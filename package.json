@@ -9,7 +9,7 @@
     "start": "react-native start",
     "test": "jest",
     "eslint": "eslint --quiet --ext js,jsx,ts,tsx src --fix",
-    "lint": "tsc && eslint --quiet --ext js,jsx,ts,tsx src && jest --passWithNoTests"
+    "lint": "tsc && eslint --quiet --ext js,jsx,ts,tsx src"
   },
   "dependencies": {
     "@react-navigation/native": "^6.0.13",
