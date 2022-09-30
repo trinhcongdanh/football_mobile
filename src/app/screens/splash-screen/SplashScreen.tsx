@@ -9,7 +9,7 @@ export const SplashScreen = (props: ISplashScreenProps) => {
     return (
         <View style={styles.container}>
             <Image source={AppImages.img_logo} style={styles.image} />
-            <Text style={{ fontSize: 40, color: 'white' }}>{EnStrings.title_update}</Text>
+            <Text style={{ fontSize: 40, color: 'white' }}>{EnStrings.title_testing}</Text>
         </View>
     );
 };

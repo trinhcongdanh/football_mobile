@@ -1,3 +1,3 @@
 export const EnStrings = {
-    title_update: 'Update',
+    title_testing: 'Testing',
 };
