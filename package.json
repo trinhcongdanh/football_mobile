@@ -16,7 +16,7 @@
     "@react-navigation/native-stack": "^6.9.0",
     "i18next": "^21.9.2",
     "lodash": "^4.17.15",
-    "lottie-react-native": "^3.3.2",
+    "lottie-react-native": "^5.1.4",
     "moment": "^2.25.1",
     "react": "18.1.0",
     "react-i18next": "^11.18.6",
