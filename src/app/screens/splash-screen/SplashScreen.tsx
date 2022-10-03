@@ -1,4 +1,4 @@
-import { View, Image, Text } from 'react-native';
+import { View, Image, Text, ImageBackground } from 'react-native';
 import React from 'react';
 import { AppImages } from '@football/app/assets/images';
 import { EnStrings } from '@football/app/i18n/EnStrings';
@@ -8,8 +8,10 @@ import styles from './SplashScreen.styles';
 export const SplashScreen = (props: any) => {
     return (
         <View style={styles.container}>
-            <Image source={AppImages.img_logo} style={styles.image} />
-            <Text style={{ fontSize: 40, color: 'white' }}>{EnStrings.title_testing}</Text>
+            <ImageBackground source={AppImages.img_background} style={styles.img_background}>
+                <Image resizeMode="contain" source={AppImages.img_logo} style={styles.image} />
+                <Text style={styles.text_header}>{EnStrings.splash_screen}</Text>
+            </ImageBackground>
         </View>
     );
 };
