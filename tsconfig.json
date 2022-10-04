@@ -34,6 +34,9 @@
       ],
       "@football/core/*": [
         "./src/core/*"
+      ],
+      "@screen": [
+        "./src/app/screens"
       ]
     }
   },

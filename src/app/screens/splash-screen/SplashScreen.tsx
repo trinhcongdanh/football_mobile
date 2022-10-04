@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import styles from './SplashScreen.styles';
 // import { ISplashScreenProps } from './SplashScreen.type';
 
-export const SplashScreen = (props: any) => {
+export const SplashPage = (props: any) => {
     const { t, i18n } = useTranslation();
 
     return (
