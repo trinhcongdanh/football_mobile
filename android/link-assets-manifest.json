@@ -2,6 +2,10 @@
   "migIndex": 1,
   "data": [
     {
+      "path": "src/app/assets/fonts/AppFonts.ts",
+      "sha1": "fd556f100b75fc23a2dace38d4524e32b42ab8a7"
+    },
+    {
       "path": "src/app/assets/fonts/IBMPlexSansHebrew-Bold.ttf",
       "sha1": "33f45ed5a08ffbe6bc9f6dfb7b93823ec382b117"
     },
@@ -28,6 +32,10 @@
     {
       "path": "src/app/assets/fonts/IBMPlexSansHebrew-Thin.ttf",
       "sha1": "0c87ece0a172e9dd6130bafb1a00c4e59f70773c"
+    },
+    {
+      "path": "src/app/assets/fonts/index.ts",
+      "sha1": "be14e8cca256ac7701f3c1b3835373ecf9e52e9d"
     }
   ]
 }
