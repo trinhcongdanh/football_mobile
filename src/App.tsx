@@ -2,6 +2,7 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { SplashScreen } from './app/screens/splash-screen/SplashScreen';
+import './app/i18n/EnStrings';
 
 const Stack = createNativeStackNavigator();
 
