@@ -8,13 +8,11 @@ const resources = {
     heb: {
         translation: {
             title: 'כדורגל נייד',
-            user: 'כasdדורגל נייד',
         },
     },
     en: {
         translation: {
             title: 'Football Mobile',
-            user: 'Danh',
         },
     },
 };
