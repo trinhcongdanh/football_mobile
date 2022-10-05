@@ -3,8 +3,10 @@ import { NavigationContainer } from '@react-navigation/native';
 import SplashScreen from 'react-native-splash-screen';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 // import { SplashPage } from './app/screens/splash-screen/SplashScreen';
-import { WelcomeScreen } from './app/screens';
 import './app/i18n/EnStrings';
+import { ThemeProvider } from 'react-native-elements';
+import { View } from 'react-native';
+import { RootNavigator } from './app/routes/RootNavigator';
 
 const Stack = createNativeStackNavigator();
 
@@ -13,24 +15,13 @@ const App = (props: any) => {
         SplashScreen.hide();
     }, []);
     return (
-        <NavigationContainer>
-            <Stack.Navigator initialRouteName="Home">
-                {/* <Stack.Screen
-                    name="Home"
-                    component={SplashPage}
-                    options={{
-                        headerShown: false,
-                    }}
-                /> */}
-                <Stack.Screen
-                    name="WelcomeScreen"
-                    component={WelcomeScreen}
-                    options={{
-                        headerShown: false,
-                    }}
-                />
-            </Stack.Navigator>
-        </NavigationContainer>
+        <ThemeProvider>
+            <NavigationContainer>
+                <View style={{ flex: 1 }}>
+                    <RootNavigator />
+                </View>
+            </NavigationContainer>
+        </ThemeProvider>
     );
 };
 

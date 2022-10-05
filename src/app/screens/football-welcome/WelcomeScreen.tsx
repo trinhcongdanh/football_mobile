@@ -10,7 +10,7 @@ export const WelcomeScreen = (props: any) => {
     return (
         <View style={styles.container}>
             <ImageBackground source={AppImages.img_background} style={styles.img_background}>
-                <StatusBar translucent backgroundColor="transparent"></StatusBar>
+                <StatusBar translucent backgroundColor="transparent" />
                 <Image resizeMode="contain" source={AppImages.img_logo} style={styles.image} />
                 <Text style={styles.text_header}>{t('title')}</Text>
                 <Text style={styles.text_desc}>{t('info')}</Text>

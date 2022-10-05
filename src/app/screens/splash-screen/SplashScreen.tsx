@@ -2,8 +2,8 @@ import { View, Image, Text, ImageBackground } from 'react-native';
 import React from 'react';
 import { AppImages } from '@football/app/assets/images';
 import { useTranslation } from 'react-i18next';
-import styles from './SplashScreen.styles';
 import { useNavigation } from '@react-navigation/native';
+import styles from './SplashScreen.styles';
 // import { ISplashScreenProps } from './SplashScreen.type';
 
 export const SplashPage = (props: any) => {

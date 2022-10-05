@@ -1,13 +1,13 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { AuthStack } from './AuthStack';
-import { ScreenName } from '../utils/constants/enum';
+import { ScreenName, ScreenStack } from '../utils/constants/enum';
 // import {AuthStack} from './AuthStack';
 // import {Auth, Main} from '../utils/BaseValues';
 // import {HomeStack} from './HomeStack';
 
 const RootStack = createNativeStackNavigator();
-const INITIAL_ROUTE = ScreenName.SplashPage;
+const INITIAL_ROUTE = ScreenName.OpeningPage;
 
 export function RootNavigator() {
     return (
@@ -18,7 +18,7 @@ export function RootNavigator() {
                 gestureEnabled: true,
             }}
         >
-            <RootStack.Screen name={ScreenName.SplashPage} component={AuthStack} />
+            <RootStack.Screen name={ScreenStack.AuthStack} component={AuthStack} />
         </RootStack.Navigator>
     );
 }

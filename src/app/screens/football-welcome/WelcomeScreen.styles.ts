@@ -36,6 +36,8 @@ const styles = StyleSheet.create({
         color: 'white',
         marginTop: 24,
         fontSize: 13,
+        fontFamily: AppFonts.regular,
+        fontWeight: '600',
     },
     button_signup: {
         backgroundColor: 'transparent',

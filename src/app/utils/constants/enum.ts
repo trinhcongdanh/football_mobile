@@ -4,3 +4,7 @@ export enum ScreenName {
     HomePage = 'HomePage',
     FavTeam = 'FavTeam',
 }
+
+export enum ScreenStack {
+    AuthStack = 'AuthStack',
+}
