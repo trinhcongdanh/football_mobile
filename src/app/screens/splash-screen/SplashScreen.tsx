@@ -3,11 +3,15 @@ import React from 'react';
 import { AppImages } from '@football/app/assets/images';
 import { useTranslation } from 'react-i18next';
 import styles from './SplashScreen.styles';
+import { useNavigation } from '@react-navigation/native';
 // import { ISplashScreenProps } from './SplashScreen.type';
 
 export const SplashPage = (props: any) => {
     const { t, i18n } = useTranslation();
-
+    const navigation = useNavigation();
+    setTimeout(() => {
+        navigation.navigate('WelcomeScreen' as never);
+    }, 3000);
     return (
         <View style={styles.container}>
             <ImageBackground source={AppImages.img_background} style={styles.img_background}>

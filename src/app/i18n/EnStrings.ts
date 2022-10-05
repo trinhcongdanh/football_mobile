@@ -7,14 +7,22 @@ import { I18nManager } from 'react-native';
 const resources = {
     heb: {
         translation: {
-            title: 'כדורגל נייד',
             splash: 'עמוד ספלאש',
+            title: 'ההתאחדות לכדורגל בישראל',
+            info: 'הצטרפו אלינו וקבלו את כל המידע הכי חם על הקבוצה או השחקן שלכם!',
+            start: 'התחל',
+            account: 'כבר יש לך משתמש?',
+            create: 'התחבר',
         },
     },
     en: {
         translation: {
-            title: 'Football Mobile',
             splash: 'Splash page',
+            title: 'The Israel Football Association',
+            info: 'Join us and get all the hottest information about your team or player!',
+            start: 'start',
+            account: 'Already have a user?',
+            create: 'Connect',
         },
     },
 };
