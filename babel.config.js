@@ -9,7 +9,6 @@ module.exports = {
                 alias: {
                     '@football/core': './src/core',
                     '@football/app': './src/app',
-                    '@football/screens': './src/app/screens',
                 },
             },
         ],
