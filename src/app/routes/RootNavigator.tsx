@@ -6,7 +6,7 @@ import { ScreenName, ScreenStack } from '../utils/constants/enum';
 const RootStack = createNativeStackNavigator();
 const INITIAL_ROUTE = ScreenName.OpeningPage;
 
-export function RootNavigator() {
+export const RootNavigator = () => {
     return (
         <RootStack.Navigator
             initialRouteName={INITIAL_ROUTE}
@@ -18,4 +18,4 @@ export function RootNavigator() {
             <RootStack.Screen name={ScreenStack.AuthStack} component={AuthStack} />
         </RootStack.Navigator>
     );
-}
+};
