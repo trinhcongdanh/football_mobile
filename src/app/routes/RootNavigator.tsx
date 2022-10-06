@@ -13,6 +13,8 @@ export const RootNavigator = () => {
             screenOptions={{
                 headerShown: false,
                 gestureEnabled: true,
+                animation: 'fade',
+                animationTypeForReplace: 'push',
             }}
         >
             <RootStack.Screen name={ScreenStack.AuthStack} component={AuthStack} />

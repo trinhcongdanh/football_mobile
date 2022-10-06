@@ -18,8 +18,10 @@ import { useTranslation } from 'react-i18next';
 import { getSize } from '@football/app/utils/responsive/scale';
 import { IRegisterScreenProps } from './RegisterScreen.type';
 import { styles } from './RegisterScreen.styles';
+import { useViewModel } from './RegisterScreen.viewModel';
 
 export const RegisterScreen = ({ navigation, route }: IRegisterScreenProps) => {
+    const { onGoBack } = useViewModel({ navigation, route });
     const { t, i18n } = useTranslation();
 
     useEffect(() => {
@@ -36,7 +38,7 @@ export const RegisterScreen = ({ navigation, route }: IRegisterScreenProps) => {
                 <StatusBar translucent backgroundColor="transparent" />
                 <SafeAreaView style={appStyles.flex}>
                     <View style={appStyles.container}>
-                        <TouchableOpacity style={styles.ic_back}>
+                        <TouchableOpacity style={styles.ic_back} onPress={onGoBack}>
                             <Icon name={appIcons.ic_right_ios} size={20} color={appColors.white} />
                         </TouchableOpacity>
                     </View>
@@ -44,7 +46,7 @@ export const RegisterScreen = ({ navigation, route }: IRegisterScreenProps) => {
                         <Image
                             resizeMode="contain"
                             source={AppImages.img_logo}
-                            style={{ width: 100, height: 100 }}
+                            style={styles.logo}
                         />
                         <Text style={appStyles.text_title}>{t('sign_up')}</Text>
                         <Text style={appStyles.text_sub_title}>{t('join_us')}</Text>
