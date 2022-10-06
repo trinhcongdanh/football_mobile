@@ -20,18 +20,6 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         marginHorizontal: 45,
     },
-    button: {
-        backgroundColor: '#2CC4FF',
-        borderRadius: 60,
-        marginTop: 18,
-    },
-    text_button: {
-        fontSize: 16,
-        color: 'white',
-        fontFamily: AppFonts.bold,
-        paddingHorizontal: 136,
-        paddingVertical: 16,
-    },
     text_question: {
         color: 'white',
         marginTop: 24,

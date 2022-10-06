@@ -34,6 +34,11 @@ export const appStyles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
     },
+    flex_row_space_center: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+    },
     container: {
         paddingHorizontal: getSize.m(16),
         marginTop: getSize.m(25),
