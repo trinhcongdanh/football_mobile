@@ -28,8 +28,8 @@ export const WelcomeScreen = ({ navigation, route }: IWelcomeScreenProps) => {
                     <Text style={styles.text_button}>{t('start')}</Text>
                 </TouchableOpacity>
                 <Text style={styles.text_question}>{t('account')}</Text>
-                <TouchableOpacity style={styles.button_signup}>
-                    <Text style={styles.text_button_signup}>{t('create')}</Text>
+                <TouchableOpacity style={styles.button_sign_up}>
+                    <Text style={styles.text_button_sign_up}>{t('create')}</Text>
                 </TouchableOpacity>
             </ImageBackground>
         </View>
