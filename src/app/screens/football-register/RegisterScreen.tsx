@@ -7,6 +7,7 @@ import {
     I18nManager,
     Image,
     Text,
+    Platform,
 } from 'react-native';
 import React, { useEffect } from 'react';
 import { AppImages } from '@football/app/assets/images';
@@ -37,7 +38,15 @@ export const RegisterScreen = ({ navigation, route }: IRegisterScreenProps) => {
                 <SafeAreaView style={appStyles.flex}>
                     <View style={appStyles.container}>
                         <TouchableOpacity style={styles.ic_back}>
-                            <Icon name={appIcons.ic_right} size={20} color={appColors.white} />
+                            <Icon
+                                name={
+                                    Platform.OS === 'android'
+                                        ? appIcons.ic_right_android
+                                        : appIcons.ic_right_ios
+                                }
+                                size={20}
+                                color={appColors.white}
+                            />
                         </TouchableOpacity>
                     </View>
                     <View style={[appStyles.flex_align_center, { marginTop: getSize.m(10) }]}>

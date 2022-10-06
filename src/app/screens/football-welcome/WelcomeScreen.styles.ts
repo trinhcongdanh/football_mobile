@@ -39,14 +39,14 @@ const styles = StyleSheet.create({
         fontFamily: AppFonts.regular,
         fontWeight: '600',
     },
-    button_signup: {
+    button_sign_up: {
         backgroundColor: 'transparent',
         borderRadius: 60,
         marginTop: 18,
         borderColor: '#2CC4FF',
         borderWidth: 1,
     },
-    text_button_signup: {
+    text_button_sign_up: {
         fontSize: 16,
         color: '#2CC4FF',
         fontFamily: AppFonts.bold,

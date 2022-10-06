@@ -36,6 +36,7 @@ export const appStyles = StyleSheet.create({
     },
     container: {
         paddingHorizontal: getSize.m(16),
+        marginTop: getSize.m(25),
     },
     text_title: {
         fontFamily: AppFonts.regular,

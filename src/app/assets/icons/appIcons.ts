@@ -1,3 +1,4 @@
 export const appIcons = {
-    ic_right: 'chevron-right',
+    ic_right_ios: 'chevron-right',
+    ic_right_android: 'arrow-right',
 };
