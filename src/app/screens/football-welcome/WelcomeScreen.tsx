@@ -12,9 +12,9 @@ import { AppImages } from '@football/app/assets/images';
 import { useTranslation } from 'react-i18next';
 import { ScreenName } from '@football/app/utils/constants/enum';
 import { appStyles } from '@football/app/utils/constants/appStyles';
+import { Button } from '@football/app/components/button';
 import styles from './WelcomeScreen.styles';
 import { IWelcomeScreenProps } from './WelcomeScreen.type';
-import { Button } from '@football/app/components/button';
 
 export const WelcomeScreen = ({ navigation, route }: IWelcomeScreenProps) => {
     const { t, i18n } = useTranslation();
@@ -47,7 +47,7 @@ export const WelcomeScreen = ({ navigation, route }: IWelcomeScreenProps) => {
                 <Text style={styles.text_header}>{t('welcome.title')}</Text>
                 <Text style={styles.text_desc}>{t('welcome.info')}</Text>
                 <View style={{ width: '90%' }}>
-                    <Button title={t('welcome.start')} onPress={RegisterPage}></Button>
+                    <Button title={t('welcome.start')} onPress={RegisterPage} />
                 </View>
                 <Text style={styles.text_question}>{t('welcome.account')}</Text>
                 <TouchableOpacity style={styles.button_sign_up} onPress={Connect}>

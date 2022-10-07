@@ -4,10 +4,10 @@ import { useTranslation } from 'react-i18next';
 import styles from './Input.styles';
 
 type Props = {
-    error?: string;
-    placeholder?: string;
-    onChangeText?: () => void;
-    onFocus?: () => void;
+    error: string;
+    placeholder: string;
+    onChangeText: () => void;
+    onFocus: () => void;
 };
 
 export const Input = ({ error, placeholder, onChangeText, onFocus }: Props) => {

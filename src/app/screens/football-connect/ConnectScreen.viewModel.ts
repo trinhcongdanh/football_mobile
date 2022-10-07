@@ -1,13 +1,13 @@
+import { Keyboard } from 'react-native';
+import { useState } from 'react';
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
 import { ScreenName } from '@football/app/utils/constants/enum';
-import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Keyboard } from 'react-native';
-import { IRegisterScreenProps } from './RegisterScreen.type';
+import { IConnectScreenProps } from './ConnectScreen.type';
 
-export const useViewModel = ({ navigation, route }: IRegisterScreenProps) => {
+export const useViewModel = ({ navigation, route }: IConnectScreenProps) => {
     const { t } = useTranslation();
-    const { goBack, navigate } = useAppNavigator();
+    const { navigate, goBack } = useAppNavigator();
 
     const [inputs, setInputs] = useState({
         numberPhone: '',
@@ -24,28 +24,25 @@ export const useViewModel = ({ navigation, route }: IRegisterScreenProps) => {
     const handleError = (errorMessage: string, input: string) => {
         setErrors(prevState => ({ ...prevState, [input]: errorMessage }));
     };
-    const connect = () => {
+
+    const Connect = () => {
         Keyboard.dismiss();
         if (!inputs.numberPhone) {
-            handleError(t('register.invalid'), 'numberPhone');
+            handleError(t('connect.error'), 'numberPhone');
         }
     };
 
-    const onGoBack = () => {
-        goBack();
-    };
-
-    const onNavigateConnect = () => {
-        navigate(ScreenName.ConnectPage);
+    const onNavigateSignUp = () => {
+        navigate(ScreenName.RegisterPage);
     };
 
     return {
         inputs,
         errors,
-        handleOnChange,
         handleError,
-        connect,
-        onGoBack,
-        onNavigateConnect,
+        handleOnChange,
+        Connect,
+        onNavigateSignUp,
+        goBack,
     };
 };

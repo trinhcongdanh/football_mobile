@@ -7,6 +7,11 @@ const styles = StyleSheet.create({
     icon_back: {
         alignItems: I18nManager.isRTL ? 'flex-start' : 'flex-end',
     },
+    logo_container: {
+        alignItems: 'center',
+        marginTop: getSize.m(10),
+        flex: 1,
+    },
     logo: { width: getSize.s(60), height: getSize.s(60) },
 
     connect_container: {

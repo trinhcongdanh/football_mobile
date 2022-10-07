@@ -18,6 +18,14 @@ const resources = {
                 sign_up: 'הרשמה לאפליקציית\n ההתאחדות לכדורגל בישראל',
                 join_us: 'הצטרפו אלינו וקבלו את כל המידע הכי חם על\n הקבוצה או השחקן שלכם!',
             },
+            register: {
+                registerByPhone: 'הרשמה באמצעות טלפון',
+                phoneNumber: '* מס׳ טלפון',
+                submit: 'שלח קוד אימות',
+                alreadyUser: 'כבר יש לך משתמש?',
+                connect: 'התחבר',
+                invalid: 'מס׳ טלפון לא תקין',
+            },
             connect: {
                 title: 'התחברות',
                 placeholder: 'מס׳ טלפון',
@@ -43,6 +51,14 @@ const resources = {
                 create: 'Connect',
                 sign_up: 'Sign up for the app\nThe Israel Football Association',
                 join_us: 'Join us and get all the hottest information about\nyour team or player!',
+            },
+            register: {
+                registerByPhone: 'Registration by phone',
+                phoneNumber: 'Phone Number *',
+                submit: 'Submit a verification code',
+                alreadyUser: 'Already have a user?',
+                connect: 'Connect',
+                invalid_phone_number: 'Invalid phone number',
             },
             connect: {
                 title: 'Connection',

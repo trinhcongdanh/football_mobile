@@ -1,10 +1,10 @@
-import { View, Text, TouchableOpacity } from 'react-native';
+import { Text, TouchableOpacity } from 'react-native';
 import React from 'react';
 import styles from './Button.styles';
 
 type Props = {
-    title?: string;
-    onPress?: () => void;
+    title: string;
+    onPress: () => void;
 };
 
 export const Button = ({ title, onPress }: Props) => {
