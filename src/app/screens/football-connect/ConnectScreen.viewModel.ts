@@ -17,22 +17,26 @@ export const useViewModel = ({ navigation, route }: IConnectScreenProps) => {
         numberPhone: '',
     });
 
-    const handleOnChange = (text: string, input: string) => {
+    const handleOnChange = (text: string, input: string): void => {
         setInputs(prevState => ({ ...prevState, [input]: text }));
     };
 
-    const handleError = (errorMessage: string, input: string) => {
+    const handleError = (errorMessage: string, input: string): void => {
         setErrors(prevState => ({ ...prevState, [input]: errorMessage }));
     };
 
-    const Connect = () => {
+    const Connect = (): void => {
         Keyboard.dismiss();
         if (!inputs.numberPhone) {
             handleError(t('connect.error'), 'numberPhone');
         }
     };
 
-    const onNavigateSignUp = () => {
+    const onGoBack = (): void => {
+        goBack();
+    };
+
+    const onNavigateSignUp = (): void => {
         navigate(ScreenName.RegisterPage);
     };
 
@@ -43,6 +47,6 @@ export const useViewModel = ({ navigation, route }: IConnectScreenProps) => {
         handleOnChange,
         Connect,
         onNavigateSignUp,
-        goBack,
+        onGoBack,
     };
 };

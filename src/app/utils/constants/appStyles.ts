@@ -61,4 +61,21 @@ export const appStyles = StyleSheet.create({
         lineHeight: getSize.m(21),
         marginTop: getSize.m(8),
     },
+
+    text_header: {
+        fontFamily: AppFonts.regular,
+        fontWeight: '700',
+        fontSize: getSize.m(20),
+        textAlign: 'center',
+        color: appColors.text_dark_blue,
+        lineHeight: getSize.m(24),
+    },
+    text_sub_header: {
+        fontFamily: AppFonts.regular,
+        fontWeight: '400',
+        fontSize: getSize.m(16),
+        textAlign: 'center',
+        color: appColors.text_dark_blue,
+        lineHeight: getSize.m(24),
+    },
 });

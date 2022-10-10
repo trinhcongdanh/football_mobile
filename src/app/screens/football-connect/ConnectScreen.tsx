@@ -3,7 +3,6 @@ import {
     Text,
     ImageBackground,
     StatusBar,
-    Image,
     TouchableOpacity,
     SafeAreaView,
     ScrollView,
@@ -13,28 +12,26 @@ import React from 'react';
 import { AppImages } from '@football/app/assets/images';
 import { useTranslation } from 'react-i18next';
 import { AppFonts } from '@football/app/assets/fonts';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import { appIcons } from '@football/app/assets/icons/appIcons';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import { getSize } from '@football/app/utils/responsive/scale';
-import { CardView } from '@football/app/components/card-connect-signup/CardView';
-import styles from './ConnectScreen.styles';
+import { CardView } from '@football/app/components/connect-signup/card-connect-signup/CardView';
 import { IConnectScreenProps } from './ConnectScreen.type';
 import { useViewModel } from './ConnectScreen.viewModel';
+import { CardHeaderView } from '@football/app/components/connect-signup/header-connect-signup/CardHeaderView';
+import { CardGoBack } from '@football/app/components/go-back/CardGoBack';
 
 // type Props = {};
 
 export const ConnectScreen = ({ navigation, route }: IConnectScreenProps) => {
     const { t } = useTranslation();
     const {
-        inputs,
         errors,
         handleError,
         handleOnChange,
         onNavigateSignUp,
         Connect,
-        goBack,
+        onGoBack,
     } = useViewModel({
         navigation,
         route,
@@ -45,24 +42,9 @@ export const ConnectScreen = ({ navigation, route }: IConnectScreenProps) => {
             <ImageBackground source={AppImages.img_background} style={appStyles.flex}>
                 <StatusBar translucent backgroundColor="transparent" />
                 <SafeAreaView style={appStyles.flex}>
-                    <View style={appStyles.container}>
-                        <TouchableOpacity style={styles.icon_back} onPress={goBack}>
-                            <Icon
-                                name={appIcons.ic_right_android}
-                                size={20}
-                                color={appColors.white}
-                            />
-                        </TouchableOpacity>
-                    </View>
+                    <CardGoBack goBack={onGoBack}></CardGoBack>
                     <ScrollView>
-                        <View style={styles.logo_container}>
-                            <Image
-                                resizeMode="contain"
-                                source={AppImages.img_logo}
-                                style={styles.logo}
-                            />
-                            <Text style={[appStyles.text_title]}>{t('connect.title')}</Text>
-                        </View>
+                        <CardHeaderView title={t('connect.title')} />
                         <CardView
                             placeHolderText={t('connect.placeholder')}
                             buttonTitle={t('connect.button')}

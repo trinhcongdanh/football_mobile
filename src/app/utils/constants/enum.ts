@@ -5,6 +5,7 @@ export enum ScreenName {
     FavTeam = 'FavTeam',
     RegisterPage = 'RegisterPage',
     ConnectPage = 'ConnectPage',
+    VerifyPage = 'VerifyPage',
 }
 
 export enum ScreenStack {

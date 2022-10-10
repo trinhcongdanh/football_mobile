@@ -26,6 +26,7 @@ export const useViewModel = ({ navigation, route }: IRegisterScreenProps) => {
     };
     const connect = () => {
         Keyboard.dismiss();
+        navigate(ScreenName.VerifyPage);
         if (!inputs.numberPhone) {
             handleError(t('register.invalid'), 'numberPhone');
         }
