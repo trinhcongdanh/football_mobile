@@ -1,9 +1,9 @@
 import { View, Text, Image } from 'react-native';
 import React from 'react';
 import { appStyles } from '@football/app/utils/constants/appStyles';
-import styles from './CardHeaderView.style';
 import { getSize } from '@football/app/utils/responsive/scale';
 import { AppImages } from '@football/app/assets/images';
+import styles from './CardHeaderView.style';
 import { ICardHeaderViewProps } from './CardHeaderView.types';
 
 // type Props = {};
@@ -13,6 +13,7 @@ export const CardHeaderView = ({ title, sub_title }: ICardHeaderViewProps) => {
         <View
             style={[
                 appStyles.flex_align_center,
+                // eslint-disable-next-line react-native/no-inline-styles
                 { marginTop: getSize.m(10), marginBottom: getSize.m(20), flex: 0 },
             ]}
         >

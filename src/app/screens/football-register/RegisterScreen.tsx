@@ -13,11 +13,11 @@ import { appStyles } from '@football/app/utils/constants/appStyles';
 import { useTranslation } from 'react-i18next';
 import { getSize } from '@football/app/utils/responsive/scale';
 import { CardView } from '@football/app/components/connect-signup/card-connect-signup/CardView';
+import { CardHeaderView } from '@football/app/components/connect-signup/header-connect-signup/CardHeaderView';
+import { CardGoBack } from '@football/app/components/go-back/CardGoBack';
 import { IRegisterScreenProps } from './RegisterScreen.type';
 import { styles } from './RegisterScreen.styles';
 import { useViewModel } from './RegisterScreen.viewModel';
-import { CardHeaderView } from '@football/app/components/connect-signup/header-connect-signup/CardHeaderView';
-import { CardGoBack } from '@football/app/components/go-back/CardGoBack';
 
 export const RegisterScreen = ({ navigation, route }: IRegisterScreenProps) => {
     const {
@@ -38,7 +38,7 @@ export const RegisterScreen = ({ navigation, route }: IRegisterScreenProps) => {
             <ImageBackground source={AppImages.img_bg_register} style={appStyles.flex}>
                 <StatusBar translucent backgroundColor="transparent" />
                 <SafeAreaView style={appStyles.flex}>
-                    <CardGoBack goBack={onGoBack}></CardGoBack>
+                    <CardGoBack goBack={onGoBack} />
                     <ScrollView>
                         <CardHeaderView
                             title={t('welcome.sign_up')}

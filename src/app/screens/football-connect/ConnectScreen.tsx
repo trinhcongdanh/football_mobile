@@ -16,10 +16,10 @@ import { appColors } from '@football/app/utils/constants/appColors';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import { getSize } from '@football/app/utils/responsive/scale';
 import { CardView } from '@football/app/components/connect-signup/card-connect-signup/CardView';
+import { CardGoBack } from '@football/app/components/go-back/CardGoBack';
+import { CardHeaderView } from '@football/app/components/connect-signup/header-connect-signup/CardHeaderView';
 import { IConnectScreenProps } from './ConnectScreen.type';
 import { useViewModel } from './ConnectScreen.viewModel';
-import { CardHeaderView } from '@football/app/components/connect-signup/header-connect-signup/CardHeaderView';
-import { CardGoBack } from '@football/app/components/go-back/CardGoBack';
 
 // type Props = {};
 
@@ -42,7 +42,7 @@ export const ConnectScreen = ({ navigation, route }: IConnectScreenProps) => {
             <ImageBackground source={AppImages.img_background} style={appStyles.flex}>
                 <StatusBar translucent backgroundColor="transparent" />
                 <SafeAreaView style={appStyles.flex}>
-                    <CardGoBack goBack={onGoBack}></CardGoBack>
+                    <CardGoBack goBack={onGoBack} />
                     <ScrollView>
                         <CardHeaderView title={t('connect.title')} />
                         <CardView

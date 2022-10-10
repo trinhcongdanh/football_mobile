@@ -3,8 +3,8 @@ import React from 'react';
 import Icon from 'react-native-vector-icons/Feather';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import { appIcons } from '@football/app/assets/icons/appIcons';
-import styles from './CardGoBack.style';
 import { appColors } from '@football/app/utils/constants/appColors';
+import styles from './CardGoBack.style';
 import { ICardGoBackProps } from './CardGoBack.types';
 
 // type Props = {};
