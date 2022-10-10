@@ -1,8 +1,8 @@
-import { IVerifyScreenProps } from './VerifyScreen.type';
 import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Keyboard } from 'react-native';
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
+import { IVerifyScreenProps } from './VerifyScreen.type';
 
 export const useViewModel = ({ navigation, route }: IVerifyScreenProps) => {
     const { t } = useTranslation();
@@ -18,6 +18,10 @@ export const useViewModel = ({ navigation, route }: IVerifyScreenProps) => {
         goBack();
     };
 
+    const handleError = (errorMessage: string, input: string): void => {
+        setErrors(prevState => ({ ...prevState, [input]: errorMessage }));
+    };
+
     const reSendVerify = (): void => {
         setTimeSend(true);
         handleError('', 'verifyError');
@@ -26,10 +30,6 @@ export const useViewModel = ({ navigation, route }: IVerifyScreenProps) => {
     setTimeout(() => {
         setTimeSend(false);
     }, 12000);
-
-    const handleError = (errorMessage: string, input: string): void => {
-        setErrors(prevState => ({ ...prevState, [input]: errorMessage }));
-    };
 
     const inputs = Array(4).fill('');
 
@@ -52,7 +52,7 @@ export const useViewModel = ({ navigation, route }: IVerifyScreenProps) => {
             newInputIndex = index === 0 ? 0 : index - 1;
         } else {
             newInputIndex = index === lastInputIndex ? lastInputIndex : index + 1;
-            if (index == lastInputIndex) {
+            if (index === lastInputIndex) {
                 Keyboard.dismiss();
             }
         }
@@ -64,19 +64,18 @@ export const useViewModel = ({ navigation, route }: IVerifyScreenProps) => {
         input.current?.focus();
     }, [nextInputIndex]);
 
-    const VerifyCode = (): void => {
+    const onVerifyCode = (): void => {
         let codeOtp = '';
         Object.values(OTP).forEach(code => {
             codeOtp += code;
         });
 
-        if (codeOtp != '1234' && codeOtp.length == 4) {
+        if (codeOtp !== '1234' && codeOtp.length === 4) {
             handleError(t('verify.error'), 'verifyError');
         } else if (codeOtp.length < 4) {
             handleError('', 'verifyError');
-        } else if (codeOtp == '1234' && codeOtp.length == 4) {
+        } else if (codeOtp === '1234' && codeOtp.length === 4) {
             handleError('', 'verifyError');
-            console.log('Create Infomation');
         }
     };
 
@@ -90,7 +89,7 @@ export const useViewModel = ({ navigation, route }: IVerifyScreenProps) => {
         handleError,
         onGoBack,
         reSendVerify,
-        VerifyCode,
+        onVerifyCode,
         handleChangeText,
     };
 };

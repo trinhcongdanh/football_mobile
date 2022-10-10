@@ -8,15 +8,16 @@ import {
     TextInput,
 } from 'react-native';
 import React from 'react';
-import { IVerifyScreenProps } from './VerifyScreen.type';
 import { useTranslation } from 'react-i18next';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import { AppImages } from '@football/app/assets/images';
-import styles from './VerifyScreen.styles';
 import { getSize } from '@football/app/utils/responsive/scale';
-import { useViewModel } from './VerifyScreen.viewModel';
 import { CardHeaderView } from '@football/app/components/connect-signup/header-connect-signup/CardHeaderView';
 import { CardGoBack } from '@football/app/components/go-back/CardGoBack';
+import { IVerifyScreenProps } from './VerifyScreen.type';
+import styles from './VerifyScreen.styles';
+import { useViewModel } from './VerifyScreen.viewModel';
+import { appColors } from '../../utils/constants/appColors';
 
 // type Props = {};
 
@@ -32,7 +33,7 @@ export const VerifyScreen = ({ navigation, route }: IVerifyScreenProps) => {
         onGoBack,
         reSendVerify,
         handleChangeText,
-        VerifyCode,
+        onVerifyCode,
     } = useViewModel({
         navigation,
         route,
@@ -41,10 +42,9 @@ export const VerifyScreen = ({ navigation, route }: IVerifyScreenProps) => {
     return (
         <View style={[appStyles.flex]}>
             <ImageBackground source={AppImages.img_background} style={appStyles.flex}>
-                <StatusBar translucent backgroundColor="transparent"></StatusBar>
+                <StatusBar translucent backgroundColor="transparent" />
                 <SafeAreaView style={appStyles.flex}>
-                    <CardGoBack goBack={onGoBack}></CardGoBack>
-
+                    <CardGoBack goBack={onGoBack} />
                     <CardHeaderView title={t('verify.title')} />
                     <View style={styles.connect_container}>
                         <Text style={[appStyles.text_header]}>{t('verify.header')}</Text>
@@ -54,13 +54,24 @@ export const VerifyScreen = ({ navigation, route }: IVerifyScreenProps) => {
                         <View style={styles.otp_Container}>
                             {inputs.map((inp: string, index: number) => {
                                 return (
-                                    <View style={styles.otp_Box} key={index.toString()}>
+                                    <View
+                                        style={[
+                                            styles.otp_Box,
+                                            {
+                                                borderColor:
+                                                    index === nextInputIndex
+                                                        ? appColors.blue_light
+                                                        : appColors.medium_gray,
+                                            },
+                                        ]}
+                                        key={index.toString()}
+                                    >
                                         <TextInput
                                             value={OTP[index]}
                                             style={styles.otp_Text}
                                             keyboardType="number-pad"
                                             maxLength={1}
-                                            onEndEditing={VerifyCode}
+                                            onEndEditing={onVerifyCode}
                                             ref={nextInputIndex === index ? input : null}
                                             onChangeText={text => handleChangeText(text, index)}
                                         />
@@ -70,16 +81,19 @@ export const VerifyScreen = ({ navigation, route }: IVerifyScreenProps) => {
                         </View>
 
                         {/* End */}
-
                         <Text
                             style={[
                                 appStyles.text_sub_title,
-                                { display: timeSend ? 'flex' : 'none', marginTop: getSize.m(15) },
+                                // eslint-disable-next-line react-native/no-inline-styles
+                                {
+                                    display: timeSend ? 'flex' : 'none',
+                                    marginTop: getSize.m(15),
+                                },
                             ]}
                         >
                             {t('verify.time_send')}
                         </Text>
-                        {errors.verifyError != '' && (
+                        {errors.verifyError !== '' && (
                             <Text style={styles.error}>{t('verify.error')}</Text>
                         )}
                         <View style={styles.footer_opt}>

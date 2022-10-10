@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
         paddingTop: getSize.m(40),
         paddingBottom: getSize.m(25),
         marginHorizontal: getSize.m(16),
-        borderRadius: 15,
+        borderRadius: getSize.m(15),
     },
 
     otp_Container: {
@@ -19,9 +19,10 @@ const styles = StyleSheet.create({
         marginTop: getSize.m(36),
     },
     otp_Box: {
-        borderRadius: 15,
+        borderRadius: getSize.m(15),
         borderColor: appColors.medium_gray,
         borderWidth: 1,
+        justifyContent: 'center',
         width: getSize.m(63),
         height: getSize.m(63),
     },
@@ -54,6 +55,12 @@ const styles = StyleSheet.create({
         fontSize: getSize.s(12),
         marginTop: getSize.m(15),
         textAlign: 'center',
+    },
+    underlineStyleBase: {
+        padding: getSize.m(30),
+        borderRadius: getSize.m(10),
+        color: appColors.text_dark_blue,
+        fontSize: getSize.m(36),
     },
 });
 
