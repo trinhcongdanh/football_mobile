@@ -10,6 +10,7 @@ export const styles = StyleSheet.create({
         textAlign: 'center',
         fontSize: getSize.m(14),
     },
+    ic_back: { alignItems: I18nManager.isRTL ? 'flex-start' : 'flex-end' },
     txt_connect: {
         fontFamily: AppFonts.bold,
         color: appColors.white,

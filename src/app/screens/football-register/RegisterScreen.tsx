@@ -15,6 +15,7 @@ import { getSize } from '@football/app/utils/responsive/scale';
 import { CardView } from '@football/app/components/connect-signup/card-connect-signup/CardView';
 import { CardHeaderView } from '@football/app/components/connect-signup/header-connect-signup/CardHeaderView';
 import { CardGoBack } from '@football/app/components/go-back/CardGoBack';
+import { appIcons } from '@football/app/assets/icons/appIcons';
 import { IRegisterScreenProps } from './RegisterScreen.type';
 import { styles } from './RegisterScreen.styles';
 import { useViewModel } from './RegisterScreen.viewModel';
@@ -38,33 +39,41 @@ export const RegisterScreen = ({ navigation, route }: IRegisterScreenProps) => {
             <ImageBackground source={AppImages.img_bg_register} style={appStyles.flex}>
                 <StatusBar translucent backgroundColor="transparent" />
                 <SafeAreaView style={appStyles.flex}>
-                    <CardGoBack goBack={onGoBack} />
-                    <ScrollView>
-                        <CardHeaderView
-                            title={t('welcome.sign_up')}
-                            sub_title={t('welcome.join_us')}
+                    <View style={appStyles.container}>
+                        <CardGoBack
+                            iconName={appIcons.ic_right_ios}
+                            iconStyle={styles.ic_back}
+                            goBack={onGoBack}
                         />
-                        <CardView
-                            errors={errors.numberPhone}
-                            titleCard={t('register.registerByPhone')}
-                            placeHolderText={t('register.phoneNumber')}
-                            buttonTitle={t('register.submit')}
-                            handleOnChange={() => handleOnChange('', 'numberPhone')}
-                            handleError={() => {
-                                handleError('', 'numberPhone');
-                            }}
-                            connect={connect}
-                        />
-                        <View style={[appStyles.flex_row_center, { marginTop: getSize.m(60) }]}>
-                            <Text style={styles.txt_have_user}>{t('register.alreadyUser')}</Text>
-                            <TouchableOpacity
-                                onPress={onNavigateConnect}
-                                style={styles.btn_connect}
-                            >
-                                <Text style={styles.txt_connect}>{t('register.connect')}</Text>
-                            </TouchableOpacity>
-                        </View>
-                    </ScrollView>
+                        <ScrollView>
+                            <CardHeaderView
+                                title={t('welcome.sign_up')}
+                                sub_title={t('welcome.join_us')}
+                            />
+                            <CardView
+                                errors={errors.numberPhone}
+                                titleCard={t('register.registerByPhone')}
+                                placeHolderText={t('register.phoneNumber')}
+                                buttonTitle={t('register.submit')}
+                                handleOnChange={() => handleOnChange('', 'numberPhone')}
+                                handleError={() => {
+                                    handleError('', 'numberPhone');
+                                }}
+                                connect={connect}
+                            />
+                            <View style={[appStyles.flex_row_center, { marginTop: getSize.m(60) }]}>
+                                <Text style={styles.txt_have_user}>
+                                    {t('register.alreadyUser')}
+                                </Text>
+                                <TouchableOpacity
+                                    onPress={onNavigateConnect}
+                                    style={styles.btn_connect}
+                                >
+                                    <Text style={styles.txt_connect}>{t('register.connect')}</Text>
+                                </TouchableOpacity>
+                            </View>
+                        </ScrollView>
+                    </View>
                 </SafeAreaView>
             </ImageBackground>
         </View>

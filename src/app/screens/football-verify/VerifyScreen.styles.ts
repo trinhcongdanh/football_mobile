@@ -1,6 +1,6 @@
 import { appColors } from '@football/app/utils/constants/appColors';
 import { getSize } from '@football/app/utils/responsive/scale';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, I18nManager } from 'react-native';
 
 const styles = StyleSheet.create({
     connect_container: {
@@ -8,9 +8,10 @@ const styles = StyleSheet.create({
         paddingHorizontal: getSize.m(28),
         paddingTop: getSize.m(40),
         paddingBottom: getSize.m(25),
-        marginHorizontal: getSize.m(16),
         borderRadius: getSize.m(15),
     },
+
+    ic_back: { alignItems: I18nManager.isRTL ? 'flex-start' : 'flex-end' },
 
     otp_Container: {
         justifyContent: 'space-between',

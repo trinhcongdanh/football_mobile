@@ -12,7 +12,6 @@ export const styles = StyleSheet.create({
         paddingHorizontal: getSize.m(30),
         paddingTop: getSize.m(32),
         paddingBottom: getSize.m(20),
-        marginHorizontal: getSize.m(16),
         borderRadius: 15,
     },
 
