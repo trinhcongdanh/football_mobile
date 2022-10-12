@@ -4,7 +4,7 @@ import { appStyles } from '@football/app/utils/constants/appStyles';
 import { getSize } from '@football/app/utils/responsive/scale';
 import { AppImages } from '@football/app/assets/images';
 import { useTranslation } from 'react-i18next';
-import { Input } from '../../input';
+import Input from '../../input/Input';
 import { Button } from '../../button';
 import { styles } from './CardView.style';
 import { ICardViewProps } from './CardView.types';

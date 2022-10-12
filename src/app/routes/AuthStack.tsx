@@ -1,7 +1,8 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { ScreenName } from '../utils/constants/enum';
-import { WelcomeScreen } from '../screens';
+import { RegScreen } from '../screens/football-reg/RegScreen';
+import { WelcomeScreen } from '../screens/football-welcome/WelcomeScreen';
 import { RegisterScreen } from '../screens/football-register/RegisterScreen';
 import { ConnectScreen } from '../screens/football-connect/ConnectScreen';
 import { VerifyScreen } from '../screens/football-verify/VerifyScreen';
@@ -20,6 +21,7 @@ export const AuthStack = () => {
             <Auth.Screen name={ScreenName.RegisterPage} component={RegisterScreen} />
             <Auth.Screen name={ScreenName.VerifyPage} component={VerifyScreen} />
             <Auth.Screen name={ScreenName.SettingsPage} component={SettingsScreen} />
+            <Auth.Screen name={ScreenName.RegPage} component={RegScreen} />
         </Auth.Navigator>
     );
 };

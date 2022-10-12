@@ -41,7 +41,7 @@ export const ConnectScreen = ({ navigation, route }: IConnectScreenProps) => {
 
     return (
         <View style={[appStyles.flex]}>
-            <ImageBackground source={AppImages.img_background} style={appStyles.flex}>
+            <ImageBackground source={AppImages.img_bg_register} style={appStyles.flex}>
                 <StatusBar translucent backgroundColor="transparent" />
                 <SafeAreaView style={appStyles.flex}>
                     <View style={appStyles.container}>
