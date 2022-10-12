@@ -13,8 +13,8 @@ export const CheckBox = ({ title, isActive, onItemSelected }: ICheckBoxProps) =>
                 styles.btn_checked,
                 {
                     backgroundColor: isActive ? appColors.check_box : appColors.white,
-                    borderWidth: isActive ? 0 : getSize.m(1),
-                    borderColor: isActive ? 'none' : appColors.border,
+                    borderWidth: getSize.m(1),
+                    borderColor: isActive ? appColors.check_box : appColors.border,
                 },
             ]}
         >
