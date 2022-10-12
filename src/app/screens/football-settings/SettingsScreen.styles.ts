@@ -28,7 +28,8 @@ export const styles = StyleSheet.create({
     },
     check_box_container: {
         flexDirection: 'row',
-        justifyContent: 'space-around',
+        alignItems: 'center',
+        justifyContent: 'space-between',
         marginTop: getSize.m(10),
     },
     txt_dob: {
