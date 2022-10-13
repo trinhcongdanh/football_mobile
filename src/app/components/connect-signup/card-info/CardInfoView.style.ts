@@ -8,6 +8,7 @@ const styles = StyleSheet.create({
         borderWidth: getSize.m(1),
         borderColor: appColors.border,
         paddingHorizontal: getSize.m(25),
+        paddingVertical: getSize.m(12),
         borderRadius: getSize.m(25),
         textAlign: 'center',
         fontFamily: AppFonts.regular,

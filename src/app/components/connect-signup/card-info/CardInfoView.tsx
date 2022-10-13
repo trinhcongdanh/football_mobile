@@ -1,4 +1,4 @@
-import { View, Text } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import React, { useState } from 'react';
 import { getSize } from '@football/app/utils/responsive/scale';
 import { appStyles } from '@football/app/utils/constants/appStyles';
@@ -52,26 +52,33 @@ export const CardInfoView = ({
                 >
                     {genders.map((sexual: string, index: number) => {
                         return (
-                            <Text
+                            <TouchableOpacity
                                 key={index.toString()}
+                                onPress={() => handleGender(index)}
                                 style={[
-                                    appStyles.text_label,
                                     styles.select_gender,
                                     {
                                         backgroundColor:
                                             gender === index
                                                 ? appColors.text_dark_blue
                                                 : appColors.white,
-                                        color:
-                                            index === gender
-                                                ? appColors.white
-                                                : appColors.text_dark_blue,
                                     },
                                 ]}
-                                onPress={() => handleGender(index)}
                             >
-                                {sexual}
-                            </Text>
+                                <Text
+                                    style={[
+                                        appStyles.text_label,
+                                        {
+                                            color:
+                                                index === gender
+                                                    ? appColors.white
+                                                    : appColors.text_dark_blue,
+                                        },
+                                    ]}
+                                >
+                                    {sexual}
+                                </Text>
+                            </TouchableOpacity>
                         );
                     })}
                 </View>
