@@ -7,6 +7,7 @@ export enum ScreenName {
     ConnectPage = 'ConnectPage',
     VerifyPage = 'VerifyPage',
     SettingsPage = 'SettingsPage',
+    RegPage = 'RegPage',
 }
 
 export enum ScreenStack {

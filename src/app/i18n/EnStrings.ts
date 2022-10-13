@@ -56,6 +56,25 @@ const resources = {
                 other_gender: 'לא רלוונטי',
                 dob: 'תאריך לידה',
             },
+            reg: {
+                title: 'וולקם! מלאו את הפרטים',
+                sub_title: 'הצטרפו אלינו וקבלו את כל המידע הכי חם על\n הקבוצה או השחקן שלכם!',
+                place_holder_name: '* שם / כינוי',
+                error: {
+                    error_empty: 'נא להזין שם',
+                    error_valid: 'שימוש בתווים לא תקינים',
+                },
+                gender: {
+                    label: 'מגדר',
+                    male: 'זכר',
+                    female: 'נקבה',
+                    other: 'לא רלוונטי',
+                },
+                birth_date: 'תאריך לידה',
+                agree: 'קראתי ואני מסכים',
+                provision: ' לתנאי שימוש',
+                button: 'עלה על הדשא',
+            },
         },
     },
     en: {
@@ -107,6 +126,26 @@ const resources = {
                 female: 'Female',
                 other_gender: 'Irrelevant',
                 dob: 'Date of Birth',
+            },
+            reg: {
+                title: 'Welcome! Fill in the details',
+                sub_title:
+                    'Join us and get all the hottest information about\n Your team or player!',
+                place_holder_name: '* Nickname',
+                error: {
+                    error_empty: 'Please enter name',
+                    error_valid: 'Use of invalid characters',
+                },
+                gender: {
+                    label: 'Gender',
+                    male: 'Male',
+                    female: 'Female',
+                    other: 'Other',
+                },
+                birth_date: 'Date of birth',
+                agree: 'I read and I agree',
+                provision: 'for terms of use',
+                button: 'Got on the grass',
             },
         },
     },

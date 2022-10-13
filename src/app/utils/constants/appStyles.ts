@@ -1,5 +1,5 @@
 import { AppFonts } from '@football/app/assets/fonts';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, I18nManager } from 'react-native';
 import { getSize } from '../responsive/scale';
 import { appColors } from './appColors';
 
@@ -77,5 +77,36 @@ export const appStyles = StyleSheet.create({
         textAlign: 'center',
         color: appColors.text_dark_blue,
         lineHeight: getSize.m(24),
+    },
+    text_input: {
+        fontSize: getSize.s(13),
+        fontWeight: '500',
+        lineHeight: getSize.m(17),
+        color: appColors.text_dark_blue,
+        paddingHorizontal: getSize.m(15),
+        paddingVertical: getSize.m(15),
+        borderColor: '#E9F1F4',
+        borderWidth: 1,
+        borderRadius: getSize.m(15),
+        textAlign: 'right',
+    },
+    text_label: {
+        fontSize: getSize.s(13),
+        fontWeight: '700',
+        lineHeight: getSize.m(17),
+        color: appColors.text_dark_blue,
+    },
+    text_error: {
+        color: 'red',
+        fontSize: getSize.s(9),
+        marginTop: getSize.m(5),
+        textAlign: I18nManager.isRTL ? 'left' : 'right',
+    },
+    account_container: {
+        backgroundColor: appColors.white,
+        paddingHorizontal: getSize.m(30),
+        paddingTop: getSize.m(32),
+        paddingBottom: getSize.m(20),
+        borderRadius: getSize.m(15),
     },
 });

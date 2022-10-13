@@ -18,7 +18,6 @@ export const useViewModel = ({ navigation, route }: IVerifyScreenProps) => {
     const onGoBack = (): void => {
         goBack();
     };
-
     const handleError = (errorMessage: string, input: string): void => {
         setErrors(prevState => ({ ...prevState, [input]: errorMessage }));
     };
@@ -77,7 +76,7 @@ export const useViewModel = ({ navigation, route }: IVerifyScreenProps) => {
             handleError('', 'verifyError');
         } else if (codeOtp === '1234' && codeOtp.length === 4) {
             handleError('', 'verifyError');
-            navigate(ScreenName.SettingsPage);
+            navigate(ScreenName.RegPage);
         }
     };
 

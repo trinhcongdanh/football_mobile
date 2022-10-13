@@ -1,27 +1,27 @@
 import { View, Text, TextInput } from 'react-native';
-import React from 'react';
+import React, { forwardRef } from 'react';
 import { useTranslation } from 'react-i18next';
-import styles from './Input.styles';
 import { IInputComponent } from './Input.type';
+import { appStyles } from '@football/app/utils/constants/appStyles';
 
-export const Input = ({
-    error,
-    placeholder,
-    onChangeText,
-    onFocus,
-    styleInput,
-}: IInputComponent) => {
+export const Input = (
+    { error, placeholder, onChangeText, onFocus, styleInput }: IInputComponent,
+    ref: any
+) => {
     const { t } = useTranslation();
     return (
         <View style={styleInput}>
             <TextInput
                 placeholderTextColor="#C3CFDC"
-                style={styles.input}
+                style={appStyles.text_input}
                 placeholder={placeholder}
-                onChangeText={onChangeText}
+                onChangeText={e => onChangeText(e)}
                 onFocus={onFocus}
+                ref={ref}
             />
-            {error && <Text style={styles.error}>{t(error)}</Text>}
+            {error && <Text style={appStyles.text_error}>{t(error)}</Text>}
         </View>
     );
 };
+
+export default forwardRef(Input);
