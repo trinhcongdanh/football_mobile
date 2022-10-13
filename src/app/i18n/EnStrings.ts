@@ -75,6 +75,12 @@ const resources = {
                 provision: ' לתנאי שימוש',
                 button: 'עלה על הדשא',
             },
+            team: {
+                title: 'נבחרות',
+                group: {
+                    temp: 'הנבחרת הצעירה',
+                },
+            },
         },
     },
     en: {
@@ -146,6 +152,12 @@ const resources = {
                 agree: 'I read and I agree',
                 provision: 'for terms of use',
                 button: 'Got on the grass',
+            },
+            team: {
+                title: 'Teams',
+                group: {
+                    temp: 'the chosen one the young woman',
+                },
             },
         },
     },

@@ -6,4 +6,6 @@ export const AppImages = {
     img_fb: require('./Facebook.png'),
     img_apple: require('./apple.png'),
     img_google: require('./google.png'),
+    img_avt: require('./avt.jpg'),
+    img_ball: require('./futbol.png'),
 };

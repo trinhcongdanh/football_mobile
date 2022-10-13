@@ -47,6 +47,7 @@ export const useViewModel = ({ navigation, route }: IRegScreenProps) => {
             handleError(t('reg.error.error_valid'), 'userName');
         } else {
             handleError('', 'userName');
+            navigate(ScreenName.TeamPage);
         }
     };
 

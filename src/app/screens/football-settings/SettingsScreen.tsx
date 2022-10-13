@@ -24,7 +24,7 @@ export function SettingsScreen(props: ISettingsScreenProps) {
         <View style={appStyles.flex}>
             <ImageBackground source={AppImages.img_background} style={appStyles.flex}>
                 <StatusBar translucent backgroundColor="transparent" />
-                <SafeAreaView style={appStyles.flex}>
+                <SafeAreaView style={appStyles.safe_area}>
                     <View style={appStyles.container}>
                         <CardGoBack
                             goBack={goBack}

@@ -38,7 +38,7 @@ export const RegisterScreen = ({ navigation, route }: IRegisterScreenProps) => {
         <View style={appStyles.flex}>
             <ImageBackground source={AppImages.img_bg_register} style={appStyles.flex}>
                 <StatusBar translucent backgroundColor="transparent" />
-                <SafeAreaView style={appStyles.flex}>
+                <SafeAreaView style={appStyles.safe_area}>
                     <View style={appStyles.container}>
                         <CardGoBack
                             iconName={appIcons.ic_right_ios}

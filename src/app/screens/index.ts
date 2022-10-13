@@ -4,3 +4,4 @@ export * from './football-welcome';
 export * from './football-connect';
 export * from './football-verify';
 export * from './football-reg';
+export * from './football-team';

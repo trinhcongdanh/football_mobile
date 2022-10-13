@@ -6,6 +6,7 @@ import {
     Text,
     ScrollView,
     TouchableOpacity,
+    Platform,
 } from 'react-native';
 import React from 'react';
 import { appColors } from '@football/app/utils/constants/appColors';
@@ -45,7 +46,7 @@ export const RegScreen = ({ navigation, route }: IRegScreenProps) => {
         <View style={appStyles.flex}>
             <ImageBackground source={AppImages.img_bg_register} style={appStyles.flex}>
                 <StatusBar translucent backgroundColor="transparent" />
-                <SafeAreaView style={appStyles.flex}>
+                <SafeAreaView style={appStyles.safe_area}>
                     <View style={appStyles.container}>
                         <CardGoBack
                             iconName={appIcons.ic_right_ios}

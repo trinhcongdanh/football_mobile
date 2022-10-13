@@ -1,5 +1,5 @@
 import { AppFonts } from '@football/app/assets/fonts';
-import { StyleSheet, I18nManager } from 'react-native';
+import { StyleSheet, I18nManager, Platform } from 'react-native';
 import { getSize } from '../responsive/scale';
 import { appColors } from './appColors';
 
@@ -37,6 +37,14 @@ export const appStyles = StyleSheet.create({
     flex_row_space_center: {
         flexDirection: 'row',
         justifyContent: 'space-between',
+        alignItems: 'center',
+    },
+    flex_space_center: {
+        justifyContent: 'space-between',
+        alignItems: 'center',
+    },
+    flex_row_align_center: {
+        flexDirection: 'row',
         alignItems: 'center',
     },
     container: {
@@ -108,5 +116,15 @@ export const appStyles = StyleSheet.create({
         paddingTop: getSize.m(32),
         paddingBottom: getSize.m(20),
         borderRadius: getSize.m(15),
+    },
+    text_bold: {
+        fontWeight: '700',
+        fontSize: getSize.s(14),
+        lineHeight: getSize.m(24),
+        color: appColors.white,
+    },
+    safe_area: {
+        flex: 1,
+        paddingTop: Platform.OS === 'android' ? 25 : 0,
     },
 });
