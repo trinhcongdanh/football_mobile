@@ -1,4 +1,4 @@
-import { View, TouchableOpacity, Text, I18nManager } from 'react-native';
+import { View, TouchableOpacity, Text } from 'react-native';
 import React from 'react';
 import Icon from 'react-native-vector-icons/Feather';
 import { appStyles } from '@football/app/utils/constants/appStyles';
@@ -10,24 +10,12 @@ import { styles } from './CardGoBack.styles';
 
 export const CardGoBack = ({ goBack, iconName, iconStyle, title }: ICardGoBackProps) => {
     return (
-        <>
-            {I18nManager.isRTL ? (
-                <View style={appStyles.flex_row_space_center}>
-                    <TouchableOpacity style={iconStyle} onPress={goBack}>
-                        <Icon name={iconName} size={20} color={appColors.white} />
-                    </TouchableOpacity>
-                    {title ? <Text style={styles.txt_title}>{title}</Text> : <View />}
-                    <View style={styles.width_size} />
-                </View>
-            ) : (
-                <View style={appStyles.flex_row_space_center}>
-                    <View style={styles.width_size} />
-                    {title ? <Text>{title}</Text> : <View />}
-                    <TouchableOpacity style={iconStyle} onPress={goBack}>
-                        <Icon name={iconName} size={20} color={appColors.white} />
-                    </TouchableOpacity>
-                </View>
-            )}
-        </>
+        <View style={appStyles.flex_row_space_center}>
+            <TouchableOpacity style={iconStyle} onPress={goBack}>
+                <Icon name={iconName} size={20} color={appColors.white} />
+            </TouchableOpacity>
+            {title ? <Text style={styles.txt_title}>{title}</Text> : <View />}
+            <View style={styles.width_size} />
+        </View>
     );
 };

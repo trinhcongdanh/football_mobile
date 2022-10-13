@@ -10,4 +10,5 @@ export const appColors = {
     medium_gray: '#DDE7F0',
     check_box: '#020047',
     shadow: '#182067',
+    soft_grey: '#C3CFDC',
 };

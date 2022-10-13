@@ -53,7 +53,7 @@ export const RegScreen = ({ navigation, route }: IRegScreenProps) => {
                             iconStyle={styles.ic_back}
                             goBack={onGoBack}
                         />
-                        <ScrollView>
+                        <ScrollView showsVerticalScrollIndicator={false}>
                             <CardHeaderView title={t('reg.title')} sub_title={t('reg.sub_title')} />
                             <CardInfoView
                                 placeHolderText={t('reg.place_holder_name')}

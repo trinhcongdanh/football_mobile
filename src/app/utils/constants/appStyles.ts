@@ -34,6 +34,10 @@ export const appStyles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
     },
+    flex_row_align: {
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
     flex_row_space_center: {
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -47,8 +51,12 @@ export const appStyles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
     },
+    align_justify: {
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
     container: {
-        paddingHorizontal: getSize.m(16),
+        paddingHorizontal: getSize.m(26),
         marginTop: getSize.m(10),
     },
     text_title: {
@@ -96,7 +104,7 @@ export const appStyles = StyleSheet.create({
         borderColor: '#E9F1F4',
         borderWidth: 1,
         borderRadius: getSize.m(15),
-        textAlign: 'right',
+        textAlign: I18nManager.isRTL ? 'right' : 'left',
     },
     text_label: {
         fontSize: getSize.s(13),
