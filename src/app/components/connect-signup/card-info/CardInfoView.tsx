@@ -2,11 +2,11 @@ import { View, Text } from 'react-native';
 import React, { useState } from 'react';
 import { getSize } from '@football/app/utils/responsive/scale';
 import { appStyles } from '@football/app/utils/constants/appStyles';
-import styles from './CardInfoView.style';
-import Input from '../../input/Input';
-import { ICardInfoViewProps } from './CardInfoView.types';
-import DatePicker from 'react-native-date-picker';
 import { appColors } from '@football/app/utils/constants/appColors';
+import DatePicker from 'react-native-date-picker';
+import styles from './CardInfoView.style';
+import { ICardInfoViewProps } from './CardInfoView.types';
+import Input from '../../input/Input';
 
 export const CardInfoView = ({
     errors,

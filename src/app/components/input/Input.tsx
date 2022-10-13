@@ -1,10 +1,10 @@
 import { View, Text, TextInput } from 'react-native';
 import React, { forwardRef } from 'react';
 import { useTranslation } from 'react-i18next';
-import { IInputComponent } from './Input.type';
 import { appStyles } from '@football/app/utils/constants/appStyles';
+import { IInputComponent } from './Input.type';
 
-export const Input = (
+const Input = (
     { error, placeholder, onChangeText, onFocus, styleInput }: IInputComponent,
     ref: any
 ) => {

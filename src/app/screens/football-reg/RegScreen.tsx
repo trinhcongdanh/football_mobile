@@ -18,10 +18,10 @@ import { CardInfoView } from '@football/app/components/connect-signup/card-info/
 import { getSize } from '@football/app/utils/responsive/scale';
 import { Button } from '@football/app/components/button';
 import Icon from 'react-native-vector-icons/Feather';
+import { appIcons } from '@football/app/assets/icons/appIcons';
 import styles from './RegScreen.styles';
 import { useViewModel } from './RegScreen.viewModel';
 import { IRegScreenProps } from './RegScreen.type';
-import { appIcons } from '@football/app/assets/icons/appIcons';
 
 // type Props = {};
 

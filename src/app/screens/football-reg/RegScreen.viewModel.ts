@@ -2,6 +2,7 @@ import { useTranslation } from 'react-i18next';
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
 import { useState } from 'react';
 import { Keyboard } from 'react-native';
+import { ScreenName } from '@football/app/utils/constants/enum';
 import { IRegScreenProps } from './RegScreen.type';
 
 export const useViewModel = ({ navigation, route }: IRegScreenProps) => {
@@ -41,6 +42,7 @@ export const useViewModel = ({ navigation, route }: IRegScreenProps) => {
 
         if (!user.username) {
             handleError(t('reg.error.error_empty'), 'userName');
+            navigate(ScreenName.SettingsPage);
         } else if (!user.username.match(/[a-zA-Z0-9,#.-]+/)) {
             handleError(t('reg.error.error_valid'), 'userName');
         } else {

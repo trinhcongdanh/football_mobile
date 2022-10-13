@@ -1,7 +1,7 @@
 import { appIcons } from '@football/app/assets/icons/appIcons';
 import { AppImages } from '@football/app/assets/images';
 import { CardGoBack } from '@football/app/components/go-back/CardGoBack';
-import { Input } from '@football/app/components/input';
+import Input from '@football/app/components/input/Input';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import React, { useState } from 'react';
 import { ImageBackground, SafeAreaView, StatusBar, Text, View } from 'react-native';
