@@ -13,12 +13,16 @@ export const useViewModel = (props: ISettingsScreenProps) => {
 
     const user = { username: '', gender: '', date: '' };
 
+    const [isEnabled, setIsEnabled] = useState(false);
+    const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+
     const handleOnDate = (e: Date) => {
         user.date = e.toString();
     };
 
     const onImagePicker = async () => {
         const result = await launchImageLibrary({ mediaType: 'photo' });
+        // eslint-disable-next-line array-callback-return
         result.assets?.map(item => {
             setImage(item.uri);
         });
@@ -27,10 +31,12 @@ export const useViewModel = (props: ISettingsScreenProps) => {
     return {
         date,
         image,
+        isEnabled,
         t,
         goBack,
         navigate,
         handleOnDate,
         onImagePicker,
+        toggleSwitch,
     };
 };

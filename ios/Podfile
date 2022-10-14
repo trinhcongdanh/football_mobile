@@ -5,6 +5,8 @@ platform :ios, '12.4'
 install! 'cocoapods', :deterministic_uuids => false
 
 target 'FootballAssociation' do
+  pod 'BVLinearGradient', :path => '../node_modules/react-native-linear-gradient'
+
   config = use_native_modules!
 
   # Flags change depending on the env values.
@@ -17,6 +19,7 @@ target 'FootballAssociation' do
     # we make it explicit here to aid in the React Native upgrade process.
     :hermes_enabled => true,
     :fabric_enabled => flags[:fabric_enabled],
+
     # Enables Flipper.
     #
     # Note that if you have use_frameworks! enabled, Flipper will not work and

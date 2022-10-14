@@ -7,12 +7,15 @@ import { Spacer } from '@football/app/components/spacer/Spacer';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import { getSize } from '@football/app/utils/responsive/scale';
+import { Avatar } from '@rneui/themed';
 import React, { useState } from 'react';
 import {
+    Image,
     ImageBackground,
     SafeAreaView,
     ScrollView,
     StatusBar,
+    Switch,
     Text,
     TouchableOpacity,
     View,
@@ -25,8 +28,17 @@ import { ISettingsScreenProps } from './SettingsScreen.type';
 import { useViewModel } from './SettingsScreen.viewModel';
 
 export function SettingsScreen(props: ISettingsScreenProps) {
-    const { goBack, navigate, t, date, handleOnDate, onImagePicker, image } = useViewModel(props);
-    const [itemSelected, setItemSelected] = useState<string>();
+    const {
+        goBack,
+        isEnabled,
+        toggleSwitch,
+        t,
+        date,
+        handleOnDate,
+        onImagePicker,
+        image,
+    } = useViewModel(props);
+    const [itemSelected, setItemSelected] = useState<string>(t('settings.male'));
     const male = { name: t('settings.male') };
     const female = { name: t('settings.female') };
     const other = { name: t('settings.other_gender') };
@@ -49,6 +61,30 @@ export function SettingsScreen(props: ISettingsScreenProps) {
                             />
                         </View>
                         <View style={styles.card_view_container}>
+                            <View style={styles.avatar_block}>
+                                <View style={styles.avatar_container}>
+                                    <Avatar
+                                        size={getSize.m(73)}
+                                        rounded
+                                        source={{ uri: image }}
+                                        title="Bj"
+                                        containerStyle={{ backgroundColor: appColors.separator }}
+                                    >
+                                        <Avatar.Accessory
+                                            onPress={onImagePicker}
+                                            style={{
+                                                backgroundColor: appColors.white,
+                                            }}
+                                            color="#100D65"
+                                            size={getSize.m(20)}
+                                        />
+                                    </Avatar>
+                                </View>
+                            </View>
+                            <View style={styles.txt_container_avatar}>
+                                <Image source={AppImages.img_ball} style={styles.ic_football} />
+                                <Text style={styles.txt_avatar}>1,345</Text>
+                            </View>
                             <View style={styles.first_block_container}>
                                 <Input
                                     placeholder={t('settings.name')}
@@ -216,7 +252,63 @@ export function SettingsScreen(props: ISettingsScreenProps) {
                                     {t('settings.notifications')}
                                 </Text>
                                 <Text style={styles.txt_tutorial}>{t('settings.tutorial')}</Text>
+                                <View style={styles.block_notifications}>
+                                    <Text style={styles.txt_before_game}>
+                                        {t('settings.before_every_game')}
+                                    </Text>
+                                    <Switch
+                                        trackColor={{
+                                            true: appColors.blue_light,
+                                            false: appColors.separator,
+                                        }}
+                                        thumbColor={isEnabled ? appColors.white : appColors.white}
+                                        onValueChange={toggleSwitch}
+                                        value={isEnabled}
+                                    />
+                                </View>
+                                <Spacer heightSpacer={getSize.m(1)} color={appColors.separator} />
+                                <View style={styles.block_notifications}>
+                                    <Text style={styles.txt_before_game}>
+                                        {t('settings.before_game_of_team')}
+                                    </Text>
+                                    <Switch
+                                        trackColor={{
+                                            true: appColors.blue_light,
+                                            false: appColors.separator,
+                                        }}
+                                        thumbColor={isEnabled ? appColors.white : appColors.white}
+                                        onValueChange={toggleSwitch}
+                                        value={isEnabled}
+                                    />
+                                </View>
+                                <Spacer heightSpacer={getSize.m(1)} color={appColors.separator} />
+                                <View style={styles.block_notifications}>
+                                    <Text style={styles.txt_before_game}>
+                                        {t('settings.point_received')}
+                                    </Text>
+                                    <Switch
+                                        trackColor={{
+                                            true: appColors.blue_light,
+                                            false: appColors.separator,
+                                        }}
+                                        thumbColor={isEnabled ? appColors.white : appColors.white}
+                                        onValueChange={toggleSwitch}
+                                        value={isEnabled}
+                                    />
+                                </View>
                             </View>
+                        </View>
+                        <View style={styles.btn_bottom_container}>
+                            <TouchableOpacity style={styles.btn_save_changes}>
+                                <Text style={styles.txt_save_changes}>
+                                    {t('settings.save_changes')}
+                                </Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={styles.btn_delete_account}>
+                                <Text style={styles.txt_delete_account}>
+                                    {t('settings.delete_account')}
+                                </Text>
+                            </TouchableOpacity>
                         </View>
                     </ScrollView>
                 </SafeAreaView>

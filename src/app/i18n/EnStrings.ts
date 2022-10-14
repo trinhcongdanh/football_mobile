@@ -65,6 +65,11 @@ const resources = {
                 national_team: 'נבחרות מועדפות',
                 notifications: 'הגדרת התראות',
                 tutorial: 'שלחו לי התראת ״Push” במקרים הבאים',
+                before_every_game: 'לפני כל משחק',
+                before_game_of_team: 'לפני משחק של קבוצות שהגדרתי',
+                point_received: 'כשמתקבלים נקודות',
+                save_changes: 'שמירת שינויים',
+                delete_account: 'מחיקת חשבון',
             },
             reg: {
                 title: 'וולקם! מלאו את הפרטים',
@@ -164,6 +169,11 @@ const resources = {
                 national_team: 'Favorite national teams',
                 notifications: 'Set notifications',
                 tutorial: 'Send me a "Push" notification in the following cases',
+                before_every_game: 'Before every game',
+                before_game_of_team: 'Before a game of teams I defined',
+                point_received: 'When points are received',
+                save_changes: 'Save changes',
+                delete_account: 'Delete account',
             },
             reg: {
                 title: 'Welcome! Fill in the details',
