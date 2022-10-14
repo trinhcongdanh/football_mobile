@@ -35,7 +35,7 @@ export const CardInfoView = ({
             <Input
                 error={errors}
                 placeholder={placeHolderText}
-                onChangeText={e => handleOnChange(e)}
+                onChangeText={(e: string) => handleOnChange(e)}
                 onFocus={handleError}
                 ref={input}
             />

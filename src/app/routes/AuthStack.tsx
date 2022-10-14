@@ -8,6 +8,7 @@ import { ConnectScreen } from '../screens/football-connect/ConnectScreen';
 import { VerifyScreen } from '../screens/football-verify/VerifyScreen';
 import { SettingsScreen } from '../screens/football-settings/SettingsScreen';
 import { TeamScreen } from '../screens/football-team/TeamScreen';
+import { TeamSquadScreen } from '../screens/football-team-squad/TeamSquadScreen';
 
 const Auth = createNativeStackNavigator();
 
@@ -24,6 +25,7 @@ export const AuthStack = () => {
             <Auth.Screen name={ScreenName.SettingsPage} component={SettingsScreen} />
             <Auth.Screen name={ScreenName.RegPage} component={RegScreen} />
             <Auth.Screen name={ScreenName.TeamPage} component={TeamScreen} />
+            <Auth.Screen name={ScreenName.TeamSquadPage} component={TeamSquadScreen} />
         </Auth.Navigator>
     );
 };

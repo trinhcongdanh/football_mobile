@@ -91,6 +91,18 @@ const resources = {
                     temp: 'הנבחרת הצעירה',
                 },
             },
+            team_squad: {
+                title: 'סגל נבחרת',
+                option: {
+                    players: 'שחקני הנבחרת',
+                    officials: 'בעלי תפקידים',
+                },
+
+                gk: 'שוערים',
+                df: 'הגנה',
+                mf: 'קישור',
+                st: 'התקפה',
+            },
         },
     },
     en: {
@@ -178,6 +190,17 @@ const resources = {
                 group: {
                     temp: 'the chosen one the young woman',
                 },
+            },
+            team_squad: {
+                title: 'Team squad',
+                option: {
+                    players: 'The team players',
+                    officials: 'Officials',
+                },
+                gk: 'Goalkeepers',
+                df: 'Defenders',
+                mf: 'Midfielders',
+                st: 'Striker',
             },
         },
     },

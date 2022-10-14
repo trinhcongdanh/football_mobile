@@ -1,4 +1,5 @@
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
+import { ScreenName } from '@football/app/utils/constants/enum';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ITeamScreenProps } from './TeamScreen.type';
@@ -25,5 +26,9 @@ export const useViewModel = ({ navigation, route }: ITeamScreenProps) => {
         { id: 9, name: 'נבחרת הנערות עד גיל 17' },
     ];
 
-    return { optionTeams, toggleChangeBar, toggleBar };
+    const handleTeam = () => {
+        navigate(ScreenName.TeamSquadPage);
+    };
+
+    return { optionTeams, toggleChangeBar, toggleBar, handleTeam };
 };
