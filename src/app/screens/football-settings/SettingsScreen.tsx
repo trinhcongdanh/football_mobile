@@ -51,15 +51,18 @@ export function SettingsScreen(props: ISettingsScreenProps) {
             <ImageBackground source={AppImages.img_background} style={appStyles.flex}>
                 <StatusBar translucent backgroundColor="transparent" />
                 <SafeAreaView style={appStyles.safe_area}>
-                    <ScrollView showsVerticalScrollIndicator={false} style={appStyles.flex}>
-                        <View style={appStyles.container}>
-                            <CardGoBack
-                                goBack={goBack}
-                                iconName={appIcons.ic_x_circle}
-                                iconStyle={styles.ic_circle}
-                                title={t('settings.user_settings')}
-                            />
-                        </View>
+                    <View style={appStyles.container}>
+                        <CardGoBack
+                            goBack={goBack}
+                            iconName={appIcons.ic_x_circle}
+                            iconStyle={styles.ic_circle}
+                            title={t('settings.user_settings')}
+                        />
+                    </View>
+                    <ScrollView
+                        showsVerticalScrollIndicator={false}
+                        style={[appStyles.flex, { marginTop: getSize.m(10) }]}
+                    >
                         <View style={styles.card_view_container}>
                             <View style={styles.avatar_block}>
                                 <View style={styles.avatar_container}>

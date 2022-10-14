@@ -10,7 +10,7 @@ export const styles = StyleSheet.create({
         borderRadius: getSize.m(25),
     },
     card_view_container: {
-        marginTop: getSize.m(48),
+        marginTop: getSize.m(38),
         backgroundColor: appColors.white,
         borderRadius: getSize.m(15),
     },
