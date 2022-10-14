@@ -11,4 +11,7 @@ export const appColors = {
     check_box: '#020047',
     shadow: '#182067',
     soft_grey: '#C3CFDC',
+    button_dark_blue: '#100D65',
+    text_option_unselect: '#154768',
+    text_dark: '#061134',
 };

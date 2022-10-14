@@ -5,3 +5,4 @@ export * from './football-connect';
 export * from './football-verify';
 export * from './football-reg';
 export * from './football-team';
+export * from './football-team-squad';

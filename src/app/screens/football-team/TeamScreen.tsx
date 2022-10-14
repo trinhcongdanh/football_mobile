@@ -25,7 +25,7 @@ import { useViewModel } from './TeamScreen.viewModel';
 // type Props = {};
 
 export const TeamScreen = ({ navigation, route }: ITeamScreenProps) => {
-    const { optionTeams, toggleChangeBar, toggleBar } = useViewModel({
+    const { optionTeams, toggleChangeBar, toggleBar, handleTeam } = useViewModel({
         navigation,
         route,
     });
@@ -33,14 +33,14 @@ export const TeamScreen = ({ navigation, route }: ITeamScreenProps) => {
 
     const renderItem = ({ item }: any) => {
         return !toggleBar ? (
-            <TouchableOpacity style={styles.option_grid}>
+            <TouchableOpacity style={styles.option_grid} onPress={handleTeam}>
                 <Image resizeMode="contain" source={AppImages.img_logo} style={styles.logo} />
                 <Text numberOfLines={2} style={styles.text_option_grid}>
                     {item.name}
                 </Text>
             </TouchableOpacity>
         ) : (
-            <TouchableOpacity style={styles.option_menu}>
+            <TouchableOpacity style={styles.option_menu} onPress={handleTeam}>
                 <View style={appStyles.flex_row_align_center}>
                     <Image resizeMode="contain" source={AppImages.img_logo} style={styles.logo} />
                     <Text style={styles.text_option_menu}>{item.name}</Text>
@@ -88,7 +88,7 @@ export const TeamScreen = ({ navigation, route }: ITeamScreenProps) => {
                             <Text style={[appStyles.text_title]}>{t('team.title')}</Text>
                         </View>
                     </View>
-                    <View style={[appStyles.flex, styles.contain]}>
+                    <View style={[appStyles.flex, appStyles.main_container]}>
                         {toggleBar ? (
                             <FlatList
                                 data={optionTeams}

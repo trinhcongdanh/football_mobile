@@ -8,4 +8,5 @@ export const AppImages = {
     img_google: require('./google.png'),
     img_avt: require('./avt.jpg'),
     img_ball: require('./futbol.png'),
+    img_gk: require('./gk.jpg'),
 };

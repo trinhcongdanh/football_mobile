@@ -56,7 +56,7 @@ export const appStyles = StyleSheet.create({
         justifyContent: 'center',
     },
     container: {
-        paddingHorizontal: getSize.m(26),
+        paddingHorizontal: getSize.m(16),
         marginTop: getSize.m(10),
     },
     text_title: {
@@ -134,5 +134,29 @@ export const appStyles = StyleSheet.create({
     safe_area: {
         flex: 1,
         paddingTop: Platform.OS === 'android' ? 25 : 0,
+    },
+
+    main_container: {
+        backgroundColor: appColors.white,
+        marginTop: getSize.m(20),
+        borderTopLeftRadius: getSize.m(30),
+        borderTopRightRadius: getSize.m(30),
+        paddingHorizontal: getSize.m(32),
+        paddingVertical: getSize.m(20),
+    },
+    text_dark: {
+        fontWeight: '700',
+        fontFamily: AppFonts.regular,
+        color: appColors.text_dark,
+        lineHeight: getSize.m(15),
+        fontSize: getSize.m(13),
+    },
+
+    number: {
+        fontWeight: '700',
+        fontFamily: AppFonts.regular,
+        color: appColors.text_dark_blue,
+        fontSize: getSize.m(16),
+        lineHeight: getSize.m(24),
     },
 });

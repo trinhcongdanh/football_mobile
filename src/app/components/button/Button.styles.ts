@@ -1,20 +1,22 @@
 import { AppFonts } from '@football/app/assets/fonts';
+import { appColors } from '@football/app/utils/constants/appColors';
+import { getSize } from '@football/app/utils/responsive/scale';
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
     button: {
-        backgroundColor: '#2CC4FF',
-        borderRadius: 60,
-        marginTop: 20,
+        backgroundColor: appColors.blue_light,
+        borderRadius: getSize.m(60),
+        marginTop: getSize.m(20),
         width: '100%',
         flexDirection: 'row',
         justifyContent: 'center',
     },
     text_button: {
-        fontSize: 16,
-        color: 'white',
+        fontSize: getSize.s(16),
+        color: appColors.white,
         fontFamily: AppFonts.bold,
-        paddingVertical: 16,
+        paddingVertical: getSize.m(16),
     },
 });
 

@@ -19,15 +19,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         borderRadius: getSize.m(40),
     },
-
-    contain: {
-        backgroundColor: appColors.white,
-        marginTop: getSize.m(20),
-        borderTopLeftRadius: getSize.m(30),
-        borderTopRightRadius: getSize.m(30),
-        paddingHorizontal: getSize.m(20),
-        paddingVertical: getSize.m(26),
-    },
     logo: { width: getSize.s(30), height: getSize.s(30) },
     option_grid: {
         borderColor: appColors.border,
