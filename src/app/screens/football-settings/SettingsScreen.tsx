@@ -25,7 +25,7 @@ import { ISettingsScreenProps } from './SettingsScreen.type';
 import { useViewModel } from './SettingsScreen.viewModel';
 
 export function SettingsScreen(props: ISettingsScreenProps) {
-    const { goBack, navigate, t, date, handleOnDate, onImagePicker } = useViewModel(props);
+    const { goBack, navigate, t, date, handleOnDate, onImagePicker, image } = useViewModel(props);
     const [itemSelected, setItemSelected] = useState<string>();
     const male = { name: t('settings.male') };
     const female = { name: t('settings.female') };
@@ -150,6 +150,7 @@ export function SettingsScreen(props: ISettingsScreenProps) {
                                         headerSkip={t('settings.sleep')}
                                         iconName={appIcons.ic_left_ios}
                                     />
+
                                     <View
                                         style={[
                                             appStyles.flex_row_space_center,
