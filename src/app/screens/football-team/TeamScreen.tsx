@@ -73,7 +73,7 @@ export const TeamScreen = ({ navigation, route }: ITeamScreenProps) => {
                                 >
                                     1,325
                                 </Text>
-                                <Image source={AppImages.img_ball} />
+                                <Image source={AppImages.img_ball} style={styles.ic_football} />
                             </View>
                             <TouchableOpacity onPress={toggleChangeBar}>
                                 <LinearGradient

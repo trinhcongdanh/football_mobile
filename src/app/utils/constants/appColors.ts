@@ -1,9 +1,11 @@
 export const appColors = {
     white: '#FFFFFF',
+    gray: '#F9F9F9',
     text_grey: '#B3B6C8',
     text_dark_blue: '#020047',
     border: '#E9F1F4',
     blue_light: '#2CC4FF',
+    blue_matte: '#EAF9FF',
     blue_dark: '#008BC1',
     separator: '#EFF4F8',
     light_gray: '#8592A6',
@@ -14,4 +16,7 @@ export const appColors = {
     button_dark_blue: '#100D65',
     text_option_unselect: '#154768',
     text_dark: '#061134',
+    yellow_light: '#FFFCEA',
+    red_light: '#FDE9ED',
+    red: '#EF1B1B',
 };

@@ -7,4 +7,8 @@ export const appIcons = {
     ic_arrow_left: 'chevron-left',
     ic_star: 'star',
     ic_plus: 'plus',
+    ic_location: 'location',
+    ic_whistle: 'whistle',
+    ic_up: 'caretup',
+    ic_down: 'caretdown',
 };

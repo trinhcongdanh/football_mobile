@@ -42,7 +42,7 @@ export const ButtonOption = ({ player, official, onSelect }: IButtonOptionCompon
                                         index === select
                                             ? appColors.white
                                             : appColors.text_option_unselect,
-                                    fontWeight: index === select ? '700' : '400',
+                                    fontWeight: index === select ? '700' : '500',
                                 },
                             ]}
                         >

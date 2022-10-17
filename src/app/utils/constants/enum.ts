@@ -10,6 +10,14 @@ export enum ScreenName {
     RegPage = 'RegPage',
     TeamPage = 'TeamPage',
     TeamSquadPage = 'TeamSquadPage',
+    MatchPage = 'MatchPage',
+}
+
+export enum ScreenTopTap {
+    CompositionPage = 'CompositionPage',
+    GamePage = 'GamePage',
+    SchedulePage = 'SchedulePage',
+    StandingPage = 'StandingPage',
 }
 
 export enum ScreenStack {
