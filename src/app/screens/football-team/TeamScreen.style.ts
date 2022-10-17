@@ -11,6 +11,12 @@ const styles = StyleSheet.create({
         flexDirection: I18nManager.isRTL ? 'row-reverse' : 'row',
     },
 
+    ic_football: {
+        width: getSize.m(16),
+        height: getSize.m(16),
+        marginRight: getSize.m(3),
+    },
+
     bar: {
         width: getSize.s(40),
         height: getSize.s(40),

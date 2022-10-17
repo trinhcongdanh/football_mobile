@@ -1,4 +1,4 @@
-import { View, Text, ImageBackground, SafeAreaView, StatusBar, ScrollView } from 'react-native';
+import { View, ImageBackground, SafeAreaView, StatusBar, ScrollView } from 'react-native';
 import React, { useState } from 'react';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import { AppImages } from '@football/app/assets/images';
@@ -10,6 +10,7 @@ import { useViewModel } from './TeamSquadScreen.viewModel';
 import { ButtonOption } from '@football/app/components/button_option';
 import { getSize } from '@football/app/utils/responsive/scale';
 import { ListPlayer } from '@football/app/components/list-player/ListPlayer';
+import { Position } from '@football/app/components/position/Position';
 
 // type Props = {};
 
@@ -43,17 +44,7 @@ export const TeamSquadScreen = ({ navigation, route }: ITeamGroupScreenProps) =>
                         {onSelect === 0 && (
                             <ScrollView>
                                 <View style={{ marginTop: getSize.m(30) }}>
-                                    <View
-                                        style={[
-                                            appStyles.flex_row_space_center,
-                                            { marginBottom: getSize.m(24) },
-                                        ]}
-                                    >
-                                        <View style={styles.line} />
-                                        <Text style={styles.text_or}>{t('team_squad.gk')}</Text>
-                                        <View style={styles.line} />
-                                    </View>
-
+                                    <Position position={t('team_squad.gk')} />
                                     {goalkeepers.map(item => {
                                         return (
                                             <ListPlayer
@@ -65,17 +56,7 @@ export const TeamSquadScreen = ({ navigation, route }: ITeamGroupScreenProps) =>
                                     })}
                                 </View>
                                 <View style={{ marginTop: getSize.m(30) }}>
-                                    <View
-                                        style={[
-                                            appStyles.flex_row_space_center,
-                                            { marginBottom: getSize.m(24) },
-                                        ]}
-                                    >
-                                        <View style={styles.line} />
-                                        <Text style={styles.text_or}>{t('team_squad.df')}</Text>
-                                        <View style={styles.line} />
-                                    </View>
-
+                                    <Position position={t('team_squad.df')} />
                                     {defenders.map(item => {
                                         return (
                                             <ListPlayer
@@ -87,17 +68,7 @@ export const TeamSquadScreen = ({ navigation, route }: ITeamGroupScreenProps) =>
                                     })}
                                 </View>
                                 <View style={{ marginTop: getSize.m(30) }}>
-                                    <View
-                                        style={[
-                                            appStyles.flex_row_space_center,
-                                            { marginBottom: getSize.m(24) },
-                                        ]}
-                                    >
-                                        <View style={styles.line} />
-                                        <Text style={styles.text_or}>{t('team_squad.mf')}</Text>
-                                        <View style={styles.line} />
-                                    </View>
-
+                                    <Position position={t('team_squad.mf')} />
                                     {goalkeepers.map(item => {
                                         return (
                                             <ListPlayer
@@ -109,17 +80,7 @@ export const TeamSquadScreen = ({ navigation, route }: ITeamGroupScreenProps) =>
                                     })}
                                 </View>
                                 <View style={{ marginTop: getSize.m(30) }}>
-                                    <View
-                                        style={[
-                                            appStyles.flex_row_space_center,
-                                            { marginBottom: getSize.m(24) },
-                                        ]}
-                                    >
-                                        <View style={styles.line} />
-                                        <Text style={styles.text_or}>{t('team_squad.st')}</Text>
-                                        <View style={styles.line} />
-                                    </View>
-
+                                    <Position position={t('team_squad.st')} />
                                     {goalkeepers.map(item => {
                                         return (
                                             <ListPlayer

@@ -38,6 +38,11 @@ export const appStyles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
     },
+    flex_row_content_center: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+    },
+
     flex_row_space_center: {
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -51,6 +56,7 @@ export const appStyles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
     },
+
     align_justify: {
         alignItems: 'center',
         justifyContent: 'center',
@@ -137,11 +143,11 @@ export const appStyles = StyleSheet.create({
     },
 
     main_container: {
-        backgroundColor: appColors.white,
+        backgroundColor: appColors.gray,
         marginTop: getSize.m(20),
         borderTopLeftRadius: getSize.m(30),
         borderTopRightRadius: getSize.m(30),
-        paddingHorizontal: getSize.m(32),
+        paddingHorizontal: getSize.m(26),
         paddingVertical: getSize.m(20),
     },
     text_dark: {
@@ -158,5 +164,16 @@ export const appStyles = StyleSheet.create({
         color: appColors.text_dark_blue,
         fontSize: getSize.m(16),
         lineHeight: getSize.m(24),
+    },
+
+    top_tap: {
+        elevation: 0,
+        backgroundColor: appColors.gray,
+    },
+
+    top_tap_indicator: {
+        borderWidth: getSize.m(2),
+        borderColor: appColors.blue_light,
+        borderRadius: getSize.m(2),
     },
 });
