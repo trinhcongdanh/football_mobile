@@ -76,7 +76,7 @@ export const useViewModel = ({ navigation, route }: IVerifyScreenProps) => {
             handleError('', 'verifyError');
         } else if (codeOtp === '1234' && codeOtp.length === 4) {
             handleError('', 'verifyError');
-            navigate(ScreenName.RegPage);
+            navigate(ScreenName.HomePage);
         }
     };
 
