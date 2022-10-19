@@ -7,6 +7,7 @@ export const appColors = {
     blue_light: '#2CC4FF',
     blue_matte: '#EAF9FF',
     blue_dark: '#008BC1',
+    blue_black: '#05162A',
     separator: '#EFF4F8',
     light_gray: '#8592A6',
     medium_gray: '#DDE7F0',
@@ -20,4 +21,5 @@ export const appColors = {
     yellow_light: '#FFFCEA',
     red_light: '#FDE9ED',
     red: '#EF1B1B',
+    red_dark: '#CC0A2D',
 };

@@ -1,63 +1,40 @@
-import {
-    View,
-    Text,
-    ImageBackground,
-    StatusBar,
-    SafeAreaView,
-    Image,
-    TouchableOpacity,
-} from 'react-native';
+import { View, Text, ImageBackground, StatusBar, SafeAreaView } from 'react-native';
 import React from 'react';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import { AppImages } from '@football/app/assets/images';
 import { Avatar } from 'react-native-elements';
 import { getSize } from '@football/app/utils/responsive/scale';
 import { useTranslation } from 'react-i18next';
-import LinearGradient from 'react-native-linear-gradient';
 import { appColors } from '@football/app/utils/constants/appColors';
-import Icon from 'react-native-vector-icons/Feather';
 import IconLocation from 'react-native-vector-icons/EvilIcons';
 import { appIcons } from '@football/app/assets/icons/appIcons';
 import { TopTaps } from '@football/app/routes/toptap/TopTap';
+import { HeaderUser } from '@football/app/components/header-user/HeaderUser';
 import styles from './MatchScreen.styles';
+import { IMatchScreenProps } from './MatchScreen.type';
+import { useViewModel } from './MatchScreen.viewModel';
 
 // type Props = {};
 
-export const MatchScreen = (props: any) => {
-    const { t } = useTranslation();
-
+export const MatchScreen = ({ navigation, route }: IMatchScreenProps) => {
+    const { t, onGoBack } = useViewModel({
+        navigation,
+        route,
+    });
     return (
         <View style={appStyles.flex}>
             <ImageBackground source={AppImages.img_background} style={appStyles.flex}>
                 <StatusBar translucent backgroundColor="transparent" />
                 <SafeAreaView style={appStyles.safe_area}>
                     <View style={appStyles.container}>
-                        <View style={[appStyles.flex_space_center, styles.header]}>
-                            <View style={[appStyles.flex_row_space_center, styles.avt]}>
-                                <Avatar rounded size={40} source={AppImages.img_avt} />
-                                <Text
-                                    style={[
-                                        appStyles.text_bold,
-                                        { marginRight: getSize.m(6), marginLeft: getSize.m(3) },
-                                    ]}
-                                >
-                                    1,325
-                                </Text>
-                                <Image source={AppImages.img_ball} style={styles.ic_football} />
-                            </View>
-                            <TouchableOpacity>
-                                <LinearGradient
-                                    colors={[appColors.text_dark_blue, appColors.text_dark_blue]}
-                                    style={styles.bar}
-                                >
-                                    <Icon
-                                        name={appIcons.ic_right_ios}
-                                        color={appColors.white}
-                                        size={14}
-                                    />
-                                </LinearGradient>
-                            </TouchableOpacity>
-                        </View>
+                        <HeaderUser
+                            avt={AppImages.img_avt}
+                            point="1,325"
+                            icon={appIcons.ic_right_ios}
+                            color_pre={appColors.text_dark_blue}
+                            color_after={appColors.text_dark_blue}
+                            handlePressFunction={onGoBack}
+                        />
                         <View>
                             <Text style={[appStyles.text_title]}>{t('match.title')}</Text>
                         </View>
@@ -107,7 +84,9 @@ export const MatchScreen = (props: any) => {
                         </View>
                     </View>
                     <View style={[appStyles.flex, appStyles.main_container]}>
-                        <TopTaps />
+                        <View style={{ paddingHorizontal: getSize.m(26) }}>
+                            <TopTaps />
+                        </View>
                     </View>
                 </SafeAreaView>
             </ImageBackground>

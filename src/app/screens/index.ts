@@ -7,3 +7,4 @@ export * from './football-reg';
 export * from './football-team';
 export * from './football-team-squad';
 export * from './football-match';
+export * from './football-data-player';

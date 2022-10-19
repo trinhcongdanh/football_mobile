@@ -36,63 +36,65 @@ export const TeamSquadScreen = ({ navigation, route }: ITeamGroupScreenProps) =>
                     </View>
                     <View style={[appStyles.flex, appStyles.main_container]}>
                         <ButtonOption
-                            player={t('team_squad.option.players')}
-                            official={t('team_squad.option.officials')}
+                            option_one={t('team_squad.option.players')}
+                            option_two={t('team_squad.option.officials')}
                             onSelect={setOnSelect}
                         />
 
-                        {onSelect === 0 && (
-                            <ScrollView>
-                                <View style={{ marginTop: getSize.m(30) }}>
-                                    <Position position={t('team_squad.gk')} />
-                                    {goalkeepers.map(item => {
-                                        return (
-                                            <ListPlayer
-                                                key={item.id}
-                                                name={item.name}
-                                                number={item.number}
-                                            ></ListPlayer>
-                                        );
-                                    })}
-                                </View>
-                                <View style={{ marginTop: getSize.m(30) }}>
-                                    <Position position={t('team_squad.df')} />
-                                    {defenders.map(item => {
-                                        return (
-                                            <ListPlayer
-                                                key={item.id}
-                                                name={item.name}
-                                                number={item.number}
-                                            ></ListPlayer>
-                                        );
-                                    })}
-                                </View>
-                                <View style={{ marginTop: getSize.m(30) }}>
-                                    <Position position={t('team_squad.mf')} />
-                                    {goalkeepers.map(item => {
-                                        return (
-                                            <ListPlayer
-                                                key={item.id}
-                                                name={item.name}
-                                                number={item.number}
-                                            ></ListPlayer>
-                                        );
-                                    })}
-                                </View>
-                                <View style={{ marginTop: getSize.m(30) }}>
-                                    <Position position={t('team_squad.st')} />
-                                    {goalkeepers.map(item => {
-                                        return (
-                                            <ListPlayer
-                                                key={item.id}
-                                                name={item.name}
-                                                number={item.number}
-                                            ></ListPlayer>
-                                        );
-                                    })}
-                                </View>
-                            </ScrollView>
-                        )}
+                        <View style={{ paddingHorizontal: getSize.m(26) }}>
+                            {onSelect === 0 && (
+                                <ScrollView>
+                                    <View style={{ marginTop: getSize.m(30) }}>
+                                        <Position position={t('team_squad.gk')} />
+                                        {goalkeepers.map(item => {
+                                            return (
+                                                <ListPlayer
+                                                    key={item.id}
+                                                    name={item.name}
+                                                    number={item.number}
+                                                ></ListPlayer>
+                                            );
+                                        })}
+                                    </View>
+                                    <View style={{ marginTop: getSize.m(30) }}>
+                                        <Position position={t('team_squad.df')} />
+                                        {defenders.map(item => {
+                                            return (
+                                                <ListPlayer
+                                                    key={item.id}
+                                                    name={item.name}
+                                                    number={item.number}
+                                                ></ListPlayer>
+                                            );
+                                        })}
+                                    </View>
+                                    <View style={{ marginTop: getSize.m(30) }}>
+                                        <Position position={t('team_squad.mf')} />
+                                        {goalkeepers.map(item => {
+                                            return (
+                                                <ListPlayer
+                                                    key={item.id}
+                                                    name={item.name}
+                                                    number={item.number}
+                                                ></ListPlayer>
+                                            );
+                                        })}
+                                    </View>
+                                    <View style={{ marginTop: getSize.m(30) }}>
+                                        <Position position={t('team_squad.st')} />
+                                        {goalkeepers.map(item => {
+                                            return (
+                                                <ListPlayer
+                                                    key={item.id}
+                                                    name={item.name}
+                                                    number={item.number}
+                                                ></ListPlayer>
+                                            );
+                                        })}
+                                    </View>
+                                </ScrollView>
+                            )}
+                        </View>
                     </View>
                 </SafeAreaView>
             </ImageBackground>

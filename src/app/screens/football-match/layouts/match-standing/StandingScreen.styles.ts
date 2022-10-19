@@ -3,9 +3,6 @@ import { getSize } from '@football/app/utils/responsive/scale';
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
-    header: {
-        backgroundColor: 'red',
-    },
     text_header: {
         fontSize: getSize.m(11),
         color: appColors.button_dark_blue,

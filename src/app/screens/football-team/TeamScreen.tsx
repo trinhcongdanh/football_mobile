@@ -10,14 +10,13 @@ import {
 } from 'react-native';
 import React from 'react';
 import Icon from 'react-native-vector-icons/Feather';
-import { Avatar } from 'react-native-elements';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import { AppImages } from '@football/app/assets/images';
 import { getSize } from '@football/app/utils/responsive/scale';
 import { appIcons } from '@football/app/assets/icons/appIcons';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { useTranslation } from 'react-i18next';
-import LinearGradient from 'react-native-linear-gradient';
+import { HeaderUser } from '@football/app/components/header-user/HeaderUser';
 import { ITeamScreenProps } from './TeamScreen.type';
 import styles from './TeamScreen.style';
 import { useViewModel } from './TeamScreen.viewModel';
@@ -62,50 +61,38 @@ export const TeamScreen = ({ navigation, route }: ITeamScreenProps) => {
                 <StatusBar translucent backgroundColor="transparent" />
                 <SafeAreaView style={appStyles.safe_area}>
                     <View style={appStyles.container}>
-                        <View style={[appStyles.flex_space_center, styles.header]}>
-                            <View style={[appStyles.flex_row_space_center, styles.avt]}>
-                                <Avatar rounded size={40} source={AppImages.img_avt} />
-                                <Text
-                                    style={[
-                                        appStyles.text_bold,
-                                        { marginRight: getSize.m(6), marginLeft: getSize.m(3) },
-                                    ]}
-                                >
-                                    1,325
-                                </Text>
-                                <Image source={AppImages.img_ball} style={styles.ic_football} />
-                            </View>
-                            <TouchableOpacity onPress={toggleChangeBar}>
-                                <LinearGradient
-                                    colors={[appColors.blue_light, appColors.blue_dark]}
-                                    style={styles.bar}
-                                >
-                                    <Icon name="align-right" color={appColors.white} size={14} />
-                                </LinearGradient>
-                            </TouchableOpacity>
-                        </View>
+                        <HeaderUser
+                            avt={AppImages.img_avt}
+                            point="1,325"
+                            icon={appIcons.ic_align_right}
+                            color_pre={appColors.blue_light}
+                            color_after={appColors.blue_dark}
+                            handlePressFunction={toggleChangeBar}
+                        />
                         <View>
                             <Text style={[appStyles.text_title]}>{t('team.title')}</Text>
                         </View>
                     </View>
                     <View style={[appStyles.flex, appStyles.main_container]}>
-                        {toggleBar ? (
-                            <FlatList
-                                data={optionTeams}
-                                keyExtractor={(item: any) => item.id}
-                                renderItem={renderItem}
-                                numColumns={1}
-                                key={1}
-                            />
-                        ) : (
-                            <FlatList
-                                data={optionTeams}
-                                keyExtractor={(item: any) => item.id}
-                                renderItem={renderItem}
-                                numColumns={3}
-                                key={3}
-                            />
-                        )}
+                        <View style={{ paddingHorizontal: getSize.m(26) }}>
+                            {toggleBar ? (
+                                <FlatList
+                                    data={optionTeams}
+                                    keyExtractor={(item: any) => item.id}
+                                    renderItem={renderItem}
+                                    numColumns={1}
+                                    key={1}
+                                />
+                            ) : (
+                                <FlatList
+                                    data={optionTeams}
+                                    keyExtractor={(item: any) => item.id}
+                                    renderItem={renderItem}
+                                    numColumns={3}
+                                    key={3}
+                                />
+                            )}
+                        </View>
                     </View>
                 </SafeAreaView>
             </ImageBackground>

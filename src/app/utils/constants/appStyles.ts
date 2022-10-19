@@ -147,7 +147,6 @@ export const appStyles = StyleSheet.create({
         marginTop: getSize.m(20),
         borderTopLeftRadius: getSize.m(30),
         borderTopRightRadius: getSize.m(30),
-        paddingHorizontal: getSize.m(26),
         paddingVertical: getSize.m(20),
     },
     text_dark: {
