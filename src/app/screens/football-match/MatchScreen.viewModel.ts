@@ -10,5 +10,5 @@ export const useViewModel = ({ navigation, route }: IMatchScreenProps) => {
         goBack();
     };
 
-    return {};
+    return { t, onGoBack };
 };

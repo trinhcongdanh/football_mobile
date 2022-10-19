@@ -6,10 +6,10 @@ import { appStyles } from '@football/app/utils/constants/appStyles';
 import styles from './ButtonOption.style';
 import { appColors } from '@football/app/utils/constants/appColors';
 
-export const ButtonOption = ({ player, official, onSelect }: IButtonOptionComponent) => {
+export const ButtonOption = ({ option_one, option_two, onSelect }: IButtonOptionComponent) => {
     const { t } = useTranslation();
 
-    const options = [player, official];
+    const options = [option_one, option_two];
 
     const [select, setSelect] = useState(0);
 

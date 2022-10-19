@@ -1,5 +1,5 @@
 export type IButtonOptionComponent = {
-    player: string;
-    official: string;
+    option_one: string;
+    option_two: string;
     onSelect: any;
 };

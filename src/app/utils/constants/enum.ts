@@ -11,6 +11,7 @@ export enum ScreenName {
     TeamPage = 'TeamPage',
     TeamSquadPage = 'TeamSquadPage',
     MatchPage = 'MatchPage',
+    DataPlayerPage = 'DataPlayerPage',
 }
 
 export enum ScreenTopTap {
@@ -18,6 +19,11 @@ export enum ScreenTopTap {
     GamePage = 'GamePage',
     SchedulePage = 'SchedulePage',
     StandingPage = 'StandingPage',
+}
+
+export enum ScreenDataPlayer {
+    DataPlayerTeamPage = 'DataPlayerTeamPage',
+    DataPlayerNationalPage = 'DataPlayerNationalPage',
 }
 
 export enum ScreenStack {
