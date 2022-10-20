@@ -34,7 +34,7 @@ export const HeaderUser = ({
             </View>
             <TouchableOpacity onPress={handlePressFunction}>
                 <LinearGradient colors={[color_pre, color_after]} style={styles.bar}>
-                    <Icon name={icon} color={appColors.white} size={14} />
+                    <Icon name={icon} color={appColors.white} size={getSize.m(20)} />
                 </LinearGradient>
             </TouchableOpacity>
         </View>

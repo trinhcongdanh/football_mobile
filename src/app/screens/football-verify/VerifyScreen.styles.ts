@@ -1,6 +1,6 @@
 import { appColors } from '@football/app/utils/constants/appColors';
 import { getSize } from '@football/app/utils/responsive/scale';
-import { StyleSheet, I18nManager } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
     connect_container: {
@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
         borderRadius: getSize.m(15),
     },
 
-    ic_back: { alignItems: I18nManager.isRTL ? 'flex-start' : 'flex-end' },
+    ic_back: { alignItems: 'flex-start' },
 
     otp_Container: {
         justifyContent: 'space-between',
