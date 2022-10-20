@@ -1,4 +1,4 @@
-import { View, Animated, TouchableOpacity, Alert, Text } from 'react-native';
+import { View, Animated, TouchableOpacity, Alert, Text, SafeAreaView } from 'react-native';
 import React from 'react';
 import { CurvedBottomBar } from 'react-native-curved-bottom-bar';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -43,17 +43,19 @@ export const HomeScreen = (props: any) => {
         return (
             <TouchableOpacity onPress={() => navigate(routeName)} style={styles.tab_bar}>
                 {renderIcon(routeName, selectedTab)}
-                <Text>{routeName}</Text>
+                <Text style={{ color: appColors.white }}>{routeName}</Text>
             </TouchableOpacity>
         );
     };
 
     return (
-        <View style={{ flex: 1 }}>
-            <CurvedBottomBar.Navigator
+        <SafeAreaView style={{ flex: 1 }}>
+            <Text>Hello</Text>
+            {/* <CurvedBottomBar.Navigator
                 style={{}}
                 height={getSize.m(60)}
                 // circleWidth={45}
+                type="DOWN"
                 bgColor={appColors.text_dark}
                 screenOptions={{ headerShown: false }}
                 initialRouteName="title1"
@@ -75,9 +77,9 @@ export const HomeScreen = (props: any) => {
                     component={TeamSquadScreen}
                     position="RIGHT"
                 />
-                <CurvedBottomBar.Screen name="title3" component={TeamScreen} position="LEFT" />
+                <CurvedBottomBar.Screen name="title3" component={TeamScreen} position="CENTER" />
                 <CurvedBottomBar.Screen name="title4" component={TeamScreen} position="LEFT" />
-            </CurvedBottomBar.Navigator>
-        </View>
+            </CurvedBottomBar.Navigator> */}
+        </SafeAreaView>
     );
 };

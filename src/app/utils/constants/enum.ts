@@ -14,6 +14,7 @@ export enum ScreenName {
     DataPlayerPage = 'DataPlayerPage',
     DataCoachPage = 'DataCoachPage',
     HistoryPage = 'HistoryPage',
+    BottomTab = 'BottomTab',
 }
 
 export enum ScreenTopTap {
