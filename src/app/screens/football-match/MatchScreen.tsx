@@ -4,7 +4,6 @@ import { appStyles } from '@football/app/utils/constants/appStyles';
 import { AppImages } from '@football/app/assets/images';
 import { Avatar } from 'react-native-elements';
 import { getSize } from '@football/app/utils/responsive/scale';
-import { useTranslation } from 'react-i18next';
 import { appColors } from '@football/app/utils/constants/appColors';
 import IconLocation from 'react-native-vector-icons/EvilIcons';
 import { appIcons } from '@football/app/assets/icons/appIcons';

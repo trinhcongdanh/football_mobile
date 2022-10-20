@@ -77,7 +77,9 @@ export const useViewModel = ({ navigation, route }: IVerifyScreenProps) => {
         } else if (codeOtp === '1234' && codeOtp.length === 4) {
             handleError('', 'verifyError');
             // navigate(ScreenName.HomePage);
-            navigate(ScreenName.DataPlayerPage);
+            // navigate(ScreenName.DataPlayerPage);
+            // navigate(ScreenName.DataCoachPage);
+            navigate(ScreenName.HistoryPage);
         }
     };
 
