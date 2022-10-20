@@ -78,7 +78,8 @@ export const useViewModel = ({ navigation, route }: IVerifyScreenProps) => {
             handleError('', 'verifyError');
             // navigate(ScreenName.HomePage);
             // navigate(ScreenName.DataPlayerPage);
-            navigate(ScreenName.DataCoachPage);
+            // navigate(ScreenName.DataCoachPage);
+            navigate(ScreenName.HistoryPage);
         }
     };
 

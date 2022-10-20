@@ -191,6 +191,12 @@ const resources = {
                 },
                 tournaments: 'פלייאוף לאליפות אירופה',
             },
+            history: {
+                title: 'קמפיינים קודמים',
+                header: 'נבחרת לאומית גברים',
+                campaign_name: 'שם קמפיין',
+                year: 'שנה',
+            },
         },
     },
     en: {
@@ -377,6 +383,12 @@ const resources = {
                     draw_number: 'Draw number',
                 },
                 tournaments: 'Playoff for the European Championship',
+            },
+            history: {
+                title: 'Previous campaigns',
+                header: "Men's national team",
+                campaign_name: 'Campaign name',
+                year: 'Year',
             },
         },
     },

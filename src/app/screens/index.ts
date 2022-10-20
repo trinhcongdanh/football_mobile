@@ -9,3 +9,4 @@ export * from './football-team-squad';
 export * from './football-match';
 export * from './football-data-player';
 export * from './football-data-coach';
+export * from './football-history';

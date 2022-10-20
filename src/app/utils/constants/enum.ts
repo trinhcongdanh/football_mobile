@@ -13,6 +13,7 @@ export enum ScreenName {
     MatchPage = 'MatchPage',
     DataPlayerPage = 'DataPlayerPage',
     DataCoachPage = 'DataCoachPage',
+    HistoryPage = 'HistoryPage',
 }
 
 export enum ScreenTopTap {
