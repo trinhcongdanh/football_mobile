@@ -11,10 +11,12 @@ export const AppImages = {
     img_gk: require('./gk.jpg'),
     img_albania: require('./albania.png'),
     img_israel: require('./israel.png'),
+    img_iceland: require('./iceland.jpg'),
     img_avt_player: require('./avt_player.jpg'),
     img_ticket_yellow: require('./ticket.png'),
     img_ticket_red: require('./ticket_red.png'),
     img_goal: require('./ball.png'),
     img_replace: require('./arrow-right-arrow-left.png'),
     img_club: require('./club.png'),
+    img_coach: require('./hazan.jpg'),
 };

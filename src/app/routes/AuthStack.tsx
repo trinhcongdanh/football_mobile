@@ -12,6 +12,7 @@ import { TeamSquadScreen } from '../screens/football-team-squad/TeamSquadScreen'
 import { MatchScreen } from '../screens/football-match/MatchScreen';
 import { HomeScreen } from '../screens';
 import { DataPlayerScreen } from '../screens/football-data-player/DataPlayerScreen';
+import { DataCoachScreen } from '../screens/football-data-coach/DataCoachScreen';
 
 const Auth = createNativeStackNavigator();
 
@@ -32,6 +33,7 @@ export const AuthStack = () => {
             <Auth.Screen name={ScreenName.MatchPage} component={MatchScreen} />
             <Auth.Screen name={ScreenName.HomePage} component={HomeScreen} />
             <Auth.Screen name={ScreenName.DataPlayerPage} component={DataPlayerScreen} />
+            <Auth.Screen name={ScreenName.DataCoachPage} component={DataCoachScreen} />
         </Auth.Navigator>
     );
 };
