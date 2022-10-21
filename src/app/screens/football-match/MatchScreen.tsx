@@ -16,10 +16,11 @@ import { useViewModel } from './MatchScreen.viewModel';
 // type Props = {};
 
 export const MatchScreen = ({ navigation, route }: IMatchScreenProps) => {
-    const { t, onGoBack } = useViewModel({
+    const { t, onGoBack, labels } = useViewModel({
         navigation,
         route,
     });
+
     return (
         <View style={appStyles.flex}>
             <ImageBackground source={AppImages.img_background} style={appStyles.flex}>
@@ -83,9 +84,7 @@ export const MatchScreen = ({ navigation, route }: IMatchScreenProps) => {
                         </View>
                     </View>
                     <View style={[appStyles.flex, appStyles.main_container]}>
-                        <View style={{ paddingHorizontal: getSize.m(26) }}>
-                            <TopTaps />
-                        </View>
+                        <TopTaps labels={labels} />
                     </View>
                 </SafeAreaView>
             </ImageBackground>

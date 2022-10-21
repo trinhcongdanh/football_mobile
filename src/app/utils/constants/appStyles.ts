@@ -68,7 +68,7 @@ export const appStyles = StyleSheet.create({
     text_title: {
         fontFamily: AppFonts.regular,
         fontWeight: '700',
-        fontSize: getSize.m(20),
+        fontSize: getSize.m(24),
         textAlign: 'center',
         color: appColors.white,
         lineHeight: getSize.m(24),
@@ -168,6 +168,7 @@ export const appStyles = StyleSheet.create({
     top_tap: {
         elevation: 0,
         backgroundColor: appColors.gray,
+        marginHorizontal: getSize.m(16),
     },
 
     top_tap_indicator: {

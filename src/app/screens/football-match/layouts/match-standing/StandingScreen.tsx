@@ -17,7 +17,12 @@ export const StandingScreen = ({ navigation, route }: IStandingScreenProps) => {
     });
 
     return (
-        <View style={[appStyles.flex, { backgroundColor: appColors.gray }]}>
+        <View
+            style={[
+                appStyles.flex,
+                { backgroundColor: appColors.gray, paddingHorizontal: getSize.m(16) },
+            ]}
+        >
             <View style={{ marginTop: getSize.m(30) }}>
                 <ScrollView>
                     <View>

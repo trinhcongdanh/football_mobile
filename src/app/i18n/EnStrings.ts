@@ -127,7 +127,9 @@ const resources = {
                     title: 'מהלך משחק',
                     start: 'שריקת פתיחה',
                 },
-                schedule: 'משחקים בבית',
+                schedule: {
+                    title: 'משחקים בבית',
+                },
                 standing: {
                     title: 'טבלת הבית',
                     place: 'מקום',
@@ -196,6 +198,28 @@ const resources = {
                 header: 'נבחרת לאומית גברים',
                 campaign_name: 'שם קמפיין',
                 year: 'שנה',
+            },
+            leagues: {
+                title: 'ליגות',
+                place_holder: 'חיפוש ליגה...',
+                graduates: {
+                    title: 'בוגרים',
+                },
+                women: {
+                    title: 'נשים',
+                },
+                youth: {
+                    title: 'נוער',
+                },
+                boys_a: {
+                    title: 'נערים א',
+                },
+                boys_b: {
+                    title: 'נערים ב',
+                },
+                boys_c: {
+                    title: 'נערים ג',
+                },
             },
         },
     },
@@ -320,7 +344,9 @@ const resources = {
                     title: 'Game move',
                     start: 'Play start',
                 },
-                schedule: 'Schedule',
+                schedule: {
+                    title: 'Schedule',
+                },
                 standing: {
                     title: 'Standing',
                     place: 'Place',
@@ -389,6 +415,28 @@ const resources = {
                 header: "Men's national team",
                 campaign_name: 'Campaign name',
                 year: 'Year',
+            },
+            leagues: {
+                title: 'Leagues',
+                place_holder: 'League search...',
+                graduates: {
+                    title: 'Graduates',
+                },
+                women: {
+                    title: 'Women',
+                },
+                youth: {
+                    title: 'Youth',
+                },
+                boys_a: {
+                    title: 'Boys a',
+                },
+                boys_b: {
+                    title: 'Boys b',
+                },
+                boys_c: {
+                    title: 'Boys c',
+                },
             },
         },
     },

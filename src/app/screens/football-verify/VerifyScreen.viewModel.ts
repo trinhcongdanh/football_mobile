@@ -80,6 +80,7 @@ export const useViewModel = ({ navigation, route }: IVerifyScreenProps) => {
             // navigate(ScreenName.DataPlayerPage);
             // navigate(ScreenName.DataCoachPage);
             // navigate(ScreenName.HistoryPage);
+            navigate(ScreenName.LeaguesPage);
         }
     };
 

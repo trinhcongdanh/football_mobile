@@ -22,7 +22,12 @@ export const GameScreen = ({ navigation, route }: IGameScreenProps) => {
         route,
     });
     return (
-        <View style={[appStyles.flex, { backgroundColor: appColors.gray }]}>
+        <View
+            style={[
+                appStyles.flex,
+                { backgroundColor: appColors.gray, paddingHorizontal: getSize.m(16) },
+            ]}
+        >
             <ScrollView>
                 <View style={{ marginTop: getSize.m(30) }}>
                     <View style={appStyles.flex_row_align_center}>

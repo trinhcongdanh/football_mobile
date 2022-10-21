@@ -14,4 +14,5 @@ export const appIcons = {
     ic_up: 'caretup',
     ic_down: 'caretdown',
     ic_arrow_down: 'arrow-down',
+    ic_search: 'search',
 };
