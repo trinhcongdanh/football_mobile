@@ -19,7 +19,12 @@ export const ScheduleScreen = ({ navigation, route }: IScheduleScreenProps) => {
     const matches = Array(2).fill('');
 
     return (
-        <View style={[appStyles.flex, { backgroundColor: appColors.gray }]}>
+        <View
+            style={[
+                appStyles.flex,
+                { backgroundColor: appColors.gray, paddingHorizontal: getSize.m(16) },
+            ]}
+        >
             <ScrollView>
                 {matches.map((inp: string, index: number) => {
                     return (

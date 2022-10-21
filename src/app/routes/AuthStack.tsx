@@ -10,7 +10,7 @@ import { SettingsScreen } from '../screens/football-settings/SettingsScreen';
 import { TeamScreen } from '../screens/football-team/TeamScreen';
 import { TeamSquadScreen } from '../screens/football-team-squad/TeamSquadScreen';
 import { MatchScreen } from '../screens/football-match/MatchScreen';
-import { HomeScreen } from '../screens';
+import { HomeScreen, LeaguesScreen } from '../screens';
 import { HistoryScreen } from '../screens/football-history/HistoryScreen';
 import { DataPlayerScreen } from '../screens/football-data-player/DataPlayerScreen';
 import { DataCoachScreen } from '../screens/football-data-coach/DataCoachScreen';
@@ -38,6 +38,7 @@ export const AuthStack = () => {
             <Auth.Screen name={ScreenName.DataCoachPage} component={DataCoachScreen} />
             <Auth.Screen name={ScreenName.HistoryPage} component={HistoryScreen} />
             <Auth.Screen name={ScreenName.BottomTab} component={BottomTabStack} />
+            <Auth.Screen name={ScreenName.LeaguesPage} component={LeaguesScreen} />
         </Auth.Navigator>
     );
 };

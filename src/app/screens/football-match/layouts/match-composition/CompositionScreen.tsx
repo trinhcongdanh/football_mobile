@@ -17,7 +17,12 @@ export const CompositionScreen = ({ navigation, route }: ICompositionScreenProps
     });
 
     return (
-        <View style={[appStyles.flex, { backgroundColor: appColors.gray }]}>
+        <View
+            style={[
+                appStyles.flex,
+                { backgroundColor: appColors.gray, paddingHorizontal: getSize.m(16) },
+            ]}
+        >
             <ScrollView>
                 <View style={{ marginTop: getSize.m(30) }}>
                     <Position position={t('match.composition.main_lineup')} />
