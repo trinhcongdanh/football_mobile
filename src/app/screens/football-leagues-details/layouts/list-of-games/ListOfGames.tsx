@@ -1,28 +1,20 @@
-import { View, ScrollView } from 'react-native';
+import { View, Text } from 'react-native';
 import React from 'react';
-import { appColors } from '@football/app/utils/constants/appColors';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import { getSize } from '@football/app/utils/responsive/scale';
 import { ListGame } from '@football/app/components/list-game/ListGame';
-import { IScheduleScreenProps } from './ScheduleScreen.type';
-import { useViewModel } from './ScheduleScreen.viewModel';
+import { appIcons } from '@football/app/assets/icons/appIcons';
+import { useViewModel } from './ListOfGames.viewModel';
+import { IListOfGamesProps } from './ListOfGames.type';
 
-// type Props = {};
-
-export const ScheduleScreen = ({ navigation, route }: IScheduleScreenProps) => {
-    const { t, listGames } = useViewModel({
-        navigation,
-        route,
-    });
-
+export const ListOfGames = ({}: IListOfGamesProps) => {
+    const { t, listGames } = useViewModel({});
     return (
-        <View
-            style={[
-                appStyles.flex,
-                { backgroundColor: appColors.gray, paddingHorizontal: getSize.m(16) },
-            ]}
-        >
-            <ScrollView>
+        <View>
+            <Text style={[appStyles.text_topic, { marginLeft: getSize.m(6) }]}>
+                {t('leagues_details.list_games.title')}
+            </Text>
+            <View>
                 {listGames.map(item => {
                     return (
                         <ListGame
@@ -36,10 +28,12 @@ export const ScheduleScreen = ({ navigation, route }: IScheduleScreenProps) => {
                             result={item.result}
                             schedule={item.schedule}
                             completed={item.completed}
+                            icon={appIcons.ic_arrow_left}
+                            details={item.details}
                         />
                     );
                 })}
-            </ScrollView>
+            </View>
         </View>
     );
 };
