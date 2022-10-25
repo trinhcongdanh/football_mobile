@@ -14,9 +14,12 @@ export const LeaguesWomenScreen = ({ navigation, route }: ILeaguesWomenScreenPro
         navigation,
         route,
     });
-    const renderItem = ({ item }: any) => {
+    const renderItem = ({ item, index }: any) => {
         return (
-            <TouchableOpacity style={styles.option_menu} onPress={handleLeaguesDetails}>
+            <TouchableOpacity
+                style={styles.option_menu}
+                onPress={() => handleLeaguesDetails(index)}
+            >
                 <View style={appStyles.flex_row_align_center}>
                     <Text style={styles.text_option_menu}>{item.name}</Text>
                 </View>

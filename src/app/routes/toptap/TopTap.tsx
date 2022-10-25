@@ -2,9 +2,10 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 import React from 'react';
 import { Text, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
+import { appStyles } from '@football/app/utils/constants/appStyles';
 import { appColors } from '../../utils/constants/appColors';
 import { getSize } from '../../utils/responsive/scale';
-import { appStyles } from '@football/app/utils/constants/appStyles';
+
 type Props = {
     labels: any;
 };

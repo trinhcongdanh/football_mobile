@@ -23,8 +23,22 @@ export const useViewModel = ({ navigation, route }: ILeaguesWomenScreenProps) =>
         { id: 9, name: 'ליגת ONE ZERO בנקאות פרטית דיגיטלית' },
     ];
 
-    const handleLeaguesDetails = () => {
-        navigate(ScreenName.LeaguesDetailsPage);
+    const handleLeaguesDetails = (index: number) => {
+        switch (index) {
+            case 0:
+                navigate(ScreenName.LeaguesDetailsPage);
+                break;
+            case 1:
+                navigate(ScreenName.TeamPage);
+                break;
+            case 2:
+                navigate(ScreenName.TeamSquadPage);
+                break;
+
+            default:
+                navigate(ScreenName.TeamSquadPage);
+                break;
+        }
     };
 
     return { t, onGoBack, optionLeagues, handleLeaguesDetails };
