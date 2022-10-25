@@ -157,6 +157,14 @@ export const appStyles = StyleSheet.create({
         fontSize: getSize.m(13),
     },
 
+    text_topic: {
+        fontFamily: AppFonts.regular,
+        fontSize: getSize.m(16),
+        lineHeight: getSize.m(20),
+        color: appColors.text_dark_blue,
+        fontWeight: '700',
+    },
+
     number: {
         fontWeight: '700',
         fontFamily: AppFonts.regular,

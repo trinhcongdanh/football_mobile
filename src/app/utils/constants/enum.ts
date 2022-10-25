@@ -16,6 +16,7 @@ export enum ScreenName {
     HistoryPage = 'HistoryPage',
     BottomTab = 'BottomTab',
     LeaguesPage = 'LeaguesPage',
+    LeaguesDetailsPage = 'LeaguesDetailsPage',
 }
 
 export enum ScreenTopTap {

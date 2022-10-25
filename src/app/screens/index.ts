@@ -11,3 +11,4 @@ export * from './football-data-player';
 export * from './football-data-coach';
 export * from './football-history';
 export * from './football-leagues';
+export * from './football-leagues-details';

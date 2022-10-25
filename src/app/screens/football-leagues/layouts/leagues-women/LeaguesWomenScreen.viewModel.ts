@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
+import { ScreenName } from '@football/app/utils/constants/enum';
 import { ILeaguesWomenScreenProps } from './LeaguesWomenScreen.type';
 
 export const useViewModel = ({ navigation, route }: ILeaguesWomenScreenProps) => {
@@ -23,7 +24,7 @@ export const useViewModel = ({ navigation, route }: ILeaguesWomenScreenProps) =>
     ];
 
     const handleLeaguesDetails = () => {
-        console.log('details');
+        navigate(ScreenName.LeaguesDetailsPage);
     };
 
     return { t, onGoBack, optionLeagues, handleLeaguesDetails };

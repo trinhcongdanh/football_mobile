@@ -19,4 +19,5 @@ export const AppImages = {
     img_replace: require('./arrow-right-arrow-left.png'),
     img_club: require('./club.png'),
     img_coach: require('./hazan.jpg'),
+    img_leagues: require('./leagues.png'),
 };
