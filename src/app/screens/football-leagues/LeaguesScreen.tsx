@@ -13,7 +13,7 @@ import { useViewModel } from './LeaguesScreen.viewModel';
 import { ILeaguesScreenProps } from './LeaguesScreen.type';
 
 export const LeaguesScreen = ({ navigation, route }: ILeaguesScreenProps) => {
-    const { onGoBack, t, labels } = useViewModel({
+    const { onGoBack, t, labels, onNavigateSetting } = useViewModel({
         navigation,
         route,
     });
@@ -29,6 +29,7 @@ export const LeaguesScreen = ({ navigation, route }: ILeaguesScreenProps) => {
                             icon={appIcons.ic_align_right}
                             color_pre={appColors.blue_light}
                             color_after={appColors.blue_dark}
+                            handlePressFunction={onNavigateSetting}
                         />
                         <View>
                             <Text style={[appStyles.text_title]}>{t('leagues.title')}</Text>

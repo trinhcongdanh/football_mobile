@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
-import { ScreenTopTap } from '@football/app/utils/constants/enum';
+import { ScreenName, ScreenTopTap } from '@football/app/utils/constants/enum';
 import { LeaguesYouthScreen } from './layouts/leagues-youth/LeaguesYouthScreen';
 import { LeaguesWomenScreen } from './layouts/leagues-women/LeaguesWomenScreen';
 import { LeaguesGraduateScreen } from './layouts/leagues-graduates/LeaguesGraduatesScreen';
@@ -15,6 +15,10 @@ export const useViewModel = ({ navigation, route }: ILeaguesScreenProps) => {
 
     const onGoBack = (): void => {
         goBack();
+    };
+
+    const onNavigateSetting = () => {
+        navigate(ScreenName.SettingsPage);
     };
 
     const labels = [
@@ -56,5 +60,5 @@ export const useViewModel = ({ navigation, route }: ILeaguesScreenProps) => {
         },
     ];
 
-    return { t, onGoBack, labels };
+    return { t, onGoBack, labels, onNavigateSetting };
 };
