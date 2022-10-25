@@ -45,7 +45,7 @@ export const RegisterScreen = ({ navigation, route }: IRegisterScreenProps) => {
                             iconStyle={styles.ic_back}
                             goBack={onGoBack}
                         />
-                        <ScrollView>
+                        <ScrollView showsVerticalScrollIndicator={false}>
                             <CardHeaderView
                                 title={t('welcome.sign_up')}
                                 sub_title={t('welcome.join_us')}

@@ -15,11 +15,11 @@ import { appIcons } from '@football/app/assets/icons/appIcons';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import { AppImages } from '@football/app/assets/images';
 import { getSize } from '@football/app/utils/responsive/scale';
+import { Avatar } from 'react-native-elements';
 import { LeaguesTable } from './layouts/leagues-table/LeaguesTable';
 import { ListOfGames } from './layouts/list-of-games/ListOfGames';
 import { Statistics } from './layouts/Statistics/Statistics';
 import { AboutLeague } from './layouts/about-league/AboutLeague';
-import { Avatar } from 'react-native-elements';
 import styles from './LeaguesDetailsScreen.style';
 import { useViewModel } from './LeaguesDetailsScreen.viewModel';
 import { ILeaguesDetailsScreenProps } from './LeaguesDetailsScreen.type';
@@ -47,7 +47,7 @@ export const LeaguesDetailsScreen = ({ navigation, route }: ILeaguesDetailsScree
                             handlePressFunction={onGoBack}
                         />
                     </View>
-                    <ScrollView>
+                    <ScrollView showsVerticalScrollIndicator={false}>
                         <View style={appStyles.container}>
                             <View style={[appStyles.align_justify, { marginTop: getSize.m(16) }]}>
                                 <Avatar

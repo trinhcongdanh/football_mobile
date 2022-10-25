@@ -5,9 +5,9 @@ import { getSize } from '@football/app/utils/responsive/scale';
 import { ListGame } from '@football/app/components/list-game/ListGame';
 import { appIcons } from '@football/app/assets/icons/appIcons';
 import { useViewModel } from './ListOfGames.viewModel';
-import { IListOfGamesProps } from './ListOfGames.type';
+// import { IListOfGamesProps } from './ListOfGames.type';
 
-export const ListOfGames = ({}: IListOfGamesProps) => {
+export const ListOfGames = (props: any) => {
     const { t, listGames } = useViewModel({});
     return (
         <View>

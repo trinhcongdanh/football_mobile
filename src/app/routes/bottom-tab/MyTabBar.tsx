@@ -36,20 +36,20 @@ export function MyTabBar({ state, descriptors, navigation }: any) {
     const renderIcon = (routeName: string, selectedTab: number, indexTab: number) => {
         let icon = '';
         switch (routeName) {
-            case ScreenName.HomePage:
-                icon = 'ios-home-outline';
-                break;
-            case ScreenName.SettingsPage:
-                icon = 'settings-outline';
-                break;
-            case ScreenName.TeamSquadPage:
-                icon = 'ios-home-outline';
-                break;
-            case ScreenName.MatchPage:
-                icon = 'settings-outline';
+            case ScreenName.DataCoachPage:
+                icon = 'briefcase-outline';
                 break;
             case ScreenName.DataPlayerPage:
-                icon = 'settings-outline';
+                icon = 'man-outline';
+                break;
+            case ScreenName.HistoryPage:
+                icon = 'reload-circle-outline';
+                break;
+            case ScreenName.LeaguesPage:
+                icon = 'trophy-outline';
+                break;
+            case ScreenName.LeaguesDetailsPage:
+                icon = 'reader-outline';
                 break;
             default:
                 break;
@@ -69,20 +69,20 @@ export function MyTabBar({ state, descriptors, navigation }: any) {
                 const { options } = descriptors[route.key];
                 let label = 'VOD';
                 switch (route.name) {
-                    case ScreenName.HomePage:
-                        label = 'בית';
-                        break;
-                    case ScreenName.SettingsPage:
-                        label = 'ליגות';
-                        break;
-                    case ScreenName.TeamSquadPage:
-                        label = 'שאלון';
-                        break;
-                    case ScreenName.MatchPage:
-                        label = 'נבחרות';
+                    case ScreenName.DataCoachPage:
+                        label = 'מְאַמֵן';
                         break;
                     case ScreenName.DataPlayerPage:
-                        label = 'VOD';
+                        label = 'שחקן';
+                        break;
+                    case ScreenName.HistoryPage:
+                        label = 'הִיסטוֹרִיָה';
+                        break;
+                    case ScreenName.LeaguesPage:
+                        label = 'ליגות';
+                        break;
+                    case ScreenName.LeaguesDetailsPage:
+                        label = 'פירוט הליגות';
                         break;
                     default:
                         break;

@@ -9,10 +9,10 @@ import { getSize } from '@football/app/utils/responsive/scale';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { appIcons } from '@football/app/assets/icons/appIcons';
 import styles from './DataPlayerTeamScreen.style';
-import { IDataPlayerTeamScreenProps } from './DataPlayerTeamScreen.type';
+// import { IDataPlayerTeamScreenProps } from './DataPlayerTeamScreen.type';
 import { useViewModel } from './DataPlayerTeamScreen.viewModel';
 
-export const DataPlayerTeamScreen = ({}: IDataPlayerTeamScreenProps) => {
+export const DataPlayerTeamScreen = (props: any) => {
     const {
         t,
         onGoBack,
@@ -27,7 +27,7 @@ export const DataPlayerTeamScreen = ({}: IDataPlayerTeamScreenProps) => {
     } = useViewModel({});
 
     return (
-        <ScrollView>
+        <ScrollView showsVerticalScrollIndicator={false}>
             <View style={styles.container_club}>
                 <View style={[appStyles.align_justify, styles.club_team]}>
                     <View style={styles.logo_club}>
@@ -50,7 +50,7 @@ export const DataPlayerTeamScreen = ({}: IDataPlayerTeamScreenProps) => {
                     </View>
                     {openModal && (
                         <View style={styles.drop_down_calender}>
-                            <ScrollView nestedScrollEnabled={true}>
+                            <ScrollView showsVerticalScrollIndicator={false} nestedScrollEnabled>
                                 {years.map((input: string, index: number) => {
                                     return (
                                         <TouchableOpacity

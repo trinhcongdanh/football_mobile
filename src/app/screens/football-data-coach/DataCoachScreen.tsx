@@ -47,7 +47,7 @@ export const DataCoachScreen = ({ navigation, route }: IDataCoachScreenProps) =>
                             handlePressFunction={onGoBack}
                         />
                     </View>
-                    <ScrollView>
+                    <ScrollView showsVerticalScrollIndicator={false}>
                         <View style={appStyles.container}>
                             <InfoPerson
                                 name_person="אלון חזן"

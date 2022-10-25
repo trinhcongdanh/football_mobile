@@ -76,11 +76,11 @@ export const useViewModel = ({ navigation, route }: IVerifyScreenProps) => {
             handleError('', 'verifyError');
         } else if (codeOtp === '1234' && codeOtp.length === 4) {
             handleError('', 'verifyError');
-            // navigate(ScreenName.BottomTab);
+            navigate(ScreenName.BottomTab);
             // navigate(ScreenName.DataPlayerPage);
             // navigate(ScreenName.DataCoachPage);
             // navigate(ScreenName.HistoryPage);
-            navigate(ScreenName.LeaguesPage);
+            // navigate(ScreenName.LeaguesPage);
         }
     };
 

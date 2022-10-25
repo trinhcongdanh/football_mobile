@@ -43,6 +43,7 @@ export const LeaguesWomenScreen = ({ navigation, route }: ILeaguesWomenScreenPro
         >
             <View>
                 <FlatList
+                    showsVerticalScrollIndicator={false}
                     data={optionLeagues}
                     keyExtractor={(item: any) => item.id}
                     renderItem={renderItem}

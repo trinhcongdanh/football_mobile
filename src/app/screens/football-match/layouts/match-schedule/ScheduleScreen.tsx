@@ -22,7 +22,7 @@ export const ScheduleScreen = ({ navigation, route }: IScheduleScreenProps) => {
                 { backgroundColor: appColors.gray, paddingHorizontal: getSize.m(16) },
             ]}
         >
-            <ScrollView>
+            <ScrollView showsVerticalScrollIndicator={false}>
                 {listGames.map(item => {
                     return (
                         <ListGame

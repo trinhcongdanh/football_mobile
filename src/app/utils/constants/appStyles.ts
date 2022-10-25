@@ -158,6 +158,7 @@ export const appStyles = StyleSheet.create({
     },
 
     text_topic: {
+        textAlign: 'left',
         fontFamily: AppFonts.regular,
         fontSize: getSize.m(16),
         lineHeight: getSize.m(20),

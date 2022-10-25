@@ -1,6 +1,6 @@
 import { AppFonts } from '@football/app/assets/fonts';
 import { appColors } from '@football/app/utils/constants/appColors';
-import { getSize, width } from '@football/app/utils/responsive/scale';
+import { getSize } from '@football/app/utils/responsive/scale';
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
@@ -42,6 +42,7 @@ const styles = StyleSheet.create({
     },
 
     text_label: {
+        textAlign: 'left',
         fontSize: getSize.m(16),
         fontFamily: AppFonts.regular,
         color: appColors.text_dark_blue,

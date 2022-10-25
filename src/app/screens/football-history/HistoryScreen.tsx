@@ -37,7 +37,7 @@ export const HistoryScreen = ({ navigation, route }: IHistoryScreenProps) => {
                                 {t('history.header')}
                             </Text>
                         </View>
-                        <ScrollView>
+                        <ScrollView showsVerticalScrollIndicator={false}>
                             <View
                                 style={{
                                     marginHorizontal: getSize.m(15),

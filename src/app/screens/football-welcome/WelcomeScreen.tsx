@@ -27,13 +27,13 @@ export const WelcomeScreen = ({ navigation, route }: IWelcomeScreenProps) => {
         }
     }, [i18n.language]);
 
-    const RegisterPage = () => {
+    const onNavigateFavTeam = () => {
         navigation.navigate(ScreenName.RegisterPage, {
             isReset: true,
         });
     };
 
-    const Connect = () => {
+    const onNavigateConnect = () => {
         navigation.navigate(ScreenName.ConnectPage, {
             isReset: true,
         });
@@ -47,10 +47,10 @@ export const WelcomeScreen = ({ navigation, route }: IWelcomeScreenProps) => {
                 <Text style={styles.text_header}>{t('welcome.title')}</Text>
                 <Text style={styles.text_desc}>{t('welcome.info')}</Text>
                 <View style={{ width: '90%' }}>
-                    <Button title={t('welcome.start')} onPress={RegisterPage} />
+                    <Button title={t('welcome.start')} onPress={onNavigateFavTeam} />
                 </View>
                 <Text style={styles.text_question}>{t('welcome.account')}</Text>
-                <TouchableOpacity style={styles.button_sign_up} onPress={Connect}>
+                <TouchableOpacity style={styles.button_sign_up} onPress={onNavigateConnect}>
                     <Text style={styles.text_button_sign_up}>{t('welcome.create')}</Text>
                 </TouchableOpacity>
             </ImageBackground>

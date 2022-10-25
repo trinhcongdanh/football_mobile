@@ -23,7 +23,7 @@ export const CompositionScreen = ({ navigation, route }: ICompositionScreenProps
                 { backgroundColor: appColors.gray, paddingHorizontal: getSize.m(16) },
             ]}
         >
-            <ScrollView>
+            <ScrollView showsVerticalScrollIndicator={false}>
                 <View style={{ marginTop: getSize.m(30) }}>
                     <Position position={t('match.composition.main_lineup')} />
                     {defenders.map(item => {

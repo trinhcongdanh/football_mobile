@@ -77,6 +77,7 @@ export const TeamScreen = ({ navigation, route }: ITeamScreenProps) => {
                         <View style={{ paddingHorizontal: getSize.m(26) }}>
                             {toggleBar ? (
                                 <FlatList
+                                    showsVerticalScrollIndicator={false}
                                     data={optionTeams}
                                     keyExtractor={(item: any) => item.id}
                                     renderItem={renderItem}
@@ -85,6 +86,7 @@ export const TeamScreen = ({ navigation, route }: ITeamScreenProps) => {
                                 />
                             ) : (
                                 <FlatList
+                                    showsVerticalScrollIndicator={false}
                                     data={optionTeams}
                                     keyExtractor={(item: any) => item.id}
                                     renderItem={renderItem}

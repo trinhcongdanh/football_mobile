@@ -1,6 +1,6 @@
 import { AppFonts } from '@football/app/assets/fonts';
 import { appColors } from '@football/app/utils/constants/appColors';
-import { getSize, width } from '@football/app/utils/responsive/scale';
+import { getSize } from '@football/app/utils/responsive/scale';
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
@@ -39,6 +39,7 @@ const styles = StyleSheet.create({
         color: appColors.text_dark_blue,
         fontWeight: '700',
         lineHeight: getSize.m(20),
+        textAlign: 'left',
     },
     header: {
         marginTop: getSize.m(14),

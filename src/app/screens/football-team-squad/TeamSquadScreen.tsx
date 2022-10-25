@@ -3,14 +3,14 @@ import React, { useState } from 'react';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import { AppImages } from '@football/app/assets/images';
 import { CardGoBack } from '@football/app/components/go-back/CardGoBack';
-import { ITeamGroupScreenProps } from './TeamSquadScreen.type';
 import { appIcons } from '@football/app/assets/icons/appIcons';
-import styles from './TeamSquadScreen.style';
-import { useViewModel } from './TeamSquadScreen.viewModel';
 import { ButtonOption } from '@football/app/components/button_option';
 import { getSize } from '@football/app/utils/responsive/scale';
 import { ListPlayer } from '@football/app/components/list-player/ListPlayer';
 import { Position } from '@football/app/components/position/Position';
+import { ITeamGroupScreenProps } from './TeamSquadScreen.type';
+import styles from './TeamSquadScreen.style';
+import { useViewModel } from './TeamSquadScreen.viewModel';
 
 // type Props = {};
 
@@ -43,7 +43,7 @@ export const TeamSquadScreen = ({ navigation, route }: ITeamGroupScreenProps) =>
 
                         <View style={{ paddingHorizontal: getSize.m(26) }}>
                             {onSelect === 0 && (
-                                <ScrollView>
+                                <ScrollView showsVerticalScrollIndicator={false}>
                                     <View style={{ marginTop: getSize.m(30) }}>
                                         <Position position={t('team_squad.gk')} />
                                         {goalkeepers.map(item => {
@@ -52,7 +52,7 @@ export const TeamSquadScreen = ({ navigation, route }: ITeamGroupScreenProps) =>
                                                     key={item.id}
                                                     name={item.name}
                                                     number={item.number}
-                                                ></ListPlayer>
+                                                />
                                             );
                                         })}
                                     </View>
@@ -64,7 +64,7 @@ export const TeamSquadScreen = ({ navigation, route }: ITeamGroupScreenProps) =>
                                                     key={item.id}
                                                     name={item.name}
                                                     number={item.number}
-                                                ></ListPlayer>
+                                                />
                                             );
                                         })}
                                     </View>
@@ -76,7 +76,7 @@ export const TeamSquadScreen = ({ navigation, route }: ITeamGroupScreenProps) =>
                                                     key={item.id}
                                                     name={item.name}
                                                     number={item.number}
-                                                ></ListPlayer>
+                                                />
                                             );
                                         })}
                                     </View>
@@ -88,7 +88,7 @@ export const TeamSquadScreen = ({ navigation, route }: ITeamGroupScreenProps) =>
                                                     key={item.id}
                                                     name={item.name}
                                                     number={item.number}
-                                                ></ListPlayer>
+                                                />
                                             );
                                         })}
                                     </View>

@@ -8,13 +8,13 @@ import { getSize } from '@football/app/utils/responsive/scale';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { appIcons } from '@football/app/assets/icons/appIcons';
 import styles from './DataPlayerNationalScreen.style';
-import { IDataPlayerNationalScreenProps } from './DataPlayerNationalScreen.type';
+// import { IDataPlayerNationalScreenProps } from './DataPlayerNationalScreen.type';
 import { useViewModel } from './DataPlayerNationalScreen.viewModel';
 
-export const DataPlayerNationalScreen = ({}: IDataPlayerNationalScreenProps) => {
+export const DataPlayerNationalScreen = (props: any) => {
     const { t, setSelected, setOpenModal, goals, years, selected, openModal } = useViewModel({});
     return (
-        <ScrollView>
+        <ScrollView showsVerticalScrollIndicator={false}>
             <View style={styles.container_national}>
                 <View style={[appStyles.align_justify, styles.team_national]}>
                     <View style={styles.logo_club}>
@@ -36,7 +36,7 @@ export const DataPlayerNationalScreen = ({}: IDataPlayerNationalScreenProps) => 
                     </View>
                     {openModal && (
                         <View style={styles.drop_down_calender}>
-                            <ScrollView nestedScrollEnabled={true}>
+                            <ScrollView showsVerticalScrollIndicator={false} nestedScrollEnabled>
                                 {years.map((input: string, index: number) => {
                                     return (
                                         <TouchableOpacity
