@@ -19,6 +19,8 @@ import { Avatar } from 'react-native-elements';
 import { LeaguesTable } from './layouts/leagues-table/LeaguesTable';
 import { ListOfGames } from './layouts/list-of-games/ListOfGames';
 import { Statistics } from './layouts/Statistics/Statistics';
+import SelectedGallery from './layouts/selected-gallery/SelectedGallery';
+import { SelectedMagazine } from './layouts/selected-magazine/SelectedMagazine';
 import { AboutLeague } from './layouts/about-league/AboutLeague';
 import styles from './LeaguesDetailsScreen.style';
 import { useViewModel } from './LeaguesDetailsScreen.viewModel';
@@ -129,14 +131,10 @@ export const LeaguesDetailsScreen = ({ navigation, route }: ILeaguesDetailsScree
                                 paddingHorizontal: getSize.m(16),
                             }}
                         >
-                            <Text
-                                style={[
-                                    appStyles.text_topic,
-                                    { marginLeft: getSize.m(6), color: appColors.white },
-                                ]}
-                            >
-                                {t('leagues_details.gallery.title')}
-                            </Text>
+                            <SelectedGallery />
+                        </View>
+                        <View style={styles.package}>
+                            <SelectedMagazine />
                         </View>
                     </ScrollView>
                 </SafeAreaView>
