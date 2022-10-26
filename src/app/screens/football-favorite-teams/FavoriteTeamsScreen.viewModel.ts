@@ -16,6 +16,10 @@ export const useViewModel = ({ navigation, route }: IFavoriteTeamsScreenProps) =
         navigate(ScreenName.BottomTab);
     };
 
+    const handleContinue = () => {
+        navigate(ScreenName.FavPlayerPage);
+    };
+
     const teamFavs = [
         { id: 1, name: 'מכבי תל אביב', logo_club: AppImages.img_club_fav },
         { id: 2, name: 'מכבי תל אביב', logo_club: AppImages.img_club_fav },
@@ -49,16 +53,11 @@ export const useViewModel = ({ navigation, route }: IFavoriteTeamsScreenProps) =
         { id: 30, name: 'מכבי תל אביב', logo_club: AppImages.img_club_fav },
     ];
 
-    const teamSelected = [
-        { id: 1, logo_club: AppImages.img_club_fav },
-        { id: 2, logo_club: AppImages.img_club_fav },
-    ];
-
     return {
         t,
         onGoBack,
         onGoSkip,
+        handleContinue,
         teamFavs,
-        teamSelected,
     };
 };

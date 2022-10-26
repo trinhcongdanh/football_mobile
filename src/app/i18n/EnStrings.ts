@@ -38,6 +38,20 @@ const resources = {
                 chosen: 'נבחרו',
                 button: 'המשך',
             },
+            favorite_player: {
+                skip: 'דלג',
+                title: 'בחר עד 3 שחקנים מועדפים',
+                place_holder: 'חיפוש קבוצה...',
+                chosen: 'נבחרו',
+                button: 'המשך',
+            },
+            favorite_top_team: {
+                skip: 'דלג',
+                title: 'בחר עד 2 נבחרות מועדפות',
+                place_holder: 'חיפוש קבוצה...',
+                chosen: 'נבחרו',
+                button: 'המשך',
+            },
             register: {
                 registerByPhone: 'הרשמה באמצעות טלפון',
                 phoneNumber: '* מס׳ טלפון',
@@ -326,6 +340,20 @@ const resources = {
             favorite_team: {
                 skip: 'Skip',
                 title: 'Select up to 3 favorite groups',
+                place_holder: 'Search group...',
+                chosen: 'were chosen',
+                button: 'Continued',
+            },
+            favorite_player: {
+                skip: 'Skip',
+                title: 'Choose up to 3 favorite players',
+                place_holder: 'Search group...',
+                chosen: 'were chosen',
+                button: 'Continued',
+            },
+            favorite_top_team: {
+                skip: 'Skip',
+                title: 'Choose up to 2 favorite teams',
                 place_holder: 'Search group...',
                 chosen: 'were chosen',
                 button: 'Continued',

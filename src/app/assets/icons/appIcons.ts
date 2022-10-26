@@ -16,4 +16,5 @@ export const appIcons = {
     ic_arrow_down: 'arrow-down',
     ic_search: 'search',
     ic_caretright: 'caretright',
+    ic_check: 'check',
 };

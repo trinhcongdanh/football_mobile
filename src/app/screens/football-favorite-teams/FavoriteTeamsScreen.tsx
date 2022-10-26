@@ -23,18 +23,14 @@ import { useViewModel } from './FavoriteTeamsScreen.viewModel';
 import styles from './FavoriteTeamsScreen.style';
 
 export const FavoriteTeamsScreen = ({ navigation, route }: IFavoriteTeamsScreenProps) => {
-    const { t, onGoBack, onGoSkip, teamFavs, teamSelected } = useViewModel({
+    const { t, onGoBack, onGoSkip, handleContinue, teamFavs } = useViewModel({
         navigation,
         route,
     });
 
-    const [selected, setSelected] = useState();
-
-    const chooseTeam = (event: any) => {
-        // console.log(event);
-    };
-
-    const handleContinue = () => {};
+    const [selected, setSelected] = useState<number>();
+    const [toggleSelect, setToggleSelect] = useState(false);
+    const [teamSelected, setTeamSelected] = useState<any[]>([]);
 
     return (
         <View style={[appStyles.flex]}>
@@ -68,20 +64,46 @@ export const FavoriteTeamsScreen = ({ navigation, route }: IFavoriteTeamsScreenP
                                                 styles.item_team,
                                                 {
                                                     backgroundColor:
-                                                        team.id === 2
+                                                        team.id === selected &&
+                                                        toggleSelect === true
                                                             ? 'rgba(44, 196, 255, 0.3)'
-                                                            : '',
+                                                            : 'transparent',
                                                     borderWidth:
-                                                        team.id === 2 ? getSize.m(1) : getSize.m(0),
+                                                        team.id === selected &&
+                                                        toggleSelect === true
+                                                            ? getSize.m(1)
+                                                            : getSize.m(0),
                                                 },
                                             ]}
-                                            onPress={event => chooseTeam(event)}
+                                            onPress={() => {
+                                                setSelected(team.id);
+                                                if (team.id === selected) {
+                                                    setToggleSelect(!toggleSelect);
+                                                } else {
+                                                    setToggleSelect(true);
+                                                    if (teamSelected.length < 3) {
+                                                        setTeamSelected(current => [
+                                                            ...current,
+                                                            team,
+                                                        ]);
+                                                    }
+                                                }
+                                            }}
                                         >
                                             <Image
                                                 source={team.logo_club}
                                                 style={styles.logo_club}
                                             />
                                             <Text style={styles.name_club}>{team.name}</Text>
+                                            {team.id === selected && toggleSelect === true && (
+                                                <View style={styles.check}>
+                                                    <Icon
+                                                        name={appIcons.ic_check}
+                                                        size={getSize.m(10)}
+                                                        color={appColors.white}
+                                                    />
+                                                </View>
+                                            )}
                                         </TouchableOpacity>
                                     );
                                 })}
@@ -91,13 +113,13 @@ export const FavoriteTeamsScreen = ({ navigation, route }: IFavoriteTeamsScreenP
                 </SafeAreaView>
                 <View style={styles.select_team}>
                     <View style={styles.result_select}>
-                        <View style={appStyles.flex_row_space_center}>
-                            {teamSelected.map(item => {
+                        <View style={styles.logo_select}>
+                            {teamSelected.map((item, index) => {
                                 return (
-                                    <View key={item.id} style={{ marginLeft: getSize.m(6) }}>
+                                    <View key={index} style={{ marginLeft: getSize.m(6) }}>
                                         <Image source={item.logo_club} style={styles.logo_club} />
                                         <View style={styles.index}>
-                                            <Text style={styles.text_index}>{item.id}</Text>
+                                            <Text style={styles.text_index}>{index + 1}</Text>
                                         </View>
                                     </View>
                                 );
