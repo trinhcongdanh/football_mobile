@@ -10,7 +10,15 @@ import { SettingsScreen } from '../screens/football-settings/SettingsScreen';
 import { TeamScreen } from '../screens/football-team/TeamScreen';
 import { TeamSquadScreen } from '../screens/football-team-squad/TeamSquadScreen';
 import { MatchScreen } from '../screens/football-match/MatchScreen';
-import { HomeScreen, LeaguesDetailsScreen, LeaguesScreen } from '../screens';
+import {
+    FavoritePlayersScreen,
+    FavoriteSummaryScreen,
+    FavoriteTeamsScreen,
+    FavoriteTopTeamsScreen,
+    HomeScreen,
+    LeaguesDetailsScreen,
+    LeaguesScreen,
+} from '../screens';
 import { HistoryScreen } from '../screens/football-history/HistoryScreen';
 import { DataPlayerScreen } from '../screens/football-data-player/DataPlayerScreen';
 import { DataCoachScreen } from '../screens/football-data-coach/DataCoachScreen';
@@ -25,6 +33,10 @@ export const AuthStack = () => {
             screenOptions={{ headerShown: false }}
         >
             <Auth.Screen name={ScreenName.OpeningPage} component={WelcomeScreen} />
+            <Auth.Screen name={ScreenName.FavTeamPage} component={FavoriteTeamsScreen} />
+            <Auth.Screen name={ScreenName.FavPlayerPage} component={FavoritePlayersScreen} />
+            <Auth.Screen name={ScreenName.FavTopTeamPage} component={FavoriteTopTeamsScreen} />
+            <Auth.Screen name={ScreenName.SummaryPage} component={FavoriteSummaryScreen} />
             <Auth.Screen name={ScreenName.ConnectPage} component={ConnectScreen} />
             <Auth.Screen name={ScreenName.RegisterPage} component={RegisterScreen} />
             <Auth.Screen name={ScreenName.VerifyPage} component={VerifyScreen} />

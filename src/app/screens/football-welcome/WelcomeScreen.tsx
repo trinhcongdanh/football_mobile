@@ -28,7 +28,7 @@ export const WelcomeScreen = ({ navigation, route }: IWelcomeScreenProps) => {
     }, [i18n.language]);
 
     const onNavigateFavTeam = () => {
-        navigation.navigate(ScreenName.RegisterPage, {
+        navigation.navigate(ScreenName.FavTeamPage, {
             isReset: true,
         });
     };

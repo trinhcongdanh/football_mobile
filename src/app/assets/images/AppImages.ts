@@ -21,4 +21,5 @@ export const AppImages = {
     img_coach: require('./hazan.jpg'),
     img_leagues: require('./leagues.png'),
     img_gallery: require('./gallery.png'),
+    img_club_fav: require('./Ma_Tel_Aviv.png'),
 };
