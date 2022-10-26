@@ -27,4 +27,6 @@ export const appColors = {
     blue_matte_light: '#EAF9FF',
     black: '#000823',
     black_dark: '#000',
+    button_disable: '#111F4D',
+    text_disable: '#3F508E',
 };

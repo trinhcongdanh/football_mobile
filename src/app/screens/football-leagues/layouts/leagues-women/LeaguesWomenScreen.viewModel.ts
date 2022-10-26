@@ -15,7 +15,7 @@ export const useViewModel = ({ navigation, route }: ILeaguesWomenScreenProps) =>
         { id: 1, name: 'ליגת האומות של אופ"א 2022/23' },
         { id: 2, name: 'ליגת ONE ZERO בנקאות פרטית דיגיטלית' },
         { id: 3, name: 'ליגה א׳ דרום' },
-        { id: 4, name: 'ליגה א׳ צפון' },
+        { id: 4, name: 'Summary' },
         { id: 5, name: 'ליגה ב׳ דרום' },
         { id: 6, name: 'ליגה ב׳ צפון' },
         { id: 7, name: 'ליגה ב׳ צפון א׳' },
@@ -33,6 +33,9 @@ export const useViewModel = ({ navigation, route }: ILeaguesWomenScreenProps) =>
                 break;
             case 2:
                 navigate(ScreenName.TeamSquadPage);
+                break;
+            case 3:
+                navigate(ScreenName.FavSummaryPage);
                 break;
 
             default:

@@ -3,5 +3,5 @@ import { NavigationProp, RouteProp } from '@react-navigation/native';
 
 export type IFavoriteSummaryScreenProps = {
     navigation: NavigationProp<any>;
-    route: RouteProp<any, ScreenName.SummaryPage>;
+    route: RouteProp<any, ScreenName.FavSummaryPage>;
 };

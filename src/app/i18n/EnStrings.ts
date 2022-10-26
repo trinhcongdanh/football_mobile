@@ -8,6 +8,19 @@ import { I18nManager } from 'react-native';
 const resources = {
     heb: {
         translation: {
+            fav_summary: {
+                group: 'קבוצות מועדפות',
+                favorite: 'שחקנים מועדפים',
+                national_team: 'נבחרות מועדפות',
+                add_group: 'הוסף קבוצה',
+                add_actress: 'הוסף שחקנ.ית',
+                add_squad: 'הוסף נבחרת',
+                save_agree: 'שמור העדפות והסכם',
+                term_use: ' לתנאי שימוש',
+                complete: 'השלמת הרשמה',
+                guest: 'המשך כאורח',
+                login_as_guest: 'לא לשמור, והיכנס כאורח',
+            },
             welcome: {
                 splash: 'עמוד ספלאש',
                 title: 'ההתאחדות לכדורגל בישראל',
@@ -287,6 +300,19 @@ const resources = {
     },
     en: {
         translation: {
+            fav_summary: {
+                group: 'Preferred groups',
+                favorite: 'Favorite players',
+                national_team: 'Favorite national teams',
+                add_group: 'Add a group',
+                add_actress: 'Add an actress',
+                add_squad: 'Add an squad',
+                save_agree: 'Save preferences and agreement ',
+                term_use: 'for terms of use',
+                complete: 'Completion of registration',
+                guest: 'Continue as a guest',
+                login_as_guest: 'Do not save, and log in as a guest',
+            },
             welcome: {
                 splash: 'Splash page',
                 title: 'The Israel Football Association',

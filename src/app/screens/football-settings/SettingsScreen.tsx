@@ -152,6 +152,7 @@ export function SettingsScreen(props: ISettingsScreenProps) {
                                 </View>
                                 <View style={styles.mr_top}>
                                     <HeaderAdded
+                                        leftIcon={false}
                                         headerTitle={t('settings.group')}
                                         headerSkip={t('settings.sleep')}
                                         iconName={appIcons.ic_left_ios}
@@ -185,6 +186,7 @@ export function SettingsScreen(props: ISettingsScreenProps) {
                                 <Spacer heightSpacer={getSize.m(1)} color={appColors.separator} />
                                 <View style={styles.mr_top_component}>
                                     <HeaderAdded
+                                        leftIcon={false}
                                         headerTitle={t('settings.favorite')}
                                         headerSkip={t('settings.sleep')}
                                         iconName={appIcons.ic_left_ios}
@@ -218,6 +220,7 @@ export function SettingsScreen(props: ISettingsScreenProps) {
                                 </View>
                                 <View style={styles.mr_top_component}>
                                     <HeaderAdded
+                                        leftIcon={false}
                                         headerTitle={t('settings.national_team')}
                                         headerSkip={t('settings.sleep')}
                                         iconName={appIcons.ic_left_ios}

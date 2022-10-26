@@ -5,7 +5,7 @@ export enum ScreenName {
     FavTeamPage = 'FavTeamPage',
     FavPlayerPage = 'FavPlayerPage',
     FavTopTeamPage = 'FavTopTeamPage',
-    SummaryPage = 'SummaryPage',
+    FavSummaryPage = 'FavSummaryPage',
     RegisterPage = 'RegisterPage',
     ConnectPage = 'ConnectPage',
     VerifyPage = 'VerifyPage',
@@ -33,6 +33,7 @@ export enum ScreenTopTap {
     LeaguesBoysAPage = 'LeaguesBoysAPage',
     LeaguesBoysBPage = 'LeaguesBoysBPage',
     LeaguesBoysCPage = 'LeaguesBoysCPage',
+    FavSummaryPage = 'FavSummaryPage',
 }
 
 export enum ScreenDataPlayer {

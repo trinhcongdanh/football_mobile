@@ -5,9 +5,10 @@ import Icon from 'react-native-vector-icons/Feather';
 import { getSize } from '@football/app/utils/responsive/scale';
 import { View, TouchableOpacity, Text } from 'react-native';
 import { useTranslation } from 'react-i18next';
+import { appStyles } from '@football/app/utils/constants/appStyles';
 import { styles } from './HeaderFav.styles';
 import { IHeaderFavProps } from './HeaderFav.type';
-import { appStyles } from '@football/app/utils/constants/appStyles';
+
 export const HeaderFav = ({ goBack, goSkip }: IHeaderFavProps) => {
     const { t } = useTranslation();
     const dots = Array(3).fill('');
