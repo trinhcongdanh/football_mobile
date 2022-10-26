@@ -272,6 +272,9 @@ const resources = {
                 gallery: {
                     title: 'גלריית נבחרת',
                 },
+                magazine: {
+                    title: 'מגזין נבחרת',
+                },
             },
         },
     },
@@ -541,6 +544,9 @@ const resources = {
 
                 gallery: {
                     title: 'Selected gallery',
+                },
+                magazine: {
+                    title: 'Selected magazine',
                 },
             },
         },

@@ -26,4 +26,5 @@ export const appColors = {
     blue_gray_dark: '#A1ACCD',
     blue_matte_light: '#EAF9FF',
     black: '#000823',
+    black_dark: '#000',
 };
