@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { AppImages } from '@football/app/assets/images';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import {
@@ -7,7 +7,6 @@ import {
     StatusBar,
     SafeAreaView,
     Text,
-    TextInput,
     Image,
     ScrollView,
     TouchableOpacity,
@@ -23,13 +22,18 @@ import { IFavoriteTopTeamsScreenProps } from './FavoriteTopTeamsScreen.type';
 import styles from './FavoriteTopTeamsScreen.style';
 
 export const FavoriteTopTeamsScreen = ({ navigation, route }: IFavoriteTopTeamsScreenProps) => {
-    const { t, onGoBack, onGoSkip, handleContinue, topTeamFavs } = useViewModel({
+    const {
+        t,
+        onGoBack,
+        onGoSkip,
+        handleContinue,
+        handleSelected,
+        topTeamSelected,
+        newTopTeams,
+    } = useViewModel({
         navigation,
         route,
     });
-    const [selected, setSelected] = useState<number>();
-    const [toggleSelect, setToggleSelect] = useState(false);
-    const [teamSelected, setTeamSelected] = useState<any[]>([]);
 
     return (
         <View style={[appStyles.flex]}>
@@ -38,63 +42,37 @@ export const FavoriteTopTeamsScreen = ({ navigation, route }: IFavoriteTopTeamsS
                 <SafeAreaView style={appStyles.safe_area}>
                     <View style={appStyles.container}>
                         <HeaderFav goSkip={onGoSkip} goBack={onGoBack} />
-                        <Text style={appStyles.text_title}>{t('favorite_top_team.title')}</Text>
-                        <View style={[appStyles.flex_row_space_center, styles.search]}>
-                            <TextInput
-                                placeholder={t('favorite_top_team.place_holder')}
-                                style={styles.text_search}
-                                placeholderTextColor={appColors.blue_gray_light}
-                            />
-                            <Icon
-                                style={{ marginRight: getSize.m(14) }}
-                                name={appIcons.ic_search}
-                                color={appColors.blue_gray_light}
-                                size={getSize.m(16)}
-                            />
-                        </View>
+                        <Text style={[appStyles.text_title, { marginBottom: getSize.m(18) }]}>
+                            {t('favorite_top_team.title')}
+                        </Text>
+
                         <ScrollView>
                             <View style={styles.content_team}>
-                                {topTeamFavs.map(team => {
+                                {newTopTeams.map(topTeam => {
                                     return (
                                         <TouchableOpacity
-                                            key={team.id}
+                                            key={topTeam.id}
                                             style={[
                                                 styles.item_team,
                                                 {
                                                     backgroundColor:
-                                                        team.id === selected &&
-                                                        toggleSelect === true
+                                                        topTeam.isSelected === true
                                                             ? 'rgba(44, 196, 255, 0.3)'
                                                             : 'transparent',
                                                     borderWidth:
-                                                        team.id === selected &&
-                                                        toggleSelect === true
+                                                        topTeam.isSelected === true
                                                             ? getSize.m(1)
                                                             : getSize.m(0),
                                                 },
                                             ]}
-                                            onPress={() => {
-                                                setSelected(team.id);
-
-                                                if (team.id === selected) {
-                                                    setToggleSelect(!toggleSelect);
-                                                } else {
-                                                    setToggleSelect(true);
-                                                    if (teamSelected.length < 2) {
-                                                        setTeamSelected(current => [
-                                                            ...current,
-                                                            team,
-                                                        ]);
-                                                    }
-                                                }
-                                            }}
+                                            onPress={() => handleSelected(topTeam)}
                                         >
                                             <Image
-                                                source={team.logo_club}
+                                                source={topTeam.logo_club}
                                                 style={styles.logo_top}
                                             />
-                                            <Text style={styles.name_top}>{team.name}</Text>
-                                            {team.id === selected && toggleSelect === true && (
+                                            <Text style={styles.name_top}>{topTeam.name}</Text>
+                                            {topTeam.isSelected === true && (
                                                 <View style={styles.check}>
                                                     <Icon
                                                         name={appIcons.ic_check}
@@ -113,7 +91,7 @@ export const FavoriteTopTeamsScreen = ({ navigation, route }: IFavoriteTopTeamsS
                 <View style={styles.select_team}>
                     <View style={styles.result_select}>
                         <View style={styles.logo_select}>
-                            {teamSelected.map((item, index) => {
+                            {topTeamSelected.map((item, index) => {
                                 return (
                                     <View key={index} style={{ marginLeft: getSize.m(6) }}>
                                         <Image source={item.logo_club} style={styles.logo_top} />
@@ -128,7 +106,7 @@ export const FavoriteTopTeamsScreen = ({ navigation, route }: IFavoriteTopTeamsS
                             <Text style={styles.result_number}>
                                 {t('favorite_top_team.chosen')}{' '}
                                 <Text style={{ color: appColors.blue_light }}>
-                                    {teamSelected.length}
+                                    {topTeamSelected.length}
                                 </Text>
                                 /2
                             </Text>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { AppImages } from '@football/app/assets/images';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import {
@@ -23,13 +23,18 @@ import { useViewModel } from './FavoritePlayersScreen.viewModel';
 import styles from './FavoritePlayersScreen.style';
 
 export const FavoritePlayersScreen = ({ navigation, route }: IFavoritePlayerScreenProps) => {
-    const { t, onGoBack, onGoSkip, handleContinue, playerFavs } = useViewModel({
+    const {
+        t,
+        onGoBack,
+        onGoSkip,
+        handleContinue,
+        handleSelected,
+        playerSelected,
+        newPlayers,
+    } = useViewModel({
         navigation,
         route,
     });
-    const [selected, setSelected] = useState<number>();
-    const [toggleSelect, setToggleSelect] = useState(false);
-    const [teamSelected, setTeamSelected] = useState<any[]>([]);
 
     return (
         <View style={[appStyles.flex]}>
@@ -57,48 +62,32 @@ export const FavoritePlayersScreen = ({ navigation, route }: IFavoritePlayerScre
                             <Text style={styles.name_club}>הפועל באר שבע</Text>
                         </View>
                         <ScrollView>
-                            <View style={styles.content_team}>
-                                {playerFavs.map(team => {
+                            <View style={styles.content_player}>
+                                {newPlayers.map(player => {
                                     return (
                                         <TouchableOpacity
-                                            key={team.id}
+                                            key={player.id}
                                             style={[
-                                                styles.item_team,
+                                                styles.item_player,
                                                 {
                                                     backgroundColor:
-                                                        team.id === selected &&
-                                                        toggleSelect === true
+                                                        player.isSelected === true
                                                             ? 'rgba(44, 196, 255, 0.3)'
                                                             : 'transparent',
                                                     borderWidth:
-                                                        team.id === selected &&
-                                                        toggleSelect === true
+                                                        player.isSelected === true
                                                             ? getSize.m(1)
                                                             : getSize.m(0),
                                                 },
                                             ]}
-                                            onPress={() => {
-                                                setSelected(team.id);
-
-                                                if (team.id === selected) {
-                                                    setToggleSelect(!toggleSelect);
-                                                } else {
-                                                    setToggleSelect(true);
-                                                    if (teamSelected.length < 3) {
-                                                        setTeamSelected(current => [
-                                                            ...current,
-                                                            team,
-                                                        ]);
-                                                    }
-                                                }
-                                            }}
+                                            onPress={() => handleSelected(player)}
                                         >
                                             <Image
-                                                source={team.avt_player}
+                                                source={player.avt_player}
                                                 style={styles.logo_player}
                                             />
-                                            <Text style={styles.name_player}>{team.name}</Text>
-                                            {team.id === selected && toggleSelect === true && (
+                                            <Text style={styles.name_player}>{player.name}</Text>
+                                            {player.isSelected === true && (
                                                 <View style={styles.check}>
                                                     <Icon
                                                         name={appIcons.ic_check}
@@ -114,10 +103,10 @@ export const FavoritePlayersScreen = ({ navigation, route }: IFavoritePlayerScre
                         </ScrollView>
                     </View>
                 </SafeAreaView>
-                <View style={styles.select_team}>
+                <View style={styles.select_player}>
                     <View style={styles.result_select}>
                         <View style={styles.logo_select}>
-                            {teamSelected.map((item, index) => {
+                            {playerSelected.map((item, index) => {
                                 return (
                                     <View key={index} style={{ marginLeft: getSize.m(6) }}>
                                         <Image
@@ -135,7 +124,7 @@ export const FavoritePlayersScreen = ({ navigation, route }: IFavoritePlayerScre
                             <Text style={styles.result_number}>
                                 {t('favorite_player.chosen')}{' '}
                                 <Text style={{ color: appColors.blue_light }}>
-                                    {teamSelected.length}
+                                    {playerSelected.length}
                                 </Text>
                                 /3
                             </Text>
