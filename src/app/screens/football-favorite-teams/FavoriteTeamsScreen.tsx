@@ -23,14 +23,18 @@ import { useViewModel } from './FavoriteTeamsScreen.viewModel';
 import styles from './FavoriteTeamsScreen.style';
 
 export const FavoriteTeamsScreen = ({ navigation, route }: IFavoriteTeamsScreenProps) => {
-    const { t, onGoBack, onGoSkip, handleContinue, teamFavs } = useViewModel({
+    const {
+        t,
+        onGoBack,
+        onGoSkip,
+        handleContinue,
+        handleSelected,
+        teamSelected,
+        newTeams,
+    } = useViewModel({
         navigation,
         route,
     });
-
-    const [selected, setSelected] = useState<number>();
-    const [toggleSelect, setToggleSelect] = useState(false);
-    const [teamSelected, setTeamSelected] = useState<any[]>([]);
 
     return (
         <View style={[appStyles.flex]}>
@@ -56,7 +60,7 @@ export const FavoriteTeamsScreen = ({ navigation, route }: IFavoriteTeamsScreenP
                         </View>
                         <ScrollView>
                             <View style={styles.content_team}>
-                                {teamFavs.map(team => {
+                                {newTeams.map(team => {
                                     return (
                                         <TouchableOpacity
                                             key={team.id}
@@ -64,30 +68,17 @@ export const FavoriteTeamsScreen = ({ navigation, route }: IFavoriteTeamsScreenP
                                                 styles.item_team,
                                                 {
                                                     backgroundColor:
-                                                        team.id === selected &&
-                                                        toggleSelect === true
+                                                        team.isSelected === true
                                                             ? 'rgba(44, 196, 255, 0.3)'
                                                             : 'transparent',
                                                     borderWidth:
-                                                        team.id === selected &&
-                                                        toggleSelect === true
+                                                        team.isSelected === true
                                                             ? getSize.m(1)
                                                             : getSize.m(0),
                                                 },
                                             ]}
                                             onPress={() => {
-                                                setSelected(team.id);
-                                                if (team.id === selected) {
-                                                    setToggleSelect(!toggleSelect);
-                                                } else {
-                                                    setToggleSelect(true);
-                                                    if (teamSelected.length < 3) {
-                                                        setTeamSelected(current => [
-                                                            ...current,
-                                                            team,
-                                                        ]);
-                                                    }
-                                                }
+                                                handleSelected(team);
                                             }}
                                         >
                                             <Image
@@ -95,7 +86,7 @@ export const FavoriteTeamsScreen = ({ navigation, route }: IFavoriteTeamsScreenP
                                                 style={styles.logo_club}
                                             />
                                             <Text style={styles.name_club}>{team.name}</Text>
-                                            {team.id === selected && toggleSelect === true && (
+                                            {team.isSelected === true && (
                                                 <View style={styles.check}>
                                                     <Icon
                                                         name={appIcons.ic_check}

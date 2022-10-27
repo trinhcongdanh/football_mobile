@@ -29,13 +29,14 @@ const styles = StyleSheet.create({
     },
 
     item_team: {
-        width: '33%',
+        width: '32%',
         alignItems: 'center',
         justifyContent: 'center',
         height: getSize.m(82),
         borderRadius: getSize.m(12),
         borderColor: appColors.blue_light,
         marginTop: getSize.m(5),
+        marginHorizontal: getSize.m(2),
     },
 
     logo_top: {

@@ -28,20 +28,21 @@ const styles = StyleSheet.create({
         color: appColors.white,
     },
 
-    content_team: {
+    content_player: {
         width: '100%',
         flexWrap: 'wrap',
         flexDirection: 'row',
     },
 
-    item_team: {
-        width: '33%',
+    item_player: {
+        width: '32%',
         alignItems: 'center',
         justifyContent: 'center',
         height: getSize.m(82),
         borderRadius: getSize.m(12),
         borderColor: appColors.blue_light,
         marginTop: getSize.m(5),
+        marginHorizontal: getSize.m(2),
     },
 
     logo_player: {
@@ -68,7 +69,7 @@ const styles = StyleSheet.create({
         top: getSize.m(-4),
         right: getSize.m(-4),
     },
-    select_team: {
+    select_player: {
         backgroundColor: appColors.black,
         width: '100%',
         borderTopLeftRadius: getSize.m(30),
