@@ -41,7 +41,7 @@ export const FavoriteTopTeamsScreen = ({ navigation, route }: IFavoriteTopTeamsS
                 <StatusBar translucent backgroundColor="transparent" />
                 <SafeAreaView style={appStyles.safe_area}>
                     <View style={appStyles.container}>
-                        <HeaderFav goSkip={onGoSkip} goBack={onGoBack} />
+                        <HeaderFav goSkip={onGoSkip} goBack={onGoBack} onIndex={2} />
                         <Text style={[appStyles.text_title, { marginBottom: getSize.m(18) }]}>
                             {t('favorite_top_team.title')}
                         </Text>

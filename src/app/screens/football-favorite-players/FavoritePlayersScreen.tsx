@@ -42,7 +42,7 @@ export const FavoritePlayersScreen = ({ navigation, route }: IFavoritePlayerScre
                 <StatusBar translucent backgroundColor="transparent" />
                 <SafeAreaView style={appStyles.safe_area}>
                     <View style={[appStyles.flex, appStyles.container]}>
-                        <HeaderFav goSkip={onGoSkip} goBack={onGoBack} />
+                        <HeaderFav goSkip={onGoSkip} goBack={onGoBack} onIndex={1} />
 
                         <Text style={appStyles.text_title}>{t('favorite_player.title')}</Text>
                         <View style={[appStyles.flex_row_space_center, styles.search]}>
