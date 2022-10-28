@@ -78,6 +78,5 @@ export const useViewModel = ({ navigation, route }: IFavoriteTopTeamsScreenProps
         handleSelected,
         topTeamSelected,
         newTopTeams,
-        topTeamFavs,
     };
 };

@@ -9,9 +9,10 @@ import { appStyles } from '@football/app/utils/constants/appStyles';
 import { styles } from './HeaderFav.styles';
 import { IHeaderFavProps } from './HeaderFav.type';
 
-export const HeaderFav = ({ goBack, goSkip }: IHeaderFavProps) => {
+export const HeaderFav = ({ goBack, goSkip, onIndex }: IHeaderFavProps) => {
     const { t } = useTranslation();
     const dots = Array(3).fill('');
+
     return (
         <View style={styles.header}>
             <TouchableOpacity onPress={goSkip}>
@@ -19,7 +20,21 @@ export const HeaderFav = ({ goBack, goSkip }: IHeaderFavProps) => {
             </TouchableOpacity>
             <View style={appStyles.flex_row_center}>
                 {dots.map((_, index) => {
-                    return <View key={index} style={styles.dots} />;
+                    return (
+                        <View
+                            key={index}
+                            style={[
+                                styles.dots,
+                                {
+                                    width: index === onIndex ? getSize.m(18) : getSize.m(5),
+                                    backgroundColor:
+                                        index === onIndex
+                                            ? appColors.blue_light
+                                            : appColors.light_gray,
+                                },
+                            ]}
+                        />
+                    );
                 })}
             </View>
             <TouchableOpacity onPress={goBack}>
