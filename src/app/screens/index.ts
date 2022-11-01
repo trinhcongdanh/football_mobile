@@ -16,3 +16,4 @@ export * from './football-data-coach';
 export * from './football-history';
 export * from './football-leagues';
 export * from './football-leagues-details';
+export * from './football-video';

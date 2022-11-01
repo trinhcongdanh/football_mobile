@@ -18,6 +18,7 @@ import {
     HomeScreen,
     LeaguesDetailsScreen,
     LeaguesScreen,
+    VideoScreen,
 } from '../screens';
 import { HistoryScreen } from '../screens/football-history/HistoryScreen';
 import { DataPlayerScreen } from '../screens/football-data-player/DataPlayerScreen';
@@ -52,6 +53,7 @@ export const AuthStack = () => {
             <Auth.Screen name={ScreenName.BottomTab} component={BottomTabStack} />
             <Auth.Screen name={ScreenName.LeaguesPage} component={LeaguesScreen} />
             <Auth.Screen name={ScreenName.LeaguesDetailsPage} component={LeaguesDetailsScreen} />
+            <Auth.Screen name={ScreenName.VideoPage} component={VideoScreen} />
         </Auth.Navigator>
     );
 };

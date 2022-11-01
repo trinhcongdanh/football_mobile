@@ -22,4 +22,5 @@ export const AppImages = {
     img_leagues: require('./leagues.png'),
     img_gallery: require('./gallery.png'),
     img_club_fav: require('./Ma_Tel_Aviv.png'),
+    img_thumbnail: require('./neymar.jpg'),
 };

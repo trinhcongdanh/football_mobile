@@ -37,6 +37,9 @@ export const useViewModel = ({ navigation, route }: ILeaguesWomenScreenProps) =>
             case 3:
                 navigate(ScreenName.FavSummaryPage);
                 break;
+            case 4:
+                navigate(ScreenName.VideoPage);
+                break;
 
             default:
                 navigate(ScreenName.TeamSquadPage);
