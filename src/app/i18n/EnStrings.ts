@@ -310,6 +310,18 @@ const resources = {
                     title: 'מגזין נבחרת',
                 },
             },
+            video: {
+                title: 'סירטונים',
+                priority: {
+                    label: 'קבוצות מועדפות',
+                },
+                fav_player: {
+                    label: 'שחקנים מועדפים',
+                },
+                fav_nation_team: {
+                    label: 'נבחרות מועדפות',
+                },
+            },
         },
     },
     en: {
@@ -615,6 +627,18 @@ const resources = {
                 },
                 magazine: {
                     title: 'Selected magazine',
+                },
+            },
+            video: {
+                title: 'Video',
+                priority: {
+                    label: 'Group Priority',
+                },
+                fav_player: {
+                    label: 'Favorite players',
+                },
+                fav_nation_team: {
+                    label: 'Favorite national teams',
                 },
             },
         },
