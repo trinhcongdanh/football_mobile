@@ -18,6 +18,7 @@ import {
     HomeScreen,
     LeaguesDetailsScreen,
     LeaguesScreen,
+    StateCupScreen,
     VideoScreen,
 } from '../screens';
 import { HistoryScreen } from '../screens/football-history/HistoryScreen';
@@ -54,6 +55,7 @@ export const AuthStack = () => {
             <Auth.Screen name={ScreenName.LeaguesPage} component={LeaguesScreen} />
             <Auth.Screen name={ScreenName.LeaguesDetailsPage} component={LeaguesDetailsScreen} />
             <Auth.Screen name={ScreenName.VideoPage} component={VideoScreen} />
+            <Auth.Screen name={ScreenName.StateCupPage} component={StateCupScreen} />
         </Auth.Navigator>
     );
 };

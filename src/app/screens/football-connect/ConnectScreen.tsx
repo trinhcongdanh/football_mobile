@@ -62,7 +62,12 @@ export const ConnectScreen = ({ navigation, route }: IConnectScreenProps) => {
                                 }}
                                 connect={Connect}
                             />
-                            <View style={[appStyles.flex_row_center, { marginTop: getSize.m(30) }]}>
+                            <View
+                                style={[
+                                    appStyles.flex_row_center,
+                                    { marginTop: getSize.m(30), marginBottom: getSize.m(30) },
+                                ]}
+                            >
                                 <Text style={{ color: appColors.white }}>
                                     {' '}
                                     {t('connect.nosignUp')}
