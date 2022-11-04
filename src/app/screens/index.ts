@@ -17,4 +17,5 @@ export * from './football-history';
 export * from './football-leagues';
 export * from './football-leagues-details';
 export * from './football-video';
+export * from './football-goblet';
 export * from './football-state-cup';

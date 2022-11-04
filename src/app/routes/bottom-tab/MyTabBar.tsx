@@ -46,10 +46,13 @@ export function MyTabBar({ state, descriptors, navigation }: any) {
                 icon = 'reload-circle-outline';
                 break;
             case ScreenName.LeaguesPage:
+                icon = 'reader-outline';
+                break;
+            case ScreenName.GobletPage:
                 icon = 'trophy-outline';
                 break;
-            case ScreenName.LeaguesDetailsPage:
-                icon = 'reader-outline';
+            case ScreenName.VideoPage:
+                icon = 'videocam-outline';
                 break;
             default:
                 break;
@@ -79,10 +82,13 @@ export function MyTabBar({ state, descriptors, navigation }: any) {
                         label = 'הִיסטוֹרִיָה';
                         break;
                     case ScreenName.LeaguesPage:
-                        label = 'ליגות';
-                        break;
-                    case ScreenName.LeaguesDetailsPage:
                         label = 'פירוט הליגות';
+                        break;
+                    case ScreenName.GobletPage:
+                        label = 'גביע';
+                        break;
+                    case ScreenName.VideoPage:
+                        label = 'VOD';
                         break;
                     default:
                         break;

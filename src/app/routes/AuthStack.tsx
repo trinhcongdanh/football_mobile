@@ -15,6 +15,7 @@ import {
     FavoriteSummaryScreen,
     FavoriteTeamsScreen,
     FavoriteTopTeamsScreen,
+    GobletScreen,
     HomeScreen,
     LeaguesDetailsScreen,
     LeaguesScreen,
@@ -55,6 +56,7 @@ export const AuthStack = () => {
             <Auth.Screen name={ScreenName.LeaguesPage} component={LeaguesScreen} />
             <Auth.Screen name={ScreenName.LeaguesDetailsPage} component={LeaguesDetailsScreen} />
             <Auth.Screen name={ScreenName.VideoPage} component={VideoScreen} />
+            <Auth.Screen name={ScreenName.GobletPage} component={GobletScreen} />
             <Auth.Screen name={ScreenName.StateCupPage} component={StateCupScreen} />
         </Auth.Navigator>
     );
