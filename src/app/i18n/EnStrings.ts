@@ -322,6 +322,11 @@ const resources = {
                     label: 'נבחרות מועדפות',
                 },
             },
+            goblet: {
+                title: 'גביע',
+                state_cup: 'גביע מדינה',
+                toto_cup: 'גביע טוטו',
+            },
             state_cup: {
                 title: 'גביע המדינה',
                 season_game: 'עונת משחקים',
@@ -662,6 +667,11 @@ const resources = {
                 fav_nation_team: {
                     label: 'Favorite national teams',
                 },
+            },
+            goblet: {
+                title: 'Goblet',
+                state_cup: 'State Cup',
+                toto_cup: 'Toto Cup',
             },
             state_cup: {
                 title: 'State cup',

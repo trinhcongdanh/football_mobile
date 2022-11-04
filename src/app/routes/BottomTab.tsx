@@ -4,9 +4,10 @@ import { ScreenName } from '../utils/constants/enum';
 import {
     DataCoachScreen,
     DataPlayerScreen,
+    GobletScreen,
     HistoryScreen,
-    LeaguesDetailsScreen,
     LeaguesScreen,
+    VideoScreen,
 } from '../screens';
 import { MyTabBar } from './bottom-tab/MyTabBar';
 
@@ -23,7 +24,8 @@ export const BottomTabStack = () => {
             <Bottom.Screen name={ScreenName.DataPlayerPage} component={DataPlayerScreen} />
             <Bottom.Screen name={ScreenName.HistoryPage} component={HistoryScreen} />
             <Bottom.Screen name={ScreenName.LeaguesPage} component={LeaguesScreen} />
-            <Bottom.Screen name={ScreenName.LeaguesDetailsPage} component={LeaguesDetailsScreen} />
+            <Bottom.Screen name={ScreenName.GobletPage} component={GobletScreen} />
+            <Bottom.Screen name={ScreenName.VideoPage} component={VideoScreen} />
         </Bottom.Navigator>
     );
 };
