@@ -36,17 +36,17 @@ export function MyTabBar({ state, descriptors, navigation }: any) {
     const renderIcon = (routeName: string, selectedTab: number, indexTab: number) => {
         let icon = '';
         switch (routeName) {
-            case ScreenName.DataCoachPage:
-                icon = 'briefcase-outline';
-                break;
-            case ScreenName.DataPlayerPage:
-                icon = 'man-outline';
-                break;
-            case ScreenName.HistoryPage:
-                icon = 'reload-circle-outline';
+            case ScreenName.GroupPagePage:
+                icon = 'home-outline';
                 break;
             case ScreenName.LeaguesPage:
-                icon = 'reader-outline';
+                icon = 'shield-checkmark-outline';
+                break;
+            case ScreenName.TeamPage:
+                icon = 'people-sharp';
+                break;
+            case ScreenName.DataPlayerPage:
+                icon = 'chatbox-ellipses-outline';
                 break;
             case ScreenName.GobletPage:
                 icon = 'trophy-outline';
@@ -72,17 +72,17 @@ export function MyTabBar({ state, descriptors, navigation }: any) {
                 const { options } = descriptors[route.key];
                 let label = 'VOD';
                 switch (route.name) {
-                    case ScreenName.DataCoachPage:
-                        label = 'מְאַמֵן';
-                        break;
-                    case ScreenName.DataPlayerPage:
-                        label = 'שחקן';
-                        break;
-                    case ScreenName.HistoryPage:
-                        label = 'הִיסטוֹרִיָה';
+                    case ScreenName.GroupPagePage:
+                        label = 'בית';
                         break;
                     case ScreenName.LeaguesPage:
-                        label = 'פירוט הליגות';
+                        label = 'ליגות';
+                        break;
+                    case ScreenName.TeamPage:
+                        label = 'נבחרות';
+                        break;
+                    case ScreenName.DataPlayerPage:
+                        label = 'שאלון';
                         break;
                     case ScreenName.GobletPage:
                         label = 'גביע';

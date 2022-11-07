@@ -22,9 +22,32 @@ export const ListGame = ({
     completed,
     details,
     icon,
+    tournament,
 }: IListGameProps) => {
     return (
         <View style={styles.main_schedule}>
+            {tournament && (
+                <View
+                    style={[
+                        styles.tournament,
+                        { backgroundColor: completed === true ? appColors.separator : '#F2FBFF' },
+                    ]}
+                >
+                    <Text
+                        style={[
+                            styles.text_tournament,
+                            {
+                                color:
+                                    completed === true
+                                        ? appColors.soft_grey
+                                        : appColors.text_option_unselect,
+                            },
+                        ]}
+                    >
+                        {tournament}
+                    </Text>
+                </View>
+            )}
             <View style={appStyles.flex_row_space}>
                 <Text
                     style={[

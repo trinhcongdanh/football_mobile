@@ -11,6 +11,18 @@ export const styles = StyleSheet.create({
         borderRadius: getSize.m(15),
         backgroundColor: appColors.white,
     },
+    tournament: {
+        borderRadius: getSize.m(5),
+        marginBottom: getSize.m(10),
+    },
+    text_tournament: {
+        textAlign: 'center',
+        fontWeight: '700',
+        fontSize: getSize.m(14),
+        lineHeight: getSize.m(22),
+        fontFamily: AppFonts.regular,
+        paddingVertical: getSize.m(4),
+    },
     line_dots: {
         marginTop: getSize.m(16),
         marginBottom: getSize.m(36),

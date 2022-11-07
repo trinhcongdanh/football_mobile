@@ -17,4 +17,11 @@ export const appIcons = {
     ic_search: 'search',
     ic_caretright: 'caretright',
     ic_check: 'check',
+    ic_user: 'user',
+    ic_building: 'building',
+    ic_phone: 'phone',
+    ic_print: 'print',
+    ic_envelope: 'envelope',
+    ic_location_arrow: 'location-arrow',
+    ic_arrow_up: 'arrow-up',
 };

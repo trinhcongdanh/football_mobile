@@ -23,6 +23,7 @@ export enum ScreenName {
     VideoPage = 'VideoPage',
     GobletPage = 'GobletPage',
     StateCupPage = 'StateCupPage',
+    GroupPagePage = 'GroupPagePage',
 }
 
 export enum ScreenTopTap {

@@ -10,4 +10,5 @@ export type IListGameProps = {
     completed: boolean;
     details?: string;
     icon?: any;
+    tournament?: string;
 };
