@@ -185,4 +185,11 @@ export const appStyles = StyleSheet.create({
         borderColor: appColors.blue_light,
         borderRadius: getSize.m(2),
     },
+
+    package: {
+        backgroundColor: appColors.gray,
+        marginTop: getSize.m(10),
+        paddingVertical: getSize.m(20),
+        paddingHorizontal: getSize.m(16),
+    },
 });
