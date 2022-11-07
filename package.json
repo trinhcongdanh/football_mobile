@@ -52,6 +52,7 @@
     "react-native-vector-icons": "^9.2.0",
     "react-native-video": "^5.2.1",
     "react-native-video-player": "^0.14.0",
+    "realm": "^11.1.0",
     "typesafe-actions": "^5.1.0"
   },
   "devDependencies": {
