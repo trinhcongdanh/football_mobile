@@ -1,9 +1,19 @@
-export const PlayerSchema = {
-    name: 'player',
+import { BSON } from 'realm';
+
+export type Task = {
+    _id: BSON.ObjectId;
+    _partition?: string;
+    name: string;
+    status: string;
+};
+
+export const TaskSchema = {
+    name: 'Task',
     properties: {
-        _id: 'int',
+        _id: 'objectId',
+        _partition: 'string?',
         name: 'string',
-        status: 'string?',
+        status: 'string',
     },
     primaryKey: '_id',
 };

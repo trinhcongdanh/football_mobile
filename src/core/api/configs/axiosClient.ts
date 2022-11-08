@@ -1,12 +1,14 @@
 import axios from 'axios';
 import queryString from 'query-string';
-import { URL_SERVER } from './config';
+import { API_KEY, BASE_URL } from './config';
 
 export const axiosClient = axios.create({
-    baseURL: URL_SERVER,
+    baseURL: BASE_URL,
     headers: {
+        // eslint-disable-next-line prettier/prettier
+        'Accept': 'application/json',
         'content-type': 'application/json',
-        // Authorization: `Bearer ${token}`,
+        'api-key': API_KEY,
     },
     paramsSerializer: (params: any) => queryString.stringify(params),
 });
