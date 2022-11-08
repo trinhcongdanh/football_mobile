@@ -384,6 +384,13 @@ const resources = {
                     number_red: 'אדומים',
                 },
             },
+            team_staff: {
+                title: 'סגל הקבוצה',
+                option: {
+                    cast: 'סגל שחקנים',
+                    official: 'בעלי תפקידים',
+                },
+            },
         },
     },
     en: {
@@ -763,6 +770,13 @@ const resources = {
                     yellow_league: 'Yellows in the league and in the cup',
                     red_card: 'Red cards',
                     number_red: 'red',
+                },
+            },
+            team_staff: {
+                title: 'Team Staff',
+                option: {
+                    cast: 'Cast',
+                    official: 'Officials',
                 },
             },
         },

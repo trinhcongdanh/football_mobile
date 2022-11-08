@@ -46,7 +46,9 @@ export const useViewModel = ({ navigation, route }: ILeaguesWomenScreenProps) =>
             case 6:
                 navigate(ScreenName.HistoryPage);
                 break;
-
+            case 7:
+                navigate(ScreenName.TeamStaffPage);
+                break;
             default:
                 navigate(ScreenName.TeamSquadPage);
                 break;

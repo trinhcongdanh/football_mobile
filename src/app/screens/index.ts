@@ -20,3 +20,4 @@ export * from './football-video';
 export * from './football-goblet';
 export * from './football-state-cup';
 export * from './football-group-page';
+export * from './football-team-staff';
