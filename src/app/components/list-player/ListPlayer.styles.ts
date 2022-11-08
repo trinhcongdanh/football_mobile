@@ -12,4 +12,14 @@ export const styles = StyleSheet.create({
         fontWeight: '700',
         textAlign: 'center',
     },
+    position: {
+        fontFamily: AppFonts.regular,
+        fontSize: getSize.m(13),
+        lineHeight: getSize.m(15),
+        fontWeight: '400',
+        color: appColors.text_option_unselect,
+        marginLeft: getSize.m(30),
+        width: getSize.m(160),
+        textAlign: 'right',
+    },
 });

@@ -1,4 +1,6 @@
 export type IListPlayerProps = {
     name: string;
-    number: number;
+    number?: number;
+    position?: string;
+    avt: any;
 };

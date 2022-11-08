@@ -25,4 +25,5 @@ export const AppImages = {
     img_thumbnail: require('./neymar.jpg'),
     img_cup: require('./cup.jpg'),
     img_state_cup: require('./state_cup.png'),
+    img_staff: require('./staff.jpg'),
 };

@@ -52,6 +52,7 @@ export const TeamSquadScreen = ({ navigation, route }: ITeamGroupScreenProps) =>
                                                     key={item.id}
                                                     name={item.name}
                                                     number={item.number}
+                                                    avt={item.avt}
                                                 />
                                             );
                                         })}
@@ -64,6 +65,7 @@ export const TeamSquadScreen = ({ navigation, route }: ITeamGroupScreenProps) =>
                                                     key={item.id}
                                                     name={item.name}
                                                     number={item.number}
+                                                    avt={item.avt}
                                                 />
                                             );
                                         })}
@@ -76,6 +78,7 @@ export const TeamSquadScreen = ({ navigation, route }: ITeamGroupScreenProps) =>
                                                     key={item.id}
                                                     name={item.name}
                                                     number={item.number}
+                                                    avt={item.avt}
                                                 />
                                             );
                                         })}
@@ -88,6 +91,7 @@ export const TeamSquadScreen = ({ navigation, route }: ITeamGroupScreenProps) =>
                                                     key={item.id}
                                                     name={item.name}
                                                     number={item.number}
+                                                    avt={item.avt}
                                                 />
                                             );
                                         })}
