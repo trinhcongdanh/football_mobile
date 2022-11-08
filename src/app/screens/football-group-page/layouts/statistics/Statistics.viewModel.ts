@@ -7,30 +7,39 @@ export const useViewModel = ({}: IStatisticsProps) => {
     const { navigate, goBack } = useAppNavigator();
     const { t } = useTranslation();
 
-    const [showDetail, setShowDetail] = useState(false);
-
     const statistics = [
-        { id: 1, player: 'מאור בוזגלו' },
-        { id: 2, player: 'מאור בוזגלו' },
-        { id: 3, player: 'מאור בוזגלו' },
-        { id: 4, player: 'מאור בוזגלו' },
-        { id: 5, player: 'מאור בוזגלו' },
+        { id: 1, player: 'מאור בוזגלו', showDetail: false },
+        { id: 2, player: 'מאור בוזגלו', showDetail: false },
+        { id: 3, player: 'מאור בוזגלו', showDetail: false },
+        { id: 4, player: 'מאור בוזגלו', showDetail: false },
+        { id: 5, player: 'מאור בוזגלו', showDetail: false },
     ];
 
-    const handleShowDetail = () => {
-        setShowDetail(true);
+    const [statisticsPlayer, setStatisticsPlayer] = useState<any[]>([]);
+
+    const handleShowDetail = (item: any) => {
+        setStatisticsPlayer([...statisticsPlayer, item]);
     };
 
-    const handleCloseDetail = () => {
-        setShowDetail(false);
+    const handleCloseDetail = (item: any) => {
+        const index = statisticsPlayer.findIndex(elm => item.id === elm.id);
+        if (index !== -1) {
+            const newStatisticsPlayer = statisticsPlayer.filter(e => e.id !== item.id);
+            setStatisticsPlayer(newStatisticsPlayer);
+        }
     };
+
+    const newStatistics = statistics.map(e => {
+        const i = statisticsPlayer.findIndex(t => t.id === e.id);
+        return { ...e, showDetail: i !== -1 };
+    });
+
     const handleMoreStatistics = () => {};
     return {
         t,
-        statistics,
-        showDetail,
         handleShowDetail,
         handleMoreStatistics,
         handleCloseDetail,
+        newStatistics,
     };
 };
