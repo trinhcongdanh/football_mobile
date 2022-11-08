@@ -17,12 +17,12 @@ import { useViewModel } from './Statistics.viewModel';
 export const Statistics = () => {
     const {
         t,
-        statistics,
-        showDetail,
         handleShowDetail,
         handleCloseDetail,
         handleMoreStatistics,
+        newStatistics,
     } = useViewModel({});
+
     return (
         <View>
             <Text style={[appStyles.text_topic, { marginLeft: getSize.m(6) }]}>
@@ -72,7 +72,7 @@ export const Statistics = () => {
                     <View style={{ width: getSize.m(20) }} />
                 </View>
                 <View>
-                    {statistics.map(item => {
+                    {newStatistics.map(item => {
                         return (
                             <View
                                 key={item.id}
@@ -80,7 +80,7 @@ export const Statistics = () => {
                                     marginTop: getSize.m(6),
                                 }}
                             >
-                                {!showDetail ? (
+                                {!item.showDetail ? (
                                     <View
                                         style={[
                                             appStyles.flex_row_space_center,
@@ -97,7 +97,7 @@ export const Statistics = () => {
                                         <Text style={[styles.text_content, { textAlign: 'left' }]}>
                                             מאור בוזגלו
                                         </Text>
-                                        <TouchableOpacity onPress={handleShowDetail}>
+                                        <TouchableOpacity onPress={() => handleShowDetail(item)}>
                                             <Icon
                                                 name={appIcons.ic_arrow_down}
                                                 size={getSize.m(10)}
@@ -144,7 +144,7 @@ export const Statistics = () => {
                                                 <Text style={[styles.text_content]}>14</Text>
                                             </View>
                                             <TouchableOpacity
-                                                onPress={handleCloseDetail}
+                                                onPress={() => handleCloseDetail(item)}
                                                 style={{ width: getSize.m(20) }}
                                             >
                                                 <Icon
