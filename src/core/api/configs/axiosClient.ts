@@ -6,7 +6,7 @@ export const axiosClient = axios.create({
     baseURL: BASE_URL,
     headers: {
         // eslint-disable-next-line prettier/prettier
-        'Accept': 'application/json',
+        Accept: 'application/json',
         'content-type': 'application/json',
         'api-key': API_KEY,
     },
@@ -15,7 +15,7 @@ export const axiosClient = axios.create({
 
 axiosClient.interceptors.response.use(
     response => {
-        if (response.data) {
+        if (response.config.responseType === 'document') {
             return response.data;
         }
         return response;

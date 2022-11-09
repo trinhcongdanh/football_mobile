@@ -1,13 +1,33 @@
-import React, { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { ScreenName } from '@football/app/utils/constants/enum';
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
 import { AppImages } from '@football/app/assets/images';
 import { useTranslation } from 'react-i18next';
+import { axiosClient } from '@football/core/api/configs/axiosClient';
+import { BASE_URL, DATA_SOURCE, DB } from '@football/core/api/configs/config';
+import { TeamItemModel, TeamModelResponse } from '@football/core/models/TeamModelResponse';
+import { Alert } from 'react-native';
 import { IFavoriteTeamsScreenProps } from './FavoriteTeamsScreen.type';
 
 export const useViewModel = ({ navigation, route }: IFavoriteTeamsScreenProps) => {
     const { t } = useTranslation();
     const { navigate, goBack } = useAppNavigator();
+    const [teamData, setTeamData] = useState<TeamItemModel[]>();
+
+    const getTeamsData = useCallback(async () => {
+        try {
+            const { data }: TeamModelResponse = await axiosClient.post(`${BASE_URL}/findOne`, {
+                dataSource: DATA_SOURCE,
+                database: DB,
+                collection: 'team',
+            });
+            if (data.document) {
+                setTeamData(data.document.teams);
+            }
+        } catch (error: any) {
+            Alert.alert(error);
+        }
+    }, []);
 
     const onGoBack = (): void => {
         goBack();
@@ -19,6 +39,10 @@ export const useViewModel = ({ navigation, route }: IFavoriteTeamsScreenProps) =
     const handleContinue = () => {
         navigate(ScreenName.FavPlayerPage);
     };
+
+    useEffect(() => {
+        getTeamsData();
+    }, [getTeamsData]);
 
     const teamFavs = [
         { id: 1, name: 'מכבי תל אביב', image: AppImages.img_club_fav, isSelected: false },
@@ -43,7 +67,7 @@ export const useViewModel = ({ navigation, route }: IFavoriteTeamsScreenProps) =
 
     const [teamSelected, setTeamSelected] = useState<any[]>([]);
 
-    const handleSelected = (team: any) => {
+    const handleSelected = (team: TeamItemModel) => {
         const index = teamSelected.findIndex(elm => team.id === elm.id);
         if (index !== -1) {
             const newTeamSelected = teamSelected.filter(e => e.id !== team.id);
@@ -53,7 +77,8 @@ export const useViewModel = ({ navigation, route }: IFavoriteTeamsScreenProps) =
         }
     };
 
-    const newTeams = teamFavs.map(e => {
+    const newTeams = teamData?.map(e => {
+        // eslint-disable-next-line @typescript-eslint/no-shadow
         const i = teamSelected.findIndex(t => t.id === e.id);
         return { ...e, isSelected: i !== -1 };
     });
