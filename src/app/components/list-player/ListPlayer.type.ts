@@ -3,4 +3,5 @@ export type IListPlayerProps = {
     number?: number;
     position?: string;
     avt: any;
+    number_before?: number;
 };

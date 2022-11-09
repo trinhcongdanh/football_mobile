@@ -2,17 +2,15 @@ import React from 'react';
 import { View, ImageBackground, StatusBar, SafeAreaView } from 'react-native';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import { AppImages } from '@football/app/assets/images';
-import { appColors } from '@football/app/utils/constants/appColors';
-import { appIcons } from '@football/app/assets/icons/appIcons';
-import { TopTaps } from '@football/app/routes/toptap/TopTap';
-import { HeaderComposition } from '@football/app/components/header-composition/HeaderComposition';
 import { HeaderUser } from '@football/app/components/header-user/HeaderUser';
-import { useViewModel } from './MatchScreen.viewModel';
-import { IMatchScreenProps } from './MatchScreen.type';
+import { appIcons } from '@football/app/assets/icons/appIcons';
+import { appColors } from '@football/app/utils/constants/appColors';
+import { HeaderComposition } from '@football/app/components/header-composition/HeaderComposition';
+import { TopTaps } from '@football/app/routes/toptap/TopTap';
+import { useViewModel } from './GameCompositionScreen.viewModel';
+import { IGameCompositionScreenProps } from './GameCompositionScreen.type';
 
-// type Props = {};
-
-export const MatchScreen = ({ navigation, route }: IMatchScreenProps) => {
+export const GameCompositionScreen = ({ navigation, route }: IGameCompositionScreenProps) => {
     const { t, onGoBack, labels } = useViewModel({
         navigation,
         route,
@@ -33,14 +31,14 @@ export const MatchScreen = ({ navigation, route }: IMatchScreenProps) => {
                             handlePressFunction={onGoBack}
                         />
                         <HeaderComposition
-                            title={t('match.title')}
-                            avt_away={AppImages.img_albania}
-                            avt_home={AppImages.img_israel}
-                            name_home={t('match.club.israel')}
-                            name_away={t('match.club.albania')}
+                            title='ליגת האומות של אופ"א 2022/23'
+                            avt_away={AppImages.img_aviv}
+                            avt_home={AppImages.img_fchj}
+                            name_home="הפועל ירושלים"
+                            name_away="הפועל באר שבע"
                             score="2 : 1"
-                            stadium={t('match.stadium')}
-                            status={t('match.status')}
+                            stadium="בלומפילד"
+                            status="הסתיים"
                         />
                     </View>
                     <View style={[appStyles.flex, appStyles.main_container]}>
