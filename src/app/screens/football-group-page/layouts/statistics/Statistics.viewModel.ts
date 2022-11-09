@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
-import React, { useState } from 'react';
+import React from 'react';
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
+import { AppImages } from '@football/app/assets/images';
 import { IStatisticsProps } from './Statistics.type';
 
 export const useViewModel = ({}: IStatisticsProps) => {
@@ -8,38 +9,110 @@ export const useViewModel = ({}: IStatisticsProps) => {
     const { t } = useTranslation();
 
     const statistics = [
-        { id: 1, player: 'מאור בוזגלו', showDetail: false },
-        { id: 2, player: 'מאור בוזגלו', showDetail: false },
-        { id: 3, player: 'מאור בוזגלו', showDetail: false },
-        { id: 4, player: 'מאור בוזגלו', showDetail: false },
-        { id: 5, player: 'מאור בוזגלו', showDetail: false },
+        {
+            id: 1,
+            player: 'אבו עוביד איעד',
+            avt: AppImages.img_avt_player,
+            number_game: 9,
+            gates: 0,
+            yellow_league_cup: 1,
+            yellow_tutu: 0,
+            red_card: 0,
+            vehicle: 7,
+            enter_replacement: 2,
+            switched: 1,
+            subtlety: 712,
+        },
+        {
+            id: 2,
+            player: 'אליאס שי',
+            avt: AppImages.img_avt_player,
+            number_game: 9,
+            gates: 0,
+            yellow_league_cup: 1,
+            yellow_tutu: 0,
+            red_card: 0,
+            vehicle: 7,
+            enter_replacement: 2,
+            switched: 1,
+            subtlety: 712,
+        },
+        {
+            id: 3,
+            player: 'אבו עוביד איעד',
+            avt: AppImages.img_avt_player,
+            number_game: 9,
+            gates: 0,
+            yellow_league_cup: 1,
+            yellow_tutu: 0,
+            red_card: 0,
+            vehicle: 7,
+            enter_replacement: 2,
+            switched: 1,
+            subtlety: 712,
+        },
+        {
+            id: 4,
+            player: 'אבו עוביד איעד',
+            avt: AppImages.img_avt_player,
+            number_game: 9,
+            gates: 0,
+            yellow_league_cup: 1,
+            yellow_tutu: 0,
+            red_card: 0,
+            vehicle: 7,
+            enter_replacement: 2,
+            switched: 1,
+            subtlety: 712,
+        },
+        {
+            id: 5,
+            player: 'אבו עוביד איעד',
+            avt: AppImages.img_avt_player,
+            number_game: 9,
+            gates: 0,
+            yellow_league_cup: 1,
+            yellow_tutu: 0,
+            red_card: 0,
+            vehicle: 7,
+            enter_replacement: 2,
+            switched: 1,
+            subtlety: 712,
+        },
+        {
+            id: 6,
+            player: 'אבו עוביד איעד',
+            avt: AppImages.img_avt_player,
+            number_game: 9,
+            gates: 0,
+            yellow_league_cup: 1,
+            yellow_tutu: 0,
+            red_card: 0,
+            vehicle: 7,
+            enter_replacement: 2,
+            switched: 1,
+            subtlety: 712,
+        },
+        {
+            id: 7,
+            player: 'אבו עוביד איעד',
+            avt: AppImages.img_avt_player,
+            number_game: 9,
+            gates: 0,
+            yellow_league_cup: 1,
+            yellow_tutu: 0,
+            red_card: 0,
+            vehicle: 7,
+            enter_replacement: 2,
+            switched: 1,
+            subtlety: 712,
+        },
     ];
-
-    const [statisticsPlayer, setStatisticsPlayer] = useState<any[]>([]);
-
-    const handleShowDetail = (item: any) => {
-        setStatisticsPlayer([...statisticsPlayer, item]);
-    };
-
-    const handleCloseDetail = (item: any) => {
-        const index = statisticsPlayer.findIndex(elm => item.id === elm.id);
-        if (index !== -1) {
-            const newStatisticsPlayer = statisticsPlayer.filter(e => e.id !== item.id);
-            setStatisticsPlayer(newStatisticsPlayer);
-        }
-    };
-
-    const newStatistics = statistics.map(e => {
-        const i = statisticsPlayer.findIndex(t => t.id === e.id);
-        return { ...e, showDetail: i !== -1 };
-    });
 
     const handleMoreStatistics = () => {};
     return {
         t,
-        handleShowDetail,
+        statistics,
         handleMoreStatistics,
-        handleCloseDetail,
-        newStatistics,
     };
 };

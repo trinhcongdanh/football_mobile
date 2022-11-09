@@ -1,27 +1,17 @@
 import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import { getSize } from '@football/app/utils/responsive/scale';
 import { Button } from '@football/app/components/button';
-import { ScorersOfGoals } from './scorers-of-goals/ScorersOfGoals';
-import { TopScorers } from './top-scorers/TopScorers';
-import { YellowsCup } from './yellows-cup/YellowsCup';
-import { YellowsLeagues } from './yellows-leagues/YellowsLeagues';
-import { RedCard } from './red-card/RedCard';
 import Icon from 'react-native-vector-icons/Feather';
 import { appIcons } from '@football/app/assets/icons/appIcons';
 import { appColors } from '@football/app/utils/constants/appColors';
+import { Avatar } from 'react-native-elements';
 import styles from './Statistics.style';
 import { useViewModel } from './Statistics.viewModel';
 
 export const Statistics = () => {
-    const {
-        t,
-        handleShowDetail,
-        handleCloseDetail,
-        handleMoreStatistics,
-        newStatistics,
-    } = useViewModel({});
+    const { t, handleMoreStatistics, statistics } = useViewModel({});
 
     return (
         <View>
@@ -48,136 +38,196 @@ export const Statistics = () => {
                         />
                     </TouchableOpacity>
                 </View>
-
-                <View
+                <ScrollView
                     style={[
-                        appStyles.flex_row_space_center,
                         {
                             marginHorizontal: getSize.m(6),
                             marginTop: getSize.m(18),
                         },
                     ]}
+                    horizontal
                 >
-                    <View style={{ width: getSize.m(120) }}>
-                        <Text style={[styles.header, { textAlign: 'left' }]}>
-                            {t('group_page.statistics.player')}
-                        </Text>
-                    </View>
-                    <View style={{ width: getSize.m(80) }}>
-                        <Text style={[styles.header]}>{t('group_page.statistics.gates')}</Text>
-                    </View>
-                    <View style={{ width: getSize.m(80) }}>
-                        <Text style={[styles.header]}>{t('group_page.statistics.yellow')}</Text>
-                    </View>
-                    <View style={{ width: getSize.m(20) }} />
-                </View>
-                <View>
-                    {newStatistics.map(item => {
-                        return (
-                            <View
-                                key={item.id}
-                                style={{
-                                    marginTop: getSize.m(6),
-                                }}
-                            >
-                                {!item.showDetail ? (
+                    <View>
+                        <View
+                            style={{
+                                flexDirection: 'row',
+                                alignItems: 'flex-end',
+                                paddingHorizontal: getSize.m(10),
+                            }}
+                        >
+                            <View style={{ width: getSize.m(100) }}>
+                                <Text style={[styles.header, { textAlign: 'left' }]}>
+                                    {t('group_page.statistics.player')}
+                                </Text>
+                            </View>
+                            <View style={{ width: getSize.m(50), marginHorizontal: getSize.m(4) }}>
+                                <Text style={styles.header}>
+                                    {t('group_page.statistics.number_game')}
+                                </Text>
+                            </View>
+                            <View style={{ width: getSize.m(50), marginHorizontal: getSize.m(4) }}>
+                                <Text style={styles.header}>
+                                    {t('group_page.statistics.gates')}
+                                </Text>
+                            </View>
+                            <View style={{ width: getSize.m(50), marginHorizontal: getSize.m(4) }}>
+                                <Text style={styles.header}>
+                                    {t('group_page.statistics.yellow_league_cup')}
+                                </Text>
+                            </View>
+                            <View style={{ width: getSize.m(50), marginHorizontal: getSize.m(4) }}>
+                                <Text style={styles.header}>
+                                    {t('group_page.statistics.yellow_tutu')}
+                                </Text>
+                            </View>
+                            <View style={{ width: getSize.m(50), marginHorizontal: getSize.m(4) }}>
+                                <Text style={styles.header}>
+                                    {t('group_page.statistics.red_card')}
+                                </Text>
+                            </View>
+                            <View style={{ width: getSize.m(50), marginHorizontal: getSize.m(4) }}>
+                                <Text style={styles.header}>
+                                    {t('group_page.statistics.vehicle')}
+                                </Text>
+                            </View>
+                            <View style={{ width: getSize.m(50), marginHorizontal: getSize.m(4) }}>
+                                <Text style={styles.header}>
+                                    {t('group_page.statistics.enter_replacement')}
+                                </Text>
+                            </View>
+                            <View style={{ width: getSize.m(50), marginHorizontal: getSize.m(4) }}>
+                                <Text style={styles.header}>
+                                    {t('group_page.statistics.switched')}
+                                </Text>
+                            </View>
+                            <View style={{ width: getSize.m(50), marginHorizontal: getSize.m(4) }}>
+                                <Text style={styles.header}>
+                                    {t('group_page.statistics.subtlety')}
+                                </Text>
+                            </View>
+                        </View>
+                        <View style={{ marginTop: getSize.m(8) }}>
+                            {statistics.map(item => {
+                                return (
                                     <View
                                         style={[
-                                            appStyles.flex_row_space_center,
+                                            appStyles.flex_row_align,
                                             {
                                                 backgroundColor:
                                                     item.id % 2 !== 0
                                                         ? appColors.blue_matte
                                                         : appColors.gray,
-                                                paddingHorizontal: getSize.m(6),
-                                                paddingVertical: getSize.m(10),
+                                                paddingVertical: getSize.m(5),
+                                                paddingHorizontal: getSize.m(10),
+                                                borderRadius: getSize.m(5),
                                             },
                                         ]}
+                                        key={item.id}
                                     >
-                                        <Text style={[styles.text_content, { textAlign: 'left' }]}>
-                                            מאור בוזגלו
-                                        </Text>
-                                        <TouchableOpacity onPress={() => handleShowDetail(item)}>
-                                            <Icon
-                                                name={appIcons.ic_arrow_down}
-                                                size={getSize.m(10)}
-                                                color={appColors.button_dark_blue}
-                                                style={styles.ic_arrow}
-                                            />
-                                        </TouchableOpacity>
-                                    </View>
-                                ) : (
-                                    <View
-                                        style={{
-                                            backgroundColor:
-                                                item.id % 2 !== 0
-                                                    ? appColors.blue_matte
-                                                    : appColors.gray,
-                                            height: getSize.m(200),
-                                        }}
-                                    >
-                                        <View
-                                            style={[
-                                                appStyles.flex_row_space_center,
-                                                {
-                                                    paddingHorizontal: getSize.m(6),
-                                                    paddingVertical: getSize.m(10),
-                                                    borderColor: appColors.black,
-                                                    borderBottomWidth: getSize.m(1),
-                                                },
-                                            ]}
-                                        >
-                                            <View style={{ width: getSize.m(120) }}>
+                                        <View style={{ width: getSize.m(100) }}>
+                                            <View style={appStyles.flex_row_align}>
+                                                <Avatar source={item.avt} rounded size={18} />
                                                 <Text
                                                     style={[
                                                         styles.text_content,
-                                                        { textAlign: 'left' },
+                                                        {
+                                                            marginLeft: getSize.m(10),
+                                                        },
                                                     ]}
                                                 >
-                                                    מאור בוזגלו
+                                                    {item.player}
                                                 </Text>
                                             </View>
-                                            <View style={{ width: getSize.m(80) }}>
-                                                <Text style={[styles.text_content]}>14</Text>
-                                            </View>
-                                            <View style={{ width: getSize.m(80) }}>
-                                                <Text style={[styles.text_content]}>14</Text>
-                                            </View>
-                                            <TouchableOpacity
-                                                onPress={() => handleCloseDetail(item)}
-                                                style={{ width: getSize.m(20) }}
-                                            >
-                                                <Icon
-                                                    name={appIcons.ic_arrow_up}
-                                                    size={getSize.m(10)}
-                                                    color={appColors.button_dark_blue}
-                                                    style={styles.ic_arrow}
-                                                />
-                                            </TouchableOpacity>
+                                        </View>
+                                        <View
+                                            style={{
+                                                width: getSize.m(50),
+                                                marginHorizontal: getSize.m(4),
+                                            }}
+                                        >
+                                            <Text style={styles.text_content}>
+                                                {item.number_game}
+                                            </Text>
+                                        </View>
+                                        <View
+                                            style={{
+                                                width: getSize.m(50),
+                                                marginHorizontal: getSize.m(4),
+                                            }}
+                                        >
+                                            <Text style={styles.text_content}>{item.gates}</Text>
+                                        </View>
+                                        <View
+                                            style={{
+                                                width: getSize.m(50),
+                                                marginHorizontal: getSize.m(4),
+                                            }}
+                                        >
+                                            <Text style={styles.text_content}>
+                                                {item.yellow_league_cup}
+                                            </Text>
+                                        </View>
+                                        <View
+                                            style={{
+                                                width: getSize.m(50),
+                                                marginHorizontal: getSize.m(4),
+                                            }}
+                                        >
+                                            <Text style={styles.text_content}>
+                                                {item.yellow_tutu}
+                                            </Text>
+                                        </View>
+                                        <View
+                                            style={{
+                                                width: getSize.m(50),
+                                                marginHorizontal: getSize.m(4),
+                                            }}
+                                        >
+                                            <Text style={styles.text_content}>{item.red_card}</Text>
+                                        </View>
+                                        <View
+                                            style={{
+                                                width: getSize.m(50),
+                                                marginHorizontal: getSize.m(4),
+                                            }}
+                                        >
+                                            <Text style={styles.text_content}>{item.vehicle}</Text>
+                                        </View>
+                                        <View
+                                            style={{
+                                                width: getSize.m(50),
+                                                marginHorizontal: getSize.m(4),
+                                            }}
+                                        >
+                                            <Text style={styles.text_content}>
+                                                {item.enter_replacement}
+                                            </Text>
+                                        </View>
+                                        <View
+                                            style={{
+                                                width: getSize.m(50),
+                                                marginHorizontal: getSize.m(4),
+                                            }}
+                                        >
+                                            <Text style={styles.text_content}>{item.switched}</Text>
+                                        </View>
+                                        <View
+                                            style={{
+                                                width: getSize.m(50),
+                                                marginHorizontal: getSize.m(4),
+                                            }}
+                                        >
+                                            <Text style={styles.text_content}>{item.subtlety}</Text>
                                         </View>
                                     </View>
-                                )}
-                            </View>
-                        );
-                    })}
-                </View>
-                <View style={{ marginHorizontal: getSize.m(28), marginTop: getSize.m(84) }}>
+                                );
+                            })}
+                        </View>
+                    </View>
+                </ScrollView>
+
+                <View style={{ marginHorizontal: getSize.m(28), marginTop: getSize.m(40) }}>
                     <Button title={t('group_page.statistics.btn')} onPress={handleMoreStatistics} />
-                </View>
-                <View style={{ marginTop: getSize.m(20) }}>
-                    <ScorersOfGoals />
-                </View>
-                <View style={{ marginTop: getSize.m(20) }}>
-                    <TopScorers />
-                </View>
-                <View style={{ marginTop: getSize.m(20) }}>
-                    <YellowsCup />
-                </View>
-                <View style={{ marginTop: getSize.m(20) }}>
-                    <YellowsLeagues />
-                </View>
-                <View style={{ marginTop: getSize.m(20) }}>
-                    <RedCard />
                 </View>
             </View>
         </View>
