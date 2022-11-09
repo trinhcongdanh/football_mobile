@@ -404,6 +404,10 @@ const resources = {
                     red_card: 'כרטיסים אדומים',
                 },
             },
+            composition: {
+                domestic: 'ביתית',
+                guest: 'אורחת',
+            },
         },
     },
     en: {
@@ -804,6 +808,10 @@ const resources = {
                     number_red: 'red',
                     red_card: 'Red Cards',
                 },
+            },
+            composition: {
+                domestic: 'Domestic',
+                guest: 'A guest',
             },
         },
     },

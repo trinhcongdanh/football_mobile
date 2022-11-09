@@ -27,4 +27,5 @@ export const AppImages = {
     img_state_cup: require('./state_cup.png'),
     img_staff: require('./staff.jpg'),
     img_aviv: require('./aviv.png'),
+    img_fchj: require('./FCHJ.png'),
 };

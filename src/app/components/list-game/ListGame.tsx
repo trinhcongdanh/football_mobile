@@ -7,8 +7,8 @@ import { appColors } from '@football/app/utils/constants/appColors';
 import { appIcons } from '@football/app/assets/icons/appIcons';
 import { getSize } from '@football/app/utils/responsive/scale';
 import { Avatar } from 'react-native-elements';
-import { IListGameProps } from './ListGame.type';
 import { styles } from './ListGame.styles';
+import { IListGameProps } from './ListGame.type';
 
 export const ListGame = ({
     logoHome,
@@ -23,6 +23,7 @@ export const ListGame = ({
     details,
     icon,
     tournament,
+    handleDetailMatch,
 }: IListGameProps) => {
     return (
         <View style={styles.main_schedule}>
@@ -114,7 +115,10 @@ export const ListGame = ({
                     <Text style={styles.name_club}>{nameHome}</Text>
                 </View>
             </View>
-            <TouchableOpacity style={[appStyles.flex_row_center, { flex: 0 }]}>
+            <TouchableOpacity
+                style={[appStyles.flex_row_center, { flex: 0 }]}
+                onPress={handleDetailMatch}
+            >
                 <Text style={styles.details}>{details}</Text>
                 <Icon name={icon} size={getSize.m(10)} color={appColors.button_dark_blue} />
             </TouchableOpacity>

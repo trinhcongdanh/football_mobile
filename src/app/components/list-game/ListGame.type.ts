@@ -11,4 +11,5 @@ export type IListGameProps = {
     details?: string;
     icon?: any;
     tournament?: string;
+    handleDetailMatch?: () => void;
 };

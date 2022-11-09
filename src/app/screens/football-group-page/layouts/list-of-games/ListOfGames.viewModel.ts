@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import React from 'react';
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
+import { ScreenName } from '@football/app/utils/constants/enum';
 import { AppImages } from '@football/app/assets/images';
 import { IListOfGamesProps } from './ListOfGames.type';
 
@@ -51,8 +52,12 @@ export const useViewModel = ({}: IListOfGamesProps) => {
             completed: true,
         },
     ];
+    const handleDetailMatch = () => {
+        navigate(ScreenName.GameCompositionPage);
+    };
     return {
         t,
         listGames,
+        handleDetailMatch,
     };
 };

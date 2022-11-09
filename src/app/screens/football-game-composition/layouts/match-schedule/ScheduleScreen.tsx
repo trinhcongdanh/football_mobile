@@ -1,24 +1,32 @@
+import { View, ScrollView } from 'react-native';
 import React from 'react';
-import { View, Text } from 'react-native';
+import { appColors } from '@football/app/utils/constants/appColors';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import { getSize } from '@football/app/utils/responsive/scale';
 import { ListGame } from '@football/app/components/list-game/ListGame';
-import { appIcons } from '@football/app/assets/icons/appIcons';
-import { useViewModel } from './ListOfGames.viewModel';
+import { useViewModel } from './ScheduleScreen.viewModel';
+import { IScheduleScreenProps } from './ScheduleScreen.type';
 
-export const ListOfGames = () => {
-    const { t, listGames, handleDetailMatch } = useViewModel({});
+// type Props = {};
+
+export const ScheduleScreen = ({ navigation, route }: IScheduleScreenProps) => {
+    const { t, listGames } = useViewModel({
+        navigation,
+        route,
+    });
+
     return (
-        <View>
-            <Text style={[appStyles.text_topic, { marginLeft: getSize.m(6) }]}>
-                {t('group_page.list_games.title')}
-            </Text>
-            <View>
+        <View
+            style={[
+                appStyles.flex,
+                { backgroundColor: appColors.gray, paddingHorizontal: getSize.m(16) },
+            ]}
+        >
+            <ScrollView showsVerticalScrollIndicator={false}>
                 {listGames.map(item => {
                     return (
                         <ListGame
                             key={item.id}
-                            tournament={item.tournament}
                             logoHome={item.logoHome}
                             logoAway={item.logoAway}
                             nameHome={item.nameHome}
@@ -28,13 +36,10 @@ export const ListOfGames = () => {
                             result={item.result}
                             schedule={item.schedule}
                             completed={item.completed}
-                            icon={appIcons.ic_arrow_left}
-                            details={item.details}
-                            handleDetailMatch={handleDetailMatch}
                         />
                     );
                 })}
-            </View>
+            </ScrollView>
         </View>
     );
 };
