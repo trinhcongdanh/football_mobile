@@ -380,6 +380,19 @@ const resources = {
                     switched: 'הוחלף',
                     subtlety: 'דקות במשחק',
                     btn: 'עוד נתונים סטטיסטים',
+                },
+            },
+            team_staff: {
+                title: 'סגל הקבוצה',
+                option: {
+                    cast: 'סגל שחקנים',
+                    official: 'בעלי תפקידים',
+                },
+            },
+            statistics: {
+                group: {
+                    title: 'סטטיסטיקות',
+                    see_all: 'ראה הכל',
                     scorer_of_goal: 'כובשי שערים בליגה',
                     player_name: 'שם השחקן',
                     number: 'שערים',
@@ -388,13 +401,7 @@ const resources = {
                     number_yellow: 'צהובים',
                     yellow_league: 'צהובים בליגה ובגביע',
                     number_red: 'אדומים',
-                },
-            },
-            team_staff: {
-                title: 'סגל הקבוצה',
-                option: {
-                    cast: 'סגל שחקנים',
-                    official: 'בעלי תפקידים',
+                    red_card: 'כרטיסים אדומים',
                 },
             },
         },
@@ -774,6 +781,19 @@ const resources = {
                     switched: 'Switched',
                     subtlety: 'Subtlety',
                     btn: 'More statistics',
+                },
+            },
+            team_staff: {
+                title: 'Team Staff',
+                option: {
+                    cast: 'Cast',
+                    official: 'Officials',
+                },
+            },
+            statistics: {
+                group: {
+                    title: 'Statistics',
+                    see_all: 'See all',
                     scorer_of_goal: 'Scorers of goals in the league',
                     player_name: "The player's name",
                     number: 'Number',
@@ -782,13 +802,7 @@ const resources = {
                     number_yellow: 'yellow',
                     yellow_league: 'Yellows in the league and in the cup',
                     number_red: 'red',
-                },
-            },
-            team_staff: {
-                title: 'Team Staff',
-                option: {
-                    cast: 'Cast',
-                    official: 'Officials',
+                    red_card: 'Red Cards',
                 },
             },
         },
