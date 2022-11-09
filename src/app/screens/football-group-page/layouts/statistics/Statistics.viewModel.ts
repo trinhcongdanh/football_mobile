@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import React from 'react';
+import { ScreenName } from '@football/app/utils/constants/enum';
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
 import { AppImages } from '@football/app/assets/images';
 import { IStatisticsProps } from './Statistics.type';
@@ -109,7 +110,9 @@ export const useViewModel = ({}: IStatisticsProps) => {
         },
     ];
 
-    const handleMoreStatistics = () => {};
+    const handleMoreStatistics = () => {
+        navigate(ScreenName.StatisticsGroupPage);
+    };
     return {
         t,
         statistics,

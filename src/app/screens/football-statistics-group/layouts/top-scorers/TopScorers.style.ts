@@ -5,12 +5,9 @@ import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
     item_statistics: {
-        backgroundColor: appColors.white,
         borderRadius: getSize.m(15),
         paddingVertical: getSize.m(17),
         paddingHorizontal: getSize.m(12),
-        marginTop: getSize.m(20),
-        elevation: getSize.m(2),
     },
     title: {
         color: appColors.text_dark_blue,

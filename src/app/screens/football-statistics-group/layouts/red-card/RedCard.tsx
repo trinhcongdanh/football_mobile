@@ -22,9 +22,9 @@ export const RedCard = () => {
                     },
                 ]}
             >
-                <Text style={styles.title}>{t('group_page.statistics.red_card')}</Text>
+                <Text style={styles.title}>{t('statistics.group.red_card')}</Text>
                 <TouchableOpacity style={appStyles.flex_row_space_center}>
-                    <Text style={styles.see_all}>{t('group_page.statistics.see_all')}</Text>
+                    <Text style={styles.see_all}>{t('statistics.group.see_all')}</Text>
                     <Icon
                         name={appIcons.ic_arrow_left}
                         size={getSize.m(10)}
@@ -43,14 +43,14 @@ export const RedCard = () => {
                 ]}
             >
                 <View>
-                    <Text style={styles.header}>{t('group_page.statistics.player_name')}</Text>
+                    <Text style={styles.header}>{t('statistics.group.player_name')}</Text>
                 </View>
                 <View
                     style={{
                         width: getSize.m(40),
                     }}
                 >
-                    <Text style={styles.header}>{t('group_page.statistics.number_red')}</Text>
+                    <Text style={styles.header}>{t('statistics.group.number_red')}</Text>
                 </View>
             </View>
             <View style={{ marginTop: getSize.m(10) }}>
@@ -63,7 +63,7 @@ export const RedCard = () => {
                                 styles.itemTeam,
                                 {
                                     backgroundColor:
-                                        item.id % 2 === 1 ? appColors.blue_matte : appColors.white,
+                                        item.id % 2 === 1 ? appColors.blue_matte : appColors.gray,
                                 },
                             ]}
                         >

@@ -1,15 +1,16 @@
 import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, Image } from 'react-native';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import { getSize } from '@football/app/utils/responsive/scale';
 import Icon from 'react-native-vector-icons/Feather';
 import { appIcons } from '@football/app/assets/icons/appIcons';
 import { appColors } from '@football/app/utils/constants/appColors';
+import { AppImages } from '@football/app/assets/images';
 import { Avatar } from 'react-native-elements';
-import styles from './TopScorers.style';
-import { useViewModel } from './TopScorers.viewModel';
+import styles from './YellowsLeagues.style';
+import { useViewModel } from './YellowsLeagues.viewModel';
 
-export const TopScorers = () => {
+export const YellowsLeagues = () => {
     const { t, listPlayerGoal } = useViewModel({});
     return (
         <View style={styles.item_statistics}>
@@ -21,9 +22,9 @@ export const TopScorers = () => {
                     },
                 ]}
             >
-                <Text style={styles.title}>{t('group_page.statistics.top_scorers')}</Text>
+                <Text style={styles.title}>{t('statistics.group.yellow_league')}</Text>
                 <TouchableOpacity style={appStyles.flex_row_space_center}>
-                    <Text style={styles.see_all}>{t('group_page.statistics.see_all')}</Text>
+                    <Text style={styles.see_all}>{t('statistics.group.see_all')}</Text>
                     <Icon
                         name={appIcons.ic_arrow_left}
                         size={getSize.m(10)}
@@ -42,10 +43,14 @@ export const TopScorers = () => {
                 ]}
             >
                 <View>
-                    <Text style={styles.header}>{t('group_page.statistics.player_name')}</Text>
+                    <Text style={styles.header}>{t('statistics.group.player_name')}</Text>
                 </View>
-                <View>
-                    <Text style={styles.header}>{t('group_page.statistics.number')}</Text>
+                <View
+                    style={{
+                        width: getSize.m(40),
+                    }}
+                >
+                    <Text style={styles.header}>{t('statistics.group.number_yellow')}</Text>
                 </View>
             </View>
             <View style={{ marginTop: getSize.m(10) }}>
@@ -58,7 +63,7 @@ export const TopScorers = () => {
                                 styles.itemTeam,
                                 {
                                     backgroundColor:
-                                        item.id % 2 === 1 ? appColors.blue_matte : appColors.white,
+                                        item.id % 2 === 1 ? appColors.blue_matte : appColors.gray,
                                 },
                             ]}
                         >
@@ -81,8 +86,13 @@ export const TopScorers = () => {
                                     </Text>
                                 </View>
                             </View>
-                            <View>
-                                <Text style={styles.text_content}>{item.goal}</Text>
+                            <View
+                                style={{
+                                    width: getSize.m(40),
+                                }}
+                            >
+                                <Image source={AppImages.img_ticket_yellow} style={styles.ticket} />
+                                <Text style={[styles.text_content]}>{item.yellow}</Text>
                             </View>
                         </View>
                     );
