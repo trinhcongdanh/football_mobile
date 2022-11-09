@@ -1,7 +1,9 @@
+import { TeamModel } from '@football/core/models/TeamModelResponse';
+
 export type IFavoriteProps = {
     onGoSkip: () => void;
     onGoBack: () => void;
-    handleSelected: (item: any) => void;
+    handleSelected: (item: TeamModel) => void;
     handleContinue: () => void;
     newFav: any;
     favSelected: any;

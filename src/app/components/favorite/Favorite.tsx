@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import React from 'react';
 import {
     Text,
@@ -16,7 +17,7 @@ import { appIcons } from '@football/app/assets/icons/appIcons';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { AppImages } from '@football/app/assets/images';
 import { appStyles } from '@football/app/utils/constants/appStyles';
-import { TeamItemModel } from '@football/core/models/TeamModelResponse';
+import { TeamModel } from '@football/core/models/TeamModelResponse';
 import { SvgUri } from 'react-native-svg';
 import { isEmpty } from 'lodash';
 import { HeaderFav } from '../header-fav/HeaderFav';
@@ -97,10 +98,10 @@ export const Favorite = ({
 
                             <ScrollView>
                                 <View style={styles.content_item}>
-                                    {newFav?.map((item: TeamItemModel) => {
+                                    {newFav.map((item: TeamModel) => {
                                         return (
                                             <TouchableOpacity
-                                                key={item.id}
+                                                key={item._id}
                                                 style={[
                                                     styles.item,
                                                     {
@@ -114,7 +115,9 @@ export const Favorite = ({
                                                                 : getSize.m(0),
                                                     },
                                                 ]}
-                                                onPress={() => handleSelected(item)}
+                                                onPress={() => {
+                                                    handleSelected(item);
+                                                }}
                                             >
                                                 <SvgUri
                                                     uri={item.logo_url}
@@ -150,7 +153,7 @@ export const Favorite = ({
                     <View style={styles.select_item}>
                         <View style={styles.result_select}>
                             <View style={styles.image_select}>
-                                {favSelected.map((item: TeamItemModel, index: number) => {
+                                {favSelected.map((item: TeamModel, index: number) => {
                                     return (
                                         <View
                                             key={index.toString()}

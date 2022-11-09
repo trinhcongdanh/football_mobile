@@ -2,6 +2,7 @@ import React from 'react';
 import { View } from 'react-native';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import { Favorite } from '@football/app/components/favorite/Favorite';
+import { TeamModel } from '@football/core/models/TeamModelResponse';
 import { useViewModel } from './FavoriteTeamsScreen.viewModel';
 import { IFavoriteTeamsScreenProps } from './FavoriteTeamsScreen.type';
 
@@ -14,6 +15,7 @@ export const FavoriteTeamsScreen = ({ navigation, route }: IFavoriteTeamsScreenP
         handleSelected,
         teamSelected,
         newTeams,
+        teamData,
     } = useViewModel({
         navigation,
         route,
@@ -25,10 +27,10 @@ export const FavoriteTeamsScreen = ({ navigation, route }: IFavoriteTeamsScreenP
                 onGoSkip={onGoSkip}
                 onGoBack={onGoBack}
                 handleContinue={handleContinue}
-                handleSelected={(item: any) => {
+                handleSelected={(item: TeamModel) => {
                     handleSelected(item);
                 }}
-                newFav={newTeams}
+                newFav={teamData}
                 favSelected={teamSelected}
                 title={t('favorite_team.title')}
                 placeholder={t('favorite_team.place_holder')}
