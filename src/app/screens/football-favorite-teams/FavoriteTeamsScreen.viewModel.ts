@@ -46,27 +46,6 @@ export const useViewModel = ({ navigation, route }: IFavoriteTeamsScreenProps) =
         getTeamsData();
     }, [getTeamsData, teamData]);
 
-    const teamFavs = [
-        { id: 1, name: 'מכבי תל אביב', image: AppImages.img_club_fav, isSelected: false },
-        { id: 2, name: 'מכבי תל אביב', image: AppImages.img_club_fav, isSelected: false },
-        { id: 3, name: 'מכבי תל אביב', image: AppImages.img_club_fav, isSelected: false },
-        { id: 4, name: 'מכבי תל אביב', image: AppImages.img_club_fav, isSelected: false },
-        { id: 5, name: 'מכבי תל אביב', image: AppImages.img_club_fav, isSelected: false },
-        { id: 6, name: 'מכבי תל אביב', image: AppImages.img_club_fav, isSelected: false },
-        { id: 7, name: 'מכבי תל אביב', image: AppImages.img_club_fav, isSelected: false },
-        { id: 8, name: 'מכבי תל אביב', image: AppImages.img_club_fav, isSelected: false },
-        { id: 9, name: 'מכבי תל אביב', image: AppImages.img_club_fav, isSelected: false },
-        { id: 10, name: 'מכבי תל אביב', image: AppImages.img_club_fav, isSelected: false },
-        { id: 11, name: 'מכבי תל אביב', image: AppImages.img_club_fav, isSelected: false },
-        { id: 12, name: 'מכבי תל אביב', image: AppImages.img_club_fav, isSelected: false },
-        { id: 13, name: 'מכבי תל אביב', image: AppImages.img_club_fav, isSelected: false },
-        { id: 14, name: 'מכבי תל אביב', image: AppImages.img_club_fav, isSelected: false },
-        { id: 15, name: 'מכבי תל אביב', image: AppImages.img_club_fav, isSelected: false },
-        { id: 16, name: 'מכבי תל אביב', image: AppImages.img_club_fav, isSelected: false },
-        { id: 17, name: 'מכבי תל אביב', image: AppImages.img_club_fav, isSelected: false },
-        { id: 18, name: 'מכבי תל אביב', image: AppImages.img_club_fav, isSelected: false },
-    ];
-
     const [teamSelected, setTeamSelected] = useState<TeamModel[]>([]);
 
     const handleSelected = (teams: TeamModel) => {
@@ -79,13 +58,15 @@ export const useViewModel = ({ navigation, route }: IFavoriteTeamsScreenProps) =
         }
     };
 
-    const newTeams = useMemo(() => {
-        teamData?.map(e => {
-            // eslint-disable-next-line @typescript-eslint/no-shadow
-            const i = teamSelected.findIndex(t => t._id === e._id);
-            return { ...e, isSelected: i !== -1 };
-        });
-    }, [teamData, teamSelected]);
+    const newTeams = useMemo(
+        () =>
+            teamData?.map(e => {
+                // eslint-disable-next-line @typescript-eslint/no-shadow
+                const i = teamSelected.findIndex(t => t._id === e._id);
+                return { ...e, isSelected: i !== -1 };
+            }),
+        [teamData, teamSelected]
+    );
 
     return {
         t,

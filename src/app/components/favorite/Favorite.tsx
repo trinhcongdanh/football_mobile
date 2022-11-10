@@ -123,15 +123,15 @@ export const Favorite = ({
                                                     uri={item.logo_url}
                                                     width={getSize.m(25)}
                                                     height={getSize.m(28)}
-                                                    // style={[
-                                                    //     styles.image_item,
-                                                    //     {
-                                                    //         borderRadius:
-                                                    //             onIndex === 1
-                                                    //                 ? getSize.m(28)
-                                                    //                 : getSize.m(0),
-                                                    //     },
-                                                    // ]}
+                                                    style={[
+                                                        styles.image_item,
+                                                        {
+                                                            borderRadius:
+                                                                onIndex === 1
+                                                                    ? getSize.m(28)
+                                                                    : getSize.m(0),
+                                                        },
+                                                    ]}
                                                 />
                                                 <Text style={styles.name_item}>{item.name_he}</Text>
                                                 {item.isSelected === true && (
