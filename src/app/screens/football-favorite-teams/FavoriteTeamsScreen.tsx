@@ -5,6 +5,7 @@ import { Favorite } from '@football/app/components/favorite/Favorite';
 import { TeamModel } from '@football/core/models/TeamModelResponse';
 import { useViewModel } from './FavoriteTeamsScreen.viewModel';
 import { IFavoriteTeamsScreenProps } from './FavoriteTeamsScreen.type';
+import { removeFavTeams } from './redux/FavTeam.slice';
 
 export const FavoriteTeamsScreen = ({ navigation, route }: IFavoriteTeamsScreenProps) => {
     const {
@@ -15,7 +16,8 @@ export const FavoriteTeamsScreen = ({ navigation, route }: IFavoriteTeamsScreenP
         handleSelected,
         teamSelected,
         newTeams,
-        teamData,
+        favTeamList,
+        dispatch,
     } = useViewModel({
         navigation,
         route,
@@ -27,8 +29,10 @@ export const FavoriteTeamsScreen = ({ navigation, route }: IFavoriteTeamsScreenP
                 onGoSkip={onGoSkip}
                 onGoBack={onGoBack}
                 handleContinue={handleContinue}
-                handleSelected={(item: TeamModel) => {
-                    handleSelected(item);
+                handleSelected={(item: TeamModel, index: number) => {
+                    const action = removeFavTeams(index);
+                    dispatch(action);
+                    handleSelected(item, index);
                 }}
                 newFav={newTeams}
                 favSelected={teamSelected}

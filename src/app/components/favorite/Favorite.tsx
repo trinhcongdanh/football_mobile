@@ -98,7 +98,7 @@ export const Favorite = ({
 
                             <ScrollView>
                                 <View style={styles.content_item}>
-                                    {newFav.map((item: TeamModel) => {
+                                    {newFav.map((item: TeamModel, index: number) => {
                                         return (
                                             <TouchableOpacity
                                                 key={item._id}
@@ -116,7 +116,7 @@ export const Favorite = ({
                                                     },
                                                 ]}
                                                 onPress={() => {
-                                                    handleSelected(item);
+                                                    handleSelected(item, index);
                                                 }}
                                             >
                                                 <SvgUri

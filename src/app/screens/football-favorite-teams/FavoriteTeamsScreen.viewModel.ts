@@ -2,17 +2,20 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { ScreenName } from '@football/app/utils/constants/enum';
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
-import { AppImages } from '@football/app/assets/images';
 import { useTranslation } from 'react-i18next';
 import { axiosClient } from '@football/core/api/configs/axiosClient';
 import { BASE_URL, DATA_SOURCE, DB } from '@football/core/api/configs/config';
 import { TeamModel, TeamModelResponse } from '@football/core/models/TeamModelResponse';
 import { Alert } from 'react-native';
 import { isEmpty } from 'lodash';
+import { useDispatch, useSelector } from 'react-redux';
 import { IFavoriteTeamsScreenProps } from './FavoriteTeamsScreen.type';
+import { addFavTeams, FavTeamState } from './redux/FavTeam.slice';
 
 export const useViewModel = ({ navigation, route }: IFavoriteTeamsScreenProps) => {
     const { t } = useTranslation();
+    const dispatch = useDispatch();
+    const favTeamList = useSelector((state: FavTeamState) => state.favTeams);
     const { navigate, goBack } = useAppNavigator();
     const [teamData, setTeamData] = useState<TeamModel[]>();
 
@@ -48,13 +51,16 @@ export const useViewModel = ({ navigation, route }: IFavoriteTeamsScreenProps) =
 
     const [teamSelected, setTeamSelected] = useState<TeamModel[]>([]);
 
-    const handleSelected = (teams: TeamModel) => {
+    const handleSelected = (teams: TeamModel, ind: number) => {
         const index = teamSelected.findIndex(elm => teams._id === elm._id);
+
         if (index !== -1) {
             const newTeamSelected = teamSelected.filter(e => e._id !== teams._id);
             setTeamSelected(newTeamSelected);
         } else if (teamSelected.length < 3) {
             setTeamSelected([...teamSelected, teams]);
+            const action = addFavTeams(teams);
+            dispatch(action);
         }
     };
 
@@ -74,8 +80,10 @@ export const useViewModel = ({ navigation, route }: IFavoriteTeamsScreenProps) =
         onGoSkip,
         handleContinue,
         handleSelected,
+        dispatch,
         teamSelected,
         newTeams,
         teamData,
+        favTeamList,
     };
 };
