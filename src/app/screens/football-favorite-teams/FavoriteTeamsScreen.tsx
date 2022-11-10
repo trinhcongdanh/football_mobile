@@ -30,7 +30,7 @@ export const FavoriteTeamsScreen = ({ navigation, route }: IFavoriteTeamsScreenP
                 handleSelected={(item: TeamModel) => {
                     handleSelected(item);
                 }}
-                newFav={teamData}
+                newFav={newTeams}
                 favSelected={teamSelected}
                 title={t('favorite_team.title')}
                 placeholder={t('favorite_team.place_holder')}
