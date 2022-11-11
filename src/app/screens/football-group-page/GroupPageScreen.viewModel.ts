@@ -11,12 +11,30 @@ export const useViewModel = ({ navigation, route }: IGroupPageScreenProps) => {
         goBack();
     };
 
-    const [openModal, setOpenModal] = useState(false);
-
+    // Game season
+    const [openModalYear, setOpenModalYear] = useState(false);
     const [selectYear, setSelectYear] = useState('2022/23');
-    const years = ['2022/23', '2021/22', '2020/21', '2019/20', '2018/19'];
+    const [years, setYears] = useState<any[]>([
+        { id: 1, content: '2022/23', isSelected: true },
+        { id: 2, content: '2021/22', isSelected: false },
+        { id: 3, content: '2020/21', isSelected: false },
+        { id: 4, content: '2019/20', isSelected: false },
+        { id: 5, content: '2018/19', isSelected: false },
+    ]);
 
-    const [isScroll, setIsScroll] = useState(true);
+    const handleSelectedYear = (item: any) => {
+        // Game season
+        setSelectYear(item.content);
+        const newYears = years.map(e => {
+            return { ...e, isSelected: e.id === item.id };
+        });
+        setYears(newYears);
+        setOpenModalYear(false);
+    };
+
+    const handleCloseModal = () => {
+        setOpenModalYear(false);
+    };
 
     const groups = [
         { id: 1, group: t('group_page.cast') },
@@ -26,13 +44,12 @@ export const useViewModel = ({ navigation, route }: IGroupPageScreenProps) => {
     return {
         t,
         onGoBack,
-        setOpenModal,
-        setSelectYear,
-        setIsScroll,
-        openModal,
+        setOpenModalYear,
+        openModalYear,
         selectYear,
         years,
-        isScroll,
         groups,
+        handleCloseModal,
+        handleSelectedYear,
     };
 };
