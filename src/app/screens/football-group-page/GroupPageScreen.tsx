@@ -18,6 +18,7 @@ import { ListOfGames } from './layouts/list-of-games/ListOfGames';
 import { Statistics } from './layouts/statistics/Statistics';
 import Icon from 'react-native-vector-icons/Feather';
 import IconFontAwesome from 'react-native-vector-icons/FontAwesome';
+import { DropDown } from '@football/app/components/drop-down/DropDown';
 import { Avatar } from 'react-native-elements';
 import styles from './GroupPageScreen.style';
 import { useViewModel } from './GroupPageScreen.viewModel';
@@ -27,14 +28,13 @@ export const GroupPageScreen = ({ navigation, route }: IGroupPageScreenProps) =>
     const {
         t,
         onGoBack,
-        setOpenModal,
-        setSelectYear,
-        setIsScroll,
-        openModal,
         selectYear,
         years,
-        isScroll,
         groups,
+        setOpenModalYear,
+        openModalYear,
+        handleCloseModal,
+        handleSelectedYear,
     } = useViewModel({
         navigation,
         route,
@@ -55,7 +55,14 @@ export const GroupPageScreen = ({ navigation, route }: IGroupPageScreenProps) =>
                             handlePressFunction={onGoBack}
                         />
                     </View>
-                    <ScrollView scrollEnabled={isScroll}>
+                    {openModalYear && (
+                        <DropDown
+                            data={years}
+                            handleSelected={(item: any) => handleSelectedYear(item)}
+                            handleCloseModal={handleCloseModal}
+                        />
+                    )}
+                    <ScrollView>
                         <View style={appStyles.container}>
                             <View style={[appStyles.align_justify, { marginTop: getSize.m(16) }]}>
                                 <Avatar
@@ -81,8 +88,7 @@ export const GroupPageScreen = ({ navigation, route }: IGroupPageScreenProps) =>
                                     </Text>
                                     <TouchableOpacity
                                         onPress={() => {
-                                            setOpenModal(!openModal);
-                                            setIsScroll(!isScroll);
+                                            setOpenModalYear(!openModalYear);
                                         }}
                                         style={styles.calender}
                                         activeOpacity={0.9}
@@ -95,30 +101,6 @@ export const GroupPageScreen = ({ navigation, route }: IGroupPageScreenProps) =>
                                             style={styles.chevron_down}
                                         />
                                     </TouchableOpacity>
-                                    {openModal && (
-                                        <View style={styles.drop_down_calender}>
-                                            <ScrollView>
-                                                {years.map((input: string, index: number) => {
-                                                    return (
-                                                        <TouchableOpacity
-                                                            activeOpacity={0.9}
-                                                            onPress={() => {
-                                                                setSelectYear(input);
-                                                                setOpenModal(false);
-                                                                setIsScroll(true);
-                                                            }}
-                                                            key={index.toString()}
-                                                            style={styles.btn_drop_down_calender}
-                                                        >
-                                                            <Text style={styles.option_year}>
-                                                                {input}
-                                                            </Text>
-                                                        </TouchableOpacity>
-                                                    );
-                                                })}
-                                            </ScrollView>
-                                        </View>
-                                    )}
                                 </View>
                             </View>
                         </View>

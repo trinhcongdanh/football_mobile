@@ -21,18 +21,36 @@ import { ListOfGames } from './layouts/list-of-games/ListOfGames';
 import { Statistics } from './layouts/Statistics/Statistics';
 import SelectedGallery from './layouts/selected-gallery/SelectedGallery';
 import { SelectedMagazine } from './layouts/selected-magazine/SelectedMagazine';
+import { DropDown } from '@football/app/components/drop-down/DropDown';
 import { AboutLeague } from './layouts/about-league/AboutLeague';
 import styles from './LeaguesDetailsScreen.style';
 import { useViewModel } from './LeaguesDetailsScreen.viewModel';
 import { ILeaguesDetailsScreenProps } from './LeaguesDetailsScreen.type';
 
 export const LeaguesDetailsScreen = ({ navigation, route }: ILeaguesDetailsScreenProps) => {
-    const { t, onGoBack, setOpenModal, setSelectYear, openModal, selectYear, years } = useViewModel(
-        {
-            navigation,
-            route,
-        }
-    );
+    const {
+        t,
+        onGoBack,
+        setOpenModalYear,
+        handleSelectedYear,
+        handleSelectedCycle,
+        handleSelectedPlayOff,
+        handleCloseModal,
+        setOpenModalCycle,
+        setOpenModalPlayOff,
+        openModalYear,
+        selectYear,
+        years,
+        openModalCycle,
+        cycles,
+        selectCycle,
+        openModalPlayOff,
+        selectPlayoff,
+        playOffs,
+    } = useViewModel({
+        navigation,
+        route,
+    });
 
     return (
         <View style={appStyles.flex}>
@@ -49,6 +67,29 @@ export const LeaguesDetailsScreen = ({ navigation, route }: ILeaguesDetailsScree
                             handlePressFunction={onGoBack}
                         />
                     </View>
+                    {openModalYear && (
+                        <DropDown
+                            data={years}
+                            handleSelected={(item: any) => handleSelectedYear(item)}
+                            handleCloseModal={handleCloseModal}
+                        />
+                    )}
+
+                    {openModalCycle && (
+                        <DropDown
+                            data={cycles}
+                            handleSelected={(item: any) => handleSelectedCycle(item)}
+                            handleCloseModal={handleCloseModal}
+                        />
+                    )}
+                    {openModalPlayOff && (
+                        <DropDown
+                            data={playOffs}
+                            handleSelected={(item: any) => handleSelectedPlayOff(item)}
+                            handleCloseModal={handleCloseModal}
+                        />
+                    )}
+
                     <ScrollView showsVerticalScrollIndicator={false}>
                         <View style={appStyles.container}>
                             <View style={[appStyles.align_justify, { marginTop: getSize.m(16) }]}>
@@ -74,7 +115,7 @@ export const LeaguesDetailsScreen = ({ navigation, route }: ILeaguesDetailsScree
                                     </Text>
                                     <TouchableOpacity
                                         onPress={() => {
-                                            setOpenModal(!openModal);
+                                            setOpenModalYear(!openModalYear);
                                         }}
                                         style={styles.calender}
                                     >
@@ -92,10 +133,13 @@ export const LeaguesDetailsScreen = ({ navigation, route }: ILeaguesDetailsScree
                         </View>
                         <View style={[appStyles.flex, appStyles.main_container]}>
                             <View style={styles.drop_down_filter}>
-                                <TouchableOpacity style={styles.cycle}>
-                                    <Text style={styles.text_cycle}>
-                                        {t('leagues_details.top_playoff')}
-                                    </Text>
+                                <TouchableOpacity
+                                    onPress={() => {
+                                        setOpenModalPlayOff(!openModalPlayOff);
+                                    }}
+                                    style={styles.cycle}
+                                >
+                                    <Text style={styles.text_cycle}>{selectPlayoff}</Text>
                                     <Icon
                                         name={appIcons.ic_chevron_down}
                                         size={getSize.m(14)}
@@ -103,8 +147,13 @@ export const LeaguesDetailsScreen = ({ navigation, route }: ILeaguesDetailsScree
                                         style={styles.chevron_down}
                                     />
                                 </TouchableOpacity>
-                                <TouchableOpacity style={styles.cycle}>
-                                    <Text style={styles.text_cycle}>מחזור 34</Text>
+                                <TouchableOpacity
+                                    onPress={() => {
+                                        setOpenModalCycle(!openModalCycle);
+                                    }}
+                                    style={styles.cycle}
+                                >
+                                    <Text style={styles.text_cycle}>{selectCycle}</Text>
                                     <Icon
                                         name={appIcons.ic_chevron_down}
                                         size={getSize.m(14)}
