@@ -50,10 +50,15 @@ export const DataCoachScreen = ({ navigation, route }: IDataCoachScreenProps) =>
                     <ScrollView showsVerticalScrollIndicator={false}>
                         <View style={appStyles.container}>
                             <InfoPerson
-                                name_person="אלון חזן"
-                                number={155}
-                                date="09/1967"
+                                name="אלון חזן"
+                                data_3={155}
+                                data_1="09/1967"
+                                data_2={t('data_player.national.israel')}
                                 avt={AppImages.img_coach}
+                                img_logo={AppImages.img_israel}
+                                title_1={t('data_player.birthday')}
+                                title_2={t('data_player.national.title')}
+                                title_3={t('data_player.number')}
                             />
                         </View>
                         <View

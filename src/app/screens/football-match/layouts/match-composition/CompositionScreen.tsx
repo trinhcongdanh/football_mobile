@@ -5,8 +5,8 @@ import { appStyles } from '@football/app/utils/constants/appStyles';
 import { Position } from '@football/app/components/position/Position';
 import { getSize } from '@football/app/utils/responsive/scale';
 import { ListPlayer } from '@football/app/components/list-player/ListPlayer';
-import { ICompositionScreenProps } from './CompositionScreen.type';
 import { useViewModel } from './CompositionScreen.viewModel';
+import { ICompositionScreenProps } from './CompositionScreen.type';
 
 // type Props = {};
 
@@ -25,25 +25,31 @@ export const CompositionScreen = ({ navigation, route }: ICompositionScreenProps
         >
             <ScrollView showsVerticalScrollIndicator={false}>
                 <View style={{ marginTop: getSize.m(30) }}>
-                    <Position position={t('match.composition.main_lineup')} />
+                    <Position
+                        width={getSize.m(130)}
+                        position={t('match.composition.main_lineup')}
+                    />
                     {defenders.map(item => {
                         return <ListPlayer key={item.id} name={item.name} number={item.number} />;
                     })}
                 </View>
                 <View style={{ marginTop: getSize.m(30) }}>
-                    <Position position={t('match.composition.replace')} />
+                    <Position width={getSize.m(130)} position={t('match.composition.replace')} />
                     {defenders.map(item => {
                         return <ListPlayer key={item.id} name={item.name} number={item.number} />;
                     })}
                 </View>
                 <View style={{ marginTop: getSize.m(30) }}>
-                    <Position position={t('match.composition.not_partner')} />
+                    <Position
+                        width={getSize.m(130)}
+                        position={t('match.composition.not_partner')}
+                    />
                     {defenders.map(item => {
                         return <ListPlayer key={item.id} name={item.name} number={item.number} />;
                     })}
                 </View>
                 <View style={{ marginTop: getSize.m(30) }}>
-                    <Position position={t('match.composition.coach')} />
+                    <Position width={getSize.m(130)} position={t('match.composition.coach')} />
                     {defenders.map(item => {
                         return <ListPlayer key={item.id} name={item.name} number={item.number} />;
                     })}
