@@ -6,12 +6,11 @@ import { getSize } from '@football/app/utils/responsive/scale';
 import { Avatar } from 'react-native-elements';
 import { appIcons } from '@football/app/assets/icons/appIcons';
 import Icon from 'react-native-vector-icons/AntDesign';
-import styles from './StandingScreen.styles';
 import { useViewModel } from './StandingScreen.viewModel';
 import { IStandingScreenProps } from './StandingScreen.type';
 
 export const StandingScreen = ({ navigation, route }: IStandingScreenProps) => {
-    const { t, headers, listTeams } = useViewModel({
+    const { t, listTeams } = useViewModel({
         navigation,
         route,
     });
@@ -26,17 +25,54 @@ export const StandingScreen = ({ navigation, route }: IStandingScreenProps) => {
             <View style={{ marginTop: getSize.m(30) }}>
                 <ScrollView>
                     <View>
-                        <View style={appStyles.flex_row_space_center}>
-                            {headers.map((header: string, index: number) => {
-                                return (
-                                    <View
-                                        key={index.toString()}
-                                        style={{ width: index === 1 ? '30%' : '10%' }}
-                                    >
-                                        <Text style={styles.text_header}>{header}</Text>
-                                    </View>
-                                );
-                            })}
+                        <View
+                            style={[
+                                appStyles.flex_row_space_center,
+                                {
+                                    paddingHorizontal: getSize.m(4),
+                                },
+                            ]}
+                        >
+                            <View style={{ width: getSize.m(30) }}>
+                                <Text style={[appStyles.statistics_header, { textAlign: 'left' }]}>
+                                    {t('match.standing.place')}
+                                </Text>
+                            </View>
+                            <View style={{ width: getSize.m(80) }}>
+                                <Text style={[appStyles.statistics_header, { textAlign: 'left' }]}>
+                                    {t('match.standing.team')}
+                                </Text>
+                            </View>
+                            <View style={{ width: getSize.m(30) }}>
+                                <Text style={appStyles.statistics_header}>
+                                    {t('match.standing.mash')}
+                                </Text>
+                            </View>
+                            <View style={{ width: getSize.m(30) }}>
+                                <Text style={appStyles.statistics_header}>
+                                    {t('match.standing.nch')}
+                                </Text>
+                            </View>
+                            <View style={{ width: getSize.m(30) }}>
+                                <Text style={appStyles.statistics_header}>
+                                    {t('match.standing.draw')}
+                                </Text>
+                            </View>
+                            <View style={{ width: getSize.m(30) }}>
+                                <Text style={appStyles.statistics_header}>
+                                    {t('match.standing.the_p')}
+                                </Text>
+                            </View>
+                            <View style={{ width: getSize.m(40) }}>
+                                <Text style={appStyles.statistics_header}>
+                                    {t('match.standing.time')}
+                                </Text>
+                            </View>
+                            <View style={{ width: getSize.m(30) }}>
+                                <Text style={appStyles.statistics_header}>
+                                    {t('match.standing.no')}
+                                </Text>
+                            </View>
                         </View>
                         <View>
                             {listTeams.map(item => {
@@ -45,7 +81,7 @@ export const StandingScreen = ({ navigation, route }: IStandingScreenProps) => {
                                         key={item.id}
                                         style={[
                                             appStyles.flex_row_space_center,
-                                            styles.itemTeam,
+                                            appStyles.statistic_row,
                                             {
                                                 backgroundColor:
                                                     item.id % 2 === 0
@@ -54,8 +90,15 @@ export const StandingScreen = ({ navigation, route }: IStandingScreenProps) => {
                                             },
                                         ]}
                                     >
-                                        <View style={appStyles.flex_row_align}>
-                                            <Text style={styles.text_body}>{item.id}</Text>
+                                        <View
+                                            style={[
+                                                appStyles.flex_row_align,
+                                                { width: getSize.m(30) },
+                                            ]}
+                                        >
+                                            <Text style={appStyles.statistics_content}>
+                                                {item.id}
+                                            </Text>
                                             <View>
                                                 <Icon
                                                     name={appIcons.ic_up}
@@ -69,34 +112,54 @@ export const StandingScreen = ({ navigation, route }: IStandingScreenProps) => {
                                                 />
                                             </View>
                                         </View>
-                                        <View style={[appStyles.flex_row_content_center]}>
-                                            <Avatar source={item.logo} rounded size={20} />
-                                            <Text
-                                                style={[
-                                                    styles.text_body,
-                                                    { marginLeft: getSize.m(6) },
-                                                ]}
+                                        <View
+                                            style={[{ width: getSize.m(80), overflow: 'hidden' }]}
+                                        >
+                                            <View
+                                                style={{
+                                                    flexDirection: 'row',
+                                                }}
                                             >
-                                                {item.name}
+                                                <Avatar source={item.logo} rounded size={20} />
+                                                <Text
+                                                    style={[
+                                                        appStyles.statistics_content,
+                                                        { marginLeft: getSize.m(6) },
+                                                    ]}
+                                                >
+                                                    {item.name}
+                                                </Text>
+                                            </View>
+                                        </View>
+                                        <View style={{ width: getSize.m(30) }}>
+                                            <Text style={appStyles.statistics_content}>
+                                                {item.mash}
                                             </Text>
                                         </View>
-                                        <View>
-                                            <Text style={styles.text_body}>{item.mash}</Text>
+                                        <View style={{ width: getSize.m(30) }}>
+                                            <Text style={appStyles.statistics_content}>
+                                                {item.nch}
+                                            </Text>
                                         </View>
-                                        <View>
-                                            <Text style={styles.text_body}>{item.nch}</Text>
+                                        <View style={{ width: getSize.m(30) }}>
+                                            <Text style={appStyles.statistics_content}>
+                                                {item.draw}
+                                            </Text>
                                         </View>
-                                        <View>
-                                            <Text style={styles.text_body}>{item.draw}</Text>
+                                        <View style={{ width: getSize.m(30) }}>
+                                            <Text style={appStyles.statistics_content}>
+                                                {item.the_p}
+                                            </Text>
                                         </View>
-                                        <View>
-                                            <Text style={styles.text_body}>{item.the_p}</Text>
+                                        <View style={{ width: getSize.m(40) }}>
+                                            <Text style={appStyles.statistics_content}>
+                                                {item.time}
+                                            </Text>
                                         </View>
-                                        <View>
-                                            <Text style={styles.text_body}>{item.time}</Text>
-                                        </View>
-                                        <View>
-                                            <Text style={styles.text_body}>{item.no}</Text>
+                                        <View style={{ width: getSize.m(30) }}>
+                                            <Text style={appStyles.statistics_content}>
+                                                {item.no}
+                                            </Text>
                                         </View>
                                     </View>
                                 );

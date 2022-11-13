@@ -5,16 +5,6 @@ import { IStandingScreenProps } from './StandingScreen.type';
 export const useViewModel = ({ navigation, route }: IStandingScreenProps) => {
     const { t } = useTranslation();
 
-    const headers = [
-        t('match.standing.place'),
-        t('match.standing.team'),
-        t('match.standing.mash'),
-        t('match.standing.nch'),
-        t('match.standing.draw'),
-        t('match.standing.the_p'),
-        t('match.standing.time'),
-        t('match.standing.no'),
-    ];
     const listTeams = [
         {
             id: 1,
@@ -62,5 +52,5 @@ export const useViewModel = ({ navigation, route }: IStandingScreenProps) => {
         },
     ];
 
-    return { t, headers, listTeams };
+    return { t, listTeams };
 };

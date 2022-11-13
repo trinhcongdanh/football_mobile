@@ -13,7 +13,7 @@ import { IAccumulationYellowsProps } from './AccumulationYellows.type';
 export const AccumulationYellows = ({}: IAccumulationYellowsProps) => {
     const { t, listTickets } = useViewModel({});
     return (
-        <View style={styles.item_statistics}>
+        <View style={appStyles.item_statistics}>
             <View
                 style={[
                     appStyles.flex_row_space_center,
@@ -22,16 +22,18 @@ export const AccumulationYellows = ({}: IAccumulationYellowsProps) => {
                     },
                 ]}
             >
-                <Text style={styles.title}>
-                    {t('leagues_details.statistics.accumulation_yellow')}
+                <Text style={appStyles.statistics_title}>
+                    {t('statistics.leagues.accumulation_yellow')}
                 </Text>
                 <TouchableOpacity style={appStyles.flex_row_space_center}>
-                    <Text style={styles.see_all}>{t('leagues_details.statistics.see_all')}</Text>
+                    <Text style={appStyles.statistics_see_all}>
+                        {t('statistics.leagues.see_all')}
+                    </Text>
                     <Icon
                         name={appIcons.ic_arrow_left}
                         size={getSize.m(10)}
                         color={appColors.button_dark_blue}
-                        style={styles.ic_arrow}
+                        style={appStyles.statistic_ic_arrow}
                     />
                 </TouchableOpacity>
             </View>
@@ -45,17 +47,19 @@ export const AccumulationYellows = ({}: IAccumulationYellowsProps) => {
                 ]}
             >
                 <View style={{ width: getSize.m(120) }}>
-                    <Text style={[styles.header, { textAlign: 'left' }]}>
-                        {t('leagues_details.statistics.name_club')}
+                    <Text style={[appStyles.statistics_header, { textAlign: 'left' }]}>
+                        {t('statistics.leagues.name_club')}
                     </Text>
                 </View>
                 <View style={{ width: getSize.m(120) }}>
-                    <Text style={[styles.header, { textAlign: 'left' }]}>
-                        {t('leagues_details.statistics.name_player')}
+                    <Text style={[appStyles.statistics_header, { textAlign: 'left' }]}>
+                        {t('statistics.leagues.name_player')}
                     </Text>
                 </View>
                 <View style={{ width: getSize.m(40) }}>
-                    <Text style={styles.header}>{t('leagues_details.statistics.yellow')}</Text>
+                    <Text style={appStyles.statistics_header}>
+                        {t('statistics.leagues.yellow')}
+                    </Text>
                 </View>
             </View>
             <View style={{ marginTop: getSize.m(10) }}>
@@ -65,10 +69,10 @@ export const AccumulationYellows = ({}: IAccumulationYellowsProps) => {
                             key={item.id}
                             style={[
                                 appStyles.flex_row_space_center,
-                                styles.itemTeam,
+                                appStyles.statistic_row,
                                 {
                                     backgroundColor:
-                                        item.id % 2 === 1 ? appColors.blue_matte : appColors.white,
+                                        item.id % 2 === 1 ? appColors.blue_matte : appColors.gray,
                                 },
                             ]}
                         >
@@ -86,7 +90,7 @@ export const AccumulationYellows = ({}: IAccumulationYellowsProps) => {
                                     <Avatar source={item.avt_club} rounded size={18} />
                                     <Text
                                         style={[
-                                            styles.text_content,
+                                            appStyles.statistics_content,
                                             {
                                                 marginLeft: getSize.m(10),
                                             },
@@ -110,7 +114,7 @@ export const AccumulationYellows = ({}: IAccumulationYellowsProps) => {
                                     <Avatar source={item.avt_player} rounded size={18} />
                                     <Text
                                         style={[
-                                            styles.text_content,
+                                            appStyles.statistics_content,
                                             {
                                                 marginLeft: getSize.m(10),
                                             },
@@ -126,7 +130,7 @@ export const AccumulationYellows = ({}: IAccumulationYellowsProps) => {
                                 }}
                             >
                                 <Image source={AppImages.img_ticket_yellow} style={styles.ticket} />
-                                <Text style={[styles.text_content]}>{item.amount}</Text>
+                                <Text style={[appStyles.statistics_content]}>{item.amount}</Text>
                             </View>
                         </View>
                     );

@@ -1,19 +1,17 @@
+import React from 'react';
+import { View, Text, TouchableOpacity } from 'react-native';
 import { appIcons } from '@football/app/assets/icons/appIcons';
 import { appColors } from '@football/app/utils/constants/appColors';
 import Icon from 'react-native-vector-icons/Feather';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import { getSize } from '@football/app/utils/responsive/scale';
-import React from 'react';
-import { View, Text, TouchableOpacity, Image } from 'react-native';
 import { Avatar } from 'react-native-elements';
-import { AppImages } from '@football/app/assets/images';
-import styles from './AccumulationReds.style';
-import { useViewModel } from './AccumulationReds.viewModel';
-import { IAccumulationRedsProps } from './AccumulationReds.type';
-export const AccumulationReds = ({}: IAccumulationRedsProps) => {
-    const { t, listTickets } = useViewModel({});
+import { useViewModel } from './ScoresGoals.viewModel';
+import { IScoresGoalsProps } from './ScoresGoals.type';
+export const ScoresGoals = ({}: IScoresGoalsProps) => {
+    const { t, listGoals } = useViewModel({});
     return (
-        <View style={styles.item_statistics}>
+        <View style={appStyles.item_statistics}>
             <View
                 style={[
                     appStyles.flex_row_space_center,
@@ -22,14 +20,16 @@ export const AccumulationReds = ({}: IAccumulationRedsProps) => {
                     },
                 ]}
             >
-                <Text style={styles.title}>{t('leagues_details.statistics.accumulation_red')}</Text>
+                <Text style={appStyles.statistics_title}>{t('statistics.leagues.goal')}</Text>
                 <TouchableOpacity style={appStyles.flex_row_space_center}>
-                    <Text style={styles.see_all}>{t('leagues_details.statistics.see_all')}</Text>
+                    <Text style={appStyles.statistics_see_all}>
+                        {t('statistics.leagues.see_all')}
+                    </Text>
                     <Icon
                         name={appIcons.ic_arrow_left}
                         size={getSize.m(10)}
                         color={appColors.button_dark_blue}
-                        style={styles.ic_arrow}
+                        style={appStyles.statistic_ic_arrow}
                     />
                 </TouchableOpacity>
             </View>
@@ -43,30 +43,30 @@ export const AccumulationReds = ({}: IAccumulationRedsProps) => {
                 ]}
             >
                 <View style={{ width: getSize.m(120) }}>
-                    <Text style={[styles.header, { textAlign: 'left' }]}>
-                        {t('leagues_details.statistics.name_club')}
+                    <Text style={[appStyles.statistics_header, { textAlign: 'left' }]}>
+                        {t('statistics.leagues.name_club')}
                     </Text>
                 </View>
                 <View style={{ width: getSize.m(120) }}>
-                    <Text style={[styles.header, { textAlign: 'left' }]}>
-                        {t('leagues_details.statistics.name_player')}
+                    <Text style={[appStyles.statistics_header, { textAlign: 'left' }]}>
+                        {t('statistics.leagues.name_player')}
                     </Text>
                 </View>
                 <View style={{ width: getSize.m(40) }}>
-                    <Text style={styles.header}>{t('leagues_details.statistics.red')}</Text>
+                    <Text style={appStyles.statistics_header}>{t('statistics.leagues.gate')}</Text>
                 </View>
             </View>
             <View style={{ marginTop: getSize.m(10) }}>
-                {listTickets.map(item => {
+                {listGoals.map(item => {
                     return (
                         <View
                             key={item.id}
                             style={[
                                 appStyles.flex_row_space_center,
-                                styles.itemTeam,
+                                appStyles.statistic_row,
                                 {
                                     backgroundColor:
-                                        item.id % 2 === 1 ? appColors.blue_matte : appColors.white,
+                                        item.id % 2 === 1 ? appColors.blue_matte : appColors.gray,
                                 },
                             ]}
                         >
@@ -84,7 +84,7 @@ export const AccumulationReds = ({}: IAccumulationRedsProps) => {
                                     <Avatar source={item.avt_club} rounded size={18} />
                                     <Text
                                         style={[
-                                            styles.text_content,
+                                            appStyles.statistics_content,
                                             {
                                                 marginLeft: getSize.m(10),
                                             },
@@ -108,7 +108,7 @@ export const AccumulationReds = ({}: IAccumulationRedsProps) => {
                                     <Avatar source={item.avt_player} rounded size={18} />
                                     <Text
                                         style={[
-                                            styles.text_content,
+                                            appStyles.statistics_content,
                                             {
                                                 marginLeft: getSize.m(10),
                                             },
@@ -123,17 +123,7 @@ export const AccumulationReds = ({}: IAccumulationRedsProps) => {
                                     width: getSize.m(40),
                                 }}
                             >
-                                <Image source={AppImages.img_ticket_red} style={styles.ticket} />
-                                <Text
-                                    style={[
-                                        styles.text_content,
-                                        {
-                                            color: appColors.white,
-                                        },
-                                    ]}
-                                >
-                                    {item.amount}
-                                </Text>
+                                <Text style={appStyles.statistics_content}>{item.gate}</Text>
                             </View>
                         </View>
                     );

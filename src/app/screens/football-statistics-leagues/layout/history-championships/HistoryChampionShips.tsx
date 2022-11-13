@@ -6,13 +6,13 @@ import { getSize } from '@football/app/utils/responsive/scale';
 import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { Avatar } from 'react-native-elements';
-import styles from './ScoresGoals.style';
-import { useViewModel } from './ScoresGoals.viewModel';
-import { IScoresGoalsProps } from './ScoresGoals.type';
-export const ScoresGoals = ({}: IScoresGoalsProps) => {
-    const { t, listGoals } = useViewModel({});
+import { useViewModel } from './HistoryChampionShips.viewModel';
+import { IHistoryChampionShipsProps } from './HistoryChampionShips.type';
+
+export const HistoryChampionShips = ({}: IHistoryChampionShipsProps) => {
+    const { t, seasonsHistory } = useViewModel({});
     return (
-        <View style={styles.item_statistics}>
+        <View style={appStyles.item_statistics}>
             <View
                 style={[
                     appStyles.flex_row_space_center,
@@ -21,14 +21,16 @@ export const ScoresGoals = ({}: IScoresGoalsProps) => {
                     },
                 ]}
             >
-                <Text style={styles.title}>{t('leagues_details.statistics.goal')}</Text>
+                <Text style={appStyles.statistics_title}>{t('statistics.leagues.history')}</Text>
                 <TouchableOpacity style={appStyles.flex_row_space_center}>
-                    <Text style={styles.see_all}>{t('leagues_details.statistics.see_all')}</Text>
+                    <Text style={appStyles.statistics_see_all}>
+                        {t('statistics.leagues.see_all')}
+                    </Text>
                     <Icon
                         name={appIcons.ic_arrow_left}
                         size={getSize.m(10)}
                         color={appColors.button_dark_blue}
-                        style={styles.ic_arrow}
+                        style={appStyles.statistic_ic_arrow}
                     />
                 </TouchableOpacity>
             </View>
@@ -41,37 +43,44 @@ export const ScoresGoals = ({}: IScoresGoalsProps) => {
                     },
                 ]}
             >
-                <View style={{ width: getSize.m(120) }}>
-                    <Text style={[styles.header, { textAlign: 'left' }]}>
-                        {t('leagues_details.statistics.name_club')}
+                <View style={{ width: getSize.m(80) }}>
+                    <Text style={[appStyles.statistics_header, { textAlign: 'left' }]}>
+                        {t('statistics.leagues.season')}
                     </Text>
                 </View>
-                <View style={{ width: getSize.m(120) }}>
-                    <Text style={[styles.header, { textAlign: 'left' }]}>
-                        {t('leagues_details.statistics.name_player')}
+                <View style={{ width: getSize.m(200) }}>
+                    <Text style={[appStyles.statistics_header, { textAlign: 'left' }]}>
+                        {t('statistics.leagues.name_club')}
                     </Text>
-                </View>
-                <View style={{ width: getSize.m(40) }}>
-                    <Text style={styles.header}>{t('leagues_details.statistics.gate')}</Text>
                 </View>
             </View>
             <View style={{ marginTop: getSize.m(10) }}>
-                {listGoals.map(item => {
+                {seasonsHistory.map(item => {
                     return (
                         <View
                             key={item.id}
                             style={[
                                 appStyles.flex_row_space_center,
-                                styles.itemTeam,
+                                appStyles.statistic_row,
                                 {
                                     backgroundColor:
-                                        item.id % 2 === 1 ? appColors.blue_matte : appColors.white,
+                                        item.id % 2 === 1 ? appColors.blue_matte : appColors.gray,
                                 },
                             ]}
                         >
                             <View
                                 style={{
-                                    width: getSize.m(120),
+                                    width: getSize.m(80),
+                                    overflow: 'hidden',
+                                }}
+                            >
+                                <Text style={[appStyles.statistics_content, { textAlign: 'left' }]}>
+                                    {item.season}
+                                </Text>
+                            </View>
+                            <View
+                                style={{
+                                    width: getSize.m(200),
                                     overflow: 'hidden',
                                 }}
                             >
@@ -83,7 +92,7 @@ export const ScoresGoals = ({}: IScoresGoalsProps) => {
                                     <Avatar source={item.avt_club} rounded size={18} />
                                     <Text
                                         style={[
-                                            styles.text_content,
+                                            appStyles.statistics_content,
                                             {
                                                 marginLeft: getSize.m(10),
                                             },
@@ -92,37 +101,6 @@ export const ScoresGoals = ({}: IScoresGoalsProps) => {
                                         {item.name_club}
                                     </Text>
                                 </View>
-                            </View>
-                            <View
-                                style={{
-                                    width: getSize.m(120),
-                                    overflow: 'hidden',
-                                }}
-                            >
-                                <View
-                                    style={{
-                                        flexDirection: 'row',
-                                    }}
-                                >
-                                    <Avatar source={item.avt_player} rounded size={18} />
-                                    <Text
-                                        style={[
-                                            styles.text_content,
-                                            {
-                                                marginLeft: getSize.m(10),
-                                            },
-                                        ]}
-                                    >
-                                        {item.name_player}
-                                    </Text>
-                                </View>
-                            </View>
-                            <View
-                                style={{
-                                    width: getSize.m(40),
-                                }}
-                            >
-                                <Text style={styles.text_content}>{item.gate}</Text>
                             </View>
                         </View>
                     );

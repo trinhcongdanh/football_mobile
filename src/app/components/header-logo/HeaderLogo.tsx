@@ -18,7 +18,7 @@ export const HeaderLogo = ({ avt, text }: IHeaderLogoProps) => {
         >
             <View style={[appStyles.align_justify, { marginTop: getSize.m(-50) }]}>
                 <View style={styles.image_avt}>
-                    <Avatar source={avt} size={getSize.m(60)} />
+                    <Avatar source={avt} size={getSize.m(60)} rounded />
                 </View>
                 <Text style={styles.text}>{text}</Text>
             </View>

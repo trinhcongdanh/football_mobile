@@ -13,7 +13,7 @@ import { useViewModel } from './YellowsCup.viewModel';
 export const YellowsCup = () => {
     const { t, listPlayerGoal } = useViewModel({});
     return (
-        <View style={styles.item_statistics}>
+        <View style={appStyles.item_statistics}>
             <View
                 style={[
                     appStyles.flex_row_space_center,
@@ -22,14 +22,16 @@ export const YellowsCup = () => {
                     },
                 ]}
             >
-                <Text style={styles.title}>{t('statistics.group.yellow_cup')}</Text>
+                <Text style={appStyles.statistics_title}>{t('statistics.group.yellow_cup')}</Text>
                 <TouchableOpacity style={appStyles.flex_row_space_center}>
-                    <Text style={styles.see_all}>{t('statistics.group.see_all')}</Text>
+                    <Text style={appStyles.statistics_see_all}>
+                        {t('statistics.group.see_all')}
+                    </Text>
                     <Icon
                         name={appIcons.ic_arrow_left}
                         size={getSize.m(10)}
                         color={appColors.button_dark_blue}
-                        style={styles.ic_arrow}
+                        style={appStyles.statistic_ic_arrow}
                     />
                 </TouchableOpacity>
             </View>
@@ -43,14 +45,18 @@ export const YellowsCup = () => {
                 ]}
             >
                 <View>
-                    <Text style={styles.header}>{t('statistics.group.player_name')}</Text>
+                    <Text style={appStyles.statistics_header}>
+                        {t('statistics.group.player_name')}
+                    </Text>
                 </View>
                 <View
                     style={{
                         width: getSize.m(40),
                     }}
                 >
-                    <Text style={styles.header}>{t('statistics.group.number_yellow')}</Text>
+                    <Text style={appStyles.statistics_header}>
+                        {t('statistics.group.number_yellow')}
+                    </Text>
                 </View>
             </View>
             <View style={{ marginTop: getSize.m(10) }}>
@@ -60,7 +66,7 @@ export const YellowsCup = () => {
                             key={item.id}
                             style={[
                                 appStyles.flex_row_space_center,
-                                styles.itemTeam,
+                                appStyles.statistic_row,
                                 {
                                     backgroundColor:
                                         item.id % 2 === 1 ? appColors.blue_matte : appColors.gray,
@@ -76,7 +82,7 @@ export const YellowsCup = () => {
                                     <Avatar source={item.avt} rounded size={18} />
                                     <Text
                                         style={[
-                                            styles.text_content,
+                                            appStyles.statistics_content,
                                             {
                                                 marginLeft: getSize.m(10),
                                             },
@@ -92,7 +98,7 @@ export const YellowsCup = () => {
                                 }}
                             >
                                 <Image source={AppImages.img_ticket_yellow} style={styles.ticket} />
-                                <Text style={[styles.text_content]}>{item.yellow}</Text>
+                                <Text style={[appStyles.statistics_content]}>{item.yellow}</Text>
                             </View>
                         </View>
                     );

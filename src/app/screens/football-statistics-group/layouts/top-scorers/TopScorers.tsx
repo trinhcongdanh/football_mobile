@@ -6,13 +6,12 @@ import Icon from 'react-native-vector-icons/Feather';
 import { appIcons } from '@football/app/assets/icons/appIcons';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { Avatar } from 'react-native-elements';
-import styles from './TopScorers.style';
 import { useViewModel } from './TopScorers.viewModel';
 
 export const TopScorers = () => {
     const { t, listPlayerGoal } = useViewModel({});
     return (
-        <View style={styles.item_statistics}>
+        <View style={appStyles.item_statistics}>
             <View
                 style={[
                     appStyles.flex_row_space_center,
@@ -21,14 +20,16 @@ export const TopScorers = () => {
                     },
                 ]}
             >
-                <Text style={styles.title}>{t('statistics.group.top_scorers')}</Text>
+                <Text style={appStyles.statistics_title}>{t('statistics.group.top_scorers')}</Text>
                 <TouchableOpacity style={appStyles.flex_row_space_center}>
-                    <Text style={styles.see_all}>{t('statistics.group.see_all')}</Text>
+                    <Text style={appStyles.statistics_see_all}>
+                        {t('statistics.group.see_all')}
+                    </Text>
                     <Icon
                         name={appIcons.ic_arrow_left}
                         size={getSize.m(10)}
                         color={appColors.button_dark_blue}
-                        style={styles.ic_arrow}
+                        style={appStyles.statistic_ic_arrow}
                     />
                 </TouchableOpacity>
             </View>
@@ -42,10 +43,12 @@ export const TopScorers = () => {
                 ]}
             >
                 <View>
-                    <Text style={styles.header}>{t('statistics.group.player_name')}</Text>
+                    <Text style={appStyles.statistics_header}>
+                        {t('statistics.group.player_name')}
+                    </Text>
                 </View>
                 <View>
-                    <Text style={styles.header}>{t('statistics.group.number')}</Text>
+                    <Text style={appStyles.statistics_header}>{t('statistics.group.number')}</Text>
                 </View>
             </View>
             <View style={{ marginTop: getSize.m(10) }}>
@@ -55,7 +58,7 @@ export const TopScorers = () => {
                             key={item.id}
                             style={[
                                 appStyles.flex_row_space_center,
-                                styles.itemTeam,
+                                appStyles.statistic_row,
                                 {
                                     backgroundColor:
                                         item.id % 2 === 1 ? appColors.blue_matte : appColors.gray,
@@ -71,7 +74,7 @@ export const TopScorers = () => {
                                     <Avatar source={item.avt} rounded size={18} />
                                     <Text
                                         style={[
-                                            styles.text_content,
+                                            appStyles.statistics_content,
                                             {
                                                 marginLeft: getSize.m(10),
                                             },
@@ -82,7 +85,7 @@ export const TopScorers = () => {
                                 </View>
                             </View>
                             <View>
-                                <Text style={styles.text_content}>{item.goal}</Text>
+                                <Text style={appStyles.statistics_content}>{item.goal}</Text>
                             </View>
                         </View>
                     );
