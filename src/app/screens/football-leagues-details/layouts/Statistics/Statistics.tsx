@@ -24,7 +24,7 @@ export const Statistics = ({}: IStatisticsProps) => {
                 />
                 {onSelect === 0 ? (
                     <View style={{ marginTop: getSize.m(20) }}>
-                        <Position position="מחזור 34" />
+                        <Position position="מחזור 34" width={getSize.m(130)} />
                         <View>
                             <View
                                 style={[

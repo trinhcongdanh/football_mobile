@@ -10,5 +10,7 @@ export const styles = StyleSheet.create({
         fontSize: getSize.m(20),
         fontFamily: AppFonts.regular,
         fontWeight: '700',
+        textAlign: 'center',
+        width: '70%',
     },
 });

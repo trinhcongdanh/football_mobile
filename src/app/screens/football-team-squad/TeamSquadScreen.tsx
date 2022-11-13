@@ -8,9 +8,9 @@ import { ButtonOption } from '@football/app/components/button_option';
 import { getSize } from '@football/app/utils/responsive/scale';
 import { ListPlayer } from '@football/app/components/list-player/ListPlayer';
 import { Position } from '@football/app/components/position/Position';
-import { ITeamGroupScreenProps } from './TeamSquadScreen.type';
 import styles from './TeamSquadScreen.style';
 import { useViewModel } from './TeamSquadScreen.viewModel';
+import { ITeamGroupScreenProps } from './TeamSquadScreen.type';
 
 // type Props = {};
 
@@ -45,7 +45,10 @@ export const TeamSquadScreen = ({ navigation, route }: ITeamGroupScreenProps) =>
                             {onSelect === 0 && (
                                 <ScrollView showsVerticalScrollIndicator={false}>
                                     <View style={{ marginTop: getSize.m(30) }}>
-                                        <Position position={t('team_squad.gk')} />
+                                        <Position
+                                            width={getSize.m(130)}
+                                            position={t('team_squad.gk')}
+                                        />
                                         {goalkeepers.map(item => {
                                             return (
                                                 <ListPlayer
@@ -58,7 +61,10 @@ export const TeamSquadScreen = ({ navigation, route }: ITeamGroupScreenProps) =>
                                         })}
                                     </View>
                                     <View style={{ marginTop: getSize.m(30) }}>
-                                        <Position position={t('team_squad.df')} />
+                                        <Position
+                                            width={getSize.m(130)}
+                                            position={t('team_squad.df')}
+                                        />
                                         {defenders.map(item => {
                                             return (
                                                 <ListPlayer
@@ -71,7 +77,10 @@ export const TeamSquadScreen = ({ navigation, route }: ITeamGroupScreenProps) =>
                                         })}
                                     </View>
                                     <View style={{ marginTop: getSize.m(30) }}>
-                                        <Position position={t('team_squad.mf')} />
+                                        <Position
+                                            width={getSize.m(130)}
+                                            position={t('team_squad.mf')}
+                                        />
                                         {goalkeepers.map(item => {
                                             return (
                                                 <ListPlayer
@@ -84,7 +93,10 @@ export const TeamSquadScreen = ({ navigation, route }: ITeamGroupScreenProps) =>
                                         })}
                                     </View>
                                     <View style={{ marginTop: getSize.m(30) }}>
-                                        <Position position={t('team_squad.st')} />
+                                        <Position
+                                            width={getSize.m(130)}
+                                            position={t('team_squad.st')}
+                                        />
                                         {goalkeepers.map(item => {
                                             return (
                                                 <ListPlayer

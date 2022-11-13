@@ -18,6 +18,7 @@ import com.oblador.vectoricons.VectorIconsPackage;
 import com.brentvatne.react.ReactVideoPackage;
 import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
 
+import com.airbnb.android.react.maps.MapsPackage;
 
 public class MainApplication extends Application implements ReactApplication {
 

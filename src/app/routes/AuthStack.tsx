@@ -11,16 +11,21 @@ import { TeamScreen } from '../screens/football-team/TeamScreen';
 import { TeamSquadScreen } from '../screens/football-team-squad/TeamSquadScreen';
 import { MatchScreen } from '../screens/football-match/MatchScreen';
 import {
+    CampaignScreen,
+    ConquerorsScreen,
     FavoritePlayersScreen,
     FavoriteSummaryScreen,
     FavoriteTeamsScreen,
     FavoriteTopTeamsScreen,
     GameCompositionScreen,
+    GoalsNationalTeamScreen,
     GobletScreen,
     GroupPageScreen,
     HomeScreen,
     LeaguesDetailsScreen,
     LeaguesScreen,
+    PitchScreen,
+    PreviousCampaignsScreen,
     StateCupScreen,
     StatisticsGroupScreen,
     StatisticsLeaguesScreen,
@@ -56,6 +61,17 @@ export const AuthStack = () => {
             <Auth.Screen name={ScreenName.HomePage} component={HomeScreen} />
             <Auth.Screen name={ScreenName.DataPlayerPage} component={DataPlayerScreen} />
             <Auth.Screen name={ScreenName.DataCoachPage} component={DataCoachScreen} />
+            <Auth.Screen
+                name={ScreenName.PreviousCampaignsPage}
+                component={PreviousCampaignsScreen}
+            />
+            <Auth.Screen name={ScreenName.CampaignPage} component={CampaignScreen} />
+            <Auth.Screen
+                name={ScreenName.GoalsNationalTeamPage}
+                component={GoalsNationalTeamScreen}
+            />
+            <Auth.Screen name={ScreenName.PitchPage} component={PitchScreen} />
+            <Auth.Screen name={ScreenName.ConquerorsPage} component={ConquerorsScreen} />
             <Auth.Screen name={ScreenName.HistoryPage} component={HistoryScreen} />
             <Auth.Screen name={ScreenName.BottomTab} component={BottomTabStack} />
             <Auth.Screen name={ScreenName.LeaguesPage} component={LeaguesScreen} />

@@ -9,8 +9,8 @@ import { InfoPerson } from '@football/app/components/info-person/InfoPerson';
 import { ButtonOption } from '@football/app/components/button_option';
 import { DataPlayerNationalScreen } from './layouts/data-player-national/DataPlayerNationalScreen';
 import { DataPlayerTeamScreen } from './layouts/data-player-team';
-import { IDataPlayerScreenProps } from './DataPlayerScreen.type';
 import { useViewModel } from './DataPlayerScreen.viewModel';
+import { IDataPlayerScreenProps } from './DataPlayerScreen.type';
 
 // type Props = {};
 
@@ -35,10 +35,15 @@ export const DataPlayerScreen = ({ navigation, route }: IDataPlayerScreenProps) 
                             handlePressFunction={onGoBack}
                         />
                         <InfoPerson
-                            name_person="פיני יואב גראפי"
-                            number={13}
-                            date="08/1993"
+                            name="פיני יואב גראפי"
+                            data_1="08/1993"
+                            data_2={t('data_player.national.israel')}
+                            data_3={13}
                             avt={AppImages.img_avt_player}
+                            img_logo={AppImages.img_israel}
+                            title_1={t('data_player.birthday')}
+                            title_2={t('data_player.national.title')}
+                            title_3={t('data_player.number')}
                         />
                     </View>
                     <View style={[appStyles.flex, appStyles.main_container]}>
