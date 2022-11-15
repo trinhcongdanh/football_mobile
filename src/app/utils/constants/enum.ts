@@ -58,3 +58,9 @@ export enum ScreenStack {
     AuthStack = 'AuthStack',
     MainStack = 'MainStack',
 }
+
+export enum OfflineData {
+    teams = 'teams_data',
+    players = 'players_data',
+    national = 'national_data',
+}
