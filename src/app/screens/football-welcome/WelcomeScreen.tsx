@@ -20,12 +20,13 @@ export const WelcomeScreen = ({ navigation, route }: IWelcomeScreenProps) => {
     const { t, i18n } = useTranslation();
 
     useEffect(() => {
+        i18n.changeLanguage('heb');
         if (i18n.language === 'en') {
             I18nManager.forceRTL(false);
         } else {
             I18nManager.forceRTL(true);
         }
-    }, [i18n.language]);
+    }, [i18n, i18n.language]);
 
     const onNavigateFavTeam = () => {
         navigation.navigate(ScreenName.FavTeamPage, {

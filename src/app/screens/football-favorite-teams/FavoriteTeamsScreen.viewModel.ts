@@ -9,8 +9,9 @@ import { TeamModel, TeamModelResponse } from '@football/core/models/TeamModelRes
 import { Alert } from 'react-native';
 import { isEmpty } from 'lodash';
 import { useDispatch, useSelector } from 'react-redux';
+import { useAsyncStorage } from '@react-native-async-storage/async-storage';
 import { IFavoriteTeamsScreenProps } from './FavoriteTeamsScreen.type';
-import { addFavTeams, FavTeamState } from './redux/FavTeam.slice';
+import { addFavTeams, FavTeamState } from '../../../store/FavTeam.slice';
 
 export const useViewModel = ({ navigation, route }: IFavoriteTeamsScreenProps) => {
     const { t } = useTranslation();
@@ -18,6 +19,7 @@ export const useViewModel = ({ navigation, route }: IFavoriteTeamsScreenProps) =
     const favTeamList = useSelector((state: FavTeamState) => state.favTeams);
     const { navigate, goBack } = useAppNavigator();
     const [teamData, setTeamData] = useState<TeamModel[]>();
+    const { getItem, setItem } = useAsyncStorage('player_data');
 
     const getTeamsData = useCallback(async () => {
         try {
@@ -51,15 +53,16 @@ export const useViewModel = ({ navigation, route }: IFavoriteTeamsScreenProps) =
 
     const [teamSelected, setTeamSelected] = useState<TeamModel[]>([]);
 
-    const handleSelected = (teams: TeamModel, ind: number) => {
-        const index = teamSelected.findIndex(elm => teams._id === elm._id);
+    const handleSelected = (team: TeamModel, ind: number) => {
+        const index = teamSelected.findIndex(elm => team._id === elm._id);
 
         if (index !== -1) {
-            const newTeamSelected = teamSelected.filter(e => e._id !== teams._id);
+            const newTeamSelected = teamSelected.filter(e => e._id !== team._id);
             setTeamSelected(newTeamSelected);
         } else if (teamSelected.length < 3) {
-            setTeamSelected([...teamSelected, teams]);
-            const action = addFavTeams(teams);
+            setTeamSelected([...teamSelected, team]);
+            setItem(JSON.stringify(team));
+            const action = addFavTeams(team);
             dispatch(action);
         }
     };

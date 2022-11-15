@@ -32,6 +32,7 @@
 		7C4D669E28EDA30000C5AF1D /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7C4D668D28EDA30000C5AF1D /* EvilIcons.ttf */; };
 		7C4D669F28EDA30000C5AF1D /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7C4D668E28EDA30000C5AF1D /* SimpleLineIcons.ttf */; };
 		7C4D66A028EDA30000C5AF1D /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7C4D668F28EDA30000C5AF1D /* MaterialIcons.ttf */; };
+		7CCCFAF12922DA8100CE19C5 /* libRNCAsyncStorage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CCCFAF02922DA2900CE19C5 /* libRNCAsyncStorage.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		98CE35118DF649C797196CAD /* IBMPlexSansHebrew-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 84289F6D57A74AD382B1F4E0 /* IBMPlexSansHebrew-Medium.ttf */; };
 		9B126F195DF3479CA168EF3A /* IBMPlexSansHebrew-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DCF4D4AA61AF4B09990E4845 /* IBMPlexSansHebrew-ExtraLight.ttf */; };
@@ -55,6 +56,13 @@
 			proxyType = 2;
 			remoteGlobalIDString = 3D7682761D8E76B80014119E;
 			remoteInfo = SplashScreen;
+		};
+		7CCCFAEF2922DA2900CE19C5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7CCCFAEB2922DA2900CE19C5 /* RNCAsyncStorage.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RNCAsyncStorage;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -92,6 +100,7 @@
 		7C4D668D28EDA30000C5AF1D /* EvilIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = EvilIcons.ttf; sourceTree = "<group>"; };
 		7C4D668E28EDA30000C5AF1D /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SimpleLineIcons.ttf; sourceTree = "<group>"; };
 		7C4D668F28EDA30000C5AF1D /* MaterialIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MaterialIcons.ttf; sourceTree = "<group>"; };
+		7CCCFAEB2922DA2900CE19C5 /* RNCAsyncStorage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNCAsyncStorage.xcodeproj; path = "../node_modules/@react-native-async-storage/async-storage/ios/RNCAsyncStorage.xcodeproj"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = FootballAssociation/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		84289F6D57A74AD382B1F4E0 /* IBMPlexSansHebrew-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "IBMPlexSansHebrew-Medium.ttf"; path = "../src/app/assets/fonts/IBMPlexSansHebrew-Medium.ttf"; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-FootballAssociation-FootballAssociationTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FootballAssociation-FootballAssociationTests.release.xcconfig"; path = "Target Support Files/Pods-FootballAssociation-FootballAssociationTests/Pods-FootballAssociation-FootballAssociationTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -117,6 +126,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7CCCFAF12922DA8100CE19C5 /* libRNCAsyncStorage.a in Frameworks */,
 				0C80B921A6F3F58F76C31292 /* libPods-FootballAssociation.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -196,9 +206,18 @@
 			path = "../node_modules/react-native-vector-icons/Fonts";
 			sourceTree = "<group>";
 		};
+		7CCCFAEC2922DA2900CE19C5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7CCCFAF02922DA2900CE19C5 /* libRNCAsyncStorage.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				7CCCFAEB2922DA2900CE19C5 /* RNCAsyncStorage.xcodeproj */,
 				7C0EC51C28EC984C002DADD8 /* SplashScreen.xcodeproj */,
 			);
 			name = Libraries;
@@ -333,6 +352,10 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
+					ProductGroup = 7CCCFAEC2922DA2900CE19C5 /* Products */;
+					ProjectRef = 7CCCFAEB2922DA2900CE19C5 /* RNCAsyncStorage.xcodeproj */;
+				},
+				{
 					ProductGroup = 7C0EC51D28EC984C002DADD8 /* Products */;
 					ProjectRef = 7C0EC51C28EC984C002DADD8 /* SplashScreen.xcodeproj */;
 				},
@@ -351,6 +374,13 @@
 			fileType = archive.ar;
 			path = libSplashScreen.a;
 			remoteRef = 7C0EC52028EC984C002DADD8 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7CCCFAF02922DA2900CE19C5 /* libRNCAsyncStorage.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNCAsyncStorage.a;
+			remoteRef = 7CCCFAEF2922DA2900CE19C5 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -637,6 +667,71 @@
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_BITCODE = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/BVLinearGradient\"",
+					"\"${PODS_ROOT}/Headers/Public/CocoaAsyncSocket\"",
+					"\"${PODS_ROOT}/Headers/Public/DoubleConversion\"",
+					"\"${PODS_ROOT}/Headers/Public/FBLazyVector\"",
+					"\"${PODS_ROOT}/Headers/Public/Flipper\"",
+					"\"${PODS_ROOT}/Headers/Public/Flipper-Fmt\"",
+					"\"${PODS_ROOT}/Headers/Public/Flipper-Folly\"",
+					"\"${PODS_ROOT}/Headers/Public/Flipper-PeerTalk\"",
+					"\"${PODS_ROOT}/Headers/Public/Flipper-RSocket\"",
+					"\"${PODS_ROOT}/Headers/Public/FlipperKit\"",
+					"\"${PODS_ROOT}/Headers/Public/RCT-Folly\"",
+					"\"${PODS_ROOT}/Headers/Public/RCTRequired\"",
+					"\"${PODS_ROOT}/Headers/Public/RCTTypeSafety\"",
+					"\"${PODS_ROOT}/Headers/Public/RNCAsyncStorage\"",
+					"\"${PODS_ROOT}/Headers/Public/RNCMaskedView\"",
+					"\"${PODS_ROOT}/Headers/Public/RNGestureHandler\"",
+					"\"${PODS_ROOT}/Headers/Public/RNReanimated\"",
+					"\"${PODS_ROOT}/Headers/Public/RNSVG\"",
+					"\"${PODS_ROOT}/Headers/Public/RNScreens\"",
+					"\"${PODS_ROOT}/Headers/Public/React-Codegen\"",
+					"\"${PODS_ROOT}/Headers/Public/React-Core\"",
+					"\"${PODS_ROOT}/Headers/Public/React-RCTAnimation\"",
+					"\"${PODS_ROOT}/Headers/Public/React-RCTBlob\"",
+					"\"${PODS_ROOT}/Headers/Public/React-RCTText\"",
+					"\"${PODS_ROOT}/Headers/Public/React-bridging\"",
+					"\"${PODS_ROOT}/Headers/Public/React-callinvoker\"",
+					"\"${PODS_ROOT}/Headers/Public/React-cxxreact\"",
+					"\"${PODS_ROOT}/Headers/Public/React-hermes\"",
+					"\"${PODS_ROOT}/Headers/Public/React-jsi\"",
+					"\"${PODS_ROOT}/Headers/Public/React-jsiexecutor\"",
+					"\"${PODS_ROOT}/Headers/Public/React-jsinspector\"",
+					"\"${PODS_ROOT}/Headers/Public/React-logger\"",
+					"\"${PODS_ROOT}/Headers/Public/React-perflogger\"",
+					"\"${PODS_ROOT}/Headers/Public/React-runtimeexecutor\"",
+					"\"${PODS_ROOT}/Headers/Public/ReactCommon\"",
+					"\"${PODS_ROOT}/Headers/Public/SocketRocket\"",
+					"\"${PODS_ROOT}/Headers/Public/Yoga\"",
+					"\"${PODS_ROOT}/Headers/Public/YogaKit\"",
+					"\"${PODS_ROOT}/Headers/Public/callstack-repack\"",
+					"\"${PODS_ROOT}/Headers/Public/fmt\"",
+					"\"${PODS_ROOT}/Headers/Public/glog\"",
+					"\"${PODS_ROOT}/Headers/Public/hermes-engine\"",
+					"\"${PODS_ROOT}/Headers/Public/libevent\"",
+					"\"${PODS_ROOT}/Headers/Public/react-native-date-picker\"",
+					"\"${PODS_ROOT}/Headers/Public/react-native-image-picker\"",
+					"\"${PODS_ROOT}/Headers/Public/react-native-pager-view\"",
+					"\"${PODS_ROOT}/Headers/Public/react-native-safe-area-context\"",
+					"\"${PODS_ROOT}/Headers/Public/react-native-splash-screen\"",
+					"\"${PODS_ROOT}/Headers/Public/react-native-video\"",
+					"\"$(PODS_ROOT)/DoubleConversion\"",
+					"\"$(PODS_ROOT)/boost\"",
+					"\"$(PODS_ROOT)/boost\"",
+					"\"$(PODS_ROOT)/boost-for-react-native\"",
+					"\"$(PODS_ROOT)/glog\"",
+					"\"$(PODS_ROOT)/RCT-Folly\"",
+					"\"$(PODS_ROOT)/RCT-Folly\"",
+					"\"${PODS_ROOT}/Headers/Public/React-hermes\"",
+					"\"${PODS_ROOT}/Headers/Public/hermes-engine\"",
+					"\"$(PODS_ROOT)/../../node_modules/react-native/ReactCommon\"",
+					"\"$(PODS_ROOT)/Headers/Private/React-Core\"",
+					"\"$(PODS_TARGET_SRCROOT)/include/\"",
+				);
 				INFOPLIST_FILE = FootballAssociation/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

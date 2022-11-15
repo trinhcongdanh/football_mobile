@@ -1,19 +1,18 @@
-import { BSON } from 'realm';
+import { AxiosResponse } from 'axios';
 
-export type Task = {
-    _id: BSON.ObjectId;
-    _partition?: string;
-    name: string;
-    status: string;
-};
+export interface PlayerModel {
+    _id: string;
+    search_terms: string;
+    name_en: string;
+    image_url: string;
+    image_width: number;
+    image_height: number;
+    name_he: string;
+    teams: string[];
+    top_teams: string[];
+    isSelected: boolean;
+}
 
-export const TaskSchema = {
-    name: 'Task',
-    properties: {
-        _id: 'objectId',
-        _partition: 'string?',
-        name: 'string',
-        status: 'string',
-    },
-    primaryKey: '_id',
-};
+export type PlayersModelResponse = AxiosResponse<{
+    documents: PlayerModel[];
+}>;

@@ -1,9 +1,10 @@
 import React from 'react';
 import { View } from 'react-native';
 import { appStyles } from '@football/app/utils/constants/appStyles';
-import { Favorite } from '@football/app/components/favorite/Favorite';
+import { PlayerModel } from '@football/core/models/PlayerModelResponse';
 import { useViewModel } from './FavoritePlayersScreen.viewModel';
 import { IFavoritePlayerScreenProps } from './FavoritePlayersScreen.type';
+import { FavoritePlayer } from './components/FavoritePlayer';
 
 export const FavoritePlayersScreen = ({ navigation, route }: IFavoritePlayerScreenProps) => {
     const {
@@ -21,11 +22,11 @@ export const FavoritePlayersScreen = ({ navigation, route }: IFavoritePlayerScre
 
     return (
         <View style={[appStyles.flex]}>
-            <Favorite
+            <FavoritePlayer
                 onGoSkip={onGoSkip}
                 onGoBack={onGoBack}
                 handleContinue={handleContinue}
-                handleSelected={(item: any) => {
+                handleSelected={(item: PlayerModel) => {
                     handleSelected(item);
                 }}
                 newFav={newPlayers}

@@ -1,13 +1,40 @@
-import React, { useState } from 'react';
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable @typescript-eslint/no-shadow */
+import { useCallback, useEffect, useState } from 'react';
 import { ScreenName } from '@football/app/utils/constants/enum';
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
-import { AppImages } from '@football/app/assets/images';
 import { useTranslation } from 'react-i18next';
+import { axiosClient } from '@football/core/api/configs/axiosClient';
+import { BASE_URL, DATA_SOURCE, DB } from '@football/core/api/configs/config';
+import { isEmpty } from 'lodash';
+import { PlayerModel, PlayersModelResponse } from '@football/core/models/PlayerModelResponse';
+import { Alert } from 'react-native';
+import { useDispatch } from 'react-redux';
 import { IFavoritePlayerScreenProps } from './FavoritePlayersScreen.type';
+import { addPlayerTeams } from '../../../store/FavPlayer.slice';
 
 export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) => {
     const { t } = useTranslation();
     const { navigate, goBack } = useAppNavigator();
+    const dispatch = useDispatch();
+    const [playersData, setPlayersData] = useState<PlayerModel[]>();
+    const [playerSelected, setPlayerSelected] = useState<PlayerModel[]>([]);
+
+    const getPlayersData = useCallback(async () => {
+        try {
+            const { data }: PlayersModelResponse = await axiosClient.post(`${BASE_URL}/find`, {
+                dataSource: DATA_SOURCE,
+                database: DB,
+                collection: 'player',
+            });
+
+            if (!isEmpty(data.documents)) {
+                setPlayersData(data.documents);
+            }
+        } catch (error: any) {
+            Alert.alert(error);
+        }
+    }, []);
 
     const onGoBack = (): void => {
         goBack();
@@ -20,55 +47,26 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
         navigate(ScreenName.FavTopTeamPage);
     };
 
-    const playerFavs = [
-        { id: 1, name: 'מכבי תל אביב', image: AppImages.img_avt_player, isSelected: false },
-        { id: 2, name: 'מכבי תל אביב', image: AppImages.img_avt_player, isSelected: false },
-        { id: 3, name: 'מכבי תל אביב', image: AppImages.img_avt_player, isSelected: false },
-        { id: 4, name: 'מכבי תל אביב', image: AppImages.img_avt_player, isSelected: false },
-        { id: 5, name: 'מכבי תל אביב', image: AppImages.img_avt_player, isSelected: false },
-        { id: 6, name: 'מכבי תל אביב', image: AppImages.img_avt_player, isSelected: false },
-        { id: 7, name: 'מכבי תל אביב', image: AppImages.img_avt_player, isSelected: false },
-        { id: 8, name: 'מכבי תל אביב', image: AppImages.img_avt_player, isSelected: false },
-        { id: 9, name: 'מכבי תל אביב', image: AppImages.img_avt_player, isSelected: false },
-        { id: 10, name: 'מכבי תל אביב', image: AppImages.img_avt_player, isSelected: false },
-        { id: 11, name: 'מכבי תל אביב', image: AppImages.img_avt_player, isSelected: false },
-        { id: 12, name: 'מכבי תל אביב', image: AppImages.img_avt_player, isSelected: false },
-        { id: 13, name: 'מכבי תל אביב', image: AppImages.img_avt_player, isSelected: false },
-        { id: 14, name: 'מכבי תל אביב', image: AppImages.img_avt_player, isSelected: false },
-        { id: 15, name: 'מכבי תל אביב', image: AppImages.img_avt_player, isSelected: false },
-        { id: 16, name: 'מכבי תל אביב', image: AppImages.img_avt_player, isSelected: false },
-        { id: 17, name: 'מכבי תל אביב', image: AppImages.img_avt_player, isSelected: false },
-        { id: 18, name: 'מכבי תל אביב', image: AppImages.img_avt_player, isSelected: false },
-        { id: 19, name: 'מכבי תל אביב', image: AppImages.img_avt_player, isSelected: false },
-        { id: 20, name: 'מכבי תל אביב', image: AppImages.img_avt_player, isSelected: false },
-        { id: 21, name: 'מכבי תל אביב', image: AppImages.img_avt_player, isSelected: false },
-        { id: 22, name: 'מכבי תל אביב', image: AppImages.img_avt_player, isSelected: false },
-        { id: 23, name: 'מכבי תל אביב', image: AppImages.img_avt_player, isSelected: false },
-        { id: 24, name: 'מכבי תל אביב', image: AppImages.img_avt_player, isSelected: false },
-        { id: 25, name: 'מכבי תל אביב', image: AppImages.img_avt_player, isSelected: false },
-        { id: 26, name: 'מכבי תל אביב', image: AppImages.img_avt_player, isSelected: false },
-        { id: 27, name: 'מכבי תל אביב', image: AppImages.img_avt_player, isSelected: false },
-        { id: 28, name: 'מכבי תל אביב', image: AppImages.img_avt_player, isSelected: false },
-        { id: 29, name: 'מכבי תל אביב', image: AppImages.img_avt_player, isSelected: false },
-        { id: 30, name: 'מכבי תל אביב', image: AppImages.img_avt_player, isSelected: false },
-    ];
-
-    const [playerSelected, setPlayerSelected] = useState<any[]>([]);
-
-    const handleSelected = (player: any) => {
-        const index = playerSelected.findIndex(elm => player.id === elm.id);
+    const handleSelected = (player: PlayerModel) => {
+        const index = playerSelected.findIndex(elm => player._id === elm._id);
         if (index !== -1) {
-            const newTeamSelected = playerSelected.filter(e => e.id !== player.id);
+            const newTeamSelected = playerSelected.filter(e => e._id !== player._id);
             setPlayerSelected(newTeamSelected);
         } else if (playerSelected.length < 3) {
             setPlayerSelected([...playerSelected, player]);
+            const action = addPlayerTeams(player);
+            dispatch(action);
         }
     };
 
-    const newPlayers = playerFavs.map(e => {
-        const i = playerSelected.findIndex(t => t.id === e.id);
+    const newPlayers = playersData?.map(e => {
+        const i = playerSelected.findIndex(t => t._id === e._id);
         return { ...e, isSelected: i !== -1 };
     });
+
+    useEffect(() => {
+        getPlayersData();
+    }, [getPlayersData]);
 
     return {
         t,

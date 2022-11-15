@@ -5,7 +5,7 @@ import { Favorite } from '@football/app/components/favorite/Favorite';
 import { TeamModel } from '@football/core/models/TeamModelResponse';
 import { useViewModel } from './FavoriteTeamsScreen.viewModel';
 import { IFavoriteTeamsScreenProps } from './FavoriteTeamsScreen.type';
-import { removeFavTeams } from './redux/FavTeam.slice';
+import { removeFavTeams } from '../../../store/FavTeam.slice';
 
 export const FavoriteTeamsScreen = ({ navigation, route }: IFavoriteTeamsScreenProps) => {
     const {
