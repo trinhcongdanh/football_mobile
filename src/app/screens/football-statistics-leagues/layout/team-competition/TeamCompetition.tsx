@@ -1,19 +1,18 @@
+import React from 'react';
+import { View, Text, TouchableOpacity } from 'react-native';
 import { appIcons } from '@football/app/assets/icons/appIcons';
 import { appColors } from '@football/app/utils/constants/appColors';
 import Icon from 'react-native-vector-icons/Feather';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import { getSize } from '@football/app/utils/responsive/scale';
-import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
 import { Avatar } from 'react-native-elements';
-import styles from './HistoryChampionShips.style';
-import { useViewModel } from './HistoryChampionShips.viewModel';
-import { IHistoryChampionShipsProps } from './HistoryChampionShips.type';
+import { useViewModel } from './TeamCompetition.viewModel';
+import { ITeamCompetitionProps } from './TeamCompetition.type';
 
-export const HistoryChampionShips = ({}: IHistoryChampionShipsProps) => {
-    const { t, seasonsHistory } = useViewModel({});
+export const TeamCompetition = ({}: ITeamCompetitionProps) => {
+    const { t, teamCompetitions } = useViewModel({});
     return (
-        <View style={styles.item_statistics}>
+        <View style={appStyles.item_statistics}>
             <View
                 style={[
                     appStyles.flex_row_space_center,
@@ -22,14 +21,18 @@ export const HistoryChampionShips = ({}: IHistoryChampionShipsProps) => {
                     },
                 ]}
             >
-                <Text style={styles.title}>{t('leagues_details.statistics.history')}</Text>
+                <Text style={appStyles.statistics_title}>
+                    {t('statistics.leagues.team_competition')}
+                </Text>
                 <TouchableOpacity style={appStyles.flex_row_space_center}>
-                    <Text style={styles.see_all}>{t('leagues_details.statistics.see_all')}</Text>
+                    <Text style={appStyles.statistics_see_all}>
+                        {t('statistics.leagues.see_all')}
+                    </Text>
                     <Icon
                         name={appIcons.ic_arrow_left}
                         size={getSize.m(10)}
                         color={appColors.button_dark_blue}
-                        style={styles.ic_arrow}
+                        style={appStyles.statistic_ic_arrow}
                     />
                 </TouchableOpacity>
             </View>
@@ -42,44 +45,48 @@ export const HistoryChampionShips = ({}: IHistoryChampionShipsProps) => {
                     },
                 ]}
             >
-                <View style={{ width: getSize.m(80) }}>
-                    <Text style={[styles.header, { textAlign: 'left' }]}>
-                        {t('leagues_details.statistics.season')}
+                <View style={{ width: getSize.m(30) }}>
+                    <Text style={[appStyles.statistics_header, { textAlign: 'left' }]}>
+                        {t('statistics.leagues.location')}
                     </Text>
                 </View>
-                <View style={{ width: getSize.m(200) }}>
-                    <Text style={[styles.header, { textAlign: 'left' }]}>
-                        {t('leagues_details.statistics.name_club')}
+                <View style={{ width: getSize.m(160) }}>
+                    <Text style={[appStyles.statistics_header, { textAlign: 'left' }]}>
+                        {t('statistics.leagues.name_club')}
                     </Text>
+                </View>
+                <View style={{ width: getSize.m(50) }}>
+                    <Text style={appStyles.statistics_header}>{t('statistics.leagues.total')}</Text>
+                </View>
+                <View style={{ width: getSize.m(40) }}>
+                    <Text style={appStyles.statistics_header}>{t('statistics.leagues.score')}</Text>
                 </View>
             </View>
             <View style={{ marginTop: getSize.m(10) }}>
-                {seasonsHistory.map(item => {
+                {teamCompetitions.map(item => {
                     return (
                         <View
                             key={item.id}
                             style={[
                                 appStyles.flex_row_space_center,
-                                styles.itemTeam,
+                                appStyles.statistic_row,
                                 {
                                     backgroundColor:
-                                        item.id % 2 === 1 ? appColors.blue_matte : appColors.white,
+                                        item.id % 2 === 1 ? appColors.blue_matte : appColors.gray,
                                 },
                             ]}
                         >
                             <View
                                 style={{
-                                    width: getSize.m(80),
+                                    width: getSize.m(30),
                                     overflow: 'hidden',
                                 }}
                             >
-                                <Text style={[styles.text_content, { textAlign: 'left' }]}>
-                                    {item.season}
-                                </Text>
+                                <Text style={[appStyles.statistics_content]}>{item.id}</Text>
                             </View>
                             <View
                                 style={{
-                                    width: getSize.m(200),
+                                    width: getSize.m(160),
                                     overflow: 'hidden',
                                 }}
                             >
@@ -91,7 +98,7 @@ export const HistoryChampionShips = ({}: IHistoryChampionShipsProps) => {
                                     <Avatar source={item.avt_club} rounded size={18} />
                                     <Text
                                         style={[
-                                            styles.text_content,
+                                            appStyles.statistics_content,
                                             {
                                                 marginLeft: getSize.m(10),
                                             },
@@ -100,6 +107,24 @@ export const HistoryChampionShips = ({}: IHistoryChampionShipsProps) => {
                                         {item.name_club}
                                     </Text>
                                 </View>
+                            </View>
+                            <View
+                                style={[
+                                    {
+                                        width: getSize.m(50),
+                                    },
+                                ]}
+                            >
+                                <Text style={appStyles.statistics_content}>{item.total}</Text>
+                            </View>
+                            <View
+                                style={[
+                                    {
+                                        width: getSize.m(40),
+                                    },
+                                ]}
+                            >
+                                <Text style={appStyles.statistics_content}>{item.score}</Text>
                             </View>
                         </View>
                     );

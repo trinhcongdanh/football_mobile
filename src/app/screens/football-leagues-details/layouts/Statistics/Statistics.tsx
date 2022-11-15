@@ -7,14 +7,8 @@ import { getSize } from '@football/app/utils/responsive/scale';
 import React from 'react';
 import { View, Text } from 'react-native';
 import { Avatar } from 'react-native-elements';
-import { AccumulationReds } from './accumulation-reds/AccumulationReds';
-import { AccumulationYellows } from './accumulation-yellows/AccumulationYellows';
-import { AverageYellows } from './average-yellows/AverageYellows';
-import { HistoryChampionShips } from './history-championships/HistoryChampionShips';
-import { ScoresGoals } from './scores-goals/ScoresGoals';
-import styles from './Statistics.style';
-import { IStatisticsProps } from './Statistics.type';
 import { useViewModel } from './Statistics.viewModel';
+import { IStatisticsProps } from './Statistics.type';
 export const Statistics = ({}: IStatisticsProps) => {
     const { t, setOnSelect, handleMoreStatistics, onSelect, listTeams } = useViewModel({});
     return (
@@ -41,37 +35,39 @@ export const Statistics = ({}: IStatisticsProps) => {
                                 ]}
                             >
                                 <View style={{ width: getSize.m(120) }}>
-                                    <Text style={[styles.header, { textAlign: 'left' }]}>
+                                    <Text
+                                        style={[appStyles.statistics_header, { textAlign: 'left' }]}
+                                    >
                                         {t('leagues_details.league_table.group')}
                                     </Text>
                                 </View>
                                 <View style={{ width: getSize.m(30) }}>
-                                    <Text style={styles.header}>
+                                    <Text style={appStyles.statistics_header}>
                                         {t('leagues_details.league_table.from')}
                                     </Text>
                                 </View>
                                 <View style={{ width: getSize.m(30) }}>
-                                    <Text style={styles.header}>
+                                    <Text style={appStyles.statistics_header}>
                                         {t('leagues_details.league_table.nch')}
                                     </Text>
                                 </View>
                                 <View style={{ width: getSize.m(30) }}>
-                                    <Text style={styles.header}>
+                                    <Text style={appStyles.statistics_header}>
                                         {t('leagues_details.league_table.draw')}
                                     </Text>
                                 </View>
                                 <View style={{ width: getSize.m(30) }}>
-                                    <Text style={styles.header}>
+                                    <Text style={appStyles.statistics_header}>
                                         {t('leagues_details.league_table.the_p')}
                                     </Text>
                                 </View>
                                 <View style={{ width: getSize.m(40) }}>
-                                    <Text style={styles.header}>
+                                    <Text style={appStyles.statistics_header}>
                                         {t('leagues_details.league_table.time')}
                                     </Text>
                                 </View>
                                 <View style={{ width: getSize.m(30) }}>
-                                    <Text style={styles.header}>
+                                    <Text style={appStyles.statistics_header}>
                                         {t('leagues_details.league_table.no')}
                                     </Text>
                                 </View>
@@ -83,7 +79,7 @@ export const Statistics = ({}: IStatisticsProps) => {
                                             key={item.id}
                                             style={[
                                                 appStyles.flex_row_space_center,
-                                                styles.itemTeam,
+                                                appStyles.statistic_row,
                                                 {
                                                     backgroundColor:
                                                         item.id % 2 === 1
@@ -105,7 +101,7 @@ export const Statistics = ({}: IStatisticsProps) => {
                                                 >
                                                     <Text
                                                         style={[
-                                                            styles.text_content,
+                                                            appStyles.statistics_content,
                                                             {
                                                                 marginRight: getSize.m(10),
                                                             },
@@ -116,7 +112,7 @@ export const Statistics = ({}: IStatisticsProps) => {
                                                     <Avatar source={item.logo} rounded size={18} />
                                                     <Text
                                                         style={[
-                                                            styles.text_content,
+                                                            appStyles.statistics_content,
                                                             {
                                                                 marginLeft: getSize.m(10),
                                                             },
@@ -127,24 +123,34 @@ export const Statistics = ({}: IStatisticsProps) => {
                                                 </View>
                                             </View>
                                             <View style={{ width: getSize.m(30) }}>
-                                                <Text style={styles.text_content}>{item.from}</Text>
+                                                <Text style={appStyles.statistics_content}>
+                                                    {item.from}
+                                                </Text>
                                             </View>
                                             <View style={{ width: getSize.m(30) }}>
-                                                <Text style={styles.text_content}>{item.nch}</Text>
+                                                <Text style={appStyles.statistics_content}>
+                                                    {item.nch}
+                                                </Text>
                                             </View>
                                             <View style={{ width: getSize.m(30) }}>
-                                                <Text style={styles.text_content}>{item.draw}</Text>
+                                                <Text style={appStyles.statistics_content}>
+                                                    {item.draw}
+                                                </Text>
                                             </View>
                                             <View style={{ width: getSize.m(30) }}>
-                                                <Text style={styles.text_content}>
+                                                <Text style={appStyles.statistics_content}>
                                                     {item.the_p}
                                                 </Text>
                                             </View>
                                             <View style={{ width: getSize.m(40) }}>
-                                                <Text style={styles.text_content}>{item.time}</Text>
+                                                <Text style={appStyles.statistics_content}>
+                                                    {item.time}
+                                                </Text>
                                             </View>
                                             <View style={{ width: getSize.m(30) }}>
-                                                <Text style={styles.text_content}>{item.no}</Text>
+                                                <Text style={appStyles.statistics_content}>
+                                                    {item.no}
+                                                </Text>
                                             </View>
                                         </View>
                                     );
@@ -157,11 +163,6 @@ export const Statistics = ({}: IStatisticsProps) => {
                                 onPress={handleMoreStatistics}
                             />
                         </View>
-                        <ScoresGoals />
-                        <AccumulationYellows />
-                        <AccumulationReds />
-                        <AverageYellows />
-                        <HistoryChampionShips />
                     </View>
                 ) : (
                     <View>

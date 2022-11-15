@@ -20,6 +20,7 @@ export enum ScreenName {
     BottomTab = 'BottomTab',
     LeaguesPage = 'LeaguesPage',
     LeaguesDetailsPage = 'LeaguesDetailsPage',
+    StatisticsLeaguesPage = 'StatisticsLeaguesPage',
     VideoPage = 'VideoPage',
     GobletPage = 'GobletPage',
     StateCupPage = 'StateCupPage',

@@ -1,19 +1,20 @@
+import React from 'react';
+import { View, Text, TouchableOpacity, Image } from 'react-native';
 import { appIcons } from '@football/app/assets/icons/appIcons';
 import { appColors } from '@football/app/utils/constants/appColors';
 import Icon from 'react-native-vector-icons/Feather';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import { getSize } from '@football/app/utils/responsive/scale';
-import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { AppImages } from '@football/app/assets/images';
 import { Avatar } from 'react-native-elements';
-import styles from './AverageYellows.style';
-import { useViewModel } from './AverageYellows.viewModel';
-import { IAverageYellowsProps } from './AverageYellows.type';
+import styles from './AverageRebounds.style';
+import { useViewModel } from './AverageRebounds.viewModel';
+import { IAverageReboundsProps } from './AverageRebounds.type';
 
-export const AverageYellows = ({}: IAverageYellowsProps) => {
+export const AverageRebounds = ({}: IAverageReboundsProps) => {
     const { t, listAverages } = useViewModel({});
     return (
-        <View style={styles.item_statistics}>
+        <View style={appStyles.item_statistics}>
             <View
                 style={[
                     appStyles.flex_row_space_center,
@@ -22,14 +23,18 @@ export const AverageYellows = ({}: IAverageYellowsProps) => {
                     },
                 ]}
             >
-                <Text style={styles.title}>{t('leagues_details.statistics.average_yellow')}</Text>
+                <Text style={appStyles.statistics_title}>
+                    {t('statistics.leagues.average_yellow')}
+                </Text>
                 <TouchableOpacity style={appStyles.flex_row_space_center}>
-                    <Text style={styles.see_all}>{t('leagues_details.statistics.see_all')}</Text>
+                    <Text style={appStyles.statistics_see_all}>
+                        {t('statistics.leagues.see_all')}
+                    </Text>
                     <Icon
                         name={appIcons.ic_arrow_left}
                         size={getSize.m(10)}
                         color={appColors.button_dark_blue}
-                        style={styles.ic_arrow}
+                        style={appStyles.statistic_ic_arrow}
                     />
                 </TouchableOpacity>
             </View>
@@ -43,18 +48,18 @@ export const AverageYellows = ({}: IAverageYellowsProps) => {
                 ]}
             >
                 <View style={{ width: getSize.m(30) }}>
-                    <Text style={[styles.header, { textAlign: 'left' }]}>
-                        {t('leagues_details.statistics.location')}
+                    <Text style={[appStyles.statistics_header, { textAlign: 'left' }]}>
+                        {t('statistics.leagues.location')}
                     </Text>
                 </View>
                 <View style={{ width: getSize.m(160) }}>
-                    <Text style={[styles.header, { textAlign: 'left' }]}>
-                        {t('leagues_details.statistics.name_club')}
+                    <Text style={[appStyles.statistics_header, { textAlign: 'left' }]}>
+                        {t('statistics.leagues.name_club')}
                     </Text>
                 </View>
                 <View style={{ width: getSize.m(60) }}>
-                    <Text style={styles.header}>
-                        {t('leagues_details.statistics.number_yellow')}
+                    <Text style={appStyles.statistics_header}>
+                        {t('statistics.leagues.average')}
                     </Text>
                 </View>
             </View>
@@ -65,10 +70,10 @@ export const AverageYellows = ({}: IAverageYellowsProps) => {
                             key={item.id}
                             style={[
                                 appStyles.flex_row_space_center,
-                                styles.itemTeam,
+                                appStyles.statistic_row,
                                 {
                                     backgroundColor:
-                                        item.id % 2 === 1 ? appColors.blue_matte : appColors.white,
+                                        item.id % 2 === 1 ? appColors.blue_matte : appColors.gray,
                                 },
                             ]}
                         >
@@ -78,7 +83,7 @@ export const AverageYellows = ({}: IAverageYellowsProps) => {
                                     overflow: 'hidden',
                                 }}
                             >
-                                <Text style={[styles.text_content]}>{item.id}</Text>
+                                <Text style={[appStyles.statistics_content]}>{item.id}</Text>
                             </View>
                             <View
                                 style={{
@@ -94,7 +99,7 @@ export const AverageYellows = ({}: IAverageYellowsProps) => {
                                     <Avatar source={item.avt_club} rounded size={18} />
                                     <Text
                                         style={[
-                                            styles.text_content,
+                                            appStyles.statistics_content,
                                             {
                                                 marginLeft: getSize.m(10),
                                             },
@@ -105,11 +110,16 @@ export const AverageYellows = ({}: IAverageYellowsProps) => {
                                 </View>
                             </View>
                             <View
-                                style={{
-                                    width: getSize.m(60),
-                                }}
+                                style={[
+                                    appStyles.flex_row_center,
+                                    {
+                                        width: getSize.m(60),
+                                        flex: 0,
+                                    },
+                                ]}
                             >
-                                <Text style={styles.text_content}>{item.amount}</Text>
+                                <Text style={appStyles.statistics_content}>{item.amount}</Text>
+                                <Image source={AppImages.img_goat_net} style={styles.ticket} />
                             </View>
                         </View>
                     );

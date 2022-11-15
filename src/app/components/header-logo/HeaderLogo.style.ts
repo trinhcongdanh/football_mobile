@@ -6,7 +6,11 @@ import { StyleSheet } from 'react-native';
 export const styles = StyleSheet.create({
     image_avt: {
         backgroundColor: appColors.white,
+        width: getSize.m(64),
+        height: getSize.m(64),
         borderRadius: getSize.m(60),
+        justifyContent: 'center',
+        alignItems: 'center',
         elevation: 2,
     },
     text: {

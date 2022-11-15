@@ -1,15 +1,18 @@
 import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
-import { appStyles } from '@football/app/utils/constants/appStyles';
-import { getSize } from '@football/app/utils/responsive/scale';
-import Icon from 'react-native-vector-icons/Feather';
+import { View, Text, TouchableOpacity, Image } from 'react-native';
 import { appIcons } from '@football/app/assets/icons/appIcons';
 import { appColors } from '@football/app/utils/constants/appColors';
+import Icon from 'react-native-vector-icons/Feather';
+import { appStyles } from '@football/app/utils/constants/appStyles';
+import { getSize } from '@football/app/utils/responsive/scale';
+import { AppImages } from '@football/app/assets/images';
 import { Avatar } from 'react-native-elements';
-import { useViewModel } from './ScorersOfGoals.viewModel';
+import styles from './AverageScores.style';
+import { useViewModel } from './AverageScores.viewModel';
+import { IAverageScoresProps } from './AverageScores.type';
 
-export const ScorersOfGoals = () => {
-    const { t, listPlayerGoal } = useViewModel({});
+export const AverageScores = ({}: IAverageScoresProps) => {
+    const { t, listAverages } = useViewModel({});
     return (
         <View style={appStyles.item_statistics}>
             <View
@@ -21,11 +24,11 @@ export const ScorersOfGoals = () => {
                 ]}
             >
                 <Text style={appStyles.statistics_title}>
-                    {t('statistics.group.scorer_of_goal')}
+                    {t('statistics.leagues.average_score')}
                 </Text>
                 <TouchableOpacity style={appStyles.flex_row_space_center}>
                     <Text style={appStyles.statistics_see_all}>
-                        {t('statistics.group.see_all')}
+                        {t('statistics.leagues.see_all')}
                     </Text>
                     <Icon
                         name={appIcons.ic_arrow_left}
@@ -44,17 +47,24 @@ export const ScorersOfGoals = () => {
                     },
                 ]}
             >
-                <View>
-                    <Text style={appStyles.statistics_header}>
-                        {t('statistics.group.player_name')}
+                <View style={{ width: getSize.m(30) }}>
+                    <Text style={[appStyles.statistics_header, { textAlign: 'left' }]}>
+                        {t('statistics.leagues.location')}
                     </Text>
                 </View>
-                <View>
-                    <Text style={appStyles.statistics_header}>{t('statistics.group.number')}</Text>
+                <View style={{ width: getSize.m(160) }}>
+                    <Text style={[appStyles.statistics_header, { textAlign: 'left' }]}>
+                        {t('statistics.leagues.name_club')}
+                    </Text>
+                </View>
+                <View style={{ width: getSize.m(60) }}>
+                    <Text style={appStyles.statistics_header}>
+                        {t('statistics.leagues.average')}
+                    </Text>
                 </View>
             </View>
             <View style={{ marginTop: getSize.m(10) }}>
-                {listPlayerGoal.map(item => {
+                {listAverages.map(item => {
                     return (
                         <View
                             key={item.id}
@@ -67,13 +77,26 @@ export const ScorersOfGoals = () => {
                                 },
                             ]}
                         >
-                            <View>
+                            <View
+                                style={{
+                                    width: getSize.m(30),
+                                    overflow: 'hidden',
+                                }}
+                            >
+                                <Text style={[appStyles.statistics_content]}>{item.id}</Text>
+                            </View>
+                            <View
+                                style={{
+                                    width: getSize.m(160),
+                                    overflow: 'hidden',
+                                }}
+                            >
                                 <View
                                     style={{
                                         flexDirection: 'row',
                                     }}
                                 >
-                                    <Avatar source={item.avt} rounded size={18} />
+                                    <Avatar source={item.avt_club} rounded size={18} />
                                     <Text
                                         style={[
                                             appStyles.statistics_content,
@@ -82,12 +105,21 @@ export const ScorersOfGoals = () => {
                                             },
                                         ]}
                                     >
-                                        {item.name}
+                                        {item.name_club}
                                     </Text>
                                 </View>
                             </View>
-                            <View>
-                                <Text style={appStyles.statistics_content}>{item.goal}</Text>
+                            <View
+                                style={[
+                                    appStyles.flex_row_center,
+                                    {
+                                        width: getSize.m(60),
+                                        flex: 0,
+                                    },
+                                ]}
+                            >
+                                <Text style={appStyles.statistics_content}>{item.amount}</Text>
+                                <Image source={AppImages.img_volleyball} style={styles.ticket} />
                             </View>
                         </View>
                     );

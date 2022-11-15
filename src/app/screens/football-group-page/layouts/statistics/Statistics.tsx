@@ -7,7 +7,6 @@ import Icon from 'react-native-vector-icons/Feather';
 import { appIcons } from '@football/app/assets/icons/appIcons';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { Avatar } from 'react-native-elements';
-import styles from './Statistics.style';
 import { useViewModel } from './Statistics.viewModel';
 
 export const Statistics = () => {
@@ -27,14 +26,16 @@ export const Statistics = () => {
                         },
                     ]}
                 >
-                    <Text style={styles.title}>2021/2022</Text>
+                    <Text style={appStyles.statistics_title}>2021/2022</Text>
                     <TouchableOpacity style={appStyles.flex_row_space_center}>
-                        <Text style={styles.see_all}>{t('group_page.statistics.see_all')}</Text>
+                        <Text style={appStyles.statistics_see_all}>
+                            {t('group_page.statistics.see_all')}
+                        </Text>
                         <Icon
                             name={appIcons.ic_arrow_left}
                             size={getSize.m(10)}
                             color={appColors.button_dark_blue}
-                            style={styles.ic_arrow}
+                            style={appStyles.statistic_ic_arrow}
                         />
                     </TouchableOpacity>
                 </View>
@@ -56,52 +57,52 @@ export const Statistics = () => {
                             }}
                         >
                             <View style={{ width: getSize.m(100) }}>
-                                <Text style={[styles.header, { textAlign: 'left' }]}>
+                                <Text style={[appStyles.statistics_header, { textAlign: 'left' }]}>
                                     {t('group_page.statistics.player')}
                                 </Text>
                             </View>
                             <View style={{ width: getSize.m(50), marginHorizontal: getSize.m(4) }}>
-                                <Text style={styles.header}>
+                                <Text style={appStyles.statistics_header}>
                                     {t('group_page.statistics.number_game')}
                                 </Text>
                             </View>
                             <View style={{ width: getSize.m(50), marginHorizontal: getSize.m(4) }}>
-                                <Text style={styles.header}>
+                                <Text style={appStyles.statistics_header}>
                                     {t('group_page.statistics.gates')}
                                 </Text>
                             </View>
                             <View style={{ width: getSize.m(50), marginHorizontal: getSize.m(4) }}>
-                                <Text style={styles.header}>
+                                <Text style={appStyles.statistics_header}>
                                     {t('group_page.statistics.yellow_league_cup')}
                                 </Text>
                             </View>
                             <View style={{ width: getSize.m(50), marginHorizontal: getSize.m(4) }}>
-                                <Text style={styles.header}>
+                                <Text style={appStyles.statistics_header}>
                                     {t('group_page.statistics.yellow_tutu')}
                                 </Text>
                             </View>
                             <View style={{ width: getSize.m(50), marginHorizontal: getSize.m(4) }}>
-                                <Text style={styles.header}>
+                                <Text style={appStyles.statistics_header}>
                                     {t('group_page.statistics.red_card')}
                                 </Text>
                             </View>
                             <View style={{ width: getSize.m(50), marginHorizontal: getSize.m(4) }}>
-                                <Text style={styles.header}>
+                                <Text style={appStyles.statistics_header}>
                                     {t('group_page.statistics.vehicle')}
                                 </Text>
                             </View>
                             <View style={{ width: getSize.m(50), marginHorizontal: getSize.m(4) }}>
-                                <Text style={styles.header}>
+                                <Text style={appStyles.statistics_header}>
                                     {t('group_page.statistics.enter_replacement')}
                                 </Text>
                             </View>
                             <View style={{ width: getSize.m(50), marginHorizontal: getSize.m(4) }}>
-                                <Text style={styles.header}>
+                                <Text style={appStyles.statistics_header}>
                                     {t('group_page.statistics.switched')}
                                 </Text>
                             </View>
                             <View style={{ width: getSize.m(50), marginHorizontal: getSize.m(4) }}>
-                                <Text style={styles.header}>
+                                <Text style={appStyles.statistics_header}>
                                     {t('group_page.statistics.subtlety')}
                                 </Text>
                             </View>
@@ -129,7 +130,7 @@ export const Statistics = () => {
                                                 <Avatar source={item.avt} rounded size={18} />
                                                 <Text
                                                     style={[
-                                                        styles.text_content,
+                                                        appStyles.statistics_content,
                                                         {
                                                             marginLeft: getSize.m(10),
                                                         },
@@ -145,7 +146,7 @@ export const Statistics = () => {
                                                 marginHorizontal: getSize.m(4),
                                             }}
                                         >
-                                            <Text style={styles.text_content}>
+                                            <Text style={appStyles.statistics_content}>
                                                 {item.number_game}
                                             </Text>
                                         </View>
@@ -155,7 +156,9 @@ export const Statistics = () => {
                                                 marginHorizontal: getSize.m(4),
                                             }}
                                         >
-                                            <Text style={styles.text_content}>{item.gates}</Text>
+                                            <Text style={appStyles.statistics_content}>
+                                                {item.gates}
+                                            </Text>
                                         </View>
                                         <View
                                             style={{
@@ -163,7 +166,7 @@ export const Statistics = () => {
                                                 marginHorizontal: getSize.m(4),
                                             }}
                                         >
-                                            <Text style={styles.text_content}>
+                                            <Text style={appStyles.statistics_content}>
                                                 {item.yellow_league_cup}
                                             </Text>
                                         </View>
@@ -173,7 +176,7 @@ export const Statistics = () => {
                                                 marginHorizontal: getSize.m(4),
                                             }}
                                         >
-                                            <Text style={styles.text_content}>
+                                            <Text style={appStyles.statistics_content}>
                                                 {item.yellow_tutu}
                                             </Text>
                                         </View>
@@ -183,7 +186,9 @@ export const Statistics = () => {
                                                 marginHorizontal: getSize.m(4),
                                             }}
                                         >
-                                            <Text style={styles.text_content}>{item.red_card}</Text>
+                                            <Text style={appStyles.statistics_content}>
+                                                {item.red_card}
+                                            </Text>
                                         </View>
                                         <View
                                             style={{
@@ -191,7 +196,9 @@ export const Statistics = () => {
                                                 marginHorizontal: getSize.m(4),
                                             }}
                                         >
-                                            <Text style={styles.text_content}>{item.vehicle}</Text>
+                                            <Text style={appStyles.statistics_content}>
+                                                {item.vehicle}
+                                            </Text>
                                         </View>
                                         <View
                                             style={{
@@ -199,7 +206,7 @@ export const Statistics = () => {
                                                 marginHorizontal: getSize.m(4),
                                             }}
                                         >
-                                            <Text style={styles.text_content}>
+                                            <Text style={appStyles.statistics_content}>
                                                 {item.enter_replacement}
                                             </Text>
                                         </View>
@@ -209,7 +216,9 @@ export const Statistics = () => {
                                                 marginHorizontal: getSize.m(4),
                                             }}
                                         >
-                                            <Text style={styles.text_content}>{item.switched}</Text>
+                                            <Text style={appStyles.statistics_content}>
+                                                {item.switched}
+                                            </Text>
                                         </View>
                                         <View
                                             style={{
@@ -217,7 +226,9 @@ export const Statistics = () => {
                                                 marginHorizontal: getSize.m(4),
                                             }}
                                         >
-                                            <Text style={styles.text_content}>{item.subtlety}</Text>
+                                            <Text style={appStyles.statistics_content}>
+                                                {item.subtlety}
+                                            </Text>
                                         </View>
                                     </View>
                                 );

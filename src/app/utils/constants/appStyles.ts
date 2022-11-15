@@ -192,4 +192,53 @@ export const appStyles = StyleSheet.create({
         paddingVertical: getSize.m(20),
         paddingHorizontal: getSize.m(16),
     },
+    item_statistics: {
+        backgroundColor: appColors.gray,
+        borderRadius: getSize.m(15),
+        paddingVertical: getSize.m(17),
+        paddingHorizontal: getSize.m(12),
+    },
+    statistics_title: {
+        color: appColors.text_dark_blue,
+        fontSize: getSize.m(14),
+        fontWeight: '700',
+        lineHeight: getSize.m(18),
+        fontFamily: AppFonts.regular,
+    },
+    statistics_see_all: {
+        color: appColors.button_dark_blue,
+        fontSize: getSize.m(12),
+        lineHeight: getSize.m(16),
+        fontWeight: '700',
+        fontFamily: AppFonts.regular,
+        marginRight: getSize.m(4),
+    },
+    statistic_ic_arrow: {
+        fontWeight: '700',
+    },
+
+    statistics_header: {
+        fontWeight: '500',
+        color: appColors.button_dark_blue,
+        textAlign: 'center',
+        fontSize: getSize.m(11),
+        lineHeight: getSize.m(14),
+        fontFamily: AppFonts.regular,
+    },
+
+    statistics_content: {
+        textAlign: 'center',
+        fontFamily: AppFonts.regular,
+        fontSize: getSize.m(11),
+        color: appColors.text_dark_blue,
+        fontWeight: '700',
+        lineHeight: getSize.m(16),
+        overflow: 'hidden',
+    },
+
+    statistic_row: {
+        paddingHorizontal: getSize.m(8),
+        paddingVertical: getSize.m(10),
+        borderRadius: getSize.m(5),
+    },
 });
