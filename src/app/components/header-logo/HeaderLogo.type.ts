@@ -1,4 +1,5 @@
 export type IHeaderLogoProps = {
-    avt: any;
+    avt?: any;
+    logo?: any;
     text: string;
 };

@@ -34,7 +34,10 @@ export const CompositionScreen = ({ navigation, route }: ICompositionScreenProps
                     />
                 </View>
                 <View style={{ marginTop: getSize.m(30) }}>
-                    <Position position={t('match.composition.main_lineup')} />
+                    <Position
+                        position={t('match.composition.main_lineup')}
+                        width={getSize.m(130)}
+                    />
                     {defenders.map(item => {
                         return (
                             <ListPlayer
@@ -47,7 +50,7 @@ export const CompositionScreen = ({ navigation, route }: ICompositionScreenProps
                     })}
                 </View>
                 <View style={{ marginTop: getSize.m(30) }}>
-                    <Position position={t('match.composition.replace')} />
+                    <Position position={t('match.composition.replace')} width={getSize.m(130)} />
                     {defenders.map(item => {
                         return (
                             <ListPlayer
@@ -60,7 +63,10 @@ export const CompositionScreen = ({ navigation, route }: ICompositionScreenProps
                     })}
                 </View>
                 <View style={{ marginTop: getSize.m(30) }}>
-                    <Position position={t('match.composition.not_partner')} />
+                    <Position
+                        position={t('match.composition.not_partner')}
+                        width={getSize.m(130)}
+                    />
                     {defenders.map(item => {
                         return (
                             <ListPlayer
@@ -73,7 +79,7 @@ export const CompositionScreen = ({ navigation, route }: ICompositionScreenProps
                     })}
                 </View>
                 <View style={{ marginTop: getSize.m(30) }}>
-                    <Position position={t('match.composition.coach')} />
+                    <Position position={t('match.composition.coach')} width={getSize.m(130)} />
                     {defenders.map(item => {
                         return (
                             <ListPlayer

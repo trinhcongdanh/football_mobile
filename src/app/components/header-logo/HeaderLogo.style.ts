@@ -4,10 +4,10 @@ import { getSize } from '@football/app/utils/responsive/scale';
 import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
-    image_avt: {
+    avt: {
         backgroundColor: appColors.white,
-        width: getSize.m(64),
-        height: getSize.m(64),
+        width: getSize.m(66),
+        height: getSize.m(66),
         borderRadius: getSize.m(60),
         justifyContent: 'center',
         alignItems: 'center',

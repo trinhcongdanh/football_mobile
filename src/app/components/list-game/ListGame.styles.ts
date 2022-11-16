@@ -27,7 +27,7 @@ export const styles = StyleSheet.create({
         marginTop: getSize.m(16),
         marginBottom: getSize.m(36),
         borderBottomWidth: 1,
-        borderStyle: 'dotted',
+        borderStyle: 'dashed',
         borderColor: appColors.soft_grey,
     },
     date: {

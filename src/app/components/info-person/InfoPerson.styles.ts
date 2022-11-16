@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
     line_dots: {
         borderBottomWidth: getSize.m(1),
         borderColor: appColors.text_option_unselect,
-        borderStyle: 'dotted',
+        borderStyle: 'dashed',
         marginVertical: getSize.m(20),
         marginHorizontal: getSize.m(20),
     },

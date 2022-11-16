@@ -29,4 +29,5 @@ export const appColors = {
     black_dark: '#000',
     button_disable: '#111F4D',
     text_disable: '#3F508E',
+    green: '#34D273',
 };
