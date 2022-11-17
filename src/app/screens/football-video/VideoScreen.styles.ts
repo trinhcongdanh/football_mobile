@@ -59,12 +59,31 @@ const styles = StyleSheet.create({
         borderWidth: getSize.m(2),
     },
 
-    video: {
+    video_container: {
         position: 'absolute',
-        right: getSize.m(10),
-        left: getSize.m(10),
-        top: getSize.m(260),
         zIndex: getSize.m(1),
+        right: getSize.m(0),
+        left: getSize.m(0),
+        top: getSize.m(0),
+        bottom: getSize.m(0),
+        justifyContent: 'center',
+        backgroundColor: appColors.black,
+    },
+
+    ic_close: {
+        position: 'absolute',
+        left: getSize.m(20),
+        top: getSize.m(40),
+        zIndex: 1,
+        backgroundColor: appColors.blue_light,
+        padding: getSize.m(4),
+        borderRadius: getSize.m(30),
+    },
+    ic_share: {
+        position: 'absolute',
+        right: getSize.m(20),
+        top: getSize.m(40),
+        zIndex: 1,
     },
     indicatorContainer: {
         flexDirection: I18nManager.isRTL ? 'row-reverse' : 'row',
