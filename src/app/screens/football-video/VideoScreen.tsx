@@ -48,31 +48,43 @@ export const VideoScreen = ({ navigation, route }: IVideoScreenProps) => {
                 <StatusBar translucent backgroundColor="transparent" />
                 <SafeAreaView style={appStyles.safe_area}>
                     {display && (
-                        <View style={styles.video}>
-                            <Icon
-                                onPress={() => {
-                                    setDisplay(false);
-                                    setAutoPlay(true);
-                                }}
-                                name="close"
-                                size={getSize.m(20)}
-                                color={appColors.white}
-                                style={{ position: 'absolute', left: 5, top: 5, zIndex: 1 }}
-                            />
-                            <VideoPlayer
-                                loop
-                                video={sourceVideo}
-                                thumbnail={AppImages.img_thumbnail}
-                                endThumbnail={AppImages.img_thumbnail}
-                                videoWidth={getSize.m(1600)}
-                                videoHeight={getSize.m(900)}
-                                resizeMode="contain"
-                                showDuration
-                                onEnd={() => {
-                                    setDisplay(false);
-                                    setAutoPlay(true);
-                                }}
-                            />
+                        <View style={styles.video_container}>
+                            <View style={styles.ic_close}>
+                                <Icon
+                                    onPress={() => {
+                                        setDisplay(false);
+                                        setAutoPlay(true);
+                                    }}
+                                    name="close"
+                                    size={getSize.m(18)}
+                                    color={appColors.white}
+                                />
+                            </View>
+                            <View style={styles.ic_share}>
+                                <Icon
+                                    onPress={() => {}}
+                                    name="sharealt"
+                                    size={getSize.m(18)}
+                                    color={appColors.white}
+                                />
+                            </View>
+
+                            <View>
+                                <VideoPlayer
+                                    loop
+                                    video={sourceVideo}
+                                    thumbnail={AppImages.img_thumbnail}
+                                    endThumbnail={AppImages.img_thumbnail}
+                                    videoWidth={getSize.m(1600)}
+                                    videoHeight={getSize.m(900)}
+                                    resizeMode="contain"
+                                    showDuration
+                                    onEnd={() => {
+                                        setDisplay(false);
+                                        setAutoPlay(true);
+                                    }}
+                                />
+                            </View>
                         </View>
                     )}
                     <ScrollView>

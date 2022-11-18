@@ -31,4 +31,5 @@ export const AppImages = {
     img_volleyball: require('./volleyball.png'),
     img_goat_net: require('./goal-net.png'),
     img_pitch: require('./pitch.jpg'),
+    img_share: require('./share-nodes.png'),
 };
