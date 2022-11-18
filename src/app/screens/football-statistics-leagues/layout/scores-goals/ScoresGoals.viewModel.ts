@@ -2,6 +2,7 @@ import { useTranslation } from 'react-i18next';
 import React from 'react';
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
 import { AppImages } from '@football/app/assets/images';
+import { ScreenName } from '@football/app/utils/constants/enum';
 import { IScoresGoalsProps } from './ScoresGoals.type';
 
 export const useViewModel = ({}: IScoresGoalsProps) => {
@@ -51,8 +52,13 @@ export const useViewModel = ({}: IScoresGoalsProps) => {
         },
     ];
 
+    const handleSeeAll = () => {
+        navigate(ScreenName.StatisticDetailsPage);
+    };
+
     return {
         t,
         listGoals,
+        handleSeeAll,
     };
 };

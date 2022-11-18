@@ -9,7 +9,7 @@ import { Avatar } from 'react-native-elements';
 import { useViewModel } from './ScoresGoals.viewModel';
 import { IScoresGoalsProps } from './ScoresGoals.type';
 export const ScoresGoals = ({}: IScoresGoalsProps) => {
-    const { t, listGoals } = useViewModel({});
+    const { t, listGoals, handleSeeAll } = useViewModel({});
     return (
         <View style={appStyles.item_statistics}>
             <View
@@ -21,7 +21,7 @@ export const ScoresGoals = ({}: IScoresGoalsProps) => {
                 ]}
             >
                 <Text style={appStyles.statistics_title}>{t('statistics.leagues.goal')}</Text>
-                <TouchableOpacity style={appStyles.flex_row_space_center}>
+                <TouchableOpacity style={appStyles.flex_row_space_center} onPress={handleSeeAll}>
                     <Text style={appStyles.statistics_see_all}>
                         {t('statistics.leagues.see_all')}
                     </Text>
