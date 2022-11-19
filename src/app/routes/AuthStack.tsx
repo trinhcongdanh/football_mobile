@@ -27,6 +27,7 @@ import {
     PitchScreen,
     PreviousCampaignsScreen,
     StateCupScreen,
+    StatisticDetailsScreen,
     StatisticsGroupScreen,
     StatisticsLeaguesScreen,
     TeamStaffScreen,
@@ -79,6 +80,10 @@ export const AuthStack = () => {
             <Auth.Screen
                 name={ScreenName.StatisticsLeaguesPage}
                 component={StatisticsLeaguesScreen}
+            />
+            <Auth.Screen
+                name={ScreenName.StatisticDetailsPage}
+                component={StatisticDetailsScreen}
             />
             <Auth.Screen name={ScreenName.VideoPage} component={VideoScreen} />
             <Auth.Screen name={ScreenName.GobletPage} component={GobletScreen} />

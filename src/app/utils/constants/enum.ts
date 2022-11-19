@@ -26,6 +26,7 @@ export enum ScreenName {
     LeaguesPage = 'LeaguesPage',
     LeaguesDetailsPage = 'LeaguesDetailsPage',
     StatisticsLeaguesPage = 'StatisticsLeaguesPage',
+    StatisticDetailsPage = 'StatisticDetailsPage',
     VideoPage = 'VideoPage',
     GobletPage = 'GobletPage',
     StateCupPage = 'StateCupPage',
