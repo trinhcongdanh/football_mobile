@@ -25,6 +25,7 @@ import {
     LeaguesDetailsScreen,
     LeaguesScreen,
     MagazineScreen,
+    NationalTeamScreen,
     PitchScreen,
     PreviousCampaignsScreen,
     StateCupScreen,
@@ -58,6 +59,7 @@ export const AuthStack = () => {
             <Auth.Screen name={ScreenName.SettingsPage} component={SettingsScreen} />
             <Auth.Screen name={ScreenName.RegPage} component={RegScreen} />
             <Auth.Screen name={ScreenName.TeamPage} component={TeamScreen} />
+            <Auth.Screen name={ScreenName.NationalTeamPage} component={NationalTeamScreen} />
             <Auth.Screen name={ScreenName.TeamSquadPage} component={TeamSquadScreen} />
             <Auth.Screen name={ScreenName.MatchPage} component={MatchScreen} />
             <Auth.Screen name={ScreenName.HomePage} component={HomeScreen} />

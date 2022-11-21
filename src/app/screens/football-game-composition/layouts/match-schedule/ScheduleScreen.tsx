@@ -34,6 +34,7 @@ export const ScheduleScreen = ({ navigation, route }: IScheduleScreenProps) => {
                             location={item.location}
                             date={item.date}
                             result={item.result}
+                            color={appColors.gray}
                             schedule={item.schedule}
                             completed={item.completed}
                         />

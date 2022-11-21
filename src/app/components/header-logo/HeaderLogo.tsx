@@ -1,13 +1,21 @@
 import React from 'react';
-import { View, Text, Image } from 'react-native';
+import { View, Text, Image, TouchableOpacity } from 'react-native';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import { getSize } from '@football/app/utils/responsive/scale';
 import { Avatar } from 'react-native-elements';
+import Icon from 'react-native-vector-icons/Feather';
 import { styles } from './HeaderLogo.style';
 import { IHeaderLogoProps } from './HeaderLogo.type';
 
-export const HeaderLogo = ({ avt, text, logo }: IHeaderLogoProps) => {
+export const HeaderLogo = ({
+    avt,
+    text,
+    logo,
+    icon,
+    details,
+    handleNavigation,
+}: IHeaderLogoProps) => {
     return (
         <View
             style={[
@@ -31,6 +39,13 @@ export const HeaderLogo = ({ avt, text, logo }: IHeaderLogoProps) => {
                     </View>
                 )}
                 <Text style={styles.text}>{text}</Text>
+                <TouchableOpacity
+                    style={[appStyles.flex_row_center, { flex: 0, marginTop: getSize.m(12) }]}
+                    onPress={handleNavigation}
+                >
+                    <Text style={styles.details}>{details}</Text>
+                    <Icon name={icon} size={getSize.m(10)} color={appColors.button_dark_blue} />
+                </TouchableOpacity>
             </View>
         </View>
     );

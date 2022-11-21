@@ -33,4 +33,5 @@ export const AppImages = {
     img_pitch: require('./pitch.jpg'),
     img_share: require('./share-nodes.png'),
     img_team: require('./team.png'),
+    img_team_israel: require('./team.jpg'),
 };

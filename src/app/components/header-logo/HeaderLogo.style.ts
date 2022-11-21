@@ -21,4 +21,12 @@ export const styles = StyleSheet.create({
         fontFamily: AppFonts.regular,
         color: appColors.check_box,
     },
+    details: {
+        fontSize: getSize.m(12),
+        color: appColors.button_dark_blue,
+        fontWeight: '700',
+        lineHeight: getSize.m(16),
+        fontFamily: AppFonts.regular,
+        marginRight: getSize.m(4),
+    },
 });

@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import { getSize } from '@football/app/utils/responsive/scale';
+import { appColors } from '@football/app/utils/constants/appColors';
 import { ListGame } from '@football/app/components/list-game/ListGame';
 import { appIcons } from '@football/app/assets/icons/appIcons';
 import { useViewModel } from './ListOfGames.viewModel';
@@ -29,6 +30,7 @@ export const ListOfGames = () => {
                             schedule={item.schedule}
                             completed={item.completed}
                             icon={appIcons.ic_arrow_left}
+                            color={appColors.gray}
                             details={item.details}
                             handleDetailMatch={handleDetailMatch}
                         />

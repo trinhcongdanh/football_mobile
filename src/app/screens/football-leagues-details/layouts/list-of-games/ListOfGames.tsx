@@ -4,6 +4,7 @@ import { appStyles } from '@football/app/utils/constants/appStyles';
 import { getSize } from '@football/app/utils/responsive/scale';
 import { ListGame } from '@football/app/components/list-game/ListGame';
 import { appIcons } from '@football/app/assets/icons/appIcons';
+import { appColors } from '@football/app/utils/constants/appColors';
 import { useViewModel } from './ListOfGames.viewModel';
 // import { IListOfGamesProps } from './ListOfGames.type';
 
@@ -28,6 +29,7 @@ export const ListOfGames = (props: any) => {
                             result={item.result}
                             schedule={item.schedule}
                             completed={item.completed}
+                            color={appColors.gray}
                             icon={appIcons.ic_arrow_left}
                             details={item.details}
                         />
