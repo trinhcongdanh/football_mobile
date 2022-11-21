@@ -34,6 +34,7 @@ export enum ScreenName {
     TeamStaffPage = 'TeamStaffPage',
     StatisticsGroupPage = 'StatisticsGroupPage',
     GameCompositionPage = 'GameCompositionPage',
+    MagazinePage = 'MagazinePage',
 }
 
 export enum ScreenTopTap {
