@@ -462,6 +462,9 @@ const resources = {
                 name: 'שם שחקן',
                 number: 'מס׳ שערים',
             },
+            magazine: {
+                title: 'חיזוק הקשר בין צוותי השיפוט למועדונים לטובת מיגור האלימות',
+            },
         },
     },
     en: {
@@ -920,6 +923,10 @@ const resources = {
                 title: 'List of conquerors',
                 name: "A player's name",
                 number: 'Number of gates',
+            },
+            magazine: {
+                title:
+                    'Strengthening the relationship between the refereeing teams and the clubs for the sake of eradicating violence',
             },
         },
     },
