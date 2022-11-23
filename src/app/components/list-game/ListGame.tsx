@@ -23,6 +23,7 @@ export const ListGame = ({
     details,
     icon,
     tournament,
+    color,
     handleDetailMatch,
 }: IListGameProps) => {
     return (
@@ -83,8 +84,8 @@ export const ListGame = ({
                 </View>
             </View>
             <View style={appStyles.flex_row_space}>
-                <View style={[styles.circle, { right: getSize.m(-40) }]} />
-                <View style={[styles.circle, { left: getSize.m(-40) }]} />
+                <View style={[styles.circle, { right: getSize.m(-40), backgroundColor: color }]} />
+                <View style={[styles.circle, { left: getSize.m(-40), backgroundColor: color }]} />
             </View>
             <View style={styles.line_dots} />
             <View style={[appStyles.flex_row_space_center, { marginHorizontal: getSize.m(36) }]}>

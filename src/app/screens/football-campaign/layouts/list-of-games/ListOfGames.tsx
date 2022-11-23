@@ -66,6 +66,7 @@ export const ListOfGames = () => {
                                     schedule={item.schedule}
                                     completed={item.completed}
                                     icon={appIcons.ic_arrow_left}
+                                    color={appColors.gray}
                                     details={item.details}
                                     handleDetailMatch={handleDetailMatch}
                                 />

@@ -130,6 +130,27 @@ const resources = {
                     temp: 'הנבחרת הצעירה',
                 },
             },
+            national_team: {
+                team_event: 'אירועי נבחרת',
+                previous_campaigns: 'קמפיינים קודמים',
+                ranking_table: {
+                    title: 'טבלת דירוג',
+                    place: 'מקום',
+                    team: 'נבחרת',
+                    time: 'שע׳',
+                    mash: 'מש׳',
+                    nch: 'נצ׳',
+                    draw: 'תיקו',
+                    the_p: 'הפ׳',
+                    no: 'נק׳',
+                },
+                list_game: {
+                    title: 'רשימת משחקים',
+                    home_away: 'בית / חוץ',
+                    house: 'בית',
+                    outside: 'חוץ',
+                },
+            },
             team_squad: {
                 title: 'סגל נבחרת',
                 option: {
@@ -590,6 +611,27 @@ const resources = {
                 title: 'Teams',
                 group: {
                     temp: 'the chosen one the young woman',
+                },
+            },
+            national_team: {
+                team_event: 'Team events',
+                previous_campaigns: 'Previous campaigns',
+                ranking_table: {
+                    title: 'Ranking table',
+                    place: 'Place',
+                    team: 'Team',
+                    time: 'Time',
+                    mash: 'Mash',
+                    nch: 'Nch',
+                    draw: 'Draw',
+                    the_p: 'The p',
+                    no: 'No',
+                },
+                list_game: {
+                    title: 'List of games',
+                    home_away: 'Home / Away',
+                    house: 'House',
+                    outside: 'Outsidess',
                 },
             },
             team_squad: {

@@ -27,7 +27,7 @@ export const useViewModel = ({ navigation, route }: ITeamScreenProps) => {
     ];
 
     const handleTeam = () => {
-        navigate(ScreenName.TeamSquadPage);
+        navigate(ScreenName.NationalTeamPage);
     };
 
     return { optionTeams, toggleChangeBar, toggleBar, handleTeam };

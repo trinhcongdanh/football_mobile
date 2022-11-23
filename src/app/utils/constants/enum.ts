@@ -12,6 +12,7 @@ export enum ScreenName {
     SettingsPage = 'SettingsPage',
     RegPage = 'RegPage',
     TeamPage = 'TeamPage',
+    NationalTeamPage = 'NationalTeamPage',
     TeamSquadPage = 'TeamSquadPage',
     MatchPage = 'MatchPage',
     DataPlayerPage = 'DataPlayerPage',
