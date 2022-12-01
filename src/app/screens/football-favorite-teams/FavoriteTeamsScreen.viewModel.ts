@@ -9,24 +9,26 @@ import { TeamModel, TeamModelResponse } from '@football/core/models/TeamModelRes
 import { Alert } from 'react-native';
 import { isEmpty, isNil } from 'lodash';
 import { useDispatch, useSelector } from 'react-redux';
-import { useAsyncStorage } from '@react-native-async-storage/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useMount } from '@football/app/utils/hooks/useMount';
-import { IFavoriteTeamsScreenProps } from './FavoriteTeamsScreen.type';
 import { addFavTeams, FavTeamState } from '../../../store/FavTeam.slice';
+import { IFavoriteTeamsScreenProps } from './FavoriteTeamsScreen.type';
 
 export const useViewModel = ({ navigation, route }: IFavoriteTeamsScreenProps) => {
     const { t } = useTranslation();
     const dispatch = useDispatch();
     const favTeamList = useSelector((state: FavTeamState) => state.favTeams);
     const { navigate, goBack } = useAppNavigator();
-    const [teamData, setTeamData] = useState<TeamModel[]>();
-    const { getItem, setItem } = useAsyncStorage(OfflineData.teams);
+    const [teamsData, setTeamsData] = useState<TeamModel[]>();
+    const [teamSelected, setTeamSelected] = useState<TeamModel[]>([]);
+    // const { getItem, setItem } = useAsyncStorage(OfflineData.teams);
 
     const getTeamsData = useCallback(async () => {
         try {
-            const offlineData = await getItem();
+            const offlineData = await AsyncStorage.getItem('@teams_data');
+
             if (!isEmpty(offlineData) && !isNil(offlineData)) {
-                setTeamData(JSON.parse(offlineData));
+                setTeamsData(JSON.parse(offlineData));
             } else {
                 const { data }: TeamModelResponse = await axiosClient.post(`${BASE_URL}/find`, {
                     dataSource: DATA_SOURCE,
@@ -34,17 +36,15 @@ export const useViewModel = ({ navigation, route }: IFavoriteTeamsScreenProps) =
                     collection: 'team',
                 });
                 if (!isEmpty(data.documents)) {
-                    setTeamData(data.documents);
+                    setTeamsData(data.documents);
                 }
             }
         } catch (error: any) {
             Alert.alert(error);
         }
-    }, [getItem]);
+    }, []);
 
-    const [teamSelected, setTeamSelected] = useState<TeamModel[]>([]);
-
-    const handleSelected = (team: TeamModel, ind: number) => {
+    const handleSelected = (team: TeamModel) => {
         const index = teamSelected.findIndex(elm => team._id === elm._id);
 
         if (index !== -1) {
@@ -52,17 +52,19 @@ export const useViewModel = ({ navigation, route }: IFavoriteTeamsScreenProps) =
             setTeamSelected(newTeamSelected);
         } else if (teamSelected.length < 3) {
             setTeamSelected([...teamSelected, team]);
+            const action = addFavTeams(team);
+            dispatch(action);
         }
     };
 
     const newTeams = useMemo(
         () =>
-            teamData?.map(e => {
+            teamsData?.map(e => {
                 // eslint-disable-next-line @typescript-eslint/no-shadow
                 const i = teamSelected.findIndex(t => t._id === e._id);
                 return { ...e, isSelected: i !== -1 };
             }),
-        [teamData, teamSelected]
+        [teamsData, teamSelected]
     );
 
     const onGoBack = (): void => {
@@ -75,7 +77,7 @@ export const useViewModel = ({ navigation, route }: IFavoriteTeamsScreenProps) =
     const handleContinue = async () => {
         const action = addFavTeams(teamSelected);
         dispatch(action);
-        await setItem(JSON.stringify(teamSelected));
+        await AsyncStorage.setItem(OfflineData.teams, JSON.stringify(teamSelected));
         navigate(ScreenName.FavPlayerPage);
     };
 
@@ -92,7 +94,7 @@ export const useViewModel = ({ navigation, route }: IFavoriteTeamsScreenProps) =
         dispatch,
         teamSelected,
         newTeams,
-        teamData,
+        teamsData,
         favTeamList,
     };
 };
