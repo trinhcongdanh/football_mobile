@@ -1,37 +1,43 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable @typescript-eslint/no-shadow */
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useState, useMemo } from 'react';
 import { OfflineData, ScreenName } from '@football/app/utils/constants/enum';
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
 import { useTranslation } from 'react-i18next';
 import { axiosClient } from '@football/core/api/configs/axiosClient';
 import { BASE_URL, DATA_SOURCE, DB } from '@football/core/api/configs/config';
-import { isEmpty } from 'lodash';
+import { isEmpty, isNil } from 'lodash';
 import { PlayerModel, PlayersModelResponse } from '@football/core/models/PlayerModelResponse';
 import { Alert } from 'react-native';
-import { useDispatch } from 'react-redux';
-import { useAsyncStorage } from '@react-native-async-storage/async-storage';
+import { useDispatch, useSelector } from 'react-redux';
+import { useMount } from '@football/app/utils/hooks/useMount';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { addPlayerTeams, FavPlayerState } from '../../../store/FavPlayer.slice';
 import { IFavoritePlayerScreenProps } from './FavoritePlayersScreen.type';
-import { addPlayerTeams } from '../../../store/FavPlayer.slice';
 
 export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) => {
     const { t } = useTranslation();
     const { navigate, goBack } = useAppNavigator();
+    const favPlayerList = useSelector((state: FavPlayerState) => state.favPlayers);
     const dispatch = useDispatch();
     const [playersData, setPlayersData] = useState<PlayerModel[]>();
     const [playerSelected, setPlayerSelected] = useState<PlayerModel[]>([]);
-    const { getItem, setItem } = useAsyncStorage(OfflineData.teams);
 
     const getPlayersData = useCallback(async () => {
         try {
-            const { data }: PlayersModelResponse = await axiosClient.post(`${BASE_URL}/find`, {
-                dataSource: DATA_SOURCE,
-                database: DB,
-                collection: 'player',
-            });
+            const offlineData = await AsyncStorage.getItem('@players_data');
+            if (!isEmpty(offlineData) && !isNil(offlineData)) {
+                setPlayersData(JSON.parse(offlineData));
+            } else {
+                const { data }: PlayersModelResponse = await axiosClient.post(`${BASE_URL}/find`, {
+                    dataSource: DATA_SOURCE,
+                    database: DB,
+                    collection: 'player',
+                });
 
-            if (!isEmpty(data.documents)) {
-                setPlayersData(data.documents);
+                if (!isEmpty(data.documents)) {
+                    setPlayersData(data.documents);
+                }
             }
         } catch (error: any) {
             Alert.alert(error);
@@ -50,10 +56,15 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
         }
     };
 
-    const newPlayers = playersData?.map(e => {
-        const i = playerSelected.findIndex(t => t._id === e._id);
-        return { ...e, isSelected: i !== -1 };
-    });
+    const newPlayers = useMemo(
+        () =>
+            playersData?.map(e => {
+                // eslint-disable-next-line @typescript-eslint/no-shadow
+                const i = playerSelected.findIndex(t => t._id === e._id);
+                return { ...e, isSelected: i !== -1 };
+            }),
+        [playersData, playerSelected]
+    );
 
     const onGoBack = (): void => {
         goBack();
@@ -62,13 +73,16 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
         navigate(ScreenName.BottomTab);
     };
 
-    const handleContinue = () => {
+    const handleContinue = async () => {
+        const action = addPlayerTeams(playerSelected);
+        dispatch(action);
+        await AsyncStorage.setItem(OfflineData.players, JSON.stringify(playerSelected));
         navigate(ScreenName.FavTopTeamPage);
     };
 
-    useEffect(() => {
+    useMount(() => {
         getPlayersData();
-    }, [getPlayersData]);
+    });
 
     return {
         t,
@@ -78,5 +92,6 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
         handleSelected,
         playerSelected,
         newPlayers,
+        favPlayerList,
     };
 };
