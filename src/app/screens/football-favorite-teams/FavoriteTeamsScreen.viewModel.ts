@@ -9,7 +9,7 @@ import { TeamModel, TeamModelResponse } from '@football/core/models/TeamModelRes
 import { Alert } from 'react-native';
 import { isEmpty, isNil } from 'lodash';
 import { useDispatch, useSelector } from 'react-redux';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage, { useAsyncStorage } from '@react-native-async-storage/async-storage';
 import { useMount } from '@football/app/utils/hooks/useMount';
 import { addFavTeams, FavTeamState } from '../../../store/FavTeam.slice';
 import { IFavoriteTeamsScreenProps } from './FavoriteTeamsScreen.type';
@@ -22,6 +22,7 @@ export const useViewModel = ({ navigation, route }: IFavoriteTeamsScreenProps) =
     const [teamsData, setTeamsData] = useState<TeamModel[]>();
     const [teamSelected, setTeamSelected] = useState<TeamModel[]>([]);
     // const { getItem, setItem } = useAsyncStorage(OfflineData.teams);
+    const { getItem, setItem } = useAsyncStorage(OfflineData.fav_teams);
 
     const getTeamsData = useCallback(async () => {
         try {
@@ -77,7 +78,7 @@ export const useViewModel = ({ navigation, route }: IFavoriteTeamsScreenProps) =
     const handleContinue = async () => {
         const action = addFavTeams(teamSelected);
         dispatch(action);
-        await AsyncStorage.setItem(OfflineData.teams, JSON.stringify(teamSelected));
+        await AsyncStorage.setItem(OfflineData.fav_teams, JSON.stringify(teamSelected));
         navigate(ScreenName.FavPlayerPage);
     };
 

@@ -68,7 +68,8 @@ export enum ScreenStack {
 }
 
 export enum OfflineData {
-    teams = 'teams_data',
-    players = 'players_data',
-    national = 'national_data',
+    fav_teams = 'teams_data',
+    fav_players = 'players_data',
+    fav_national = 'national_data',
+    team_page = 'team_page',
 }
