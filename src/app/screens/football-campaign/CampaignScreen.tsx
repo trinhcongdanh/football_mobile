@@ -8,12 +8,20 @@ import { CardGoBack } from '@football/app/components/go-back/CardGoBack';
 import { HeaderLogo } from '@football/app/components/header-logo/HeaderLogo';
 import { ListOfGames } from './layouts/list-of-games/ListOfGames';
 import { RankingTable } from './layouts/ranking-table/RankingTable';
+import { Campaign } from '@football/core/models/CampaignsResponse';
+import { isNil } from 'lodash';
 import styles from './CampaignScreen.style';
 import { useViewModel } from './CampaignScreen.viewModel';
 import { ICampaignScreenProps } from './CampaignScreen.type';
 
 export const CampaignScreen = ({ navigation, route }: ICampaignScreenProps) => {
     const { t, onGoBack } = useViewModel({ navigation, route });
+
+    const campaign: Campaign | undefined = route.params?.['campaign'];
+    if (isNil(campaign)) {
+        throw new Error('Campaign is not defined');
+    }
+
     return (
         <View style={appStyles.flex}>
             <ImageBackground source={AppImages.img_background} style={appStyles.flex}>
@@ -24,13 +32,13 @@ export const CampaignScreen = ({ navigation, route }: ICampaignScreenProps) => {
                             iconName={appIcons.ic_right_ios}
                             iconStyle={styles.ic_back}
                             goBack={onGoBack}
-                            title="ליגת ONE ZERO בנקאות פרטית דיגיטלית"
+                            title={campaign.name_he}
                         />
                     </View>
                     <ScrollView>
                         <HeaderLogo text="נבחרת לאומית גברים" logo={AppImages.img_logo} />
                         <View style={[appStyles.package, { marginTop: getSize.m(0) }]}>
-                            <RankingTable />
+                            <RankingTable rankingTable={campaign} />
                         </View>
                         <View style={appStyles.package}>
                             <ListOfGames />

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { Image, Text, View } from 'react-native';
 import { Position } from '@football/app/components/position/Position';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { appStyles } from '@football/app/utils/constants/appStyles';
@@ -8,15 +8,16 @@ import { Avatar } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/AntDesign';
 import { appIcons } from '@football/app/assets/icons/appIcons';
 import { useViewModel } from './RankingTable.viewModel';
+import { IRankingTableProps } from './RankingTable.type';
 
-export const RankingTable = () => {
-    const { t, listTeams } = useViewModel({});
+export const RankingTable = ({ rankingTable }: IRankingTableProps) => {
+    const { t } = useViewModel({ rankingTable });
     return (
         <View>
             <Text style={appStyles.statistics_title}>{t('campaign.ranking_table.title')}</Text>
             <View style={{ marginTop: getSize.m(26) }}>
                 <Position
-                    position="בית 9"
+                    position={rankingTable.group_name_he}
                     color={appColors.text_dark_blue}
                     width={getSize.m(130)}
                 />
@@ -71,10 +72,10 @@ export const RankingTable = () => {
                         </View>
                     </View>
                     <View>
-                        {listTeams.map(item => {
+                        {rankingTable.leader_board.map(item => {
                             return (
                                 <View
-                                    key={item.id}
+                                    key={item.place}
                                     style={[
                                         appStyles.flex_row_space_center,
                                         appStyles.statistic_row,
@@ -89,18 +90,24 @@ export const RankingTable = () => {
                                     <View
                                         style={[appStyles.flex_row_align, { width: getSize.m(30) }]}
                                     >
-                                        <Text style={appStyles.statistics_content}>{item.id}</Text>
+                                        <Text style={appStyles.statistics_content}>
+                                            {item.place}
+                                        </Text>
                                         <View>
-                                            <Icon
-                                                name={appIcons.ic_up}
-                                                size={11}
-                                                color={appColors.green}
-                                            />
-                                            <Icon
-                                                name={appIcons.ic_down}
-                                                size={11}
-                                                color={appColors.red}
-                                            />
+                                            {item.place_change == 'up' && (
+                                                <Icon
+                                                    name={appIcons.ic_up}
+                                                    size={11}
+                                                    color={appColors.green}
+                                                />
+                                            )}
+                                            {item.place_change == 'down' && (
+                                                <Icon
+                                                    name={appIcons.ic_down}
+                                                    size={11}
+                                                    color={appColors.red}
+                                                />
+                                            )}
                                         </View>
                                     </View>
                                     <View style={[{ width: getSize.m(80), overflow: 'hidden' }]}>
@@ -109,42 +116,50 @@ export const RankingTable = () => {
                                                 flexDirection: 'row',
                                             }}
                                         >
-                                            <Avatar source={item.logo} rounded size={20} />
+                                            <Avatar
+                                                source={{ uri: item.logo_url }}
+                                                rounded
+                                                size={getSize.m(20)}
+                                            />
                                             <Text
                                                 style={[
                                                     appStyles.statistics_content,
                                                     { marginLeft: getSize.m(6) },
                                                 ]}
                                             >
-                                                {item.name}
+                                                {item.name_he}
                                             </Text>
                                         </View>
                                     </View>
                                     <View style={{ width: getSize.m(30) }}>
                                         <Text style={appStyles.statistics_content}>
-                                            {item.mash}
-                                        </Text>
-                                    </View>
-                                    <View style={{ width: getSize.m(30) }}>
-                                        <Text style={appStyles.statistics_content}>{item.nch}</Text>
-                                    </View>
-                                    <View style={{ width: getSize.m(30) }}>
-                                        <Text style={appStyles.statistics_content}>
-                                            {item.draw}
+                                            {item.games}
                                         </Text>
                                     </View>
                                     <View style={{ width: getSize.m(30) }}>
                                         <Text style={appStyles.statistics_content}>
-                                            {item.the_p}
+                                            {item.games}
+                                        </Text>
+                                    </View>
+                                    <View style={{ width: getSize.m(30) }}>
+                                        <Text style={appStyles.statistics_content}>
+                                            {item.ties}
+                                        </Text>
+                                    </View>
+                                    <View style={{ width: getSize.m(30) }}>
+                                        <Text style={appStyles.statistics_content}>
+                                            {item.difference}
                                         </Text>
                                     </View>
                                     <View style={{ width: getSize.m(40) }}>
                                         <Text style={appStyles.statistics_content}>
-                                            {item.time}
+                                            {item.goals}
                                         </Text>
                                     </View>
                                     <View style={{ width: getSize.m(30) }}>
-                                        <Text style={appStyles.statistics_content}>{item.no}</Text>
+                                        <Text style={appStyles.statistics_content}>
+                                            {item.score}
+                                        </Text>
                                     </View>
                                 </View>
                             );

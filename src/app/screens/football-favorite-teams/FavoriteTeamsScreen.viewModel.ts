@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 import { useCallback, useMemo, useState } from 'react';
-import { OfflineData, ScreenName } from '@football/app/utils/constants/enum';
+import { ItemKey, OfflineData, ScreenName } from '@football/app/utils/constants/enum';
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
 import { useTranslation } from 'react-i18next';
 import { axiosClient } from '@football/core/api/configs/axiosClient';
@@ -10,6 +10,7 @@ import { Alert } from 'react-native';
 import { isEmpty, isNil } from 'lodash';
 import { useDispatch, useSelector } from 'react-redux';
 import AsyncStorage, { useAsyncStorage } from '@react-native-async-storage/async-storage';
+import { getItem, setItem } from '@football/core/helpers/localStorage';
 import { useMount } from '@football/app/utils/hooks/useMount';
 import { addFavTeams, FavTeamState } from '../../../store/FavTeam.slice';
 import { IFavoriteTeamsScreenProps } from './FavoriteTeamsScreen.type';
@@ -26,8 +27,9 @@ export const useViewModel = ({ navigation, route }: IFavoriteTeamsScreenProps) =
 
     const getTeamsData = useCallback(async () => {
         try {
-            const offlineData = await AsyncStorage.getItem('@teams_data');
+            // const offlineData = await AsyncStorage.getItem('@teams_data');
 
+            const offlineData = await AsyncStorage.getItem(OfflineData.fav_teams);
             if (!isEmpty(offlineData) && !isNil(offlineData)) {
                 setTeamsData(JSON.parse(offlineData));
             } else {
@@ -37,6 +39,8 @@ export const useViewModel = ({ navigation, route }: IFavoriteTeamsScreenProps) =
                     collection: 'team',
                 });
                 if (!isEmpty(data.documents)) {
+                    console.log(data.documents);
+
                     setTeamsData(data.documents);
                 }
             }
