@@ -19,7 +19,7 @@ import { useViewModel } from './PreviousCampaignsScreen.viewModel';
 import { IPreviousCampaignsScreenProps } from './PreviousCampaignsScreen.type';
 
 export const PreviousCampaignsScreen = ({ navigation, route }: IPreviousCampaignsScreenProps) => {
-    const { t, onGoBack, campaigns, handleCampaignPage } = useViewModel({ navigation, route });
+    const { t, onGoBack, preCampaigns, handleCampaignPage } = useViewModel({ navigation, route });
     return (
         <View style={appStyles.flex}>
             <ImageBackground source={AppImages.img_background} style={appStyles.flex}>
@@ -45,7 +45,7 @@ export const PreviousCampaignsScreen = ({ navigation, route }: IPreviousCampaign
                                 </Text>
                             </View>
                             <View>
-                                {campaigns.map(campaign => {
+                                {preCampaigns.map(campaign => {
                                     return (
                                         <TouchableOpacity
                                             style={[
@@ -53,13 +53,13 @@ export const PreviousCampaignsScreen = ({ navigation, route }: IPreviousCampaign
                                                 styles.content,
                                             ]}
                                             onPress={handleCampaignPage}
-                                            key={campaign.id}
+                                            key={campaign._id}
                                         >
                                             <Text style={styles.name_campaign}>
-                                                {campaign.name}
+                                                {campaign.name_he}
                                             </Text>
                                             <Text style={styles.year_campaign}>
-                                                {campaign.year}
+                                                {campaign.season}
                                             </Text>
                                         </TouchableOpacity>
                                     );

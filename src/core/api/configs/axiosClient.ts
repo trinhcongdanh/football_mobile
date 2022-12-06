@@ -12,7 +12,10 @@ export const axiosClient = axios.create({
     },
     paramsSerializer: (params: any) => queryString.stringify(params),
 });
-
+axiosClient.interceptors.request.use(request => {
+    // console.log('Starting Request', JSON.stringify(request, null, 2));
+    return request;
+});
 axiosClient.interceptors.response.use(
     response => {
         if (response.config.responseType === 'document') {

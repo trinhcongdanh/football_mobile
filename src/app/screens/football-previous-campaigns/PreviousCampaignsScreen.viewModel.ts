@@ -1,36 +1,56 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
 import { ScreenName } from '@football/app/utils/constants/enum';
+import { Alert } from 'react-native';
+import { axiosClient } from '@football/core/api/configs/axiosClient';
+import { BASE_URL, DATA_SOURCE, DB } from '@football/core/api/configs/config';
+import { isEmpty } from 'lodash';
+import { useMount } from '@football/app/utils/hooks/useMount';
+import { Campaign, CampaignsResponse } from '@football/core/models/CampaignsResponse';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { IPreviousCampaignsScreenProps } from './PreviousCampaignsScreen.type';
 
 export const useViewModel = ({ navigation, route }: IPreviousCampaignsScreenProps) => {
     const { navigate, goBack } = useAppNavigator();
     const { t } = useTranslation();
-
+    const [preCampaigns, setPreCampaigns] = useState<Campaign[]>([]);
     const onGoBack = (): void => {
         goBack();
     };
 
-    const campaigns = [
-        { id: 1, name: 'ליגת האומות של אופ"א 2022/23', year: '2022/23' },
-        { id: 2, name: 'ידידות', year: '2022/23' },
-        { id: 3, name: 'מוקדמות מונדיאל', year: '2022/23' },
-        { id: 4, name: 'ליגת האומות של אופ"א 2022/23', year: '2022/23' },
-        { id: 5, name: 'ליגת האומות של אופ"א 2022/23', year: '2022/23' },
-        { id: 6, name: 'ליגת האומות של אופ"א 2022/23', year: '2022/23' },
-        { id: 7, name: 'ליגת האומות של אופ"א 2022/23', year: '2022/23' },
-        { id: 8, name: 'ליגת האומות של אופ"א 2022/23', year: '2022/23' },
-    ];
+    const getPreCampaign = useCallback(async () => {
+        try {
+            const { data }: CampaignsResponse = await axiosClient.post(`${BASE_URL}/find`, {
+                dataSource: DATA_SOURCE,
+                database: DB,
+                collection: 'campaign',
+                // top_team_id: '636027f8a1c4cf43fdff2a67',
+            });
+            if (!isEmpty(data)) {
+                console.log(data);
+            }
+        } catch (error: any) {
+            Alert.alert(error);
+        }
+    }, []);
 
     const handleCampaignPage = () => {
-        navigate(ScreenName.CampaignPage);
+        for (let i = 0; i < preCampaigns.length; i++) {
+            navigate(ScreenName.CampaignPage, {
+                campaign: preCampaigns[i],
+            });
+        }
     };
+
+    useMount(() => {
+        getPreCampaign();
+    });
 
     return {
         t,
         onGoBack,
         handleCampaignPage,
-        campaigns,
+        preCampaigns,
     };
 };
