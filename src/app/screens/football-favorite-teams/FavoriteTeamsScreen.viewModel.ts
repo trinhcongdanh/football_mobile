@@ -39,7 +39,7 @@ export const useViewModel = ({ navigation, route }: IFavoriteTeamsScreenProps) =
                     collection: 'team',
                 });
                 if (!isEmpty(data.documents)) {
-                    console.log(data.documents);
+                    // console.log(data.documents);
 
                     setTeamsData(data.documents);
                 }

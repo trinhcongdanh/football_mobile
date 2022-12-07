@@ -1,57 +1,115 @@
 import { View, Text } from 'react-native';
 import React from 'react';
-import { Avatar } from 'react-native-elements';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { getSize } from '@football/app/utils/responsive/scale';
-import { AppImages } from '@football/app/assets/images';
-import { IDataCoachTeamsScreenProps } from './DataCoachTeamsScreen.type';
+import { SvgUri } from 'react-native-svg';
 import { useViewModel } from './DataCoachTeamsScreen.viewModel';
-import styles from './DataCoachTeamsScreen.style';
+import { IDataCoachTeamsScreenProps } from './DataCoachTeamsScreen.type';
 
 // type Props = {};
 
-export const DataCoachTeamsScreen = ({}: IDataCoachTeamsScreenProps) => {
-    const { t, onGoBack, datas } = useViewModel({});
-    const matches = Array(2).fill('');
+export const DataCoachTeamsScreen = ({ teams }: IDataCoachTeamsScreenProps) => {
+    const { t, onGoBack } = useViewModel({ teams });
+
     return (
         <View>
-            {matches.map((inp: string, index: number) => {
-                return (
-                    <View key={index.toString()} style={styles.data_coach}>
-                        <View style={styles.logo}>
-                            <Avatar
-                                source={AppImages.img_club}
-                                size={getSize.m(50)}
-                                rounded
-                                containerStyle={styles.logo_club}
-                            />
-                        </View>
-                        <View style={styles.content}>
-                            {datas.map(item => {
-                                return (
-                                    <View
-                                        key={item.id}
-                                        style={[
-                                            appStyles.flex_row_space_center,
-                                            styles.content_item,
-                                            {
-                                                backgroundColor:
-                                                    item.id % 2 === 0
-                                                        ? appColors.blue_matte
-                                                        : appColors.white,
-                                            },
-                                        ]}
-                                    >
-                                        <Text style={styles.label}>{item.label}</Text>
-                                        <Text style={styles.data_content}>{item.content}</Text>
-                                    </View>
-                                );
-                            })}
-                        </View>
+            <View style={appStyles.item_statistics}>
+                <View
+                    style={[
+                        appStyles.flex_row_space_center,
+                        {
+                            paddingHorizontal: getSize.m(4),
+                        },
+                    ]}
+                >
+                    <View style={{ width: getSize.m(60) }}>
+                        <Text style={[appStyles.statistics_header, { textAlign: 'left' }]}>
+                            {t('coach.season')}
+                        </Text>
                     </View>
-                );
-            })}
+                    <View style={{ width: getSize.m(100) }}>
+                        <Text style={[appStyles.statistics_header, { textAlign: 'left' }]}>
+                            {t('coach.club')}
+                        </Text>
+                    </View>
+                    <View style={{ width: getSize.m(60) }}>
+                        <Text style={appStyles.statistics_header}>{t('coach.age_group')}</Text>
+                    </View>
+                    <View style={{ width: getSize.m(60) }}>
+                        <Text style={appStyles.statistics_header}>{t('coach.position')}</Text>
+                    </View>
+                </View>
+                <View style={{ marginTop: getSize.m(10) }}>
+                    {teams.map((item, index) => {
+                        return (
+                            <View
+                                key={item.team_id}
+                                style={[
+                                    appStyles.flex_row_space_center,
+                                    appStyles.statistic_row,
+                                    {
+                                        backgroundColor:
+                                            index % 2 === 0 ? appColors.blue_matte : appColors.gray,
+                                    },
+                                ]}
+                            >
+                                <View style={{ width: getSize.m(60) }}>
+                                    <Text style={appStyles.statistics_content}>{item.years}</Text>
+                                </View>
+                                <View
+                                    style={{
+                                        width: getSize.m(100),
+                                        overflow: 'hidden',
+                                    }}
+                                >
+                                    <View
+                                        style={{
+                                            flexDirection: 'row',
+                                            alignItems: 'center',
+                                        }}
+                                    >
+                                        <SvgUri
+                                            uri={item.logo_url}
+                                            width={getSize.m(22)}
+                                            height={getSize.m(22)}
+                                        />
+                                        <Text
+                                            style={[
+                                                appStyles.statistics_content,
+                                                {
+                                                    marginLeft: getSize.m(3),
+                                                },
+                                            ]}
+                                        >
+                                            {item.name_he}
+                                        </Text>
+                                    </View>
+                                </View>
+
+                                <View
+                                    style={{
+                                        width: getSize.m(60),
+                                    }}
+                                >
+                                    <Text style={appStyles.statistics_content}>
+                                        {item.age_group_he}
+                                    </Text>
+                                </View>
+                                <View
+                                    style={{
+                                        width: getSize.m(60),
+                                    }}
+                                >
+                                    <Text style={appStyles.statistics_content}>
+                                        {item.position_he}
+                                    </Text>
+                                </View>
+                            </View>
+                        );
+                    })}
+                </View>
+            </View>
         </View>
     );
 };

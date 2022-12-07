@@ -6,34 +6,22 @@ import { appColors } from '@football/app/utils/constants/appColors';
 import { Avatar } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/Feather';
 import { getSize } from '@football/app/utils/responsive/scale';
-import { AppImages } from '@football/app/assets/images';
 import { appIcons } from '@football/app/assets/icons/appIcons';
 import styles from './DataCoachGamesScreen.style';
 import { useViewModel } from './DataCoachGamesScreen.viewModel';
 import { IDataCoachGamesScreenProps } from './DataCoachGamesScreen.type';
 
-export const DataCoachGamesScreen = ({}: IDataCoachGamesScreenProps) => {
-    const { t, onGoBack } = useViewModel({});
-    const matches = Array(2).fill('');
+export const DataCoachGamesScreen = ({ games }: IDataCoachGamesScreenProps) => {
+    const { t, onGoBack } = useViewModel({ games });
     return (
         <View>
-            {matches.map((inp: string, index: number) => {
+            {games.map((game, index) => {
                 return (
                     <View key={index.toString()} style={styles.games}>
                         <View style={styles.tournaments}>
                             <Text style={styles.text_tournaments}>{t('coach.tournaments')}</Text>
                         </View>
-                        <View style={appStyles.flex_row_space}>
-                            <Text
-                                style={[
-                                    styles.date,
-                                    {
-                                        color: appColors.text_dark_blue,
-                                    },
-                                ]}
-                            >
-                                15.09.22
-                            </Text>
+                        <View style={[appStyles.flex_row_space, { flexDirection: 'row-reverse' }]}>
                             <View style={[appStyles.flex_row_align, { flex: 0 }]}>
                                 <IconLocation
                                     name={appIcons.ic_location}
@@ -48,9 +36,19 @@ export const DataCoachGamesScreen = ({}: IDataCoachGamesScreenProps) => {
                                         },
                                     ]}
                                 >
-                                    {t('match.stadium')}
+                                    {game.stadium_he}
                                 </Text>
                             </View>
+                            <Text
+                                style={[
+                                    styles.date,
+                                    {
+                                        color: appColors.text_dark_blue,
+                                    },
+                                ]}
+                            >
+                                {game.date}
+                            </Text>
                         </View>
                         <View style={appStyles.flex_row_space}>
                             <View style={[styles.circle, { right: getSize.m(-40) }]} />
@@ -60,30 +58,37 @@ export const DataCoachGamesScreen = ({}: IDataCoachGamesScreenProps) => {
                         <View
                             style={[
                                 appStyles.flex_row_space_center,
-                                { marginHorizontal: getSize.m(36) },
+                                { marginHorizontal: getSize.m(36), flexDirection: 'row-reverse' },
                             ]}
                         >
                             <View style={[appStyles.align_justify]}>
                                 <Avatar
                                     rounded
                                     size={getSize.m(40)}
-                                    source={AppImages.img_albania}
+                                    source={{ uri: game.team1.logo_url }}
                                     containerStyle={styles.avt_club}
                                 />
-                                <Text style={styles.name_club}>{t('match.club.albania')}</Text>
+
+                                <Text style={styles.name_club}>{game.team1.name_he}</Text>
                             </View>
-                            <View style={[appStyles.align_justify, styles.result]}>
-                                <Text style={styles.score}>3:1</Text>
-                            </View>
+                            {game.score != null ? (
+                                <View style={[appStyles.align_justify, styles.result]}>
+                                    <Text style={styles.score}>{game.score}</Text>
+                                </View>
+                            ) : (
+                                <View style={[appStyles.align_justify, styles.result]}>
+                                    <Text style={styles.score}>{game.time}</Text>
+                                </View>
+                            )}
+
                             <View style={[appStyles.align_justify]}>
                                 <Avatar
                                     rounded
                                     size={getSize.m(40)}
-                                    source={AppImages.img_israel}
+                                    source={{ uri: game.team2.logo_url }}
                                     containerStyle={styles.avt_club}
                                 />
-
-                                <Text style={styles.name_club}>{t('match.club.israel')}</Text>
+                                <Text style={styles.name_club}>{game.team2.name_he}</Text>
                             </View>
                         </View>
                         <TouchableOpacity style={[appStyles.flex_row_center, { flex: 0 }]}>

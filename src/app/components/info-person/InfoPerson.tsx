@@ -23,7 +23,7 @@ export const InfoPerson = ({
         <View>
             <View style={[appStyles.align_justify, { marginTop: getSize.m(16) }]}>
                 <Avatar
-                    source={avt}
+                    source={{ uri: avt }}
                     size={getSize.m(78)}
                     rounded
                     containerStyle={styles.avt_person}
@@ -40,7 +40,7 @@ export const InfoPerson = ({
                     <View style={appStyles.flex_row_space_center}>
                         {img_logo && (
                             <Avatar
-                                source={img_logo}
+                                source={{ uri: img_logo }}
                                 size={getSize.m(18)}
                                 rounded
                                 containerStyle={styles.avt_national}
