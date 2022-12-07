@@ -6,6 +6,7 @@ import {
     Text,
     ScrollView,
     TouchableOpacity,
+    Image,
 } from 'react-native';
 import React from 'react';
 import { AppImages } from '@football/app/assets/images';
@@ -27,10 +28,16 @@ import { IDataCoachScreenProps } from './DataCoachScreen.type';
 // type Props = {};
 
 export const DataCoachScreen = ({ navigation, route }: IDataCoachScreenProps) => {
-    const { t, onGoBack, setOnSelect, onSelect } = useViewModel({
+    const { t, onGoBack, setOnSelect, onSelect, coachesData } = useViewModel({
         navigation,
         route,
     });
+    if (coachesData.isLoading == true) {
+        return <></>;
+    }
+    if (coachesData.success == false) {
+        return <></>;
+    }
 
     return (
         <View style={appStyles.flex}>
@@ -50,12 +57,12 @@ export const DataCoachScreen = ({ navigation, route }: IDataCoachScreenProps) =>
                     <ScrollView showsVerticalScrollIndicator={false}>
                         <View style={appStyles.container}>
                             <InfoPerson
-                                name="אלון חזן"
-                                data_3={155}
-                                data_1="09/1967"
-                                data_2={t('data_player.national.israel')}
-                                avt={AppImages.img_coach}
-                                img_logo={AppImages.img_israel}
+                                name={coachesData.data.name_he}
+                                data_3={coachesData.data.num_of_games}
+                                data_1={coachesData.data.date_of_birth}
+                                data_2={coachesData.data.citizenship_he}
+                                avt={coachesData.data.image_url}
+                                img_logo={coachesData.data.citizenship_image_url}
                                 title_1={t('data_player.birthday')}
                                 title_2={t('data_player.national.title')}
                                 title_3={t('data_player.number')}
@@ -65,7 +72,7 @@ export const DataCoachScreen = ({ navigation, route }: IDataCoachScreenProps) =>
                             style={[
                                 appStyles.flex,
                                 appStyles.main_container,
-                                { paddingHorizontal: getSize.m(20), marginTop: getSize.m(62) },
+                                { marginTop: getSize.m(62) },
                             ]}
                         >
                             <View style={styles.debut_game}>
@@ -75,32 +82,41 @@ export const DataCoachScreen = ({ navigation, route }: IDataCoachScreenProps) =>
                                 <View
                                     style={[
                                         appStyles.flex_row_space_center,
-                                        { marginVertical: getSize.m(26) },
+                                        {
+                                            marginVertical: getSize.m(26),
+                                            flexDirection: 'row-reverse',
+                                        },
                                     ]}
                                 >
                                     <View style={appStyles.align_justify}>
                                         <Avatar
-                                            source={AppImages.img_israel}
+                                            source={{
+                                                uri: coachesData.data.debut_game.team1.logo_url,
+                                            }}
                                             rounded
                                             size={getSize.m(26)}
                                             containerStyle={styles.logo}
                                         />
                                         <Text style={styles.name_national}>
-                                            {t('coach.israel')}
+                                            {coachesData.data.debut_game.team1.name_he}
                                         </Text>
                                     </View>
                                     <View style={styles.score}>
-                                        <Text style={appStyles.number}>3 : 1</Text>
+                                        <Text style={appStyles.number}>
+                                            {coachesData.data.debut_game.score}
+                                        </Text>
                                     </View>
                                     <View style={appStyles.align_justify}>
                                         <Avatar
-                                            source={AppImages.img_iceland}
+                                            source={{
+                                                uri: coachesData.data.debut_game.team2.logo_url,
+                                            }}
                                             rounded
                                             size={getSize.m(24)}
                                             containerStyle={styles.logo}
                                         />
                                         <Text style={styles.name_national}>
-                                            {t('coach.iceland')}
+                                            {coachesData.data.debut_game.team2.name_he}
                                         </Text>
                                     </View>
                                 </View>
@@ -124,9 +140,75 @@ export const DataCoachScreen = ({ navigation, route }: IDataCoachScreenProps) =>
                                     onSelect={setOnSelect}
                                 />
                                 {onSelect === 0 ? (
-                                    <DataCoachTeamsScreen />
+                                    <View>
+                                        <DataCoachTeamsScreen teams={coachesData.data.teams} />
+                                        <View
+                                            style={{
+                                                borderBottomColor: appColors.separator,
+                                                borderBottomWidth: getSize.m(1),
+                                                marginHorizontal: getSize.m(10),
+                                                marginBottom: getSize.m(12),
+                                            }}
+                                        />
+                                        <View style={styles.footer_statistics}>
+                                            <View style={appStyles.align_justify}>
+                                                <View style={styles.item_footer_statistics}>
+                                                    <Image
+                                                        source={AppImages.img_down_left_up_right}
+                                                    />
+                                                </View>
+                                                <View style={{ marginTop: getSize.m(4) }}>
+                                                    <Text>{t('coach.draw')}</Text>
+                                                </View>
+                                                <View style={{ marginTop: getSize.m(14) }}>
+                                                    <Text style={styles.total}>
+                                                        {coachesData.data.total_ties}
+                                                    </Text>
+                                                </View>
+                                            </View>
+                                            <View style={appStyles.align_justify}>
+                                                <View style={styles.item_footer_statistics}>
+                                                    <Image source={AppImages.img_down_right} />
+                                                </View>
+                                                <View style={{ marginTop: getSize.m(4) }}>
+                                                    <Text>{t('coach.loss')}</Text>
+                                                </View>
+                                                <View style={{ marginTop: getSize.m(14) }}>
+                                                    <Text style={styles.total}>
+                                                        {coachesData.data.total_losses}
+                                                    </Text>
+                                                </View>
+                                            </View>
+                                            <View style={appStyles.align_justify}>
+                                                <View style={styles.item_footer_statistics}>
+                                                    <Image source={AppImages.img_state_cup} />
+                                                </View>
+                                                <View style={{ marginTop: getSize.m(4) }}>
+                                                    <Text>{t('coach.victory')}</Text>
+                                                </View>
+                                                <View style={{ marginTop: getSize.m(14) }}>
+                                                    <Text style={styles.total}>
+                                                        {coachesData.data.total_wins}
+                                                    </Text>
+                                                </View>
+                                            </View>
+                                            <View style={appStyles.align_justify}>
+                                                <View style={styles.item_footer_statistics}>
+                                                    <Image source={AppImages.img_goal_net_blue} />
+                                                </View>
+                                                <View style={{ marginTop: getSize.m(4) }}>
+                                                    <Text>{t('coach.game')}</Text>
+                                                </View>
+                                                <View style={{ marginTop: getSize.m(14) }}>
+                                                    <Text style={styles.total}>
+                                                        {coachesData.data.total_games}
+                                                    </Text>
+                                                </View>
+                                            </View>
+                                        </View>
+                                    </View>
                                 ) : (
-                                    <DataCoachGamesScreen />
+                                    <DataCoachGamesScreen games={coachesData.data.games} />
                                 )}
                             </View>
                         </View>

@@ -10,6 +10,7 @@ const styles = StyleSheet.create({
         backgroundColor: appColors.white,
         borderRadius: getSize.m(20),
         marginTop: getSize.m(-50),
+        marginHorizontal: getSize.m(20),
     },
 
     congratulations: {
@@ -55,6 +56,30 @@ const styles = StyleSheet.create({
         lineHeight: getSize.m(16),
         fontFamily: AppFonts.regular,
         marginRight: getSize.m(4),
+    },
+    footer_statistics: {
+        marginHorizontal: getSize.m(10),
+        paddingHorizontal: getSize.m(36),
+        paddingVertical: getSize.m(25),
+        backgroundColor: appColors.white,
+        borderRadius: getSize.m(15),
+        flexDirection: 'row-reverse',
+        justifyContent: 'space-between',
+    },
+    item_footer_statistics: {
+        width: getSize.m(30),
+        height: getSize.m(30),
+        borderRadius: getSize.m(30),
+        backgroundColor: appColors.blue_matte,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    total: {
+        fontWeight: '700',
+        fontSize: getSize.m(15),
+        lineHeight: getSize.m(22),
+        color: appColors.text_dark_blue,
+        fontFamily: AppFonts.regular,
     },
 });
 

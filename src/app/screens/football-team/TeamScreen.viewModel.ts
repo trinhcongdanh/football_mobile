@@ -29,9 +29,11 @@ export const useViewModel = ({ navigation, route }: ITeamScreenProps) => {
                     database: DB,
                     collection: 'team',
                 });
-                // if (!isEmpty(data.documents)) {
-                //     setTeamPageData(data.documents);
-                // }
+                if (!isEmpty(data.documents)) {
+                    // console.log(data.documents);
+
+                    setTeamPageData(data.documents);
+                }
             }
         } catch (error: any) {
             Alert.alert(error);
