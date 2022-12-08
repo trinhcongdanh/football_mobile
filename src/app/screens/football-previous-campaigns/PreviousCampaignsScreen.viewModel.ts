@@ -28,7 +28,8 @@ export const useViewModel = ({ navigation, route }: IPreviousCampaignsScreenProp
                 // top_team_id: '636027f8a1c4cf43fdff2a67',
             });
             if (!isEmpty(data)) {
-                // console.log(data);
+                console.log(data);
+                setPreCampaigns(data.documents);
             }
         } catch (error: any) {
             Alert.alert(error);

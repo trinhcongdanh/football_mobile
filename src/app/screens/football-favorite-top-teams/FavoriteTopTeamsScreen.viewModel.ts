@@ -1,5 +1,5 @@
 import { useCallback, useMemo, useState } from 'react';
-import { ItemKey, OfflineData, ScreenName } from '@football/app/utils/constants/enum';
+import { OfflineData, ScreenName } from '@football/app/utils/constants/enum';
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
 import { useTranslation } from 'react-i18next';
 import { axiosClient } from '@football/core/api/configs/axiosClient';
@@ -8,10 +8,9 @@ import { TopTeamModel, TopTeamModelResponse } from '@football/core/models/TopTea
 import { Alert } from 'react-native';
 import { isEmpty, isNil } from 'lodash';
 import { useDispatch, useSelector } from 'react-redux';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useMount } from '@football/app/utils/hooks/useMount';
-import { addFavTopTeams, FavTopTeamState } from '../../../store/FavTopTeam.slice';
-import { getItem, setItem } from '@football/core/helpers/localStorage';
+import localStorage from '@football/core/helpers/localStorage';
+import { FavTopTeamState, addFavTopTeams } from 'src/store/FavTopTeam.slice';
 import { IFavoriteTopTeamsScreenProps } from './FavoriteTopTeamsScreen.type';
 
 export const useViewModel = ({ navigation, route }: IFavoriteTopTeamsScreenProps) => {
@@ -26,7 +25,9 @@ export const useViewModel = ({ navigation, route }: IFavoriteTopTeamsScreenProps
         try {
             // const offlineData = await getItem();
             // const offlineData = await AsyncStorage.getItem('@national_data');
-            const offlineData = await getItem<TopTeamModel[]>(ItemKey.NATIONAL_SELECTED);
+            const offlineData = await localStorage.getItem<TopTeamModel[]>(
+                OfflineData.fav_national
+            );
             if (!isEmpty(offlineData) && !isNil(offlineData)) {
                 setTopTeamsData(offlineData);
             } else {
@@ -75,7 +76,7 @@ export const useViewModel = ({ navigation, route }: IFavoriteTopTeamsScreenProps
         const action = addFavTopTeams(topTeamSelected);
         dispatch(action);
         // await AsyncStorage.setItem(OfflineData.national, JSON.stringify(topTeamSelected));
-        await setItem(ItemKey.NATIONAL_SELECTED, topTeamSelected);
+        await localStorage.setItem<TopTeamModel[]>(OfflineData.fav_national, topTeamSelected);
         navigate(ScreenName.FavSummaryPage);
     };
     useMount(() => {
