@@ -10,6 +10,7 @@
     "lib": [
       "es6"
     ],
+    "baseUrl": ".",
     "moduleResolution": "node",
     "noEmit": true,
     "strict": true,

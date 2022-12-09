@@ -1,19 +1,18 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable @typescript-eslint/no-shadow */
-import { useCallback, useState, useMemo } from 'react';
-import { ItemKey, OfflineData, ScreenName } from '@football/app/utils/constants/enum';
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
-import { useTranslation } from 'react-i18next';
+import { OfflineData, ScreenName } from '@football/app/utils/constants/enum';
+import { useMount } from '@football/app/utils/hooks/useMount';
 import { axiosClient } from '@football/core/api/configs/axiosClient';
 import { BASE_URL, DATA_SOURCE, DB } from '@football/core/api/configs/config';
-import { isEmpty, isNil } from 'lodash';
+import localStorage from '@football/core/helpers/localStorage';
 import { PlayerModel, PlayersModelResponse } from '@football/core/models/PlayerModelResponse';
+import { isEmpty, isNil } from 'lodash';
+import { useCallback, useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Alert } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { useMount } from '@football/app/utils/hooks/useMount';
-import AsyncStorage, { useAsyncStorage } from '@react-native-async-storage/async-storage';
-import { addPlayerTeams, FavPlayerState } from '../../../store/FavPlayer.slice';
-import { getItem, setItem } from '@football/core/helpers/localStorage';
+import { addPlayerTeams, FavPlayerState } from 'src/store/FavPlayer.slice';
 import { IFavoritePlayerScreenProps } from './FavoritePlayersScreen.type';
 
 export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) => {
@@ -23,14 +22,16 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
     const dispatch = useDispatch();
     const [playersData, setPlayersData] = useState<PlayerModel[]>();
     const [playerSelected, setPlayerSelected] = useState<PlayerModel[]>([]);
-    const { getItem, setItem } = useAsyncStorage(OfflineData.fav_players);
+    // const { getItem, setItem } = useAsyncStorage(OfflineData.fav_players);
 
     const getPlayersData = useCallback(async () => {
         try {
             // const offlineData = await AsyncStorage.getItem('@players_data');
-            const offlineData = await AsyncStorage.getItem(OfflineData.fav_players);
+            // const offlineData = await AsyncStorage.getItem(OfflineData.fav_players);
+
+            const offlineData = await localStorage.getItem<PlayerModel[]>(OfflineData.fav_players);
             if (!isEmpty(offlineData) && !isNil(offlineData)) {
-                setPlayersData(JSON.parse(offlineData));
+                setPlayersData(offlineData);
             } else {
                 const { data }: PlayersModelResponse = await axiosClient.post(`${BASE_URL}/find`, {
                     dataSource: DATA_SOURCE,
@@ -79,7 +80,8 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
     const handleContinue = async () => {
         const action = addPlayerTeams(playerSelected);
         dispatch(action);
-        await AsyncStorage.setItem(OfflineData.fav_players, JSON.stringify(playerSelected));
+        // await AsyncStorage.setItem(OfflineData.fav_players, JSON.stringify(playerSelected));
+        await localStorage.setItem<PlayerModel[]>(OfflineData.fav_players, playerSelected);
         navigate(ScreenName.FavTopTeamPage);
     };
 

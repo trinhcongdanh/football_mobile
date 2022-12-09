@@ -74,9 +74,3 @@ export enum OfflineData {
     team_page = 'TEAM_PAGE',
     coach_page = 'COACH_PAGE',
 }
-
-export enum ItemKey {
-    TEAM_SELECTED = 'TEAM_SELECTED',
-    PLAYER_SELECTED = 'PLAYER_SELECTED',
-    NATIONAL_SELECTED = 'NATIONAL_SELECTED',
-}
