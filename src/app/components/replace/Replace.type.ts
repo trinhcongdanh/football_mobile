@@ -1,7 +1,8 @@
 export type IReplaceProps = {
-    name_home: string;
-    name_away: string;
-    avt: any;
-    minute: any;
+    name_up: string;
+    name_down: string;
+    avt_up: string;
+    avt_down: string;
+    minute: number;
     team: string;
 };

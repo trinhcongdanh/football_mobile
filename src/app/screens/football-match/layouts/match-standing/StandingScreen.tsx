@@ -10,10 +10,17 @@ import { useViewModel } from './StandingScreen.viewModel';
 import { IStandingScreenProps } from './StandingScreen.type';
 
 export const StandingScreen = ({ navigation, route }: IStandingScreenProps) => {
-    const { t, listTeams } = useViewModel({
+    const { t, leaderBoard } = useViewModel({
         navigation,
         route,
     });
+
+    if (leaderBoard.isLoading == true) {
+        return <></>;
+    }
+    if (leaderBoard.success == false) {
+        return <></>;
+    }
 
     return (
         <View
@@ -75,16 +82,16 @@ export const StandingScreen = ({ navigation, route }: IStandingScreenProps) => {
                             </View>
                         </View>
                         <View>
-                            {listTeams.map(item => {
+                            {leaderBoard.data.map((item, index) => {
                                 return (
                                     <View
-                                        key={item.id}
+                                        key={index}
                                         style={[
                                             appStyles.flex_row_space_center,
                                             appStyles.statistic_row,
                                             {
                                                 backgroundColor:
-                                                    item.id % 2 === 0
+                                                    index % 2 === 0
                                                         ? appColors.blue_matte
                                                         : appColors.gray,
                                             },
@@ -97,19 +104,23 @@ export const StandingScreen = ({ navigation, route }: IStandingScreenProps) => {
                                             ]}
                                         >
                                             <Text style={appStyles.statistics_content}>
-                                                {item.id}
+                                                {item.place}
                                             </Text>
                                             <View>
-                                                <Icon
-                                                    name={appIcons.ic_up}
-                                                    size={11}
-                                                    color={appColors.blue_light}
-                                                />
-                                                <Icon
-                                                    name={appIcons.ic_down}
-                                                    size={11}
-                                                    color={appColors.red}
-                                                />
+                                                {item.place_change === 'up' && (
+                                                    <Icon
+                                                        name={appIcons.ic_up}
+                                                        size={11}
+                                                        color={appColors.blue_light}
+                                                    />
+                                                )}
+                                                {item.place_change === 'down' && (
+                                                    <Icon
+                                                        name={appIcons.ic_down}
+                                                        size={11}
+                                                        color={appColors.red}
+                                                    />
+                                                )}
                                             </View>
                                         </View>
                                         <View
@@ -120,45 +131,49 @@ export const StandingScreen = ({ navigation, route }: IStandingScreenProps) => {
                                                     flexDirection: 'row',
                                                 }}
                                             >
-                                                <Avatar source={item.logo} rounded size={20} />
+                                                <Avatar
+                                                    source={{ uri: item.logo_url }}
+                                                    rounded
+                                                    size={20}
+                                                />
                                                 <Text
                                                     style={[
                                                         appStyles.statistics_content,
                                                         { marginLeft: getSize.m(6) },
                                                     ]}
                                                 >
-                                                    {item.name}
+                                                    {item.name_he}
                                                 </Text>
                                             </View>
                                         </View>
                                         <View style={{ width: getSize.m(30) }}>
                                             <Text style={appStyles.statistics_content}>
-                                                {item.mash}
+                                                {item.games}
                                             </Text>
                                         </View>
                                         <View style={{ width: getSize.m(30) }}>
                                             <Text style={appStyles.statistics_content}>
-                                                {item.nch}
+                                                {item.wins}
                                             </Text>
                                         </View>
                                         <View style={{ width: getSize.m(30) }}>
                                             <Text style={appStyles.statistics_content}>
-                                                {item.draw}
+                                                {item.ties}
                                             </Text>
                                         </View>
                                         <View style={{ width: getSize.m(30) }}>
                                             <Text style={appStyles.statistics_content}>
-                                                {item.the_p}
+                                                {item.difference}
                                             </Text>
                                         </View>
                                         <View style={{ width: getSize.m(40) }}>
                                             <Text style={appStyles.statistics_content}>
-                                                {item.time}
+                                                {item.goals}
                                             </Text>
                                         </View>
                                         <View style={{ width: getSize.m(30) }}>
                                             <Text style={appStyles.statistics_content}>
-                                                {item.no}
+                                                {item.score}
                                             </Text>
                                         </View>
                                     </View>

@@ -1,6 +1,6 @@
 export type ITicketRedProps = {
     name: string;
-    avt: any;
-    minute: any;
+    avt: string;
+    minute: number;
     team: string;
 };

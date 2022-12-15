@@ -1,60 +1,39 @@
+import { OfflineData } from '@football/app/utils/constants/enum';
+import { useMount } from '@football/app/utils/hooks/useMount';
+import localStorage from '@football/core/helpers/localStorage';
+import { GameModel, Lineup } from '@football/core/models/GameModelResponse';
+import { isEmpty, isNil } from 'lodash';
+import { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Alert } from 'react-native';
 import { ICompositionScreenProps } from './CompositionScreen.type';
 
 export const useViewModel = ({ navigation, route }: ICompositionScreenProps) => {
     const { t } = useTranslation();
-    const defenders = [
-        {
-            id: 1,
-            name: 'עמרי גלזר',
-            number: 18,
-        },
-        {
-            id: 2,
-            name: 'פיני יואב גראפי',
-            number: 1,
-        },
-        {
-            id: 3,
-            name: 'עופר מרציאנו',
-            number: 21,
-        },
-        {
-            id: 4,
-            name: 'עופר מרציאנו',
-            number: 21,
-        },
-        {
-            id: 5,
-            name: 'עופר מרציאנו',
-            number: 21,
-        },
-        {
-            id: 6,
-            name: 'עופר מרציאנו',
-            number: 21,
-        },
-        {
-            id: 7,
-            name: 'עופר מרציאנו',
-            number: 21,
-        },
-        {
-            id: 8,
-            name: 'עופר מרציאנו',
-            number: 21,
-        },
-        {
-            id: 9,
-            name: 'עופר מרציאנו',
-            number: 21,
-        },
+    const [lineUp, setLineUp] = useState<{
+        isLoading: boolean;
+        success: boolean;
+        data: Lineup;
+    }>({ isLoading: true, success: false, data: null! });
 
-        {
-            id: 10,
-            name: 'עופר מרציאנו',
-            number: 21,
-        },
-    ];
-    return { t, defenders };
+    const getLineUp = useCallback(async () => {
+        try {
+            const offlineData = await localStorage.getItem<{
+                isLoading: boolean;
+                success: boolean;
+                data: GameModel;
+            }>(OfflineData.game_page);
+            if (!isEmpty(offlineData) && !isNil(offlineData)) {
+                setLineUp({ isLoading: false, success: true, data: offlineData.data.lineup });
+            }
+        } catch (error: any) {
+            Alert.alert(error);
+        }
+    }, []);
+
+    useMount(() => {
+        getLineUp();
+    });
+
+    return { t, lineUp };
 };

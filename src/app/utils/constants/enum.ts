@@ -73,4 +73,5 @@ export enum OfflineData {
     fav_national = 'NATIONAL_DATA',
     team_page = 'TEAM_PAGE',
     coach_page = 'COACH_PAGE',
+    game_page = 'GAME_PAGE',
 }
