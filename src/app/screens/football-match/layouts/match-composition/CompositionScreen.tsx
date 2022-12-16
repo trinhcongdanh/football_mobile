@@ -11,10 +11,16 @@ import { ICompositionScreenProps } from './CompositionScreen.type';
 // type Props = {};
 
 export const CompositionScreen = ({ navigation, route }: ICompositionScreenProps) => {
-    const { t, defenders } = useViewModel({
+    const { t, lineUp } = useViewModel({
         navigation,
         route,
     });
+    if (lineUp.isLoading == true) {
+        return <></>;
+    }
+    if (lineUp.success == false) {
+        return <></>;
+    }
 
     return (
         <View
@@ -29,14 +35,28 @@ export const CompositionScreen = ({ navigation, route }: ICompositionScreenProps
                         width={getSize.m(130)}
                         position={t('match.composition.main_lineup')}
                     />
-                    {defenders.map(item => {
-                        return <ListPlayer key={item.id} name={item.name} number={item.number} />;
+                    {lineUp.data.opening.map(item => {
+                        return (
+                            <ListPlayer
+                                key={item.player_id}
+                                name={item.name_he}
+                                number_before={item.shirt_number}
+                                avt={item.image_url}
+                            />
+                        );
                     })}
                 </View>
                 <View style={{ marginTop: getSize.m(30) }}>
                     <Position width={getSize.m(130)} position={t('match.composition.replace')} />
-                    {defenders.map(item => {
-                        return <ListPlayer key={item.id} name={item.name} number={item.number} />;
+                    {lineUp.data.substitutes.map(item => {
+                        return (
+                            <ListPlayer
+                                key={item.player_id}
+                                name={item.name_he}
+                                number_before={item.shirt_number}
+                                avt={item.image_url}
+                            />
+                        );
                     })}
                 </View>
                 <View style={{ marginTop: getSize.m(30) }}>
@@ -44,14 +64,27 @@ export const CompositionScreen = ({ navigation, route }: ICompositionScreenProps
                         width={getSize.m(130)}
                         position={t('match.composition.not_partner')}
                     />
-                    {defenders.map(item => {
-                        return <ListPlayer key={item.id} name={item.name} number={item.number} />;
+                    {lineUp.data.not_participated.map(item => {
+                        return (
+                            <ListPlayer
+                                key={item.player_id}
+                                name={item.name_he}
+                                number_before={item.shirt_number}
+                                avt={item.image_url}
+                            />
+                        );
                     })}
                 </View>
                 <View style={{ marginTop: getSize.m(30) }}>
                     <Position width={getSize.m(130)} position={t('match.composition.coach')} />
-                    {defenders.map(item => {
-                        return <ListPlayer key={item.id} name={item.name} number={item.number} />;
+                    {lineUp.data.coaches.map(item => {
+                        return (
+                            <ListPlayer
+                                key={item.coach_id}
+                                name={item.name_he}
+                                avt={item.image_url}
+                            />
+                        );
                     })}
                 </View>
             </ScrollView>

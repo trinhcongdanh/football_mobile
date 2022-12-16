@@ -11,15 +11,14 @@ import { styles } from './ListGame.styles';
 import { IListGameProps } from './ListGame.type';
 
 export const ListGame = ({
-    logoHome,
-    logoAway,
+    logo_home,
+    logo_away,
     nameHome,
     nameAway,
     location,
     date,
     result,
     schedule,
-    completed,
     details,
     icon,
     tournament,
@@ -32,7 +31,7 @@ export const ListGame = ({
                 <View
                     style={[
                         styles.tournament,
-                        { backgroundColor: completed === true ? appColors.separator : '#F2FBFF' },
+                        { backgroundColor: result !== null ? appColors.separator : '#F2FBFF' },
                     ]}
                 >
                     <Text
@@ -40,7 +39,7 @@ export const ListGame = ({
                             styles.text_tournament,
                             {
                                 color:
-                                    completed === true
+                                    result !== null
                                         ? appColors.soft_grey
                                         : appColors.text_option_unselect,
                             },
@@ -55,8 +54,7 @@ export const ListGame = ({
                     style={[
                         styles.date,
                         {
-                            color:
-                                completed === true ? appColors.soft_grey : appColors.text_dark_blue,
+                            color: result !== null ? appColors.soft_grey : appColors.text_dark_blue,
                         },
                     ]}
                 >
@@ -66,14 +64,14 @@ export const ListGame = ({
                     <IconLocation
                         name={appIcons.ic_location}
                         size={getSize.m(15)}
-                        color={completed === true ? appColors.soft_grey : appColors.blue_light}
+                        color={result !== null ? appColors.soft_grey : appColors.blue_light}
                     />
                     <Text
                         style={[
                             styles.stadium,
                             {
                                 color:
-                                    completed === true
+                                    result !== null
                                         ? appColors.soft_grey
                                         : appColors.text_dark_blue,
                             },
@@ -88,32 +86,27 @@ export const ListGame = ({
                 <View style={[styles.circle, { left: getSize.m(-40), backgroundColor: color }]} />
             </View>
             <View style={styles.line_dots} />
-            <View style={[appStyles.flex_row_space_center, { marginHorizontal: getSize.m(36) }]}>
+            <View
+                style={[
+                    appStyles.flex_row_space_center,
+                    { marginHorizontal: getSize.m(36), flexDirection: 'row-reverse' },
+                ]}
+            >
                 <View style={[appStyles.align_justify]}>
-                    <Avatar
-                        rounded
-                        size={getSize.m(40)}
-                        source={logoAway}
-                        containerStyle={styles.avt_club}
-                    />
-                    <Text style={styles.name_club}>{nameAway}</Text>
+                    <Avatar rounded size={getSize.m(40)} source={{ uri: logo_home }} />
+
+                    <Text style={styles.name_club}>{nameHome}</Text>
                 </View>
                 <View style={[appStyles.align_justify, styles.time]}>
-                    {completed === false ? (
+                    {result === null ? (
                         <Text style={styles.score}>{schedule}</Text>
                     ) : (
                         <Text style={styles.score}>{result}</Text>
                     )}
                 </View>
                 <View style={[appStyles.align_justify]}>
-                    <Avatar
-                        rounded
-                        size={getSize.m(40)}
-                        source={logoHome}
-                        containerStyle={styles.avt_club}
-                    />
-
-                    <Text style={styles.name_club}>{nameHome}</Text>
+                    <Avatar rounded size={getSize.m(40)} source={{ uri: logo_away }} />
+                    <Text style={styles.name_club}>{nameAway}</Text>
                 </View>
             </View>
             <TouchableOpacity

@@ -18,24 +18,33 @@ export const HeaderComposition = ({
     status,
     stadium,
     score,
+    season,
 }: IHeaderCompositionProps) => {
     return (
         <View>
             <View>
                 <Text style={[appStyles.text_title]}>{title}</Text>
+                {season && (
+                    <Text style={[appStyles.text_title, { marginTop: getSize.m(4) }]}>
+                        {season}
+                    </Text>
+                )}
             </View>
             <View
                 style={[
                     appStyles.flex_row_space_center,
-                    { marginTop: getSize.m(24), marginHorizontal: getSize.m(36) },
+                    {
+                        marginTop: getSize.m(24),
+                        marginHorizontal: getSize.m(36),
+                        flexDirection: 'row-reverse',
+                    },
                 ]}
             >
                 <View style={[appStyles.align_justify]}>
                     <View style={styles.avt_club}>
-                        <Avatar rounded size={getSize.m(60)} source={avt_away} />
+                        <Avatar rounded size={60} source={{ uri: avt_home }} />
                     </View>
-
-                    <Text style={styles.name_club}>{name_away}</Text>
+                    <Text style={styles.name_club}>{name_home}</Text>
                 </View>
                 <View style={[appStyles.align_justify]}>
                     <Text style={styles.score}>{score}</Text>
@@ -43,9 +52,10 @@ export const HeaderComposition = ({
                 </View>
                 <View style={[appStyles.align_justify]}>
                     <View style={styles.avt_club}>
-                        <Avatar rounded size={60} source={avt_home} />
+                        <Avatar rounded size={getSize.m(60)} source={{ uri: avt_away }} />
                     </View>
-                    <Text style={styles.name_club}>{name_home}</Text>
+
+                    <Text style={styles.name_club}>{name_away}</Text>
                 </View>
             </View>
             <View style={[appStyles.flex_row_center, { marginTop: getSize.m(24), flex: 0 }]}>

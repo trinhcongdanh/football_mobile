@@ -13,10 +13,17 @@ import { IMatchScreenProps } from './MatchScreen.type';
 // type Props = {};
 
 export const MatchScreen = ({ navigation, route }: IMatchScreenProps) => {
-    const { t, onGoBack, labels } = useViewModel({
+    const { t, onGoBack, labels, gamesData } = useViewModel({
         navigation,
         route,
     });
+
+    if (gamesData.isLoading == true) {
+        return <></>;
+    }
+    if (gamesData.success == false) {
+        return <></>;
+    }
 
     return (
         <View style={appStyles.flex}>
@@ -33,13 +40,14 @@ export const MatchScreen = ({ navigation, route }: IMatchScreenProps) => {
                             handlePressFunction={onGoBack}
                         />
                         <HeaderComposition
-                            title={t('match.title')}
-                            avt_away={AppImages.img_albania}
-                            avt_home={AppImages.img_israel}
-                            name_home={t('match.club.israel')}
-                            name_away={t('match.club.albania')}
-                            score="2 : 1"
-                            stadium={t('match.stadium')}
+                            title={gamesData.data.campaign_name_he}
+                            season={gamesData.data.season}
+                            avt_away={gamesData.data.team2.logo_url}
+                            avt_home={gamesData.data.team1.logo_url}
+                            name_home={gamesData.data.team1.name_he}
+                            name_away={gamesData.data.team2.name_he}
+                            score={gamesData.data.score}
+                            stadium={gamesData.data.stadium_he}
                             status={t('match.status')}
                         />
                     </View>

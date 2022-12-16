@@ -16,7 +16,12 @@ export const TicketYellow = ({ name, avt, minute, team }: ITicketYellowProps) =>
                 <View style={styles.ticket}>
                     <Image source={AppImages.img_ticket_yellow} />
                 </View>
-                <Avatar source={avt} size={getSize.m(28)} rounded containerStyle={styles.avt} />
+                <Avatar
+                    source={{ uri: avt }}
+                    size={getSize.m(28)}
+                    rounded
+                    containerStyle={styles.avt}
+                />
                 <Text style={styles.name_player}>{name}</Text>
             </View>
             <Text style={styles.team}>{team}</Text>

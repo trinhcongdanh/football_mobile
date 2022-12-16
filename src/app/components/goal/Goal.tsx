@@ -16,7 +16,12 @@ export const Goal = ({ name, avt, minute, team }: IGoalProps) => {
                 <View style={styles.ticket}>
                     <Image source={AppImages.img_goal} />
                 </View>
-                <Avatar source={avt} size={getSize.m(28)} rounded containerStyle={styles.avt} />
+                <Avatar
+                    source={{ uri: avt }}
+                    size={getSize.m(28)}
+                    rounded
+                    containerStyle={styles.avt}
+                />
                 <Text style={styles.name_player}>{name}</Text>
             </View>
             <Text style={styles.team}>{team}</Text>
