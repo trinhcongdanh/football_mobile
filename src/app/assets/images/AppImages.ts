@@ -1,6 +1,7 @@
 /* eslint-disable global-require */
 export const AppImages = {
     img_logo: require('./logo.png'),
+    img_bg: require('./bg.png'),
     img_background: require('./background.png'),
     img_bg_register: require('./background_register.png'),
     img_fb: require('./Facebook.png'),
@@ -37,4 +38,14 @@ export const AppImages = {
     img_goal_net_blue: require('./goal-net-blue.png'),
     img_down_right: require('./down-right.png'),
     img_down_left_up_right: require('./down-left-and-up-right-to-center.png'),
+    img_x_circle: require('./X-circle.png'),
+    img_coin: require('./coin.png'),
+    img_big_ball: require('./big_ball.png'),
+    img_boots: require('./boots.png'),
+    img_scarf: require('./scarf.png'),
+    img_shirt: require('./shirt.png'),
+    img_archive: require('./archive.png'),
+    img_ticket_complete: require('./ticket_complete.png'),
+    img_trophy_star: require('./trophy-star.png'),
+    img_attach: require('./attach.png'),
 };

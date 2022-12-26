@@ -24,4 +24,5 @@ export const appIcons = {
     ic_envelope: 'envelope',
     ic_location_arrow: 'location-arrow',
     ic_arrow_up: 'arrow-up',
+    ic_info: 'info',
 };

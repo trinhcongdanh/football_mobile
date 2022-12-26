@@ -482,6 +482,25 @@ const resources = {
             magazine: {
                 title: 'חיזוק הקשר בין צוותי השיפוט למועדונים לטובת מיגור האלימות',
             },
+            play_ground: {
+                title: 'המשחקייה',
+                awards: {
+                    title: 'פרסים',
+                    choose: 'בחר אותי',
+                },
+                archives: {
+                    title: 'ארכיון',
+                    test_yourself: 'בחן את עצמך',
+                    place: 'מקום',
+                    accumulated: 'צברת',
+                },
+                quizzes: {
+                    title: 'חידונים',
+                    test_yourself: 'בחן את עצמך',
+                    accumulated: 'צבור עד',
+                    participants: 'השתתפו בחידון',
+                },
+            },
         },
     },
     en: {
@@ -961,6 +980,25 @@ const resources = {
             magazine: {
                 title:
                     'Strengthening the relationship between the refereeing teams and the clubs for the sake of eradicating violence',
+            },
+            play_ground: {
+                title: 'The playground',
+                awards: {
+                    title: 'Awards',
+                    choose: 'Choose me',
+                },
+                archives: {
+                    title: 'Archives',
+                    test_yourself: 'Test yourself',
+                    place: 'Place',
+                    accumulated: 'Accumulated',
+                },
+                quizzes: {
+                    title: 'Quizzes',
+                    test_yourself: 'Test yourself',
+                    accumulated: 'Accumulate up to',
+                    participants: 'participated in the quiz',
+                },
             },
         },
     },
