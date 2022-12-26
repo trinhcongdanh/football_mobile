@@ -45,7 +45,7 @@ export function MyTabBar({ state, descriptors, navigation }: any) {
             case ScreenName.TeamPage:
                 icon = 'people-sharp';
                 break;
-            case ScreenName.DataPlayerPage:
+            case ScreenName.PlayGroundPage:
                 icon = 'chatbox-ellipses-outline';
                 break;
             case ScreenName.GobletPage:
@@ -81,7 +81,7 @@ export function MyTabBar({ state, descriptors, navigation }: any) {
                     case ScreenName.TeamPage:
                         label = 'נבחרות';
                         break;
-                    case ScreenName.DataPlayerPage:
+                    case ScreenName.PlayGroundPage:
                         label = 'שאלון';
                         break;
                     case ScreenName.GobletPage:
