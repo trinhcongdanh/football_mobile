@@ -2,6 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
 import { AppImages } from '@football/app/assets/images';
+import { ScreenName } from '@football/app/utils/constants/enum';
 import { IQuizzesProps } from '@football/app/screens/football-playground/layouts/Quizzes/Quizzes.type';
 
 export const useViewModel = ({}: IQuizzesProps) => {
@@ -46,7 +47,9 @@ export const useViewModel = ({}: IQuizzesProps) => {
             quality: '19,200',
         },
     ];
-    const handleDiscussionRequired = () => {};
+    const handleDiscussionRequired = () => {
+        navigate(ScreenName.DiscussionPage);
+    };
     return {
         t,
         onGoBack,

@@ -501,6 +501,14 @@ const resources = {
                     participants: 'השתתפו בחידון',
                 },
             },
+            discussion: {
+                title: 'בחן את עצמך',
+                question: 'כמה אתה מכיר את נבחרת ישראל?',
+                subtitle:
+                    'לורם איפסום דולור סיט אמט, קונסק לורם איפס אדיפיסינג אלית קולהע צופעט למרקוח',
+                rules: 'השתתף בחידון ותוכל לצבור עד',
+                start: 'התחל משחק',
+            },
         },
     },
     en: {
@@ -999,6 +1007,14 @@ const resources = {
                     accumulated: 'Accumulate up to',
                     participants: 'participated in the quiz',
                 },
+            },
+            discussion: {
+                title: 'Test yourself',
+                question: "how well do you know Israel's national team?",
+                subtitle:
+                    'Lorem Ipsum Dolor Sit Emt, Konsk Lorem Ips Edificing Alit Kolhe Tsofet for decoction',
+                rules: 'Take the quiz and you can earn a witness',
+                start: 'Start a game',
             },
         },
     },

@@ -33,3 +33,5 @@ export * from './football-statistics-group';
 export * from './football-game-composition';
 export * from './football-magazine';
 export * from './football-playground';
+export * from './football-discussion';
+export * from './football-question';

@@ -48,4 +48,7 @@ export const AppImages = {
     img_ticket_complete: require('./ticket_complete.png'),
     img_trophy_star: require('./trophy-star.png'),
     img_attach: require('./attach.png'),
+    img_background_discussion: require('./background_discussion.png'),
+    img_medium_ball: require('./medium_ball.png'),
+    img_image_question: require('./image_question.png'),
 };
