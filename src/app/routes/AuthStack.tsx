@@ -13,6 +13,7 @@ import { MatchScreen } from '../screens/football-match/MatchScreen';
 import {
     CampaignScreen,
     ConquerorsScreen,
+    ConversationalDiscussionScreen,
     DiscussionScreen,
     FavoritePlayersScreen,
     FavoriteSummaryScreen,
@@ -102,6 +103,10 @@ export const AuthStack = () => {
             <Auth.Screen name={ScreenName.PlayGroundPage} component={PlayGroundScreen} />
             <Auth.Screen name={ScreenName.DiscussionPage} component={DiscussionScreen} />
             <Auth.Screen name={ScreenName.QuestionPage} component={QuestionScreen} />
+            <Auth.Screen
+                name={ScreenName.ConversationalDiscussionPage}
+                component={ConversationalDiscussionScreen}
+            />
         </Auth.Navigator>
     );
 };

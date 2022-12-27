@@ -35,3 +35,4 @@ export * from './football-magazine';
 export * from './football-playground';
 export * from './football-discussion';
 export * from './football-question';
+export * from './football-conversational-discussion';

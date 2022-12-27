@@ -39,6 +39,7 @@ export enum ScreenName {
     PlayGroundPage = 'PlayGroundPage',
     DiscussionPage = 'DiscussionPage',
     QuestionPage = 'QuestionPage',
+    ConversationalDiscussionPage = 'ConversationalDiscussionPage',
 }
 
 export enum ScreenTopTap {

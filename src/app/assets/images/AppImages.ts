@@ -51,4 +51,11 @@ export const AppImages = {
     img_background_discussion: require('./background_discussion.png'),
     img_medium_ball: require('./medium_ball.png'),
     img_image_question: require('./image_question.png'),
+    img_background_award: require('./background_award.png'),
+    img_badge_1: require('./badge_1.png'),
+    img_badge_2: require('./badge_2.png'),
+    img_badge_3: require('./badge_3.png'),
+    img_badge_4: require('./badge_4.png'),
+    img_badge_5: require('./badge_5.png'),
+    img_time: require('./time.png'),
 };
