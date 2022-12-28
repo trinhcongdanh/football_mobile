@@ -509,6 +509,13 @@ const resources = {
                 rules: 'השתתף בחידון ותוכל לצבור עד',
                 start: 'התחל משחק',
             },
+            conversational: {
+                accumulated: 'צברת',
+                out_of: 'מתוך',
+                question: 'רוצה להתחרות מול החברים שלך?',
+                time: 'הזמן',
+                next_quiz: 'לחידון הבא',
+            },
         },
     },
     en: {
@@ -1015,6 +1022,13 @@ const resources = {
                     'Lorem Ipsum Dolor Sit Emt, Konsk Lorem Ips Edificing Alit Kolhe Tsofet for decoction',
                 rules: 'Take the quiz and you can earn a witness',
                 start: 'Start a game',
+            },
+            conversational: {
+                accumulated: 'Accumulated',
+                out_of: 'Out of',
+                question: 'Want to compete against your friends?',
+                time: 'The time',
+                next_quiz: 'For the next quiz',
             },
         },
     },

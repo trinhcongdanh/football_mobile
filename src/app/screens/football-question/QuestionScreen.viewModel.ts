@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
+import { ScreenName } from '@football/app/utils/constants/enum';
 import { IQuestionScreenProps } from '@football/app/screens/football-question/QuestionScreen.type';
 
 export const useViewModel = ({ navigation, route }: IQuestionScreenProps) => {
@@ -78,6 +79,7 @@ export const useViewModel = ({ navigation, route }: IQuestionScreenProps) => {
                 setTimeLeft(59);
             } else {
                 setProgress(progress);
+                navigate(ScreenName.ConversationalDiscussionPage);
             }
         }, timeLeft);
     };
