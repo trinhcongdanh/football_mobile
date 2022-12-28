@@ -11,7 +11,9 @@ import { TeamScreen } from '../screens/football-team/TeamScreen';
 import { TeamSquadScreen } from '../screens/football-team-squad/TeamSquadScreen';
 import { MatchScreen } from '../screens/football-match/MatchScreen';
 import {
+    AwardScreen,
     CampaignScreen,
+    ConfirmationScreen,
     ConquerorsScreen,
     ConversationalDiscussionScreen,
     DiscussionScreen,
@@ -107,6 +109,8 @@ export const AuthStack = () => {
                 name={ScreenName.ConversationalDiscussionPage}
                 component={ConversationalDiscussionScreen}
             />
+            <Auth.Screen name={ScreenName.AwardPage} component={AwardScreen} />
+            <Auth.Screen name={ScreenName.ConfirmationPage} component={ConfirmationScreen} />
         </Auth.Navigator>
     );
 };
