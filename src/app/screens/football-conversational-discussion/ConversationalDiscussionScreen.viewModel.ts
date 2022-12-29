@@ -2,6 +2,7 @@ import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
 import { useTranslation } from 'react-i18next';
 import { AppImages } from '@football/app/assets/images';
 import { useState } from 'react';
+import { ScreenName } from '@football/app/utils/constants/enum';
 import { IConversationalDiscussionScreenProps } from '@football/app/screens/football-conversational-discussion/ConversationalDiscussionScreen.type';
 
 export const useViewModel = ({ navigation, route }: IConversationalDiscussionScreenProps) => {
@@ -61,10 +62,9 @@ export const useViewModel = ({ navigation, route }: IConversationalDiscussionScr
             setPage(page + 1);
             setConversational(conversationals[page + 1]);
         } else {
-            console.log('Next screen');
+            navigate(ScreenName.AwardPage);
         }
     };
-    console.log(page);
 
     return {
         t,

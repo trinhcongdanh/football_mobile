@@ -36,3 +36,5 @@ export * from './football-playground';
 export * from './football-discussion';
 export * from './football-question';
 export * from './football-conversational-discussion';
+export * from './football-award';
+export * from './football-confirmation';
