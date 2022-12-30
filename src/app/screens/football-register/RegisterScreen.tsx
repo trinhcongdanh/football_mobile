@@ -24,6 +24,8 @@ export const RegisterScreen = ({ navigation, route }: IRegisterScreenProps) => {
     const {
         onGoBack,
         errors,
+        phoneNumberRef,
+        phoneNumber,
         handleError,
         handleOnChange,
         connect,
@@ -51,11 +53,13 @@ export const RegisterScreen = ({ navigation, route }: IRegisterScreenProps) => {
                                 sub_title={t('welcome.join_us')}
                             />
                             <CardView
+                                input={phoneNumber}
+                                inputRef={phoneNumberRef}
                                 errors={errors.numberPhone}
                                 titleCard={t('register.registerByPhone')}
                                 placeHolderText={t('register.phoneNumber')}
                                 buttonTitle={t('register.submit')}
-                                handleOnChange={() => handleOnChange('', 'numberPhone')}
+                                onChangeTextInput={handleOnChange}
                                 handleError={() => {
                                     handleError('', 'numberPhone');
                                 }}

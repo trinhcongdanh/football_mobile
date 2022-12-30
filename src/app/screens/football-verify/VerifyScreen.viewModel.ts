@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Keyboard } from 'react-native';
+import { Alert, Keyboard } from 'react-native';
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
-import { ScreenName } from '@football/app/utils/constants/enum';
+import { OfflineData, ScreenName } from '@football/app/utils/constants/enum';
 import { IVerifyScreenProps } from './VerifyScreen.type';
+import localStorage from '@football/core/helpers/localStorage';
 
 export const useViewModel = ({ navigation, route }: IVerifyScreenProps) => {
     const { t } = useTranslation();
@@ -31,9 +32,9 @@ export const useViewModel = ({ navigation, route }: IVerifyScreenProps) => {
         setTimeSend(false);
     }, 12000);
 
-    const inputs = Array(4).fill('');
+    const inputs = Array(6).fill('');
 
-    const [OTP, setOTP] = useState<any>({ 0: '', 1: '', 2: '', 3: '' });
+    const [OTP, setOTP] = useState<any>({ 0: '', 1: '', 2: '', 3: '', 4: '', 5: '' });
 
     const input = useRef<any>();
 
@@ -64,24 +65,37 @@ export const useViewModel = ({ navigation, route }: IVerifyScreenProps) => {
         input.current?.focus();
     }, [nextInputIndex]);
 
-    const onVerifyCode = (): void => {
+    const [confirm, setConfirm] = useState<any>(null);
+
+    const onVerifyCode = async () => {
         let codeOtp = '';
         Object.values(OTP).forEach(code => {
             codeOtp += code;
         });
-
-        if (codeOtp !== '1234' && codeOtp.length === 4) {
-            handleError(t('verify.error'), 'verifyError');
-        } else if (codeOtp.length < 4) {
-            handleError('', 'verifyError');
-        } else if (codeOtp === '1234' && codeOtp.length === 4) {
-            handleError('', 'verifyError');
-            navigate(ScreenName.BottomTab);
-            // navigate(ScreenName.DataPlayerPage);
-            // navigate(ScreenName.DataCoachPage);
-            // navigate(ScreenName.HistoryPage);
-            // navigate(ScreenName.LeaguesPage);
+        if (codeOtp.length === 6) {
+            try {
+                const confirmation = await localStorage.getItem<any>(OfflineData.phone_number);
+                setConfirm(confirmation);
+                // console.log(confirm);
+                await confirm.confirm(codeOtp);
+            } catch (error: any) {
+                Alert.alert(JSON.stringify(error));
+            }
+            if (confirm) {
+                navigate(ScreenName.BottomTab);
+            }
         }
+        // if (confirm) {
+        //     console.log('Success!');
+        // }
+        // if (codeOtp !== '1234' && codeOtp.length === 4) {
+        //     handleError(t('verify.error'), 'verifyError');
+        // } else if (codeOtp.length < 4) {
+        //     handleError('', 'verifyError');
+        // } else if (codeOtp === '1234' && codeOtp.length === 4) {
+        //     handleError('', 'verifyError');
+        //     navigate(ScreenName.BottomTab);
+        // }
     };
 
     return {

@@ -4,7 +4,7 @@
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
 #import "React/RCTI18nUtil.h"
-#import <react-native-splash-screen/RNSplashScreen.h>
+
 
 #import <React/RCTAppSetupUtils.h>
 
@@ -60,7 +60,6 @@ static NSString *const kRNConcurrentRoot = @"concurrentRoot";
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
   [[RCTI18nUtil sharedInstance] allowRTL:YES];
-  [RNSplashScreen show];
   return YES;
 }
 

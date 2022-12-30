@@ -9,16 +9,25 @@ import { Button } from '../../button';
 import { styles } from './CardView.style';
 import { ICardViewProps } from './CardView.types';
 
-export const CardView = ({ errors, handleOnChange, handleError, connect }: ICardViewProps) => {
+export const CardView = ({
+    errors,
+    input,
+    inputRef,
+    onChangeTextInput,
+    handleError,
+    connect,
+}: ICardViewProps) => {
     const { t } = useTranslation();
     return (
         <View style={styles.mr_top}>
             <View style={styles.connect_container}>
                 <Text style={styles.txt_register}>{t('register.registerByPhone')}</Text>
                 <Input
+                    input={input}
+                    inputRef={inputRef}
                     error={errors}
                     placeholder={t('register.phoneNumber')}
-                    onChangeText={handleOnChange}
+                    onChangeTextInput={onChangeTextInput}
                     onFocus={handleError}
                 />
                 <Button onPress={connect} title={t('register.submit')} />

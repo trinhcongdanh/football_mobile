@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "39034379703",
+    "project_id": "otp-verification-42ae7",
+    "storage_bucket": "otp-verification-42ae7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:39034379703:android:97636683d0c8995c0e9c32",
+        "android_client_info": {
+          "package_name": "com.footballassociation"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "39034379703-rg28gmk6d8t0i9af7ifn543sae47rrj1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDRQhFRyJ8IbTT_Kt775WiR6gXGWhDn2Po"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "39034379703-rg28gmk6d8t0i9af7ifn543sae47rrj1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

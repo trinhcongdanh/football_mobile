@@ -1,8 +1,7 @@
-export type ISplashScreenParams = {
-    title: string;
-    header: string;
-};
+import { ScreenName } from '@football/app/utils/constants/enum';
+import { NavigationProp, RouteProp } from '@react-navigation/native';
 
-export interface ISplashScreenProps {
-    params: ISplashScreenParams;
-}
+export type ISplashScreenProps = {
+    navigation: NavigationProp<any>;
+    route: RouteProp<any, ScreenName.SplashPage>;
+};

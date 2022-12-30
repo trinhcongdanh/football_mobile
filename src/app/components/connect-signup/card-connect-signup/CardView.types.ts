@@ -3,7 +3,9 @@ export type ICardViewProps = {
     placeHolderText: string;
     buttonTitle: string;
     errors: string;
-    handleOnChange: () => void;
+    input: string;
+    inputRef: any;
+    onChangeTextInput: (e: string) => void;
     handleError: () => void;
     connect: () => void;
 };
