@@ -74,10 +74,12 @@ export enum ScreenStack {
 }
 
 export enum OfflineData {
+    splash_animation = 'SPLASH_ANIMATION',
     fav_teams = 'TEAMS_DATA',
     fav_players = 'PLAYERS_DATA',
     fav_national = 'NATIONAL_DATA',
     team_page = 'TEAM_PAGE',
     coach_page = 'COACH_PAGE',
     game_page = 'GAME_PAGE',
+    phone_number = 'PHONE_NUMBER',
 }

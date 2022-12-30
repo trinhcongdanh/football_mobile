@@ -24,12 +24,12 @@ const styles = StyleSheet.create({
         borderColor: appColors.medium_gray,
         borderWidth: 1,
         justifyContent: 'center',
-        width: getSize.m(63),
-        height: getSize.m(63),
+        width: getSize.m(45),
+        height: getSize.m(45),
     },
 
     otp_Text: {
-        fontSize: getSize.s(36),
+        fontSize: getSize.s(20),
         fontWeight: '700',
         color: appColors.text_dark_blue,
         textAlign: 'center',

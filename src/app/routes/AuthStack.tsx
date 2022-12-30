@@ -12,6 +12,7 @@ import { TeamSquadScreen } from '../screens/football-team-squad/TeamSquadScreen'
 import { MatchScreen } from '../screens/football-match/MatchScreen';
 import {
     AwardScreen,
+    SplashScreen,
     CampaignScreen,
     ConfirmationScreen,
     ConquerorsScreen,
@@ -51,9 +52,10 @@ const Auth = createNativeStackNavigator();
 export const AuthStack = () => {
     return (
         <Auth.Navigator
-            initialRouteName={ScreenName.OpeningPage}
+            initialRouteName={ScreenName.SplashPage}
             screenOptions={{ headerShown: false }}
         >
+            <Auth.Screen name={ScreenName.SplashPage} component={SplashScreen} />
             <Auth.Screen name={ScreenName.OpeningPage} component={WelcomeScreen} />
             <Auth.Screen name={ScreenName.FavTeamPage} component={FavoriteTeamsScreen} />
             <Auth.Screen name={ScreenName.FavPlayerPage} component={FavoritePlayersScreen} />
