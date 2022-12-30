@@ -9,14 +9,13 @@ const styles = StyleSheet.create({
         borderRadius: getSize.m(60),
         marginTop: getSize.m(20),
         width: '100%',
-        flexDirection: 'row',
-        justifyContent: 'center',
+        paddingVertical: getSize.m(16),
     },
     text_button: {
         fontSize: getSize.s(16),
         color: appColors.white,
         fontFamily: AppFonts.bold,
-        paddingVertical: getSize.m(16),
+        textAlign: 'center',
     },
 });
 

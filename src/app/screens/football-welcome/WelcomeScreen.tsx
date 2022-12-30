@@ -44,16 +44,16 @@ export const WelcomeScreen = ({ navigation, route }: IWelcomeScreenProps) => {
         <View style={appStyles.flex}>
             <ImageBackground source={AppImages.img_background} style={appStyles.flex_center}>
                 <StatusBar translucent backgroundColor="transparent" />
-                <Image resizeMode="contain" source={AppImages.img_logo} style={styles.image} />
-                <Text style={styles.text_header}>{t('welcome.title')}</Text>
-                <Text style={styles.text_desc}>{t('welcome.info')}</Text>
-                <View style={{ width: '90%' }}>
+                <View style={{ width: '90%', justifyContent: 'center', alignItems: 'center' }}>
+                    <Image resizeMode="contain" source={AppImages.img_logo} style={styles.image} />
+                    <Text style={styles.text_header}>{t('welcome.title')}</Text>
+                    <Text style={styles.text_desc}>{t('welcome.info')}</Text>
                     <Button title={t('welcome.start')} onPress={onNavigateFavTeam} />
+                    <Text style={styles.text_question}>{t('welcome.account')}</Text>
+                    <TouchableOpacity style={styles.button_sign_up} onPress={onNavigateConnect}>
+                        <Text style={styles.text_button_sign_up}>{t('welcome.create')}</Text>
+                    </TouchableOpacity>
                 </View>
-                <Text style={styles.text_question}>{t('welcome.account')}</Text>
-                <TouchableOpacity style={styles.button_sign_up} onPress={onNavigateConnect}>
-                    <Text style={styles.text_button_sign_up}>{t('welcome.create')}</Text>
-                </TouchableOpacity>
             </ImageBackground>
         </View>
     );
