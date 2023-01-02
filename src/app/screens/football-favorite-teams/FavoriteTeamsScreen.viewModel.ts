@@ -21,14 +21,10 @@ export const useViewModel = ({ navigation, route }: IFavoriteTeamsScreenProps) =
     const { navigate, goBack } = useAppNavigator();
     const [teamsData, setTeamsData] = useState<TeamModel[]>();
     const [teamSelected, setTeamSelected] = useState<TeamModel[]>([]);
-    // const { getItem, setItem } = useAsyncStorage(OfflineData.teams);
-    // const { getItem, setItem } = useAsyncStorage(OfflineData.fav_teams);
+    const [searchText, setSearchText] = useState('');
 
     const getTeamsData = useCallback(async () => {
         try {
-            // const offlineData = await AsyncStorage.getItem('@teams_data');
-
-            // const offlineData = await AsyncStorage.getItem(OfflineData.fav_teams);
             const offlineData = await localStorage.getItem<TeamModel[]>(OfflineData.fav_teams);
             if (!isEmpty(offlineData) && !isNil(offlineData)) {
                 setTeamsData(offlineData);
@@ -39,8 +35,6 @@ export const useViewModel = ({ navigation, route }: IFavoriteTeamsScreenProps) =
                     collection: 'team',
                 });
                 if (!isEmpty(data.documents)) {
-                    // console.log(data.documents);
-
                     setTeamsData(data.documents);
                 }
             }
@@ -72,6 +66,16 @@ export const useViewModel = ({ navigation, route }: IFavoriteTeamsScreenProps) =
         [teamsData, teamSelected]
     );
 
+    const searchFavTeam = (text: string) => {
+        setSearchText(text);
+    };
+
+    const filterSearchTeam = () => {
+        if (!isEmpty(newTeams) && !isNil(newTeams)) {
+            return newTeams.filter((newTeam: TeamModel) => newTeam.name_he.includes(searchText));
+        }
+    };
+
     const onGoBack = (): void => {
         goBack();
     };
@@ -99,8 +103,11 @@ export const useViewModel = ({ navigation, route }: IFavoriteTeamsScreenProps) =
         handleSelected,
         dispatch,
         teamSelected,
-        newTeams,
         teamsData,
         favTeamList,
+        searchText,
+        searchFavTeam,
+        setSearchText,
+        filterSearchTeam,
     };
 };

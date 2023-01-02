@@ -13,4 +13,6 @@ export type IFavoriteTeamProps = {
     button: string;
     onIndex: number;
     number: number;
+    searchText: string;
+    searchFavTeam: (text: string) => void;
 };

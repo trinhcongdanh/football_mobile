@@ -14,7 +14,9 @@ export const FavoritePlayersScreen = ({ navigation, route }: IFavoritePlayerScre
         handleContinue,
         handleSelected,
         playerSelected,
-        newPlayers,
+        searchFavPlayer,
+        filterSearchPlayer,
+        setSearchText,
     } = useViewModel({
         navigation,
         route,
@@ -26,10 +28,14 @@ export const FavoritePlayersScreen = ({ navigation, route }: IFavoritePlayerScre
                 onGoSkip={onGoSkip}
                 onGoBack={onGoBack}
                 handleContinue={handleContinue}
+                searchFavPlayer={(text: string) => {
+                    setSearchText(text);
+                    searchFavPlayer(text);
+                }}
                 handleSelected={(item: PlayerModel) => {
                     handleSelected(item);
                 }}
-                newFav={newPlayers}
+                newFav={filterSearchPlayer()}
                 favSelected={playerSelected}
                 title={t('favorite_player.title')}
                 placeholder={t('favorite_player.place_holder')}
