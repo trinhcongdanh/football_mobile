@@ -38,6 +38,8 @@ export const FavoritePlayer = ({
     favSelected,
     chosen,
     button,
+    searchText,
+    searchFavPlayer,
 }: IFavoritePlayerProps) => {
     return (
         <ImageBackground source={AppImages.img_bg_register} style={appStyles.flex}>
@@ -54,6 +56,28 @@ export const FavoritePlayer = ({
                         >
                             {title}
                         </Text>
+                        {onIndex !== 2 && (
+                            <View style={[appStyles.flex_row_space_center, styles.search]}>
+                                <TextInput
+                                    value={searchText}
+                                    placeholder={placeholder}
+                                    style={styles.text_search}
+                                    placeholderTextColor={appColors.blue_gray_light}
+                                    onChangeText={searchFavPlayer}
+                                />
+                                <Icon
+                                    style={{ marginRight: getSize.m(14) }}
+                                    name={appIcons.ic_search}
+                                    color={appColors.blue_gray_light}
+                                    size={getSize.m(16)}
+                                />
+                            </View>
+                        )}
+                        {onIndex === 1 && (
+                            <View style={{ marginBottom: getSize.m(10) }}>
+                                <Text style={styles.name_club}>הפועל באר שבע</Text>
+                            </View>
+                        )}
                         <ActivityIndicator
                             style={appStyles.flex_center}
                             size="large"
@@ -78,9 +102,11 @@ export const FavoritePlayer = ({
                             {onIndex !== 2 && (
                                 <View style={[appStyles.flex_row_space_center, styles.search]}>
                                     <TextInput
+                                        value={searchText}
                                         placeholder={placeholder}
                                         style={styles.text_search}
                                         placeholderTextColor={appColors.blue_gray_light}
+                                        onChangeText={searchFavPlayer}
                                     />
                                     <Icon
                                         style={{ marginRight: getSize.m(14) }}

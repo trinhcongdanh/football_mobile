@@ -22,13 +22,10 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
     const dispatch = useDispatch();
     const [playersData, setPlayersData] = useState<PlayerModel[]>();
     const [playerSelected, setPlayerSelected] = useState<PlayerModel[]>([]);
-    // const { getItem, setItem } = useAsyncStorage(OfflineData.fav_players);
+    const [searchText, setSearchText] = useState('');
 
     const getPlayersData = useCallback(async () => {
         try {
-            // const offlineData = await AsyncStorage.getItem('@players_data');
-            // const offlineData = await AsyncStorage.getItem(OfflineData.fav_players);
-
             const offlineData = await localStorage.getItem<PlayerModel[]>(OfflineData.fav_players);
             if (!isEmpty(offlineData) && !isNil(offlineData)) {
                 setPlayersData(offlineData);
@@ -70,6 +67,18 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
         [playersData, playerSelected]
     );
 
+    const searchFavPlayer = (text: string) => {
+        setSearchText(text);
+    };
+
+    const filterSearchPlayer = () => {
+        if (!isEmpty(newPlayers) && !isNil(newPlayers)) {
+            return newPlayers.filter((newPlayer: PlayerModel) =>
+                newPlayer.name_he.includes(searchText)
+            );
+        }
+    };
+
     const onGoBack = (): void => {
         goBack();
     };
@@ -80,7 +89,6 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
     const handleContinue = async () => {
         const action = addPlayerTeams(playerSelected);
         dispatch(action);
-        // await AsyncStorage.setItem(OfflineData.fav_players, JSON.stringify(playerSelected));
         await localStorage.setItem<PlayerModel[]>(OfflineData.fav_players, playerSelected);
         navigate(ScreenName.FavTopTeamPage);
     };
@@ -96,7 +104,9 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
         handleContinue,
         handleSelected,
         playerSelected,
-        newPlayers,
         favPlayerList,
+        searchFavPlayer,
+        filterSearchPlayer,
+        setSearchText,
     };
 };

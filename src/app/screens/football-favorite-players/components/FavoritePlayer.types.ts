@@ -13,4 +13,6 @@ export type IFavoritePlayerProps = {
     button: string;
     onIndex: number;
     number: number;
+    searchText: string;
+    searchFavPlayer: (text: string) => void;
 };
