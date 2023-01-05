@@ -13,10 +13,12 @@ export const FavoritePlayersScreen = ({ navigation, route }: IFavoritePlayerScre
         onGoSkip,
         handleContinue,
         handleSelected,
-        playerSelected,
         searchFavPlayer,
-        filterSearchPlayer,
         setSearchText,
+        searchText,
+        group,
+        filteredPlayers,
+        favSelectedPlayers,
     } = useViewModel({
         navigation,
         route,
@@ -25,6 +27,7 @@ export const FavoritePlayersScreen = ({ navigation, route }: IFavoritePlayerScre
     return (
         <View style={[appStyles.flex]}>
             <FavoritePlayer
+                searchText={searchText}
                 onGoSkip={onGoSkip}
                 onGoBack={onGoBack}
                 handleContinue={handleContinue}
@@ -35,12 +38,13 @@ export const FavoritePlayersScreen = ({ navigation, route }: IFavoritePlayerScre
                 handleSelected={(item: PlayerModel) => {
                     handleSelected(item);
                 }}
-                newFav={filterSearchPlayer()}
-                favSelected={playerSelected}
+                newFav={filteredPlayers}
+                favSelected={favSelectedPlayers}
                 title={t('favorite_player.title')}
                 placeholder={t('favorite_player.place_holder')}
                 chosen={t('favorite_player.chosen')}
                 button={t('favorite_player.button')}
+                group={group}
                 number={3}
                 onIndex={1}
             />

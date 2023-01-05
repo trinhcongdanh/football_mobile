@@ -57,12 +57,12 @@ export const AuthStack = () => {
         >
             <Auth.Screen name={ScreenName.SplashPage} component={SplashScreen} />
             <Auth.Screen name={ScreenName.OpeningPage} component={WelcomeScreen} />
+            <Auth.Screen name={ScreenName.ConnectPage} component={ConnectScreen} />
+            <Auth.Screen name={ScreenName.RegisterPage} component={RegisterScreen} />
             <Auth.Screen name={ScreenName.FavTeamPage} component={FavoriteTeamsScreen} />
             <Auth.Screen name={ScreenName.FavPlayerPage} component={FavoritePlayersScreen} />
             <Auth.Screen name={ScreenName.FavTopTeamPage} component={FavoriteTopTeamsScreen} />
             <Auth.Screen name={ScreenName.FavSummaryPage} component={FavoriteSummaryScreen} />
-            <Auth.Screen name={ScreenName.ConnectPage} component={ConnectScreen} />
-            <Auth.Screen name={ScreenName.RegisterPage} component={RegisterScreen} />
             <Auth.Screen name={ScreenName.VerifyPage} component={VerifyScreen} />
             <Auth.Screen name={ScreenName.SettingsPage} component={SettingsScreen} />
             <Auth.Screen name={ScreenName.RegPage} component={RegScreen} />

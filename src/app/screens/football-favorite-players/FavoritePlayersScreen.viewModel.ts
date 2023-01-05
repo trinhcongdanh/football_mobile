@@ -1,35 +1,35 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable @typescript-eslint/no-shadow */
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
-import { OfflineData, ScreenName } from '@football/app/utils/constants/enum';
+import { ScreenName } from '@football/app/utils/constants/enum';
 import { useMount } from '@football/app/utils/hooks/useMount';
 import { axiosClient } from '@football/core/api/configs/axiosClient';
 import { BASE_URL, DATA_SOURCE, DB } from '@football/core/api/configs/config';
-import localStorage from '@football/core/helpers/localStorage';
 import { PlayerModel, PlayersModelResponse } from '@football/core/models/PlayerModelResponse';
+import { TeamModel } from '@football/core/models/TeamModelResponse';
 import { isEmpty, isNil } from 'lodash';
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Alert } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { addPlayerTeams, FavPlayerState } from 'src/store/FavPlayer.slice';
+import { setFavPlayers, pushFavPlayer } from 'src/store/FavPlayer.slice';
 import { IFavoritePlayerScreenProps } from './FavoritePlayersScreen.type';
 
 export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) => {
     const { t } = useTranslation();
     const { navigate, goBack } = useAppNavigator();
-    const favPlayerList = useSelector((state: FavPlayerState) => state.favPlayers);
     const dispatch = useDispatch();
-    const [playersData, setPlayersData] = useState<PlayerModel[]>();
-    const [playerSelected, setPlayerSelected] = useState<PlayerModel[]>([]);
     const [searchText, setSearchText] = useState('');
 
+    const favPlayers = useSelector((state: any) => state.favPlayers.favPlayers as PlayerModel[]);
+    const favSelectedPlayers = useSelector(
+        (state: any) =>
+            state.favPlayers.favPlayers.filter((v: PlayerModel) => v.isSelected) as PlayerModel[]
+    );
+
     const getPlayersData = useCallback(async () => {
-        try {
-            const offlineData = await localStorage.getItem<PlayerModel[]>(OfflineData.fav_players);
-            if (!isEmpty(offlineData) && !isNil(offlineData)) {
-                setPlayersData(offlineData);
-            } else {
+        if (isEmpty(favPlayers) || isNil(favPlayers)) {
+            try {
                 const { data }: PlayersModelResponse = await axiosClient.post(`${BASE_URL}/find`, {
                     dataSource: DATA_SOURCE,
                     database: DB,
@@ -37,46 +37,26 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
                 });
 
                 if (!isEmpty(data.documents)) {
-                    setPlayersData(data.documents);
+                    dispatch(setFavPlayers(data.documents));
                 }
+            } catch (error: any) {
+                Alert.alert(error);
             }
-        } catch (error: any) {
-            Alert.alert(error);
         }
     }, []);
 
     const handleSelected = (player: PlayerModel) => {
-        const index = playerSelected.findIndex(elm => player._id === elm._id);
-        if (index !== -1) {
-            const newTeamSelected = playerSelected.filter(e => e._id !== player._id);
-            setPlayerSelected(newTeamSelected);
-        } else if (playerSelected.length < 3) {
-            setPlayerSelected([...playerSelected, player]);
-            const action = addPlayerTeams(player);
-            dispatch(action);
-        }
+        dispatch(pushFavPlayer(player));
     };
 
-    const newPlayers = useMemo(
-        () =>
-            playersData?.map(e => {
-                // eslint-disable-next-line @typescript-eslint/no-shadow
-                const i = playerSelected.findIndex(t => t._id === e._id);
-                return { ...e, isSelected: i !== -1 };
-            }),
-        [playersData, playerSelected]
+    const filteredPlayers = useMemo(
+        () => favPlayers.filter(v => v.name_he.includes(searchText)),
+
+        [favPlayers, searchText]
     );
 
     const searchFavPlayer = (text: string) => {
         setSearchText(text);
-    };
-
-    const filterSearchPlayer = () => {
-        if (!isEmpty(newPlayers) && !isNil(newPlayers)) {
-            return newPlayers.filter((newPlayer: PlayerModel) =>
-                newPlayer.name_he.includes(searchText)
-            );
-        }
     };
 
     const onGoBack = (): void => {
@@ -86,10 +66,7 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
         navigate(ScreenName.BottomTab);
     };
 
-    const handleContinue = async () => {
-        const action = addPlayerTeams(playerSelected);
-        dispatch(action);
-        await localStorage.setItem<PlayerModel[]>(OfflineData.fav_players, playerSelected);
+    const handleContinue = () => {
         navigate(ScreenName.FavTopTeamPage);
     };
 
@@ -97,16 +74,30 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
         getPlayersData();
     });
 
+    const favSelectedTeams = useSelector(
+        (state: any) =>
+            state.favTeams.favTeams.filter((v: TeamModel) => v.isSelected) as TeamModel[]
+    );
+    const [group, setGroup] = useState('');
+    useEffect(() => {
+        favSelectedTeams.map((favTeam: TeamModel, index: number) => {
+            if (index === 0) {
+                setGroup(favTeam.name_he);
+            }
+        });
+    }, []);
+
     return {
         t,
         onGoBack,
         onGoSkip,
         handleContinue,
         handleSelected,
-        playerSelected,
-        favPlayerList,
         searchFavPlayer,
-        filterSearchPlayer,
         setSearchText,
+        searchText,
+        group,
+        favSelectedPlayers,
+        filteredPlayers,
     };
 };

@@ -8,4 +8,6 @@ export type ICardViewProps = {
     onChangeTextInput: (e: string) => void;
     handleError: () => void;
     connect: () => void;
+    connectFacebook: () => void;
+    connectGoogle: () => void;
 };

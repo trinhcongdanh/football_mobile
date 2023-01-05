@@ -10,19 +10,33 @@ const initialState: FavPlayerState = {
     favPlayers: [],
 };
 
+const MAX_TEAM_NUM = 3;
+
 export const favPlayerSlice = createSlice({
-    name: 'favTeam',
+    name: 'favPlayer',
     initialState,
     reducers: {
-        addPlayerTeams: (state, action) => {
-            state.favPlayers.push(action.payload);
+        setFavPlayers: (state, action) => {
+            state.favPlayers.push(
+                ...action.payload.map((v: PlayerModel) => ({ ...v, isSelected: false }))
+            );
         },
-        removePlayerTeams: (state, action) => {
-            state.favPlayers.splice(action.payload, 1);
+        pushFavPlayer: (state, action) => {
+            const player: PlayerModel = action.payload;
+
+            const selectedPlayer = state.favPlayers.find(e => e._id === player._id)!;
+            const listSelectedPlayer = state.favPlayers.filter(e => e.isSelected);
+
+            if (!selectedPlayer.isSelected && listSelectedPlayer.length === MAX_TEAM_NUM) {
+                return;
+            }
+
+            selectedPlayer.isSelected = !selectedPlayer.isSelected;
+            state.favPlayers = [...state.favPlayers];
         },
     },
 });
 
 const { actions, reducer } = favPlayerSlice;
-export const { addPlayerTeams, removePlayerTeams } = actions;
-export default reducer;
+export const { setFavPlayers, pushFavPlayer } = actions;
+export default favPlayerSlice.reducer;

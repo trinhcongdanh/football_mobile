@@ -9,20 +9,32 @@ export interface FavTopTeamState {
 const initialState: FavTopTeamState = {
     favTopTeams: [],
 };
-
+const MAX_TEAM_NUM = 2;
 export const favTopTeamSlice = createSlice({
     name: 'favTopTeam',
     initialState,
     reducers: {
-        addFavTopTeams: (state, action) => {
-            state.favTopTeams.push(action.payload);
+        setFavTopTeams: (state, action) => {
+            state.favTopTeams.push(
+                ...action.payload.map((v: TopTeamModel) => ({ ...v, isSelected: false }))
+            );
         },
-        removeFavTopTeams: (state, action) => {
-            state.favTopTeams.splice(action.payload, 1);
+        pushFavTopTeam: (state, action) => {
+            const topTeam: TopTeamModel = action.payload;
+
+            const selectedTopTeam = state.favTopTeams.find(e => e._id === topTeam._id)!;
+            const listSelectedTopTeam = state.favTopTeams.filter(e => e.isSelected);
+
+            if (!selectedTopTeam.isSelected && listSelectedTopTeam.length === MAX_TEAM_NUM) {
+                return;
+            }
+
+            selectedTopTeam.isSelected = !selectedTopTeam.isSelected;
+            state.favTopTeams = [...state.favTopTeams];
         },
     },
 });
 
 const { actions, reducer } = favTopTeamSlice;
-export const { addFavTopTeams, removeFavTopTeams } = actions;
-export default reducer;
+export const { setFavTopTeams, pushFavTopTeam } = actions;
+export default favTopTeamSlice.reducer;

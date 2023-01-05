@@ -13,7 +13,7 @@ export const axiosClient = axios.create({
     paramsSerializer: (params: any) => queryString.stringify(params),
 });
 axiosClient.interceptors.request.use(request => {
-    // console.log('Starting Request', JSON.stringify(request, null, 2));
+    console.log('Starting Request', JSON.stringify(request, null, 2));
     return request;
 });
 axiosClient.interceptors.response.use(

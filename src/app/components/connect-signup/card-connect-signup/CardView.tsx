@@ -16,6 +16,8 @@ export const CardView = ({
     onChangeTextInput,
     handleError,
     connect,
+    connectFacebook,
+    connectGoogle,
 }: ICardViewProps) => {
     const { t } = useTranslation();
     return (
@@ -42,7 +44,10 @@ export const CardView = ({
                     <View style={styles.line} />
                 </View>
 
-                <TouchableOpacity style={[appStyles.flex_row_center, styles.button_link]}>
+                <TouchableOpacity
+                    onPress={connectFacebook}
+                    style={[appStyles.flex_row_center, styles.button_link]}
+                >
                     <Image
                         resizeMode="contain"
                         source={AppImages.img_fb}
@@ -50,7 +55,10 @@ export const CardView = ({
                     />
                     <Text style={styles.text_link}>{t('connect.fb')}</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={[appStyles.flex_row_center, styles.button_link]}>
+                <TouchableOpacity
+                    onPress={connectGoogle}
+                    style={[appStyles.flex_row_center, styles.button_link]}
+                >
                     <Image
                         resizeMode="contain"
                         source={AppImages.img_google}

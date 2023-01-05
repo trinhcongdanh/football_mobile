@@ -135,6 +135,7 @@ export interface TopTeamModel {
     last_campaign: LastCampaign;
     goal_kickers: GoalKicker[];
     players_appearances: PlayersAppearance[];
+    isSelected: boolean;
 }
 
 export type TopTeamModelResponse = AxiosResponse<{

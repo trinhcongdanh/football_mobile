@@ -12,6 +12,7 @@ import {
     Image,
 } from 'react-native';
 import { appIcons } from '@football/app/assets/icons/appIcons';
+import { SvgUri } from 'react-native-svg';
 import { CardGoBack } from '@football/app/components/go-back/CardGoBack';
 import { HeaderAdded } from '@football/app/components/header-added/HeaderAdded';
 import { appColors } from '@football/app/utils/constants/appColors';
@@ -21,9 +22,29 @@ import _ from 'lodash';
 import { useViewModel } from './FavoriteSummaryScreen.viewModel';
 import { IFavoriteSummaryScreenProps } from './FavoriteSummaryScreen.type';
 import styles from './FavoriteSummaryScreen.style';
+import { TeamModel } from '@football/core/models/TeamModelResponse';
+import { PlayerModel } from '@football/core/models/PlayerModelResponse';
 
 export const FavoriteSummaryScreen = ({ navigation, route }: IFavoriteSummaryScreenProps) => {
-    const { t, onGoBack, onImagePicker, toggleOnCheck, images, onCheck } = useViewModel({
+    const {
+        t,
+        onGoBack,
+        toggleOnCheck,
+        onCheck,
+        addFavTeam,
+        changeFavTeam,
+        addFavPlayer,
+        changeFavPlayer,
+        addFavTopTeam,
+        changeFavTopTeam,
+        backFavTeam,
+        backFavPlayer,
+        backFavTopTeam,
+        favSelectedTeams,
+        favSelectedPlayers,
+        favSelectedTopTeams,
+        navigationHomePage,
+    } = useViewModel({
         navigation,
         route,
     });
@@ -42,23 +63,21 @@ export const FavoriteSummaryScreen = ({ navigation, route }: IFavoriteSummaryScr
                             />
                             <View style={styles.block_add_group}>
                                 <HeaderAdded
+                                    backFav={backFavTeam}
                                     leftIcon
                                     headerTitle={t('fav_summary.group')}
                                     headerSkip={t('settings.sleep')}
                                     iconName={appIcons.ic_left_ios}
                                 />
                                 <View style={styles.item_render}>
-                                    {images.map((item, index) => {
+                                    {favSelectedTeams.map((item: TeamModel) => {
                                         return (
-                                            <View
-                                                key={index.toString()}
-                                                style={styles.item_container}
-                                            >
+                                            <View key={item._id} style={styles.item_container}>
                                                 {_.isEmpty(item) ? (
                                                     <>
                                                         <TouchableOpacity
                                                             style={styles.btn_add}
-                                                            onPress={() => onImagePicker(index)}
+                                                            onPress={() => addFavTeam(item._id)}
                                                         >
                                                             <Icon
                                                                 name={appIcons.ic_plus}
@@ -74,11 +93,11 @@ export const FavoriteSummaryScreen = ({ navigation, route }: IFavoriteSummaryScr
                                                     <>
                                                         <TouchableOpacity
                                                             style={styles.btn_img}
-                                                            onPress={() => onImagePicker(index)}
+                                                            onPress={() => changeFavTeam(item._id)}
                                                         >
                                                             <Image
                                                                 resizeMode="cover"
-                                                                source={{ uri: item.uri }}
+                                                                source={{ uri: item.logo_url }}
                                                                 style={styles.img_view}
                                                             />
                                                         </TouchableOpacity>
@@ -86,7 +105,7 @@ export const FavoriteSummaryScreen = ({ navigation, route }: IFavoriteSummaryScr
                                                             numberOfLines={2}
                                                             style={styles.txt_add_group}
                                                         >
-                                                            {item.fileName}
+                                                            {item.name_he}
                                                         </Text>
                                                     </>
                                                 )}
@@ -97,23 +116,21 @@ export const FavoriteSummaryScreen = ({ navigation, route }: IFavoriteSummaryScr
                             </View>
                             <View style={styles.block_add_actress}>
                                 <HeaderAdded
+                                    backFav={backFavPlayer}
                                     leftIcon
                                     headerTitle={t('fav_summary.favorite')}
                                     headerSkip={t('settings.sleep')}
                                     iconName={appIcons.ic_left_ios}
                                 />
                                 <View style={styles.item_render}>
-                                    {images.map((item, index) => {
+                                    {favSelectedPlayers.map((item: PlayerModel, index) => {
                                         return (
-                                            <View
-                                                key={index.toString()}
-                                                style={styles.item_container}
-                                            >
+                                            <View key={item._id} style={styles.item_container}>
                                                 {_.isEmpty(item) ? (
                                                     <>
                                                         <TouchableOpacity
                                                             style={styles.btn_add}
-                                                            onPress={() => onImagePicker(index)}
+                                                            onPress={() => addFavPlayer(item._id)}
                                                         >
                                                             <Icon
                                                                 name={appIcons.ic_plus}
@@ -129,11 +146,13 @@ export const FavoriteSummaryScreen = ({ navigation, route }: IFavoriteSummaryScr
                                                     <>
                                                         <TouchableOpacity
                                                             style={styles.btn_img}
-                                                            onPress={() => onImagePicker(index)}
+                                                            onPress={() =>
+                                                                changeFavPlayer(item._id)
+                                                            }
                                                         >
                                                             <Image
                                                                 resizeMode="cover"
-                                                                source={{ uri: item.uri }}
+                                                                source={{ uri: item.image_url }}
                                                                 style={styles.img_view}
                                                             />
                                                         </TouchableOpacity>
@@ -141,7 +160,7 @@ export const FavoriteSummaryScreen = ({ navigation, route }: IFavoriteSummaryScr
                                                             numberOfLines={2}
                                                             style={styles.txt_add_group}
                                                         >
-                                                            {item.fileName}
+                                                            {item.name_he}
                                                         </Text>
                                                     </>
                                                 )}
@@ -152,23 +171,21 @@ export const FavoriteSummaryScreen = ({ navigation, route }: IFavoriteSummaryScr
                             </View>
                             <View style={styles.block_add_actress}>
                                 <HeaderAdded
+                                    backFav={backFavTopTeam}
                                     leftIcon
                                     headerTitle={t('fav_summary.national_team')}
                                     headerSkip={t('settings.sleep')}
                                     iconName={appIcons.ic_left_ios}
                                 />
                                 <View style={styles.item_render}>
-                                    {images.map((item, index) => {
+                                    {favSelectedTopTeams.map((item, index) => {
                                         return (
-                                            <View
-                                                key={index.toString()}
-                                                style={styles.item_container}
-                                            >
+                                            <View key={item._id} style={styles.item_container}>
                                                 {_.isEmpty(item) ? (
                                                     <>
                                                         <TouchableOpacity
                                                             style={styles.btn_add}
-                                                            onPress={() => onImagePicker(index)}
+                                                            onPress={() => addFavTopTeam(item._id)}
                                                         >
                                                             <Icon
                                                                 name={appIcons.ic_plus}
@@ -184,11 +201,14 @@ export const FavoriteSummaryScreen = ({ navigation, route }: IFavoriteSummaryScr
                                                     <>
                                                         <TouchableOpacity
                                                             style={styles.btn_img}
-                                                            onPress={() => onImagePicker(index)}
+                                                            onPress={() =>
+                                                                changeFavTopTeam(item._id)
+                                                            }
                                                         >
-                                                            <Image
-                                                                resizeMode="cover"
-                                                                source={{ uri: item.uri }}
+                                                            <SvgUri
+                                                                width={getSize.m(38)}
+                                                                height={getSize.m(38)}
+                                                                uri={item.logo_url}
                                                                 style={styles.img_view}
                                                             />
                                                         </TouchableOpacity>
@@ -196,7 +216,7 @@ export const FavoriteSummaryScreen = ({ navigation, route }: IFavoriteSummaryScr
                                                             numberOfLines={2}
                                                             style={styles.txt_add_group}
                                                         >
-                                                            {item.fileName}
+                                                            {item.name_he}
                                                         </Text>
                                                     </>
                                                 )}
@@ -234,9 +254,13 @@ export const FavoriteSummaryScreen = ({ navigation, route }: IFavoriteSummaryScr
                                     {t('fav_summary.complete')}
                                 </Text>
                             </TouchableOpacity>
-                            <Text style={styles.bottom_text}>
-                                {onCheck ? t('fav_summary.guest') : t('fav_summary.login_as_guest')}
-                            </Text>
+                            <TouchableOpacity onPress={navigationHomePage}>
+                                <Text style={styles.bottom_text}>
+                                    {onCheck
+                                        ? t('fav_summary.guest')
+                                        : t('fav_summary.login_as_guest')}
+                                </Text>
+                            </TouchableOpacity>
                         </View>
                     </ScrollView>
                 </SafeAreaView>

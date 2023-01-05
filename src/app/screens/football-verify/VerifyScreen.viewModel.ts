@@ -76,7 +76,6 @@ export const useViewModel = ({ navigation, route }: IVerifyScreenProps) => {
             try {
                 const confirmation = await localStorage.getItem<any>(OfflineData.phone_number);
                 setConfirm(confirmation);
-                // console.log(confirm);
                 await confirm.confirm(codeOtp);
             } catch (error: any) {
                 Alert.alert(JSON.stringify(error));
