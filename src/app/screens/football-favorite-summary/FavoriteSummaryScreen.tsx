@@ -43,6 +43,9 @@ export const FavoriteSummaryScreen = ({ navigation, route }: IFavoriteSummaryScr
         favSelectedTeams,
         favSelectedPlayers,
         favSelectedTopTeams,
+        teams,
+        players,
+        topTeams,
         navigationHomePage,
     } = useViewModel({
         navigation,
@@ -70,14 +73,17 @@ export const FavoriteSummaryScreen = ({ navigation, route }: IFavoriteSummaryScr
                                     iconName={appIcons.ic_left_ios}
                                 />
                                 <View style={styles.item_render}>
-                                    {favSelectedTeams.map((item: TeamModel) => {
+                                    {teams.map((item, index) => {
                                         return (
-                                            <View key={item._id} style={styles.item_container}>
+                                            <View
+                                                key={index.toString()}
+                                                style={styles.item_container}
+                                            >
                                                 {_.isEmpty(item) ? (
                                                     <>
                                                         <TouchableOpacity
                                                             style={styles.btn_add}
-                                                            onPress={() => addFavTeam(item._id)}
+                                                            onPress={() => addFavTeam(index)}
                                                         >
                                                             <Icon
                                                                 name={appIcons.ic_plus}
@@ -123,14 +129,17 @@ export const FavoriteSummaryScreen = ({ navigation, route }: IFavoriteSummaryScr
                                     iconName={appIcons.ic_left_ios}
                                 />
                                 <View style={styles.item_render}>
-                                    {favSelectedPlayers.map((item: PlayerModel, index) => {
+                                    {players.map((item, index) => {
                                         return (
-                                            <View key={item._id} style={styles.item_container}>
+                                            <View
+                                                key={index.toString()}
+                                                style={styles.item_container}
+                                            >
                                                 {_.isEmpty(item) ? (
                                                     <>
                                                         <TouchableOpacity
                                                             style={styles.btn_add}
-                                                            onPress={() => addFavPlayer(item._id)}
+                                                            onPress={() => addFavPlayer(index)}
                                                         >
                                                             <Icon
                                                                 name={appIcons.ic_plus}
@@ -178,14 +187,17 @@ export const FavoriteSummaryScreen = ({ navigation, route }: IFavoriteSummaryScr
                                     iconName={appIcons.ic_left_ios}
                                 />
                                 <View style={styles.item_render}>
-                                    {favSelectedTopTeams.map((item, index) => {
+                                    {topTeams.map((item, index) => {
                                         return (
-                                            <View key={item._id} style={styles.item_container}>
+                                            <View
+                                                key={index.toString()}
+                                                style={styles.item_container}
+                                            >
                                                 {_.isEmpty(item) ? (
                                                     <>
                                                         <TouchableOpacity
                                                             style={styles.btn_add}
-                                                            onPress={() => addFavTopTeam(item._id)}
+                                                            onPress={() => addFavTopTeam(index)}
                                                         >
                                                             <Icon
                                                                 name={appIcons.ic_plus}
