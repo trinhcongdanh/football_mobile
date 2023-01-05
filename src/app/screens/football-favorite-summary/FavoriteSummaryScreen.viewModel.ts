@@ -126,6 +126,10 @@ export const useViewModel = ({ navigation, route }: IFavoriteSummaryScreenProps)
         setonCheck(!onCheck);
     };
 
+    const navigationMethodRegister = () => {
+        navigate(ScreenName.RegisterPage);
+    };
+
     return {
         t,
         onGoBack,
@@ -141,12 +145,10 @@ export const useViewModel = ({ navigation, route }: IFavoriteSummaryScreenProps)
         backFavTeam,
         backFavPlayer,
         backFavTopTeam,
-        favSelectedTeams,
-        favSelectedPlayers,
-        favSelectedTopTeams,
         navigationHomePage,
         teams,
         players,
         topTeams,
+        navigationMethodRegister,
     };
 };

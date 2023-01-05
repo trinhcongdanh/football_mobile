@@ -30,6 +30,8 @@ export const RegisterScreen = ({ navigation, route }: IRegisterScreenProps) => {
         handleOnChange,
         connect,
         onNavigateConnect,
+        connectFacebook,
+        connectGoogle,
     } = useViewModel({
         navigation,
         route,
@@ -53,6 +55,8 @@ export const RegisterScreen = ({ navigation, route }: IRegisterScreenProps) => {
                                 sub_title={t('welcome.join_us')}
                             />
                             <CardView
+                                connectFacebook={connectFacebook}
+                                connectGoogle={connectGoogle}
                                 input={phoneNumber}
                                 inputRef={phoneNumberRef}
                                 errors={errors.numberPhone}

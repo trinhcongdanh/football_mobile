@@ -1,6 +1,6 @@
 import { appColors } from '@football/app/utils/constants/appColors';
 import { getSize } from '@football/app/utils/responsive/scale';
-import { StyleSheet } from 'react-native';
+import { I18nManager, StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
     connect_container: {
@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
     otp_Container: {
         justifyContent: 'space-between',
         alignItems: 'center',
-        flexDirection: 'row-reverse',
+        flexDirection: I18nManager.isRTL ? 'row-reverse' : 'row-reverse',
         marginTop: getSize.m(36),
     },
     otp_Box: {

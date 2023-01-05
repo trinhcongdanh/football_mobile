@@ -40,12 +40,10 @@ export const FavoriteSummaryScreen = ({ navigation, route }: IFavoriteSummaryScr
         backFavTeam,
         backFavPlayer,
         backFavTopTeam,
-        favSelectedTeams,
-        favSelectedPlayers,
-        favSelectedTopTeams,
         teams,
         players,
         topTeams,
+        navigationMethodRegister,
         navigationHomePage,
     } = useViewModel({
         navigation,
@@ -255,7 +253,8 @@ export const FavoriteSummaryScreen = ({ navigation, route }: IFavoriteSummaryScr
                                 <Text style={styles.provision}>{t('fav_summary.term_use')}</Text>
                             </View>
                             <TouchableOpacity
-                                disabled={onCheck}
+                                onPress={navigationMethodRegister}
+                                disabled={!onCheck}
                                 style={onCheck ? styles.btn_complete : styles.btn_complete_disable}
                             >
                                 <Text
