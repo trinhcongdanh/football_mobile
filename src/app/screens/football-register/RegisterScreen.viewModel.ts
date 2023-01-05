@@ -1,11 +1,15 @@
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
-import { OfflineData, ScreenName } from '@football/app/utils/constants/enum';
-import { useRef, useState } from 'react';
+import { AuthData, ScreenName } from '@football/app/utils/constants/enum';
+import { useRef, useState, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Alert, Keyboard } from 'react-native';
-import auth from '@react-native-firebase/auth';
 import { IRegisterScreenProps } from './RegisterScreen.type';
-import localStorage from '@football/core/helpers/localStorage';
+import { useSelector } from 'react-redux';
+import { AccessToken, LoginManager, Profile } from 'react-native-fbsdk-next';
+import { axiosAuth } from '@football/core/api/auth/axiosAuth';
+import { ACTION, AUTH_URL } from '@football/core/api/auth/config';
+import { env } from 'src/config';
+import { isEmpty } from 'lodash';
 
 export const useViewModel = ({ navigation, route }: IRegisterScreenProps) => {
     const { t } = useTranslation();
@@ -23,21 +27,68 @@ export const useViewModel = ({ navigation, route }: IRegisterScreenProps) => {
         setPhoneNumber(e);
     };
 
-    const signInWithPhoneNumber = async (phoneNumber: string) => {
-        const confirmation = await auth().signInWithPhoneNumber(phoneNumber);
-        await localStorage.setItem(OfflineData.phone_number, confirmation);
-    };
-
     const connect = () => {
         Keyboard.dismiss();
-        if (phoneNumber === '') {
-            handleError(t('register.invalid'), 'numberPhone');
-        } else {
-            signInWithPhoneNumber(phoneNumber);
-            navigate(ScreenName.VerifyPage);
-        }
+        // if (phoneNumber === '') {
+        //     handleError(t('register.invalid'), 'numberPhone');
+        navigate(ScreenName.VerifyPage);
+        // } else {
+        // }
     };
 
+    const guestId = useSelector((state: any) => state.guestId.guestId);
+    const profile = useSelector((state: any) => state.createProfile.profile);
+    const tokenLogin = useSelector((state: any) => state.login.login);
+
+    function serializeParams(obj: any) {
+        let str = [];
+        for (let p in obj) {
+            if (obj.hasOwnProperty(p)) {
+                str.push(p + '=' + encodeURIComponent(obj[p]));
+            }
+        }
+        return str.join('&');
+    }
+
+    const connectFacebook = useCallback(async () => {
+        LoginManager.logInWithPermissions(['public_profile', 'email']).then((result: any) => {
+            if (result.isCancelled) {
+            } else {
+                Profile.getCurrentProfile().then(currentProfile => {
+                    if (currentProfile) {
+                        console.log(currentProfile);
+                    }
+                });
+                AccessToken.getCurrentAccessToken().then((data: any) => {
+                    console.log(data.accessToken.toString());
+                });
+            }
+        });
+        try {
+            const { data }: any = await axiosAuth.post(
+                `${AUTH_URL}`,
+                serializeParams({
+                    action: ACTION,
+                    token: tokenLogin[0].token,
+                    call: AuthData.REGISTER,
+                    guest_id: profile[0].tc_user,
+                    guest_guid: guestId[0],
+                    'item[facebook_app_id]': env.FACEBOOK_APPID,
+                    'item[facebook_app_secret]': env.FACEBOOK_SECRET_KEY,
+                }),
+                {
+                    headers: {},
+                }
+            );
+            if (!isEmpty(data)) {
+                console.log(data);
+            }
+        } catch (error: any) {
+            Alert.alert(error);
+        }
+    }, []);
+
+    const connectGoogle = () => {};
     const onGoBack = () => {
         goBack();
     };
@@ -55,5 +106,7 @@ export const useViewModel = ({ navigation, route }: IRegisterScreenProps) => {
         connect,
         onGoBack,
         onNavigateConnect,
+        connectFacebook,
+        connectGoogle,
     };
 };
