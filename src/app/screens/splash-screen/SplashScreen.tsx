@@ -15,25 +15,29 @@ import { Lottie } from '@football/core/models/SplashModelResponse';
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
 import styles from '@football/app/screens/splash-screen/SplashScreen.styles';
 import { ISplashScreenProps } from '@football/app/screens/splash-screen/SplashScreen.type';
+import { useDispatch, useSelector } from 'react-redux';
+import { addGuestId } from 'src/store/user/GuestId.slice';
 
 export const SplashScreen = ({ navigation, route }: ISplashScreenProps) => {
     const { t, i18n } = useTranslation();
     const { navigate } = useAppNavigator();
     const [splashData, setSplashData] = useState<Lottie>();
+
+    const uuid = require('uuid');
+    let id = uuid.v4();
+    const dispatch = useDispatch();
+
+    const guestId = useSelector((state: any) => state.guestId.guestId);
+
     const getSplashData = useCallback(async () => {
         try {
-            const offlineData = await localStorage.getItem<Lottie>(OfflineData.splash_animation);
-            if (!isEmpty(offlineData) && !isNil(offlineData)) {
-                setSplashData(offlineData);
-            } else {
-                const { data } = await axiosClient.post(`${BASE_URL}/find`, {
-                    dataSource: DATA_SOURCE,
-                    database: DB,
-                    collection: 'splash_animation',
-                });
-                if (!isEmpty(data.documents)) {
-                    setSplashData(data.documents[0].lottie);
-                }
+            const { data } = await axiosClient.post(`${BASE_URL}/find`, {
+                dataSource: DATA_SOURCE,
+                database: DB,
+                collection: 'splash_animation',
+            });
+            if (!isEmpty(data.documents)) {
+                setSplashData(data.documents[0].lottie);
             }
         } catch (error: any) {
             Alert.alert(error);
@@ -44,13 +48,25 @@ export const SplashScreen = ({ navigation, route }: ISplashScreenProps) => {
     });
     const [authLoaded, setAuthLoaded] = useState(false);
     useEffect(() => {
+        if (guestId.length === 0) {
+            const action = addGuestId(id);
+            dispatch(action);
+        }
+    }, []);
+    useEffect(() => {
         setTimeout(() => {
             setAuthLoaded(true);
         }, 8000);
     }, []);
+    const login = useSelector((state: any) => state.login.login);
+
     useEffect(() => {
         if (authLoaded) {
-            navigate(ScreenName.OpeningPage);
+            if (!isEmpty(login) && !isNil(login)) {
+                navigate(ScreenName.BottomTab);
+            } else {
+                navigate(ScreenName.OpeningPage);
+            }
         }
     }, [authLoaded]);
 

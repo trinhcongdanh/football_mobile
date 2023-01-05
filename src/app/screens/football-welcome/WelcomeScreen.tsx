@@ -15,9 +15,14 @@ import { appStyles } from '@football/app/utils/constants/appStyles';
 import { Button } from '@football/app/components/button';
 import styles from './WelcomeScreen.styles';
 import { IWelcomeScreenProps } from './WelcomeScreen.type';
+import { useViewModel } from '@football/app/screens/football-welcome/WelcomeScreen.viewModel';
 
 export const WelcomeScreen = ({ navigation, route }: IWelcomeScreenProps) => {
-    const { t, i18n } = useTranslation();
+    const { i18n } = useTranslation();
+    const { t, onNavigateFavTeam } = useViewModel({
+        navigation,
+        route,
+    });
 
     useEffect(() => {
         i18n.changeLanguage('heb');
@@ -27,12 +32,6 @@ export const WelcomeScreen = ({ navigation, route }: IWelcomeScreenProps) => {
             I18nManager.forceRTL(true);
         }
     }, [i18n, i18n.language]);
-
-    const onNavigateFavTeam = () => {
-        navigation.navigate(ScreenName.FavTeamPage, {
-            isReset: true,
-        });
-    };
 
     const onNavigateConnect = () => {
         navigation.navigate(ScreenName.ConnectPage, {

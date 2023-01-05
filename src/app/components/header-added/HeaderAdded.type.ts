@@ -3,4 +3,5 @@ export type IHeaderAddedProps = {
     headerSkip: string;
     iconName: string;
     leftIcon: boolean;
+    backFav: () => void;
 };

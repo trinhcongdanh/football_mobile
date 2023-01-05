@@ -41,7 +41,7 @@ const resources = {
             favorite_player: {
                 skip: 'דלג',
                 title: 'בחר עד 3 שחקנים מועדפים',
-                place_holder: 'חיפוש קבוצה...',
+                place_holder: 'חיפוש שחקן…',
                 chosen: 'נבחרו',
                 button: 'המשך',
             },
@@ -562,14 +562,14 @@ const resources = {
             favorite_team: {
                 skip: 'Skip',
                 title: 'Select up to 3 favorite groups',
-                place_holder: 'Search group...',
+                place_holder: 'Search team...',
                 chosen: 'were chosen',
                 button: 'Continued',
             },
             favorite_player: {
                 skip: 'Skip',
                 title: 'Choose up to 3 favorite players',
-                place_holder: 'Search group...',
+                place_holder: 'Search player…',
                 chosen: 'were chosen',
                 button: 'Continued',
             },

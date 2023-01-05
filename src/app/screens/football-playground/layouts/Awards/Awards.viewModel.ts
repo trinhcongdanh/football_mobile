@@ -3,6 +3,9 @@ import { useTranslation } from 'react-i18next';
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
 import { AppImages } from '@football/app/assets/images';
 import { IAwardsProps } from '@football/app/screens/football-playground/layouts/Awards/Awards.type';
+import { useSelector } from 'react-redux';
+import { isEmpty, isNil } from 'lodash';
+import { ScreenName } from '@football/app/utils/constants/enum';
 
 export const useViewModel = ({}: IAwardsProps) => {
     const { navigate, goBack } = useAppNavigator();
@@ -19,9 +22,20 @@ export const useViewModel = ({}: IAwardsProps) => {
         { id: 4, name: 'כדורגל ADIDAS מונדיאל 2022', image: AppImages.img_shirt, coin: 820 },
     ];
 
+    const registerFacebook = useSelector((state: any) => state.registerFacebook.registerFacebook);
+
+    const handleAward = () => {
+        if (!isEmpty(registerFacebook) && !isNil(registerFacebook)) {
+            console.log('Go award');
+        } else {
+            navigate(ScreenName.ConnectPage);
+        }
+    };
+
     return {
         t,
         onGoBack,
         awards,
+        handleAward,
     };
 };

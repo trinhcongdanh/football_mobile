@@ -39,6 +39,7 @@ export const FavoritePlayer = ({
     chosen,
     button,
     searchText,
+    group,
     searchFavPlayer,
 }: IFavoritePlayerProps) => {
     return (
@@ -75,7 +76,7 @@ export const FavoritePlayer = ({
                         )}
                         {onIndex === 1 && (
                             <View style={{ marginBottom: getSize.m(10) }}>
-                                <Text style={styles.name_club}>הפועל באר שבע</Text>
+                                <Text style={styles.name_club}>{group}</Text>
                             </View>
                         )}
                         <ActivityIndicator
@@ -118,7 +119,7 @@ export const FavoritePlayer = ({
                             )}
                             {onIndex === 1 && (
                                 <View style={{ marginBottom: getSize.m(10) }}>
-                                    <Text style={styles.name_club}>הפועל באר שבע</Text>
+                                    <Text style={styles.name_club}>{group}</Text>
                                 </View>
                             )}
 
@@ -146,9 +147,6 @@ export const FavoritePlayer = ({
                                                 }}
                                             >
                                                 <Image
-                                                    // uri={item.logo_url}
-                                                    // width={getSize.m(25)}
-                                                    // height={getSize.m(28)}
                                                     source={{ uri: item.image_url }}
                                                     style={[
                                                         styles.image_item,
@@ -187,9 +185,6 @@ export const FavoritePlayer = ({
                                             style={{ marginLeft: getSize.m(6) }}
                                         >
                                             <Image
-                                                // uri={item.logo_url}
-                                                // width={getSize.m(25)}
-                                                // height={getSize.m(28)}
                                                 source={{ uri: item.image_url }}
                                                 style={[
                                                     styles.image_item,

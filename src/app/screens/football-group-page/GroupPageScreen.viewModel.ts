@@ -1,4 +1,5 @@
 import { useTranslation } from 'react-i18next';
+import { ScreenName } from '@football/app/utils/constants/enum';
 import React, { useState } from 'react';
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
 import { IGroupPageScreenProps } from './GroupPageScreen.type';
@@ -8,7 +9,7 @@ export const useViewModel = ({ navigation, route }: IGroupPageScreenProps) => {
     const { t } = useTranslation();
 
     const onGoBack = (): void => {
-        goBack();
+        navigate(ScreenName.OpeningPage);
     };
 
     // Game season

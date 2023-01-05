@@ -82,4 +82,13 @@ export enum OfflineData {
     coach_page = 'COACH_PAGE',
     game_page = 'GAME_PAGE',
     phone_number = 'PHONE_NUMBER',
+    create_profile = 'CREATE_PROFILE',
+    login = 'LOGIN',
+}
+
+export enum AuthData {
+    ECHO = 'echo',
+    CREATE_PROFILE = 'create_profile',
+    REGISTER = 'register',
+    LOGIN = 'login',
 }

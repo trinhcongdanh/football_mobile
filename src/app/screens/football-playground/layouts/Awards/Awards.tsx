@@ -9,7 +9,7 @@ import { useViewModel } from '@football/app/screens/football-playground/layouts/
 import { IAwardsProps } from '@football/app/screens/football-playground/layouts/Awards/Awards.type';
 
 export const Awards = ({}: IAwardsProps) => {
-    const { t, onGoBack, awards } = useViewModel({});
+    const { t, onGoBack, awards, handleAward } = useViewModel({});
     return (
         <View style={{ paddingHorizontal: getSize.m(16) }}>
             {awards.map(award => {
@@ -19,7 +19,7 @@ export const Awards = ({}: IAwardsProps) => {
                             <Text style={styles.item_award_name}>{award.name}</Text>
                             <Image source={award.image} style={styles.item_award_image} />
                         </View>
-                        <TouchableOpacity>
+                        <TouchableOpacity onPress={handleAward}>
                             <LinearGradient
                                 colors={['rgba(44, 196, 255, 1)', 'rgba(26, 117, 255, 1)']}
                                 style={[
