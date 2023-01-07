@@ -24,6 +24,7 @@ import { HeaderFav } from '@football/app/components/header-fav/HeaderFav';
 import { Button } from '@football/app/components/button';
 import { IFavoritePlayerProps } from './FavoritePlayer.types';
 import styles from './FavoritePlayer.style';
+import { Position } from '@football/core/models/TeamPersonnelResponse';
 
 export const FavoritePlayer = ({
     onGoSkip,
@@ -125,10 +126,10 @@ export const FavoritePlayer = ({
 
                             <ScrollView>
                                 <View style={styles.content_item}>
-                                    {newFav?.map((item: PlayerModel, index: number) => {
+                                    {newFav?.map((item: PlayerModel | Position, index: number) => {
                                         return (
                                             <TouchableOpacity
-                                                key={item._id}
+                                                key={index.toString()}
                                                 style={[
                                                     styles.item,
                                                     {
@@ -178,7 +179,7 @@ export const FavoritePlayer = ({
                     <View style={styles.select_item}>
                         <View style={styles.result_select}>
                             <View style={styles.image_select}>
-                                {favSelected.map((item: PlayerModel, index: number) => {
+                                {favSelected.map((item: PlayerModel | Position, index: number) => {
                                     return (
                                         <View
                                             key={index.toString()}

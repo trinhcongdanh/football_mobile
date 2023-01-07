@@ -44,6 +44,7 @@ const resources = {
                 place_holder: 'חיפוש שחקן…',
                 chosen: 'נבחרו',
                 button: 'המשך',
+                group: 'כל השחקנים',
             },
             favorite_top_team: {
                 skip: 'דלג',
@@ -572,6 +573,7 @@ const resources = {
                 place_holder: 'Search player…',
                 chosen: 'were chosen',
                 button: 'Continued',
+                group: 'All Players',
             },
             favorite_top_team: {
                 skip: 'Skip',

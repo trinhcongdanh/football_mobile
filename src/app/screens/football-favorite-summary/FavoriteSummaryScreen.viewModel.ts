@@ -8,6 +8,7 @@ import { TopTeamModel } from '@football/core/models/TopTeamModelResponse';
 import { useTranslation } from 'react-i18next';
 import { IFavoriteSummaryScreenProps } from './FavoriteSummaryScreen.type';
 import { isEmpty } from 'lodash';
+import { Position } from '@football/core/models/TeamPersonnelResponse';
 
 export const useViewModel = ({ navigation, route }: IFavoriteSummaryScreenProps) => {
     const { t } = useTranslation();
@@ -32,9 +33,9 @@ export const useViewModel = ({ navigation, route }: IFavoriteSummaryScreenProps)
     }, []);
 
     // player
-    const [firstPlayers, setFirstPlayers] = useState<PlayerModel>();
-    const [secondPlayers, setSecondPlayers] = useState<PlayerModel>();
-    const [thirdPlayers, setThirdPlayers] = useState<PlayerModel>();
+    const [firstPlayers, setFirstPlayers] = useState<PlayerModel | Position>();
+    const [secondPlayers, setSecondPlayers] = useState<PlayerModel | Position>();
+    const [thirdPlayers, setThirdPlayers] = useState<PlayerModel | Position>();
     const players = [firstPlayers, secondPlayers, thirdPlayers];
     useEffect(() => {
         if (favSelectedPlayers.length === 3) {
@@ -66,9 +67,12 @@ export const useViewModel = ({ navigation, route }: IFavoriteSummaryScreenProps)
         (state: any) =>
             state.favTeams.favTeams.filter((v: TeamModel) => v.isSelected) as TeamModel[]
     );
-    const favSelectedPlayers = useSelector(
-        (state: any) =>
-            state.favPlayers.favPlayers.filter((v: PlayerModel) => v.isSelected) as PlayerModel[]
+    const favSelectedPlayers = useSelector((state: any) =>
+        !isEmpty(favSelectedTeams)
+            ? (state.favPlayers.groupsPlayer.filter((v: Position) => v.isSelected) as Position[])
+            : (state.favPlayers.favPlayers.filter(
+                  (v: PlayerModel) => v.isSelected
+              ) as PlayerModel[])
     );
     const favSelectedTopTeams = useSelector(
         (state: any) =>
