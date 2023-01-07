@@ -39,7 +39,7 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
         !isEmpty(favSelectedTeams)
             ? (state.favPlayers.groupsPlayer as Position[])
             : (state.favPlayers.favPlayers as PlayerModel[])
-    );
+    ) as (Position | PlayerModel)[];
     const favSelectedPlayers = useSelector((state: any) =>
         !isEmpty(favSelectedTeams)
             ? (state.favPlayers.groupsPlayer.filter((v: Position) => v.isSelected) as Position[])
