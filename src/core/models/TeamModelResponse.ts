@@ -7,6 +7,7 @@ export interface TeamModel {
     logo_width: number;
     name_en: string;
     name_he: string;
+    team_personnel_id: string;
     popularity: number;
     search_terms: string;
     isSelected: boolean;

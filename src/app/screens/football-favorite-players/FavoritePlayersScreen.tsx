@@ -5,6 +5,7 @@ import { PlayerModel } from '@football/core/models/PlayerModelResponse';
 import { useViewModel } from './FavoritePlayersScreen.viewModel';
 import { IFavoritePlayerScreenProps } from './FavoritePlayersScreen.type';
 import { FavoritePlayer } from './components/FavoritePlayer';
+import { Position } from '@football/core/models/TeamPersonnelResponse';
 
 export const FavoritePlayersScreen = ({ navigation, route }: IFavoritePlayerScreenProps) => {
     const {
@@ -35,7 +36,7 @@ export const FavoritePlayersScreen = ({ navigation, route }: IFavoritePlayerScre
                     setSearchText(text);
                     searchFavPlayer(text);
                 }}
-                handleSelected={(item: PlayerModel) => {
+                handleSelected={(item: PlayerModel | Position) => {
                     handleSelected(item);
                 }}
                 newFav={filteredPlayers}
