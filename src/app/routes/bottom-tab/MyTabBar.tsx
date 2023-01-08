@@ -1,5 +1,5 @@
-import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import React, { useCallback } from 'react';
+import { Alert, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { AppFonts } from '@football/app/assets/fonts';
 import { getSize } from '@football/app/utils/responsive/scale';

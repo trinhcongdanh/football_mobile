@@ -153,9 +153,7 @@ export const FavoriteSummaryScreen = ({ navigation, route }: IFavoriteSummaryScr
                                                     <>
                                                         <TouchableOpacity
                                                             style={styles.btn_img}
-                                                            onPress={() =>
-                                                                changeFavPlayer(item._id)
-                                                            }
+                                                            onPress={() => changeFavPlayer(index)}
                                                         >
                                                             <Image
                                                                 resizeMode="cover"
