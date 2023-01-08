@@ -11,7 +11,6 @@ import { IWelcomeScreenProps } from '@football/app/screens/football-welcome/Welc
 import { ScreenName } from '@football/app/utils/constants/enum';
 import { addProfile } from 'src/store/user/CreateProfile.slice';
 import { useDispatch, useSelector } from 'react-redux';
-import { addLogin } from 'src/store/user/Login.slice';
 
 export const useViewModel = ({ navigation, route }: IWelcomeScreenProps) => {
     const { navigate, goBack } = useAppNavigator();
@@ -31,7 +30,8 @@ export const useViewModel = ({ navigation, route }: IWelcomeScreenProps) => {
         }
         return str.join('&');
     }
-    const getCreateProfile = useCallback(async () => {
+
+    const onNavigateFavTeam = async () => {
         if (isEmpty(profile) || isNil(profile)) {
             try {
                 const { data }: any = await axiosAuth.post(
@@ -58,40 +58,7 @@ export const useViewModel = ({ navigation, route }: IWelcomeScreenProps) => {
                 Alert.alert(error);
             }
         }
-    }, []);
-    useMount(() => {
-        getCreateProfile();
-    });
-
-    const login = useSelector((state: any) => state.login.login);
-
-    const onNavigateFavTeam = async () => {
-        try {
-            if (!isEmpty(login) && !isNil(login)) {
-                navigate(ScreenName.FavTeamPage);
-            } else {
-                const { data }: any = await axiosAuth.post(
-                    `${AUTH_URL}`,
-                    serializeParams({
-                        action: ACTION,
-                        token: TOKEN,
-                        call: AuthData.LOGIN,
-                        guest_id: profile[0].tc_user,
-                        guest_guid: guestId[0],
-                    }),
-                    {
-                        headers: {},
-                    }
-                );
-                if (!isEmpty(data)) {
-                    const action = addLogin(data);
-                    dispatch(action);
-                    navigate(ScreenName.FavTeamPage);
-                }
-            }
-        } catch (error: any) {
-            Alert.alert(error);
-        }
+        navigate(ScreenName.FavTeamPage);
     };
 
     return {
