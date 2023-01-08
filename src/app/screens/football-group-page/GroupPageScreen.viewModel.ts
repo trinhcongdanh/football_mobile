@@ -8,9 +8,7 @@ export const useViewModel = ({ navigation, route }: IGroupPageScreenProps) => {
     const { navigate, goBack } = useAppNavigator();
     const { t } = useTranslation();
 
-    const onGoBack = (): void => {
-        navigate(ScreenName.OpeningPage);
-    };
+    const onGoBack = (): void => {};
 
     // Game season
     const [openModalYear, setOpenModalYear] = useState(false);

@@ -77,28 +77,55 @@ export const useViewModel = ({ navigation, route }: IFavoriteTeamsScreenProps) =
         goBack();
     };
     const onGoSkip = async () => {
-        if (!isEmpty(login) && !isNil(login)) {
-            navigate(ScreenName.BottomTab);
-        } else {
+        if (isEmpty(profile) || isNil(profile)) {
             try {
                 const { data }: any = await axiosAuth.post(
                     `${AUTH_URL}`,
                     serializeParams({
                         action: ACTION,
                         token: TOKEN,
-                        call: AuthData.LOGIN,
-                        guest_id: profile[0].tc_user,
-                        guest_guid: guestId[0],
+                        call: AuthData.CREATE_PROFILE,
+                        'item[guest_guid]': guestId[0],
                     }),
+
                     {
                         headers: {},
                     }
                 );
+
                 if (!isEmpty(data)) {
-                    const action = addLogin(data);
+                    let data1 = data;
+                    const action = addProfile(data1.item);
                     dispatch(action);
-                    navigate(ScreenName.BottomTab);
+                    try {
+                        if (!isEmpty(login) && !isNil(login)) {
+                            navigate(ScreenName.BottomTab);
+                        } else {
+                            const { data }: any = await axiosAuth.post(
+                                `${AUTH_URL}`,
+                                serializeParams({
+                                    action: ACTION,
+                                    token: TOKEN,
+                                    call: AuthData.LOGIN,
+                                    guest_id: data1.item.tc_user,
+                                    guest_guid: guestId[0],
+                                }),
+                                {
+                                    headers: {},
+                                }
+                            );
+                            if (!isEmpty(data)) {
+                                const action = addLogin(data);
+                                dispatch(action);
+                                navigate(ScreenName.BottomTab);
+                            }
+                        }
+                    } catch (error: any) {
+                        Alert.alert(error);
+                    }
                 }
+
+                // }
             } catch (error: any) {
                 Alert.alert(error);
             }

@@ -31,33 +31,7 @@ export const useViewModel = ({ navigation, route }: IWelcomeScreenProps) => {
         return str.join('&');
     }
 
-    const onNavigateFavTeam = async () => {
-        if (isEmpty(profile) || isNil(profile)) {
-            try {
-                const { data }: any = await axiosAuth.post(
-                    `${AUTH_URL}`,
-                    serializeParams({
-                        action: ACTION,
-                        token: TOKEN,
-                        call: AuthData.CREATE_PROFILE,
-                        'item[guest_guid]': guestId[0],
-                    }),
-
-                    {
-                        headers: {},
-                    }
-                );
-
-                if (!isEmpty(data)) {
-                    const action = addProfile(data.item);
-                    dispatch(action);
-                }
-
-                // }
-            } catch (error: any) {
-                Alert.alert(error);
-            }
-        }
+    const onNavigateFavTeam = () => {
         navigate(ScreenName.FavTeamPage);
     };
 
