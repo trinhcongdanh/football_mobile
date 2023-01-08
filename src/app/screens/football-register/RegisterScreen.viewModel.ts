@@ -1,6 +1,6 @@
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
 import { AuthData, ScreenName } from '@football/app/utils/constants/enum';
-import { useRef, useState, useCallback } from 'react';
+import { useRef, useState, useCallback, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Alert, Keyboard } from 'react-native';
 import { IRegisterScreenProps } from './RegisterScreen.type';
@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux';
 import { AccessToken, LoginManager, Profile } from 'react-native-fbsdk-next';
 import { axiosAuth } from '@football/core/api/auth/axiosAuth';
 import { ACTION, AUTH_URL } from '@football/core/api/auth/config';
+import { GoogleSignin, statusCodes } from '@react-native-google-signin/google-signin';
 import { env } from 'src/config';
 import { isEmpty } from 'lodash';
 
@@ -88,7 +89,34 @@ export const useViewModel = ({ navigation, route }: IRegisterScreenProps) => {
         }
     }, []);
 
-    const connectGoogle = () => {};
+    useEffect(() => {
+        GoogleSignin.configure({
+            webClientId: '476796468470-2e0e3qgmfo76l4c2juqiu3gvgmts0v32.apps.googleusercontent.com',
+            offlineAccess: true,
+        });
+    }, []);
+
+    const connectGoogle = useCallback(async () => {
+        try {
+            await GoogleSignin.hasPlayServices();
+            await GoogleSignin.signIn().then((result: any) => {
+                console.log(result);
+            });
+        } catch (error: any) {
+            if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+                // user cancelled the login flow
+                Alert.alert('User cancelled the login flow !');
+            } else if (error.code === statusCodes.IN_PROGRESS) {
+                Alert.alert('Signin in progress');
+                // operation (f.e. sign in) is in progress already
+            } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+                Alert.alert('Google play services not available or outdated !');
+                // play services not available or outdated
+            } else {
+                console.log(error);
+            }
+        }
+    }, []);
     const onGoBack = () => {
         goBack();
     };
