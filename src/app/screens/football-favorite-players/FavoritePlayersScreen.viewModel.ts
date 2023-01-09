@@ -26,35 +26,42 @@ import { ACTION, AUTH_URL, TOKEN } from '@football/core/api/auth/config';
 import { addLogin } from 'src/store/user/Login.slice';
 import { addProfile } from 'src/store/user/CreateProfile.slice';
 import { IFavoritePlayerScreenProps } from './FavoritePlayersScreen.type';
+import { RootState } from 'src/store/store';
 
 export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) => {
     const { t } = useTranslation();
     const { navigate, goBack } = useAppNavigator();
     const dispatch = useDispatch();
     const [searchText, setSearchText] = useState('');
-    const [group, setGroup] = useState('');
 
     const favSelectedTeams = useSelector(
         (state: any) =>
             state.favTeams.favTeams.filter((v: TeamModel) => v.isSelected) as TeamModel[]
     );
-    // get all player
-    const favPlayers = useSelector((state: any) =>
+
+    const favPlayers = useSelector((state: RootState) =>
+        !isEmpty(favSelectedTeams) ? state.favPlayers.groupPlayers : state.favPlayers.favPlayers
+    );
+
+    const favSelectedPlayers = useSelector((state: RootState) =>
         !isEmpty(favSelectedTeams)
-            ? (state.favPlayers.groupsPlayer as Position[])
-            : (state.favPlayers.favPlayers as PlayerModel[])
-    ) as (Position | PlayerModel)[];
-    const favSelectedPlayers = useSelector((state: any) =>
-        !isEmpty(favSelectedTeams)
-            ? (state.favPlayers.groupsPlayer.filter((v: Position) => v.isSelected) as Position[])
-            : (state.favPlayers.favPlayers.filter(
-                  (v: PlayerModel) => v.isSelected
-              ) as PlayerModel[])
+            ? state.favPlayers.groupPlayers
+                  .map(e => {
+                      return e.listFavPlayers.filter(v => v.isSelected);
+                  })
+                  .flat()
+            : state.favPlayers.favPlayers
+                  .map(e => {
+                      return e.listFavPlayers.filter(v => v.isSelected);
+                  })
+                  .flat()
     );
 
     const login = useSelector((state: any) => state.login.login);
     const profile = useSelector((state: any) => state.createProfile.profile);
     const guestId = useSelector((state: any) => state.guestId.guestId);
+    const uuid = require('uuid');
+    let id = uuid.v4();
 
     function serializeParams(obj: any) {
         let str = [];
@@ -66,18 +73,6 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
         return str.join('&');
     }
 
-    useEffect(() => {
-        if (!isEmpty(favSelectedTeams)) {
-            favSelectedTeams.map((favTeam: TeamModel, index: number) => {
-                if (index === 0) {
-                    setGroup(favTeam.name_he);
-                }
-            });
-        } else {
-            setGroup(t('favorite_player.group'));
-        }
-    }, []);
-
     const getPlayersData = useCallback(async () => {
         if (isEmpty(favPlayers) || isNil(favPlayers)) {
             try {
@@ -88,7 +83,13 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
                 });
 
                 if (!isEmpty(data.documents)) {
-                    dispatch(setAllFavPlayers(data.documents));
+                    dispatch(
+                        setAllFavPlayers({
+                            id: id,
+                            label: t('favorite_player.group'),
+                            listFavPlayers: data.documents,
+                        })
+                    );
                 }
             } catch (error: any) {
                 Alert.alert(error);
@@ -108,11 +109,20 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
                 if (!isEmpty(data.documents)) {
                     favSelectedTeams.map((favTeam: TeamModel, index: number) => {
                         data.documents.map((team_personnel: TeamPersonnelModel) => {
-                            if (favTeam.team_personnel_id === team_personnel._id && index === 0) {
-                                dispatch(setGroupFavPlayer(team_personnel.players.attack));
-                                dispatch(setGroupFavPlayer(team_personnel.players.midfield));
-                                dispatch(setGroupFavPlayer(team_personnel.players.defence));
-                                dispatch(setGroupFavPlayer(team_personnel.players.goalkeepers));
+                            if (favTeam.team_personnel_id === team_personnel._id) {
+                                let temp = [];
+                                temp.push(...team_personnel.players.attack);
+                                temp.push(...team_personnel.players.midfield);
+                                temp.push(...team_personnel.players.defence);
+                                temp.push(...team_personnel.players.goalkeepers);
+
+                                dispatch(
+                                    setGroupFavPlayer({
+                                        id: team_personnel._id,
+                                        label: favTeam.name_he,
+                                        listFavPlayers: temp,
+                                    })
+                                );
                             }
                         });
                     });
@@ -122,7 +132,7 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
             }
         }
     }, []);
-    const handleSelected = (player: Position | PlayerModel) => {
+    const handleSelected = (player: PlayerModel | Position) => {
         if (!isEmpty(favSelectedTeams)) {
             dispatch(pushGroupFavPlayer(player));
         } else {
@@ -130,11 +140,18 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
         }
     };
 
-    const filteredPlayers = useMemo(
-        () => favPlayers.filter((v: Position | PlayerModel) => v.name_he.includes(searchText)),
+    // const filteredPlayers = useMemo(
+    //     () =>
+    //         favPlayers
+    //             .map(favPlayer => {
+    //                 return favPlayer.listFavPlayers.filter((v: Position | PlayerModel) =>
+    //                     v.name_he.includes(searchText)
+    //                 );
+    //             })
+    //             .flat(),
 
-        [favPlayers, searchText]
-    );
+    //     [favPlayers, searchText]
+    // );
 
     const searchFavPlayer = (text: string) => {
         setSearchText(text);
@@ -206,10 +223,10 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
     useMount(() => {
         if (!isEmpty(favSelectedTeams)) {
             getTeamPersonnel();
-            dispatch(resetAllFavPlayers(favPlayers));
+            dispatch(resetAllFavPlayers({ id: '', label: '', listFavPlayers: [] }));
         } else {
             getPlayersData();
-            dispatch(resetGroupFavPlayer(favPlayers));
+            dispatch(resetGroupFavPlayer({ id: '', label: '', listFavPlayers: [] }));
         }
     });
 
@@ -222,8 +239,7 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
         searchFavPlayer,
         setSearchText,
         searchText,
-        group,
         favSelectedPlayers,
-        filteredPlayers,
+        favPlayers,
     };
 };

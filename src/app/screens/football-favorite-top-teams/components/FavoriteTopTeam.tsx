@@ -10,6 +10,7 @@ import {
     TextInput,
     ScrollView,
     ActivityIndicator,
+    Image,
 } from 'react-native';
 import { getSize } from '@football/app/utils/responsive/scale';
 import Icon from 'react-native-vector-icons/Feather';
@@ -119,11 +120,8 @@ export const FavoriteTopTeam = ({
                                                     handleSelected(item);
                                                 }}
                                             >
-                                                <SvgUri
-                                                    // uri={item.logo_url}
-                                                    width={getSize.m(25)}
-                                                    height={getSize.m(28)}
-                                                    uri={item.logo_url}
+                                                <Image
+                                                    source={{ uri: item.logo_url }}
                                                     style={[
                                                         styles.image_item,
                                                         {
@@ -160,11 +158,8 @@ export const FavoriteTopTeam = ({
                                             key={index.toString()}
                                             style={{ marginLeft: getSize.m(6) }}
                                         >
-                                            <SvgUri
-                                                // uri={item.logo_url}
-                                                width={getSize.m(25)}
-                                                height={getSize.m(28)}
-                                                uri={item.logo_url}
+                                            <Image
+                                                source={{ uri: item.logo_url }}
                                                 style={[
                                                     styles.image_item,
                                                     {

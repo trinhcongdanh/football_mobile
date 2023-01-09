@@ -14,6 +14,7 @@ import { isEmpty, isNil } from 'lodash';
 import { addProfile } from 'src/store/user/CreateProfile.slice';
 import { Position } from '@football/core/models/TeamPersonnelResponse';
 import { IFavoriteSummaryScreenProps } from './FavoriteSummaryScreen.type';
+import { RootState } from 'src/store/store';
 
 export const useViewModel = ({ navigation, route }: IFavoriteSummaryScreenProps) => {
     const { t } = useTranslation();
@@ -73,12 +74,18 @@ export const useViewModel = ({ navigation, route }: IFavoriteSummaryScreenProps)
         (state: any) =>
             state.favTeams.favTeams.filter((v: TeamModel) => v.isSelected) as TeamModel[]
     );
-    const favSelectedPlayers = useSelector((state: any) =>
+    const favSelectedPlayers = useSelector((state: RootState) =>
         !isEmpty(favSelectedTeams)
-            ? (state.favPlayers.groupsPlayer.filter((v: Position) => v.isSelected) as Position[])
-            : (state.favPlayers.favPlayers.filter(
-                  (v: PlayerModel) => v.isSelected
-              ) as PlayerModel[])
+            ? state.favPlayers.groupPlayers
+                  .map(e => {
+                      return e.listFavPlayers.filter(v => v.isSelected);
+                  })
+                  .flat()
+            : state.favPlayers.favPlayers
+                  .map(e => {
+                      return e.listFavPlayers.filter(v => v.isSelected);
+                  })
+                  .flat()
     );
     const favSelectedTopTeams = useSelector(
         (state: any) =>
