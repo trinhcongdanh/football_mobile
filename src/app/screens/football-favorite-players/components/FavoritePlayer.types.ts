@@ -6,7 +6,10 @@ export type IFavoritePlayerProps = {
     onGoBack: () => void;
     handleSelected: (item: PlayerModel | Position) => void;
     handleContinue: () => void;
-    newFav: PlayerModel[] | undefined;
+    newFav: {
+        label: string;
+        listFavPlayers: PlayerModel[] | Position[];
+    }[];
     favSelected: PlayerModel[] | Position[];
     title: string;
     placeholder: string;
@@ -15,6 +18,5 @@ export type IFavoritePlayerProps = {
     onIndex: number;
     number: number;
     searchText: any;
-    group: string;
     searchFavPlayer: (text: string) => void;
 };

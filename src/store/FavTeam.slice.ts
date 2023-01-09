@@ -4,10 +4,12 @@ import { createSlice } from '@reduxjs/toolkit';
 
 export interface FavTeamState {
     favTeams: TeamModel[];
+    selectedTeams: TeamModel[];
 }
 
 const initialState: FavTeamState = {
     favTeams: [],
+    selectedTeams: [],
 };
 
 const MAX_TEAM_NUM = 3;

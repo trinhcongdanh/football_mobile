@@ -213,10 +213,9 @@ export const FavoriteSummaryScreen = ({ navigation, route }: IFavoriteSummaryScr
                                                                 changeFavTopTeam(item._id)
                                                             }
                                                         >
-                                                            <SvgUri
-                                                                width={getSize.m(38)}
-                                                                height={getSize.m(38)}
-                                                                uri={item.logo_url}
+                                                            <Image
+                                                                resizeMode="cover"
+                                                                source={{ uri: item.logo_url }}
                                                                 style={styles.img_view}
                                                             />
                                                         </TouchableOpacity>

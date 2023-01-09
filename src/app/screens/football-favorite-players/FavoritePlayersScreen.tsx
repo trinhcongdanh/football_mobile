@@ -17,8 +17,7 @@ export const FavoritePlayersScreen = ({ navigation, route }: IFavoritePlayerScre
         searchFavPlayer,
         setSearchText,
         searchText,
-        group,
-        filteredPlayers,
+        favPlayers,
         favSelectedPlayers,
     } = useViewModel({
         navigation,
@@ -39,13 +38,12 @@ export const FavoritePlayersScreen = ({ navigation, route }: IFavoritePlayerScre
                 handleSelected={(item: PlayerModel | Position) => {
                     handleSelected(item);
                 }}
-                newFav={filteredPlayers}
+                newFav={favPlayers}
                 favSelected={favSelectedPlayers}
                 title={t('favorite_player.title')}
                 placeholder={t('favorite_player.place_holder')}
                 chosen={t('favorite_player.chosen')}
                 button={t('favorite_player.button')}
-                group={group}
                 number={3}
                 onIndex={1}
             />

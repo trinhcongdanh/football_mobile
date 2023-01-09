@@ -16,6 +16,7 @@ import { addLogin } from 'src/store/user/Login.slice';
 import { addProfile } from 'src/store/user/CreateProfile.slice';
 import { setFavTeams, pushFavTeam } from 'src/store/FavTeam.slice';
 import { IFavoriteTeamsScreenProps } from './FavoriteTeamsScreen.type';
+import { resetAllFavPlayers, resetGroupFavPlayer } from 'src/store/FavPlayer.slice';
 
 export const useViewModel = ({ navigation, route }: IFavoriteTeamsScreenProps) => {
     const { t } = useTranslation();
@@ -61,6 +62,8 @@ export const useViewModel = ({ navigation, route }: IFavoriteTeamsScreenProps) =
 
     const handleSelected = (team: TeamModel) => {
         dispatch(pushFavTeam(team));
+        dispatch(resetGroupFavPlayer({ id: '', label: '', listFavPlayers: [] }));
+        dispatch(resetAllFavPlayers({ id: '', label: '', listFavPlayers: [] }));
     };
 
     const filteredTeams = useMemo(
