@@ -3,7 +3,7 @@ import { StackActions, useNavigation } from '@react-navigation/native';
 export const useAppNavigator = () => {
     const navigation = useNavigation();
 
-    const navigate = (name: string, params?: any) => {
+    const navigate = (name: string, params?: { previous_screen: string }) => {
         navigation.dispatch(StackActions.push(name, params));
     };
 

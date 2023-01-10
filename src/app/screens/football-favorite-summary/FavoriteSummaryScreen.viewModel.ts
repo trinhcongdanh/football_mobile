@@ -8,17 +8,18 @@ import { TopTeamModel } from '@football/core/models/TopTeamModelResponse';
 import { useTranslation } from 'react-i18next';
 import { axiosAuth } from '@football/core/api/auth/axiosAuth';
 import { ACTION, AUTH_URL, TOKEN } from '@football/core/api/auth/config';
-import { addLogin } from 'src/store/user/Login.slice';
 import { Alert } from 'react-native';
 import { isEmpty, isNil } from 'lodash';
-import { addProfile } from 'src/store/user/CreateProfile.slice';
+import { loginUser } from 'src/store/user/Login.slice';
+import { createProfileUser } from 'src/store/user/CreateProfile.slice';
 import { Position } from '@football/core/models/TeamPersonnelResponse';
 import { IFavoriteSummaryScreenProps } from './FavoriteSummaryScreen.type';
 import { RootState } from 'src/store/store';
+import { useIsFocused } from '@react-navigation/native';
 
 export const useViewModel = ({ navigation, route }: IFavoriteSummaryScreenProps) => {
     const { t } = useTranslation();
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<any>();
     const { navigate, goBack } = useAppNavigator();
     const [onCheck, setonCheck] = useState(false);
     // team
@@ -94,8 +95,8 @@ export const useViewModel = ({ navigation, route }: IFavoriteSummaryScreenProps)
             ) as TopTeamModel[]
     );
 
-    const login = useSelector((state: any) => state.login.login);
-    const profile = useSelector((state: any) => state.createProfile.profile);
+    const login = useSelector((state: RootState) => state.login);
+    const profile = useSelector((state: RootState) => state.createProfile);
     const guestId = useSelector((state: any) => state.guestId.guestId);
 
     function serializeParams(obj: any) {
@@ -111,97 +112,73 @@ export const useViewModel = ({ navigation, route }: IFavoriteSummaryScreenProps)
     const onGoBack = (): void => {
         goBack();
     };
-    const onGoSkip = (): void => {
-        navigate(ScreenName.BottomTab);
-    };
 
     const addFavTeam = (index: number) => {
-        navigate(ScreenName.FavTeamPage);
+        navigate(ScreenName.FavTeamPage, {
+            previous_screen: ScreenName.FavSummaryPage,
+        });
     };
 
     const changeFavTeam = (index: string) => {
-        navigate(ScreenName.FavTeamPage);
+        navigate(ScreenName.FavTeamPage, {
+            previous_screen: ScreenName.FavSummaryPage,
+        });
     };
 
     const addFavPlayer = (index: number) => {
-        navigate(ScreenName.FavPlayerPage);
+        navigate(ScreenName.FavPlayerPage, {
+            previous_screen: ScreenName.FavSummaryPage,
+        });
     };
 
     const changeFavPlayer = (index: number) => {
-        navigate(ScreenName.FavPlayerPage);
+        navigate(ScreenName.FavPlayerPage, {
+            previous_screen: ScreenName.FavSummaryPage,
+        });
     };
 
     const addFavTopTeam = (index: number) => {
-        navigate(ScreenName.FavTopTeamPage);
+        navigate(ScreenName.FavTopTeamPage, {
+            previous_screen: ScreenName.FavSummaryPage,
+        });
     };
 
     const changeFavTopTeam = (index: string) => {
-        navigate(ScreenName.FavTopTeamPage);
+        navigate(ScreenName.FavTopTeamPage, {
+            previous_screen: ScreenName.FavSummaryPage,
+        });
     };
 
     const backFavTeam = () => {
-        navigate(ScreenName.FavTeamPage);
+        navigate(ScreenName.FavTeamPage, {
+            previous_screen: ScreenName.FavSummaryPage,
+        });
     };
     const backFavPlayer = () => {
-        navigate(ScreenName.FavPlayerPage);
+        navigate(ScreenName.FavPlayerPage, {
+            previous_screen: ScreenName.FavSummaryPage,
+        });
     };
     const backFavTopTeam = () => {
-        navigate(ScreenName.FavTopTeamPage);
+        navigate(ScreenName.FavTopTeamPage, {
+            previous_screen: ScreenName.FavSummaryPage,
+        });
     };
 
-    const navigationHomePage = async () => {
-        if (isEmpty(profile) || isNil(profile)) {
-            try {
-                const { data }: any = await axiosAuth.post(
-                    `${AUTH_URL}`,
+    const [screenName, setScreenName] = useState<any>(null);
+    const navigationHomePage = () => {
+        setScreenName(ScreenName.BottomTab);
+        if (isEmpty(profile.profile) || isNil(profile.profile)) {
+            dispatch(
+                createProfileUser(
                     serializeParams({
                         action: ACTION,
                         token: TOKEN,
                         call: AuthData.CREATE_PROFILE,
                         'item[guest_guid]': guestId[0],
-                    }),
-
-                    {
-                        headers: {},
-                    }
-                );
-
-                if (!isEmpty(data)) {
-                    let data1 = data;
-                    const action = addProfile(data1.item);
-                    dispatch(action);
-                    try {
-                        if (!isEmpty(login) && !isNil(login)) {
-                            navigate(ScreenName.BottomTab);
-                        } else {
-                            const { data }: any = await axiosAuth.post(
-                                `${AUTH_URL}`,
-                                serializeParams({
-                                    action: ACTION,
-                                    token: TOKEN,
-                                    call: AuthData.LOGIN,
-                                    guest_id: data1.item.tc_user,
-                                    guest_guid: guestId[0],
-                                }),
-                                {
-                                    headers: {},
-                                }
-                            );
-                            if (!isEmpty(data)) {
-                                const action = addLogin(data);
-                                dispatch(action);
-                                navigate(ScreenName.BottomTab);
-                            }
-                        }
-                    } catch (error: any) {
-                        Alert.alert(error);
-                    }
-                }
-
-                // }
-            } catch (error: any) {
-                Alert.alert(error);
-            }
+                    })
+                )
+            );
         }
     };
 
@@ -209,66 +186,60 @@ export const useViewModel = ({ navigation, route }: IFavoriteSummaryScreenProps)
         setonCheck(!onCheck);
     };
 
-    const navigationMethodRegister = async () => {
-        if (isEmpty(profile) || isNil(profile)) {
-            try {
-                const { data }: any = await axiosAuth.post(
-                    `${AUTH_URL}`,
+    const navigationMethodRegister = () => {
+        setScreenName(ScreenName.RegisterPage);
+        if (isEmpty(profile.profile) || isNil(profile.profile)) {
+            dispatch(
+                createProfileUser(
                     serializeParams({
                         action: ACTION,
                         token: TOKEN,
                         call: AuthData.CREATE_PROFILE,
                         'item[guest_guid]': guestId[0],
-                    }),
-
-                    {
-                        headers: {},
-                    }
-                );
-
-                if (!isEmpty(data)) {
-                    let data1 = data;
-                    const action = addProfile(data1.item);
-                    dispatch(action);
-                    try {
-                        if (!isEmpty(login) && !isNil(login)) {
-                            navigate(ScreenName.RegisterPage);
-                        } else {
-                            const { data }: any = await axiosAuth.post(
-                                `${AUTH_URL}`,
-                                serializeParams({
-                                    action: ACTION,
-                                    token: TOKEN,
-                                    call: AuthData.LOGIN,
-                                    guest_id: data1.item.tc_user,
-                                    guest_guid: guestId[0],
-                                }),
-                                {
-                                    headers: {},
-                                }
-                            );
-                            if (!isEmpty(data)) {
-                                const action = addLogin(data);
-                                dispatch(action);
-                                navigate(ScreenName.RegisterPage);
-                            }
-                        }
-                    } catch (error: any) {
-                        Alert.alert(error);
-                    }
-                }
-
-                // }
-            } catch (error: any) {
-                Alert.alert(error);
-            }
+                    })
+                )
+            );
         }
     };
+    const isFocused = useIsFocused();
 
+    useEffect(() => {
+        if (!isFocused) return;
+        if (!isEmpty(login.login)) {
+            navigate(screenName);
+            if (screenName === ScreenName.BottomTab) {
+                navigation.reset({
+                    index: 0,
+                    routes: [{ name: ScreenName.BottomTab as never }],
+                });
+            }
+        } else {
+            if (profile.success === true) {
+                dispatch(
+                    loginUser(
+                        serializeParams({
+                            action: ACTION,
+                            token: TOKEN,
+                            call: AuthData.LOGIN,
+                            guest_id: profile.profile.tc_user,
+                            guest_guid: guestId[0],
+                        })
+                    )
+                );
+
+                navigate(screenName);
+                if (screenName === ScreenName.BottomTab) {
+                    navigation.reset({
+                        index: 0,
+                        routes: [{ name: ScreenName.BottomTab as never }],
+                    });
+                }
+            }
+        }
+    }, [profile.success, isFocused]);
     return {
         t,
         onGoBack,
-        onGoSkip,
         toggleOnCheck,
         onCheck,
         addFavTeam,
@@ -285,5 +256,6 @@ export const useViewModel = ({ navigation, route }: IFavoriteSummaryScreenProps)
         players,
         topTeams,
         navigationMethodRegister,
+        profile,
     };
 };

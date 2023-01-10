@@ -1,11 +1,13 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, ActivityIndicator } from 'react-native';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import { PlayerModel } from '@football/core/models/PlayerModelResponse';
 import { useViewModel } from './FavoritePlayersScreen.viewModel';
 import { IFavoritePlayerScreenProps } from './FavoritePlayersScreen.type';
 import { FavoritePlayer } from './components/FavoritePlayer';
 import { Position } from '@football/core/models/TeamPersonnelResponse';
+import { getSize } from '@football/app/utils/responsive/scale';
+import { isEmpty } from 'lodash';
 
 export const FavoritePlayersScreen = ({ navigation, route }: IFavoritePlayerScreenProps) => {
     const {
@@ -19,6 +21,9 @@ export const FavoritePlayersScreen = ({ navigation, route }: IFavoritePlayerScre
         searchText,
         favPlayers,
         favSelectedPlayers,
+        profile,
+        favSearchPlayers,
+        favSelectedSearchPlayers,
     } = useViewModel({
         navigation,
         route,
@@ -26,6 +31,23 @@ export const FavoritePlayersScreen = ({ navigation, route }: IFavoritePlayerScre
 
     return (
         <View style={[appStyles.flex]}>
+            {profile.success === false && (
+                <View
+                    style={{
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        position: 'absolute',
+                        backgroundColor: 'rgba(0,0,0,0.5)',
+                        top: getSize.m(0),
+                        bottom: getSize.m(0),
+                        left: getSize.m(0),
+                        right: getSize.m(0),
+                        zIndex: 10,
+                    }}
+                >
+                    <ActivityIndicator size="large" />
+                </View>
+            )}
             <FavoritePlayer
                 searchText={searchText}
                 onGoSkip={onGoSkip}
@@ -38,8 +60,10 @@ export const FavoritePlayersScreen = ({ navigation, route }: IFavoritePlayerScre
                 handleSelected={(item: PlayerModel | Position) => {
                     handleSelected(item);
                 }}
-                newFav={favPlayers}
-                favSelected={favSelectedPlayers}
+                newFav={!isEmpty(favSearchPlayers) ? favSearchPlayers : favPlayers}
+                favSelected={
+                    !isEmpty(favSearchPlayers) ? favSelectedSearchPlayers : favSelectedPlayers
+                }
                 title={t('favorite_player.title')}
                 placeholder={t('favorite_player.place_holder')}
                 chosen={t('favorite_player.chosen')}

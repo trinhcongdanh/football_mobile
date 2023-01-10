@@ -18,25 +18,41 @@ import {
     pushAllFavPlayers,
     setGroupFavPlayer,
     pushGroupFavPlayer,
+    searchFavPlayers,
+    pushSearchFavPlayers,
     resetAllFavPlayers,
     resetGroupFavPlayer,
+    resetSearchFavPlayer,
 } from 'src/store/FavPlayer.slice';
-import { axiosAuth } from '@football/core/api/auth/axiosAuth';
-import { ACTION, AUTH_URL, TOKEN } from '@football/core/api/auth/config';
-import { addLogin } from 'src/store/user/Login.slice';
-import { addProfile } from 'src/store/user/CreateProfile.slice';
-import { IFavoritePlayerScreenProps } from './FavoritePlayersScreen.type';
 import { RootState } from 'src/store/store';
+import { useIsFocused, useRoute } from '@react-navigation/native';
+import { ACTION, TOKEN } from '@football/core/api/auth/config';
+import { loginUser } from 'src/store/user/Login.slice';
+import { createProfileUser } from 'src/store/user/CreateProfile.slice';
+import { IFavoritePlayerScreenProps } from './FavoritePlayersScreen.type';
 
 export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) => {
     const { t } = useTranslation();
     const { navigate, goBack } = useAppNavigator();
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<any>();
     const [searchText, setSearchText] = useState('');
+    const routes = useRoute();
 
     const favSelectedTeams = useSelector(
         (state: any) =>
             state.favTeams.favTeams.filter((v: TeamModel) => v.isSelected) as TeamModel[]
+    );
+
+    const favSearchPlayers = useSelector((state: RootState) => {
+        return state.favPlayers.searchPlayers;
+    });
+
+    const favSelectedSearchPlayers = useSelector((state: RootState) =>
+        state.favPlayers.searchPlayers
+            .map(e => {
+                return e.listFavPlayers.filter(v => v.isSelected);
+            })
+            .flat()
     );
 
     const favPlayers = useSelector((state: RootState) =>
@@ -57,8 +73,8 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
                   .flat()
     );
 
-    const login = useSelector((state: any) => state.login.login);
-    const profile = useSelector((state: any) => state.createProfile.profile);
+    const login = useSelector((state: RootState) => state.login);
+    const profile = useSelector((state: RootState) => state.createProfile);
     const guestId = useSelector((state: any) => state.guestId.guestId);
     const uuid = require('uuid');
     let id = uuid.v4();
@@ -133,91 +149,136 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
         }
     }, []);
     const handleSelected = (player: PlayerModel | Position) => {
-        if (!isEmpty(favSelectedTeams)) {
-            dispatch(pushGroupFavPlayer(player));
+        if (!isEmpty(favSearchPlayers)) {
+            dispatch(pushSearchFavPlayers(player));
         } else {
-            dispatch(pushAllFavPlayers(player));
+            if (!isEmpty(favSelectedTeams)) {
+                dispatch(pushGroupFavPlayer(player));
+            } else {
+                dispatch(pushAllFavPlayers(player));
+            }
         }
     };
 
-    // const filteredPlayers = useMemo(
-    //     () =>
-    //         favPlayers
-    //             .map(favPlayer => {
-    //                 return favPlayer.listFavPlayers.filter((v: Position | PlayerModel) =>
-    //                     v.name_he.includes(searchText)
-    //                 );
-    //             })
-    //             .flat(),
+    const searchFavPlayer = async (text: string) => {
+        if (text !== '') {
+            try {
+                const { data }: PlayersModelResponse = await axiosClient.post(`${BASE_URL}/find`, {
+                    dataSource: DATA_SOURCE,
+                    database: DB,
+                    collection: 'player',
+                    projection: {
+                        search_terms: true,
+                        name_en: true,
+                        image_url: true,
+                        image_width: true,
+                        image_height: true,
+                        name_he: true,
+                        team: true,
+                        top_team: true,
+                        date_of_birth: true,
+                        citizenship_he: true,
+                        citizenship_en: true,
+                        citizenship_image_url: true,
+                        num_of_games: true,
+                        homepage_info: true,
+                    },
+                    filter: {
+                        search_terms: { $regex: `.*${text}.*`, $options: 'i' },
+                    },
+                    limit: 100,
+                });
 
-    //     [favPlayers, searchText]
-    // );
-
-    const searchFavPlayer = (text: string) => {
-        setSearchText(text);
+                if (!isEmpty(data.documents)) {
+                    dispatch(
+                        resetSearchFavPlayer({
+                            id: '',
+                            label: '',
+                            listFavPlayers: [],
+                        })
+                    );
+                    dispatch(
+                        searchFavPlayers({
+                            id: id,
+                            label: '',
+                            listFavPlayers: data.documents,
+                        })
+                    );
+                }
+            } catch (error: any) {
+                Alert.alert(error);
+            }
+        } else {
+            dispatch(
+                resetSearchFavPlayer({
+                    id: '',
+                    label: '',
+                    listFavPlayers: [],
+                })
+            );
+        }
     };
 
     const onGoBack = (): void => {
         goBack();
     };
-    const onGoSkip = async () => {
-        if (isEmpty(profile) || isNil(profile)) {
-            try {
-                const { data }: any = await axiosAuth.post(
-                    `${AUTH_URL}`,
+    const onGoSkip = () => {
+        if (isEmpty(profile.profile) || isNil(profile.profile)) {
+            dispatch(
+                createProfileUser(
                     serializeParams({
                         action: ACTION,
                         token: TOKEN,
                         call: AuthData.CREATE_PROFILE,
                         'item[guest_guid]': guestId[0],
-                    }),
-
-                    {
-                        headers: {},
-                    }
-                );
-
-                if (!isEmpty(data)) {
-                    let data1 = data;
-                    const action = addProfile(data1.item);
-                    dispatch(action);
-                    try {
-                        if (!isEmpty(login) && !isNil(login)) {
-                            navigate(ScreenName.BottomTab);
-                        } else {
-                            const { data }: any = await axiosAuth.post(
-                                `${AUTH_URL}`,
-                                serializeParams({
-                                    action: ACTION,
-                                    token: TOKEN,
-                                    call: AuthData.LOGIN,
-                                    guest_id: data1.item.tc_user,
-                                    guest_guid: guestId[0],
-                                }),
-                                {
-                                    headers: {},
-                                }
-                            );
-                            if (!isEmpty(data)) {
-                                const action = addLogin(data);
-                                dispatch(action);
-                                navigate(ScreenName.BottomTab);
-                            }
-                        }
-                    } catch (error: any) {
-                        Alert.alert(error);
-                    }
-                }
-
-                // }
-            } catch (error: any) {
-                Alert.alert(error);
-            }
+                    })
+                )
+            );
         }
     };
+    const isFocused = useIsFocused();
+
+    useEffect(() => {
+        if (!isFocused) return;
+        if (!isEmpty(login.login)) {
+            navigate(ScreenName.BottomTab);
+            navigation.reset({
+                index: 0,
+                routes: [{ name: ScreenName.BottomTab as never }],
+            });
+        } else {
+            if (profile.success === true) {
+                dispatch(
+                    loginUser(
+                        serializeParams({
+                            action: ACTION,
+                            token: TOKEN,
+                            call: AuthData.LOGIN,
+                            guest_id: profile.profile.tc_user,
+                            guest_guid: guestId[0],
+                        })
+                    )
+                );
+
+                navigate(ScreenName.BottomTab);
+                navigation.reset({
+                    index: 0,
+                    routes: [{ name: ScreenName.BottomTab as never }],
+                });
+            }
+        }
+    }, [profile.success, isFocused]);
 
     const handleContinue = () => {
-        navigate(ScreenName.FavTopTeamPage);
+        if (routes.params !== undefined) {
+            if (routes.params!.previous_screen === ScreenName.FavSummaryPage) {
+                navigate(ScreenName.FavSummaryPage);
+            } else {
+                navigate(ScreenName.FavTopTeamPage);
+            }
+        } else {
+            navigate(ScreenName.FavTopTeamPage);
+        }
     };
 
     useMount(() => {
@@ -241,5 +302,8 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
         searchText,
         favSelectedPlayers,
         favPlayers,
+        profile,
+        favSearchPlayers,
+        favSelectedSearchPlayers,
     };
 };

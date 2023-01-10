@@ -1,23 +1,50 @@
 /* eslint-disable no-underscore-dangle */
-import { createSlice } from '@reduxjs/toolkit';
+import { axiosAuth } from '@football/core/api/auth/axiosAuth';
+import { AUTH_URL } from '@football/core/api/auth/config';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { isEmpty } from 'lodash';
 
 const initialState: any = {
-    login: [],
+    login: {},
 };
+
+export const loginUser = createAsyncThunk('user/loginUser', async (loginData: any) => {
+    const { data }: any = await axiosAuth.post(
+        `${AUTH_URL}`,
+        loginData,
+
+        {
+            headers: {},
+        }
+    );
+
+    if (!isEmpty(data)) {
+        return data;
+    }
+});
 
 export const loginSlice = createSlice({
     name: 'login',
     initialState,
-    reducers: {
-        addLogin: (state, action) => {
-            state.login.push(action.payload);
-        },
-        removeLogin: (state, action) => {
-            state.login.splice(action.payload, 1);
-        },
+    reducers: {},
+    extraReducers: builder => {
+        builder
+            .addCase(loginUser.pending, (state, action) => {
+                state.loading = true;
+                state.success = false;
+            })
+            .addCase(loginUser.fulfilled, (state, action) => {
+                state.loading = false;
+                state.success = true;
+                state.login = action.payload;
+            })
+            .addCase(loginUser.rejected, (state, action) => {
+                state.loading = false;
+                state.success = false;
+            });
     },
 });
 
 const { actions, reducer } = loginSlice;
-export const { addLogin, removeLogin } = actions;
+export const {} = actions;
 export default loginSlice.reducer;
