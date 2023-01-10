@@ -1,5 +1,5 @@
-import { useCallback, useMemo, useState } from 'react';
-import { AuthData, OfflineData, ScreenName } from '@football/app/utils/constants/enum';
+import { useCallback, useEffect } from 'react';
+import { AuthData, ScreenName } from '@football/app/utils/constants/enum';
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
 import { useTranslation } from 'react-i18next';
 import { axiosClient } from '@football/core/api/configs/axiosClient';
@@ -9,16 +9,17 @@ import { Alert } from 'react-native';
 import { isEmpty, isNil } from 'lodash';
 import { useDispatch, useSelector } from 'react-redux';
 import { useMount } from '@football/app/utils/hooks/useMount';
-import { axiosAuth } from '@football/core/api/auth/axiosAuth';
-import { ACTION, AUTH_URL, TOKEN } from '@football/core/api/auth/config';
-import { addLogin } from 'src/store/user/Login.slice';
-import { addProfile } from 'src/store/user/CreateProfile.slice';
+import { ACTION, TOKEN } from '@football/core/api/auth/config';
+import { useIsFocused } from '@react-navigation/native';
+import { loginUser } from 'src/store/user/Login.slice';
+import { createProfileUser } from 'src/store/user/CreateProfile.slice';
 import { setFavTopTeams, pushFavTopTeam } from 'src/store/FavTopTeam.slice';
 import { IFavoriteTopTeamsScreenProps } from './FavoriteTopTeamsScreen.type';
+import { RootState } from 'src/store/store';
 
 export const useViewModel = ({ navigation, route }: IFavoriteTopTeamsScreenProps) => {
     const { t } = useTranslation();
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<any>();
     const { navigate, goBack } = useAppNavigator();
 
     const favTopTeams = useSelector(
@@ -30,9 +31,9 @@ export const useViewModel = ({ navigation, route }: IFavoriteTopTeamsScreenProps
                 (v: TopTeamModel) => v.isSelected
             ) as TopTeamModel[]
     );
-    const login = useSelector((state: any) => state.login.login);
-    const profile = useSelector((state: any) => state.createProfile.profile);
-    const guestId = useSelector((state: any) => state.guestId.guestId);
+    const login = useSelector((state: RootState) => state.login);
+    const profile = useSelector((state: RootState) => state.createProfile);
+    const guestId = useSelector((state: RootState) => state.guestId.guestId);
 
     function serializeParams(obj: any) {
         let str = [];
@@ -68,61 +69,53 @@ export const useViewModel = ({ navigation, route }: IFavoriteTopTeamsScreenProps
     const onGoBack = (): void => {
         goBack();
     };
-    const onGoSkip = async () => {
-        if (isEmpty(profile) || isNil(profile)) {
-            try {
-                const { data }: any = await axiosAuth.post(
-                    `${AUTH_URL}`,
+    const onGoSkip = () => {
+        if (isEmpty(profile.profile) || isNil(profile.profile)) {
+            dispatch(
+                createProfileUser(
                     serializeParams({
                         action: ACTION,
                         token: TOKEN,
                         call: AuthData.CREATE_PROFILE,
                         'item[guest_guid]': guestId[0],
-                    }),
-
-                    {
-                        headers: {},
-                    }
-                );
-
-                if (!isEmpty(data)) {
-                    let data1 = data;
-                    const action = addProfile(data1.item);
-                    dispatch(action);
-                    try {
-                        if (!isEmpty(login) && !isNil(login)) {
-                            navigate(ScreenName.BottomTab);
-                        } else {
-                            const { data }: any = await axiosAuth.post(
-                                `${AUTH_URL}`,
-                                serializeParams({
-                                    action: ACTION,
-                                    token: TOKEN,
-                                    call: AuthData.LOGIN,
-                                    guest_id: data1.item.tc_user,
-                                    guest_guid: guestId[0],
-                                }),
-                                {
-                                    headers: {},
-                                }
-                            );
-                            if (!isEmpty(data)) {
-                                const action = addLogin(data);
-                                dispatch(action);
-                                navigate(ScreenName.BottomTab);
-                            }
-                        }
-                    } catch (error: any) {
-                        Alert.alert(error);
-                    }
-                }
-
-                // }
-            } catch (error: any) {
-                Alert.alert(error);
-            }
+                    })
+                )
+            );
         }
     };
+
+    const isFocused = useIsFocused();
+
+    useEffect(() => {
+        if (!isFocused) return;
+        if (!isEmpty(login.login)) {
+            navigate(ScreenName.BottomTab);
+            navigation.reset({
+                index: 0,
+                routes: [{ name: ScreenName.BottomTab as never }],
+            });
+        } else {
+            if (profile.success === true) {
+                dispatch(
+                    loginUser(
+                        serializeParams({
+                            action: ACTION,
+                            token: TOKEN,
+                            call: AuthData.LOGIN,
+                            guest_id: profile.profile.tc_user,
+                            guest_guid: guestId[0],
+                        })
+                    )
+                );
+
+                navigate(ScreenName.BottomTab);
+                navigation.reset({
+                    index: 0,
+                    routes: [{ name: ScreenName.BottomTab as never }],
+                });
+            }
+        }
+    }, [profile.success, isFocused]);
 
     const handleContinue = () => {
         navigate(ScreenName.FavSummaryPage);
@@ -139,5 +132,6 @@ export const useViewModel = ({ navigation, route }: IFavoriteTopTeamsScreenProps
         handleSelected,
         favTopTeams,
         favSelectedTopTeams,
+        profile,
     };
 };

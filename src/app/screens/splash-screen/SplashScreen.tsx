@@ -58,14 +58,22 @@ export const SplashScreen = ({ navigation, route }: ISplashScreenProps) => {
             setAuthLoaded(true);
         }, 8000);
     }, []);
-    const login = useSelector((state: any) => state.login.login);
+    const login = useSelector((state: any) => state.login);
 
     useEffect(() => {
         if (authLoaded) {
-            if (!isEmpty(login) && !isNil(login)) {
+            if (!isEmpty(login.login) && !isNil(login.login)) {
                 navigate(ScreenName.BottomTab);
+                navigation.reset({
+                    index: 0,
+                    routes: [{ name: ScreenName.BottomTab as never }],
+                });
             } else {
                 navigate(ScreenName.OpeningPage);
+                navigation.reset({
+                    index: 0,
+                    routes: [{ name: ScreenName.OpeningPage as never }],
+                });
             }
         }
     }, [authLoaded]);

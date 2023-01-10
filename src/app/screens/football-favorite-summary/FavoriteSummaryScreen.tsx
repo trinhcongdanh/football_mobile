@@ -10,9 +10,9 @@ import {
     ScrollView,
     TouchableOpacity,
     Image,
+    ActivityIndicator,
 } from 'react-native';
 import { appIcons } from '@football/app/assets/icons/appIcons';
-import { SvgUri } from 'react-native-svg';
 import { CardGoBack } from '@football/app/components/go-back/CardGoBack';
 import { HeaderAdded } from '@football/app/components/header-added/HeaderAdded';
 import { appColors } from '@football/app/utils/constants/appColors';
@@ -45,6 +45,7 @@ export const FavoriteSummaryScreen = ({ navigation, route }: IFavoriteSummaryScr
         topTeams,
         navigationMethodRegister,
         navigationHomePage,
+        profile,
     } = useViewModel({
         navigation,
         route,
@@ -52,6 +53,23 @@ export const FavoriteSummaryScreen = ({ navigation, route }: IFavoriteSummaryScr
 
     return (
         <View style={[appStyles.flex]}>
+            {profile.success === false && (
+                <View
+                    style={{
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        position: 'absolute',
+                        backgroundColor: 'rgba(0,0,0,0.5)',
+                        top: getSize.m(0),
+                        bottom: getSize.m(0),
+                        left: getSize.m(0),
+                        right: getSize.m(0),
+                        zIndex: 10,
+                    }}
+                >
+                    <ActivityIndicator size="large" />
+                </View>
+            )}
             <ImageBackground source={AppImages.img_bg_register} style={appStyles.flex}>
                 <StatusBar translucent backgroundColor="transparent" />
                 <SafeAreaView style={appStyles.safe_area}>

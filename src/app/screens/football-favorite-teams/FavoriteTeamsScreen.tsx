@@ -1,10 +1,11 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, ActivityIndicator } from 'react-native';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import { FavoriteTeam } from './components/FavoriteTeam';
 import { TeamModel } from '@football/core/models/TeamModelResponse';
 import { useViewModel } from './FavoriteTeamsScreen.viewModel';
 import { IFavoriteTeamsScreenProps } from './FavoriteTeamsScreen.type';
+import { getSize } from '@football/app/utils/responsive/scale';
 
 export const FavoriteTeamsScreen = ({ navigation, route }: IFavoriteTeamsScreenProps) => {
     const {
@@ -17,7 +18,8 @@ export const FavoriteTeamsScreen = ({ navigation, route }: IFavoriteTeamsScreenP
         searchFavTeam,
         setSearchText,
         favSelectedTeams,
-        filteredTeams,
+        favTeams,
+        profile,
     } = useViewModel({
         navigation,
         route,
@@ -25,6 +27,23 @@ export const FavoriteTeamsScreen = ({ navigation, route }: IFavoriteTeamsScreenP
 
     return (
         <View style={[appStyles.flex]}>
+            {profile.success === false && (
+                <View
+                    style={{
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        position: 'absolute',
+                        backgroundColor: 'rgba(0,0,0,0.5)',
+                        top: getSize.m(0),
+                        bottom: getSize.m(0),
+                        left: getSize.m(0),
+                        right: getSize.m(0),
+                        zIndex: 10,
+                    }}
+                >
+                    <ActivityIndicator size="large" />
+                </View>
+            )}
             <FavoriteTeam
                 searchText={searchText}
                 searchFavTeam={(text: string) => {
@@ -37,7 +56,7 @@ export const FavoriteTeamsScreen = ({ navigation, route }: IFavoriteTeamsScreenP
                 handleSelected={(item: TeamModel) => {
                     handleSelected(item);
                 }}
-                newFav={filteredTeams}
+                newFav={favTeams}
                 favSelected={favSelectedTeams}
                 title={t('favorite_team.title')}
                 placeholder={t('favorite_team.place_holder')}

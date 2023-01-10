@@ -15,11 +15,17 @@ export interface FavPlayerState {
         label: string;
         listFavPlayers: Position[];
     }[];
+    searchPlayers: {
+        id: string;
+        label: string;
+        listFavPlayers: PlayerModel[];
+    }[];
 }
 
 const initialState: FavPlayerState = {
     favPlayers: [],
     groupPlayers: [],
+    searchPlayers: [],
 };
 
 const MAX_TEAM_NUM = 3;
@@ -88,6 +94,33 @@ export const favPlayerSlice = createSlice({
                 favPlayer.listFavPlayers = [...favPlayer.listFavPlayers];
             });
         },
+        searchFavPlayers: (
+            state,
+            action: PayloadAction<{ id: string; label: string; listFavPlayers: PlayerModel[] }>
+        ) => {
+            state.searchPlayers.push({
+                id: action.payload.id,
+                label: action.payload.label,
+                listFavPlayers: action.payload.listFavPlayers.map((v: PlayerModel) => ({
+                    ...v,
+                    isSelected: false,
+                })),
+            });
+        },
+        pushSearchFavPlayers: (state, action) => {
+            const player: PlayerModel = action.payload;
+
+            state.searchPlayers.map(favPlayer => {
+                const selectedPlayer = favPlayer.listFavPlayers.find(e => e._id === player._id);
+                const listSelectedPlayer = favPlayer.listFavPlayers.filter(e => e.isSelected);
+                if (!selectedPlayer!.isSelected && listSelectedPlayer.length === MAX_TEAM_NUM) {
+                    return;
+                }
+
+                selectedPlayer!.isSelected = !selectedPlayer!.isSelected;
+                favPlayer.listFavPlayers = [...favPlayer.listFavPlayers];
+            });
+        },
         resetAllFavPlayers: (
             state,
             action: PayloadAction<{ id: string; label: string; listFavPlayers: PlayerModel[] }>
@@ -95,6 +128,12 @@ export const favPlayerSlice = createSlice({
             state.favPlayers = [];
         },
         resetGroupFavPlayer: (
+            state,
+            action: PayloadAction<{ id: string; label: string; listFavPlayers: Position[] }>
+        ) => {
+            state.groupPlayers = [];
+        },
+        resetSearchFavPlayer: (
             state,
             action: PayloadAction<{ id: string; label: string; listFavPlayers: Position[] }>
         ) => {
@@ -109,7 +148,10 @@ export const {
     pushAllFavPlayers,
     setGroupFavPlayer,
     pushGroupFavPlayer,
+    searchFavPlayers,
+    pushSearchFavPlayers,
     resetAllFavPlayers,
     resetGroupFavPlayer,
+    resetSearchFavPlayer,
 } = actions;
 export default favPlayerSlice.reducer;

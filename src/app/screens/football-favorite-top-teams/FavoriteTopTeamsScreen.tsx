@@ -1,10 +1,11 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, ActivityIndicator } from 'react-native';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import { FavoriteTopTeam } from './components/FavoriteTopTeam';
 import { TopTeamModel } from '@football/core/models/TopTeamModelResponse';
 import { useViewModel } from './FavoriteTopTeamsScreen.viewModel';
 import { IFavoriteTopTeamsScreenProps } from './FavoriteTopTeamsScreen.type';
+import { getSize } from '@football/app/utils/responsive/scale';
 
 export const FavoriteTopTeamsScreen = ({ navigation, route }: IFavoriteTopTeamsScreenProps) => {
     const {
@@ -15,6 +16,7 @@ export const FavoriteTopTeamsScreen = ({ navigation, route }: IFavoriteTopTeamsS
         handleSelected,
         favSelectedTopTeams,
         favTopTeams,
+        profile,
     } = useViewModel({
         navigation,
         route,
@@ -22,6 +24,23 @@ export const FavoriteTopTeamsScreen = ({ navigation, route }: IFavoriteTopTeamsS
 
     return (
         <View style={[appStyles.flex]}>
+            {profile.success === false && (
+                <View
+                    style={{
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        position: 'absolute',
+                        backgroundColor: 'rgba(0,0,0,0.5)',
+                        top: getSize.m(0),
+                        bottom: getSize.m(0),
+                        left: getSize.m(0),
+                        right: getSize.m(0),
+                        zIndex: 10,
+                    }}
+                >
+                    <ActivityIndicator size="large" />
+                </View>
+            )}
             <FavoriteTopTeam
                 onGoSkip={onGoSkip}
                 onGoBack={onGoBack}

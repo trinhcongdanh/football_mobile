@@ -5,7 +5,6 @@ export interface Position {
     name_he: string;
     name_en: string;
     image_url: string;
-    shirt_number: number;
     isSelected: boolean;
 }
 
