@@ -186,7 +186,7 @@ export const FavoritePlayer = ({
                     <View style={styles.select_item}>
                         <View style={styles.result_select}>
                             <View style={styles.image_select}>
-                                {favSelected.map((item: PlayerModel | Position, index: number) => {
+                                {favSelected.map((item, index) => {
                                     return (
                                         <View
                                             key={index.toString()}

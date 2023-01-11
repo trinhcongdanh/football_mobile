@@ -5,7 +5,7 @@ export type IFavoriteTeamProps = {
     onGoBack: () => void;
     handleSelected: (item: TeamModel) => void;
     handleContinue: () => void;
-    newFav: TeamModel[] | undefined;
+    newFav: (TeamModel & { isSelected: boolean })[] | undefined;
     favSelected: TeamModel[];
     title: string;
     placeholder: string;
@@ -15,4 +15,5 @@ export type IFavoriteTeamProps = {
     number: number;
     searchText: string;
     searchFavTeam: (text: string) => void;
+    searchTextRef: any;
 };

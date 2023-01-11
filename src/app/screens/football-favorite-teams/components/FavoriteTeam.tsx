@@ -17,7 +17,6 @@ import Icon from 'react-native-vector-icons/Feather';
 import { appIcons } from '@football/app/assets/icons/appIcons';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { AppImages } from '@football/app/assets/images';
-import { SvgUri, SvgCssUri } from 'react-native-svg';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import { isEmpty } from 'lodash';
 import { TeamModel } from '@football/core/models/TeamModelResponse';
@@ -41,6 +40,7 @@ export const FavoriteTeam = ({
     button,
     searchText,
     searchFavTeam,
+    searchTextRef,
 }: IFavoriteTeamProps) => {
     return (
         <ImageBackground source={AppImages.img_bg_register} style={appStyles.flex}>
@@ -60,6 +60,7 @@ export const FavoriteTeam = ({
                         {onIndex !== 2 && (
                             <View style={[appStyles.flex_row_space_center, styles.search]}>
                                 <TextInput
+                                    ref={searchTextRef}
                                     value={searchText}
                                     placeholder={placeholder}
                                     style={styles.text_search}
@@ -125,7 +126,7 @@ export const FavoriteTeam = ({
 
                             <ScrollView>
                                 <View style={styles.content_item}>
-                                    {newFav?.map((item: TeamModel, index: number) => {
+                                    {newFav?.map((item, index) => {
                                         return (
                                             <TouchableOpacity
                                                 key={item._id}
@@ -178,7 +179,7 @@ export const FavoriteTeam = ({
                     <View style={styles.select_item}>
                         <View style={styles.result_select}>
                             <View style={styles.image_select}>
-                                {favSelected.map((item: TeamModel, index: number) => {
+                                {favSelected.map((item, index) => {
                                     return (
                                         <View
                                             key={index.toString()}

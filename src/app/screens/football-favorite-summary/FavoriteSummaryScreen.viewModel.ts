@@ -16,6 +16,9 @@ import { Position } from '@football/core/models/TeamPersonnelResponse';
 import { IFavoriteSummaryScreenProps } from './FavoriteSummaryScreen.type';
 import { RootState } from 'src/store/store';
 import { useIsFocused } from '@react-navigation/native';
+import { resetSearchFavPlayer, SelectedPlayer } from 'src/store/FavPlayer.slice';
+import { resetFavTeam } from 'src/store/FavTeam.slice';
+import { resetTopTeams } from 'src/store/FavTopTeam.slice';
 
 export const useViewModel = ({ navigation, route }: IFavoriteSummaryScreenProps) => {
     const { t } = useTranslation();
@@ -28,33 +31,33 @@ export const useViewModel = ({ navigation, route }: IFavoriteSummaryScreenProps)
     const [thirdTeams, setThirdTeams] = useState<TeamModel>();
     const teams = [firstTeams, secondTeams, thirdTeams];
     useEffect(() => {
-        if (favSelectedTeams.length === 3) {
-            setFirstTeams(favSelectedTeams[0]);
-            setSecondTeams(favSelectedTeams[1]);
-            setThirdTeams(favSelectedTeams[2]);
-        } else if (favSelectedTeams.length === 2) {
-            setFirstTeams(favSelectedTeams[0]);
-            setSecondTeams(favSelectedTeams[1]);
-        } else if (favSelectedTeams.length === 1) {
-            setFirstTeams(favSelectedTeams[0]);
+        if (selectedFavTeams.length === 3) {
+            setFirstTeams(selectedFavTeams[0]);
+            setSecondTeams(selectedFavTeams[1]);
+            setThirdTeams(selectedFavTeams[2]);
+        } else if (selectedFavTeams.length === 2) {
+            setFirstTeams(selectedFavTeams[0]);
+            setSecondTeams(selectedFavTeams[1]);
+        } else if (selectedFavTeams.length === 1) {
+            setFirstTeams(selectedFavTeams[0]);
         }
     }, []);
 
     // player
-    const [firstPlayers, setFirstPlayers] = useState<PlayerModel | Position>();
-    const [secondPlayers, setSecondPlayers] = useState<PlayerModel | Position>();
-    const [thirdPlayers, setThirdPlayers] = useState<PlayerModel | Position>();
+    const [firstPlayers, setFirstPlayers] = useState<SelectedPlayer>();
+    const [secondPlayers, setSecondPlayers] = useState<SelectedPlayer>();
+    const [thirdPlayers, setThirdPlayers] = useState<SelectedPlayer>();
     const players = [firstPlayers, secondPlayers, thirdPlayers];
     useEffect(() => {
-        if (favSelectedPlayers.length === 3) {
-            setFirstPlayers(favSelectedPlayers[0]);
-            setSecondPlayers(favSelectedPlayers[1]);
-            setThirdPlayers(favSelectedPlayers[2]);
-        } else if (favSelectedPlayers.length === 2) {
-            setFirstPlayers(favSelectedPlayers[0]);
-            setSecondPlayers(favSelectedPlayers[1]);
-        } else if (favSelectedPlayers.length === 1) {
-            setFirstPlayers(favSelectedPlayers[0]);
+        if (selectedFavPlayers.length === 3) {
+            setFirstPlayers(selectedFavPlayers[0]);
+            setSecondPlayers(selectedFavPlayers[1]);
+            setThirdPlayers(selectedFavPlayers[2]);
+        } else if (selectedFavPlayers.length === 2) {
+            setFirstPlayers(selectedFavPlayers[0]);
+            setSecondPlayers(selectedFavPlayers[1]);
+        } else if (selectedFavPlayers.length === 1) {
+            setFirstPlayers(selectedFavPlayers[0]);
         }
     }, []);
 
@@ -63,38 +66,19 @@ export const useViewModel = ({ navigation, route }: IFavoriteSummaryScreenProps)
     const [secondTopTeams, setSecondTopTeams] = useState<TopTeamModel>();
     const topTeams = [firstTopTeams, secondTopTeams];
     useEffect(() => {
-        if (favSelectedTopTeams.length === 2) {
-            setFirstTopTeams(favSelectedTopTeams[0]);
-            setSecondTopTeams(favSelectedTopTeams[1]);
-        } else if (favSelectedTopTeams.length === 1) {
-            setFirstTopTeams(favSelectedTopTeams[0]);
+        if (selectedFavTopTeams.length === 2) {
+            setFirstTopTeams(selectedFavTopTeams[0]);
+            setSecondTopTeams(selectedFavTopTeams[1]);
+        } else if (selectedFavTopTeams.length === 1) {
+            setFirstTopTeams(selectedFavTopTeams[0]);
         }
     }, []);
 
-    const favSelectedTeams = useSelector(
-        (state: any) =>
-            state.favTeams.favTeams.filter((v: TeamModel) => v.isSelected) as TeamModel[]
+    const selectedFavTeams = useSelector((state: RootState) => state.favTeams.selectedTeams);
+    const selectedFavPlayers = useSelector((state: RootState) => state.favPlayers.selectedPlayers);
+    const selectedFavTopTeams = useSelector(
+        (state: RootState) => state.favTopTeams.selectedTopTeams
     );
-    const favSelectedPlayers = useSelector((state: RootState) =>
-        !isEmpty(favSelectedTeams)
-            ? state.favPlayers.groupPlayers
-                  .map(e => {
-                      return e.listFavPlayers.filter(v => v.isSelected);
-                  })
-                  .flat()
-            : state.favPlayers.favPlayers
-                  .map(e => {
-                      return e.listFavPlayers.filter(v => v.isSelected);
-                  })
-                  .flat()
-    );
-    const favSelectedTopTeams = useSelector(
-        (state: any) =>
-            state.favTopTeams.favTopTeams.filter(
-                (v: TopTeamModel) => v.isSelected
-            ) as TopTeamModel[]
-    );
-
     const login = useSelector((state: RootState) => state.login);
     const profile = useSelector((state: RootState) => state.createProfile);
     const guestId = useSelector((state: any) => state.guestId.guestId);
@@ -114,36 +98,42 @@ export const useViewModel = ({ navigation, route }: IFavoriteSummaryScreenProps)
     };
 
     const addFavTeam = (index: number) => {
+        dispatch(resetFavTeam([]));
         navigate(ScreenName.FavTeamPage, {
             previous_screen: ScreenName.FavSummaryPage,
         });
     };
 
     const changeFavTeam = (index: string) => {
+        dispatch(resetFavTeam([]));
         navigate(ScreenName.FavTeamPage, {
             previous_screen: ScreenName.FavSummaryPage,
         });
     };
 
     const addFavPlayer = (index: number) => {
+        dispatch(resetSearchFavPlayer({ id: '', label: '', listFavPlayers: [] }));
         navigate(ScreenName.FavPlayerPage, {
             previous_screen: ScreenName.FavSummaryPage,
         });
     };
 
     const changeFavPlayer = (index: number) => {
+        dispatch(resetSearchFavPlayer({ id: '', label: '', listFavPlayers: [] }));
         navigate(ScreenName.FavPlayerPage, {
             previous_screen: ScreenName.FavSummaryPage,
         });
     };
 
     const addFavTopTeam = (index: number) => {
+        dispatch(resetTopTeams([]));
         navigate(ScreenName.FavTopTeamPage, {
             previous_screen: ScreenName.FavSummaryPage,
         });
     };
 
     const changeFavTopTeam = (index: string) => {
+        dispatch(resetTopTeams([]));
         navigate(ScreenName.FavTopTeamPage, {
             previous_screen: ScreenName.FavSummaryPage,
         });

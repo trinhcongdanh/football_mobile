@@ -1,40 +1,52 @@
 /* eslint-disable no-underscore-dangle */
 import { TopTeamModel } from '@football/core/models/TopTeamModelResponse';
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { RootState } from 'src/store/store';
 
 export interface FavTopTeamState {
     favTopTeams: TopTeamModel[];
+    selectedTopTeams: TopTeamModel[];
 }
 
 const initialState: FavTopTeamState = {
     favTopTeams: [],
+    selectedTopTeams: [],
 };
 const MAX_TEAM_NUM = 2;
 export const favTopTeamSlice = createSlice({
     name: 'favTopTeam',
     initialState,
     reducers: {
-        setFavTopTeams: (state, action) => {
-            state.favTopTeams.push(
-                ...action.payload.map((v: TopTeamModel) => ({ ...v, isSelected: false }))
-            );
+        setFavTopTeams: (state, action: PayloadAction<TopTeamModel[]>) => {
+            state.favTopTeams = [...action.payload];
         },
-        pushFavTopTeam: (state, action) => {
-            const topTeam: TopTeamModel = action.payload;
+        pushFavTopTeam: (state, action: PayloadAction<TopTeamModel>) => {
+            const topTeam = action.payload;
 
-            const selectedTopTeam = state.favTopTeams.find(e => e._id === topTeam._id)!;
-            const listSelectedTopTeam = state.favTopTeams.filter(e => e.isSelected);
-
-            if (!selectedTopTeam.isSelected && listSelectedTopTeam.length === MAX_TEAM_NUM) {
-                return;
+            if (
+                !state.selectedTopTeams.some(favTopTeam => favTopTeam._id === topTeam._id) &&
+                state.selectedTopTeams.length < MAX_TEAM_NUM
+            ) {
+                state.selectedTopTeams = [...state.selectedTopTeams, topTeam];
+            } else {
+                state.selectedTopTeams = state.selectedTopTeams.filter(
+                    item => item._id !== topTeam._id
+                );
             }
-
-            selectedTopTeam.isSelected = !selectedTopTeam.isSelected;
-            state.favTopTeams = [...state.favTopTeams];
+        },
+        resetTopTeams: (state, action) => {
+            state.favTopTeams = [];
         },
     },
 });
 
+export function selectedFavTopTeamsAsMapSelector(state: RootState) {
+    return state.favTopTeams.selectedTopTeams.reduce((result, topTeam) => {
+       result.set(topTeam._id, topTeam)
+        return result;
+    }, new Map<string, TopTeamModel>);
+}
+
 const { actions, reducer } = favTopTeamSlice;
-export const { setFavTopTeams, pushFavTopTeam } = actions;
+export const { setFavTopTeams, pushFavTopTeam, resetTopTeams } = actions;
 export default favTopTeamSlice.reducer;

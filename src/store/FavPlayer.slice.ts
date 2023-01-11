@@ -3,6 +3,12 @@ import { PlayerModel } from '@football/core/models/PlayerModelResponse';
 import { Position } from '@football/core/models/TeamPersonnelResponse';
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
+import { RootState } from 'src/store/store';
+// import { isEmpty, pick } from 'lodash';
+// import { axiosClient } from '@football/core/api/configs/axiosClient';
+// import { BASE_URL } from '@football/core/api/configs/config';
+
+export type SelectedPlayer = Pick<PlayerModel, '_id'| "name_en"|"name_he"| "image_url">
 
 export interface FavPlayerState {
     favPlayers: {
@@ -20,15 +26,36 @@ export interface FavPlayerState {
         label: string;
         listFavPlayers: PlayerModel[];
     }[];
+
+    selectedPlayers: SelectedPlayer[];
+    // loading: any,
+    // success:any
 }
 
 const initialState: FavPlayerState = {
     favPlayers: [],
     groupPlayers: [],
     searchPlayers: [],
+    selectedPlayers: [],
+    // loading:null,
+    // success:null,
 };
 
+
 const MAX_TEAM_NUM = 3;
+
+// export const searchFilterPlayers=createAsyncThunk(
+//     "fav/searchFilterPlayers",
+//     async (dataSearch:any)=>{
+//         const {data}:PlayersModelResponse=await axiosClient.post(`${BASE_URL}/find`,
+//             dataSearch
+//         )
+        
+//         if (!isEmpty(data)){
+//             return data;
+//         }
+//     }
+// )
 
 export const favPlayerSlice = createSlice({
     name: 'favPlayer',
@@ -41,30 +68,24 @@ export const favPlayerSlice = createSlice({
             state.groupPlayers.push({
                 id: action.payload.id,
                 label: action.payload.label,
-                listFavPlayers: action.payload.listFavPlayers.map((v: Position) => ({
-                    ...v,
-                    isSelected: false,
-                })),
+                listFavPlayers: [...action.payload.listFavPlayers],
             });
         },
-        pushGroupFavPlayer: (state, action) => {
-            const player: Position = action.payload;
+        pushGroupFavPlayer: (state,  action: PayloadAction< SelectedPlayer >) => {
+            const player = action.payload;
 
-            state.groupPlayers.map(groupPlayer => {
-                const selectedPlayer = groupPlayer.listFavPlayers.find(
-                    e => e.player_id === player.player_id
+            if (
+                !state.selectedPlayers.some(
+                    (favPlayer) => favPlayer._id === player._id
+                ) &&
+                state.selectedPlayers.length < MAX_TEAM_NUM
+            ) {
+                state.selectedPlayers = [...state.selectedPlayers, player];
+            } else {
+                state.selectedPlayers = state.selectedPlayers.filter(
+                    item => item._id !== player._id
                 );
-
-                const listSelectedPlayer = groupPlayer.listFavPlayers.filter(e => e.isSelected);
-                if (selectedPlayer?.isSelected !== undefined) {
-                    if (!selectedPlayer?.isSelected && listSelectedPlayer.length === MAX_TEAM_NUM) {
-                        return;
-                    }
-
-                    selectedPlayer!.isSelected = !selectedPlayer?.isSelected;
-                }
-                groupPlayer.listFavPlayers = [...groupPlayer.listFavPlayers];
-            });
+            }
         },
 
         setAllFavPlayers: (
@@ -74,25 +95,22 @@ export const favPlayerSlice = createSlice({
             state.favPlayers.push({
                 id: action.payload.id,
                 label: action.payload.label,
-                listFavPlayers: action.payload.listFavPlayers.map((v: PlayerModel) => ({
-                    ...v,
-                    isSelected: false,
-                })),
+                listFavPlayers: [...action.payload.listFavPlayers],
             });
         },
-        pushAllFavPlayers: (state, action) => {
-            const player: PlayerModel = action.payload;
+        pushAllFavPlayers: (state, action: PayloadAction<SelectedPlayer>) => {
+            const player = action.payload;
 
-            state.favPlayers.map(favPlayer => {
-                const selectedPlayer = favPlayer.listFavPlayers.find(e => e._id === player._id);
-                const listSelectedPlayer = favPlayer.listFavPlayers.filter(e => e.isSelected);
-                if (!selectedPlayer!.isSelected && listSelectedPlayer.length === MAX_TEAM_NUM) {
-                    return;
-                }
-
-                selectedPlayer!.isSelected = !selectedPlayer!.isSelected;
-                favPlayer.listFavPlayers = [...favPlayer.listFavPlayers];
-            });
+            if (
+                !state.selectedPlayers.some((favPlayer) => favPlayer._id === player._id) &&
+                state.selectedPlayers.length < MAX_TEAM_NUM
+            ) {
+                state.selectedPlayers = [...state.selectedPlayers, player];
+            } else {
+                state.selectedPlayers = state.selectedPlayers.filter(
+                    item => item._id !== player._id
+                );
+            }
         },
         searchFavPlayers: (
             state,
@@ -101,25 +119,22 @@ export const favPlayerSlice = createSlice({
             state.searchPlayers.push({
                 id: action.payload.id,
                 label: action.payload.label,
-                listFavPlayers: action.payload.listFavPlayers.map((v: PlayerModel) => ({
-                    ...v,
-                    isSelected: false,
-                })),
+                listFavPlayers: [...action.payload.listFavPlayers],
             });
         },
-        pushSearchFavPlayers: (state, action) => {
-            const player: PlayerModel = action.payload;
+        pushSearchFavPlayers: (state, action:PayloadAction<SelectedPlayer>) => {
+            const player = action.payload;
 
-            state.searchPlayers.map(favPlayer => {
-                const selectedPlayer = favPlayer.listFavPlayers.find(e => e._id === player._id);
-                const listSelectedPlayer = favPlayer.listFavPlayers.filter(e => e.isSelected);
-                if (!selectedPlayer!.isSelected && listSelectedPlayer.length === MAX_TEAM_NUM) {
-                    return;
-                }
-
-                selectedPlayer!.isSelected = !selectedPlayer!.isSelected;
-                favPlayer.listFavPlayers = [...favPlayer.listFavPlayers];
-            });
+            if (
+                !state.selectedPlayers.some((favPlayer) => favPlayer._id === player._id) &&
+                state.selectedPlayers.length < MAX_TEAM_NUM
+            ) {
+                state.selectedPlayers = [...state.selectedPlayers, player];
+            } else {
+                state.selectedPlayers = state.selectedPlayers.filter(
+                    item => item._id !== player._id
+                );
+            }
         },
         resetAllFavPlayers: (
             state,
@@ -137,10 +152,38 @@ export const favPlayerSlice = createSlice({
             state,
             action: PayloadAction<{ id: string; label: string; listFavPlayers: Position[] }>
         ) => {
-            state.groupPlayers = [];
+            state.searchPlayers = [];
         },
     },
+    // extraReducers:builder=>{
+    //     builder
+    //     .addCase(searchFilterPlayers.pending, (state, action) => {
+    //         state.loading = true;
+    //         state.success = false;
+    //     })
+    //     .addCase(searchFilterPlayers.fulfilled, (state, action) => {
+    //         state.loading = false;
+    //         state.success = true;
+    //         console.log(action.payload);
+    //         state.searchPlayers.push({
+    //             id: 'a',
+    //             label: '',
+    //             listFavPlayers: [...action.payload?.documents],
+    //         });
+    //     })
+    //     .addCase(searchFilterPlayers.rejected, (state, action) => {
+    //         state.loading = false;
+    //         state.success = false;
+    //     });
+    // }
 });
+
+export function selectedFavPlayersAsMapSelector(state: RootState) {
+    return state.favPlayers.selectedPlayers.reduce((result, player) => {
+       result.set(player._id, player)
+        return result;
+    }, new Map<string, SelectedPlayer>);
+}
 
 const { actions, reducer } = favPlayerSlice;
 export const {

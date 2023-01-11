@@ -81,7 +81,7 @@ export interface TeamModel {
     league_name_en: string;
     seasons: Season[];
     homepage_info: HomepageInfo;
-    isSelected: boolean;
+    // isSelected: boolean;
 }
 
 export type TeamModelResponse = AxiosResponse<{

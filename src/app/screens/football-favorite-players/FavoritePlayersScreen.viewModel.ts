@@ -8,7 +8,7 @@ import { BASE_URL, DATA_SOURCE, DB } from '@football/core/api/configs/config';
 import { PlayerModel, PlayersModelResponse } from '@football/core/models/PlayerModelResponse';
 import { TeamModel } from '@football/core/models/TeamModelResponse';
 import { Position, TeamPersonnelModel } from '@football/core/models/TeamPersonnelResponse';
-import { isEmpty, isNil } from 'lodash';
+import { get, isEmpty, isNil, pick } from 'lodash';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Alert } from 'react-native';
@@ -23,6 +23,8 @@ import {
     resetAllFavPlayers,
     resetGroupFavPlayer,
     resetSearchFavPlayer,
+    selectedFavPlayersAsMapSelector,
+    SelectedPlayer,
 } from 'src/store/FavPlayer.slice';
 import { RootState } from 'src/store/store';
 import { useIsFocused, useRoute } from '@react-navigation/native';
@@ -38,14 +40,43 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
     const [searchText, setSearchText] = useState('');
     const routes = useRoute();
 
-    const favSelectedTeams = useSelector(
-        (state: any) =>
-            state.favTeams.favTeams.filter((v: TeamModel) => v.isSelected) as TeamModel[]
+    const selectedFavPlayersMap = useSelector(selectedFavPlayersAsMapSelector);
+    const selectedFavTeams = useSelector((state: RootState) => state.favTeams.selectedTeams);
+    const selectedFavPlayers = useSelector((state: RootState) => state.favPlayers.selectedPlayers);
+
+    const favPlayers = useSelector((state: RootState) =>
+        !isEmpty(selectedFavTeams) ? state.favPlayers.groupPlayers : state.favPlayers.favPlayers
     );
 
     const favSearchPlayers = useSelector((state: RootState) => {
         return state.favPlayers.searchPlayers;
     });
+
+    const formattedSearchFavPlayers = useMemo(() => {
+        return favSearchPlayers.map(favSearchPlayer => {
+            return {
+                id: 'a',
+                label: '',
+                listFavPlayers: favSearchPlayer.listFavPlayers.map(player => ({
+                    ...player,
+                    isSelected: selectedFavPlayersMap.has(player._id),
+                })),
+            };
+        });
+    }, [favSearchPlayers, selectedFavPlayersMap]);
+
+    const formattedFavPlayers = useMemo(() => {
+        return favPlayers.map(favPlayer => {
+            return {
+                id: id,
+                label: favPlayer.label,
+                listFavPlayers: favPlayer.listFavPlayers.map(player => ({
+                    ...player,
+                    isSelected: selectedFavPlayersMap.has(player._id),
+                })) as PlayerModel[] | Position[],
+            };
+        });
+    }, [favPlayers, selectedFavPlayersMap]);
 
     const favSelectedSearchPlayers = useSelector((state: RootState) =>
         state.favPlayers.searchPlayers
@@ -55,12 +86,8 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
             .flat()
     );
 
-    const favPlayers = useSelector((state: RootState) =>
-        !isEmpty(favSelectedTeams) ? state.favPlayers.groupPlayers : state.favPlayers.favPlayers
-    );
-
     const favSelectedPlayers = useSelector((state: RootState) =>
-        !isEmpty(favSelectedTeams)
+        !isEmpty(selectedFavTeams)
             ? state.favPlayers.groupPlayers
                   .map(e => {
                       return e.listFavPlayers.filter(v => v.isSelected);
@@ -123,7 +150,7 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
                 });
 
                 if (!isEmpty(data.documents)) {
-                    favSelectedTeams.map((favTeam: TeamModel, index: number) => {
+                    selectedFavTeams.map((favTeam: TeamModel, index: number) => {
                         data.documents.map((team_personnel: TeamPersonnelModel) => {
                             if (favTeam.team_personnel_id === team_personnel._id) {
                                 let temp = [];
@@ -136,7 +163,7 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
                                     setGroupFavPlayer({
                                         id: team_personnel._id,
                                         label: favTeam.name_he,
-                                        listFavPlayers: temp,
+                                        listFavPlayers: temp.map(v => ({ ...v, _id: v.player_id })),
                                     })
                                 );
                             }
@@ -148,14 +175,18 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
             }
         }
     }, []);
+
+    function convertToCommonPlayer(player: PlayerModel | Position): SelectedPlayer {
+        return pick(player, ['name_en', 'name_he', 'image_url', '_id']);
+    }
     const handleSelected = (player: PlayerModel | Position) => {
         if (!isEmpty(favSearchPlayers)) {
-            dispatch(pushSearchFavPlayers(player));
+            dispatch(pushAllFavPlayers(convertToCommonPlayer(player)));
         } else {
-            if (!isEmpty(favSelectedTeams)) {
-                dispatch(pushGroupFavPlayer(player));
+            if (!isEmpty(selectedFavTeams)) {
+                dispatch(pushGroupFavPlayer(convertToCommonPlayer(player)));
             } else {
-                dispatch(pushAllFavPlayers(player));
+                dispatch(pushAllFavPlayers(convertToCommonPlayer(player)));
             }
         }
     };
@@ -219,6 +250,46 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
         }
     };
 
+    // const searchFavPlayer = async (text: string) => {
+    //     if (text !== '') {
+    //         dispatch(
+    //             searchFilterPlayers({
+    //                 dataSource: DATA_SOURCE,
+    //                 database: DB,
+    //                 collection: 'player',
+    //                 projection: {
+    //                     search_terms: true,
+    //                     name_en: true,
+    //                     image_url: true,
+    //                     image_width: true,
+    //                     image_height: true,
+    //                     name_he: true,
+    //                     team: true,
+    //                     top_team: true,
+    //                     date_of_birth: true,
+    //                     citizenship_he: true,
+    //                     citizenship_en: true,
+    //                     citizenship_image_url: true,
+    //                     num_of_games: true,
+    //                     homepage_info: true,
+    //                 },
+    //                 filter: {
+    //                     search_terms: { $regex: `.*${text}.*`, $options: 'i' },
+    //                 },
+    //                 limit: 100,
+    //             })
+    //         );
+    //     } else {
+    //         dispatch(
+    //             resetSearchFavPlayer({
+    //                 id: '',
+    //                 label: '',
+    //                 listFavPlayers: [],
+    //             })
+    //         );
+    //     }
+    // };
+
     const onGoBack = (): void => {
         goBack();
     };
@@ -270,8 +341,9 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
     }, [profile.success, isFocused]);
 
     const handleContinue = () => {
-        if (routes.params !== undefined) {
-            if (routes.params!.previous_screen === ScreenName.FavSummaryPage) {
+        const params = routes.params;
+        if (!isEmpty(params)) {
+            if (params.previous_screen === ScreenName.FavSummaryPage) {
                 navigate(ScreenName.FavSummaryPage);
             } else {
                 navigate(ScreenName.FavTopTeamPage);
@@ -282,7 +354,7 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
     };
 
     useMount(() => {
-        if (!isEmpty(favSelectedTeams)) {
+        if (!isEmpty(selectedFavTeams)) {
             getTeamPersonnel();
             dispatch(resetAllFavPlayers({ id: '', label: '', listFavPlayers: [] }));
         } else {
@@ -305,5 +377,8 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
         profile,
         favSearchPlayers,
         favSelectedSearchPlayers,
+        formattedSearchFavPlayers,
+        selectedFavPlayers,
+        formattedFavPlayers,
     };
 };

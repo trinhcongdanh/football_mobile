@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
         borderRadius: getSize.m(15),
     },
 
-    ic_back: { alignItems: 'flex-start' },
+    ic_back: { alignItems: I18nManager.isRTL ? 'flex-start' : 'flex-end' },
 
     otp_Container: {
         justifyContent: 'space-between',
@@ -24,12 +24,12 @@ const styles = StyleSheet.create({
         borderColor: appColors.medium_gray,
         borderWidth: 1,
         justifyContent: 'center',
-        width: getSize.m(45),
-        height: getSize.m(45),
+        width: getSize.m(63),
+        height: getSize.m(63),
     },
 
     otp_Text: {
-        fontSize: getSize.s(20),
+        fontSize: getSize.s(36),
         fontWeight: '700',
         color: appColors.text_dark_blue,
         textAlign: 'center',
