@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useMemo } from 'react';
 import { AuthData, ScreenName } from '@football/app/utils/constants/enum';
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
 import { useTranslation } from 'react-i18next';
@@ -13,7 +13,12 @@ import { ACTION, TOKEN } from '@football/core/api/auth/config';
 import { useIsFocused } from '@react-navigation/native';
 import { loginUser } from 'src/store/user/Login.slice';
 import { createProfileUser } from 'src/store/user/CreateProfile.slice';
-import { setFavTopTeams, pushFavTopTeam } from 'src/store/FavTopTeam.slice';
+import {
+    setFavTopTeams,
+    pushFavTopTeam,
+    resetTopTeams,
+    selectedFavTopTeamsAsMapSelector,
+} from 'src/store/FavTopTeam.slice';
 import { IFavoriteTopTeamsScreenProps } from './FavoriteTopTeamsScreen.type';
 import { RootState } from 'src/store/store';
 
@@ -22,15 +27,21 @@ export const useViewModel = ({ navigation, route }: IFavoriteTopTeamsScreenProps
     const dispatch = useDispatch<any>();
     const { navigate, goBack } = useAppNavigator();
 
-    const favTopTeams = useSelector(
-        (state: any) => state.favTopTeams.favTopTeams as TopTeamModel[]
+    const selectedFavTopTeamsMap = useSelector(selectedFavTopTeamsAsMapSelector);
+
+    const favTopTeams = useSelector((state: RootState) => state.favTopTeams.favTopTeams);
+
+    const formattedFavTopTeams = useMemo(() => {
+        return favTopTeams.map(topTeam => ({
+            ...topTeam,
+            isSelected: selectedFavTopTeamsMap.has(topTeam._id),
+        }));
+    }, [favTopTeams, selectedFavTopTeamsMap]);
+
+    const selectedFavTopTeams = useSelector(
+        (state: RootState) => state.favTopTeams.selectedTopTeams
     );
-    const favSelectedTopTeams = useSelector(
-        (state: any) =>
-            state.favTopTeams.favTopTeams.filter(
-                (v: TopTeamModel) => v.isSelected
-            ) as TopTeamModel[]
-    );
+
     const login = useSelector((state: RootState) => state.login);
     const profile = useSelector((state: RootState) => state.createProfile);
     const guestId = useSelector((state: RootState) => state.guestId.guestId);
@@ -131,7 +142,8 @@ export const useViewModel = ({ navigation, route }: IFavoriteTopTeamsScreenProps
         handleContinue,
         handleSelected,
         favTopTeams,
-        favSelectedTopTeams,
+        formattedFavTopTeams,
+        selectedFavTopTeams,
         profile,
     };
 };

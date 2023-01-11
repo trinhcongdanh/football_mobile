@@ -32,9 +32,9 @@ export const useViewModel = ({ navigation, route }: IVerifyScreenProps) => {
         setTimeSend(false);
     }, 12000);
 
-    const inputs = Array(6).fill('');
+    const inputs = Array(4).fill('');
 
-    const [OTP, setOTP] = useState<any>({ 0: '', 1: '', 2: '', 3: '', 4: '', 5: '' });
+    const [OTP, setOTP] = useState<any>({ 0: '', 1: '', 2: '', 3: '' });
 
     const input = useRef<any>();
 
@@ -72,7 +72,7 @@ export const useViewModel = ({ navigation, route }: IVerifyScreenProps) => {
         Object.values(OTP).forEach(code => {
             codeOtp += code;
         });
-        if (codeOtp.length === 6) {
+        if (codeOtp.length === 4) {
             try {
                 const confirmation = await localStorage.getItem<any>(OfflineData.phone_number);
                 setConfirm(confirmation);

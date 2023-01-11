@@ -1,5 +1,5 @@
 /* eslint-disable no-underscore-dangle */
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useRef, useCallback, useEffect, useMemo, useState } from 'react';
 import { AuthData, ScreenName } from '@football/app/utils/constants/enum';
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
 import { useTranslation } from 'react-i18next';
@@ -13,10 +13,16 @@ import { useMount } from '@football/app/utils/hooks/useMount';
 import { ACTION, TOKEN } from '@football/core/api/auth/config';
 import { loginUser } from 'src/store/user/Login.slice';
 import { createProfileUser } from 'src/store/user/CreateProfile.slice';
-import { setFavTeams, pushFavTeam, resetFavTeam } from 'src/store/FavTeam.slice';
+import {
+    setFavTeams,
+    pushFavTeam,
+    resetFavTeam,
+    selectedFavTeamsAsMapSelector,
+} from 'src/store/FavTeam.slice';
 import { IFavoriteTeamsScreenProps } from './FavoriteTeamsScreen.type';
 import { resetAllFavPlayers, resetGroupFavPlayer } from 'src/store/FavPlayer.slice';
 import { useIsFocused, useRoute } from '@react-navigation/native';
+import { RootState } from 'src/store/store';
 
 export const useViewModel = ({ navigation, route }: IFavoriteTeamsScreenProps) => {
     const { t } = useTranslation();
@@ -24,12 +30,18 @@ export const useViewModel = ({ navigation, route }: IFavoriteTeamsScreenProps) =
     const { navigate, goBack } = useAppNavigator();
     const [searchText, setSearchText] = useState('');
     const routes = useRoute();
+    const searchTextRef = useRef<any>(null);
 
-    const favTeams = useSelector((state: any) => state.favTeams.favTeams as TeamModel[]);
-    const favSelectedTeams = useSelector(
-        (state: any) =>
-            state.favTeams.favTeams.filter((v: TeamModel) => v.isSelected) as TeamModel[]
-    );
+    const selectedFavTeamsMap = useSelector(selectedFavTeamsAsMapSelector);
+
+    const favTeams = useSelector((state: RootState) => state.favTeams.favTeams);
+
+    const formattedFavTeams = useMemo(() => {
+        return favTeams.map(team => ({ ...team, isSelected: selectedFavTeamsMap.has(team._id) }));
+    }, [favTeams, selectedFavTeamsMap]);
+
+    const selectedFavTeams = useSelector((state: RootState) => state.favTeams.selectedTeams);
+
     const login = useSelector((state: any) => state.login);
     const profile = useSelector((state: any) => state.createProfile);
     const guestId = useSelector((state: any) => state.guestId.guestId);
@@ -62,9 +74,10 @@ export const useViewModel = ({ navigation, route }: IFavoriteTeamsScreenProps) =
     }, []);
 
     const handleSelected = (team: TeamModel) => {
+        const params = routes.params;
         dispatch(pushFavTeam(team));
-        if (routes.params !== undefined) {
-            if (routes.params!.previous_screen !== ScreenName.FavSummaryPage) {
+        if (!isEmpty(params)) {
+            if (params.previous_screen !== ScreenName.FavSummaryPage) {
                 dispatch(resetGroupFavPlayer({ id: '', label: '', listFavPlayers: [] }));
                 dispatch(resetAllFavPlayers({ id: '', label: '', listFavPlayers: [] }));
             }
@@ -73,59 +86,60 @@ export const useViewModel = ({ navigation, route }: IFavoriteTeamsScreenProps) =
             dispatch(resetAllFavPlayers({ id: '', label: '', listFavPlayers: [] }));
         }
     };
-    const filteredTeams = useMemo(
-        () => favTeams.filter(v => v.name_he.includes(searchText)),
 
-        [favTeams, searchText]
-    );
     const searchFavTeam = async (text: string) => {
-        try {
-            const { data }: TeamModelResponse = await axiosClient.post(`${BASE_URL}/find`, {
-                dataSource: DATA_SOURCE,
-                database: DB,
-                collection: 'team',
-                projection: {
-                    logo_url: true,
-                    name_en: true,
-                    name_he: true,
-                    popularity: true,
-                    team_personnel_id: true,
-                    search_terms: true,
-                    league_name_he: true,
-                    league_name_en: true,
-                    seasons: true,
-                    homepage_info: true,
-                },
-                filter: {
-                    search_terms: { $regex: `.*${text}.*`, $options: 'i' },
-                },
-                limit: 100,
-            });
-
-            if (!isEmpty(data.documents)) {
+        if (text !== '') {
+            try {
                 dispatch(resetFavTeam([]));
-                dispatch(setFavTeams(data.documents));
-            } else {
-                try {
-                    const { data }: TeamModelResponse = await axiosClient.post(`${BASE_URL}/find`, {
-                        dataSource: DATA_SOURCE,
-                        database: DB,
-                        collection: 'team',
-                    });
-                    if (!isEmpty(data.documents)) {
-                        dispatch(resetFavTeam([]));
-                        dispatch(setFavTeams(data.documents));
-                    }
-                } catch (error: any) {
-                    Alert.alert(error);
+                const { data }: TeamModelResponse = await axiosClient.post(`${BASE_URL}/find`, {
+                    dataSource: DATA_SOURCE,
+                    database: DB,
+                    collection: 'team',
+                    projection: {
+                        logo_url: true,
+                        name_en: true,
+                        name_he: true,
+                        popularity: true,
+                        team_personnel_id: true,
+                        search_terms: true,
+                        league_name_he: true,
+                        league_name_en: true,
+                        seasons: true,
+                        homepage_info: true,
+                    },
+                    filter: {
+                        search_terms: { $regex: `.*${text}.*`, $options: 'i' },
+                    },
+                    limit: 100,
+                });
+
+                if (!isEmpty(data.documents)) {
+                    dispatch(resetFavTeam([]));
+                    dispatch(setFavTeams(data.documents));
                 }
+            } catch (error: any) {
+                Alert.alert(error);
             }
-        } catch (error: any) {
-            Alert.alert(error);
+        } else {
+            dispatch(resetFavTeam([]));
+            try {
+                const { data }: TeamModelResponse = await axiosClient.post(`${BASE_URL}/find`, {
+                    dataSource: DATA_SOURCE,
+                    database: DB,
+                    collection: 'team',
+                });
+                if (!isEmpty(data.documents)) {
+                    dispatch(resetFavTeam([]));
+                    dispatch(setFavTeams(data.documents));
+                }
+            } catch (error: any) {
+                Alert.alert(error);
+            }
         }
     };
 
     const onGoBack = (): void => {
+        dispatch(resetFavTeam([]));
         goBack();
     };
     const onGoSkip = () => {
@@ -176,8 +190,9 @@ export const useViewModel = ({ navigation, route }: IFavoriteTeamsScreenProps) =
     }, [profile.success, isFocused]);
 
     const handleContinue = () => {
-        if (routes.params !== undefined) {
-            if (routes.params!.previous_screen === ScreenName.FavSummaryPage) {
+        const params = routes.params;
+        if (!isEmpty(params)) {
+            if (params.previous_screen === ScreenName.FavSummaryPage) {
                 navigate(ScreenName.FavSummaryPage);
             } else {
                 navigate(ScreenName.FavPlayerPage);
@@ -202,7 +217,9 @@ export const useViewModel = ({ navigation, route }: IFavoriteTeamsScreenProps) =
         setSearchText,
         favTeams,
         searchText,
-        favSelectedTeams,
         profile,
+        selectedFavTeams,
+        formattedFavTeams,
+        searchTextRef,
     };
 };

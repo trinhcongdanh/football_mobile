@@ -1,9 +1,14 @@
-import { StackActions, useNavigation } from '@react-navigation/native';
+import { ScreenName } from '@football/app/utils/constants/enum';
+import { ParamListBase, StackActions, useNavigation } from '@react-navigation/native';
+
+// export type NavigationParam = ParamListBase & {
+//     previous_screen: ScreenName;
+// };
 
 export const useAppNavigator = () => {
     const navigation = useNavigation();
 
-    const navigate = (name: string, params?: { previous_screen: string }) => {
+    const navigate = (name: string, params?: any) => {
         navigation.dispatch(StackActions.push(name, params));
     };
 

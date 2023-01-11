@@ -1,6 +1,7 @@
 import { AxiosResponse } from 'axios';
 
 export interface Position {
+    _id: string;
     player_id: string;
     name_he: string;
     name_en: string;
