@@ -17,6 +17,11 @@ export const styles = StyleSheet.create({
         fontFamily: AppFonts.regular,
     },
 
+    ic_back: {
+        width: getSize.m(14),
+        height: getSize.m(18),
+    },
+
     dots: {
         width: getSize.m(5),
         height: getSize.m(5),

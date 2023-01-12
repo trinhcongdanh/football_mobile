@@ -8,7 +8,6 @@ const styles = StyleSheet.create({
         backgroundColor: appColors.black,
         borderRadius: getSize.m(10),
         marginTop: getSize.m(20),
-        marginBottom: getSize.m(20),
     },
     text_search: {
         flex: 1,
@@ -17,7 +16,7 @@ const styles = StyleSheet.create({
         fontFamily: AppFonts.regular,
         color: appColors.blue_gray_dark,
         fontWeight: '400',
-        paddingVertical: getSize.m(14),
+        paddingVertical: getSize.m(13),
         paddingHorizontal: getSize.m(25),
         textAlign: I18nManager.isRTL ? 'right' : 'left',
     },
@@ -26,12 +25,16 @@ const styles = StyleSheet.create({
         fontSize: getSize.m(14),
         fontWeight: '700',
         color: appColors.white,
+        lineHeight: getSize.m(24),
+        fontFamily: AppFonts.bold,
     },
 
     content_item: {
         width: '100%',
         flexWrap: 'wrap',
         flexDirection: 'row',
+        paddingHorizontal: getSize.m(16),
+        marginTop: getSize.m(7),
     },
 
     item: {
@@ -41,7 +44,7 @@ const styles = StyleSheet.create({
         height: getSize.m(82),
         borderRadius: getSize.m(12),
         borderColor: appColors.blue_light,
-        marginTop: getSize.m(5),
+        marginBottom: getSize.m(7),
         marginHorizontal: getSize.m(2),
     },
 
@@ -54,7 +57,7 @@ const styles = StyleSheet.create({
         fontWeight: '600',
         color: appColors.white,
         lineHeight: getSize.m(15),
-        fontFamily: AppFonts.regular,
+        fontFamily: AppFonts.semibold,
         marginTop: getSize.m(10),
     },
     check: {
@@ -65,8 +68,16 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         position: 'absolute',
-        top: getSize.m(-4),
-        right: getSize.m(-4),
+        top: getSize.m(-5),
+        right: getSize.m(-5),
+    },
+    ic_check: {
+        fontWeight: '900',
+        lineHeight: getSize.m(10),
+        height: getSize.m(9.39),
+        width: getSize.m(10.17),
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     select_item: {
         backgroundColor: appColors.black,
@@ -99,16 +110,17 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
     result_number: {
-        fontWeight: '700',
         fontSize: getSize.m(14),
         color: appColors.white,
         lineHeight: getSize.m(24),
-        fontFamily: AppFonts.regular,
     },
     image_select: {
         flexDirection: I18nManager.isRTL ? 'row-reverse' : 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
+    },
+    button_continue: {
+        borderRadius: getSize.m(15),
     },
 });
 

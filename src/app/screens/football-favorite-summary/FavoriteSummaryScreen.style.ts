@@ -87,8 +87,8 @@ const styles = StyleSheet.create({
         backgroundColor: appColors.blue_light,
         alignItems: 'center',
         justifyContent: 'center',
-        paddingVertical: getSize.m(17),
-        borderRadius: getSize.m(59),
+        paddingVertical: getSize.m(16.5),
+        borderRadius: getSize.m(15),
         marginHorizontal: getSize.m(16),
     },
     txt_complete: {
@@ -112,8 +112,8 @@ const styles = StyleSheet.create({
         backgroundColor: appColors.button_disable,
         alignItems: 'center',
         justifyContent: 'center',
-        paddingVertical: getSize.m(17),
-        borderRadius: getSize.m(59),
+        paddingVertical: getSize.m(16.5),
+        borderRadius: getSize.m(15),
         marginHorizontal: getSize.m(16),
     },
     txt_complete_disable: {
