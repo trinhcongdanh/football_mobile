@@ -139,7 +139,7 @@ export const appStyles = StyleSheet.create({
     },
     safe_area: {
         flex: 1,
-        paddingTop: Platform.OS === 'android' ? 25 : 0,
+        paddingTop: Platform.OS === 'android' ? 30 : 0,
     },
 
     main_container: {

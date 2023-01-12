@@ -25,6 +25,7 @@ import { Button } from '@football/app/components/button';
 import { IFavoritePlayerProps } from './FavoritePlayer.types';
 import styles from './FavoritePlayer.style';
 import { Position } from '@football/core/models/TeamPersonnelResponse';
+import { AppFonts } from '@football/app/assets/fonts';
 
 export const FavoritePlayer = ({
     onGoSkip,
@@ -49,31 +50,34 @@ export const FavoritePlayer = ({
                 <SafeAreaView style={appStyles.safe_area}>
                     <View style={[appStyles.flex, appStyles.container]}>
                         <HeaderFav goSkip={onGoSkip} goBack={onGoBack} onIndex={onIndex} />
-                        <Text
-                            style={[
-                                appStyles.text_title,
-                                { marginBottom: onIndex === 2 ? getSize.m(16) : getSize.m(0) },
-                            ]}
-                        >
-                            {title}
-                        </Text>
-                        {onIndex !== 2 && (
-                            <View style={[appStyles.flex_row_space_center, styles.search]}>
-                                <TextInput
-                                    value={searchText}
-                                    placeholder={placeholder}
-                                    style={styles.text_search}
-                                    placeholderTextColor={appColors.blue_gray_light}
-                                    onChangeText={searchFavPlayer}
-                                />
-                                <Icon
-                                    style={{ marginRight: getSize.m(14) }}
-                                    name={appIcons.ic_search}
-                                    color={appColors.blue_gray_light}
-                                    size={getSize.m(16)}
-                                />
-                            </View>
-                        )}
+                        <View style={{ marginTop: getSize.m(15) }}>
+                            <Text
+                                style={[
+                                    appStyles.text_title,
+                                    {
+                                        marginTop: getSize.m(0),
+                                    },
+                                ]}
+                            >
+                                {title}
+                            </Text>
+                        </View>
+
+                        <View style={[appStyles.flex_row_space_center, styles.search]}>
+                            <TextInput
+                                value={searchText}
+                                placeholder={placeholder}
+                                style={styles.text_search}
+                                placeholderTextColor={appColors.blue_gray_dark}
+                                onChangeText={searchFavPlayer}
+                            />
+                            <Icon
+                                style={{ marginRight: getSize.m(14) }}
+                                name={appIcons.ic_search}
+                                color={appColors.blue_gray_dark}
+                                size={getSize.m(16)}
+                            />
+                        </View>
 
                         <ActivityIndicator
                             style={appStyles.flex_center}
@@ -85,45 +89,51 @@ export const FavoritePlayer = ({
             ) : (
                 <>
                     <SafeAreaView style={appStyles.safe_area}>
-                        <View style={[appStyles.flex, appStyles.container]}>
-                            <HeaderFav goSkip={onGoSkip} goBack={onGoBack} onIndex={onIndex} />
+                        <View style={[appStyles.flex, { marginTop: getSize.m(10) }]}>
+                            <View style={{ paddingHorizontal: getSize.m(16) }}>
+                                <HeaderFav goSkip={onGoSkip} goBack={onGoBack} onIndex={onIndex} />
 
-                            <Text
-                                style={[
-                                    appStyles.text_title,
-                                    { marginBottom: onIndex === 2 ? getSize.m(16) : getSize.m(0) },
-                                ]}
-                            >
-                                {title}
-                            </Text>
-                            {onIndex !== 2 && (
+                                <View style={{ marginTop: getSize.m(15) }}>
+                                    <Text
+                                        style={[
+                                            appStyles.text_title,
+                                            {
+                                                marginTop: getSize.m(0),
+                                            },
+                                        ]}
+                                    >
+                                        {title}
+                                    </Text>
+                                </View>
+
                                 <View style={[appStyles.flex_row_space_center, styles.search]}>
                                     <TextInput
                                         value={searchText}
                                         placeholder={placeholder}
                                         style={styles.text_search}
-                                        placeholderTextColor={appColors.blue_gray_light}
+                                        placeholderTextColor={appColors.blue_gray_dark}
                                         onChangeText={searchFavPlayer}
                                     />
                                     <Icon
                                         style={{ marginRight: getSize.m(14) }}
                                         name={appIcons.ic_search}
-                                        color={appColors.blue_gray_light}
+                                        color={appColors.blue_gray_dark}
                                         size={getSize.m(16)}
                                     />
                                 </View>
-                            )}
+                            </View>
                             <ScrollView>
                                 {newFav.map((items: any, index: number) => {
                                     return (
                                         <View key={index.toString()}>
-                                            {onIndex === 1 && (
-                                                <View style={{ marginBottom: getSize.m(10) }}>
-                                                    <Text style={styles.name_club}>
-                                                        {items.label}
-                                                    </Text>
-                                                </View>
-                                            )}
+                                            <View
+                                                style={{
+                                                    marginTop: getSize.m(13),
+                                                    paddingHorizontal: getSize.m(16),
+                                                }}
+                                            >
+                                                <Text style={styles.name_club}>{items.label}</Text>
+                                            </View>
 
                                             <View style={styles.content_item}>
                                                 {items.listFavPlayers.map(
@@ -136,7 +146,7 @@ export const FavoritePlayer = ({
                                                                     {
                                                                         backgroundColor:
                                                                             item.isSelected === true
-                                                                                ? 'rgba(44, 196, 255, 0.3)'
+                                                                                ? 'rgba(20, 36, 86, 1)'
                                                                                 : 'transparent',
                                                                         borderWidth:
                                                                             item.isSelected === true
@@ -169,6 +179,7 @@ export const FavoritePlayer = ({
                                                                             name={appIcons.ic_check}
                                                                             size={getSize.m(10)}
                                                                             color={appColors.white}
+                                                                            style={styles.ic_check}
                                                                         />
                                                                     </View>
                                                                 )}
@@ -213,11 +224,26 @@ export const FavoritePlayer = ({
                             </View>
                             <View>
                                 <Text style={styles.result_number}>
-                                    {chosen}{' '}
-                                    <Text style={{ color: appColors.blue_light }}>
+                                    <Text
+                                        style={{ fontWeight: '400', fontFamily: AppFonts.regular }}
+                                    >
+                                        {chosen}
+                                    </Text>
+
+                                    <Text
+                                        style={{
+                                            fontWeight: '700',
+                                            color: appColors.blue_light,
+                                            fontFamily: AppFonts.semibold,
+                                        }}
+                                    >
                                         {favSelected.length}
                                     </Text>
-                                    /{number}
+                                    <Text
+                                        style={{ fontWeight: '400', fontFamily: AppFonts.regular }}
+                                    >
+                                        /{number}
+                                    </Text>
                                 </Text>
                             </View>
                         </View>
@@ -227,7 +253,11 @@ export const FavoritePlayer = ({
                                 paddingBottom: getSize.m(36),
                             }}
                         >
-                            <Button title={button} onPress={handleContinue} />
+                            <Button
+                                style={styles.button_continue}
+                                title={button}
+                                onPress={handleContinue}
+                            />
                         </View>
                     </View>
                 </>

@@ -38,7 +38,12 @@ export const HeaderFav = ({ goBack, goSkip, onIndex }: IHeaderFavProps) => {
                 })}
             </View>
             <TouchableOpacity onPress={goBack}>
-                <Icon name={appIcons.ic_right_ios} size={getSize.m(14)} color={appColors.white} />
+                <Icon
+                    name={appIcons.ic_right_ios}
+                    style={styles.ic_back}
+                    size={getSize.m(18)}
+                    color={appColors.white}
+                />
             </TouchableOpacity>
         </View>
     );
