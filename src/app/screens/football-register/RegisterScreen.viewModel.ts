@@ -39,7 +39,7 @@ export const useViewModel = ({ navigation, route }: IRegisterScreenProps) => {
 
     const guestId = useSelector((state: any) => state.guestId.guestId);
     const profile = useSelector((state: any) => state.createProfile.profile);
-    const tokenLogin = useSelector((state: any) => state.login.login);
+    const tokenLogin = useSelector((state: any) => state.login.login.token);
 
     function serializeParams(obj: any) {
         let str = [];
@@ -65,14 +65,15 @@ export const useViewModel = ({ navigation, route }: IRegisterScreenProps) => {
                 });
             }
         });
+
         try {
             const { data }: any = await axiosAuth.post(
                 `${AUTH_URL}`,
                 serializeParams({
                     action: ACTION,
-                    token: tokenLogin[0].token,
+                    token: tokenLogin,
                     call: AuthData.REGISTER,
-                    guest_id: profile[0].tc_user,
+                    guest_id: profile.tc_user,
                     guest_guid: guestId[0],
                     'item[facebook_app_id]': env.FACEBOOK_APPID,
                     'item[facebook_app_secret]': env.FACEBOOK_SECRET_KEY,

@@ -1,5 +1,5 @@
 import { Keyboard, Alert } from 'react-native';
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect, useRef } from 'react';
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
 import { AuthData, OfflineData, ScreenName } from '@football/app/utils/constants/enum';
 import { useTranslation } from 'react-i18next';
@@ -108,31 +108,29 @@ export const useViewModel = ({ navigation, route }: IConnectScreenProps) => {
         navigate(ScreenName.RegisterPage);
     };
 
-    const [inputs, setInputs] = useState({
-        numberPhone: '',
-    });
-
+    const phoneNumberRef = useRef<any>(null);
+    const [phoneNumber, setPhoneNumber] = useState('');
     const [errors, setErrors] = useState({
         numberPhone: '',
     });
 
-    const handleOnChange = (text: string, input: string): void => {
-        setInputs(prevState => ({ ...prevState, [input]: text }));
+    const handleOnChange = (e: string) => {
+        setPhoneNumber(e);
     };
+    console.log(phoneNumber);
 
     const handleError = (errorMessage: string, input: string): void => {
         setErrors(prevState => ({ ...prevState, [input]: errorMessage }));
     };
 
-    const Connect = (): void => {
+    const Connect = () => {
         Keyboard.dismiss();
-        if (!inputs.numberPhone) {
+        if (phoneNumber !== '1234') {
             handleError(t('connect.error'), 'numberPhone');
         }
     };
 
     return {
-        inputs,
         errors,
         handleError,
         handleOnChange,
@@ -141,5 +139,7 @@ export const useViewModel = ({ navigation, route }: IConnectScreenProps) => {
         onGoBack,
         connectFacebook,
         connectGoogle,
+        phoneNumberRef,
+        phoneNumber,
     };
 };

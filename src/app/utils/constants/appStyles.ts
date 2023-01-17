@@ -66,7 +66,7 @@ export const appStyles = StyleSheet.create({
         marginTop: getSize.m(10),
     },
     text_title: {
-        fontFamily: AppFonts.regular,
+        fontFamily: AppFonts.bold,
         fontWeight: '700',
         fontSize: getSize.m(24),
         textAlign: 'center',
@@ -106,7 +106,7 @@ export const appStyles = StyleSheet.create({
         lineHeight: getSize.m(17),
         color: appColors.text_dark_blue,
         paddingHorizontal: getSize.m(15),
-        paddingVertical: getSize.m(15),
+        paddingVertical: getSize.m(13),
         borderColor: '#E9F1F4',
         borderWidth: 1,
         borderRadius: getSize.m(15),
@@ -120,8 +120,11 @@ export const appStyles = StyleSheet.create({
     },
     text_error: {
         color: 'red',
-        fontSize: getSize.s(9),
-        marginTop: getSize.m(5),
+        fontSize: getSize.m(12),
+        marginTop: getSize.m(4),
+        lineHeight: getSize.m(11.7),
+        fontWeight: '500',
+        fontFamily: AppFonts.medium,
         textAlign: I18nManager.isRTL ? 'left' : 'right',
     },
     account_container: {

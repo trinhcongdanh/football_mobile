@@ -12,8 +12,14 @@ type Props = {
 
 export const Button = ({ title, onPress, disabled, style }: Props) => {
     return (
-        <TouchableOpacity disabled={disabled} style={[styles.button, style]} onPress={onPress}>
-            <Text style={styles.text_button}>{title}</Text>
+        <TouchableOpacity
+            disabled={disabled}
+            style={[disabled ? styles.button_disable : styles.button_completed, style]}
+            onPress={onPress}
+        >
+            <Text style={disabled ? styles.text_button_disable : styles.text_button_completed}>
+                {title}
+            </Text>
         </TouchableOpacity>
     );
 };
