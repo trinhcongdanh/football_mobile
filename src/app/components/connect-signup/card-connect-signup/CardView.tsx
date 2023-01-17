@@ -18,12 +18,16 @@ export const CardView = ({
     connect,
     connectFacebook,
     connectGoogle,
+    option,
 }: ICardViewProps) => {
     const { t } = useTranslation();
     return (
         <View style={styles.mr_top}>
             <View style={styles.connect_container}>
-                <Text style={styles.txt_register}>{t('register.registerByPhone')}</Text>
+                {option === '1' && (
+                    <Text style={styles.txt_register}>{t('register.registerByPhone')}</Text>
+                )}
+
                 <Input
                     input={input}
                     inputRef={inputRef}
@@ -32,11 +36,16 @@ export const CardView = ({
                     onChangeTextInput={onChangeTextInput}
                     onFocus={handleError}
                 />
-                <Button onPress={connect} title={t('register.submit')} />
+                <Button
+                    style={{ borderRadius: getSize.m(15) }}
+                    disabled={input !== '' ? false : true}
+                    onPress={connect}
+                    title={t('register.submit')}
+                />
                 <View
                     style={[
                         appStyles.flex_row_space_center,
-                        { marginTop: getSize.m(30), marginBottom: getSize.m(16) },
+                        { marginTop: getSize.m(45), marginBottom: getSize.m(23) },
                     ]}
                 >
                     <View style={styles.line} />

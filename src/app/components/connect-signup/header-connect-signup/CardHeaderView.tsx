@@ -8,7 +8,7 @@ import { ICardHeaderViewProps } from './CardHeaderView.types';
 
 // type Props = {};
 
-export const CardHeaderView = ({ title, sub_title }: ICardHeaderViewProps) => {
+export const CardHeaderView = ({ title, sub_title, style, option }: ICardHeaderViewProps) => {
     return (
         <View
             style={[
@@ -18,8 +18,8 @@ export const CardHeaderView = ({ title, sub_title }: ICardHeaderViewProps) => {
             ]}
         >
             <Image resizeMode="contain" source={AppImages.img_logo} style={styles.logo} />
-            <Text style={[appStyles.text_title]}>{title}</Text>
-            <Text style={appStyles.text_sub_title}>{sub_title}</Text>
+            <Text style={[appStyles.text_title, style]}>{title}</Text>
+            {option === '1' && <Text style={appStyles.text_sub_title}>{sub_title}</Text>}
         </View>
     );
 };

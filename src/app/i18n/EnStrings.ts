@@ -56,7 +56,7 @@ const resources = {
             register: {
                 registerByPhone: 'הרשמה באמצעות טלפון',
                 phoneNumber: '* מס׳ טלפון',
-                submit: 'שלח קוד אימות',
+                submit: 'התחבר',
                 alreadyUser: 'כבר יש לך משתמש?',
                 connect: 'התחבר',
                 invalid: 'מס׳ טלפון לא תקין',
@@ -70,8 +70,8 @@ const resources = {
                 fb: 'התחברות באמצעות פייסבוק',
                 gg: 'התחברות באמצעות גוגל',
                 apple: 'התחברות באמצעות אפל',
-                signup: '? הרשם עכשיו',
-                nosignUp: 'עדיין לא רשום',
+                signup: 'הרשם עכשיו',
+                nosignUp: 'עדיין לא רשום? ',
             },
             verify: {
                 title: 'הרשמה באמצעות טלפון',
@@ -585,7 +585,7 @@ const resources = {
             register: {
                 registerByPhone: 'Registration by phone',
                 phoneNumber: 'Phone Number *',
-                submit: 'Submit a verification code',
+                submit: 'Connect',
                 alreadyUser: 'Already have a user?',
                 connect: 'Connect',
                 invalid_phone_number: 'Invalid phone number',
@@ -599,8 +599,8 @@ const resources = {
                 fb: 'Login via Facebook',
                 gg: 'Login using Google',
                 apple: 'Logging in via Apple',
-                signup: 'Register now ?',
-                nosignUp: 'Not registered yet',
+                signup: 'Register now',
+                nosignUp: 'Not registered yet ?',
             },
             verify: {
                 title: 'Registration by phone',

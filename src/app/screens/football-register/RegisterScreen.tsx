@@ -51,10 +51,12 @@ export const RegisterScreen = ({ navigation, route }: IRegisterScreenProps) => {
                         />
                         <ScrollView showsVerticalScrollIndicator={false}>
                             <CardHeaderView
+                                option="1"
                                 title={t('welcome.sign_up')}
                                 sub_title={t('welcome.join_us')}
                             />
                             <CardView
+                                option="1"
                                 connectFacebook={connectFacebook}
                                 connectGoogle={connectGoogle}
                                 input={phoneNumber}

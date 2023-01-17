@@ -36,6 +36,8 @@ export const ConnectScreen = ({ navigation, route }: IConnectScreenProps) => {
         onGoBack,
         connectFacebook,
         connectGoogle,
+        phoneNumberRef,
+        phoneNumber,
     } = useViewModel({
         navigation,
         route,
@@ -53,12 +55,23 @@ export const ConnectScreen = ({ navigation, route }: IConnectScreenProps) => {
                             goBack={onGoBack}
                         />
                         <ScrollView showsVerticalScrollIndicator={false}>
-                            <CardHeaderView title={t('connect.title')} />
+                            <CardHeaderView
+                                option="0"
+                                style={{
+                                    fontSize: getSize.m(20),
+                                    lineHeight: getSize.m(26),
+                                    marginTop: getSize.m(16),
+                                }}
+                                title={t('connect.title')}
+                            />
                             <CardView
+                                option="0"
                                 placeHolderText={t('connect.placeholder')}
                                 buttonTitle={t('connect.button')}
                                 errors={errors.numberPhone}
-                                handleOnChange={() => handleOnChange('', 'numberPhone')}
+                                input={phoneNumber}
+                                inputRef={phoneNumberRef}
+                                onChangeTextInput={handleOnChange}
                                 handleError={() => {
                                     handleError('', 'numberPhone');
                                 }}
@@ -69,10 +82,18 @@ export const ConnectScreen = ({ navigation, route }: IConnectScreenProps) => {
                             <View
                                 style={[
                                     appStyles.flex_row_center,
-                                    { marginTop: getSize.m(30), marginBottom: getSize.m(30) },
+                                    { marginTop: getSize.m(23), marginBottom: getSize.m(30) },
                                 ]}
                             >
-                                <Text style={{ color: appColors.white }}>
+                                <Text
+                                    style={{
+                                        color: appColors.white,
+                                        fontWeight: '400',
+                                        fontFamily: AppFonts.regular,
+                                        lineHeight: getSize.m(24),
+                                        fontSize: getSize.m(14),
+                                    }}
+                                >
                                     {' '}
                                     {t('connect.nosignUp')}
                                 </Text>
@@ -81,6 +102,9 @@ export const ConnectScreen = ({ navigation, route }: IConnectScreenProps) => {
                                         style={{
                                             color: appColors.white,
                                             fontFamily: AppFonts.bold,
+                                            lineHeight: getSize.m(24),
+                                            fontSize: getSize.m(14),
+                                            fontWeight: '700',
                                         }}
                                     >
                                         {t('connect.signup')}

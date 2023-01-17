@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import { IInputComponent } from './Input.type';
 import { onChange } from 'react-native-reanimated';
+import { appColors } from '@football/app/utils/constants/appColors';
 
 const Input = ({
     error,
@@ -19,7 +20,7 @@ const Input = ({
         <View style={styleInput}>
             <TextInput
                 value={input}
-                placeholderTextColor="#C3CFDC"
+                placeholderTextColor={appColors.light_gray}
                 style={appStyles.text_input}
                 placeholder={placeholder}
                 onChangeText={onChangeTextInput}
