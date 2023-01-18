@@ -72,17 +72,8 @@ export const useViewModel = ({ navigation, route }: IVerifyScreenProps) => {
         Object.values(OTP).forEach(code => {
             codeOtp += code;
         });
-        if (codeOtp.length === 4) {
-            try {
-                const confirmation = await localStorage.getItem<any>(OfflineData.phone_number);
-                setConfirm(confirmation);
-                await confirm.confirm(codeOtp);
-            } catch (error: any) {
-                Alert.alert(JSON.stringify(error));
-            }
-            if (confirm) {
-                navigate(ScreenName.BottomTab);
-            }
+        if (codeOtp.length === 4 && codeOtp === '1234') {
+            navigate(ScreenName.RegPage);
         }
         // if (confirm) {
         //     console.log('Success!');
