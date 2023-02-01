@@ -87,8 +87,12 @@ export const useViewModel = ({ navigation, route }: IFavoriteTeamsScreenProps) =
         }
     };
 
-    const searchFavTeam = async (text: string) => {
-        if (text !== '') {
+    const searchFavTeam = (text: string) => {
+        setSearchText(text);
+    };
+
+    const submitSearchFavTeam = async () => {
+        if (searchText !== '') {
             try {
                 dispatch(resetFavTeam([]));
                 const { data }: TeamModelResponse = await axiosClient.post(`${BASE_URL}/find`, {
@@ -108,11 +112,10 @@ export const useViewModel = ({ navigation, route }: IFavoriteTeamsScreenProps) =
                         homepage_info: true,
                     },
                     filter: {
-                        search_terms: { $regex: `.*${text}.*`, $options: 'i' },
+                        search_terms: { $regex: `.*${searchText}.*`, $options: 'i' },
                     },
                     limit: 100,
                 });
-
                 if (!isEmpty(data.documents)) {
                     dispatch(resetFavTeam([]));
                     dispatch(setFavTeams(data.documents));
@@ -221,5 +224,6 @@ export const useViewModel = ({ navigation, route }: IFavoriteTeamsScreenProps) =
         selectedFavTeams,
         formattedFavTeams,
         searchTextRef,
+        submitSearchFavTeam,
     };
 };
