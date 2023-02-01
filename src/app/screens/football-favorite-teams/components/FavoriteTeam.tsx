@@ -7,10 +7,10 @@ import {
     ImageBackground,
     StatusBar,
     SafeAreaView,
-    TextInput,
     ScrollView,
     ActivityIndicator,
     Image,
+    TouchableWithoutFeedback,
 } from 'react-native';
 import { getSize } from '@football/app/utils/responsive/scale';
 import Icon from 'react-native-vector-icons/Feather';
@@ -25,6 +25,7 @@ import { Button } from '@football/app/components/button';
 import styles from './FavoriteTeam.style';
 import { IFavoriteTeamProps } from './FavoriteTeam.types';
 import { AppFonts } from '@football/app/assets/fonts';
+import { TextInput } from 'react-native-gesture-handler';
 
 export const FavoriteTeam = ({
     onGoSkip,
@@ -42,6 +43,7 @@ export const FavoriteTeam = ({
     searchText,
     searchFavTeam,
     searchTextRef,
+    submitSearchFavTeam,
 }: IFavoriteTeamProps) => {
     return (
         <ImageBackground source={AppImages.img_bg_register} style={appStyles.flex}>
@@ -71,7 +73,9 @@ export const FavoriteTeam = ({
                                 style={styles.text_search}
                                 placeholderTextColor={appColors.blue_gray_dark}
                                 onChangeText={searchFavTeam}
+                                onBlur={submitSearchFavTeam}
                             />
+
                             <Icon
                                 style={{ marginRight: getSize.m(14) }}
                                 name={appIcons.ic_search}
@@ -114,6 +118,7 @@ export const FavoriteTeam = ({
                                         style={styles.text_search}
                                         placeholderTextColor={appColors.blue_gray_dark}
                                         onChangeText={searchFavTeam}
+                                        onBlur={submitSearchFavTeam}
                                     />
                                     <Icon
                                         style={{ marginRight: getSize.m(14) }}

@@ -21,4 +21,5 @@ export type IFavoritePlayerProps = {
     number: number;
     searchText: any;
     searchFavPlayer: (text: string) => void;
+    submitSearchFavPlayer: () => void;
 };

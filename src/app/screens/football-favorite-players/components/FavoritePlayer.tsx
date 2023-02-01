@@ -42,6 +42,7 @@ export const FavoritePlayer = ({
     button,
     searchText,
     searchFavPlayer,
+    submitSearchFavPlayer,
 }: IFavoritePlayerProps) => {
     return (
         <ImageBackground source={AppImages.img_bg_register} style={appStyles.flex}>
@@ -70,6 +71,7 @@ export const FavoritePlayer = ({
                                 style={styles.text_search}
                                 placeholderTextColor={appColors.blue_gray_dark}
                                 onChangeText={searchFavPlayer}
+                                onBlur={submitSearchFavPlayer}
                             />
                             <Icon
                                 style={{ marginRight: getSize.m(14) }}
@@ -113,6 +115,7 @@ export const FavoritePlayer = ({
                                         style={styles.text_search}
                                         placeholderTextColor={appColors.blue_gray_dark}
                                         onChangeText={searchFavPlayer}
+                                        onBlur={submitSearchFavPlayer}
                                     />
                                     <Icon
                                         style={{ marginRight: getSize.m(14) }}

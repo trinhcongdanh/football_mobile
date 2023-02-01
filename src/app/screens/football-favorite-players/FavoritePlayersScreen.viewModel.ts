@@ -191,9 +191,34 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
         }
     };
 
-    const searchFavPlayer = async (text: string) => {
-        if (text !== '') {
+    const searchFavPlayer = (text: string) => {
+        setSearchText(text);
+    };
+
+    const submitSearchFavPlayer = async () => {
+        if (searchText !== '') {
             try {
+                dispatch(
+                    resetSearchFavPlayer({
+                        id: '',
+                        label: '',
+                        listFavPlayers: [],
+                    })
+                );
+                dispatch(
+                    resetAllFavPlayers({
+                        id: '',
+                        label: '',
+                        listFavPlayers: [],
+                    })
+                );
+                dispatch(
+                    resetGroupFavPlayer({
+                        id: '',
+                        label: '',
+                        listFavPlayers: [],
+                    })
+                );
                 const { data }: PlayersModelResponse = await axiosClient.post(`${BASE_URL}/find`, {
                     dataSource: DATA_SOURCE,
                     database: DB,
@@ -215,7 +240,7 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
                         homepage_info: true,
                     },
                     filter: {
-                        search_terms: { $regex: `.*${text}.*`, $options: 'i' },
+                        search_terms: { $regex: `.*${searchText}.*`, $options: 'i' },
                     },
                     limit: 100,
                 });
@@ -247,48 +272,71 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
                     listFavPlayers: [],
                 })
             );
+            if (!isEmpty(selectedFavTeams)) {
+                if (isEmpty(favPlayers) || isNil(favPlayers)) {
+                    try {
+                        const { data }: any = await axiosClient.post(`${BASE_URL}/find`, {
+                            dataSource: DATA_SOURCE,
+                            database: DB,
+                            collection: 'team_personnel',
+                        });
+
+                        if (!isEmpty(data.documents)) {
+                            selectedFavTeams.map((favTeam: TeamModel, index: number) => {
+                                data.documents.map((team_personnel: TeamPersonnelModel) => {
+                                    if (favTeam.team_personnel_id === team_personnel._id) {
+                                        let temp = [];
+                                        temp.push(...team_personnel.players.attack);
+                                        temp.push(...team_personnel.players.midfield);
+                                        temp.push(...team_personnel.players.defence);
+                                        temp.push(...team_personnel.players.goalkeepers);
+
+                                        dispatch(
+                                            setGroupFavPlayer({
+                                                id: team_personnel._id,
+                                                label: favTeam.name_he,
+                                                listFavPlayers: temp.map(v => ({
+                                                    ...v,
+                                                    _id: v.player_id,
+                                                })),
+                                            })
+                                        );
+                                    }
+                                });
+                            });
+                        }
+                    } catch (error: any) {
+                        Alert.alert(error);
+                    }
+                }
+            } else {
+                if (isEmpty(favPlayers) || isNil(favPlayers)) {
+                    try {
+                        const { data }: PlayersModelResponse = await axiosClient.post(
+                            `${BASE_URL}/find`,
+                            {
+                                dataSource: DATA_SOURCE,
+                                database: DB,
+                                collection: 'player',
+                            }
+                        );
+
+                        if (!isEmpty(data.documents)) {
+                            dispatch(
+                                setAllFavPlayers({
+                                    id: id,
+                                    label: t('favorite_player.group'),
+                                    listFavPlayers: data.documents,
+                                })
+                            );
+                        }
+                    } catch (error: any) {
+                        Alert.alert(error);
+                    }
+                }
+            }
         }
     };
-
-    // const searchFavPlayer = async (text: string) => {
-    //     if (text !== '') {
-    //         dispatch(
-    //             searchFilterPlayers({
-    //                 dataSource: DATA_SOURCE,
-    //                 database: DB,
-    //                 collection: 'player',
-    //                 projection: {
-    //                     search_terms: true,
-    //                     name_en: true,
-    //                     image_url: true,
-    //                     image_width: true,
-    //                     image_height: true,
-    //                     name_he: true,
-    //                     team: true,
-    //                     top_team: true,
-    //                     date_of_birth: true,
-    //                     citizenship_he: true,
-    //                     citizenship_en: true,
-    //                     citizenship_image_url: true,
-    //                     num_of_games: true,
-    //                     homepage_info: true,
-    //                 },
-    //                 filter: {
-    //                     search_terms: { $regex: `.*${text}.*`, $options: 'i' },
-    //                 },
-    //                 limit: 100,
-    //             })
-    //         );
-    //     } else {
-    //         dispatch(
-    //             resetSearchFavPlayer({
-    //                 id: '',
-    //                 label: '',
-    //                 listFavPlayers: [],
-    //             })
-    //         );
-    //     }
-    // };
 
     const onGoBack = (): void => {
         goBack();
@@ -380,5 +428,6 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
         formattedSearchFavPlayers,
         selectedFavPlayers,
         formattedFavPlayers,
+        submitSearchFavPlayer,
     };
 };

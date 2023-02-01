@@ -27,6 +27,7 @@ export const FavoritePlayersScreen = ({ navigation, route }: IFavoritePlayerScre
         formattedSearchFavPlayers,
         selectedFavPlayers,
         formattedFavPlayers,
+        submitSearchFavPlayer,
     } = useViewModel({
         navigation,
         route,
@@ -56,6 +57,7 @@ export const FavoritePlayersScreen = ({ navigation, route }: IFavoritePlayerScre
                 onGoSkip={onGoSkip}
                 onGoBack={onGoBack}
                 handleContinue={handleContinue}
+                submitSearchFavPlayer={submitSearchFavPlayer}
                 searchFavPlayer={(text: string) => {
                     setSearchText(text);
                     searchFavPlayer(text);

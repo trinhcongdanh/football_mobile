@@ -21,6 +21,7 @@ export const FavoriteTeamsScreen = ({ navigation, route }: IFavoriteTeamsScreenP
         selectedFavTeams,
         formattedFavTeams,
         searchTextRef,
+        submitSearchFavTeam,
     } = useViewModel({
         navigation,
         route,
@@ -48,6 +49,7 @@ export const FavoriteTeamsScreen = ({ navigation, route }: IFavoriteTeamsScreenP
             <FavoriteTeam
                 searchTextRef={searchTextRef}
                 searchText={searchText}
+                submitSearchFavTeam={submitSearchFavTeam}
                 searchFavTeam={(text: string) => {
                     setSearchText(text);
                     searchFavTeam(text);
