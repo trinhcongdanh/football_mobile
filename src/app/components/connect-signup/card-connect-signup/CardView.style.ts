@@ -9,9 +9,9 @@ export const styles = StyleSheet.create({
     },
     connect_container: {
         backgroundColor: appColors.white,
-        paddingHorizontal: getSize.m(30),
-        paddingTop: getSize.m(32),
-        paddingBottom: getSize.m(20),
+        paddingHorizontal: getSize.m(15),
+        paddingTop: getSize.m(22),
+        paddingBottom: getSize.m(18),
         borderRadius: 15,
     },
 
@@ -22,9 +22,11 @@ export const styles = StyleSheet.create({
     },
 
     txt_register: {
-        fontFamily: AppFonts.regular,
+        fontFamily: AppFonts.bold,
         fontWeight: '700',
         textAlign: 'center',
+        fontSize: getSize.m(13),
+        color: appColors.text_dark_blue,
         marginBottom: getSize.m(15),
     },
 
