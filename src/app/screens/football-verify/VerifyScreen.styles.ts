@@ -1,3 +1,4 @@
+import { AppFonts } from '@football/app/assets/fonts';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { getSize } from '@football/app/utils/responsive/scale';
 import { I18nManager, StyleSheet } from 'react-native';
@@ -5,7 +6,6 @@ import { I18nManager, StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
     connect_container: {
         backgroundColor: appColors.white,
-        paddingHorizontal: getSize.m(28),
         paddingTop: getSize.m(40),
         paddingBottom: getSize.m(25),
         borderRadius: getSize.m(15),
@@ -14,10 +14,11 @@ const styles = StyleSheet.create({
     ic_back: { alignItems: I18nManager.isRTL ? 'flex-start' : 'flex-end' },
 
     otp_Container: {
+        paddingHorizontal: getSize.m(28),
         justifyContent: 'space-between',
         alignItems: 'center',
         flexDirection: I18nManager.isRTL ? 'row-reverse' : 'row-reverse',
-        marginTop: getSize.m(36),
+        marginTop: getSize.m(37),
     },
     otp_Box: {
         borderRadius: getSize.m(15),
@@ -37,7 +38,6 @@ const styles = StyleSheet.create({
 
     footer_opt: {
         flexDirection: 'row',
-        marginTop: getSize.m(38),
         justifyContent: 'center',
     },
 
@@ -45,17 +45,28 @@ const styles = StyleSheet.create({
         fontSize: getSize.m(14),
         fontWeight: '700',
         color: appColors.blue_light,
+        fontFamily: AppFonts.bold,
+        lineHeight: getSize.m(18.2),
     },
     text_not_reach: {
         fontSize: getSize.m(14),
         fontWeight: '700',
         color: appColors.text_dark_blue,
+        fontFamily: AppFonts.bold,
+        lineHeight: getSize.m(18.2),
+    },
+    timeSend: {
+        fontSize: getSize.m(13),
+        fontFamily: AppFonts.medium,
+        color: appColors.light_gray,
+        textAlign: 'center',
     },
     error: {
         color: 'red',
         fontSize: getSize.s(12),
-        marginTop: getSize.m(15),
         textAlign: 'center',
+        fontFamily: AppFonts.medium,
+        fontWeight: '500',
     },
     underlineStyleBase: {
         padding: getSize.m(30),

@@ -7,6 +7,7 @@ import DatePicker from 'react-native-date-picker';
 import styles from './CardInfoView.style';
 import { ICardInfoViewProps } from './CardInfoView.types';
 import Input from '../../input/Input';
+import { AppFonts } from '@football/app/assets/fonts';
 
 export const CardInfoView = ({
     errors,
@@ -41,7 +42,17 @@ export const CardInfoView = ({
             />
 
             <View style={{ marginTop: getSize.m(30) }}>
-                <Text style={appStyles.text_label}>{genderLabel}</Text>
+                <Text
+                    style={[
+                        appStyles.text_label,
+                        {
+                            fontWeight: '500',
+                            fontFamily: AppFonts.medium,
+                        },
+                    ]}
+                >
+                    {genderLabel}
+                </Text>
                 <View
                     style={[
                         appStyles.flex_row_space,
@@ -83,7 +94,17 @@ export const CardInfoView = ({
                     })}
                 </View>
                 <View style={{ marginTop: getSize.m(30) }}>
-                    <Text style={appStyles.text_label}>{birthDateLabel}</Text>
+                    <Text
+                        style={[
+                            appStyles.text_label,
+                            {
+                                fontWeight: '500',
+                                fontFamily: AppFonts.medium,
+                            },
+                        ]}
+                    >
+                        {birthDateLabel}
+                    </Text>
                     <View style={styles.date_picker}>
                         <DatePicker
                             fadeToColor="none"

@@ -90,7 +90,7 @@ export const appStyles = StyleSheet.create({
         fontSize: getSize.m(20),
         textAlign: 'center',
         color: appColors.text_dark_blue,
-        lineHeight: getSize.m(24),
+        lineHeight: getSize.m(25),
     },
     text_sub_header: {
         fontFamily: AppFonts.regular,
@@ -98,7 +98,7 @@ export const appStyles = StyleSheet.create({
         fontSize: getSize.m(16),
         textAlign: 'center',
         color: appColors.text_dark_blue,
-        lineHeight: getSize.m(24),
+        lineHeight: getSize.m(25),
     },
     text_input: {
         fontSize: getSize.s(13),
@@ -129,9 +129,10 @@ export const appStyles = StyleSheet.create({
     },
     account_container: {
         backgroundColor: appColors.white,
-        paddingHorizontal: getSize.m(30),
-        paddingTop: getSize.m(32),
-        paddingBottom: getSize.m(20),
+        paddingRight: getSize.m(33),
+        paddingLeft: getSize.m(31),
+        paddingTop: getSize.m(30),
+        paddingBottom: getSize.m(30),
         borderRadius: getSize.m(15),
     },
     text_bold: {

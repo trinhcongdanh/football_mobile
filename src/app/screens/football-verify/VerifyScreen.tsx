@@ -53,8 +53,10 @@ export const VerifyScreen = ({ navigation, route }: IVerifyScreenProps) => {
                         />
                         <CardHeaderView title={t('verify.title')} />
                         <View style={styles.connect_container}>
-                            <Text style={[appStyles.text_header]}>{t('verify.header')}</Text>
-                            <Text style={[appStyles.text_sub_header]}>052-5381648</Text>
+                            <View style={{ paddingHorizontal: getSize.m(56) }}>
+                                <Text style={[appStyles.text_header]}>{t('verify.header')}</Text>
+                                <Text style={[appStyles.text_sub_header]}>052-5381648</Text>
+                            </View>
 
                             {/* OTP Verify */}
                             <View style={styles.otp_Container}>
@@ -87,22 +89,30 @@ export const VerifyScreen = ({ navigation, route }: IVerifyScreenProps) => {
                             </View>
 
                             {/* End */}
-                            <Text
+                            <View style={{ marginTop: getSize.m(15) }}>
+                                <Text
+                                    style={[
+                                        styles.timeSend,
+                                        // eslint-disable-next-line react-native/no-inline-styles
+                                        {
+                                            display: timeSend ? 'flex' : 'none',
+                                        },
+                                    ]}
+                                >
+                                    {t('verify.time_send')}
+                                </Text>
+                            </View>
+                            {errors.verifyError !== '' && (
+                                <View style={{ marginTop: getSize.m(15) }}>
+                                    <Text style={styles.error}>{t('verify.error')}</Text>
+                                </View>
+                            )}
+                            <View
                                 style={[
-                                    appStyles.text_sub_title,
-                                    // eslint-disable-next-line react-native/no-inline-styles
-                                    {
-                                        display: timeSend ? 'flex' : 'none',
-                                        marginTop: getSize.m(15),
-                                    },
+                                    styles.footer_opt,
+                                    { marginTop: timeSend ? getSize.m(38) : getSize.m(72) },
                                 ]}
                             >
-                                {t('verify.time_send')}
-                            </Text>
-                            {errors.verifyError !== '' && (
-                                <Text style={styles.error}>{t('verify.error')}</Text>
-                            )}
-                            <View style={styles.footer_opt}>
                                 <Text style={styles.text_not_reach}>
                                     {t('verify.text_not_reach')}
                                 </Text>

@@ -54,7 +54,11 @@ export const RegScreen = ({ navigation, route }: IRegScreenProps) => {
                             goBack={onGoBack}
                         />
                         <ScrollView showsVerticalScrollIndicator={false}>
-                            <CardHeaderView title={t('reg.title')} sub_title={t('reg.sub_title')} />
+                            <CardHeaderView
+                                option="1"
+                                title={t('reg.title')}
+                                sub_title={t('reg.sub_title')}
+                            />
                             <CardInfoView
                                 placeHolderText={t('reg.place_holder_name')}
                                 errors={errors.userName}
@@ -87,8 +91,13 @@ export const RegScreen = ({ navigation, route }: IRegScreenProps) => {
                                 <Text style={styles.agree}>{t('reg.agree')}</Text>
                                 <Text style={styles.provision}>{t('reg.provision')}</Text>
                             </View>
-                            <View style={{ marginHorizontal: getSize.m(32) }}>
-                                <Button title={t('reg.button')} onPress={createInfo} />
+                            <View style={{ marginHorizontal: getSize.m(16) }}>
+                                <Button
+                                    disabled={!onCheck}
+                                    style={{ borderRadius: getSize.m(15) }}
+                                    title={t('reg.button')}
+                                    onPress={createInfo}
+                                />
                             </View>
                         </ScrollView>
                     </View>
