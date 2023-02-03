@@ -33,6 +33,7 @@ export const useViewModel = ({ navigation, route }: IConnectScreenProps) => {
         return str.join('&');
     }
 
+    // Facebook
     const connectFacebook = useCallback(async () => {
         LoginManager.logInWithPermissions(['public_profile', 'email']).then((result: any) => {
             if (result.isCancelled) {
@@ -71,6 +72,7 @@ export const useViewModel = ({ navigation, route }: IConnectScreenProps) => {
         }
     }, []);
 
+    // Google Account
     useEffect(() => {
         GoogleSignin.configure({
             webClientId: '476796468470-2e0e3qgmfo76l4c2juqiu3gvgmts0v32.apps.googleusercontent.com',
@@ -100,6 +102,10 @@ export const useViewModel = ({ navigation, route }: IConnectScreenProps) => {
         }
     }, []);
 
+    // Apple Developer
+    const connectApple = () => {
+        console.log('Apple Developer');
+    };
     const onGoBack = (): void => {
         goBack();
     };
@@ -139,6 +145,7 @@ export const useViewModel = ({ navigation, route }: IConnectScreenProps) => {
         onGoBack,
         connectFacebook,
         connectGoogle,
+        connectApple,
         phoneNumberRef,
         phoneNumber,
     };

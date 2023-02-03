@@ -19,6 +19,7 @@ export const CardView = ({
     connect,
     connectFacebook,
     connectGoogle,
+    connectApple,
     option,
 }: ICardViewProps) => {
     const { t } = useTranslation();
@@ -78,7 +79,10 @@ export const CardView = ({
                         />
                         <Text style={styles.text_link}> {t('connect.gg')}</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={[appStyles.flex_row_center, styles.button_link]}>
+                    <TouchableOpacity
+                        onPress={connectApple}
+                        style={[appStyles.flex_row_center, styles.button_link]}
+                    >
                         <Image
                             resizeMode="contain"
                             source={AppImages.img_apple}
