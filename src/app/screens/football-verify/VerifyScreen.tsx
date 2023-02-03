@@ -25,7 +25,6 @@ import { appColors } from '../../utils/constants/appColors';
 export const VerifyScreen = ({ navigation, route }: IVerifyScreenProps) => {
     const { t } = useTranslation();
     const {
-        timeSend,
         errors,
         OTP,
         nextInputIndex,
@@ -94,9 +93,6 @@ export const VerifyScreen = ({ navigation, route }: IVerifyScreenProps) => {
                                     style={[
                                         styles.timeSend,
                                         // eslint-disable-next-line react-native/no-inline-styles
-                                        {
-                                            display: timeSend ? 'flex' : 'none',
-                                        },
                                     ]}
                                 >
                                     {t('verify.time_send')}
@@ -107,12 +103,7 @@ export const VerifyScreen = ({ navigation, route }: IVerifyScreenProps) => {
                                     <Text style={styles.error}>{t('verify.error')}</Text>
                                 </View>
                             )}
-                            <View
-                                style={[
-                                    styles.footer_opt,
-                                    { marginTop: timeSend ? getSize.m(38) : getSize.m(72) },
-                                ]}
-                            >
+                            <View style={[styles.footer_opt, { marginTop: getSize.m(38) }]}>
                                 <Text style={styles.text_not_reach}>
                                     {t('verify.text_not_reach')}
                                 </Text>

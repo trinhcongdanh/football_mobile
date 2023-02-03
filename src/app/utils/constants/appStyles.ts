@@ -105,7 +105,7 @@ export const appStyles = StyleSheet.create({
         fontWeight: '500',
         lineHeight: getSize.m(17),
         color: appColors.text_dark_blue,
-        paddingHorizontal: getSize.m(15),
+        paddingHorizontal: getSize.m(24),
         paddingVertical: getSize.m(13),
         borderColor: '#E9F1F4',
         borderWidth: 1,

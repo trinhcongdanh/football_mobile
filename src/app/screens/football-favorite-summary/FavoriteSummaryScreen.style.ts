@@ -78,7 +78,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         borderWidth: getSize.m(1),
-        borderColor: appColors.blue_light,
         marginRight: getSize.m(8),
         borderRadius: getSize.m(3),
     },

@@ -157,8 +157,9 @@ export const useViewModel = ({ navigation, route }: IFavoriteSummaryScreenProps)
 
     const [screenName, setScreenName] = useState<any>(null);
     const navigationHomePage = () => {
-        setScreenName(ScreenName.BottomTab);
         if (isEmpty(profile.profile) || isNil(profile.profile)) {
+            setScreenName(ScreenName.BottomTab);
+
             dispatch(
                 createProfileUser(
                     serializeParams({
@@ -169,6 +170,8 @@ export const useViewModel = ({ navigation, route }: IFavoriteSummaryScreenProps)
                     })
                 )
             );
+        } else {
+            navigate(ScreenName.BottomTab);
         }
     };
 
@@ -177,8 +180,9 @@ export const useViewModel = ({ navigation, route }: IFavoriteSummaryScreenProps)
     };
 
     const navigationMethodRegister = () => {
-        setScreenName(ScreenName.RegisterPage);
         if (isEmpty(profile.profile) || isNil(profile.profile)) {
+            setScreenName(ScreenName.RegisterPage);
+
             dispatch(
                 createProfileUser(
                     serializeParams({
@@ -189,14 +193,19 @@ export const useViewModel = ({ navigation, route }: IFavoriteSummaryScreenProps)
                     })
                 )
             );
+        } else {
+            navigate(ScreenName.RegisterPage);
         }
     };
     const isFocused = useIsFocused();
 
     useEffect(() => {
+        console.log(screenName);
+
         if (!isFocused) return;
         if (!isEmpty(login.login)) {
             navigate(screenName);
+
             if (screenName === ScreenName.BottomTab) {
                 navigation.reset({
                     index: 0,
@@ -226,7 +235,7 @@ export const useViewModel = ({ navigation, route }: IFavoriteSummaryScreenProps)
                 }
             }
         }
-    }, [profile.success, isFocused]);
+    }, [profile.success]);
     return {
         t,
         onGoBack,

@@ -353,6 +353,8 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
                     })
                 )
             );
+        } else {
+            navigate(ScreenName.BottomTab);
         }
     };
     const isFocused = useIsFocused();

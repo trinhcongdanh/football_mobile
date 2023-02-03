@@ -182,9 +182,15 @@ export const FavoriteTopTeam = ({
 
                                     <Text
                                         style={{
-                                            fontWeight: '700',
-                                            color: appColors.blue_light,
-                                            fontFamily: AppFonts.semibold,
+                                            fontWeight: favSelected.length > 0 ? '700' : '400',
+                                            color:
+                                                favSelected.length > 0
+                                                    ? appColors.blue_light
+                                                    : appColors.white,
+                                            fontFamily:
+                                                favSelected.length > 0
+                                                    ? AppFonts.semibold
+                                                    : AppFonts.regular,
                                         }}
                                     >
                                         {favSelected.length}

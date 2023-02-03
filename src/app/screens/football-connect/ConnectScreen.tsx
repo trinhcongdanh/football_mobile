@@ -87,7 +87,7 @@ export const ConnectScreen = ({ navigation, route }: IConnectScreenProps) => {
                             >
                                 <Text
                                     style={{
-                                        color: appColors.white,
+                                        color: appColors.text_grey,
                                         fontWeight: '400',
                                         fontFamily: AppFonts.regular,
                                         lineHeight: getSize.m(24),
@@ -100,7 +100,7 @@ export const ConnectScreen = ({ navigation, route }: IConnectScreenProps) => {
                                 <TouchableOpacity onPress={onNavigateSignUp}>
                                     <Text
                                         style={{
-                                            color: appColors.white,
+                                            color: appColors.text_grey,
                                             fontFamily: AppFonts.bold,
                                             lineHeight: getSize.m(24),
                                             fontSize: getSize.m(14),

@@ -10,8 +10,6 @@ export const useViewModel = ({ navigation, route }: IVerifyScreenProps) => {
     const { t } = useTranslation();
     const { navigate, goBack } = useAppNavigator();
 
-    const [timeSend, setTimeSend] = useState(true);
-
     const [errors, setErrors] = useState({
         verifyError: '',
     });
@@ -24,13 +22,9 @@ export const useViewModel = ({ navigation, route }: IVerifyScreenProps) => {
     };
 
     const reSendVerify = (): void => {
-        setTimeSend(true);
+        // setTimeSend(true);
         handleError('', 'verifyError');
     };
-
-    setTimeout(() => {
-        setTimeSend(false);
-    }, 12000);
 
     const inputs = Array(4).fill('');
 
@@ -89,7 +83,6 @@ export const useViewModel = ({ navigation, route }: IVerifyScreenProps) => {
     };
 
     return {
-        timeSend,
         inputs,
         errors,
         OTP,
