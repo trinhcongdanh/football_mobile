@@ -36,6 +36,7 @@ export const ConnectScreen = ({ navigation, route }: IConnectScreenProps) => {
         onGoBack,
         connectFacebook,
         connectGoogle,
+        connectApple,
         phoneNumberRef,
         phoneNumber,
     } = useViewModel({
@@ -76,6 +77,7 @@ export const ConnectScreen = ({ navigation, route }: IConnectScreenProps) => {
                                     handleError('', 'numberPhone');
                                 }}
                                 connect={Connect}
+                                connectApple={connectApple}
                                 connectFacebook={connectFacebook}
                                 connectGoogle={connectGoogle}
                             />
