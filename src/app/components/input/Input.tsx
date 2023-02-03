@@ -5,6 +5,7 @@ import { appStyles } from '@football/app/utils/constants/appStyles';
 import { IInputComponent } from './Input.type';
 import { onChange } from 'react-native-reanimated';
 import { appColors } from '@football/app/utils/constants/appColors';
+import { getSize } from '@football/app/utils/responsive/scale';
 
 const Input = ({
     error,
@@ -21,12 +22,23 @@ const Input = ({
             <TextInput
                 value={input}
                 placeholderTextColor={appColors.light_gray}
-                style={appStyles.text_input}
+                style={[
+                    appStyles.text_input,
+                    {
+                        paddingHorizontal: input === '' ? getSize.m(24) : getSize.m(15),
+                    },
+                ]}
                 placeholder={placeholder}
                 onChangeText={onChangeTextInput}
                 onFocus={onFocus}
                 ref={inputRef}
             />
+            {input === '' && (
+                <View style={{ position: 'absolute', top: getSize.m(19), left: getSize.m(16) }}>
+                    <Text style={{ color: 'red' }}>*</Text>
+                </View>
+            )}
+
             {error && <Text style={appStyles.text_error}>{t(error)}</Text>}
         </View>
     );

@@ -8,6 +8,7 @@ import Input from '../../input/Input';
 import { Button } from '../../button';
 import { styles } from './CardView.style';
 import { ICardViewProps } from './CardView.types';
+import { appColors } from '@football/app/utils/constants/appColors';
 
 export const CardView = ({
     errors,
@@ -54,6 +55,7 @@ export const CardView = ({
                         <Text style={styles.text_or}>{t('connect.or')}</Text>
                         <View style={styles.line} />
                     </View>
+
                     <TouchableOpacity
                         onPress={connectFacebook}
                         style={[appStyles.flex_row_center, styles.button_link]}

@@ -257,7 +257,10 @@ export const FavoriteSummaryScreen = ({ navigation, route }: IFavoriteSummaryScr
                                         {
                                             backgroundColor: onCheck
                                                 ? appColors.blue_light
-                                                : appColors.white,
+                                                : appColors.separator,
+                                            borderColor: onCheck
+                                                ? appColors.blue_light
+                                                : appColors.soft_grey,
                                         },
                                     ]}
                                     onPress={toggleOnCheck}

@@ -92,6 +92,8 @@ export const useViewModel = ({ navigation, route }: IFavoriteTopTeamsScreenProps
                     })
                 )
             );
+        } else {
+            navigate(ScreenName.BottomTab);
         }
     };
 

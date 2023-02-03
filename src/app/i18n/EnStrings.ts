@@ -55,8 +55,8 @@ const resources = {
             },
             register: {
                 registerByPhone: 'הרשמה באמצעות טלפון',
-                phoneNumber: '* מס׳ טלפון',
-                submit: 'התחבר',
+                phoneNumber: 'מס׳ טלפון',
+                submit: 'שלח קוד אימות',
                 alreadyUser: 'כבר יש לך משתמש?',
                 connect: 'התחבר',
                 invalid: 'מס׳ טלפון לא תקין',
@@ -584,8 +584,8 @@ const resources = {
             },
             register: {
                 registerByPhone: 'Registration by phone',
-                phoneNumber: 'Phone Number *',
-                submit: 'Connect',
+                phoneNumber: 'Phone Number',
+                submit: 'Submit a verification code',
                 alreadyUser: 'Already have a user?',
                 connect: 'Connect',
                 invalid_phone_number: 'Invalid phone number',

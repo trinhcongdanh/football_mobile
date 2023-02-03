@@ -8,7 +8,7 @@ export const styles = StyleSheet.create({
         marginTop: getSize.m(17),
     },
     connect_container: {
-        backgroundColor: appColors.white,
+        backgroundColor: appColors.gray,
         paddingHorizontal: getSize.m(15),
         paddingTop: getSize.m(22),
         paddingBottom: getSize.m(18),
@@ -39,7 +39,7 @@ export const styles = StyleSheet.create({
         backgroundColor: appColors.white,
         marginBottom: getSize.m(12),
         borderRadius: 15,
-        elevation: 3,
+        elevation: 1,
         flex: 0,
     },
 
