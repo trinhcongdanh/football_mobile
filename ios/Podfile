@@ -7,6 +7,8 @@ install! 'cocoapods', :deterministic_uuids => false
 target 'FootballAssociation' do
   pod 'BVLinearGradient', :path => '../node_modules/react-native-linear-gradient'
   pod 'react-native-pager-view', :path => '../node_modules/react-native-pager-view'
+  pod 'react-native-google-maps', :path => '../node_modules/react-native-maps'
+  pod 'react-native-video/VideoCaching', :path => '../node_modules/react-native-video/react-native-video.podspec'
 
   config = use_native_modules!
 
