@@ -27,8 +27,8 @@ export const ScheduleScreen = ({ navigation, route }: IScheduleScreenProps) => {
                     return (
                         <ListGame
                             key={item.id}
-                            logoHome={item.logoHome}
-                            logoAway={item.logoAway}
+                            logo_home={item.logoHome}
+                            logo_away={item.logoAway}
                             nameHome={item.nameHome}
                             nameAway={item.nameAway}
                             location={item.location}
@@ -36,7 +36,7 @@ export const ScheduleScreen = ({ navigation, route }: IScheduleScreenProps) => {
                             result={item.result}
                             color={appColors.gray}
                             schedule={item.schedule}
-                            completed={item.completed}
+                            // completed={item.completed}
                         />
                     );
                 })}

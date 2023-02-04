@@ -6,18 +6,19 @@ import { appStyles } from '@football/app/utils/constants/appStyles';
 import { getSize } from '@football/app/utils/responsive/scale';
 import { Avatar } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/AntDesign';
+import { useTranslation } from 'react-i18next';
 import { appIcons } from '@football/app/assets/icons/appIcons';
-import { useViewModel } from './RankingTable.viewModel';
 import { IRankingTableProps } from './RankingTable.type';
+import { useViewModel } from '@football/app/screens/football-campaign/layouts/ranking-table/RankingTable.viewModel';
 
-export const RankingTable = ({ rankingTable }: IRankingTableProps) => {
-    const { t } = useViewModel({ rankingTable });
+export const RankingTable = ({}: IRankingTableProps) => {
+    const { t, rankingTable } = useViewModel({});
     return (
         <View>
             <Text style={appStyles.statistics_title}>{t('campaign.ranking_table.title')}</Text>
             <View style={{ marginTop: getSize.m(26) }}>
                 <Position
-                    position={rankingTable.group_name_he}
+                    position="בית 9"
                     color={appColors.text_dark_blue}
                     width={getSize.m(130)}
                 />
@@ -72,7 +73,7 @@ export const RankingTable = ({ rankingTable }: IRankingTableProps) => {
                         </View>
                     </View>
                     <View>
-                        {rankingTable.leader_board.map(item => {
+                        {rankingTable.map(item => {
                             return (
                                 <View
                                     key={item.place}

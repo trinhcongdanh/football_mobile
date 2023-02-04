@@ -20,15 +20,15 @@ export const ListOfGames = () => {
                         <ListGame
                             key={item.id}
                             tournament={item.tournament}
-                            logoHome={item.logoHome}
-                            logoAway={item.logoAway}
+                            logo_home={item.logoHome}
+                            logo_away={item.logoAway}
                             nameHome={item.nameHome}
                             nameAway={item.nameAway}
                             location={item.location}
                             date={item.date}
                             result={item.result}
                             schedule={item.schedule}
-                            completed={item.completed}
+                            // completed={item.completed}
                             icon={appIcons.ic_arrow_left}
                             color={appColors.gray}
                             details={item.details}

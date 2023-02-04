@@ -17,10 +17,10 @@ import { ICampaignScreenProps } from './CampaignScreen.type';
 export const CampaignScreen = ({ navigation, route }: ICampaignScreenProps) => {
     const { t, onGoBack } = useViewModel({ navigation, route });
 
-    const campaign: Campaign | undefined = route.params?.['campaign'];
-    if (isNil(campaign)) {
-        throw new Error('Campaign is not defined');
-    }
+    // const campaign: Campaign | undefined = route.params?.['campaign'];
+    // if (isNil(campaign)) {
+    //     throw new Error('Campaign is not defined');
+    // }
 
     return (
         <View style={appStyles.flex}>
@@ -32,13 +32,13 @@ export const CampaignScreen = ({ navigation, route }: ICampaignScreenProps) => {
                             iconName={appIcons.ic_right_ios}
                             iconStyle={styles.ic_back}
                             goBack={onGoBack}
-                            title={campaign.name_he}
+                            title="ליגת האומות של אופ״א 2022/23"
                         />
                     </View>
                     <ScrollView>
                         <HeaderLogo text="נבחרת לאומית גברים" logo={AppImages.img_logo} />
                         <View style={[appStyles.package, { marginTop: getSize.m(0) }]}>
-                            <RankingTable rankingTable={campaign} />
+                            <RankingTable />
                         </View>
                         <View style={appStyles.package}>
                             <ListOfGames />

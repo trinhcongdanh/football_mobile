@@ -44,7 +44,7 @@ export const CompositionScreen = ({ navigation, route }: ICompositionScreenProps
                                 key={item.id}
                                 name={item.name}
                                 number_before={item.number}
-                                avt={AppImages.img_avt_player}
+                                avt="https://upload.wikimedia.org/wikipedia/commons/5/55/EranZeahviCelebrating.jpg"
                             />
                         );
                     })}
@@ -57,7 +57,7 @@ export const CompositionScreen = ({ navigation, route }: ICompositionScreenProps
                                 key={item.id}
                                 name={item.name}
                                 number_before={item.number}
-                                avt={AppImages.img_avt_player}
+                                avt="https://upload.wikimedia.org/wikipedia/commons/5/55/EranZeahviCelebrating.jpg"
                             />
                         );
                     })}
@@ -73,7 +73,7 @@ export const CompositionScreen = ({ navigation, route }: ICompositionScreenProps
                                 key={item.id}
                                 name={item.name}
                                 number_before={item.number}
-                                avt={AppImages.img_avt_player}
+                                avt="https://upload.wikimedia.org/wikipedia/commons/5/55/EranZeahviCelebrating.jpg"
                             />
                         );
                     })}
@@ -86,7 +86,7 @@ export const CompositionScreen = ({ navigation, route }: ICompositionScreenProps
                                 key={item.id}
                                 name={item.name}
                                 number_before={item.number}
-                                avt={AppImages.img_avt_player}
+                                avt="https://upload.wikimedia.org/wikipedia/commons/5/55/EranZeahviCelebrating.jpg"
                             />
                         );
                     })}

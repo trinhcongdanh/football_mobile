@@ -32,8 +32,8 @@ export const GameCompositionScreen = ({ navigation, route }: IGameCompositionScr
                         />
                         <HeaderComposition
                             title='ליגת האומות של אופ"א 2022/23'
-                            avt_away={AppImages.img_aviv}
-                            avt_home={AppImages.img_fchj}
+                            avt_away="https://upload.wikimedia.org/wikipedia/he/thumb/5/50/HaifaCarmel.svg/800px-HaifaCarmel.svg.png"
+                            avt_home="https://upload.wikimedia.org/wikipedia/he/thumb/5/50/HaifaCarmel.svg/800px-HaifaCarmel.svg.png"
                             name_home="הפועל ירושלים"
                             name_away="הפועל באר שבע"
                             score="2 : 1"

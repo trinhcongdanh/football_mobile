@@ -1,3 +1,1 @@
-export type IRankingTableProps = {
-    rankingTable: any;
-};
+export type IRankingTableProps = {};

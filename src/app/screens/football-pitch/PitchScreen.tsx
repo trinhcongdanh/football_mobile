@@ -45,7 +45,7 @@ export const PitchScreen = ({ navigation, route }: IPitchScreenProps) => {
                                 data_1="שארית ישראל תל אביב - יפו"
                                 data_2="איתן שור"
                                 data_3="03-6376000"
-                                avt={AppImages.img_pitch}
+                                avt="https://upload.wikimedia.org/wikipedia/commons/5/55/EranZeahviCelebrating.jpg"
                                 title_1={t('pitch.address')}
                                 title_2={t('pitch.contact')}
                                 title_3={t('pitch.phone')}

@@ -3,6 +3,6 @@ export type IReplaceProps = {
     name_down: string;
     avt_up: string;
     avt_down: string;
-    minute: number;
+    minute: string;
     team: string;
 };

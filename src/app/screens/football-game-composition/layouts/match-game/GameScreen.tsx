@@ -45,7 +45,7 @@ export const GameScreen = ({ navigation, route }: IGameScreenProps) => {
                         <View style={{ marginTop: getSize.m(20) }}>
                             <TicketYellow
                                 name="דני גרופר"
-                                avt={AppImages.img_avt_player}
+                                avt="https://upload.wikimedia.org/wikipedia/commons/5/55/EranZeahviCelebrating.jpg"
                                 minute="22'"
                                 team="ישראל"
                             />
@@ -53,7 +53,7 @@ export const GameScreen = ({ navigation, route }: IGameScreenProps) => {
                         <View style={{ marginTop: getSize.m(30) }}>
                             <TicketRed
                                 name="דני גרופר"
-                                avt={AppImages.img_avt_player}
+                                avt="https://upload.wikimedia.org/wikipedia/commons/5/55/EranZeahviCelebrating.jpg"
                                 minute="30'"
                                 team="ישראל"
                             />
@@ -61,16 +61,17 @@ export const GameScreen = ({ navigation, route }: IGameScreenProps) => {
                         <View style={{ marginTop: getSize.m(45) }}>
                             <Goal
                                 name="דני גרופר"
-                                avt={AppImages.img_avt_player}
+                                avt="https://upload.wikimedia.org/wikipedia/commons/5/55/EranZeahviCelebrating.jpg"
                                 minute="45'"
                                 team="ישראל"
                             />
                         </View>
                         <View style={{ marginTop: getSize.m(78) }}>
                             <Replace
-                                name_home="עומר אצילי"
-                                name_away="דני גרופר"
-                                avt={AppImages.img_avt_player}
+                                name_up="עומר אצילי"
+                                name_down="דני גרופר"
+                                avt_up="https://upload.wikimedia.org/wikipedia/commons/5/55/EranZeahviCelebrating.jpg"
+                                avt_down="https://upload.wikimedia.org/wikipedia/commons/5/55/EranZeahviCelebrating.jpg"
                                 minute="78'"
                                 team="ישראל"
                             />
@@ -78,7 +79,7 @@ export const GameScreen = ({ navigation, route }: IGameScreenProps) => {
                         <View style={{ marginTop: getSize.m(90) }}>
                             <Goal
                                 name="דני גרופר"
-                                avt={AppImages.img_avt_player}
+                                avt="https://upload.wikimedia.org/wikipedia/commons/5/55/EranZeahviCelebrating.jpg"
                                 minute="90'"
                                 team="ישראל"
                             />

@@ -40,7 +40,7 @@ export const MatchScreen = ({ navigation, route }: IMatchScreenProps) => {
                             handlePressFunction={onGoBack}
                         />
                         <HeaderComposition
-                            title={gamesData.data.campaign_name_he}
+                            title={gamesData.data.context_name_he}
                             season={gamesData.data.season}
                             avt_away={gamesData.data.team2.logo_url}
                             avt_home={gamesData.data.team1.logo_url}
