@@ -14,12 +14,12 @@ export const ScheduleScreen = ({ navigation, route }: IScheduleScreenProps) => {
         navigation,
         route,
     });
-    if (games.isLoading == true) {
-        return <></>;
-    }
-    if (games.success == false) {
-        return <></>;
-    }
+    // if (games.isLoading == true) {
+    //     return <></>;
+    // }
+    // if (games.success == false) {
+    //     return <></>;
+    // }
     return (
         <View
             style={[
@@ -28,14 +28,14 @@ export const ScheduleScreen = ({ navigation, route }: IScheduleScreenProps) => {
             ]}
         >
             <ScrollView showsVerticalScrollIndicator={false}>
-                {games.data.map(item => {
+                {games.map(item => {
                     return (
                         <ListGame
                             key={item.game_id}
-                            logo_home={item.team1.logo_url}
-                            logo_away={item.team2.logo_url}
-                            nameHome={item.team1.name_he}
-                            nameAway={item.team2.name_he}
+                            logo_home={item.logo_url}
+                            logo_away={item.logo_url}
+                            nameHome={item.name_he}
+                            nameAway={item.name_he}
                             location={item.stadium_he}
                             date={item.date}
                             result={item.score}

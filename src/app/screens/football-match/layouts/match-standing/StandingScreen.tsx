@@ -15,12 +15,12 @@ export const StandingScreen = ({ navigation, route }: IStandingScreenProps) => {
         route,
     });
 
-    if (leaderBoard.isLoading == true) {
-        return <></>;
-    }
-    if (leaderBoard.success == false) {
-        return <></>;
-    }
+    // if (leaderBoard.isLoading == true) {
+    //     return <></>;
+    // }
+    // if (leaderBoard.success == false) {
+    //     return <></>;
+    // }
 
     return (
         <View
@@ -82,7 +82,7 @@ export const StandingScreen = ({ navigation, route }: IStandingScreenProps) => {
                             </View>
                         </View>
                         <View>
-                            {leaderBoard.data.map((item, index) => {
+                            {leaderBoard.map((item, index) => {
                                 return (
                                     <View
                                         key={index}
