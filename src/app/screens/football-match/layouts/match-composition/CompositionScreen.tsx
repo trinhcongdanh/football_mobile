@@ -15,12 +15,12 @@ export const CompositionScreen = ({ navigation, route }: ICompositionScreenProps
         navigation,
         route,
     });
-    if (lineUp.isLoading == true) {
-        return <></>;
-    }
-    if (lineUp.success == false) {
-        return <></>;
-    }
+    // if (lineUp.isLoading == true) {
+    //     return <></>;
+    // }
+    // if (lineUp.success == false) {
+    //     return <></>;
+    // }
 
     return (
         <View
@@ -35,7 +35,7 @@ export const CompositionScreen = ({ navigation, route }: ICompositionScreenProps
                         width={getSize.m(130)}
                         position={t('match.composition.main_lineup')}
                     />
-                    {lineUp.data.opening.map(item => {
+                    {lineUp.map(item => {
                         return (
                             <ListPlayer
                                 key={item.player_id}
@@ -48,7 +48,7 @@ export const CompositionScreen = ({ navigation, route }: ICompositionScreenProps
                 </View>
                 <View style={{ marginTop: getSize.m(30) }}>
                     <Position width={getSize.m(130)} position={t('match.composition.replace')} />
-                    {lineUp.data.substitutes.map(item => {
+                    {lineUp.map(item => {
                         return (
                             <ListPlayer
                                 key={item.player_id}
@@ -64,7 +64,7 @@ export const CompositionScreen = ({ navigation, route }: ICompositionScreenProps
                         width={getSize.m(130)}
                         position={t('match.composition.not_partner')}
                     />
-                    {lineUp.data.not_participated.map(item => {
+                    {lineUp.map(item => {
                         return (
                             <ListPlayer
                                 key={item.player_id}
@@ -77,10 +77,10 @@ export const CompositionScreen = ({ navigation, route }: ICompositionScreenProps
                 </View>
                 <View style={{ marginTop: getSize.m(30) }}>
                     <Position width={getSize.m(130)} position={t('match.composition.coach')} />
-                    {lineUp.data.coaches.map(item => {
+                    {lineUp.map(item => {
                         return (
                             <ListPlayer
-                                key={item.coach_id}
+                                key={item.player_id}
                                 name={item.name_he}
                                 avt={item.image_url}
                             />

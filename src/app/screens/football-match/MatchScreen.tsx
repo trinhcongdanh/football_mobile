@@ -40,14 +40,14 @@ export const MatchScreen = ({ navigation, route }: IMatchScreenProps) => {
                             handlePressFunction={onGoBack}
                         />
                         <HeaderComposition
-                            title={gamesData.data.context_name_he}
-                            season={gamesData.data.season}
-                            avt_away={gamesData.data.team2.logo_url}
-                            avt_home={gamesData.data.team1.logo_url}
-                            name_home={gamesData.data.team1.name_he}
-                            name_away={gamesData.data.team2.name_he}
-                            score={gamesData.data.score}
-                            stadium={gamesData.data.stadium_he}
+                            title="ליגת האומות של אופ״א"
+                            season="2022/23"
+                            avt_away="https://cdn0.iconfinder.com/data/icons/all-national-flags-of-the-world-very-high-quality-/283/iceland-512.png"
+                            avt_home="https://cdn0.iconfinder.com/data/icons/all-national-flags-of-the-world-very-high-quality-/283/israel-512.png"
+                            name_home="ישראל"
+                            name_away="איסלנד"
+                            score="3 : 6"
+                            stadium="בלומפילד"
                             status={t('match.status')}
                         />
                     </View>

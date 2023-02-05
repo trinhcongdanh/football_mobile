@@ -21,12 +21,12 @@ export const GameScreen = ({ navigation, route }: IGameScreenProps) => {
         navigation,
         route,
     });
-    if (gamePlay.isLoading == true) {
-        return <></>;
-    }
-    if (gamePlay.success == false) {
-        return <></>;
-    }
+    // if (gamePlay.isLoading == true) {
+    //     return <></>;
+    // }
+    // if (gamePlay.success == false) {
+    //     return <></>;
+    // }
     return (
         <View
             style={[
@@ -48,39 +48,39 @@ export const GameScreen = ({ navigation, route }: IGameScreenProps) => {
                     </View>
                     <View style={styles.line} />
                     <View>
-                        {gamePlay.data.map((item, index) => {
+                        {gamePlay.map((item, index) => {
                             return (
                                 <View key={index} style={{ marginTop: getSize.m(item.minute) }}>
                                     {item.action === GamePlayAction.YellowCard && (
                                         <TicketYellow
-                                            name={item.player.name_he}
-                                            avt={item.player.image_url}
+                                            name={item.name_he}
+                                            avt={item.image_url}
                                             minute={item.minute}
                                             team={item.team_name_he}
                                         />
                                     )}
                                     {item.action === GamePlayAction.RedCard && (
                                         <TicketRed
-                                            name={item.player.name_he}
-                                            avt={item.player.image_url}
+                                            name={item.name_he}
+                                            avt={item.image_url}
                                             minute={item.minute}
                                             team={item.team_name_he}
                                         />
                                     )}
                                     {item.action === GamePlayAction.Goal && (
                                         <Goal
-                                            name={item.player.name_he}
-                                            avt={item.player.image_url}
+                                            name={item.name_he}
+                                            avt={item.image_url}
                                             minute={item.minute}
                                             team={item.team_name_he}
                                         />
                                     )}
                                     {item.action === GamePlayAction.Exchange && (
                                         <Replace
-                                            name_up={item.player_up.name_he}
-                                            name_down={item.player_down.name_he}
-                                            avt_up={item.player_up.image_url}
-                                            avt_down={item.player_down.image_url}
+                                            name_up={item.name_he}
+                                            name_down={item.name_he}
+                                            avt_up={item.image_url}
+                                            avt_down={item.image_url}
                                             minute={item.minute}
                                             team={item.team_name_he}
                                         />
