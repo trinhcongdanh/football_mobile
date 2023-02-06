@@ -364,11 +364,15 @@ const resources = {
                     email: 'דוא״ל',
                     list: 'רשימת מגרשים',
                     stadium: 'איצטדיון',
+                    league: 'ליגה',
                 },
                 cast: 'סגל שחקנים',
                 official: 'בעלי תפקידים',
                 list_games: {
                     title: 'רשימת משחקים',
+                },
+                league_table: {
+                    title: 'טבלת ליגה',
                 },
                 statistics: {
                     title: 'סטטיסטיקות',
@@ -894,9 +898,13 @@ const resources = {
                     email: 'Email',
                     list: 'List of lots',
                     stadium: 'Stadium',
+                    league: 'League',
                 },
                 cast: 'Cast',
                 official: 'Officials',
+                league_table: {
+                    title: 'League table',
+                },
                 list_games: {
                     title: 'List of games',
                 },

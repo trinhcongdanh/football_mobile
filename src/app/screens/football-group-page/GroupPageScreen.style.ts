@@ -73,14 +73,23 @@ const styles = StyleSheet.create({
         color: appColors.white,
     },
 
+    drop_down_info: {
+        width: getSize.m(24),
+        height: getSize.m(24),
+        borderRadius: getSize.m(24),
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+
     info_group: {
-        marginHorizontal: getSize.m(20),
-        paddingHorizontal: getSize.m(16),
+        marginHorizontal: getSize.m(15),
+        paddingLeft: getSize.m(25),
+        paddingRight: getSize.m(16),
         paddingVertical: getSize.m(20),
         borderRadius: getSize.m(15),
         backgroundColor: appColors.white,
         elevation: 1,
-        marginTop: getSize.m(-60),
+        marginTop: getSize.m(-50),
     },
     info_group_item: {
         flexDirection: I18nManager.isRTL ? 'row-reverse' : 'row',
@@ -95,7 +104,7 @@ const styles = StyleSheet.create({
         fontSize: getSize.m(13),
         color: appColors.light_gray,
         lineHeight: getSize.m(17),
-        fontFamily: AppFonts.regular,
+        fontFamily: AppFonts.medium,
     },
 
     info_group_item_content: {
@@ -103,7 +112,7 @@ const styles = StyleSheet.create({
         fontSize: getSize.m(14),
         color: appColors.blue_black,
         lineHeight: getSize.m(18),
-        fontFamily: AppFonts.regular,
+        fontFamily: AppFonts.bold,
     },
 
     ic_label: {

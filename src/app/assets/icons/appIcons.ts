@@ -26,4 +26,6 @@ export const appIcons = {
     ic_arrow_up: 'arrow-up',
     ic_info: 'info',
     ic_close: 'close',
+    ic_location_sharp: 'location-sharp',
+    ic_chevron_up: 'chevron-up',
 };

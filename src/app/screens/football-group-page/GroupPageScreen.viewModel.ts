@@ -40,6 +40,13 @@ export const useViewModel = ({ navigation, route }: IGroupPageScreenProps) => {
         { id: 2, group: t('group_page.official') },
     ];
 
+    // Show Info Group
+
+    const [showInfo, setShowInfo] = useState(false);
+    const showInfoGroup = () => {
+        setShowInfo(!showInfo);
+    };
+
     return {
         t,
         onGoBack,
@@ -50,5 +57,7 @@ export const useViewModel = ({ navigation, route }: IGroupPageScreenProps) => {
         groups,
         handleCloseModal,
         handleSelectedYear,
+        showInfoGroup,
+        showInfo,
     };
 };
