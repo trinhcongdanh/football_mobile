@@ -16,8 +16,11 @@ import { getSize } from '@football/app/utils/responsive/scale';
 import { HeaderUser } from '@football/app/components/header-user/HeaderUser';
 import { ListOfGames } from './layouts/list-of-games/ListOfGames';
 import { Statistics } from './layouts/statistics/Statistics';
+import { LeagueTable } from '@football/app/screens/football-group-page/layouts/league-table/LeagueTable';
 import Icon from 'react-native-vector-icons/Feather';
 import IconFontAwesome from 'react-native-vector-icons/FontAwesome';
+import IconIonicons from 'react-native-vector-icons/Ionicons';
+import IconEntypo from 'react-native-vector-icons/Entypo';
 import { DropDown } from '@football/app/components/drop-down/DropDown';
 import { Avatar } from 'react-native-elements';
 import styles from './GroupPageScreen.style';
@@ -35,6 +38,8 @@ export const GroupPageScreen = ({ navigation, route }: IGroupPageScreenProps) =>
         openModalYear,
         handleCloseModal,
         handleSelectedYear,
+        showInfoGroup,
+        showInfo,
     } = useViewModel({
         navigation,
         route,
@@ -113,144 +118,199 @@ export const GroupPageScreen = ({ navigation, route }: IGroupPageScreenProps) =>
                         >
                             <View style={styles.info_group}>
                                 <View>
-                                    <Text style={appStyles.number}>
-                                        {t('group_page.info_group.about')}
-                                    </Text>
-                                    <View>
-                                        <View style={styles.info_group_item}>
-                                            <View>
-                                                <Text style={styles.info_group_item_label}>
-                                                    {t('group_page.info_group.age_group')}
-                                                </Text>
-                                                <Text style={styles.info_group_item_content}>
-                                                    בוגרים
-                                                </Text>
-                                            </View>
-                                            <View style={styles.ic_label}>
-                                                <IconFontAwesome
-                                                    name={appIcons.ic_user}
-                                                    size={getSize.m(12)}
-                                                    color={appColors.blue_light}
-                                                />
-                                            </View>
+                                    <View style={appStyles.flex_row_space_center}>
+                                        <View>
+                                            <Text style={appStyles.number}>
+                                                {t('group_page.info_group.about')}
+                                            </Text>
                                         </View>
-                                        <View style={styles.info_group_item}>
-                                            <View>
-                                                <Text style={styles.info_group_item_label}>
-                                                    {t('group_page.info_group.governing')}
-                                                </Text>
-                                                <Text style={styles.info_group_item_content}>
-                                                    513997569 - א.א. החברה לקידום הספורט באר שבע
-                                                    בע"מ
-                                                </Text>
-                                            </View>
-                                            <View style={styles.ic_label}>
-                                                <IconFontAwesome
-                                                    name={appIcons.ic_building}
+                                        <View
+                                            style={[
+                                                styles.drop_down_info,
+                                                {
+                                                    backgroundColor: showInfo
+                                                        ? appColors.separator
+                                                        : appColors.blue_light,
+                                                },
+                                            ]}
+                                        >
+                                            <TouchableOpacity onPress={showInfoGroup}>
+                                                <IconEntypo
+                                                    name={
+                                                        showInfo
+                                                            ? appIcons.ic_chevron_up
+                                                            : appIcons.ic_chevron_down
+                                                    }
                                                     size={getSize.m(12)}
-                                                    color={appColors.blue_light}
+                                                    color={
+                                                        showInfo
+                                                            ? appColors.text_option_unselect
+                                                            : appColors.white
+                                                    }
                                                 />
-                                            </View>
-                                        </View>
-                                        <View style={styles.info_group_item}>
-                                            <View>
-                                                <Text style={styles.info_group_item_label}>
-                                                    {t('group_page.info_group.office')}
-                                                </Text>
-                                                <Text style={styles.info_group_item_content}>
-                                                    0778830426
-                                                </Text>
-                                            </View>
-                                            <View style={styles.ic_label}>
-                                                <IconFontAwesome
-                                                    name={appIcons.ic_phone}
-                                                    size={getSize.m(12)}
-                                                    color={appColors.blue_light}
-                                                />
-                                            </View>
-                                        </View>
-                                        <View style={styles.info_group_item}>
-                                            <View>
-                                                <Text style={styles.info_group_item_label}>
-                                                    {t('group_page.info_group.fax')}
-                                                </Text>
-                                                <Text style={styles.info_group_item_content}>
-                                                    0778830426
-                                                </Text>
-                                            </View>
-                                            <View style={styles.ic_label}>
-                                                <IconFontAwesome
-                                                    name={appIcons.ic_print}
-                                                    size={getSize.m(12)}
-                                                    color={appColors.blue_light}
-                                                />
-                                            </View>
-                                        </View>
-                                        <View style={styles.info_group_item}>
-                                            <View>
-                                                <Text style={styles.info_group_item_label}>
-                                                    {t('group_page.info_group.address')}
-                                                </Text>
-                                                <Text style={styles.info_group_item_content}>
-                                                    חיים סנה 12 באר שבע ת.ד.3242 מיקוד 84489
-                                                </Text>
-                                            </View>
-                                            <View style={styles.ic_label}>
-                                                <IconFontAwesome
-                                                    name={appIcons.ic_user}
-                                                    size={getSize.m(12)}
-                                                    color={appColors.blue_light}
-                                                />
-                                            </View>
-                                        </View>
-                                        <View style={styles.info_group_item}>
-                                            <View>
-                                                <Text style={styles.info_group_item_label}>
-                                                    {t('group_page.info_group.email')}
-                                                </Text>
-                                                <Text style={styles.info_group_item_content}>
-                                                    office@hbsfc.co.il
-                                                </Text>
-                                            </View>
-                                            <View style={styles.ic_label}>
-                                                <IconFontAwesome
-                                                    name={appIcons.ic_envelope}
-                                                    size={getSize.m(12)}
-                                                    color={appColors.blue_light}
-                                                />
-                                            </View>
+                                            </TouchableOpacity>
                                         </View>
                                     </View>
                                 </View>
-                                <View style={styles.line} />
-                                <View>
-                                    <Text style={appStyles.number}>
-                                        {t('group_page.info_group.list')}
-                                    </Text>
+                                {showInfo ? (
                                     <View>
-                                        <View style={styles.info_group_item}>
-                                            <View>
-                                                <Text style={styles.info_group_item_label}>
-                                                    {t('group_page.info_group.stadium')}
-                                                </Text>
-                                                <Text style={styles.info_group_item_content}>
-                                                    באר שבע איצטדיון טוטו ע"ש טרנר
-                                                </Text>
+                                        <View>
+                                            <View style={styles.info_group_item}>
+                                                <View>
+                                                    <Text style={styles.info_group_item_label}>
+                                                        {t('group_page.info_group.age_group')}
+                                                    </Text>
+                                                    <Text style={styles.info_group_item_content}>
+                                                        בוגרים
+                                                    </Text>
+                                                </View>
+                                                <View style={styles.ic_label}>
+                                                    <IconFontAwesome
+                                                        name={appIcons.ic_user}
+                                                        size={getSize.m(12)}
+                                                        color={appColors.blue_light}
+                                                    />
+                                                </View>
                                             </View>
-                                            <View style={styles.ic_label}>
-                                                <IconFontAwesome
-                                                    name={appIcons.ic_location_arrow}
-                                                    size={getSize.m(12)}
-                                                    color={appColors.blue_light}
-                                                />
+                                            <View style={styles.info_group_item}>
+                                                <View>
+                                                    <Text style={styles.info_group_item_label}>
+                                                        {t('group_page.info_group.league')}
+                                                    </Text>
+                                                    <Text style={styles.info_group_item_content}>
+                                                        ליגת ONE ZERO בנקאות פרטית דיגיטלית
+                                                    </Text>
+                                                </View>
+                                                <View style={styles.ic_label}>
+                                                    <IconFontAwesome
+                                                        name={appIcons.ic_user}
+                                                        size={getSize.m(12)}
+                                                        color={appColors.blue_light}
+                                                    />
+                                                </View>
+                                            </View>
+                                            <View style={styles.info_group_item}>
+                                                <View>
+                                                    <Text style={styles.info_group_item_label}>
+                                                        {t('group_page.info_group.governing')}
+                                                    </Text>
+                                                    <Text style={styles.info_group_item_content}>
+                                                        513997569 - א.א. החברה לקידום הספורט באר שבע
+                                                        בע"מ
+                                                    </Text>
+                                                </View>
+                                                <View style={styles.ic_label}>
+                                                    <IconFontAwesome
+                                                        name={appIcons.ic_building}
+                                                        size={getSize.m(12)}
+                                                        color={appColors.blue_light}
+                                                    />
+                                                </View>
+                                            </View>
+                                            <View style={styles.info_group_item}>
+                                                <View>
+                                                    <Text style={styles.info_group_item_label}>
+                                                        {t('group_page.info_group.office')}
+                                                    </Text>
+                                                    <Text style={styles.info_group_item_content}>
+                                                        0778830426
+                                                    </Text>
+                                                </View>
+                                                <View style={styles.ic_label}>
+                                                    <IconFontAwesome
+                                                        name={appIcons.ic_phone}
+                                                        size={getSize.m(12)}
+                                                        color={appColors.blue_light}
+                                                    />
+                                                </View>
+                                            </View>
+                                            <View style={styles.info_group_item}>
+                                                <View>
+                                                    <Text style={styles.info_group_item_label}>
+                                                        {t('group_page.info_group.fax')}
+                                                    </Text>
+                                                    <Text style={styles.info_group_item_content}>
+                                                        0778830426
+                                                    </Text>
+                                                </View>
+                                                <View style={styles.ic_label}>
+                                                    <IconFontAwesome
+                                                        name={appIcons.ic_print}
+                                                        size={getSize.m(12)}
+                                                        color={appColors.blue_light}
+                                                    />
+                                                </View>
+                                            </View>
+                                            <View style={styles.info_group_item}>
+                                                <View>
+                                                    <Text style={styles.info_group_item_label}>
+                                                        {t('group_page.info_group.address')}
+                                                    </Text>
+                                                    <Text style={styles.info_group_item_content}>
+                                                        חיים סנה 12 באר שבע ת.ד.3242 מיקוד 84489
+                                                    </Text>
+                                                </View>
+                                                <View style={styles.ic_label}>
+                                                    <IconFontAwesome
+                                                        name={appIcons.ic_user}
+                                                        size={getSize.m(12)}
+                                                        color={appColors.blue_light}
+                                                    />
+                                                </View>
+                                            </View>
+                                            <View style={styles.info_group_item}>
+                                                <View>
+                                                    <Text style={styles.info_group_item_label}>
+                                                        {t('group_page.info_group.email')}
+                                                    </Text>
+                                                    <Text style={styles.info_group_item_content}>
+                                                        office@hbsfc.co.il
+                                                    </Text>
+                                                </View>
+                                                <View style={styles.ic_label}>
+                                                    <IconFontAwesome
+                                                        name={appIcons.ic_envelope}
+                                                        size={getSize.m(12)}
+                                                        color={appColors.blue_light}
+                                                    />
+                                                </View>
+                                            </View>
+                                        </View>
+                                        <View style={styles.line} />
+                                        <View>
+                                            <Text style={appStyles.number}>
+                                                {t('group_page.info_group.list')}
+                                            </Text>
+                                            <View>
+                                                <View style={styles.info_group_item}>
+                                                    <View>
+                                                        <Text style={styles.info_group_item_label}>
+                                                            {t('group_page.info_group.stadium')}
+                                                        </Text>
+                                                        <Text
+                                                            style={styles.info_group_item_content}
+                                                        >
+                                                            באר שבע איצטדיון טוטו ע"ש טרנר
+                                                        </Text>
+                                                    </View>
+                                                    <View style={styles.ic_label}>
+                                                        <IconIonicons
+                                                            name={appIcons.ic_location_sharp}
+                                                            size={getSize.m(12)}
+                                                            color={appColors.blue_light}
+                                                        />
+                                                    </View>
+                                                </View>
                                             </View>
                                         </View>
                                     </View>
-                                </View>
+                                ) : (
+                                    <View></View>
+                                )}
                             </View>
                             <View
                                 style={{
-                                    marginHorizontal: getSize.m(20),
+                                    marginHorizontal: getSize.m(15),
                                     marginTop: getSize.m(23),
                                 }}
                             >
@@ -278,6 +338,9 @@ export const GroupPageScreen = ({ navigation, route }: IGroupPageScreenProps) =>
                                     );
                                 })}
                             </View>
+                        </View>
+                        <View style={appStyles.package}>
+                            <LeagueTable />
                         </View>
                         <View style={appStyles.package}>
                             <ListOfGames />
