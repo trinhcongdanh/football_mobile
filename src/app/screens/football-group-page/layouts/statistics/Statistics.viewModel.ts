@@ -12,8 +12,6 @@ export const useViewModel = ({}: IStatisticsProps) => {
     const statistics = [
         {
             id: 1,
-            player: 'אבו עוביד איעד',
-            avt: AppImages.img_avt_player,
             number_game: 9,
             gates: 0,
             yellow_league_cup: 1,
@@ -26,8 +24,6 @@ export const useViewModel = ({}: IStatisticsProps) => {
         },
         {
             id: 2,
-            player: 'אליאס שי',
-            avt: AppImages.img_avt_player,
             number_game: 9,
             gates: 0,
             yellow_league_cup: 1,
@@ -40,8 +36,6 @@ export const useViewModel = ({}: IStatisticsProps) => {
         },
         {
             id: 3,
-            player: 'אבו עוביד איעד',
-            avt: AppImages.img_avt_player,
             number_game: 9,
             gates: 0,
             yellow_league_cup: 1,
@@ -54,8 +48,6 @@ export const useViewModel = ({}: IStatisticsProps) => {
         },
         {
             id: 4,
-            player: 'אבו עוביד איעד',
-            avt: AppImages.img_avt_player,
             number_game: 9,
             gates: 0,
             yellow_league_cup: 1,
@@ -68,8 +60,6 @@ export const useViewModel = ({}: IStatisticsProps) => {
         },
         {
             id: 5,
-            player: 'אבו עוביד איעד',
-            avt: AppImages.img_avt_player,
             number_game: 9,
             gates: 0,
             yellow_league_cup: 1,
@@ -82,8 +72,6 @@ export const useViewModel = ({}: IStatisticsProps) => {
         },
         {
             id: 6,
-            player: 'אבו עוביד איעד',
-            avt: AppImages.img_avt_player,
             number_game: 9,
             gates: 0,
             yellow_league_cup: 1,
@@ -96,8 +84,6 @@ export const useViewModel = ({}: IStatisticsProps) => {
         },
         {
             id: 7,
-            player: 'אבו עוביד איעד',
-            avt: AppImages.img_avt_player,
             number_game: 9,
             gates: 0,
             yellow_league_cup: 1,
@@ -109,7 +95,43 @@ export const useViewModel = ({}: IStatisticsProps) => {
             subtlety: 712,
         },
     ];
-
+    const players = [
+        {
+            id: 1,
+            player: 'אבו עוביד איעד',
+            avt: AppImages.img_avt_player,
+        },
+        {
+            id: 2,
+            player: 'אליאס שי',
+            avt: AppImages.img_avt_player,
+        },
+        {
+            id: 3,
+            player: 'אבו עוביד איעד',
+            avt: AppImages.img_avt_player,
+        },
+        {
+            id: 4,
+            player: 'אבו עוביד איעד',
+            avt: AppImages.img_avt_player,
+        },
+        {
+            id: 5,
+            player: 'אבו עוביד איעד',
+            avt: AppImages.img_avt_player,
+        },
+        {
+            id: 6,
+            player: 'אבו עוביד איעד',
+            avt: AppImages.img_avt_player,
+        },
+        {
+            id: 7,
+            player: 'אבו עוביד איעד',
+            avt: AppImages.img_avt_player,
+        },
+    ];
     const handleMoreStatistics = () => {
         navigate(ScreenName.StatisticsGroupPage);
     };
@@ -117,5 +139,6 @@ export const useViewModel = ({}: IStatisticsProps) => {
         t,
         statistics,
         handleMoreStatistics,
+        players,
     };
 };
