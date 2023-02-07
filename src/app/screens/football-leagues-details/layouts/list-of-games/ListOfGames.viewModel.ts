@@ -10,8 +10,10 @@ export const useViewModel = ({}: IListOfGamesProps) => {
     const listGames = [
         {
             id: 1,
-            logoHome: AppImages.img_israel,
-            logoAway: AppImages.img_albania,
+            logoHome:
+                'https://upload.wikimedia.org/wikipedia/he/thumb/5/50/HaifaCarmel.svg/800px-HaifaCarmel.svg.png',
+            logoAway:
+                'https://upload.wikimedia.org/wikipedia/he/thumb/5/50/HaifaCarmel.svg/800px-HaifaCarmel.svg.png',
             nameHome: 'ישראל',
             nameAway: 'אלבניה',
             location: 'בלומפילד',
@@ -23,8 +25,10 @@ export const useViewModel = ({}: IListOfGamesProps) => {
         },
         {
             id: 2,
-            logoHome: AppImages.img_israel,
-            logoAway: AppImages.img_albania,
+            logoHome:
+                'https://upload.wikimedia.org/wikipedia/he/thumb/5/50/HaifaCarmel.svg/800px-HaifaCarmel.svg.png',
+            logoAway:
+                'https://upload.wikimedia.org/wikipedia/he/thumb/5/50/HaifaCarmel.svg/800px-HaifaCarmel.svg.png',
             nameHome: 'ישראל',
             nameAway: 'אלבניה',
             location: 'בלומפילד',
@@ -36,8 +40,10 @@ export const useViewModel = ({}: IListOfGamesProps) => {
         },
         {
             id: 3,
-            logoHome: AppImages.img_israel,
-            logoAway: AppImages.img_albania,
+            logoHome:
+                'https://upload.wikimedia.org/wikipedia/he/thumb/5/50/HaifaCarmel.svg/800px-HaifaCarmel.svg.png',
+            logoAway:
+                'https://upload.wikimedia.org/wikipedia/he/thumb/5/50/HaifaCarmel.svg/800px-HaifaCarmel.svg.png',
             nameHome: 'ישראל',
             nameAway: 'אלבניה',
             location: 'בלומפילד',

@@ -8,9 +8,9 @@ const styles = StyleSheet.create({
         fontWeight: '500',
         color: appColors.button_dark_blue,
         textAlign: 'center',
-        fontSize: getSize.m(11),
+        fontSize: getSize.m(12),
         lineHeight: getSize.m(14),
-        fontFamily: AppFonts.regular,
+        fontFamily: AppFonts.medium,
     },
 
     itemTeam: {
@@ -21,8 +21,8 @@ const styles = StyleSheet.create({
 
     text_content: {
         textAlign: 'center',
-        fontFamily: AppFonts.regular,
-        fontSize: getSize.m(11),
+        fontFamily: AppFonts.bold,
+        fontSize: getSize.m(14),
         color: appColors.text_dark_blue,
         fontWeight: '700',
         lineHeight: getSize.m(16),
@@ -30,19 +30,14 @@ const styles = StyleSheet.create({
     },
 
     item_statistics: {
-        backgroundColor: appColors.white,
-        borderRadius: getSize.m(15),
-        paddingVertical: getSize.m(17),
-        paddingHorizontal: getSize.m(12),
-        elevation: getSize.m(2),
-        marginTop: getSize.m(20),
+        backgroundColor: appColors.gray,
     },
     title: {
         color: appColors.text_dark_blue,
-        fontSize: getSize.m(14),
+        fontSize: getSize.m(16),
         fontWeight: '700',
         lineHeight: getSize.m(18),
-        fontFamily: AppFonts.regular,
+        fontFamily: AppFonts.bold,
     },
 
     see_all: {
@@ -50,11 +45,11 @@ const styles = StyleSheet.create({
         fontSize: getSize.m(12),
         lineHeight: getSize.m(16),
         fontWeight: '700',
-        fontFamily: AppFonts.regular,
+        fontFamily: AppFonts.bold,
         marginRight: getSize.m(4),
     },
     ic_arrow: {
-        fontWeight: '700',
+        fontWeight: '900',
     },
 });
 

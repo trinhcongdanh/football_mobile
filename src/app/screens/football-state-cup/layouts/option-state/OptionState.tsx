@@ -52,7 +52,7 @@ export const OptionState = ({ label }: IOptionStateProps) => {
                                     {
                                         backgroundColor:
                                             item.id % 2 === 1
-                                                ? appColors.blue_matte
+                                                ? 'rgba(7, 16, 47, 0.03)'
                                                 : appColors.gray,
                                     },
                                 ]}

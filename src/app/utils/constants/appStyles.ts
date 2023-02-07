@@ -163,7 +163,7 @@ export const appStyles = StyleSheet.create({
 
     text_topic: {
         textAlign: 'left',
-        fontFamily: AppFonts.regular,
+        fontFamily: AppFonts.bold,
         fontSize: getSize.m(16),
         lineHeight: getSize.m(20),
         color: appColors.text_dark_blue,

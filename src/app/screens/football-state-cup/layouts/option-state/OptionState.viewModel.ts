@@ -8,7 +8,7 @@ export const useViewModel = () => {
     const listState = [
         {
             id: 1,
-            date: '15.12.22',
+            date: '15/12/22',
             play: 'מכבי נווה שאנן אלדד - איחוד בני כפר קרע',
             etch: '-',
             hour: '-',
@@ -16,7 +16,7 @@ export const useViewModel = () => {
         },
         {
             id: 2,
-            date: '06.09.22',
+            date: '06/09/22',
             play: 'מ.ס. הפועל לוד - הפועל אזור',
             etch: 'ירושלים עמק הארזים 1 סינטטי',
             hour: '20:00',
@@ -24,7 +24,7 @@ export const useViewModel = () => {
         },
         {
             id: 3,
-            date: '06.09.22',
+            date: '06/09/22',
             play: 'מ.ס. הפועל לוד - הפועל אזור',
             etch: 'ירושלים עמק הארזים 1 סינטטי',
             hour: '20:00',
@@ -32,7 +32,7 @@ export const useViewModel = () => {
         },
         {
             id: 4,
-            date: '06.09.22',
+            date: '06/09/22',
             play: 'מ.ס. הפועל לוד - הפועל אזור',
             etch: 'ירושלים עמק הארזים 1 סינטטי',
             hour: '20:00',
@@ -40,7 +40,7 @@ export const useViewModel = () => {
         },
         {
             id: 5,
-            date: '06.09.22',
+            date: '06/09/22',
             play: 'מ.ס. הפועל לוד - הפועל אזור',
             etch: 'ירושלים עמק הארזים 1 סינטטי',
             hour: '20:00',

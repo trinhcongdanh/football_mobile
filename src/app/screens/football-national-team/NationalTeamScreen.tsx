@@ -394,7 +394,7 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                                                                     }}
                                                                 >
                                                                     <Avatar
-                                                                        source={item.logo}
+                                                                        source={{ uri: item.logo }}
                                                                         rounded
                                                                         size={20}
                                                                     />

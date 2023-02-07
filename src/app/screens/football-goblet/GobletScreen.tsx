@@ -18,6 +18,7 @@ import { appStyles } from '@football/app/utils/constants/appStyles';
 import Icon from 'react-native-vector-icons/Feather';
 import { ButtonOption } from '@football/app/components/button_option';
 import { getSize } from '@football/app/utils/responsive/scale';
+import FastImage from 'react-native-fast-image';
 import styles from './GobletScreen.style';
 import { useViewModel } from './GobletScreen.viewModel';
 import { IGobletScreenProps } from './GobletScreen.type';
@@ -78,7 +79,16 @@ export const GobletScreen = ({ navigation, route }: IGobletScreenProps) => {
                                                     onPress={handleStateCup}
                                                 >
                                                     <View style={styles.image_cup}>
-                                                        <Image source={AppImages.img_state_cup} />
+                                                        <FastImage
+                                                            source={AppImages.img_state_cup}
+                                                            style={{
+                                                                width: getSize.m(12),
+                                                                height: getSize.m(12),
+                                                            }}
+                                                            resizeMode={
+                                                                FastImage.resizeMode.contain
+                                                            }
+                                                        />
                                                     </View>
                                                     <Text
                                                         numberOfLines={2}

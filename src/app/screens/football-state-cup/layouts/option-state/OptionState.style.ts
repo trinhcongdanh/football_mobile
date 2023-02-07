@@ -15,11 +15,11 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontSize: getSize.m(11),
         lineHeight: getSize.m(14),
-        fontFamily: AppFonts.regular,
+        fontFamily: AppFonts.medium,
     },
     text_content: {
         textAlign: 'center',
-        fontFamily: AppFonts.regular,
+        fontFamily: AppFonts.bold,
         fontSize: getSize.m(11),
         color: appColors.text_dark_blue,
         fontWeight: '700',

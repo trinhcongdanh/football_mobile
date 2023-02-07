@@ -20,15 +20,15 @@ export const ListOfGames = (props: any) => {
                     return (
                         <ListGame
                             key={item.id}
-                            logoHome={item.logoHome}
-                            logoAway={item.logoAway}
+                            logo_home={item.logoHome}
+                            logo_away={item.logoAway}
                             nameHome={item.nameHome}
                             nameAway={item.nameAway}
                             location={item.location}
                             date={item.date}
                             result={item.result}
                             schedule={item.schedule}
-                            completed={item.completed}
+                            // completed={item.completed}
                             color={appColors.gray}
                             icon={appIcons.ic_arrow_left}
                             details={item.details}

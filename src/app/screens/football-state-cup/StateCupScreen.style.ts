@@ -4,9 +4,18 @@ import { getSize } from '@football/app/utils/responsive/scale';
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
+    avt_leagues_container: {
+        width: getSize.m(80),
+        height: getSize.m(80),
+        backgroundColor: appColors.white,
+        borderRadius: getSize.m(76),
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
     avt_leagues: {
-        borderColor: appColors.white,
-        borderWidth: getSize.m(4),
+        width: getSize.m(74),
+        height: getSize.m(74),
+        borderRadius: getSize.m(74),
     },
     name_leagues: {
         fontFamily: AppFonts.regular,
