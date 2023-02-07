@@ -3,6 +3,7 @@ import React from 'react';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import { getSize } from '@football/app/utils/responsive/scale';
 import { AppImages } from '@football/app/assets/images';
+import FastImage from 'react-native-fast-image';
 import { useTranslation } from 'react-i18next';
 import Input from '../../input/Input';
 import { Button } from '../../button';
@@ -60,20 +61,31 @@ export const CardView = ({
                         onPress={connectFacebook}
                         style={[appStyles.flex_row_center, styles.button_link]}
                     >
-                        <Image
+                        {/* <Image
                             resizeMode="contain"
                             source={AppImages.img_fb}
                             style={styles.image_link}
+                        /> */}
+                        <FastImage
+                            source={AppImages.img_fb}
+                            resizeMode={FastImage.resizeMode.contain}
+                            style={styles.image_link}
                         />
+
                         <Text style={styles.text_link}>{t('connect.fb')}</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
                         onPress={connectGoogle}
                         style={[appStyles.flex_row_center, styles.button_link]}
                     >
-                        <Image
+                        {/* <Image
                             resizeMode="contain"
                             source={AppImages.img_google}
+                            style={styles.image_link}
+                        /> */}
+                        <FastImage
+                            source={AppImages.img_google}
+                            resizeMode={FastImage.resizeMode.contain}
                             style={styles.image_link}
                         />
                         <Text style={styles.text_link}> {t('connect.gg')}</Text>
@@ -82,9 +94,14 @@ export const CardView = ({
                         onPress={connectApple}
                         style={[appStyles.flex_row_center, styles.button_link]}
                     >
-                        <Image
+                        {/* <Image
                             resizeMode="contain"
                             source={AppImages.img_apple}
+                            style={styles.image_link}
+                        /> */}
+                        <FastImage
+                            source={AppImages.img_apple}
+                            resizeMode={FastImage.resizeMode.contain}
                             style={styles.image_link}
                         />
                         <Text style={styles.text_link}> {t('connect.apple')} </Text>
