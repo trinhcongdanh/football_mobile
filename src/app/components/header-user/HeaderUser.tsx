@@ -6,6 +6,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/Feather';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import { appColors } from '@football/app/utils/constants/appColors';
+import FastImage from 'react-native-fast-image';
 import { Avatar } from 'react-native-elements';
 import { IHeaderUserProps } from './HeaderUser.type';
 import { styles } from './HeaderUser.styles';
@@ -21,7 +22,15 @@ export const HeaderUser = ({
     return (
         <View style={[appStyles.flex_space_center, styles.header]}>
             <View style={[appStyles.flex_row_space_center, styles.avt]}>
-                <Avatar rounded size={40} source={avt} />
+                <FastImage
+                    style={{
+                        width: getSize.m(40),
+                        height: getSize.m(40),
+                        borderRadius: getSize.m(40),
+                    }}
+                    source={avt}
+                />
+
                 <Text
                     style={[
                         appStyles.text_bold,

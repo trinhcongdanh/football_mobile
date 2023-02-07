@@ -12,6 +12,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: getSize.m(17),
         borderRadius: getSize.m(15),
         marginBottom: getSize.m(14),
+        backgroundColor: appColors.white,
     },
 
     text_option_menu: {

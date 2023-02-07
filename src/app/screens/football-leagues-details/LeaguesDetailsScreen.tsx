@@ -15,12 +15,12 @@ import { appIcons } from '@football/app/assets/icons/appIcons';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import { AppImages } from '@football/app/assets/images';
 import { getSize } from '@football/app/utils/responsive/scale';
-import { Avatar } from 'react-native-elements';
 import { LeaguesTable } from './layouts/leagues-table/LeaguesTable';
 import { ListOfGames } from './layouts/list-of-games/ListOfGames';
 import { Statistics } from './layouts/Statistics/Statistics';
 import SelectedGallery from './layouts/selected-gallery/SelectedGallery';
 import { SelectedMagazine } from './layouts/selected-magazine/SelectedMagazine';
+import FastImage from 'react-native-fast-image';
 import { DropDown } from '@football/app/components/drop-down/DropDown';
 import { AboutLeague } from './layouts/about-league/AboutLeague';
 import styles from './LeaguesDetailsScreen.style';
@@ -93,12 +93,12 @@ export const LeaguesDetailsScreen = ({ navigation, route }: ILeaguesDetailsScree
                     <ScrollView showsVerticalScrollIndicator={false}>
                         <View style={appStyles.container}>
                             <View style={[appStyles.align_justify, { marginTop: getSize.m(16) }]}>
-                                <Avatar
-                                    source={AppImages.img_leagues}
-                                    size={getSize.m(78)}
-                                    rounded
-                                    containerStyle={styles.avt_leagues}
-                                />
+                                <View style={styles.avt_leagues_container}>
+                                    <FastImage
+                                        source={AppImages.img_cup}
+                                        style={styles.avt_leagues}
+                                    />
+                                </View>
                                 <Text style={styles.name_leagues}>
                                     ליגת ONE ZERO בנקאות פרטית דיגיטלית
                                 </Text>
@@ -137,7 +137,7 @@ export const LeaguesDetailsScreen = ({ navigation, route }: ILeaguesDetailsScree
                                     onPress={() => {
                                         setOpenModalPlayOff(!openModalPlayOff);
                                     }}
-                                    style={styles.cycle}
+                                    style={[styles.cycle, { flex: 0.9 }]}
                                 >
                                     <Text style={styles.text_cycle}>{selectPlayoff}</Text>
                                     <Icon
@@ -151,7 +151,7 @@ export const LeaguesDetailsScreen = ({ navigation, route }: ILeaguesDetailsScree
                                     onPress={() => {
                                         setOpenModalCycle(!openModalCycle);
                                     }}
-                                    style={styles.cycle}
+                                    style={[styles.cycle, { flex: 0.5 }]}
                                 >
                                     <Text style={styles.text_cycle}>{selectCycle}</Text>
                                     <Icon

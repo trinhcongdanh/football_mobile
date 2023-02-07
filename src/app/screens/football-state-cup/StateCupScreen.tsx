@@ -17,10 +17,13 @@ import { AppImages } from '@football/app/assets/images';
 import { getSize } from '@football/app/utils/responsive/scale';
 import { OptionState } from './layouts/option-state/OptionState';
 import { Statistics } from './layouts/Statistics/Statistics';
+import FastImage from 'react-native-fast-image';
 import { Avatar } from 'react-native-elements';
 import styles from './StateCupScreen.style';
 import { useViewModel } from './StateCupScreen.viewModel';
 import { IStateCupScreenProps } from './StateCupScreen.type';
+import { Trophy } from '@football/app/screens/football-state-cup/layouts/Statistics/Trophy/Trophy';
+import { CupAround } from '@football/app/screens/football-state-cup/layouts/Statistics/Cup-Around/CupAround';
 
 export const StateCupScreen = ({ navigation, route }: IStateCupScreenProps) => {
     const {
@@ -56,12 +59,12 @@ export const StateCupScreen = ({ navigation, route }: IStateCupScreenProps) => {
                     <ScrollView scrollEnabled={isScroll}>
                         <View style={appStyles.container}>
                             <View style={[appStyles.align_justify, { marginTop: getSize.m(16) }]}>
-                                <Avatar
-                                    source={AppImages.img_cup}
-                                    size={getSize.m(78)}
-                                    rounded
-                                    containerStyle={styles.avt_leagues}
-                                />
+                                <View style={styles.avt_leagues_container}>
+                                    <FastImage
+                                        source={AppImages.img_cup}
+                                        style={styles.avt_leagues}
+                                    />
+                                </View>
                                 <Text style={styles.name_leagues}>{t('state_cup.title')}</Text>
                             </View>
                             <View>
@@ -144,7 +147,10 @@ export const StateCupScreen = ({ navigation, route }: IStateCupScreenProps) => {
                             <OptionState label={t('state_cup.early_stage_game.label')} />
                         </View>
                         <View style={styles.package}>
-                            <Statistics />
+                            <Trophy />
+                        </View>
+                        <View style={styles.package}>
+                            <CupAround />
                         </View>
                     </ScrollView>
                 </SafeAreaView>

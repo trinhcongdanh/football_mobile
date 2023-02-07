@@ -33,10 +33,10 @@ export const styles = StyleSheet.create({
         fontWeight: '700',
         color: appColors.text_dark_blue,
         fontSize: getSize.m(18),
-        fontFamily: AppFonts.regular,
+        fontFamily: AppFonts.bold,
         lineHeight: getSize.m(23),
         textAlign: 'center',
-        paddingVertical: getSize.m(20),
+        paddingBottom: getSize.m(20),
         borderBottomWidth: getSize.m(1),
         borderColor: appColors.soft_grey,
         borderStyle: 'dashed',
@@ -56,10 +56,18 @@ export const styles = StyleSheet.create({
         borderColor: appColors.separator,
     },
 
-    btn_select: {
+    btn: {
+        borderRadius: getSize.m(20),
         width: getSize.m(20),
         height: getSize.m(20),
-        borderRadius: getSize.m(20),
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+
+    btn_select: {
+        width: getSize.m(11),
+        height: getSize.m(11),
+        borderRadius: getSize.m(11),
     },
 
     content_select: {
