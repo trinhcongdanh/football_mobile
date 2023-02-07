@@ -12,6 +12,7 @@ import { axiosAuth } from '@football/core/api/auth/axiosAuth';
 import { ACTION, AUTH_URL, TOKEN } from '@football/core/api/auth/config';
 import * as uuid from 'uuid';
 import { GoogleSignin, statusCodes } from '@react-native-google-signin/google-signin';
+import { appleAuth } from '@invertase/react-native-apple-authentication';
 import { env } from 'src/config';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -103,8 +104,26 @@ export const useViewModel = ({ navigation, route }: IConnectScreenProps) => {
     }, []);
 
     // Apple Developer
-    const connectApple = () => {
-        console.log('Apple Developer');
+    const connectApple = async () => {
+        const appleAuthRequestResponse = await appleAuth.performRequest({
+            requestedOperation: appleAuth.Operation.LOGIN,
+            requestedScopes: [appleAuth.Scope.EMAIL, appleAuth.Scope.FULL_NAME],
+        });
+
+        console.log(appleAuthRequestResponse);
+
+        // get current authentication state for user
+        // /!\ This method must be tested on a real device. On the iOS simulator it always throws an error.
+        const credentialState = await appleAuth.getCredentialStateForUser(
+            appleAuthRequestResponse.user
+        );
+
+        console.log(credentialState);
+
+        // use credentialState response to ensure the user is authenticated
+        if (credentialState === appleAuth.State.AUTHORIZED) {
+            // user is authenticated
+        }
     };
     const onGoBack = (): void => {
         goBack();
@@ -123,7 +142,7 @@ export const useViewModel = ({ navigation, route }: IConnectScreenProps) => {
     const handleOnChange = (e: string) => {
         setPhoneNumber(e);
     };
-    console.log(phoneNumber);
+    // console.log(phoneNumber);
 
     const handleError = (errorMessage: string, input: string): void => {
         setErrors(prevState => ({ ...prevState, [input]: errorMessage }));

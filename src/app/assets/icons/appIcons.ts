@@ -28,4 +28,5 @@ export const appIcons = {
     ic_close: 'close',
     ic_location_sharp: 'location-sharp',
     ic_chevron_up: 'chevron-up',
+    ic_caretleft: 'caretleft',
 };
