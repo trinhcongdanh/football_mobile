@@ -5,13 +5,13 @@ import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
     header_title: {
-        fontFamily: AppFonts.regular,
+        fontFamily: AppFonts.bold,
         fontSize: getSize.m(13),
         fontWeight: '700',
         color: appColors.text_dark_blue,
     },
     header_skip: {
-        fontFamily: AppFonts.regular,
+        fontFamily: AppFonts.bold,
         fontSize: getSize.m(12),
         fontWeight: '700',
         color: appColors.text_dark_blue,

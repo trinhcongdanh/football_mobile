@@ -39,6 +39,7 @@ const styles = StyleSheet.create({
         width: '32%',
         alignItems: 'center',
         justifyContent: 'center',
+        paddingHorizontal: getSize.m(10),
         height: getSize.m(82),
         borderRadius: getSize.m(12),
         borderColor: appColors.blue_light,

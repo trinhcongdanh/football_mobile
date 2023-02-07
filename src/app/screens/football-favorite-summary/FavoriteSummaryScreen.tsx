@@ -107,7 +107,7 @@ export const FavoriteSummaryScreen = ({ navigation, route }: IFavoriteSummaryScr
                                                                 color={appColors.blue_light}
                                                             />
                                                         </TouchableOpacity>
-                                                        <Text style={styles.txt_add_group}>
+                                                        <Text style={styles.txt_no_group}>
                                                             {t('fav_summary.add_group')}
                                                         </Text>
                                                     </>
@@ -120,7 +120,7 @@ export const FavoriteSummaryScreen = ({ navigation, route }: IFavoriteSummaryScr
                                                             <Image
                                                                 resizeMode="cover"
                                                                 source={{ uri: item.logo_url }}
-                                                                style={styles.img_view}
+                                                                style={styles.img_team}
                                                             />
                                                         </TouchableOpacity>
                                                         <Text
@@ -163,7 +163,7 @@ export const FavoriteSummaryScreen = ({ navigation, route }: IFavoriteSummaryScr
                                                                 color={appColors.blue_light}
                                                             />
                                                         </TouchableOpacity>
-                                                        <Text style={styles.txt_add_group}>
+                                                        <Text style={styles.txt_no_group}>
                                                             {t('fav_summary.add_actress')}
                                                         </Text>
                                                     </>
@@ -176,7 +176,7 @@ export const FavoriteSummaryScreen = ({ navigation, route }: IFavoriteSummaryScr
                                                             <Image
                                                                 resizeMode="cover"
                                                                 source={{ uri: item.image_url }}
-                                                                style={styles.img_view}
+                                                                style={styles.img_player}
                                                             />
                                                         </TouchableOpacity>
                                                         <Text
@@ -219,7 +219,7 @@ export const FavoriteSummaryScreen = ({ navigation, route }: IFavoriteSummaryScr
                                                                 color={appColors.blue_light}
                                                             />
                                                         </TouchableOpacity>
-                                                        <Text style={styles.txt_add_group}>
+                                                        <Text style={styles.txt_no_group}>
                                                             {t('fav_summary.add_squad')}
                                                         </Text>
                                                     </>
@@ -234,7 +234,7 @@ export const FavoriteSummaryScreen = ({ navigation, route }: IFavoriteSummaryScr
                                                             <Image
                                                                 resizeMode="cover"
                                                                 source={{ uri: item.logo_url }}
-                                                                style={styles.img_view}
+                                                                style={styles.img_top_team}
                                                             />
                                                         </TouchableOpacity>
                                                         <Text
@@ -283,7 +283,10 @@ export const FavoriteSummaryScreen = ({ navigation, route }: IFavoriteSummaryScr
                                     {t('fav_summary.complete')}
                                 </Text>
                             </TouchableOpacity>
-                            <TouchableOpacity onPress={navigationHomePage}>
+                            <TouchableOpacity
+                                style={{ marginTop: getSize.m(80), marginBottom: getSize.m(35) }}
+                                onPress={navigationHomePage}
+                            >
                                 <Text style={styles.bottom_text}>
                                     {onCheck
                                         ? t('fav_summary.guest')

@@ -34,13 +34,22 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
-    txt_add_group: {
+    txt_no_group: {
         textAlign: 'center',
-        marginTop: getSize.m(11),
+        marginTop: getSize.m(12),
         fontFamily: AppFonts.regular,
         fontSize: getSize.m(12),
         lineHeight: getSize.m(15),
         fontWeight: '400',
+        color: appColors.text_dark_blue,
+    },
+    txt_add_group: {
+        textAlign: 'center',
+        marginTop: getSize.m(12),
+        fontFamily: AppFonts.bold,
+        fontSize: getSize.m(12),
+        lineHeight: getSize.m(15),
+        fontWeight: '700',
         color: appColors.text_dark_blue,
     },
     btn_img: {
@@ -50,10 +59,19 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
-    img_view: {
+    img_team: {
         width: getSize.m(38),
         height: getSize.m(38),
-        borderRadius: getSize.m(38 / 2),
+    },
+
+    img_player: {
+        width: getSize.m(38),
+        height: getSize.m(38),
+        borderRadius: getSize.m(38),
+    },
+    img_top_team: {
+        width: getSize.m(32),
+        height: getSize.m(38),
     },
     block_add_actress: {
         backgroundColor: appColors.white,
@@ -98,7 +116,6 @@ const styles = StyleSheet.create({
         fontWeight: '700',
     },
     bottom_text: {
-        marginTop: getSize.m(80),
         fontFamily: AppFonts.regular,
         fontSize: getSize.m(14),
         fontWeight: '700',

@@ -47,6 +47,10 @@ export const useViewModel = ({ navigation, route }: IGroupPageScreenProps) => {
         setShowInfo(!showInfo);
     };
 
+    const handleMoreStatistics = () => {
+        navigate(ScreenName.StatisticsGroupPage);
+    };
+
     return {
         t,
         onGoBack,
@@ -59,5 +63,6 @@ export const useViewModel = ({ navigation, route }: IGroupPageScreenProps) => {
         handleSelectedYear,
         showInfoGroup,
         showInfo,
+        handleMoreStatistics,
     };
 };

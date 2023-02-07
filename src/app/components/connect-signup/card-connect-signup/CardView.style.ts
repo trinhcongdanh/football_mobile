@@ -51,8 +51,8 @@ export const styles = StyleSheet.create({
     },
 
     image_link: {
-        height: getSize.s(32),
-        width: getSize.s(32),
+        height: getSize.m(32),
+        width: getSize.m(32),
     },
     txt_have_user: {
         fontFamily: AppFonts.regular,

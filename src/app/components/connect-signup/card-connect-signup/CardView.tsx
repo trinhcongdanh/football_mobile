@@ -8,7 +8,6 @@ import Input from '../../input/Input';
 import { Button } from '../../button';
 import { styles } from './CardView.style';
 import { ICardViewProps } from './CardView.types';
-import { appColors } from '@football/app/utils/constants/appColors';
 
 export const CardView = ({
     errors,

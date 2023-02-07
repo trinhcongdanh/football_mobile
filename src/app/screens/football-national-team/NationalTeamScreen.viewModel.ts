@@ -185,8 +185,10 @@ export const useViewModel = ({ navigation, route }: INationalTeamScreenProps) =>
     const listMatches = [
         {
             id: 1,
-            logoHome: AppImages.img_israel,
-            logoAway: AppImages.img_albania,
+            logoHome:
+                'https://upload.wikimedia.org/wikipedia/he/thumb/0/0e/MaacabiSymbol.svg/1200px-MaacabiSymbol.svg.png',
+            logoAway:
+                'https://upload.wikimedia.org/wikipedia/he/thumb/0/0e/MaacabiSymbol.svg/1200px-MaacabiSymbol.svg.png',
             nameHome: 'ישראל',
             nameAway: 'אלבניה',
             location: 'בלומפילד',
@@ -199,8 +201,10 @@ export const useViewModel = ({ navigation, route }: INationalTeamScreenProps) =>
         },
         {
             id: 2,
-            logoHome: AppImages.img_israel,
-            logoAway: AppImages.img_albania,
+            logoHome:
+                'https://upload.wikimedia.org/wikipedia/he/thumb/0/0e/MaacabiSymbol.svg/1200px-MaacabiSymbol.svg.png',
+            logoAway:
+                'https://upload.wikimedia.org/wikipedia/he/thumb/0/0e/MaacabiSymbol.svg/1200px-MaacabiSymbol.svg.png',
             nameHome: 'ישראל',
             nameAway: 'אלבניה',
             location: 'בלומפילד',
@@ -213,8 +217,10 @@ export const useViewModel = ({ navigation, route }: INationalTeamScreenProps) =>
         },
         {
             id: 3,
-            logoHome: AppImages.img_israel,
-            logoAway: AppImages.img_albania,
+            logoHome:
+                'https://upload.wikimedia.org/wikipedia/he/thumb/0/0e/MaacabiSymbol.svg/1200px-MaacabiSymbol.svg.png',
+            logoAway:
+                'https://upload.wikimedia.org/wikipedia/he/thumb/0/0e/MaacabiSymbol.svg/1200px-MaacabiSymbol.svg.png',
             nameHome: 'ישראל',
             nameAway: 'אלבניה',
             location: 'בלומפילד',

@@ -1,5 +1,5 @@
 import { appStyles } from '@football/app/utils/constants/appStyles';
-import { getSize, width } from '@football/app/utils/responsive/scale';
+import { getSize } from '@football/app/utils/responsive/scale';
 import React from 'react';
 import Icon from 'react-native-vector-icons/Feather';
 import { View, Text, TouchableOpacity } from 'react-native';
@@ -9,6 +9,7 @@ import { appColors } from '@football/app/utils/constants/appColors';
 import styles from './LeagueTable.style';
 import { DropDown } from '@football/app/components/drop-down/DropDown';
 import { Avatar } from 'react-native-elements';
+import LinearGradient from 'react-native-linear-gradient';
 
 export const LeagueTable = () => {
     const {
@@ -45,13 +46,20 @@ export const LeagueTable = () => {
             <Text style={[appStyles.text_topic, { marginLeft: getSize.m(6) }]}>
                 {t('group_page.league_table.title')}
             </Text>
-            <View style={[appStyles.flex]}>
+            <View
+                style={[
+                    appStyles.flex,
+                    {
+                        paddingHorizontal: getSize.m(10.5),
+                    },
+                ]}
+            >
                 <View style={styles.drop_down_filter}>
                     <TouchableOpacity
                         onPress={() => {
                             setOpenModalPlayOff(!openModalPlayOff);
                         }}
-                        style={[styles.cycle, { marginRight: getSize.m(12), width: '60%' }]}
+                        style={[styles.cycle, { marginRight: getSize.m(12), flex: 0.9 }]}
                     >
                         <Text style={styles.text_cycle}>{selectPlayoff}</Text>
                         <Icon
@@ -65,7 +73,7 @@ export const LeagueTable = () => {
                         onPress={() => {
                             setOpenModalCycle(!openModalCycle);
                         }}
-                        style={[styles.cycle, { width: '40%' }]}
+                        style={[styles.cycle, { flex: 0.5 }]}
                     >
                         <Text style={styles.text_cycle}>{selectCycle}</Text>
                         <Icon
@@ -133,7 +141,7 @@ export const LeagueTable = () => {
                                     {
                                         backgroundColor:
                                             item.id % 2 === 1
-                                                ? appColors.blue_matte
+                                                ? 'rgba(7, 16, 47, 0.03)'
                                                 : appColors.gray,
                                     },
                                 ]}
@@ -195,6 +203,14 @@ export const LeagueTable = () => {
                     })}
                 </View>
             </View>
+            <TouchableOpacity style={styles.more_result}>
+                <Text style={styles.text_more_result}>{t('group_page.league_table.more')}</Text>
+                <Icon
+                    name={appIcons.ic_arrow_left}
+                    size={getSize.m(10)}
+                    style={styles.ic_more_result}
+                />
+            </TouchableOpacity>
         </View>
     );
 };

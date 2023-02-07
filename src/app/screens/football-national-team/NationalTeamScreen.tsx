@@ -242,15 +242,15 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                                             <ListGame
                                                 key={item.id}
                                                 tournament={item.tournament}
-                                                logoHome={item.logoHome}
-                                                logoAway={item.logoAway}
+                                                logo_home={item.logoHome}
+                                                logo_away={item.logoAway}
                                                 nameHome={item.nameHome}
                                                 nameAway={item.nameAway}
                                                 location={item.location}
                                                 date={item.date}
                                                 result={item.result}
                                                 schedule={item.schedule}
-                                                completed={item.completed}
+                                                // completed={item.completed}
                                                 color={appColors.text_dark_blue}
                                                 handleDetailMatch={handleDetailMatch}
                                             />
@@ -349,7 +349,7 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                                                                 {
                                                                     backgroundColor:
                                                                         item.id % 2 === 0
-                                                                            ? appColors.blue_matte
+                                                                            ? 'rgba(7, 16, 47, 0.03)'
                                                                             : appColors.gray,
                                                                 },
                                                             ]}
@@ -527,15 +527,15 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                                                     return (
                                                         <ListGame
                                                             key={item.id}
-                                                            logoHome={item.logoHome}
-                                                            logoAway={item.logoAway}
+                                                            logo_home={item.logoHome}
+                                                            logo_away={item.logoAway}
                                                             nameHome={item.nameHome}
                                                             nameAway={item.nameAway}
                                                             location={item.location}
                                                             date={item.date}
                                                             result={item.result}
                                                             schedule={item.schedule}
-                                                            completed={item.completed}
+                                                            // completed={item.completed}
                                                             icon={appIcons.ic_arrow_left}
                                                             color={appColors.gray}
                                                             details={item.details}
