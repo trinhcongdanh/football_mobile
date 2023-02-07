@@ -1,18 +1,28 @@
-import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
+import React from 'react';
+import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import { getSize } from '@football/app/utils/responsive/scale';
 import { Button } from '@football/app/components/button';
-import Icon from 'react-native-vector-icons/Feather';
-import { appIcons } from '@football/app/assets/icons/appIcons';
+import IconAntDesign from 'react-native-vector-icons/AntDesign';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { Avatar } from 'react-native-elements';
 import { useViewModel } from './Statistics.viewModel';
 import styles from '@football/app/screens/football-group-page/layouts/statistics/Statistics.style';
+import { appIcons } from '@football/app/assets/icons/appIcons';
 
 export const Statistics = () => {
-    const { t, handleMoreStatistics, statistics, players } = useViewModel({});
-    const [activeIndexNumber, setActiveIndexNumber] = useState(Number);
+    const {
+        t,
+        handleMoreStatistics,
+        statistics,
+        players,
+        activeIndexNumber,
+        setActiveIndexNumber,
+        dots,
+        handleNextRightSlide,
+        handleNextLeftSlide,
+    } = useViewModel({});
+
     return (
         <View>
             <Text style={[appStyles.text_topic, { marginLeft: getSize.m(6) }]}>
@@ -77,6 +87,16 @@ export const Statistics = () => {
                         </View>
                     </View>
 
+                    <TouchableOpacity
+                        style={{ position: 'absolute', top: getSize.m(10), left: getSize.m(140) }}
+                        onPress={handleNextRightSlide}
+                    >
+                        <IconAntDesign
+                            name={appIcons.ic_caretright}
+                            size={getSize.m(10)}
+                            color={activeIndexNumber === 2 ? '#D9D9D9' : appColors.blue_light}
+                        />
+                    </TouchableOpacity>
                     <ScrollView
                         horizontal
                         pagingEnabled
@@ -87,7 +107,6 @@ export const Statistics = () => {
                                     e.nativeEvent.layoutMeasurement.width
                             );
                             if (slide !== activeIndexNumber) {
-                                console.log(slide);
                                 setActiveIndexNumber(slide); //here we will set our active index num
                             }
                         }}
@@ -349,6 +368,39 @@ export const Statistics = () => {
                             </View>
                         </View>
                     </ScrollView>
+                    <TouchableOpacity
+                        style={{ position: 'absolute', top: getSize.m(10), right: getSize.m(-6) }}
+                        onPress={handleNextLeftSlide}
+                    >
+                        <IconAntDesign
+                            name={appIcons.ic_caretleft}
+                            size={getSize.m(10)}
+                            color={activeIndexNumber === 0 ? '#D9D9D9' : appColors.blue_light}
+                        />
+                    </TouchableOpacity>
+                    <View style={styles.dotContainer}>
+                        {dots.map((_, index) => {
+                            return (
+                                <View key={index}>
+                                    <View
+                                        style={[
+                                            styles.dot,
+                                            {
+                                                width:
+                                                    index === activeIndexNumber
+                                                        ? getSize.m(18)
+                                                        : getSize.m(5),
+                                                backgroundColor:
+                                                    index === activeIndexNumber
+                                                        ? appColors.blue_light
+                                                        : appColors.soft_grey,
+                                            },
+                                        ]}
+                                    ></View>
+                                </View>
+                            );
+                        })}
+                    </View>
                 </View>
 
                 <View style={{ marginHorizontal: getSize.m(28), marginTop: getSize.m(40) }}>

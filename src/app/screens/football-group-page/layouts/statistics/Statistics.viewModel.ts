@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import React from 'react';
+import React, { useState } from 'react';
 import { ScreenName } from '@football/app/utils/constants/enum';
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
 import { AppImages } from '@football/app/assets/images';
@@ -132,13 +132,27 @@ export const useViewModel = ({}: IStatisticsProps) => {
             avt: AppImages.img_avt_player,
         },
     ];
+
+    const [activeIndexNumber, setActiveIndexNumber] = useState(Number);
+    const dots = Array(3).fill('');
+
+    const handleNextRightSlide = () => {};
+
+    const handleNextLeftSlide = () => {};
+
     const handleMoreStatistics = () => {
         navigate(ScreenName.StatisticsGroupPage);
     };
+
     return {
         t,
         statistics,
         handleMoreStatistics,
         players,
+        activeIndexNumber,
+        setActiveIndexNumber,
+        dots,
+        handleNextRightSlide,
+        handleNextLeftSlide,
     };
 };
