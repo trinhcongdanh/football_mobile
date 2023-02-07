@@ -17,6 +17,7 @@ import { HeaderUser } from '@football/app/components/header-user/HeaderUser';
 import { ListOfGames } from './layouts/list-of-games/ListOfGames';
 import { Statistics } from './layouts/statistics/Statistics';
 import { LeagueTable } from '@football/app/screens/football-group-page/layouts/league-table/LeagueTable';
+import { Button } from '@football/app/components/button';
 import Icon from 'react-native-vector-icons/Feather';
 import IconFontAwesome from 'react-native-vector-icons/FontAwesome';
 import IconIonicons from 'react-native-vector-icons/Ionicons';
@@ -40,6 +41,7 @@ export const GroupPageScreen = ({ navigation, route }: IGroupPageScreenProps) =>
         handleSelectedYear,
         showInfoGroup,
         showInfo,
+        handleMoreStatistics,
     } = useViewModel({
         navigation,
         route,
@@ -318,11 +320,13 @@ export const GroupPageScreen = ({ navigation, route }: IGroupPageScreenProps) =>
                                     return (
                                         <TouchableOpacity key={item.id} style={styles.option_menu}>
                                             <View style={appStyles.flex_row_align_center}>
-                                                <Avatar
-                                                    source={AppImages.img_israel}
-                                                    size={getSize.m(25)}
-                                                    rounded
-                                                />
+                                                <View style={styles.container_img}>
+                                                    <Avatar
+                                                        source={AppImages.img_israel}
+                                                        size={getSize.m(26)}
+                                                        rounded
+                                                    />
+                                                </View>
                                                 <Text style={styles.text_option_menu}>
                                                     {item.group}
                                                 </Text>
@@ -347,6 +351,13 @@ export const GroupPageScreen = ({ navigation, route }: IGroupPageScreenProps) =>
                         </View>
                         <View style={appStyles.package}>
                             <Statistics />
+                        </View>
+                        <View style={{ marginHorizontal: getSize.m(28) }}>
+                            <Button
+                                style={{ borderRadius: getSize.m(15) }}
+                                title={t('group_page.statistics.btn')}
+                                onPress={handleMoreStatistics}
+                            />
                         </View>
                     </ScrollView>
                 </SafeAreaView>

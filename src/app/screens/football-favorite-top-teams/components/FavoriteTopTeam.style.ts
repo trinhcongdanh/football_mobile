@@ -20,6 +20,7 @@ const styles = StyleSheet.create({
 
     item: {
         width: '32%',
+        paddingHorizontal: getSize.m(10),
         alignItems: 'center',
         justifyContent: 'center',
         height: getSize.m(82),

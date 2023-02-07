@@ -50,7 +50,9 @@ export const DataCoachTeamsScreen = ({ teams }: IDataCoachTeamsScreenProps) => {
                                     appStyles.statistic_row,
                                     {
                                         backgroundColor:
-                                            index % 2 === 0 ? appColors.blue_matte : appColors.gray,
+                                            index % 2 === 0
+                                                ? 'rgba(7, 16, 47, 0.03)'
+                                                : appColors.gray,
                                     },
                                 ]}
                             >

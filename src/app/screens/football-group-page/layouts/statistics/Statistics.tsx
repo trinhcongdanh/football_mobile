@@ -2,7 +2,6 @@ import React from 'react';
 import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import { getSize } from '@football/app/utils/responsive/scale';
-import { Button } from '@football/app/components/button';
 import IconAntDesign from 'react-native-vector-icons/AntDesign';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { Avatar } from 'react-native-elements';
@@ -13,7 +12,6 @@ import { appIcons } from '@football/app/assets/icons/appIcons';
 export const Statistics = () => {
     const {
         t,
-        handleMoreStatistics,
         statistics,
         players,
         activeIndexNumber,
@@ -401,10 +399,6 @@ export const Statistics = () => {
                             );
                         })}
                     </View>
-                </View>
-
-                <View style={{ marginHorizontal: getSize.m(28), marginTop: getSize.m(40) }}>
-                    <Button title={t('group_page.statistics.btn')} onPress={handleMoreStatistics} />
                 </View>
             </View>
         </View>

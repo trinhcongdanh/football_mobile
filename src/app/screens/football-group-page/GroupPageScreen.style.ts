@@ -124,6 +124,16 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
+
+    container_img: {
+        width: getSize.m(30),
+        height: getSize.m(30),
+        backgroundColor: appColors.white,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: getSize.m(30),
+        elevation: getSize.m(1),
+    },
     line: {
         borderColor: appColors.separator,
         borderTopWidth: getSize.m(1),

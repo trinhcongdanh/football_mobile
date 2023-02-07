@@ -373,6 +373,7 @@ const resources = {
                 },
                 league_table: {
                     title: 'טבלת ליגה',
+                    more: 'לתוצאות המשחק בזמן אמת',
                 },
                 statistics: {
                     title: 'סטטיסטיקות',
@@ -904,6 +905,7 @@ const resources = {
                 official: 'Officials',
                 league_table: {
                     title: 'League table',
+                    more: 'For the results of the game in real time',
                 },
                 list_games: {
                     title: 'List of games',

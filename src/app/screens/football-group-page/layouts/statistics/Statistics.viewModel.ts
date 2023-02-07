@@ -140,14 +140,9 @@ export const useViewModel = ({}: IStatisticsProps) => {
 
     const handleNextLeftSlide = () => {};
 
-    const handleMoreStatistics = () => {
-        navigate(ScreenName.StatisticsGroupPage);
-    };
-
     return {
         t,
         statistics,
-        handleMoreStatistics,
         players,
         activeIndexNumber,
         setActiveIndexNumber,

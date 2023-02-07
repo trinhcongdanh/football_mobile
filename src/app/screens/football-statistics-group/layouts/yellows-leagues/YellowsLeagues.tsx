@@ -71,7 +71,9 @@ export const YellowsLeagues = () => {
                                 appStyles.statistic_row,
                                 {
                                     backgroundColor:
-                                        item.id % 2 === 1 ? appColors.blue_matte : appColors.gray,
+                                        item.id % 2 === 1
+                                            ? 'rgba(7, 16, 47, 0.03)'
+                                            : appColors.gray,
                                 },
                             ]}
                         >
