@@ -10,7 +10,8 @@ export const useViewModel = ({}: ILeaguesTableProps) => {
     const listTeams = [
         {
             id: 1,
-            logo: AppImages.img_israel,
+            logo:
+                'https://upload.wikimedia.org/wikipedia/he/thumb/0/0e/MaacabiSymbol.svg/1200px-MaacabiSymbol.svg.png',
             name: 'מכבי חיפה',
             from: 34,
             nch: 22,
@@ -21,7 +22,8 @@ export const useViewModel = ({}: ILeaguesTableProps) => {
         },
         {
             id: 2,
-            logo: AppImages.img_israel,
+            logo:
+                'https://upload.wikimedia.org/wikipedia/he/thumb/0/0e/MaacabiSymbol.svg/1200px-MaacabiSymbol.svg.png',
             name: 'הפועל באר שבע',
             from: 34,
             nch: 22,
@@ -32,7 +34,8 @@ export const useViewModel = ({}: ILeaguesTableProps) => {
         },
         {
             id: 3,
-            logo: AppImages.img_israel,
+            logo:
+                'https://upload.wikimedia.org/wikipedia/he/thumb/0/0e/MaacabiSymbol.svg/1200px-MaacabiSymbol.svg.png',
             name: 'מכבי תל אביב',
             from: 34,
             nch: 22,
@@ -43,7 +46,8 @@ export const useViewModel = ({}: ILeaguesTableProps) => {
         },
         {
             id: 4,
-            logo: AppImages.img_israel,
+            logo:
+                'https://upload.wikimedia.org/wikipedia/he/thumb/0/0e/MaacabiSymbol.svg/1200px-MaacabiSymbol.svg.png',
             name: 'מכבי נתניה',
             from: 34,
             nch: 22,
@@ -54,7 +58,8 @@ export const useViewModel = ({}: ILeaguesTableProps) => {
         },
         {
             id: 5,
-            logo: AppImages.img_israel,
+            logo:
+                'https://upload.wikimedia.org/wikipedia/he/thumb/0/0e/MaacabiSymbol.svg/1200px-MaacabiSymbol.svg.png',
             name: 'מכבי נתניה',
             from: 34,
             nch: 22,
@@ -65,7 +70,8 @@ export const useViewModel = ({}: ILeaguesTableProps) => {
         },
         {
             id: 6,
-            logo: AppImages.img_israel,
+            logo:
+                'https://upload.wikimedia.org/wikipedia/he/thumb/0/0e/MaacabiSymbol.svg/1200px-MaacabiSymbol.svg.png',
             name: 'מכבי נתניה',
             from: 34,
             nch: 22,

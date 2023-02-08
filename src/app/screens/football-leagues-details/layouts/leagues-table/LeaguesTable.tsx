@@ -3,6 +3,7 @@ import { appStyles } from '@football/app/utils/constants/appStyles';
 import { getSize } from '@football/app/utils/responsive/scale';
 import React from 'react';
 import { View, Text } from 'react-native';
+import FastImage from 'react-native-fast-image';
 import { Avatar } from 'react-native-elements';
 import styles from './LeaguesTable.style';
 import { ILeaguesTableProps } from './LeaguesTable.type';
@@ -88,7 +89,10 @@ export const LeaguesTable = ({}: ILeaguesTableProps) => {
                                         >
                                             {item.id}
                                         </Text>
-                                        <Avatar source={item.logo} rounded size={18} />
+                                        <FastImage
+                                            source={{ uri: item.logo }}
+                                            style={{ width: getSize.m(18), height: getSize.m(18) }}
+                                        />
                                         <Text
                                             style={[
                                                 styles.text_content,
