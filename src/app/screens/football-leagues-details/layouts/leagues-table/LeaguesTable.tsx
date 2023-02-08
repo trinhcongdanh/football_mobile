@@ -8,6 +8,7 @@ import { Avatar } from 'react-native-elements';
 import styles from './LeaguesTable.style';
 import { ILeaguesTableProps } from './LeaguesTable.type';
 import { useViewModel } from './LeaguesTable.viewModel';
+import LinearGradient from 'react-native-linear-gradient';
 
 export const LeaguesTable = ({}: ILeaguesTableProps) => {
     const { t, listTeams } = useViewModel({});
@@ -57,18 +58,16 @@ export const LeaguesTable = ({}: ILeaguesTableProps) => {
                 <View style={{ marginTop: getSize.m(10) }}>
                     {listTeams.map(item => {
                         return (
-                            <View
+                            <LinearGradient
                                 key={item.id}
-                                style={[
-                                    appStyles.flex_row_space_center,
-                                    styles.itemTeam,
-                                    {
-                                        backgroundColor:
-                                            item.id % 2 === 1
-                                                ? 'rgba(7, 16, 47, 0.03)'
-                                                : appColors.gray,
-                                    },
+                                colors={[
+                                    item.id % 2 === 1
+                                        ? 'rgba(255, 255, 255, 0.05)'
+                                        : appColors.gray,
+                                    item.id % 2 === 1 ? 'rgba(16, 32, 100, 0.05)' : appColors.gray,
+                                    item.id % 2 === 1 ? 'rgba(59, 168, 225, 0.05)' : appColors.gray,
                                 ]}
+                                style={[appStyles.flex_row_space_center, styles.itemTeam]}
                             >
                                 <View
                                     style={{
@@ -123,7 +122,7 @@ export const LeaguesTable = ({}: ILeaguesTableProps) => {
                                 <View style={{ width: getSize.m(30) }}>
                                     <Text style={styles.text_content}>{item.no}</Text>
                                 </View>
-                            </View>
+                            </LinearGradient>
                         );
                     })}
                 </View>

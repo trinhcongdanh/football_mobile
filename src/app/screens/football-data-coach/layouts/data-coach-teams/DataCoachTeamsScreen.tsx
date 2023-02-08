@@ -6,6 +6,7 @@ import { getSize } from '@football/app/utils/responsive/scale';
 import { SvgUri } from 'react-native-svg';
 import { useViewModel } from './DataCoachTeamsScreen.viewModel';
 import { IDataCoachTeamsScreenProps } from './DataCoachTeamsScreen.type';
+import LinearGradient from 'react-native-linear-gradient';
 
 // type Props = {};
 
@@ -43,18 +44,14 @@ export const DataCoachTeamsScreen = ({ teams }: IDataCoachTeamsScreenProps) => {
                 <View style={{ marginTop: getSize.m(10) }}>
                     {teams.map((item, index) => {
                         return (
-                            <View
+                            <LinearGradient
                                 key={item.team_id}
-                                style={[
-                                    appStyles.flex_row_space_center,
-                                    appStyles.statistic_row,
-                                    {
-                                        backgroundColor:
-                                            index % 2 === 0
-                                                ? 'rgba(7, 16, 47, 0.03)'
-                                                : appColors.gray,
-                                    },
+                                colors={[
+                                    index % 2 === 0 ? 'rgba(255, 255, 255, 0.05)' : appColors.gray,
+                                    index % 2 === 0 ? 'rgba(16, 32, 100, 0.05)' : appColors.gray,
+                                    index % 2 === 0 ? 'rgba(59, 168, 225, 0.05)' : appColors.gray,
                                 ]}
+                                style={[appStyles.flex_row_space_center, appStyles.statistic_row]}
                             >
                                 <View style={{ width: getSize.m(60) }}>
                                     <Text style={appStyles.statistics_content}>{item.years}</Text>
@@ -107,7 +104,7 @@ export const DataCoachTeamsScreen = ({ teams }: IDataCoachTeamsScreenProps) => {
                                         {item.position_he}
                                     </Text>
                                 </View>
-                            </View>
+                            </LinearGradient>
                         );
                     })}
                 </View>

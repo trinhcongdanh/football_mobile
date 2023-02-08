@@ -20,6 +20,7 @@ import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 import styles from './PitchScreen.style';
 import { useViewModel } from './PitchScreen.viewModel';
 import { IPitchScreenProps } from './PitchScreen.type';
+import LinearGradient from 'react-native-linear-gradient';
 
 export const PitchScreen = ({ navigation, route }: IPitchScreenProps) => {
     const { t, onGoBack, listTeamFields } = useViewModel({ navigation, route });
@@ -99,17 +100,22 @@ export const PitchScreen = ({ navigation, route }: IPitchScreenProps) => {
                                 <View style={{ marginTop: getSize.m(10) }}>
                                     {listTeamFields.map(item => {
                                         return (
-                                            <View
+                                            <LinearGradient
                                                 key={item.id}
+                                                colors={[
+                                                    item.id % 2 === 1
+                                                        ? 'rgba(255, 255, 255, 0.05)'
+                                                        : appColors.gray,
+                                                    item.id % 2 === 1
+                                                        ? 'rgba(16, 32, 100, 0.05)'
+                                                        : appColors.gray,
+                                                    item.id % 2 === 1
+                                                        ? 'rgba(59, 168, 225, 0.05)'
+                                                        : appColors.gray,
+                                                ]}
                                                 style={[
                                                     appStyles.flex_row_space_center,
                                                     appStyles.statistic_row,
-                                                    {
-                                                        backgroundColor:
-                                                            item.id % 2 === 1
-                                                                ? 'rgba(7, 16, 47, 0.03)'
-                                                                : appColors.white,
-                                                    },
                                                 ]}
                                             >
                                                 <View
@@ -158,7 +164,7 @@ export const PitchScreen = ({ navigation, route }: IPitchScreenProps) => {
                                                         {item.home_training}
                                                     </Text>
                                                 </View>
-                                            </View>
+                                            </LinearGradient>
                                         );
                                     })}
                                 </View>

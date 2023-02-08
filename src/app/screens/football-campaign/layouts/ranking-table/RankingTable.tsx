@@ -10,6 +10,7 @@ import { useTranslation } from 'react-i18next';
 import { appIcons } from '@football/app/assets/icons/appIcons';
 import { IRankingTableProps } from './RankingTable.type';
 import { useViewModel } from '@football/app/screens/football-campaign/layouts/ranking-table/RankingTable.viewModel';
+import LinearGradient from 'react-native-linear-gradient';
 
 export const RankingTable = ({}: IRankingTableProps) => {
     const { t, rankingTable } = useViewModel({});
@@ -75,17 +76,22 @@ export const RankingTable = ({}: IRankingTableProps) => {
                     <View>
                         {rankingTable.map(item => {
                             return (
-                                <View
+                                <LinearGradient
                                     key={item.place}
+                                    colors={[
+                                        item.id % 2 === 1
+                                            ? 'rgba(255, 255, 255, 0.05)'
+                                            : appColors.gray,
+                                        item.id % 2 === 1
+                                            ? 'rgba(16, 32, 100, 0.05)'
+                                            : appColors.gray,
+                                        item.id % 2 === 1
+                                            ? 'rgba(59, 168, 225, 0.05)'
+                                            : appColors.gray,
+                                    ]}
                                     style={[
                                         appStyles.flex_row_space_center,
                                         appStyles.statistic_row,
-                                        {
-                                            backgroundColor:
-                                                item.id % 2 === 0
-                                                    ? 'rgba(7, 16, 47, 0.03)'
-                                                    : appColors.gray,
-                                        },
                                     ]}
                                 >
                                     <View
@@ -162,7 +168,7 @@ export const RankingTable = ({}: IRankingTableProps) => {
                                             {item.score}
                                         </Text>
                                     </View>
-                                </View>
+                                </LinearGradient>
                             );
                         })}
                     </View>

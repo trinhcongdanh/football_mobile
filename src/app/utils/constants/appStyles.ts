@@ -155,7 +155,7 @@ export const appStyles = StyleSheet.create({
     },
     text_dark: {
         fontWeight: '700',
-        fontFamily: AppFonts.regular,
+        fontFamily: AppFonts.bold,
         color: appColors.text_dark,
         lineHeight: getSize.m(15),
         fontSize: getSize.m(13),

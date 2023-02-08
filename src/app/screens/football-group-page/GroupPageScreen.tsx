@@ -27,6 +27,7 @@ import { Avatar } from 'react-native-elements';
 import styles from './GroupPageScreen.style';
 import { useViewModel } from './GroupPageScreen.viewModel';
 import { IGroupPageScreenProps } from './GroupPageScreen.type';
+import FastImage from 'react-native-fast-image';
 
 export const GroupPageScreen = ({ navigation, route }: IGroupPageScreenProps) => {
     const {
@@ -167,10 +168,12 @@ export const GroupPageScreen = ({ navigation, route }: IGroupPageScreenProps) =>
                                                     </Text>
                                                 </View>
                                                 <View style={styles.ic_label}>
-                                                    <IconFontAwesome
-                                                        name={appIcons.ic_user}
-                                                        size={getSize.m(12)}
-                                                        color={appColors.blue_light}
+                                                    <FastImage
+                                                        source={AppImages.img_user}
+                                                        style={{
+                                                            width: getSize.m(11),
+                                                            height: getSize.m(12),
+                                                        }}
                                                     />
                                                 </View>
                                             </View>
@@ -184,10 +187,12 @@ export const GroupPageScreen = ({ navigation, route }: IGroupPageScreenProps) =>
                                                     </Text>
                                                 </View>
                                                 <View style={styles.ic_label}>
-                                                    <IconFontAwesome
-                                                        name={appIcons.ic_user}
-                                                        size={getSize.m(12)}
-                                                        color={appColors.blue_light}
+                                                    <FastImage
+                                                        source={AppImages.img_user}
+                                                        style={{
+                                                            width: getSize.m(11),
+                                                            height: getSize.m(12),
+                                                        }}
                                                     />
                                                 </View>
                                             </View>
@@ -202,10 +207,12 @@ export const GroupPageScreen = ({ navigation, route }: IGroupPageScreenProps) =>
                                                     </Text>
                                                 </View>
                                                 <View style={styles.ic_label}>
-                                                    <IconFontAwesome
-                                                        name={appIcons.ic_building}
-                                                        size={getSize.m(12)}
-                                                        color={appColors.blue_light}
+                                                    <FastImage
+                                                        source={AppImages.img_building}
+                                                        style={{
+                                                            width: getSize.m(9),
+                                                            height: getSize.m(12),
+                                                        }}
                                                     />
                                                 </View>
                                             </View>
@@ -253,10 +260,12 @@ export const GroupPageScreen = ({ navigation, route }: IGroupPageScreenProps) =>
                                                     </Text>
                                                 </View>
                                                 <View style={styles.ic_label}>
-                                                    <IconFontAwesome
-                                                        name={appIcons.ic_user}
-                                                        size={getSize.m(12)}
-                                                        color={appColors.blue_light}
+                                                    <FastImage
+                                                        source={AppImages.img_user}
+                                                        style={{
+                                                            width: getSize.m(11),
+                                                            height: getSize.m(12),
+                                                        }}
                                                     />
                                                 </View>
                                             </View>
@@ -343,13 +352,21 @@ export const GroupPageScreen = ({ navigation, route }: IGroupPageScreenProps) =>
                                 })}
                             </View>
                         </View>
-                        <View style={appStyles.package}>
+                        <View style={[appStyles.package, { backgroundColor: appColors.white }]}>
                             <LeagueTable />
                         </View>
                         <View style={appStyles.package}>
                             <ListOfGames />
                         </View>
-                        <View style={appStyles.package}>
+                        <View
+                            style={[
+                                appStyles.package,
+                                {
+                                    paddingHorizontal: getSize.m(0),
+                                    paddingLeft: getSize.m(16),
+                                },
+                            ]}
+                        >
                             <Statistics />
                         </View>
                         <View style={{ marginHorizontal: getSize.m(28) }}>

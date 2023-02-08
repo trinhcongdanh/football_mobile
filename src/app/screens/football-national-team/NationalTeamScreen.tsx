@@ -27,6 +27,7 @@ import { Avatar } from 'react-native-elements';
 import styles from './NationalTeamScreen.style';
 import { useViewModel } from './NationalTeamScreen.viewModel';
 import { INationalTeamScreenProps } from './NationalTeamScreen.type';
+import LinearGradient from 'react-native-linear-gradient';
 
 export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenProps) => {
     const {
@@ -341,17 +342,22 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                                             <View>
                                                 {listTeams.map(item => {
                                                     return (
-                                                        <View
+                                                        <LinearGradient
                                                             key={item.id}
+                                                            colors={[
+                                                                item.id % 2 === 1
+                                                                    ? 'rgba(255, 255, 255, 0.05)'
+                                                                    : appColors.gray,
+                                                                item.id % 2 === 1
+                                                                    ? 'rgba(16, 32, 100, 0.05)'
+                                                                    : appColors.gray,
+                                                                item.id % 2 === 1
+                                                                    ? 'rgba(59, 168, 225, 0.05)'
+                                                                    : appColors.gray,
+                                                            ]}
                                                             style={[
                                                                 appStyles.flex_row_space_center,
                                                                 appStyles.statistic_row,
-                                                                {
-                                                                    backgroundColor:
-                                                                        item.id % 2 === 0
-                                                                            ? 'rgba(7, 16, 47, 0.03)'
-                                                                            : appColors.gray,
-                                                                },
                                                             ]}
                                                         >
                                                             <View
@@ -466,7 +472,7 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                                                                     {item.no}
                                                                 </Text>
                                                             </View>
-                                                        </View>
+                                                        </LinearGradient>
                                                     );
                                                 })}
                                             </View>

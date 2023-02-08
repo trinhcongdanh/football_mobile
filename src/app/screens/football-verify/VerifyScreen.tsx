@@ -61,9 +61,11 @@ export const VerifyScreen = ({ navigation, route }: IVerifyScreenProps) => {
                             <View style={styles.otp_Container}>
                                 {inputs.map((inp: string, index: number) => {
                                     return (
-                                        <View
+                                        <TextInput
+                                            key={index}
+                                            value={OTP[index]}
                                             style={[
-                                                styles.otp_Box,
+                                                styles.otp_Text,
                                                 {
                                                     borderColor:
                                                         index === nextInputIndex
@@ -71,18 +73,12 @@ export const VerifyScreen = ({ navigation, route }: IVerifyScreenProps) => {
                                                             : appColors.medium_gray,
                                                 },
                                             ]}
-                                            key={index.toString()}
-                                        >
-                                            <TextInput
-                                                value={OTP[index]}
-                                                style={styles.otp_Text}
-                                                keyboardType="number-pad"
-                                                maxLength={1}
-                                                onEndEditing={onVerifyCode}
-                                                ref={nextInputIndex === index ? input : null}
-                                                onChangeText={text => handleChangeText(text, index)}
-                                            />
-                                        </View>
+                                            keyboardType="number-pad"
+                                            maxLength={1}
+                                            onEndEditing={onVerifyCode}
+                                            ref={nextInputIndex === index ? input : null}
+                                            onChangeText={text => handleChangeText(text, index)}
+                                        />
                                     );
                                 })}
                             </View>

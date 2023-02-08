@@ -131,7 +131,11 @@ export const FavoriteTopTeam = ({
                                                             },
                                                         ]}
                                                     />
-                                                    <Text style={styles.name_item}>
+
+                                                    <Text
+                                                        numberOfLines={2}
+                                                        style={styles.name_item}
+                                                    >
                                                         {item.name_he}
                                                     </Text>
                                                     {item.isSelected === true && (

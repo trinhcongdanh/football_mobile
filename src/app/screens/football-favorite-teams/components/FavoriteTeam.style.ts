@@ -40,7 +40,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         paddingHorizontal: getSize.m(10),
-        height: getSize.m(82),
+        paddingTop: getSize.m(11),
+        height: getSize.m(85),
         borderRadius: getSize.m(12),
         borderColor: appColors.blue_light,
         marginBottom: getSize.m(7),
@@ -50,6 +51,7 @@ const styles = StyleSheet.create({
     image_item: {
         width: getSize.m(25),
         height: getSize.m(28),
+        marginBottom: getSize.m(10),
     },
     name_item: {
         fontSize: getSize.m(12),
@@ -57,7 +59,7 @@ const styles = StyleSheet.create({
         color: appColors.white,
         lineHeight: getSize.m(15),
         fontFamily: AppFonts.semibold,
-        marginTop: getSize.m(10),
+        height: getSize.m(30),
     },
     check: {
         width: getSize.m(18),
