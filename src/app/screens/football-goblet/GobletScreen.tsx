@@ -31,7 +31,14 @@ export const GobletScreen = ({ navigation, route }: IGobletScreenProps) => {
         }
     );
     return (
-        <View style={appStyles.flex}>
+        <View
+            style={[
+                appStyles.flex,
+                {
+                    minHeight: getSize.m(1000),
+                },
+            ]}
+        >
             <ImageBackground source={AppImages.img_background} style={appStyles.flex}>
                 <StatusBar translucent backgroundColor="transparent" />
                 <SafeAreaView style={appStyles.safe_area}>

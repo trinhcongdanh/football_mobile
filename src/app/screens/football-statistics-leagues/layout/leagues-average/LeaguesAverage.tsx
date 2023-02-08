@@ -46,17 +46,22 @@ export const LeaguesAverage = ({}: ILeaguesAverageProps) => {
                 ]}
             >
                 <View style={{ width: getSize.m(120) }}>
-                    <Text style={[appStyles.statistics_header, { textAlign: 'left' }]}>
+                    <Text
+                        style={[
+                            appStyles.statistics_header,
+                            { textAlign: 'left', fontSize: getSize.m(12) },
+                        ]}
+                    >
                         {t('statistics.leagues.category')}
                     </Text>
                 </View>
                 <View style={{ width: getSize.m(100) }}>
-                    <Text style={[appStyles.statistics_header]}>
+                    <Text style={[appStyles.statistics_header, { fontSize: getSize.m(12) }]}>
                         {t('statistics.leagues.average_game')}
                     </Text>
                 </View>
                 <View style={{ width: getSize.m(100) }}>
-                    <Text style={appStyles.statistics_header}>
+                    <Text style={[appStyles.statistics_header, { fontSize: getSize.m(12) }]}>
                         {t('statistics.leagues.average_cycle')}
                     </Text>
                 </View>
@@ -79,7 +84,12 @@ export const LeaguesAverage = ({}: ILeaguesAverageProps) => {
                                     overflow: 'hidden',
                                 }}
                             >
-                                <Text style={[appStyles.statistics_content, { textAlign: 'left' }]}>
+                                <Text
+                                    style={[
+                                        appStyles.statistics_content,
+                                        { textAlign: 'left', fontSize: getSize.m(14) },
+                                    ]}
+                                >
                                     {item.category}
                                 </Text>
                             </View>
@@ -89,7 +99,12 @@ export const LeaguesAverage = ({}: ILeaguesAverageProps) => {
                                     overflow: 'hidden',
                                 }}
                             >
-                                <Text style={[appStyles.statistics_content]}>
+                                <Text
+                                    style={[
+                                        appStyles.statistics_content,
+                                        { fontSize: getSize.m(14) },
+                                    ]}
+                                >
                                     {item.average_game}
                                 </Text>
                             </View>
@@ -100,7 +115,12 @@ export const LeaguesAverage = ({}: ILeaguesAverageProps) => {
                                     },
                                 ]}
                             >
-                                <Text style={appStyles.statistics_content}>
+                                <Text
+                                    style={[
+                                        appStyles.statistics_content,
+                                        { fontSize: getSize.m(14) },
+                                    ]}
+                                >
                                     {item.average_cycle}
                                 </Text>
                             </View>

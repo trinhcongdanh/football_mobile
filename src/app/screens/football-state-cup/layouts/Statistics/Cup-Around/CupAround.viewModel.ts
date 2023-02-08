@@ -35,7 +35,7 @@ export const useViewModel = () => {
     ];
 
     const handleStatisticDetailsScreen = () => {
-        navigate(ScreenName.StatisticDetailsPage);
+        navigate(ScreenName.CupsPage);
     };
     return {
         t,

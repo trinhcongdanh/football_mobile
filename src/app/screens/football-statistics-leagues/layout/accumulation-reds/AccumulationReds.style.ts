@@ -6,8 +6,8 @@ const styles = StyleSheet.create({
         width: getSize.m(13),
         height: getSize.m(19),
         position: 'absolute',
-        left: getSize.m(13),
-        top: getSize.m(-3),
+        left: getSize.m(14),
+        top: getSize.m(-1),
     },
 });
 

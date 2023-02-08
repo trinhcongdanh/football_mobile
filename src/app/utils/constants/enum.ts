@@ -42,6 +42,7 @@ export enum ScreenName {
     ConversationalDiscussionPage = 'ConversationalDiscussionPage',
     AwardPage = 'AwardPage',
     ConfirmationPage = 'ConfirmationPage',
+    CupsPage = 'CupsPage',
 }
 
 export enum ScreenTopTap {

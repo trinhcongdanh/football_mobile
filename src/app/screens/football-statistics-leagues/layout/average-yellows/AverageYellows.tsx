@@ -11,6 +11,7 @@ import styles from './AverageYellows.style';
 import { useViewModel } from './AverageYellows.viewModel';
 import { IAverageYellowsProps } from './AverageYellows.type';
 import LinearGradient from 'react-native-linear-gradient';
+import FastImage from 'react-native-fast-image';
 
 export const AverageYellows = ({}: IAverageYellowsProps) => {
     const { t, listAverages } = useViewModel({});
@@ -49,17 +50,27 @@ export const AverageYellows = ({}: IAverageYellowsProps) => {
                 ]}
             >
                 <View style={{ width: getSize.m(30) }}>
-                    <Text style={[appStyles.statistics_header, { textAlign: 'left' }]}>
+                    <Text
+                        style={[
+                            appStyles.statistics_header,
+                            { textAlign: 'left', fontSize: getSize.m(12) },
+                        ]}
+                    >
                         {t('statistics.leagues.location')}
                     </Text>
                 </View>
                 <View style={{ width: getSize.m(160) }}>
-                    <Text style={[appStyles.statistics_header, { textAlign: 'left' }]}>
+                    <Text
+                        style={[
+                            appStyles.statistics_header,
+                            { textAlign: 'left', fontSize: getSize.m(12) },
+                        ]}
+                    >
                         {t('statistics.leagues.name_club')}
                     </Text>
                 </View>
                 <View style={{ width: getSize.m(60) }}>
-                    <Text style={appStyles.statistics_header}>
+                    <Text style={[appStyles.statistics_header, { fontSize: getSize.m(12) }]}>
                         {t('statistics.leagues.average')}
                     </Text>
                 </View>
@@ -82,7 +93,14 @@ export const AverageYellows = ({}: IAverageYellowsProps) => {
                                     overflow: 'hidden',
                                 }}
                             >
-                                <Text style={[appStyles.statistics_content]}>{item.id}</Text>
+                                <Text
+                                    style={[
+                                        appStyles.statistics_content,
+                                        { fontSize: getSize.m(14) },
+                                    ]}
+                                >
+                                    {item.id}
+                                </Text>
                             </View>
                             <View
                                 style={{
@@ -101,6 +119,7 @@ export const AverageYellows = ({}: IAverageYellowsProps) => {
                                             appStyles.statistics_content,
                                             {
                                                 marginLeft: getSize.m(10),
+                                                fontSize: getSize.m(14),
                                             },
                                         ]}
                                     >
@@ -117,8 +136,18 @@ export const AverageYellows = ({}: IAverageYellowsProps) => {
                                     },
                                 ]}
                             >
-                                <Text style={appStyles.statistics_content}>{item.amount}</Text>
-                                <Image source={AppImages.img_ticket_yellow} style={styles.ticket} />
+                                <Text
+                                    style={[
+                                        appStyles.statistics_content,
+                                        { fontSize: getSize.m(14) },
+                                    ]}
+                                >
+                                    {item.amount}
+                                </Text>
+                                <FastImage
+                                    source={AppImages.img_ticket_yellow}
+                                    style={styles.ticket}
+                                />
                             </View>
                         </LinearGradient>
                     );

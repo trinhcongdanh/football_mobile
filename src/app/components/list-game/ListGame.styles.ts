@@ -15,6 +15,13 @@ export const styles = StyleSheet.create({
         borderRadius: getSize.m(5),
         marginBottom: getSize.m(10),
     },
+    text_live: {
+        fontSize: getSize.m(13),
+        fontWeight: '700',
+        fontFamily: AppFonts.bold,
+        lineHeight: getSize.m(17),
+        color: appColors.text_dark_blue,
+    },
     text_tournament: {
         textAlign: 'center',
         fontWeight: '700',
@@ -65,6 +72,8 @@ export const styles = StyleSheet.create({
         paddingVertical: getSize.m(8),
         borderRadius: getSize.m(16),
         marginBottom: getSize.m(20),
+        width: getSize.m(65),
+        height: getSize.m(39),
     },
     circle: {
         backgroundColor: appColors.gray,

@@ -44,6 +44,18 @@ const styles = StyleSheet.create({
         lineHeight: getSize.m(16),
         fontWeight: '900',
     },
+    dotContainer: {
+        flexDirection: 'row-reverse',
+        justifyContent: 'center',
+        marginTop: getSize.m(20),
+    },
+
+    dot: {
+        width: getSize.m(5),
+        height: getSize.m(5),
+        marginHorizontal: getSize.m(2.5),
+        borderRadius: getSize.m(5),
+    },
 });
 
 export default styles;

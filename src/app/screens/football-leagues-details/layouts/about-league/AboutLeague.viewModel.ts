@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { Animated } from 'react-native';
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
 import { IAboutLeagueProps } from './AboutLeague.type';
 
@@ -18,13 +18,14 @@ export const useViewModel = ({}: IAboutLeagueProps) => {
         { id: 8, title: t('leagues_details.about.cycles'), content: '15 דקות' },
         { id: 9, title: t('leagues_details.about.cycles'), content: '2' },
     ];
-    const dots = Array(5).fill('');
-    const scrollX = useRef(new Animated.Value(0)).current;
+    const dots = Array(4).fill('');
+    const [activeIndexNumber, setActiveIndexNumber] = useState(Number);
 
     return {
         t,
         aboutGames,
         dots,
-        scrollX,
+        activeIndexNumber,
+        setActiveIndexNumber,
     };
 };

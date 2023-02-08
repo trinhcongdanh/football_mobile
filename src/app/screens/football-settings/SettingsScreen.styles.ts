@@ -26,6 +26,7 @@ export const styles = StyleSheet.create({
         justifyContent: 'center',
         backgroundColor: appColors.white,
         borderRadius: getSize.m(80 / 2),
+        elevation: 2,
     },
     txt_container_avatar: {
         flexDirection: 'row',
@@ -77,7 +78,7 @@ export const styles = StyleSheet.create({
         alignItems: 'center',
     },
     txt_title_block: {
-        fontFamily: AppFonts.regular,
+        fontFamily: AppFonts.bold,
         fontSize: getSize.m(16),
         fontWeight: '700',
         color: appColors.text_dark_blue,
@@ -106,14 +107,14 @@ export const styles = StyleSheet.create({
     },
     txt_add_group: {
         marginTop: getSize.m(11),
-        fontFamily: AppFonts.regular,
+        fontFamily: AppFonts.bold,
         fontSize: getSize.m(12),
         lineHeight: getSize.m(15),
         fontWeight: '700',
         color: appColors.text_dark_blue,
     },
     txt_tutorial: {
-        fontFamily: AppFonts.regular,
+        fontFamily: AppFonts.bold,
         fontSize: getSize.m(14),
         lineHeight: getSize.m(18),
         fontWeight: '700',
@@ -129,8 +130,8 @@ export const styles = StyleSheet.create({
         marginVertical: getSize.m(14),
     },
     txt_before_game: {
-        fontFamily: AppFonts.regular,
-        color: appColors.text_dark_blue,
+        fontFamily: AppFonts.medium,
+        color: appColors.blue_black,
         fontSize: getSize.m(12),
         lineHeight: getSize.m(15),
         fontWeight: '500',
@@ -138,6 +139,7 @@ export const styles = StyleSheet.create({
     btn_bottom_container: {
         justifyContent: 'center',
         alignItems: 'center',
+        paddingHorizontal: getSize.m(26),
     },
     btn_save_changes: {
         backgroundColor: appColors.blue_light,
@@ -145,7 +147,7 @@ export const styles = StyleSheet.create({
         justifyContent: 'center',
         paddingHorizontal: getSize.m(98),
         paddingVertical: getSize.m(14),
-        borderRadius: getSize.m(60),
+        borderRadius: getSize.m(15),
         marginTop: getSize.m(30),
         marginBottom: getSize.m(20),
     },
@@ -160,7 +162,8 @@ export const styles = StyleSheet.create({
     btn_delete_account: {
         alignItems: 'center',
         justifyContent: 'center',
-        // marginBottom: getSize.m(10),
+        marginBottom: getSize.m(35),
+        marginTop: getSize.m(20),
     },
     txt_delete_account: {
         fontFamily: AppFonts.regular,
@@ -169,5 +172,19 @@ export const styles = StyleSheet.create({
         lineHeight: getSize.m(24),
         fontWeight: '400',
         textAlign: 'center',
+    },
+
+    btn_switch: {
+        width: getSize.m(45),
+        height: getSize.m(27),
+        borderRadius: getSize.m(100),
+        paddingHorizontal: getSize.m(3),
+    },
+
+    btn_switch_circle: {
+        width: getSize.m(21),
+        height: getSize.m(21),
+        backgroundColor: appColors.white,
+        borderRadius: getSize.m(21),
     },
 });

@@ -1,4 +1,5 @@
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
+import { ScreenName } from '@football/app/utils/constants/enum';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { launchImageLibrary } from 'react-native-image-picker';
@@ -28,6 +29,25 @@ export const useViewModel = (props: ISettingsScreenProps) => {
         });
     };
 
+    const backFavTeam = () => {
+        navigate(ScreenName.FavTeamPage, {
+            previous_screen: ScreenName.SettingsPage,
+        });
+    };
+
+    const backFavPlayer = () => {
+        navigate(ScreenName.FavPlayerPage, {
+            previous_screen: ScreenName.SettingsPage,
+        });
+    };
+
+    const backFavTopTeam = () => {
+        navigate(ScreenName.FavTopTeamPage, {
+            previous_screen: ScreenName.SettingsPage,
+        });
+    };
+
+    const handleSaveChange = () => {};
     return {
         date,
         image,
@@ -38,5 +58,9 @@ export const useViewModel = (props: ISettingsScreenProps) => {
         handleOnDate,
         onImagePicker,
         toggleSwitch,
+        backFavPlayer,
+        backFavTeam,
+        backFavTopTeam,
+        handleSaveChange,
     };
 };

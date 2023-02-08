@@ -21,7 +21,7 @@ export const HeaderLogo = ({
             style={[
                 appStyles.flex,
                 appStyles.main_container,
-                { marginTop: getSize.m(50), backgroundColor: appColors.white },
+                { marginTop: getSize.m(50), backgroundColor: appColors.white, elevation: 1 },
             ]}
         >
             <View style={[appStyles.align_justify, { marginTop: getSize.m(-50) }]}>
@@ -39,13 +39,15 @@ export const HeaderLogo = ({
                     </View>
                 )}
                 <Text style={styles.text}>{text}</Text>
-                <TouchableOpacity
-                    style={[appStyles.flex_row_center, { flex: 0, marginTop: getSize.m(12) }]}
-                    onPress={handleNavigation}
-                >
-                    <Text style={styles.details}>{details}</Text>
-                    <Icon name={icon} size={getSize.m(10)} color={appColors.button_dark_blue} />
-                </TouchableOpacity>
+                {handleNavigation && (
+                    <TouchableOpacity
+                        style={[appStyles.flex_row_center, { flex: 0, marginTop: getSize.m(12) }]}
+                        onPress={handleNavigation}
+                    >
+                        <Text style={styles.details}>{details}</Text>
+                        <Icon name={icon} size={getSize.m(10)} color={appColors.button_dark_blue} />
+                    </TouchableOpacity>
+                )}
             </View>
         </View>
     );

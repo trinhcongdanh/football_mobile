@@ -21,7 +21,9 @@ export const ScoresGoals = ({}: IScoresGoalsProps) => {
                     },
                 ]}
             >
-                <Text style={appStyles.statistics_title}>{t('statistics.leagues.goal')}</Text>
+                <Text style={[appStyles.statistics_title, { fontSize: getSize.m(16) }]}>
+                    {t('statistics.leagues.goal')}
+                </Text>
                 <TouchableOpacity style={appStyles.flex_row_space_center} onPress={handleSeeAll}>
                     <Text style={appStyles.statistics_see_all}>
                         {t('statistics.leagues.see_all')}
@@ -44,17 +46,29 @@ export const ScoresGoals = ({}: IScoresGoalsProps) => {
                 ]}
             >
                 <View style={{ width: getSize.m(120) }}>
-                    <Text style={[appStyles.statistics_header, { textAlign: 'left' }]}>
+                    <Text
+                        style={[
+                            appStyles.statistics_header,
+                            { textAlign: 'left', fontSize: getSize.m(12) },
+                        ]}
+                    >
                         {t('statistics.leagues.name_club')}
                     </Text>
                 </View>
                 <View style={{ width: getSize.m(120) }}>
-                    <Text style={[appStyles.statistics_header, { textAlign: 'left' }]}>
+                    <Text
+                        style={[
+                            appStyles.statistics_header,
+                            { textAlign: 'left', fontSize: getSize.m(12) },
+                        ]}
+                    >
                         {t('statistics.leagues.name_player')}
                     </Text>
                 </View>
                 <View style={{ width: getSize.m(40) }}>
-                    <Text style={appStyles.statistics_header}>{t('statistics.leagues.gate')}</Text>
+                    <Text style={[appStyles.statistics_header, { fontSize: getSize.m(12) }]}>
+                        {t('statistics.leagues.gate')}
+                    </Text>
                 </View>
             </View>
             <View style={{ marginTop: getSize.m(10) }}>
@@ -86,6 +100,7 @@ export const ScoresGoals = ({}: IScoresGoalsProps) => {
                                             appStyles.statistics_content,
                                             {
                                                 marginLeft: getSize.m(10),
+                                                fontSize: getSize.m(14),
                                             },
                                         ]}
                                     >
@@ -110,6 +125,7 @@ export const ScoresGoals = ({}: IScoresGoalsProps) => {
                                             appStyles.statistics_content,
                                             {
                                                 marginLeft: getSize.m(10),
+                                                fontSize: getSize.m(14),
                                             },
                                         ]}
                                     >
@@ -122,7 +138,14 @@ export const ScoresGoals = ({}: IScoresGoalsProps) => {
                                     width: getSize.m(40),
                                 }}
                             >
-                                <Text style={appStyles.statistics_content}>{item.gate}</Text>
+                                <Text
+                                    style={[
+                                        appStyles.statistics_content,
+                                        { fontSize: getSize.m(14) },
+                                    ]}
+                                >
+                                    {item.gate}
+                                </Text>
                             </View>
                         </LinearGradient>
                     );

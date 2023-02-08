@@ -1,4 +1,4 @@
-import { View, Text, Image, TouchableOpacity } from 'react-native';
+import { View, Text, Image, TouchableOpacity, ScrollView } from 'react-native';
 import React from 'react';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import { appIcons } from '@football/app/assets/icons/appIcons';
@@ -12,7 +12,7 @@ import { useViewModel } from './SelectedMagazine.viewModel';
 import { ISelectedMagazineProps } from './SelectedMagazine.type';
 
 export const SelectedMagazine = ({}: ISelectedMagazineProps) => {
-    const { t, data, width } = useViewModel({});
+    const { t, data, width, activeIndexNumber, setActiveIndexNumber } = useViewModel({});
 
     return (
         <View>
@@ -33,6 +33,7 @@ export const SelectedMagazine = ({}: ISelectedMagazineProps) => {
                             parallaxScrollingScale: 1,
                             parallaxScrollingOffset: getSize.m(140),
                         }}
+                        onSnapToItem={index => setActiveIndexNumber(index)}
                         autoPlay={true}
                         data={data}
                         renderItem={({ item, index }) => (
@@ -64,6 +65,29 @@ export const SelectedMagazine = ({}: ISelectedMagazineProps) => {
                         )}
                     />
                 </GestureHandlerRootView>
+                <View style={styles.dotContainer}>
+                    {data.map((_, index) => {
+                        return (
+                            <View key={index}>
+                                <View
+                                    style={[
+                                        styles.dot,
+                                        {
+                                            width:
+                                                index === activeIndexNumber
+                                                    ? getSize.m(18)
+                                                    : getSize.m(5),
+                                            backgroundColor:
+                                                index === activeIndexNumber
+                                                    ? appColors.blue_light
+                                                    : appColors.soft_grey,
+                                        },
+                                    ]}
+                                ></View>
+                            </View>
+                        );
+                    })}
+                </View>
             </View>
         </View>
     );
