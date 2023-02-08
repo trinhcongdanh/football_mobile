@@ -7,9 +7,10 @@ import Icon from 'react-native-vector-icons/Feather';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import styles from './CupAround.style';
 import { useViewModel } from './CupAround.viewModel';
+import LinearGradient from 'react-native-linear-gradient';
 
 export const CupAround = () => {
-    const { t, cupsAround } = useViewModel();
+    const { t, cupsAround, handleStatisticDetailsScreen } = useViewModel();
     return (
         <View style={styles.item_statistics}>
             <View
@@ -21,7 +22,10 @@ export const CupAround = () => {
                 ]}
             >
                 <Text style={styles.title}>{t('state_cup.statistics.trophy')}</Text>
-                <TouchableOpacity style={appStyles.flex_row_space_center}>
+                <TouchableOpacity
+                    style={appStyles.flex_row_space_center}
+                    onPress={handleStatisticDetailsScreen}
+                >
                     <Text style={styles.see_all}>{t('state_cup.statistics.see_all')}</Text>
                     <Icon
                         name={appIcons.ic_arrow_left}
@@ -54,18 +58,14 @@ export const CupAround = () => {
             <View style={{ marginTop: getSize.m(10) }}>
                 {cupsAround.map(item => {
                     return (
-                        <View
+                        <LinearGradient
                             key={item.id}
-                            style={[
-                                appStyles.flex_row_space_center,
-                                styles.itemTeam,
-                                {
-                                    backgroundColor:
-                                        item.id % 2 === 1
-                                            ? 'rgba(7, 16, 47, 0.03)'
-                                            : appColors.gray,
-                                },
+                            colors={[
+                                item.id % 2 === 1 ? 'rgba(255, 255, 255, 0.05)' : appColors.gray,
+                                item.id % 2 === 1 ? 'rgba(16, 32, 100, 0.05)' : appColors.gray,
+                                item.id % 2 === 1 ? 'rgba(59, 168, 225, 0.05)' : appColors.gray,
                             ]}
+                            style={[appStyles.flex_row_space_center, styles.itemTeam]}
                         >
                             <View
                                 style={{
@@ -85,7 +85,7 @@ export const CupAround = () => {
                                     {item.group}
                                 </Text>
                             </View>
-                        </View>
+                        </LinearGradient>
                     );
                 })}
             </View>

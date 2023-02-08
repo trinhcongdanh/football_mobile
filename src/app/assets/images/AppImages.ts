@@ -58,4 +58,6 @@ export const AppImages = {
     img_badge_4: require('./badge_4.png'),
     img_badge_5: require('./badge_5.png'),
     img_time: require('./time.png'),
+    img_user: require('./user.png'),
+    img_building: require('./building.png'),
 };

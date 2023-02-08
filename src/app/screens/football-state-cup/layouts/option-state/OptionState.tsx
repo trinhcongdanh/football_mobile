@@ -6,6 +6,7 @@ import { getSize } from '@football/app/utils/responsive/scale';
 import styles from './OptionState.style';
 import { useViewModel } from './OptionState.viewModel';
 import { IOptionStateProps } from './OptionState.type';
+import LinearGradient from 'react-native-linear-gradient';
 export const OptionState = ({ label }: IOptionStateProps) => {
     const { t, listState } = useViewModel();
     return (
@@ -44,18 +45,16 @@ export const OptionState = ({ label }: IOptionStateProps) => {
                 <View style={{ marginTop: getSize.m(10) }}>
                     {listState.map(item => {
                         return (
-                            <View
+                            <LinearGradient
                                 key={item.id}
-                                style={[
-                                    appStyles.flex_row_space_center,
-                                    styles.itemTeam,
-                                    {
-                                        backgroundColor:
-                                            item.id % 2 === 1
-                                                ? 'rgba(7, 16, 47, 0.03)'
-                                                : appColors.gray,
-                                    },
+                                colors={[
+                                    item.id % 2 === 1
+                                        ? 'rgba(255, 255, 255, 0.05)'
+                                        : appColors.gray,
+                                    item.id % 2 === 1 ? 'rgba(16, 32, 100, 0.05)' : appColors.gray,
+                                    item.id % 2 === 1 ? 'rgba(59, 168, 225, 0.05)' : appColors.gray,
                                 ]}
+                                style={[appStyles.flex_row_space_center, styles.itemTeam]}
                             >
                                 <View style={{ width: getSize.m(50) }}>
                                     <Text style={styles.text_content}>{item.date}</Text>
@@ -72,7 +71,7 @@ export const OptionState = ({ label }: IOptionStateProps) => {
                                 <View style={{ width: getSize.m(30) }}>
                                     <Text style={styles.text_content}>{item.toch}</Text>
                                 </View>
-                            </View>
+                            </LinearGradient>
                         );
                     })}
                 </View>

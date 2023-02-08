@@ -4,7 +4,6 @@ import { Alert, Keyboard } from 'react-native';
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
 import { OfflineData, ScreenName } from '@football/app/utils/constants/enum';
 import { IVerifyScreenProps } from './VerifyScreen.type';
-import localStorage from '@football/core/helpers/localStorage';
 
 export const useViewModel = ({ navigation, route }: IVerifyScreenProps) => {
     const { t } = useTranslation();

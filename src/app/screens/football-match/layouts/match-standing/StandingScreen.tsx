@@ -8,6 +8,7 @@ import { appIcons } from '@football/app/assets/icons/appIcons';
 import Icon from 'react-native-vector-icons/AntDesign';
 import { useViewModel } from './StandingScreen.viewModel';
 import { IStandingScreenProps } from './StandingScreen.type';
+import LinearGradient from 'react-native-linear-gradient';
 
 export const StandingScreen = ({ navigation, route }: IStandingScreenProps) => {
     const { t, leaderBoard } = useViewModel({
@@ -84,17 +85,22 @@ export const StandingScreen = ({ navigation, route }: IStandingScreenProps) => {
                         <View>
                             {leaderBoard.map((item, index) => {
                                 return (
-                                    <View
+                                    <LinearGradient
                                         key={index}
+                                        colors={[
+                                            index % 2 === 0
+                                                ? 'rgba(255, 255, 255, 0.05)'
+                                                : appColors.gray,
+                                            index % 2 === 0
+                                                ? 'rgba(16, 32, 100, 0.05)'
+                                                : appColors.gray,
+                                            index % 2 === 0
+                                                ? 'rgba(59, 168, 225, 0.05)'
+                                                : appColors.gray,
+                                        ]}
                                         style={[
                                             appStyles.flex_row_space_center,
                                             appStyles.statistic_row,
-                                            {
-                                                backgroundColor:
-                                                    index % 2 === 0
-                                                        ? 'rgba(7, 16, 47, 0.03)'
-                                                        : appColors.gray,
-                                            },
                                         ]}
                                     >
                                         <View
@@ -176,7 +182,7 @@ export const StandingScreen = ({ navigation, route }: IStandingScreenProps) => {
                                                 {item.score}
                                             </Text>
                                         </View>
-                                    </View>
+                                    </LinearGradient>
                                 );
                             })}
                         </View>

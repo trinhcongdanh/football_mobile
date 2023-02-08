@@ -2,6 +2,7 @@ import { useTranslation } from 'react-i18next';
 import React from 'react';
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
 import { AppImages } from '@football/app/assets/images';
+import { ScreenName } from '@football/app/utils/constants/enum';
 
 export const useViewModel = () => {
     const { navigate, goBack } = useAppNavigator();
@@ -39,8 +40,12 @@ export const useViewModel = () => {
             season: '2021/2022',
         },
     ];
+
+    const handleCupAround = () => {};
+
     return {
         t,
         seasonsTrophy,
+        handleCupAround,
     };
 };

@@ -94,7 +94,7 @@ export const LeagueTable = () => {
                         },
                     ]}
                 >
-                    <View style={{ width: getSize.m(120) }}>
+                    <View style={{ width: getSize.m(120), left: getSize.m(18) }}>
                         <Text style={[appStyles.statistics_header, { textAlign: 'left' }]}>
                             {t('leagues_details.league_table.group')}
                         </Text>
@@ -133,18 +133,18 @@ export const LeagueTable = () => {
                 <View style={{ marginTop: getSize.m(10) }}>
                     {listTeams.map(item => {
                         return (
-                            <View
-                                key={item.id}
-                                style={[
-                                    appStyles.flex_row_space_center,
-                                    appStyles.statistic_row,
-                                    {
-                                        backgroundColor:
-                                            item.id % 2 === 1
-                                                ? 'rgba(7, 16, 47, 0.03)'
-                                                : appColors.gray,
-                                    },
+                            <LinearGradient
+                                colors={[
+                                    item.id % 2 === 1
+                                        ? 'rgba(255, 255, 255, 0.05)'
+                                        : appColors.white,
+                                    item.id % 2 === 1 ? 'rgba(16, 32, 100, 0.05)' : appColors.white,
+                                    item.id % 2 === 1
+                                        ? 'rgba(59, 168, 225, 0.05)'
+                                        : appColors.white,
                                 ]}
+                                key={item.id}
+                                style={[appStyles.flex_row_space_center, appStyles.statistic_row]}
                             >
                                 <View
                                     style={{
@@ -198,7 +198,7 @@ export const LeagueTable = () => {
                                 <View style={{ width: getSize.m(30) }}>
                                     <Text style={appStyles.statistics_content}>{item.no}</Text>
                                 </View>
-                            </View>
+                            </LinearGradient>
                         );
                     })}
                 </View>

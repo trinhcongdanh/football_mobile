@@ -284,7 +284,7 @@ export const FavoriteSummaryScreen = ({ navigation, route }: IFavoriteSummaryScr
                                 </Text>
                             </TouchableOpacity>
                             <TouchableOpacity
-                                style={{ marginTop: getSize.m(80), marginBottom: getSize.m(35) }}
+                                style={{ marginTop: getSize.m(80), marginBottom: getSize.m(16) }}
                                 onPress={navigationHomePage}
                             >
                                 <Text style={styles.bottom_text}>

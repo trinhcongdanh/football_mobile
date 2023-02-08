@@ -20,20 +20,25 @@ const styles = StyleSheet.create({
         flexDirection: I18nManager.isRTL ? 'row-reverse' : 'row-reverse',
         marginTop: getSize.m(37),
     },
-    otp_Box: {
-        borderRadius: getSize.m(15),
-        borderColor: appColors.medium_gray,
-        borderWidth: 1,
-        justifyContent: 'center',
-        width: getSize.m(63),
-        height: getSize.m(63),
-    },
+    // otp_Box: {
+    //     borderRadius: getSize.m(15),
+    //     borderColor: appColors.medium_gray,
+    //     borderWidth: 1,
+    //     width: getSize.m(63),
+    //     height: getSize.m(63),
+    //     justifyContent: 'center',
+    //     alignItems: 'center',
+    // },
 
     otp_Text: {
-        fontSize: getSize.s(36),
+        fontSize: getSize.m(36),
         fontWeight: '700',
         color: appColors.text_dark_blue,
         textAlign: 'center',
+        width: getSize.m(63),
+        borderRadius: getSize.m(15),
+        borderColor: appColors.medium_gray,
+        borderWidth: getSize.m(1),
     },
 
     footer_opt: {

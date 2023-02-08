@@ -10,6 +10,7 @@ import { Avatar } from 'react-native-elements';
 import styles from './AverageRebounds.style';
 import { useViewModel } from './AverageRebounds.viewModel';
 import { IAverageReboundsProps } from './AverageRebounds.type';
+import LinearGradient from 'react-native-linear-gradient';
 
 export const AverageRebounds = ({}: IAverageReboundsProps) => {
     const { t, listAverages } = useViewModel({});
@@ -66,18 +67,14 @@ export const AverageRebounds = ({}: IAverageReboundsProps) => {
             <View style={{ marginTop: getSize.m(10) }}>
                 {listAverages.map(item => {
                     return (
-                        <View
+                        <LinearGradient
                             key={item.id}
-                            style={[
-                                appStyles.flex_row_space_center,
-                                appStyles.statistic_row,
-                                {
-                                    backgroundColor:
-                                        item.id % 2 === 1
-                                            ? 'rgba(7, 16, 47, 0.03)'
-                                            : appColors.gray,
-                                },
+                            colors={[
+                                item.id % 2 === 1 ? 'rgba(255, 255, 255, 0.05)' : appColors.gray,
+                                item.id % 2 === 1 ? 'rgba(16, 32, 100, 0.05)' : appColors.gray,
+                                item.id % 2 === 1 ? 'rgba(59, 168, 225, 0.05)' : appColors.gray,
                             ]}
+                            style={[appStyles.flex_row_space_center, appStyles.statistic_row]}
                         >
                             <View
                                 style={{
@@ -123,7 +120,7 @@ export const AverageRebounds = ({}: IAverageReboundsProps) => {
                                 <Text style={appStyles.statistics_content}>{item.amount}</Text>
                                 <Image source={AppImages.img_goat_net} style={styles.ticket} />
                             </View>
-                        </View>
+                        </LinearGradient>
                     );
                 })}
             </View>

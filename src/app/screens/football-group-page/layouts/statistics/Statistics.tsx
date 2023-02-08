@@ -8,6 +8,7 @@ import { Avatar } from 'react-native-elements';
 import { useViewModel } from './Statistics.viewModel';
 import styles from '@football/app/screens/football-group-page/layouts/statistics/Statistics.style';
 import { appIcons } from '@football/app/assets/icons/appIcons';
+import LinearGradient from 'react-native-linear-gradient';
 
 export const Statistics = () => {
     const {
@@ -26,7 +27,7 @@ export const Statistics = () => {
             <Text style={[appStyles.text_topic, { marginLeft: getSize.m(6) }]}>
                 {t('group_page.statistics.title')}
             </Text>
-            <View style={{ marginTop: getSize.m(30) }}>
+            <View style={{ marginTop: getSize.m(30), marginBottom: getSize.m(21) }}>
                 <View style={{ flexDirection: 'row' }}>
                     <View style={{ marginTop: getSize.m(8) }}>
                         <View
@@ -36,7 +37,7 @@ export const Statistics = () => {
                                 paddingHorizontal: getSize.m(10),
                             }}
                         >
-                            <View style={{ width: getSize.m(130) }}>
+                            <View style={{ width: getSize.m(120) }}>
                                 <Text style={[appStyles.statistics_header, { textAlign: 'left' }]}>
                                     {t('group_page.statistics.player')}
                                 </Text>
@@ -45,21 +46,28 @@ export const Statistics = () => {
                         <View style={{ marginTop: getSize.m(14) }}>
                             {players.map(item => {
                                 return (
-                                    <View
+                                    <LinearGradient
+                                        colors={[
+                                            item.id % 2 === 1
+                                                ? 'rgba(255, 255, 255, 0.05)'
+                                                : appColors.white,
+                                            item.id % 2 === 1
+                                                ? 'rgba(16, 32, 100, 0.05)'
+                                                : appColors.white,
+                                            item.id % 2 === 1
+                                                ? 'rgba(59, 168, 225, 0.05)'
+                                                : appColors.white,
+                                        ]}
                                         style={[
                                             appStyles.align_justify,
                                             {
-                                                backgroundColor:
-                                                    item.id % 2 !== 0
-                                                        ? appColors.blue_matte
-                                                        : appColors.white,
                                                 paddingHorizontal: getSize.m(10),
                                                 height: getSize.m(30),
                                             },
                                         ]}
                                         key={item.id}
                                     >
-                                        <View style={{ width: getSize.m(130) }}>
+                                        <View style={{ width: getSize.m(120) }}>
                                             <View style={appStyles.flex_row_align}>
                                                 <Avatar
                                                     source={item.avt}
@@ -79,14 +87,14 @@ export const Statistics = () => {
                                                 </Text>
                                             </View>
                                         </View>
-                                    </View>
+                                    </LinearGradient>
                                 );
                             })}
                         </View>
                     </View>
 
                     <TouchableOpacity
-                        style={{ position: 'absolute', top: getSize.m(10), left: getSize.m(140) }}
+                        style={{ position: 'absolute', top: getSize.m(10), left: getSize.m(130) }}
                         onPress={handleNextRightSlide}
                     >
                         <IconAntDesign
@@ -98,6 +106,7 @@ export const Statistics = () => {
                     <ScrollView
                         horizontal
                         pagingEnabled
+                        snapToInterval={getSize.m(194)}
                         showsHorizontalScrollIndicator={false}
                         onScroll={e => {
                             let slide = Math.round(
@@ -119,7 +128,7 @@ export const Statistics = () => {
                             >
                                 <View
                                     style={{
-                                        width: getSize.m(50),
+                                        width: getSize.m(56),
                                         marginHorizontal: getSize.m(4),
                                     }}
                                 >
@@ -129,7 +138,7 @@ export const Statistics = () => {
                                 </View>
                                 <View
                                     style={{
-                                        width: getSize.m(50),
+                                        width: getSize.m(56),
                                         marginHorizontal: getSize.m(4),
                                     }}
                                 >
@@ -139,7 +148,7 @@ export const Statistics = () => {
                                 </View>
                                 <View
                                     style={{
-                                        width: getSize.m(50),
+                                        width: getSize.m(56),
                                         marginHorizontal: getSize.m(4),
                                     }}
                                 >
@@ -149,7 +158,7 @@ export const Statistics = () => {
                                 </View>
                                 <View
                                     style={{
-                                        width: getSize.m(50),
+                                        width: getSize.m(56),
                                         marginHorizontal: getSize.m(4),
                                     }}
                                 >
@@ -159,7 +168,7 @@ export const Statistics = () => {
                                 </View>
                                 <View
                                     style={{
-                                        width: getSize.m(50),
+                                        width: getSize.m(56),
                                         marginHorizontal: getSize.m(4),
                                     }}
                                 >
@@ -169,7 +178,7 @@ export const Statistics = () => {
                                 </View>
                                 <View
                                     style={{
-                                        width: getSize.m(50),
+                                        width: getSize.m(56),
                                         marginHorizontal: getSize.m(4),
                                     }}
                                 >
@@ -179,7 +188,7 @@ export const Statistics = () => {
                                 </View>
                                 <View
                                     style={{
-                                        width: getSize.m(50),
+                                        width: getSize.m(56),
                                         marginHorizontal: getSize.m(4),
                                     }}
                                 >
@@ -189,7 +198,7 @@ export const Statistics = () => {
                                 </View>
                                 <View
                                     style={{
-                                        width: getSize.m(50),
+                                        width: getSize.m(56),
                                         marginHorizontal: getSize.m(4),
                                     }}
                                 >
@@ -199,7 +208,7 @@ export const Statistics = () => {
                                 </View>
                                 <View
                                     style={{
-                                        width: getSize.m(50),
+                                        width: getSize.m(56),
                                         marginHorizontal: getSize.m(4),
                                     }}
                                 >
@@ -211,14 +220,21 @@ export const Statistics = () => {
                             <View style={{ marginTop: getSize.m(8) }}>
                                 {statistics.map(item => {
                                     return (
-                                        <View
+                                        <LinearGradient
+                                            colors={[
+                                                item.id % 2 === 1
+                                                    ? 'rgba(255, 255, 255, 0.05)'
+                                                    : appColors.gray,
+                                                item.id % 2 === 1
+                                                    ? 'rgba(16, 32, 100, 0.05)'
+                                                    : appColors.gray,
+                                                item.id % 2 === 1
+                                                    ? 'rgba(59, 168, 225, 0.05)'
+                                                    : appColors.gray,
+                                            ]}
                                             style={[
                                                 appStyles.flex_row_align,
                                                 {
-                                                    backgroundColor:
-                                                        item.id % 2 !== 0
-                                                            ? appColors.blue_matte
-                                                            : appColors.gray,
                                                     paddingHorizontal: getSize.m(10),
                                                     height: getSize.m(30),
                                                 },
@@ -227,7 +243,7 @@ export const Statistics = () => {
                                         >
                                             <View
                                                 style={{
-                                                    width: getSize.m(50),
+                                                    width: getSize.m(56),
                                                     marginHorizontal: getSize.m(4),
                                                 }}
                                             >
@@ -242,7 +258,7 @@ export const Statistics = () => {
                                             </View>
                                             <View
                                                 style={{
-                                                    width: getSize.m(50),
+                                                    width: getSize.m(56),
                                                     marginHorizontal: getSize.m(4),
                                                 }}
                                             >
@@ -257,7 +273,7 @@ export const Statistics = () => {
                                             </View>
                                             <View
                                                 style={{
-                                                    width: getSize.m(50),
+                                                    width: getSize.m(56),
                                                     marginHorizontal: getSize.m(4),
                                                 }}
                                             >
@@ -272,7 +288,7 @@ export const Statistics = () => {
                                             </View>
                                             <View
                                                 style={{
-                                                    width: getSize.m(50),
+                                                    width: getSize.m(56),
                                                     marginHorizontal: getSize.m(4),
                                                 }}
                                             >
@@ -287,7 +303,7 @@ export const Statistics = () => {
                                             </View>
                                             <View
                                                 style={{
-                                                    width: getSize.m(50),
+                                                    width: getSize.m(56),
                                                     marginHorizontal: getSize.m(4),
                                                 }}
                                             >
@@ -302,7 +318,7 @@ export const Statistics = () => {
                                             </View>
                                             <View
                                                 style={{
-                                                    width: getSize.m(50),
+                                                    width: getSize.m(56),
                                                     marginHorizontal: getSize.m(4),
                                                 }}
                                             >
@@ -317,7 +333,7 @@ export const Statistics = () => {
                                             </View>
                                             <View
                                                 style={{
-                                                    width: getSize.m(50),
+                                                    width: getSize.m(56),
                                                     marginHorizontal: getSize.m(4),
                                                 }}
                                             >
@@ -332,7 +348,7 @@ export const Statistics = () => {
                                             </View>
                                             <View
                                                 style={{
-                                                    width: getSize.m(50),
+                                                    width: getSize.m(56),
                                                     marginHorizontal: getSize.m(4),
                                                 }}
                                             >
@@ -347,7 +363,7 @@ export const Statistics = () => {
                                             </View>
                                             <View
                                                 style={{
-                                                    width: getSize.m(50),
+                                                    width: getSize.m(56),
                                                     marginHorizontal: getSize.m(4),
                                                 }}
                                             >
@@ -360,14 +376,14 @@ export const Statistics = () => {
                                                     {item.subtlety}
                                                 </Text>
                                             </View>
-                                        </View>
+                                        </LinearGradient>
                                     );
                                 })}
                             </View>
                         </View>
                     </ScrollView>
                     <TouchableOpacity
-                        style={{ position: 'absolute', top: getSize.m(10), right: getSize.m(-6) }}
+                        style={{ position: 'absolute', top: getSize.m(10), right: getSize.m(2) }}
                         onPress={handleNextLeftSlide}
                     >
                         <IconAntDesign

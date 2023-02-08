@@ -10,6 +10,7 @@ import { AppImages } from '@football/app/assets/images';
 import styles from './AccumulationReds.style';
 import { useViewModel } from './AccumulationReds.viewModel';
 import { IAccumulationRedsProps } from './AccumulationReds.type';
+import LinearGradient from 'react-native-linear-gradient';
 export const AccumulationReds = ({}: IAccumulationRedsProps) => {
     const { t, listTickets } = useViewModel({});
     return (
@@ -63,18 +64,14 @@ export const AccumulationReds = ({}: IAccumulationRedsProps) => {
             <View style={{ marginTop: getSize.m(10) }}>
                 {listTickets.map(item => {
                     return (
-                        <View
+                        <LinearGradient
                             key={item.id}
-                            style={[
-                                appStyles.flex_row_space_center,
-                                appStyles.statistic_row,
-                                {
-                                    backgroundColor:
-                                        item.id % 2 === 1
-                                            ? 'rgba(7, 16, 47, 0.03)'
-                                            : appColors.gray,
-                                },
+                            colors={[
+                                item.id % 2 === 1 ? 'rgba(255, 255, 255, 0.05)' : appColors.gray,
+                                item.id % 2 === 1 ? 'rgba(16, 32, 100, 0.05)' : appColors.gray,
+                                item.id % 2 === 1 ? 'rgba(59, 168, 225, 0.05)' : appColors.gray,
                             ]}
+                            style={[appStyles.flex_row_space_center, appStyles.statistic_row]}
                         >
                             <View
                                 style={{
@@ -141,7 +138,7 @@ export const AccumulationReds = ({}: IAccumulationRedsProps) => {
                                     {item.amount}
                                 </Text>
                             </View>
-                        </View>
+                        </LinearGradient>
                     );
                 })}
             </View>

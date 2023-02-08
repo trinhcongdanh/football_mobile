@@ -7,6 +7,7 @@ import { appIcons } from '@football/app/assets/icons/appIcons';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { Avatar } from 'react-native-elements';
 import { useViewModel } from './ScorersOfGoals.viewModel';
+import LinearGradient from 'react-native-linear-gradient';
 
 export const ScorersOfGoals = () => {
     const { t, listPlayerGoal } = useViewModel({});
@@ -56,18 +57,14 @@ export const ScorersOfGoals = () => {
             <View style={{ marginTop: getSize.m(10) }}>
                 {listPlayerGoal.map(item => {
                     return (
-                        <View
+                        <LinearGradient
                             key={item.id}
-                            style={[
-                                appStyles.flex_row_space_center,
-                                appStyles.statistic_row,
-                                {
-                                    backgroundColor:
-                                        item.id % 2 === 1
-                                            ? 'rgba(7, 16, 47, 0.03)'
-                                            : appColors.gray,
-                                },
+                            colors={[
+                                item.id % 2 === 1 ? 'rgba(255, 255, 255, 0.05)' : appColors.gray,
+                                item.id % 2 === 1 ? 'rgba(16, 32, 100, 0.05)' : appColors.gray,
+                                item.id % 2 === 1 ? 'rgba(59, 168, 225, 0.05)' : appColors.gray,
                             ]}
+                            style={[appStyles.flex_row_space_center, appStyles.statistic_row]}
                         >
                             <View>
                                 <View
@@ -91,7 +88,7 @@ export const ScorersOfGoals = () => {
                             <View>
                                 <Text style={appStyles.statistics_content}>{item.goal}</Text>
                             </View>
-                        </View>
+                        </LinearGradient>
                     );
                 })}
             </View>
