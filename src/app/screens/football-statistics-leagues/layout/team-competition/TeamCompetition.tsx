@@ -47,20 +47,34 @@ export const TeamCompetition = ({}: ITeamCompetitionProps) => {
                 ]}
             >
                 <View style={{ width: getSize.m(30) }}>
-                    <Text style={[appStyles.statistics_header, { textAlign: 'left' }]}>
+                    <Text
+                        style={[
+                            appStyles.statistics_header,
+                            { textAlign: 'left', fontSize: getSize.m(12) },
+                        ]}
+                    >
                         {t('statistics.leagues.location')}
                     </Text>
                 </View>
                 <View style={{ width: getSize.m(160) }}>
-                    <Text style={[appStyles.statistics_header, { textAlign: 'left' }]}>
+                    <Text
+                        style={[
+                            appStyles.statistics_header,
+                            { textAlign: 'left', fontSize: getSize.m(12) },
+                        ]}
+                    >
                         {t('statistics.leagues.name_club')}
                     </Text>
                 </View>
                 <View style={{ width: getSize.m(50) }}>
-                    <Text style={appStyles.statistics_header}>{t('statistics.leagues.total')}</Text>
+                    <Text style={[appStyles.statistics_header, { fontSize: getSize.m(12) }]}>
+                        {t('statistics.leagues.total')}
+                    </Text>
                 </View>
                 <View style={{ width: getSize.m(40) }}>
-                    <Text style={appStyles.statistics_header}>{t('statistics.leagues.score')}</Text>
+                    <Text style={[appStyles.statistics_header, { fontSize: getSize.m(12) }]}>
+                        {t('statistics.leagues.score')}
+                    </Text>
                 </View>
             </View>
             <View style={{ marginTop: getSize.m(10) }}>
@@ -81,7 +95,14 @@ export const TeamCompetition = ({}: ITeamCompetitionProps) => {
                                     overflow: 'hidden',
                                 }}
                             >
-                                <Text style={[appStyles.statistics_content]}>{item.id}</Text>
+                                <Text
+                                    style={[
+                                        appStyles.statistics_content,
+                                        { fontSize: getSize.m(14) },
+                                    ]}
+                                >
+                                    {item.id}
+                                </Text>
                             </View>
                             <View
                                 style={{
@@ -100,6 +121,7 @@ export const TeamCompetition = ({}: ITeamCompetitionProps) => {
                                             appStyles.statistics_content,
                                             {
                                                 marginLeft: getSize.m(10),
+                                                fontSize: getSize.m(14),
                                             },
                                         ]}
                                     >
@@ -114,7 +136,16 @@ export const TeamCompetition = ({}: ITeamCompetitionProps) => {
                                     },
                                 ]}
                             >
-                                <Text style={appStyles.statistics_content}>{item.total}</Text>
+                                <Text
+                                    style={[
+                                        appStyles.statistics_content,
+                                        {
+                                            fontSize: getSize.m(14),
+                                        },
+                                    ]}
+                                >
+                                    {item.total}
+                                </Text>
                             </View>
                             <View
                                 style={[
@@ -123,7 +154,14 @@ export const TeamCompetition = ({}: ITeamCompetitionProps) => {
                                     },
                                 ]}
                             >
-                                <Text style={appStyles.statistics_content}>{item.score}</Text>
+                                <Text
+                                    style={[
+                                        appStyles.statistics_content,
+                                        { fontSize: getSize.m(14) },
+                                    ]}
+                                >
+                                    {item.score}
+                                </Text>
                             </View>
                         </LinearGradient>
                     );

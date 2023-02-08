@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import React from 'react';
+import React, { useState } from 'react';
 import { Dimensions } from 'react-native';
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
 import { AppImages } from '@football/app/assets/images';
@@ -26,10 +26,12 @@ export const useViewModel = ({}: ISelectedGalleryProps) => {
         },
     ];
     const width = Dimensions.get('window').width;
-
+    const [activeIndexNumber, setActiveIndexNumber] = useState(Number);
     return {
         t,
         data,
         width,
+        activeIndexNumber,
+        setActiveIndexNumber,
     };
 };

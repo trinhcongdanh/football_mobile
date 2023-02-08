@@ -18,7 +18,7 @@ export const styles = StyleSheet.create({
         fontWeight: '700',
         fontSize: getSize.m(16),
         lineHeight: getSize.m(16),
-        fontFamily: AppFonts.regular,
+        fontFamily: AppFonts.bold,
         color: appColors.check_box,
     },
     details: {
@@ -26,7 +26,7 @@ export const styles = StyleSheet.create({
         color: appColors.button_dark_blue,
         fontWeight: '700',
         lineHeight: getSize.m(16),
-        fontFamily: AppFonts.regular,
+        fontFamily: AppFonts.bold,
         marginRight: getSize.m(4),
     },
 });

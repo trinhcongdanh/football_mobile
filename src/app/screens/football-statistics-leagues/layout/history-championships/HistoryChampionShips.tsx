@@ -45,12 +45,22 @@ export const HistoryChampionShips = ({}: IHistoryChampionShipsProps) => {
                 ]}
             >
                 <View style={{ width: getSize.m(80) }}>
-                    <Text style={[appStyles.statistics_header, { textAlign: 'left' }]}>
+                    <Text
+                        style={[
+                            appStyles.statistics_header,
+                            { textAlign: 'left', fontSize: getSize.m(12) },
+                        ]}
+                    >
                         {t('statistics.leagues.season')}
                     </Text>
                 </View>
                 <View style={{ width: getSize.m(200) }}>
-                    <Text style={[appStyles.statistics_header, { textAlign: 'left' }]}>
+                    <Text
+                        style={[
+                            appStyles.statistics_header,
+                            { textAlign: 'left', fontSize: getSize.m(12) },
+                        ]}
+                    >
                         {t('statistics.leagues.name_club')}
                     </Text>
                 </View>
@@ -73,7 +83,12 @@ export const HistoryChampionShips = ({}: IHistoryChampionShipsProps) => {
                                     overflow: 'hidden',
                                 }}
                             >
-                                <Text style={[appStyles.statistics_content, { textAlign: 'left' }]}>
+                                <Text
+                                    style={[
+                                        appStyles.statistics_content,
+                                        { textAlign: 'left', fontSize: getSize.m(14) },
+                                    ]}
+                                >
                                     {item.season}
                                 </Text>
                             </View>
@@ -94,6 +109,7 @@ export const HistoryChampionShips = ({}: IHistoryChampionShipsProps) => {
                                             appStyles.statistics_content,
                                             {
                                                 marginLeft: getSize.m(10),
+                                                fontSize: getSize.m(14),
                                             },
                                         ]}
                                     >

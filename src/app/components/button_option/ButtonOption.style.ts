@@ -7,12 +7,12 @@ const styles = StyleSheet.create({
     option: {
         backgroundColor: appColors.separator,
         borderRadius: getSize.m(30),
-        paddingHorizontal: getSize.m(5),
+        paddingHorizontal: getSize.m(4),
         paddingVertical: getSize.m(4),
-        marginHorizontal: getSize.m(26),
+        marginHorizontal: getSize.m(24),
     },
     button_option_dark: {
-        paddingHorizontal: getSize.m(30),
+        paddingHorizontal: getSize.m(10),
         paddingVertical: getSize.m(10),
         borderRadius: getSize.m(30),
         flex: 1,

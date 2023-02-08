@@ -207,14 +207,14 @@ export const appStyles = StyleSheet.create({
         fontSize: getSize.m(14),
         fontWeight: '700',
         lineHeight: getSize.m(18),
-        fontFamily: AppFonts.regular,
+        fontFamily: AppFonts.bold,
     },
     statistics_see_all: {
         color: appColors.button_dark_blue,
         fontSize: getSize.m(12),
         lineHeight: getSize.m(16),
         fontWeight: '700',
-        fontFamily: AppFonts.regular,
+        fontFamily: AppFonts.bold,
         marginRight: getSize.m(4),
     },
     statistic_ic_arrow: {

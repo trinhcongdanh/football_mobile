@@ -12,7 +12,7 @@ import { ISelectedGalleryProps } from './SelectedGallery.type';
 import { useViewModel } from './SelectedGallery.viewModel';
 
 const SelectedGallery = ({}: ISelectedGalleryProps) => {
-    const { t, data, width } = useViewModel({});
+    const { t, data, width, activeIndexNumber, setActiveIndexNumber } = useViewModel({});
 
     return (
         <View>
@@ -37,6 +37,7 @@ const SelectedGallery = ({}: ISelectedGalleryProps) => {
                             parallaxAdjacentItemScale: 0.9,
                         }}
                         autoPlay={true}
+                        onSnapToItem={index => setActiveIndexNumber(index)}
                         data={data}
                         renderItem={({ item, index }) => (
                             <View
@@ -66,6 +67,29 @@ const SelectedGallery = ({}: ISelectedGalleryProps) => {
                         )}
                     />
                 </GestureHandlerRootView>
+                <View style={styles.dotContainer}>
+                    {data.map((_, index) => {
+                        return (
+                            <View key={index}>
+                                <View
+                                    style={[
+                                        styles.dot,
+                                        {
+                                            width:
+                                                index === activeIndexNumber
+                                                    ? getSize.m(18)
+                                                    : getSize.m(5),
+                                            backgroundColor:
+                                                index === activeIndexNumber
+                                                    ? appColors.blue_light
+                                                    : appColors.soft_grey,
+                                        },
+                                    ]}
+                                ></View>
+                            </View>
+                        );
+                    })}
+                </View>
             </View>
         </View>
     );

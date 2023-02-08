@@ -1,5 +1,6 @@
 import { appIcons } from '@football/app/assets/icons/appIcons';
 import { AppImages } from '@football/app/assets/images';
+import { Button } from '@football/app/components/button';
 import { CardGoBack } from '@football/app/components/go-back/CardGoBack';
 import { HeaderAdded } from '@football/app/components/header-added/HeaderAdded';
 import Input from '@football/app/components/input/Input';
@@ -37,6 +38,10 @@ export function SettingsScreen(props: ISettingsScreenProps) {
         handleOnDate,
         onImagePicker,
         image,
+        backFavPlayer,
+        backFavTeam,
+        backFavTopTeam,
+        handleSaveChange,
     } = useViewModel(props);
     const [itemSelected, setItemSelected] = useState<string>(t('settings.male'));
     const male = { name: t('settings.male') };
@@ -69,19 +74,18 @@ export function SettingsScreen(props: ISettingsScreenProps) {
                                     <Avatar
                                         size={getSize.m(73)}
                                         rounded
-                                        source={{ uri: image }}
-                                        title="Bj"
+                                        source={AppImages.img_avt_player}
                                         containerStyle={{ backgroundColor: appColors.separator }}
-                                    >
-                                        <Avatar.Accessory
-                                            onPress={onImagePicker}
-                                            style={{
-                                                backgroundColor: appColors.white,
-                                            }}
-                                            color="#100D65"
-                                            size={getSize.m(20)}
-                                        />
-                                    </Avatar>
+                                    />
+
+                                    <Avatar.Accessory
+                                        onPress={onImagePicker}
+                                        style={{
+                                            backgroundColor: appColors.white,
+                                        }}
+                                        color="#100D65"
+                                        size={getSize.m(20)}
+                                    />
                                 </View>
                             </View>
                             <View style={styles.txt_container_avatar}>
@@ -152,6 +156,7 @@ export function SettingsScreen(props: ISettingsScreenProps) {
                                 </View>
                                 <View style={styles.mr_top}>
                                     <HeaderAdded
+                                        backFav={backFavTeam}
                                         leftIcon={false}
                                         headerTitle={t('settings.group')}
                                         headerSkip={t('settings.sleep')}
@@ -190,6 +195,7 @@ export function SettingsScreen(props: ISettingsScreenProps) {
                                         headerTitle={t('settings.favorite')}
                                         headerSkip={t('settings.sleep')}
                                         iconName={appIcons.ic_left_ios}
+                                        backFav={backFavPlayer}
                                     />
 
                                     <View
@@ -220,6 +226,7 @@ export function SettingsScreen(props: ISettingsScreenProps) {
                                 </View>
                                 <View style={styles.mr_top_component}>
                                     <HeaderAdded
+                                        backFav={backFavTopTeam}
                                         leftIcon={false}
                                         headerTitle={t('settings.national_team')}
                                         headerSkip={t('settings.sleep')}
@@ -262,54 +269,75 @@ export function SettingsScreen(props: ISettingsScreenProps) {
                                     <Text style={styles.txt_before_game}>
                                         {t('settings.before_every_game')}
                                     </Text>
-                                    <Switch
-                                        trackColor={{
-                                            true: appColors.blue_light,
-                                            false: appColors.separator,
-                                        }}
-                                        thumbColor={isEnabled ? appColors.white : appColors.white}
-                                        onValueChange={toggleSwitch}
-                                        value={isEnabled}
-                                    />
+                                    <TouchableOpacity
+                                        activeOpacity={0.7}
+                                        onPress={toggleSwitch}
+                                        style={[
+                                            styles.btn_switch,
+                                            {
+                                                backgroundColor: isEnabled
+                                                    ? appColors.separator
+                                                    : appColors.blue_light,
+                                                justifyContent: 'center',
+                                                alignItems: isEnabled ? 'flex-start' : 'flex-end',
+                                            },
+                                        ]}
+                                    >
+                                        <View style={styles.btn_switch_circle} />
+                                    </TouchableOpacity>
                                 </View>
                                 <Spacer heightSpacer={getSize.m(1)} color={appColors.separator} />
                                 <View style={styles.block_notifications}>
                                     <Text style={styles.txt_before_game}>
                                         {t('settings.before_game_of_team')}
                                     </Text>
-                                    <Switch
-                                        trackColor={{
-                                            true: appColors.blue_light,
-                                            false: appColors.separator,
-                                        }}
-                                        thumbColor={isEnabled ? appColors.white : appColors.white}
-                                        onValueChange={toggleSwitch}
-                                        value={isEnabled}
-                                    />
+                                    <TouchableOpacity
+                                        activeOpacity={0.7}
+                                        onPress={toggleSwitch}
+                                        style={[
+                                            styles.btn_switch,
+                                            {
+                                                backgroundColor: isEnabled
+                                                    ? appColors.separator
+                                                    : appColors.blue_light,
+                                                justifyContent: 'center',
+                                                alignItems: isEnabled ? 'flex-start' : 'flex-end',
+                                            },
+                                        ]}
+                                    >
+                                        <View style={styles.btn_switch_circle} />
+                                    </TouchableOpacity>
                                 </View>
                                 <Spacer heightSpacer={getSize.m(1)} color={appColors.separator} />
                                 <View style={styles.block_notifications}>
                                     <Text style={styles.txt_before_game}>
                                         {t('settings.point_received')}
                                     </Text>
-                                    <Switch
-                                        trackColor={{
-                                            true: appColors.blue_light,
-                                            false: appColors.separator,
-                                        }}
-                                        thumbColor={isEnabled ? appColors.white : appColors.white}
-                                        onValueChange={toggleSwitch}
-                                        value={isEnabled}
-                                    />
+                                    <TouchableOpacity
+                                        activeOpacity={0.7}
+                                        onPress={toggleSwitch}
+                                        style={[
+                                            styles.btn_switch,
+                                            {
+                                                backgroundColor: isEnabled
+                                                    ? appColors.separator
+                                                    : appColors.blue_light,
+                                                justifyContent: 'center',
+                                                alignItems: isEnabled ? 'flex-start' : 'flex-end',
+                                            },
+                                        ]}
+                                    >
+                                        <View style={styles.btn_switch_circle} />
+                                    </TouchableOpacity>
                                 </View>
                             </View>
                         </View>
                         <View style={styles.btn_bottom_container}>
-                            <TouchableOpacity style={styles.btn_save_changes}>
-                                <Text style={styles.txt_save_changes}>
-                                    {t('settings.save_changes')}
-                                </Text>
-                            </TouchableOpacity>
+                            <Button
+                                style={{ borderRadius: getSize.m(15) }}
+                                title={t('settings.save_changes')}
+                                onPress={handleSaveChange}
+                            />
                             <TouchableOpacity style={styles.btn_delete_account}>
                                 <Text style={styles.txt_delete_account}>
                                     {t('settings.delete_account')}

@@ -25,7 +25,12 @@ export const Statistics = ({}: IStatisticsProps) => {
                 />
                 {onSelect === 0 ? (
                     <View style={{ marginTop: getSize.m(20) }}>
-                        <Position position="מחזור 34" width={getSize.m(130)} />
+                        <Position
+                            color={appColors.text_dark_blue}
+                            fontWeight="700"
+                            position="מחזור 34"
+                            width={getSize.m(130)}
+                        />
                         <View>
                             <View
                                 style={[
@@ -35,7 +40,7 @@ export const Statistics = ({}: IStatisticsProps) => {
                                     },
                                 ]}
                             >
-                                <View style={{ width: getSize.m(120) }}>
+                                <View style={{ width: getSize.m(120), left: getSize.m(18) }}>
                                     <Text
                                         style={[appStyles.statistics_header, { textAlign: 'left' }]}
                                     >

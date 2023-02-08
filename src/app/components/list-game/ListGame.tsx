@@ -31,7 +31,19 @@ export const ListGame = ({
                 <View
                     style={[
                         styles.tournament,
-                        { backgroundColor: result !== null ? appColors.separator : '#F2FBFF' },
+                        {
+                            backgroundColor: result !== null ? appColors.separator : '#F2FBFF',
+                            flexDirection: result === null && schedule === null ? 'row' : 'column',
+                            justifyContent:
+                                result === null && schedule === null ? 'space-between' : 'center',
+                            alignItems: result === null && schedule === null ? 'center' : 'center',
+                            paddingLeft:
+                                result === null && schedule === null
+                                    ? getSize.m(23.5)
+                                    : getSize.m(0),
+                            paddingRight:
+                                result === null && schedule === null ? getSize.m(10) : getSize.m(0),
+                        },
                     ]}
                 >
                     <Text
@@ -47,6 +59,9 @@ export const ListGame = ({
                     >
                         {tournament}
                     </Text>
+                    {result === null && schedule === null && (
+                        <Text style={styles.text_live}>LIVE</Text>
+                    )}
                 </View>
             )}
             <View style={appStyles.flex_row_space}>
@@ -93,19 +108,31 @@ export const ListGame = ({
                 ]}
             >
                 <View style={[appStyles.align_justify]}>
-                    <Avatar rounded size={getSize.m(40)} source={{ uri: logo_home }} />
+                    <Avatar rounded size={getSize.m(30)} source={{ uri: logo_home }} />
 
                     <Text style={styles.name_club}>{nameHome}</Text>
                 </View>
                 <View style={[appStyles.align_justify, styles.time]}>
-                    {result === null ? (
-                        <Text style={styles.score}>{schedule}</Text>
-                    ) : (
-                        <Text style={styles.score}>{result}</Text>
+                    {result === null && schedule === null && (
+                        <Text
+                            style={[
+                                styles.score,
+                                {
+                                    color: appColors.light_gray,
+                                },
+                            ]}
+                        >
+                            - : -
+                        </Text>
                     )}
+                    {result === null && schedule !== null && (
+                        <Text style={styles.score}>{schedule}</Text>
+                    )}
+
+                    {result !== null && <Text style={styles.score}>{result}</Text>}
                 </View>
                 <View style={[appStyles.align_justify]}>
-                    <Avatar rounded size={getSize.m(40)} source={{ uri: logo_away }} />
+                    <Avatar rounded size={getSize.m(30)} source={{ uri: logo_away }} />
                     <Text style={styles.name_club}>{nameAway}</Text>
                 </View>
             </View>

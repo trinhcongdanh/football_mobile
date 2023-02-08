@@ -9,7 +9,7 @@ import { IAboutLeagueProps } from './AboutLeague.type';
 import { useViewModel } from './AboutLeague.viewModel';
 
 export const AboutLeague = ({}: IAboutLeagueProps) => {
-    const { t, aboutGames, dots, scrollX } = useViewModel({});
+    const { t, aboutGames, dots, activeIndexNumber, setActiveIndexNumber } = useViewModel({});
 
     let { width: windowWidth, height: windowHeight } = useWindowDimensions();
     windowHeight = windowHeight - 300;
@@ -31,9 +31,16 @@ export const AboutLeague = ({}: IAboutLeagueProps) => {
                     horizontal={true}
                     pagingEnabled
                     showsHorizontalScrollIndicator={false}
-                    onScroll={Animated.event([{ nativeEvent: { contentOffset: { x: scrollX } } }], {
-                        useNativeDriver: false,
-                    })}
+                    // snapToInterval={getSize.m(194)}
+                    onScroll={e => {
+                        let slide = Math.round(
+                            e.nativeEvent.contentOffset.x / e.nativeEvent.layoutMeasurement.width
+                        );
+                        if (slide !== activeIndexNumber) {
+                            console.log(slide);
+                            setActiveIndexNumber(slide); //here we will set our active index num
+                        }
+                    }}
                     scrollEventThrottle={16}
                 >
                     {aboutGames.map(item => {
@@ -58,8 +65,31 @@ export const AboutLeague = ({}: IAboutLeagueProps) => {
                     })}
                 </ScrollView>
             </View>
-            <View style={styles.indicatorContainer}>
-                {dots.map((item, index) => {
+            <View style={styles.dotContainer}>
+                {dots.map((_, index) => {
+                    return (
+                        <View key={index}>
+                            <View
+                                style={[
+                                    styles.dot,
+                                    {
+                                        width:
+                                            index === activeIndexNumber
+                                                ? getSize.m(18)
+                                                : getSize.m(5),
+                                        backgroundColor:
+                                            index === activeIndexNumber
+                                                ? appColors.blue_light
+                                                : appColors.soft_grey,
+                                    },
+                                ]}
+                            ></View>
+                        </View>
+                    );
+                })}
+            </View>
+            {/* <View style={styles.indicatorContainer}> */}
+            {/* {dots.map((item, index) => {
                     const width = scrollX.interpolate({
                         inputRange: [
                             windowWidth * (index - 1),
@@ -80,8 +110,8 @@ export const AboutLeague = ({}: IAboutLeagueProps) => {
                             ]}
                         />
                     );
-                })}
-            </View>
+                })} */}
+            {/* </View> */}
         </View>
     );
 };

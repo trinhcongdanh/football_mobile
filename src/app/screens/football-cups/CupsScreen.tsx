@@ -8,12 +8,12 @@ import { appStyles } from '@football/app/utils/constants/appStyles';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { Avatar } from 'react-native-elements';
 import { getSize } from '@football/app/utils/responsive/scale';
-import styles from './StatisticDetailsScreen.style';
-import { useViewModel } from './StatisticDetailsScreen.viewModel';
-import { IStatisticDetailsScreenProps } from './StatisticDetailsScreen.type';
 import LinearGradient from 'react-native-linear-gradient';
+import { ICupsScreenProps } from '@football/app/screens/football-cups/CupsScreen.type';
+import { useViewModel } from '@football/app/screens/football-cups/CupsScreen.viewModel';
+import styles from '@football/app/screens/football-cups/CupsScreen.style';
 
-export const StatisticDetailsScreen = ({ navigation, route }: IStatisticDetailsScreenProps) => {
+export const CupsScreen = ({ navigation, route }: ICupsScreenProps) => {
     const { t, onGoBack, listGoals } = useViewModel({
         navigation,
         route,
@@ -28,11 +28,11 @@ export const StatisticDetailsScreen = ({ navigation, route }: IStatisticDetailsS
                             iconName={appIcons.ic_right_ios}
                             iconStyle={styles.ic_back}
                             goBack={onGoBack}
-                            title={t('statistics.leagues.goal')}
+                            title="מחזיקות גביע"
                         />
                     </View>
                     <ScrollView>
-                        <HeaderLogo text="ליגת הבורסה לניירות ערך" avt={AppImages.img_leagues} />
+                        <HeaderLogo text="גביע המדינה" avt={AppImages.img_leagues} />
                         <View style={[appStyles.package, { marginTop: getSize.m(0) }]}>
                             <View style={appStyles.item_statistics}>
                                 <View
@@ -43,7 +43,7 @@ export const StatisticDetailsScreen = ({ navigation, route }: IStatisticDetailsS
                                         },
                                     ]}
                                 >
-                                    <View style={{ width: getSize.m(120) }}>
+                                    <View style={{ width: getSize.m(80) }}>
                                         <Text
                                             style={[
                                                 appStyles.statistics_header,
@@ -61,16 +61,6 @@ export const StatisticDetailsScreen = ({ navigation, route }: IStatisticDetailsS
                                             ]}
                                         >
                                             {t('statistics.leagues.name_player')}
-                                        </Text>
-                                    </View>
-                                    <View style={{ width: getSize.m(40) }}>
-                                        <Text
-                                            style={[
-                                                appStyles.statistics_header,
-                                                { fontSize: getSize.m(12) },
-                                            ]}
-                                        >
-                                            {t('statistics.leagues.gate')}
                                         </Text>
                                     </View>
                                 </View>
@@ -95,6 +85,23 @@ export const StatisticDetailsScreen = ({ navigation, route }: IStatisticDetailsS
                                                     appStyles.statistic_row,
                                                 ]}
                                             >
+                                                <View
+                                                    style={{
+                                                        overflow: 'hidden',
+                                                        width: getSize.m(80),
+                                                    }}
+                                                >
+                                                    <Text
+                                                        style={[
+                                                            appStyles.statistics_content,
+                                                            {
+                                                                fontSize: getSize.m(14),
+                                                            },
+                                                        ]}
+                                                    >
+                                                        {item.seasion}
+                                                    </Text>
+                                                </View>
                                                 <View
                                                     style={{
                                                         width: getSize.m(120),
@@ -123,49 +130,6 @@ export const StatisticDetailsScreen = ({ navigation, route }: IStatisticDetailsS
                                                             {item.name_club}
                                                         </Text>
                                                     </View>
-                                                </View>
-                                                <View
-                                                    style={{
-                                                        width: getSize.m(120),
-                                                        overflow: 'hidden',
-                                                    }}
-                                                >
-                                                    <View
-                                                        style={{
-                                                            flexDirection: 'row',
-                                                        }}
-                                                    >
-                                                        <Avatar
-                                                            source={item.avt_player}
-                                                            rounded
-                                                            size={18}
-                                                        />
-                                                        <Text
-                                                            style={[
-                                                                appStyles.statistics_content,
-                                                                {
-                                                                    marginLeft: getSize.m(10),
-                                                                    fontSize: getSize.m(14),
-                                                                },
-                                                            ]}
-                                                        >
-                                                            {item.name_player}
-                                                        </Text>
-                                                    </View>
-                                                </View>
-                                                <View
-                                                    style={{
-                                                        width: getSize.m(40),
-                                                    }}
-                                                >
-                                                    <Text
-                                                        style={[
-                                                            appStyles.statistics_content,
-                                                            { fontSize: getSize.m(14) },
-                                                        ]}
-                                                    >
-                                                        {item.gate}
-                                                    </Text>
                                                 </View>
                                             </LinearGradient>
                                         );

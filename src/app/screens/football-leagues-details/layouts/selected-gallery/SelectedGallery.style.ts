@@ -51,6 +51,19 @@ const styles = StyleSheet.create({
         borderColor: 'rgba(255, 255, 255, 0.2)',
         borderWidth: getSize.m(2),
     },
+
+    dotContainer: {
+        flexDirection: 'row-reverse',
+        justifyContent: 'center',
+        marginTop: getSize.m(20),
+    },
+
+    dot: {
+        width: getSize.m(5),
+        height: getSize.m(5),
+        marginHorizontal: getSize.m(2.5),
+        borderRadius: getSize.m(5),
+    },
 });
 
 export default styles;

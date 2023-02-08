@@ -5,8 +5,8 @@ export type IListGameProps = {
     nameAway: string;
     location: string;
     date: string;
-    result: string;
-    schedule: string;
+    result: any;
+    schedule: any;
     details?: string;
     icon?: any;
     tournament?: string;

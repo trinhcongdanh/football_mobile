@@ -55,6 +55,18 @@ const styles = StyleSheet.create({
         backgroundColor: appColors.separator,
         marginHorizontal: getSize.m(5),
     },
+    dotContainer: {
+        flexDirection: 'row-reverse',
+        justifyContent: 'center',
+        marginTop: getSize.m(16),
+    },
+
+    dot: {
+        width: getSize.m(5),
+        height: getSize.m(5),
+        marginHorizontal: getSize.m(2.5),
+        borderRadius: getSize.m(5),
+    },
 });
 
 export default styles;

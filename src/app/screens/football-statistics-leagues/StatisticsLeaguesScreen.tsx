@@ -59,9 +59,9 @@ export const StatisticsLeaguesScreen = ({ navigation, route }: IStatisticsLeague
                         <View style={appStyles.package}>
                             <LeaguesAverage />
                         </View>
-                        <View style={appStyles.package}>
+                        {/* <View style={appStyles.package}>
                             <TeamCompetition />
-                        </View>
+                        </View> */}
                         <View style={appStyles.package}>
                             <HistoryChampionShips />
                         </View>
