@@ -33,7 +33,12 @@ export const CupsScreen = ({ navigation, route }: ICupsScreenProps) => {
                     </View>
                     <ScrollView>
                         <HeaderLogo text="גביע המדינה" avt={AppImages.img_leagues} />
-                        <View style={[appStyles.package, { marginTop: getSize.m(0) }]}>
+                        <View
+                            style={[
+                                appStyles.package,
+                                { marginTop: getSize.m(0), minHeight: getSize.m(900) },
+                            ]}
+                        >
                             <View style={appStyles.item_statistics}>
                                 <View
                                     style={[
