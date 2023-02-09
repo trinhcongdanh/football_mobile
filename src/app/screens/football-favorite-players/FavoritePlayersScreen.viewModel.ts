@@ -7,7 +7,7 @@ import { axiosClient } from '@football/core/api/configs/axiosClient';
 import { BASE_URL, DATA_SOURCE, DB } from '@football/core/api/configs/config';
 import { PlayerModel, PlayersModelResponse } from '@football/core/models/PlayerModelResponse';
 import { TeamModel } from '@football/core/models/TeamModelResponse';
-import { Position, TeamPersonnelModel } from '@football/core/models/TeamPersonnelResponse';
+import { Players, TeamPersonnelModel } from '@football/core/models/TeamPersonnelResponse';
 import { get, isEmpty, isNil, pick } from 'lodash';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -73,7 +73,7 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
                 listFavPlayers: favPlayer.listFavPlayers.map(player => ({
                     ...player,
                     isSelected: selectedFavPlayersMap.has(player._id),
-                })) as PlayerModel[] | Position[],
+                })) as PlayerModel[] | Players[],
             };
         });
     }, [favPlayers, selectedFavPlayersMap]);
@@ -153,17 +153,18 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
                     selectedFavTeams.map((favTeam: TeamModel, index: number) => {
                         data.documents.map((team_personnel: TeamPersonnelModel) => {
                             if (favTeam.team_personnel_id === team_personnel._id) {
-                                let temp = [];
-                                temp.push(...team_personnel.players.attack);
-                                temp.push(...team_personnel.players.midfield);
-                                temp.push(...team_personnel.players.defence);
-                                temp.push(...team_personnel.players.goalkeepers);
-
+                                var temp: Players[] = [];
+                                team_personnel.players.map((player_personnel: Players) => {
+                                    temp.push(player_personnel);
+                                });
                                 dispatch(
                                     setGroupFavPlayer({
                                         id: team_personnel._id,
                                         label: favTeam.name_he,
-                                        listFavPlayers: temp.map(v => ({ ...v, _id: v.player_id })),
+                                        listFavPlayers: temp.map(v => ({
+                                            ...v,
+                                            _id: v.player_id,
+                                        })),
                                     })
                                 );
                             }
@@ -176,10 +177,10 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
         }
     }, []);
 
-    function convertToCommonPlayer(player: PlayerModel | Position): SelectedPlayer {
+    function convertToCommonPlayer(player: PlayerModel | Players): SelectedPlayer {
         return pick(player, ['name_en', 'name_he', 'image_url', '_id']);
     }
-    const handleSelected = (player: PlayerModel | Position) => {
+    const handleSelected = (player: PlayerModel | Players) => {
         if (!isEmpty(favSearchPlayers)) {
             dispatch(pushAllFavPlayers(convertToCommonPlayer(player)));
         } else {
@@ -285,12 +286,10 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
                             selectedFavTeams.map((favTeam: TeamModel, index: number) => {
                                 data.documents.map((team_personnel: TeamPersonnelModel) => {
                                     if (favTeam.team_personnel_id === team_personnel._id) {
-                                        let temp = [];
-                                        temp.push(...team_personnel.players.attack);
-                                        temp.push(...team_personnel.players.midfield);
-                                        temp.push(...team_personnel.players.defence);
-                                        temp.push(...team_personnel.players.goalkeepers);
-
+                                        var temp: Players[] = [];
+                                        team_personnel.players.map((player_personnel: Players) => {
+                                            temp.push(player_personnel);
+                                        });
                                         dispatch(
                                             setGroupFavPlayer({
                                                 id: team_personnel._id,
