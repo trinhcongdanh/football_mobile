@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { Keyboard } from 'react-native';
 import { ScreenName } from '@football/app/utils/constants/enum';
 import { IRegScreenProps } from './RegScreen.type';
@@ -29,8 +29,10 @@ export const useViewModel = ({ navigation, route }: IRegScreenProps) => {
 
     const user = { username: '', gender: '', date: '' };
 
-    const handleOnChange = (e: any) => {
-        user.username = e;
+    const userNameRef = useRef<any>(null);
+    const [userName, setUserName] = useState('');
+    const handleOnChange = (e: string) => {
+        setUserName(e);
     };
 
     const handleOnDate = (e: Date) => {
@@ -61,5 +63,7 @@ export const useViewModel = ({ navigation, route }: IRegScreenProps) => {
         createInfo,
         handleOnDate,
         toggleOnCheck,
+        userName,
+        userNameRef,
     };
 };

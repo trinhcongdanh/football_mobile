@@ -117,6 +117,7 @@ export const appStyles = StyleSheet.create({
         fontWeight: '700',
         lineHeight: getSize.m(17),
         color: appColors.text_dark_blue,
+        fontFamily: AppFonts.bold,
     },
     text_error: {
         color: 'red',

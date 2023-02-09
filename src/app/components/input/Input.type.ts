@@ -4,7 +4,7 @@ export type IInputComponent = {
     error: string;
     placeholder: string;
     input: string;
-    inputRef: any;
+    inputRef?: any;
     styleInput?: StyleProp<ViewStyle>;
     onChangeTextInput: (text: string) => void;
     onFocus: () => void;
