@@ -47,20 +47,24 @@ export const CupsScreen = ({ navigation, route }: ICupsScreenProps) => {
                                         <Text
                                             style={[
                                                 appStyles.statistics_header,
-                                                { textAlign: 'left', fontSize: getSize.m(12) },
+                                                {
+                                                    textAlign: 'left',
+                                                    fontSize: getSize.m(12),
+                                                    left: getSize.m(10),
+                                                },
                                             ]}
                                         >
-                                            {t('statistics.leagues.name_club')}
+                                            {t('state_cup.cup.year')}
                                         </Text>
                                     </View>
-                                    <View style={{ width: getSize.m(120) }}>
+                                    <View style={{ width: getSize.m(180) }}>
                                         <Text
                                             style={[
                                                 appStyles.statistics_header,
                                                 { textAlign: 'left', fontSize: getSize.m(12) },
                                             ]}
                                         >
-                                            {t('statistics.leagues.name_player')}
+                                            {t('state_cup.cup.name')}
                                         </Text>
                                     </View>
                                 </View>
@@ -104,7 +108,7 @@ export const CupsScreen = ({ navigation, route }: ICupsScreenProps) => {
                                                 </View>
                                                 <View
                                                     style={{
-                                                        width: getSize.m(120),
+                                                        width: getSize.m(180),
                                                         overflow: 'hidden',
                                                     }}
                                                 >

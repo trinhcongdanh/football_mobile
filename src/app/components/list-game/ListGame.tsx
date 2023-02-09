@@ -78,7 +78,7 @@ export const ListGame = ({
                 <View style={[appStyles.flex_row_align, { flex: 0 }]}>
                     <IconLocation
                         name={appIcons.ic_location}
-                        size={getSize.m(15)}
+                        size={getSize.m(20)}
                         color={result !== null ? appColors.soft_grey : appColors.blue_light}
                     />
                     <Text
