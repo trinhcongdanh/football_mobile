@@ -37,6 +37,8 @@ export const RegScreen = ({ navigation, route }: IRegScreenProps) => {
         createInfo,
         handleOnDate,
         toggleOnCheck,
+        userName,
+        userNameRef,
     } = useViewModel({
         navigation,
         route,
@@ -62,10 +64,12 @@ export const RegScreen = ({ navigation, route }: IRegScreenProps) => {
                             <CardInfoView
                                 placeHolderText={t('reg.place_holder_name')}
                                 errors={errors.userName}
-                                handleOnChange={(e: string) => handleOnChange(e)}
+                                onChangeTextInput={(e: string) => handleOnChange(e)}
                                 handleError={() => {
                                     handleError('', 'userName');
                                 }}
+                                input={userName}
+                                inputRef={userNameRef}
                                 genderLabel={t('reg.gender.label')}
                                 male={t('reg.gender.male')}
                                 female={t('reg.gender.female')}
@@ -81,7 +85,10 @@ export const RegScreen = ({ navigation, route }: IRegScreenProps) => {
                                         {
                                             backgroundColor: onCheck
                                                 ? appColors.blue_light
-                                                : appColors.white,
+                                                : appColors.separator,
+                                            borderColor: onCheck
+                                                ? appColors.blue_light
+                                                : appColors.soft_grey,
                                         },
                                     ]}
                                     onPress={toggleOnCheck}
@@ -91,7 +98,12 @@ export const RegScreen = ({ navigation, route }: IRegScreenProps) => {
                                 <Text style={styles.agree}>{t('reg.agree')}</Text>
                                 <Text style={styles.provision}>{t('reg.provision')}</Text>
                             </View>
-                            <View style={{ marginHorizontal: getSize.m(16) }}>
+                            <View
+                                style={{
+                                    marginHorizontal: getSize.m(16),
+                                    marginBottom: getSize.m(197),
+                                }}
+                            >
                                 <Button
                                     disabled={!onCheck}
                                     style={{ borderRadius: getSize.m(15) }}

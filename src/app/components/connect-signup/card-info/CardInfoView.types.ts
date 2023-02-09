@@ -7,8 +7,9 @@ export type ICardInfoViewProps = {
     female: string;
     other: string;
     birthDateLabel: string;
-    input?: any;
-    handleOnChange: (e: string) => void;
+    input: string;
+    inputRef: any;
     handleError: () => void;
     handleOnDate: (e: Date) => void;
+    onChangeTextInput: (e: string) => void;
 };

@@ -11,7 +11,6 @@ import { AppFonts } from '@football/app/assets/fonts';
 
 export const CardInfoView = ({
     errors,
-    handleOnChange,
     handleError,
     handleOnDate,
     placeHolderText,
@@ -20,7 +19,9 @@ export const CardInfoView = ({
     female,
     other,
     input,
+    inputRef,
     birthDateLabel,
+    onChangeTextInput,
 }: ICardInfoViewProps) => {
     const date = new Date();
     const [gender, setGender] = useState(0);
@@ -36,9 +37,10 @@ export const CardInfoView = ({
             <Input
                 error={errors}
                 placeholder={placeHolderText}
-                onChangeText={(e: string) => handleOnChange(e)}
+                onChangeTextInput={onChangeTextInput}
                 onFocus={handleError}
-                ref={input}
+                input={input}
+                inputRef={inputRef}
             />
 
             <View style={{ marginTop: getSize.m(30) }}>

@@ -16,6 +16,7 @@ const styles = StyleSheet.create({
         fontWeight: '700',
         color: appColors.white,
         lineHeight: getSize.v(34),
+        marginRight: getSize.m(10),
     },
 
     date_picker: {
@@ -25,9 +26,9 @@ const styles = StyleSheet.create({
         borderRadius: getSize.m(15),
         overflow: 'hidden',
         shadowColor: appColors.shadow,
-        elevation: getSize.m(2),
+        elevation: getSize.m(1),
         paddingHorizontal: getSize.m(14),
-        paddingVertical: getSize.m(12),
+        paddingVertical: getSize.m(5),
     },
 });
 

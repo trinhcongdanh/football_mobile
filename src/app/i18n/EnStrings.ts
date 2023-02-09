@@ -109,7 +109,7 @@ const resources = {
             reg: {
                 title: 'וולקם! מלאו את הפרטים',
                 sub_title: 'הצטרפו אלינו וקבלו את כל המידע הכי חם על\n הקבוצה או השחקן שלכם!',
-                place_holder_name: '* שם / כינוי',
+                place_holder_name: 'שם / כינוי',
                 error: {
                     error_empty: 'נא להזין שם',
                     error_valid: 'שימוש בתווים לא תקינים',
@@ -648,7 +648,7 @@ const resources = {
                 title: 'Welcome! Fill in the details',
                 sub_title:
                     'Join us and get all the hottest information about\n Your team or player!',
-                place_holder_name: '* Nickname',
+                place_holder_name: 'Nickname',
                 error: {
                     error_empty: 'Please enter name',
                     error_valid: 'Use of invalid characters',
