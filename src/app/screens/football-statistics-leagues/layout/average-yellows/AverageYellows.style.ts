@@ -4,8 +4,8 @@ import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
     ticket: {
         marginLeft: getSize.m(9),
-        width: getSize.m(13),
-        height: getSize.m(19),
+        width: getSize.m(14),
+        height: getSize.m(20),
     },
 });
 

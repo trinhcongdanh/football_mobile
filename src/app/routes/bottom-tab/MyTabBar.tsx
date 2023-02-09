@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
     txt_tabbar_focus: {
         color: appColors.white,
         marginTop: getSize.m(5),
-        fontFamily: AppFonts.regular,
+        fontFamily: AppFonts.bold,
         fontSize: getSize.m(13),
         lineHeight: getSize.m(17),
         fontWeight: '700',

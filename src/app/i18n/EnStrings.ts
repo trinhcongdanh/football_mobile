@@ -352,6 +352,10 @@ const resources = {
                     date: 'תאריך',
                     round: 'סבב',
                 },
+                cup: {
+                    year: 'שנה',
+                    name: 'שם קבוצה',
+                },
             },
             group_page: {
                 info_group: {
@@ -886,6 +890,10 @@ const resources = {
                     cup_around: 'The cup rounds',
                     date: 'Date',
                     round: 'Round',
+                },
+                cup: {
+                    year: 'Year',
+                    name: 'A group name',
                 },
             },
             group_page: {

@@ -68,7 +68,7 @@ export const AccumulationYellows = ({}: IAccumulationYellowsProps) => {
                         {t('statistics.leagues.name_player')}
                     </Text>
                 </View>
-                <View style={{ width: getSize.m(40) }}>
+                <View style={{ width: getSize.m(44) }}>
                     <Text style={[appStyles.statistics_header, { fontSize: getSize.m(12) }]}>
                         {t('statistics.leagues.yellow')}
                     </Text>
@@ -138,7 +138,7 @@ export const AccumulationYellows = ({}: IAccumulationYellowsProps) => {
                             </View>
                             <View
                                 style={{
-                                    width: getSize.m(40),
+                                    width: getSize.m(44),
                                 }}
                             >
                                 <FastImage
