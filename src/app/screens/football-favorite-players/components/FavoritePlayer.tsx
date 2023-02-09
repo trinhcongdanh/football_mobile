@@ -24,7 +24,7 @@ import { HeaderFav } from '@football/app/components/header-fav/HeaderFav';
 import { Button } from '@football/app/components/button';
 import { IFavoritePlayerProps } from './FavoritePlayer.types';
 import styles from './FavoritePlayer.style';
-import { Position } from '@football/core/models/TeamPersonnelResponse';
+// import { Position } from '@football/core/models/TeamPersonnelResponse';
 import { AppFonts } from '@football/app/assets/fonts';
 
 export const FavoritePlayer = ({

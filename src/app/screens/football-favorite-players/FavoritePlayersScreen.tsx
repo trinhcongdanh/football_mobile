@@ -5,7 +5,8 @@ import { PlayerModel } from '@football/core/models/PlayerModelResponse';
 import { useViewModel } from './FavoritePlayersScreen.viewModel';
 import { IFavoritePlayerScreenProps } from './FavoritePlayersScreen.type';
 import { FavoritePlayer } from './components/FavoritePlayer';
-import { Position } from '@football/core/models/TeamPersonnelResponse';
+// import { Position } from '@football/core/models/TeamPersonnelResponse';
+import { Players } from '@football/core/models/TeamPersonnelResponse';
 import { getSize } from '@football/app/utils/responsive/scale';
 import { isEmpty } from 'lodash';
 
@@ -62,7 +63,7 @@ export const FavoritePlayersScreen = ({ navigation, route }: IFavoritePlayerScre
                     setSearchText(text);
                     searchFavPlayer(text);
                 }}
-                handleSelected={(item: PlayerModel | Position) => {
+                handleSelected={(item: PlayerModel | Players) => {
                     handleSelected(item);
                 }}
                 newFav={

@@ -1,6 +1,6 @@
 import { AxiosResponse } from 'axios';
 
-export interface Position {
+export interface Players {
     _id: string;
     player_id: string;
     name_he: string;
@@ -9,12 +9,12 @@ export interface Position {
     isSelected: boolean;
 }
 
-export interface Players {
-    goalkeepers: Position[];
-    defence: Position[];
-    midfield: Position[];
-    attack: Position[];
-}
+// export interface Players {
+//     goalkeepers: Position[];
+//     defence: Position[];
+//     midfield: Position[];
+//     attack: Position[];
+// }
 
 export interface Staff {
     coach_id: string;
@@ -30,7 +30,7 @@ export interface TeamPersonnelModel {
     team_id: string;
     team_season_id?: any;
     is_top_team: boolean;
-    players: Players;
+    players: Players[];
     staff: Staff[];
 }
 
