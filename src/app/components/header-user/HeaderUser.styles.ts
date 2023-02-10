@@ -16,8 +16,8 @@ export const styles = StyleSheet.create({
         marginRight: getSize.m(3),
     },
     bar: {
-        width: getSize.s(40),
-        height: getSize.s(40),
+        width: getSize.m(40),
+        height: getSize.m(40),
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: getSize.m(40),

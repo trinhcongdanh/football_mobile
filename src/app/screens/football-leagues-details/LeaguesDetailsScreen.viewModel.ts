@@ -35,40 +35,19 @@ export const useViewModel = ({ navigation, route }: ILeaguesDetailsScreenProps) 
     // Cycle
     const [openModalCycle, setOpenModalCycle] = useState(false);
     const [selectCycle, setSelectCycle] = useState('34 מחזור');
-    const [cycles, setCycle] = useState<any[]>([
-        { id: 1, content: '30 מחזור', isSelected: false },
-        { id: 2, content: '31 מחזור', isSelected: false },
-        { id: 3, content: '32 מחזור', isSelected: false },
-        { id: 4, content: '33 מחזור', isSelected: false },
-        { id: 5, content: '34 מחזור', isSelected: true },
-    ]);
-    const handleSelectedCycle = (item: any) => {
-        setSelectCycle(item.content);
-        const newCycles = cycles.map(e => {
-            return { ...e, isSelected: e.id === item.id };
-        });
-        setCycle(newCycles);
-        setOpenModalCycle(false);
-    };
+    const cycles = ['30 מחזור', '31 מחזור', '32 מחזור', '33 מחזור', '34 מחזור'];
 
     // Top playoff
     const [openModalPlayOff, setOpenModalPlayOff] = useState(false);
     const [selectPlayoff, setSelectPlayoff] = useState('פלייאוף עליון');
-    const [playOffs, setPlayOff] = useState<any[]>([
-        { id: 1, content: 'פלייאוף עליון', isSelected: true },
-        { id: 2, content: 'פלייאוף עליון', isSelected: false },
-        { id: 3, content: 'פלייאוף עליון', isSelected: false },
-        { id: 4, content: 'פלייאוף עליון', isSelected: false },
-        { id: 5, content: 'פלייאוף עליון', isSelected: false },
-    ]);
-    const handleSelectedPlayOff = (item: any) => {
-        setSelectPlayoff(item.content);
-        const newPlayOff = playOffs.map(e => {
-            return { ...e, isSelected: e.id === item.id };
-        });
-        setPlayOff(newPlayOff);
-        setOpenModalPlayOff(false);
-    };
+
+    const playOffs = [
+        'פלייאוף עליון',
+        'פלייאוף עליון',
+        'פלייאוף עליון',
+        'פלייאוף עליון',
+        'פלייאוף עליון',
+    ];
 
     const handleCloseModal = () => {
         setOpenModalYear(false);
@@ -83,9 +62,9 @@ export const useViewModel = ({ navigation, route }: ILeaguesDetailsScreenProps) 
         handleSelectedYear,
         handleCloseModal,
         setOpenModalCycle,
-        handleSelectedCycle,
-        handleSelectedPlayOff,
         setOpenModalPlayOff,
+        setSelectCycle,
+        setSelectPlayoff,
         openModalYear,
         selectYear,
         years,

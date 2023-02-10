@@ -64,7 +64,7 @@ export const TeamScreen = ({ navigation, route }: ITeamScreenProps) => {
                         <HeaderUser
                             avt={AppImages.img_avt}
                             point="1,325"
-                            icon={appIcons.ic_align_right}
+                            icon={AppImages.img_bars_sort}
                             color_pre={appColors.blue_light}
                             color_after={appColors.blue_dark}
                             handlePressFunction={toggleChangeBar}

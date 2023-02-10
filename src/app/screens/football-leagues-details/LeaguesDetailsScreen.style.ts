@@ -52,15 +52,29 @@ const styles = StyleSheet.create({
         fontWeight: '900',
     },
     drop_down_calender: {
-        borderColor: appColors.border,
-        borderWidth: 1,
-        width: '40%',
+        position: 'absolute',
+        right: getSize.m(10),
+        top: getSize.m(48),
+        zIndex: 10,
+        backgroundColor: appColors.white,
+        borderBottomLeftRadius: getSize.m(20),
+        borderBottomRightRadius: getSize.m(20),
+        elevation: 1,
     },
     btn_drop_down_calender: {
         borderColor: appColors.border,
         borderBottomWidth: 1,
-        paddingHorizontal: getSize.m(17),
+        marginHorizontal: getSize.m(12),
         paddingVertical: getSize.m(15),
+    },
+
+    btn_drop_down_calender_text: {
+        textAlign: 'left',
+        fontWeight: '700',
+        fontSize: getSize.m(13),
+        fontFamily: AppFonts.bold,
+        lineHeight: getSize.m(17),
+        color: appColors.text_dark_blue,
     },
 
     line_dots: {
@@ -80,6 +94,7 @@ const styles = StyleSheet.create({
         elevation: getSize.m(1),
         flexDirection: 'row',
         justifyContent: 'space-between',
+        zIndex: 10,
     },
     cycle: {
         flexDirection: 'row',
@@ -89,7 +104,6 @@ const styles = StyleSheet.create({
         paddingVertical: getSize.m(12),
         marginHorizontal: getSize.m(7),
         borderRadius: getSize.m(10),
-        borderColor: appColors.border,
         borderWidth: getSize.m(1),
         flex: 1,
     },

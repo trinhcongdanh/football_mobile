@@ -25,7 +25,7 @@ export const GameCompositionScreen = ({ navigation, route }: IGameCompositionScr
                         <HeaderUser
                             avt={AppImages.img_avt}
                             point="1,325"
-                            icon={appIcons.ic_right_ios}
+                            icon={AppImages.img_angle_right}
                             color_pre={appColors.text_dark_blue}
                             color_after={appColors.text_dark_blue}
                             handlePressFunction={onGoBack}

@@ -105,7 +105,7 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                         <HeaderUser
                             avt={AppImages.img_avt}
                             point="1,325"
-                            icon={appIcons.ic_right_ios}
+                            icon={AppImages.img_angle_right}
                             color_pre={appColors.black}
                             color_after={appColors.black}
                             handlePressFunction={onGoBack}

@@ -60,4 +60,6 @@ export const AppImages = {
     img_time: require('./time.png'),
     img_user: require('./user.png'),
     img_building: require('./building.png'),
+    img_bars_sort: require('./bars_sort.png'),
+    img_angle_right: require('./angle_right.png'),
 };
