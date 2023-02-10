@@ -43,7 +43,15 @@ export const HeaderUser = ({
             </View>
             <TouchableOpacity onPress={handlePressFunction}>
                 <LinearGradient colors={[color_pre, color_after]} style={styles.bar}>
-                    <Icon name={icon} color={appColors.white} size={getSize.m(20)} />
+                    {/* <Icon name={icon} color={appColors.white} size={getSize.m(20)} /> */}
+                    <FastImage
+                        source={icon}
+                        resizeMode={FastImage.resizeMode.contain}
+                        style={{
+                            width: getSize.m(12),
+                            height: getSize.m(12),
+                        }}
+                    />
                 </LinearGradient>
             </TouchableOpacity>
         </View>

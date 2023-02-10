@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
     text_label: {
         textAlign: 'left',
         fontSize: getSize.m(16),
-        fontFamily: AppFonts.regular,
+        fontFamily: AppFonts.bold,
         color: appColors.text_dark_blue,
         fontWeight: '700',
         lineHeight: getSize.m(20),
@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
     frame: {
         fontWeight: '500',
         fontSize: getSize.m(13),
-        fontFamily: AppFonts.regular,
+        fontFamily: AppFonts.medium,
         lineHeight: getSize.m(17),
         marginRight: getSize.m(3),
         color: appColors.light_gray,
@@ -112,13 +112,12 @@ const styles = StyleSheet.create({
         paddingVertical: getSize.m(11),
         backgroundColor: appColors.blue_matte,
         borderRadius: getSize.m(10),
-        marginVertical: getSize.m(10),
     },
     date: {
         fontSize: getSize.m(11),
         fontWeight: '500',
         lineHeight: getSize.m(17),
-        fontFamily: AppFonts.regular,
+        fontFamily: AppFonts.medium,
         color: appColors.text_dark_blue,
     },
     score: {

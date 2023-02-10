@@ -11,6 +11,7 @@ import { appIcons } from '@football/app/assets/icons/appIcons';
 import styles from './DataPlayerTeamScreen.style';
 // import { IDataPlayerTeamScreenProps } from './DataPlayerTeamScreen.type';
 import { useViewModel } from './DataPlayerTeamScreen.viewModel';
+import LinearGradient from 'react-native-linear-gradient';
 
 export const DataPlayerTeamScreen = (props: any) => {
     const {
@@ -129,10 +130,21 @@ export const DataPlayerTeamScreen = (props: any) => {
                             ליגת ONE ZERO בנקאות פרטית דיגיטלית
                         </Text>
                     </View>
-                    <View style={[{ marginHorizontal: getSize.m(10) }]}>
+                    <View style={[{ marginHorizontal: getSize.m(10), marginTop: getSize.m(12) }]}>
                         {datas.map(item => {
                             return (
-                                <View
+                                <LinearGradient
+                                    colors={[
+                                        item.id % 2 === 1
+                                            ? 'rgba(255, 255, 255, 0.05)'
+                                            : appColors.gray,
+                                        item.id % 2 === 1
+                                            ? 'rgba(16, 32, 100, 0.05)'
+                                            : appColors.gray,
+                                        item.id % 2 === 1
+                                            ? 'rgba(59, 168, 225, 0.05)'
+                                            : appColors.gray,
+                                    ]}
                                     style={[appStyles.flex_row_space_center, styles.result]}
                                     key={item.id}
                                 >
@@ -165,7 +177,11 @@ export const DataPlayerTeamScreen = (props: any) => {
                                         <IconBall name="volleyball-ball" />
                                         <Image
                                             source={AppImages.img_ticket_red}
-                                            style={{ marginLeft: getSize.m(16) }}
+                                            style={{
+                                                marginLeft: getSize.m(16),
+                                                width: getSize.m(14),
+                                                height: getSize.m(20),
+                                            }}
                                         />
                                         <Text style={[styles.date, { marginLeft: getSize.m(16) }]}>
                                             {item.time}
@@ -176,7 +192,7 @@ export const DataPlayerTeamScreen = (props: any) => {
                                             size={getSize.m(10)}
                                         />
                                     </View>
-                                </View>
+                                </LinearGradient>
                             );
                         })}
                     </View>
@@ -184,10 +200,21 @@ export const DataPlayerTeamScreen = (props: any) => {
                         <Text style={styles.frame}>{t('data_player.frame')}:</Text>
                         <Text style={appStyles.text_label}>מסלול אירופה</Text>
                     </View>
-                    <View style={[{ marginHorizontal: getSize.m(10) }]}>
+                    <View style={[{ marginHorizontal: getSize.m(10), marginTop: getSize.m(12) }]}>
                         {datas.map(item => {
                             return (
-                                <View
+                                <LinearGradient
+                                    colors={[
+                                        item.id % 2 === 1
+                                            ? 'rgba(255, 255, 255, 0.05)'
+                                            : appColors.gray,
+                                        item.id % 2 === 1
+                                            ? 'rgba(16, 32, 100, 0.05)'
+                                            : appColors.gray,
+                                        item.id % 2 === 1
+                                            ? 'rgba(59, 168, 225, 0.05)'
+                                            : appColors.gray,
+                                    ]}
                                     style={[appStyles.flex_row_space_center, styles.result]}
                                     key={item.id}
                                 >
@@ -220,7 +247,11 @@ export const DataPlayerTeamScreen = (props: any) => {
                                         <IconBall name="volleyball-ball" />
                                         <Image
                                             source={AppImages.img_ticket_red}
-                                            style={{ marginLeft: getSize.m(16) }}
+                                            style={{
+                                                marginLeft: getSize.m(16),
+                                                width: getSize.m(14),
+                                                height: getSize.m(20),
+                                            }}
                                         />
                                         <Text style={[styles.date, { marginLeft: getSize.m(16) }]}>
                                             {item.time}
@@ -231,7 +262,7 @@ export const DataPlayerTeamScreen = (props: any) => {
                                             size={getSize.m(10)}
                                         />
                                     </View>
-                                </View>
+                                </LinearGradient>
                             );
                         })}
                     </View>
