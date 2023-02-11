@@ -3,4 +3,6 @@ export type IPositionProps = {
     color?: any;
     width?: any;
     fontWeight?: any;
+    fontFamily?: any;
+    fontSize?: any;
 };

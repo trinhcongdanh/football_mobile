@@ -62,4 +62,7 @@ export const AppImages = {
     img_building: require('./building.png'),
     img_bars_sort: require('./bars_sort.png'),
     img_angle_right: require('./angle_right.png'),
+    img_light_volleyball: require('./light_volleyball.png'),
+    img_calendar: require('./calendar.png'),
+    img_location_dot: require('./location_dot.png'),
 };

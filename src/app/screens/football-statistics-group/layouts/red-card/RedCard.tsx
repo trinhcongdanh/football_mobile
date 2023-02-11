@@ -10,19 +10,13 @@ import { Avatar } from 'react-native-elements';
 import styles from './RedCard.style';
 import { useViewModel } from './RedCard.viewModel';
 import LinearGradient from 'react-native-linear-gradient';
+import FastImage from 'react-native-fast-image';
 
 export const RedCard = () => {
     const { t, listPlayerGoal } = useViewModel({});
     return (
         <View style={appStyles.item_statistics}>
-            <View
-                style={[
-                    appStyles.flex_row_space_center,
-                    {
-                        marginHorizontal: getSize.m(4),
-                    },
-                ]}
-            >
+            <View style={[appStyles.flex_row_space_center]}>
                 <Text style={appStyles.statistics_title}>{t('statistics.group.red_card')}</Text>
                 <TouchableOpacity style={appStyles.flex_row_space_center}>
                     <Text style={appStyles.statistics_see_all}>
@@ -46,7 +40,7 @@ export const RedCard = () => {
                 ]}
             >
                 <View>
-                    <Text style={appStyles.statistics_header}>
+                    <Text style={[appStyles.statistics_header, { fontSize: getSize.m(12) }]}>
                         {t('statistics.group.player_name')}
                     </Text>
                 </View>
@@ -55,7 +49,7 @@ export const RedCard = () => {
                         width: getSize.m(40),
                     }}
                 >
-                    <Text style={appStyles.statistics_header}>
+                    <Text style={[appStyles.statistics_header, { fontSize: getSize.m(12) }]}>
                         {t('statistics.group.number_red')}
                     </Text>
                 </View>
@@ -84,6 +78,7 @@ export const RedCard = () => {
                                             appStyles.statistics_content,
                                             {
                                                 marginLeft: getSize.m(10),
+                                                fontSize: getSize.m(14),
                                             },
                                         ]}
                                     >
@@ -93,11 +88,21 @@ export const RedCard = () => {
                             </View>
                             <View
                                 style={{
-                                    width: getSize.m(40),
+                                    width: getSize.m(44),
                                 }}
                             >
-                                <Image source={AppImages.img_ticket_red} style={styles.ticket} />
-                                <Text style={[appStyles.statistics_content]}>{item.red}</Text>
+                                <FastImage
+                                    source={AppImages.img_ticket_red}
+                                    style={styles.ticket}
+                                />
+                                <Text
+                                    style={[
+                                        appStyles.statistics_content,
+                                        { fontSize: getSize.m(14), color: appColors.white },
+                                    ]}
+                                >
+                                    {item.red}
+                                </Text>
                             </View>
                         </LinearGradient>
                     );

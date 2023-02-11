@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import styles from './ButtonOption.style';
 import { appColors } from '@football/app/utils/constants/appColors';
+import { AppFonts } from '@football/app/assets/fonts';
 
 export const ButtonOption = ({ option_one, option_two, onSelect }: IButtonOptionComponent) => {
     const { t } = useTranslation();
@@ -43,6 +44,7 @@ export const ButtonOption = ({ option_one, option_two, onSelect }: IButtonOption
                                             ? appColors.white
                                             : appColors.text_option_unselect,
                                     fontWeight: index === select ? '700' : '500',
+                                    fontFamily: index === select ? AppFonts.bold : AppFonts.medium,
                                 },
                             ]}
                         >

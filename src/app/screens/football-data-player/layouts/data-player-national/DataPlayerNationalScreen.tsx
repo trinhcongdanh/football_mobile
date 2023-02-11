@@ -10,6 +10,8 @@ import { appIcons } from '@football/app/assets/icons/appIcons';
 import styles from './DataPlayerNationalScreen.style';
 // import { IDataPlayerNationalScreenProps } from './DataPlayerNationalScreen.type';
 import { useViewModel } from './DataPlayerNationalScreen.viewModel';
+import FastImage from 'react-native-fast-image';
+import LinearGradient from 'react-native-linear-gradient';
 
 export const DataPlayerNationalScreen = (props: any) => {
     const { t, setSelected, setOpenModal, goals, years, selected, openModal } = useViewModel({});
@@ -18,42 +20,19 @@ export const DataPlayerNationalScreen = (props: any) => {
             <View style={styles.container_national}>
                 <View style={[appStyles.align_justify, styles.team_national]}>
                     <View style={styles.logo_club}>
-                        <Avatar source={AppImages.img_logo} size={getSize.m(40)} />
+                        <FastImage
+                            source={AppImages.img_logo}
+                            style={{ width: getSize.m(50), height: getSize.m(56) }}
+                        />
                     </View>
-                    <View style={[appStyles.align_justify, { marginTop: getSize.m(54) }]}>
+                    <View
+                        style={[
+                            appStyles.align_justify,
+                            { marginTop: getSize.m(54), marginBottom: getSize.m(20) },
+                        ]}
+                    >
                         <Text style={styles.name_national}>נבחרת לאומית גברים</Text>
                     </View>
-                    <View style={[appStyles.align_justify, { marginVertical: getSize.m(16) }]}>
-                        <TouchableOpacity
-                            onPress={() => {
-                                setOpenModal(!openModal);
-                            }}
-                            style={styles.calender}
-                        >
-                            <Text style={styles.text_calender}>{selected}</Text>
-                            <Icon name={appIcons.ic_chevron_down} size={getSize.m(14)} />
-                        </TouchableOpacity>
-                    </View>
-                    {openModal && (
-                        <View style={styles.drop_down_calender}>
-                            <ScrollView showsVerticalScrollIndicator={false} nestedScrollEnabled>
-                                {years.map((input: string, index: number) => {
-                                    return (
-                                        <TouchableOpacity
-                                            onPress={() => {
-                                                setSelected(input);
-                                                setOpenModal(false);
-                                            }}
-                                            key={index.toString()}
-                                            style={styles.btn_drop_down_calender}
-                                        >
-                                            <Text style={{ textAlign: 'left' }}>{input}</Text>
-                                        </TouchableOpacity>
-                                    );
-                                })}
-                            </ScrollView>
-                        </View>
-                    )}
                 </View>
                 <View style={[styles.item, { marginTop: getSize.m(30) }]}>
                     <View style={{ marginLeft: getSize.m(22) }}>
@@ -69,15 +48,18 @@ export const DataPlayerNationalScreen = (props: any) => {
                             <View style={appStyles.flex_row_align}>
                                 <View style={styles.team_national_date}>
                                     <Text style={appStyles.text_label}>פולין</Text>
-                                    <Text style={appStyles.number}>16/11/2019</Text>
+                                    <Text style={styles.date}>16/11/2019</Text>
                                 </View>
-
-                                <Avatar
-                                    source={AppImages.img_albania}
-                                    size={getSize.m(30)}
-                                    rounded
-                                    containerStyle={styles.logo_national}
-                                />
+                                <View style={styles.logo_national}>
+                                    <FastImage
+                                        source={AppImages.img_albania}
+                                        style={{
+                                            width: getSize.m(28),
+                                            height: getSize.m(28),
+                                            borderRadius: getSize.m(28),
+                                        }}
+                                    />
+                                </View>
                             </View>
                         </View>
                         <View style={[appStyles.flex_row_space_center, styles.info_player]}>
@@ -85,15 +67,19 @@ export const DataPlayerNationalScreen = (props: any) => {
                             <View style={appStyles.flex_row_align}>
                                 <View style={styles.team_national_date}>
                                     <Text style={appStyles.text_label}>פולין</Text>
-                                    <Text style={appStyles.number}>24/09/2022</Text>
+                                    <Text style={styles.date}>24/09/2022</Text>
                                 </View>
 
-                                <Avatar
-                                    source={AppImages.img_albania}
-                                    size={getSize.m(30)}
-                                    rounded
-                                    containerStyle={styles.logo_national}
-                                />
+                                <View style={styles.logo_national}>
+                                    <FastImage
+                                        source={AppImages.img_albania}
+                                        style={{
+                                            width: getSize.m(28),
+                                            height: getSize.m(28),
+                                            borderRadius: getSize.m(28),
+                                        }}
+                                    />
+                                </View>
                             </View>
                         </View>
                     </View>
@@ -102,14 +88,21 @@ export const DataPlayerNationalScreen = (props: any) => {
                     <View style={{ marginHorizontal: getSize.m(22) }}>
                         <Text style={styles.text_label}>{t('data_player.goal')}</Text>
                     </View>
-                    <View style={[appStyles.flex_row_space_center, styles.header]}>
+                    <LinearGradient
+                        colors={[
+                            'rgba(255, 255, 255, 0.05)',
+                            'rgba(16, 32, 100, 0.05)',
+                            'rgba(59, 168, 225, 0.05)',
+                        ]}
+                        style={[appStyles.flex_row_space_center, styles.header]}
+                    >
                         <Text style={[styles.text_header, { width: '40%' }]}>
                             {t('data_player.team')}
                         </Text>
                         <Text style={[styles.text_header]}>{t('data_player.games')}</Text>
                         <Text style={styles.text_header}>{t('data_player.gates')}</Text>
                         <Text style={styles.text_header}>{t('data_player.details')}</Text>
-                    </View>
+                    </LinearGradient>
                     <View style={{ marginHorizontal: getSize.m(22) }}>
                         {goals.map(item => {
                             return (
@@ -125,7 +118,7 @@ export const DataPlayerNationalScreen = (props: any) => {
                                     <TouchableOpacity style={[styles.details]}>
                                         <Icon
                                             name={appIcons.ic_arrow_left}
-                                            size={getSize.m(10)}
+                                            size={getSize.m(15)}
                                             color={appColors.text_dark_blue}
                                         />
                                     </TouchableOpacity>

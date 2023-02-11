@@ -200,7 +200,6 @@ export const appStyles = StyleSheet.create({
     item_statistics: {
         backgroundColor: appColors.gray,
         borderRadius: getSize.m(15),
-        paddingVertical: getSize.m(17),
         paddingHorizontal: getSize.m(12),
     },
     statistics_title: {

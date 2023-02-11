@@ -16,8 +16,8 @@ const styles = StyleSheet.create({
     logo_club: {
         backgroundColor: appColors.white,
         elevation: getSize.m(2),
-        width: getSize.m(54),
-        height: getSize.m(54),
+        width: getSize.m(65),
+        height: getSize.m(65),
         borderRadius: getSize.m(56),
         justifyContent: 'center',
         alignItems: 'center',
@@ -46,7 +46,6 @@ const styles = StyleSheet.create({
         marginHorizontal: getSize.m(10),
         paddingHorizontal: getSize.m(12),
         paddingVertical: getSize.m(7),
-        backgroundColor: appColors.blue_matte,
         borderRadius: getSize.m(5),
     },
 
@@ -55,7 +54,7 @@ const styles = StyleSheet.create({
         fontSize: getSize.m(12),
         lineHeight: getSize.m(16),
         fontWeight: '500',
-        fontFamily: AppFonts.regular,
+        fontFamily: AppFonts.medium,
     },
 
     calender: {
@@ -106,11 +105,11 @@ const styles = StyleSheet.create({
         borderRadius: getSize.m(10),
     },
     date: {
-        fontSize: getSize.m(11),
+        fontSize: getSize.m(12),
         fontWeight: '500',
         lineHeight: getSize.m(17),
-        fontFamily: AppFonts.regular,
-        color: appColors.text_dark_blue,
+        fontFamily: AppFonts.medium,
+        color: appColors.light_gray,
     },
     score: {
         fontSize: getSize.m(12),
@@ -121,8 +120,13 @@ const styles = StyleSheet.create({
     },
 
     logo_national: {
-        borderColor: appColors.white,
-        borderWidth: getSize.m(2),
+        width: getSize.m(30),
+        height: getSize.m(30),
+        borderRadius: getSize.m(30),
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: appColors.white,
+        elevation: 1,
     },
 
     info_player: {
@@ -138,7 +142,7 @@ const styles = StyleSheet.create({
 
     details: {
         padding: getSize.m(12),
-        backgroundColor: appColors.blue_matte,
+        backgroundColor: appColors.separator,
         borderRadius: getSize.m(30),
     },
 

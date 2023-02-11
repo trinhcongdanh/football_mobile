@@ -6,6 +6,7 @@ import { AppImages } from '@football/app/assets/images';
 import { Avatar } from 'react-native-elements';
 import { styles } from './TicketYellow.styles';
 import { ITicketYellowProps } from './TicketYellow.type';
+import FastImage from 'react-native-fast-image';
 
 export const TicketYellow = ({ name, avt, minute, team }: ITicketYellowProps) => {
     return (
@@ -14,7 +15,10 @@ export const TicketYellow = ({ name, avt, minute, team }: ITicketYellowProps) =>
                 <Text style={styles.time}>{minute}</Text>
 
                 <View style={styles.ticket}>
-                    <Image source={AppImages.img_ticket_yellow} />
+                    <FastImage
+                        source={AppImages.img_ticket_yellow}
+                        style={{ width: getSize.m(12), height: getSize.m(10) }}
+                    />
                 </View>
                 <Avatar
                     source={{ uri: avt }}

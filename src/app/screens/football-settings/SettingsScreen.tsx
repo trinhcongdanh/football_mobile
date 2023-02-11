@@ -31,8 +31,12 @@ import { useViewModel } from './SettingsScreen.viewModel';
 export function SettingsScreen(props: ISettingsScreenProps) {
     const {
         goBack,
-        isEnabled,
-        toggleSwitch,
+        isEnabled1,
+        isEnabled2,
+        isEnabled3,
+        toggleSwitch1,
+        toggleSwitch2,
+        toggleSwitch3,
         t,
         date,
         handleOnDate,
@@ -271,15 +275,15 @@ export function SettingsScreen(props: ISettingsScreenProps) {
                                     </Text>
                                     <TouchableOpacity
                                         activeOpacity={0.7}
-                                        onPress={toggleSwitch}
+                                        onPress={toggleSwitch1}
                                         style={[
                                             styles.btn_switch,
                                             {
-                                                backgroundColor: isEnabled
+                                                backgroundColor: isEnabled1
                                                     ? appColors.separator
                                                     : appColors.blue_light,
                                                 justifyContent: 'center',
-                                                alignItems: isEnabled ? 'flex-start' : 'flex-end',
+                                                alignItems: isEnabled1 ? 'flex-start' : 'flex-end',
                                             },
                                         ]}
                                     >
@@ -293,15 +297,15 @@ export function SettingsScreen(props: ISettingsScreenProps) {
                                     </Text>
                                     <TouchableOpacity
                                         activeOpacity={0.7}
-                                        onPress={toggleSwitch}
+                                        onPress={toggleSwitch2}
                                         style={[
                                             styles.btn_switch,
                                             {
-                                                backgroundColor: isEnabled
+                                                backgroundColor: isEnabled2
                                                     ? appColors.separator
                                                     : appColors.blue_light,
                                                 justifyContent: 'center',
-                                                alignItems: isEnabled ? 'flex-start' : 'flex-end',
+                                                alignItems: isEnabled2 ? 'flex-start' : 'flex-end',
                                             },
                                         ]}
                                     >
@@ -315,15 +319,15 @@ export function SettingsScreen(props: ISettingsScreenProps) {
                                     </Text>
                                     <TouchableOpacity
                                         activeOpacity={0.7}
-                                        onPress={toggleSwitch}
+                                        onPress={toggleSwitch3}
                                         style={[
                                             styles.btn_switch,
                                             {
-                                                backgroundColor: isEnabled
+                                                backgroundColor: isEnabled3
                                                     ? appColors.separator
                                                     : appColors.blue_light,
                                                 justifyContent: 'center',
-                                                alignItems: isEnabled ? 'flex-start' : 'flex-end',
+                                                alignItems: isEnabled3 ? 'flex-start' : 'flex-end',
                                             },
                                         ]}
                                     >

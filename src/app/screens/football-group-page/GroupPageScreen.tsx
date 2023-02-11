@@ -144,7 +144,7 @@ export const GroupPageScreen = ({ navigation, route }: IGroupPageScreenProps) =>
                                                             ? appIcons.ic_chevron_up
                                                             : appIcons.ic_chevron_down
                                                     }
-                                                    size={getSize.m(12)}
+                                                    size={getSize.m(18)}
                                                     color={
                                                         showInfo
                                                             ? appColors.text_option_unselect

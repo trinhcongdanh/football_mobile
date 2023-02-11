@@ -12,6 +12,8 @@ import styles from './DataPlayerTeamScreen.style';
 // import { IDataPlayerTeamScreenProps } from './DataPlayerTeamScreen.type';
 import { useViewModel } from './DataPlayerTeamScreen.viewModel';
 import LinearGradient from 'react-native-linear-gradient';
+import FastImage from 'react-native-fast-image';
+import { AppFonts } from '@football/app/assets/fonts';
 
 export const DataPlayerTeamScreen = (props: any) => {
     const {
@@ -161,24 +163,57 @@ export const DataPlayerTeamScreen = (props: any) => {
                                     >
                                         <View style={[appStyles.flex_row_align_center]}>
                                             <Text style={styles.name_club}>{item.home}</Text>
-                                            <Avatar source={AppImages.img_club} />
+                                            <View style={styles.avt_club}>
+                                                <FastImage
+                                                    source={AppImages.img_club}
+                                                    style={{
+                                                        width: getSize.m(24),
+                                                        height: getSize.m(24),
+                                                    }}
+                                                />
+                                            </View>
                                         </View>
                                         <View style={{ marginHorizontal: getSize.m(12) }}>
                                             <Text style={styles.score}>{item.result}</Text>
                                         </View>
                                         <View style={appStyles.flex_row_align_center}>
-                                            <Avatar source={AppImages.img_club} />
+                                            <View style={styles.avt_club}>
+                                                <FastImage
+                                                    source={AppImages.img_club}
+                                                    style={{
+                                                        width: getSize.m(24),
+                                                        height: getSize.m(24),
+                                                    }}
+                                                />
+                                            </View>
                                             <Text style={styles.name_club} numberOfLines={2}>
                                                 {item.away}
                                             </Text>
                                         </View>
                                     </View>
                                     <View style={appStyles.flex_row_align_center}>
-                                        <IconBall name="volleyball-ball" />
-                                        <Image
+                                        <View>
+                                            <Text
+                                                style={{
+                                                    color: appColors.text_dark_blue,
+                                                    fontWeight: '500',
+                                                    fontSize: getSize.m(11),
+                                                    lineHeight: getSize.m(16.5),
+                                                    fontFamily: AppFonts.medium,
+                                                    marginRight: getSize.m(2),
+                                                }}
+                                            >
+                                                -
+                                            </Text>
+                                        </View>
+                                        <FastImage
+                                            source={AppImages.img_light_volleyball}
+                                            style={{ width: getSize.m(12), height: getSize.m(12) }}
+                                        />
+                                        <FastImage
                                             source={AppImages.img_ticket_red}
                                             style={{
-                                                marginLeft: getSize.m(16),
+                                                marginLeft: getSize.m(10),
                                                 width: getSize.m(14),
                                                 height: getSize.m(20),
                                             }}
@@ -231,24 +266,57 @@ export const DataPlayerTeamScreen = (props: any) => {
                                     >
                                         <View style={[appStyles.flex_row_align_center]}>
                                             <Text style={styles.name_club}>{item.home}</Text>
-                                            <Avatar source={AppImages.img_club} />
+                                            <View style={styles.avt_club}>
+                                                <FastImage
+                                                    source={AppImages.img_club}
+                                                    style={{
+                                                        width: getSize.m(24),
+                                                        height: getSize.m(24),
+                                                    }}
+                                                />
+                                            </View>
                                         </View>
                                         <View style={{ marginHorizontal: getSize.m(12) }}>
                                             <Text style={styles.score}>{item.result}</Text>
                                         </View>
                                         <View style={appStyles.flex_row_align_center}>
-                                            <Avatar source={AppImages.img_club} />
+                                            <View style={styles.avt_club}>
+                                                <FastImage
+                                                    source={AppImages.img_club}
+                                                    style={{
+                                                        width: getSize.m(24),
+                                                        height: getSize.m(24),
+                                                    }}
+                                                />
+                                            </View>
                                             <Text style={styles.name_club} numberOfLines={2}>
                                                 {item.away}
                                             </Text>
                                         </View>
                                     </View>
                                     <View style={appStyles.flex_row_align_center}>
-                                        <IconBall name="volleyball-ball" />
-                                        <Image
+                                        <View>
+                                            <Text
+                                                style={{
+                                                    color: appColors.text_dark_blue,
+                                                    fontWeight: '500',
+                                                    fontSize: getSize.m(11),
+                                                    lineHeight: getSize.m(16.5),
+                                                    fontFamily: AppFonts.medium,
+                                                    marginRight: getSize.m(2),
+                                                }}
+                                            >
+                                                -
+                                            </Text>
+                                        </View>
+                                        <FastImage
+                                            source={AppImages.img_light_volleyball}
+                                            style={{ width: getSize.m(12), height: getSize.m(12) }}
+                                        />
+                                        <FastImage
                                             source={AppImages.img_ticket_red}
                                             style={{
-                                                marginLeft: getSize.m(16),
+                                                marginLeft: getSize.m(10),
                                                 width: getSize.m(14),
                                                 height: getSize.m(20),
                                             }}

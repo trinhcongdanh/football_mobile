@@ -5,7 +5,14 @@ import { appStyles } from '@football/app/utils/constants/appStyles';
 import { styles } from './Position.styles';
 import { IPositionProps } from './Position.type';
 
-export const Position = ({ position, color, width, fontWeight }: IPositionProps) => {
+export const Position = ({
+    position,
+    color,
+    width,
+    fontWeight,
+    fontFamily,
+    fontSize,
+}: IPositionProps) => {
     return (
         <View style={[appStyles.flex_row_space_center, { marginBottom: getSize.m(24) }]}>
             <View style={[styles.line, { width: width }]} />
@@ -15,6 +22,8 @@ export const Position = ({ position, color, width, fontWeight }: IPositionProps)
                     {
                         color: color,
                         fontWeight: fontWeight,
+                        fontFamily: fontFamily,
+                        fontSize: fontSize,
                     },
                 ]}
             >

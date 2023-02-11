@@ -136,6 +136,7 @@ const resources = {
                 previous_campaigns: 'קמפיינים קודמים',
                 ranking_table: {
                     title: 'טבלת דירוג',
+                    details: 'לכל המשחקים',
                     place: 'מקום',
                     team: 'נבחרת',
                     time: 'שע׳',
@@ -675,6 +676,7 @@ const resources = {
                 previous_campaigns: 'Previous campaigns',
                 ranking_table: {
                     title: 'Ranking table',
+                    details: 'for all games',
                     place: 'Place',
                     team: 'Team',
                     time: 'Time',

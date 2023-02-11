@@ -9,6 +9,7 @@ import { getSize } from '@football/app/utils/responsive/scale';
 import { Avatar } from 'react-native-elements';
 import { styles } from './ListGame.styles';
 import { IListGameProps } from './ListGame.type';
+import FastImage from 'react-native-fast-image';
 
 export const ListGame = ({
     logo_home,
@@ -64,7 +65,12 @@ export const ListGame = ({
                     )}
                 </View>
             )}
-            <View style={appStyles.flex_row_space}>
+            <View
+                style={[
+                    appStyles.flex_row_space,
+                    { marginLeft: getSize.m(24), marginRight: getSize.m(10) },
+                ]}
+            >
                 <Text
                     style={[
                         styles.date,
@@ -97,10 +103,12 @@ export const ListGame = ({
                 </View>
             </View>
             <View style={appStyles.flex_row_space}>
-                <View style={[styles.circle, { right: getSize.m(-40), backgroundColor: color }]} />
-                <View style={[styles.circle, { left: getSize.m(-40), backgroundColor: color }]} />
+                <View style={[styles.circle, { right: getSize.m(-30), backgroundColor: color }]} />
+                <View style={[styles.circle, { left: getSize.m(-30), backgroundColor: color }]} />
             </View>
-            <View style={styles.line_dots} />
+            <View style={{ paddingHorizontal: getSize.m(14) }}>
+                <View style={styles.line_dots} />
+            </View>
             <View
                 style={[
                     appStyles.flex_row_space_center,
@@ -108,7 +116,26 @@ export const ListGame = ({
                 ]}
             >
                 <View style={[appStyles.align_justify]}>
-                    <Avatar rounded size={getSize.m(30)} source={{ uri: logo_home }} />
+                    <View
+                        style={{
+                            backgroundColor: appColors.white,
+                            width: getSize.m(32),
+                            height: getSize.m(32),
+                            borderRadius: getSize.m(30),
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            elevation: 1,
+                        }}
+                    >
+                        <FastImage
+                            style={{
+                                width: getSize.m(28),
+                                height: getSize.m(28),
+                                borderRadius: getSize.m(28),
+                            }}
+                            source={{ uri: logo_home }}
+                        />
+                    </View>
 
                     <Text style={styles.name_club}>{nameHome}</Text>
                 </View>
@@ -132,17 +159,38 @@ export const ListGame = ({
                     {result !== null && <Text style={styles.score}>{result}</Text>}
                 </View>
                 <View style={[appStyles.align_justify]}>
-                    <Avatar rounded size={getSize.m(30)} source={{ uri: logo_away }} />
+                    <View
+                        style={{
+                            backgroundColor: appColors.white,
+                            width: getSize.m(32),
+                            height: getSize.m(32),
+                            borderRadius: getSize.m(30),
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            elevation: 1,
+                        }}
+                    >
+                        <FastImage
+                            style={{
+                                width: getSize.m(28),
+                                height: getSize.m(28),
+                                borderRadius: getSize.m(28),
+                            }}
+                            source={{ uri: logo_away }}
+                        />
+                    </View>
                     <Text style={styles.name_club}>{nameAway}</Text>
                 </View>
             </View>
-            <TouchableOpacity
-                style={[appStyles.flex_row_center, { flex: 0 }]}
-                onPress={handleDetailMatch}
-            >
-                <Text style={styles.details}>{details}</Text>
-                <Icon name={icon} size={getSize.m(10)} color={appColors.button_dark_blue} />
-            </TouchableOpacity>
+            {details && (
+                <TouchableOpacity
+                    style={[appStyles.flex_row_center, { flex: 0 }]}
+                    onPress={handleDetailMatch}
+                >
+                    <Text style={styles.details}>{details}</Text>
+                    <Icon name={icon} size={getSize.m(10)} color={appColors.button_dark_blue} />
+                </TouchableOpacity>
+            )}
         </View>
     );
 };

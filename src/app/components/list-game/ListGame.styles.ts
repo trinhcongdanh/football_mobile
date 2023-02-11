@@ -6,8 +6,9 @@ import { StyleSheet } from 'react-native';
 export const styles = StyleSheet.create({
     main_schedule: {
         marginTop: getSize.m(30),
-        paddingHorizontal: getSize.m(23),
-        paddingVertical: getSize.m(24),
+        paddingHorizontal: getSize.m(10),
+        paddingTop: getSize.m(12),
+        paddingBottom: getSize.m(41),
         borderRadius: getSize.m(15),
         backgroundColor: appColors.white,
     },
@@ -27,7 +28,7 @@ export const styles = StyleSheet.create({
         fontWeight: '700',
         fontSize: getSize.m(14),
         lineHeight: getSize.m(22),
-        fontFamily: AppFonts.regular,
+        fontFamily: AppFonts.bold,
         paddingVertical: getSize.m(4),
     },
     line_dots: {
@@ -41,12 +42,14 @@ export const styles = StyleSheet.create({
         fontSize: getSize.m(14),
         fontWeight: '700',
         lineHeight: getSize.m(20),
+        fontFamily: AppFonts.bold,
     },
     stadium: {
         fontWeight: '600',
         lineHeight: getSize.m(18),
         fontSize: getSize.m(14),
         marginLeft: getSize.m(6),
+        fontFamily: AppFonts.semibold,
     },
     avt_club: {
         borderColor: appColors.white,
@@ -58,12 +61,14 @@ export const styles = StyleSheet.create({
         color: appColors.text_dark_blue,
         lineHeight: getSize.m(20),
         marginTop: getSize.m(5),
+        fontFamily: AppFonts.bold,
     },
     score: {
         color: appColors.text_dark_blue,
         fontSize: getSize.m(14),
         lineHeight: getSize.m(20),
         fontWeight: '700',
+        fontFamily: AppFonts.bold,
     },
     time: {
         borderColor: appColors.border,
@@ -71,7 +76,6 @@ export const styles = StyleSheet.create({
         paddingHorizontal: getSize.m(12),
         paddingVertical: getSize.m(8),
         borderRadius: getSize.m(16),
-        marginBottom: getSize.m(20),
         width: getSize.m(65),
         height: getSize.m(39),
     },
@@ -87,7 +91,7 @@ export const styles = StyleSheet.create({
         color: appColors.button_dark_blue,
         fontWeight: '700',
         lineHeight: getSize.m(16),
-        fontFamily: AppFonts.regular,
+        fontFamily: AppFonts.bold,
         marginRight: getSize.m(4),
     },
 });

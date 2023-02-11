@@ -20,6 +20,7 @@ import { HeaderUser } from '@football/app/components/header-user/HeaderUser';
 import { ITeamScreenProps } from './TeamScreen.type';
 import styles from './TeamScreen.style';
 import { useViewModel } from './TeamScreen.viewModel';
+import FastImage from 'react-native-fast-image';
 
 // type Props = {};
 
@@ -32,16 +33,28 @@ export const TeamScreen = ({ navigation, route }: ITeamScreenProps) => {
 
     const renderItem = ({ item }: any) => {
         return !toggleBar ? (
-            <TouchableOpacity style={styles.option_grid} onPress={handleTeam}>
-                <Image resizeMode="contain" source={AppImages.img_logo} style={styles.logo} />
+            <TouchableOpacity activeOpacity={1} style={styles.option_grid} onPress={handleTeam}>
+                <View style={styles.container_logo}>
+                    <FastImage
+                        resizeMode="contain"
+                        source={AppImages.img_logo}
+                        style={styles.logo}
+                    />
+                </View>
                 <Text numberOfLines={2} style={styles.text_option_grid}>
                     {item.name}
                 </Text>
             </TouchableOpacity>
         ) : (
-            <TouchableOpacity style={styles.option_menu} onPress={handleTeam}>
+            <TouchableOpacity style={styles.option_menu} activeOpacity={0} onPress={handleTeam}>
                 <View style={appStyles.flex_row_align_center}>
-                    <Image resizeMode="contain" source={AppImages.img_logo} style={styles.logo} />
+                    <View style={styles.container_logo}>
+                        <FastImage
+                            resizeMode="contain"
+                            source={AppImages.img_logo}
+                            style={styles.logo}
+                        />
+                    </View>
                     <Text style={styles.text_option_menu}>{item.name}</Text>
                 </View>
 

@@ -81,9 +81,9 @@ export const useViewModel = ({ navigation, route }: INationalTeamScreenProps) =>
             nameHome: 'ישראל',
             nameAway: 'אלבניה',
             location: 'בלומפילד',
-            date: '21:45  |  27.9.22',
-            result: '3:1',
-            schedule: 'VS',
+            date: '21:45  |  27/9/22',
+            result: null,
+            schedule: null,
             details: 'הרכב',
             tournament: 'פלייאוף לאליפות אירופה',
             completed: false,
@@ -97,9 +97,9 @@ export const useViewModel = ({ navigation, route }: INationalTeamScreenProps) =>
             nameHome: 'ישראל',
             nameAway: 'אלבניה',
             location: 'בלומפילד',
-            date: '21:45  |  27.9.22',
+            date: '27/9/22',
             result: '3:1',
-            schedule: 'VS',
+            schedule: 'V S',
             details: 'פרטי משחק',
             tournament: 'פלייאוף לאליפות אירופה',
             completed: false,
@@ -113,9 +113,9 @@ export const useViewModel = ({ navigation, route }: INationalTeamScreenProps) =>
             nameHome: 'ישראל',
             nameAway: 'אלבניה',
             location: 'בלומפילד',
-            date: '21:45  |  27.9.22',
-            result: '3:1',
-            schedule: 'VS',
+            date: '21:45  |  27/9/22',
+            result: null,
+            schedule: 'V S',
             details: 'פרטי משחק',
             tournament: 'פלייאוף לאליפות אירופה',
             completed: false,
@@ -248,6 +248,12 @@ export const useViewModel = ({ navigation, route }: INationalTeamScreenProps) =>
         { id: 2, name: 'בעלי תפקידים', avt: AppImages.img_logo },
     ];
 
+    const [activeIndexNumber, setActiveIndexNumber] = useState(Number);
+
+    const handleDetails = () => {
+        navigate(ScreenName.ListGamePage);
+    };
+
     return {
         t,
         onGoBack,
@@ -269,5 +275,8 @@ export const useViewModel = ({ navigation, route }: INationalTeamScreenProps) =>
         select,
         listMatches,
         teamSquads,
+        activeIndexNumber,
+        setActiveIndexNumber,
+        handleDetails,
     };
 };

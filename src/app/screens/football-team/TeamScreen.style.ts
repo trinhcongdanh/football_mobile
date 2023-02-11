@@ -1,3 +1,4 @@
+import { AppFonts } from '@football/app/assets/fonts';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { getSize } from '@football/app/utils/responsive/scale';
 import { I18nManager, StyleSheet } from 'react-native';
@@ -25,7 +26,16 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         borderRadius: getSize.m(40),
     },
-    logo: { width: getSize.s(30), height: getSize.s(30) },
+    logo: { width: getSize.m(28), height: getSize.m(28), borderRadius: getSize.m(28) },
+    container_logo: {
+        backgroundColor: appColors.white,
+        width: getSize.m(32),
+        height: getSize.m(32),
+        borderRadius: getSize.m(32),
+        justifyContent: 'center',
+        alignItems: 'center',
+        elevation: 1,
+    },
     option_grid: {
         borderColor: appColors.border,
         borderWidth: getSize.m(1),
@@ -39,9 +49,11 @@ const styles = StyleSheet.create({
         overflow: 'hidden',
     },
     text_option_grid: {
-        fontSize: getSize.s(14),
+        fontSize: getSize.m(13),
         marginTop: getSize.m(10),
         fontWeight: '700',
+        lineHeight: getSize.m(16),
+        fontFamily: AppFonts.bold,
         color: appColors.text_dark_blue,
         textAlign: 'center',
         paddingHorizontal: getSize.m(4),
@@ -63,10 +75,11 @@ const styles = StyleSheet.create({
     },
 
     text_option_menu: {
-        fontSize: getSize.s(14),
+        fontSize: getSize.m(13),
         fontWeight: '700',
         color: appColors.text_dark_blue,
         textAlign: 'center',
+        fontFamily: AppFonts.bold,
         paddingHorizontal: getSize.m(4),
     },
     ic_arrow_left: {

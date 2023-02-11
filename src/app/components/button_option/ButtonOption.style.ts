@@ -19,9 +19,9 @@ const styles = StyleSheet.create({
     },
 
     text_option: {
-        fontFamily: AppFonts.regular,
         lineHeight: getSize.m(22),
         textAlign: 'center',
+        fontSize: getSize.m(14),
     },
 });
 
