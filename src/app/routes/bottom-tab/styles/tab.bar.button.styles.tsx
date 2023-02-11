@@ -1,3 +1,5 @@
+import { AppFonts } from '@football/app/assets/fonts';
+import { getSize } from '@football/app/utils/responsive/scale';
 import { StyleSheet } from 'react-native';
 
 export const style = StyleSheet.create({
@@ -6,7 +8,8 @@ export const style = StyleSheet.create({
         alignItems: 'center',
         flex: 1,
         zIndex: 1,
-        elevation: 12,
+        // elevation: 12,
+        // width: getSize.m(60),
     },
     squareFocusedButton: {
         borderRadius: 16,
@@ -15,7 +18,7 @@ export const style = StyleSheet.create({
     focusedButton: {
         position: 'absolute',
         zIndex: -1,
-        borderRadius: 32,
+        borderRadius: 1000,
         elevation: 10,
         justifyContent: 'center',
         alignItems: 'center',
@@ -27,5 +30,19 @@ export const style = StyleSheet.create({
         width: '100%',
         elevation: 12,
         zIndex: 12,
+    },
+    txt_tabbar: {
+        marginTop: getSize.m(5),
+        fontFamily: AppFonts.regular,
+        fontSize: getSize.m(13),
+        lineHeight: getSize.m(17),
+        fontWeight: '400',
+    },
+    txt_tabbar_focus: {
+        marginTop: getSize.m(5),
+        fontFamily: AppFonts.bold,
+        fontSize: getSize.m(13),
+        lineHeight: getSize.m(17),
+        fontWeight: '700',
     },
 });

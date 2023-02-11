@@ -102,9 +102,8 @@ export const BarButton: React.FC<Props> = memo(
                                         {
                                             marginTop: 2,
                                             color: isFocused ? activeTintColor : inactiveTintColor,
-                                            fontWeight: isFocused ? 'bold' : 'normal',
                                         },
-
+                                        isFocused ? style.txt_tabbar_focus : style.txt_tabbar,
                                         options.tabBarLabelStyle,
                                     ]}
                                 >

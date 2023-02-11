@@ -5,6 +5,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable spaced-comment */
 /* eslint-disable react-native/no-inline-styles */
+import { getSize } from '@football/app/utils/responsive/scale';
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import { Route } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
@@ -141,6 +142,7 @@ export const FabTabBar: React.FC<BottomTabBarProps & CustomProps> = ({
                     marginBottom: bottom,
                     height: TAB_BAR_HEIGHT,
                     flexDirection: isRtl ? 'row-reverse' : 'row',
+                    // justifyContent: 'space-around',
                 },
                 bottomBarContainerStyle,
                 // apply style from descriptor
@@ -163,7 +165,10 @@ export const FabTabBar: React.FC<BottomTabBarProps & CustomProps> = ({
             <View
                 style={[
                     style.fabButtonsContainer,
-                    { flexDirection: isRtl ? 'row-reverse' : 'row' },
+                    {
+                        flexDirection: isRtl ? 'row-reverse' : 'row',
+                        justifyContent: 'space-around',
+                    },
                 ]}
             >
                 {state.routes.map((route: Route<any>, index: number) => {
@@ -201,7 +206,7 @@ export const FabTabBar: React.FC<BottomTabBarProps & CustomProps> = ({
                             isFocused={isFocused}
                             activeTintColor={options.tabBarActiveTintColor}
                             inactiveTintColor={options.tabBarInactiveTintColor}
-                            width={tabWidth - 10}
+                            width={tabWidth - 10 > getSize.m(50) ? getSize.m(50) : tabWidth - 10}
                         />
                     );
                 })}
@@ -228,6 +233,7 @@ export const FabTabBar: React.FC<BottomTabBarProps & CustomProps> = ({
                     />
                 </ReanimatedSvg>
             </View>
+
             {state.routes.map((route: Route<any>, index: number) => {
                 const { options } = descriptors[route.key];
                 const isFocused = state.index === index;
