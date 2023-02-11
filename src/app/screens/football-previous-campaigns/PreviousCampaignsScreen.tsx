@@ -17,6 +17,7 @@ import { HeaderLogo } from '@football/app/components/header-logo/HeaderLogo';
 import styles from './PreviousCampaignsScreen.style';
 import { useViewModel } from './PreviousCampaignsScreen.viewModel';
 import { IPreviousCampaignsScreenProps } from './PreviousCampaignsScreen.type';
+import LinearGradient from 'react-native-linear-gradient';
 
 export const PreviousCampaignsScreen = ({ navigation, route }: IPreviousCampaignsScreenProps) => {
     const { t, onGoBack, preCampaigns, handleCampaignPage } = useViewModel({ navigation, route });
@@ -35,15 +36,34 @@ export const PreviousCampaignsScreen = ({ navigation, route }: IPreviousCampaign
                     </View>
                     <ScrollView>
                         <HeaderLogo text="נבחרת לאומית גברים" logo={AppImages.img_logo} />
-                        <View style={[appStyles.package, { marginTop: getSize.m(0) }]}>
-                            <View style={[appStyles.flex_row_space_center, styles.header]}>
+                        <View
+                            style={[
+                                appStyles.package,
+                                { marginTop: getSize.m(0), minHeight: getSize.m(900) },
+                            ]}
+                        >
+                            <LinearGradient
+                                colors={[
+                                    'rgba(255, 255, 255, 0.05)',
+                                    'rgba(16, 32, 100, 0.05)',
+                                    'rgba(59, 168, 225, 0.05)',
+                                ]}
+                                style={[appStyles.flex_row_space_center, styles.header]}
+                            >
                                 <Text style={styles.text_header}>
                                     {t('previous_campaigns.campaign_game')}
                                 </Text>
-                                <Text style={styles.text_header}>
+                                <Text
+                                    style={[
+                                        styles.text_header,
+                                        {
+                                            marginRight: getSize.m(30),
+                                        },
+                                    ]}
+                                >
                                     {t('previous_campaigns.year')}
                                 </Text>
-                            </View>
+                            </LinearGradient>
                             <View>
                                 {preCampaigns.map(campaign => {
                                     return (
@@ -53,13 +73,13 @@ export const PreviousCampaignsScreen = ({ navigation, route }: IPreviousCampaign
                                                 styles.content,
                                             ]}
                                             onPress={handleCampaignPage}
-                                            key={campaign._id}
+                                            key={campaign.id}
                                         >
                                             <Text style={styles.name_campaign}>
-                                                {campaign.name_he}
+                                                {campaign.title}
                                             </Text>
                                             <Text style={styles.year_campaign}>
-                                                {campaign.season}
+                                                {campaign.year}
                                             </Text>
                                         </TouchableOpacity>
                                     );

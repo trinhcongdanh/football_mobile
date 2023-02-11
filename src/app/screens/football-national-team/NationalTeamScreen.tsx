@@ -29,6 +29,7 @@ import { useViewModel } from './NationalTeamScreen.viewModel';
 import { INationalTeamScreenProps } from './NationalTeamScreen.type';
 import LinearGradient from 'react-native-linear-gradient';
 import { AppFonts } from '@football/app/assets/fonts';
+import FastImage from 'react-native-fast-image';
 
 export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenProps) => {
     const {
@@ -55,6 +56,7 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
         activeIndexNumber,
         setActiveIndexNumber,
         handleDetails,
+        cupsAround,
     } = useViewModel({
         navigation,
         route,
@@ -587,6 +589,164 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                                                 })}
                                             </View>
                                         )}
+                                    </View>
+                                </View>
+                            </View>
+                            <View style={appStyles.package}>
+                                <View style={appStyles.item_statistics}>
+                                    <View style={[appStyles.flex_row_space_center]}>
+                                        <Text
+                                            style={[
+                                                appStyles.statistics_title,
+                                                { fontSize: getSize.m(16) },
+                                            ]}
+                                        >
+                                            {t('national_team.conquerors.title')}
+                                        </Text>
+                                        <TouchableOpacity style={appStyles.flex_row_space_center}>
+                                            <Text style={appStyles.statistics_see_all}>
+                                                {t('national_team.conquerors.full_list')}
+                                            </Text>
+                                            <IconFeather
+                                                name={appIcons.ic_arrow_left}
+                                                size={getSize.m(10)}
+                                                color={appColors.button_dark_blue}
+                                                style={appStyles.statistic_ic_arrow}
+                                            />
+                                        </TouchableOpacity>
+                                    </View>
+                                    <View style={{ marginTop: getSize.m(10) }}>
+                                        {cupsAround.map(item => {
+                                            return (
+                                                <View
+                                                    key={item.id}
+                                                    style={[
+                                                        appStyles.flex_row_space_center,
+                                                        appStyles.statistic_row,
+                                                        {
+                                                            paddingHorizontal: getSize.m(0),
+                                                        },
+                                                    ]}
+                                                >
+                                                    <View style={appStyles.flex_row_align}>
+                                                        <FastImage
+                                                            source={AppImages.img_avt_player}
+                                                            style={{
+                                                                width: getSize.m(20),
+                                                                height: getSize.m(20),
+                                                                borderRadius: getSize.m(20),
+                                                            }}
+                                                        />
+                                                        <Text
+                                                            style={[
+                                                                appStyles.statistics_content,
+                                                                {
+                                                                    textAlign: 'left',
+                                                                    marginLeft: getSize.m(10),
+                                                                    fontWeight: '500',
+                                                                    fontFamily: AppFonts.medium,
+                                                                    fontSize: getSize.m(14),
+                                                                },
+                                                            ]}
+                                                        >
+                                                            {item.name}
+                                                        </Text>
+                                                    </View>
+                                                    <View>
+                                                        <Text
+                                                            style={[
+                                                                appStyles.statistics_content,
+                                                                {
+                                                                    textAlign: 'left',
+                                                                    fontSize: getSize.m(16),
+                                                                },
+                                                            ]}
+                                                        >
+                                                            {item.number}
+                                                        </Text>
+                                                    </View>
+                                                </View>
+                                            );
+                                        })}
+                                    </View>
+                                </View>
+                            </View>
+                            <View style={appStyles.package}>
+                                <View style={appStyles.item_statistics}>
+                                    <View style={[appStyles.flex_row_space_center]}>
+                                        <Text
+                                            style={[
+                                                appStyles.statistics_title,
+                                                { fontSize: getSize.m(16) },
+                                            ]}
+                                        >
+                                            {t('national_team.performances.title')}
+                                        </Text>
+                                        <TouchableOpacity style={appStyles.flex_row_space_center}>
+                                            <Text style={appStyles.statistics_see_all}>
+                                                {t('national_team.performances.full_list')}
+                                            </Text>
+                                            <IconFeather
+                                                name={appIcons.ic_arrow_left}
+                                                size={getSize.m(10)}
+                                                color={appColors.button_dark_blue}
+                                                style={appStyles.statistic_ic_arrow}
+                                            />
+                                        </TouchableOpacity>
+                                    </View>
+                                    <View style={{ marginTop: getSize.m(10) }}>
+                                        {cupsAround.map(item => {
+                                            return (
+                                                <View
+                                                    key={item.id}
+                                                    style={[
+                                                        appStyles.flex_row_space_center,
+                                                        appStyles.statistic_row,
+                                                        {
+                                                            paddingHorizontal: getSize.m(0),
+                                                        },
+                                                    ]}
+                                                >
+                                                    <View style={appStyles.flex_row_align}>
+                                                        <FastImage
+                                                            source={AppImages.img_avt_player}
+                                                            style={{
+                                                                width: getSize.m(20),
+                                                                height: getSize.m(20),
+                                                                borderRadius: getSize.m(20),
+                                                            }}
+                                                        />
+                                                        <Text
+                                                            style={[
+                                                                appStyles.statistics_content,
+                                                                {
+                                                                    textAlign: 'left',
+                                                                    marginLeft: getSize.m(10),
+                                                                    fontWeight: '500',
+                                                                    fontFamily: AppFonts.medium,
+                                                                    fontSize: getSize.m(14),
+                                                                },
+                                                            ]}
+                                                        >
+                                                            {item.name}
+                                                        </Text>
+                                                    </View>
+                                                    <View>
+                                                        <Text
+                                                            style={[
+                                                                appStyles.statistics_content,
+                                                                {
+                                                                    textAlign: 'left',
+                                                                    fontSize: getSize.m(16),
+                                                                },
+                                                            ]}
+                                                        >
+                                                            {item.number}
+                                                        </Text>
+                                                    </View>
+                                                </View>
+                                            );
+                                        })}
                                     </View>
                                 </View>
                             </View>

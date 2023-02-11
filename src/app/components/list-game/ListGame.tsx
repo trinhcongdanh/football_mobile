@@ -139,7 +139,15 @@ export const ListGame = ({
 
                     <Text style={styles.name_club}>{nameHome}</Text>
                 </View>
-                <View style={[appStyles.align_justify, styles.time]}>
+                <View
+                    style={[
+                        appStyles.align_justify,
+                        styles.time,
+                        {
+                            backgroundColor: result === null ? appColors.white : '#F8FDFF',
+                        },
+                    ]}
+                >
                     {result === null && schedule === null && (
                         <Text
                             style={[

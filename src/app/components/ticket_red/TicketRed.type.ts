@@ -3,4 +3,5 @@ export type ITicketRedProps = {
     avt: string;
     minute: any;
     team: string;
+    ticket?: any;
 };

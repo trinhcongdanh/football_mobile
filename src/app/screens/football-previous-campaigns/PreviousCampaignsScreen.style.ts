@@ -6,7 +6,6 @@ import { StyleSheet, I18nManager } from 'react-native';
 const styles = StyleSheet.create({
     ic_back: { alignItems: I18nManager.isRTL ? 'flex-start' : 'flex-end' },
     header: {
-        backgroundColor: appColors.blue_matte,
         paddingVertical: getSize.m(7),
         paddingHorizontal: getSize.m(14),
         borderRadius: getSize.m(5),
@@ -16,7 +15,7 @@ const styles = StyleSheet.create({
         fontSize: getSize.m(12),
         fontWeight: '500',
         lineHeight: getSize.m(16),
-        fontFamily: AppFonts.regular,
+        fontFamily: AppFonts.medium,
     },
 
     content: {
@@ -25,6 +24,7 @@ const styles = StyleSheet.create({
         marginTop: getSize.m(12),
         borderRadius: getSize.m(15),
         backgroundColor: appColors.white,
+        elevation: 1,
     },
 
     name_campaign: {
@@ -32,14 +32,14 @@ const styles = StyleSheet.create({
         color: appColors.text_dark_blue,
         lineHeight: getSize.m(18),
         fontSize: getSize.m(14),
-        fontFamily: AppFonts.regular,
+        fontFamily: AppFonts.bold,
     },
 
     year_campaign: {
         fontWeight: '500',
         fontSize: getSize.m(14),
         lineHeight: getSize.m(21),
-        fontFamily: AppFonts.regular,
+        fontFamily: AppFonts.medium,
         color: appColors.text_option_unselect,
     },
 });

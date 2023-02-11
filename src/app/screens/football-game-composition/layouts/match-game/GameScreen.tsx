@@ -48,6 +48,7 @@ export const GameScreen = ({ navigation, route }: IGameScreenProps) => {
                                 avt="https://upload.wikimedia.org/wikipedia/commons/5/55/EranZeahviCelebrating.jpg"
                                 minute="22'"
                                 team="ישראל"
+                                ticket={AppImages.img_ticket_yellow_1}
                             />
                         </View>
                         <View style={{ marginTop: getSize.m(30) }}>
@@ -56,6 +57,7 @@ export const GameScreen = ({ navigation, route }: IGameScreenProps) => {
                                 avt="https://upload.wikimedia.org/wikipedia/commons/5/55/EranZeahviCelebrating.jpg"
                                 minute="30'"
                                 team="ישראל"
+                                ticket={AppImages.img_ticket_red_1}
                             />
                         </View>
                         <View style={{ marginTop: getSize.m(45) }}>

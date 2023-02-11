@@ -7,7 +7,8 @@ const styles = StyleSheet.create({
     games: {
         marginTop: getSize.m(30),
         paddingHorizontal: getSize.m(23),
-        paddingVertical: getSize.m(24),
+        paddingTop: getSize.m(12),
+        paddingBottom: getSize.m(20),
         borderRadius: getSize.m(15),
         backgroundColor: appColors.white,
     },

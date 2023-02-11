@@ -36,12 +36,22 @@ export const StandingScreen = ({ navigation, route }: IStandingScreenProps) => {
                             ]}
                         >
                             <View style={{ width: getSize.m(30) }}>
-                                <Text style={[appStyles.statistics_header, { textAlign: 'left' }]}>
+                                <Text
+                                    style={[
+                                        appStyles.statistics_header,
+                                        { textAlign: 'left', marginLeft: getSize.m(2) },
+                                    ]}
+                                >
                                     {t('match.standing.place')}
                                 </Text>
                             </View>
                             <View style={{ width: getSize.m(70) }}>
-                                <Text style={[appStyles.statistics_header, { textAlign: 'left' }]}>
+                                <Text
+                                    style={[
+                                        appStyles.statistics_header,
+                                        { textAlign: 'left', marginLeft: getSize.m(2) },
+                                    ]}
+                                >
                                     {t('match.standing.team')}
                                 </Text>
                             </View>
@@ -114,7 +124,7 @@ export const StandingScreen = ({ navigation, route }: IStandingScreenProps) => {
                                             >
                                                 <Icon
                                                     name={appIcons.ic_up}
-                                                    size={10}
+                                                    size={8}
                                                     color={appColors.blue_light}
                                                 />
                                                 {/* <Icon

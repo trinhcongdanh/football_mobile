@@ -77,8 +77,8 @@ export const ListGameScreen = ({ navigation, route }: IListGameScreenProps) => {
                                                 <FastImage
                                                     source={AppImages.img_calendar}
                                                     style={{
-                                                        width: getSize.m(10),
-                                                        height: getSize.m(13),
+                                                        width: getSize.m(12),
+                                                        height: getSize.m(15),
                                                     }}
                                                 />
                                                 <Text style={styles.calendar}>{item.date}</Text>
@@ -129,8 +129,8 @@ export const ListGameScreen = ({ navigation, route }: IListGameScreenProps) => {
                                                 <FastImage
                                                     source={AppImages.img_location_dot}
                                                     style={{
-                                                        width: getSize.m(10),
-                                                        height: getSize.m(13),
+                                                        width: getSize.m(12),
+                                                        height: getSize.m(15),
                                                     }}
                                                 />
                                                 <Text style={styles.location}>{item.location}</Text>

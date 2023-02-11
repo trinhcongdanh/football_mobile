@@ -15,7 +15,14 @@ export const DataCoachTeamsScreen = ({ teams }: IDataCoachTeamsScreenProps) => {
 
     return (
         <View>
-            <View style={appStyles.item_statistics}>
+            <View
+                style={[
+                    appStyles.item_statistics,
+                    {
+                        marginTop: getSize.m(38),
+                    },
+                ]}
+            >
                 <View
                     style={[
                         appStyles.flex_row_space_center,

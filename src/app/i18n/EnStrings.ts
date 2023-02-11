@@ -152,6 +152,14 @@ const resources = {
                     house: 'בית',
                     outside: 'חוץ',
                 },
+                conquerors: {
+                    title: 'רשימת כובשים',
+                    full_list: 'רשימה מלאה',
+                },
+                performances: {
+                    title: 'הופעות בנבחרת',
+                    full_list: 'רשימה מלאה',
+                },
             },
             team_squad: {
                 title: 'סגל נבחרת',
@@ -691,6 +699,14 @@ const resources = {
                     home_away: 'Home / Away',
                     house: 'House',
                     outside: 'Outsidess',
+                },
+                conquerors: {
+                    title: 'List of conquerors',
+                    full_list: 'Full list',
+                },
+                performances: {
+                    title: 'Performances in the team',
+                    full_list: 'Full list',
                 },
             },
             team_squad: {

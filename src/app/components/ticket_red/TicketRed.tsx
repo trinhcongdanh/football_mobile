@@ -6,15 +6,26 @@ import { AppImages } from '@football/app/assets/images';
 import { Avatar } from 'react-native-elements';
 import { styles } from './TicketRed.styles';
 import { ITicketRedProps } from './TicketRed.type';
+import FastImage from 'react-native-fast-image';
 
-export const TicketRed = ({ name, avt, minute, team }: ITicketRedProps) => {
+export const TicketRed = ({ name, avt, minute, team, ticket }: ITicketRedProps) => {
     return (
         <View>
             <View style={appStyles.flex_row_align_center}>
                 <Text style={styles.time}>{minute}</Text>
 
                 <View style={styles.ticket}>
-                    <Image source={AppImages.img_ticket_red} />
+                    {ticket ? (
+                        <FastImage
+                            source={ticket}
+                            style={{ width: getSize.m(13), height: getSize.m(15) }}
+                        />
+                    ) : (
+                        <FastImage
+                            source={AppImages.img_ticket_red}
+                            style={{ width: getSize.m(14), height: getSize.m(18) }}
+                        />
+                    )}
                 </View>
 
                 <Avatar

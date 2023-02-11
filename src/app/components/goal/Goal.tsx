@@ -6,6 +6,7 @@ import { AppImages } from '@football/app/assets/images';
 import { Avatar } from 'react-native-elements';
 import { styles } from './Goal.styles';
 import { IGoalProps } from './Goal.type';
+import FastImage from 'react-native-fast-image';
 
 export const Goal = ({ name, avt, minute, team }: IGoalProps) => {
     return (
@@ -14,7 +15,10 @@ export const Goal = ({ name, avt, minute, team }: IGoalProps) => {
                 <Text style={styles.time}>{minute}</Text>
 
                 <View style={styles.ticket}>
-                    <Image source={AppImages.img_goal} />
+                    <FastImage
+                        source={AppImages.img_goal}
+                        style={{ width: getSize.m(14), height: getSize.m(14) }}
+                    />
                 </View>
                 <Avatar
                     source={{ uri: avt }}

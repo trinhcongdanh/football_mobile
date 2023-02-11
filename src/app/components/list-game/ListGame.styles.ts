@@ -8,7 +8,7 @@ export const styles = StyleSheet.create({
         marginTop: getSize.m(30),
         paddingHorizontal: getSize.m(10),
         paddingTop: getSize.m(12),
-        paddingBottom: getSize.m(41),
+        paddingBottom: getSize.m(30),
         borderRadius: getSize.m(15),
         backgroundColor: appColors.white,
     },
@@ -71,7 +71,7 @@ export const styles = StyleSheet.create({
         fontFamily: AppFonts.bold,
     },
     time: {
-        borderColor: appColors.border,
+        borderColor: '#E8F4F9',
         borderWidth: 1,
         paddingHorizontal: getSize.m(12),
         paddingVertical: getSize.m(8),

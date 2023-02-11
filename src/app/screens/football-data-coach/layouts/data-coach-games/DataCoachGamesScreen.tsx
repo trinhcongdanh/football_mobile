@@ -14,7 +14,7 @@ import { IDataCoachGamesScreenProps } from './DataCoachGamesScreen.type';
 export const DataCoachGamesScreen = ({ games }: IDataCoachGamesScreenProps) => {
     const { t, onGoBack } = useViewModel({ games });
     return (
-        <View>
+        <View style={{ marginHorizontal: getSize.m(20) }}>
             {games.map((game, index) => {
                 return (
                     <View key={index.toString()} style={styles.games}>
@@ -25,7 +25,7 @@ export const DataCoachGamesScreen = ({ games }: IDataCoachGamesScreenProps) => {
                             <View style={[appStyles.flex_row_align, { flex: 0 }]}>
                                 <IconLocation
                                     name={appIcons.ic_location}
-                                    size={getSize.m(15)}
+                                    size={getSize.m(20)}
                                     color={appColors.blue_light}
                                 />
                                 <Text
