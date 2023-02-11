@@ -75,22 +75,33 @@ export const PitchScreen = ({ navigation, route }: IPitchScreenProps) => {
                                         <Text
                                             style={[
                                                 appStyles.statistics_header,
-                                                { textAlign: 'left' },
+                                                { textAlign: 'left', fontSize: getSize.m(12) },
                                             ]}
                                         >
                                             {t('pitch.group')}
                                         </Text>
                                     </View>
-                                    <View style={{ width: getSize.m(60) }}>
-                                        <Text style={[appStyles.statistics_header]}>
-                                            {t('pitch.age')}
-                                        </Text>
-                                    </View>
-                                    <View style={{ width: getSize.m(60) }}>
+                                    <View
+                                        style={{ width: getSize.m(60), marginRight: getSize.m(4) }}
+                                    >
                                         <Text
                                             style={[
                                                 appStyles.statistics_header,
-                                                { textAlign: 'left' },
+                                                {
+                                                    fontSize: getSize.m(12),
+                                                },
+                                            ]}
+                                        >
+                                            {t('pitch.age')}
+                                        </Text>
+                                    </View>
+                                    <View
+                                        style={{ width: getSize.m(62), marginRight: getSize.m(10) }}
+                                    >
+                                        <Text
+                                            style={[
+                                                appStyles.statistics_header,
+                                                { textAlign: 'left', fontSize: getSize.m(12) },
                                             ]}
                                         >
                                             {t('pitch.home_training')}
@@ -105,13 +116,13 @@ export const PitchScreen = ({ navigation, route }: IPitchScreenProps) => {
                                                 colors={[
                                                     item.id % 2 === 1
                                                         ? 'rgba(255, 255, 255, 0.05)'
-                                                        : appColors.gray,
+                                                        : appColors.white,
                                                     item.id % 2 === 1
                                                         ? 'rgba(16, 32, 100, 0.05)'
-                                                        : appColors.gray,
+                                                        : appColors.white,
                                                     item.id % 2 === 1
                                                         ? 'rgba(59, 168, 225, 0.05)'
-                                                        : appColors.gray,
+                                                        : appColors.white,
                                                 ]}
                                                 style={[
                                                     appStyles.flex_row_space_center,
@@ -139,6 +150,7 @@ export const PitchScreen = ({ navigation, route }: IPitchScreenProps) => {
                                                                 appStyles.statistics_content,
                                                                 {
                                                                     marginLeft: getSize.m(10),
+                                                                    fontSize: getSize.m(13),
                                                                 },
                                                             ]}
                                                         >
@@ -151,16 +163,32 @@ export const PitchScreen = ({ navigation, route }: IPitchScreenProps) => {
                                                         width: getSize.m(60),
                                                     }}
                                                 >
-                                                    <Text style={appStyles.statistics_content}>
+                                                    <Text
+                                                        style={[
+                                                            appStyles.statistics_content,
+                                                            {
+                                                                textAlign: 'left',
+                                                                fontSize: getSize.m(13),
+                                                            },
+                                                        ]}
+                                                    >
                                                         {item.age}
                                                     </Text>
                                                 </View>
                                                 <View
                                                     style={{
-                                                        width: getSize.m(60),
+                                                        width: getSize.m(62),
                                                     }}
                                                 >
-                                                    <Text style={appStyles.statistics_content}>
+                                                    <Text
+                                                        style={[
+                                                            appStyles.statistics_content,
+                                                            {
+                                                                textAlign: 'left',
+                                                                fontSize: getSize.m(13),
+                                                            },
+                                                        ]}
+                                                    >
                                                         {item.home_training}
                                                     </Text>
                                                 </View>

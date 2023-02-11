@@ -2,6 +2,7 @@ import { appColors } from '@football/app/utils/constants/appColors';
 import { StyleSheet } from 'react-native';
 
 import { getSize } from '@football/app/utils/responsive/scale';
+import { AppFonts } from '@football/app/assets/fonts';
 
 export const styles = StyleSheet.create({
     time: {
@@ -26,9 +27,16 @@ export const styles = StyleSheet.create({
     },
     name_player: {
         marginLeft: getSize.m(10),
+        fontSize: getSize.m(13),
+        fontWeight: '600',
+        fontFamily: AppFonts.semibold,
+        color: appColors.text_dark_blue,
     },
     team: {
         marginLeft: getSize.m(32),
         fontSize: getSize.m(12),
+        color: '#2f4cfa',
+        fontWeight: '700',
+        fontFamily: AppFonts.bold,
     },
 });

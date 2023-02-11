@@ -65,4 +65,7 @@ export const AppImages = {
     img_light_volleyball: require('./light_volleyball.png'),
     img_calendar: require('./calendar.png'),
     img_location_dot: require('./location_dot.png'),
+    img_trophy_star_blue: require('./trophy-star-blue.png'),
+    img_ticket_yellow_1: require('./ticket_yellow.png'),
+    img_ticket_red_1: require('./ticket_red_1.png'),
 };

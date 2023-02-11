@@ -42,12 +42,22 @@ export const StandingScreen = ({ navigation, route }: IStandingScreenProps) => {
                             ]}
                         >
                             <View style={{ width: getSize.m(30) }}>
-                                <Text style={[appStyles.statistics_header, { textAlign: 'left' }]}>
+                                <Text
+                                    style={[
+                                        appStyles.statistics_header,
+                                        { textAlign: 'left', marginLeft: getSize.m(2) },
+                                    ]}
+                                >
                                     {t('match.standing.place')}
                                 </Text>
                             </View>
                             <View style={{ width: getSize.m(80) }}>
-                                <Text style={[appStyles.statistics_header, { textAlign: 'left' }]}>
+                                <Text
+                                    style={[
+                                        appStyles.statistics_header,
+                                        { textAlign: 'left', marginLeft: getSize.m(2) },
+                                    ]}
+                                >
                                     {t('match.standing.team')}
                                 </Text>
                             </View>
@@ -112,18 +122,23 @@ export const StandingScreen = ({ navigation, route }: IStandingScreenProps) => {
                                             <Text style={appStyles.statistics_content}>
                                                 {item.place}
                                             </Text>
-                                            <View>
+                                            <View
+                                                style={{
+                                                    marginLeft: getSize.m(4),
+                                                    marginTop: getSize.m(1),
+                                                }}
+                                            >
                                                 {item.place_change === 'up' && (
                                                     <Icon
                                                         name={appIcons.ic_up}
-                                                        size={11}
+                                                        size={getSize.m(8)}
                                                         color={appColors.blue_light}
                                                     />
                                                 )}
                                                 {item.place_change === 'down' && (
                                                     <Icon
                                                         name={appIcons.ic_down}
-                                                        size={11}
+                                                        size={getSize.m(8)}
                                                         color={appColors.red}
                                                     />
                                                 )}

@@ -51,9 +51,9 @@ export const styles = StyleSheet.create({
         marginTop: getSize.m(14),
     },
     txt_gender: {
-        marginTop: getSize.m(10),
+        marginTop: getSize.m(13),
         textAlign: 'left',
-        fontFamily: AppFonts.regular,
+        fontFamily: AppFonts.medium,
         fontSize: getSize.m(13),
         fontWeight: '500',
         color: appColors.text_dark_blue,
@@ -61,14 +61,13 @@ export const styles = StyleSheet.create({
     check_box_container: {
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'space-between',
         marginTop: getSize.m(10),
     },
     txt_dob: {
-        marginTop: getSize.m(14),
+        marginTop: getSize.m(13),
         color: appColors.light_gray,
         fontSize: getSize.m(13),
-        fontFamily: AppFonts.regular,
+        fontFamily: AppFonts.medium,
         fontWeight: '500',
         textAlign: 'left',
     },

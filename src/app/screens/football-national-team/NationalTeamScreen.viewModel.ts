@@ -254,6 +254,34 @@ export const useViewModel = ({ navigation, route }: INationalTeamScreenProps) =>
         navigate(ScreenName.ListGamePage);
     };
 
+    const cupsAround = [
+        {
+            id: 1,
+            name: 'איאד אבו עוביד',
+            number: '12',
+        },
+        {
+            id: 2,
+            name: 'איאד אבו עוביד',
+            number: '10',
+        },
+        {
+            id: 3,
+            name: 'איאד אבו עוביד',
+            number: '10',
+        },
+        {
+            id: 4,
+            name: 'איאד אבו עוביד',
+            number: '10',
+        },
+        {
+            id: 5,
+            name: 'איאד אבו עוביד',
+            number: '10',
+        },
+    ];
+
     return {
         t,
         onGoBack,
@@ -278,5 +306,6 @@ export const useViewModel = ({ navigation, route }: INationalTeamScreenProps) =>
         activeIndexNumber,
         setActiveIndexNumber,
         handleDetails,
+        cupsAround,
     };
 };

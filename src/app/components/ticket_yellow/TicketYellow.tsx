@@ -8,17 +8,24 @@ import { styles } from './TicketYellow.styles';
 import { ITicketYellowProps } from './TicketYellow.type';
 import FastImage from 'react-native-fast-image';
 
-export const TicketYellow = ({ name, avt, minute, team }: ITicketYellowProps) => {
+export const TicketYellow = ({ name, avt, minute, team, ticket }: ITicketYellowProps) => {
     return (
         <View>
             <View style={appStyles.flex_row_align_center}>
                 <Text style={styles.time}>{minute}</Text>
 
                 <View style={styles.ticket}>
-                    <FastImage
-                        source={AppImages.img_ticket_yellow}
-                        style={{ width: getSize.m(12), height: getSize.m(10) }}
-                    />
+                    {ticket ? (
+                        <FastImage
+                            source={ticket}
+                            style={{ width: getSize.m(13), height: getSize.m(15) }}
+                        />
+                    ) : (
+                        <FastImage
+                            source={AppImages.img_ticket_yellow}
+                            style={{ width: getSize.m(14), height: getSize.m(18) }}
+                        />
+                    )}
                 </View>
                 <Avatar
                     source={{ uri: avt }}

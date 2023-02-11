@@ -14,27 +14,55 @@ import { IPreviousCampaignsScreenProps } from './PreviousCampaignsScreen.type';
 export const useViewModel = ({ navigation, route }: IPreviousCampaignsScreenProps) => {
     const { navigate, goBack } = useAppNavigator();
     const { t } = useTranslation();
-    const [preCampaigns, setPreCampaigns] = useState<Campaign[]>([]);
+    // const [preCampaigns, setPreCampaigns] = useState<Campaign[]>([]);
     const onGoBack = (): void => {
         goBack();
     };
 
-    const getPreCampaign = useCallback(async () => {
-        try {
-            const { data }: CampaignsResponse = await axiosClient.post(`${BASE_URL}/find`, {
-                dataSource: DATA_SOURCE,
-                database: DB,
-                collection: 'campaign',
-                // top_team_id: '636027f8a1c4cf43fdff2a67',
-            });
-            if (!isEmpty(data)) {
-                console.log(data);
-                setPreCampaigns(data.documents);
-            }
-        } catch (error: any) {
-            Alert.alert(error);
-        }
-    }, []);
+    // const getPreCampaign = useCallback(async () => {
+    //     try {
+    //         const { data }: CampaignsResponse = await axiosClient.post(`${BASE_URL}/find`, {
+    //             dataSource: DATA_SOURCE,
+    //             database: DB,
+    //             collection: 'campaign',
+    //             // top_team_id: '636027f8a1c4cf43fdff2a67',
+    //         });
+    //         if (!isEmpty(data)) {
+    //             console.log(data);
+    //             setPreCampaigns(data.documents);
+    //         }
+    //     } catch (error: any) {
+    //         Alert.alert(error);
+    //     }
+    // }, []);
+
+    const preCampaigns = [
+        {
+            id: 1,
+            title: 'ליגת האומות של אופ"א 2022/23',
+            year: '2022/23',
+        },
+        {
+            id: 2,
+            title: 'ליגת האומות של אופ"א 2022/23',
+            year: '2022/23',
+        },
+        {
+            id: 3,
+            title: 'ליגת האומות של אופ"א 2022/23',
+            year: '2022/23',
+        },
+        {
+            id: 4,
+            title: 'ליגת האומות של אופ"א 2022/23',
+            year: '2022/23',
+        },
+        {
+            id: 5,
+            title: 'ליגת האומות של אופ"א 2022/23',
+            year: '2022/23',
+        },
+    ];
 
     const handleCampaignPage = () => {
         for (let i = 0; i < preCampaigns.length; i++) {
@@ -44,9 +72,9 @@ export const useViewModel = ({ navigation, route }: IPreviousCampaignsScreenProp
         }
     };
 
-    useMount(() => {
-        getPreCampaign();
-    });
+    // useMount(() => {
+    //     getPreCampaign();
+    // });
 
     return {
         t,

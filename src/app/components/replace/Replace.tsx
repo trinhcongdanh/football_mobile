@@ -8,6 +8,7 @@ import { Avatar } from 'react-native-elements';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { styles } from './Replace.styles';
 import { IReplaceProps } from './Replace.type';
+import FastImage from 'react-native-fast-image';
 
 export const Replace = ({ name_up, name_down, avt_up, avt_down, minute, team }: IReplaceProps) => {
     return (
@@ -16,7 +17,10 @@ export const Replace = ({ name_up, name_down, avt_up, avt_down, minute, team }: 
                 <Text style={styles.time}>{minute}</Text>
 
                 <View style={styles.ticket}>
-                    <Image source={AppImages.img_replace} />
+                    <FastImage
+                        source={AppImages.img_replace}
+                        style={{ width: getSize.m(12), height: getSize.m(12) }}
+                    />
                 </View>
                 <View style={{ flexDirection: 'row' }}>
                     <Avatar

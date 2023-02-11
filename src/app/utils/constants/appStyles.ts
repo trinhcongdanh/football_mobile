@@ -101,7 +101,7 @@ export const appStyles = StyleSheet.create({
         lineHeight: getSize.m(25),
     },
     text_input: {
-        fontSize: getSize.s(13),
+        fontSize: getSize.m(13),
         fontWeight: '500',
         lineHeight: getSize.m(17),
         color: appColors.text_dark_blue,
@@ -110,6 +110,7 @@ export const appStyles = StyleSheet.create({
         borderColor: '#E9F1F4',
         borderWidth: 1,
         borderRadius: getSize.m(15),
+        fontFamily: AppFonts.medium,
         textAlign: I18nManager.isRTL ? 'right' : 'left',
     },
     text_label: {

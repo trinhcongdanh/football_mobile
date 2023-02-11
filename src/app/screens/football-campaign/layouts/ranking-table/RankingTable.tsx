@@ -11,6 +11,7 @@ import { appIcons } from '@football/app/assets/icons/appIcons';
 import { IRankingTableProps } from './RankingTable.type';
 import { useViewModel } from '@football/app/screens/football-campaign/layouts/ranking-table/RankingTable.viewModel';
 import LinearGradient from 'react-native-linear-gradient';
+import { AppFonts } from '@football/app/assets/fonts';
 
 export const RankingTable = ({}: IRankingTableProps) => {
     const { t, rankingTable } = useViewModel({});
@@ -21,6 +22,9 @@ export const RankingTable = ({}: IRankingTableProps) => {
                 <Position
                     position="בית 9"
                     color={appColors.text_dark_blue}
+                    fontFamily={AppFonts.bold}
+                    fontWeight="700"
+                    fontSize={getSize.m(12)}
                     width={getSize.m(130)}
                 />
                 <View>
@@ -33,12 +37,22 @@ export const RankingTable = ({}: IRankingTableProps) => {
                         ]}
                     >
                         <View style={{ width: getSize.m(30) }}>
-                            <Text style={[appStyles.statistics_header, { textAlign: 'left' }]}>
+                            <Text
+                                style={[
+                                    appStyles.statistics_header,
+                                    { textAlign: 'left', marginLeft: getSize.m(4) },
+                                ]}
+                            >
                                 {t('match.standing.place')}
                             </Text>
                         </View>
                         <View style={{ width: getSize.m(80) }}>
-                            <Text style={[appStyles.statistics_header, { textAlign: 'left' }]}>
+                            <Text
+                                style={[
+                                    appStyles.statistics_header,
+                                    { textAlign: 'left', marginLeft: getSize.m(4) },
+                                ]}
+                            >
                                 {t('match.standing.team')}
                             </Text>
                         </View>
@@ -100,18 +114,23 @@ export const RankingTable = ({}: IRankingTableProps) => {
                                         <Text style={appStyles.statistics_content}>
                                             {item.place}
                                         </Text>
-                                        <View>
+                                        <View
+                                            style={{
+                                                marginLeft: getSize.m(2),
+                                                marginTop: getSize.m(2),
+                                            }}
+                                        >
                                             {item.place_change == 'up' && (
                                                 <Icon
                                                     name={appIcons.ic_up}
-                                                    size={11}
+                                                    size={8}
                                                     color={appColors.green}
                                                 />
                                             )}
                                             {item.place_change == 'down' && (
                                                 <Icon
                                                     name={appIcons.ic_down}
-                                                    size={11}
+                                                    size={8}
                                                     color={appColors.red}
                                                 />
                                             )}

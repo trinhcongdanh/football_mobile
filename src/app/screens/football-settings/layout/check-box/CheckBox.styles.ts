@@ -13,6 +13,7 @@ export const styles = StyleSheet.create({
         backgroundColor: appColors.check_box,
         paddingHorizontal: getSize.m(25),
         borderRadius: getSize.m(25),
+        marginRight: getSize.m(10),
     },
     txt_title: {
         textAlign: 'center',

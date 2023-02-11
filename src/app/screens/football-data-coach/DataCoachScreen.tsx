@@ -24,6 +24,7 @@ import { DataCoachGamesScreen } from './layouts/data-coach-games';
 import styles from './DataCoachScreen.style';
 import { useViewModel } from './DataCoachScreen.viewModel';
 import { IDataCoachScreenProps } from './DataCoachScreen.type';
+import FastImage from 'react-native-fast-image';
 
 // type Props = {};
 
@@ -153,8 +154,12 @@ export const DataCoachScreen = ({ navigation, route }: IDataCoachScreenProps) =>
                                         <View style={styles.footer_statistics}>
                                             <View style={appStyles.align_justify}>
                                                 <View style={styles.item_footer_statistics}>
-                                                    <Image
+                                                    <FastImage
                                                         source={AppImages.img_down_left_up_right}
+                                                        style={{
+                                                            width: getSize.m(12),
+                                                            height: getSize.m(12),
+                                                        }}
                                                     />
                                                 </View>
                                                 <View style={{ marginTop: getSize.m(4) }}>
@@ -168,7 +173,13 @@ export const DataCoachScreen = ({ navigation, route }: IDataCoachScreenProps) =>
                                             </View>
                                             <View style={appStyles.align_justify}>
                                                 <View style={styles.item_footer_statistics}>
-                                                    <Image source={AppImages.img_down_right} />
+                                                    <FastImage
+                                                        style={{
+                                                            width: getSize.m(9),
+                                                            height: getSize.m(9),
+                                                        }}
+                                                        source={AppImages.img_down_right}
+                                                    />
                                                 </View>
                                                 <View style={{ marginTop: getSize.m(4) }}>
                                                     <Text>{t('coach.loss')}</Text>
@@ -181,7 +192,13 @@ export const DataCoachScreen = ({ navigation, route }: IDataCoachScreenProps) =>
                                             </View>
                                             <View style={appStyles.align_justify}>
                                                 <View style={styles.item_footer_statistics}>
-                                                    <Image source={AppImages.img_state_cup} />
+                                                    <FastImage
+                                                        source={AppImages.img_trophy_star_blue}
+                                                        style={{
+                                                            width: getSize.m(14),
+                                                            height: getSize.m(12),
+                                                        }}
+                                                    />
                                                 </View>
                                                 <View style={{ marginTop: getSize.m(4) }}>
                                                     <Text>{t('coach.victory')}</Text>
@@ -194,7 +211,13 @@ export const DataCoachScreen = ({ navigation, route }: IDataCoachScreenProps) =>
                                             </View>
                                             <View style={appStyles.align_justify}>
                                                 <View style={styles.item_footer_statistics}>
-                                                    <Image source={AppImages.img_goal_net_blue} />
+                                                    <FastImage
+                                                        style={{
+                                                            width: getSize.m(15),
+                                                            height: getSize.m(12),
+                                                        }}
+                                                        source={AppImages.img_goal_net_blue}
+                                                    />
                                                 </View>
                                                 <View style={{ marginTop: getSize.m(4) }}>
                                                     <Text>{t('coach.game')}</Text>

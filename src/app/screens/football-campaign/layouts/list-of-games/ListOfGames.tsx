@@ -8,6 +8,7 @@ import { appStyles } from '@football/app/utils/constants/appStyles';
 import { getSize } from '@football/app/utils/responsive/scale';
 import styles from './ListOfGames.style';
 import { useViewModel } from './ListOfGames.viewModel';
+import { AppFonts } from '@football/app/assets/fonts';
 
 export const ListOfGames = () => {
     const { t, options, select, listGames, selectOption, handleDetailMatch } = useViewModel({});
@@ -15,7 +16,14 @@ export const ListOfGames = () => {
         <View>
             <Text style={appStyles.statistics_title}>{t('campaign.list_game.title')}</Text>
             <View style={{ marginTop: getSize.m(26) }}>
-                <Position position="בית 9" color={appColors.text_dark_blue} />
+                <Position
+                    position="בית 9"
+                    color={appColors.text_dark_blue}
+                    fontFamily={AppFonts.bold}
+                    fontWeight="700"
+                    fontSize={getSize.m(12)}
+                    width={getSize.m(130)}
+                />
                 <View style={[appStyles.flex_row_space, styles.option]}>
                     {options.map((option: string, index: number) => {
                         return (
