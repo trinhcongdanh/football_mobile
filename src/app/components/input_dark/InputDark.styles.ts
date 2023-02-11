@@ -1,3 +1,4 @@
+import { AppFonts } from '@football/app/assets/fonts';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { getSize } from '@football/app/utils/responsive/scale';
 import { StyleSheet, I18nManager } from 'react-native';
@@ -9,7 +10,6 @@ const styles = StyleSheet.create({
     confirmation_reward_input: {
         backgroundColor: 'rgba(6, 17, 52, 0.5)',
         fontSize: getSize.s(13),
-        fontWeight: '500',
         lineHeight: getSize.m(17),
         color: appColors.white,
         paddingHorizontal: getSize.m(15),
@@ -18,6 +18,7 @@ const styles = StyleSheet.create({
         borderRadius: getSize.m(15),
         textAlign: I18nManager.isRTL ? 'right' : 'left',
         zIndex: 1,
+        fontFamily: AppFonts.medium,
     },
     confirmation_reward_label_input: {
         paddingHorizontal: getSize.m(15),

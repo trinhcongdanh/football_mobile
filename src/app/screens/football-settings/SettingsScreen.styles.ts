@@ -40,11 +40,10 @@ export const styles = StyleSheet.create({
         marginRight: getSize.m(3),
     },
     txt_avatar: {
-        fontFamily: AppFonts.regular,
+        fontFamily: AppFonts.bold,
         color: appColors.text_dark_blue,
         fontSize: getSize.m(16),
         lineHeight: getSize.m(16),
-        fontWeight: '900',
     },
     first_block_container: { padding: getSize.m(16), marginTop: getSize.m(17) },
     input_container: {
@@ -55,7 +54,6 @@ export const styles = StyleSheet.create({
         textAlign: 'left',
         fontFamily: AppFonts.medium,
         fontSize: getSize.m(13),
-        fontWeight: '500',
         color: appColors.text_dark_blue,
     },
     check_box_container: {
@@ -68,7 +66,6 @@ export const styles = StyleSheet.create({
         color: appColors.light_gray,
         fontSize: getSize.m(13),
         fontFamily: AppFonts.medium,
-        fontWeight: '500',
         textAlign: 'left',
     },
     date_box_container: {
@@ -79,7 +76,6 @@ export const styles = StyleSheet.create({
     txt_title_block: {
         fontFamily: AppFonts.bold,
         fontSize: getSize.m(16),
-        fontWeight: '700',
         color: appColors.text_dark_blue,
         textAlign: 'left',
         marginLeft: I18nManager.isRTL ? getSize.m(4) : 0,
@@ -109,14 +105,12 @@ export const styles = StyleSheet.create({
         fontFamily: AppFonts.bold,
         fontSize: getSize.m(12),
         lineHeight: getSize.m(15),
-        fontWeight: '700',
         color: appColors.text_dark_blue,
     },
     txt_tutorial: {
         fontFamily: AppFonts.bold,
         fontSize: getSize.m(14),
         lineHeight: getSize.m(18),
-        fontWeight: '700',
         color: appColors.text_dark_blue,
         textAlign: 'left',
         marginTop: getSize.m(20),
@@ -133,7 +127,6 @@ export const styles = StyleSheet.create({
         color: appColors.blue_black,
         fontSize: getSize.m(12),
         lineHeight: getSize.m(15),
-        fontWeight: '500',
     },
     btn_bottom_container: {
         justifyContent: 'center',
@@ -151,11 +144,10 @@ export const styles = StyleSheet.create({
         marginBottom: getSize.m(20),
     },
     txt_save_changes: {
-        fontFamily: AppFonts.regular,
+        fontFamily: AppFonts.bold,
         color: appColors.white,
         fontSize: getSize.m(14),
         lineHeight: getSize.m(18),
-        fontWeight: '700',
         textAlign: 'center',
     },
     btn_delete_account: {
@@ -169,7 +161,6 @@ export const styles = StyleSheet.create({
         color: appColors.text_grey,
         fontSize: getSize.m(14),
         lineHeight: getSize.m(24),
-        fontWeight: '400',
         textAlign: 'center',
     },
 

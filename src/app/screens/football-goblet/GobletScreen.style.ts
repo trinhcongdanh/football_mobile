@@ -16,7 +16,6 @@ const styles = StyleSheet.create({
         lineHeight: getSize.m(24),
         fontFamily: AppFonts.regular,
         color: appColors.blue_gray_dark,
-        fontWeight: '400',
         paddingVertical: getSize.m(14),
         paddingHorizontal: getSize.m(25),
         textAlign: I18nManager.isRTL ? 'right' : 'left',
@@ -50,10 +49,10 @@ const styles = StyleSheet.create({
     text_option_grid: {
         fontSize: getSize.s(14),
         marginTop: getSize.m(10),
-        fontWeight: '700',
         color: appColors.text_dark_blue,
         textAlign: 'center',
         paddingHorizontal: getSize.m(4),
+        fontFamily: AppFonts.bold,
     },
 });
 

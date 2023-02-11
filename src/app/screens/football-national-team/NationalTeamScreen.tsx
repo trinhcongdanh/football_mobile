@@ -285,7 +285,6 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                                         <Position
                                             position="בית 9"
                                             color={appColors.text_dark_blue}
-                                            fontWeight="700"
                                             fontFamily={AppFonts.bold}
                                             fontSize={getSize.m(11)}
                                             width={getSize.m(130)}
@@ -523,7 +522,6 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                                         <Position
                                             position="בית 9"
                                             color={appColors.text_dark_blue}
-                                            fontWeight="700"
                                             fontFamily={AppFonts.bold}
                                             fontSize={getSize.m(11)}
                                             width={getSize.m(130)}
@@ -552,10 +550,11 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                                                                         index === select
                                                                             ? appColors.white
                                                                             : appColors.text_option_unselect,
-                                                                    fontWeight:
+
+                                                                    fontFamily:
                                                                         index === select
-                                                                            ? '700'
-                                                                            : '500',
+                                                                            ? AppFonts.bold
+                                                                            : AppFonts.medium,
                                                                 },
                                                             ]}
                                                         >
@@ -643,7 +642,6 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                                                                 {
                                                                     textAlign: 'left',
                                                                     marginLeft: getSize.m(10),
-                                                                    fontWeight: '500',
                                                                     fontFamily: AppFonts.medium,
                                                                     fontSize: getSize.m(14),
                                                                 },
@@ -722,7 +720,6 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                                                                 {
                                                                     textAlign: 'left',
                                                                     marginLeft: getSize.m(10),
-                                                                    fontWeight: '500',
                                                                     fontFamily: AppFonts.medium,
                                                                     fontSize: getSize.m(14),
                                                                 },
@@ -772,7 +769,7 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                                         <IconFeather
                                             name={appIcons.ic_arrow_left}
                                             color={appColors.text_dark_blue}
-                                            style={{ fontWeight: '700' }}
+                                            style={{ fontFamily: AppFonts.bold }}
                                         />
                                     </TouchableOpacity>
                                 );

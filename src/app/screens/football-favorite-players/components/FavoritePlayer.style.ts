@@ -15,7 +15,6 @@ const styles = StyleSheet.create({
         lineHeight: getSize.m(24),
         fontFamily: AppFonts.regular,
         color: appColors.blue_gray_dark,
-        fontWeight: '400',
         paddingVertical: getSize.m(13),
         paddingHorizontal: getSize.m(25),
         textAlign: I18nManager.isRTL ? 'right' : 'left',
@@ -23,7 +22,6 @@ const styles = StyleSheet.create({
 
     name_club: {
         fontSize: getSize.m(14),
-        fontWeight: '700',
         color: appColors.white,
         lineHeight: getSize.m(24),
         fontFamily: AppFonts.bold,
@@ -57,7 +55,6 @@ const styles = StyleSheet.create({
     },
     name_item: {
         fontSize: getSize.m(12),
-        fontWeight: '600',
         color: appColors.white,
         lineHeight: getSize.m(15),
         fontFamily: AppFonts.semibold,
@@ -75,12 +72,12 @@ const styles = StyleSheet.create({
         right: getSize.m(-5),
     },
     ic_check: {
-        fontWeight: '900',
         lineHeight: getSize.m(10),
         height: getSize.m(9.39),
         width: getSize.m(10.17),
         justifyContent: 'center',
         alignItems: 'center',
+        fontFamily: AppFonts.bold,
     },
     select_item: {
         backgroundColor: appColors.black,
@@ -106,10 +103,9 @@ const styles = StyleSheet.create({
         bottom: getSize.m(0),
     },
     text_index: {
-        fontWeight: '600',
         color: appColors.white,
         fontSize: getSize.m(10),
-        fontFamily: AppFonts.regular,
+        fontFamily: AppFonts.semibold,
         textAlign: 'center',
     },
     result_number: {

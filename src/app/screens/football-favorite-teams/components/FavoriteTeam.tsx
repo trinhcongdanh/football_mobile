@@ -226,7 +226,6 @@ export const FavoriteTeam = ({
                                     <Text style={styles.result_number}>
                                         <Text
                                             style={{
-                                                fontWeight: '400',
                                                 fontFamily: AppFonts.regular,
                                             }}
                                         >
@@ -235,7 +234,6 @@ export const FavoriteTeam = ({
 
                                         <Text
                                             style={{
-                                                fontWeight: favSelected.length > 0 ? '700' : '400',
                                                 color:
                                                     favSelected.length > 0
                                                         ? appColors.blue_light
@@ -250,7 +248,6 @@ export const FavoriteTeam = ({
                                         </Text>
                                         <Text
                                             style={{
-                                                fontWeight: '400',
                                                 fontFamily: AppFonts.regular,
                                             }}
                                         >

@@ -5,12 +5,11 @@ import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
     header: {
-        fontWeight: '500',
         color: appColors.button_dark_blue,
         textAlign: 'center',
         fontSize: getSize.m(11),
         lineHeight: getSize.m(14),
-        fontFamily: AppFonts.regular,
+        fontFamily: AppFonts.medium,
     },
 
     itemTeam: {
@@ -21,10 +20,9 @@ const styles = StyleSheet.create({
 
     text_content: {
         textAlign: 'center',
-        fontFamily: AppFonts.regular,
+        fontFamily: AppFonts.bold,
         fontSize: getSize.m(11),
         color: appColors.text_dark_blue,
-        fontWeight: '700',
         lineHeight: getSize.m(16),
         overflow: 'hidden',
     },

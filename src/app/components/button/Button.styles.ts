@@ -24,7 +24,6 @@ const styles = StyleSheet.create({
         fontFamily: AppFonts.bold,
         textAlign: 'center',
         lineHeight: getSize.m(20.8),
-        fontWeight: '700',
     },
     text_button_disable: {
         fontSize: getSize.s(16),
@@ -32,7 +31,6 @@ const styles = StyleSheet.create({
         fontFamily: AppFonts.bold,
         textAlign: 'center',
         lineHeight: getSize.m(20.8),
-        fontWeight: '700',
     },
 });
 

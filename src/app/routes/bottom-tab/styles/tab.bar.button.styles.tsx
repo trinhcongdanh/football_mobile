@@ -36,13 +36,11 @@ export const style = StyleSheet.create({
         fontFamily: AppFonts.regular,
         fontSize: getSize.m(13),
         lineHeight: getSize.m(17),
-        fontWeight: '400',
     },
     txt_tabbar_focus: {
         marginTop: getSize.m(5),
         fontFamily: AppFonts.bold,
         fontSize: getSize.m(13),
         lineHeight: getSize.m(17),
-        fontWeight: '700',
     },
 });

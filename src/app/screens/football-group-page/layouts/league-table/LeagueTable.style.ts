@@ -24,12 +24,12 @@ const styles = StyleSheet.create({
     },
     text_cycle: {
         fontSize: getSize.m(13),
-        fontWeight: '700',
         color: appColors.text_dark_blue,
         lineHeight: getSize.m(20),
+        fontFamily: AppFonts.bold,
     },
     chevron_down: {
-        fontWeight: '900',
+        fontFamily: AppFonts.bold,
     },
 
     more_result: {
@@ -40,14 +40,12 @@ const styles = StyleSheet.create({
     },
 
     text_more_result: {
-        fontWeight: '700',
         fontSize: getSize.m(12),
         lineHeight: getSize.m(15.6),
         fontFamily: AppFonts.bold,
         color: appColors.button_dark_blue,
     },
     ic_more_result: {
-        fontWeight: '900',
         lineHeight: getSize.m(13),
         color: appColors.button_dark_blue,
         fontFamily: AppFonts.bold,

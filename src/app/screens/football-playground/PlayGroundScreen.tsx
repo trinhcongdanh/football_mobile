@@ -159,11 +159,10 @@ export const PlayGroundScreen = ({ navigation, route }: IPlayGroundScreenProps) 
                                                 <View>
                                                     <Text
                                                         style={{
-                                                            fontWeight: '700',
                                                             fontSize: 14,
                                                             lineHeight: 18,
                                                             color: 'white',
-                                                            fontFamily: AppFonts.regular,
+                                                            fontFamily: AppFonts.bold,
                                                             marginLeft: 14,
                                                         }}
                                                     >
@@ -204,7 +203,7 @@ export const PlayGroundScreen = ({ navigation, route }: IPlayGroundScreenProps) 
                                                             styles.text_option,
                                                             {
                                                                 color: appColors.white,
-                                                                fontWeight: '700',
+                                                                fontFamily: AppFonts.bold,
                                                             },
                                                         ]}
                                                     >

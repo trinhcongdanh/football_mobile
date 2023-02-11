@@ -16,7 +16,6 @@ const styles = StyleSheet.create({
         lineHeight: getSize.m(24),
         fontFamily: AppFonts.regular,
         color: appColors.blue_gray_dark,
-        fontWeight: '400',
         paddingVertical: getSize.m(14),
         paddingHorizontal: getSize.m(25),
         textAlign: I18nManager.isRTL ? 'right' : 'left',
@@ -24,8 +23,8 @@ const styles = StyleSheet.create({
 
     name_club: {
         fontSize: getSize.m(14),
-        fontWeight: '700',
         color: appColors.white,
+        fontFamily: AppFonts.bold,
     },
 
     content_item: {
@@ -51,10 +50,9 @@ const styles = StyleSheet.create({
     },
     name_item: {
         fontSize: getSize.m(12),
-        fontWeight: '600',
         color: appColors.white,
         lineHeight: getSize.m(15),
-        fontFamily: AppFonts.regular,
+        fontFamily: AppFonts.semibold,
         marginTop: getSize.m(10),
     },
     check: {
@@ -92,18 +90,16 @@ const styles = StyleSheet.create({
         bottom: getSize.m(0),
     },
     text_index: {
-        fontWeight: '600',
         color: appColors.white,
         fontSize: getSize.m(10),
-        fontFamily: AppFonts.regular,
+        fontFamily: AppFonts.semibold,
         textAlign: 'center',
     },
     result_number: {
-        fontWeight: '700',
         fontSize: getSize.m(14),
         color: appColors.white,
         lineHeight: getSize.m(24),
-        fontFamily: AppFonts.regular,
+        fontFamily: AppFonts.bold,
     },
     image_select: {
         flexDirection: I18nManager.isRTL ? 'row-reverse' : 'row',

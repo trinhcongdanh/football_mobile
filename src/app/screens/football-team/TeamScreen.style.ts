@@ -45,13 +45,12 @@ const styles = StyleSheet.create({
         marginHorizontal: getSize.m(6),
         marginVertical: getSize.m(7),
         width: '30%',
-        height: getSize.s(100),
+        height: getSize.m(110),
         overflow: 'hidden',
     },
     text_option_grid: {
         fontSize: getSize.m(13),
         marginTop: getSize.m(10),
-        fontWeight: '700',
         lineHeight: getSize.m(16),
         fontFamily: AppFonts.bold,
         color: appColors.text_dark_blue,
@@ -76,14 +75,13 @@ const styles = StyleSheet.create({
 
     text_option_menu: {
         fontSize: getSize.m(13),
-        fontWeight: '700',
         color: appColors.text_dark_blue,
         textAlign: 'center',
         fontFamily: AppFonts.bold,
         paddingHorizontal: getSize.m(4),
     },
     ic_arrow_left: {
-        fontWeight: '900',
+        fontFamily: AppFonts.bold,
     },
 });
 

@@ -196,7 +196,6 @@ export const DataPlayerTeamScreen = (props: any) => {
                                             <Text
                                                 style={{
                                                     color: appColors.text_dark_blue,
-                                                    fontWeight: '500',
                                                     fontSize: getSize.m(11),
                                                     lineHeight: getSize.m(16.5),
                                                     fontFamily: AppFonts.medium,
@@ -299,7 +298,6 @@ export const DataPlayerTeamScreen = (props: any) => {
                                             <Text
                                                 style={{
                                                     color: appColors.text_dark_blue,
-                                                    fontWeight: '500',
                                                     fontSize: getSize.m(11),
                                                     lineHeight: getSize.m(16.5),
                                                     fontFamily: AppFonts.medium,

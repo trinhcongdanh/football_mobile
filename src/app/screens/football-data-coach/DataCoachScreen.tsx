@@ -160,6 +160,7 @@ export const DataCoachScreen = ({ navigation, route }: IDataCoachScreenProps) =>
                                                             width: getSize.m(12),
                                                             height: getSize.m(12),
                                                         }}
+                                                        resizeMode={FastImage.resizeMode.contain}
                                                     />
                                                 </View>
                                                 <View style={{ marginTop: getSize.m(4) }}>
@@ -178,6 +179,7 @@ export const DataCoachScreen = ({ navigation, route }: IDataCoachScreenProps) =>
                                                             width: getSize.m(9),
                                                             height: getSize.m(9),
                                                         }}
+                                                        resizeMode={FastImage.resizeMode.contain}
                                                         source={AppImages.img_down_right}
                                                     />
                                                 </View>
@@ -194,9 +196,11 @@ export const DataCoachScreen = ({ navigation, route }: IDataCoachScreenProps) =>
                                                 <View style={styles.item_footer_statistics}>
                                                     <FastImage
                                                         source={AppImages.img_trophy_star_blue}
+                                                        resizeMode={FastImage.resizeMode.contain}
                                                         style={{
                                                             width: getSize.m(14),
                                                             height: getSize.m(12),
+                                                            marginLeft: getSize.m(2),
                                                         }}
                                                     />
                                                 </View>
@@ -216,6 +220,7 @@ export const DataCoachScreen = ({ navigation, route }: IDataCoachScreenProps) =>
                                                             width: getSize.m(15),
                                                             height: getSize.m(12),
                                                         }}
+                                                        resizeMode={FastImage.resizeMode.contain}
                                                         source={AppImages.img_goal_net_blue}
                                                     />
                                                 </View>

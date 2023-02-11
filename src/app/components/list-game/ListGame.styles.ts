@@ -18,14 +18,12 @@ export const styles = StyleSheet.create({
     },
     text_live: {
         fontSize: getSize.m(13),
-        fontWeight: '700',
         fontFamily: AppFonts.bold,
         lineHeight: getSize.m(17),
         color: appColors.text_dark_blue,
     },
     text_tournament: {
         textAlign: 'center',
-        fontWeight: '700',
         fontSize: getSize.m(14),
         lineHeight: getSize.m(22),
         fontFamily: AppFonts.bold,
@@ -40,12 +38,10 @@ export const styles = StyleSheet.create({
     },
     date: {
         fontSize: getSize.m(14),
-        fontWeight: '700',
         lineHeight: getSize.m(20),
         fontFamily: AppFonts.bold,
     },
     stadium: {
-        fontWeight: '600',
         lineHeight: getSize.m(18),
         fontSize: getSize.m(14),
         marginLeft: getSize.m(6),
@@ -56,7 +52,6 @@ export const styles = StyleSheet.create({
         borderWidth: getSize.m(5),
     },
     name_club: {
-        fontWeight: '700',
         fontSize: getSize.m(13),
         color: appColors.text_dark_blue,
         lineHeight: getSize.m(20),
@@ -67,7 +62,6 @@ export const styles = StyleSheet.create({
         color: appColors.text_dark_blue,
         fontSize: getSize.m(14),
         lineHeight: getSize.m(20),
-        fontWeight: '700',
         fontFamily: AppFonts.bold,
     },
     time: {
@@ -89,7 +83,6 @@ export const styles = StyleSheet.create({
     details: {
         fontSize: getSize.m(12),
         color: appColors.button_dark_blue,
-        fontWeight: '700',
         lineHeight: getSize.m(16),
         fontFamily: AppFonts.bold,
         marginRight: getSize.m(4),

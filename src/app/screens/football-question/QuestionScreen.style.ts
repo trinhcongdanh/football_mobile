@@ -32,18 +32,16 @@ const styles = StyleSheet.create({
         bottom: getSize.m(0),
     },
     question_total: {
-        fontWeight: '500',
         color: appColors.white,
         fontSize: getSize.m(16),
         lineHeight: getSize.m(24),
-        fontFamily: AppFonts.regular,
+        fontFamily: AppFonts.medium,
     },
     question_current: {
-        fontWeight: '700',
         color: appColors.white,
         fontSize: getSize.m(16),
         lineHeight: getSize.m(24),
-        fontFamily: AppFonts.regular,
+        fontFamily: AppFonts.bold,
     },
 
     question_background: {
@@ -55,12 +53,12 @@ const styles = StyleSheet.create({
     },
     question_title: {
         color: appColors.white,
-        fontWeight: '700',
         lineHeight: getSize.m(29),
         fontSize: getSize.m(20),
         textAlign: 'center',
         marginTop: getSize.m(97),
         marginHorizontal: getSize.m(40),
+        fontFamily: AppFonts.bold,
     },
     question_time: {
         paddingVertical: getSize.m(10),
@@ -72,10 +70,10 @@ const styles = StyleSheet.create({
         marginTop: getSize.m(-20),
     },
     question_time_text: {
-        fontWeight: '700',
         fontSize: getSize.m(16),
         lineHeight: getSize.m(19),
         color: appColors.white,
+        fontFamily: AppFonts.bold,
     },
 
     answer: {
@@ -85,11 +83,10 @@ const styles = StyleSheet.create({
     },
 
     answer_text: {
-        fontWeight: '700',
         fontSize: getSize.m(15),
         lineHeight: getSize.m(19),
         color: appColors.white,
-        fontFamily: AppFonts.regular,
+        fontFamily: AppFonts.bold,
     },
 });
 

@@ -27,11 +27,10 @@ const styles = StyleSheet.create({
     },
     name_national: {
         marginTop: getSize.m(5),
-        fontFamily: AppFonts.regular,
+        fontFamily: AppFonts.bold,
         fontSize: getSize.m(15),
         lineHeight: getSize.m(20),
         color: appColors.text_dark_blue,
-        fontWeight: '700',
     },
     score: {
         paddingHorizontal: getSize.m(18),
@@ -52,9 +51,8 @@ const styles = StyleSheet.create({
     details: {
         fontSize: getSize.m(12),
         color: appColors.button_dark_blue,
-        fontWeight: '700',
         lineHeight: getSize.m(16),
-        fontFamily: AppFonts.regular,
+        fontFamily: AppFonts.bold,
         marginRight: getSize.m(4),
     },
     footer_statistics: {
@@ -75,11 +73,10 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     total: {
-        fontWeight: '700',
         fontSize: getSize.m(15),
         lineHeight: getSize.m(22),
         color: appColors.text_dark_blue,
-        fontFamily: AppFonts.regular,
+        fontFamily: AppFonts.bold,
     },
 });
 

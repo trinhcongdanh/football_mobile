@@ -10,11 +10,10 @@ export const styles = StyleSheet.create({
         alignItems: 'center',
     },
     skip: {
-        fontWeight: '700',
         fontSize: getSize.m(14),
         lineHeight: getSize.m(24),
         color: appColors.white,
-        fontFamily: AppFonts.regular,
+        fontFamily: AppFonts.bold,
     },
 
     ic_back: {

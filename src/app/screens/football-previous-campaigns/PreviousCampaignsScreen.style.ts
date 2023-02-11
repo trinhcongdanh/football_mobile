@@ -13,7 +13,6 @@ const styles = StyleSheet.create({
     text_header: {
         color: appColors.text_option_unselect,
         fontSize: getSize.m(12),
-        fontWeight: '500',
         lineHeight: getSize.m(16),
         fontFamily: AppFonts.medium,
     },
@@ -28,7 +27,6 @@ const styles = StyleSheet.create({
     },
 
     name_campaign: {
-        fontWeight: '700',
         color: appColors.text_dark_blue,
         lineHeight: getSize.m(18),
         fontSize: getSize.m(14),
@@ -36,7 +34,6 @@ const styles = StyleSheet.create({
     },
 
     year_campaign: {
-        fontWeight: '500',
         fontSize: getSize.m(14),
         lineHeight: getSize.m(21),
         fontFamily: AppFonts.medium,

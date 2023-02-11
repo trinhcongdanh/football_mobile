@@ -60,7 +60,6 @@ export const GoalsNationalTeamScreen = ({ navigation, route }: IGoalsNationalTea
                                     color={appColors.text_dark_blue}
                                     width={getSize.m(60)}
                                     fontFamily={AppFonts.bold}
-                                    fontWeight="700"
                                     fontSize={getSize.m(12)}
                                 />
                                 <View style={{ marginTop: getSize.m(-10) }}>
@@ -158,7 +157,6 @@ export const GoalsNationalTeamScreen = ({ navigation, route }: IGoalsNationalTea
                                     color={appColors.text_dark_blue}
                                     width={getSize.m(130)}
                                     fontFamily={AppFonts.bold}
-                                    fontWeight="700"
                                     fontSize={getSize.m(12)}
                                 />
                                 <View style={{ marginTop: getSize.m(-10) }}>

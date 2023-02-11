@@ -17,9 +17,8 @@ export const styles = StyleSheet.create({
     },
     txt_title: {
         textAlign: 'center',
-        fontFamily: AppFonts.regular,
+        fontFamily: AppFonts.bold,
         fontSize: getSize.m(12),
-        fontWeight: '700',
         color: appColors.white,
         lineHeight: getSize.v(34),
     },

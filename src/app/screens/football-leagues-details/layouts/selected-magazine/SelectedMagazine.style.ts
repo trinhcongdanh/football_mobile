@@ -19,8 +19,7 @@ const styles = StyleSheet.create({
     },
     text_date: {
         fontSize: getSize.m(12),
-        fontWeight: '600',
-        fontFamily: AppFonts.regular,
+        fontFamily: AppFonts.semibold,
         color: appColors.white,
         lineHeight: getSize.m(20),
     },
@@ -33,16 +32,16 @@ const styles = StyleSheet.create({
         overflow: 'hidden',
     },
     text_content: {
-        fontWeight: '700',
         textAlign: 'center',
         fontSize: getSize.m(12),
         lineHeight: getSize.m(16),
         color: appColors.white,
-        fontFamily: AppFonts.regular,
+        fontFamily: AppFonts.bold,
     },
     ic_arrow_left: {
         lineHeight: getSize.m(16),
-        fontWeight: '900',
+
+        fontFamily: AppFonts.bold,
     },
     dotContainer: {
         flexDirection: 'row-reverse',

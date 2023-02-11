@@ -16,7 +16,6 @@ const styles = StyleSheet.create({
         justifyContent: I18nManager.isRTL ? 'flex-start' : 'flex-end',
     },
     text_time: {
-        fontWeight: '400',
         fontSize: getSize.m(11),
         color: appColors.text_option_unselect,
         lineHeight: getSize.m(20),
@@ -26,11 +25,10 @@ const styles = StyleSheet.create({
         backgroundColor: appColors.blue_matte,
     },
     text_title: {
-        fontWeight: '700',
         fontSize: getSize.m(18),
         lineHeight: getSize.m(23),
         color: appColors.text_dark_blue,
-        fontFamily: AppFonts.regular,
+        fontFamily: AppFonts.bold,
     },
     image: {
         resizeMode: 'contain',
@@ -38,7 +36,6 @@ const styles = StyleSheet.create({
         borderRadius: getSize.m(20),
     },
     item_content: {
-        fontWeight: '400',
         fontSize: getSize.m(14),
         lineHeight: getSize.m(18),
         color: appColors.blue_black,

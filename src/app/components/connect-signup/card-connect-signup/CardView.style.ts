@@ -23,7 +23,6 @@ export const styles = StyleSheet.create({
 
     txt_register: {
         fontFamily: AppFonts.bold,
-        fontWeight: '700',
         textAlign: 'center',
         fontSize: getSize.m(13),
         color: appColors.text_dark_blue,
@@ -63,7 +62,6 @@ export const styles = StyleSheet.create({
     txt_connect: {
         fontFamily: AppFonts.bold,
         color: appColors.white,
-        fontWeight: '700',
         textAlign: 'center',
         fontSize: getSize.m(14),
     },

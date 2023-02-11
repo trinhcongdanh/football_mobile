@@ -14,7 +14,6 @@ export const styles = StyleSheet.create({
     txt_connect: {
         fontFamily: AppFonts.bold,
         color: appColors.text_grey,
-        fontWeight: '700',
         textAlign: 'center',
         fontSize: getSize.m(14),
     },

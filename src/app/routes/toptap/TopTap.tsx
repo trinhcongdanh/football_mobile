@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import { appColors } from '../../utils/constants/appColors';
 import { getSize } from '../../utils/responsive/scale';
+import { AppFonts } from '@football/app/assets/fonts';
 
 type Props = {
     labels: any;
@@ -33,7 +34,7 @@ export const TopTaps = ({ labels }: Props) => {
                                             color: focused
                                                 ? appColors.text_dark_blue
                                                 : appColors.text_option_unselect,
-                                            fontWeight: focused ? '700' : '500',
+                                            fontFamily: focused ? AppFonts.bold : AppFonts.medium,
                                             lineHeight: getSize.m(18),
                                         }}
                                     >

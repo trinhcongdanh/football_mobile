@@ -21,9 +21,8 @@ const styles = StyleSheet.create({
     },
     text_tournaments: {
         fontSize: getSize.m(14),
-        fontWeight: '700',
         color: appColors.text_option_unselect,
-        fontFamily: AppFonts.regular,
+        fontFamily: AppFonts.bold,
         lineHeight: getSize.m(22),
     },
     line_dots: {
@@ -35,11 +34,11 @@ const styles = StyleSheet.create({
     },
     date: {
         fontSize: getSize.m(14),
-        fontWeight: '700',
         lineHeight: getSize.m(20),
+        fontFamily: AppFonts.bold,
     },
     stadium: {
-        fontWeight: '600',
+        fontFamily: AppFonts.semibold,
         lineHeight: getSize.m(18),
         fontSize: getSize.m(14),
         marginLeft: getSize.m(6),
@@ -49,7 +48,7 @@ const styles = StyleSheet.create({
         borderWidth: getSize.m(5),
     },
     name_club: {
-        fontWeight: '700',
+        fontFamily: AppFonts.bold,
         fontSize: getSize.m(13),
         color: appColors.text_dark_blue,
         lineHeight: getSize.m(20),
@@ -59,7 +58,7 @@ const styles = StyleSheet.create({
         color: appColors.text_dark_blue,
         fontSize: getSize.m(14),
         lineHeight: getSize.m(20),
-        fontWeight: '700',
+        fontFamily: AppFonts.bold,
     },
     result: {
         borderColor: appColors.border,
@@ -80,9 +79,8 @@ const styles = StyleSheet.create({
     details: {
         fontSize: getSize.m(12),
         color: appColors.button_dark_blue,
-        fontWeight: '700',
         lineHeight: getSize.m(16),
-        fontFamily: AppFonts.regular,
+        fontFamily: AppFonts.bold,
         marginRight: getSize.m(4),
     },
 });

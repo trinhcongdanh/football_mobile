@@ -9,9 +9,8 @@ const styles = StyleSheet.create({
         borderWidth: getSize.m(4),
     },
     name_person: {
-        fontFamily: AppFonts.regular,
+        fontFamily: AppFonts.bold,
         color: appColors.white,
-        fontWeight: '700',
         fontSize: getSize.m(18),
         lineHeight: getSize.m(24),
         marginTop: getSize.m(16),
@@ -32,8 +31,7 @@ const styles = StyleSheet.create({
     },
 
     data: {
-        fontFamily: AppFonts.regular,
-        fontWeight: '700',
+        fontFamily: AppFonts.bold,
         fontSize: getSize.m(15),
         color: appColors.white,
         lineHeight: getSize.m(22),
@@ -41,7 +39,6 @@ const styles = StyleSheet.create({
 
     title: {
         fontFamily: AppFonts.regular,
-        fontWeight: '400',
         fontSize: getSize.m(13),
         lineHeight: getSize.m(17),
         color: appColors.white,

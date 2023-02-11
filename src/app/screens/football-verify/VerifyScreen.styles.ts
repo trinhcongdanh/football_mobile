@@ -32,13 +32,13 @@ const styles = StyleSheet.create({
 
     otp_Text: {
         fontSize: getSize.m(36),
-        fontWeight: '700',
         color: appColors.text_dark_blue,
         textAlign: 'center',
         width: getSize.m(63),
         borderRadius: getSize.m(15),
         borderColor: appColors.medium_gray,
         borderWidth: getSize.m(1),
+        fontFamily: AppFonts.bold,
     },
 
     footer_opt: {
@@ -48,14 +48,12 @@ const styles = StyleSheet.create({
 
     text_link: {
         fontSize: getSize.m(14),
-        fontWeight: '700',
         color: appColors.blue_light,
         fontFamily: AppFonts.bold,
         lineHeight: getSize.m(18.2),
     },
     text_not_reach: {
         fontSize: getSize.m(14),
-        fontWeight: '700',
         color: appColors.text_dark_blue,
         fontFamily: AppFonts.bold,
         lineHeight: getSize.m(18.2),
@@ -71,7 +69,6 @@ const styles = StyleSheet.create({
         fontSize: getSize.s(12),
         textAlign: 'center',
         fontFamily: AppFonts.medium,
-        fontWeight: '500',
     },
     underlineStyleBase: {
         padding: getSize.m(30),

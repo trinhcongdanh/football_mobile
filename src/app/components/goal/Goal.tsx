@@ -18,6 +18,7 @@ export const Goal = ({ name, avt, minute, team }: IGoalProps) => {
                     <FastImage
                         source={AppImages.img_goal}
                         style={{ width: getSize.m(14), height: getSize.m(14) }}
+                        resizeMode={FastImage.resizeMode.contain}
                     />
                 </View>
                 <Avatar

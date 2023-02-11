@@ -16,7 +16,6 @@ const styles = StyleSheet.create({
         lineHeight: getSize.m(24),
         fontFamily: AppFonts.regular,
         color: appColors.blue_gray_dark,
-        fontWeight: '400',
         paddingVertical: getSize.m(14),
         paddingHorizontal: getSize.m(25),
         textAlign: I18nManager.isRTL ? 'right' : 'left',

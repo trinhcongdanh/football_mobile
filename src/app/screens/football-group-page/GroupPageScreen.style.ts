@@ -9,27 +9,24 @@ const styles = StyleSheet.create({
         borderWidth: getSize.m(4),
     },
     name_leagues: {
-        fontFamily: AppFonts.regular,
+        fontFamily: AppFonts.bold,
         color: appColors.white,
-        fontWeight: '700',
         fontSize: getSize.m(18),
         lineHeight: getSize.m(24),
         marginTop: getSize.m(16),
     },
     sub_name_leagues: {
-        fontFamily: AppFonts.regular,
+        fontFamily: AppFonts.medium,
         color: appColors.white,
-        fontWeight: '500',
         fontSize: getSize.m(14),
         lineHeight: getSize.m(21),
         marginTop: getSize.m(2),
     },
     season_year: {
-        fontWeight: '700',
         fontSize: getSize.m(14),
         lineHeight: getSize.m(18),
         color: appColors.white,
-        fontFamily: AppFonts.regular,
+        fontFamily: AppFonts.bold,
         marginRight: getSize.m(12),
     },
     calender: {
@@ -42,13 +39,13 @@ const styles = StyleSheet.create({
     },
     text_calender: {
         fontSize: getSize.m(13),
-        fontWeight: '700',
         color: appColors.white,
         marginRight: getSize.m(58),
         lineHeight: getSize.m(20),
+        fontFamily: AppFonts.bold,
     },
     chevron_down: {
-        fontWeight: '900',
+        fontFamily: AppFonts.bold,
     },
     drop_down_calender: {
         borderColor: appColors.text_option_unselect,
@@ -100,7 +97,6 @@ const styles = StyleSheet.create({
     },
 
     info_group_item_label: {
-        fontWeight: '500',
         fontSize: getSize.m(13),
         color: appColors.light_gray,
         lineHeight: getSize.m(17),
@@ -108,7 +104,6 @@ const styles = StyleSheet.create({
     },
 
     info_group_item_content: {
-        fontWeight: '700',
         fontSize: getSize.m(14),
         color: appColors.blue_black,
         lineHeight: getSize.m(18),
@@ -153,14 +148,14 @@ const styles = StyleSheet.create({
 
     text_option_menu: {
         fontSize: getSize.s(14),
-        fontWeight: '700',
         color: appColors.text_dark_blue,
         textAlign: 'center',
         paddingHorizontal: getSize.m(4),
         marginLeft: getSize.m(10),
+        fontFamily: AppFonts.bold,
     },
     ic_arrow_left: {
-        fontWeight: '900',
+        fontFamily: AppFonts.bold,
     },
 });
 

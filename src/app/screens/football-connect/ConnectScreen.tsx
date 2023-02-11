@@ -90,7 +90,6 @@ export const ConnectScreen = ({ navigation, route }: IConnectScreenProps) => {
                                 <Text
                                     style={{
                                         color: appColors.text_grey,
-                                        fontWeight: '400',
                                         fontFamily: AppFonts.regular,
                                         lineHeight: getSize.m(24),
                                         fontSize: getSize.m(14),
@@ -106,7 +105,6 @@ export const ConnectScreen = ({ navigation, route }: IConnectScreenProps) => {
                                             fontFamily: AppFonts.bold,
                                             lineHeight: getSize.m(24),
                                             fontSize: getSize.m(14),
-                                            fontWeight: '700',
                                         }}
                                     >
                                         {t('connect.signup')}

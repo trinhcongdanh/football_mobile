@@ -26,18 +26,16 @@ const styles = StyleSheet.create({
     },
 
     name_national: {
-        fontFamily: AppFonts.regular,
+        fontFamily: AppFonts.bold,
         fontSize: getSize.m(16),
-        fontWeight: '700',
         lineHeight: getSize.m(22),
         color: appColors.text_dark_blue,
     },
 
     text_label: {
         fontSize: getSize.m(16),
-        fontFamily: AppFonts.regular,
+        fontFamily: AppFonts.bold,
         color: appColors.text_dark_blue,
-        fontWeight: '700',
         lineHeight: getSize.m(20),
         textAlign: 'left',
     },
@@ -53,7 +51,6 @@ const styles = StyleSheet.create({
         color: appColors.text_option_unselect,
         fontSize: getSize.m(12),
         lineHeight: getSize.m(16),
-        fontWeight: '500',
         fontFamily: AppFonts.medium,
     },
 
@@ -68,10 +65,10 @@ const styles = StyleSheet.create({
     },
     text_calender: {
         fontSize: getSize.m(13),
-        fontWeight: '700',
         color: appColors.text_dark_blue,
         marginRight: getSize.m(20),
         lineHeight: getSize.m(20),
+        fontFamily: AppFonts.bold,
     },
     drop_down_calender: {
         borderColor: appColors.border,
@@ -90,9 +87,8 @@ const styles = StyleSheet.create({
         marginTop: getSize.m(18),
     },
     frame: {
-        fontWeight: '500',
         fontSize: getSize.m(13),
-        fontFamily: AppFonts.regular,
+        fontFamily: AppFonts.medium,
         lineHeight: getSize.m(17),
         marginRight: getSize.m(3),
         color: appColors.light_gray,
@@ -106,7 +102,6 @@ const styles = StyleSheet.create({
     },
     date: {
         fontSize: getSize.m(12),
-        fontWeight: '500',
         lineHeight: getSize.m(17),
         fontFamily: AppFonts.medium,
         color: appColors.light_gray,
@@ -114,8 +109,7 @@ const styles = StyleSheet.create({
     score: {
         fontSize: getSize.m(12),
         color: appColors.text_dark_blue,
-        fontWeight: '800',
-        fontFamily: AppFonts.regular,
+        fontFamily: AppFonts.bold,
         lineHeight: getSize.m(18),
     },
 

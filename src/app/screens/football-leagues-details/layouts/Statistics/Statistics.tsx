@@ -10,6 +10,7 @@ import { Avatar } from 'react-native-elements';
 import { useViewModel } from './Statistics.viewModel';
 import { IStatisticsProps } from './Statistics.type';
 import LinearGradient from 'react-native-linear-gradient';
+import { AppFonts } from '@football/app/assets/fonts';
 export const Statistics = ({}: IStatisticsProps) => {
     const { t, setOnSelect, handleMoreStatistics, onSelect, listTeams } = useViewModel({});
     return (
@@ -27,9 +28,9 @@ export const Statistics = ({}: IStatisticsProps) => {
                     <View style={{ marginTop: getSize.m(20) }}>
                         <Position
                             color={appColors.text_dark_blue}
-                            fontWeight="700"
                             position="מחזור 34"
                             width={getSize.m(130)}
+                            fontFamily={AppFonts.bold}
                         />
                         <View>
                             <View
