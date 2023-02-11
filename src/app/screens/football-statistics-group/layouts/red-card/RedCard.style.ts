@@ -3,11 +3,11 @@ import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
     ticket: {
-        width: getSize.m(13),
-        height: getSize.m(19),
+        width: getSize.m(14),
+        height: getSize.m(20),
         position: 'absolute',
-        left: getSize.m(13),
-        top: getSize.m(-3),
+        left: getSize.m(15.5),
+        top: getSize.m(-2),
     },
 });
 

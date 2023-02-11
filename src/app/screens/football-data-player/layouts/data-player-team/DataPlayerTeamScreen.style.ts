@@ -33,6 +33,17 @@ const styles = StyleSheet.create({
         color: appColors.text_dark_blue,
     },
 
+    avt_club: {
+        width: getSize.m(26),
+        height: getSize.m(26),
+        backgroundColor: appColors.white,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: getSize.m(26),
+        marginHorizontal: getSize.m(4),
+        elevation: 1,
+    },
+
     club_desc: {
         fontFamily: AppFonts.regular,
         fontWeight: '500',
@@ -124,7 +135,7 @@ const styles = StyleSheet.create({
         fontSize: getSize.m(12),
         color: appColors.text_dark_blue,
         fontWeight: '800',
-        fontFamily: AppFonts.regular,
+        fontFamily: AppFonts.bold,
         lineHeight: getSize.m(18),
     },
 
@@ -132,7 +143,7 @@ const styles = StyleSheet.create({
         fontSize: getSize.m(11),
         fontWeight: '600',
         lineHeight: getSize.m(14),
-        fontFamily: AppFonts.regular,
+        fontFamily: AppFonts.bold,
         color: appColors.text_dark_blue,
         width: getSize.m(30),
     },

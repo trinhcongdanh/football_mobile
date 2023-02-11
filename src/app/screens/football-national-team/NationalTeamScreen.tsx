@@ -28,6 +28,7 @@ import styles from './NationalTeamScreen.style';
 import { useViewModel } from './NationalTeamScreen.viewModel';
 import { INationalTeamScreenProps } from './NationalTeamScreen.type';
 import LinearGradient from 'react-native-linear-gradient';
+import { AppFonts } from '@football/app/assets/fonts';
 
 export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenProps) => {
     const {
@@ -51,6 +52,9 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
         select,
         listMatches,
         teamSquads,
+        activeIndexNumber,
+        setActiveIndexNumber,
+        handleDetails,
     } = useViewModel({
         navigation,
         route,
@@ -224,8 +228,8 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                                                                 : getSize.m(5),
                                                         backgroundColor:
                                                             index === indexDot
-                                                                ? appColors.white
-                                                                : appColors.text_option_unselect,
+                                                                ? appColors.blue_light
+                                                                : appColors.soft_grey,
                                                     },
                                                 ]}
                                             />
@@ -270,13 +274,18 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                             />
                             <View style={[appStyles.package, { marginTop: getSize.m(0) }]}>
                                 <View>
-                                    <Text style={appStyles.statistics_title}>
-                                        {t('national_team.ranking_table.title')}
-                                    </Text>
+                                    <View>
+                                        <Text style={appStyles.statistics_title}>
+                                            {t('national_team.ranking_table.title')}
+                                        </Text>
+                                    </View>
                                     <View style={{ marginTop: getSize.m(26) }}>
                                         <Position
                                             position="בית 9"
                                             color={appColors.text_dark_blue}
+                                            fontWeight="700"
+                                            fontFamily={AppFonts.bold}
+                                            fontSize={getSize.m(11)}
                                             width={getSize.m(130)}
                                         />
                                         <View>
@@ -373,17 +382,22 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                                                                 >
                                                                     {item.id}
                                                                 </Text>
-                                                                <View>
+                                                                <View
+                                                                    style={{
+                                                                        marginLeft: getSize.m(2),
+                                                                        marginTop: getSize.m(2),
+                                                                    }}
+                                                                >
                                                                     <Icon
                                                                         name={appIcons.ic_up}
-                                                                        size={11}
+                                                                        size={8}
                                                                         color={appColors.green}
                                                                     />
-                                                                    <Icon
+                                                                    {/* <Icon
                                                                         name={appIcons.ic_down}
                                                                         size={11}
                                                                         color={appColors.red}
-                                                                    />
+                                                                    /> */}
                                                                 </View>
                                                             </View>
                                                             <View
@@ -482,13 +496,35 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                             </View>
                             <View style={appStyles.package}>
                                 <View>
-                                    <Text style={appStyles.statistics_title}>
-                                        {t('national_team.list_game.title')}
-                                    </Text>
+                                    <View style={appStyles.flex_row_space_center}>
+                                        <Text style={appStyles.statistics_title}>
+                                            {t('national_team.list_game.title')}
+                                        </Text>
+                                        <TouchableOpacity
+                                            style={[
+                                                appStyles.flex_row_center,
+                                                { flex: 0, marginTop: getSize.m(12) },
+                                            ]}
+                                            onPress={handleDetails}
+                                        >
+                                            <Text style={styles.details}>
+                                                {t('national_team.ranking_table.details')}
+                                            </Text>
+                                            <IconFeather
+                                                name={appIcons.ic_arrow_left}
+                                                size={getSize.m(10)}
+                                                color={appColors.button_dark_blue}
+                                            />
+                                        </TouchableOpacity>
+                                    </View>
                                     <View style={{ marginTop: getSize.m(26) }}>
                                         <Position
                                             position="בית 9"
                                             color={appColors.text_dark_blue}
+                                            fontWeight="700"
+                                            fontFamily={AppFonts.bold}
+                                            fontSize={getSize.m(11)}
+                                            width={getSize.m(130)}
                                         />
                                         <View style={[appStyles.flex_row_space, styles.option]}>
                                             {options.map((option: string, index: number) => {
@@ -581,6 +617,63 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                                     </TouchableOpacity>
                                 );
                             })}
+                        </View>
+                        <View style={{ marginVertical: getSize.m(50) }}>
+                            <GestureHandlerRootView style={appStyles.flex}>
+                                <Carousel
+                                    loop
+                                    pagingEnabled={true}
+                                    snapEnabled
+                                    width={width}
+                                    height={getSize.m(280)}
+                                    scrollAnimationDuration={1000}
+                                    mode="parallax"
+                                    modeConfig={{
+                                        parallaxScrollingScale: 1,
+                                        parallaxScrollingOffset: getSize.m(160),
+                                        parallaxAdjacentItemScale: 0.9,
+                                    }}
+                                    autoPlay={true}
+                                    onSnapToItem={index => setActiveIndexNumber(index)}
+                                    data={data}
+                                    renderItem={({ item, index }) => (
+                                        <View
+                                            key={index}
+                                            style={{
+                                                flexDirection: 'row',
+                                                justifyContent: 'center',
+                                            }}
+                                        >
+                                            <View>
+                                                <Image source={item.image} style={[styles.image]} />
+                                            </View>
+                                        </View>
+                                    )}
+                                />
+                            </GestureHandlerRootView>
+                            <View style={styles.dotContainer}>
+                                {data.map((_, index) => {
+                                    return (
+                                        <View key={index}>
+                                            <View
+                                                style={[
+                                                    styles.dot,
+                                                    {
+                                                        width:
+                                                            index === activeIndexNumber
+                                                                ? getSize.m(18)
+                                                                : getSize.m(5),
+                                                        backgroundColor:
+                                                            index === activeIndexNumber
+                                                                ? appColors.blue_light
+                                                                : appColors.soft_grey,
+                                                    },
+                                                ]}
+                                            ></View>
+                                        </View>
+                                    );
+                                })}
+                            </View>
                         </View>
                     </ScrollView>
                 </SafeAreaView>

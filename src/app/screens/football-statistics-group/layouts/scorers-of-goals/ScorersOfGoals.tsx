@@ -13,14 +13,7 @@ export const ScorersOfGoals = () => {
     const { t, listPlayerGoal } = useViewModel({});
     return (
         <View style={appStyles.item_statistics}>
-            <View
-                style={[
-                    appStyles.flex_row_space_center,
-                    {
-                        marginHorizontal: getSize.m(4),
-                    },
-                ]}
-            >
+            <View style={[appStyles.flex_row_space_center]}>
                 <Text style={appStyles.statistics_title}>
                     {t('statistics.group.scorer_of_goal')}
                 </Text>
@@ -46,12 +39,18 @@ export const ScorersOfGoals = () => {
                 ]}
             >
                 <View>
-                    <Text style={appStyles.statistics_header}>
+                    <Text style={[appStyles.statistics_header, { fontSize: getSize.m(12) }]}>
                         {t('statistics.group.player_name')}
                     </Text>
                 </View>
-                <View>
-                    <Text style={appStyles.statistics_header}>{t('statistics.group.number')}</Text>
+                <View
+                    style={{
+                        width: getSize.m(44),
+                    }}
+                >
+                    <Text style={[appStyles.statistics_header, { fontSize: getSize.m(12) }]}>
+                        {t('statistics.group.number')}
+                    </Text>
                 </View>
             </View>
             <View style={{ marginTop: getSize.m(10) }}>
@@ -78,6 +77,7 @@ export const ScorersOfGoals = () => {
                                             appStyles.statistics_content,
                                             {
                                                 marginLeft: getSize.m(10),
+                                                fontSize: getSize.m(14),
                                             },
                                         ]}
                                     >
@@ -85,8 +85,19 @@ export const ScorersOfGoals = () => {
                                     </Text>
                                 </View>
                             </View>
-                            <View>
-                                <Text style={appStyles.statistics_content}>{item.goal}</Text>
+                            <View
+                                style={{
+                                    width: getSize.m(44),
+                                }}
+                            >
+                                <Text
+                                    style={[
+                                        appStyles.statistics_content,
+                                        { fontSize: getSize.m(14) },
+                                    ]}
+                                >
+                                    {item.goal}
+                                </Text>
                             </View>
                         </LinearGradient>
                     );

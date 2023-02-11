@@ -74,9 +74,9 @@ const styles = StyleSheet.create({
     },
 
     drop_down_info: {
-        width: getSize.m(24),
-        height: getSize.m(24),
-        borderRadius: getSize.m(24),
+        width: getSize.m(34),
+        height: getSize.m(34),
+        borderRadius: getSize.m(34),
         justifyContent: 'center',
         alignItems: 'center',
     },

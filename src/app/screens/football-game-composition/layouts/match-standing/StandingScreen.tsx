@@ -9,6 +9,7 @@ import Icon from 'react-native-vector-icons/AntDesign';
 import { useViewModel } from './StandingScreen.viewModel';
 import { IStandingScreenProps } from './StandingScreen.type';
 import LinearGradient from 'react-native-linear-gradient';
+import FastImage from 'react-native-fast-image';
 
 export const StandingScreen = ({ navigation, route }: IStandingScreenProps) => {
     const { t, listTeams } = useViewModel({
@@ -39,7 +40,7 @@ export const StandingScreen = ({ navigation, route }: IStandingScreenProps) => {
                                     {t('match.standing.place')}
                                 </Text>
                             </View>
-                            <View style={{ width: getSize.m(80) }}>
+                            <View style={{ width: getSize.m(70) }}>
                                 <Text style={[appStyles.statistics_header, { textAlign: 'left' }]}>
                                     {t('match.standing.team')}
                                 </Text>
@@ -105,28 +106,40 @@ export const StandingScreen = ({ navigation, route }: IStandingScreenProps) => {
                                             <Text style={appStyles.statistics_content}>
                                                 {item.id}
                                             </Text>
-                                            <View>
+                                            <View
+                                                style={{
+                                                    marginLeft: getSize.m(4),
+                                                    marginTop: getSize.m(1),
+                                                }}
+                                            >
                                                 <Icon
                                                     name={appIcons.ic_up}
-                                                    size={11}
+                                                    size={10}
                                                     color={appColors.blue_light}
                                                 />
-                                                <Icon
+                                                {/* <Icon
                                                     name={appIcons.ic_down}
                                                     size={11}
                                                     color={appColors.red}
-                                                />
+                                                /> */}
                                             </View>
                                         </View>
                                         <View
-                                            style={[{ width: getSize.m(80), overflow: 'hidden' }]}
+                                            style={[{ width: getSize.m(70), overflow: 'hidden' }]}
                                         >
                                             <View
                                                 style={{
                                                     flexDirection: 'row',
                                                 }}
                                             >
-                                                <Avatar source={item.logo} rounded size={20} />
+                                                <FastImage
+                                                    source={item.logo}
+                                                    style={{
+                                                        width: getSize.m(20),
+                                                        height: getSize.m(20),
+                                                        borderRadius: getSize.m(20),
+                                                    }}
+                                                />
                                                 <Text
                                                     style={[
                                                         appStyles.statistics_content,

@@ -138,6 +138,15 @@ const styles = StyleSheet.create({
         marginHorizontal: getSize.m(5),
     },
 
+    details: {
+        fontSize: getSize.m(12),
+        color: appColors.button_dark_blue,
+        fontWeight: '700',
+        lineHeight: getSize.m(16),
+        fontFamily: AppFonts.bold,
+        marginRight: getSize.m(4),
+    },
+
     option: {
         backgroundColor: appColors.separator,
         borderRadius: getSize.m(30),
@@ -170,6 +179,18 @@ const styles = StyleSheet.create({
         fontSize: getSize.m(14),
         fontFamily: AppFonts.regular,
         marginLeft: getSize.m(8),
+    },
+    dotContainer: {
+        flexDirection: 'row-reverse',
+        justifyContent: 'center',
+        marginTop: getSize.m(20),
+    },
+
+    dot: {
+        width: getSize.m(5),
+        height: getSize.m(5),
+        marginHorizontal: getSize.m(2.5),
+        borderRadius: getSize.m(5),
     },
 });
 

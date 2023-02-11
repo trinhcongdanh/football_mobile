@@ -31,7 +31,8 @@ export const GameCompositionScreen = ({ navigation, route }: IGameCompositionScr
                             handlePressFunction={onGoBack}
                         />
                         <HeaderComposition
-                            title='ליגת האומות של אופ"א 2022/23'
+                            title='ליגת האומות של אופ"א'
+                            season="2022/23"
                             avt_away="https://upload.wikimedia.org/wikipedia/he/thumb/5/50/HaifaCarmel.svg/800px-HaifaCarmel.svg.png"
                             avt_home="https://upload.wikimedia.org/wikipedia/he/thumb/5/50/HaifaCarmel.svg/800px-HaifaCarmel.svg.png"
                             name_home="הפועל ירושלים"

@@ -10,19 +10,13 @@ import { Avatar } from 'react-native-elements';
 import styles from './YellowsLeagues.style';
 import { useViewModel } from './YellowsLeagues.viewModel';
 import LinearGradient from 'react-native-linear-gradient';
+import FastImage from 'react-native-fast-image';
 
 export const YellowsLeagues = () => {
     const { t, listPlayerGoal } = useViewModel({});
     return (
         <View style={appStyles.item_statistics}>
-            <View
-                style={[
-                    appStyles.flex_row_space_center,
-                    {
-                        marginHorizontal: getSize.m(4),
-                    },
-                ]}
-            >
+            <View style={[appStyles.flex_row_space_center]}>
                 <Text style={appStyles.statistics_title}>
                     {t('statistics.group.yellow_league')}
                 </Text>
@@ -48,16 +42,16 @@ export const YellowsLeagues = () => {
                 ]}
             >
                 <View>
-                    <Text style={appStyles.statistics_header}>
+                    <Text style={[appStyles.statistics_header, { fontSize: getSize.m(12) }]}>
                         {t('statistics.group.player_name')}
                     </Text>
                 </View>
                 <View
                     style={{
-                        width: getSize.m(40),
+                        width: getSize.m(44),
                     }}
                 >
-                    <Text style={appStyles.statistics_header}>
+                    <Text style={[appStyles.statistics_header, { fontSize: getSize.m(12) }]}>
                         {t('statistics.group.number_yellow')}
                     </Text>
                 </View>
@@ -86,6 +80,7 @@ export const YellowsLeagues = () => {
                                             appStyles.statistics_content,
                                             {
                                                 marginLeft: getSize.m(10),
+                                                fontSize: getSize.m(14),
                                             },
                                         ]}
                                     >
@@ -95,11 +90,21 @@ export const YellowsLeagues = () => {
                             </View>
                             <View
                                 style={{
-                                    width: getSize.m(40),
+                                    width: getSize.m(44),
                                 }}
                             >
-                                <Image source={AppImages.img_ticket_yellow} style={styles.ticket} />
-                                <Text style={[appStyles.statistics_content]}>{item.yellow}</Text>
+                                <FastImage
+                                    source={AppImages.img_ticket_yellow}
+                                    style={styles.ticket}
+                                />
+                                <Text
+                                    style={[
+                                        appStyles.statistics_content,
+                                        { fontSize: getSize.m(14) },
+                                    ]}
+                                >
+                                    {item.yellow}
+                                </Text>
                             </View>
                         </LinearGradient>
                     );

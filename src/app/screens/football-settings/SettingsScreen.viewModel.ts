@@ -7,15 +7,19 @@ import { ISettingsScreenProps } from './SettingsScreen.type';
 
 export const useViewModel = (props: ISettingsScreenProps) => {
     const { t } = useTranslation();
-    const { goBack, navigate } = useAppNavigator();
+    const { goBack, navigate, replace } = useAppNavigator();
     const [image, setImage] = useState<any>();
 
     const date = new Date();
 
     const user = { username: '', gender: '', date: '' };
 
-    const [isEnabled, setIsEnabled] = useState(false);
-    const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+    const [isEnabled1, setIsEnabled1] = useState(false);
+    const [isEnabled2, setIsEnabled2] = useState(false);
+    const [isEnabled3, setIsEnabled3] = useState(false);
+    const toggleSwitch1 = () => setIsEnabled1(previousState => !previousState);
+    const toggleSwitch2 = () => setIsEnabled2(previousState => !previousState);
+    const toggleSwitch3 = () => setIsEnabled3(previousState => !previousState);
 
     const handleOnDate = (e: Date) => {
         user.date = e.toString();
@@ -30,19 +34,19 @@ export const useViewModel = (props: ISettingsScreenProps) => {
     };
 
     const backFavTeam = () => {
-        navigate(ScreenName.FavTeamPage, {
+        replace(ScreenName.FavTeamPage, {
             previous_screen: ScreenName.SettingsPage,
         });
     };
 
     const backFavPlayer = () => {
-        navigate(ScreenName.FavPlayerPage, {
+        replace(ScreenName.FavPlayerPage, {
             previous_screen: ScreenName.SettingsPage,
         });
     };
 
     const backFavTopTeam = () => {
-        navigate(ScreenName.FavTopTeamPage, {
+        replace(ScreenName.FavTopTeamPage, {
             previous_screen: ScreenName.SettingsPage,
         });
     };
@@ -51,13 +55,17 @@ export const useViewModel = (props: ISettingsScreenProps) => {
     return {
         date,
         image,
-        isEnabled,
+        isEnabled1,
+        isEnabled2,
+        isEnabled3,
         t,
         goBack,
         navigate,
         handleOnDate,
         onImagePicker,
-        toggleSwitch,
+        toggleSwitch1,
+        toggleSwitch2,
+        toggleSwitch3,
         backFavPlayer,
         backFavTeam,
         backFavTopTeam,

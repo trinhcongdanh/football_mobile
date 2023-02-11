@@ -5,6 +5,7 @@ import { getSize } from '@football/app/utils/responsive/scale';
 import { Avatar } from 'react-native-elements';
 import { styles } from './ListPlayer.styles';
 import { IListPlayerProps } from './ListPlayer.type';
+import FastImage from 'react-native-fast-image';
 
 export const ListPlayer = ({ name, number, avt, position, number_before }: IListPlayerProps) => {
     return (
@@ -20,7 +21,25 @@ export const ListPlayer = ({ name, number, avt, position, number_before }: IList
                         {number_before}
                     </Text>
                 )}
-                <Avatar rounded size={26} source={{ uri: avt }} />
+                <View
+                    style={{
+                        width: getSize.m(30),
+                        height: getSize.m(30),
+                        borderRadius: getSize.m(30),
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        elevation: 1,
+                    }}
+                >
+                    <FastImage
+                        style={{
+                            width: getSize.m(26),
+                            height: getSize.m(26),
+                            borderRadius: getSize.m(26),
+                        }}
+                        source={{ uri: avt }}
+                    />
+                </View>
                 <Text style={[appStyles.text_dark, { marginLeft: getSize.m(10) }]}>{name}</Text>
             </View>
             {number && <Text style={appStyles.number}>{number}</Text>}

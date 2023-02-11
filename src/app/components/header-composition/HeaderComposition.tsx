@@ -23,9 +23,14 @@ export const HeaderComposition = ({
     return (
         <View>
             <View>
-                <Text style={[appStyles.text_title]}>{title}</Text>
+                <Text style={[appStyles.text_title, { fontSize: getSize.m(20) }]}>{title}</Text>
                 {season && (
-                    <Text style={[appStyles.text_title, { marginTop: getSize.m(4) }]}>
+                    <Text
+                        style={[
+                            appStyles.text_title,
+                            { marginTop: getSize.m(4), fontSize: getSize.m(20) },
+                        ]}
+                    >
                         {season}
                     </Text>
                 )}
@@ -61,7 +66,7 @@ export const HeaderComposition = ({
             <View style={[appStyles.flex_row_center, { marginTop: getSize.m(24), flex: 0 }]}>
                 <IconLocation
                     name={appIcons.ic_location}
-                    size={getSize.m(15)}
+                    size={getSize.m(20)}
                     color={appColors.blue_light}
                 />
                 <Text style={styles.stadium}>{stadium}</Text>
