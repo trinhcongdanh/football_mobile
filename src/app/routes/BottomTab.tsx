@@ -118,36 +118,11 @@ export const BottomTabStack = () => {
         >
             <Bottom.Screen
                 options={{
-                    tabBarIcon: renderIcon(ScreenName.GroupPagePage),
-                    tabBarLabel: renderLabel(ScreenName.GroupPagePage),
+                    tabBarIcon: renderIcon(ScreenName.VideoPage),
+                    tabBarLabel: renderLabel(ScreenName.VideoPage),
                 }}
-                name={ScreenName.GroupPagePage}
-                component={GroupPageScreen}
-            />
-
-            <Bottom.Screen
-                options={{
-                    tabBarIcon: renderIcon(ScreenName.LeaguesPage),
-                    tabBarLabel: renderLabel(ScreenName.LeaguesPage),
-                }}
-                name={ScreenName.LeaguesPage}
-                component={LeaguesScreen}
-            />
-            <Bottom.Screen
-                options={{
-                    tabBarIcon: renderIcon(ScreenName.TeamPage),
-                    tabBarLabel: renderLabel(ScreenName.TeamPage),
-                }}
-                name={ScreenName.TeamPage}
-                component={TeamScreen}
-            />
-            <Bottom.Screen
-                options={{
-                    tabBarIcon: renderIcon(ScreenName.PlayGroundPage),
-                    tabBarLabel: renderLabel(ScreenName.PlayGroundPage),
-                }}
-                name={ScreenName.PlayGroundPage}
-                component={PlayGroundScreen}
+                name={ScreenName.VideoPage}
+                component={VideoScreen}
             />
             <Bottom.Screen
                 options={{
@@ -159,11 +134,35 @@ export const BottomTabStack = () => {
             />
             <Bottom.Screen
                 options={{
-                    tabBarIcon: renderIcon(ScreenName.VideoPage),
-                    tabBarLabel: renderLabel(ScreenName.VideoPage),
+                    tabBarIcon: renderIcon(ScreenName.PlayGroundPage),
+                    tabBarLabel: renderLabel(ScreenName.PlayGroundPage),
                 }}
-                name={ScreenName.VideoPage}
-                component={VideoScreen}
+                name={ScreenName.PlayGroundPage}
+                component={PlayGroundScreen}
+            />
+            <Bottom.Screen
+                options={{
+                    tabBarIcon: renderIcon(ScreenName.TeamPage),
+                    tabBarLabel: renderLabel(ScreenName.TeamPage),
+                }}
+                name={ScreenName.TeamPage}
+                component={TeamScreen}
+            />
+            <Bottom.Screen
+                options={{
+                    tabBarIcon: renderIcon(ScreenName.LeaguesPage),
+                    tabBarLabel: renderLabel(ScreenName.LeaguesPage),
+                }}
+                name={ScreenName.LeaguesPage}
+                component={LeaguesScreen}
+            />
+            <Bottom.Screen
+                options={{
+                    tabBarIcon: renderIcon(ScreenName.GroupPagePage),
+                    tabBarLabel: renderLabel(ScreenName.GroupPagePage),
+                }}
+                name={ScreenName.GroupPagePage}
+                component={GroupPageScreen}
             />
         </Bottom.Navigator>
     );

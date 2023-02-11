@@ -30,8 +30,14 @@ const styles = StyleSheet.create({
         marginLeft: getSize.m(6),
     },
     avt_club: {
-        borderColor: appColors.white,
-        borderWidth: getSize.m(5),
+        width: getSize.m(26),
+        height: getSize.m(26),
+        backgroundColor: appColors.white,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: getSize.m(26),
+        marginHorizontal: getSize.m(4),
+        elevation: 1,
     },
     name_club: {
         fontWeight: '700',
@@ -86,6 +92,22 @@ const styles = StyleSheet.create({
         color: appColors.text_dark_blue,
         fontFamily: AppFonts.regular,
         marginLeft: getSize.m(4),
+    },
+
+    calendar: {
+        fontSize: getSize.m(11),
+        color: appColors.text_dark_blue,
+        lineHeight: getSize.m(16.5),
+        fontWeight: '500',
+        fontFamily: AppFonts.medium,
+    },
+    location: {
+        fontSize: getSize.m(11),
+        color: appColors.text_dark_blue,
+        lineHeight: getSize.m(14.5),
+        fontWeight: '500',
+        fontFamily: AppFonts.medium,
+        marginRight: getSize.m(3),
     },
 });
 
