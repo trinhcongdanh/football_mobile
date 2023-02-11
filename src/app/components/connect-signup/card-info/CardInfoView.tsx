@@ -48,7 +48,6 @@ export const CardInfoView = ({
                     style={[
                         appStyles.text_label,
                         {
-                            fontWeight: '500',
                             fontFamily: AppFonts.medium,
                         },
                     ]}
@@ -100,7 +99,6 @@ export const CardInfoView = ({
                         style={[
                             appStyles.text_label,
                             {
-                                fontWeight: '500',
                                 fontFamily: AppFonts.medium,
                             },
                         ]}

@@ -1,3 +1,4 @@
+import { AppFonts } from '@football/app/assets/fonts';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { getSize } from '@football/app/utils/responsive/scale';
 import { StyleSheet, I18nManager } from 'react-native';
@@ -7,12 +8,12 @@ const styles = StyleSheet.create({
     provision: {
         color: appColors.white,
         fontSize: getSize.s(13),
-        fontWeight: '700',
+        fontFamily: AppFonts.bold,
     },
     agree: {
         color: appColors.white,
         fontSize: getSize.s(13),
-        fontWeight: '400',
+        fontFamily: AppFonts.regular,
     },
 
     checkBox: {

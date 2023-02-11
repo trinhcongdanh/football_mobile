@@ -20,7 +20,6 @@ export const ListOfGames = () => {
                     position="בית 9"
                     color={appColors.text_dark_blue}
                     fontFamily={AppFonts.bold}
-                    fontWeight="700"
                     fontSize={getSize.m(12)}
                     width={getSize.m(130)}
                 />
@@ -48,7 +47,8 @@ export const ListOfGames = () => {
                                                 index === select
                                                     ? appColors.white
                                                     : appColors.text_option_unselect,
-                                            fontWeight: index === select ? '700' : '500',
+                                            fontFamily:
+                                                index === select ? AppFonts.bold : AppFonts.medium,
                                         },
                                     ]}
                                 >

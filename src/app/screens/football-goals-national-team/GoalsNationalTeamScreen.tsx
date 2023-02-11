@@ -23,6 +23,9 @@ import { Avatar } from 'react-native-elements';
 import styles from './GoalsNationalTeamScreen.style';
 import { useViewModel } from './GoalsNationalTeamScreen.viewModel';
 import { IGoalsNationalTeamScreenProps } from './GoalsNationalTeamScreen.type';
+import { AppFonts } from '@football/app/assets/fonts';
+import FastImage from 'react-native-fast-image';
+import LinearGradient from 'react-native-linear-gradient';
 
 export const GoalsNationalTeamScreen = ({ navigation, route }: IGoalsNationalTeamScreenProps) => {
     const { t, onGoBack, listGames, handleDetailMatch } = useViewModel({ navigation, route });
@@ -41,194 +44,210 @@ export const GoalsNationalTeamScreen = ({ navigation, route }: IGoalsNationalTea
                     </View>
                     <ScrollView>
                         <HeaderLogo text="פיני יואב גראפי" avt={AppImages.img_avt_player} />
-                        <View style={[appStyles.package, { marginTop: getSize.m(0) }]}>
-                            {listGames.map(item => {
-                                return (
-                                    <View key={item.id} style={{ marginTop: getSize.m(26) }}>
-                                        <Position
-                                            position={item.tournament}
-                                            color={appColors.text_dark_blue}
-                                            width={getSize.m(60)}
-                                        />
-                                        <View style={styles.main_schedule}>
-                                            <View style={appStyles.flex_row_space}>
-                                                <Text
-                                                    style={[
-                                                        styles.date,
-                                                        {
-                                                            color:
-                                                                item.completed === true
-                                                                    ? appColors.soft_grey
-                                                                    : appColors.text_dark_blue,
-                                                        },
-                                                    ]}
-                                                >
-                                                    {item.date}
-                                                </Text>
-                                                <View
-                                                    style={[appStyles.flex_row_align, { flex: 0 }]}
-                                                >
-                                                    <IconLocation
-                                                        name={appIcons.ic_location}
-                                                        size={getSize.m(15)}
-                                                        color={
-                                                            item.completed === true
-                                                                ? appColors.soft_grey
-                                                                : appColors.blue_light
-                                                        }
-                                                    />
-                                                    <Text
-                                                        style={[
-                                                            styles.stadium,
-                                                            {
-                                                                color:
-                                                                    item.completed === true
-                                                                        ? appColors.soft_grey
-                                                                        : appColors.text_dark_blue,
-                                                            },
-                                                        ]}
-                                                    >
-                                                        {item.location}
-                                                    </Text>
-                                                </View>
-                                            </View>
-                                            <View
+                        <View
+                            style={[
+                                appStyles.package,
+                                {
+                                    marginTop: getSize.m(0),
+                                    paddingVertical: getSize.m(0),
+                                    minHeight: getSize.m(900),
+                                },
+                            ]}
+                        >
+                            <View style={{ marginTop: getSize.m(20) }}>
+                                <Position
+                                    position='ליגת האומות של אופ"א 2022/23'
+                                    color={appColors.text_dark_blue}
+                                    width={getSize.m(60)}
+                                    fontFamily={AppFonts.bold}
+                                    fontSize={getSize.m(12)}
+                                />
+                                <View style={{ marginTop: getSize.m(-10) }}>
+                                    {listGames.map((item, index) => {
+                                        return (
+                                            <LinearGradient
+                                                colors={[
+                                                    item.id % 2 === 1
+                                                        ? 'rgba(255, 255, 255, 0.05)'
+                                                        : appColors.gray,
+                                                    item.id % 2 === 1
+                                                        ? 'rgba(16, 32, 100, 0.05)'
+                                                        : appColors.gray,
+                                                    item.id % 2 === 1
+                                                        ? 'rgba(59, 168, 225, 0.05)'
+                                                        : appColors.gray,
+                                                ]}
+                                                key={item.id}
                                                 style={[
                                                     appStyles.flex_row_space_center,
                                                     {
-                                                        marginHorizontal: getSize.m(10),
-                                                        marginTop: getSize.m(16),
+                                                        borderRadius: getSize.m(5),
+                                                        paddingVertical: getSize.m(14),
+                                                        paddingHorizontal: getSize.m(16),
                                                     },
                                                 ]}
                                             >
-                                                <View style={[appStyles.align_justify]}>
-                                                    <Avatar
-                                                        rounded
-                                                        size={getSize.m(40)}
-                                                        source={item.logoAway}
-                                                        containerStyle={styles.avt_club}
-                                                    />
-                                                    <Text style={styles.name_club}>
-                                                        {item.nameAway}
-                                                    </Text>
+                                                <View style={appStyles.flex_row_align}>
+                                                    <Text style={styles.calendar}>{item.date}</Text>
                                                 </View>
                                                 <View
-                                                    style={[appStyles.align_justify, styles.time]}
+                                                    style={[
+                                                        appStyles.flex_row_space_center,
+                                                        {
+                                                            marginHorizontal: getSize.m(15),
+                                                        },
+                                                    ]}
                                                 >
-                                                    {item.completed === false ? (
-                                                        <Text style={styles.score}>
-                                                            {item.schedule}
+                                                    <View style={[appStyles.flex_row_align_center]}>
+                                                        <Text style={styles.name_club}>
+                                                            {item.nameHome}
                                                         </Text>
-                                                    ) : (
+                                                        <View style={styles.avt_club}>
+                                                            <FastImage
+                                                                source={item.home}
+                                                                style={{
+                                                                    width: getSize.m(22),
+                                                                    height: getSize.m(22),
+                                                                    borderRadius: getSize.m(22),
+                                                                }}
+                                                            />
+                                                        </View>
+                                                    </View>
+                                                    <View
+                                                        style={{ marginHorizontal: getSize.m(10) }}
+                                                    >
                                                         <Text style={styles.score}>
                                                             {item.result}
                                                         </Text>
-                                                    )}
+                                                    </View>
+                                                    <View style={appStyles.flex_row_align_center}>
+                                                        <View style={styles.avt_club}>
+                                                            <FastImage
+                                                                source={item.away}
+                                                                style={{
+                                                                    width: getSize.m(22),
+                                                                    height: getSize.m(22),
+                                                                    borderRadius: getSize.m(22),
+                                                                }}
+                                                            />
+                                                        </View>
+                                                        <Text style={styles.name_club}>
+                                                            {item.nameAway}
+                                                        </Text>
+                                                    </View>
                                                 </View>
-                                                <View style={[appStyles.align_justify]}>
-                                                    <Avatar
-                                                        rounded
-                                                        size={getSize.m(40)}
-                                                        source={item.logoHome}
-                                                        containerStyle={styles.avt_club}
+                                                <View style={appStyles.flex_row_align}>
+                                                    <Text style={styles.location}>{item.goal}</Text>
+                                                    <FastImage
+                                                        source={AppImages.img_ball}
+                                                        style={{
+                                                            width: getSize.m(12),
+                                                            height: getSize.m(12),
+                                                        }}
                                                     />
-
-                                                    <Text style={styles.name_club}>
-                                                        {item.nameHome}
-                                                    </Text>
                                                 </View>
-                                            </View>
-                                            <TouchableOpacity
-                                                style={[appStyles.flex_row_center, { flex: 0 }]}
-                                                onPress={handleDetailMatch}
-                                            >
-                                                <Text style={styles.details}>{item.details}</Text>
-                                                <Icon
-                                                    name={appIcons.ic_arrow_left}
-                                                    size={getSize.m(10)}
-                                                    color={appColors.button_dark_blue}
-                                                />
-                                            </TouchableOpacity>
-                                            <View style={appStyles.flex_row_space}>
-                                                <View
-                                                    style={[
-                                                        styles.circle,
-                                                        { right: getSize.m(-40) },
-                                                    ]}
-                                                />
-                                                <View
-                                                    style={[
-                                                        styles.circle,
-                                                        { left: getSize.m(-40) },
-                                                    ]}
-                                                />
-                                            </View>
-                                            <View style={styles.line_dots} />
-                                            <View
+                                            </LinearGradient>
+                                        );
+                                    })}
+                                </View>
+                            </View>
+                            <View style={{ marginTop: getSize.m(20) }}>
+                                <Position
+                                    position="ידידות"
+                                    color={appColors.text_dark_blue}
+                                    width={getSize.m(130)}
+                                    fontFamily={AppFonts.bold}
+                                    fontSize={getSize.m(12)}
+                                />
+                                <View style={{ marginTop: getSize.m(-10) }}>
+                                    {listGames.map((item, index) => {
+                                        return (
+                                            <LinearGradient
+                                                colors={[
+                                                    item.id % 2 === 1
+                                                        ? 'rgba(255, 255, 255, 0.05)'
+                                                        : appColors.gray,
+                                                    item.id % 2 === 1
+                                                        ? 'rgba(16, 32, 100, 0.05)'
+                                                        : appColors.gray,
+                                                    item.id % 2 === 1
+                                                        ? 'rgba(59, 168, 225, 0.05)'
+                                                        : appColors.gray,
+                                                ]}
+                                                key={item.id}
                                                 style={[
                                                     appStyles.flex_row_space_center,
-                                                    { marginHorizontal: getSize.m(20) },
+                                                    {
+                                                        borderRadius: getSize.m(5),
+                                                        paddingVertical: getSize.m(14),
+                                                        paddingHorizontal: getSize.m(16),
+                                                    },
                                                 ]}
                                             >
-                                                <View
-                                                    style={[
-                                                        appStyles.flex_align_center,
-                                                        { flex: 0 },
-                                                    ]}
-                                                >
-                                                    <Text style={styles.number}>{item.goal}</Text>
-                                                    <View style={appStyles.flex_row_align}>
-                                                        <Image
-                                                            source={AppImages.img_ball}
-                                                            style={{
-                                                                width: getSize.m(11),
-                                                                height: getSize.m(11),
-                                                            }}
-                                                        />
-                                                        <Text style={styles.label}>
-                                                            {t('goal_national_team.goal')}
-                                                        </Text>
-                                                    </View>
+                                                <View style={appStyles.flex_row_align}>
+                                                    <Text style={styles.calendar}>{item.date}</Text>
                                                 </View>
                                                 <View
                                                     style={[
-                                                        appStyles.flex_align_center,
-                                                        { flex: 0 },
+                                                        appStyles.flex_row_space_center,
+                                                        {
+                                                            marginHorizontal: getSize.m(15),
+                                                        },
                                                     ]}
                                                 >
-                                                    <Text style={styles.number}>
-                                                        {item.yellow_card}
-                                                    </Text>
-                                                    <View style={appStyles.flex_row_align}>
-                                                        <Image
-                                                            source={AppImages.img_ticket_yellow}
-                                                        />
-                                                        <Text style={styles.label}>
-                                                            {t('goal_national_team.yellow')}
+                                                    <View style={[appStyles.flex_row_align_center]}>
+                                                        <Text style={styles.name_club}>
+                                                            {item.nameHome}
+                                                        </Text>
+                                                        <View style={styles.avt_club}>
+                                                            <FastImage
+                                                                source={item.home}
+                                                                style={{
+                                                                    width: getSize.m(22),
+                                                                    height: getSize.m(22),
+                                                                    borderRadius: getSize.m(22),
+                                                                }}
+                                                            />
+                                                        </View>
+                                                    </View>
+                                                    <View
+                                                        style={{ marginHorizontal: getSize.m(10) }}
+                                                    >
+                                                        <Text style={styles.score}>
+                                                            {item.result}
+                                                        </Text>
+                                                    </View>
+                                                    <View style={appStyles.flex_row_align_center}>
+                                                        <View style={styles.avt_club}>
+                                                            <FastImage
+                                                                source={item.away}
+                                                                style={{
+                                                                    width: getSize.m(22),
+                                                                    height: getSize.m(22),
+                                                                    borderRadius: getSize.m(22),
+                                                                }}
+                                                            />
+                                                        </View>
+                                                        <Text style={styles.name_club}>
+                                                            {item.nameAway}
                                                         </Text>
                                                     </View>
                                                 </View>
-                                                <View
-                                                    style={[
-                                                        appStyles.flex_align_center,
-                                                        { flex: 0 },
-                                                    ]}
-                                                >
-                                                    <Text style={styles.number}>
-                                                        {item.red_card}
-                                                    </Text>
-                                                    <View style={appStyles.flex_row_align}>
-                                                        <Image source={AppImages.img_ticket_red} />
-                                                        <Text style={styles.label}>
-                                                            {t('goal_national_team.red')}
-                                                        </Text>
-                                                    </View>
+                                                <View style={appStyles.flex_row_align}>
+                                                    <Text style={styles.location}>{item.goal}</Text>
+                                                    <FastImage
+                                                        source={AppImages.img_ball}
+                                                        style={{
+                                                            width: getSize.m(12),
+                                                            height: getSize.m(12),
+                                                        }}
+                                                    />
                                                 </View>
-                                            </View>
-                                        </View>
-                                    </View>
-                                );
-                            })}
+                                            </LinearGradient>
+                                        );
+                                    })}
+                                </View>
+                            </View>
                         </View>
                     </ScrollView>
                 </SafeAreaView>

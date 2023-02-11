@@ -43,7 +43,6 @@ export const ButtonOption = ({ option_one, option_two, onSelect }: IButtonOption
                                         index === select
                                             ? appColors.white
                                             : appColors.text_option_unselect,
-                                    fontWeight: index === select ? '700' : '500',
                                     fontFamily: index === select ? AppFonts.bold : AppFonts.medium,
                                 },
                             ]}

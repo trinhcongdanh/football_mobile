@@ -1,3 +1,4 @@
+import { AppFonts } from '@football/app/assets/fonts';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { getSize } from '@football/app/utils/responsive/scale';
 import { StyleSheet, I18nManager } from 'react-native';
@@ -35,7 +36,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     confirmation_reward_title: {
-        fontWeight: '700',
+        fontFamily: AppFonts.bold,
         fontSize: getSize.m(17),
         lineHeight: getSize.m(25),
         color: appColors.white,
@@ -44,7 +45,7 @@ const styles = StyleSheet.create({
         marginBottom: getSize.m(7),
     },
     confirmation_reward_subtitle: {
-        fontWeight: '400',
+        fontFamily: AppFonts.regular,
         fontSize: getSize.m(14),
         lineHeight: getSize.m(18),
         color: appColors.white,
@@ -55,7 +56,7 @@ const styles = StyleSheet.create({
         marginVertical: getSize.m(31),
     },
     confirmation_reward_require: {
-        fontWeight: '700',
+        fontFamily: AppFonts.bold,
         fontSize: getSize.m(14),
         lineHeight: getSize.m(18),
         color: appColors.white,
@@ -69,7 +70,8 @@ const styles = StyleSheet.create({
         borderRadius: getSize.m(3),
     },
     confirmation_reward_provision: {
-        fontWeight: '500',
+        fontFamily: AppFonts.medium,
+
         fontSize: getSize.m(14),
         lineHeight: getSize.m(18),
         color: appColors.white,
@@ -82,7 +84,7 @@ const styles = StyleSheet.create({
     },
     confirmation_button_text: {
         color: appColors.white,
-        fontWeight: '700',
+        fontFamily: AppFonts.bold,
         fontSize: getSize.m(16),
         textAlign: 'center',
     },

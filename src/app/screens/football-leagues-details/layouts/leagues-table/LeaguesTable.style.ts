@@ -5,7 +5,6 @@ import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
     header: {
-        fontWeight: '500',
         color: appColors.button_dark_blue,
         textAlign: 'center',
         fontSize: getSize.m(11),
@@ -24,7 +23,6 @@ const styles = StyleSheet.create({
         fontFamily: AppFonts.bold,
         fontSize: getSize.m(11),
         color: appColors.text_dark_blue,
-        fontWeight: '700',
         lineHeight: getSize.m(16),
         overflow: 'hidden',
     },

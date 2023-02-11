@@ -8,8 +8,7 @@ export const styles = StyleSheet.create({
     txt_title: {
         color: appColors.white,
         fontSize: getSize.m(20),
-        fontFamily: AppFonts.regular,
-        fontWeight: '700',
+        fontFamily: AppFonts.bold,
         textAlign: 'center',
         width: '70%',
     },

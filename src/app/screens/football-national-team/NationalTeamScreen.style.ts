@@ -19,11 +19,10 @@ const styles = StyleSheet.create({
         elevation: 2,
     },
     text_title: {
-        fontWeight: '700',
         fontSize: getSize.m(18),
         color: appColors.white,
         lineHeight: getSize.m(23),
-        fontFamily: AppFonts.regular,
+        fontFamily: AppFonts.bold,
         marginTop: getSize.m(14),
         textAlign: 'center',
     },
@@ -50,8 +49,7 @@ const styles = StyleSheet.create({
     },
     text_date: {
         fontSize: getSize.m(12),
-        fontWeight: '600',
-        fontFamily: AppFonts.regular,
+        fontFamily: AppFonts.semibold,
         color: appColors.white,
         lineHeight: getSize.m(20),
     },
@@ -64,16 +62,15 @@ const styles = StyleSheet.create({
         overflow: 'hidden',
     },
     text_content: {
-        fontWeight: '700',
         textAlign: 'left',
         fontSize: getSize.m(12),
         lineHeight: getSize.m(16),
         color: appColors.white,
-        fontFamily: AppFonts.regular,
+        fontFamily: AppFonts.bold,
     },
     ic_arrow_left: {
         lineHeight: getSize.m(16),
-        fontWeight: '900',
+        fontFamily: AppFonts.bold,
     },
     play_video_main: {
         paddingHorizontal: getSize.m(16),
@@ -141,7 +138,6 @@ const styles = StyleSheet.create({
     details: {
         fontSize: getSize.m(12),
         color: appColors.button_dark_blue,
-        fontWeight: '700',
         lineHeight: getSize.m(16),
         fontFamily: AppFonts.bold,
         marginRight: getSize.m(4),
@@ -152,7 +148,7 @@ const styles = StyleSheet.create({
         borderRadius: getSize.m(30),
         paddingHorizontal: getSize.m(5),
         paddingVertical: getSize.m(4),
-        marginHorizontal: getSize.m(26),
+        marginHorizontal: getSize.m(10),
     },
     button_option_dark: {
         paddingHorizontal: getSize.m(30),
@@ -173,11 +169,10 @@ const styles = StyleSheet.create({
         backgroundColor: appColors.white,
     },
     name_player: {
-        fontWeight: '700',
         color: appColors.text_dark_blue,
         lineHeight: getSize.m(18),
         fontSize: getSize.m(14),
-        fontFamily: AppFonts.regular,
+        fontFamily: AppFonts.bold,
         marginLeft: getSize.m(8),
     },
     dotContainer: {

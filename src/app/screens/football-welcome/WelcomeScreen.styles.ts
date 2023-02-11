@@ -11,7 +11,6 @@ const styles = StyleSheet.create({
         fontSize: getSize.m(20),
         color: 'white',
         lineHeight: getSize.m(21.6),
-        fontWeight: '700',
         fontFamily: AppFonts.bold,
     },
     image: { width: getSize.m(89), height: getSize.m(98) },
@@ -20,7 +19,6 @@ const styles = StyleSheet.create({
         fontSize: getSize.m(15),
         lineHeight: getSize.m(21),
         textAlign: 'center',
-        fontWeight: '500',
         fontFamily: AppFonts.medium,
     },
     button_start: {
@@ -31,7 +29,6 @@ const styles = StyleSheet.create({
         color: 'white',
         fontSize: getSize.m(13),
         fontFamily: AppFonts.semibold,
-        fontWeight: '600',
         lineHeight: getSize.m(24),
     },
     button_sign_up: {

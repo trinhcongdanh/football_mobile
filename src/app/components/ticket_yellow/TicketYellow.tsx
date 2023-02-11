@@ -19,11 +19,13 @@ export const TicketYellow = ({ name, avt, minute, team, ticket }: ITicketYellowP
                         <FastImage
                             source={ticket}
                             style={{ width: getSize.m(13), height: getSize.m(15) }}
+                            resizeMode={FastImage.resizeMode.contain}
                         />
                     ) : (
                         <FastImage
                             source={AppImages.img_ticket_yellow}
                             style={{ width: getSize.m(14), height: getSize.m(18) }}
+                            resizeMode={FastImage.resizeMode.contain}
                         />
                     )}
                 </View>

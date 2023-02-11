@@ -30,7 +30,6 @@ export const styles = StyleSheet.create({
     },
 
     title_drop_down: {
-        fontWeight: '700',
         color: appColors.text_dark_blue,
         fontSize: getSize.m(18),
         fontFamily: AppFonts.bold,
@@ -42,8 +41,7 @@ export const styles = StyleSheet.create({
         borderStyle: 'dashed',
     },
     label_drop_down: {
-        fontWeight: '700',
-        fontFamily: AppFonts.regular,
+        fontFamily: AppFonts.bold,
         fontSize: getSize.m(13),
         color: appColors.text_dark_blue,
         lineHeight: getSize.m(17),
@@ -71,8 +69,7 @@ export const styles = StyleSheet.create({
     },
 
     content_select: {
-        fontFamily: AppFonts.regular,
-        fontWeight: '700',
+        fontFamily: AppFonts.bold,
         fontSize: getSize.m(15),
         lineHeight: getSize.m(15),
         color: appColors.text_dark_blue,

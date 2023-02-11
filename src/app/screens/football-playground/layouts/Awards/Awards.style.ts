@@ -12,20 +12,18 @@ const styles = StyleSheet.create({
         marginBottom: getSize.m(20),
     },
     item_award_name: {
-        fontWeight: '700',
         fontSize: getSize.m(16),
         color: appColors.white,
         lineHeight: getSize.m(24),
-        fontFamily: AppFonts.regular,
+        fontFamily: AppFonts.bold,
         width: getSize.m(150),
     },
     item_award_image: {},
     item_award_coin: {
-        fontWeight: '700',
         fontSize: getSize.m(16),
         color: appColors.white,
         lineHeight: getSize.m(24),
-        fontFamily: AppFonts.regular,
+        fontFamily: AppFonts.bold,
         paddingHorizontal: getSize.m(5),
     },
 });

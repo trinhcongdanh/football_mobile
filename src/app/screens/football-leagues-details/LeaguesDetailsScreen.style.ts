@@ -18,19 +18,17 @@ const styles = StyleSheet.create({
         borderRadius: getSize.m(74),
     },
     name_leagues: {
-        fontFamily: AppFonts.regular,
+        fontFamily: AppFonts.bold,
         color: appColors.white,
-        fontWeight: '700',
         fontSize: getSize.m(18),
         lineHeight: getSize.m(24),
         marginTop: getSize.m(16),
     },
     season_year: {
-        fontWeight: '700',
         fontSize: getSize.m(14),
         lineHeight: getSize.m(18),
         color: appColors.white,
-        fontFamily: AppFonts.regular,
+        fontFamily: AppFonts.bold,
         marginRight: getSize.m(12),
     },
     calender: {
@@ -43,13 +41,13 @@ const styles = StyleSheet.create({
     },
     text_calender: {
         fontSize: getSize.m(13),
-        fontWeight: '700',
         color: appColors.white,
         marginRight: getSize.m(58),
         lineHeight: getSize.m(20),
+        fontFamily: AppFonts.bold,
     },
     chevron_down: {
-        fontWeight: '900',
+        fontFamily: AppFonts.bold,
     },
     drop_down_calender: {
         position: 'absolute',
@@ -70,7 +68,6 @@ const styles = StyleSheet.create({
 
     btn_drop_down_calender_text: {
         textAlign: 'left',
-        fontWeight: '700',
         fontSize: getSize.m(13),
         fontFamily: AppFonts.bold,
         lineHeight: getSize.m(17),
@@ -109,9 +106,9 @@ const styles = StyleSheet.create({
     },
     text_cycle: {
         fontSize: getSize.m(13),
-        fontWeight: '700',
         color: appColors.text_dark_blue,
         lineHeight: getSize.m(20),
+        fontFamily: AppFonts.bold,
     },
 
     package: {

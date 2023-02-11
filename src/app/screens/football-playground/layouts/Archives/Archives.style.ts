@@ -22,12 +22,12 @@ const styles = StyleSheet.create({
     item_archives_background: { borderRadius: getSize.m(20), width: '100%' },
     item_archives_test: {
         color: 'rgba(255, 255, 255, 0.8)',
-        fontWeight: '700',
         fontSize: getSize.m(11),
         lineHeight: getSize.m(11),
         position: 'absolute',
         top: getSize.m(16),
         left: getSize.m(16),
+        fontFamily: AppFonts.bold,
     },
     item_archives_ticket: {
         position: 'absolute',
@@ -56,11 +56,10 @@ const styles = StyleSheet.create({
         height: getSize.m(36),
     },
     item_archives_title: {
-        fontWeight: '700',
         fontSize: getSize.m(16),
         lineHeight: getSize.m(20),
         color: 'rgba(119, 125, 163, 1)',
-        fontFamily: AppFonts.regular,
+        fontFamily: AppFonts.bold,
         textAlign: 'center',
     },
     item_archives_line: {
@@ -78,11 +77,10 @@ const styles = StyleSheet.create({
         marginRight: getSize.m(10),
     },
     item_archives_point: {
-        fontWeight: '700',
         fontSize: getSize.m(13),
         lineHeight: getSize.m(17),
         color: appColors.white,
-        fontFamily: AppFonts.regular,
+        fontFamily: AppFonts.bold,
     },
     item_archives_img_point: {
         marginLeft: getSize.m(4),

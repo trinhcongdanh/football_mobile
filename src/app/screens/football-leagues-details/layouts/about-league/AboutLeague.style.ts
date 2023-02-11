@@ -26,19 +26,17 @@ const styles = StyleSheet.create({
     },
     title_about: {
         fontSize: getSize.m(13),
-        fontWeight: '500',
         color: appColors.light_gray,
         lineHeight: getSize.m(17),
-        fontFamily: AppFonts.regular,
+        fontFamily: AppFonts.medium,
         marginTop: getSize.m(6),
         marginBottom: getSize.m(14),
     },
     content_about: {
         fontSize: getSize.m(15),
         color: appColors.blue_black,
-        fontWeight: '700',
         lineHeight: getSize.m(22),
-        fontFamily: AppFonts.regular,
+        fontFamily: AppFonts.bold,
     },
 
     indicatorContainer: {

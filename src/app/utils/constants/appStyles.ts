@@ -67,7 +67,6 @@ export const appStyles = StyleSheet.create({
     },
     text_title: {
         fontFamily: AppFonts.bold,
-        fontWeight: '700',
         fontSize: getSize.m(24),
         textAlign: 'center',
         color: appColors.white,
@@ -75,8 +74,7 @@ export const appStyles = StyleSheet.create({
         marginTop: getSize.m(20),
     },
     text_sub_title: {
-        fontFamily: AppFonts.regular,
-        fontWeight: '500',
+        fontFamily: AppFonts.medium,
         fontSize: getSize.m(15),
         textAlign: 'center',
         color: appColors.text_grey,
@@ -85,8 +83,7 @@ export const appStyles = StyleSheet.create({
     },
 
     text_header: {
-        fontFamily: AppFonts.regular,
-        fontWeight: '700',
+        fontFamily: AppFonts.bold,
         fontSize: getSize.m(20),
         textAlign: 'center',
         color: appColors.text_dark_blue,
@@ -94,7 +91,6 @@ export const appStyles = StyleSheet.create({
     },
     text_sub_header: {
         fontFamily: AppFonts.regular,
-        fontWeight: '400',
         fontSize: getSize.m(16),
         textAlign: 'center',
         color: appColors.text_dark_blue,
@@ -102,7 +98,6 @@ export const appStyles = StyleSheet.create({
     },
     text_input: {
         fontSize: getSize.m(13),
-        fontWeight: '500',
         lineHeight: getSize.m(17),
         color: appColors.text_dark_blue,
         paddingHorizontal: getSize.m(24),
@@ -115,7 +110,6 @@ export const appStyles = StyleSheet.create({
     },
     text_label: {
         fontSize: getSize.s(13),
-        fontWeight: '700',
         lineHeight: getSize.m(17),
         color: appColors.text_dark_blue,
         fontFamily: AppFonts.bold,
@@ -125,7 +119,6 @@ export const appStyles = StyleSheet.create({
         fontSize: getSize.m(12),
         marginTop: getSize.m(4),
         lineHeight: getSize.m(11.7),
-        fontWeight: '500',
         fontFamily: AppFonts.medium,
         textAlign: I18nManager.isRTL ? 'left' : 'right',
     },
@@ -138,10 +131,10 @@ export const appStyles = StyleSheet.create({
         borderRadius: getSize.m(15),
     },
     text_bold: {
-        fontWeight: '700',
         fontSize: getSize.s(14),
         lineHeight: getSize.m(24),
         color: appColors.white,
+        fontFamily: AppFonts.bold,
     },
     safe_area: {
         flex: 1,
@@ -156,7 +149,6 @@ export const appStyles = StyleSheet.create({
         paddingVertical: getSize.m(20),
     },
     text_dark: {
-        fontWeight: '700',
         fontFamily: AppFonts.bold,
         color: appColors.text_dark,
         lineHeight: getSize.m(15),
@@ -169,11 +161,9 @@ export const appStyles = StyleSheet.create({
         fontSize: getSize.m(16),
         lineHeight: getSize.m(20),
         color: appColors.text_dark_blue,
-        fontWeight: '700',
     },
 
     number: {
-        fontWeight: '700',
         fontFamily: AppFonts.bold,
         color: appColors.text_dark_blue,
         fontSize: getSize.m(16),
@@ -206,7 +196,6 @@ export const appStyles = StyleSheet.create({
     statistics_title: {
         color: appColors.text_dark_blue,
         fontSize: getSize.m(14),
-        fontWeight: '700',
         lineHeight: getSize.m(18),
         fontFamily: AppFonts.bold,
     },
@@ -214,16 +203,14 @@ export const appStyles = StyleSheet.create({
         color: appColors.button_dark_blue,
         fontSize: getSize.m(12),
         lineHeight: getSize.m(16),
-        fontWeight: '700',
         fontFamily: AppFonts.bold,
         marginRight: getSize.m(4),
     },
     statistic_ic_arrow: {
-        fontWeight: '700',
+        fontFamily: AppFonts.bold,
     },
 
     statistics_header: {
-        fontWeight: '500',
         color: appColors.button_dark_blue,
         textAlign: 'center',
         fontSize: getSize.m(11),
@@ -236,7 +223,6 @@ export const appStyles = StyleSheet.create({
         fontFamily: AppFonts.bold,
         fontSize: getSize.m(11),
         color: appColors.text_dark_blue,
-        fontWeight: '700',
         lineHeight: getSize.m(16),
         overflow: 'hidden',
     },

@@ -20,6 +20,7 @@ export const Replace = ({ name_up, name_down, avt_up, avt_down, minute, team }: 
                     <FastImage
                         source={AppImages.img_replace}
                         style={{ width: getSize.m(12), height: getSize.m(12) }}
+                        resizeMode={FastImage.resizeMode.contain}
                     />
                 </View>
                 <View style={{ flexDirection: 'row' }}>

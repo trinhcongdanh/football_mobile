@@ -26,9 +26,8 @@ const styles = StyleSheet.create({
     },
 
     club_name: {
-        fontFamily: AppFonts.regular,
+        fontFamily: AppFonts.bold,
         fontSize: getSize.m(16),
-        fontWeight: '700',
         lineHeight: getSize.m(22),
         color: appColors.text_dark_blue,
     },
@@ -45,8 +44,7 @@ const styles = StyleSheet.create({
     },
 
     club_desc: {
-        fontFamily: AppFonts.regular,
-        fontWeight: '500',
+        fontFamily: AppFonts.medium,
         fontSize: getSize.m(14),
         color: appColors.text_dark_blue,
         lineHeight: getSize.m(22),
@@ -57,7 +55,6 @@ const styles = StyleSheet.create({
         fontSize: getSize.m(16),
         fontFamily: AppFonts.bold,
         color: appColors.text_dark_blue,
-        fontWeight: '700',
         lineHeight: getSize.m(20),
     },
     header: {
@@ -73,8 +70,7 @@ const styles = StyleSheet.create({
         color: appColors.text_option_unselect,
         fontSize: getSize.m(12),
         lineHeight: getSize.m(16),
-        fontWeight: '500',
-        fontFamily: AppFonts.regular,
+        fontFamily: AppFonts.medium,
     },
     calender: {
         flexDirection: 'row',
@@ -87,10 +83,10 @@ const styles = StyleSheet.create({
     },
     text_calender: {
         fontSize: getSize.m(13),
-        fontWeight: '700',
         color: appColors.text_dark_blue,
         marginRight: getSize.m(20),
         lineHeight: getSize.m(20),
+        fontFamily: AppFonts.bold,
     },
     drop_down_calender: {
         borderColor: appColors.border,
@@ -110,7 +106,6 @@ const styles = StyleSheet.create({
         marginTop: getSize.m(18),
     },
     frame: {
-        fontWeight: '500',
         fontSize: getSize.m(13),
         fontFamily: AppFonts.medium,
         lineHeight: getSize.m(17),
@@ -126,7 +121,6 @@ const styles = StyleSheet.create({
     },
     date: {
         fontSize: getSize.m(11),
-        fontWeight: '500',
         lineHeight: getSize.m(17),
         fontFamily: AppFonts.medium,
         color: appColors.text_dark_blue,
@@ -134,16 +128,14 @@ const styles = StyleSheet.create({
     score: {
         fontSize: getSize.m(12),
         color: appColors.text_dark_blue,
-        fontWeight: '800',
         fontFamily: AppFonts.bold,
         lineHeight: getSize.m(18),
     },
 
     name_club: {
         fontSize: getSize.m(11),
-        fontWeight: '600',
         lineHeight: getSize.m(14),
-        fontFamily: AppFonts.bold,
+        fontFamily: AppFonts.semibold,
         color: appColors.text_dark_blue,
         width: getSize.m(30),
     },

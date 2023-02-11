@@ -6,8 +6,8 @@ import { StyleSheet, I18nManager } from 'react-native';
 const styles = StyleSheet.create({
     name_club: {
         fontSize: getSize.m(14),
-        fontWeight: '700',
         color: appColors.white,
+        fontFamily: AppFonts.bold,
     },
 
     content_item: {
@@ -38,7 +38,6 @@ const styles = StyleSheet.create({
     },
     name_item: {
         fontSize: getSize.m(12),
-        fontWeight: '600',
         color: appColors.white,
         lineHeight: getSize.m(15),
         fontFamily: AppFonts.semibold,
@@ -56,12 +55,12 @@ const styles = StyleSheet.create({
         right: getSize.m(-5),
     },
     ic_check: {
-        fontWeight: '900',
         lineHeight: getSize.m(10),
         height: getSize.m(9.39),
         width: getSize.m(10.17),
         justifyContent: 'center',
         alignItems: 'center',
+        fontFamily: AppFonts.bold,
     },
     select_item: {
         backgroundColor: appColors.black,
@@ -87,10 +86,9 @@ const styles = StyleSheet.create({
         bottom: getSize.m(0),
     },
     text_index: {
-        fontWeight: '600',
         color: appColors.white,
         fontSize: getSize.m(10),
-        fontFamily: AppFonts.regular,
+        fontFamily: AppFonts.semibold,
         textAlign: 'center',
     },
     result_number: {

@@ -11,21 +11,18 @@ const styles = StyleSheet.create({
     txt_title: {
         color: appColors.white,
         fontSize: getSize.m(20),
-        fontFamily: AppFonts.regular,
-        fontWeight: '700',
+        fontFamily: AppFonts.bold,
         textAlign: 'center',
         marginRight: getSize.m(100),
     },
     discussion_question: {
-        fontWeight: '700',
         fontSize: getSize.m(36),
         lineHeight: getSize.m(46),
         color: appColors.white,
         textAlign: 'center',
-        fontFamily: AppFonts.regular,
+        fontFamily: AppFonts.bold,
     },
     discussion_subtitle: {
-        fontWeight: '400',
         fontSize: getSize.m(16),
         color: 'rgba(159, 195, 255, 1)',
         textAlign: 'center',
@@ -38,16 +35,16 @@ const styles = StyleSheet.create({
         marginVertical: getSize.m(32),
     },
     discussion_rules: {
-        fontWeight: '600',
         fontSize: getSize.m(18),
         lineHeight: getSize.m(28),
         textAlign: 'center',
         color: appColors.white,
+        fontFamily: AppFonts.semibold,
     },
     discussion_point: {
         marginRight: getSize.m(10),
         color: appColors.white,
-        fontWeight: '700',
+        fontFamily: AppFonts.bold,
     },
 
     discussion_start: {
@@ -56,17 +53,16 @@ const styles = StyleSheet.create({
     },
     discussion_start_text: {
         textAlign: 'center',
-        fontWeight: '700',
         fontSize: getSize.m(20),
         lineHeight: getSize.m(26),
         color: appColors.white,
+        fontFamily: AppFonts.bold,
     },
     discussion_participant: {
-        fontWeight: '700',
         fontSize: getSize.m(14),
         lineHeight: getSize.m(21),
         color: appColors.white,
-        fontFamily: AppFonts.regular,
+        fontFamily: AppFonts.bold,
         textAlign: 'center',
     },
 });

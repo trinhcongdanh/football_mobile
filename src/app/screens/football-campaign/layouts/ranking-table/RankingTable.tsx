@@ -23,7 +23,6 @@ export const RankingTable = ({}: IRankingTableProps) => {
                     position="בית 9"
                     color={appColors.text_dark_blue}
                     fontFamily={AppFonts.bold}
-                    fontWeight="700"
                     fontSize={getSize.m(12)}
                     width={getSize.m(130)}
                 />

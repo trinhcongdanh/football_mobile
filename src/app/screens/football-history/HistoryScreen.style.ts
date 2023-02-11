@@ -24,26 +24,23 @@ const styles = StyleSheet.create({
 
     text_label: {
         fontSize: getSize.m(12),
-        fontWeight: '500',
         lineHeight: getSize.m(16),
         color: appColors.text_option_unselect,
-        fontFamily: AppFonts.regular,
+        fontFamily: AppFonts.medium,
     },
 
     campaign: {
-        fontWeight: '700',
         color: appColors.text_dark_blue,
         fontSize: getSize.m(14),
         lineHeight: getSize.m(18),
-        fontFamily: AppFonts.regular,
+        fontFamily: AppFonts.bold,
     },
 
     year: {
-        fontWeight: '500',
         fontSize: getSize.m(14),
         color: appColors.text_option_unselect,
         lineHeight: getSize.m(21),
-        fontFamily: AppFonts.regular,
+        fontFamily: AppFonts.medium,
     },
 });
 

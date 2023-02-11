@@ -40,7 +40,6 @@ const styles = StyleSheet.create({
         fontFamily: AppFonts.regular,
         fontSize: getSize.m(12),
         lineHeight: getSize.m(15),
-        fontWeight: '400',
         color: appColors.text_dark_blue,
     },
     txt_add_group: {
@@ -49,7 +48,6 @@ const styles = StyleSheet.create({
         fontFamily: AppFonts.bold,
         fontSize: getSize.m(12),
         lineHeight: getSize.m(15),
-        fontWeight: '700',
         color: appColors.text_dark_blue,
     },
     btn_img: {
@@ -83,12 +81,12 @@ const styles = StyleSheet.create({
     provision: {
         color: appColors.white,
         fontSize: getSize.m(13),
-        fontWeight: '700',
+        fontFamily: AppFonts.bold,
     },
     agree: {
         color: appColors.white,
         fontSize: getSize.m(13),
-        fontWeight: '400',
+        fontFamily: AppFonts.regular,
     },
     checkBox: {
         width: getSize.m(15),
@@ -109,16 +107,14 @@ const styles = StyleSheet.create({
         marginHorizontal: getSize.m(16),
     },
     txt_complete: {
-        fontFamily: AppFonts.regular,
+        fontFamily: AppFonts.bold,
         fontSize: getSize.m(16),
         lineHeight: getSize.m(20),
         color: appColors.white,
-        fontWeight: '700',
     },
     bottom_text: {
-        fontFamily: AppFonts.regular,
+        fontFamily: AppFonts.bold,
         fontSize: getSize.m(14),
-        fontWeight: '700',
         lineHeight: getSize.m(18),
         color: appColors.text_grey,
         textAlign: 'center',
@@ -133,11 +129,10 @@ const styles = StyleSheet.create({
         marginHorizontal: getSize.m(16),
     },
     txt_complete_disable: {
-        fontFamily: AppFonts.regular,
+        fontFamily: AppFonts.bold,
         fontSize: getSize.m(16),
         lineHeight: getSize.m(20),
         color: appColors.text_disable,
-        fontWeight: '700',
     },
 });
 

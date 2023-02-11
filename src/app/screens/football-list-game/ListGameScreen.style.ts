@@ -20,7 +20,6 @@ const styles = StyleSheet.create({
     club_name: {
         fontFamily: AppFonts.bold,
         fontSize: getSize.m(16),
-        fontWeight: '700',
         lineHeight: getSize.m(22),
         color: appColors.text_dark_blue,
     },
@@ -39,14 +38,12 @@ const styles = StyleSheet.create({
     score: {
         fontSize: getSize.m(12),
         color: appColors.text_dark_blue,
-        fontWeight: '800',
         fontFamily: AppFonts.bold,
         lineHeight: getSize.m(18),
     },
 
     name_club: {
         fontSize: getSize.m(11),
-        fontWeight: '700',
         lineHeight: getSize.m(14),
         fontFamily: AppFonts.bold,
         color: appColors.text_dark_blue,
@@ -56,7 +53,6 @@ const styles = StyleSheet.create({
         fontSize: getSize.m(11),
         color: appColors.text_dark_blue,
         lineHeight: getSize.m(16.5),
-        fontWeight: '500',
         fontFamily: AppFonts.medium,
         marginLeft: getSize.m(5),
     },
@@ -64,8 +60,7 @@ const styles = StyleSheet.create({
         fontSize: getSize.m(11),
         color: appColors.text_dark_blue,
         lineHeight: getSize.m(14.5),
-        fontWeight: '600',
-        fontFamily: AppFonts.medium,
+        fontFamily: AppFonts.semibold,
         marginLeft: getSize.m(5),
     },
 });

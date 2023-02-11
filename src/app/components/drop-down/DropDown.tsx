@@ -20,7 +20,7 @@ export const DropDown = ({ data, handleSelected, handleCloseModal }: IDropDownPr
                             name={appIcons.ic_close}
                             color={appColors.black_dark}
                             size={getSize.m(20)}
-                            style={{ fontWeight: '900', fontFamily: AppFonts.bold }}
+                            style={{ fontFamily: AppFonts.bold }}
                         />
                     </TouchableOpacity>
                     <Text style={styles.title_drop_down}>ליגת הבורסה לניירות ערך</Text>

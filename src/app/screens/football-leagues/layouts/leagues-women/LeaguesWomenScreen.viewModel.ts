@@ -24,6 +24,7 @@ export const useViewModel = ({ navigation, route }: ILeaguesWomenScreenProps) =>
         { id: 10, name: 'ליגה ג׳ גליל עליון' },
         { id: 11, name: 'ליגת ONE ZERO בנקאות פרטית דיגיטלית' },
         { id: 12, name: 'ליגת ONE ZERO בנקאות פרטית דיגיטלית' },
+        { id: 13, name: 'ליגת ONE ZERO בנקאות פרטית דיגיטלית' },
     ];
 
     const handleLeaguesDetails = (index: number) => {
@@ -63,6 +64,9 @@ export const useViewModel = ({ navigation, route }: ILeaguesWomenScreenProps) =>
                 break;
             case 11:
                 navigate(ScreenName.ConquerorsPage);
+                break;
+            case 12:
+                navigate(ScreenName.PitchPage);
                 break;
             default:
                 navigate(ScreenName.TeamSquadPage);

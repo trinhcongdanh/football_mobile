@@ -7,9 +7,9 @@ export const styles = StyleSheet.create({
     time: {
         fontSize: getSize.m(14),
         color: appColors.text_dark_blue,
-        fontWeight: '700',
         marginRight: getSize.m(10),
         marginLeft: getSize.m(6),
+        fontFamily: AppFonts.bold,
     },
     ticket: {
         backgroundColor: appColors.blue_matte,
@@ -36,7 +36,6 @@ export const styles = StyleSheet.create({
     },
     name_player: {
         fontSize: getSize.m(13),
-        fontWeight: '600',
         fontFamily: AppFonts.semibold,
         color: appColors.text_dark_blue,
     },
@@ -44,7 +43,6 @@ export const styles = StyleSheet.create({
         marginLeft: getSize.m(32),
         fontSize: getSize.m(12),
         color: '#2f4cfa',
-        fontWeight: '700',
         fontFamily: AppFonts.bold,
     },
 });

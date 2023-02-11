@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
 
     item_quizzes_test: {
         color: 'rgba(255, 255, 255, 0.8)',
-        fontWeight: '700',
+        fontFamily: AppFonts.bold,
         fontSize: getSize.m(11),
         lineHeight: getSize.m(11),
         position: 'absolute',
@@ -60,11 +60,10 @@ const styles = StyleSheet.create({
     },
 
     item_quizzes_title: {
-        fontWeight: '700',
         fontSize: getSize.m(16),
         lineHeight: getSize.m(20),
         color: appColors.white,
-        fontFamily: AppFonts.regular,
+        fontFamily: AppFonts.bold,
         textAlign: 'center',
     },
 
@@ -75,29 +74,26 @@ const styles = StyleSheet.create({
     },
 
     item_quizzes_point: {
-        fontWeight: '700',
         fontSize: getSize.m(13),
         lineHeight: getSize.m(17),
         color: appColors.white,
-        fontFamily: AppFonts.regular,
+        fontFamily: AppFonts.bold,
     },
     item_quizzes_img_point: {
         marginLeft: getSize.m(4),
     },
     item_quizzes_quality: {
-        fontWeight: '700',
         fontSize: getSize.m(12),
         lineHeight: getSize.m(18),
         color: appColors.white,
-        fontFamily: AppFonts.regular,
+        fontFamily: AppFonts.bold,
         marginRight: getSize.m(4),
     },
     item_quizzes_participant: {
-        fontWeight: '500',
         fontSize: getSize.m(12),
         lineHeight: getSize.m(18),
         color: appColors.white,
-        fontFamily: AppFonts.regular,
+        fontFamily: AppFonts.medium,
     },
 });
 
