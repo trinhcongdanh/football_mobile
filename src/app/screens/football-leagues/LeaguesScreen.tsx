@@ -1,16 +1,17 @@
-import { View, ImageBackground, StatusBar, SafeAreaView, Text, TextInput } from 'react-native';
-import React from 'react';
-import { appStyles } from '@football/app/utils/constants/appStyles';
-import { AppImages } from '@football/app/assets/images';
-import Icon from 'react-native-vector-icons/Feather';
-import { HeaderUser } from '@football/app/components/header-user/HeaderUser';
 import { appIcons } from '@football/app/assets/icons/appIcons';
-import { appColors } from '@football/app/utils/constants/appColors';
-import { getSize } from '@football/app/utils/responsive/scale';
+import { AppImages } from '@football/app/assets/images';
+import { HeaderUser } from '@football/app/components/header-user/HeaderUser';
+import { TAB_BAR_HEIGHT } from '@football/app/routes/bottom-tab/styles/bottom.tab.styles';
 import { TopTaps } from '@football/app/routes/toptap/TopTap';
+import { appColors } from '@football/app/utils/constants/appColors';
+import { appStyles } from '@football/app/utils/constants/appStyles';
+import { getSize } from '@football/app/utils/responsive/scale';
+import React from 'react';
+import { ImageBackground, SafeAreaView, StatusBar, Text, TextInput, View } from 'react-native';
+import Icon from 'react-native-vector-icons/Feather';
 import styles from './LeaguesScreen.style';
-import { useViewModel } from './LeaguesScreen.viewModel';
 import { ILeaguesScreenProps } from './LeaguesScreen.type';
+import { useViewModel } from './LeaguesScreen.viewModel';
 
 export const LeaguesScreen = ({ navigation, route }: ILeaguesScreenProps) => {
     const { onGoBack, t, labels, onNavigateSetting } = useViewModel({
@@ -50,6 +51,7 @@ export const LeaguesScreen = ({ navigation, route }: ILeaguesScreenProps) => {
                     </View>
                     <View style={[appStyles.flex, appStyles.main_container]}>
                         <TopTaps labels={labels} />
+                        <View style={{ height: TAB_BAR_HEIGHT }} />
                     </View>
                 </SafeAreaView>
             </ImageBackground>

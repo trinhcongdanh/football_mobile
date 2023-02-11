@@ -1,28 +1,30 @@
-import {
-    ImageBackground,
-    SafeAreaView,
-    StatusBar,
-    Text,
-    View,
-    Image,
-    TouchableOpacity,
-    ScrollView,
-} from 'react-native';
-import React, { useState } from 'react';
-import { AppImages } from '@football/app/assets/images';
-import { appStyles } from '@football/app/utils/constants/appStyles';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import { appIcons } from '@football/app/assets/icons/appIcons';
-import { getSize } from '@football/app/utils/responsive/scale';
-import LinearGradient from 'react-native-linear-gradient';
-import { appColors } from '@football/app/utils/constants/appColors';
 import { AppFonts } from '@football/app/assets/fonts';
-import { Awards } from '@football/app/screens/football-playground/layouts/Awards/Awards';
+import { appIcons } from '@football/app/assets/icons/appIcons';
+import { AppImages } from '@football/app/assets/images';
+import { BOTTOM_SVG_HEIGHT } from '@football/app/routes/bottom-tab/components/bottom.tab';
+import { TAB_BAR_HEIGHT } from '@football/app/routes/bottom-tab/styles/bottom.tab.styles';
 import { Archives } from '@football/app/screens/football-playground/layouts/Archives/Archives';
+import { Awards } from '@football/app/screens/football-playground/layouts/Awards/Awards';
 import { Quizzes } from '@football/app/screens/football-playground/layouts/Quizzes/Quizzes';
 import styles from '@football/app/screens/football-playground/PlayGroundScreen.style';
-import { useViewModel } from '@football/app/screens/football-playground/PlayGroundScreen.viewModel';
 import { IPlayGroundScreenProps } from '@football/app/screens/football-playground/PlayGroundScreen.type';
+import { useViewModel } from '@football/app/screens/football-playground/PlayGroundScreen.viewModel';
+import { appColors } from '@football/app/utils/constants/appColors';
+import { appStyles } from '@football/app/utils/constants/appStyles';
+import { getSize } from '@football/app/utils/responsive/scale';
+import React, { useState } from 'react';
+import {
+    Image,
+    ImageBackground,
+    SafeAreaView,
+    ScrollView,
+    StatusBar,
+    Text,
+    TouchableOpacity,
+    View,
+} from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 export const PlayGroundScreen = ({ navigation, route }: IPlayGroundScreenProps) => {
     const { t, onGoBack } = useViewModel({ navigation, route });
@@ -220,6 +222,7 @@ export const PlayGroundScreen = ({ navigation, route }: IPlayGroundScreenProps) 
                                 {select === 1 && <Archives />}
                                 {select === 2 && <Quizzes />}
                             </View>
+                            <View style={{ height: TAB_BAR_HEIGHT + BOTTOM_SVG_HEIGHT }} />
                         </ScrollView>
                     </View>
                 </SafeAreaView>

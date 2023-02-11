@@ -1,15 +1,15 @@
-import React, { useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import './app/i18n/EnStrings';
-import { ThemeProvider } from 'react-native-elements';
-import { I18nManager, View } from 'react-native';
-import { Provider } from 'react-redux';
-import { RootNavigator } from './app/routes/RootNavigator';
-import { PersistGate } from 'redux-persist/integration/react';
-import { appStyles } from './app/utils/constants/appStyles';
-import { store, persistor } from './store/store';
-import 'react-native-get-random-values';
+import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import { I18nManager, View } from 'react-native';
+import { ThemeProvider } from 'react-native-elements';
+import 'react-native-get-random-values';
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
+import './app/i18n/EnStrings';
+import { RootNavigator } from './app/routes/RootNavigator';
+import { appStyles } from './app/utils/constants/appStyles';
+import { persistor, store } from './store/store';
 
 const App = (props: any) => {
     const { i18n } = useTranslation();

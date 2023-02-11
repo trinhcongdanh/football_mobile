@@ -1,26 +1,27 @@
-import {
-    View,
-    Text,
-    ImageBackground,
-    StatusBar,
-    SafeAreaView,
-    TouchableOpacity,
-    Image,
-    FlatList,
-} from 'react-native';
-import React from 'react';
-import Icon from 'react-native-vector-icons/Feather';
-import { appStyles } from '@football/app/utils/constants/appStyles';
-import { AppImages } from '@football/app/assets/images';
-import { getSize } from '@football/app/utils/responsive/scale';
 import { appIcons } from '@football/app/assets/icons/appIcons';
-import { appColors } from '@football/app/utils/constants/appColors';
-import { useTranslation } from 'react-i18next';
+import { AppImages } from '@football/app/assets/images';
 import { HeaderUser } from '@football/app/components/header-user/HeaderUser';
-import { ITeamScreenProps } from './TeamScreen.type';
-import styles from './TeamScreen.style';
-import { useViewModel } from './TeamScreen.viewModel';
+import { BOTTOM_SVG_HEIGHT } from '@football/app/routes/bottom-tab/components/bottom.tab';
+import { TAB_BAR_HEIGHT } from '@football/app/routes/bottom-tab/styles/bottom.tab.styles';
+import { appColors } from '@football/app/utils/constants/appColors';
+import { appStyles } from '@football/app/utils/constants/appStyles';
+import { getSize } from '@football/app/utils/responsive/scale';
+import React from 'react';
+import { useTranslation } from 'react-i18next';
+import {
+    FlatList,
+    ImageBackground,
+    SafeAreaView,
+    StatusBar,
+    Text,
+    TouchableOpacity,
+    View,
+} from 'react-native';
 import FastImage from 'react-native-fast-image';
+import Icon from 'react-native-vector-icons/Feather';
+import styles from './TeamScreen.style';
+import { ITeamScreenProps } from './TeamScreen.type';
+import { useViewModel } from './TeamScreen.viewModel';
 
 // type Props = {};
 
@@ -108,6 +109,7 @@ export const TeamScreen = ({ navigation, route }: ITeamScreenProps) => {
                                 />
                             )}
                         </View>
+                        <View style={{ height: TAB_BAR_HEIGHT + BOTTOM_SVG_HEIGHT }} />
                     </View>
                 </SafeAreaView>
             </ImageBackground>

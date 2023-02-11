@@ -1,27 +1,28 @@
-import React from 'react';
-import {
-    View,
-    ImageBackground,
-    StatusBar,
-    SafeAreaView,
-    Text,
-    TextInput,
-    ScrollView,
-    TouchableOpacity,
-    Image,
-} from 'react-native';
 import { appIcons } from '@football/app/assets/icons/appIcons';
 import { AppImages } from '@football/app/assets/images';
+import { ButtonOption } from '@football/app/components/button_option';
 import { HeaderUser } from '@football/app/components/header-user/HeaderUser';
+import { BOTTOM_SVG_HEIGHT } from '@football/app/routes/bottom-tab/components/bottom.tab';
+import { TAB_BAR_HEIGHT } from '@football/app/routes/bottom-tab/styles/bottom.tab.styles';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { appStyles } from '@football/app/utils/constants/appStyles';
-import Icon from 'react-native-vector-icons/Feather';
-import { ButtonOption } from '@football/app/components/button_option';
 import { getSize } from '@football/app/utils/responsive/scale';
+import React from 'react';
+import {
+    ImageBackground,
+    SafeAreaView,
+    ScrollView,
+    StatusBar,
+    Text,
+    TextInput,
+    TouchableOpacity,
+    View,
+} from 'react-native';
 import FastImage from 'react-native-fast-image';
+import Icon from 'react-native-vector-icons/Feather';
 import styles from './GobletScreen.style';
-import { useViewModel } from './GobletScreen.viewModel';
 import { IGobletScreenProps } from './GobletScreen.type';
+import { useViewModel } from './GobletScreen.viewModel';
 
 export const GobletScreen = ({ navigation, route }: IGobletScreenProps) => {
     const { t, onNavigateSetting, setOnSelect, handleStateCup, onSelect, stateCups } = useViewModel(
@@ -101,9 +102,12 @@ export const GobletScreen = ({ navigation, route }: IGobletScreenProps) => {
                                         })}
                                     </View>
                                 </View>
+                                <View style={{ height: TAB_BAR_HEIGHT + BOTTOM_SVG_HEIGHT }} />
                             </ScrollView>
                         ) : (
-                            <View></View>
+                            <View>
+                                <View style={{ height: TAB_BAR_HEIGHT + BOTTOM_SVG_HEIGHT }} />
+                            </View>
                         )}
                     </View>
                 </SafeAreaView>
