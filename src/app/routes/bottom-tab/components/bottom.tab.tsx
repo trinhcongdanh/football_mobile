@@ -1,10 +1,14 @@
+/* eslint-disable no-console-log/no-console-log */
+/* eslint-disable no-console */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable react/require-default-props */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable spaced-comment */
 /* eslint-disable react-native/no-inline-styles */
+import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
+import { Route } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
-import { Dimensions, StyleProp, StyleSheet, View } from 'react-native';
+import { Dimensions, StyleProp, View } from 'react-native';
 import RNReanimated, {
     useAnimatedStyle,
     useSharedValue,
@@ -13,22 +17,19 @@ import RNReanimated, {
 } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Path, Svg } from 'react-native-svg';
-import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
-import { Route } from '@react-navigation/native';
 import { style, TAB_BAR_HEIGHT } from '../styles/bottom.tab.styles';
 import FabBarButton, { BarButton } from './tab.bar.button';
 import { getTabShape } from './tab.shape';
-import { getSquareTabShape } from './tab.square.shape';
 
 const ReanimatedSvg = RNReanimated.createAnimatedComponent(Svg);
-
-const tabWidth = 110;
 
 export const defaultSpringConfig = {
     damping: 30,
     mass: 0.7,
     stiffness: 250,
 };
+
+export const BOTTOM_SVG_HEIGHT = 50;
 
 type CustomProps = {
     mode: 'default' | 'square';
@@ -67,19 +68,19 @@ export const FabTabBar: React.FC<BottomTabBarProps & CustomProps> = ({
         height: Dimensions.get('window').height,
     });
     const { bottom } = useSafeAreaInsets();
-    const d =
-        mode === 'default'
-            ? getTabShape(width, height, tabWidth, TAB_BAR_HEIGHT)
-            : getSquareTabShape(width, height, tabWidth, TAB_BAR_HEIGHT);
-
     const tabsWidthValue = React.useMemo(() => width / state.routes.length, [width, state.routes]);
     const tabsRealWidth = width / state.routes.length;
 
-    const initialPosition = isRtl
+    const tabWidth = tabsWidthValue;
+    const d = getTabShape(width, height + 10, tabWidth, TAB_BAR_HEIGHT);
+
+    console.log(d);
+
+    const initialPosition = !isRtl
         ? -width + tabsWidthValue * (state.routes.length - 1 - state.index)
         : -width + tabsWidthValue * state.index;
 
-    const animatedValueLength = useSharedValue(initialPosition);
+    const animatedValueLength = useSharedValue(-initialPosition);
 
     const offset =
         tabsRealWidth < tabWidth ? tabWidth - tabsRealWidth : (tabsRealWidth - tabWidth) * -1;
@@ -94,6 +95,8 @@ export const FabTabBar: React.FC<BottomTabBarProps & CustomProps> = ({
         };
     });
     useEffect(() => {
+        console.log(offset);
+
         animatedValueLength.value = withSpring(
             initialPosition - offset / 2,
             springConfig || defaultSpringConfig
@@ -198,14 +201,15 @@ export const FabTabBar: React.FC<BottomTabBarProps & CustomProps> = ({
                             isFocused={isFocused}
                             activeTintColor={options.tabBarActiveTintColor}
                             inactiveTintColor={options.tabBarInactiveTintColor}
+                            width={tabWidth - 10}
                         />
                     );
                 })}
             </View>
-            <View style={[StyleSheet.absoluteFill, style.barShapeWrapper]}>
+            <View style={[{ position: 'absolute', top: -10, left: 0 }, style.barShapeWrapper]}>
                 <ReanimatedSvg
-                    width={width * 2.5}
-                    height={height + bottom}
+                    width={width * 2}
+                    height={height + bottom + BOTTOM_SVG_HEIGHT}
                     style={[
                         {
                             width: '100%',
@@ -215,6 +219,7 @@ export const FabTabBar: React.FC<BottomTabBarProps & CustomProps> = ({
                     ]}
                 >
                     <Path
+                        y={3}
                         d={d}
                         fill={
                             Object.values(descriptors)[state.index].options

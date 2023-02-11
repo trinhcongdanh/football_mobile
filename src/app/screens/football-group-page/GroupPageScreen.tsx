@@ -1,33 +1,35 @@
+import { appIcons } from '@football/app/assets/icons/appIcons';
+import { AppImages } from '@football/app/assets/images';
+import { Button } from '@football/app/components/button';
+import { DropDown } from '@football/app/components/drop-down/DropDown';
+import { HeaderUser } from '@football/app/components/header-user/HeaderUser';
+import { BOTTOM_SVG_HEIGHT } from '@football/app/routes/bottom-tab/components/bottom.tab';
+import { TAB_BAR_HEIGHT } from '@football/app/routes/bottom-tab/styles/bottom.tab.styles';
+import { LeagueTable } from '@football/app/screens/football-group-page/layouts/league-table/LeagueTable';
+import { appColors } from '@football/app/utils/constants/appColors';
+import { appStyles } from '@football/app/utils/constants/appStyles';
+import { getSize } from '@football/app/utils/responsive/scale';
 import React from 'react';
 import {
-    View,
     ImageBackground,
-    StatusBar,
     SafeAreaView,
     ScrollView,
+    StatusBar,
     Text,
     TouchableOpacity,
+    View,
 } from 'react-native';
-import { appStyles } from '@football/app/utils/constants/appStyles';
-import { AppImages } from '@football/app/assets/images';
-import { appIcons } from '@football/app/assets/icons/appIcons';
-import { appColors } from '@football/app/utils/constants/appColors';
-import { getSize } from '@football/app/utils/responsive/scale';
-import { HeaderUser } from '@football/app/components/header-user/HeaderUser';
-import { ListOfGames } from './layouts/list-of-games/ListOfGames';
-import { Statistics } from './layouts/statistics/Statistics';
-import { LeagueTable } from '@football/app/screens/football-group-page/layouts/league-table/LeagueTable';
-import { Button } from '@football/app/components/button';
+import { Avatar } from 'react-native-elements';
+import FastImage from 'react-native-fast-image';
+import IconEntypo from 'react-native-vector-icons/Entypo';
 import Icon from 'react-native-vector-icons/Feather';
 import IconFontAwesome from 'react-native-vector-icons/FontAwesome';
 import IconIonicons from 'react-native-vector-icons/Ionicons';
-import IconEntypo from 'react-native-vector-icons/Entypo';
-import { DropDown } from '@football/app/components/drop-down/DropDown';
-import { Avatar } from 'react-native-elements';
 import styles from './GroupPageScreen.style';
-import { useViewModel } from './GroupPageScreen.viewModel';
 import { IGroupPageScreenProps } from './GroupPageScreen.type';
-import FastImage from 'react-native-fast-image';
+import { useViewModel } from './GroupPageScreen.viewModel';
+import { ListOfGames } from './layouts/list-of-games/ListOfGames';
+import { Statistics } from './layouts/statistics/Statistics';
 
 export const GroupPageScreen = ({ navigation, route }: IGroupPageScreenProps) => {
     const {
@@ -376,6 +378,7 @@ export const GroupPageScreen = ({ navigation, route }: IGroupPageScreenProps) =>
                                 onPress={handleMoreStatistics}
                             />
                         </View>
+                        <View style={{ height: TAB_BAR_HEIGHT + BOTTOM_SVG_HEIGHT }} />
                     </ScrollView>
                 </SafeAreaView>
             </ImageBackground>

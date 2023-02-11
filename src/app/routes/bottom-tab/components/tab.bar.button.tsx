@@ -1,7 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable react/prop-types */
 import React, { memo, useEffect } from 'react';
-import { StyleProp, Text, TouchableOpacity, View } from 'react-native';
+import { StyleProp, TouchableOpacity, View } from 'react-native';
 
 import RNReanimated, {
     interpolate,
@@ -13,6 +13,8 @@ import RNReanimated, {
 
 import { BottomTabNavigationOptions } from '@react-navigation/bottom-tabs';
 
+import { appColors } from '@football/app/utils/constants/appColors';
+import LinearGradient from 'react-native-linear-gradient';
 import { style } from '../styles/tab.bar.button.styles';
 
 interface Props {
@@ -26,6 +28,7 @@ interface Props {
     activeTintColor?: string;
     springConfig?: WithSpringConfig;
     focusedButtonStyle?: StyleProp<any>;
+    width?: number;
 }
 
 export const defaultSpringConfig: WithSpringConfig = {
@@ -43,6 +46,7 @@ export const BarButton: React.FC<Props> = memo(
         inactiveTintColor,
         focusedButtonStyle,
         springConfig,
+        activeTintColor,
     }) => {
         const animationValueThreshold = useSharedValue(0);
 
@@ -54,18 +58,18 @@ export const BarButton: React.FC<Props> = memo(
             }
         }, [isFocused, animationValueThreshold, springConfig]);
 
-        const animatedStyles = useAnimatedStyle(() => {
-            return {
-                opacity: animationValueThreshold.value,
-                transform: [
-                    {
-                        scale: animationValueThreshold.value,
-                    },
-                ],
-            };
-        });
+        // const animatedStyles = useAnimatedStyle(() => {
+        //     return {
+        //         opacity: animationValueThreshold.value,
+        //         transform: [
+        //             {
+        //                 scale: animationValueThreshold.value,
+        //             },
+        //         ],
+        //     };
+        // });
 
-        const textAnimatedStyle = useAnimatedStyle(() => {
+        const iconAnimatedStyle = useAnimatedStyle(() => {
             return {
                 opacity: interpolate(animationValueThreshold.value, [0.5, 1], [0, 1]),
             };
@@ -73,7 +77,7 @@ export const BarButton: React.FC<Props> = memo(
 
         return (
             <View style={style.wrapper}>
-                <RNReanimated.View style={animatedStyles}>
+                <RNReanimated.View>
                     <TouchableOpacity
                         accessibilityRole="button"
                         accessibilityLabel={options.tabBarAccessibilityLabel}
@@ -83,28 +87,28 @@ export const BarButton: React.FC<Props> = memo(
                         onLongPress={onLongPress}
                     >
                         <View style={style.tabBarLabelWrapper}>
-                            {options.tabBarIcon && !isFocused ? (
-                                options.tabBarIcon({
-                                    focused: isFocused,
-                                    color: inactiveTintColor || 'white',
-                                    size: 28,
-                                })
-                            ) : (
-                                <View />
-                            )}
+                            {options.tabBarIcon ? (
+                                <RNReanimated.View style={iconAnimatedStyle}>
+                                    {options.tabBarIcon({
+                                        focused: isFocused,
+                                        color: inactiveTintColor || 'white',
+                                        size: 28,
+                                    })}
+                                </RNReanimated.View>
+                            ) : null}
                             {options.tabBarLabel && (
                                 <RNReanimated.Text
                                     style={[
                                         {
                                             marginTop: 2,
-                                            color: inactiveTintColor,
+                                            color: isFocused ? activeTintColor : inactiveTintColor,
+                                            fontWeight: isFocused ? 'bold' : 'normal',
                                         },
-                                        textAnimatedStyle,
+
                                         options.tabBarLabelStyle,
                                     ]}
                                 >
-                                    ABC
-                                    {/* {options.tabBarLabel} */}
+                                    {options.tabBarLabel}
                                 </RNReanimated.Text>
                             )}
                         </View>
@@ -124,6 +128,7 @@ export const TabBarButton: React.FC<Props> = memo(
         activeTintColor,
         springConfig,
         focusedButtonStyle,
+        width,
         mode,
     }) => {
         const animationValueThreshold = useSharedValue(0);
@@ -140,7 +145,7 @@ export const TabBarButton: React.FC<Props> = memo(
             return {
                 transform: [
                     {
-                        translateY: interpolate(animationValueThreshold.value, [0, 1], [-18, 100]),
+                        translateY: interpolate(animationValueThreshold.value, [0, 1], [-40, 100]),
                     },
                 ],
             };
@@ -149,7 +154,7 @@ export const TabBarButton: React.FC<Props> = memo(
         return (
             <View style={style.wrapper}>
                 <RNReanimated.View
-                    style={[animatedStyles, { backgroundColor: 'green' }, style.focusedButton]}
+                    style={[animatedStyles, { width, height: width }, style.focusedButton]}
                 >
                     <TouchableOpacity
                         accessibilityRole="button"
@@ -166,13 +171,26 @@ export const TabBarButton: React.FC<Props> = memo(
                         ]}
                         onLongPress={onLongPress}
                     >
-                        {options.tabBarIcon
-                            ? options.tabBarIcon({
-                                  focused: isFocused,
-                                  color: 'white',
-                                  size: 28,
-                              })
-                            : null}
+                        <LinearGradient
+                            colors={[appColors.blue_light, appColors.blue_dark]}
+                            style={[
+                                {
+                                    width,
+                                    height: width,
+                                    borderRadius: 1000,
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                },
+                            ]}
+                        >
+                            {options.tabBarIcon
+                                ? options.tabBarIcon({
+                                      focused: isFocused,
+                                      color: 'white',
+                                      size: 28,
+                                  })
+                                : null}
+                        </LinearGradient>
                     </TouchableOpacity>
                 </RNReanimated.View>
             </View>

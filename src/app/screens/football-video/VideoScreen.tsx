@@ -1,27 +1,29 @@
 import { appIcons } from '@football/app/assets/icons/appIcons';
 import { AppImages } from '@football/app/assets/images';
 import { HeaderUser } from '@football/app/components/header-user/HeaderUser';
+import { BOTTOM_SVG_HEIGHT } from '@football/app/routes/bottom-tab/components/bottom.tab';
+import { TAB_BAR_HEIGHT } from '@football/app/routes/bottom-tab/styles/bottom.tab.styles';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { appStyles } from '@football/app/utils/constants/appStyles';
-import Icon from 'react-native-vector-icons/AntDesign';
 import { getSize } from '@football/app/utils/responsive/scale';
 import React, { useState } from 'react';
-import VideoPlayer from 'react-native-video-player';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import {
     Image,
     ImageBackground,
     SafeAreaView,
+    ScrollView,
     StatusBar,
     Text,
     TouchableOpacity,
     View,
-    ScrollView,
 } from 'react-native';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import Carousel from 'react-native-reanimated-carousel';
+import Icon from 'react-native-vector-icons/AntDesign';
+import VideoPlayer from 'react-native-video-player';
 import styles from './VideoScreen.styles';
-import { useViewModel } from './VideoScreen.viewModel';
 import { IVideoScreenProps } from './VideoScreen.type';
+import { useViewModel } from './VideoScreen.viewModel';
 
 export const VideoScreen = ({ navigation, route }: IVideoScreenProps) => {
     const {
@@ -393,6 +395,7 @@ export const VideoScreen = ({ navigation, route }: IVideoScreenProps) => {
                                 </View>
                             </View>
                         </View>
+                        <View style={{ height: TAB_BAR_HEIGHT + BOTTOM_SVG_HEIGHT }} />
                     </ScrollView>
                 </SafeAreaView>
             </ImageBackground>

@@ -20,20 +20,30 @@ export const getTabShape = (width: number, height: number, tabWidth: number, tab
         { x: 0, y: 0 },
     ]);
 
+    const o1 = 500;
+    const o2 = 70; // 65
+    const o3 = 35; // 35
+    const o4 = 45; // 50
+    const o5 = 3; // 5
+    const o6 = 2; // 6
+    const o7 = 20; // 15
+    const o8 = 47; // 14
+
     const tab = shape
         .line()
         .x((d: { x: number; y: number }) => d.x)
         .y((d: { x: number; y: number }) => d.y)
         .curve(shape.curveBasis)([
-        {
-            x: width,
-            y: 0,
-        },
-        { x: width + 18, y: 6 },
-        { x: width + 25, y: tabHeight - 12 },
-        { x: width + tabWidth - 25, y: tabHeight - 12 },
-        { x: width + tabWidth - 18, y: 6 },
-        { x: width + tabWidth, y: 0 },
+        { x: width + tabWidth / 2 - o1, y: 0 },
+
+        { x: width + tabWidth / 2 - o2 + -o3, y: 0 },
+        { x: width + tabWidth / 2 - o4 + o5, y: -o6 },
+        { x: width + tabWidth / 2 - o4 + o7, y: height - o8 },
+        { x: width + tabWidth / 2 + o4 - o7, y: height - o8 },
+        { x: width + tabWidth / 2 + o4 - o5, y: -o6 },
+        { x: width + tabWidth / 2 + o2 - -o3, y: 0 },
+
+        { x: width + tabWidth / 2 + o1, y: 0 },
     ]);
 
     const d = `${left} ${tab} ${right}`;
