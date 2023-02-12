@@ -62,7 +62,6 @@ const styles = StyleSheet.create({
         marginHorizontal: getSize.m(10),
         paddingHorizontal: getSize.m(12),
         paddingVertical: getSize.m(7),
-        backgroundColor: appColors.blue_matte,
         borderRadius: getSize.m(5),
     },
 
@@ -116,7 +115,6 @@ const styles = StyleSheet.create({
     result: {
         paddingHorizontal: getSize.m(8),
         paddingVertical: getSize.m(11),
-        backgroundColor: appColors.blue_matte,
         borderRadius: getSize.m(10),
     },
     date: {

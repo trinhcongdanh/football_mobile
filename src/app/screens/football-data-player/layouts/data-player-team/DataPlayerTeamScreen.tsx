@@ -76,10 +76,17 @@ export const DataPlayerTeamScreen = (props: any) => {
                     <View style={{ marginLeft: getSize.m(22) }}>
                         <Text style={styles.text_label}>{t('data_player.gates')}</Text>
                     </View>
-                    <View style={[appStyles.flex_row_space_center, styles.header]}>
+                    <LinearGradient
+                        colors={[
+                            'rgba(255, 255, 255, 0.05)',
+                            'rgba(16, 32, 100, 0.05)',
+                            'rgba(59, 168, 225, 0.05)',
+                        ]}
+                        style={[appStyles.flex_row_space_center, styles.header]}
+                    >
                         <Text style={styles.text_header}>{t('data_player.frame')}</Text>
                         <Text style={styles.text_header}>{t('data_player.gates')}</Text>
-                    </View>
+                    </LinearGradient>
                     <View style={{ marginHorizontal: getSize.m(22) }}>
                         {gates.map(item => {
                             return (
@@ -101,10 +108,17 @@ export const DataPlayerTeamScreen = (props: any) => {
                     <View style={{ marginLeft: getSize.m(22) }}>
                         <Text style={styles.text_label}>{t('data_player.ticket.label')}</Text>
                     </View>
-                    <View style={[appStyles.flex_row_space_center, styles.header]}>
+                    <LinearGradient
+                        colors={[
+                            'rgba(255, 255, 255, 0.05)',
+                            'rgba(16, 32, 100, 0.05)',
+                            'rgba(59, 168, 225, 0.05)',
+                        ]}
+                        style={[appStyles.flex_row_space_center, styles.header]}
+                    >
                         <Text style={styles.text_header}>{t('data_player.ticket.type')}</Text>
                         <Text style={styles.text_header}>{t('data_player.ticket.amount')}</Text>
-                    </View>
+                    </LinearGradient>
                     <View style={{ marginHorizontal: getSize.m(22) }}>
                         {tickets.map(item => {
                             return (
@@ -141,7 +155,7 @@ export const DataPlayerTeamScreen = (props: any) => {
                                             ? 'rgba(255, 255, 255, 0.05)'
                                             : appColors.gray,
                                         item.id % 2 === 1
-                                            ? 'rgba(16, 32, 100, 0.05)'
+                                            ? 'rgba(16, 32, 100,0.05)'
                                             : appColors.gray,
                                         item.id % 2 === 1
                                             ? 'rgba(59, 168, 225, 0.05)'
@@ -165,10 +179,11 @@ export const DataPlayerTeamScreen = (props: any) => {
                                             <Text style={styles.name_club}>{item.home}</Text>
                                             <View style={styles.avt_club}>
                                                 <FastImage
-                                                    source={AppImages.img_club}
+                                                    source={AppImages.img_albania}
                                                     style={{
                                                         width: getSize.m(24),
                                                         height: getSize.m(24),
+                                                        borderRadius: getSize.m(24),
                                                     }}
                                                 />
                                             </View>
@@ -179,10 +194,11 @@ export const DataPlayerTeamScreen = (props: any) => {
                                         <View style={appStyles.flex_row_align_center}>
                                             <View style={styles.avt_club}>
                                                 <FastImage
-                                                    source={AppImages.img_club}
+                                                    source={AppImages.img_albania}
                                                     style={{
                                                         width: getSize.m(24),
                                                         height: getSize.m(24),
+                                                        borderRadius: getSize.m(24),
                                                     }}
                                                 />
                                             </View>
@@ -267,10 +283,11 @@ export const DataPlayerTeamScreen = (props: any) => {
                                             <Text style={styles.name_club}>{item.home}</Text>
                                             <View style={styles.avt_club}>
                                                 <FastImage
-                                                    source={AppImages.img_club}
+                                                    source={AppImages.img_albania}
                                                     style={{
                                                         width: getSize.m(24),
                                                         height: getSize.m(24),
+                                                        borderRadius: getSize.m(24),
                                                     }}
                                                 />
                                             </View>
@@ -281,10 +298,11 @@ export const DataPlayerTeamScreen = (props: any) => {
                                         <View style={appStyles.flex_row_align_center}>
                                             <View style={styles.avt_club}>
                                                 <FastImage
-                                                    source={AppImages.img_club}
+                                                    source={AppImages.img_albania}
                                                     style={{
                                                         width: getSize.m(24),
                                                         height: getSize.m(24),
+                                                        borderRadius: getSize.m(24),
                                                     }}
                                                 />
                                             </View>

@@ -274,7 +274,12 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                                 icon={appIcons.ic_arrow_left}
                                 handleNavigation={() => handleNavigation()}
                             />
-                            <View style={[appStyles.package, { marginTop: getSize.m(0) }]}>
+                            <View
+                                style={[
+                                    appStyles.package,
+                                    { marginTop: getSize.m(0), backgroundColor: appColors.white },
+                                ]}
+                            >
                                 <View>
                                     <View>
                                         <Text style={appStyles.statistics_title}>
@@ -357,13 +362,13 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                                                             colors={[
                                                                 item.id % 2 === 1
                                                                     ? 'rgba(255, 255, 255, 0.05)'
-                                                                    : appColors.gray,
+                                                                    : appColors.white,
                                                                 item.id % 2 === 1
                                                                     ? 'rgba(16, 32, 100, 0.05)'
-                                                                    : appColors.gray,
+                                                                    : appColors.white,
                                                                 item.id % 2 === 1
                                                                     ? 'rgba(59, 168, 225, 0.05)'
-                                                                    : appColors.gray,
+                                                                    : appColors.white,
                                                             ]}
                                                             style={[
                                                                 appStyles.flex_row_space_center,
