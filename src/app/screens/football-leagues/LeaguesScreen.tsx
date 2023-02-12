@@ -18,6 +18,7 @@ export const LeaguesScreen = ({ navigation, route }: ILeaguesScreenProps) => {
         navigation,
         route,
     });
+
     return (
         <View style={appStyles.flex}>
             <ImageBackground source={AppImages.img_background} style={appStyles.flex}>

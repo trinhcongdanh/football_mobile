@@ -1,36 +1,33 @@
-/* eslint-disable no-underscore-dangle */
-/* eslint-disable @typescript-eslint/no-shadow */
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
 import { AuthData, ScreenName } from '@football/app/utils/constants/enum';
 import { useMount } from '@football/app/utils/hooks/useMount';
+import { ACTION, TOKEN } from '@football/core/api/auth/config';
 import { axiosClient } from '@football/core/api/configs/axiosClient';
 import { BASE_URL, DATA_SOURCE, DB } from '@football/core/api/configs/config';
 import { PlayerModel, PlayersModelResponse } from '@football/core/models/PlayerModelResponse';
 import { TeamModel } from '@football/core/models/TeamModelResponse';
 import { Players, TeamPersonnelModel } from '@football/core/models/TeamPersonnelResponse';
-import { get, isEmpty, isNil, pick } from 'lodash';
+import { useIsFocused, useRoute } from '@react-navigation/native';
+import { isEmpty, isNil, pick } from 'lodash';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Alert } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-    setAllFavPlayers,
     pushAllFavPlayers,
-    setGroupFavPlayer,
     pushGroupFavPlayer,
-    searchFavPlayers,
-    pushSearchFavPlayers,
     resetAllFavPlayers,
     resetGroupFavPlayer,
     resetSearchFavPlayer,
+    searchFavPlayers,
     selectedFavPlayersAsMapSelector,
     SelectedPlayer,
+    setAllFavPlayers,
+    setGroupFavPlayer,
 } from 'src/store/FavPlayer.slice';
 import { RootState } from 'src/store/store';
-import { useIsFocused, useRoute } from '@react-navigation/native';
-import { ACTION, TOKEN } from '@football/core/api/auth/config';
-import { loginUser } from 'src/store/user/Login.slice';
 import { createProfileUser } from 'src/store/user/CreateProfile.slice';
+import { loginUser } from 'src/store/user/Login.slice';
 import { IFavoritePlayerScreenProps } from './FavoritePlayersScreen.type';
 
 export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) => {

@@ -1,9 +1,9 @@
 import { useTranslation } from 'react-i18next';
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
 import { ScreenName } from '@football/app/utils/constants/enum';
-import { ILeaguesWomenScreenProps } from './LeaguesWomenScreen.type';
+import { ILeagueItemScreenProps } from './LeagueItemScreen.type';
 
-export const useViewModel = ({ navigation, route }: ILeaguesWomenScreenProps) => {
+export const useViewModel = ({ navigation, route }: ILeagueItemScreenProps) => {
     const { navigate, goBack } = useAppNavigator();
     const { t } = useTranslation();
 

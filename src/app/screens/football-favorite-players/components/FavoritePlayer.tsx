@@ -1,31 +1,28 @@
-/* eslint-disable no-underscore-dangle */
+import { appIcons } from '@football/app/assets/icons/appIcons';
+import { AppImages } from '@football/app/assets/images';
+import { Button } from '@football/app/components/button';
+import { HeaderFav } from '@football/app/components/header-fav/HeaderFav';
+import { appColors } from '@football/app/utils/constants/appColors';
+import { appStyles } from '@football/app/utils/constants/appStyles';
+import { getSize } from '@football/app/utils/responsive/scale';
+import { isEmpty } from 'lodash';
+import { AppFonts } from '@football/app/assets/fonts';
 import React from 'react';
 import {
-    Text,
-    TouchableOpacity,
-    View,
-    ImageBackground,
-    StatusBar,
-    SafeAreaView,
-    TextInput,
-    ScrollView,
     ActivityIndicator,
     Image,
+    ImageBackground,
+    SafeAreaView,
+    ScrollView,
+    StatusBar,
+    Text,
+    TextInput,
+    TouchableOpacity,
+    View,
 } from 'react-native';
-import { getSize } from '@football/app/utils/responsive/scale';
 import Icon from 'react-native-vector-icons/Feather';
-import { appIcons } from '@football/app/assets/icons/appIcons';
-import { appColors } from '@football/app/utils/constants/appColors';
-import { AppImages } from '@football/app/assets/images';
-import { appStyles } from '@football/app/utils/constants/appStyles';
-import { isEmpty } from 'lodash';
-import { PlayerModel } from '@football/core/models/PlayerModelResponse';
-import { HeaderFav } from '@football/app/components/header-fav/HeaderFav';
-import { Button } from '@football/app/components/button';
-import { IFavoritePlayerProps } from './FavoritePlayer.types';
 import styles from './FavoritePlayer.style';
-// import { Position } from '@football/core/models/TeamPersonnelResponse';
-import { AppFonts } from '@football/app/assets/fonts';
+import { IFavoritePlayerProps } from './FavoritePlayer.types';
 
 export const FavoritePlayer = ({
     onGoSkip,

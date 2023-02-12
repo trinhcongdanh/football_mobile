@@ -1,17 +1,27 @@
-import { useTranslation } from 'react-i18next';
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
-import { ScreenName, ScreenTopTap } from '@football/app/utils/constants/enum';
-import { LeaguesYouthScreen } from './layouts/leagues-youth/LeaguesYouthScreen';
-import { LeaguesWomenScreen } from './layouts/leagues-women/LeaguesWomenScreen';
-import { LeaguesGraduateScreen } from './layouts/leagues-graduates/LeaguesGraduatesScreen';
-import { LeaguesBoysAScreen } from './layouts/leagues-boys-a/LeaguesBoysAScreen';
-import { LeaguesBoysBScreen } from './layouts/leagues-boys-b/LeaguesBoysBScreen';
-import { LeaguesBoysCScreen } from './layouts/leagues-boys-c/LeaguesBoysCScreen';
+import { LeagueItemScreen } from '@football/app/screens/football-leagues/layouts/league-item/LeagueItemScreen';
+import { ScreenName } from '@football/app/utils/constants/enum';
+import { useMount } from '@football/app/utils/hooks/useMount';
+import { axiosClient } from '@football/core/api/configs/axiosClient';
+import { BASE_URL, DATA_SOURCE, DB } from '@football/core/api/configs/config';
+import { LeagueTypeModelResponse } from '@football/core/models/LeagueModelResponse';
+import { isEmpty, isNil } from 'lodash';
+import { useCallback, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { Alert } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
+import { setLeagueTypes } from 'src/store/league/League.slice';
+import { RootState } from 'src/store/store';
 import { ILeaguesScreenProps } from './LeaguesScreen.type';
 
 export const useViewModel = ({ navigation, route }: ILeaguesScreenProps) => {
     const { navigate, goBack } = useAppNavigator();
     const { t } = useTranslation();
+
+    const dispatch = useDispatch<any>();
+    const [searchText, setSearchText] = useState('');
+
+    const leagueTypes = useSelector((state: RootState) => state.leagues.leagueTypes);
 
     const onGoBack = (): void => {
         goBack();
@@ -20,45 +30,37 @@ export const useViewModel = ({ navigation, route }: ILeaguesScreenProps) => {
     const onNavigateSetting = () => {
         navigate(ScreenName.SettingsPage);
     };
+    const getLeagueTypesData = useCallback(async () => {
+        if (isEmpty(leagueTypes) || isNil(leagueTypes)) {
+            try {
+                const { data }: LeagueTypeModelResponse = await axiosClient.post(
+                    `${BASE_URL}/find`,
+                    {
+                        dataSource: DATA_SOURCE,
+                        database: DB,
+                        collection: 'league_type',
+                    }
+                );
 
-    const labels = [
-        {
-            id: 1,
-            component: LeaguesGraduateScreen,
-            name: ScreenTopTap.LeaguesGraduatesPage,
-            title: t('leagues.graduates.title'),
-        },
-        {
-            id: 2,
-            component: LeaguesWomenScreen,
-            name: ScreenTopTap.LeaguesWomenPage,
-            title: t('leagues.women.title'),
-        },
-        {
-            id: 3,
-            component: LeaguesYouthScreen,
-            name: ScreenTopTap.LeaguesYouthPage,
-            title: t('leagues.youth.title'),
-        },
-        {
-            id: 4,
-            component: LeaguesBoysAScreen,
-            name: ScreenTopTap.LeaguesBoysAPage,
-            title: t('leagues.boys_a.title'),
-        },
-        {
-            id: 5,
-            component: LeaguesBoysBScreen,
-            name: ScreenTopTap.LeaguesBoysBPage,
-            title: t('leagues.boys_b.title'),
-        },
-        {
-            id: 6,
-            component: LeaguesBoysCScreen,
-            name: ScreenTopTap.LeaguesBoysCPage,
-            title: t('leagues.boys_c.title'),
-        },
-    ];
+                if (!isEmpty(data.documents)) {
+                    dispatch(setLeagueTypes(data.documents));
+                }
+            } catch (error: any) {
+                Alert.alert(error);
+            }
+        }
+    }, []);
 
-    return { t, onGoBack, labels, onNavigateSetting };
+    const labels = leagueTypes.map(e => ({
+        id: e.index,
+        title: e.name_he,
+        name: e.name_en.split(' ').join(''),
+        component: LeagueItemScreen,
+    }));
+
+    useMount(() => {
+        getLeagueTypesData();
+    });
+
+    return { t, onGoBack, labels, onNavigateSetting, leagueTypes };
 };
