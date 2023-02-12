@@ -42,7 +42,7 @@ export const Trophy = () => {
                     },
                 ]}
             >
-                <View style={{ width: getSize.m(80) }}>
+                <View style={{ width: getSize.m(90) }}>
                     <Text style={[styles.header, { textAlign: 'left' }]}>
                         {t('state_cup.statistics.season')}
                     </Text>
@@ -67,7 +67,7 @@ export const Trophy = () => {
                         >
                             <View
                                 style={{
-                                    width: getSize.m(80),
+                                    width: getSize.m(90),
                                     overflow: 'hidden',
                                 }}
                             >

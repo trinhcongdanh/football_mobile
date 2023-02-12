@@ -61,7 +61,7 @@ export const ListGame = ({
                         {tournament}
                     </Text>
                     {result === null && schedule === null && (
-                        <Text style={styles.text_live}>LIVE</Text>
+                        <Text style={styles.text_live}>L I V E</Text>
                     )}
                 </View>
             )}

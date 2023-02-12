@@ -131,8 +131,8 @@ export const ListGameScreen = ({ navigation, route }: IListGameScreenProps) => {
                                                     source={AppImages.img_location_dot}
                                                     resizeMode={FastImage.resizeMode.contain}
                                                     style={{
-                                                        width: getSize.m(10),
-                                                        height: getSize.m(12),
+                                                        width: getSize.m(9),
+                                                        height: getSize.m(11),
                                                     }}
                                                 />
                                                 <Text style={styles.location}>{item.location}</Text>

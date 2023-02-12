@@ -41,7 +41,12 @@ export const TeamSquadScreen = ({ navigation, route }: ITeamGroupScreenProps) =>
                             onSelect={setOnSelect}
                         />
 
-                        <View style={{ paddingHorizontal: getSize.m(26) }}>
+                        <View
+                            style={{
+                                paddingHorizontal: getSize.m(26),
+                                marginBottom: getSize.m(30),
+                            }}
+                        >
                             {onSelect === 0 && (
                                 <ScrollView showsVerticalScrollIndicator={false}>
                                     <View style={{ marginTop: getSize.m(30) }}>

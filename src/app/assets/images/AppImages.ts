@@ -68,4 +68,8 @@ export const AppImages = {
     img_trophy_star_blue: require('./trophy-star-blue.png'),
     img_ticket_yellow_1: require('./ticket_yellow.png'),
     img_ticket_red_1: require('./ticket_red_1.png'),
+    img_calendar_week: require('./calendar-week.png'),
+    img_clock: require('./clock.png'),
+    img_up_right: require('./up-right.png'),
+    img_users: require('./users.png'),
 };
