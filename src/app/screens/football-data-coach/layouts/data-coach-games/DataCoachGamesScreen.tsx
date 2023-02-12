@@ -10,6 +10,7 @@ import { appIcons } from '@football/app/assets/icons/appIcons';
 import styles from './DataCoachGamesScreen.style';
 import { useViewModel } from './DataCoachGamesScreen.viewModel';
 import { IDataCoachGamesScreenProps } from './DataCoachGamesScreen.type';
+import FastImage from 'react-native-fast-image';
 
 export const DataCoachGamesScreen = ({ games }: IDataCoachGamesScreenProps) => {
     const { t, onGoBack } = useViewModel({ games });
@@ -21,8 +22,24 @@ export const DataCoachGamesScreen = ({ games }: IDataCoachGamesScreenProps) => {
                         <View style={styles.tournaments}>
                             <Text style={styles.text_tournaments}>{t('coach.tournaments')}</Text>
                         </View>
-                        <View style={[appStyles.flex_row_space, { flexDirection: 'row-reverse' }]}>
-                            <View style={[appStyles.flex_row_align, { flex: 0 }]}>
+                        <View
+                            style={[
+                                appStyles.flex_row_space,
+                                {
+                                    flexDirection: 'row-reverse',
+                                    marginRight: getSize.m(20),
+                                    marginLeft: getSize.m(34),
+                                },
+                            ]}
+                        >
+                            <View
+                                style={[
+                                    appStyles.flex_row_align,
+                                    {
+                                        flex: 0,
+                                    },
+                                ]}
+                            >
                                 <IconLocation
                                     name={appIcons.ic_location}
                                     size={getSize.m(20)}
@@ -50,7 +67,14 @@ export const DataCoachGamesScreen = ({ games }: IDataCoachGamesScreenProps) => {
                                 {game.date}
                             </Text>
                         </View>
-                        <View style={appStyles.flex_row_space}>
+                        <View
+                            style={[
+                                appStyles.flex_row_space,
+                                {
+                                    marginHorizontal: getSize.m(28),
+                                },
+                            ]}
+                        >
                             <View style={[styles.circle, { right: getSize.m(-40) }]} />
                             <View style={[styles.circle, { left: getSize.m(-40) }]} />
                         </View>
@@ -62,12 +86,16 @@ export const DataCoachGamesScreen = ({ games }: IDataCoachGamesScreenProps) => {
                             ]}
                         >
                             <View style={[appStyles.align_justify]}>
-                                <Avatar
-                                    rounded
-                                    size={getSize.m(40)}
-                                    source={{ uri: game.team1.logo_url }}
-                                    containerStyle={styles.avt_club}
-                                />
+                                <View style={styles.avt_club}>
+                                    <FastImage
+                                        style={{
+                                            width: getSize.m(24),
+                                            height: getSize.m(24),
+                                            borderRadius: getSize.m(24),
+                                        }}
+                                        source={{ uri: game.team1.logo_url }}
+                                    />
+                                </View>
 
                                 <Text style={styles.name_club}>{game.team1.name_he}</Text>
                             </View>
@@ -82,12 +110,16 @@ export const DataCoachGamesScreen = ({ games }: IDataCoachGamesScreenProps) => {
                             )}
 
                             <View style={[appStyles.align_justify]}>
-                                <Avatar
-                                    rounded
-                                    size={getSize.m(40)}
-                                    source={{ uri: game.team2.logo_url }}
-                                    containerStyle={styles.avt_club}
-                                />
+                                <View style={styles.avt_club}>
+                                    <FastImage
+                                        style={{
+                                            width: getSize.m(24),
+                                            height: getSize.m(24),
+                                            borderRadius: getSize.m(24),
+                                        }}
+                                        source={{ uri: game.team2.logo_url }}
+                                    />
+                                </View>
                                 <Text style={styles.name_club}>{game.team2.name_he}</Text>
                             </View>
                         </View>

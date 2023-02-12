@@ -76,6 +76,7 @@ export const ListGameScreen = ({ navigation, route }: IListGameScreenProps) => {
                                             <View style={appStyles.flex_row_align}>
                                                 <FastImage
                                                     source={AppImages.img_calendar}
+                                                    resizeMode={FastImage.resizeMode.contain}
                                                     style={{
                                                         width: getSize.m(10),
                                                         height: getSize.m(13),
@@ -128,9 +129,10 @@ export const ListGameScreen = ({ navigation, route }: IListGameScreenProps) => {
                                             <View style={appStyles.flex_row_align}>
                                                 <FastImage
                                                     source={AppImages.img_location_dot}
+                                                    resizeMode={FastImage.resizeMode.contain}
                                                     style={{
                                                         width: getSize.m(10),
-                                                        height: getSize.m(13),
+                                                        height: getSize.m(12),
                                                     }}
                                                 />
                                                 <Text style={styles.location}>{item.location}</Text>

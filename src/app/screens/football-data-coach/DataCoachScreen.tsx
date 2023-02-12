@@ -200,7 +200,6 @@ export const DataCoachScreen = ({ navigation, route }: IDataCoachScreenProps) =>
                                                         style={{
                                                             width: getSize.m(14),
                                                             height: getSize.m(12),
-                                                            marginLeft: getSize.m(2),
                                                         }}
                                                     />
                                                 </View>

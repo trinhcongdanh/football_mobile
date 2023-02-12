@@ -6,7 +6,6 @@ import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
     games: {
         marginTop: getSize.m(30),
-        paddingHorizontal: getSize.m(23),
         paddingTop: getSize.m(12),
         paddingBottom: getSize.m(20),
         borderRadius: getSize.m(15),
@@ -14,10 +13,11 @@ const styles = StyleSheet.create({
     },
     tournaments: {
         alignItems: 'center',
-        backgroundColor: appColors.blue_matte,
+        backgroundColor: '#F2FBFF',
         paddingVertical: getSize.m(4),
         borderRadius: getSize.m(5),
         marginBottom: getSize.m(10),
+        marginHorizontal: getSize.m(12),
     },
     text_tournaments: {
         fontSize: getSize.m(14),
@@ -29,8 +29,9 @@ const styles = StyleSheet.create({
         marginTop: getSize.m(16),
         marginBottom: getSize.m(36),
         borderBottomWidth: 1,
-        borderStyle: 'dotted',
+        borderStyle: 'dashed',
         borderColor: appColors.soft_grey,
+        marginHorizontal: getSize.m(28),
     },
     date: {
         fontSize: getSize.m(14),
@@ -44,8 +45,13 @@ const styles = StyleSheet.create({
         marginLeft: getSize.m(6),
     },
     avt_club: {
-        borderColor: appColors.white,
-        borderWidth: getSize.m(5),
+        backgroundColor: appColors.white,
+        width: getSize.m(28),
+        height: getSize.m(28),
+        borderRadius: getSize.m(28),
+        justifyContent: 'center',
+        alignItems: 'center',
+        elevation: 1,
     },
     name_club: {
         fontFamily: AppFonts.bold,

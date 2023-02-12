@@ -146,7 +146,6 @@ const styles = StyleSheet.create({
     option: {
         backgroundColor: appColors.separator,
         borderRadius: getSize.m(30),
-        paddingHorizontal: getSize.m(5),
         paddingVertical: getSize.m(4),
         marginHorizontal: getSize.m(10),
     },
