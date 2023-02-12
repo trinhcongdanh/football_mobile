@@ -58,6 +58,7 @@ export enum ScreenTopTap {
     LeaguesBoysBPage = 'LeaguesBoysBPage',
     LeaguesBoysCPage = 'LeaguesBoysCPage',
     FavSummaryPage = 'FavSummaryPage',
+    LeagueItemPage = 'LeagueItemPage',
 }
 
 export enum ScreenDataPlayer {

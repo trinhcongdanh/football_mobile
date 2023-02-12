@@ -10,10 +10,13 @@ import { ILeagueItemScreenProps } from './LeagueItemScreen.type';
 import { useViewModel } from './LeagueItemScreen.viewModel';
 
 export const LeagueItemScreen = ({ navigation, route }: ILeagueItemScreenProps) => {
+    const { typeId } = route.params;
     const { t, onGoBack, optionLeagues, handleLeaguesDetails } = useViewModel({
         navigation,
         route,
+        typeId,
     });
+
     const renderItem = ({ item, index }: any) => {
         return (
             <TouchableOpacity
@@ -21,7 +24,7 @@ export const LeagueItemScreen = ({ navigation, route }: ILeagueItemScreenProps) 
                 onPress={() => handleLeaguesDetails(index)}
             >
                 <View style={appStyles.flex_row_align_center}>
-                    <Text style={styles.text_option_menu}>{item.name}</Text>
+                    <Text style={styles.text_option_menu}>{item.name_he}</Text>
                 </View>
 
                 <Icon

@@ -1,31 +1,23 @@
-import { useTranslation } from 'react-i18next';
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
 import { ScreenName } from '@football/app/utils/constants/enum';
+import { useMount } from '@football/app/utils/hooks/useMount';
+import { axiosClient } from '@football/core/api/configs/axiosClient';
+import { BASE_URL, DATA_SOURCE, DB } from '@football/core/api/configs/config';
+import { LeagueModel, LeagueModelResponse } from '@football/core/models/LeagueModelResponse';
+import { useCallback, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { Alert } from 'react-native';
 import { ILeagueItemScreenProps } from './LeagueItemScreen.type';
 
-export const useViewModel = ({ navigation, route }: ILeagueItemScreenProps) => {
+export const useViewModel = ({ navigation, route, typeId }: ILeagueItemScreenProps) => {
     const { navigate, goBack } = useAppNavigator();
     const { t } = useTranslation();
+
+    const [optionLeagues, setOptionsLeagues] = useState<LeagueModel[]>([]);
 
     const onGoBack = (): void => {
         goBack();
     };
-
-    const optionLeagues = [
-        { id: 1, name: 'ליגת האומות של אופ"א 2022/23' },
-        { id: 2, name: 'ליגת ONE ZERO בנקאות פרטית דיגיטלית' },
-        { id: 3, name: 'ליגה א׳ דרום' },
-        { id: 4, name: 'Summary' },
-        { id: 5, name: 'ליגה ב׳ דרום' },
-        { id: 6, name: 'ליגה ב׳ צפון' },
-        { id: 7, name: 'ליגה ב׳ צפון א׳' },
-        { id: 8, name: 'ליגה ג׳ גליל עליון' },
-        { id: 9, name: 'ליגה ג׳ גליל עליון' },
-        { id: 10, name: 'ליגה ג׳ גליל עליון' },
-        { id: 11, name: 'ליגת ONE ZERO בנקאות פרטית דיגיטלית' },
-        { id: 12, name: 'ליגת ONE ZERO בנקאות פרטית דיגיטלית' },
-        { id: 13, name: 'ליגת ONE ZERO בנקאות פרטית דיגיטלית' },
-    ];
 
     const handleLeaguesDetails = (index: number) => {
         switch (index) {
@@ -73,6 +65,27 @@ export const useViewModel = ({ navigation, route }: ILeagueItemScreenProps) => {
                 break;
         }
     };
+
+    const getLeaguesByType = useCallback(async () => {
+        try {
+            const { data }: LeagueModelResponse = await axiosClient.post(`${BASE_URL}/find`, {
+                dataSource: DATA_SOURCE,
+                database: DB,
+                collection: 'league',
+                filter: {
+                    type: { $eq: typeId },
+                },
+            });
+
+            setOptionsLeagues(data.documents);
+        } catch (error: any) {
+            Alert.alert(error);
+        }
+    }, [typeId]);
+
+    useMount(() => {
+        getLeaguesByType();
+    });
 
     return { t, onGoBack, optionLeagues, handleLeaguesDetails };
 };

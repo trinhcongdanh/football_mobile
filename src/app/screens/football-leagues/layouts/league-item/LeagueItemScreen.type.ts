@@ -3,5 +3,6 @@ import { NavigationProp, RouteProp } from '@react-navigation/native';
 
 export type ILeagueItemScreenProps = {
     navigation: NavigationProp<any>;
-    route: RouteProp<any, ScreenTopTap.LeaguesWomenPage>;
+    route: RouteProp<any, ScreenTopTap.LeagueItemPage>;
+    typeId: number;
 };

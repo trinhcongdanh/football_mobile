@@ -18,7 +18,7 @@ const TabLabel = ({ focused, title }: any) => (
             fontFamily: focused ? AppFonts.bold : AppFonts.medium,
 
             lineHeight: getSize.m(18),
-            width: getSize.m(80),
+            width: getSize.m(80), // Fix losing the last character of the text
             textAlign: 'center',
         }}
     >
@@ -45,6 +45,7 @@ export const TopTaps = ({ labels }: Props) => {
                         key={item.id}
                         name={item.name}
                         component={item.component}
+                        initialParams={{ typeId: item.id }}
                         options={{
                             tabBarLabel: ({ focused }) => (
                                 <TabLabel focused={focused} title={item.title} />
