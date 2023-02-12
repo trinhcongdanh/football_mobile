@@ -7,8 +7,8 @@ const styles = StyleSheet.create({
     select_gender: {
         borderWidth: getSize.m(1),
         borderColor: appColors.border,
-        paddingHorizontal: getSize.m(25),
-        paddingVertical: getSize.m(12),
+        paddingHorizontal: getSize.m(24.5),
+        paddingVertical: getSize.m(8),
         borderRadius: getSize.m(25),
         textAlign: 'center',
         fontFamily: AppFonts.bold,

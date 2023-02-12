@@ -21,7 +21,7 @@ export const HeaderLogo = ({
             style={[
                 appStyles.flex,
                 appStyles.main_container,
-                { marginTop: getSize.m(50), backgroundColor: appColors.white, elevation: 1 },
+                { marginTop: getSize.m(50), backgroundColor: appColors.white, elevation: 3 },
             ]}
         >
             <View style={[appStyles.align_justify, { marginTop: getSize.m(-50) }]}>

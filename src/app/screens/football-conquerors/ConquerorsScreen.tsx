@@ -18,6 +18,7 @@ import { Avatar } from 'react-native-elements';
 import styles from './ConquerorsScreen.style';
 import { useViewModel } from './ConquerorsScreen.viewModel';
 import { IConquerorsScreenProps } from './ConquerorsScreen.type';
+import LinearGradient from 'react-native-linear-gradient';
 
 export const ConquerorsScreen = ({ navigation, route }: IConquerorsScreenProps) => {
     const { t, onGoBack, listConquerors } = useViewModel({ navigation, route });
@@ -37,10 +38,17 @@ export const ConquerorsScreen = ({ navigation, route }: IConquerorsScreenProps) 
                     <ScrollView>
                         <HeaderLogo text="נבחרת לאומית גברים" logo={AppImages.img_logo} />
                         <View style={[appStyles.package, { marginTop: getSize.m(0) }]}>
-                            <View style={[appStyles.flex_row_space_center, styles.header]}>
+                            <LinearGradient
+                                colors={[
+                                    'rgba(255, 255, 255, 0.05)',
+                                    'rgba(16, 32, 100, 0.05)',
+                                    'rgba(59, 168, 225, 0.05)',
+                                ]}
+                                style={[appStyles.flex_row_space_center, styles.header]}
+                            >
                                 <Text style={styles.text_header}>{t('conquerors.name')}</Text>
                                 <Text style={styles.text_header}>{t('conquerors.number')}</Text>
-                            </View>
+                            </LinearGradient>
                             <View>
                                 {listConquerors.map(conquerors => {
                                     return (

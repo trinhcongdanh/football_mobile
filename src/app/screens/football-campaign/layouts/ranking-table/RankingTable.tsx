@@ -94,13 +94,13 @@ export const RankingTable = ({}: IRankingTableProps) => {
                                     colors={[
                                         item.id % 2 === 1
                                             ? 'rgba(255, 255, 255, 0.05)'
-                                            : appColors.gray,
+                                            : appColors.white,
                                         item.id % 2 === 1
                                             ? 'rgba(16, 32, 100, 0.05)'
-                                            : appColors.gray,
+                                            : appColors.white,
                                         item.id % 2 === 1
                                             ? 'rgba(59, 168, 225, 0.05)'
-                                            : appColors.gray,
+                                            : appColors.white,
                                     ]}
                                     style={[
                                         appStyles.flex_row_space_center,

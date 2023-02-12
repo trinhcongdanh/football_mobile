@@ -19,11 +19,13 @@ export const Statistics = ({}: IStatisticsProps) => {
                 {t('leagues_details.statistics.title')}
             </Text>
             <View style={{ marginTop: getSize.m(20) }}>
-                <ButtonOption
-                    option_one={t('leagues_details.statistics.ranking_home')}
-                    option_two={t('leagues_details.statistics.ranking_away')}
-                    onSelect={setOnSelect}
-                />
+                <View style={{ marginHorizontal: getSize.m(-24) }}>
+                    <ButtonOption
+                        option_one={t('leagues_details.statistics.ranking_home')}
+                        option_two={t('leagues_details.statistics.ranking_away')}
+                        onSelect={setOnSelect}
+                    />
+                </View>
                 {onSelect === 0 ? (
                     <View style={{ marginTop: getSize.m(20) }}>
                         <Position

@@ -4,6 +4,7 @@ import { appStyles } from '@football/app/utils/constants/appStyles';
 import { getSize } from '@football/app/utils/responsive/scale';
 import React from 'react';
 import { View, Animated, Text, useWindowDimensions, ScrollView, Image } from 'react-native';
+import FastImage from 'react-native-fast-image';
 import styles from './AboutLeague.style';
 import { IAboutLeagueProps } from './AboutLeague.type';
 import { useViewModel } from './AboutLeague.viewModel';
@@ -56,7 +57,14 @@ export const AboutLeague = ({}: IAboutLeagueProps) => {
                                 ]}
                             >
                                 <View style={styles.icon_about}>
-                                    <Image source={AppImages.img_ball} style={styles.ic_football} />
+                                    <FastImage
+                                        source={item.img}
+                                        resizeMode={FastImage.resizeMode.contain}
+                                        style={{
+                                            width: getSize.m(item.width),
+                                            height: getSize.m(item.height),
+                                        }}
+                                    />
                                 </View>
                                 <Text style={styles.title_about}>{item.title}</Text>
                                 <Text style={styles.content_about}>{item.content}</Text>

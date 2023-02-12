@@ -13,6 +13,7 @@ import { isNil } from 'lodash';
 import styles from './CampaignScreen.style';
 import { useViewModel } from './CampaignScreen.viewModel';
 import { ICampaignScreenProps } from './CampaignScreen.type';
+import { appColors } from '@football/app/utils/constants/appColors';
 
 export const CampaignScreen = ({ navigation, route }: ICampaignScreenProps) => {
     const { t, onGoBack } = useViewModel({ navigation, route });

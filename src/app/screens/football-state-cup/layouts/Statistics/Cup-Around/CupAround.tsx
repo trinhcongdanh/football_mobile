@@ -44,7 +44,7 @@ export const CupAround = () => {
                     },
                 ]}
             >
-                <View style={{ width: getSize.m(80) }}>
+                <View style={{ width: getSize.m(90) }}>
                     <Text style={[styles.header, { textAlign: 'left' }]}>
                         {t('state_cup.statistics.date')}
                     </Text>
@@ -69,7 +69,7 @@ export const CupAround = () => {
                         >
                             <View
                                 style={{
-                                    width: getSize.m(80),
+                                    width: getSize.m(90),
                                 }}
                             >
                                 <Text style={[styles.text_content, { textAlign: 'left' }]}>

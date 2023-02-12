@@ -26,7 +26,7 @@ export const OptionState = ({ label }: IOptionStateProps) => {
                         },
                     ]}
                 >
-                    <View style={{ width: getSize.m(50) }}>
+                    <View style={{ width: getSize.m(60) }}>
                         <Text style={styles.header}>{t('state_cup.early_stage_game.date')}</Text>
                     </View>
                     <View style={{ width: getSize.m(110) }}>
@@ -56,7 +56,7 @@ export const OptionState = ({ label }: IOptionStateProps) => {
                                 ]}
                                 style={[appStyles.flex_row_space_center, styles.itemTeam]}
                             >
-                                <View style={{ width: getSize.m(50) }}>
+                                <View style={{ width: getSize.m(60) }}>
                                     <Text style={styles.text_content}>{item.date}</Text>
                                 </View>
                                 <View style={{ width: getSize.m(110) }}>

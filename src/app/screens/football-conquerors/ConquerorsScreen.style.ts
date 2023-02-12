@@ -6,7 +6,6 @@ import { StyleSheet, I18nManager } from 'react-native';
 const styles = StyleSheet.create({
     ic_back: { alignItems: I18nManager.isRTL ? 'flex-start' : 'flex-end' },
     header: {
-        backgroundColor: appColors.blue_matte,
         paddingVertical: getSize.m(7),
         paddingHorizontal: getSize.m(14),
         borderRadius: getSize.m(5),

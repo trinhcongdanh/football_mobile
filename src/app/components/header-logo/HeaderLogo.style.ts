@@ -11,7 +11,7 @@ export const styles = StyleSheet.create({
         borderRadius: getSize.m(60),
         justifyContent: 'center',
         alignItems: 'center',
-        elevation: 2,
+        elevation: 10,
     },
     text: {
         marginTop: getSize.m(20),
