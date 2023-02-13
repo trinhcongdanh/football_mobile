@@ -176,7 +176,7 @@ export const appStyles = StyleSheet.create({
         marginHorizontal: getSize.m(16),
     },
     top_tap_item: {
-        width: getSize.m(80),
+        width: getSize.m(90),
         textAlign: 'center',
     },
     top_tap_indicator: {

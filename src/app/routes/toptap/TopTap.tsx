@@ -18,7 +18,7 @@ const TabLabel = ({ focused, title }: any) => (
             fontFamily: focused ? AppFonts.bold : AppFonts.medium,
 
             lineHeight: getSize.m(18),
-            width: getSize.m(80), // Fix losing the last character of the text
+            width: getSize.m(90), // Fix losing the last character of the text
             textAlign: 'center',
         }}
     >
