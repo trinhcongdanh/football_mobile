@@ -1,15 +1,12 @@
-import { View, Text, Image, TouchableOpacity } from 'react-native';
-import React from 'react';
-import { getSize } from '@football/app/utils/responsive/scale';
 import { AppImages } from '@football/app/assets/images';
-import LinearGradient from 'react-native-linear-gradient';
-import Icon from 'react-native-vector-icons/Feather';
 import { appStyles } from '@football/app/utils/constants/appStyles';
-import { appColors } from '@football/app/utils/constants/appColors';
+import { getSize } from '@football/app/utils/responsive/scale';
+import React from 'react';
+import { Image, Text, TouchableOpacity, View } from 'react-native';
 import FastImage from 'react-native-fast-image';
-import { Avatar } from 'react-native-elements';
-import { IHeaderUserProps } from './HeaderUser.type';
+import LinearGradient from 'react-native-linear-gradient';
 import { styles } from './HeaderUser.styles';
+import { IHeaderUserProps } from './HeaderUser.type';
 
 export const HeaderUser = ({
     avt,

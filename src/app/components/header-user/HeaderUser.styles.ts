@@ -1,6 +1,5 @@
-import { appColors } from '@football/app/utils/constants/appColors';
 import { getSize } from '@football/app/utils/responsive/scale';
-import { StyleSheet, I18nManager } from 'react-native';
+import { I18nManager, StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
     header: {

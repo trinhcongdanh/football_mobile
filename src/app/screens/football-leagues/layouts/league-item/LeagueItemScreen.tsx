@@ -1,19 +1,22 @@
-import { FlatList, Text, TouchableOpacity, View } from 'react-native';
-import React from 'react';
-import Icon from 'react-native-vector-icons/Feather';
-import { appStyles } from '@football/app/utils/constants/appStyles';
-import { appColors } from '@football/app/utils/constants/appColors';
-import { getSize } from '@football/app/utils/responsive/scale';
 import { appIcons } from '@football/app/assets/icons/appIcons';
-import styles from './LeaguesWomenScreen.style';
-import { useViewModel } from './LeaguesWomenScreen.viewModel';
-import { ILeaguesWomenScreenProps } from './LeaguesWomenScreen.type';
+import { appColors } from '@football/app/utils/constants/appColors';
+import { appStyles } from '@football/app/utils/constants/appStyles';
+import { getSize } from '@football/app/utils/responsive/scale';
+import React from 'react';
+import { FlatList, Text, TouchableOpacity, View } from 'react-native';
+import Icon from 'react-native-vector-icons/Feather';
+import styles from './LeagueItemScreen.style';
+import { ILeagueItemScreenProps } from './LeagueItemScreen.type';
+import { useViewModel } from './LeagueItemScreen.viewModel';
 
-export const LeaguesWomenScreen = ({ navigation, route }: ILeaguesWomenScreenProps) => {
+export const LeagueItemScreen = ({ navigation, route }: ILeagueItemScreenProps) => {
+    const { typeId } = route.params;
     const { t, onGoBack, optionLeagues, handleLeaguesDetails } = useViewModel({
         navigation,
         route,
+        typeId,
     });
+
     const renderItem = ({ item, index }: any) => {
         return (
             <TouchableOpacity
@@ -21,7 +24,7 @@ export const LeaguesWomenScreen = ({ navigation, route }: ILeaguesWomenScreenPro
                 onPress={() => handleLeaguesDetails(index)}
             >
                 <View style={appStyles.flex_row_align_center}>
-                    <Text style={styles.text_option_menu}>{item.name}</Text>
+                    <Text style={styles.text_option_menu}>{item.name_he}</Text>
                 </View>
 
                 <Icon

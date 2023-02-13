@@ -1,14 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { combineReducers } from 'redux';
 import {
-    persistStore,
-    persistReducer,
     FLUSH,
-    REHYDRATE,
     PAUSE,
     PERSIST,
+    persistReducer,
+    persistStore,
     PURGE,
     REGISTER,
+    REHYDRATE,
 } from 'redux-persist';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -19,6 +19,7 @@ import createProfileReducer from './user/CreateProfile.slice';
 import guestIdReducer from './user/GuestId.slice';
 import loginReducer from './user/Login.slice';
 import registerFacebookReducer from './user/RegisterFacebook.slice';
+import leagueReducer from './league/League.slice';
 
 const reducer = combineReducers({
     guestId: guestIdReducer,
@@ -28,6 +29,7 @@ const reducer = combineReducers({
     favPlayers: favPlayerReducer,
     favTopTeams: favTopTeamReducer,
     registerFacebook: registerFacebookReducer,
+    leagues: leagueReducer,
 });
 const persistConfig = {
     key: 'root',

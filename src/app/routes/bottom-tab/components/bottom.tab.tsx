@@ -1,5 +1,3 @@
-/* eslint-disable no-console-log/no-console-log */
-/* eslint-disable no-console */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable react/require-default-props */
 /* eslint-disable react-hooks/exhaustive-deps */
@@ -75,8 +73,6 @@ export const FabTabBar: React.FC<BottomTabBarProps & CustomProps> = ({
     const tabWidth = tabsWidthValue;
     const d = getTabShape(width, height + 10, tabWidth, TAB_BAR_HEIGHT);
 
-    console.log(d);
-
     const initialPosition = !isRtl
         ? -width + tabsWidthValue * (state.routes.length - 1 - state.index)
         : -width + tabsWidthValue * state.index;
@@ -96,8 +92,6 @@ export const FabTabBar: React.FC<BottomTabBarProps & CustomProps> = ({
         };
     });
     useEffect(() => {
-        console.log(offset);
-
         animatedValueLength.value = withSpring(
             initialPosition - offset / 2,
             springConfig || defaultSpringConfig

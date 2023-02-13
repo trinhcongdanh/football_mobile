@@ -175,7 +175,10 @@ export const appStyles = StyleSheet.create({
         backgroundColor: appColors.gray,
         marginHorizontal: getSize.m(16),
     },
-
+    top_tap_item: {
+        width: getSize.m(90),
+        textAlign: 'center',
+    },
     top_tap_indicator: {
         borderWidth: getSize.m(2),
         borderColor: appColors.blue_light,
