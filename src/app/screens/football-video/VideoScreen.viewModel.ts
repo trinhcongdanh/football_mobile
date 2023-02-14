@@ -7,8 +7,8 @@ import { IVideoScreenProps } from './VideoScreen.type';
 
 export const useViewModel = ({ navigation, route }: IVideoScreenProps) => {
     const { navigate, goBack } = useAppNavigator();
+
     const { t } = useTranslation();
-    const onNavigateSetting = () => {};
 
     const data = [
         {
@@ -65,9 +65,19 @@ export const useViewModel = ({ navigation, route }: IVideoScreenProps) => {
 
     const width = Dimensions.get('window').width;
 
+    const [showSideMenu, setShowSideMenu] = useState(false);
+
+    const ShowSideMenu = () => {
+        navigation.openDrawer();
+    };
+
+    const closeSideMenu = () => {
+        setShowSideMenu(false);
+    };
+
     return {
         t,
-        onNavigateSetting,
+        ShowSideMenu,
         handlePlayVideo,
         setDisplay,
         sourceVideo,
@@ -77,5 +87,7 @@ export const useViewModel = ({ navigation, route }: IVideoScreenProps) => {
         autoPlay,
         setAutoPlay,
         handleEndVideo,
+        showSideMenu,
+        closeSideMenu,
     };
 };

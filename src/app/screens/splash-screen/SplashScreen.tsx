@@ -63,10 +63,10 @@ export const SplashScreen = ({ navigation, route }: ISplashScreenProps) => {
     useEffect(() => {
         if (authLoaded) {
             if (!isEmpty(login.login) && !isNil(login.login)) {
-                navigate(ScreenName.BottomTab);
+                navigate(ScreenName.SideBar);
                 navigation.reset({
                     index: 0,
-                    routes: [{ name: ScreenName.BottomTab as never }],
+                    routes: [{ name: ScreenName.SideBar as never }],
                 });
             } else {
                 navigate(ScreenName.OpeningPage);

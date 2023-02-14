@@ -44,6 +44,9 @@ export enum ScreenName {
     ConfirmationPage = 'ConfirmationPage',
     CupsPage = 'CupsPage',
     ListGamePage = 'ListGamePage',
+    ContactUsPage = 'ContactUsPage',
+    TermsConditionPage = 'TermsConditionPage',
+    SideBar = 'SideBar',
 }
 
 export enum ScreenTopTap {

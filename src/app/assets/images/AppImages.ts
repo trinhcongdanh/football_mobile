@@ -72,4 +72,8 @@ export const AppImages = {
     img_clock: require('./clock.png'),
     img_up_right: require('./up-right.png'),
     img_users: require('./users.png'),
+    img_arrow_right_from_bracket: require('./arrow-right-from-bracket.png'),
+    img_file: require('./file.png'),
+    img_gear: require('./gear.png'),
+    img_message: require('./message.png'),
 };

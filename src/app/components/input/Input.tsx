@@ -13,6 +13,9 @@ const Input = ({
     onChangeTextInput,
     onFocus,
     styleInput,
+    backgroundColor,
+    backgroundColorCompleted,
+    textColor,
     input,
     inputRef,
 }: IInputComponent) => {
@@ -26,6 +29,8 @@ const Input = ({
                     appStyles.text_input,
                     {
                         paddingHorizontal: input === '' ? getSize.m(24) : getSize.m(15),
+                        backgroundColor: input === '' ? backgroundColor : backgroundColorCompleted,
+                        color: textColor,
                     },
                 ]}
                 placeholder={placeholder}

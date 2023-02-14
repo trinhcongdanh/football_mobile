@@ -158,7 +158,7 @@ export const useViewModel = ({ navigation, route }: IFavoriteSummaryScreenProps)
     const [screenName, setScreenName] = useState<any>(null);
     const navigationHomePage = () => {
         if (isEmpty(profile.profile) || isNil(profile.profile)) {
-            setScreenName(ScreenName.BottomTab);
+            setScreenName(ScreenName.SideBar);
 
             dispatch(
                 createProfileUser(
@@ -171,7 +171,7 @@ export const useViewModel = ({ navigation, route }: IFavoriteSummaryScreenProps)
                 )
             );
         } else {
-            navigate(ScreenName.BottomTab);
+            navigate(ScreenName.SideBar);
         }
     };
 
@@ -206,10 +206,10 @@ export const useViewModel = ({ navigation, route }: IFavoriteSummaryScreenProps)
         if (!isEmpty(login.login)) {
             navigate(screenName);
 
-            if (screenName === ScreenName.BottomTab) {
+            if (screenName === ScreenName.SideBar) {
                 navigation.reset({
                     index: 0,
-                    routes: [{ name: ScreenName.BottomTab as never }],
+                    routes: [{ name: ScreenName.SideBar as never }],
                 });
             }
         } else {
@@ -227,10 +227,10 @@ export const useViewModel = ({ navigation, route }: IFavoriteSummaryScreenProps)
                 );
 
                 navigate(screenName);
-                if (screenName === ScreenName.BottomTab) {
+                if (screenName === ScreenName.SideBar) {
                     navigation.reset({
                         index: 0,
-                        routes: [{ name: ScreenName.BottomTab as never }],
+                        routes: [{ name: ScreenName.SideBar as never }],
                     });
                 }
             }

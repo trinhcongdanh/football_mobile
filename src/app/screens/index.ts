@@ -40,3 +40,5 @@ export * from './football-award';
 export * from './football-confirmation';
 export * from './football-cups';
 export * from './football-list-game';
+export * from './football-contact-us';
+export * from './football-terms-conditon';
