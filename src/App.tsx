@@ -7,6 +7,7 @@ import 'react-native-get-random-values';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import './app/i18n/EnStrings';
+import 'react-native-gesture-handler';
 import { RootNavigator } from './app/routes/RootNavigator';
 import { appStyles } from './app/utils/constants/appStyles';
 import { persistor, store } from './store/store';

@@ -61,6 +61,12 @@ const resources = {
                 connect: 'התחבר',
                 invalid: 'מס׳ טלפון לא תקין',
             },
+            side_menu: {
+                my_account: 'החשבון שלי',
+                contact_us: 'צור קשר',
+                definitions: 'הגדרות',
+                terms: 'תנאי שימוש ומדינות פרטיות',
+            },
             connect: {
                 title: 'התחברות',
                 placeholder: 'מס׳ טלפון',
@@ -551,6 +557,17 @@ const resources = {
                 provision: 'אני מאשר קבלת ניתן לבטל בכל רגע דרך מסך הגדרות תוכן פירסומי מההתאחדות ',
                 button: 'אישור קבלת פרס',
             },
+            contact_us: {
+                application: 'יישום',
+                name: 'שם',
+                email: ' דוא״ל',
+                title: 'נושא / כותרת',
+                content: 'תוכן',
+                button: 'שליחה',
+            },
+            terms: {
+                title: 'תנאי שימוש',
+            },
         },
     },
     en: {
@@ -607,6 +624,12 @@ const resources = {
                 alreadyUser: 'Already have a user?',
                 connect: 'Connect',
                 invalid_phone_number: 'Invalid phone number',
+            },
+            side_menu: {
+                my_account: 'My account',
+                contact_us: 'Contact us',
+                definitions: 'Definitions',
+                terms: 'Terms of use and private states',
             },
             connect: {
                 title: 'Connection',
@@ -1100,6 +1123,18 @@ const resources = {
                 provision:
                     'I confirm receipt can be canceled at any time through the advertising content settings screen from the association',
                 button: 'Confirmation of receiving an award',
+            },
+
+            contact_us: {
+                application: 'Application',
+                name: 'Name',
+                email: 'Email',
+                title: 'Subject / Title',
+                content: 'Content',
+                button: 'Button',
+            },
+            terms: {
+                title: 'Terms of Use',
             },
         },
     },

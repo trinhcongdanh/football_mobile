@@ -8,4 +8,7 @@ export type IInputComponent = {
     styleInput?: StyleProp<ViewStyle>;
     onChangeTextInput: (text: string) => void;
     onFocus: () => void;
+    backgroundColor?: any;
+    backgroundColorCompleted?: any;
+    textColor?: any;
 };

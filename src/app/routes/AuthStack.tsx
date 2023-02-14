@@ -43,11 +43,14 @@ import {
     VideoScreen,
     CupsScreen,
     ListGameScreen,
+    ContactUsScreen,
+    TermsConditionScreen,
 } from '../screens';
 import { HistoryScreen } from '../screens/football-history/HistoryScreen';
 import { DataPlayerScreen } from '../screens/football-data-player/DataPlayerScreen';
 import { DataCoachScreen } from '../screens/football-data-coach/DataCoachScreen';
 import { BottomTabStack } from './BottomTab';
+import { SideBar } from '@football/app/routes/side-bar/SideBar';
 
 const Auth = createNativeStackNavigator();
 
@@ -88,6 +91,7 @@ export const AuthStack = () => {
             <Auth.Screen name={ScreenName.ConquerorsPage} component={ConquerorsScreen} />
             <Auth.Screen name={ScreenName.HistoryPage} component={HistoryScreen} />
             <Auth.Screen name={ScreenName.BottomTab} component={BottomTabStack} />
+            <Auth.Screen name={ScreenName.SideBar} component={SideBar} />
             <Auth.Screen name={ScreenName.LeaguesPage} component={LeaguesScreen} />
             <Auth.Screen name={ScreenName.LeaguesDetailsPage} component={LeaguesDetailsScreen} />
             <Auth.Screen
@@ -117,6 +121,8 @@ export const AuthStack = () => {
             <Auth.Screen name={ScreenName.ConfirmationPage} component={ConfirmationScreen} />
             <Auth.Screen name={ScreenName.CupsPage} component={CupsScreen} />
             <Auth.Screen name={ScreenName.ListGamePage} component={ListGameScreen} />
+            <Auth.Screen name={ScreenName.ContactUsPage} component={ContactUsScreen} />
+            <Auth.Screen name={ScreenName.TermsConditionPage} component={TermsConditionScreen} />
         </Auth.Navigator>
     );
 };

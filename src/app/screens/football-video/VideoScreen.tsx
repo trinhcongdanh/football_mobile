@@ -1,8 +1,10 @@
 import { appIcons } from '@football/app/assets/icons/appIcons';
 import { AppImages } from '@football/app/assets/images';
 import { HeaderUser } from '@football/app/components/header-user/HeaderUser';
+import { SideMenu } from '@football/app/components/side-menu/SideMenu';
 import { BOTTOM_SVG_HEIGHT } from '@football/app/routes/bottom-tab/components/bottom.tab';
 import { TAB_BAR_HEIGHT } from '@football/app/routes/bottom-tab/styles/bottom.tab.styles';
+import { SideBar } from '@football/app/routes/side-bar/SideBar';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import { getSize } from '@football/app/utils/responsive/scale';
@@ -28,7 +30,7 @@ import { useViewModel } from './VideoScreen.viewModel';
 export const VideoScreen = ({ navigation, route }: IVideoScreenProps) => {
     const {
         t,
-        onNavigateSetting,
+        ShowSideMenu,
         handlePlayVideo,
         setDisplay,
         setAutoPlay,
@@ -37,6 +39,8 @@ export const VideoScreen = ({ navigation, route }: IVideoScreenProps) => {
         width,
         sourceVideo,
         autoPlay,
+        showSideMenu,
+        closeSideMenu,
     } = useViewModel({
         navigation,
         route,
@@ -97,7 +101,7 @@ export const VideoScreen = ({ navigation, route }: IVideoScreenProps) => {
                                 icon={AppImages.img_bars_sort}
                                 color_pre={appColors.blue_light}
                                 color_after={appColors.blue_dark}
-                                handlePressFunction={onNavigateSetting}
+                                handlePressFunction={ShowSideMenu}
                             />
                             <View>
                                 <Text style={[appStyles.text_title]}>{t('video.title')}</Text>

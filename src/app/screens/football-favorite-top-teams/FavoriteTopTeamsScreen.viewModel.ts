@@ -93,7 +93,7 @@ export const useViewModel = ({ navigation, route }: IFavoriteTopTeamsScreenProps
                 )
             );
         } else {
-            navigate(ScreenName.BottomTab);
+            navigate(ScreenName.SideBar);
         }
     };
 
@@ -102,10 +102,10 @@ export const useViewModel = ({ navigation, route }: IFavoriteTopTeamsScreenProps
     useEffect(() => {
         if (!isFocused) return;
         if (!isEmpty(login.login)) {
-            navigate(ScreenName.BottomTab);
+            navigate(ScreenName.SideBar);
             navigation.reset({
                 index: 0,
-                routes: [{ name: ScreenName.BottomTab as never }],
+                routes: [{ name: ScreenName.SideBar as never }],
             });
         } else {
             if (profile.success === true) {
@@ -121,10 +121,10 @@ export const useViewModel = ({ navigation, route }: IFavoriteTopTeamsScreenProps
                     )
                 );
 
-                navigate(ScreenName.BottomTab);
+                navigate(ScreenName.SideBar);
                 navigation.reset({
                     index: 0,
-                    routes: [{ name: ScreenName.BottomTab as never }],
+                    routes: [{ name: ScreenName.SideBar as never }],
                 });
             }
         }
