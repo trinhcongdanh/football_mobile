@@ -12,7 +12,6 @@ import { Alert } from 'react-native';
 import { isEmpty, isNil } from 'lodash';
 import { loginUser } from 'src/store/user/Login.slice';
 import { createProfileUser } from 'src/store/user/CreateProfile.slice';
-import { Position } from '@football/core/models/TeamPersonnelResponse';
 import { IFavoriteSummaryScreenProps } from './FavoriteSummaryScreen.type';
 import { RootState } from 'src/store/store';
 import { useIsFocused } from '@react-navigation/native';

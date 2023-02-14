@@ -89,11 +89,9 @@ export const DataPlayerNationalScreen = (props: any) => {
                         <Text style={styles.text_label}>{t('data_player.goal')}</Text>
                     </View>
                     <LinearGradient
-                        colors={[
-                            'rgba(255, 255, 255, 0.05)',
-                            'rgba(16, 32, 100, 0.05)',
-                            'rgba(59, 168, 225, 0.05)',
-                        ]}
+                        start={{ x: 0, y: 0 }}
+                        end={{ x: 1, y: 1 }}
+                        colors={['rgba(16, 32, 100, 0.04)', 'rgba(59, 168, 225, 0.04)']}
                         style={[appStyles.flex_row_space_center, styles.header]}
                     >
                         <Text style={[styles.text_header, { width: '40%' }]}>

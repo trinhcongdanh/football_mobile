@@ -113,15 +113,14 @@ export const PitchScreen = ({ navigation, route }: IPitchScreenProps) => {
                                         return (
                                             <LinearGradient
                                                 key={item.id}
+                                                start={{ x: 0, y: 0 }}
+                                                end={{ x: 1, y: 1 }}
                                                 colors={[
                                                     item.id % 2 === 1
-                                                        ? 'rgba(255, 255, 255, 0.05)'
+                                                        ? 'rgba(16, 32, 100, 0.04)'
                                                         : appColors.white,
                                                     item.id % 2 === 1
-                                                        ? 'rgba(16, 32, 100, 0.05)'
-                                                        : appColors.white,
-                                                    item.id % 2 === 1
-                                                        ? 'rgba(59, 168, 225, 0.05)'
+                                                        ? 'rgba(59, 168, 225, 0.04)'
                                                         : appColors.white,
                                                 ]}
                                                 style={[

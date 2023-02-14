@@ -12,7 +12,8 @@ export const styles = StyleSheet.create({
     card_view_container: {
         marginTop: getSize.m(38),
         backgroundColor: appColors.white,
-        borderRadius: getSize.m(15),
+        borderTopLeftRadius: getSize.m(30),
+        borderTopRightRadius: getSize.m(30),
     },
     avatar_block: {
         alignItems: 'center',
@@ -26,7 +27,7 @@ export const styles = StyleSheet.create({
         justifyContent: 'center',
         backgroundColor: appColors.white,
         borderRadius: getSize.m(80 / 2),
-        elevation: 2,
+        elevation: 10,
     },
     txt_container_avatar: {
         flexDirection: 'row',
@@ -43,7 +44,6 @@ export const styles = StyleSheet.create({
         fontFamily: AppFonts.bold,
         color: appColors.text_dark_blue,
         fontSize: getSize.m(16),
-        lineHeight: getSize.m(16),
     },
     first_block_container: { padding: getSize.m(16), marginTop: getSize.m(17) },
     input_container: {
@@ -100,13 +100,6 @@ export const styles = StyleSheet.create({
         borderColor: appColors.blue_light,
         borderStyle: 'dashed',
     },
-    txt_add_group: {
-        marginTop: getSize.m(11),
-        fontFamily: AppFonts.bold,
-        fontSize: getSize.m(12),
-        lineHeight: getSize.m(15),
-        color: appColors.text_dark_blue,
-    },
     txt_tutorial: {
         fontFamily: AppFonts.bold,
         fontSize: getSize.m(14),
@@ -127,6 +120,7 @@ export const styles = StyleSheet.create({
         color: appColors.blue_black,
         fontSize: getSize.m(12),
         lineHeight: getSize.m(15),
+        width: getSize.m(240),
     },
     btn_bottom_container: {
         justifyContent: 'center',
@@ -176,5 +170,55 @@ export const styles = StyleSheet.create({
         height: getSize.m(21),
         backgroundColor: appColors.white,
         borderRadius: getSize.m(21),
+    },
+
+    item_render: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        marginTop: getSize.m(21),
+        marginBottom: getSize.m(16),
+    },
+    item_container: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        flex: 1,
+    },
+    txt_no_group: {
+        textAlign: 'center',
+        marginTop: getSize.m(12),
+        fontFamily: AppFonts.regular,
+        fontSize: getSize.m(12),
+        lineHeight: getSize.m(15),
+        color: appColors.text_dark_blue,
+    },
+    txt_add_group: {
+        textAlign: 'center',
+        marginTop: getSize.m(12),
+        fontFamily: AppFonts.bold,
+        fontSize: getSize.m(12),
+        lineHeight: getSize.m(15),
+        color: appColors.text_dark_blue,
+    },
+    btn_img: {
+        flex: 0.2,
+        width: getSize.m(38),
+        height: getSize.m(38),
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    img_team: {
+        width: getSize.m(38),
+        height: getSize.m(38),
+    },
+
+    img_player: {
+        width: getSize.m(38),
+        height: getSize.m(38),
+        borderRadius: getSize.m(38),
+    },
+    img_top_team: {
+        width: getSize.m(32),
+        height: getSize.m(38),
     },
 });

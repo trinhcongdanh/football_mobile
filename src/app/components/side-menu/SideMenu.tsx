@@ -61,7 +61,7 @@ export const SideMenu = ({ navigation }: ISideMenuProps) => {
                         style={appStyles.flex_row_align_center}
                     >
                         <FastImage
-                            source={AppImages.img_user}
+                            source={AppImages.img_user_bold}
                             resizeMode={FastImage.resizeMode.contain}
                             style={{ width: getSize.m(14), height: getSize.m(12) }}
                         />

@@ -22,7 +22,7 @@ export const useViewModel = ({ navigation, route, typeId }: ILeagueItemScreenPro
     const handleLeaguesDetails = (index: number) => {
         switch (index) {
             case 0:
-                navigate(ScreenName.LeaguesDetailsPage);
+                navigate(ScreenName.DataPlayerPage);
                 break;
             case 1:
                 navigate(ScreenName.TeamPage);
