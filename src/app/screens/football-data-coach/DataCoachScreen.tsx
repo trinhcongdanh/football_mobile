@@ -84,7 +84,8 @@ export const DataCoachScreen = ({ navigation, route }: IDataCoachScreenProps) =>
                                     style={[
                                         appStyles.flex_row_space_center,
                                         {
-                                            marginVertical: getSize.m(26),
+                                            marginTop: getSize.m(26),
+                                            marginBottom: getSize.m(20),
                                             flexDirection: 'row-reverse',
                                         },
                                     ]}

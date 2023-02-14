@@ -1,12 +1,14 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable react/no-unstable-nested-components */
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { AppImages } from '@football/app/assets/images';
 import { BOTTOM_SVG_HEIGHT } from '@football/app/routes/bottom-tab/components/bottom.tab';
 import { TAB_BAR_HEIGHT } from '@football/app/routes/bottom-tab/styles/bottom.tab.styles';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { getSize, height } from '@football/app/utils/responsive/scale';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React from 'react';
+import FastImage from 'react-native-fast-image';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {
     GobletScreen,
@@ -22,35 +24,43 @@ import { BottomFabBar } from './bottom-tab';
 const Bottom = createBottomTabNavigator();
 
 const renderIcon = (routeName: string) => {
-    let icon = '';
+    let icon: any = '';
+    let icon_outline: any = '';
     switch (routeName) {
         case ScreenName.GroupPagePage:
-            icon = 'home';
+            icon = AppImages.img_home;
+            icon_outline = AppImages.img_home_outline;
             break;
         case ScreenName.LeaguesPage:
-            icon = 'shield-checkmark';
+            icon = AppImages.img_security;
+            icon_outline = AppImages.img_security_outline;
             break;
         case ScreenName.TeamPage:
-            icon = 'people';
+            icon = AppImages.img_people;
+            icon_outline = AppImages.img_people_outline;
             break;
         case ScreenName.PlayGroundPage:
-            icon = 'chatbox-ellipses';
+            icon = AppImages.img_message_question;
+            icon_outline = AppImages.img_message_question_outline;
             break;
         case ScreenName.GobletPage:
-            icon = 'trophy';
+            icon = AppImages.img_cups;
+            icon_outline = AppImages.img_cups_outline;
             break;
         case ScreenName.VideoPage:
-            icon = 'videocam';
+            icon = AppImages.img_video_square;
+            icon_outline = AppImages.img_video_square_outline;
             break;
         default:
             break;
     }
 
     return ({ focused }: any) => (
-        <Ionicons
-            name={!focused ? `${icon}-outline` : icon}
-            size={getSize.m(25)}
-            color={focused ? appColors.white : appColors.stroke}
+        <FastImage
+            source={!focused ? icon_outline : icon}
+            resizeMode={FastImage.resizeMode.contain}
+            style={{ width: getSize.m(25), height: getSize.m(25) }}
+            // color={focused ? appColors.white : appColors.stroke}
         />
     );
 };

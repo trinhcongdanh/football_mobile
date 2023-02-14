@@ -13,7 +13,7 @@ export const CardGoBack = ({ goBack, iconName, iconStyle, title }: ICardGoBackPr
     return (
         <View style={appStyles.flex_row_space_center}>
             <TouchableOpacity style={iconStyle} onPress={goBack}>
-                <Icon name={iconName} size={getSize.m(20)} color={appColors.white} />
+                <Icon name={iconName} size={getSize.m(16)} color={appColors.white} />
             </TouchableOpacity>
             {title ? <Text style={styles.txt_title}>{title}</Text> : <View />}
             <View style={styles.width_size} />
