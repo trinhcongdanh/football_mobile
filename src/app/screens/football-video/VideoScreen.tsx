@@ -117,85 +117,54 @@ export const VideoScreen = ({ navigation, route }: IVideoScreenProps) => {
                                         marginTop: getSize.m(18),
                                     }}
                                 >
-                                    <GestureHandlerRootView style={appStyles.flex}>
-                                        <Carousel
-                                            loop={false}
-                                            pagingEnabled={true}
-                                            snapEnabled
-                                            width={width}
-                                            height={getSize.m(280)}
-                                            scrollAnimationDuration={1000}
-                                            autoPlayInterval={4000}
-                                            mode="parallax"
-                                            modeConfig={{
-                                                parallaxScrollingScale: 1,
-                                                parallaxScrollingOffset: getSize.m(140),
-                                            }}
-                                            autoPlay={autoPlay}
-                                            defaultIndex={0}
-                                            onSnapToItem={index => {
-                                                setIndexDot(index);
-                                            }}
-                                            data={data}
-                                            renderItem={({ item, index }) => (
-                                                <View
-                                                    key={index}
-                                                    style={{
-                                                        flexDirection: 'row',
-                                                        justifyContent: 'center',
-                                                    }}
-                                                >
-                                                    <TouchableOpacity
-                                                        activeOpacity={0.9}
-                                                        onPress={() => handlePlayVideo(item.video)}
+                                    <View style={{ paddingLeft: getSize.m(14) }}>
+                                        <ScrollView
+                                            horizontal
+                                            showsHorizontalScrollIndicator={false}
+                                            directionalLockEnabled
+                                        >
+                                            {data.map((item, index) => {
+                                                return (
+                                                    <View
+                                                        key={index}
+                                                        style={{
+                                                            flexDirection: 'row',
+                                                            justifyContent: 'center',
+                                                            marginHorizontal: getSize.m(8),
+                                                        }}
                                                     >
-                                                        <Image
-                                                            source={item.image}
-                                                            style={[styles.image]}
-                                                        />
-                                                        <View style={styles.date}>
-                                                            <Text style={styles.text_date}>
-                                                                {item.minute}
-                                                            </Text>
-                                                        </View>
-                                                        <View style={styles.play_video}>
-                                                            <Icon
-                                                                name={appIcons.ic_caretright}
-                                                                size={getSize.m(16)}
-                                                                color={appColors.white}
+                                                        <TouchableOpacity
+                                                            activeOpacity={0.9}
+                                                            onPress={() =>
+                                                                handlePlayVideo(item.video)
+                                                            }
+                                                        >
+                                                            <Image
+                                                                source={item.image}
+                                                                style={[styles.image]}
                                                             />
-                                                        </View>
-                                                        <View style={styles.content}>
-                                                            <Text style={styles.text_content}>
-                                                                {item.content}
-                                                            </Text>
-                                                        </View>
-                                                    </TouchableOpacity>
-                                                </View>
-                                            )}
-                                        />
-                                    </GestureHandlerRootView>
-                                    <View style={styles.indicatorContainer}>
-                                        {data.map((item, index) => {
-                                            return (
-                                                <View
-                                                    key={index.toString()}
-                                                    style={[
-                                                        styles.normalDots,
-                                                        {
-                                                            width:
-                                                                index === indexDot
-                                                                    ? getSize.m(18)
-                                                                    : getSize.m(5),
-                                                            backgroundColor:
-                                                                index === indexDot
-                                                                    ? appColors.white
-                                                                    : appColors.text_option_unselect,
-                                                        },
-                                                    ]}
-                                                />
-                                            );
-                                        })}
+                                                            <View style={styles.date}>
+                                                                <Text style={styles.text_date}>
+                                                                    {item.minute}
+                                                                </Text>
+                                                            </View>
+                                                            <View style={styles.play_video}>
+                                                                <Icon
+                                                                    name={appIcons.ic_caretright}
+                                                                    size={getSize.m(16)}
+                                                                    color={appColors.white}
+                                                                />
+                                                            </View>
+                                                            <View style={styles.content}>
+                                                                <Text style={styles.text_content}>
+                                                                    {item.content}
+                                                                </Text>
+                                                            </View>
+                                                        </TouchableOpacity>
+                                                    </View>
+                                                );
+                                            })}
+                                        </ScrollView>
                                     </View>
                                 </View>
                             </View>
@@ -215,85 +184,54 @@ export const VideoScreen = ({ navigation, route }: IVideoScreenProps) => {
                                         marginTop: getSize.m(18),
                                     }}
                                 >
-                                    <GestureHandlerRootView style={appStyles.flex}>
-                                        <Carousel
-                                            loop={false}
-                                            pagingEnabled={true}
-                                            snapEnabled
-                                            width={width}
-                                            height={getSize.m(280)}
-                                            scrollAnimationDuration={1000}
-                                            autoPlayInterval={4000}
-                                            mode="parallax"
-                                            modeConfig={{
-                                                parallaxScrollingScale: 1,
-                                                parallaxScrollingOffset: getSize.m(140),
-                                            }}
-                                            autoPlay={autoPlay}
-                                            defaultIndex={0}
-                                            onSnapToItem={index => {
-                                                setIndexDot(index);
-                                            }}
-                                            data={data}
-                                            renderItem={({ item, index }) => (
-                                                <View
-                                                    key={index}
-                                                    style={{
-                                                        flexDirection: 'row',
-                                                        justifyContent: 'center',
-                                                    }}
-                                                >
-                                                    <TouchableOpacity
-                                                        activeOpacity={0.9}
-                                                        onPress={() => handlePlayVideo(item.video)}
+                                    <View style={{ paddingLeft: getSize.m(14) }}>
+                                        <ScrollView
+                                            horizontal
+                                            showsHorizontalScrollIndicator={false}
+                                            directionalLockEnabled
+                                        >
+                                            {data.map((item, index) => {
+                                                return (
+                                                    <View
+                                                        key={index}
+                                                        style={{
+                                                            flexDirection: 'row',
+                                                            justifyContent: 'center',
+                                                            marginHorizontal: getSize.m(8),
+                                                        }}
                                                     >
-                                                        <Image
-                                                            source={item.image}
-                                                            style={[styles.image]}
-                                                        />
-                                                        <View style={styles.date}>
-                                                            <Text style={styles.text_date}>
-                                                                {item.minute}
-                                                            </Text>
-                                                        </View>
-                                                        <View style={styles.play_video}>
-                                                            <Icon
-                                                                name={appIcons.ic_caretright}
-                                                                size={getSize.m(16)}
-                                                                color={appColors.white}
+                                                        <TouchableOpacity
+                                                            activeOpacity={0.9}
+                                                            onPress={() =>
+                                                                handlePlayVideo(item.video)
+                                                            }
+                                                        >
+                                                            <Image
+                                                                source={item.image}
+                                                                style={[styles.image]}
                                                             />
-                                                        </View>
-                                                        <View style={styles.content}>
-                                                            <Text style={styles.text_content}>
-                                                                {item.content}
-                                                            </Text>
-                                                        </View>
-                                                    </TouchableOpacity>
-                                                </View>
-                                            )}
-                                        />
-                                    </GestureHandlerRootView>
-                                    <View style={styles.indicatorContainer}>
-                                        {data.map((item, index) => {
-                                            return (
-                                                <View
-                                                    key={index.toString()}
-                                                    style={[
-                                                        styles.normalDots,
-                                                        {
-                                                            width:
-                                                                index === indexDot
-                                                                    ? getSize.m(18)
-                                                                    : getSize.m(5),
-                                                            backgroundColor:
-                                                                index === indexDot
-                                                                    ? appColors.white
-                                                                    : appColors.text_option_unselect,
-                                                        },
-                                                    ]}
-                                                />
-                                            );
-                                        })}
+                                                            <View style={styles.date}>
+                                                                <Text style={styles.text_date}>
+                                                                    {item.minute}
+                                                                </Text>
+                                                            </View>
+                                                            <View style={styles.play_video}>
+                                                                <Icon
+                                                                    name={appIcons.ic_caretright}
+                                                                    size={getSize.m(16)}
+                                                                    color={appColors.white}
+                                                                />
+                                                            </View>
+                                                            <View style={styles.content}>
+                                                                <Text style={styles.text_content}>
+                                                                    {item.content}
+                                                                </Text>
+                                                            </View>
+                                                        </TouchableOpacity>
+                                                    </View>
+                                                );
+                                            })}
+                                        </ScrollView>
                                     </View>
                                 </View>
                             </View>
@@ -312,85 +250,54 @@ export const VideoScreen = ({ navigation, route }: IVideoScreenProps) => {
                                         marginTop: getSize.m(18),
                                     }}
                                 >
-                                    <GestureHandlerRootView style={appStyles.flex}>
-                                        <Carousel
-                                            loop={false}
-                                            pagingEnabled={true}
-                                            snapEnabled
-                                            width={width}
-                                            height={getSize.m(280)}
-                                            scrollAnimationDuration={1000}
-                                            autoPlayInterval={4000}
-                                            mode="parallax"
-                                            modeConfig={{
-                                                parallaxScrollingScale: 1,
-                                                parallaxScrollingOffset: getSize.m(140),
-                                            }}
-                                            autoPlay={autoPlay}
-                                            defaultIndex={0}
-                                            onSnapToItem={index => {
-                                                setIndexDot(index);
-                                            }}
-                                            data={data}
-                                            renderItem={({ item, index }) => (
-                                                <View
-                                                    key={index}
-                                                    style={{
-                                                        flexDirection: 'row',
-                                                        justifyContent: 'center',
-                                                    }}
-                                                >
-                                                    <TouchableOpacity
-                                                        activeOpacity={0.9}
-                                                        onPress={() => handlePlayVideo(item.video)}
+                                    <View style={{ paddingLeft: getSize.m(14) }}>
+                                        <ScrollView
+                                            horizontal
+                                            showsHorizontalScrollIndicator={false}
+                                            directionalLockEnabled
+                                        >
+                                            {data.map((item, index) => {
+                                                return (
+                                                    <View
+                                                        key={index}
+                                                        style={{
+                                                            flexDirection: 'row',
+                                                            justifyContent: 'center',
+                                                            marginHorizontal: getSize.m(8),
+                                                        }}
                                                     >
-                                                        <Image
-                                                            source={item.image}
-                                                            style={[styles.image]}
-                                                        />
-                                                        <View style={styles.date}>
-                                                            <Text style={styles.text_date}>
-                                                                {item.minute}
-                                                            </Text>
-                                                        </View>
-                                                        <View style={styles.play_video}>
-                                                            <Icon
-                                                                name={appIcons.ic_caretright}
-                                                                size={getSize.m(16)}
-                                                                color={appColors.white}
+                                                        <TouchableOpacity
+                                                            activeOpacity={0.9}
+                                                            onPress={() =>
+                                                                handlePlayVideo(item.video)
+                                                            }
+                                                        >
+                                                            <Image
+                                                                source={item.image}
+                                                                style={[styles.image]}
                                                             />
-                                                        </View>
-                                                        <View style={styles.content}>
-                                                            <Text style={styles.text_content}>
-                                                                {item.content}
-                                                            </Text>
-                                                        </View>
-                                                    </TouchableOpacity>
-                                                </View>
-                                            )}
-                                        />
-                                    </GestureHandlerRootView>
-                                    <View style={styles.indicatorContainer}>
-                                        {data.map((item, index) => {
-                                            return (
-                                                <View
-                                                    key={index.toString()}
-                                                    style={[
-                                                        styles.normalDots,
-                                                        {
-                                                            width:
-                                                                index === indexDot
-                                                                    ? getSize.m(18)
-                                                                    : getSize.m(5),
-                                                            backgroundColor:
-                                                                index === indexDot
-                                                                    ? appColors.white
-                                                                    : appColors.text_option_unselect,
-                                                        },
-                                                    ]}
-                                                />
-                                            );
-                                        })}
+                                                            <View style={styles.date}>
+                                                                <Text style={styles.text_date}>
+                                                                    {item.minute}
+                                                                </Text>
+                                                            </View>
+                                                            <View style={styles.play_video}>
+                                                                <Icon
+                                                                    name={appIcons.ic_caretright}
+                                                                    size={getSize.m(16)}
+                                                                    color={appColors.white}
+                                                                />
+                                                            </View>
+                                                            <View style={styles.content}>
+                                                                <Text style={styles.text_content}>
+                                                                    {item.content}
+                                                                </Text>
+                                                            </View>
+                                                        </TouchableOpacity>
+                                                    </View>
+                                                );
+                                            })}
+                                        </ScrollView>
                                     </View>
                                 </View>
                             </View>

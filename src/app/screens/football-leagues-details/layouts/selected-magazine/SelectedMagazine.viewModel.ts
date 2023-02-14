@@ -37,11 +37,13 @@ export const useViewModel = ({}: ISelectedMagazineProps) => {
     ];
     const width = Dimensions.get('window').width;
     const [activeIndexNumber, setActiveIndexNumber] = useState(Number);
+    const dots = Array(activeIndexNumber).fill('');
     return {
         t,
         data,
         width,
         activeIndexNumber,
         setActiveIndexNumber,
+        dots,
     };
 };

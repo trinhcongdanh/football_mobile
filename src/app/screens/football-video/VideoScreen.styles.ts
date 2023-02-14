@@ -5,13 +5,13 @@ import { StyleSheet, I18nManager } from 'react-native';
 
 const styles = StyleSheet.create({
     image: {
-        height: getSize.m(280),
-        width: getSize.m(200),
+        height: getSize.m(240),
+        width: getSize.m(160),
         resizeMode: 'contain',
         borderRadius: getSize.m(18),
     },
     date: {
-        backgroundColor: 'rgba(0, 0, 0, 0.3)',
+        backgroundColor: 'rgba(0, 0, 0, 0.6)',
         paddingHorizontal: getSize.m(12),
         paddingVertical: getSize.m(2),
         position: 'absolute',
@@ -49,11 +49,11 @@ const styles = StyleSheet.create({
         paddingHorizontal: getSize.m(16),
         paddingVertical: getSize.m(14),
         borderRadius: getSize.m(50),
-        backgroundColor: 'rgba(255, 255, 255, 0.1)',
+        backgroundColor: 'rgba(255, 255, 255, 0.2)',
         position: 'absolute',
-        top: getSize.m(114),
-        left: getSize.m(74),
-        borderColor: 'rgba(255, 255, 255, 0.2)',
+        top: getSize.m(100),
+        left: getSize.m(60),
+        borderColor: 'rgba(255, 255, 255, 0.4)',
         borderWidth: getSize.m(2),
     },
 
