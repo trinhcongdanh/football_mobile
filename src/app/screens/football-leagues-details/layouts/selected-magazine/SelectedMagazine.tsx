@@ -12,36 +12,43 @@ import { useViewModel } from './SelectedMagazine.viewModel';
 import { ISelectedMagazineProps } from './SelectedMagazine.type';
 
 export const SelectedMagazine = ({}: ISelectedMagazineProps) => {
-    const { t, data, width, activeIndexNumber, setActiveIndexNumber } = useViewModel({});
+    const { t, data, width, activeIndexNumber, setActiveIndexNumber, dots } = useViewModel({});
 
     return (
         <View>
             <Text style={[appStyles.text_topic, { marginLeft: getSize.m(6) }]}>
                 {t('leagues_details.magazine.title')}
             </Text>
-            <View style={{ marginHorizontal: getSize.m(-16), marginTop: getSize.m(18) }}>
-                <GestureHandlerRootView style={appStyles.flex}>
-                    <Carousel
-                        loop
-                        pagingEnabled={true}
-                        snapEnabled
-                        width={width}
-                        height={getSize.m(280)}
-                        scrollAnimationDuration={1000}
-                        mode="parallax"
-                        modeConfig={{
-                            parallaxScrollingScale: 1,
-                            parallaxScrollingOffset: getSize.m(140),
-                        }}
-                        onSnapToItem={index => setActiveIndexNumber(index)}
-                        autoPlay={true}
-                        data={data}
-                        renderItem={({ item, index }) => (
+            <View
+                style={{
+                    marginLeft: getSize.m(-16),
+                    marginRight: getSize.m(-20),
+                    marginTop: getSize.m(18),
+                }}
+            >
+                <ScrollView
+                    horizontal
+                    pagingEnabled
+                    showsHorizontalScrollIndicator={false}
+                    directionalLockEnabled
+                    onScroll={e => {
+                        let slide = Math.round(
+                            e.nativeEvent.contentOffset.x / e.nativeEvent.layoutMeasurement.width
+                        );
+                        if (slide !== activeIndexNumber) {
+                            console.log(slide);
+                            setActiveIndexNumber(slide); //here we will set our active index num
+                        }
+                    }}
+                >
+                    {data.map((item, index) => {
+                        return (
                             <View
                                 key={index}
                                 style={{
                                     flexDirection: 'row',
                                     justifyContent: 'center',
+                                    marginHorizontal: getSize.m(12),
                                 }}
                             >
                                 <TouchableOpacity activeOpacity={0.9}>
@@ -62,11 +69,11 @@ export const SelectedMagazine = ({}: ISelectedMagazineProps) => {
                                     </View>
                                 </TouchableOpacity>
                             </View>
-                        )}
-                    />
-                </GestureHandlerRootView>
+                        );
+                    })}
+                </ScrollView>
                 <View style={styles.dotContainer}>
-                    {data.map((_, index) => {
+                    {dots.map((_, index) => {
                         return (
                             <View key={index}>
                                 <View

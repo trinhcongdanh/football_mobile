@@ -4,10 +4,6 @@ import { getSize } from '@football/app/utils/responsive/scale';
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
-    image: {
-        height: getSize.m(280),
-        borderRadius: getSize.m(18),
-    },
     minutes: {
         backgroundColor: appColors.black_dark,
         paddingHorizontal: getSize.m(6),
@@ -61,6 +57,16 @@ const styles = StyleSheet.create({
         height: getSize.m(5),
         marginHorizontal: getSize.m(2.5),
         borderRadius: getSize.m(5),
+    },
+
+    imageContainer: {
+        borderRadius: 34,
+        overflow: 'hidden',
+    },
+    image: {
+        width: '100%',
+        height: undefined,
+        aspectRatio: 1,
     },
 });
 

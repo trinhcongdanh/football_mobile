@@ -1,5 +1,5 @@
-import { View, Text, Image } from 'react-native';
-import React from 'react';
+import { View, Text, Image, useWindowDimensions } from 'react-native';
+import React, { useEffect, useRef, useState } from 'react';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import { getSize } from '@football/app/utils/responsive/scale';
 import { appColors } from '@football/app/utils/constants/appColors';
@@ -7,89 +7,110 @@ import Carousel from 'react-native-reanimated-carousel';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { appIcons } from '@football/app/assets/icons/appIcons';
 import Icon from 'react-native-vector-icons/AntDesign';
+import Animated, {
+    interpolate,
+    useAnimatedRef,
+    useAnimatedScrollHandler,
+    useAnimatedStyle,
+    useSharedValue,
+} from 'react-native-reanimated';
+import Pagination from '@football/app/components/pagination/Pagination';
 import styles from './SelectedGallery.style';
-import { ISelectedGalleryProps } from './SelectedGallery.type';
 import { useViewModel } from './SelectedGallery.viewModel';
+import { ISelectedGalleryProps } from './SelectedGallery.type';
 
-const SelectedGallery = ({}: ISelectedGalleryProps) => {
-    const { t, data, width, activeIndexNumber, setActiveIndexNumber } = useViewModel({});
+const SelectedGallery = ({ autoPlay, pagination }: ISelectedGalleryProps) => {
+    const { t, activeIndexNumber, setActiveIndexNumber, data } = useViewModel({});
+
+    const scrollViewRef = useAnimatedRef<any>();
+    const interval = useRef<any>();
+    const [isAutoPlay, setIsAutoPlay] = useState(autoPlay);
+    const [newData] = useState([{ key: 'spacer-left' }, ...data, { key: 'spacer-right' }]);
+    const { width } = useWindowDimensions();
+    const SIZE = width * 0.6;
+    const SPACER = (width - SIZE) / 2;
+    const x = useSharedValue(0);
+    const offSet = useSharedValue(0);
+
+    const onScroll = useAnimatedScrollHandler({
+        onScroll: event => {
+            x.value = event.contentOffset.x;
+        },
+    });
+
+    useEffect(() => {
+        if (isAutoPlay === true) {
+            let _offSet = offSet.value;
+            interval.current = setInterval(() => {
+                if (_offSet >= Math.floor(SIZE * (data.length - 1) - 10)) {
+                    _offSet = 0;
+                } else {
+                    _offSet = Math.floor(_offSet + SIZE);
+                }
+                scrollViewRef.current.scrollTo({ x: _offSet, y: 0 });
+            }, 2000);
+        } else {
+            clearInterval(interval.current);
+        }
+    }, [SIZE, SPACER, isAutoPlay, data.length, offSet.value, scrollViewRef]);
 
     return (
-        <View>
+        <View
+            style={{
+                marginLeft: getSize.m(-16),
+                marginRight: getSize.m(-20),
+                marginTop: getSize.m(18),
+            }}
+        >
             <Text
                 style={[appStyles.text_topic, { marginLeft: getSize.m(6), color: appColors.white }]}
             >
                 {t('leagues_details.gallery.title')}
             </Text>
-            <View style={{ marginHorizontal: getSize.m(-16), marginTop: getSize.m(18) }}>
-                <GestureHandlerRootView style={appStyles.flex}>
-                    <Carousel
-                        loop
-                        pagingEnabled={true}
-                        snapEnabled
-                        width={width}
-                        height={getSize.m(280)}
-                        scrollAnimationDuration={1000}
-                        mode="parallax"
-                        modeConfig={{
-                            parallaxScrollingScale: 1,
-                            parallaxScrollingOffset: getSize.m(160),
-                            parallaxAdjacentItemScale: 0.9,
-                        }}
-                        autoPlay={true}
-                        onSnapToItem={index => setActiveIndexNumber(index)}
-                        data={data}
-                        renderItem={({ item, index }) => (
-                            <View
-                                key={index}
-                                style={{
-                                    flexDirection: 'row',
-                                    justifyContent: 'center',
-                                }}
-                            >
-                                <View>
-                                    <Image source={item.image} style={[styles.image]} />
-                                    <View style={styles.minutes}>
-                                        <Text style={styles.text_minutes}>{item.minutes}</Text>
-                                    </View>
-                                    <View style={styles.play_video}>
-                                        <Icon
-                                            name={appIcons.ic_caretright}
-                                            size={getSize.m(16)}
-                                            color={appColors.white}
-                                        />
-                                    </View>
-                                    <View style={styles.content}>
-                                        <Text style={styles.text_content}>{item.content}</Text>
-                                    </View>
-                                </View>
-                            </View>
-                        )}
-                    />
-                </GestureHandlerRootView>
-                <View style={styles.dotContainer}>
-                    {data.map((_, index) => {
+
+            <View>
+                <Animated.ScrollView
+                    ref={scrollViewRef}
+                    onScroll={onScroll}
+                    onScrollBeginDrag={() => {
+                        setIsAutoPlay(false);
+                    }}
+                    onMomentumScrollEnd={e => {
+                        offSet.value = e.nativeEvent.contentOffset.x;
+                        setIsAutoPlay(autoPlay);
+                    }}
+                    scrollEventThrottle={16}
+                    decelerationRate="fast"
+                    snapToInterval={SIZE}
+                    horizontal
+                    bounces={false}
+                    showsHorizontalScrollIndicator={false}
+                >
+                    {newData.map((item: any, index: any) => {
+                        // eslint-disable-next-line react-hooks/rules-of-hooks
+                        const style = useAnimatedStyle(() => {
+                            const scale = interpolate(
+                                x.value,
+                                [(index - 2) * SIZE, (index - 1) * SIZE, index * SIZE],
+                                [0.8, 1, 0.8]
+                            );
+                            return {
+                                transform: [{ scale }],
+                            };
+                        });
+                        if (!item.image) {
+                            return <View style={{ width: getSize.m(30) }} key={index} />;
+                        }
                         return (
-                            <View key={index}>
-                                <View
-                                    style={[
-                                        styles.dot,
-                                        {
-                                            width:
-                                                index === activeIndexNumber
-                                                    ? getSize.m(18)
-                                                    : getSize.m(5),
-                                            backgroundColor:
-                                                index === activeIndexNumber
-                                                    ? appColors.blue_light
-                                                    : appColors.soft_grey,
-                                        },
-                                    ]}
-                                ></View>
+                            <View style={{ width: SIZE }} key={index}>
+                                <Animated.View style={[styles.imageContainer, style]}>
+                                    <Image source={item.image} style={styles.image} />
+                                </Animated.View>
                             </View>
                         );
                     })}
-                </View>
+                </Animated.ScrollView>
+                <Pagination data={data} x={x} size={SIZE} />
             </View>
         </View>
     );

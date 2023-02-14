@@ -7,7 +7,8 @@ import { appColors } from '@football/app/utils/constants/appColors';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import { getSize } from '@football/app/utils/responsive/scale';
 import React from 'react';
-import { ImageBackground, SafeAreaView, StatusBar, Text, TextInput, View } from 'react-native';
+import { ImageBackground, SafeAreaView, ScrollView, StatusBar, Text, View } from 'react-native';
+import { TextInput } from 'react-native-gesture-handler';
 
 import Icon from 'react-native-vector-icons/Feather';
 import styles from './LeaguesScreen.style';

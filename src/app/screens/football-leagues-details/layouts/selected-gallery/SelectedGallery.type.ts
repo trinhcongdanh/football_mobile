@@ -1,1 +1,4 @@
-export type ISelectedGalleryProps = {};
+export type ISelectedGalleryProps = {
+    autoPlay?: any;
+    pagination?: any;
+};
