@@ -1,4 +1,4 @@
-import { View, Text, Image, useWindowDimensions } from 'react-native';
+import { View, Text, Image, useWindowDimensions, ScrollView } from 'react-native';
 import React, { useEffect, useRef, useState } from 'react';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import { getSize } from '@football/app/utils/responsive/scale';
@@ -18,100 +18,56 @@ import Pagination from '@football/app/components/pagination/Pagination';
 import styles from './SelectedGallery.style';
 import { useViewModel } from './SelectedGallery.viewModel';
 import { ISelectedGalleryProps } from './SelectedGallery.type';
+import FastImage from 'react-native-fast-image';
 
 const SelectedGallery = ({ autoPlay, pagination }: ISelectedGalleryProps) => {
     const { t, activeIndexNumber, setActiveIndexNumber, data } = useViewModel({});
-
-    const scrollViewRef = useAnimatedRef<any>();
-    const interval = useRef<any>();
-    const [isAutoPlay, setIsAutoPlay] = useState(autoPlay);
-    const [newData] = useState([{ key: 'spacer-left' }, ...data, { key: 'spacer-right' }]);
     const { width } = useWindowDimensions();
-    const SIZE = width * 0.6;
+    const [newData] = useState([{ key: 'spacer-left' }, ...data, { key: 'spacer-right' }]);
+
+    const SIZE = width * 0.7;
     const SPACER = (width - SIZE) / 2;
     const x = useSharedValue(0);
-    const offSet = useSharedValue(0);
-
     const onScroll = useAnimatedScrollHandler({
         onScroll: event => {
             x.value = event.contentOffset.x;
         },
     });
 
-    useEffect(() => {
-        if (isAutoPlay === true) {
-            let _offSet = offSet.value;
-            interval.current = setInterval(() => {
-                if (_offSet >= Math.floor(SIZE * (data.length - 1) - 10)) {
-                    _offSet = 0;
-                } else {
-                    _offSet = Math.floor(_offSet + SIZE);
-                }
-                scrollViewRef.current.scrollTo({ x: _offSet, y: 0 });
-            }, 2000);
-        } else {
-            clearInterval(interval.current);
-        }
-    }, [SIZE, SPACER, isAutoPlay, data.length, offSet.value, scrollViewRef]);
-
     return (
-        <View
-            style={{
-                marginLeft: getSize.m(-16),
-                marginRight: getSize.m(-20),
-                marginTop: getSize.m(18),
-            }}
-        >
-            <Text
-                style={[appStyles.text_topic, { marginLeft: getSize.m(6), color: appColors.white }]}
+        <View>
+            <Animated.ScrollView
+                horizontal
+                showsHorizontalScrollIndicator={false}
+                bounces={false}
+                scrollEventThrottle={16}
+                snapToInterval={SIZE}
+                decelerationRate="fast"
+                onScroll={onScroll}
             >
-                {t('leagues_details.gallery.title')}
-            </Text>
-
-            <View>
-                <Animated.ScrollView
-                    ref={scrollViewRef}
-                    onScroll={onScroll}
-                    onScrollBeginDrag={() => {
-                        setIsAutoPlay(false);
-                    }}
-                    onMomentumScrollEnd={e => {
-                        offSet.value = e.nativeEvent.contentOffset.x;
-                        setIsAutoPlay(autoPlay);
-                    }}
-                    scrollEventThrottle={16}
-                    decelerationRate="fast"
-                    snapToInterval={SIZE}
-                    horizontal
-                    bounces={false}
-                    showsHorizontalScrollIndicator={false}
-                >
-                    {newData.map((item: any, index: any) => {
-                        // eslint-disable-next-line react-hooks/rules-of-hooks
-                        const style = useAnimatedStyle(() => {
-                            const scale = interpolate(
-                                x.value,
-                                [(index - 2) * SIZE, (index - 1) * SIZE, index * SIZE],
-                                [0.8, 1, 0.8]
-                            );
-                            return {
-                                transform: [{ scale }],
-                            };
-                        });
-                        if (!item.image) {
-                            return <View style={{ width: getSize.m(30) }} key={index} />;
-                        }
-                        return (
-                            <View style={{ width: SIZE }} key={index}>
-                                <Animated.View style={[styles.imageContainer, style]}>
-                                    <Image source={item.image} style={styles.image} />
-                                </Animated.View>
-                            </View>
+                {newData.map((item: any, index: any) => {
+                    const style = useAnimatedStyle(() => {
+                        const scale = interpolate(
+                            x.value,
+                            [(index - 2) * SIZE, (index - 1) * SIZE, index * SIZE],
+                            [0.8, 1, 0.8]
                         );
-                    })}
-                </Animated.ScrollView>
-                <Pagination data={data} x={x} size={SIZE} />
-            </View>
+                        return {
+                            transform: [{ scale }],
+                        };
+                    });
+                    if (!item.image) {
+                        return <View style={{ width: SPACER }} key={index} />;
+                    }
+                    return (
+                        <View style={{ width: SIZE }} key={index}>
+                            <Animated.View style={[styles.imageContainer, style]}>
+                                <Image source={item.image} style={styles.image} />
+                            </Animated.View>
+                        </View>
+                    );
+                })}
+            </Animated.ScrollView>
         </View>
     );
 };

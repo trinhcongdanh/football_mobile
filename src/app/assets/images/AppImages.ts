@@ -89,4 +89,5 @@ export const AppImages = {
     img_message_question_outline: require('./message-question-outline.png'),
     img_cups_outline: require('./cup-outline.png'),
     img_video_square_outline: require('./video-square-outline.png'),
+    img_product: require('./image-product-1.jpg'),
 };

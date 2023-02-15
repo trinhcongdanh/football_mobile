@@ -8,7 +8,7 @@ import { ISelectedGalleryProps } from './SelectedGallery.type';
 export const useViewModel = ({}: ISelectedGalleryProps) => {
     const { navigate, goBack } = useAppNavigator();
     const { t } = useTranslation();
-    const data = <any>[
+    const data = [
         {
             image: AppImages.img_gallery,
             minutes: '25:11',
