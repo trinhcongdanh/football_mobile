@@ -574,6 +574,10 @@ const resources = {
             terms: {
                 title: 'תנאי שימוש',
             },
+            home_page: {
+                statistics: 'סטטיסטיקות',
+                see_all: 'ראה הכל',
+            },
         },
     },
     en: {
@@ -1147,6 +1151,10 @@ const resources = {
             },
             terms: {
                 title: 'Terms of Use',
+            },
+            home_page: {
+                statistics: 'Statistics',
+                see_all: 'See all',
             },
         },
     },

@@ -34,6 +34,10 @@ const SelectedGallery = ({ autoPlay, pagination }: ISelectedGalleryProps) => {
         },
     });
 
+    useEffect(() => {
+        console.log('');
+    }, [x.value]);
+
     return (
         <View>
             <Animated.ScrollView

@@ -9,6 +9,7 @@ export const AppImages = {
     img_google: require('./google.png'),
     img_avt: require('./avt.jpg'),
     img_ball: require('./futbol.png'),
+    img_ball_red: require('./futbol_red.png'),
     img_gk: require('./gk.jpg'),
     img_albania: require('./albania.png'),
     img_israel: require('./israel.png'),
@@ -90,4 +91,9 @@ export const AppImages = {
     img_cups_outline: require('./cup-outline.png'),
     img_video_square_outline: require('./video-square-outline.png'),
     img_product: require('./image-product-1.jpg'),
+    img_background_header_home: require('./background_header_home.png'),
+    img_home_team: require('./home_team.png'),
+    img_background_home_1: require('./background_home_1.png'),
+    img_angle_down: require('./angle-down.png'),
+    img_chess_queen: require('./chess-queen.png'),
 };
