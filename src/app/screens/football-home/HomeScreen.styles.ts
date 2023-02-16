@@ -115,6 +115,14 @@ const styles = StyleSheet.create({
         paddingTop: getSize.m(16),
         paddingBottom: getSize.m(23.5),
     },
+
+    title_statistic: {
+        fontFamily: AppFonts.bold,
+        fontSize: getSize.m(16),
+        lineHeight: getSize.m(20.8),
+        color: appColors.text_dark_blue,
+        marginLeft: getSize.m(4),
+    },
     dotContainer: {
         flexDirection: 'row-reverse',
         justifyContent: 'center',

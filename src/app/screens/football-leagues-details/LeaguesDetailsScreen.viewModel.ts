@@ -21,7 +21,7 @@ export const useViewModel = ({ navigation, route }: ILeaguesDetailsScreenProps) 
         goBack();
     };
     const dispatch = useDispatch<any>();
-    const { leagueId } = route.params;
+    const { leagueId }: any = route.params;
 
     // Game season
     const [openModalYear, setOpenModalYear] = useState(false);

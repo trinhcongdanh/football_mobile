@@ -85,5 +85,6 @@ export const styles = StyleSheet.create({
         lineHeight: getSize.m(16),
         fontFamily: AppFonts.bold,
         marginRight: getSize.m(4),
+        color: appColors.button_dark_blue,
     },
 });
