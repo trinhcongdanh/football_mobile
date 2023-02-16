@@ -1,3 +1,4 @@
+import { LeagueSeasonModel } from './../../core/models/LeagueSeasonModelResponse';
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-underscore-dangle */
 
@@ -7,11 +8,13 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 export interface LeagueState {
     leagueTypes: LeagueTypeModel[];
     searchLeagues: LeagueModel[];
+    leagueSeasons: LeagueSeasonModel[];
 }
 
 const initialState: LeagueState = {
     leagueTypes: [],
     searchLeagues: [],
+    leagueSeasons: [],
 };
 const MAX_LEAGUE_TYPE_NUM = 2;
 export const leagueSlice = createSlice({
@@ -20,6 +23,9 @@ export const leagueSlice = createSlice({
     reducers: {
         setLeagueTypes: (state, action: PayloadAction<LeagueTypeModel[]>) => {
             state.leagueTypes = [...action.payload];
+        },
+        setLeagueSeasons: (state, action: PayloadAction<LeagueSeasonModel[]>) => {
+            state.leagueSeasons = [...action.payload];
         },
         setSearchLeagues: (state, action: PayloadAction<LeagueModel[]>) => {
             state.searchLeagues = [...action.payload];
@@ -48,6 +54,7 @@ export const leagueSlice = createSlice({
 const { actions, reducer } = leagueSlice;
 export const {
     setLeagueTypes,
+    setLeagueSeasons,
     pushLeagueType,
     resetLeagueTypes,
     resetSearchLeagues,

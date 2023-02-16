@@ -26,3 +26,7 @@ export type LeagueTypeModelResponse = AxiosResponse<{
 export type LeagueModelResponse = AxiosResponse<{
     documents: LeagueModel[];
 }>;
+
+export type LeagueOneModelResponse = AxiosResponse<{
+    documents: LeagueModel[];
+}>;

@@ -28,8 +28,6 @@ export const LeaguesScreen = ({ navigation, route }: ILeaguesScreenProps) => {
         route,
     });
 
-    console.log('SEARCH', searchLeagues);
-
     return (
         <View style={appStyles.flex}>
             <ImageBackground source={AppImages.img_background} style={appStyles.flex}>

@@ -15,13 +15,14 @@ import { appIcons } from '@football/app/assets/icons/appIcons';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import { AppImages } from '@football/app/assets/images';
 import { getSize } from '@football/app/utils/responsive/scale';
+import FastImage from 'react-native-fast-image';
+import { DropDown } from '@football/app/components/drop-down/DropDown';
+import { Cycle, Round } from '@football/core/models/LeagueSeasonModelResponse';
 import { LeaguesTable } from './layouts/leagues-table/LeaguesTable';
 import { ListOfGames } from './layouts/list-of-games/ListOfGames';
 import { Statistics } from './layouts/Statistics/Statistics';
 import SelectedGallery from './layouts/selected-gallery/SelectedGallery';
 import { SelectedMagazine } from './layouts/selected-magazine/SelectedMagazine';
-import FastImage from 'react-native-fast-image';
-import { DropDown } from '@football/app/components/drop-down/DropDown';
 import { AboutLeague } from './layouts/about-league/AboutLeague';
 import styles from './LeaguesDetailsScreen.style';
 import { useViewModel } from './LeaguesDetailsScreen.viewModel';
@@ -47,6 +48,7 @@ export const LeaguesDetailsScreen = ({ navigation, route }: ILeaguesDetailsScree
         openModalPlayOff,
         selectPlayoff,
         playOffs,
+        league,
     } = useViewModel({
         navigation,
         route,
@@ -80,13 +82,17 @@ export const LeaguesDetailsScreen = ({ navigation, route }: ILeaguesDetailsScree
                             <View style={[appStyles.align_justify, { marginTop: getSize.m(16) }]}>
                                 <View style={styles.avt_leagues_container}>
                                     <FastImage
-                                        source={AppImages.img_cup}
-                                        style={styles.avt_leagues}
+                                        source={{
+                                            uri: league?.logo_url,
+                                        }}
+                                        style={{
+                                            ...styles.avt_leagues,
+                                            // width: league?.logo_width,
+                                            // height: league?.logo_height,
+                                        }}
                                     />
                                 </View>
-                                <Text style={styles.name_leagues}>
-                                    ליגת ONE ZERO בנקאות פרטית דיגיטלית
-                                </Text>
+                                <Text style={styles.name_leagues}>{league?.name_he}</Text>
                             </View>
                             <View>
                                 <View
@@ -154,11 +160,13 @@ export const LeaguesDetailsScreen = ({ navigation, route }: ILeaguesDetailsScree
                                                 showsVerticalScrollIndicator={false}
                                                 nestedScrollEnabled
                                             >
-                                                {playOffs.map((input: string, index: number) => {
+                                                {playOffs.map((playOff: Cycle, index: number) => {
                                                     return (
                                                         <TouchableOpacity
                                                             onPress={() => {
-                                                                setSelectPlayoff(input);
+                                                                setSelectPlayoff(
+                                                                    playOff.cycle_name_he
+                                                                );
                                                                 setOpenModalPlayOff(false);
                                                             }}
                                                             key={index.toString()}
@@ -169,7 +177,7 @@ export const LeaguesDetailsScreen = ({ navigation, route }: ILeaguesDetailsScree
                                                                     styles.btn_drop_down_calender_text
                                                                 }
                                                             >
-                                                                {input}
+                                                                {playOff.cycle_name_he}
                                                             </Text>
                                                         </TouchableOpacity>
                                                     );
@@ -192,7 +200,9 @@ export const LeaguesDetailsScreen = ({ navigation, route }: ILeaguesDetailsScree
                                             },
                                         ]}
                                     >
-                                        <Text style={styles.text_cycle}>{selectCycle}</Text>
+                                        <Text style={styles.text_cycle}>
+                                            {selectCycle?.round_name_he}
+                                        </Text>
                                         <Icon
                                             name={
                                                 openModalCycle
@@ -214,7 +224,7 @@ export const LeaguesDetailsScreen = ({ navigation, route }: ILeaguesDetailsScree
                                                 showsVerticalScrollIndicator={false}
                                                 nestedScrollEnabled
                                             >
-                                                {cycles.map((input: string, index: number) => {
+                                                {cycles.map((input: Round, index: number) => {
                                                     return (
                                                         <TouchableOpacity
                                                             onPress={() => {
@@ -229,7 +239,7 @@ export const LeaguesDetailsScreen = ({ navigation, route }: ILeaguesDetailsScree
                                                                     styles.btn_drop_down_calender_text
                                                                 }
                                                             >
-                                                                {input}
+                                                                {input.round_name_he}
                                                             </Text>
                                                         </TouchableOpacity>
                                                     );
@@ -239,7 +249,7 @@ export const LeaguesDetailsScreen = ({ navigation, route }: ILeaguesDetailsScree
                                     )}
                                 </View>
                             </View>
-                            <LeaguesTable />
+                            <LeaguesTable leaderBoards={selectCycle?.leader_board || []} />
                         </View>
                         <View style={styles.package}>
                             <ListOfGames />

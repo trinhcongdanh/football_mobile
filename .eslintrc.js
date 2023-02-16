@@ -37,7 +37,12 @@ module.exports = {
     },
     rules: {
         'no-console-log/no-console-log': ['error'],
-        'prettier/prettier': ['error'],
+        'prettier/prettier': [
+            'error',
+            {
+                endOfLine: 'auto',
+            },
+        ],
         'react/prop-types': 'warn',
         'import/prefer-default-export': [0],
         'react/jsx-filename-extension': [0],
@@ -81,7 +86,12 @@ module.exports = {
             },
             rules: {
                 'no-console-log/no-console-log': ['error'],
-                'prettier/prettier': ['error'],
+                'prettier/prettier': [
+                    'error',
+                    {
+                        endOfLine: 'auto',
+                    },
+                ],
                 'react/prop-types': 'warn',
                 'import/prefer-default-export': [0],
                 '@typescript-eslint/prefer-optional-chain': ['error'],
