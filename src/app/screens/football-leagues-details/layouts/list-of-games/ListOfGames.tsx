@@ -32,6 +32,8 @@ export const ListOfGames = (props: any) => {
                             color={appColors.gray}
                             icon={appIcons.ic_arrow_left}
                             details={item.details}
+                            started={item.started}
+                            starting={item.starting}
                         />
                     );
                 })}

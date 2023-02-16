@@ -25,7 +25,7 @@ export const useViewModel = ({ navigation, route, typeId }: ILeagueItemScreenPro
                 navigate(ScreenName.LeaguesDetailsPage);
                 break;
             case 1:
-                navigate(ScreenName.TeamPage);
+                navigate(ScreenName.HomePage);
                 break;
             case 2:
                 navigate(ScreenName.TeamSquadPage);
