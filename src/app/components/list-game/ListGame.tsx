@@ -25,7 +25,7 @@ export const ListGame = ({
     tournament,
     color,
     handleDetailMatch,
-    starting,
+    label,
 }: IListGameProps) => {
     const { t } = useTranslation();
 
@@ -68,7 +68,7 @@ export const ListGame = ({
                     )}
                 </View>
             )}
-            {!tournament && result === null && schedule === null ? (
+            {!tournament && label ? (
                 <View>
                     <Text
                         style={[
@@ -170,7 +170,7 @@ export const ListGame = ({
                         },
                     ]}
                 >
-                    {result === null && schedule === null && (
+                    {label && (
                         <Text
                             style={[
                                 styles.score,
@@ -182,11 +182,11 @@ export const ListGame = ({
                             - : -
                         </Text>
                     )}
-                    {result === null && schedule !== null && (
+                    {!label && result === null && schedule !== null && (
                         <Text style={styles.score}>{schedule}</Text>
                     )}
 
-                    {result !== null && <Text style={styles.score}>{result}</Text>}
+                    {!label && result !== null && <Text style={styles.score}>{result}</Text>}
                 </View>
                 <View style={[appStyles.align_justify]}>
                     <View
@@ -217,22 +217,12 @@ export const ListGame = ({
                     style={[appStyles.flex_row_center, { flex: 0 }]}
                     onPress={handleDetailMatch}
                 >
-                    <Text
-                        style={[
-                            styles.details,
-                            {
-                                color:
-                                    starting === false
-                                        ? appColors.button_dark_blue
-                                        : appColors.light_gray,
-                            },
-                        ]}
-                    >
-                        {t('match.composition.title')}
-                    </Text>
-                    {starting === false && (
-                        <Icon name={icon} size={getSize.m(10)} color={appColors.button_dark_blue} />
+                    {label ? (
+                        <Text style={[styles.details]}>{t('list_game.results')}</Text>
+                    ) : (
+                        <Text style={[styles.details]}>{t('list_game.composition')}</Text>
                     )}
+                    <Icon name={icon} size={getSize.m(10)} color={appColors.button_dark_blue} />
                 </TouchableOpacity>
             )}
         </View>

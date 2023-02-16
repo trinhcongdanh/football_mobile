@@ -214,8 +214,16 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                                         },
                                     ]}
                                 >
-                                    <View>
-                                        <View>
+                                    <View
+                                        style={[
+                                            appStyles.flex_row_space_center,
+                                            {
+                                                paddingLeft: getSize.m(16),
+                                                paddingRight: getSize.m(10),
+                                            },
+                                        ]}
+                                    >
+                                        <View style={appStyles.flex_row_align}>
                                             <FastImage
                                                 source={AppImages.img_chess_queen}
                                                 style={{
@@ -224,9 +232,11 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                                                 }}
                                                 resizeMode={FastImage.resizeMode.contain}
                                             />
-                                            <Text>{t('home_page.statistics')}</Text>
+                                            <Text style={styles.title_statistic}>
+                                                {t('home_page.statistics')}
+                                            </Text>
                                         </View>
-                                        <View>
+                                        <View style={appStyles.flex_row_align}>
                                             <Text>{t('home_page.see_all')}</Text>
                                             <IconEntypo
                                                 name={appIcons.ic_arrow_left}

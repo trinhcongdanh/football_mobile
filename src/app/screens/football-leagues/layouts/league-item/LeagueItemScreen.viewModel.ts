@@ -21,47 +21,48 @@ export const useViewModel = ({ navigation, route, typeId }: ILeagueItemScreenPro
 
     const handleLeaguesDetails = (index: number) => {
         switch (index) {
-            case 0:
-                navigate(ScreenName.LeaguesDetailsPage);
-                break;
-            case 1:
-                navigate(ScreenName.HomePage);
-                break;
-            case 2:
-                navigate(ScreenName.TeamSquadPage);
-                break;
-            case 3:
-                navigate(ScreenName.StateCupPage);
-                break;
-            case 4:
-                navigate(ScreenName.DataCoachPage);
-                break;
-            case 5:
-                navigate(ScreenName.MatchPage);
-                break;
-            case 6:
-                navigate(ScreenName.HistoryPage);
-                break;
-            case 7:
-                navigate(ScreenName.TeamStaffPage);
-                break;
-            case 8:
-                navigate(ScreenName.DataPlayerPage);
-                break;
-            case 9:
-                navigate(ScreenName.PreviousCampaignsPage);
-                break;
-            case 10:
-                navigate(ScreenName.CampaignPage);
-                break;
-            case 11:
-                navigate(ScreenName.ConquerorsPage);
-                break;
-            case 12:
-                navigate(ScreenName.PitchPage);
-                break;
+            // case 0:
+            //     navigate(ScreenName.LeaguesDetailsPage);
+            //     break;
+            // case 1:
+            //     navigate(ScreenName.HomePage);
+            //     break;
+            // case 2:
+            //     navigate(ScreenName.TeamSquadPage);
+            //     break;
+            // case 3:
+            //     navigate(ScreenName.StateCupPage);
+            //     break;
+            // case 4:
+            //     navigate(ScreenName.DataCoachPage);
+            //     break;
+            // case 5:
+            //     navigate(ScreenName.MatchPage);
+            //     break;
+            // case 6:
+            //     navigate(ScreenName.HistoryPage);
+            //     break;
+            // case 7:
+            //     navigate(ScreenName.TeamStaffPage);
+            //     break;
+            // case 8:
+            //     navigate(ScreenName.DataPlayerPage);
+            //     break;
+            // case 9:
+            //     navigate(ScreenName.PreviousCampaignsPage);
+            //     break;
+            // case 10:
+            //     navigate(ScreenName.CampaignPage);
+            //     break;
+            // case 11:
+            //     navigate(ScreenName.ConquerorsPage);
+            //     break;
+            // case 12:
+            //     navigate(ScreenName.PitchPage);
+            //     break;
             default:
-                navigate(ScreenName.TeamSquadPage);
+                // eslint-disable-next-line no-underscore-dangle
+                navigate(ScreenName.LeaguesDetailsPage, { leagueId: optionLeagues[index]?._id });
                 break;
         }
     };

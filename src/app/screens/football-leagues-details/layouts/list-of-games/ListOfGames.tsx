@@ -29,12 +29,10 @@ export const ListOfGames = ({ games }: IListOfGamesProps) => {
                             date={item.date}
                             result={item.score}
                             schedule={item.time}
-                            // completed={item.completed}
                             color={appColors.gray}
                             icon={appIcons.ic_arrow_left}
                             details={item.game_id}
-                            // started={item.started}
-                            starting={item.game_id.length > 0}
+                            label={item.game_id.length > 0}
                         />
                     );
                 })}
