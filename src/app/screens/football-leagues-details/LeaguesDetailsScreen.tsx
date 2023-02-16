@@ -255,7 +255,10 @@ export const LeaguesDetailsScreen = ({ navigation, route }: ILeaguesDetailsScree
                             <ListOfGames games={selectCycle?.games || []} />
                         </View>
                         <View style={styles.package}>
-                            <Statistics />
+                            <Statistics
+                                selectedRoundName={selectCycle?.round_name_he || ''}
+                                statistics={selectCycle?.statistics}
+                            />
                         </View>
                         <View style={styles.package}>
                             <AboutLeague />
