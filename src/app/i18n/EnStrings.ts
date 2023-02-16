@@ -578,6 +578,10 @@ const resources = {
                 statistics: 'סטטיסטיקות',
                 see_all: 'ראה הכל',
             },
+            list_game: {
+                results: 'לתוצאות המשחק בזמן אמת',
+                composition: 'הרכב',
+            },
         },
     },
     en: {
@@ -1155,6 +1159,10 @@ const resources = {
             home_page: {
                 statistics: 'Statistics',
                 see_all: 'See all',
+            },
+            list_game: {
+                results: 'For the results of the game in real time',
+                composition: 'Composition',
             },
         },
     },
