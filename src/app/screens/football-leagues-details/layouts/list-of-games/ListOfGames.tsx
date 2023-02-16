@@ -33,10 +33,9 @@ export const ListOfGames = ({ games }: IListOfGamesProps) => {
                             color={appColors.gray}
                             icon={appIcons.ic_arrow_left}
                             details={item.game_id}
-                            // started={item.started}
                             isLive={moment().isBetween(
                                 moment(`${item.date} ${item.time}`, 'DD.M.YY HH:mm'),
-                                moment().add(2, 'hours')
+                                moment(`${item.date} ${item.time}`, 'DD.M.YY HH:mm').add(2, 'hours')
                             )}
                         />
                     );
