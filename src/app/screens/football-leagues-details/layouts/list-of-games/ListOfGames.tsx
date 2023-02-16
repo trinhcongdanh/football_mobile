@@ -33,6 +33,8 @@ export const ListOfGames = ({ games }: IListOfGamesProps) => {
                             color={appColors.gray}
                             icon={appIcons.ic_arrow_left}
                             details={item.game_id}
+                            // started={item.started}
+                            starting={item.game_id.length > 0}
                         />
                     );
                 })}

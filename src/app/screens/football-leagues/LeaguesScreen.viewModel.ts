@@ -67,23 +67,18 @@ export const useViewModel = ({ navigation, route }: ILeaguesScreenProps) => {
         navigate(ScreenName.SettingsPage);
     };
     const getLeagueTypesData = useCallback(async () => {
-        if (isEmpty(leagueTypes) || isNil(leagueTypes)) {
-            try {
-                const { data }: LeagueTypeModelResponse = await axiosClient.post(
-                    `${BASE_URL}/find`,
-                    {
-                        dataSource: DATA_SOURCE,
-                        database: DB,
-                        collection: 'league_type',
-                    }
-                );
+        try {
+            const { data }: LeagueTypeModelResponse = await axiosClient.post(`${BASE_URL}/find`, {
+                dataSource: DATA_SOURCE,
+                database: DB,
+                collection: 'league_type',
+            });
 
-                if (!isEmpty(data.documents)) {
-                    dispatch(setLeagueTypes(data.documents));
-                }
-            } catch (error: any) {
-                Alert.alert(error);
+            if (!isEmpty(data.documents)) {
+                dispatch(setLeagueTypes(data.documents));
             }
+        } catch (error: any) {
+            Alert.alert(error);
         }
     }, []);
 

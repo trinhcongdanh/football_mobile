@@ -25,6 +25,7 @@ export const ListGame = ({
     tournament,
     color,
     handleDetailMatch,
+    starting,
 }: IListGameProps) => {
     const { t } = useTranslation();
 
@@ -67,31 +68,29 @@ export const ListGame = ({
                     )}
                 </View>
             )}
-            <View
-                style={[
-                    appStyles.flex_row_space,
-                    { marginLeft: getSize.m(24), marginRight: getSize.m(10) },
-                ]}
-            >
-                <Text
-                    style={[
-                        styles.date,
-                        {
-                            color: result !== null ? appColors.soft_grey : appColors.text_dark_blue,
-                        },
-                    ]}
-                >
-                    {date}
-                </Text>
-                <View style={[appStyles.flex_row_align, { flex: 0 }]}>
-                    <IconLocation
-                        name={appIcons.ic_location}
-                        size={getSize.m(20)}
-                        color={result !== null ? appColors.soft_grey : appColors.blue_light}
-                    />
+            {!tournament && result === null && schedule === null ? (
+                <View>
                     <Text
                         style={[
-                            styles.stadium,
+                            styles.text_live,
+                            {
+                                textAlign: 'center',
+                            },
+                        ]}
+                    >
+                        L I V E
+                    </Text>
+                </View>
+            ) : (
+                <View
+                    style={[
+                        appStyles.flex_row_space,
+                        { marginLeft: getSize.m(24), marginRight: getSize.m(10) },
+                    ]}
+                >
+                    <Text
+                        style={[
+                            styles.date,
                             {
                                 color:
                                     result !== null
@@ -100,10 +99,31 @@ export const ListGame = ({
                             },
                         ]}
                     >
-                        {location}
+                        {date}
                     </Text>
+                    <View style={[appStyles.flex_row_align, { flex: 0 }]}>
+                        <IconLocation
+                            name={appIcons.ic_location}
+                            size={getSize.m(20)}
+                            color={result !== null ? appColors.soft_grey : appColors.blue_light}
+                        />
+                        <Text
+                            style={[
+                                styles.stadium,
+                                {
+                                    color:
+                                        result !== null
+                                            ? appColors.soft_grey
+                                            : appColors.text_dark_blue,
+                                },
+                            ]}
+                        >
+                            {location}
+                        </Text>
+                    </View>
                 </View>
-            </View>
+            )}
+
             <View style={appStyles.flex_row_space}>
                 <View style={[styles.circle, { right: getSize.m(-30), backgroundColor: color }]} />
                 <View style={[styles.circle, { left: getSize.m(-30), backgroundColor: color }]} />
@@ -197,8 +217,22 @@ export const ListGame = ({
                     style={[appStyles.flex_row_center, { flex: 0 }]}
                     onPress={handleDetailMatch}
                 >
-                    <Text style={styles.details}>{t('match.composition.title')}</Text>
-                    <Icon name={icon} size={getSize.m(10)} color={appColors.button_dark_blue} />
+                    <Text
+                        style={[
+                            styles.details,
+                            {
+                                color:
+                                    starting === false
+                                        ? appColors.button_dark_blue
+                                        : appColors.light_gray,
+                            },
+                        ]}
+                    >
+                        {t('match.composition.title')}
+                    </Text>
+                    {starting === false && (
+                        <Icon name={icon} size={getSize.m(10)} color={appColors.button_dark_blue} />
+                    )}
                 </TouchableOpacity>
             )}
         </View>
