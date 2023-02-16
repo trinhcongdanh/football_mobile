@@ -25,7 +25,7 @@ export const ListGame = ({
     tournament,
     color,
     handleDetailMatch,
-    label,
+    isLive,
 }: IListGameProps) => {
     const { t } = useTranslation();
 
@@ -68,7 +68,7 @@ export const ListGame = ({
                     )}
                 </View>
             )}
-            {!tournament && label ? (
+            {!tournament && isLive ? (
                 <View>
                     <Text
                         style={[
@@ -170,7 +170,7 @@ export const ListGame = ({
                         },
                     ]}
                 >
-                    {label && (
+                    {isLive && (
                         <Text
                             style={[
                                 styles.score,
@@ -182,11 +182,11 @@ export const ListGame = ({
                             - : -
                         </Text>
                     )}
-                    {!label && result === null && schedule !== null && (
+                    {!isLive && result === null && schedule !== null && (
                         <Text style={styles.score}>{schedule}</Text>
                     )}
 
-                    {!label && result !== null && <Text style={styles.score}>{result}</Text>}
+                    {!isLive && result !== null && <Text style={styles.score}>{result}</Text>}
                 </View>
                 <View style={[appStyles.align_justify]}>
                     <View
@@ -217,7 +217,7 @@ export const ListGame = ({
                     style={[appStyles.flex_row_center, { flex: 0 }]}
                     onPress={handleDetailMatch}
                 >
-                    {label ? (
+                    {isLive ? (
                         <Text style={[styles.details]}>{t('list_game.results')}</Text>
                     ) : (
                         <Text style={[styles.details]}>{t('list_game.composition')}</Text>

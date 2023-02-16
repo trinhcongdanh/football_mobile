@@ -32,7 +32,7 @@ export const ListOfGames = ({ games }: IListOfGamesProps) => {
                             color={appColors.gray}
                             icon={appIcons.ic_arrow_left}
                             details={item.game_id}
-                            label={item.game_id.length > 0}
+                            isLive={item.game_id.length > 0}
                         />
                     );
                 })}
