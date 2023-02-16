@@ -5,6 +5,7 @@ import { getSize } from '@football/app/utils/responsive/scale';
 import { ListGame } from '@football/app/components/list-game/ListGame';
 import { appIcons } from '@football/app/assets/icons/appIcons';
 import { appColors } from '@football/app/utils/constants/appColors';
+import moment from 'moment';
 import { useViewModel } from './ListOfGames.viewModel';
 import { IListOfGamesProps } from './ListOfGames.type';
 // import { IListOfGamesProps } from './ListOfGames.type';
@@ -34,7 +35,10 @@ export const ListOfGames = ({ games }: IListOfGamesProps) => {
                             icon={appIcons.ic_arrow_left}
                             details={item.game_id}
                             // started={item.started}
-                            starting={item.game_id.length > 0}
+                            starting={moment().isBetween(
+                                moment(`${item.date} ${item.time}`, 'DD.M.YY HH:mm'),
+                                moment().add(2, 'hours')
+                            )}
                         />
                     );
                 })}
