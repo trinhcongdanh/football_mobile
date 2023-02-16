@@ -252,7 +252,7 @@ export const LeaguesDetailsScreen = ({ navigation, route }: ILeaguesDetailsScree
                             <LeaguesTable leaderBoards={selectCycle?.leader_board || []} />
                         </View>
                         <View style={styles.package}>
-                            <ListOfGames />
+                            <ListOfGames games={selectCycle?.games || []} />
                         </View>
                         <View style={styles.package}>
                             <Statistics />

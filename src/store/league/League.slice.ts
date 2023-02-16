@@ -1,4 +1,4 @@
-import { LeagueSeasonModel } from './../../core/models/LeagueSeasonModelResponse';
+import { LeagueSeasonModel } from '@football/core/models/LeagueSeasonModelResponse';
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-underscore-dangle */
 

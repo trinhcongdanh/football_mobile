@@ -71,12 +71,12 @@ export interface Game {
     stadium_he: string;
     stadium_en: string;
     score: string;
-    team1: Team1;
-    team2: Team1;
+    team1: Team;
+    team2: Team;
     is_home_game: boolean;
 }
 
-export interface Team1 {
+export interface Team {
     name_he: string;
     name_en: string;
     logo_url: string;

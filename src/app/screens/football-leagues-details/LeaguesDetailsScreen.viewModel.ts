@@ -84,14 +84,13 @@ export const useViewModel = ({ navigation, route }: ILeaguesDetailsScreenProps) 
         setOpenModalYear(false);
     };
 
-
-    // Top playoff
+    // Top playoff: This actually cycles instead of playoff
     const [openModalPlayOff, setOpenModalPlayOff] = useState(false);
     const playOffs: Cycle[] = leagueSeasons?.length ? leagueSeasons[0].cycles : [];
     const firstPlayOffItem = playOffs[0] ? playOffs[0] : null;
     const [selectPlayoff, setSelectPlayoff] = useState(firstPlayOffItem?.cycle_name_he);
 
-    // Cycle
+    // Cycle : This actually rounds instead of cycles
     const [openModalCycle, setOpenModalCycle] = useState(false);
     const cycles = firstPlayOffItem?.rounds || [];
     const firstCycle = cycles[0] ? cycles[0] : null;

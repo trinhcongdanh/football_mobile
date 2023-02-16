@@ -6,10 +6,11 @@ import { ListGame } from '@football/app/components/list-game/ListGame';
 import { appIcons } from '@football/app/assets/icons/appIcons';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { useViewModel } from './ListOfGames.viewModel';
+import { IListOfGamesProps } from './ListOfGames.type';
 // import { IListOfGamesProps } from './ListOfGames.type';
 
-export const ListOfGames = (props: any) => {
-    const { t, listGames } = useViewModel({});
+export const ListOfGames = ({ games }: IListOfGamesProps) => {
+    const { t, listGames } = useViewModel({ games });
     return (
         <View>
             <Text style={[appStyles.text_topic, { marginLeft: getSize.m(6) }]}>
@@ -19,19 +20,19 @@ export const ListOfGames = (props: any) => {
                 {listGames.map(item => {
                     return (
                         <ListGame
-                            key={item.id}
-                            logo_home={item.logoHome}
-                            logo_away={item.logoAway}
-                            nameHome={item.nameHome}
-                            nameAway={item.nameAway}
-                            location={item.location}
+                            key={item.game_id}
+                            logo_home={item.team1.logo_url}
+                            logo_away={item.team2.logo_url}
+                            nameHome={item.team1.name_he}
+                            nameAway={item.team2.name_he}
+                            location={item.stadium_he}
                             date={item.date}
-                            result={item.result}
-                            schedule={item.schedule}
+                            result={item.score}
+                            schedule={item.time}
                             // completed={item.completed}
                             color={appColors.gray}
                             icon={appIcons.ic_arrow_left}
-                            details={item.details}
+                            details={item.game_id}
                         />
                     );
                 })}

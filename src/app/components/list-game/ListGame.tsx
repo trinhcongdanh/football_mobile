@@ -6,10 +6,10 @@ import { appStyles } from '@football/app/utils/constants/appStyles';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { appIcons } from '@football/app/assets/icons/appIcons';
 import { getSize } from '@football/app/utils/responsive/scale';
-import { Avatar } from 'react-native-elements';
+import FastImage from 'react-native-fast-image';
+import { useTranslation } from 'react-i18next';
 import { styles } from './ListGame.styles';
 import { IListGameProps } from './ListGame.type';
-import FastImage from 'react-native-fast-image';
 
 export const ListGame = ({
     logo_home,
@@ -26,6 +26,8 @@ export const ListGame = ({
     color,
     handleDetailMatch,
 }: IListGameProps) => {
+    const { t } = useTranslation();
+
     return (
         <View style={styles.main_schedule}>
             {tournament && (
@@ -195,7 +197,7 @@ export const ListGame = ({
                     style={[appStyles.flex_row_center, { flex: 0 }]}
                     onPress={handleDetailMatch}
                 >
-                    <Text style={styles.details}>{details}</Text>
+                    <Text style={styles.details}>{t('match.composition.title')}</Text>
                     <Icon name={icon} size={getSize.m(10)} color={appColors.button_dark_blue} />
                 </TouchableOpacity>
             )}
