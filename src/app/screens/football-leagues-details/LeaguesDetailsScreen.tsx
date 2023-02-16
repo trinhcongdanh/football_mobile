@@ -39,6 +39,7 @@ export const LeaguesDetailsScreen = ({ navigation, route }: ILeaguesDetailsScree
         setOpenModalPlayOff,
         setSelectCycle,
         setSelectPlayoff,
+        setGalleries,
         openModalYear,
         selectYear,
         years,
@@ -49,6 +50,7 @@ export const LeaguesDetailsScreen = ({ navigation, route }: ILeaguesDetailsScree
         selectPlayoff,
         playOffs,
         league,
+        galleries,
     } = useViewModel({
         navigation,
         route,
@@ -270,10 +272,10 @@ export const LeaguesDetailsScreen = ({ navigation, route }: ILeaguesDetailsScree
                                 paddingHorizontal: getSize.m(16),
                             }}
                         >
-                            <SelectedGallery />
+                            <SelectedGallery galleries={galleries || []} />
                         </View>
                         <View style={styles.package}>
-                            <SelectedMagazine />
+                            <SelectedMagazine galleries={galleries || []} />
                         </View>
                     </ScrollView>
                 </SafeAreaView>

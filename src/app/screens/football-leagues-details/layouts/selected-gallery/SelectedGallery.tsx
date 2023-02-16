@@ -1,27 +1,19 @@
-import { View, Text, Image, useWindowDimensions, ScrollView } from 'react-native';
-import React, { useEffect, useRef, useState } from 'react';
-import { appStyles } from '@football/app/utils/constants/appStyles';
-import { getSize } from '@football/app/utils/responsive/scale';
-import { appColors } from '@football/app/utils/constants/appColors';
-import Carousel from 'react-native-reanimated-carousel';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import { appIcons } from '@football/app/assets/icons/appIcons';
-import Icon from 'react-native-vector-icons/AntDesign';
+/* eslint-disable react/no-array-index-key */
+import { View, Image, useWindowDimensions } from 'react-native';
+import React, { useEffect, useState } from 'react';
 import Animated, {
     interpolate,
-    useAnimatedRef,
     useAnimatedScrollHandler,
     useAnimatedStyle,
     useSharedValue,
 } from 'react-native-reanimated';
-import Pagination from '@football/app/components/pagination/Pagination';
+import { Gallery } from '@football/core/models/LeagueSeasonModelResponse';
 import styles from './SelectedGallery.style';
 import { useViewModel } from './SelectedGallery.viewModel';
 import { ISelectedGalleryProps } from './SelectedGallery.type';
-import FastImage from 'react-native-fast-image';
 
-const SelectedGallery = ({ autoPlay, pagination }: ISelectedGalleryProps) => {
-    const { t, activeIndexNumber, setActiveIndexNumber, data } = useViewModel({});
+const SelectedGallery = ({ autoPlay, pagination, galleries }: ISelectedGalleryProps) => {
+    const { t, activeIndexNumber, setActiveIndexNumber, data } = useViewModel({ galleries });
     const { width } = useWindowDimensions();
     const [newData] = useState([{ key: 'spacer-left' }, ...data, { key: 'spacer-right' }]);
 
@@ -34,9 +26,7 @@ const SelectedGallery = ({ autoPlay, pagination }: ISelectedGalleryProps) => {
         },
     });
 
-    useEffect(() => {
-        console.log('');
-    }, [x.value]);
+    useEffect(() => {}, [x.value]);
 
     return (
         <View>
@@ -49,7 +39,8 @@ const SelectedGallery = ({ autoPlay, pagination }: ISelectedGalleryProps) => {
                 decelerationRate="fast"
                 onScroll={onScroll}
             >
-                {newData.map((item: any, index: any) => {
+                {newData.map((item: Gallery, index: number) => {
+                    // eslint-disable-next-line react-hooks/rules-of-hooks
                     const style = useAnimatedStyle(() => {
                         const scale = interpolate(
                             x.value,
@@ -60,13 +51,13 @@ const SelectedGallery = ({ autoPlay, pagination }: ISelectedGalleryProps) => {
                             transform: [{ scale }],
                         };
                     });
-                    if (!item.image) {
+                    if (!item.image_url) {
                         return <View style={{ width: SPACER }} key={index} />;
                     }
                     return (
                         <View style={{ width: SIZE }} key={index}>
                             <Animated.View style={[styles.imageContainer, style]}>
-                                <Image source={item.image} style={styles.image} />
+                                <Image source={{ uri: item.image_url }} style={styles.image} />
                             </Animated.View>
                         </View>
                     );

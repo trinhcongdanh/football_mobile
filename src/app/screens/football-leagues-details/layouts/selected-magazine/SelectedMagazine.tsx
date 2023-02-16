@@ -3,16 +3,17 @@ import React from 'react';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import { appIcons } from '@football/app/assets/icons/appIcons';
 import { getSize } from '@football/app/utils/responsive/scale';
-import Carousel from 'react-native-reanimated-carousel';
 import { appColors } from '@football/app/utils/constants/appColors';
 import Icon from 'react-native-vector-icons/Feather';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { Gallery } from '@football/core/models/LeagueSeasonModelResponse';
 import styles from './SelectedMagazine.style';
 import { useViewModel } from './SelectedMagazine.viewModel';
 import { ISelectedMagazineProps } from './SelectedMagazine.type';
 
-export const SelectedMagazine = ({}: ISelectedMagazineProps) => {
-    const { t, data, width, activeIndexNumber, setActiveIndexNumber, dots } = useViewModel({});
+export const SelectedMagazine = ({ galleries }: ISelectedMagazineProps) => {
+    const { t, data, width, activeIndexNumber, setActiveIndexNumber, dots } = useViewModel({
+        galleries,
+    });
 
     return (
         <View>
@@ -32,18 +33,18 @@ export const SelectedMagazine = ({}: ISelectedMagazineProps) => {
                     showsHorizontalScrollIndicator={false}
                     directionalLockEnabled
                     onScroll={e => {
-                        let slide = Math.round(
+                        const slide = Math.round(
                             e.nativeEvent.contentOffset.x / e.nativeEvent.layoutMeasurement.width
                         );
                         if (slide !== activeIndexNumber) {
-                            console.log(slide);
-                            setActiveIndexNumber(slide); //here we will set our active index num
+                            setActiveIndexNumber(slide); // here we will set our active index num
                         }
                     }}
                 >
-                    {data.map((item, index) => {
+                    {data.map((item: Gallery, index: number) => {
                         return (
                             <View
+                                // eslint-disable-next-line react/no-array-index-key
                                 key={index}
                                 style={{
                                     flexDirection: 'row',
@@ -52,13 +53,13 @@ export const SelectedMagazine = ({}: ISelectedMagazineProps) => {
                                 }}
                             >
                                 <TouchableOpacity activeOpacity={0.9}>
-                                    <Image source={item.image} style={[styles.image]} />
+                                    <Image source={{ uri: item.image_url }} style={styles.image} />
                                     <View style={styles.date}>
-                                        <Text style={styles.text_date}>{item.date}</Text>
+                                        <Text style={styles.text_date}>{item.length}</Text>
                                     </View>
                                     <View style={styles.content}>
                                         <Text style={styles.text_content}>
-                                            {item.content}{' '}
+                                            {item.caption_he}{' '}
                                             <Icon
                                                 name={appIcons.ic_arrow_left}
                                                 size={getSize.m(12)}
@@ -75,6 +76,7 @@ export const SelectedMagazine = ({}: ISelectedMagazineProps) => {
                 <View style={styles.dotContainer}>
                     {dots.map((_, index) => {
                         return (
+                            // eslint-disable-next-line react/no-array-index-key
                             <View key={index}>
                                 <View
                                     style={[
@@ -90,7 +92,7 @@ export const SelectedMagazine = ({}: ISelectedMagazineProps) => {
                                                     : appColors.soft_grey,
                                         },
                                     ]}
-                                ></View>
+                                />
                             </View>
                         );
                     })}

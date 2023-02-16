@@ -6,7 +6,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { axiosClient } from '@football/core/api/configs/axiosClient';
 import { BASE_URL, DATA_SOURCE, DB } from '@football/core/api/configs/config';
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
-import { LeagueSeasonModelResponse, Cycle } from '@football/core/models/LeagueSeasonModelResponse';
+import {
+    LeagueSeasonModelResponse,
+    Cycle,
+    Gallery,
+} from '@football/core/models/LeagueSeasonModelResponse';
 import { setLeagueSeasons } from 'src/store/league/League.slice';
 import { Alert } from 'react-native';
 import { RootState } from 'src/store/store';
@@ -96,6 +100,11 @@ export const useViewModel = ({ navigation, route }: ILeaguesDetailsScreenProps) 
     const firstCycle = cycles[0] ? cycles[0] : null;
     const [selectCycle, setSelectCycle] = useState(firstCycle);
 
+    // Galerry
+    // NOTE need to update leagueSeason after dropdown changed
+    // const galleries = leagueSeasons[0].gallery;
+    const [galleries, setGalleries] = useState<Gallery[]>(leagueSeasons[0].gallery);
+
     const handleCloseModal = () => {
         setOpenModalYear(false);
         setOpenModalCycle(false);
@@ -118,6 +127,7 @@ export const useViewModel = ({ navigation, route }: ILeaguesDetailsScreenProps) 
         setOpenModalPlayOff,
         setSelectCycle,
         setSelectPlayoff,
+        setGalleries,
         openModalYear,
         selectYear,
         years,
@@ -128,5 +138,6 @@ export const useViewModel = ({ navigation, route }: ILeaguesDetailsScreenProps) 
         selectPlayoff,
         playOffs,
         league,
+        galleries,
     };
 };
