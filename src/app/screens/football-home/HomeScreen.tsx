@@ -13,6 +13,17 @@ import { appIcons } from '@football/app/assets/icons/appIcons';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { Item1 } from '@football/app/screens/football-home/layouts/Item1/Item1';
 import { Item2 } from '@football/app/screens/football-home/layouts/Item2/Item2';
+import { Item3 } from '@football/app/screens/football-home/layouts/Item3/Item3';
+import { Item4 } from '@football/app/screens/football-home/layouts/Item4/Item4';
+import { Item5 } from '@football/app/screens/football-home/layouts/Item5/Item5';
+import { Item6 } from '@football/app/screens/football-home/layouts/Item6/Item6';
+import { Item7 } from '@football/app/screens/football-home/layouts/Item7/Item7';
+import { Item8 } from '@football/app/screens/football-home/layouts/Item8/Item8';
+import { Item9 } from '@football/app/screens/football-home/layouts/Item9/Item9';
+import { Item10 } from '@football/app/screens/football-home/layouts/Item10/Item10';
+import { Item11 } from '@football/app/screens/football-home/layouts/Item11/Item11';
+import { Item12 } from '@football/app/screens/football-home/layouts/Item12/Item12';
+import { Item13 } from '@football/app/screens/football-home/layouts/Item13/Item13';
 
 export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
     const { onGoBack, t, data_header } = useViewModel({
@@ -20,7 +31,7 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
         route,
     });
     return (
-        <View style={appStyles.flex}>
+        <View style={[appStyles.flex, { backgroundColor: appColors.white }]}>
             {/* Header */}
             <ScrollView>
                 <ImageBackground
@@ -144,6 +155,28 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                 <Item1 />
                 {/* Item2 */}
                 <Item2 />
+                {/* Item3 */}
+                <Item3 />
+                {/* Item4 */}
+                <Item4 />
+                {/* Item5 */}
+                <Item5 />
+                {/* Item6 */}
+                <Item6 />
+                {/* Item7 */}
+                <Item7 />
+                {/* Item8 */}
+                <Item8 />
+                {/* Item9 */}
+                <Item9 />
+                {/* Item10 */}
+                <Item10 />
+                {/* Item11 */}
+                <Item11 />
+                {/* Item12 */}
+                <Item12 />
+                {/* Item13 */}
+                <Item13 />
             </ScrollView>
         </View>
     );

@@ -13,6 +13,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import {
     GobletScreen,
     GroupPageScreen,
+    HomeScreen,
     LeaguesScreen,
     PlayGroundScreen,
     TeamScreen,
@@ -27,7 +28,7 @@ const renderIcon = (routeName: string) => {
     let icon: any = '';
     let icon_outline: any = '';
     switch (routeName) {
-        case ScreenName.GroupPagePage:
+        case ScreenName.HomePage:
             icon = AppImages.img_home;
             icon_outline = AppImages.img_home_outline;
             break;
@@ -68,7 +69,7 @@ const renderIcon = (routeName: string) => {
 const renderLabel = (routeName: string) => {
     let label = '';
     switch (routeName) {
-        case ScreenName.GroupPagePage:
+        case ScreenName.HomePage:
             label = 'בית';
             break;
         case ScreenName.LeaguesPage:
@@ -168,11 +169,11 @@ export const BottomTabStack = () => {
             />
             <Bottom.Screen
                 options={{
-                    tabBarIcon: renderIcon(ScreenName.GroupPagePage),
-                    tabBarLabel: renderLabel(ScreenName.GroupPagePage),
+                    tabBarIcon: renderIcon(ScreenName.HomePage),
+                    tabBarLabel: renderLabel(ScreenName.HomePage),
                 }}
-                name={ScreenName.GroupPagePage}
-                component={GroupPageScreen}
+                name={ScreenName.HomePage}
+                component={HomeScreen}
             />
         </Bottom.Navigator>
     );

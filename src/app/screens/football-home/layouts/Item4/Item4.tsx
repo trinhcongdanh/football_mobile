@@ -1,6 +1,6 @@
 import { appIcons } from '@football/app/assets/icons/appIcons';
 import { AppImages } from '@football/app/assets/images';
-import styles from '@football/app/screens/football-home/layouts/Item3/Item3.style';
+import styles from '@football/app/screens/football-home/layouts/Item4/Item4.style';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import { getSize } from '@football/app/utils/responsive/scale';
 import React from 'react';
@@ -8,12 +8,12 @@ import { ImageBackground, Text, View, TouchableOpacity, ScrollView } from 'react
 import IconEntypo from 'react-native-vector-icons/Entypo';
 import FastImage from 'react-native-fast-image';
 import LinearGradient from 'react-native-linear-gradient';
-import { useViewModel } from '@football/app/screens/football-home/layouts/Item3/Item3.viewModel';
+import { useViewModel } from '@football/app/screens/football-home/layouts/Item4/Item4.viewModel';
 import { appColors } from '@football/app/utils/constants/appColors';
-import { GameTable1 } from '@football/app/components/game-table-1/GameTable1';
+import { GameTable2 } from '@football/app/components/game-table-2/GameTable2';
 
-export const Item3 = () => {
-    const { t, pages, activeIndexNumber, setActiveIndexNumber } = useViewModel({});
+export const Item4 = () => {
+    const { t, pages, activeIndexNumber, setActiveIndexNumber, datas } = useViewModel({});
     return (
         <ImageBackground
             source={AppImages.img_background_home_3}
@@ -84,7 +84,7 @@ export const Item3 = () => {
                                 }}
                                 resizeMode={FastImage.resizeMode.contain}
                             />
-                            <Text style={styles.title_statistic}>משחקים בעונה 21/22</Text>
+                            <Text style={styles.title_statistic}>{t('home_page.game_season')}</Text>
                         </View>
                         <TouchableOpacity style={appStyles.flex_row_align}>
                             <Text style={styles.text_see_all}>{t('home_page.see_all')}</Text>
@@ -95,19 +95,23 @@ export const Item3 = () => {
                             />
                         </TouchableOpacity>
                     </View>
-                    <GameTable1
-                        date="14.09.22"
-                        name_away="הפועל ב״ש"
-                        name_home="הפועל ב״ש"
-                        result="3 : 1"
-                        schedule=":"
-                        avt_away={AppImages.img_club}
-                        avt_home={AppImages.img_club}
-                        clock="45 דק׳"
-                        ticket_red="1"
-                        ticket_yellow="2"
-                        score="3"
-                    />
+                    {datas.map((item, index) => {
+                        return (
+                            <GameTable2
+                                key={item.id}
+                                date={item.date}
+                                name_away={item.name_away}
+                                name_home={item.name_home}
+                                result={item.result}
+                                schedule={item.schedule}
+                                avt_away={AppImages.img_club}
+                                avt_home={AppImages.img_club}
+                                clock={item.clock}
+                                ticket={item.ticket}
+                                score={item.score}
+                            />
+                        );
+                    })}
                 </View>
                 <View
                     style={[
@@ -148,7 +152,11 @@ export const Item3 = () => {
                         </TouchableOpacity>
                     </View>
                     <View>
-                        <View style={{ marginTop: getSize.m(20) }}>
+                        <View
+                            style={{
+                                marginTop: getSize.m(20),
+                            }}
+                        >
                             <View style={{ marginLeft: getSize.m(16) }}>
                                 <Text style={styles.label}> {t('home_page.gates')}</Text>
                             </View>
@@ -163,21 +171,26 @@ export const Item3 = () => {
                             >
                                 <View style={appStyles.align_justify}>
                                     <Text style={styles.content}>3</Text>
-                                    <Text style={styles.title}>ליגת העל</Text>
+                                    <Text style={styles.title}>{t('home_page.league')}</Text>
                                 </View>
                                 <View style={appStyles.align_justify}>
                                     <Text>-</Text>
-                                    <Text style={styles.title}>גביע המדינה</Text>
+                                    <Text style={styles.title}>{t('home_page.state_cup')}</Text>
                                 </View>
                                 <View style={appStyles.align_justify}>
                                     <Text style={styles.content}>2</Text>
-                                    <Text style={styles.title}>גביע הטוטו</Text>
+                                    <Text style={styles.title}>{t('home_page.toto_cup')}</Text>
+                                </View>
+                                <View style={appStyles.align_justify}>
+                                    <Text style={styles.content}>5</Text>
+                                    <Text style={styles.title}>{t('home_page.total')}</Text>
                                 </View>
                             </View>
                         </View>
+                        <View style={styles.line} />
                         <View style={{ marginTop: getSize.m(20) }}>
                             <View style={{ marginLeft: getSize.m(16) }}>
-                                <Text style={styles.label}> {t('home_page.tickets')}</Text>
+                                <Text style={styles.label}> {t('home_page.yellow_card')}</Text>
                             </View>
                             <View
                                 style={[
@@ -189,34 +202,121 @@ export const Item3 = () => {
                                 ]}
                             >
                                 <View style={appStyles.align_justify}>
-                                    <FastImage
-                                        source={AppImages.img_ticket_white_1}
-                                        style={{ width: getSize.m(24), height: getSize.m(27) }}
-                                        resizeMode={FastImage.resizeMode.contain}
-                                    />
-                                    <Text style={styles.title}>גביע המדינה</Text>
+                                    <View style={{ marginBottom: getSize.m(3) }}>
+                                        <FastImage
+                                            source={AppImages.img_ticket_yellow}
+                                            resizeMode={FastImage.resizeMode.contain}
+                                            style={styles.ticket}
+                                        />
+                                        <Text style={styles.content_ticket}>3</Text>
+                                    </View>
+                                    <Text style={styles.title}>{t('home_page.league')}</Text>
                                 </View>
                                 <View style={appStyles.align_justify}>
-                                    <View style={appStyles.flex_row_align}>
-                                        <Text style={styles.content_ticket}>x2</Text>
+                                    <View style={{ marginBottom: getSize.m(3) }}>
                                         <FastImage
-                                            source={AppImages.img_ticket_red_1}
-                                            style={{ width: getSize.m(24), height: getSize.m(27) }}
+                                            source={AppImages.img_ticket_yellow}
                                             resizeMode={FastImage.resizeMode.contain}
+                                            style={styles.ticket}
                                         />
+                                        <Text style={styles.content_ticket}>3</Text>
                                     </View>
-                                    <Text style={styles.title}>גביע המדינה</Text>
+                                    <Text style={styles.title}>{t('home_page.state_cup')}</Text>
                                 </View>
                                 <View style={appStyles.align_justify}>
-                                    <View style={appStyles.flex_row_align}>
-                                        <Text style={styles.content_ticket}>x2</Text>
+                                    <View style={{ marginBottom: getSize.m(3) }}>
                                         <FastImage
-                                            source={AppImages.img_ticket_yellow_1}
-                                            style={{ width: getSize.m(24), height: getSize.m(27) }}
+                                            source={AppImages.img_ticket_yellow}
                                             resizeMode={FastImage.resizeMode.contain}
+                                            style={styles.ticket}
                                         />
+                                        <Text style={styles.content_ticket}>3</Text>
                                     </View>
-                                    <Text style={styles.title}>גביע הטוטו</Text>
+                                    <Text style={styles.title}>{t('home_page.toto_cup')}</Text>
+                                </View>
+                                <View style={appStyles.align_justify}>
+                                    <Text style={styles.content}>9</Text>
+                                    <Text style={styles.title}>{t('home_page.total')}</Text>
+                                </View>
+                            </View>
+                        </View>
+                        <View style={styles.line} />
+                        <View style={{ marginTop: getSize.m(20) }}>
+                            <View style={{ marginLeft: getSize.m(16) }}>
+                                <Text style={styles.label}> {t('home_page.red_card')}</Text>
+                            </View>
+                            <View
+                                style={[
+                                    appStyles.flex_row_space_center,
+                                    {
+                                        marginHorizontal: getSize.m(37),
+                                        marginTop: getSize.m(20),
+                                    },
+                                ]}
+                            >
+                                <View style={appStyles.align_justify}>
+                                    <View style={{ marginBottom: getSize.m(3) }}>
+                                        <FastImage
+                                            source={AppImages.img_ticket_red}
+                                            resizeMode={FastImage.resizeMode.contain}
+                                            style={styles.ticket}
+                                        />
+                                        <Text
+                                            style={[
+                                                styles.content_ticket,
+                                                {
+                                                    color: appColors.white,
+                                                },
+                                            ]}
+                                        >
+                                            3
+                                        </Text>
+                                    </View>
+                                    <Text style={styles.title}>{t('home_page.league')}</Text>
+                                </View>
+                                <View style={appStyles.align_justify}>
+                                    <View style={{ marginBottom: getSize.m(3) }}>
+                                        <FastImage
+                                            source={AppImages.img_ticket_red}
+                                            resizeMode={FastImage.resizeMode.contain}
+                                            style={styles.ticket}
+                                        />
+                                        <Text
+                                            style={[
+                                                styles.content_ticket,
+                                                {
+                                                    color: appColors.white,
+                                                },
+                                            ]}
+                                        >
+                                            3
+                                        </Text>
+                                    </View>
+                                    <Text style={styles.title}>{t('home_page.state_cup')}</Text>
+                                </View>
+                                <View style={appStyles.align_justify}>
+                                    <View style={{ marginBottom: getSize.m(3) }}>
+                                        <FastImage
+                                            source={AppImages.img_ticket_red}
+                                            resizeMode={FastImage.resizeMode.contain}
+                                            style={styles.ticket}
+                                        />
+                                        <Text
+                                            style={[
+                                                styles.content_ticket,
+                                                {
+                                                    color: appColors.white,
+                                                },
+                                            ]}
+                                        >
+                                            3
+                                        </Text>
+                                    </View>
+                                    <Text style={styles.title}>{t('home_page.toto_cup')}</Text>
+                                </View>
+                                <View style={appStyles.align_justify}>
+                                    <Text style={styles.content}>9</Text>
+                                    <Text style={styles.title}>{t('home_page.total')}</Text>
                                 </View>
                             </View>
                         </View>
