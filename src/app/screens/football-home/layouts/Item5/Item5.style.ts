@@ -28,10 +28,10 @@ const styles = StyleSheet.create({
         fontFamily: AppFonts.bold,
         fontSize: getSize.m(20),
         lineHeight: getSize.m(26),
-        color: appColors.blue_black,
+        color: appColors.white,
     },
     stats_content: {
-        backgroundColor: appColors.gray,
+        backgroundColor: appColors.white,
         width: getSize.m(303),
         height: getSize.m(389),
         borderRadius: getSize.m(15),
@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
     label: {
         fontFamily: AppFonts.bold,
         fontSize: getSize.m(13),
-        color: appColors.light_gray,
+        color: appColors.text_dark_blue,
         lineHeight: getSize.m(17),
     },
 
@@ -111,16 +111,54 @@ const styles = StyleSheet.create({
         fontSize: getSize.m(12),
         fontFamily: AppFonts.medium,
         lineHeight: getSize.m(16),
-        color: appColors.light_gray,
+        color: appColors.text_dark_blue,
         marginTop: getSize.m(4),
     },
 
     content_ticket: {
-        fontSize: getSize.m(13),
-        fontFamily: AppFonts.bold,
+        fontSize: getSize.m(14),
+        fontFamily: AppFonts.semibold,
         color: appColors.text_dark_blue,
         lineHeight: getSize.m(17),
-        marginRight: getSize.m(4),
+    },
+
+    ticket: {
+        width: getSize.m(15),
+        height: getSize.m(21),
+        position: 'absolute',
+        left: getSize.m(-2.5),
+        top: getSize.m(-2.5),
+    },
+
+    line: {
+        height: getSize.m(1),
+        backgroundColor: appColors.separator,
+        marginVertical: getSize.m(14),
+        marginHorizontal: getSize.m(16),
+    },
+
+    statistics_header: {
+        color: appColors.text_dark_blue,
+        textAlign: 'center',
+        fontSize: getSize.m(12),
+        lineHeight: getSize.m(14),
+        fontFamily: AppFonts.regular,
+    },
+
+    statistics_content: {
+        textAlign: 'center',
+        fontFamily: AppFonts.bold,
+        fontSize: getSize.m(14),
+        color: appColors.blue_black,
+        lineHeight: getSize.m(16),
+        overflow: 'hidden',
+    },
+    img_ticket: {
+        width: getSize.m(14),
+        height: getSize.m(21),
+        position: 'absolute',
+        top: getSize.m(-3),
+        left: getSize.m(18),
     },
 });
 
