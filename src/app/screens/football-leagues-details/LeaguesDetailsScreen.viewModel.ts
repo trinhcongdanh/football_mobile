@@ -1,22 +1,19 @@
-import { LeagueModel, LeagueOneModelResponse } from '@football/core/models/LeagueModelResponse';
-import { isEmpty } from 'lodash';
-import { useTranslation } from 'react-i18next';
-import { useState, useCallback } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
 import { axiosClient } from '@football/core/api/configs/axiosClient';
 import { BASE_URL, DATA_SOURCE, DB } from '@football/core/api/configs/config';
-import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
+import { LeagueModel, LeagueOneModelResponse } from '@football/core/models/LeagueModelResponse';
 import {
-    LeagueSeasonModelResponse,
     Cycle,
     Gallery,
     Highlights,
-    LeagueSeasonModel,
+    LeagueSeasonModelResponse,
 } from '@football/core/models/LeagueSeasonModelResponse';
-import { setLeagueSeasons } from 'src/store/league/League.slice';
+import { useCallback, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Alert } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
+import { setLeagueSeasons } from 'src/store/league/League.slice';
 import { RootState } from 'src/store/store';
-import { useMount } from '@football/app/utils/hooks/useMount';
 import { ILeaguesDetailsScreenProps } from './LeaguesDetailsScreen.type';
 
 export const useViewModel = ({ navigation, route }: ILeaguesDetailsScreenProps) => {
@@ -51,10 +48,12 @@ export const useViewModel = ({ navigation, route }: ILeaguesDetailsScreenProps) 
     const leagueSeasons = useSelector((state: RootState) => state.leagues.leagueSeasons);
     // if (!leagueSeasons.length) return;
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    const [activeLeagueSeason, setActiveLeagueSeason] = useState<LeagueSeasonModel>(
-        leagueSeasons[0]
+    // const [activeLeagueSeason, setActiveLeagueSeason] = useState<LeagueSeasonModel>(
+    //     leagueSeasons[0]
+    // );
+    const [selectYear, setSelectYear] = useState(
+        leagueSeasons?.length ? leagueSeasons[0].name : undefined
     );
-    const [selectYear, setSelectYear] = useState(leagueSeasons?.length ? leagueSeasons[0].name : undefined);
     const [years, setYears] = useState<any[]>(
         (leagueSeasons?.length ? leagueSeasons : []).map((season, index) => {
             return {
@@ -122,12 +121,26 @@ export const useViewModel = ({ navigation, route }: ILeaguesDetailsScreenProps) 
         setOpenModalPlayOff(false);
     };
 
-    useMount(() => {
-        console.log('run ');
-        
+    // useMount(() => {
+    //     console.log('run ', route.params);
+
+    //     getLeagueSeasonsData();
+    //     getLeagueById();
+    // });
+
+    useEffect(() => {
+        console.log('run ', route.params);
+
         getLeagueSeasonsData();
         getLeagueById();
-    });
+        return () => {
+            dispatch(setLeagueSeasons([]));
+        };
+    }, []);
+
+    // useEffect(() => {
+    //     setSelectYear(leagueSeasons[0].name)
+    // }, [leagueSeasons]);
 
     return {
         t,
@@ -154,5 +167,6 @@ export const useViewModel = ({ navigation, route }: ILeaguesDetailsScreenProps) 
         league,
         galleries,
         highlights,
+        leagueSeasons,
     };
 };

@@ -51,10 +51,13 @@ export const LeaguesDetailsScreen = ({ navigation, route }: ILeaguesDetailsScree
         league,
         galleries,
         highlights,
+        leagueSeasons,
     } = useViewModel({
         navigation,
         route,
     });
+
+    console.log(leagueSeasons);
 
     return (
         <View style={appStyles.flex}>
@@ -112,7 +115,9 @@ export const LeaguesDetailsScreen = ({ navigation, route }: ILeaguesDetailsScree
                                         }}
                                         style={styles.calender}
                                     >
-                                        <Text style={styles.text_calender}>{selectYear}</Text>
+                                        <Text style={styles.text_calender}>
+                                            {leagueSeasons.length ? leagueSeasons[0].name : ''}
+                                        </Text>
                                         <Icon
                                             name={appIcons.ic_chevron_down}
                                             size={getSize.m(14)}
