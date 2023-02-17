@@ -11,6 +11,6 @@ export type IListGameProps = {
     icon?: any;
     tournament?: string;
     color?: any;
-    label?: boolean;
+    isLive?: boolean;
     handleDetailMatch?: () => void;
 };
