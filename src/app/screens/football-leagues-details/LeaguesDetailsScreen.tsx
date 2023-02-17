@@ -272,10 +272,10 @@ export const LeaguesDetailsScreen = ({ navigation, route }: ILeaguesDetailsScree
                                 paddingHorizontal: getSize.m(16),
                             }}
                         >
-                            <SelectedGallery galleries={galleries || []} />
+                            <SelectedGallery galleries={galleries || null} />
                         </View>
                         <View style={styles.package}>
-                            <SelectedMagazine galleries={galleries || []} />
+                            <SelectedMagazine galleries={galleries || null} />
                         </View>
                     </ScrollView>
                 </SafeAreaView>

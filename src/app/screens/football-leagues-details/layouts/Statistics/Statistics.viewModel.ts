@@ -8,8 +8,8 @@ export const useViewModel = ({ statistics }: IStatisticsProps) => {
     const { navigate, goBack } = useAppNavigator();
     const { t } = useTranslation();
     const [onSelect, setOnSelect] = useState(0);
-    const externalGames = statistics.external_games;
-    const homeGames = statistics.home_games;
+    const externalGames = statistics?.external_games || [];
+    const homeGames = statistics?.home_games || [];
 
     const handleMoreStatistics = () => {
         navigate(ScreenName.StatisticsLeaguesPage);

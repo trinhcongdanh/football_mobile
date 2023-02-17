@@ -1,4 +1,3 @@
-import { Highlights } from './../../../core/models/LeagueSeasonModelResponse';
 import { LeagueModel, LeagueOneModelResponse } from '@football/core/models/LeagueModelResponse';
 import { isEmpty } from 'lodash';
 import { useTranslation } from 'react-i18next';
@@ -11,6 +10,8 @@ import {
     LeagueSeasonModelResponse,
     Cycle,
     Gallery,
+    Highlights,
+    LeagueSeasonModel,
 } from '@football/core/models/LeagueSeasonModelResponse';
 import { setLeagueSeasons } from 'src/store/league/League.slice';
 import { Alert } from 'react-native';
@@ -30,26 +31,30 @@ export const useViewModel = ({ navigation, route }: ILeaguesDetailsScreenProps) 
 
     // Game season
     const [openModalYear, setOpenModalYear] = useState(false);
-    const getLeagueSeasonsData = useCallback(async () => {
+    const getLeagueSeasonsData = async () => {
         try {
             const { data }: LeagueSeasonModelResponse = await axiosClient.post(`${BASE_URL}/find`, {
                 dataSource: DATA_SOURCE,
                 database: DB,
                 collection: 'league_season',
+                filter: {
+                    league_id: {
+                        $eq: leagueId,
+                    },
+                },
             });
-
-            if (!isEmpty(data.documents)) {
-                dispatch(setLeagueSeasons(data.documents));
-            }
+            dispatch(setLeagueSeasons(data.documents));
         } catch (error: any) {
             Alert.alert(error);
         }
-    }, []);
+    };
     const leagueSeasons = useSelector((state: RootState) => state.leagues.leagueSeasons);
-
-    const [selectYear, setSelectYear] = useState(
-        leagueSeasons?.length ? leagueSeasons[0].name : undefined
+    // if (!leagueSeasons.length) return;
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const [activeLeagueSeason, setActiveLeagueSeason] = useState<LeagueSeasonModel>(
+        leagueSeasons[0]
     );
+    const [selectYear, setSelectYear] = useState(leagueSeasons?.length ? leagueSeasons[0].name : undefined);
     const [years, setYears] = useState<any[]>(
         (leagueSeasons?.length ? leagueSeasons : []).map((season, index) => {
             return {
@@ -103,12 +108,13 @@ export const useViewModel = ({ navigation, route }: ILeaguesDetailsScreenProps) 
 
     // Galerry
     // NOTE need to update leagueSeason after dropdown changed
-    const [galleries, setGalleries] = useState<Gallery[]>(leagueSeasons[0].gallery);
+    const currentGalleries = leagueSeasons?.length ? leagueSeasons[0].gallery : [];
+    const [galleries, setGalleries] = useState<Gallery[]>(currentGalleries);
 
     // Hightlights
     // NOTE need to update leagueSeason after dropdown changed
-    const [highlights, setHightlights] = useState<Highlights>(leagueSeasons[0].highlights);
-
+    const currentHighlights = leagueSeasons?.length ? leagueSeasons[0].highlights : null;
+    const [highlights, setHightlights] = useState<Highlights>(currentHighlights);
 
     const handleCloseModal = () => {
         setOpenModalYear(false);
@@ -117,6 +123,8 @@ export const useViewModel = ({ navigation, route }: ILeaguesDetailsScreenProps) 
     };
 
     useMount(() => {
+        console.log('run ');
+        
         getLeagueSeasonsData();
         getLeagueById();
     });
