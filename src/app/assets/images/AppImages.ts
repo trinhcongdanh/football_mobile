@@ -96,4 +96,6 @@ export const AppImages = {
     img_background_home_1: require('./background_home_1.png'),
     img_angle_down: require('./angle-down.png'),
     img_chess_queen: require('./chess-queen.png'),
+    img_ticket_white: require('./ticket_white.png'),
+    img_background_home_2: require('./background_home_2.png'),
 };

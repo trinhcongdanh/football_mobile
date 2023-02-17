@@ -20,8 +20,5 @@ export const useViewModel = ({ navigation, route }: IHomeScreenProps) => {
         { id: 5, name: 'רועי אזוט', avt: AppImages.img_avt_player },
     ];
 
-    const pages = Array(2).fill('');
-    const [activeIndexNumber, setActiveIndexNumber] = useState(Number);
-
-    return { t, onGoBack, data_header, pages, activeIndexNumber, setActiveIndexNumber };
+    return { t, onGoBack, data_header };
 };

@@ -1,36 +1,21 @@
 import React from 'react';
-import {
-    View,
-    ImageBackground,
-    StatusBar,
-    SafeAreaView,
-    Text,
-    ScrollView,
-    Image,
-    TouchableOpacity,
-} from 'react-native';
+import { View, ImageBackground, StatusBar, SafeAreaView, Text, ScrollView } from 'react-native';
 import { useViewModel } from '@football/app/screens/football-home/HomeScreen.viewModel';
 import { IHomeScreenProps } from '@football/app/screens/football-home/HomeScreen.type';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import { AppImages } from '@football/app/assets/images';
 import { getSize } from '@football/app/utils/responsive/scale';
 import IconAntDesign from 'react-native-vector-icons/AntDesign';
-import IconEntypo from 'react-native-vector-icons/Entypo';
 import LinearGradient from 'react-native-linear-gradient';
 import styles from '@football/app/screens/football-home/HomeScreen.styles';
 import FastImage from 'react-native-fast-image';
 import { appIcons } from '@football/app/assets/icons/appIcons';
 import { appColors } from '@football/app/utils/constants/appColors';
+import { Item1 } from '@football/app/screens/football-home/layouts/Item1/Item1';
+import { Item2 } from '@football/app/screens/football-home/layouts/Item2/Item2';
 
 export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
-    const {
-        onGoBack,
-        t,
-        data_header,
-        pages,
-        activeIndexNumber,
-        setActiveIndexNumber,
-    } = useViewModel({
+    const { onGoBack, t, data_header } = useViewModel({
         navigation,
         route,
     });
@@ -156,122 +141,9 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                     </View>
                 </View>
                 {/* Player Stats */}
-                <ImageBackground
-                    source={AppImages.img_background_home_1}
-                    style={[appStyles.flex, { height: getSize.m(527), marginTop: getSize.m(46) }]}
-                >
-                    <View style={appStyles.align_justify}>
-                        <View style={styles.logo_team}>
-                            <FastImage
-                                source={AppImages.img_israel}
-                                style={{
-                                    width: getSize.m(58),
-                                    height: getSize.m(58),
-                                    borderRadius: getSize.m(62),
-                                }}
-                            />
-                        </View>
-                        <View style={[appStyles.flex_row_align, { marginTop: getSize.m(14) }]}>
-                            <Text style={styles.text_details}>הפועל באר שבע בוגרים</Text>
-                            <LinearGradient
-                                colors={['rgba(255, 43, 94, 1)', 'rgba(204, 10, 45, 1)']}
-                                style={styles.icon_arrow_left}
-                            >
-                                <FastImage
-                                    source={AppImages.img_angle_down}
-                                    style={{ width: getSize.m(9), height: getSize.m(12) }}
-                                    resizeMode={FastImage.resizeMode.contain}
-                                />
-                            </LinearGradient>
-                        </View>
-                    </View>
-                    <ScrollView
-                        horizontal
-                        pagingEnabled
-                        showsHorizontalScrollIndicator={false}
-                        onScroll={e => {
-                            let slide = Math.round(
-                                e.nativeEvent.contentOffset.x /
-                                    e.nativeEvent.layoutMeasurement.width
-                            );
-                            if (slide !== activeIndexNumber) {
-                                setActiveIndexNumber(slide); //here we will set our active index num
-                            }
-                        }}
-                    >
-                        {pages.map((_, index) => {
-                            return (
-                                <View
-                                    key={index}
-                                    style={[
-                                        styles.stats_content,
-                                        {
-                                            marginLeft: index === 0 ? getSize.m(25) : getSize.m(8),
-                                            marginRight:
-                                                index === pages.length - 1
-                                                    ? getSize.m(25)
-                                                    : getSize.m(8),
-                                        },
-                                    ]}
-                                >
-                                    <View
-                                        style={[
-                                            appStyles.flex_row_space_center,
-                                            {
-                                                paddingLeft: getSize.m(16),
-                                                paddingRight: getSize.m(10),
-                                            },
-                                        ]}
-                                    >
-                                        <View style={appStyles.flex_row_align}>
-                                            <FastImage
-                                                source={AppImages.img_chess_queen}
-                                                style={{
-                                                    width: getSize.m(14),
-                                                    height: getSize.m(14),
-                                                }}
-                                                resizeMode={FastImage.resizeMode.contain}
-                                            />
-                                            <Text style={styles.title_statistic}>
-                                                {t('home_page.statistics')}
-                                            </Text>
-                                        </View>
-                                        <View style={appStyles.flex_row_align}>
-                                            <Text>{t('home_page.see_all')}</Text>
-                                            <IconEntypo
-                                                name={appIcons.ic_arrow_left}
-                                                size={getSize.m(13)}
-                                            />
-                                        </View>
-                                    </View>
-                                </View>
-                            );
-                        })}
-                    </ScrollView>
-                    <View style={styles.dotContainer}>
-                        {pages.map((_, index) => {
-                            return (
-                                <View key={index}>
-                                    <View
-                                        style={[
-                                            styles.dot,
-                                            {
-                                                width:
-                                                    index === activeIndexNumber
-                                                        ? getSize.m(18)
-                                                        : getSize.m(5),
-                                                backgroundColor:
-                                                    index === activeIndexNumber
-                                                        ? appColors.white
-                                                        : appColors.light_gray,
-                                            },
-                                        ]}
-                                    ></View>
-                                </View>
-                            );
-                        })}
-                    </View>
-                </ImageBackground>
+                <Item1 />
+                {/* Item2 */}
+                <Item2 />
             </ScrollView>
         </View>
     );

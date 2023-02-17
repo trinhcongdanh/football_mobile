@@ -6,7 +6,9 @@ import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
     image: {
         height: getSize.m(280),
+        width: getSize.m(194),
         borderRadius: getSize.m(18),
+        resizeMode: 'contain',
     },
     date: {
         backgroundColor: 'rgba(0, 0, 0, 0.3)',

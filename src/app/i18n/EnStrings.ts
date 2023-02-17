@@ -577,6 +577,14 @@ const resources = {
             home_page: {
                 statistics: 'סטטיסטיקות',
                 see_all: 'ראה הכל',
+                gates: 'שערים',
+                league: 'ליגה',
+                third_country: 'ג. מדינה',
+                third_tutu: 'ג. טוטו',
+                total: 'סה״כ',
+                yellow_card: 'כרטיסים צהובים',
+                red_card: 'כרטיסים אדומים',
+                game_table: 'טבלת משחק',
             },
             list_game: {
                 results: 'לתוצאות המשחק בזמן אמת',
@@ -1159,6 +1167,14 @@ const resources = {
             home_page: {
                 statistics: 'Statistics',
                 see_all: 'See all',
+                gates: 'Gates',
+                league: 'League',
+                third_country: 'third. Country',
+                third_tutu: 'third. tutu',
+                total: 'Total',
+                yellow_card: 'Yellow cards',
+                red_card: 'Red Cards',
+                game_table: 'Game Table',
             },
             list_game: {
                 results: 'For the results of the game in real time',

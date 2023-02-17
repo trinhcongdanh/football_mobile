@@ -80,61 +80,6 @@ const styles = StyleSheet.create({
         color: appColors.white,
         fontFamily: AppFonts.bold,
     },
-    logo_team: {
-        width: getSize.m(63),
-        height: getSize.m(63),
-        borderRadius: getSize.m(63),
-        backgroundColor: appColors.white,
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginTop: getSize.m(-30),
-        elevation: 10,
-    },
-
-    icon_arrow_left: {
-        width: getSize.m(24),
-        height: getSize.m(24),
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderRadius: getSize.m(24),
-        marginLeft: getSize.m(10),
-    },
-
-    text_details: {
-        fontFamily: AppFonts.bold,
-        fontSize: getSize.m(20),
-        lineHeight: getSize.m(26),
-        color: appColors.white,
-    },
-    stats_content: {
-        backgroundColor: appColors.white,
-        width: getSize.m(303),
-        height: getSize.m(389),
-        borderRadius: getSize.m(15),
-        marginTop: getSize.m(14),
-        paddingTop: getSize.m(16),
-        paddingBottom: getSize.m(23.5),
-    },
-
-    title_statistic: {
-        fontFamily: AppFonts.bold,
-        fontSize: getSize.m(16),
-        lineHeight: getSize.m(20.8),
-        color: appColors.text_dark_blue,
-        marginLeft: getSize.m(4),
-    },
-    dotContainer: {
-        flexDirection: 'row-reverse',
-        justifyContent: 'center',
-        marginBottom: getSize.m(30),
-    },
-
-    dot: {
-        width: getSize.m(5),
-        height: getSize.m(5),
-        marginHorizontal: getSize.m(2.5),
-        borderRadius: getSize.m(5),
-    },
 });
 
 export default styles;
