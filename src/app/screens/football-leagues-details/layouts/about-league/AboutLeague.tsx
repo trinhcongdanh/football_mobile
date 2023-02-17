@@ -1,19 +1,20 @@
-import { AppImages } from '@football/app/assets/images';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import { getSize } from '@football/app/utils/responsive/scale';
 import React from 'react';
-import { View, Animated, Text, useWindowDimensions, ScrollView, Image } from 'react-native';
+import { View, Animated, Text, useWindowDimensions, ScrollView } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import styles from './AboutLeague.style';
 import { IAboutLeagueProps } from './AboutLeague.type';
 import { useViewModel } from './AboutLeague.viewModel';
 
-export const AboutLeague = ({}: IAboutLeagueProps) => {
-    const { t, aboutGames, dots, activeIndexNumber, setActiveIndexNumber } = useViewModel({});
+export const AboutLeague = ({ highlights }: IAboutLeagueProps) => {
+    const { t, aboutGames, dots, activeIndexNumber, setActiveIndexNumber } = useViewModel({
+        highlights,
+    });
 
     let { width: windowWidth, height: windowHeight } = useWindowDimensions();
-    windowHeight = windowHeight - 300;
+    windowHeight -= 300;
     return (
         <View>
             <Text style={[appStyles.text_topic, { marginLeft: getSize.m(6) }]}>
@@ -29,22 +30,22 @@ export const AboutLeague = ({}: IAboutLeagueProps) => {
                 ]}
             >
                 <ScrollView
-                    horizontal={true}
+                    horizontal
                     pagingEnabled
                     showsHorizontalScrollIndicator={false}
                     // snapToInterval={getSize.m(194)}
                     onScroll={e => {
-                        let slide = Math.round(
+                        const slide = Math.round(
                             e.nativeEvent.contentOffset.x / e.nativeEvent.layoutMeasurement.width
                         );
                         if (slide !== activeIndexNumber) {
                             console.log(slide);
-                            setActiveIndexNumber(slide); //here we will set our active index num
+                            setActiveIndexNumber(slide); // here we will set our active index num
                         }
                     }}
                     scrollEventThrottle={16}
                 >
-                    {aboutGames.map(item => {
+                    {aboutGames.map((item, index) => {
                         return (
                             <Animated.View
                                 key={item.id}
@@ -58,16 +59,16 @@ export const AboutLeague = ({}: IAboutLeagueProps) => {
                             >
                                 <View style={styles.icon_about}>
                                     <FastImage
-                                        source={item.img}
+                                        source={item.icon}
                                         resizeMode={FastImage.resizeMode.contain}
                                         style={{
-                                            width: getSize.m(item.width),
-                                            height: getSize.m(item.height),
+                                            width: getSize.m(12),
+                                            height: getSize.m(12),
                                         }}
                                     />
                                 </View>
-                                <Text style={styles.title_about}>{item.title}</Text>
-                                <Text style={styles.content_about}>{item.content}</Text>
+                                <Text style={styles.title_about}>{item.text}</Text>
+                                <Text style={styles.content_about}>{item.value}</Text>
                             </Animated.View>
                         );
                     })}
@@ -91,7 +92,7 @@ export const AboutLeague = ({}: IAboutLeagueProps) => {
                                                 : appColors.soft_grey,
                                     },
                                 ]}
-                            ></View>
+                            />
                         </View>
                     );
                 })}

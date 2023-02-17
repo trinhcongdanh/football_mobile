@@ -39,7 +39,6 @@ export const LeaguesDetailsScreen = ({ navigation, route }: ILeaguesDetailsScree
         setOpenModalPlayOff,
         setSelectCycle,
         setSelectPlayoff,
-        setGalleries,
         openModalYear,
         selectYear,
         years,
@@ -51,6 +50,7 @@ export const LeaguesDetailsScreen = ({ navigation, route }: ILeaguesDetailsScree
         playOffs,
         league,
         galleries,
+        highlights,
     } = useViewModel({
         navigation,
         route,
@@ -263,7 +263,7 @@ export const LeaguesDetailsScreen = ({ navigation, route }: ILeaguesDetailsScree
                             />
                         </View>
                         <View style={styles.package}>
-                            <AboutLeague />
+                            <AboutLeague highlights={highlights || null} />
                         </View>
                         <View
                             style={{

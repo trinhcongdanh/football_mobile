@@ -1,88 +1,88 @@
-import { useTranslation } from 'react-i18next';
-import { Animated } from 'react-native';
-import React, { useRef, useState } from 'react';
-import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
-import { IAboutLeagueProps } from './AboutLeague.type';
 import { AppImages } from '@football/app/assets/images';
-import { getSize } from '@football/app/utils/responsive/scale';
+import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { IAboutLeagueProps } from './AboutLeague.type';
 
-export const useViewModel = ({}: IAboutLeagueProps) => {
-    const { navigate, goBack } = useAppNavigator();
+export const useViewModel = ({ highlights }: IAboutLeagueProps) => {
     const { t } = useTranslation();
-    const aboutGames = [
-        {
-            id: 1,
-            title: t('leagues_details.about.cycles'),
-            content: '32',
-            img: AppImages.img_goal_net_blue,
-            width: getSize.m(15),
-            height: getSize.m(12),
-        },
-        {
-            id: 2,
-            title: t('leagues_details.about.cycles'),
-            content: '3',
-            img: AppImages.img_ball,
-            width: getSize.m(12),
-            height: getSize.m(12),
-        },
-        {
-            id: 3,
-            title: t('leagues_details.about.cycles'),
-            content: '2021/2022',
-            img: AppImages.img_calendar_week,
-            width: getSize.m(11),
-            height: getSize.m(12),
-        },
-        {
-            id: 4,
-            title: t('leagues_details.about.cycles'),
-            content: '0',
-            img: AppImages.img_up_right,
-            width: getSize.m(9),
-            height: getSize.m(12),
-        },
-        {
-            id: 5,
-            title: t('leagues_details.about.cycles'),
-            content: '14',
-            img: AppImages.img_users,
-            width: getSize.m(15),
-            height: getSize.m(12),
-        },
-        {
-            id: 6,
-            title: t('leagues_details.about.cycles'),
-            content: 'בוגרים',
-            img: AppImages.img_user,
-            width: getSize.m(11),
-            height: getSize.m(12),
-        },
-        {
-            id: 7,
-            title: t('leagues_details.about.cycles'),
-            content: '5',
-            img: AppImages.img_down_left_up_right,
-            width: getSize.m(12),
-            height: getSize.m(12),
-        },
-        {
-            id: 8,
-            title: t('leagues_details.about.cycles'),
-            content: '15 דקות',
-            img: AppImages.img_clock,
-            width: getSize.m(12),
-            height: getSize.m(12),
-        },
-        {
-            id: 9,
-            title: t('leagues_details.about.cycles'),
-            content: '2',
-            img: AppImages.img_down_right,
-            width: getSize.m(9),
-            height: getSize.m(12),
-        },
-    ];
+    const aboutGames = Object.keys(highlights).map((key, index) => {
+        switch (key) {
+            case 'season_name':
+                return {
+                    id: index,
+                    icon: AppImages.img_calendar_week,
+                    text: t('leagues_details.about.seasons'),
+                    value: highlights[key],
+                };
+
+            case 'num_of_cycles':
+                return {
+                    id: index,
+                    icon: AppImages.img_ball,
+                    text: t('leagues_details.about.cycles'),
+                    value: highlights[key],
+                };
+
+            case 'num_of_rounds':
+                return {
+                    id: index,
+                    icon: AppImages.img_goal_net_blue,
+                    text: t('leagues_details.about.rounds'),
+                    value: highlights[key],
+                };
+
+            case 'age_group_he':
+                return {
+                    id: index,
+                    icon: AppImages.img_user,
+                    text: t('leagues_details.about.age_group'),
+                    value: highlights[key],
+                };
+
+            case 'num_of_teams':
+                return {
+                    id: index,
+                    icon: AppImages.img_users,
+                    text: t('leagues_details.about.groups'),
+                    value: highlights[key],
+                };
+
+            case 'num_of_ascending_teams':
+                return {
+                    id: index,
+                    icon: AppImages.img_up_right,
+                    text: t('leagues_details.about.rising'),
+                    value: highlights[key],
+                };
+
+            case 'num_of_descending_teams':
+                return {
+                    id: index,
+                    icon: AppImages.img_down_right,
+                    text: t('leagues_details.about.down'),
+                    value: highlights[key],
+                };
+
+            case 'break':
+                return {
+                    id: index,
+                    icon: AppImages.img_clock,
+                    text: t('leagues_details.about.pause'),
+                    value: highlights[key],
+                };
+
+            case 'num_of_exchanges':
+                return {
+                    id: index,
+                    icon: AppImages.img_replace,
+                    text: t('leagues_details.about.exchanges'),
+                    value: highlights[key],
+                };
+
+            default:
+                return {};
+        }
+    });
     const dots = Array(4).fill('');
     const [activeIndexNumber, setActiveIndexNumber] = useState(Number);
 

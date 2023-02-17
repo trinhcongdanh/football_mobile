@@ -1,3 +1,4 @@
+import { Highlights } from './../../../core/models/LeagueSeasonModelResponse';
 import { LeagueModel, LeagueOneModelResponse } from '@football/core/models/LeagueModelResponse';
 import { isEmpty } from 'lodash';
 import { useTranslation } from 'react-i18next';
@@ -102,8 +103,12 @@ export const useViewModel = ({ navigation, route }: ILeaguesDetailsScreenProps) 
 
     // Galerry
     // NOTE need to update leagueSeason after dropdown changed
-    // const galleries = leagueSeasons[0].gallery;
     const [galleries, setGalleries] = useState<Gallery[]>(leagueSeasons[0].gallery);
+
+    // Hightlights
+    // NOTE need to update leagueSeason after dropdown changed
+    const [highlights, setHightlights] = useState<Highlights>(leagueSeasons[0].highlights);
+
 
     const handleCloseModal = () => {
         setOpenModalYear(false);
@@ -128,6 +133,7 @@ export const useViewModel = ({ navigation, route }: ILeaguesDetailsScreenProps) 
         setSelectCycle,
         setSelectPlayoff,
         setGalleries,
+        setHightlights,
         openModalYear,
         selectYear,
         years,
@@ -139,5 +145,6 @@ export const useViewModel = ({ navigation, route }: ILeaguesDetailsScreenProps) 
         playOffs,
         league,
         galleries,
+        highlights,
     };
 };
