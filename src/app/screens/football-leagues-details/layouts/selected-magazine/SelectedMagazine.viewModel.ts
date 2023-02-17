@@ -7,7 +7,7 @@ import { ISelectedMagazineProps } from './SelectedMagazine.type';
 export const useViewModel = ({ galleries }: ISelectedMagazineProps) => {
     const { navigate, goBack } = useAppNavigator();
     const { t } = useTranslation();
-    const data = galleries;
+    const data = galleries || [];
     // const data = [
     //     {
     //         image_url: AppImages.img_gallery,

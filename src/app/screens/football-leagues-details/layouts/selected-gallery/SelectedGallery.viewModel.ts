@@ -7,7 +7,7 @@ import { ISelectedGalleryProps } from './SelectedGallery.type';
 export const useViewModel = ({ galleries }: ISelectedGalleryProps) => {
     const { navigate, goBack } = useAppNavigator();
     const { t } = useTranslation();
-    const data = galleries;
+    const data = galleries || [];
     const { width } = Dimensions.get('window');
     const [activeIndexNumber, setActiveIndexNumber] = useState(Number);
     return {
