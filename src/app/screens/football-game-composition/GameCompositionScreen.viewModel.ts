@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { ScreenTopTap } from '../../utils/constants/enum';
+import { ScreenName, ScreenTopTap } from '../../utils/constants/enum';
 
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
 import { CompositionScreen } from './layouts/match-composition';
@@ -42,5 +42,9 @@ export const useViewModel = ({ navigation, route }: IGameCompositionScreenProps)
         },
     ];
 
-    return { t, onGoBack, labels };
+    const handleStadium = () => {
+        navigate(ScreenName.PitchPage);
+    };
+
+    return { t, onGoBack, labels, handleStadium };
 };

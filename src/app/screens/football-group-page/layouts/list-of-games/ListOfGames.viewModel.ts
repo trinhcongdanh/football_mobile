@@ -24,6 +24,7 @@ export const useViewModel = ({}: IListOfGamesProps) => {
             details: 'הרכב',
             tournament: 'פלייאוף לאליפות אירופה',
             completed: false,
+            isLive: true,
         },
         {
             id: 2,
@@ -40,6 +41,7 @@ export const useViewModel = ({}: IListOfGamesProps) => {
             details: 'פרטי משחק',
             tournament: 'פלייאוף לאליפות אירופה',
             completed: true,
+            isLive: false,
         },
         {
             id: 3,
@@ -56,14 +58,20 @@ export const useViewModel = ({}: IListOfGamesProps) => {
             details: 'פרטי משחק',
             tournament: 'פלייאוף לאליפות אירופה',
             completed: true,
+            isLive: false,
         },
     ];
     const handleDetailMatch = () => {
-        navigate(ScreenName.GameCompositionPage);
+        navigate(ScreenName.MatchPage);
+    };
+
+    const handleStadium = () => {
+        navigate(ScreenName.PitchPage);
     };
     return {
         t,
         listGames,
         handleDetailMatch,
+        handleStadium,
     };
 };

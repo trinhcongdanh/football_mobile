@@ -11,7 +11,15 @@ import { useViewModel } from './ListOfGames.viewModel';
 import { AppFonts } from '@football/app/assets/fonts';
 
 export const ListOfGames = () => {
-    const { t, options, select, listGames, selectOption, handleDetailMatch } = useViewModel({});
+    const {
+        t,
+        options,
+        select,
+        listGames,
+        selectOption,
+        handleDetailMatch,
+        handleStadium,
+    } = useViewModel({});
     return (
         <View>
             <Text style={appStyles.statistics_title}>{t('campaign.list_game.title')}</Text>
@@ -76,7 +84,9 @@ export const ListOfGames = () => {
                                     icon={appIcons.ic_arrow_left}
                                     color={appColors.gray}
                                     details={item.details}
+                                    isLive={item.isLive}
                                     handleDetailMatch={handleDetailMatch}
+                                    handleStadium={handleStadium}
                                 />
                             );
                         })}

@@ -26,13 +26,15 @@ export const ListGame = ({
     color,
     handleDetailMatch,
     isLive,
+    handleStadium,
 }: IListGameProps) => {
     const { t } = useTranslation();
 
     return (
         <View style={styles.main_schedule}>
             {tournament && (
-                <View
+                <TouchableOpacity
+                    onPress={handleDetailMatch}
                     style={[
                         styles.tournament,
                         {
@@ -63,10 +65,8 @@ export const ListGame = ({
                     >
                         {tournament}
                     </Text>
-                    {result === null && schedule === null && (
-                        <Text style={styles.text_live}>L I V E</Text>
-                    )}
-                </View>
+                    {isLive && <Text style={styles.text_live}>L I V E</Text>}
+                </TouchableOpacity>
             )}
             {!tournament && isLive ? (
                 <View>
@@ -101,7 +101,10 @@ export const ListGame = ({
                     >
                         {date}
                     </Text>
-                    <View style={[appStyles.flex_row_align, { flex: 0 }]}>
+                    <TouchableOpacity
+                        onPress={handleStadium}
+                        style={[appStyles.flex_row_align, { flex: 0 }]}
+                    >
                         <IconLocation
                             name={appIcons.ic_location}
                             size={getSize.m(20)}
@@ -120,7 +123,7 @@ export const ListGame = ({
                         >
                             {location}
                         </Text>
-                    </View>
+                    </TouchableOpacity>
                 </View>
             )}
 

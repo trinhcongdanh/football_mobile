@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import { getSize } from '@football/app/utils/responsive/scale';
@@ -8,7 +8,7 @@ import { useViewModel } from './OptionState.viewModel';
 import { IOptionStateProps } from './OptionState.type';
 import LinearGradient from 'react-native-linear-gradient';
 export const OptionState = ({ label }: IOptionStateProps) => {
-    const { t, listState } = useViewModel();
+    const { t, listState, onNavigateGame } = useViewModel();
     return (
         <View
             style={{
@@ -45,32 +45,37 @@ export const OptionState = ({ label }: IOptionStateProps) => {
                 <View style={{ marginTop: getSize.m(10) }}>
                     {listState.map(item => {
                         return (
-                            <LinearGradient
-                                key={item.id}
-                                start={{ x: 0, y: 0 }}
-                                end={{ x: 1, y: 1 }}
-                                colors={[
-                                    item.id % 2 === 1 ? 'rgba(16, 32, 100, 0.04)' : appColors.gray,
-                                    item.id % 2 === 1 ? 'rgba(59, 168, 225, 0.04)' : appColors.gray,
-                                ]}
-                                style={[appStyles.flex_row_space_center, styles.itemTeam]}
-                            >
-                                <View style={{ width: getSize.m(60) }}>
-                                    <Text style={styles.text_content}>{item.date}</Text>
-                                </View>
-                                <View style={{ width: getSize.m(110) }}>
-                                    <Text style={styles.text_content}>{item.play}</Text>
-                                </View>
-                                <View style={{ width: getSize.m(80) }}>
-                                    <Text style={styles.text_content}>{item.etch}</Text>
-                                </View>
-                                <View style={{ width: getSize.m(30) }}>
-                                    <Text style={styles.text_content}>{item.hour}</Text>
-                                </View>
-                                <View style={{ width: getSize.m(30) }}>
-                                    <Text style={styles.text_content}>{item.toch}</Text>
-                                </View>
-                            </LinearGradient>
+                            <TouchableOpacity onPress={onNavigateGame} key={item.id}>
+                                <LinearGradient
+                                    start={{ x: 0, y: 0 }}
+                                    end={{ x: 1, y: 1 }}
+                                    colors={[
+                                        item.id % 2 === 1
+                                            ? 'rgba(16, 32, 100, 0.04)'
+                                            : appColors.gray,
+                                        item.id % 2 === 1
+                                            ? 'rgba(59, 168, 225, 0.04)'
+                                            : appColors.gray,
+                                    ]}
+                                    style={[appStyles.flex_row_space_center, styles.itemTeam]}
+                                >
+                                    <View style={{ width: getSize.m(60) }}>
+                                        <Text style={styles.text_content}>{item.date}</Text>
+                                    </View>
+                                    <View style={{ width: getSize.m(110) }}>
+                                        <Text style={styles.text_content}>{item.play}</Text>
+                                    </View>
+                                    <View style={{ width: getSize.m(80) }}>
+                                        <Text style={styles.text_content}>{item.etch}</Text>
+                                    </View>
+                                    <View style={{ width: getSize.m(30) }}>
+                                        <Text style={styles.text_content}>{item.hour}</Text>
+                                    </View>
+                                    <View style={{ width: getSize.m(30) }}>
+                                        <Text style={styles.text_content}>{item.toch}</Text>
+                                    </View>
+                                </LinearGradient>
+                            </TouchableOpacity>
                         );
                     })}
                 </View>

@@ -21,7 +21,10 @@ import { IConquerorsScreenProps } from './ConquerorsScreen.type';
 import LinearGradient from 'react-native-linear-gradient';
 
 export const ConquerorsScreen = ({ navigation, route }: IConquerorsScreenProps) => {
-    const { t, onGoBack, listConquerors } = useViewModel({ navigation, route });
+    const { t, onGoBack, listConquerors, onNavigateDataPlayer } = useViewModel({
+        navigation,
+        route,
+    });
     return (
         <View style={appStyles.flex}>
             <ImageBackground source={AppImages.img_background} style={appStyles.flex}>
@@ -53,6 +56,7 @@ export const ConquerorsScreen = ({ navigation, route }: IConquerorsScreenProps) 
                                 {listConquerors.map(conquerors => {
                                     return (
                                         <TouchableOpacity
+                                            onPress={onNavigateDataPlayer}
                                             style={[
                                                 appStyles.flex_row_space_center,
                                                 styles.content,

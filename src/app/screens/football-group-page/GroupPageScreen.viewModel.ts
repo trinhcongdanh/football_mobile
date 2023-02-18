@@ -36,8 +36,8 @@ export const useViewModel = ({ navigation, route }: IGroupPageScreenProps) => {
     };
 
     const groups = [
-        { id: 1, group: t('group_page.cast') },
-        { id: 2, group: t('group_page.official') },
+        { id: 1, group: t('group_page.cast'), screen: ScreenName.TeamSquadPage },
+        { id: 2, group: t('group_page.official'), screen: ScreenName.TeamStaffPage },
     ];
 
     // Show Info Group
@@ -49,6 +49,10 @@ export const useViewModel = ({ navigation, route }: IGroupPageScreenProps) => {
 
     const handleMoreStatistics = () => {
         navigate(ScreenName.StatisticsGroupPage);
+    };
+
+    const onNavigateStadium = () => {
+        navigate(ScreenName.PitchPage);
     };
 
     return {
@@ -64,5 +68,7 @@ export const useViewModel = ({ navigation, route }: IGroupPageScreenProps) => {
         showInfoGroup,
         showInfo,
         handleMoreStatistics,
+        onNavigateStadium,
+        navigate,
     };
 };

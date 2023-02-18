@@ -23,10 +23,13 @@ export const useViewModel = ({ navigation, route }: IConquerorsScreenProps) => {
         { id: 7, name: 'שון גולדברג', number: '31', avt: AppImages.img_avt_player },
         { id: 8, name: 'שון גולדברג', number: '31', avt: AppImages.img_avt_player },
     ];
-
+    const onNavigateDataPlayer = () => {
+        navigate(ScreenName.DataPlayerPage);
+    };
     return {
         t,
         onGoBack,
         listConquerors,
+        onNavigateDataPlayer,
     };
 };

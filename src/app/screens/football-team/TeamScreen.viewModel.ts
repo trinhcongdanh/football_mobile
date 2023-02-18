@@ -59,10 +59,13 @@ export const useViewModel = ({ navigation, route }: ITeamScreenProps) => {
     const handleTeam = () => {
         navigate(ScreenName.NationalTeamPage);
     };
+    const onShowSideMenu = () => {
+        navigation.openDrawer();
+    };
 
     useMount(() => {
         getTeamsData();
     });
 
-    return { optionTeams, toggleChangeBar, toggleBar, handleTeam };
+    return { optionTeams, toggleChangeBar, toggleBar, handleTeam, onShowSideMenu };
 };

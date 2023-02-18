@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import React from 'react';
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
+import { ScreenName } from '@football/app/utils/constants/enum';
 
 export const useViewModel = () => {
     const { navigate, goBack } = useAppNavigator();
@@ -47,8 +48,13 @@ export const useViewModel = () => {
             toch: '2 : 2',
         },
     ];
+
+    const onNavigateGame = () => {
+        navigate(ScreenName.MatchPage);
+    };
     return {
         t,
         listState,
+        onNavigateGame,
     };
 };

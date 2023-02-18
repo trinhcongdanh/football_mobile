@@ -20,5 +20,9 @@ export const useViewModel = ({ navigation, route }: IHomeScreenProps) => {
         { id: 5, name: 'רועי אזוט', avt: AppImages.img_avt_player },
     ];
 
-    return { t, onGoBack, data_header };
+    const onShowSideMenu = () => {
+        navigation.openDrawer();
+    };
+
+    return { t, onGoBack, data_header, onShowSideMenu };
 };

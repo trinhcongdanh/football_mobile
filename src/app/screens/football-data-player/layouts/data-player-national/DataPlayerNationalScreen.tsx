@@ -14,7 +14,16 @@ import FastImage from 'react-native-fast-image';
 import LinearGradient from 'react-native-linear-gradient';
 
 export const DataPlayerNationalScreen = (props: any) => {
-    const { t, setSelected, setOpenModal, goals, years, selected, openModal } = useViewModel({});
+    const {
+        t,
+        setSelected,
+        setOpenModal,
+        goals,
+        years,
+        selected,
+        openModal,
+        onNavigateGoalTopTeam,
+    } = useViewModel({});
     return (
         <ScrollView showsVerticalScrollIndicator={false}>
             <View style={styles.container_national}>
@@ -113,7 +122,10 @@ export const DataPlayerNationalScreen = (props: any) => {
                                     </Text>
                                     <Text style={[appStyles.number]}>{item.games}</Text>
                                     <Text style={[appStyles.number]}>{item.gates}</Text>
-                                    <TouchableOpacity style={[styles.details]}>
+                                    <TouchableOpacity
+                                        onPress={onNavigateGoalTopTeam}
+                                        style={[styles.details]}
+                                    >
                                         <Icon
                                             name={appIcons.ic_arrow_left}
                                             size={getSize.m(15)}

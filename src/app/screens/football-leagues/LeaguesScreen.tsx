@@ -19,7 +19,7 @@ export const LeaguesScreen = ({ navigation, route }: ILeaguesScreenProps) => {
     const {
         t,
         labels,
-        onNavigateSetting,
+        onShowSideMenu,
         searchLeagues,
         onSearchLeague,
         submitSearchLeague,
@@ -40,7 +40,7 @@ export const LeaguesScreen = ({ navigation, route }: ILeaguesScreenProps) => {
                             icon={AppImages.img_bars_sort}
                             color_pre={appColors.blue_light}
                             color_after={appColors.blue_dark}
-                            handlePressFunction={onNavigateSetting}
+                            handlePressFunction={onShowSideMenu}
                         />
                         <View>
                             <Text style={[appStyles.text_title]}>{t('leagues.title')}</Text>

@@ -30,7 +30,7 @@ import { useViewModel } from './VideoScreen.viewModel';
 export const VideoScreen = ({ navigation, route }: IVideoScreenProps) => {
     const {
         t,
-        ShowSideMenu,
+        onShowSideMenu,
         handlePlayVideo,
         setDisplay,
         setAutoPlay,
@@ -101,7 +101,7 @@ export const VideoScreen = ({ navigation, route }: IVideoScreenProps) => {
                                 icon={AppImages.img_bars_sort}
                                 color_pre={appColors.blue_light}
                                 color_after={appColors.blue_dark}
-                                handlePressFunction={ShowSideMenu}
+                                handlePressFunction={onShowSideMenu}
                             />
                             <View>
                                 <Text style={[appStyles.text_title]}>{t('video.title')}</Text>

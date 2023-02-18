@@ -10,6 +10,7 @@ import styles from './LeagueTable.style';
 import { DropDown } from '@football/app/components/drop-down/DropDown';
 import { Avatar } from 'react-native-elements';
 import LinearGradient from 'react-native-linear-gradient';
+import { ScreenName } from '@football/app/utils/constants/enum';
 
 export const LeagueTable = () => {
     const {
@@ -26,6 +27,7 @@ export const LeagueTable = () => {
         playOffs,
         handleCloseModal,
         listTeams,
+        navigate,
     } = useViewModel({});
     return (
         <View>
@@ -133,71 +135,90 @@ export const LeagueTable = () => {
                 <View style={{ marginTop: getSize.m(10) }}>
                     {listTeams.map(item => {
                         return (
-                            <LinearGradient
-                                start={{ x: 0, y: 0 }}
-                                end={{ x: 1, y: 1 }}
-                                colors={[
-                                    item.id % 2 === 1 ? 'rgba(16, 32, 100, 0.04)' : appColors.white,
-                                    item.id % 2 === 1
-                                        ? 'rgba(59, 168, 225, 0.04)'
-                                        : appColors.white,
-                                ]}
+                            <TouchableOpacity
+                                onPress={() => {
+                                    navigate(ScreenName.GroupPagePage);
+                                }}
                                 key={item.id}
-                                style={[appStyles.flex_row_space_center, appStyles.statistic_row]}
                             >
-                                <View
-                                    style={{
-                                        width: getSize.m(120),
-                                        overflow: 'hidden',
-                                    }}
+                                <LinearGradient
+                                    start={{ x: 0, y: 0 }}
+                                    end={{ x: 1, y: 1 }}
+                                    colors={[
+                                        item.id % 2 === 1
+                                            ? 'rgba(16, 32, 100, 0.04)'
+                                            : appColors.white,
+                                        item.id % 2 === 1
+                                            ? 'rgba(59, 168, 225, 0.04)'
+                                            : appColors.white,
+                                    ]}
+                                    style={[
+                                        appStyles.flex_row_space_center,
+                                        appStyles.statistic_row,
+                                    ]}
                                 >
                                     <View
                                         style={{
-                                            flexDirection: 'row',
+                                            width: getSize.m(120),
+                                            overflow: 'hidden',
                                         }}
                                     >
-                                        <Text
-                                            style={[
-                                                appStyles.statistics_content,
-                                                {
-                                                    marginRight: getSize.m(10),
-                                                },
-                                            ]}
+                                        <View
+                                            style={{
+                                                flexDirection: 'row',
+                                            }}
                                         >
-                                            {item.id}
-                                        </Text>
-                                        <Avatar source={item.logo} rounded size={18} />
-                                        <Text
-                                            style={[
-                                                appStyles.statistics_content,
-                                                {
-                                                    marginLeft: getSize.m(10),
-                                                },
-                                            ]}
-                                        >
-                                            {item.name}
+                                            <Text
+                                                style={[
+                                                    appStyles.statistics_content,
+                                                    {
+                                                        marginRight: getSize.m(10),
+                                                    },
+                                                ]}
+                                            >
+                                                {item.id}
+                                            </Text>
+                                            <Avatar source={item.logo} rounded size={18} />
+                                            <Text
+                                                style={[
+                                                    appStyles.statistics_content,
+                                                    {
+                                                        marginLeft: getSize.m(10),
+                                                    },
+                                                ]}
+                                            >
+                                                {item.name}
+                                            </Text>
+                                        </View>
+                                    </View>
+                                    <View style={{ width: getSize.m(30) }}>
+                                        <Text style={appStyles.statistics_content}>
+                                            {item.from}
                                         </Text>
                                     </View>
-                                </View>
-                                <View style={{ width: getSize.m(30) }}>
-                                    <Text style={appStyles.statistics_content}>{item.from}</Text>
-                                </View>
-                                <View style={{ width: getSize.m(30) }}>
-                                    <Text style={appStyles.statistics_content}>{item.nch}</Text>
-                                </View>
-                                <View style={{ width: getSize.m(30) }}>
-                                    <Text style={appStyles.statistics_content}>{item.draw}</Text>
-                                </View>
-                                <View style={{ width: getSize.m(30) }}>
-                                    <Text style={appStyles.statistics_content}>{item.the_p}</Text>
-                                </View>
-                                <View style={{ width: getSize.m(40) }}>
-                                    <Text style={appStyles.statistics_content}>{item.time}</Text>
-                                </View>
-                                <View style={{ width: getSize.m(30) }}>
-                                    <Text style={appStyles.statistics_content}>{item.no}</Text>
-                                </View>
-                            </LinearGradient>
+                                    <View style={{ width: getSize.m(30) }}>
+                                        <Text style={appStyles.statistics_content}>{item.nch}</Text>
+                                    </View>
+                                    <View style={{ width: getSize.m(30) }}>
+                                        <Text style={appStyles.statistics_content}>
+                                            {item.draw}
+                                        </Text>
+                                    </View>
+                                    <View style={{ width: getSize.m(30) }}>
+                                        <Text style={appStyles.statistics_content}>
+                                            {item.the_p}
+                                        </Text>
+                                    </View>
+                                    <View style={{ width: getSize.m(40) }}>
+                                        <Text style={appStyles.statistics_content}>
+                                            {item.time}
+                                        </Text>
+                                    </View>
+                                    <View style={{ width: getSize.m(30) }}>
+                                        <Text style={appStyles.statistics_content}>{item.no}</Text>
+                                    </View>
+                                </LinearGradient>
+                            </TouchableOpacity>
                         );
                     })}
                 </View>

@@ -45,6 +45,8 @@ export const GroupPageScreen = ({ navigation, route }: IGroupPageScreenProps) =>
         showInfoGroup,
         showInfo,
         handleMoreStatistics,
+        onNavigateStadium,
+        navigate,
     } = useViewModel({
         navigation,
         route,
@@ -296,7 +298,7 @@ export const GroupPageScreen = ({ navigation, route }: IGroupPageScreenProps) =>
                                             </Text>
                                             <View>
                                                 <View style={styles.info_group_item}>
-                                                    <View>
+                                                    <TouchableOpacity onPress={onNavigateStadium}>
                                                         <Text style={styles.info_group_item_label}>
                                                             {t('group_page.info_group.stadium')}
                                                         </Text>
@@ -305,7 +307,7 @@ export const GroupPageScreen = ({ navigation, route }: IGroupPageScreenProps) =>
                                                         >
                                                             באר שבע איצטדיון טוטו ע"ש טרנר
                                                         </Text>
-                                                    </View>
+                                                    </TouchableOpacity>
                                                     <View style={styles.ic_label}>
                                                         <IconIonicons
                                                             name={appIcons.ic_location_sharp}
@@ -329,7 +331,13 @@ export const GroupPageScreen = ({ navigation, route }: IGroupPageScreenProps) =>
                             >
                                 {groups.map(item => {
                                     return (
-                                        <TouchableOpacity key={item.id} style={styles.option_menu}>
+                                        <TouchableOpacity
+                                            onPress={() => {
+                                                navigate(item.screen);
+                                            }}
+                                            key={item.id}
+                                            style={styles.option_menu}
+                                        >
                                             <View style={appStyles.flex_row_align_center}>
                                                 <View style={styles.container_img}>
                                                     <Avatar

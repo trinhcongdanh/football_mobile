@@ -3,14 +3,14 @@ import { appStyles } from '@football/app/utils/constants/appStyles';
 import { getSize } from '@football/app/utils/responsive/scale';
 import React from 'react';
 import LinearGradient from 'react-native-linear-gradient';
-import { View, Text } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import { ILeaguesTableProps } from '@football/app/screens/football-leagues-details/layouts/leagues-table/LeaguesTable.type';
 import styles from './LeaguesTable.style';
 import { useViewModel } from './LeaguesTable.viewModel';
 
 export const LeaguesTable = ({ leaderBoards }: ILeaguesTableProps) => {
-    const { t, listTeams } = useViewModel({ leaderBoards });
+    const { t, listTeams, onNavigateTeamDetails } = useViewModel({ leaderBoards });
     return (
         <View
             style={{
@@ -54,7 +54,10 @@ export const LeaguesTable = ({ leaderBoards }: ILeaguesTableProps) => {
                         <Text style={styles.header}>{t('leagues_details.league_table.no')}</Text>
                     </View>
                 </View>
-                <View style={{ marginTop: getSize.m(10) }}>
+                <TouchableOpacity
+                    onPress={onNavigateTeamDetails}
+                    style={{ marginTop: getSize.m(10) }}
+                >
                     {listTeams.map(item => {
                         return (
                             <LinearGradient
@@ -127,7 +130,7 @@ export const LeaguesTable = ({ leaderBoards }: ILeaguesTableProps) => {
                             </LinearGradient>
                         );
                     })}
-                </View>
+                </TouchableOpacity>
             </View>
         </View>
     );

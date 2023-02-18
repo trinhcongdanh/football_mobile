@@ -41,7 +41,9 @@ export const useViewModel = () => {
         },
     ];
 
-    const handleCupAround = () => {};
+    const handleCupAround = () => {
+        navigate(ScreenName.CupsPage);
+    };
 
     return {
         t,

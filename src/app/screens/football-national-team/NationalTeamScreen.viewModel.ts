@@ -87,6 +87,7 @@ export const useViewModel = ({ navigation, route }: INationalTeamScreenProps) =>
             details: 'הרכב',
             tournament: 'פלייאוף לאליפות אירופה',
             completed: false,
+            isLive: true,
         },
         {
             id: 2,
@@ -103,6 +104,7 @@ export const useViewModel = ({ navigation, route }: INationalTeamScreenProps) =>
             details: 'פרטי משחק',
             tournament: 'פלייאוף לאליפות אירופה',
             completed: false,
+            isLive: false,
         },
         {
             id: 3,
@@ -119,15 +121,28 @@ export const useViewModel = ({ navigation, route }: INationalTeamScreenProps) =>
             details: 'פרטי משחק',
             tournament: 'פלייאוף לאליפות אירופה',
             completed: false,
+            isLive: false,
         },
     ];
 
     const handleDetailMatch = () => {
-        navigate(ScreenName.GameCompositionPage);
+        navigate(ScreenName.MatchPage);
+    };
+
+    const handleStadium = () => {
+        navigate(ScreenName.PitchPage);
     };
 
     const handleNavigation = () => {
         navigate(ScreenName.PreviousCampaignsPage);
+    };
+
+    const onNavigateConquerors = () => {
+        navigate(ScreenName.ConquerorsPage);
+    };
+
+    const onNavigatePlayerData = () => {
+        navigate(ScreenName.DataPlayerPage);
     };
 
     const listTeams = [
@@ -244,8 +259,8 @@ export const useViewModel = ({ navigation, route }: INationalTeamScreenProps) =>
     ];
 
     const teamSquads = [
-        { id: 1, name: 'סגל נבחרת', avt: AppImages.img_logo },
-        { id: 2, name: 'בעלי תפקידים', avt: AppImages.img_logo },
+        { id: 1, name: 'סגל נבחרת', avt: AppImages.img_logo, screen: ScreenName.TeamSquadPage },
+        { id: 2, name: 'בעלי תפקידים', avt: AppImages.img_logo, screen: ScreenName.TeamStaffPage },
     ];
 
     const [activeIndexNumber, setActiveIndexNumber] = useState(Number);
@@ -307,5 +322,9 @@ export const useViewModel = ({ navigation, route }: INationalTeamScreenProps) =>
         setActiveIndexNumber,
         handleDetails,
         cupsAround,
+        handleStadium,
+        onNavigateConquerors,
+        onNavigatePlayerData,
+        navigate,
     };
 };

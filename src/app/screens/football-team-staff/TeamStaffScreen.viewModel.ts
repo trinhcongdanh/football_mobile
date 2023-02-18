@@ -1,5 +1,6 @@
 import { AppImages } from '@football/app/assets/images';
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
+import { ScreenName } from '@football/app/utils/constants/enum';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ITeamStaffScreenProps } from './TeamStaffScreen.type';
@@ -69,5 +70,9 @@ export const useViewModel = ({ navigation, route }: ITeamStaffScreenProps) => {
         },
     ];
 
-    return { t, onGoBack, setOnSelect, onSelect, teamStaffs };
+    const onNavigateDataCoach = () => {
+        navigate(ScreenName.DataCoachPage);
+    };
+
+    return { t, onGoBack, setOnSelect, onSelect, teamStaffs, onNavigateDataCoach };
 };

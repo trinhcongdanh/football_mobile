@@ -2,6 +2,7 @@ import { AppImages } from '@football/app/assets/images';
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
 import { useTranslation } from 'react-i18next';
 import { IListGameScreenProps } from '@football/app/screens/football-list-game/ListGameScreen.type';
+import { ScreenName } from '@football/app/utils/constants/enum';
 
 export const useViewModel = ({ navigation, route }: IListGameScreenProps) => {
     const { navigate, goBack } = useAppNavigator();
@@ -53,9 +54,14 @@ export const useViewModel = ({ navigation, route }: IListGameScreenProps) => {
         },
     ];
 
+    const onNavigateGame = () => {
+        navigate(ScreenName.MatchPage);
+    };
+
     return {
         t,
         onGoBack,
         listGames,
+        onNavigateGame,
     };
 };

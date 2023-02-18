@@ -4,4 +4,5 @@ export type IListPlayerProps = {
     position?: string;
     avt?: string;
     number_before?: number;
+    handleDataPlayer?: () => void;
 };

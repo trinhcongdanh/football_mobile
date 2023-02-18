@@ -8,4 +8,5 @@ export type IHeaderCompositionProps = {
     stadium: string;
     score: string;
     season?: string;
+    handleStadium?: () => void;
 };

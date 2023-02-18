@@ -25,12 +25,10 @@ import { IGobletScreenProps } from './GobletScreen.type';
 import { useViewModel } from './GobletScreen.viewModel';
 
 export const GobletScreen = ({ navigation, route }: IGobletScreenProps) => {
-    const { t, onNavigateSetting, setOnSelect, handleStateCup, onSelect, stateCups } = useViewModel(
-        {
-            navigation,
-            route,
-        }
-    );
+    const { t, onShowSideMenu, setOnSelect, handleStateCup, onSelect, stateCups } = useViewModel({
+        navigation,
+        route,
+    });
     return (
         <View style={[appStyles.flex]}>
             <ImageBackground source={AppImages.img_background} style={appStyles.flex}>
@@ -43,7 +41,7 @@ export const GobletScreen = ({ navigation, route }: IGobletScreenProps) => {
                             icon={AppImages.img_bars_sort}
                             color_pre={appColors.blue_light}
                             color_after={appColors.blue_dark}
-                            handlePressFunction={onNavigateSetting}
+                            handlePressFunction={onShowSideMenu}
                         />
                         <View>
                             <Text style={[appStyles.text_title]}>{t('goblet.title')}</Text>

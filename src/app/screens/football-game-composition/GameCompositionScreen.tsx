@@ -11,7 +11,7 @@ import { useViewModel } from './GameCompositionScreen.viewModel';
 import { IGameCompositionScreenProps } from './GameCompositionScreen.type';
 
 export const GameCompositionScreen = ({ navigation, route }: IGameCompositionScreenProps) => {
-    const { t, onGoBack, labels } = useViewModel({
+    const { t, onGoBack, labels, handleStadium } = useViewModel({
         navigation,
         route,
     });
@@ -40,6 +40,7 @@ export const GameCompositionScreen = ({ navigation, route }: IGameCompositionScr
                             score="2 : 1"
                             stadium="בלומפילד"
                             status="הסתיים"
+                            handleStadium={handleStadium}
                         />
                     </View>
                     <View style={[appStyles.flex, appStyles.main_container]}>

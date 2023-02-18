@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import { getSize } from '@football/app/utils/responsive/scale';
 import { Avatar } from 'react-native-elements';
@@ -19,6 +19,7 @@ export const HeaderComposition = ({
     stadium,
     score,
     season,
+    handleStadium,
 }: IHeaderCompositionProps) => {
     return (
         <View>
@@ -63,14 +64,17 @@ export const HeaderComposition = ({
                     <Text style={styles.name_club}>{name_away}</Text>
                 </View>
             </View>
-            <View style={[appStyles.flex_row_center, { marginTop: getSize.m(24), flex: 0 }]}>
+            <TouchableOpacity
+                onPress={handleStadium}
+                style={[appStyles.flex_row_center, { marginTop: getSize.m(24), flex: 0 }]}
+            >
                 <IconLocation
                     name={appIcons.ic_location}
                     size={getSize.m(20)}
                     color={appColors.blue_light}
                 />
                 <Text style={styles.stadium}>{stadium}</Text>
-            </View>
+            </TouchableOpacity>
         </View>
     );
 };
