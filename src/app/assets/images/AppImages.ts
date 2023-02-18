@@ -83,7 +83,7 @@ export const AppImages = {
     img_security: require('./security.png'),
     img_people: require('./people.png'),
     img_message_question: require('./message-question.png'),
-    img_cups: require('./cup.png'),
+    img_cups: require('./icon_cup.png'),
     img_video_square: require('./video-square.png'),
     img_home_outline: require('./home-outline.png'),
     img_security_outline: require('./security-outline.png'),
