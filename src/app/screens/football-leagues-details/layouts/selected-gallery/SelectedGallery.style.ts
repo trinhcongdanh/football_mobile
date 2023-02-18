@@ -33,6 +33,27 @@ const styles = StyleSheet.create({
         color: appColors.white,
         fontFamily: AppFonts.bold,
     },
+    date: {
+        backgroundColor: 'rgba(0, 0, 0, 0.3)',
+        paddingHorizontal: getSize.m(12),
+        paddingVertical: getSize.m(2),
+        position: 'absolute',
+        borderRadius: getSize.m(40),
+        top: getSize.m(16),
+        right: getSize.m(16),
+    },
+    text_date: {
+        fontSize: getSize.m(12),
+        fontFamily: AppFonts.semibold,
+        color: appColors.white,
+        lineHeight: getSize.m(20),
+    },
+
+    ic_arrow_left: {
+        lineHeight: getSize.m(16),
+
+        fontFamily: AppFonts.bold,
+    },
 
     play_video: {
         paddingHorizontal: getSize.m(16),
@@ -64,9 +85,36 @@ const styles = StyleSheet.create({
         overflow: 'hidden',
     },
     image: {
-        width: '100%',
-        height: undefined,
-        aspectRatio: 1,
+        height: getSize.m(280),
+        width: getSize.m(194),
+        borderRadius: getSize.m(18),
+        resizeMode: 'contain',
+    },
+    video_container: {
+        position: 'absolute',
+        zIndex: getSize.m(100),
+        right: getSize.m(-20),
+        left: getSize.m(-20),
+        top: getSize.m(-200),
+        bottom: getSize.m(-200),
+        justifyContent: 'center',
+        backgroundColor: 'rgba(0,0,0,0.8)',
+    },
+
+    ic_close: {
+        position: 'absolute',
+        left: getSize.m(20),
+        top: getSize.m(40),
+        zIndex: 1,
+        backgroundColor: appColors.blue_light,
+        padding: getSize.m(4),
+        borderRadius: getSize.m(30),
+    },
+    ic_share: {
+        position: 'absolute',
+        right: getSize.m(20),
+        top: getSize.m(40),
+        zIndex: 1,
     },
 });
 

@@ -1,5 +1,13 @@
 import React from 'react';
-import { View, ImageBackground, StatusBar, SafeAreaView, Text, ScrollView } from 'react-native';
+import {
+    View,
+    ImageBackground,
+    StatusBar,
+    SafeAreaView,
+    Text,
+    ScrollView,
+    TouchableOpacity,
+} from 'react-native';
 import { useViewModel } from '@football/app/screens/football-home/HomeScreen.viewModel';
 import { IHomeScreenProps } from '@football/app/screens/football-home/HomeScreen.type';
 import { appStyles } from '@football/app/utils/constants/appStyles';
@@ -26,7 +34,7 @@ import { Item12 } from '@football/app/screens/football-home/layouts/Item12/Item1
 import { Item13 } from '@football/app/screens/football-home/layouts/Item13/Item13';
 
 export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
-    const { onGoBack, t, data_header } = useViewModel({
+    const { onGoBack, t, data_header, onShowSideMenu } = useViewModel({
         navigation,
         route,
     });
@@ -42,7 +50,7 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                     <SafeAreaView style={appStyles.safe_area}>
                         <View style={appStyles.container}>
                             <View style={appStyles.flex_row_space_center}>
-                                <View>
+                                <TouchableOpacity onPress={onShowSideMenu}>
                                     <LinearGradient
                                         colors={['rgba(255, 43, 94, 1)', 'rgba(204, 10, 45, 1)']}
                                         style={styles.home_side_bar}
@@ -53,7 +61,7 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                                             resizeMode={FastImage.resizeMode.contain}
                                         />
                                     </LinearGradient>
-                                </View>
+                                </TouchableOpacity>
                                 <View>
                                     <View style={[appStyles.flex_row_align, styles.avt]}>
                                         <FastImage

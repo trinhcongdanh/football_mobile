@@ -20,6 +20,7 @@ export const Statistics = () => {
         dots,
         handleNextRightSlide,
         handleNextLeftSlide,
+        onNavigateDataPlayer,
     } = useViewModel({});
 
     return (
@@ -46,47 +47,48 @@ export const Statistics = () => {
                         <View style={{ marginTop: getSize.m(14) }}>
                             {players.map(item => {
                                 return (
-                                    <LinearGradient
-                                        start={{ x: 0, y: 0 }}
-                                        end={{ x: 1, y: 1 }}
-                                        colors={[
-                                            item.id % 2 === 1
-                                                ? 'rgba(16, 32, 100, 0.04)'
-                                                : appColors.white,
-                                            item.id % 2 === 1
-                                                ? 'rgba(59, 168, 225, 0.04)'
-                                                : appColors.white,
-                                        ]}
-                                        style={[
-                                            appStyles.align_justify,
-                                            {
-                                                paddingHorizontal: getSize.m(10),
-                                                height: getSize.m(30),
-                                            },
-                                        ]}
-                                        key={item.id}
-                                    >
-                                        <View style={{ width: getSize.m(120) }}>
-                                            <View style={appStyles.flex_row_align}>
-                                                <Avatar
-                                                    source={item.avt}
-                                                    rounded
-                                                    size={getSize.m(17.33)}
-                                                />
-                                                <Text
-                                                    style={[
-                                                        appStyles.statistics_content,
-                                                        {
-                                                            marginLeft: getSize.m(10),
-                                                            fontSize: getSize.m(13),
-                                                        },
-                                                    ]}
-                                                >
-                                                    {item.player}
-                                                </Text>
+                                    <TouchableOpacity onPress={onNavigateDataPlayer} key={item.id}>
+                                        <LinearGradient
+                                            start={{ x: 0, y: 0 }}
+                                            end={{ x: 1, y: 1 }}
+                                            colors={[
+                                                item.id % 2 === 1
+                                                    ? 'rgba(16, 32, 100, 0.04)'
+                                                    : appColors.white,
+                                                item.id % 2 === 1
+                                                    ? 'rgba(59, 168, 225, 0.04)'
+                                                    : appColors.white,
+                                            ]}
+                                            style={[
+                                                appStyles.align_justify,
+                                                {
+                                                    paddingHorizontal: getSize.m(10),
+                                                    height: getSize.m(30),
+                                                },
+                                            ]}
+                                        >
+                                            <View style={{ width: getSize.m(120) }}>
+                                                <View style={appStyles.flex_row_align}>
+                                                    <Avatar
+                                                        source={item.avt}
+                                                        rounded
+                                                        size={getSize.m(17.33)}
+                                                    />
+                                                    <Text
+                                                        style={[
+                                                            appStyles.statistics_content,
+                                                            {
+                                                                marginLeft: getSize.m(10),
+                                                                fontSize: getSize.m(13),
+                                                            },
+                                                        ]}
+                                                    >
+                                                        {item.player}
+                                                    </Text>
+                                                </View>
                                             </View>
-                                        </View>
-                                    </LinearGradient>
+                                        </LinearGradient>
+                                    </TouchableOpacity>
                                 );
                             })}
                         </View>

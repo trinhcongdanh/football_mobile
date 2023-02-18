@@ -13,7 +13,7 @@ import { IMatchScreenProps } from './MatchScreen.type';
 // type Props = {};
 
 export const MatchScreen = ({ navigation, route }: IMatchScreenProps) => {
-    const { t, onGoBack, labels, gamesData } = useViewModel({
+    const { t, onGoBack, labels, gamesData, handleStadium } = useViewModel({
         navigation,
         route,
     });
@@ -49,6 +49,7 @@ export const MatchScreen = ({ navigation, route }: IMatchScreenProps) => {
                             score="3 : 6"
                             stadium="בלומפילד"
                             status={t('match.status')}
+                            handleStadium={handleStadium}
                         />
                     </View>
                     <View style={[appStyles.flex, appStyles.main_container]}>

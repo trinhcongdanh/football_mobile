@@ -13,4 +13,5 @@ export type IListGameProps = {
     color?: any;
     isLive?: boolean;
     handleDetailMatch?: () => void;
+    handleStadium?: () => void;
 };

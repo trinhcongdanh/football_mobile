@@ -26,7 +26,7 @@ import { useViewModel } from './TeamScreen.viewModel';
 // type Props = {};
 
 export const TeamScreen = ({ navigation, route }: ITeamScreenProps) => {
-    const { optionTeams, toggleChangeBar, toggleBar, handleTeam } = useViewModel({
+    const { optionTeams, toggleChangeBar, toggleBar, handleTeam, onShowSideMenu } = useViewModel({
         navigation,
         route,
     });
@@ -81,7 +81,7 @@ export const TeamScreen = ({ navigation, route }: ITeamScreenProps) => {
                             icon={AppImages.img_bars_sort}
                             color_pre={appColors.blue_light}
                             color_after={appColors.blue_dark}
-                            handlePressFunction={toggleChangeBar}
+                            handlePressFunction={onShowSideMenu}
                         />
                         <View>
                             <Text style={[appStyles.text_title]}>{t('team.title')}</Text>

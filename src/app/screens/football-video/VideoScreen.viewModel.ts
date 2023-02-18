@@ -67,7 +67,7 @@ export const useViewModel = ({ navigation, route }: IVideoScreenProps) => {
 
     const [showSideMenu, setShowSideMenu] = useState(false);
 
-    const ShowSideMenu = () => {
+    const onShowSideMenu = () => {
         navigation.openDrawer();
     };
 
@@ -77,7 +77,7 @@ export const useViewModel = ({ navigation, route }: IVideoScreenProps) => {
 
     return {
         t,
-        ShowSideMenu,
+        onShowSideMenu,
         handlePlayVideo,
         setDisplay,
         sourceVideo,

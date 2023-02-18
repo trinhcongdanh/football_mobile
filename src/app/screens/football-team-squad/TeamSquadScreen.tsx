@@ -11,6 +11,8 @@ import { Position } from '@football/app/components/position/Position';
 import styles from './TeamSquadScreen.style';
 import { useViewModel } from './TeamSquadScreen.viewModel';
 import { ITeamGroupScreenProps } from './TeamSquadScreen.type';
+import { HeaderUser } from '@football/app/components/header-user/HeaderUser';
+import { appColors } from '@football/app/utils/constants/appColors';
 
 // type Props = {};
 
@@ -27,11 +29,13 @@ export const TeamSquadScreen = ({ navigation, route }: ITeamGroupScreenProps) =>
                 <StatusBar translucent backgroundColor="transparent" />
                 <SafeAreaView style={appStyles.safe_area}>
                     <View style={appStyles.container}>
-                        <CardGoBack
-                            iconName={appIcons.ic_right_ios}
-                            iconStyle={styles.ic_back}
-                            goBack={onGoBack}
-                            title={t('team_squad.title')}
+                        <HeaderUser
+                            avt={AppImages.img_avt}
+                            point="1,325"
+                            icon={AppImages.img_angle_right}
+                            color_pre={appColors.black}
+                            color_after={appColors.black}
+                            handlePressFunction={onGoBack}
                         />
                     </View>
                     <View style={[appStyles.flex, appStyles.main_container]}>

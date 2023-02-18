@@ -13,7 +13,7 @@ import { ICompositionScreenProps } from './CompositionScreen.type';
 // type Props = {};
 
 export const CompositionScreen = ({ navigation, route }: ICompositionScreenProps) => {
-    const { t, defenders, setOnSelect, onSelect } = useViewModel({
+    const { t, defenders, setOnSelect, onSelect, handleDataPlayer } = useViewModel({
         navigation,
         route,
     });
@@ -45,6 +45,7 @@ export const CompositionScreen = ({ navigation, route }: ICompositionScreenProps
                                 name={item.name}
                                 number_before={item.number}
                                 avt="https://upload.wikimedia.org/wikipedia/commons/5/55/EranZeahviCelebrating.jpg"
+                                handleDataPlayer={handleDataPlayer}
                             />
                         );
                     })}
@@ -58,6 +59,7 @@ export const CompositionScreen = ({ navigation, route }: ICompositionScreenProps
                                 name={item.name}
                                 number_before={item.number}
                                 avt="https://upload.wikimedia.org/wikipedia/commons/5/55/EranZeahviCelebrating.jpg"
+                                handleDataPlayer={handleDataPlayer}
                             />
                         );
                     })}
@@ -74,6 +76,7 @@ export const CompositionScreen = ({ navigation, route }: ICompositionScreenProps
                                 name={item.name}
                                 number_before={item.number}
                                 avt="https://upload.wikimedia.org/wikipedia/commons/5/55/EranZeahviCelebrating.jpg"
+                                handleDataPlayer={handleDataPlayer}
                             />
                         );
                     })}
@@ -87,6 +90,7 @@ export const CompositionScreen = ({ navigation, route }: ICompositionScreenProps
                                 name={item.name}
                                 number_before={item.number}
                                 avt="https://upload.wikimedia.org/wikipedia/commons/5/55/EranZeahviCelebrating.jpg"
+                                handleDataPlayer={handleDataPlayer}
                             />
                         );
                     })}

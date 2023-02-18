@@ -133,5 +133,6 @@ export const useViewModel = ({}: ILeagueTableProps) => {
         selectPlayoff,
         playOffs,
         listTeams,
+        navigate,
     };
 };

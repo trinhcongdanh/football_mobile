@@ -8,8 +8,8 @@ export const useViewModel = ({ navigation, route }: IGobletScreenProps) => {
     const { navigate, goBack } = useAppNavigator();
     const { t } = useTranslation();
 
-    const onNavigateSetting = () => {
-        navigate(ScreenName.SettingsPage);
+    const onShowSideMenu = () => {
+        navigation.openDrawer();
     };
 
     const [onSelect, setOnSelect] = useState(0);
@@ -30,5 +30,5 @@ export const useViewModel = ({ navigation, route }: IGobletScreenProps) => {
         navigate(ScreenName.StateCupPage);
     };
 
-    return { t, onNavigateSetting, setOnSelect, handleStateCup, onSelect, stateCups };
+    return { t, onShowSideMenu, setOnSelect, handleStateCup, onSelect, stateCups };
 };

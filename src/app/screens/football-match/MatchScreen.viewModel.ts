@@ -7,7 +7,7 @@ import { BASE_URL, DATA_SOURCE, DB } from '@football/core/api/configs/config';
 import { useMount } from '@football/app/utils/hooks/useMount';
 import localStorage from '@football/core/helpers/localStorage';
 import { useTranslation } from 'react-i18next';
-import { OfflineData, ScreenTopTap } from '../../utils/constants/enum';
+import { OfflineData, ScreenName, ScreenTopTap } from '../../utils/constants/enum';
 import { CompositionScreen } from '../../screens/football-match/layouts/match-composition';
 import { GameScreen } from '../../screens/football-match/layouts/match-game';
 import { ScheduleScreen } from '../../screens/football-match/layouts/match-schedule';
@@ -102,5 +102,9 @@ export const useViewModel = ({ navigation, route }: IMatchScreenProps) => {
         },
     ];
 
-    return { t, onGoBack, labels, gamesData };
+    const handleStadium = () => {
+        navigate(ScreenName.PitchPage);
+    };
+
+    return { t, onGoBack, labels, gamesData, handleStadium };
 };

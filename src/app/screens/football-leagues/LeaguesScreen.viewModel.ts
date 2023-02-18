@@ -63,8 +63,8 @@ export const useViewModel = ({ navigation, route }: ILeaguesScreenProps) => {
         }
     };
 
-    const onNavigateSetting = () => {
-        navigate(ScreenName.SettingsPage);
+    const onShowSideMenu = () => {
+        navigation.openDrawer();
     };
     const getLeagueTypesData = useCallback(async () => {
         try {
@@ -97,7 +97,7 @@ export const useViewModel = ({ navigation, route }: ILeaguesScreenProps) => {
         t,
         onGoBack,
         labels,
-        onNavigateSetting,
+        onShowSideMenu,
         leagueTypes,
         searchLeagues,
         onSearchLeague,

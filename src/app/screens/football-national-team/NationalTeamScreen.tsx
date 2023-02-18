@@ -57,6 +57,10 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
         setActiveIndexNumber,
         handleDetails,
         cupsAround,
+        handleStadium,
+        onNavigateConquerors,
+        onNavigatePlayerData,
+        navigate,
     } = useViewModel({
         navigation,
         route,
@@ -260,6 +264,8 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                                                 // completed={item.completed}
                                                 color={appColors.text_dark_blue}
                                                 handleDetailMatch={handleDetailMatch}
+                                                handleStadium={handleStadium}
+                                                isLive={item.isLive}
                                             />
                                         );
                                     })}
@@ -587,6 +593,7 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                                                             color={appColors.gray}
                                                             details={item.details}
                                                             handleDetailMatch={handleDetailMatch}
+                                                            handleStadium={handleStadium}
                                                         />
                                                     );
                                                 })}
@@ -606,7 +613,10 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                                         >
                                             {t('national_team.conquerors.title')}
                                         </Text>
-                                        <TouchableOpacity style={appStyles.flex_row_space_center}>
+                                        <TouchableOpacity
+                                            onPress={onNavigateConquerors}
+                                            style={appStyles.flex_row_space_center}
+                                        >
                                             <Text style={appStyles.statistics_see_all}>
                                                 {t('national_team.conquerors.full_list')}
                                             </Text>
@@ -621,7 +631,8 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                                     <View style={{ marginTop: getSize.m(10) }}>
                                         {cupsAround.map(item => {
                                             return (
-                                                <View
+                                                <TouchableOpacity
+                                                    onPress={onNavigatePlayerData}
                                                     key={item.id}
                                                     style={[
                                                         appStyles.flex_row_space_center,
@@ -667,7 +678,7 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                                                             {item.number}
                                                         </Text>
                                                     </View>
-                                                </View>
+                                                </TouchableOpacity>
                                             );
                                         })}
                                     </View>
@@ -684,7 +695,10 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                                         >
                                             {t('national_team.performances.title')}
                                         </Text>
-                                        <TouchableOpacity style={appStyles.flex_row_space_center}>
+                                        <TouchableOpacity
+                                            onPress={onNavigateConquerors}
+                                            style={appStyles.flex_row_space_center}
+                                        >
                                             <Text style={appStyles.statistics_see_all}>
                                                 {t('national_team.performances.full_list')}
                                             </Text>
@@ -699,7 +713,8 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                                     <View style={{ marginTop: getSize.m(10) }}>
                                         {cupsAround.map(item => {
                                             return (
-                                                <View
+                                                <TouchableOpacity
+                                                    onPress={onNavigatePlayerData}
                                                     key={item.id}
                                                     style={[
                                                         appStyles.flex_row_space_center,
@@ -745,7 +760,7 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                                                             {item.number}
                                                         </Text>
                                                     </View>
-                                                </View>
+                                                </TouchableOpacity>
                                             );
                                         })}
                                     </View>
@@ -756,6 +771,9 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                             {teamSquads.map(item => {
                                 return (
                                     <TouchableOpacity
+                                        onPress={() => {
+                                            navigate(item.screen);
+                                        }}
                                         style={[
                                             appStyles.flex_row_space_center,
                                             styles.content_team_squad,
@@ -798,7 +816,7 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                                     onSnapToItem={index => setActiveIndexNumber(index)}
                                     data={data}
                                     renderItem={({ item, index }) => (
-                                        <View
+                                        <TouchableOpacity
                                             key={index}
                                             style={{
                                                 flexDirection: 'row',
@@ -808,7 +826,7 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                                             <View>
                                                 <Image source={item.image} style={[styles.image]} />
                                             </View>
-                                        </View>
+                                        </TouchableOpacity>
                                     )}
                                 />
                             </GestureHandlerRootView>

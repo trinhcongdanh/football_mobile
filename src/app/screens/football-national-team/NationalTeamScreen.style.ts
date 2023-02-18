@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
         top: getSize.m(0),
         bottom: getSize.m(0),
         justifyContent: 'center',
-        backgroundColor: appColors.black,
+        backgroundColor: 'rgba(0,0,0,0.8)',
     },
 
     ic_close: {

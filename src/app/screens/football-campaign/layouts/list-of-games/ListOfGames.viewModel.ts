@@ -35,6 +35,7 @@ export const useViewModel = ({}: IListOfGamesProps) => {
             details: 'פרטי משחק',
             tournament: 'פלייאוף לאליפות אירופה',
             completed: false,
+            isLive: true,
         },
         {
             id: 2,
@@ -51,6 +52,7 @@ export const useViewModel = ({}: IListOfGamesProps) => {
             details: 'פרטי משחק',
             tournament: 'פלייאוף לאליפות אירופה',
             completed: true,
+            isLive: false,
         },
         {
             id: 3,
@@ -67,10 +69,15 @@ export const useViewModel = ({}: IListOfGamesProps) => {
             details: 'פרטי משחק',
             tournament: 'פלייאוף לאליפות אירופה',
             completed: true,
+            isLive: false,
         },
     ];
     const handleDetailMatch = () => {
-        navigate(ScreenName.GoalsNationalTeamPage);
+        navigate(ScreenName.MatchPage);
+    };
+
+    const handleStadium = () => {
+        navigate(ScreenName.PitchPage);
     };
 
     return {
@@ -81,5 +88,6 @@ export const useViewModel = ({}: IListOfGamesProps) => {
         setSelect,
         selectOption,
         handleDetailMatch,
+        handleStadium,
     };
 };

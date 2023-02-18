@@ -8,7 +8,7 @@ import { appIcons } from '@football/app/assets/icons/appIcons';
 import { useViewModel } from './ListOfGames.viewModel';
 
 export const ListOfGames = () => {
-    const { t, listGames, handleDetailMatch } = useViewModel({});
+    const { t, listGames, handleDetailMatch, handleStadium } = useViewModel({});
     return (
         <View>
             <Text style={[appStyles.text_topic, { marginLeft: getSize.m(6) }]}>
@@ -32,7 +32,9 @@ export const ListOfGames = () => {
                             icon={appIcons.ic_arrow_left}
                             color={appColors.gray}
                             details={item.details}
+                            isLive={item.isLive}
                             handleDetailMatch={handleDetailMatch}
+                            handleStadium={handleStadium}
                         />
                     );
                 })}

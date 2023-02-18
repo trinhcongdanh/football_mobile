@@ -2,6 +2,7 @@ import { useTranslation } from 'react-i18next';
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
 import { useState } from 'react';
 import { IDataPlayerNationalScreenProps } from './DataPlayerNationalScreen.type';
+import { ScreenName } from '@football/app/utils/constants/enum';
 
 export const useViewModel = ({}: IDataPlayerNationalScreenProps) => {
     const { navigate, goBack } = useAppNavigator();
@@ -18,5 +19,18 @@ export const useViewModel = ({}: IDataPlayerNationalScreenProps) => {
         { id: 4, team: 'נוער עד גיל 17', games: 2, gates: 1 },
     ];
 
-    return { t, setSelected, setOpenModal, goals, years, selected, openModal };
+    const onNavigateGoalTopTeam = () => {
+        navigate(ScreenName.GoalsNationalTeamPage);
+    };
+
+    return {
+        t,
+        setSelected,
+        setOpenModal,
+        goals,
+        years,
+        selected,
+        openModal,
+        onNavigateGoalTopTeam,
+    };
 };

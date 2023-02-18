@@ -11,7 +11,7 @@ import { ICompositionScreenProps } from './CompositionScreen.type';
 // type Props = {};
 
 export const CompositionScreen = ({ navigation, route }: ICompositionScreenProps) => {
-    const { t, lineUp } = useViewModel({
+    const { t, lineUp, handleDataPlayer } = useViewModel({
         navigation,
         route,
     });
@@ -42,6 +42,7 @@ export const CompositionScreen = ({ navigation, route }: ICompositionScreenProps
                                 name={item.name_he}
                                 number_before={item.shirt_number}
                                 avt={item.image_url}
+                                handleDataPlayer={handleDataPlayer}
                             />
                         );
                     })}
@@ -55,6 +56,7 @@ export const CompositionScreen = ({ navigation, route }: ICompositionScreenProps
                                 name={item.name_he}
                                 number_before={item.shirt_number}
                                 avt={item.image_url}
+                                handleDataPlayer={handleDataPlayer}
                             />
                         );
                     })}
@@ -71,6 +73,7 @@ export const CompositionScreen = ({ navigation, route }: ICompositionScreenProps
                                 name={item.name_he}
                                 number_before={item.shirt_number}
                                 avt={item.image_url}
+                                handleDataPlayer={handleDataPlayer}
                             />
                         );
                     })}
@@ -83,6 +86,7 @@ export const CompositionScreen = ({ navigation, route }: ICompositionScreenProps
                                 key={item.player_id}
                                 name={item.name_he}
                                 avt={item.image_url}
+                                handleDataPlayer={handleDataPlayer}
                             />
                         );
                     })}

@@ -1,4 +1,5 @@
-import { OfflineData } from '@football/app/utils/constants/enum';
+import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
+import { OfflineData, ScreenName } from '@football/app/utils/constants/enum';
 import { useMount } from '@football/app/utils/hooks/useMount';
 import localStorage from '@football/core/helpers/localStorage';
 import { GameModel, Lineup } from '@football/core/models/GameModelResponse';
@@ -10,6 +11,7 @@ import { ICompositionScreenProps } from './CompositionScreen.type';
 
 export const useViewModel = ({ navigation, route }: ICompositionScreenProps) => {
     const { t } = useTranslation();
+    const { navigate, goBack } = useAppNavigator();
     // const [lineUp, setLineUp] = useState<{
     //     isLoading: boolean;
     //     success: boolean;
@@ -59,5 +61,9 @@ export const useViewModel = ({ navigation, route }: ICompositionScreenProps) => 
         },
     ];
 
-    return { t, lineUp };
+    const handleDataPlayer = () => {
+        navigate(ScreenName.DataPlayerPage);
+    };
+
+    return { t, lineUp, handleDataPlayer };
 };

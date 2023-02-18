@@ -11,7 +11,7 @@ import { IListOfGamesProps } from './ListOfGames.type';
 // import { IListOfGamesProps } from './ListOfGames.type';
 
 export const ListOfGames = ({ games }: IListOfGamesProps) => {
-    const { t, listGames } = useViewModel({ games });
+    const { t, listGames, onNavigateGamePersonnel, onNavigateStadium } = useViewModel({ games });
     return (
         <View>
             <Text style={[appStyles.text_topic, { marginLeft: getSize.m(6) }]}>
@@ -37,6 +37,8 @@ export const ListOfGames = ({ games }: IListOfGamesProps) => {
                                 moment(`${item.date} ${item.time}`, 'DD.M.YY HH:mm'),
                                 moment(`${item.date} ${item.time}`, 'DD.M.YY HH:mm').add(2, 'hours')
                             )}
+                            handleDetailMatch={onNavigateGamePersonnel}
+                            handleStadium={onNavigateStadium}
                         />
                     );
                 })}

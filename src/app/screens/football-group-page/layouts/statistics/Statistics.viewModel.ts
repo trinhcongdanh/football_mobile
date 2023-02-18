@@ -140,6 +140,10 @@ export const useViewModel = ({}: IStatisticsProps) => {
 
     const handleNextLeftSlide = () => {};
 
+    const onNavigateDataPlayer = () => {
+        navigate(ScreenName.DataPlayerPage);
+    };
+
     return {
         t,
         statistics,
@@ -149,5 +153,6 @@ export const useViewModel = ({}: IStatisticsProps) => {
         dots,
         handleNextRightSlide,
         handleNextLeftSlide,
+        onNavigateDataPlayer,
     };
 };

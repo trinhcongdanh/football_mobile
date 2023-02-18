@@ -27,7 +27,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 export const PlayGroundScreen = ({ navigation, route }: IPlayGroundScreenProps) => {
-    const { t, onGoBack } = useViewModel({ navigation, route });
+    const { t, onGoBack, onShowSideMenu } = useViewModel({ navigation, route });
 
     const options = [
         t('play_ground.awards.title'),
@@ -58,7 +58,7 @@ export const PlayGroundScreen = ({ navigation, route }: IPlayGroundScreenProps) 
                                 {t('play_ground.title')}
                             </Text>
 
-                            <TouchableOpacity>
+                            <TouchableOpacity onPress={onShowSideMenu}>
                                 <LinearGradient
                                     colors={[appColors.blue_light, appColors.blue_dark]}
                                     style={styles.bar}

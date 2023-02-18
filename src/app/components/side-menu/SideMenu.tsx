@@ -15,6 +15,9 @@ import { ScreenName } from '@football/app/utils/constants/enum';
 
 export const SideMenu = ({ navigation }: ISideMenuProps) => {
     const { navigate, goBack } = useAppNavigator();
+    const onNavigateStartScreen = () => {
+        navigate(ScreenName.OpeningPage);
+    };
 
     const { t } = useTranslation();
     return (
@@ -43,20 +46,23 @@ export const SideMenu = ({ navigation }: ISideMenuProps) => {
                     </View>
                     <View style={{ marginLeft: getSize.m(10) }}>
                         <Text style={styles.side_menu_name}>עידו אברהמי</Text>
-                        <View style={[appStyles.flex_row_align_center]}>
+                        <TouchableOpacity
+                            onPress={onNavigateStartScreen}
+                            style={[appStyles.flex_row_align_center]}
+                        >
                             <FastImage
                                 source={AppImages.img_arrow_right_from_bracket}
                                 style={styles.side_menu_logout_icon}
                                 resizeMode={FastImage.resizeMode.contain}
                             />
                             <Text style={styles.side_menu_logout_text}>התנתק</Text>
-                        </View>
+                        </TouchableOpacity>
                     </View>
                 </View>
                 <View style={{ marginTop: getSize.m(23) }}>
                     <TouchableOpacity
                         onPress={() => {
-                            navigate(ScreenName.TermsConditionPage);
+                            navigate(ScreenName.SettingsPage);
                         }}
                         style={appStyles.flex_row_align_center}
                     >
@@ -81,6 +87,9 @@ export const SideMenu = ({ navigation }: ISideMenuProps) => {
                         <Text style={styles.side_menu_item_text}>{t('side_menu.contact_us')}</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
+                        onPress={() => {
+                            navigate(ScreenName.SettingsPage);
+                        }}
                         style={[appStyles.flex_row_align_center, { marginTop: getSize.m(28) }]}
                     >
                         <FastImage
@@ -91,6 +100,9 @@ export const SideMenu = ({ navigation }: ISideMenuProps) => {
                         <Text style={styles.side_menu_item_text}>{t('side_menu.definitions')}</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
+                        onPress={() => {
+                            navigate(ScreenName.TermsConditionPage);
+                        }}
                         style={[appStyles.flex_row_align_center, { marginTop: getSize.m(28) }]}
                     >
                         <FastImage

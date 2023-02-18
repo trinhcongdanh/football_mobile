@@ -12,7 +12,7 @@ import { useViewModel } from './TeamStaffScreen.viewModel';
 import { ITeamStaffScreenProps } from './TeamStaffScreen.type';
 
 export const TeamStaffScreen = ({ navigation, route }: ITeamStaffScreenProps) => {
-    const { t, onGoBack, setOnSelect, onSelect, teamStaffs } = useViewModel({
+    const { t, onGoBack, setOnSelect, onSelect, teamStaffs, onNavigateDataCoach } = useViewModel({
         navigation,
         route,
     });
@@ -38,6 +38,8 @@ export const TeamStaffScreen = ({ navigation, route }: ITeamStaffScreenProps) =>
                         />
                         <View style={{ paddingHorizontal: getSize.m(26) }}>
                             {onSelect === 0 ? (
+                                <ScrollView showsVerticalScrollIndicator={false}></ScrollView>
+                            ) : (
                                 <ScrollView showsVerticalScrollIndicator={false}>
                                     <View style={{ marginTop: getSize.m(30) }}>
                                         {teamStaffs.map(item => {
@@ -47,14 +49,11 @@ export const TeamStaffScreen = ({ navigation, route }: ITeamStaffScreenProps) =>
                                                     avt={item.avt}
                                                     name={item.name}
                                                     position={item.position}
+                                                    handleDataPlayer={onNavigateDataCoach}
                                                 />
                                             );
                                         })}
                                     </View>
-                                </ScrollView>
-                            ) : (
-                                <ScrollView showsVerticalScrollIndicator={false}>
-                                    <View></View>
                                 </ScrollView>
                             )}
                         </View>

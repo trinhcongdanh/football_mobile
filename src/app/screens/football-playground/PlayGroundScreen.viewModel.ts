@@ -10,9 +10,13 @@ export const useViewModel = ({ navigation, route }: IPlayGroundScreenProps) => {
     const onGoBack = (): void => {
         goBack();
     };
+    const onShowSideMenu = () => {
+        navigation.openDrawer();
+    };
 
     return {
         t,
         onGoBack,
+        onShowSideMenu,
     };
 };
