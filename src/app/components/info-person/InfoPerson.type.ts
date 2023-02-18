@@ -8,4 +8,5 @@ export type IInfoPersonComponent = {
     title_1: string;
     title_2: string;
     title_3: string;
+    rating?: any;
 };

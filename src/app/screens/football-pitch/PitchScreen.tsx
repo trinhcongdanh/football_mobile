@@ -42,7 +42,7 @@ export const PitchScreen = ({ navigation, route }: IPitchScreenProps) => {
                     <ScrollView>
                         <View style={appStyles.container}>
                             <InfoPerson
-                                name="פיני יואב גראפי"
+                                name="בלומפילד"
                                 data_1="שארית ישראל תל אביב - יפו"
                                 data_2="איתן שור"
                                 data_3="03-6376000"
@@ -50,6 +50,7 @@ export const PitchScreen = ({ navigation, route }: IPitchScreenProps) => {
                                 title_1={t('pitch.address')}
                                 title_2={t('pitch.contact')}
                                 title_3={t('pitch.phone')}
+                                rating="על"
                             />
                         </View>
                         <View
@@ -96,7 +97,7 @@ export const PitchScreen = ({ navigation, route }: IPitchScreenProps) => {
                                         </Text>
                                     </View>
                                     <View
-                                        style={{ width: getSize.m(62), marginRight: getSize.m(10) }}
+                                        style={{ width: getSize.m(66), marginRight: getSize.m(10) }}
                                     >
                                         <Text
                                             style={[
@@ -176,7 +177,7 @@ export const PitchScreen = ({ navigation, route }: IPitchScreenProps) => {
                                                 </View>
                                                 <View
                                                     style={{
-                                                        width: getSize.m(62),
+                                                        width: getSize.m(66),
                                                     }}
                                                 >
                                                     <Text

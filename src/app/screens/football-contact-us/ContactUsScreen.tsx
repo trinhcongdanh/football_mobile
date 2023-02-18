@@ -15,6 +15,7 @@ import {
     SafeAreaView,
     ScrollView,
     StatusBar,
+    Text,
     TextInput,
     View,
 } from 'react-native';
@@ -57,20 +58,8 @@ export const ContactUsScreen = ({ navigation, route }: IContactUsScreenProps) =>
                     </View>
                     <ScrollView>
                         <View style={styles.contact_us_conatiner}>
-                            <View>
-                                <Input
-                                    input={application}
-                                    backgroundColor={appColors.white}
-                                    backgroundColorCompleted={appColors.separator}
-                                    textColor={appColors.light_gray}
-                                    inputRef={applicationRef}
-                                    error={errors.application}
-                                    placeholder={t('contact_us.application')}
-                                    onChangeTextInput={text => setApplication(text)}
-                                    onFocus={() => {
-                                        handleError('', 'application');
-                                    }}
-                                />
+                            <View style={styles.title}>
+                                <Text style={styles.title_text}>התאחדות לכדורגל בישראל</Text>
                             </View>
                             <View style={{ marginTop: getSize.m(16) }}>
                                 <Input

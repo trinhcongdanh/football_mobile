@@ -11,8 +11,7 @@ export const styles = StyleSheet.create({
         top: 0,
         left: 0,
         right: 0,
-        width: '100%',
-        zIndex: 1000,
+        zIndex: 10,
     },
     side_menu: {
         paddingHorizontal: getSize.m(30),

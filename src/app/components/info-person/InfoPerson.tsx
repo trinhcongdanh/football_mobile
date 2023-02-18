@@ -17,6 +17,7 @@ export const InfoPerson = ({
     title_1,
     title_2,
     title_3,
+    rating,
 }: IInfoPersonComponent) => {
     const { t } = useTranslation();
     return (
@@ -28,10 +29,29 @@ export const InfoPerson = ({
                     rounded
                     containerStyle={styles.avt_person}
                 />
-                <Text style={styles.name_person}>{name}</Text>
+                <View style={[appStyles.flex_row_align, { marginTop: getSize.m(16) }]}>
+                    <View>
+                        <Text style={styles.name_person}>{name}</Text>
+                    </View>
+                    {rating && (
+                        <View style={[appStyles.flex_row_align, { marginLeft: getSize.m(13) }]}>
+                            <Text style={styles.rating}>{t('pitch.rating')}</Text>
+                            <Text style={styles.content_rating}>{rating}</Text>
+                        </View>
+                    )}
+                </View>
             </View>
             <View style={styles.line_dots} />
-            <View style={[appStyles.flex_row_space_center, { marginHorizontal: getSize.m(20) }]}>
+            <View
+                style={[
+                    appStyles.flex_row_space_center,
+                    {
+                        marginHorizontal: getSize.m(20),
+                        height: getSize.m(60),
+                        alignItems: 'flex-end',
+                    },
+                ]}
+            >
                 <View style={[appStyles.align_justify, { width: getSize.m(100) }]}>
                     <Text style={styles.data}>{data_1}</Text>
                     <Text style={styles.title}>{title_1}</Text>

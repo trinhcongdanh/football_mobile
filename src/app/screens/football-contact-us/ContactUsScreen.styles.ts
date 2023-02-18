@@ -21,9 +21,24 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderRadius: getSize.m(15),
         paddingHorizontal: getSize.m(24),
-        ontFamily: AppFonts.medium,
+        fontFamily: AppFonts.medium,
         height: getSize.m(153),
         textAlignVertical: 'top',
+    },
+    title: {
+        paddingHorizontal: getSize.m(15),
+        paddingVertical: getSize.m(17),
+        borderColor: '#E9F1F4',
+        borderWidth: 1,
+        borderRadius: getSize.m(15),
+        textAlign: I18nManager.isRTL ? 'right' : 'left',
+        backgroundColor: appColors.separator,
+    },
+    title_text: {
+        fontSize: getSize.m(13),
+        lineHeight: getSize.m(17),
+        color: appColors.light_gray,
+        fontFamily: AppFonts.medium,
     },
 });
 

@@ -13,7 +13,6 @@ const styles = StyleSheet.create({
         color: appColors.white,
         fontSize: getSize.m(18),
         lineHeight: getSize.m(24),
-        marginTop: getSize.m(16),
     },
 
     line_dots: {
@@ -43,6 +42,19 @@ const styles = StyleSheet.create({
         lineHeight: getSize.m(17),
         color: appColors.white,
         marginTop: getSize.m(2),
+    },
+    rating: {
+        fontFamily: AppFonts.regular,
+        fontSize: getSize.m(18),
+        color: appColors.white,
+        lineHeight: getSize.m(23),
+    },
+    content_rating: {
+        fontFamily: AppFonts.bold,
+        fontSize: getSize.m(18),
+        color: appColors.white,
+        lineHeight: getSize.m(23),
+        marginLeft: getSize.m(4),
     },
 });
 

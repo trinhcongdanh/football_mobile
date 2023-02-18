@@ -12,6 +12,7 @@ export const SideBar = () => {
             initialRouteName={ScreenName.BottomTab}
             screenOptions={{
                 headerShown: false,
+                drawerStyle: { width: '85%' },
             }}
             drawerContent={props => <SideMenu {...props} />}
         >

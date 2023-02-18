@@ -49,7 +49,7 @@ export const AverageScores = ({}: IAverageScoresProps) => {
                     },
                 ]}
             >
-                <View style={{ width: getSize.m(30) }}>
+                <View style={{ width: getSize.m(40) }}>
                     <Text
                         style={[
                             appStyles.statistics_header,

@@ -504,6 +504,7 @@ const resources = {
                 group: 'קבוצה',
                 age: 'קבוצת גיל',
                 home_training: 'בית/אימונים',
+                rating: 'דרוג:',
             },
             conquerors: {
                 title: 'רשימת כובשים',
@@ -1099,6 +1100,7 @@ const resources = {
                 group: 'Group',
                 age: 'Age group',
                 home_training: 'Home/Training',
+                rating: 'Rating:',
             },
             conquerors: {
                 title: 'List of conquerors',

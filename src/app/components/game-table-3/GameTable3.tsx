@@ -56,8 +56,8 @@ export const GameTable3 = ({
                     style={[
                         appStyles.flex_row_space_center,
                         {
-                            marginLeft: getSize.m(44),
-                            marginRight: getSize.m(36),
+                            marginLeft: tournaments ? getSize.m(44) : getSize.m(20),
+                            marginRight: tournaments ? getSize.m(36) : getSize.m(16),
                             marginVertical: getSize.m(12),
                         },
                     ]}

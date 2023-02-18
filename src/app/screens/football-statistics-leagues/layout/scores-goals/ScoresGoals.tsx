@@ -52,7 +52,7 @@ export const ScoresGoals = ({}: IScoresGoalsProps) => {
                             { textAlign: 'left', fontSize: getSize.m(12) },
                         ]}
                     >
-                        {t('statistics.leagues.name_club')}
+                        {t('statistics.leagues.name_player')}
                     </Text>
                 </View>
                 <View style={{ width: getSize.m(120) }}>
@@ -62,9 +62,10 @@ export const ScoresGoals = ({}: IScoresGoalsProps) => {
                             { textAlign: 'left', fontSize: getSize.m(12) },
                         ]}
                     >
-                        {t('statistics.leagues.name_player')}
+                        {t('statistics.leagues.name_club')}
                     </Text>
                 </View>
+
                 <View style={{ width: getSize.m(40) }}>
                     <Text style={[appStyles.statistics_header, { fontSize: getSize.m(12) }]}>
                         {t('statistics.leagues.gate')}
@@ -95,7 +96,7 @@ export const ScoresGoals = ({}: IScoresGoalsProps) => {
                                         flexDirection: 'row',
                                     }}
                                 >
-                                    <Avatar source={item.avt_club} rounded size={18} />
+                                    <Avatar source={item.avt_player} rounded size={18} />
                                     <Text
                                         style={[
                                             appStyles.statistics_content,
@@ -105,7 +106,7 @@ export const ScoresGoals = ({}: IScoresGoalsProps) => {
                                             },
                                         ]}
                                     >
-                                        {item.name_club}
+                                        {item.name_player}
                                     </Text>
                                 </View>
                             </View>
@@ -120,7 +121,7 @@ export const ScoresGoals = ({}: IScoresGoalsProps) => {
                                         flexDirection: 'row',
                                     }}
                                 >
-                                    <Avatar source={item.avt_player} rounded size={18} />
+                                    <Avatar source={item.avt_club} rounded size={18} />
                                     <Text
                                         style={[
                                             appStyles.statistics_content,
@@ -130,7 +131,7 @@ export const ScoresGoals = ({}: IScoresGoalsProps) => {
                                             },
                                         ]}
                                     >
-                                        {item.name_player}
+                                        {item.name_club}
                                     </Text>
                                 </View>
                             </View>

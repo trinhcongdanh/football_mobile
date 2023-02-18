@@ -185,6 +185,7 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                 <Item12 />
                 {/* Item13 */}
                 <Item13 />
+                <View style={{ height: getSize.m(120), width: '100%' }} />
             </ScrollView>
         </View>
     );

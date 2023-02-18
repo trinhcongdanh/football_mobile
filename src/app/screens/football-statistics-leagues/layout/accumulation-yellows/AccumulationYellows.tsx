@@ -55,7 +55,7 @@ export const AccumulationYellows = ({}: IAccumulationYellowsProps) => {
                             { textAlign: 'left', fontSize: getSize.m(12) },
                         ]}
                     >
-                        {t('statistics.leagues.name_club')}
+                        {t('statistics.leagues.name_player')}
                     </Text>
                 </View>
                 <View style={{ width: getSize.m(120) }}>
@@ -65,9 +65,10 @@ export const AccumulationYellows = ({}: IAccumulationYellowsProps) => {
                             { textAlign: 'left', fontSize: getSize.m(12) },
                         ]}
                     >
-                        {t('statistics.leagues.name_player')}
+                        {t('statistics.leagues.name_club')}
                     </Text>
                 </View>
+
                 <View style={{ width: getSize.m(44) }}>
                     <Text style={[appStyles.statistics_header, { fontSize: getSize.m(12) }]}>
                         {t('statistics.leagues.yellow')}
@@ -98,7 +99,7 @@ export const AccumulationYellows = ({}: IAccumulationYellowsProps) => {
                                         flexDirection: 'row',
                                     }}
                                 >
-                                    <Avatar source={item.avt_club} rounded size={18} />
+                                    <Avatar source={item.avt_player} rounded size={18} />
                                     <Text
                                         style={[
                                             appStyles.statistics_content,
@@ -108,7 +109,7 @@ export const AccumulationYellows = ({}: IAccumulationYellowsProps) => {
                                             },
                                         ]}
                                     >
-                                        {item.name_club}
+                                        {item.name_player}
                                     </Text>
                                 </View>
                             </View>
@@ -123,7 +124,7 @@ export const AccumulationYellows = ({}: IAccumulationYellowsProps) => {
                                         flexDirection: 'row',
                                     }}
                                 >
-                                    <Avatar source={item.avt_player} rounded size={18} />
+                                    <Avatar source={item.avt_club} rounded size={18} />
                                     <Text
                                         style={[
                                             appStyles.statistics_content,
@@ -133,7 +134,7 @@ export const AccumulationYellows = ({}: IAccumulationYellowsProps) => {
                                             },
                                         ]}
                                     >
-                                        {item.name_player}
+                                        {item.name_club}
                                     </Text>
                                 </View>
                             </View>
