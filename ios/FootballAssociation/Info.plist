@@ -3,28 +3,27 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleURLTypes</key>
-<array>
-  <dict>
-  <key>CFBundleURLSchemes</key>
-  <array>
-    <string>fb584766430131655</string>
-  </array>
-  </dict>
-</array>
-<key>FacebookAppID</key>
-<string>584766430131655</string>
-<key>FacebookClientToken</key>
-<string>0beac9d561f90959411cdc3606f3ab7a</string>
-<key>FacebookDisplayName</key>
-<string>Login</string>
-
-<key>LSApplicationQueriesSchemes</key>
-<array>
-  <string>fbapi</string>
-  <string>fb-messenger-share-api</string>
-   <string>fbauth2</string>
-  <string>fbshareextension</string>
-</array>
+	<array>
+	<dict>
+		<key>CFBundleURLSchemes</key>
+		<array>
+			<string>fb584766430131655</string>
+		</array>
+	</dict>
+	</array>
+	<key>FacebookAppID</key>
+	<string>584766430131655</string>
+	<key>FacebookClientToken</key>
+	<string>0beac9d561f90959411cdc3606f3ab7a</string>
+	<key>FacebookDisplayName</key>
+	<string>Login</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>fbapi</string>
+		<string>fb-messenger-share-api</string>
+		<string>fbauth2</string>
+		<string>fbshareextension</string>
+	</array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
@@ -59,9 +58,11 @@
 		</dict>
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-  <key>NSPhotoLibraryUsageDescription</key>
-  <key>NSCameraUsageDescription</key>
-	<string/>
+	<string>We need your location to send you delivery better</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>This app requires access to the photo library.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>This app requires access to the camera.</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIRequiredDeviceCapabilities</key>
@@ -85,22 +86,22 @@
 		<string>IBMPlexSansHebrew-Regular.ttf</string>
 		<string>IBMPlexSansHebrew-SemiBold.ttf</string>
 		<string>IBMPlexSansHebrew-Thin.ttf</string>
-    <string>AntDesign.ttf</string>
-    <string>Entypo.ttf</string>
-    <string>EvilIcons.ttf</string>
-    <string>Feather.ttf</string>
-    <string>FontAwesome.ttf</string>
-    <string>FontAwesome5_Brands.ttf</string>
-    <string>FontAwesome5_Regular.ttf</string>
-    <string>FontAwesome5_Solid.ttf</string>
-    <string>Foundation.ttf</string>
-    <string>Ionicons.ttf</string>
-    <string>MaterialIcons.ttf</string>
-    <string>MaterialCommunityIcons.ttf</string>
-    <string>SimpleLineIcons.ttf</string>
-    <string>Octicons.ttf</string>
-    <string>Zocial.ttf</string>
-    <string>Fontisto.ttf</string>
+		<string>AntDesign.ttf</string>
+		<string>Entypo.ttf</string>
+		<string>EvilIcons.ttf</string>
+		<string>Feather.ttf</string>
+		<string>FontAwesome.ttf</string>
+		<string>FontAwesome5_Brands.ttf</string>
+		<string>FontAwesome5_Regular.ttf</string>
+		<string>FontAwesome5_Solid.ttf</string>
+		<string>Foundation.ttf</string>
+		<string>Ionicons.ttf</string>
+		<string>MaterialIcons.ttf</string>
+		<string>MaterialCommunityIcons.ttf</string>
+		<string>SimpleLineIcons.ttf</string>
+		<string>Octicons.ttf</string>
+		<string>Zocial.ttf</string>
+		<string>Fontisto.ttf</string>
 	</array>
 </dict>
 </plist>
