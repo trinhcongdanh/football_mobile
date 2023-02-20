@@ -1,24 +1,17 @@
 /* eslint-disable react/no-array-index-key */
-import { View, Image, useWindowDimensions, ScrollView, TouchableOpacity, Text } from 'react-native';
-import React, { useEffect, useState } from 'react';
-import Animated, {
-    interpolate,
-    useAnimatedScrollHandler,
-    useAnimatedStyle,
-    useSharedValue,
-} from 'react-native-reanimated';
-import { Gallery } from '@football/core/models/LeagueSeasonModelResponse';
-import IconAntDesign from 'react-native-vector-icons/AntDesign';
-import IconFeather from 'react-native-vector-icons/Feather';
-import styles from './SelectedGallery.style';
-import { useViewModel } from './SelectedGallery.viewModel';
-import { ISelectedGalleryProps } from './SelectedGallery.type';
-import { getSize } from '@football/app/utils/responsive/scale';
 import { appIcons } from '@football/app/assets/icons/appIcons';
+import { AppImages } from '@football/app/assets/images';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { appStyles } from '@football/app/utils/constants/appStyles';
+import { getSize } from '@football/app/utils/responsive/scale';
+import React from 'react';
+import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import IconAntDesign from 'react-native-vector-icons/AntDesign';
+import IconFeather from 'react-native-vector-icons/Feather';
 import VideoPlayer from 'react-native-video-player';
-import { AppImages } from '@football/app/assets/images';
+import styles from './SelectedGallery.style';
+import { ISelectedGalleryProps } from './SelectedGallery.type';
+import { useViewModel } from './SelectedGallery.viewModel';
 
 const SelectedGallery = ({ pagination, galleries }: ISelectedGalleryProps) => {
     const {
@@ -168,9 +161,9 @@ const SelectedGallery = ({ pagination, galleries }: ISelectedGalleryProps) => {
                             >
                                 <TouchableOpacity
                                     activeOpacity={0.9}
-                                    onPress={() => handlePlayVideo(item.video)}
+                                    onPress={() => handlePlayVideo(item.video_url)}
                                 >
-                                    <Image source={item.image_url} style={styles.image} />
+                                    <Image source={{ uri: item.image_url }} style={styles.image} />
                                     <View style={styles.date}>
                                         <Text style={styles.text_date}>{item.length}</Text>
                                     </View>

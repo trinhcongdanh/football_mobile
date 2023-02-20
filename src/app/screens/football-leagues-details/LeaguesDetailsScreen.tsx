@@ -282,9 +282,9 @@ export const LeaguesDetailsScreen = ({ navigation, route }: ILeaguesDetailsScree
                         >
                             <SelectedGallery galleries={galleries} />
                         </View>
-                        <View style={styles.package}>
+                        {/* <View style={styles.package}>
                             <SelectedMagazine galleries={galleries} />
-                        </View>
+                        </View> */}
                     </ScrollView>
                 </SafeAreaView>
             </ImageBackground>
