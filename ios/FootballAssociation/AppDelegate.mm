@@ -4,8 +4,8 @@
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
 #import "React/RCTI18nUtil.h"
-// #import <FBSDKCoreKit/FBSDKCoreKit.h>
-
+#import <FBSDKCoreKit/FBSDKCoreKit-swift.h>
+#import <React/RCTLinkingManager.h>
 
 #import <React/RCTAppSetupUtils.h>
 
@@ -36,18 +36,23 @@ static NSString *const kRNConcurrentRoot = @"concurrentRoot";
             openURL:(NSURL *)url 
             options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
 
-  // BOOL handled = [[FBSDKApplicationDelegate sharedInstance] application:application
-  //   openURL:url
-  //   sourceApplication:options[UIApplicationOpenURLOptionsSourceApplicationKey]
-  //   annotation:options[UIApplicationOpenURLOptionsAnnotationKey]
-  // ];
-  // Add any custom logic here.
+  // if ([[FBSDKApplicationDelegate sharedInstance] application:application openURL:url options:options]) {
+  //   return YES;
+  // }
+
+  // if ([RCTLinkingManager application:application openURL:url options:options]) {
+  //   return YES;
+  // }
+
   return YES;
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
   // [GMSServices provideAPIKey:@"_YOUR_API_KEY_"];
+  [[FBSDKApplicationDelegate sharedInstance] application:application
+                      didFinishLaunchingWithOptions:launchOptions];
+  [FBSDKApplicationDelegate.sharedInstance initializeSDK];
   RCTAppSetupPrepareApp(application);
 
   RCTBridge *bridge = [[RCTBridge alloc] initWithDelegate:self launchOptions:launchOptions];
