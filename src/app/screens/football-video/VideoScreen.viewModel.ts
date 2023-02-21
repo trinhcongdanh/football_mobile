@@ -4,6 +4,8 @@ import { Dimensions } from 'react-native';
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
 import { useTranslation } from 'react-i18next';
 import { IVideoScreenProps } from './VideoScreen.type';
+import { useDispatch } from 'react-redux';
+import { setShowVideo, videoSlice } from 'src/store/video/Video.slice';
 
 export const useViewModel = ({ navigation, route }: IVideoScreenProps) => {
     const { navigate, goBack } = useAppNavigator();
@@ -48,6 +50,8 @@ export const useViewModel = ({ navigation, route }: IVideoScreenProps) => {
         },
     ];
 
+    const dispatch = useDispatch();
+
     const [display, setDisplay] = useState(false);
     const [sourceVideo, setSourceVideo] = useState();
     const [autoPlay, setAutoPlay] = useState(true);
@@ -56,6 +60,7 @@ export const useViewModel = ({ navigation, route }: IVideoScreenProps) => {
         setDisplay(true);
         setSourceVideo(video);
         setAutoPlay(false);
+        dispatch(setShowVideo(true));
     };
 
     const handleEndVideo = () => {

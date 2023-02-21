@@ -10,7 +10,6 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React from 'react';
 import { SafeAreaView } from 'react-native';
 import FastImage from 'react-native-fast-image';
-import Ionicons from 'react-native-vector-icons/Ionicons';
 import {
     GobletScreen,
     GroupPageScreen,
@@ -121,7 +120,7 @@ export const BottomTabStack = () => {
                         }}
                         bottomBarContainerStyle={{
                             position: 'absolute',
-                            top: height - TAB_BAR_HEIGHT - BOTTOM_SVG_HEIGHT,
+                            bottom: 0,
                             left: 0,
                             right: 0,
                         }}

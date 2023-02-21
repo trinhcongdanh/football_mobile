@@ -28,7 +28,7 @@ export const defaultSpringConfig = {
     stiffness: 250,
 };
 
-export const BOTTOM_SVG_HEIGHT = 50;
+export const BOTTOM_SVG_HEIGHT = 46;
 
 type CustomProps = {
     mode: 'default' | 'square';
@@ -213,6 +213,7 @@ export const FabTabBar: React.FC<BottomTabBarProps & CustomProps> = ({
                         {
                             width: '100%',
                             backgroundColor: 'transparent',
+                            flex: 1,
                         },
                         animatedStyles,
                     ]}

@@ -59,13 +59,13 @@ const styles = StyleSheet.create({
 
     video_container: {
         position: 'absolute',
-        zIndex: getSize.m(1),
+        zIndex: 1000,
         right: getSize.m(0),
         left: getSize.m(0),
         top: getSize.m(0),
         bottom: getSize.m(0),
         justifyContent: 'center',
-        backgroundColor: appColors.black,
+        backgroundColor: 'rgba(0,0,0,0.8)',
     },
 
     ic_close: {

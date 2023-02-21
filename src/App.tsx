@@ -1,7 +1,7 @@
 import { NavigationContainer } from '@react-navigation/native';
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { I18nManager, View } from 'react-native';
+import { I18nManager, ScrollView, View } from 'react-native';
 import { ThemeProvider } from 'react-native-elements';
 import 'react-native-get-random-values';
 import { Provider } from 'react-redux';
@@ -11,6 +11,7 @@ import 'react-native-gesture-handler';
 import { RootNavigator } from './app/routes/RootNavigator';
 import { appStyles } from './app/utils/constants/appStyles';
 import { persistor, store } from './store/store';
+import { Video } from '@football/app/components/video/Video';
 
 const App = (props: any) => {
     const { i18n } = useTranslation();
@@ -22,6 +23,7 @@ const App = (props: any) => {
             I18nManager.forceRTL(true);
         }
     }, [i18n, i18n.language]);
+
     return (
         <Provider store={store}>
             <PersistGate loading={null} persistor={persistor}>
@@ -29,6 +31,7 @@ const App = (props: any) => {
                     <NavigationContainer>
                         <View style={appStyles.flex}>
                             <RootNavigator />
+                            <Video />
                         </View>
                     </NavigationContainer>
                 </ThemeProvider>

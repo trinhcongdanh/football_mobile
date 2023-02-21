@@ -24,12 +24,17 @@ import { ListGame } from '@football/app/components/list-game/ListGame';
 import { HeaderLogo } from '@football/app/components/header-logo/HeaderLogo';
 import { Position } from '@football/app/components/position/Position';
 import { Avatar } from 'react-native-elements';
-import styles from './NationalTeamScreen.style';
-import { useViewModel } from './NationalTeamScreen.viewModel';
-import { INationalTeamScreenProps } from './NationalTeamScreen.type';
 import LinearGradient from 'react-native-linear-gradient';
 import { AppFonts } from '@football/app/assets/fonts';
 import FastImage from 'react-native-fast-image';
+import moment from 'moment';
+import {
+    MAX_TOPTEAM_LASTCAMPAIGN_GAMES,
+    MAX_TOPTEAM_LASTCAMPAIGN_PLAYERAPPEARANCE,
+} from '@football/core/api/configs/config';
+import styles from './NationalTeamScreen.style';
+import { useViewModel } from './NationalTeamScreen.viewModel';
+import { INationalTeamScreenProps } from './NationalTeamScreen.type';
 
 export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenProps) => {
     const {
@@ -41,26 +46,20 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
         handleDetailMatch,
         handleNavigation,
         selectOption,
-        video,
         display,
-        data,
         width,
         sourceVideo,
         autoPlay,
-        listGames,
-        listTeams,
         options,
         select,
-        listMatches,
         teamSquads,
         activeIndexNumber,
-        setActiveIndexNumber,
         handleDetails,
-        cupsAround,
         handleStadium,
         onNavigateConquerors,
         onNavigatePlayerData,
         navigate,
+        topTeam,
     } = useViewModel({
         navigation,
         route,
@@ -125,21 +124,26 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                         <View style={appStyles.container}>
                             <View style={appStyles.align_justify}>
                                 <View style={styles.container_image}>
-                                    <Image source={AppImages.img_logo} style={styles.image_logo} />
+                                    <Image
+                                        source={{ uri: topTeam?.logo_url }}
+                                        style={styles.image_logo}
+                                    />
                                 </View>
-                                <Text style={styles.text_title}>נבחרת לאומית גברים</Text>
+                                <Text style={styles.text_title}>{topTeam?.name_he}</Text>
                             </View>
                             <View style={{ marginTop: getSize.m(20) }}>
                                 <TouchableOpacity
                                     activeOpacity={0.9}
-                                    onPress={() => handlePlayVideo(video)}
+                                    onPress={() => handlePlayVideo(topTeam?.main_video.video_url)}
                                 >
                                     <Image
-                                        source={AppImages.img_team_israel}
+                                        source={{ uri: topTeam?.main_video?.image_url }}
                                         style={styles.image_team}
                                     />
                                     <View style={styles.date}>
-                                        <Text style={styles.text_date}>01:23</Text>
+                                        <Text style={styles.text_date}>
+                                            {topTeam?.main_video?.length}
+                                        </Text>
                                     </View>
                                     <View style={styles.play_video_main}>
                                         <Icon
@@ -150,7 +154,7 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                                     </View>
                                     <View style={styles.content}>
                                         <Text style={styles.text_content}>
-                                            נבחרת ישראל זכתה במדליית זהב במכבייה בפעם השנייה
+                                            {topTeam?.main_video?.caption_he}
                                         </Text>
                                     </View>
                                 </TouchableOpacity>
@@ -164,7 +168,7 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                                 <GestureHandlerRootView style={appStyles.flex}>
                                     <Carousel
                                         loop={false}
-                                        pagingEnabled={true}
+                                        pagingEnabled
                                         snapEnabled
                                         width={width}
                                         height={getSize.m(280)}
@@ -179,9 +183,9 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                                         autoPlay={autoPlay}
                                         defaultIndex={0}
                                         onSnapToItem={index => {
-                                            setIndexDot(index);
+                                            // setIndexDot(index);
                                         }}
-                                        data={data}
+                                        data={topTeam?.video_gallery}
                                         renderItem={({ item, index }) => (
                                             <View
                                                 key={index}
@@ -192,15 +196,15 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                                             >
                                                 <TouchableOpacity
                                                     activeOpacity={0.9}
-                                                    onPress={() => handlePlayVideo(item.video)}
+                                                    onPress={() => handlePlayVideo(item.video_url)}
                                                 >
                                                     <Image
-                                                        source={item.image}
+                                                        source={{ uri: item.image_url }}
                                                         style={[styles.image]}
                                                     />
                                                     <View style={styles.date}>
                                                         <Text style={styles.text_date}>
-                                                            {item.minute}
+                                                            {item.length}
                                                         </Text>
                                                     </View>
                                                     <View style={styles.play_video}>
@@ -212,7 +216,7 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                                                     </View>
                                                     <View style={styles.content}>
                                                         <Text style={styles.text_content}>
-                                                            {item.content}
+                                                            {item.caption_he}
                                                         </Text>
                                                     </View>
                                                 </TouchableOpacity>
@@ -221,7 +225,7 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                                     />
                                 </GestureHandlerRootView>
                                 <View style={styles.indicatorContainer}>
-                                    {data.map((item, index) => {
+                                    {topTeam?.video_gallery.map((item, index) => {
                                         return (
                                             <View
                                                 key={index.toString()}
@@ -248,24 +252,36 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                                     {t('national_team.team_event')}
                                 </Text>
                                 <View>
-                                    {listGames.map(item => {
+                                    {topTeam?.future_events?.map((item, index) => {
                                         return (
                                             <ListGame
-                                                key={item.id}
-                                                tournament={item.tournament}
-                                                logo_home={item.logoHome}
-                                                logo_away={item.logoAway}
-                                                nameHome={item.nameHome}
-                                                nameAway={item.nameAway}
-                                                location={item.location}
+                                                // eslint-disable-next-line react/no-array-index-key
+                                                key={index}
+                                                tournament={item.name_he}
+                                                logo_home={item.team1.logo_url}
+                                                logo_away={item.team2.logo_url}
+                                                nameHome={item.team1.name_he}
+                                                nameAway={item.team2.name_he}
+                                                location={item.stadium_he}
                                                 date={item.date}
-                                                result={item.result}
-                                                schedule={item.schedule}
+                                                result={item.score}
+                                                schedule={item.time}
                                                 // completed={item.completed}
                                                 color={appColors.text_dark_blue}
-                                                handleDetailMatch={handleDetailMatch}
-                                                handleStadium={handleStadium}
-                                                isLive={item.isLive}
+                                                handleDetailMatch={() =>
+                                                    handleDetailMatch(item.object_id)
+                                                }
+                                                handleStadium={() => handleStadium(item.stadium_id)}
+                                                isLive={moment().isBetween(
+                                                    moment(
+                                                        `${item.date} ${item.time}`,
+                                                        'DD.M.YY HH:mm'
+                                                    ),
+                                                    moment(
+                                                        `${item.date} ${item.time}`,
+                                                        'DD.M.YY HH:mm'
+                                                    ).add(2, 'hours')
+                                                )}
                                             />
                                         );
                                     })}
@@ -274,7 +290,7 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                         </View>
                         <View>
                             <HeaderLogo
-                                text='ליגת האומות של אופ"א 2022/23'
+                                text={topTeam?.last_campaign?.name_he}
                                 avt={AppImages.img_israel}
                                 details={t('national_team.previous_campaigns')}
                                 icon={appIcons.ic_arrow_left}
@@ -294,7 +310,7 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                                     </View>
                                     <View style={{ marginTop: getSize.m(26) }}>
                                         <Position
-                                            position="בית 9"
+                                            position={topTeam?.last_campaign?.group_name_he}
                                             color={appColors.text_dark_blue}
                                             fontFamily={AppFonts.bold}
                                             fontSize={getSize.m(11)}
@@ -361,145 +377,179 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                                                 </View>
                                             </View>
                                             <View>
-                                                {listTeams.map(item => {
-                                                    return (
-                                                        <LinearGradient
-                                                            key={item.id}
-                                                            start={{ x: 0, y: 0 }}
-                                                            end={{ x: 1, y: 1 }}
-                                                            colors={[
-                                                                item.id % 2 === 1
-                                                                    ? 'rgba(16, 32, 100, 0.04)'
-                                                                    : appColors.white,
-                                                                item.id % 2 === 1
-                                                                    ? 'rgba(59, 168, 225, 0.04)'
-                                                                    : appColors.white,
-                                                            ]}
-                                                            style={[
-                                                                appStyles.flex_row_space_center,
-                                                                appStyles.statistic_row,
-                                                            ]}
-                                                        >
-                                                            <View
-                                                                style={[
-                                                                    appStyles.flex_row_align,
-                                                                    { width: getSize.m(30) },
+                                                {topTeam?.last_campaign?.leader_board.map(
+                                                    (item, index) => {
+                                                        return (
+                                                            <LinearGradient
+                                                                // eslint-disable-next-line react/no-array-index-key
+                                                                key={index}
+                                                                start={{ x: 0, y: 0 }}
+                                                                end={{ x: 1, y: 1 }}
+                                                                colors={[
+                                                                    item.place % 2 === 1
+                                                                        ? 'rgba(16, 32, 100, 0.04)'
+                                                                        : appColors.white,
+                                                                    item.place % 2 === 0
+                                                                        ? 'rgba(59, 168, 225, 0.04)'
+                                                                        : appColors.white,
                                                                 ]}
-                                                            >
-                                                                <Text
-                                                                    style={
-                                                                        appStyles.statistics_content
-                                                                    }
-                                                                >
-                                                                    {item.id}
-                                                                </Text>
-                                                                <View
-                                                                    style={{
-                                                                        marginLeft: getSize.m(2),
-                                                                        marginTop: getSize.m(2),
-                                                                    }}
-                                                                >
-                                                                    <Icon
-                                                                        name={appIcons.ic_up}
-                                                                        size={8}
-                                                                        color={appColors.green}
-                                                                    />
-                                                                    {/* <Icon
-                                                                        name={appIcons.ic_down}
-                                                                        size={11}
-                                                                        color={appColors.red}
-                                                                    /> */}
-                                                                </View>
-                                                            </View>
-                                                            <View
                                                                 style={[
-                                                                    {
-                                                                        width: getSize.m(80),
-                                                                        overflow: 'hidden',
-                                                                    },
+                                                                    appStyles.flex_row_space_center,
+                                                                    appStyles.statistic_row,
                                                                 ]}
                                                             >
                                                                 <View
-                                                                    style={{
-                                                                        flexDirection: 'row',
-                                                                    }}
+                                                                    style={[
+                                                                        appStyles.flex_row_align,
+                                                                        { width: getSize.m(30) },
+                                                                    ]}
                                                                 >
-                                                                    <Avatar
-                                                                        source={{ uri: item.logo }}
-                                                                        rounded
-                                                                        size={20}
-                                                                    />
                                                                     <Text
-                                                                        style={[
-                                                                            appStyles.statistics_content,
-                                                                            {
-                                                                                marginLeft: getSize.m(
-                                                                                    6
-                                                                                ),
-                                                                            },
-                                                                        ]}
+                                                                        style={
+                                                                            appStyles.statistics_content
+                                                                        }
                                                                     >
-                                                                        {item.name}
+                                                                        {item.place}
+                                                                    </Text>
+                                                                    <View
+                                                                        style={{
+                                                                            marginLeft: getSize.m(
+                                                                                2
+                                                                            ),
+                                                                            marginTop: getSize.m(2),
+                                                                        }}
+                                                                    >
+                                                                        {item.place_change ===
+                                                                            'up' && (
+                                                                            <Icon
+                                                                                name={
+                                                                                    appIcons.ic_up
+                                                                                }
+                                                                                size={8}
+                                                                                color={
+                                                                                    appColors.green
+                                                                                }
+                                                                            />
+                                                                        )}
+
+                                                                        {item.place_change ===
+                                                                            'down' && (
+                                                                            <Icon
+                                                                                name={
+                                                                                    appIcons.ic_down
+                                                                                }
+                                                                                size={8}
+                                                                                color={
+                                                                                    appColors.red
+                                                                                }
+                                                                            />
+                                                                        )}
+                                                                    </View>
+                                                                </View>
+                                                                <View
+                                                                    style={[
+                                                                        {
+                                                                            width: getSize.m(80),
+                                                                            overflow: 'hidden',
+                                                                        },
+                                                                    ]}
+                                                                >
+                                                                    <View
+                                                                        style={{
+                                                                            flexDirection: 'row',
+                                                                        }}
+                                                                    >
+                                                                        <Avatar
+                                                                            source={{
+                                                                                uri: item.logo_url,
+                                                                            }}
+                                                                            rounded
+                                                                            size={20}
+                                                                        />
+                                                                        <Text
+                                                                            style={[
+                                                                                appStyles.statistics_content,
+                                                                                {
+                                                                                    marginLeft: getSize.m(
+                                                                                        6
+                                                                                    ),
+                                                                                },
+                                                                            ]}
+                                                                        >
+                                                                            {item.name_he}
+                                                                        </Text>
+                                                                    </View>
+                                                                </View>
+                                                                <View
+                                                                    style={{ width: getSize.m(30) }}
+                                                                >
+                                                                    <Text
+                                                                        style={
+                                                                            appStyles.statistics_content
+                                                                        }
+                                                                    >
+                                                                        {item.games}
                                                                     </Text>
                                                                 </View>
-                                                            </View>
-                                                            <View style={{ width: getSize.m(30) }}>
-                                                                <Text
-                                                                    style={
-                                                                        appStyles.statistics_content
-                                                                    }
+                                                                <View
+                                                                    style={{ width: getSize.m(30) }}
                                                                 >
-                                                                    {item.mash}
-                                                                </Text>
-                                                            </View>
-                                                            <View style={{ width: getSize.m(30) }}>
-                                                                <Text
-                                                                    style={
-                                                                        appStyles.statistics_content
-                                                                    }
+                                                                    <Text
+                                                                        style={
+                                                                            appStyles.statistics_content
+                                                                        }
+                                                                    >
+                                                                        {item.wins}
+                                                                    </Text>
+                                                                </View>
+                                                                <View
+                                                                    style={{ width: getSize.m(30) }}
                                                                 >
-                                                                    {item.nch}
-                                                                </Text>
-                                                            </View>
-                                                            <View style={{ width: getSize.m(30) }}>
-                                                                <Text
-                                                                    style={
-                                                                        appStyles.statistics_content
-                                                                    }
+                                                                    <Text
+                                                                        style={
+                                                                            appStyles.statistics_content
+                                                                        }
+                                                                    >
+                                                                        {item.ties}
+                                                                    </Text>
+                                                                </View>
+                                                                <View
+                                                                    style={{ width: getSize.m(30) }}
                                                                 >
-                                                                    {item.draw}
-                                                                </Text>
-                                                            </View>
-                                                            <View style={{ width: getSize.m(30) }}>
-                                                                <Text
-                                                                    style={
-                                                                        appStyles.statistics_content
-                                                                    }
+                                                                    <Text
+                                                                        style={
+                                                                            appStyles.statistics_content
+                                                                        }
+                                                                    >
+                                                                        {item.difference}
+                                                                    </Text>
+                                                                </View>
+                                                                <View
+                                                                    style={{ width: getSize.m(40) }}
                                                                 >
-                                                                    {item.the_p}
-                                                                </Text>
-                                                            </View>
-                                                            <View style={{ width: getSize.m(40) }}>
-                                                                <Text
-                                                                    style={
-                                                                        appStyles.statistics_content
-                                                                    }
+                                                                    <Text
+                                                                        style={
+                                                                            appStyles.statistics_content
+                                                                        }
+                                                                    >
+                                                                        {item.goals}
+                                                                    </Text>
+                                                                </View>
+                                                                <View
+                                                                    style={{ width: getSize.m(30) }}
                                                                 >
-                                                                    {item.time}
-                                                                </Text>
-                                                            </View>
-                                                            <View style={{ width: getSize.m(30) }}>
-                                                                <Text
-                                                                    style={
-                                                                        appStyles.statistics_content
-                                                                    }
-                                                                >
-                                                                    {item.no}
-                                                                </Text>
-                                                            </View>
-                                                        </LinearGradient>
-                                                    );
-                                                })}
+                                                                    <Text
+                                                                        style={
+                                                                            appStyles.statistics_content
+                                                                        }
+                                                                    >
+                                                                        {item.score}
+                                                                    </Text>
+                                                                </View>
+                                                            </LinearGradient>
+                                                        );
+                                                    }
+                                                )}
                                             </View>
                                         </View>
                                     </View>
@@ -516,7 +566,7 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                                                 appStyles.flex_row_center,
                                                 { flex: 0, marginTop: getSize.m(12) },
                                             ]}
-                                            onPress={handleDetails}
+                                            onPress={() => handleDetails}
                                         >
                                             <Text style={styles.details}>
                                                 {t('national_team.ranking_table.details')}
@@ -530,7 +580,7 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                                     </View>
                                     <View style={{ marginTop: getSize.m(26) }}>
                                         <Position
-                                            position="בית 9"
+                                            position={topTeam?.last_campaign?.group_name_he}
                                             color={appColors.text_dark_blue}
                                             fontFamily={AppFonts.bold}
                                             fontSize={getSize.m(11)}
@@ -574,31 +624,59 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                                                 );
                                             })}
                                         </View>
-                                        {select === 0 && (
-                                            <View>
-                                                {listMatches.map(item => {
+                                        <View>
+                                            {topTeam?.last_campaign.games
+                                                .slice(0, MAX_TOPTEAM_LASTCAMPAIGN_GAMES)
+                                                .filter(game => {
+                                                    switch (select) {
+                                                        case 0:
+                                                            return true;
+                                                        case 1:
+                                                            return game.is_home_game;
+
+                                                        case 2:
+                                                            return !game.is_home_game;
+
+                                                        default:
+                                                            return true;
+                                                    }
+                                                })
+                                                .map(item => {
                                                     return (
                                                         <ListGame
-                                                            key={item.id}
-                                                            logo_home={item.logoHome}
-                                                            logo_away={item.logoAway}
-                                                            nameHome={item.nameHome}
-                                                            nameAway={item.nameAway}
-                                                            location={item.location}
+                                                            key={item.game_id}
+                                                            logo_home={item.team1.logo_url}
+                                                            logo_away={item.team2.logo_url}
+                                                            nameHome={item.team1.name_he}
+                                                            nameAway={item.team2.name_he}
+                                                            location={item.stadium_he}
                                                             date={item.date}
-                                                            result={item.result}
-                                                            schedule={item.schedule}
+                                                            result={item.score}
+                                                            schedule={item.time}
                                                             // completed={item.completed}
                                                             icon={appIcons.ic_arrow_left}
                                                             color={appColors.gray}
-                                                            details={item.details}
-                                                            handleDetailMatch={handleDetailMatch}
-                                                            handleStadium={handleStadium}
+                                                            details={item.game_id}
+                                                            handleDetailMatch={() =>
+                                                                handleDetailMatch(item.game_id)
+                                                            }
+                                                            handleStadium={() =>
+                                                                handleStadium(item.stadium_id)
+                                                            }
+                                                            isLive={moment().isBetween(
+                                                                moment(
+                                                                    `${item.date} ${item.time}`,
+                                                                    'DD.M.YY HH:mm'
+                                                                ),
+                                                                moment(
+                                                                    `${item.date} ${item.time}`,
+                                                                    'DD.M.YY HH:mm'
+                                                                ).add(2, 'hours')
+                                                            )}
                                                         />
                                                     );
                                                 })}
-                                            </View>
-                                        )}
+                                        </View>
                                     </View>
                                 </View>
                             </View>
@@ -629,58 +707,62 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                                         </TouchableOpacity>
                                     </View>
                                     <View style={{ marginTop: getSize.m(10) }}>
-                                        {cupsAround.map(item => {
-                                            return (
-                                                <TouchableOpacity
-                                                    onPress={onNavigatePlayerData}
-                                                    key={item.id}
-                                                    style={[
-                                                        appStyles.flex_row_space_center,
-                                                        appStyles.statistic_row,
-                                                        {
-                                                            paddingHorizontal: getSize.m(0),
-                                                        },
-                                                    ]}
-                                                >
-                                                    <View style={appStyles.flex_row_align}>
-                                                        <FastImage
-                                                            source={AppImages.img_avt_player}
-                                                            style={{
-                                                                width: getSize.m(20),
-                                                                height: getSize.m(20),
-                                                                borderRadius: getSize.m(20),
-                                                            }}
-                                                        />
-                                                        <Text
-                                                            style={[
-                                                                appStyles.statistics_content,
-                                                                {
-                                                                    textAlign: 'left',
-                                                                    marginLeft: getSize.m(10),
-                                                                    fontFamily: AppFonts.medium,
-                                                                    fontSize: getSize.m(14),
-                                                                },
-                                                            ]}
-                                                        >
-                                                            {item.name}
-                                                        </Text>
-                                                    </View>
-                                                    <View>
-                                                        <Text
-                                                            style={[
-                                                                appStyles.statistics_content,
-                                                                {
-                                                                    textAlign: 'left',
-                                                                    fontSize: getSize.m(16),
-                                                                },
-                                                            ]}
-                                                        >
-                                                            {item.number}
-                                                        </Text>
-                                                    </View>
-                                                </TouchableOpacity>
-                                            );
-                                        })}
+                                        {topTeam?.last_campaign?.goal_kickers
+                                            .slice(0, MAX_TOPTEAM_LASTCAMPAIGN_PLAYERAPPEARANCE)
+                                            .map((item, index) => {
+                                                return (
+                                                    <TouchableOpacity
+                                                        onPress={onNavigatePlayerData}
+                                                        key={item.player_id}
+                                                        style={[
+                                                            appStyles.flex_row_space_center,
+                                                            appStyles.statistic_row,
+                                                            {
+                                                                paddingHorizontal: getSize.m(0),
+                                                            },
+                                                        ]}
+                                                    >
+                                                        <View style={appStyles.flex_row_align}>
+                                                            <FastImage
+                                                                source={{ uri: item.image_url }}
+                                                                style={{
+                                                                    width: getSize.m(20),
+                                                                    height: getSize.m(20),
+                                                                    borderRadius: getSize.m(20),
+                                                                }}
+                                                            />
+                                                            <Text
+                                                                style={[
+                                                                    appStyles.statistics_content,
+                                                                    // eslint-disable-next-line react-native/no-inline-styles
+                                                                    {
+                                                                        textAlign: 'left',
+                                                                        marginLeft: getSize.m(10),
+                                                                        fontFamily: AppFonts.medium,
+                                                                        fontSize: getSize.m(14),
+                                                                    },
+                                                                ]}
+                                                            >
+                                                                {item.name_he}
+                                                            </Text>
+                                                        </View>
+                                                        <View>
+                                                            <Text
+                                                                style={[
+                                                                    appStyles.statistics_content,
+                                                                    // eslint-disable-next-line react-native/no-inline-styles
+                                                                    {
+                                                                        textAlign: 'left',
+                                                                        fontSize: getSize.m(16),
+                                                                    },
+                                                                ]}
+                                                            >
+                                                                {item.num_of_goals}
+                                                            </Text>
+                                                        </View>
+                                                    </TouchableOpacity>
+                                                );
+                                            })}
                                     </View>
                                 </View>
                             </View>
@@ -711,58 +793,60 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                                         </TouchableOpacity>
                                     </View>
                                     <View style={{ marginTop: getSize.m(10) }}>
-                                        {cupsAround.map(item => {
-                                            return (
-                                                <TouchableOpacity
-                                                    onPress={onNavigatePlayerData}
-                                                    key={item.id}
-                                                    style={[
-                                                        appStyles.flex_row_space_center,
-                                                        appStyles.statistic_row,
-                                                        {
-                                                            paddingHorizontal: getSize.m(0),
-                                                        },
-                                                    ]}
-                                                >
-                                                    <View style={appStyles.flex_row_align}>
-                                                        <FastImage
-                                                            source={AppImages.img_avt_player}
-                                                            style={{
-                                                                width: getSize.m(20),
-                                                                height: getSize.m(20),
-                                                                borderRadius: getSize.m(20),
-                                                            }}
-                                                        />
-                                                        <Text
-                                                            style={[
-                                                                appStyles.statistics_content,
-                                                                {
-                                                                    textAlign: 'left',
-                                                                    marginLeft: getSize.m(10),
-                                                                    fontFamily: AppFonts.medium,
-                                                                    fontSize: getSize.m(14),
-                                                                },
-                                                            ]}
-                                                        >
-                                                            {item.name}
-                                                        </Text>
-                                                    </View>
-                                                    <View>
-                                                        <Text
-                                                            style={[
-                                                                appStyles.statistics_content,
-                                                                {
-                                                                    textAlign: 'left',
-                                                                    fontSize: getSize.m(16),
-                                                                },
-                                                            ]}
-                                                        >
-                                                            {item.number}
-                                                        </Text>
-                                                    </View>
-                                                </TouchableOpacity>
-                                            );
-                                        })}
+                                        {topTeam?.last_campaign?.players_appearances
+                                            .slice(0, MAX_TOPTEAM_LASTCAMPAIGN_PLAYERAPPEARANCE)
+                                            .map(item => {
+                                                return (
+                                                    <TouchableOpacity
+                                                        onPress={onNavigatePlayerData}
+                                                        key={item.player_id}
+                                                        style={[
+                                                            appStyles.flex_row_space_center,
+                                                            appStyles.statistic_row,
+                                                            {
+                                                                paddingHorizontal: getSize.m(0),
+                                                            },
+                                                        ]}
+                                                    >
+                                                        <View style={appStyles.flex_row_align}>
+                                                            <FastImage
+                                                                source={{ uri: item.image_url }}
+                                                                style={{
+                                                                    width: getSize.m(20),
+                                                                    height: getSize.m(20),
+                                                                    borderRadius: getSize.m(20),
+                                                                }}
+                                                            />
+                                                            <Text
+                                                                style={[
+                                                                    appStyles.statistics_content,
+                                                                    {
+                                                                        textAlign: 'left',
+                                                                        marginLeft: getSize.m(10),
+                                                                        fontFamily: AppFonts.medium,
+                                                                        fontSize: getSize.m(14),
+                                                                    },
+                                                                ]}
+                                                            >
+                                                                {item.name_he}
+                                                            </Text>
+                                                        </View>
+                                                        <View>
+                                                            <Text
+                                                                style={[
+                                                                    appStyles.statistics_content,
+                                                                    {
+                                                                        textAlign: 'left',
+                                                                        fontSize: getSize.m(16),
+                                                                    },
+                                                                ]}
+                                                            >
+                                                                {item.num_of_appearances}
+                                                            </Text>
+                                                        </View>
+                                                    </TouchableOpacity>
+                                                );
+                                            })}
                                     </View>
                                 </View>
                             </View>
@@ -782,7 +866,7 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                                     >
                                         <View style={appStyles.flex_row_align}>
                                             <Avatar
-                                                source={item.avt}
+                                                source={{ uri: topTeam?.logo_url }}
                                                 size={getSize.m(26)}
                                                 rounded
                                             />
@@ -801,7 +885,7 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                             <GestureHandlerRootView style={appStyles.flex}>
                                 <Carousel
                                     loop
-                                    pagingEnabled={true}
+                                    pagingEnabled
                                     snapEnabled
                                     width={width}
                                     height={getSize.m(280)}
@@ -812,9 +896,9 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                                         parallaxScrollingOffset: getSize.m(160),
                                         parallaxAdjacentItemScale: 0.9,
                                     }}
-                                    autoPlay={true}
-                                    onSnapToItem={index => setActiveIndexNumber(index)}
-                                    data={data}
+                                    autoPlay
+                                    // onSnapToItem={index => setActiveIndexNumber(index)}
+                                    data={topTeam?.image_gallery}
                                     renderItem={({ item, index }) => (
                                         <TouchableOpacity
                                             key={index}
@@ -824,14 +908,17 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                                             }}
                                         >
                                             <View>
-                                                <Image source={item.image} style={[styles.image]} />
+                                                <Image
+                                                    source={{ uri: item.image_url }}
+                                                    style={[styles.image]}
+                                                />
                                             </View>
                                         </TouchableOpacity>
                                     )}
                                 />
                             </GestureHandlerRootView>
                             <View style={styles.dotContainer}>
-                                {data.map((_, index) => {
+                                {topTeam?.image_gallery.map((_, index) => {
                                     return (
                                         <View key={index}>
                                             <View
@@ -848,7 +935,7 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                                                                 : appColors.soft_grey,
                                                     },
                                                 ]}
-                                            ></View>
+                                            />
                                         </View>
                                     );
                                 })}

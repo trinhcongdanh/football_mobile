@@ -26,7 +26,7 @@ import { useViewModel } from './TeamScreen.viewModel';
 // type Props = {};
 
 export const TeamScreen = ({ navigation, route }: ITeamScreenProps) => {
-    const { optionTeams, toggleChangeBar, toggleBar, handleTeam, onShowSideMenu } = useViewModel({
+    const { topTeams, toggleChangeBar, toggleBar, handleTeam, onShowSideMenu } = useViewModel({
         navigation,
         route,
     });
@@ -34,29 +34,39 @@ export const TeamScreen = ({ navigation, route }: ITeamScreenProps) => {
 
     const renderItem = ({ item }: any) => {
         return !toggleBar ? (
-            <TouchableOpacity activeOpacity={1} style={styles.option_grid} onPress={handleTeam}>
+            <TouchableOpacity
+                activeOpacity={1}
+                style={styles.option_grid}
+                // eslint-disable-next-line no-underscore-dangle
+                onPress={() => handleTeam(item._id)}
+            >
                 <View style={styles.container_logo}>
                     <FastImage
                         resizeMode="contain"
-                        source={AppImages.img_logo}
+                        source={{ uri: item.logo_url }}
                         style={styles.logo}
                     />
                 </View>
                 <Text numberOfLines={2} style={styles.text_option_grid}>
-                    {item.name}
+                    {item.name_he}
                 </Text>
             </TouchableOpacity>
         ) : (
-            <TouchableOpacity style={styles.option_menu} activeOpacity={0} onPress={handleTeam}>
+            <TouchableOpacity
+                style={styles.option_menu}
+                activeOpacity={0}
+                // eslint-disable-next-line no-underscore-dangle
+                onPress={() => handleTeam(item._id)}
+            >
                 <View style={appStyles.flex_row_align_center}>
                     <View style={styles.container_logo}>
                         <FastImage
                             resizeMode="contain"
-                            source={AppImages.img_logo}
+                            source={{ uri: item.logo_url }}
                             style={styles.logo}
                         />
                     </View>
-                    <Text style={styles.text_option_menu}>{item.name}</Text>
+                    <Text style={styles.text_option_menu}>{item.name_he}</Text>
                 </View>
 
                 <Icon
@@ -92,7 +102,7 @@ export const TeamScreen = ({ navigation, route }: ITeamScreenProps) => {
                             {toggleBar ? (
                                 <FlatList
                                     showsVerticalScrollIndicator={false}
-                                    data={optionTeams}
+                                    data={topTeams}
                                     keyExtractor={(item: any) => item.id}
                                     renderItem={renderItem}
                                     numColumns={1}
@@ -101,7 +111,7 @@ export const TeamScreen = ({ navigation, route }: ITeamScreenProps) => {
                             ) : (
                                 <FlatList
                                     showsVerticalScrollIndicator={false}
-                                    data={optionTeams}
+                                    data={topTeams}
                                     keyExtractor={(item: any) => item.id}
                                     renderItem={renderItem}
                                     numColumns={3}

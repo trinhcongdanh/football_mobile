@@ -11,6 +11,9 @@ import { AxiosResponse } from 'axios';
 //     search_terms: string;
 //     isSelected: boolean;
 // }
+export interface ImageGallery {
+    image_url: string;
+}
 
 export interface MainVideo {
     video_url: string;
@@ -28,13 +31,7 @@ export interface VideoGallery {
     caption_en: string;
 }
 
-export interface Team1 {
-    name_he: string;
-    name_en: string;
-    logo_url: string;
-}
-
-export interface Team2 {
+export interface Team {
     name_he: string;
     name_en: string;
     logo_url: string;
@@ -51,8 +48,9 @@ export interface FutureEvent {
     stadium_en: string;
     link?: any;
     object_id?: any;
-    team1: Team1;
-    team2: Team2;
+    team1: Team;
+    team2: Team;
+    score: string;
 }
 
 export interface LeaderBoard {
@@ -69,18 +67,6 @@ export interface LeaderBoard {
     score: number;
 }
 
-export interface Team12 {
-    name_he: string;
-    name_en: string;
-    logo_url: string;
-}
-
-export interface Team22 {
-    name_he: string;
-    name_en: string;
-    logo_url: string;
-}
-
 export interface Game {
     game_id: string;
     date: string;
@@ -89,8 +75,8 @@ export interface Game {
     stadium_he: string;
     stadium_en: string;
     score: string;
-    team1: Team12;
-    team2: Team22;
+    team1: Team;
+    team2: Team;
     is_home_game: boolean;
 }
 
@@ -102,6 +88,8 @@ export interface LastCampaign {
     group_name_en: string;
     leader_board: LeaderBoard[];
     games: Game[];
+    goal_kickers: GoalKicker[];
+    players_appearances: PlayersAppearance[];
 }
 
 export interface GoalKicker {
@@ -136,6 +124,7 @@ export interface TopTeamModel {
     goal_kickers: GoalKicker[];
     players_appearances: PlayersAppearance[];
     isSelected: boolean;
+    image_gallery: ImageGallery[];
 }
 
 export type TopTeamModelResponse = AxiosResponse<{

@@ -1,48 +1,47 @@
-import { useTranslation } from 'react-i18next';
-import { useState } from 'react';
-import { Dimensions } from 'react-native';
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
+import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { Dimensions } from 'react-native';
 import { ISelectedGalleryProps } from './SelectedGallery.type';
-import { AppImages } from '@football/app/assets/images';
 
 export const useViewModel = ({ galleries }: ISelectedGalleryProps) => {
     const { navigate, goBack } = useAppNavigator();
     const { t } = useTranslation();
-    // const data = galleries || [];
+    const data = galleries || [];
     const { width } = Dimensions.get('window');
     const [activeIndexNumber, setActiveIndexNumber] = useState(Number);
-    const data = [
-        {
-            image_url: AppImages.img_gallery,
-            length: '11/8/22',
-            caption_he: 'תוצאות הגרלת ליגת העל לעונת 2023-2024',
-            video: require('../../../../assets/video/neymarSkill.mp4'),
-        },
-        {
-            image_url: AppImages.img_gallery,
-            length: '11/8/22',
-            caption_he: 'תוצאות הגרלת ליגת העל לעונת 2023-2024',
-            video: require('../../../../assets/video/neymarSkill.mp4'),
-        },
-        {
-            image_url: AppImages.img_gallery,
-            length: '11/8/22',
-            caption_he: 'תוצאות הגרלת ליגת העל לעונת 2023-2024',
-            video: require('../../../../assets/video/neymarSkill.mp4'),
-        },
-        {
-            image_url: AppImages.img_gallery,
-            length: '11/8/22',
-            caption_he: 'תוצאות הגרלת ליגת העל לעונת 2023-2024',
-            video: require('../../../../assets/video/neymarSkill.mp4'),
-        },
-        {
-            image_url: AppImages.img_gallery,
-            length: '11/8/22',
-            caption_he: 'תוצאות הגרלת ליגת העל לעונת 2023-2024',
-            video: require('../../../../assets/video/neymarSkill.mp4'),
-        },
-    ];
+    // const data = [
+    //     {
+    //         image_url: AppImages.img_gallery,
+    //         length: '11/8/22',
+    //         caption_he: 'תוצאות הגרלת ליגת העל לעונת 2023-2024',
+    //         video: require('../../../../assets/video/neymarSkill.mp4'),
+    //     },
+    //     {
+    //         image_url: AppImages.img_gallery,
+    //         length: '11/8/22',
+    //         caption_he: 'תוצאות הגרלת ליגת העל לעונת 2023-2024',
+    //         video: require('../../../../assets/video/neymarSkill.mp4'),
+    //     },
+    //     {
+    //         image_url: AppImages.img_gallery,
+    //         length: '11/8/22',
+    //         caption_he: 'תוצאות הגרלת ליגת העל לעונת 2023-2024',
+    //         video: require('../../../../assets/video/neymarSkill.mp4'),
+    //     },
+    //     {
+    //         image_url: AppImages.img_gallery,
+    //         length: '11/8/22',
+    //         caption_he: 'תוצאות הגרלת ליגת העל לעונת 2023-2024',
+    //         video: require('../../../../assets/video/neymarSkill.mp4'),
+    //     },
+    //     {
+    //         image_url: AppImages.img_gallery,
+    //         length: '11/8/22',
+    //         caption_he: 'תוצאות הגרלת ליגת העל לעונת 2023-2024',
+    //         video: require('../../../../assets/video/neymarSkill.mp4'),
+    //     },
+    // ];
     const dots = Array(data.length).fill('');
 
     const [display, setDisplay] = useState(false);
