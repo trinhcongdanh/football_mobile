@@ -20,6 +20,7 @@ import guestIdReducer from './user/GuestId.slice';
 import loginReducer from './user/Login.slice';
 import registerFacebookReducer from './user/RegisterFacebook.slice';
 import leagueReducer from './league/League.slice';
+import videoReducer from './video/Video.slice';
 
 const reducer = combineReducers({
     guestId: guestIdReducer,
@@ -30,6 +31,7 @@ const reducer = combineReducers({
     favTopTeams: favTopTeamReducer,
     registerFacebook: registerFacebookReducer,
     leagues: leagueReducer,
+    video: videoReducer,
 });
 const persistConfig = {
     key: 'root',

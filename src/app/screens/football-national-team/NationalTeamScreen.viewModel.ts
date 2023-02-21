@@ -13,6 +13,7 @@ export const useViewModel = ({ navigation, route }: INationalTeamScreenProps) =>
     const onGoBack = (): void => {
         goBack();
     };
+    console.log('NationalTeamScreen');
 
     const data = [
         {
@@ -124,26 +125,6 @@ export const useViewModel = ({ navigation, route }: INationalTeamScreenProps) =>
             isLive: false,
         },
     ];
-
-    const handleDetailMatch = () => {
-        navigate(ScreenName.MatchPage);
-    };
-
-    const handleStadium = () => {
-        navigate(ScreenName.PitchPage);
-    };
-
-    const handleNavigation = () => {
-        navigate(ScreenName.PreviousCampaignsPage);
-    };
-
-    const onNavigateConquerors = () => {
-        navigate(ScreenName.ConquerorsPage);
-    };
-
-    const onNavigatePlayerData = () => {
-        navigate(ScreenName.DataPlayerPage);
-    };
 
     const listTeams = [
         {
@@ -267,6 +248,25 @@ export const useViewModel = ({ navigation, route }: INationalTeamScreenProps) =>
 
     const handleDetails = () => {
         navigate(ScreenName.ListGamePage);
+    };
+    const handleDetailMatch = () => {
+        navigate(ScreenName.MatchPage);
+    };
+
+    const handleStadium = () => {
+        navigate(ScreenName.PitchPage);
+    };
+
+    const handleNavigation = () => {
+        navigate(ScreenName.PreviousCampaignsPage);
+    };
+
+    const onNavigateConquerors = () => {
+        navigate(ScreenName.ConquerorsPage);
+    };
+
+    const onNavigatePlayerData = () => {
+        navigate(ScreenName.DataPlayerPage);
     };
 
     const cupsAround = [

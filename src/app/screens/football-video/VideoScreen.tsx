@@ -23,9 +23,11 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import Carousel from 'react-native-reanimated-carousel';
 import Icon from 'react-native-vector-icons/AntDesign';
 import VideoPlayer from 'react-native-video-player';
+
 import styles from './VideoScreen.styles';
 import { IVideoScreenProps } from './VideoScreen.type';
 import { useViewModel } from './VideoScreen.viewModel';
+import { Video } from '@football/app/components/video/Video';
 
 export const VideoScreen = ({ navigation, route }: IVideoScreenProps) => {
     const {
@@ -53,46 +55,6 @@ export const VideoScreen = ({ navigation, route }: IVideoScreenProps) => {
             <ImageBackground source={AppImages.img_background} style={appStyles.flex}>
                 <StatusBar translucent backgroundColor="transparent" />
                 <SafeAreaView style={appStyles.safe_area}>
-                    {display && (
-                        <View style={styles.video_container}>
-                            <View style={styles.ic_close}>
-                                <Icon
-                                    onPress={() => {
-                                        setDisplay(false);
-                                        setAutoPlay(true);
-                                    }}
-                                    name="close"
-                                    size={getSize.m(18)}
-                                    color={appColors.white}
-                                />
-                            </View>
-                            <View style={styles.ic_share}>
-                                <Icon
-                                    onPress={() => {}}
-                                    name="sharealt"
-                                    size={getSize.m(18)}
-                                    color={appColors.white}
-                                />
-                            </View>
-
-                            <View>
-                                <VideoPlayer
-                                    loop
-                                    video={sourceVideo}
-                                    thumbnail={AppImages.img_thumbnail}
-                                    endThumbnail={AppImages.img_thumbnail}
-                                    videoWidth={getSize.m(1600)}
-                                    videoHeight={getSize.m(900)}
-                                    resizeMode="contain"
-                                    showDuration
-                                    onEnd={() => {
-                                        setDisplay(false);
-                                        setAutoPlay(true);
-                                    }}
-                                />
-                            </View>
-                        </View>
-                    )}
                     <ScrollView>
                         <View style={appStyles.container}>
                             <HeaderUser
