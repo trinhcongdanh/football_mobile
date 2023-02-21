@@ -1,17 +1,8 @@
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
 import { LeagueItemScreen } from '@football/app/screens/football-leagues/layouts/league-item/LeagueItemScreen';
-import { ScreenName } from '@football/app/utils/constants/enum';
 import { useMount } from '@football/app/utils/hooks/useMount';
-import { axiosClient } from '@football/core/api/configs/axiosClient';
-import { BASE_URL, DATA_SOURCE, DB } from '@football/core/api/configs/config';
-import {
-    LeagueModelResponse,
-    LeagueTypeModelResponse,
-} from '@football/core/models/LeagueModelResponse';
-import { isEmpty, isNil } from 'lodash';
 import { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Alert } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import {
     resetSearchLeagues,
@@ -19,10 +10,11 @@ import {
     setSearchLeagues,
 } from 'src/store/league/League.slice';
 import { RootState } from 'src/store/store';
+import leagueService from './LeaguesScreen.service';
 import { ILeaguesScreenProps } from './LeaguesScreen.type';
 
-export const useViewModel = ({ navigation, route }: ILeaguesScreenProps) => {
-    const { navigate, goBack } = useAppNavigator();
+export const useViewModel = ({ navigation }: ILeaguesScreenProps) => {
+    const { goBack } = useAppNavigator();
     const { t } = useTranslation();
 
     const dispatch = useDispatch<any>();
@@ -41,46 +33,32 @@ export const useViewModel = ({ navigation, route }: ILeaguesScreenProps) => {
         setSearchText(text);
     };
 
-    const submitSearchLeague = async () => {
+    const submitSearchLeague = useCallback(async () => {
         if (searchText !== '') {
-            try {
-                dispatch(resetSearchLeagues());
-                const { data }: LeagueModelResponse = await axiosClient.post(`${BASE_URL}/find`, {
-                    dataSource: DATA_SOURCE,
-                    database: DB,
-                    collection: 'league',
-                    filter: {
-                        search_terms: { $regex: `.*${searchText}.*`, $options: 'i' },
-                    },
-                });
+            dispatch(resetSearchLeagues());
+            const [error, res] = await leagueService.search(searchText);
 
-                if (!isEmpty(data.documents)) {
-                    dispatch(setSearchLeagues(data.documents));
-                }
-            } catch (error: any) {
-                Alert.alert(error);
+            if (error) {
+                return;
             }
+
+            dispatch(setSearchLeagues(res.data.documents));
         }
-    };
+    }, [dispatch, searchText]);
+
+    const getLeagueTypesData = useCallback(async () => {
+        const [error, res] = await leagueService.getTypes();
+
+        if (error) {
+            return;
+        }
+
+        dispatch(setLeagueTypes(res.data.documents));
+    }, [dispatch]);
 
     const onShowSideMenu = () => {
         navigation.openDrawer();
     };
-    const getLeagueTypesData = useCallback(async () => {
-        try {
-            const { data }: LeagueTypeModelResponse = await axiosClient.post(`${BASE_URL}/find`, {
-                dataSource: DATA_SOURCE,
-                database: DB,
-                collection: 'league_type',
-            });
-
-            if (!isEmpty(data.documents)) {
-                dispatch(setLeagueTypes(data.documents));
-            }
-        } catch (error: any) {
-            Alert.alert(error);
-        }
-    }, []);
 
     const labels = leagueTypes.map(e => ({
         id: e.index,
