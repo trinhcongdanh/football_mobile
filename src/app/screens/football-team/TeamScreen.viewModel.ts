@@ -3,6 +3,7 @@ import { OfflineData, ScreenName } from '@football/app/utils/constants/enum';
 import { useMount } from '@football/app/utils/hooks/useMount';
 import { axiosClient } from '@football/core/api/configs/axiosClient';
 import { BASE_URL, DATA_SOURCE, DB } from '@football/core/api/configs/config';
+import { TopTeamModel, TopTeamModelResponse } from '@football/core/models/TopTeamModelResponse';
 import { useAsyncStorage } from '@react-native-async-storage/async-storage';
 import { isEmpty, isNil } from 'lodash';
 import { useCallback, useState } from 'react';
@@ -44,28 +45,45 @@ export const useViewModel = ({ navigation, route }: ITeamScreenProps) => {
         setToggleBar(!toggleBar);
     };
 
-    const optionTeams = [
-        { id: 1, name: 'הנבחרת הצעירה' },
-        { id: 2, name: 'נבחרת הנשים' },
-        { id: 3, name: 'נבחרת נערים א' },
-        { id: 4, name: 'הנבחרת הלאומית' },
-        { id: 5, name: 'נבחרת נוער ב' },
-        { id: 6, name: 'נבחרת הנערות עד גיל 19' },
-        { id: 7, name: 'נבחרת הנערות עד גיל 17' },
-        { id: 8, name: 'נבחרת הנערות עד גיל 17' },
-        { id: 9, name: 'נבחרת הנערות עד גיל 17' },
-    ];
+    // const optionTeams = [
+    //     { id: 1, name: 'הנבחרת הצעירה' },
+    //     { id: 2, name: 'נבחרת הנשים' },
+    //     { id: 3, name: 'נבחרת נערים א' },
+    //     { id: 4, name: 'הנבחרת הלאומית' },
+    //     { id: 5, name: 'נבחרת נוער ב' },
+    //     { id: 6, name: 'נבחרת הנערות עד גיל 19' },
+    //     { id: 7, name: 'נבחרת הנערות עד גיל 17' },
+    //     { id: 8, name: 'נבחרת הנערות עד גיל 17' },
+    //     { id: 9, name: 'נבחרת הנערות עד גיל 17' },
+    // ];
 
-    const handleTeam = () => {
-        navigate(ScreenName.NationalTeamPage);
+    const [topTeams, setTopTeams] = useState<TopTeamModel[]>();
+    const getTopTeamsData = async () => {
+        try {
+            const { data }: TopTeamModelResponse = await axiosClient.post(`${BASE_URL}/find`, {
+                dataSource: DATA_SOURCE,
+                database: DB,
+                collection: 'top_team',
+            });
+
+            setTopTeams(data.documents);
+        } catch (error: any) {
+            Alert.alert(error);
+        }
     };
+
+    const handleTeam = (_id: string) => {
+        navigate(ScreenName.NationalTeamPage, { topTeamId: _id });
+    };
+
     const onShowSideMenu = () => {
         navigation.openDrawer();
     };
 
     useMount(() => {
         getTeamsData();
+        getTopTeamsData();
     });
 
-    return { optionTeams, toggleChangeBar, toggleBar, handleTeam, onShowSideMenu };
+    return { topTeams, toggleChangeBar, toggleBar, handleTeam, onShowSideMenu };
 };

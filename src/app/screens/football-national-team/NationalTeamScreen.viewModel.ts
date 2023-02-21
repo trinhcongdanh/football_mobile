@@ -1,9 +1,13 @@
-import { useState } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Dimensions } from 'react-native';
+import { Alert, Dimensions } from 'react-native';
 import { AppImages } from '@football/app/assets/images';
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
 import { ScreenName } from '@football/app/utils/constants/enum';
+import { axiosClient } from '@football/core/api/configs/axiosClient';
+import { BASE_URL, DATA_SOURCE, DB } from '@football/core/api/configs/config';
+import { TopTeamModel, TopTeamModelResponse } from '@football/core/models/TopTeamModelResponse';
 import { INationalTeamScreenProps } from './NationalTeamScreen.type';
 
 export const useViewModel = ({ navigation, route }: INationalTeamScreenProps) => {
@@ -14,43 +18,29 @@ export const useViewModel = ({ navigation, route }: INationalTeamScreenProps) =>
         goBack();
     };
 
-    const data = [
-        {
-            id: 1,
-            image: AppImages.img_thumbnail,
-            minute: '04:50',
-            content: 'תוצאות הגרלת ליגת העל לעונת 2023-2024',
-            video: require('../../assets/video/neymarSkill.mp4'),
-        },
-        {
-            id: 2,
-            image: AppImages.img_gallery,
-            minute: '04:50',
-            content: 'תוצאות הגרלת ליגת העל לעונת 2023-2024',
-            video: require('../../assets/video/neymarSkill.mp4'),
-        },
-        {
-            id: 3,
-            image: AppImages.img_thumbnail,
-            minute: '04:50',
-            content: 'תוצאות הגרלת ליגת העל לעונת 2023-2024',
-            video: require('../../assets/video/neymarSkill.mp4'),
-        },
-        {
-            id: 4,
-            image: AppImages.img_gallery,
-            minute: '04:50',
-            content: 'תוצאות הגרלת ליגת העל לעונת 2023-2024',
-            video: require('../../assets/video/neymarSkill.mp4'),
-        },
-        {
-            id: 5,
-            image: AppImages.img_thumbnail,
-            minute: '04:50',
-            content: 'תוצאות הגרלת ליגת העל לעונת 2023-2024',
-            video: require('../../assets/video/neymarSkill.mp4'),
-        },
-    ];
+    const [topTeam, setTopTeam] = useState<TopTeamModel>();
+    const getTopTeamData = async () => {
+        try {
+            const { data }: TopTeamModelResponse = await axiosClient.post(`${BASE_URL}/find`, {
+                dataSource: DATA_SOURCE,
+                database: DB,
+                collection: 'top_team',
+                filter: {
+                    _id: { $oid: route?.params?.topTeamId },
+                },
+            });
+
+            if (data.documents?.length) {
+                setTopTeam(data.documents[0]);
+            }
+        } catch (error: any) {
+            Alert.alert(error);
+        }
+    };
+
+    useEffect(() => {
+        getTopTeamData();
+    }, []);
 
     const [display, setDisplay] = useState(false);
     const [sourceVideo, setSourceVideo] = useState();
@@ -67,70 +57,14 @@ export const useViewModel = ({ navigation, route }: INationalTeamScreenProps) =>
         setDisplay(false);
     };
 
-    const width = Dimensions.get('window').width;
+    const { width } = Dimensions.get('window');
 
-    const video = require('../../assets/video/neymarSkill.mp4');
-
-    const listGames = [
-        {
-            id: 1,
-            logoHome:
-                'https://upload.wikimedia.org/wikipedia/he/thumb/0/0e/MaacabiSymbol.svg/1200px-MaacabiSymbol.svg.png',
-            logoAway:
-                'https://upload.wikimedia.org/wikipedia/he/thumb/0/0e/MaacabiSymbol.svg/1200px-MaacabiSymbol.svg.png',
-            nameHome: 'ישראל',
-            nameAway: 'אלבניה',
-            location: 'בלומפילד',
-            date: '21:45  |  27/9/22',
-            result: null,
-            schedule: null,
-            details: 'הרכב',
-            tournament: 'פלייאוף לאליפות אירופה',
-            completed: false,
-            isLive: true,
-        },
-        {
-            id: 2,
-            logoHome:
-                'https://upload.wikimedia.org/wikipedia/he/thumb/0/0e/MaacabiSymbol.svg/1200px-MaacabiSymbol.svg.png',
-            logoAway:
-                'https://upload.wikimedia.org/wikipedia/he/thumb/0/0e/MaacabiSymbol.svg/1200px-MaacabiSymbol.svg.png',
-            nameHome: 'ישראל',
-            nameAway: 'אלבניה',
-            location: 'בלומפילד',
-            date: '27/9/22',
-            result: '3:1',
-            schedule: 'V S',
-            details: 'פרטי משחק',
-            tournament: 'פלייאוף לאליפות אירופה',
-            completed: false,
-            isLive: false,
-        },
-        {
-            id: 3,
-            logoHome:
-                'https://upload.wikimedia.org/wikipedia/he/thumb/0/0e/MaacabiSymbol.svg/1200px-MaacabiSymbol.svg.png',
-            logoAway:
-                'https://upload.wikimedia.org/wikipedia/he/thumb/0/0e/MaacabiSymbol.svg/1200px-MaacabiSymbol.svg.png',
-            nameHome: 'ישראל',
-            nameAway: 'אלבניה',
-            location: 'בלומפילד',
-            date: '21:45  |  27/9/22',
-            result: null,
-            schedule: 'V S',
-            details: 'פרטי משחק',
-            tournament: 'פלייאוף לאליפות אירופה',
-            completed: false,
-            isLive: false,
-        },
-    ];
-
-    const handleDetailMatch = () => {
-        navigate(ScreenName.MatchPage);
+    const handleDetailMatch = (gameId: any) => {
+        navigate(ScreenName.MatchPage, { gameId });
     };
 
-    const handleStadium = () => {
-        navigate(ScreenName.PitchPage);
+    const handleStadium = (stadiumId: string) => {
+        navigate(ScreenName.PitchPage, { stadiumId });
     };
 
     const handleNavigation = () => {
@@ -145,57 +79,6 @@ export const useViewModel = ({ navigation, route }: INationalTeamScreenProps) =>
         navigate(ScreenName.DataPlayerPage);
     };
 
-    const listTeams = [
-        {
-            id: 1,
-            logo:
-                'https://upload.wikimedia.org/wikipedia/he/thumb/0/0e/MaacabiSymbol.svg/1200px-MaacabiSymbol.svg.png',
-            name: 'ישראל',
-            mash: 6,
-            nch: 4,
-            draw: 0,
-            the_p: 2,
-            time: '6-9',
-            no: 12,
-        },
-        {
-            id: 2,
-            logo:
-                'https://upload.wikimedia.org/wikipedia/he/thumb/0/0e/MaacabiSymbol.svg/1200px-MaacabiSymbol.svg.png',
-            name: 'ישראל',
-            mash: 6,
-            nch: 4,
-            draw: 0,
-            the_p: 2,
-            time: '6-9',
-            no: 12,
-        },
-        {
-            id: 3,
-            logo:
-                'https://upload.wikimedia.org/wikipedia/he/thumb/0/0e/MaacabiSymbol.svg/1200px-MaacabiSymbol.svg.png',
-            name: 'ישראל',
-            mash: 6,
-            nch: 4,
-            draw: 0,
-            the_p: 2,
-            time: '6-9',
-            no: 12,
-        },
-        {
-            id: 4,
-            logo:
-                'https://upload.wikimedia.org/wikipedia/he/thumb/0/0e/MaacabiSymbol.svg/1200px-MaacabiSymbol.svg.png',
-            name: 'ישראל',
-            mash: 6,
-            nch: 4,
-            draw: 0,
-            the_p: 2,
-            time: '6-9',
-            no: 12,
-        },
-    ];
-
     const options = [
         t('national_team.list_game.home_away'),
         t('national_team.list_game.house'),
@@ -207,60 +90,9 @@ export const useViewModel = ({ navigation, route }: INationalTeamScreenProps) =>
         setSelect(index);
     };
 
-    const listMatches = [
-        {
-            id: 1,
-            logoHome:
-                'https://upload.wikimedia.org/wikipedia/he/thumb/0/0e/MaacabiSymbol.svg/1200px-MaacabiSymbol.svg.png',
-            logoAway:
-                'https://upload.wikimedia.org/wikipedia/he/thumb/0/0e/MaacabiSymbol.svg/1200px-MaacabiSymbol.svg.png',
-            nameHome: 'ישראל',
-            nameAway: 'אלבניה',
-            location: 'בלומפילד',
-            date: '15.09.22',
-            result: '3:1',
-            schedule: '11:00',
-            details: 'פרטי משחק',
-            tournament: 'פלייאוף לאליפות אירופה',
-            completed: false,
-        },
-        {
-            id: 2,
-            logoHome:
-                'https://upload.wikimedia.org/wikipedia/he/thumb/0/0e/MaacabiSymbol.svg/1200px-MaacabiSymbol.svg.png',
-            logoAway:
-                'https://upload.wikimedia.org/wikipedia/he/thumb/0/0e/MaacabiSymbol.svg/1200px-MaacabiSymbol.svg.png',
-            nameHome: 'ישראל',
-            nameAway: 'אלבניה',
-            location: 'בלומפילד',
-            date: '10.09.22',
-            result: '3:1',
-            schedule: '11:00',
-            details: 'פרטי משחק',
-            tournament: 'פלייאוף לאליפות אירופה',
-            completed: true,
-        },
-        {
-            id: 3,
-            logoHome:
-                'https://upload.wikimedia.org/wikipedia/he/thumb/0/0e/MaacabiSymbol.svg/1200px-MaacabiSymbol.svg.png',
-            logoAway:
-                'https://upload.wikimedia.org/wikipedia/he/thumb/0/0e/MaacabiSymbol.svg/1200px-MaacabiSymbol.svg.png',
-            nameHome: 'ישראל',
-            nameAway: 'אלבניה',
-            location: 'בלומפילד',
-            date: '01.09.22',
-            result: '3:1',
-            schedule: '11:00',
-            details: 'פרטי משחק',
-            tournament: 'פלייאוף לאליפות אירופה',
-            completed: true,
-        },
-    ];
-
     const teamSquads = [
-        { id: 1, name: 'סגל נבחרת', avt: AppImages.img_logo, screen: ScreenName.TeamSquadPage },
-        { id: 2, name: 'בעלי תפקידים', avt: AppImages.img_logo, screen: ScreenName.TeamStaffPage },
+        { id: 1, name: t('team_squad.title'), screen: ScreenName.TeamSquadPage },
+        { id: 2, name: t('team_squad.option.officials'), screen: ScreenName.TeamStaffPage },
     ];
 
     const [activeIndexNumber, setActiveIndexNumber] = useState(Number);
@@ -268,34 +100,6 @@ export const useViewModel = ({ navigation, route }: INationalTeamScreenProps) =>
     const handleDetails = () => {
         navigate(ScreenName.ListGamePage);
     };
-
-    const cupsAround = [
-        {
-            id: 1,
-            name: 'איאד אבו עוביד',
-            number: '12',
-        },
-        {
-            id: 2,
-            name: 'איאד אבו עוביד',
-            number: '10',
-        },
-        {
-            id: 3,
-            name: 'איאד אבו עוביד',
-            number: '10',
-        },
-        {
-            id: 4,
-            name: 'איאד אבו עוביד',
-            number: '10',
-        },
-        {
-            id: 5,
-            name: 'איאד אבו עוביד',
-            number: '10',
-        },
-    ];
 
     return {
         t,
@@ -306,25 +110,20 @@ export const useViewModel = ({ navigation, route }: INationalTeamScreenProps) =>
         handleDetailMatch,
         handleNavigation,
         selectOption,
-        video,
         display,
-        data,
         width,
         sourceVideo,
         autoPlay,
-        listGames,
-        listTeams,
         options,
         select,
-        listMatches,
         teamSquads,
         activeIndexNumber,
         setActiveIndexNumber,
         handleDetails,
-        cupsAround,
         handleStadium,
         onNavigateConquerors,
         onNavigatePlayerData,
         navigate,
+        topTeam,
     };
 };
