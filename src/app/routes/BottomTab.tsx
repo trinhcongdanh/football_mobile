@@ -120,7 +120,7 @@ export const BottomTabStack = () => {
                         }}
                         bottomBarContainerStyle={{
                             position: 'absolute',
-                            top: height - TAB_BAR_HEIGHT - BOTTOM_SVG_HEIGHT,
+                            bottom: 0,
                             left: 0,
                             right: 0,
                         }}
