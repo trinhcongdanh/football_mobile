@@ -13,8 +13,8 @@
       android:allowBackup="false"
       android:theme="@style/AppTheme"
       android:supportsRtl="true">
-      <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
-   	  <meta-data android:name="com.facebook.sdk.ClientToken" android:value="@string/facebook_client_token"/>
+      <!-- <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
+   	  <meta-data android:name="com.facebook.sdk.ClientToken" android:value="@string/facebook_client_token"/> -->
       <meta-data
         android:name="com.google.android.geo.API_KEY"
         android:value="AIzaSyBidhsRwLmGN_XJ1-BGVSKiIOM2rZ8l6H4"/>
