@@ -7,26 +7,15 @@ import { appColors } from '@football/app/utils/constants/appColors';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import { getSize } from '@football/app/utils/responsive/scale';
 import React from 'react';
-import { ImageBackground, SafeAreaView, ScrollView, StatusBar, Text, View } from 'react-native';
+import { ImageBackground, SafeAreaView, StatusBar, Text, View } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 
 import Icon from 'react-native-vector-icons/Feather';
 import styles from './LeaguesScreen.style';
-import { ILeaguesScreenProps } from './LeaguesScreen.type';
 import { useViewModel } from './LeaguesScreen.viewModel';
 
-export const LeaguesScreen = ({ navigation, route }: ILeaguesScreenProps) => {
-    const {
-        t,
-        labels,
-        onShowSideMenu,
-        searchLeagues,
-        onSearchLeague,
-        submitSearchLeague,
-    } = useViewModel({
-        navigation,
-        route,
-    });
+export const LeaguesScreen = () => {
+    const { t, labels, onSearchLeague, submitSearchLeague } = useViewModel();
 
     return (
         <View style={appStyles.flex}>
@@ -40,7 +29,6 @@ export const LeaguesScreen = ({ navigation, route }: ILeaguesScreenProps) => {
                             icon={AppImages.img_bars_sort}
                             color_pre={appColors.blue_light}
                             color_after={appColors.blue_dark}
-                            handlePressFunction={onShowSideMenu}
                         />
                         <View>
                             <Text style={[appStyles.text_title]}>{t('leagues.title')}</Text>

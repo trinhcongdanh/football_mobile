@@ -1,5 +1,6 @@
 import { AppImages } from '@football/app/assets/images';
 import { appStyles } from '@football/app/utils/constants/appStyles';
+import { useAppNavigation } from '@football/app/utils/hooks/useAppNavigation';
 import { getSize } from '@football/app/utils/responsive/scale';
 import React from 'react';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
@@ -16,6 +17,16 @@ export const HeaderUser = ({
     color_pre,
     handlePressFunction,
 }: IHeaderUserProps) => {
+    const { openDrawer } = useAppNavigation();
+
+    const onPressMenu = () => {
+        if (handlePressFunction) {
+            handlePressFunction();
+        } else {
+            openDrawer();
+        }
+    };
+
     return (
         <View style={[appStyles.flex_space_center, styles.header]}>
             <View style={[appStyles.flex_row_space_center, styles.avt]}>
@@ -38,9 +49,8 @@ export const HeaderUser = ({
                 </Text>
                 <Image source={AppImages.img_ball} style={styles.ic_football} />
             </View>
-            <TouchableOpacity onPress={handlePressFunction}>
+            <TouchableOpacity onPress={onPressMenu}>
                 <LinearGradient colors={[color_pre, color_after]} style={styles.bar}>
-                    {/* <Icon name={icon} color={appColors.white} size={getSize.m(20)} /> */}
                     <FastImage
                         source={icon}
                         resizeMode={FastImage.resizeMode.contain}
