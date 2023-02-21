@@ -113,4 +113,8 @@ export const AppImages = {
     img_instagram: require('./instagram.png'),
     img_squad: require('./squad.png'),
     img_card: require('./card.png'),
+    img_backward_left: require('./backward_left.png'),
+    img_backward_right: require('./backward_right.png'),
+    img_expand: require('./expand.png'),
+    img_vector: require('./Vector.png'),
 };

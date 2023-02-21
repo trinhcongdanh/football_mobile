@@ -2,7 +2,6 @@
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Alert, Dimensions } from 'react-native';
-import { AppImages } from '@football/app/assets/images';
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
 import { ScreenName } from '@football/app/utils/constants/enum';
 import { axiosClient } from '@football/core/api/configs/axiosClient';
