@@ -2,17 +2,18 @@ import { styles } from '@football/app/components/video/Video.style';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import React, { createRef, useState } from 'react';
 import IconIonicons from 'react-native-vector-icons/Ionicons';
-import { ScrollView, Text, View, TouchableOpacity, I18nManager, SafeAreaView } from 'react-native';
+import { ScrollView, Text, View, TouchableOpacity, I18nManager } from 'react-native';
 import { appIcons } from '@football/app/assets/icons/appIcons';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { getSize } from '@football/app/utils/responsive/scale';
 import Video_Player from 'react-native-video';
 import IconFontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import { BlurView } from '@react-native-community/blur';
 import Slider from '@react-native-community/slider';
 import FastImage from 'react-native-fast-image';
 import { AppImages } from '@football/app/assets/images';
 import { useDispatch, useSelector } from 'react-redux';
-import { setHiddenVideo } from 'src/store/video/Video.slice';
+import { resetVideo, setHiddenVideo } from 'src/store/video/Video.slice';
 
 export const Video = () => {
     // Pause Video
@@ -71,20 +72,29 @@ export const Video = () => {
     const fullDuration = getMinutesFromSeconds(duration);
 
     const showVideo = useSelector((state: any) => state.video.showVideo);
+    const sourceVideo = useSelector((state: any) => state.video.sourceVideo);
 
     const hiddenVideo = () => {
+        videoRef.current.seek(0);
+        setPause(true);
         dispatch(setHiddenVideo(false));
+        dispatch(resetVideo(null));
     };
 
     return (
         <View
-            style={[
-                styles.background_opacity,
-                {
-                    display: showVideo ? 'flex' : 'none',
-                },
-            ]}
+            style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                display: showVideo ? 'flex' : 'none',
+                backgroundColor: 'none',
+                zIndex: 1,
+            }}
         >
+            <BlurView style={[styles.background_opacity]} />
             <View style={[styles.container_video]}>
                 <View style={styles.line_close} />
                 <TouchableOpacity onPress={hiddenVideo} style={styles.ic_close}>
@@ -96,10 +106,14 @@ export const Video = () => {
                     />
                 </TouchableOpacity>
                 <ScrollView>
-                    <View style={{ minHeight: getSize.m(900) }}>
+                    <View
+                        style={{
+                            minHeight: getSize.m(900),
+                        }}
+                    >
                         <Video_Player
                             ref={videoRef}
-                            source={require('../../assets/video/neymarSkill.mp4')}
+                            source={sourceVideo}
                             style={styles.background_video}
                             paused={pause}
                             resizeMode="cover"

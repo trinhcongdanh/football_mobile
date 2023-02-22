@@ -5,7 +5,7 @@ import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
 import { useTranslation } from 'react-i18next';
 import { IVideoScreenProps } from './VideoScreen.type';
 import { useDispatch } from 'react-redux';
-import { setShowVideo, videoSlice } from 'src/store/video/Video.slice';
+import { addVideo, setShowVideo, videoSlice } from 'src/store/video/Video.slice';
 
 export const useViewModel = ({ navigation, route }: IVideoScreenProps) => {
     const { navigate, goBack } = useAppNavigator();
@@ -61,6 +61,7 @@ export const useViewModel = ({ navigation, route }: IVideoScreenProps) => {
         setSourceVideo(video);
         setAutoPlay(false);
         dispatch(setShowVideo(true));
+        dispatch(addVideo(video));
     };
 
     const handleEndVideo = () => {
