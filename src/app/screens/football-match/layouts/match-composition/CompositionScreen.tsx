@@ -1,17 +1,20 @@
-import { View, ScrollView } from 'react-native';
-import React from 'react';
+import { AppFonts } from '@football/app/assets/fonts';
+import { ListPlayer } from '@football/app/components/list-player/ListPlayer';
+import { Position } from '@football/app/components/position/Position';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { appStyles } from '@football/app/utils/constants/appStyles';
-import { Position } from '@football/app/components/position/Position';
 import { getSize } from '@football/app/utils/responsive/scale';
-import { ListPlayer } from '@football/app/components/list-player/ListPlayer';
-import { useViewModel } from './CompositionScreen.viewModel';
+import { Team } from '@football/core/models/GameModelResponse';
+import React from 'react';
+import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import styles from './CompositionScreen.styles';
 import { ICompositionScreenProps } from './CompositionScreen.type';
+import { useViewModel } from './CompositionScreen.viewModel';
 
 // type Props = {};
 
 export const CompositionScreen = ({ navigation, route }: ICompositionScreenProps) => {
-    const { t, lineUp, handleDataPlayer } = useViewModel({
+    const { t, game, handleDataPlayer, options, selectOption, select } = useViewModel({
         navigation,
         route,
     });
@@ -22,20 +25,15 @@ export const CompositionScreen = ({ navigation, route }: ICompositionScreenProps
     //     return <></>;
     // }
 
-    return (
-        <View
-            style={[
-                appStyles.flex,
-                { backgroundColor: appColors.gray, paddingHorizontal: getSize.m(16) },
-            ]}
-        >
-            <ScrollView showsVerticalScrollIndicator={false}>
+    const renderList = (team: Team) => {
+        return (
+            <>
                 <View style={{ marginTop: getSize.m(30) }}>
                     <Position
                         width={getSize.m(130)}
                         position={t('match.composition.main_lineup')}
                     />
-                    {lineUp.map(item => {
+                    {team?.lineup?.opening.map(item => {
                         return (
                             <ListPlayer
                                 key={item.player_id}
@@ -49,7 +47,7 @@ export const CompositionScreen = ({ navigation, route }: ICompositionScreenProps
                 </View>
                 <View style={{ marginTop: getSize.m(30) }}>
                     <Position width={getSize.m(130)} position={t('match.composition.replace')} />
-                    {lineUp.map(item => {
+                    {team?.lineup?.substitutes.map(item => {
                         return (
                             <ListPlayer
                                 key={item.player_id}
@@ -66,7 +64,7 @@ export const CompositionScreen = ({ navigation, route }: ICompositionScreenProps
                         width={getSize.m(130)}
                         position={t('match.composition.not_partner')}
                     />
-                    {lineUp.map(item => {
+                    {team?.lineup?.not_participated.map(item => {
                         return (
                             <ListPlayer
                                 key={item.player_id}
@@ -80,10 +78,10 @@ export const CompositionScreen = ({ navigation, route }: ICompositionScreenProps
                 </View>
                 <View style={{ marginTop: getSize.m(30) }}>
                     <Position width={getSize.m(130)} position={t('match.composition.coach')} />
-                    {lineUp.map(item => {
+                    {team?.lineup?.coaches.map(item => {
                         return (
                             <ListPlayer
-                                key={item.player_id}
+                                key={item.coach_id}
                                 name={item.name_he}
                                 avt={item.image_url}
                                 handleDataPlayer={handleDataPlayer}
@@ -91,6 +89,67 @@ export const CompositionScreen = ({ navigation, route }: ICompositionScreenProps
                         );
                     })}
                 </View>
+                <View style={{ marginTop: getSize.m(30) }}>
+                    <Position width={getSize.m(130)} position={t('match.composition.referees')} />
+                    {team?.lineup?.referees.map(item => {
+                        return (
+                            <ListPlayer
+                                key={item.referee_id}
+                                name={item.name_he}
+                                avt={item.image_url}
+                                handleDataPlayer={handleDataPlayer}
+                            />
+                        );
+                    })}
+                </View>
+            </>
+        );
+    };
+    return (
+        <View
+            style={[
+                appStyles.flex,
+                { backgroundColor: appColors.gray, paddingHorizontal: getSize.m(16) },
+            ]}
+        >
+            <ScrollView showsVerticalScrollIndicator={false}>
+                <View style={[appStyles.flex_row_space, styles.option]}>
+                    {options.map((option: string, index: number) => {
+                        return (
+                            <TouchableOpacity
+                                style={[
+                                    styles.button_option_dark,
+                                    {
+                                        backgroundColor:
+                                            index === select
+                                                ? appColors.button_dark_blue
+                                                : appColors.separator,
+                                    },
+                                ]}
+                                key={index.toString()}
+                                onPress={() => selectOption(index)}
+                            >
+                                <Text
+                                    style={[
+                                        styles.text_option,
+                                        {
+                                            color:
+                                                index === select
+                                                    ? appColors.white
+                                                    : appColors.text_option_unselect,
+
+                                            fontFamily:
+                                                index === select ? AppFonts.bold : AppFonts.medium,
+                                        },
+                                    ]}
+                                >
+                                    {option}
+                                </Text>
+                            </TouchableOpacity>
+                        );
+                    })}
+                </View>
+                {game && renderList(select === 0 ? game.team1 : game.team2)}
             </ScrollView>
         </View>
     );

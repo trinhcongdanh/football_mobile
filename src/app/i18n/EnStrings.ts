@@ -199,6 +199,7 @@ const resources = {
                     replace: 'מחליפים',
                     not_partner: 'לא שותפו',
                     coach: 'מאמן',
+                    referees: 'שופטים',
                 },
                 game_move: {
                     title: 'מהלך משחק',
@@ -218,6 +219,8 @@ const resources = {
                     the_p: 'הפ׳',
                     no: 'נק׳',
                 },
+                home: 'ביתית',
+                guest: 'אורחת',
             },
             data_player: {
                 number: 'מס׳ משחקים',

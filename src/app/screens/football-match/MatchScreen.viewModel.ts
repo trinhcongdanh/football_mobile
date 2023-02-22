@@ -1,19 +1,42 @@
-import { useCallback, useState } from 'react';
-import { Alert } from 'react-native';
-import { GameModel, GamesModelResponse } from '@football/core/models/GameModelResponse';
-import { isEmpty, isNil } from 'lodash';
-import { axiosClient } from '@football/core/api/configs/axiosClient';
-import { BASE_URL, DATA_SOURCE, DB } from '@football/core/api/configs/config';
-import { useMount } from '@football/app/utils/hooks/useMount';
-import localStorage from '@football/core/helpers/localStorage';
-import { useTranslation } from 'react-i18next';
-import { OfflineData, ScreenName, ScreenTopTap } from '../../utils/constants/enum';
-import { CompositionScreen } from '../../screens/football-match/layouts/match-composition';
-import { GameScreen } from '../../screens/football-match/layouts/match-game';
-import { ScheduleScreen } from '../../screens/football-match/layouts/match-schedule';
-import { StandingScreen } from '../../screens/football-match/layouts/match-standing';
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
+import { useMount } from '@football/app/utils/hooks/useMount';
+import { GameModel } from '@football/core/models/GameModelResponse';
+import gameService from '@football/core/services/game.service';
+import { useCallback, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { ScreenName, ScreenTopTap } from '../../utils/constants/enum';
+import { CompositionScreen } from './layouts/match-composition';
+import { GameScreen } from './layouts/match-game';
+import { ScheduleScreen } from './layouts/match-schedule';
+import { StandingScreen } from './layouts/match-standing';
 import { IMatchScreenProps } from './MatchScreen.type';
+
+const useViewState = () => {
+    const [game, setGame] = useState<GameModel>();
+
+    return {
+        game,
+        setGame,
+    };
+};
+
+const useViewCallback = (route: any, viewState: any) => {
+    const { setGame } = viewState;
+    const getGameData = useCallback(async () => {
+        const [error, res] = await gameService.findByOId(route?.params?.gameId);
+        if (error) {
+            return;
+        }
+
+        if (res.data.documents?.length) {
+            setGame(res.data.documents[0]);
+        }
+    }, []);
+
+    return {
+        getGameData,
+    };
+};
 
 export const useViewModel = ({ navigation, route }: IMatchScreenProps) => {
     const { navigate, goBack } = useAppNavigator();
@@ -23,56 +46,12 @@ export const useViewModel = ({ navigation, route }: IMatchScreenProps) => {
         goBack();
     };
 
-    const [gamesData, setGamesData] = useState<{
-        isLoading: boolean;
-        success: boolean;
-        data: GameModel;
-    }>({ isLoading: true, success: false, data: null! });
+    const state = useViewState();
 
-    const getGamesData = useCallback(async () => {
-        try {
-            const offlineData = await localStorage.getItem<{
-                isLoading: boolean;
-                success: boolean;
-                data: GameModel;
-            }>(OfflineData.game_page);
-            if (!isEmpty(offlineData) && !isNil(offlineData)) {
-                setGamesData({ isLoading: false, success: true, data: offlineData.data });
-            } else {
-                try {
-                    const { data }: GamesModelResponse = await axiosClient.post(
-                        `${BASE_URL}/find`,
-                        {
-                            dataSource: DATA_SOURCE,
-                            database: DB,
-                            collection: 'game',
-                        }
-                    );
-
-                    if (!isEmpty(data.documents)) {
-                        // documents always has one element
-                        setGamesData({
-                            isLoading: false,
-                            success: true,
-                            data: data.documents[0],
-                        });
-                        await localStorage.setItem<{
-                            isLoading: boolean;
-                            success: boolean;
-                            data: GameModel;
-                        }>(OfflineData.game_page, gamesData);
-                    }
-                } catch (e) {
-                    setGamesData({ isLoading: false, success: false, data: null! });
-                }
-            }
-        } catch (error: any) {
-            Alert.alert(error);
-        }
-    }, []);
+    const { getGameData } = useViewCallback(route, state);
 
     useMount(() => {
-        getGamesData();
+        getGameData();
     });
 
     const labels = [
@@ -106,5 +85,5 @@ export const useViewModel = ({ navigation, route }: IMatchScreenProps) => {
         navigate(ScreenName.PitchPage);
     };
 
-    return { t, onGoBack, labels, gamesData, handleStadium };
+    return { t, onGoBack, labels, ...state, handleStadium };
 };

@@ -6,9 +6,10 @@ import { Text, View } from 'react-native';
 import { appColors } from '../../utils/constants/appColors';
 import { getSize } from '../../utils/responsive/scale';
 
-type Props = {
+interface Props {
     labels: any;
-};
+    data?: any;
+}
 const Tab = createMaterialTopTabNavigator();
 
 const TabLabel = ({ focused, title }: any) => (
@@ -25,11 +26,10 @@ const TabLabel = ({ focused, title }: any) => (
         {title}
     </Text>
 );
-export const TopTaps = ({ labels }: Props) => {
+export const TopTaps = ({ labels, data }: Props) => {
     if (labels.length === 0) {
         return <View />;
     }
-
     return (
         <Tab.Navigator
             screenOptions={{
@@ -45,7 +45,7 @@ export const TopTaps = ({ labels }: Props) => {
                         key={item.id}
                         name={item.name}
                         component={item.component}
-                        initialParams={{ typeId: item.id }}
+                        initialParams={{ typeId: item.id, gameId: data }}
                         options={{
                             tabBarLabel: ({ focused }) => (
                                 <TabLabel focused={focused} title={item.title} />
