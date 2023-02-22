@@ -1,4 +1,3 @@
-import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
 import { useAppNavigation } from '@football/app/utils/hooks/useAppNavigation';
 import { LeagueModel } from '@football/core/models/LeagueModelResponse';
 import {
@@ -6,7 +5,7 @@ import {
     Gallery,
     Highlights,
     LeagueSeasonModel,
-    Round,
+    Round
 } from '@football/core/models/LeagueSeasonModelResponse';
 import LeagueService from '@football/core/services/League.service';
 import LeagueSeasonService from '@football/core/services/LeagueSeason.service';
