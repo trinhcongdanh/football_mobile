@@ -1,14 +1,55 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useState, useEffect } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Alert, Dimensions } from 'react-native';
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
 import { ScreenName } from '@football/app/utils/constants/enum';
-import { axiosClient } from '@football/core/api/configs/axiosClient';
-import { BASE_URL, DATA_SOURCE, DB } from '@football/core/api/configs/config';
-import { TopTeamModel, TopTeamModelResponse } from '@football/core/models/TopTeamModelResponse';
+import { TopTeamModel } from '@football/core/models/TopTeamModelResponse';
+import TopTeamService from '@football/core/services/TopTeam.service';
+import { useCallback, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { Dimensions } from 'react-native';
 import { INationalTeamScreenProps } from './NationalTeamScreen.type';
 
+const useViewState = () => {
+    const [topTeam, setTopTeam] = useState<TopTeamModel>();
+    const [activeIndexNumber, setActiveIndexNumber] = useState(Number);
+    const [display, setDisplay] = useState(false);
+    const [sourceVideo, setSourceVideo] = useState();
+    const [autoPlay, setAutoPlay] = useState(true);
+    const [select, setSelect] = useState(0);
+
+    return {
+        topTeam,
+        setTopTeam,
+        activeIndexNumber,
+        setActiveIndexNumber,
+        display,
+        setDisplay,
+        sourceVideo,
+        setSourceVideo,
+        autoPlay,
+        setAutoPlay,
+        select,
+        setSelect,
+    };
+};
+
+const useViewCallback = (route: any, viewState: any) => {
+    const { setTopTeam } = viewState;
+
+    const getTopTeamData = useCallback(async () => {
+        const [error, res] = await TopTeamService.findByOId(route?.params?.topTeamId);
+        if (error) {
+            return;
+        }
+
+        if (res.data.documents?.length) {
+            setTopTeam(res.data.documents[0]);
+        }
+    }, []);
+
+    return {
+        getTopTeamData,
+    };
+};
 export const useViewModel = ({ navigation, route }: INationalTeamScreenProps) => {
     const { navigate, goBack } = useAppNavigator();
     const { t } = useTranslation();
@@ -16,44 +57,22 @@ export const useViewModel = ({ navigation, route }: INationalTeamScreenProps) =>
     const onGoBack = (): void => {
         goBack();
     };
+    const state = useViewState();
 
-    const [topTeam, setTopTeam] = useState<TopTeamModel>();
-    const getTopTeamData = async () => {
-        try {
-            const { data }: TopTeamModelResponse = await axiosClient.post(`${BASE_URL}/find`, {
-                dataSource: DATA_SOURCE,
-                database: DB,
-                collection: 'top_team',
-                filter: {
-                    _id: { $oid: route?.params?.topTeamId },
-                },
-            });
-
-            if (data.documents?.length) {
-                setTopTeam(data.documents[0]);
-            }
-        } catch (error: any) {
-            Alert.alert(error);
-        }
-    };
-
+    const { getTopTeamData } = useViewCallback(route, state);
     useEffect(() => {
         getTopTeamData();
     }, []);
 
-    const [display, setDisplay] = useState(false);
-    const [sourceVideo, setSourceVideo] = useState();
-    const [autoPlay, setAutoPlay] = useState(true);
-
     const handlePlayVideo = (video: any) => {
-        setDisplay(true);
-        setSourceVideo(video);
-        setAutoPlay(false);
+        state.setDisplay(true);
+        state.setSourceVideo(video);
+        state.setAutoPlay(false);
     };
 
     const handleEndVideo = () => {
-        setAutoPlay(true);
-        setDisplay(false);
+        state.setAutoPlay(true);
+        state.setDisplay(false);
     };
 
     const { width } = Dimensions.get('window');
@@ -84,17 +103,14 @@ export const useViewModel = ({ navigation, route }: INationalTeamScreenProps) =>
         t('national_team.list_game.outside'),
     ];
 
-    const [select, setSelect] = useState(0);
     const selectOption = (index: any) => {
-        setSelect(index);
+        state.setSelect(index);
     };
 
     const teamSquads = [
         { id: 1, name: t('team_squad.title'), screen: ScreenName.TeamSquadPage },
         { id: 2, name: t('team_squad.option.officials'), screen: ScreenName.TeamStaffPage },
     ];
-
-    const [activeIndexNumber, setActiveIndexNumber] = useState(Number);
 
     const handleDetails = () => {
         navigate(ScreenName.ListGamePage);
@@ -104,25 +120,17 @@ export const useViewModel = ({ navigation, route }: INationalTeamScreenProps) =>
         t,
         onGoBack,
         handlePlayVideo,
-        setDisplay,
-        setAutoPlay,
         handleDetailMatch,
         handleNavigation,
         selectOption,
-        display,
         width,
-        sourceVideo,
-        autoPlay,
         options,
-        select,
-        teamSquads,
-        activeIndexNumber,
-        setActiveIndexNumber,
         handleDetails,
         handleStadium,
         onNavigateConquerors,
         onNavigatePlayerData,
         navigate,
-        topTeam,
+        ...state,
+        teamSquads,
     };
 };

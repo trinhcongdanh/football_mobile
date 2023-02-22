@@ -1,4 +1,5 @@
-import { configureStore } from '@reduxjs/toolkit';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { configureStore, ThunkAction } from '@reduxjs/toolkit';
 import { combineReducers } from 'redux';
 import {
     FLUSH,
@@ -10,16 +11,15 @@ import {
     REGISTER,
     REHYDRATE,
 } from 'redux-persist';
-
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Action } from 'typesafe-actions';
 import favPlayerReducer from './FavPlayer.slice';
 import favTeamReducer from './FavTeam.slice';
 import favTopTeamReducer from './FavTopTeam.slice';
+import leagueReducer from './league/League.slice';
 import createProfileReducer from './user/CreateProfile.slice';
 import guestIdReducer from './user/GuestId.slice';
 import loginReducer from './user/Login.slice';
 import registerFacebookReducer from './user/RegisterFacebook.slice';
-import leagueReducer from './league/League.slice';
 import videoReducer from './video/Video.slice';
 
 const reducer = combineReducers({
@@ -52,6 +52,15 @@ export const store = configureStore({
             immutableCheck: false,
         }),
 });
+
 export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
+
+export type AppThunk<ReturnType = void> = ThunkAction<
+    ReturnType,
+    RootState,
+    unknown,
+    Action<string>
+>;
 
 export const persistor = persistStore(store);
