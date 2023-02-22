@@ -1,31 +1,22 @@
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
-import { axiosClient } from '@football/core/api/configs/axiosClient';
-import { BASE_URL, DATA_SOURCE, DB } from '@football/core/api/configs/config';
-import { LeagueModel, LeagueOneModelResponse } from '@football/core/models/LeagueModelResponse';
+import { useAppNavigation } from '@football/app/utils/hooks/useAppNavigation';
+import { LeagueModel } from '@football/core/models/LeagueModelResponse';
 import {
     Cycle,
     Gallery,
     Highlights,
     LeagueSeasonModel,
-    LeagueSeasonModelResponse,
     Round,
 } from '@football/core/models/LeagueSeasonModelResponse';
+import LeagueService from '@football/core/services/League.service';
+import LeagueSeasonService from '@football/core/services/LeagueSeason.service';
 import { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Alert } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { setLeagueSeasons } from 'src/store/league/League.slice';
 import { ILeaguesDetailsScreenProps } from './LeaguesDetailsScreen.type';
 
-export const useViewModel = ({ navigation, route }: ILeaguesDetailsScreenProps) => {
-    const { navigate, goBack } = useAppNavigator();
-    const { t } = useTranslation();
-
-    const onGoBack = (): void => {
-        goBack();
-    };
-    const dispatch = useDispatch<any>();
-    const { leagueId }: any = route.params;
+const useViewState = () => {
     const [years, setYears] = useState<any[]>([]);
     const [allLeagueSeasons, setAllLeagueSeasons] = useState<any[]>([]);
 
@@ -41,123 +32,153 @@ export const useViewModel = ({ navigation, route }: ILeaguesDetailsScreenProps) 
     const [galleries, setGalleries] = useState<Gallery[]>();
     const [highlights, setHightlights] = useState<Highlights>();
 
-    // Call league_season api
-    const getLeagueSeasonsData = async () => {
-        try {
-            const { data }: LeagueSeasonModelResponse = await axiosClient.post(`${BASE_URL}/find`, {
-                dataSource: DATA_SOURCE,
-                database: DB,
-                collection: 'league_season',
-                filter: {
-                    league_id: {
-                        $eq: leagueId,
-                    },
-                },
-            });
-
-            const leagueSeasons = data.documents;
-            dispatch(setLeagueSeasons(leagueSeasons));
-            setAllLeagueSeasons(leagueSeasons);
-            if (leagueSeasons?.length) {
-                setSelectedLeagueSeason(leagueSeasons[0]);
-            }
-        } catch (error: any) {
-            Alert.alert(error);
-        }
-    };
-
+    // League
     const [league, setLeague] = useState<LeagueModel>();
-    const getLeagueById = useCallback(async () => {
-        try {
-            const { data }: LeagueOneModelResponse = await axiosClient.post(`${BASE_URL}/find`, {
-                dataSource: DATA_SOURCE,
-                database: DB,
-                collection: 'league',
-                filter: {
-                    _id: { $oid: leagueId },
-                },
-            });
-            if (data.documents?.length) {
-                setLeague(data.documents[0]);
-            }
-        } catch (error: any) {
-            Alert.alert(error);
+
+    return {
+        years,
+        setYears,
+        allLeagueSeasons,
+        setAllLeagueSeasons,
+        openModalYear,
+        setOpenModalYear,
+        openModalPlayOff,
+        setOpenModalPlayOff,
+        openModalCycle,
+        setOpenModalCycle,
+        selectedLeagueSeason,
+        setSelectedLeagueSeason,
+        selectCycle,
+        setSelectCycle,
+        selectRound,
+        setSelectRound,
+        galleries,
+        setGalleries,
+        highlights,
+        setHightlights,
+        league,
+        setLeague,
+    };
+};
+
+const useViewCallback = (route: any, viewState: any) => {
+    const dispatch = useDispatch();
+    const { leagueId }: any = route.params;
+
+    const { setAllLeagueSeasons, setSelectedLeagueSeason, setLeague } = viewState;
+    const getLeagueSeasonsData = useCallback(async () => {
+        const [error, res] = await LeagueSeasonService.findByFilter({
+            league_id: leagueId,
+        });
+        if (error) {
+            return;
+        }
+
+        const leagueSeasons = res.data.documents;
+
+        dispatch(setLeagueSeasons(leagueSeasons));
+        setAllLeagueSeasons(leagueSeasons);
+        if (leagueSeasons?.length) {
+            setSelectedLeagueSeason(leagueSeasons[0]);
         }
     }, []);
 
+    const getLeagueById = useCallback(async () => {
+        const [error, res] = await LeagueService.findByOId(leagueId);
+        if (error) {
+            return;
+        }
+
+        if (res.data.documents?.length) {
+            setLeague(res.data.documents[0]);
+        }
+    }, []);
+
+    return {
+        getLeagueSeasonsData,
+        getLeagueById,
+        dispatch,
+    };
+};
+
+export const useViewModel = ({ navigation, route }: ILeaguesDetailsScreenProps) => {
+    const { onGoBack } = useAppNavigation();
+    const { t } = useTranslation();
+
+    const viewState = useViewState();
+    const { getLeagueSeasonsData, getLeagueById, dispatch } = useViewCallback(route, viewState);
+
     const handleSelectedYear = (item: any) => {
-        setSelectedLeagueSeason(allLeagueSeasons.find(season => season.name === item.content));
-        setOpenModalYear(false);
+        // eslint-disable-next-line @typescript-eslint/dot-notation
+        viewState.setSelectedLeagueSeason(
+            viewState.allLeagueSeasons.find(season => season.name === item.content)
+        );
+        viewState.setOpenModalYear(false);
     };
 
     const handleCloseModal = () => {
-        setOpenModalYear(false);
-        setOpenModalCycle(false);
-        setOpenModalPlayOff(false);
+        viewState.setOpenModalYear(false);
+        viewState.setOpenModalCycle(false);
+        viewState.setOpenModalPlayOff(false);
     };
 
     useEffect(() => {
         getLeagueSeasonsData();
         getLeagueById();
+
         return () => {
             dispatch(setLeagueSeasons([]));
         };
     }, []);
 
     useEffect(() => {
-        setYears(
-            (allLeagueSeasons?.length ? allLeagueSeasons : []).map((season, index) => {
+        viewState.setYears(
+            (viewState.allLeagueSeasons?.length ? viewState.allLeagueSeasons : []).map(season => {
                 return {
                     // eslint-disable-next-line no-underscore-dangle
                     id: season._id.$oid,
                     content: season.name,
-                    isSelected: selectedLeagueSeason?.name === season.name,
+                    isSelected: viewState.selectedLeagueSeason?.name === season.name,
                 };
             })
         );
-        const cycles: Cycle[] = selectedLeagueSeason?.cycles || [];
+        const cycles: Cycle[] = viewState.selectedLeagueSeason?.cycles || [];
         // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-        cycles[0] ? setSelectCycle(cycles[0]) : null;
+        cycles[0] ? viewState.setSelectCycle(cycles[0]) : null;
 
-        const currentGalleries = selectedLeagueSeason?.gallery || [];
+        const currentGalleries = viewState.selectedLeagueSeason?.gallery || [];
         if (currentGalleries.length) {
-            setGalleries(currentGalleries);
+            viewState.setGalleries(currentGalleries);
         }
 
-        if (selectedLeagueSeason?.highlights) {
-            setHightlights(selectedLeagueSeason.highlights);
+        if (viewState.selectedLeagueSeason?.highlights) {
+            viewState.setHightlights(viewState.selectedLeagueSeason.highlights);
         }
-    }, [selectedLeagueSeason, allLeagueSeasons]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [
+        viewState.selectedLeagueSeason,
+        viewState.allLeagueSeasons,
+        viewState.setAllLeagueSeasons,
+        viewState.setYears,
+        viewState.setSelectCycle,
+        viewState.setGalleries,
+        viewState.setHightlights,
+    ]);
 
     useEffect(() => {
-        const rounds = selectCycle?.rounds || [];
+        const rounds = viewState.selectCycle?.rounds || [];
         const firstRound = rounds[0] ? rounds[0] : null;
         if (firstRound) {
-            setSelectRound(firstRound);
+            viewState.setSelectRound(firstRound);
         }
-    }, [selectCycle]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [viewState.selectCycle, viewState.setSelectCycle, viewState.setSelectRound]);
 
     return {
         t,
         onGoBack,
-        setOpenModalYear,
         handleSelectedYear,
         handleCloseModal,
-        setOpenModalCycle,
-        setOpenModalPlayOff,
-        setSelectCycle,
-        setSelectRound,
-        setGalleries,
-        setHightlights,
-        openModalYear,
-        years,
-        openModalCycle,
-        selectRound,
-        selectCycle,
-        openModalPlayOff,
-        league,
-        galleries,
-        highlights,
-        selectedLeagueSeason,
+        ...viewState,
     };
 };

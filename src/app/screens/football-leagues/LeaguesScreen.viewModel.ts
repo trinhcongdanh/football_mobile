@@ -9,7 +9,7 @@ import {
     setLeagueTypes,
     setSearchLeagues,
 } from 'src/store/league/League.slice';
-import leagueService from './LeaguesScreen.service';
+import leagueService from '@football/core/services/League.service';
 
 const useViewState = () => {
     const [searchText, setSearchText] = useState('');
@@ -46,7 +46,7 @@ const useViewCallback = () => {
     const submitSearchLeague = useCallback(async () => {
         if (searchText !== '') {
             dispatch(resetSearchLeagues());
-            const [error, res] = await leagueService.search(searchText);
+            const [error, res] = await leagueService.searchLeague(searchText);
 
             if (error) {
                 return;

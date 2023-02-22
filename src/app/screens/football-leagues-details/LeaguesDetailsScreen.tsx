@@ -22,7 +22,6 @@ import { LeaguesTable } from './layouts/leagues-table/LeaguesTable';
 import { ListOfGames } from './layouts/list-of-games/ListOfGames';
 import { Statistics } from './layouts/Statistics/Statistics';
 import SelectedGallery from './layouts/selected-gallery/SelectedGallery';
-import { SelectedMagazine } from './layouts/selected-magazine/SelectedMagazine';
 import { AboutLeague } from './layouts/about-league/AboutLeague';
 import styles from './LeaguesDetailsScreen.style';
 import { useViewModel } from './LeaguesDetailsScreen.viewModel';
