@@ -11,6 +11,7 @@ target 'FootballAssociation' do
   pod 'react-native-pager-view', :path => '../node_modules/react-native-pager-view'
   pod 'react-native-video/VideoCaching', :path => '../node_modules/react-native-video/react-native-video.podspec'
   pod 'RNFBCrashlytics', :path => '../node_modules/@react-native-firebase/crashlytics'
+  pod 'RNFBMessaging', :path => '../node_modules/@react-native-firebase/messaging'
   
   # set this and toggle '$RNFirebaseAsStaticFramework' above to test static frameworks)
   use_frameworks! :linkage => :static
