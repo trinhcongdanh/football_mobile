@@ -13,48 +13,9 @@ import { IMatchScreenProps } from './MatchScreen.type';
 
 const useViewState = () => {
     const [game, setGame] = useState<GameModel>();
-
-    return {
-        game,
-        setGame,
-    };
-};
-
-const useViewCallback = (route: any, viewState: any) => {
-    const { setGame } = viewState;
-    const getGameData = useCallback(async () => {
-        const [error, res] = await gameService.findByOId(route?.params?.gameId);
-        if (error) {
-            return;
-        }
-
-        if (res.data.documents?.length) {
-            setGame(res.data.documents[0]);
-        }
-    }, []);
-
-    return {
-        getGameData,
-    };
-};
-
-export const useViewModel = ({ navigation, route }: IMatchScreenProps) => {
-    const { navigate, goBack } = useAppNavigator();
     const { t } = useTranslation();
 
-    const onGoBack = (): void => {
-        goBack();
-    };
-
-    const state = useViewState();
-
-    const { getGameData } = useViewCallback(route, state);
-
-    useMount(() => {
-        getGameData();
-    });
-
-    const labels = [
+    const [labels, setLabels] = useState<any[]>([
         {
             id: 1,
             component: CompositionScreen,
@@ -79,11 +40,55 @@ export const useViewModel = ({ navigation, route }: IMatchScreenProps) => {
             name: ScreenTopTap.StandingPage,
             title: t('match.standing.title'),
         },
-    ];
+    ]);
+
+    return {
+        game,
+        setGame,
+        t,
+        labels,
+        setLabels,
+    };
+};
+
+const useViewCallback = (route: any, viewState: any) => {
+    const { setGame } = viewState;
+    const getGameData = useCallback(async () => {
+        const [error, res] = await gameService.findByOId(route?.params?.gameId);
+        if (error) {
+            return;
+        }
+
+        if (res.data.documents?.length) {
+            setGame(res.data.documents[0]);
+            const newBabels = viewState.labels;
+            // newBabels.find(label => label.name === )
+        }
+    }, []);
+
+    return {
+        getGameData,
+    };
+};
+
+export const useViewModel = ({ navigation, route }: IMatchScreenProps) => {
+    const { navigate, goBack } = useAppNavigator();
+
+    const onGoBack = (): void => {
+        goBack();
+    };
+
+    const state = useViewState();
+
+    const { getGameData } = useViewCallback(route, state);
+
+    useMount(() => {
+        getGameData();
+    });
 
     const handleStadium = () => {
         navigate(ScreenName.PitchPage);
     };
 
-    return { t, onGoBack, labels, ...state, handleStadium };
+    return { onGoBack, ...state, handleStadium };
 };

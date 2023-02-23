@@ -8,6 +8,7 @@ import { getSize } from '../../utils/responsive/scale';
 
 interface Props {
     labels: any;
+    // eslint-disable-next-line react/require-default-props
     data?: any;
 }
 const Tab = createMaterialTopTabNavigator();
@@ -45,7 +46,7 @@ export const TopTaps = ({ labels, data }: Props) => {
                         key={item.id}
                         name={item.name}
                         component={item.component}
-                        initialParams={{ typeId: item.id, gameId: data }}
+                        initialParams={{ typeId: item.id, data }}
                         options={{
                             tabBarLabel: ({ focused }) => (
                                 <TabLabel focused={focused} title={item.title} />
