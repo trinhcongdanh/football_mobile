@@ -38,18 +38,20 @@ export const MatchScreen = ({ navigation, route }: IMatchScreenProps) => {
                             color_after={appColors.text_dark_blue}
                             handlePressFunction={onGoBack}
                         />
-                        <HeaderComposition
-                            title={game?.context_name_he}
-                            season={game?.season}
-                            avt_away={game?.team2.logo_url}
-                            avt_home={game?.team1.logo_url}
-                            name_home={game?.team1.name_he}
-                            name_away={game?.team2.name_he}
-                            score={game?.score}
-                            stadium={game?.stadium_he}
-                            status={t('match.status')}
-                            handleStadium={handleStadium}
-                        />
+                        {game && (
+                            <HeaderComposition
+                                title={game.context_name_he}
+                                season={game.season}
+                                avt_away={game.team2.logo_url}
+                                avt_home={game.team1.logo_url}
+                                name_home={game.team1.name_he}
+                                name_away={game.team2.name_he}
+                                score={game.score}
+                                stadium={game.stadium_he}
+                                status={t('match.status')}
+                                handleStadium={handleStadium}
+                            />
+                        )}
                     </View>
                     <View style={[appStyles.flex, appStyles.main_container]}>
                         {game && <TopTaps labels={labels} data={game} />}

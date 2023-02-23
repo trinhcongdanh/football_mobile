@@ -6,12 +6,15 @@ import { getSize } from '@football/app/utils/responsive/scale';
 import { Avatar } from 'react-native-elements';
 import { appIcons } from '@football/app/assets/icons/appIcons';
 import Icon from 'react-native-vector-icons/AntDesign';
+import LinearGradient from 'react-native-linear-gradient';
+import { LeaderBoard } from '@football/core/models/GameModelResponse';
 import { useViewModel } from './StandingScreen.viewModel';
 import { IStandingScreenProps } from './StandingScreen.type';
-import LinearGradient from 'react-native-linear-gradient';
 
 export const StandingScreen = ({ navigation, route }: IStandingScreenProps) => {
-    const { t, leaderBoard } = useViewModel({
+    const game = route?.params?.data;
+
+    const { t } = useViewModel({
         navigation,
         route,
     });
@@ -93,17 +96,17 @@ export const StandingScreen = ({ navigation, route }: IStandingScreenProps) => {
                             </View>
                         </View>
                         <View>
-                            {leaderBoard.map((item, index) => {
+                            {game?.leader_board.map((item: LeaderBoard, index: number) => {
                                 return (
                                     <LinearGradient
-                                        key={index}
+                                        key={item.place}
                                         start={{ x: 0, y: 0 }}
                                         end={{ x: 1, y: 1 }}
                                         colors={[
                                             index % 2 === 0
                                                 ? 'rgba(16, 32, 100, 0.04)'
                                                 : appColors.gray,
-                                            index % 2 === 0
+                                            index % 2 !== 0
                                                 ? 'rgba(59, 168, 225, 0.04)'
                                                 : appColors.gray,
                                         ]}

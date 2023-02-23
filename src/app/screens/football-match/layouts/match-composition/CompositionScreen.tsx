@@ -14,7 +14,7 @@ import { useViewModel } from './CompositionScreen.viewModel';
 // type Props = {};
 
 export const CompositionScreen = ({ navigation, route }: ICompositionScreenProps) => {
-    const game = route.params.data;
+    const game = route?.params?.data;
     const { t, handleDataPlayer, options, selectOption, select } = useViewModel({
         navigation,
         route,

@@ -9,7 +9,7 @@ import { TicketYellow } from '@football/app/components/ticket_yellow/TicketYello
 import { TicketRed } from '@football/app/components/ticket_red/TicketRed';
 import { Goal } from '@football/app/components/goal/Goal';
 import { Replace } from '@football/app/components/replace/Replace';
-import { GamePlayAction } from '@football/core/models/GameModelResponse';
+import { Gameplay, GamePlayAction } from '@football/core/models/GameModelResponse';
 import styles from './GameScreen.styles';
 import { useViewModel } from './GameScreen.viewModel';
 import { IGameScreenProps } from './GameScreen.type';
@@ -17,7 +17,9 @@ import { IGameScreenProps } from './GameScreen.type';
 // type Props = {};
 
 export const GameScreen = ({ navigation, route }: IGameScreenProps) => {
-    const { t, gamePlay } = useViewModel({
+    const game = route?.params?.data;
+
+    const { t } = useViewModel({
         navigation,
         route,
     });
@@ -48,39 +50,40 @@ export const GameScreen = ({ navigation, route }: IGameScreenProps) => {
                     </View>
                     <View style={styles.line} />
                     <View>
-                        {gamePlay.map((item, index) => {
+                        {game?.gameplay.map((item: Gameplay, index: number) => {
                             return (
+                                // eslint-disable-next-line react/no-array-index-key
                                 <View key={index} style={{ marginTop: getSize.m(item.minute) }}>
                                     {item.action === GamePlayAction.YellowCard && (
                                         <TicketYellow
-                                            name={item.name_he}
-                                            avt={item.image_url}
+                                            name={item.player.name_he}
+                                            avt={item.player.image_url}
                                             minute={item.minute}
                                             team={item.team_name_he}
                                         />
                                     )}
                                     {item.action === GamePlayAction.RedCard && (
                                         <TicketRed
-                                            name={item.name_he}
-                                            avt={item.image_url}
+                                            name={item.player.name_he}
+                                            avt={item.player.image_url}
                                             minute={item.minute}
                                             team={item.team_name_he}
                                         />
                                     )}
                                     {item.action === GamePlayAction.Goal && (
                                         <Goal
-                                            name={item.name_he}
-                                            avt={item.image_url}
+                                            name={item.player.name_he}
+                                            avt={item.player.image_url}
                                             minute={item.minute}
                                             team={item.team_name_he}
                                         />
                                     )}
                                     {item.action === GamePlayAction.Exchange && (
                                         <Replace
-                                            name_up={item.name_he}
-                                            name_down={item.name_he}
-                                            avt_up={item.image_url}
-                                            avt_down={item.image_url}
+                                            name_up={item.player_up.name_he}
+                                            name_down={item.player_down.name_he}
+                                            avt_up={item.player_up.image_url}
+                                            avt_down={item.player_down.image_url}
                                             minute={item.minute}
                                             team={item.team_name_he}
                                         />

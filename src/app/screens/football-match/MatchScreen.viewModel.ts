@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
 import { useMount } from '@football/app/utils/hooks/useMount';
 import { GameModel } from '@football/core/models/GameModelResponse';
@@ -61,8 +62,6 @@ const useViewCallback = (route: any, viewState: any) => {
 
         if (res.data.documents?.length) {
             setGame(res.data.documents[0]);
-            const newBabels = viewState.labels;
-            // newBabels.find(label => label.name === )
         }
     }, []);
 
