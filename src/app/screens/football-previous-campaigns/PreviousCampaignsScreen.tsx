@@ -14,13 +14,15 @@ import { appIcons } from '@football/app/assets/icons/appIcons';
 import { getSize } from '@football/app/utils/responsive/scale';
 import { CardGoBack } from '@football/app/components/go-back/CardGoBack';
 import { HeaderLogo } from '@football/app/components/header-logo/HeaderLogo';
+import LinearGradient from 'react-native-linear-gradient';
+import { TopTeamModel } from '@football/core/models/TopTeamModelResponse';
 import styles from './PreviousCampaignsScreen.style';
 import { useViewModel } from './PreviousCampaignsScreen.viewModel';
 import { IPreviousCampaignsScreenProps } from './PreviousCampaignsScreen.type';
-import LinearGradient from 'react-native-linear-gradient';
 
 export const PreviousCampaignsScreen = ({ navigation, route }: IPreviousCampaignsScreenProps) => {
-    const { t, onGoBack, preCampaigns, handleCampaignPage } = useViewModel({ navigation, route });
+    const { t, onGoBack, campaigns, handleCampaignPage } = useViewModel({ navigation, route });
+    const topTeam = route?.params?.topTeam as TopTeamModel;
     return (
         <View style={appStyles.flex}>
             <ImageBackground source={AppImages.img_background} style={appStyles.flex}>
@@ -35,7 +37,7 @@ export const PreviousCampaignsScreen = ({ navigation, route }: IPreviousCampaign
                         />
                     </View>
                     <ScrollView>
-                        <HeaderLogo text="נבחרת לאומית גברים" logo={AppImages.img_logo} />
+                        <HeaderLogo text={topTeam.name_he} logo={{ uri: topTeam.logo_url }} />
                         <View
                             style={[
                                 appStyles.package,
@@ -63,7 +65,7 @@ export const PreviousCampaignsScreen = ({ navigation, route }: IPreviousCampaign
                                 </Text>
                             </LinearGradient>
                             <View>
-                                {preCampaigns.map(campaign => {
+                                {campaigns?.map(campaign => {
                                     return (
                                         <TouchableOpacity
                                             style={[
@@ -71,13 +73,14 @@ export const PreviousCampaignsScreen = ({ navigation, route }: IPreviousCampaign
                                                 styles.content,
                                             ]}
                                             onPress={handleCampaignPage}
-                                            key={campaign.id}
+                                            // eslint-disable-next-line no-underscore-dangle
+                                            key={campaign._id}
                                         >
                                             <Text style={styles.name_campaign}>
-                                                {campaign.title}
+                                                {campaign.name_en}
                                             </Text>
                                             <Text style={styles.year_campaign}>
-                                                {campaign.year}
+                                                {campaign.season}
                                             </Text>
                                         </TouchableOpacity>
                                     );

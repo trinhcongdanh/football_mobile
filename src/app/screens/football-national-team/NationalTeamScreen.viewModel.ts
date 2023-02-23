@@ -86,7 +86,7 @@ export const useViewModel = ({ navigation, route }: INationalTeamScreenProps) =>
     };
 
     const handleNavigation = () => {
-        navigate(ScreenName.PreviousCampaignsPage);
+        navigate(ScreenName.PreviousCampaignsPage, { topTeam: state.topTeam });
     };
 
     const onNavigateConquerors = () => {
