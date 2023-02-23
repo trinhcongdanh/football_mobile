@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { AppImages } from '@football/app/assets/images';
 import { Dimensions } from 'react-native';
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
@@ -6,6 +6,9 @@ import { useTranslation } from 'react-i18next';
 import { IVideoScreenProps } from './VideoScreen.type';
 import { useDispatch } from 'react-redux';
 import { addVideo, setShowVideo, videoSlice } from 'src/store/video/Video.slice';
+import crashlytics from '@react-native-firebase/crashlytics';
+import { useMount } from '@football/app/utils/hooks/useMount';
+import { firebase } from '@react-native-firebase/auth';
 
 export const useViewModel = ({ navigation, route }: IVideoScreenProps) => {
     const { navigate, goBack } = useAppNavigator();
@@ -80,7 +83,13 @@ export const useViewModel = ({ navigation, route }: IVideoScreenProps) => {
     const closeSideMenu = () => {
         setShowSideMenu(false);
     };
-
+    useMount(() => {
+        crashlytics().log('Updating user count.');
+    });
+    const createCrash = () => {
+        firebase.crashlytics().crash();
+        // console.log('adnh');
+    };
     return {
         t,
         onShowSideMenu,
@@ -95,5 +104,6 @@ export const useViewModel = ({ navigation, route }: IVideoScreenProps) => {
         handleEndVideo,
         showSideMenu,
         closeSideMenu,
+        createCrash,
     };
 };

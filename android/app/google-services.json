@@ -1,33 +1,41 @@
 {
   "project_info": {
-    "project_number": "39034379703",
-    "project_id": "otp-verification-42ae7",
-    "storage_bucket": "otp-verification-42ae7.appspot.com"
+    "project_number": "944318847741",
+    "project_id": "crashlyticsfootballapp",
+    "storage_bucket": "crashlyticsfootballapp.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:39034379703:android:97636683d0c8995c0e9c32",
+        "mobilesdk_app_id": "1:944318847741:android:ba29ce477472454efb3c94",
         "android_client_info": {
           "package_name": "com.footballassociation"
         }
       },
       "oauth_client": [
         {
-          "client_id": "39034379703-rg28gmk6d8t0i9af7ifn543sae47rrj1.apps.googleusercontent.com",
+          "client_id": "944318847741-eu2b1224vilm8q6oh2ut2c0pvon0552k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.footballassociation",
+            "certificate_hash": "b4557948cc5b25fc938292cd68ff4515676f38a9"
+          }
+        },
+        {
+          "client_id": "944318847741-bpv6lhggvaun1ociv2bctcstcj9660t4.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDRQhFRyJ8IbTT_Kt775WiR6gXGWhDn2Po"
+          "current_key": "AIzaSyAjOfDUt6FF4fWuN-03wzELs3ISwhLM4-E"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "39034379703-rg28gmk6d8t0i9af7ifn543sae47rrj1.apps.googleusercontent.com",
+              "client_id": "944318847741-bpv6lhggvaun1ociv2bctcstcj9660t4.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
