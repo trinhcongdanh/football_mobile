@@ -2,15 +2,19 @@ import { LeagueItemScreen } from '@football/app/screens/football-leagues/layouts
 import { useAppNavigation } from '@football/app/utils/hooks/useAppNavigation';
 import { useMount } from '@football/app/utils/hooks/useMount';
 import { useAppDispatch, useAppSelector } from '@football/app/utils/hooks/useStore';
-import { useCallback, useState } from 'react';
+import leagueService from '@football/core/services/League.service';
+import React, { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
     resetSearchLeagues,
     setLeagueTypes,
     setSearchLeagues,
 } from 'src/store/league/League.slice';
-import leagueService from '@football/core/services/League.service';
 
+type INavigationProps = {
+    route: any;
+    navigation: any;
+};
 const useViewState = () => {
     const [searchText, setSearchText] = useState('');
 
@@ -23,6 +27,9 @@ const useViewState = () => {
         id: e.index,
         title: e.name_he,
         name: e.name_en.split(' ').join(''),
+        renderComponent: (props: INavigationProps) => (
+            <LeagueItemScreen {...props} typeId={e.index} />
+        ),
         component: LeagueItemScreen,
     }));
 

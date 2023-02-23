@@ -9,8 +9,7 @@ import styles from './LeagueItemScreen.style';
 import { ILeagueItemScreenProps } from './LeagueItemScreen.type';
 import { useViewModel } from './LeagueItemScreen.viewModel';
 
-export const LeagueItemScreen = ({ navigation, route }: ILeagueItemScreenProps) => {
-    const { typeId } = route.params;
+export const LeagueItemScreen = ({ navigation, route, typeId }: ILeagueItemScreenProps) => {
     const { t, onGoBack, optionLeagues, handleLeaguesDetails } = useViewModel({
         navigation,
         route,
@@ -54,7 +53,6 @@ export const LeagueItemScreen = ({ navigation, route }: ILeagueItemScreenProps) 
                     keyExtractor={(item: any) => item.id}
                     renderItem={renderItem}
                     numColumns={1}
-                    key={1}
                 />
             </View>
         </View>
