@@ -41,6 +41,21 @@ export const TopTaps = ({ labels, data }: Props) => {
             }}
         >
             {labels.map((item: any) => {
+                if (item.renderComponent) {
+                    return (
+                        <Tab.Screen
+                            key={item.id}
+                            name={item.name}
+                            options={{
+                                tabBarLabel: ({ focused }) => (
+                                    <TabLabel focused={focused} title={item.title} />
+                                ),
+                            }}
+                        >
+                            {item.renderComponent}
+                        </Tab.Screen>
+                    );
+                }
                 return (
                     <Tab.Screen
                         key={item.id}
