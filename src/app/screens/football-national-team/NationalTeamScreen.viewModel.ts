@@ -113,7 +113,7 @@ export const useViewModel = ({ navigation, route }: INationalTeamScreenProps) =>
     ];
 
     const handleDetails = () => {
-        navigate(ScreenName.ListGamePage);
+        navigate(ScreenName.ListGamePage, { topTeam: state.topTeam });
     };
 
     return {

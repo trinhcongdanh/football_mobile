@@ -566,7 +566,7 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                                                 appStyles.flex_row_center,
                                                 { flex: 0, marginTop: getSize.m(12) },
                                             ]}
-                                            onPress={() => handleDetails}
+                                            onPress={handleDetails}
                                         >
                                             <Text style={styles.details}>
                                                 {t('national_team.ranking_table.details')}

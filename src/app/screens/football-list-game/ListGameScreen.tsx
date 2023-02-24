@@ -20,9 +20,12 @@ import { IListGameScreenProps } from '@football/app/screens/football-list-game/L
 import FastImage from 'react-native-fast-image';
 import LinearGradient from 'react-native-linear-gradient';
 import { appColors } from '@football/app/utils/constants/appColors';
+import { TopTeamModel } from '@football/core/models/TopTeamModelResponse';
+import { Game } from '@football/core/models/TeamModelResponse';
 
 export const ListGameScreen = ({ navigation, route }: IListGameScreenProps) => {
-    const { t, onGoBack, listGames, onNavigateGame } = useViewModel({
+    const topTeam = route?.params?.topTeam as TopTeamModel;
+    const { t, onGoBack, onNavigateGame, onNavigateStadium } = useViewModel({
         navigation,
         route,
     });
@@ -41,8 +44,8 @@ export const ListGameScreen = ({ navigation, route }: IListGameScreenProps) => {
                     </View>
                     <ScrollView>
                         <HeaderLogo
-                            text='ליגת האומות של אופ"א 2022/23'
-                            avt={AppImages.img_leagues}
+                            text={topTeam.last_campaign.name_he}
+                            avt={{ uri: topTeam.logo_url }}
                         />
                         <View
                             style={[
@@ -57,17 +60,20 @@ export const ListGameScreen = ({ navigation, route }: IListGameScreenProps) => {
                             ]}
                         >
                             <View>
-                                {listGames.map((item, index) => {
+                                {topTeam?.last_campaign.games.map((item: Game, index: number) => {
                                     return (
-                                        <TouchableOpacity onPress={onNavigateGame} key={item.id}>
+                                        <TouchableOpacity
+                                            onPress={onNavigateGame}
+                                            key={item.game_id}
+                                        >
                                             <LinearGradient
                                                 start={{ x: 0, y: 0 }}
                                                 end={{ x: 1, y: 1 }}
                                                 colors={[
-                                                    item.id % 2 === 1
+                                                    index % 2 === 1
                                                         ? 'rgba(16, 32, 100, 0.04)'
                                                         : appColors.gray,
-                                                    item.id % 2 === 1
+                                                    index % 2 === 0
                                                         ? 'rgba(59, 168, 225, 0.04)'
                                                         : appColors.gray,
                                                 ]}
@@ -101,11 +107,13 @@ export const ListGameScreen = ({ navigation, route }: IListGameScreenProps) => {
                                                 >
                                                     <View style={[appStyles.flex_row_align_center]}>
                                                         <Text style={styles.name_club}>
-                                                            {item.nameHome}
+                                                            {item.team1.name_he}
                                                         </Text>
                                                         <View style={styles.avt_club}>
                                                             <FastImage
-                                                                source={item.home}
+                                                                source={{
+                                                                    uri: item.team1.logo_url,
+                                                                }}
                                                                 style={{
                                                                     width: getSize.m(22),
                                                                     height: getSize.m(22),
@@ -118,13 +126,15 @@ export const ListGameScreen = ({ navigation, route }: IListGameScreenProps) => {
                                                         style={{ marginHorizontal: getSize.m(10) }}
                                                     >
                                                         <Text style={styles.score}>
-                                                            {item.result}
+                                                            {item.score}
                                                         </Text>
                                                     </View>
                                                     <View style={appStyles.flex_row_align_center}>
                                                         <View style={styles.avt_club}>
                                                             <FastImage
-                                                                source={item.away}
+                                                                source={{
+                                                                    uri: item.team2.logo_url,
+                                                                }}
                                                                 style={{
                                                                     width: getSize.m(22),
                                                                     height: getSize.m(22),
@@ -133,23 +143,30 @@ export const ListGameScreen = ({ navigation, route }: IListGameScreenProps) => {
                                                             />
                                                         </View>
                                                         <Text style={styles.name_club}>
-                                                            {item.nameAway}
+                                                            {item.team2.name_he}
                                                         </Text>
                                                     </View>
                                                 </View>
-                                                <View style={appStyles.flex_row_align}>
-                                                    <FastImage
-                                                        source={AppImages.img_location_dot}
-                                                        resizeMode={FastImage.resizeMode.contain}
-                                                        style={{
-                                                            width: getSize.m(9),
-                                                            height: getSize.m(11),
-                                                        }}
-                                                    />
-                                                    <Text style={styles.location}>
-                                                        {item.location}
-                                                    </Text>
-                                                </View>
+                                                <TouchableOpacity
+                                                    onPress={onNavigateStadium}
+                                                    key={item.game_id}
+                                                >
+                                                    <View style={appStyles.flex_row_align}>
+                                                        <FastImage
+                                                            source={AppImages.img_location_dot}
+                                                            resizeMode={
+                                                                FastImage.resizeMode.contain
+                                                            }
+                                                            style={{
+                                                                width: getSize.m(9),
+                                                                height: getSize.m(11),
+                                                            }}
+                                                        />
+                                                        <Text style={styles.location}>
+                                                            {item.stadium_he}
+                                                        </Text>
+                                                    </View>
+                                                </TouchableOpacity>
                                             </LinearGradient>
                                         </TouchableOpacity>
                                     );
