@@ -13,8 +13,7 @@ target 'FootballAssociation' do
   pod 'RNFBCrashlytics', :path => '../node_modules/@react-native-firebase/crashlytics'
   pod 'RNFBMessaging', :path => '../node_modules/@react-native-firebase/messaging'
   pod 'Google-Maps-iOS-Utils', :git => 'https://github.com/Simon-TechForm/google-maps-ios-utils.git', :branch => 'feat/support-apple-silicon'
-  rn_maps_path = '../node_modules/react-native-maps'
-  pod 'react-native-google-maps', :path => rn_maps_path
+  
   
   # set this and toggle '$RNFirebaseAsStaticFramework' above to test static frameworks)
   use_frameworks! :linkage => :static
