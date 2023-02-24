@@ -9,6 +9,7 @@ import { Avatar } from 'react-native-elements';
 import LinearGradient from 'react-native-linear-gradient';
 import { useViewModel } from './ScoresGoals.viewModel';
 import { IScoresGoalsProps } from './ScoresGoals.type';
+import { MAX_LEAGUE_SEASON_STATS_ITEMS } from '@football/core/api/configs/config';
 
 export const ScoresGoals = ({ goalKickers }: IScoresGoalsProps) => {
     const { t, handleSeeAll } = useViewModel();
@@ -74,7 +75,7 @@ export const ScoresGoals = ({ goalKickers }: IScoresGoalsProps) => {
                 </View>
             </View>
             <View style={{ marginTop: getSize.m(10) }}>
-                {goalKickers?.map((item, index) => {
+                {goalKickers?.slice(0, MAX_LEAGUE_SEASON_STATS_ITEMS).map((item, index) => {
                     return (
                         <LinearGradient
                             key={item.player_id}

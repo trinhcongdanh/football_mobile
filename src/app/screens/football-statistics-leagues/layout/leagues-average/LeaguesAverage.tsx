@@ -1,11 +1,9 @@
-import { appIcons } from '@football/app/assets/icons/appIcons';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import { getSize } from '@football/app/utils/responsive/scale';
 import React from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { Text, View } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import Icon from 'react-native-vector-icons/Feather';
 import { ILeaguesAverageProps } from './LeaguesAverage.type';
 import { useViewModel } from './LeaguesAverage.viewModel';
 
@@ -24,7 +22,7 @@ export const LeaguesAverage = ({ data }: ILeaguesAverageProps) => {
                 <Text style={appStyles.statistics_title}>
                     {t('statistics.leagues.average_league')}
                 </Text>
-                <TouchableOpacity style={appStyles.flex_row_space_center}>
+                {/* <TouchableOpacity style={appStyles.flex_row_space_center}>
                     <Text style={appStyles.statistics_see_all}>
                         {t('statistics.leagues.see_all')}
                     </Text>
@@ -34,7 +32,7 @@ export const LeaguesAverage = ({ data }: ILeaguesAverageProps) => {
                         color={appColors.button_dark_blue}
                         style={appStyles.statistic_ic_arrow}
                     />
-                </TouchableOpacity>
+                </TouchableOpacity> */}
             </View>
             <View
                 style={[

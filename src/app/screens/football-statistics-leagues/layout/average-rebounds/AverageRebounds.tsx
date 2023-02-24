@@ -3,6 +3,7 @@ import { AppImages } from '@football/app/assets/images';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import { getSize } from '@football/app/utils/responsive/scale';
+import { MAX_LEAGUE_SEASON_STATS_ITEMS } from '@football/core/api/configs/config';
 import React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import { Avatar } from 'react-native-elements';
@@ -83,7 +84,7 @@ export const AverageRebounds = ({ avgRebounds }: IAverageReboundsProps) => {
                 </View>
             </View>
             <View style={{ marginTop: getSize.m(10) }}>
-                {avgRebounds.map((item, index) => {
+                {avgRebounds.slice(0, MAX_LEAGUE_SEASON_STATS_ITEMS).map((item, index) => {
                     return (
                         <LinearGradient
                             key={item.team_id}
