@@ -1,42 +1,29 @@
-import { useTranslation } from 'react-i18next';
-import React from 'react';
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
+import { useTranslation } from 'react-i18next';
 import { ILeaguesAverageProps } from './LeaguesAverage.type';
 
-export const useViewModel = ({}: ILeaguesAverageProps) => {
+export const useViewModel = ({ data }: ILeaguesAverageProps) => {
     const { navigate, goBack } = useAppNavigator();
     const { t } = useTranslation();
 
     const listAverages = [
         {
             id: 1,
-            category: 'ממוצע שערים',
-            average_game: 3.5,
-            average_cycle: 3.5,
+            category: t('statistics.leagues.avg_game_goals'),
+            avgGame: data.league_avgs.avg_game_goals,
+            avgRound: data.league_avgs.avg_round_goals,
         },
         {
             id: 2,
-            category: 'ממוצע שערים',
-            average_game: 3.5,
-            average_cycle: 3.5,
+            category: t('statistics.leagues.avg_game_red_cards'),
+            avgGame: data.league_avgs.avg_game_red_cards,
+            avgRound: data.league_avgs.avg_round_red_cards,
         },
         {
             id: 3,
-            category: 'ממוצע שערים',
-            average_game: 3.5,
-            average_cycle: 3.5,
-        },
-        {
-            id: 4,
-            category: 'ממוצע שערים',
-            average_game: 3.5,
-            average_cycle: 3.5,
-        },
-        {
-            id: 5,
-            category: 'ממוצע שערים',
-            average_game: 3.5,
-            average_cycle: 3.5,
+            category: t('statistics.leagues.avg_game_yellow_cards'),
+            avgGame: data.league_avgs.avg_game_yellow_cards,
+            avgRound: data.league_avgs.avg_round_yellow_cards,
         },
     ];
 

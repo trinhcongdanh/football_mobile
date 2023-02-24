@@ -463,6 +463,9 @@ const resources = {
                     score: 'ניקוד',
                     history: 'הסטוריית אליפויות',
                     season: 'עונה',
+                    avg_game_goals: 'ממוצע שערים',
+                    avg_game_yellow_cards: 'ממוצע כ. צהובים',
+                    avg_game_red_cards: 'ממוצע כ. אדומים',
                 },
             },
             composition: {

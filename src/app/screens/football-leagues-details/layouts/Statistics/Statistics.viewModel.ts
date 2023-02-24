@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { IStatisticsProps } from './Statistics.type';
 
-export const useViewModel = ({ statistics }: IStatisticsProps) => {
+export const useViewModel = ({ statistics, statisticsId }: IStatisticsProps) => {
     const { navigate, goBack } = useAppNavigator();
     const { t } = useTranslation();
     const [onSelect, setOnSelect] = useState(0);
@@ -12,7 +12,7 @@ export const useViewModel = ({ statistics }: IStatisticsProps) => {
     const homeGames = statistics?.home_games || [];
 
     const handleMoreStatistics = () => {
-        navigate(ScreenName.StatisticsLeaguesPage);
+        navigate(ScreenName.StatisticsLeaguesPage, { statisticsId });
     };
 
     return {

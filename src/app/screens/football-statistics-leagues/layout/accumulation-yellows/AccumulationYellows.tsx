@@ -1,19 +1,20 @@
 import { appIcons } from '@football/app/assets/icons/appIcons';
+import { AppImages } from '@football/app/assets/images';
 import { appColors } from '@football/app/utils/constants/appColors';
-import Icon from 'react-native-vector-icons/Feather';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import { getSize } from '@football/app/utils/responsive/scale';
 import React from 'react';
-import { View, Text, TouchableOpacity, Image } from 'react-native';
-import { AppImages } from '@football/app/assets/images';
+import { Text, TouchableOpacity, View } from 'react-native';
 import { Avatar } from 'react-native-elements';
-import styles from './AccumulationYellows.style';
-import { useViewModel } from './AccumulationYellows.viewModel';
-import { IAccumulationYellowsProps } from './AccumulationYellows.type';
-import LinearGradient from 'react-native-linear-gradient';
 import FastImage from 'react-native-fast-image';
-export const AccumulationYellows = ({}: IAccumulationYellowsProps) => {
-    const { t, listTickets } = useViewModel({});
+import LinearGradient from 'react-native-linear-gradient';
+import Icon from 'react-native-vector-icons/Feather';
+import styles from './AccumulationYellows.style';
+import { IAccumulationYellowsProps } from './AccumulationYellows.type';
+import { useViewModel } from './AccumulationYellows.viewModel';
+
+export const AccumulationYellows = ({ yellowCards }: IAccumulationYellowsProps) => {
+    const { t } = useViewModel();
     return (
         <View style={appStyles.item_statistics}>
             <View
@@ -76,15 +77,15 @@ export const AccumulationYellows = ({}: IAccumulationYellowsProps) => {
                 </View>
             </View>
             <View style={{ marginTop: getSize.m(10) }}>
-                {listTickets.map(item => {
+                {yellowCards.map((item, index) => {
                     return (
                         <LinearGradient
-                            key={item.id}
+                            key={item.player_id}
                             start={{ x: 0, y: 0 }}
                             end={{ x: 1, y: 1 }}
                             colors={[
-                                item.id % 2 === 1 ? 'rgba(16, 32, 100, 0.04)' : appColors.gray,
-                                item.id % 2 === 1 ? 'rgba(59, 168, 225, 0.04)' : appColors.gray,
+                                index % 2 === 0 ? 'rgba(16, 32, 100, 0.04)' : appColors.gray,
+                                index % 2 !== 0 ? 'rgba(59, 168, 225, 0.04)' : appColors.gray,
                             ]}
                             style={[appStyles.flex_row_space_center, appStyles.statistic_row]}
                         >
@@ -99,7 +100,11 @@ export const AccumulationYellows = ({}: IAccumulationYellowsProps) => {
                                         flexDirection: 'row',
                                     }}
                                 >
-                                    <Avatar source={item.avt_player} rounded size={18} />
+                                    <Avatar
+                                        source={{ uri: item.player_image_url }}
+                                        rounded
+                                        size={18}
+                                    />
                                     <Text
                                         style={[
                                             appStyles.statistics_content,
@@ -109,7 +114,7 @@ export const AccumulationYellows = ({}: IAccumulationYellowsProps) => {
                                             },
                                         ]}
                                     >
-                                        {item.name_player}
+                                        {item.player_name_he}
                                     </Text>
                                 </View>
                             </View>
@@ -124,7 +129,11 @@ export const AccumulationYellows = ({}: IAccumulationYellowsProps) => {
                                         flexDirection: 'row',
                                     }}
                                 >
-                                    <Avatar source={item.avt_club} rounded size={18} />
+                                    <Avatar
+                                        source={{ uri: item.team_image_url }}
+                                        rounded
+                                        size={18}
+                                    />
                                     <Text
                                         style={[
                                             appStyles.statistics_content,
@@ -134,7 +143,7 @@ export const AccumulationYellows = ({}: IAccumulationYellowsProps) => {
                                             },
                                         ]}
                                     >
-                                        {item.name_club}
+                                        {item.team_name_he}
                                     </Text>
                                 </View>
                             </View>
@@ -153,7 +162,7 @@ export const AccumulationYellows = ({}: IAccumulationYellowsProps) => {
                                         { fontSize: getSize.m(14) },
                                     ]}
                                 >
-                                    {item.amount}
+                                    {item.num_of_cards}
                                 </Text>
                             </View>
                         </LinearGradient>

@@ -12,7 +12,7 @@ import { AppFonts } from '@football/app/assets/fonts';
 import { useViewModel } from './Statistics.viewModel';
 import { IStatisticsProps } from './Statistics.type';
 
-export const Statistics = ({ selectedRoundName, statistics }: IStatisticsProps) => {
+export const Statistics = ({ selectedRoundName, statistics, statisticsId }: IStatisticsProps) => {
     const {
         t,
         setOnSelect,
@@ -23,6 +23,7 @@ export const Statistics = ({ selectedRoundName, statistics }: IStatisticsProps) 
     } = useViewModel({
         selectedRoundName,
         statistics,
+        statisticsId,
     });
 
     const renderStatistics = (data: any[]) => {

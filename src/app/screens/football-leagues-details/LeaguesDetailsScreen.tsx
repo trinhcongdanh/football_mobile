@@ -267,6 +267,7 @@ export const LeaguesDetailsScreen = ({ navigation, route }: ILeaguesDetailsScree
                             <Statistics
                                 selectedRoundName={selectRound?.round_name_he || ''}
                                 statistics={selectRound?.statistics}
+                                statisticsId={selectedLeagueSeason?.league_season_stats_id}
                             />
                         </View>
                         <View style={styles.package}>
