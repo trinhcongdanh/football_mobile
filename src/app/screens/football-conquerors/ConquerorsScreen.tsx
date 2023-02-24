@@ -15,13 +15,26 @@ import { getSize } from '@football/app/utils/responsive/scale';
 import { CardGoBack } from '@football/app/components/go-back/CardGoBack';
 import { HeaderLogo } from '@football/app/components/header-logo/HeaderLogo';
 import { Avatar } from 'react-native-elements';
+import LinearGradient from 'react-native-linear-gradient';
+import {
+    GoalKicker,
+    PlayersAppearance,
+    TopTeamModel,
+} from '@football/core/models/TopTeamModelResponse';
+import { TopTeamPlayerType } from '@football/app/utils/constants/enum';
 import styles from './ConquerorsScreen.style';
 import { useViewModel } from './ConquerorsScreen.viewModel';
 import { IConquerorsScreenProps } from './ConquerorsScreen.type';
-import LinearGradient from 'react-native-linear-gradient';
 
 export const ConquerorsScreen = ({ navigation, route }: IConquerorsScreenProps) => {
-    const { t, onGoBack, listConquerors, onNavigateDataPlayer } = useViewModel({
+    const topTeam = route?.params?.topTeam as TopTeamModel;
+    const type = route?.params?.type;
+    const listItems =
+        type === TopTeamPlayerType.Appearances
+            ? topTeam.last_campaign.players_appearances
+            : (topTeam.last_campaign.goal_kickers as GoalKicker[] | PlayersAppearance[]);
+
+    const { t, onGoBack, onNavigateDataPlayer } = useViewModel({
         navigation,
         route,
     });
@@ -35,11 +48,15 @@ export const ConquerorsScreen = ({ navigation, route }: IConquerorsScreenProps) 
                             iconName={appIcons.ic_right_ios}
                             iconStyle={styles.ic_back}
                             goBack={onGoBack}
-                            title={t('conquerors.title')}
+                            title={t(
+                                type === TopTeamPlayerType.Appearances
+                                    ? 'conquerors.appearances_kicker_title'
+                                    : 'conquerors.goal_kicker_title'
+                            )}
                         />
                     </View>
                     <ScrollView>
-                        <HeaderLogo text="נבחרת לאומית גברים" logo={AppImages.img_logo} />
+                        <HeaderLogo text={topTeam.name_he} avt={{ uri: topTeam.logo_url }} />
                         <View style={[appStyles.package, { marginTop: getSize.m(0) }]}>
                             <LinearGradient
                                 colors={[
@@ -49,11 +66,17 @@ export const ConquerorsScreen = ({ navigation, route }: IConquerorsScreenProps) 
                                 ]}
                                 style={[appStyles.flex_row_space_center, styles.header]}
                             >
-                                <Text style={styles.text_header}>{t('conquerors.name')}</Text>
+                                <Text style={styles.text_header}>
+                                    {t(
+                                        type === TopTeamPlayerType.Appearances
+                                            ? 'conquerors.appearances'
+                                            : 'conquerors.number_of_goals'
+                                    )}
+                                </Text>
                                 <Text style={styles.text_header}>{t('conquerors.number')}</Text>
                             </LinearGradient>
                             <View>
-                                {listConquerors.map(conquerors => {
+                                {listItems.map(item => {
                                     return (
                                         <TouchableOpacity
                                             onPress={onNavigateDataPlayer}
@@ -61,19 +84,23 @@ export const ConquerorsScreen = ({ navigation, route }: IConquerorsScreenProps) 
                                                 appStyles.flex_row_space_center,
                                                 styles.content,
                                             ]}
-                                            key={conquerors.id}
+                                            key={item.player_id}
                                         >
                                             <View style={appStyles.flex_row_align}>
                                                 <Avatar
-                                                    source={conquerors.avt}
+                                                    source={{ uri: item.image_url }}
                                                     size={getSize.m(26)}
                                                     rounded
                                                 />
                                                 <Text style={styles.name_player}>
-                                                    {conquerors.name}
+                                                    {item.name_he}
                                                 </Text>
                                             </View>
-                                            <Text style={styles.number}>{conquerors.number}</Text>
+                                            <Text style={styles.number}>
+                                                {type === TopTeamPlayerType.Appearances
+                                                    ? item.num_of_appearances
+                                                    : item.num_of_goals}
+                                            </Text>
                                         </TouchableOpacity>
                                     );
                                 })}

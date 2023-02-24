@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
-import { ScreenName } from '@football/app/utils/constants/enum';
+import { ScreenName, TopTeamPlayerType } from '@football/app/utils/constants/enum';
 import { TopTeamModel } from '@football/core/models/TopTeamModelResponse';
 import TopTeamService from '@football/core/services/TopTeam.service';
 import { useCallback, useEffect, useState } from 'react';
@@ -89,8 +89,18 @@ export const useViewModel = ({ navigation, route }: INationalTeamScreenProps) =>
         navigate(ScreenName.PreviousCampaignsPage, { topTeam: state.topTeam });
     };
 
-    const onNavigateConquerors = () => {
-        navigate(ScreenName.ConquerorsPage);
+    const onNavigateGoalKickers = () => {
+        navigate(ScreenName.ConquerorsPage, {
+            topTeam: state.topTeam,
+            type: TopTeamPlayerType.GoalKickers,
+        });
+    };
+
+    const onNavigateAppearances = () => {
+        navigate(ScreenName.ConquerorsPage, {
+            topTeam: state.topTeam,
+            type: TopTeamPlayerType.Appearances,
+        });
     };
 
     const onNavigatePlayerData = () => {
@@ -127,7 +137,8 @@ export const useViewModel = ({ navigation, route }: INationalTeamScreenProps) =>
         options,
         handleDetails,
         handleStadium,
-        onNavigateConquerors,
+        onNavigateGoalKickers,
+        onNavigateAppearances,
         onNavigatePlayerData,
         navigate,
         ...state,

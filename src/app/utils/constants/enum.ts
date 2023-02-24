@@ -69,6 +69,11 @@ export enum ScreenDataPlayer {
     DataPlayerNationalPage = 'DataPlayerNationalPage',
 }
 
+export enum TopTeamPlayerType {
+    GoalKickers = 'GoalKickers',
+    Appearances = 'Appearances',
+}
+
 export enum ScreenDataCoach {
     DataCoachGamesPage = 'DataCoachGamesPage',
     DataCoachTeamsPage = 'DataCoachTeamsPage',

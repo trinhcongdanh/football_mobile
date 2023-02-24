@@ -512,9 +512,12 @@ const resources = {
                 rating: 'דרוג:',
             },
             conquerors: {
-                title: 'רשימת כובשים',
+                goal_kicker_title: 'רשימת כובשים',
+                appearances_kicker_title: 'הופעות בנבחרת',
                 name: 'שם שחקן',
                 number: 'מס׳ שערים',
+                number_of_goals: 'מספר שערים',
+                appearances: 'הופעות בנבחרת',
             },
             magazine: {
                 title: 'חיזוק הקשר בין צוותי השיפוט למועדונים לטובת מיגור האלימות',

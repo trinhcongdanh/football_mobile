@@ -56,7 +56,8 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
         activeIndexNumber,
         handleDetails,
         handleStadium,
-        onNavigateConquerors,
+        onNavigateGoalKickers,
+        onNavigateAppearances,
         onNavigatePlayerData,
         navigate,
         topTeam,
@@ -692,7 +693,7 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                                             {t('national_team.conquerors.title')}
                                         </Text>
                                         <TouchableOpacity
-                                            onPress={onNavigateConquerors}
+                                            onPress={onNavigateGoalKickers}
                                             style={appStyles.flex_row_space_center}
                                         >
                                             <Text style={appStyles.statistics_see_all}>
@@ -778,7 +779,7 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                                             {t('national_team.performances.title')}
                                         </Text>
                                         <TouchableOpacity
-                                            onPress={onNavigateConquerors}
+                                            onPress={onNavigateAppearances}
                                             style={appStyles.flex_row_space_center}
                                         >
                                             <Text style={appStyles.statistics_see_all}>
