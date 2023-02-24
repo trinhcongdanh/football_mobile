@@ -16,7 +16,7 @@ import {
 } from 'react-native';
 import { Avatar } from 'react-native-elements';
 import LinearGradient from 'react-native-linear-gradient';
-import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
+import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import styles from './PitchScreen.style';
 import { IPitchScreenProps } from './PitchScreen.type';
 import { useViewModel } from './PitchScreen.viewModel';
@@ -208,7 +208,8 @@ export const PitchScreen = ({ navigation, route }: IPitchScreenProps) => {
                                 <View style={{ marginVertical: getSize.m(30) }}>
                                     <MapView
                                         provider={PROVIDER_GOOGLE}
-                                        mapType={Platform.OS === 'android' ? 'none' : 'standard'}
+                                        // mapType={Platform.OS === 'android' ? 'none' : 'standard'}
+                                        zoomEnabled={true}
                                         style={styles.map}
                                         initialRegion={{
                                             latitude: parseFloat(stadium?.location_lat),
@@ -216,7 +217,14 @@ export const PitchScreen = ({ navigation, route }: IPitchScreenProps) => {
                                             latitudeDelta: 0.0922,
                                             longitudeDelta: 0.0421,
                                         }}
-                                    />
+                                    >
+                                        <Marker
+                                            coordinate={{
+                                                latitude: parseFloat(stadium?.location_lat),
+                                                longitude: parseFloat(stadium?.location_lon),
+                                            }}
+                                        />
+                                    </MapView>
                                 </View>
                             </View>
                         </ScrollView>
