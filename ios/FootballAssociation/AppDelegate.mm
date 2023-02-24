@@ -5,6 +5,7 @@
 #import <React/RCTRootView.h>
 #import "React/RCTI18nUtil.h"
 #import <Firebase.h>
+#import <GoogleMaps/GoogleMaps.h>
 // #import <FBSDKCoreKit/FBSDKCoreKit-swift.h>
 // #import <React/RCTLinkingManager.h>
 
@@ -51,6 +52,7 @@ static NSString *const kRNConcurrentRoot = @"concurrentRoot";
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
   // [GMSServices provideAPIKey:@"_YOUR_API_KEY_"];
+  [GMSServices provideAPIKey:@"AIzaSyD-bcsWEPz5OmiW9hTdcY4doQiIQYQ5v0g"]
   // [[FBSDKApplicationDelegate sharedInstance] application:application
   //                     didFinishLaunchingWithOptions:launchOptions];
   // [FBSDKApplicationDelegate.sharedInstance initializeSDK];
