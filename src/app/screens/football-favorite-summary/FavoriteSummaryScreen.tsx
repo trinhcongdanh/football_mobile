@@ -45,6 +45,7 @@ export const FavoriteSummaryScreen = ({ navigation, route }: IFavoriteSummaryScr
         topTeams,
         navigationMethodRegister,
         navigationHomePage,
+        navigationSaveHomePage,
         profile,
     } = useViewModel({
         navigation,
@@ -283,16 +284,29 @@ export const FavoriteSummaryScreen = ({ navigation, route }: IFavoriteSummaryScr
                                     {t('fav_summary.complete')}
                                 </Text>
                             </TouchableOpacity>
-                            <TouchableOpacity
-                                style={{ marginTop: getSize.m(80), marginBottom: getSize.m(16) }}
-                                onPress={navigationHomePage}
-                            >
-                                <Text style={styles.bottom_text}>
-                                    {onCheck
-                                        ? t('fav_summary.guest')
-                                        : t('fav_summary.login_as_guest')}
-                                </Text>
-                            </TouchableOpacity>
+                            {onCheck ? (
+                                <TouchableOpacity
+                                    style={{
+                                        marginTop: getSize.m(80),
+                                        marginBottom: getSize.m(16),
+                                    }}
+                                    onPress={navigationSaveHomePage}
+                                >
+                                    <Text style={styles.bottom_text}>{t('fav_summary.guest')}</Text>
+                                </TouchableOpacity>
+                            ) : (
+                                <TouchableOpacity
+                                    style={{
+                                        marginTop: getSize.m(80),
+                                        marginBottom: getSize.m(16),
+                                    }}
+                                    onPress={navigationHomePage}
+                                >
+                                    <Text style={styles.bottom_text}>
+                                        {t('fav_summary.login_as_guest')}
+                                    </Text>
+                                </TouchableOpacity>
+                            )}
                         </View>
                     </ScrollView>
                 </SafeAreaView>

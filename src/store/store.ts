@@ -26,6 +26,7 @@ const reducer = combineReducers({
     guestId: guestIdReducer,
     createProfile: createProfileReducer,
     login: loginReducer,
+    setProfile: createProfileReducer,
     favTeams: favTeamReducer,
     favPlayers: favPlayerReducer,
     favTopTeams: favTopTeamReducer,
