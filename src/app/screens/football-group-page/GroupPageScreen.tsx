@@ -298,7 +298,9 @@ export const GroupPageScreen = ({ navigation, route }: IGroupPageScreenProps) =>
                                             </Text>
                                             <View>
                                                 <View style={styles.info_group_item}>
-                                                    <TouchableOpacity onPress={onNavigateStadium}>
+                                                    <TouchableOpacity
+                                                        onPress={() => onNavigateStadium('a')}
+                                                    >
                                                         <Text style={styles.info_group_item_label}>
                                                             {t('group_page.info_group.stadium')}
                                                         </Text>
@@ -320,7 +322,7 @@ export const GroupPageScreen = ({ navigation, route }: IGroupPageScreenProps) =>
                                         </View>
                                     </View>
                                 ) : (
-                                    <View></View>
+                                    <View />
                                 )}
                             </View>
                             <View

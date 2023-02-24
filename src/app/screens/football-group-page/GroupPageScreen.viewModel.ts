@@ -51,8 +51,8 @@ export const useViewModel = ({ navigation, route }: IGroupPageScreenProps) => {
         navigate(ScreenName.StatisticsGroupPage);
     };
 
-    const onNavigateStadium = () => {
-        navigate(ScreenName.PitchPage);
+    const onNavigateStadium = (stadiumId: string) => {
+        navigate(ScreenName.PitchPage, { stadiumId });
     };
 
     return {

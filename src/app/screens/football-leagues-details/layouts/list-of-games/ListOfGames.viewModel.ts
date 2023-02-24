@@ -1,7 +1,7 @@
-import { useTranslation } from 'react-i18next';
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
-import { IListOfGamesProps } from './ListOfGames.type';
 import { ScreenName } from '@football/app/utils/constants/enum';
+import { useTranslation } from 'react-i18next';
+import { IListOfGamesProps } from './ListOfGames.type';
 
 export const useViewModel = ({ games }: IListOfGamesProps) => {
     const { navigate, goBack } = useAppNavigator();
@@ -12,9 +12,10 @@ export const useViewModel = ({ games }: IListOfGamesProps) => {
         navigate(ScreenName.MatchPage);
     };
 
-    const onNavigateStadium = () => {
-        navigate(ScreenName.PitchPage);
+    const onNavigateStadium = (stadiumId: string) => {
+        navigate(ScreenName.PitchPage, { stadiumId });
     };
+
     return {
         t,
         listGames,

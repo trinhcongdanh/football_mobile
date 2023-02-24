@@ -38,7 +38,7 @@ export const ListOfGames = ({ games }: IListOfGamesProps) => {
                                 moment(`${item.date} ${item.time}`, 'DD.M.YY HH:mm').add(2, 'hours')
                             )}
                             handleDetailMatch={onNavigateGamePersonnel}
-                            handleStadium={onNavigateStadium}
+                            handleStadium={() => onNavigateStadium(item.stadium_id)}
                         />
                     );
                 })}

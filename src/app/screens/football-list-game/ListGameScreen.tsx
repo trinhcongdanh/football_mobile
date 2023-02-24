@@ -148,7 +148,9 @@ export const ListGameScreen = ({ navigation, route }: IListGameScreenProps) => {
                                                     </View>
                                                 </View>
                                                 <TouchableOpacity
-                                                    onPress={onNavigateStadium}
+                                                    onPress={() =>
+                                                        onNavigateStadium(item.stadium_id)
+                                                    }
                                                     key={item.game_id}
                                                 >
                                                     <View style={appStyles.flex_row_align}>

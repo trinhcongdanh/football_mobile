@@ -14,8 +14,8 @@ export const useViewModel = ({ navigation, route }: IListGameScreenProps) => {
         navigate(ScreenName.MatchPage);
     };
 
-    const onNavigateStadium = () => {
-        navigate(ScreenName.PitchPage);
+    const onNavigateStadium = (stadiumId: string) => {
+        navigate(ScreenName.PitchPage, { stadiumId });
     };
 
     return {

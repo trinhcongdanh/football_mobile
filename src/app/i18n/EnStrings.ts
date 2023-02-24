@@ -507,6 +507,8 @@ const resources = {
                 group: 'קבוצה',
                 age: 'קבוצת גיל',
                 home_training: 'בית/אימונים',
+                home: 'בית',
+                training: 'אימונים',
                 rating: 'דרוג:',
             },
             conquerors: {
