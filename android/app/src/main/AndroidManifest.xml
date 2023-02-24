@@ -17,7 +17,7 @@
    	  <meta-data android:name="com.facebook.sdk.ClientToken" android:value="@string/facebook_client_token"/> -->
       <meta-data
         android:name="com.google.android.geo.API_KEY"
-        android:value="AIzaSyBidhsRwLmGN_XJ1-BGVSKiIOM2rZ8l6H4"/>
+        android:value="AIzaSyD-bcsWEPz5OmiW9hTdcY4doQiIQYQ5v0g"/>
 
       <activity android:name="com.facebook.FacebookActivity"
         android:configChanges=

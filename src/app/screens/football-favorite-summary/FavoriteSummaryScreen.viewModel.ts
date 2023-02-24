@@ -11,6 +11,7 @@ import { ACTION, AUTH_URL, TOKEN } from '@football/core/api/auth/config';
 import { Alert } from 'react-native';
 import { isEmpty, isNil } from 'lodash';
 import { loginUser } from 'src/store/user/Login.slice';
+import { setProfileUser } from 'src/store/user/setProfile.slice';
 import { createProfileUser } from 'src/store/user/CreateProfile.slice';
 import { IFavoriteSummaryScreenProps } from './FavoriteSummaryScreen.type';
 import { RootState } from 'src/store/store';
@@ -18,6 +19,7 @@ import { useIsFocused } from '@react-navigation/native';
 import { resetSearchFavPlayer, SelectedPlayer } from 'src/store/FavPlayer.slice';
 import { resetFavTeam } from 'src/store/FavTeam.slice';
 import { resetTopTeams } from 'src/store/FavTopTeam.slice';
+import qs from 'qs';
 
 export const useViewModel = ({ navigation, route }: IFavoriteSummaryScreenProps) => {
     const { t } = useTranslation();
@@ -83,13 +85,9 @@ export const useViewModel = ({ navigation, route }: IFavoriteSummaryScreenProps)
     const guestId = useSelector((state: any) => state.guestId.guestId);
 
     function serializeParams(obj: any) {
-        let str = [];
-        for (let p in obj) {
-            if (obj.hasOwnProperty(p)) {
-                str.push(p + '=' + encodeURIComponent(obj[p]));
-            }
-        }
-        return str.join('&');
+        const a = qs.stringify(obj, { encode: false, arrayFormat: 'brackets' });
+        console.log(a);
+        return a;
     }
 
     const onGoBack = (): void => {
@@ -155,7 +153,15 @@ export const useViewModel = ({ navigation, route }: IFavoriteSummaryScreenProps)
     };
 
     const [screenName, setScreenName] = useState<any>(null);
+
+    const toggleOnCheck = () => {
+        setonCheck(!onCheck);
+    };
+
+    const [setProfile, setSetProfile] = useState(false);
+
     const navigationHomePage = () => {
+        setSetProfile(false);
         if (isEmpty(profile.profile) || isNil(profile.profile)) {
             setScreenName(ScreenName.SideBar);
 
@@ -165,7 +171,9 @@ export const useViewModel = ({ navigation, route }: IFavoriteSummaryScreenProps)
                         action: ACTION,
                         token: TOKEN,
                         call: AuthData.CREATE_PROFILE,
-                        'item[guest_guid]': guestId[0],
+                        item: {
+                            guest_guid: guestId[0],
+                        },
                     })
                 )
             );
@@ -174,8 +182,26 @@ export const useViewModel = ({ navigation, route }: IFavoriteSummaryScreenProps)
         }
     };
 
-    const toggleOnCheck = () => {
-        setonCheck(!onCheck);
+    const navigationSaveHomePage = () => {
+        setSetProfile(true);
+        if (isEmpty(profile.profile) || isNil(profile.profile)) {
+            setScreenName(ScreenName.SideBar);
+
+            dispatch(
+                createProfileUser(
+                    serializeParams({
+                        action: ACTION,
+                        token: TOKEN,
+                        call: AuthData.CREATE_PROFILE,
+                        item: {
+                            guest_guid: guestId[0],
+                        },
+                    })
+                )
+            );
+        } else {
+            navigate(ScreenName.SideBar);
+        }
     };
 
     const navigationMethodRegister = () => {
@@ -197,9 +223,9 @@ export const useViewModel = ({ navigation, route }: IFavoriteSummaryScreenProps)
         }
     };
     const isFocused = useIsFocused();
-
+    console.log('New Token:', login.login.token);
     useEffect(() => {
-        console.log(screenName);
+        console.log(setProfile);
 
         if (!isFocused) return;
         if (!isEmpty(login.login)) {
@@ -224,17 +250,44 @@ export const useViewModel = ({ navigation, route }: IFavoriteSummaryScreenProps)
                         })
                     )
                 );
-
-                navigate(screenName);
-                if (screenName === ScreenName.SideBar) {
-                    navigation.reset({
-                        index: 0,
-                        routes: [{ name: ScreenName.SideBar as never }],
-                    });
-                }
+                // if (setProfile === true) {
+                //     console.log(login.login.token);
+                //     dispatch(
+                //         setProfileUser(
+                //             serializeParams({
+                //                 action: ACTION,
+                //                 token: login.login.token,
+                //                 call: AuthData.SET_PROFILE,
+                //                 item_id: profile.profile.tc_user,
+                //                 item: {
+                //                     FAVORITE_ISRAEL_TEAMS: ['636b6548a1c4cf43fdff2a82'],
+                //                 },
+                //             })
+                //         )
+                //     );
+                //     navigate(screenName);
+                //     if (screenName === ScreenName.SideBar) {
+                //         navigation.reset({
+                //             index: 0,
+                //             routes: [{ name: ScreenName.SideBar as never }],
+                //         });
+                //     }
+                // } else {
+                //     navigate(screenName);
+                //     if (screenName === ScreenName.SideBar) {
+                //         navigation.reset({
+                //             index: 0,
+                //             routes: [{ name: ScreenName.SideBar as never }],
+                //         });
+                //     }
+                // }
             }
         }
     }, [profile.success]);
+
+    useEffect(() => {
+        console.log('Set Profile');
+    }, [login.success === true]);
     return {
         t,
         onGoBack,
@@ -255,5 +308,6 @@ export const useViewModel = ({ navigation, route }: IFavoriteSummaryScreenProps)
         topTeams,
         navigationMethodRegister,
         profile,
+        navigationSaveHomePage,
     };
 };

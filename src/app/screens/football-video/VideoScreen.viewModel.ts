@@ -83,13 +83,7 @@ export const useViewModel = ({ navigation, route }: IVideoScreenProps) => {
     const closeSideMenu = () => {
         setShowSideMenu(false);
     };
-    useMount(() => {
-        crashlytics().log('Updating user count.');
-    });
-    const createCrash = () => {
-        firebase.crashlytics().crash();
-        // console.log('adnh');
-    };
+
     return {
         t,
         onShowSideMenu,
@@ -104,6 +98,5 @@ export const useViewModel = ({ navigation, route }: IVideoScreenProps) => {
         handleEndVideo,
         showSideMenu,
         closeSideMenu,
-        createCrash,
     };
 };

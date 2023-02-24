@@ -43,7 +43,6 @@ export const VideoScreen = ({ navigation, route }: IVideoScreenProps) => {
         autoPlay,
         showSideMenu,
         closeSideMenu,
-        createCrash,
     } = useViewModel({
         navigation,
         route,
@@ -66,9 +65,9 @@ export const VideoScreen = ({ navigation, route }: IVideoScreenProps) => {
                                 color_after={appColors.blue_dark}
                                 handlePressFunction={onShowSideMenu}
                             />
-                            <TouchableOpacity onPress={createCrash}>
+                            <View>
                                 <Text style={[appStyles.text_title]}>{t('video.title')}</Text>
-                            </TouchableOpacity>
+                            </View>
                             <View style={{ marginTop: getSize.m(30) }}>
                                 <Text
                                     style={[
