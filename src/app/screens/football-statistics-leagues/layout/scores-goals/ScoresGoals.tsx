@@ -7,11 +7,11 @@ import { appStyles } from '@football/app/utils/constants/appStyles';
 import { getSize } from '@football/app/utils/responsive/scale';
 import { Avatar } from 'react-native-elements';
 import LinearGradient from 'react-native-linear-gradient';
+import { MAX_LEAGUE_SEASON_STATS_ITEMS } from '@football/core/api/configs/config';
 import { useViewModel } from './ScoresGoals.viewModel';
 import { IScoresGoalsProps } from './ScoresGoals.type';
-import { MAX_LEAGUE_SEASON_STATS_ITEMS } from '@football/core/api/configs/config';
 
-export const ScoresGoals = ({ goalKickers }: IScoresGoalsProps) => {
+export const ScoresGoals = ({ goalKickers, leagueSeasonStats }: IScoresGoalsProps) => {
     const { t, handleSeeAll } = useViewModel();
     return (
         <View style={appStyles.item_statistics}>
@@ -26,7 +26,10 @@ export const ScoresGoals = ({ goalKickers }: IScoresGoalsProps) => {
                 <Text style={[appStyles.statistics_title, { fontSize: getSize.m(16) }]}>
                     {t('statistics.leagues.goal')}
                 </Text>
-                <TouchableOpacity style={appStyles.flex_row_space_center} onPress={handleSeeAll}>
+                <TouchableOpacity
+                    style={appStyles.flex_row_space_center}
+                    onPress={() => handleSeeAll(leagueSeasonStats, goalKickers)}
+                >
                     <Text style={appStyles.statistics_see_all}>
                         {t('statistics.leagues.see_all')}
                     </Text>

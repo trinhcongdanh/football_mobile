@@ -11,8 +11,11 @@ import Icon from 'react-native-vector-icons/Feather';
 import { IHistoryChampionShipsProps } from './HistoryChampionShips.type';
 import { useViewModel } from './HistoryChampionShips.viewModel';
 
-export const HistoryChampionShips = ({ championshipHistory }: IHistoryChampionShipsProps) => {
-    const { t } = useViewModel();
+export const HistoryChampionShips = ({
+    championshipHistory,
+    leagueSeasonStats,
+}: IHistoryChampionShipsProps) => {
+    const { t, handleSeeAll } = useViewModel();
     return (
         <View style={appStyles.item_statistics}>
             <View
@@ -24,7 +27,10 @@ export const HistoryChampionShips = ({ championshipHistory }: IHistoryChampionSh
                 ]}
             >
                 <Text style={appStyles.statistics_title}>{t('statistics.leagues.history')}</Text>
-                <TouchableOpacity style={appStyles.flex_row_space_center}>
+                <TouchableOpacity
+                    style={appStyles.flex_row_space_center}
+                    onPress={() => handleSeeAll(leagueSeasonStats, championshipHistory)}
+                >
                     <Text style={appStyles.statistics_see_all}>
                         {t('statistics.leagues.see_all')}
                     </Text>

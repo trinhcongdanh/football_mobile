@@ -14,8 +14,8 @@ import styles from './AverageRebounds.style';
 import { IAverageReboundsProps } from './AverageRebounds.type';
 import { useViewModel } from './AverageRebounds.viewModel';
 
-export const AverageRebounds = ({ avgRebounds }: IAverageReboundsProps) => {
-    const { t } = useViewModel();
+export const AverageRebounds = ({ avgRebounds, leagueSeasonStats }: IAverageReboundsProps) => {
+    const { t, handleSeeAll } = useViewModel();
     return (
         <View style={appStyles.item_statistics}>
             <View
@@ -29,7 +29,10 @@ export const AverageRebounds = ({ avgRebounds }: IAverageReboundsProps) => {
                 <Text style={appStyles.statistics_title}>
                     {t('statistics.leagues.average_yellow')}
                 </Text>
-                <TouchableOpacity style={appStyles.flex_row_space_center}>
+                <TouchableOpacity
+                    style={appStyles.flex_row_space_center}
+                    onPress={() => handleSeeAll(leagueSeasonStats, avgRebounds)}
+                >
                     <Text style={appStyles.statistics_see_all}>
                         {t('statistics.leagues.see_all')}
                     </Text>

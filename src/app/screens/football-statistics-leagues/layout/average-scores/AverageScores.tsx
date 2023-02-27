@@ -14,8 +14,8 @@ import styles from './AverageScores.style';
 import { IAverageScoresProps } from './AverageScores.type';
 import { useViewModel } from './AverageScores.viewModel';
 
-export const AverageScores = ({ avgGoalKicker }: IAverageScoresProps) => {
-    const { t } = useViewModel();
+export const AverageScores = ({ avgGoalKicker, leagueSeasonStats }: IAverageScoresProps) => {
+    const { t, handleSeeAll } = useViewModel();
     return (
         <View style={appStyles.item_statistics}>
             <View
@@ -29,7 +29,10 @@ export const AverageScores = ({ avgGoalKicker }: IAverageScoresProps) => {
                 <Text style={appStyles.statistics_title}>
                     {t('statistics.leagues.average_score')}
                 </Text>
-                <TouchableOpacity style={appStyles.flex_row_space_center}>
+                <TouchableOpacity
+                    style={appStyles.flex_row_space_center}
+                    onPress={() => handleSeeAll(leagueSeasonStats, avgGoalKicker)}
+                >
                     <Text style={appStyles.statistics_see_all}>
                         {t('statistics.leagues.see_all')}
                     </Text>

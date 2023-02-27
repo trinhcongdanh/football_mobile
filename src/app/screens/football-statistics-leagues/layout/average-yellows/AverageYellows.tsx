@@ -14,8 +14,8 @@ import styles from './AverageYellows.style';
 import { IAverageYellowsProps } from './AverageYellows.type';
 import { useViewModel } from './AverageYellows.viewModel';
 
-export const AverageYellows = ({ avgCards }: IAverageYellowsProps) => {
-    const { t } = useViewModel();
+export const AverageYellows = ({ avgCards, leagueSeasonStats }: IAverageYellowsProps) => {
+    const { t, handleSeeAll } = useViewModel();
     return (
         <View style={appStyles.item_statistics}>
             <View
@@ -29,7 +29,10 @@ export const AverageYellows = ({ avgCards }: IAverageYellowsProps) => {
                 <Text style={appStyles.statistics_title}>
                     {t('statistics.leagues.average_yellow')}
                 </Text>
-                <TouchableOpacity style={appStyles.flex_row_space_center}>
+                <TouchableOpacity
+                    style={appStyles.flex_row_space_center}
+                    onPress={() => handleSeeAll(leagueSeasonStats, avgCards)}
+                >
                     <Text style={appStyles.statistics_see_all}>
                         {t('statistics.leagues.see_all')}
                     </Text>

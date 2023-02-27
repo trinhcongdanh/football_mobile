@@ -14,8 +14,11 @@ import styles from './AccumulationYellows.style';
 import { IAccumulationYellowsProps } from './AccumulationYellows.type';
 import { useViewModel } from './AccumulationYellows.viewModel';
 
-export const AccumulationYellows = ({ yellowCards }: IAccumulationYellowsProps) => {
-    const { t } = useViewModel();
+export const AccumulationYellows = ({
+    yellowCards,
+    leagueSeasonStats,
+}: IAccumulationYellowsProps) => {
+    const { t, handleSeeAll } = useViewModel();
     return (
         <View style={appStyles.item_statistics}>
             <View
@@ -29,7 +32,10 @@ export const AccumulationYellows = ({ yellowCards }: IAccumulationYellowsProps) 
                 <Text style={appStyles.statistics_title}>
                     {t('statistics.leagues.accumulation_yellow')}
                 </Text>
-                <TouchableOpacity style={appStyles.flex_row_space_center}>
+                <TouchableOpacity
+                    style={appStyles.flex_row_space_center}
+                    onPress={() => handleSeeAll(leagueSeasonStats, yellowCards)}
+                >
                     <Text style={appStyles.statistics_see_all}>
                         {t('statistics.leagues.see_all')}
                     </Text>

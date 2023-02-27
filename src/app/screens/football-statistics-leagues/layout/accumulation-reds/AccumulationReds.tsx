@@ -14,8 +14,8 @@ import styles from './AccumulationReds.style';
 import { IAccumulationRedsProps } from './AccumulationReds.type';
 import { useViewModel } from './AccumulationReds.viewModel';
 
-export const AccumulationReds = ({ redCards }: IAccumulationRedsProps) => {
-    const { t } = useViewModel();
+export const AccumulationReds = ({ redCards, leagueSeasonStats }: IAccumulationRedsProps) => {
+    const { t, handleSeeAll } = useViewModel();
     return (
         <View style={appStyles.item_statistics}>
             <View
@@ -29,7 +29,10 @@ export const AccumulationReds = ({ redCards }: IAccumulationRedsProps) => {
                 <Text style={appStyles.statistics_title}>
                     {t('statistics.leagues.accumulation_red')}
                 </Text>
-                <TouchableOpacity style={appStyles.flex_row_space_center}>
+                <TouchableOpacity
+                    style={appStyles.flex_row_space_center}
+                    onPress={() => handleSeeAll(leagueSeasonStats, redCards)}
+                >
                     <Text style={appStyles.statistics_see_all}>
                         {t('statistics.leagues.see_all')}
                     </Text>

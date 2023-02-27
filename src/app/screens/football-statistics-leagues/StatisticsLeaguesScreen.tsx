@@ -43,29 +43,39 @@ export const StatisticsLeaguesScreen = ({ navigation, route }: IStatisticsLeague
                                 avt={{ uri: leagueSeasonStats.league_logo_url }}
                             />
                             <View style={[appStyles.package, { marginTop: getSize.m(0) }]}>
-                                <ScoresGoals goalKickers={leagueSeasonStats.goal_kickers || []} />
+                                <ScoresGoals
+                                    goalKickers={leagueSeasonStats.goal_kickers || []}
+                                    leagueSeasonStats={leagueSeasonStats}
+                                />
                             </View>
                             <View style={appStyles.package}>
                                 <AccumulationYellows
                                     yellowCards={leagueSeasonStats.yellow_cards || []}
+                                    leagueSeasonStats={leagueSeasonStats}
                                 />
                             </View>
                             <View style={appStyles.package}>
-                                <AccumulationReds redCards={leagueSeasonStats.red_cards || []} />
+                                <AccumulationReds
+                                    redCards={leagueSeasonStats.red_cards || []}
+                                    leagueSeasonStats={leagueSeasonStats}
+                                />
                             </View>
                             <View style={appStyles.package}>
                                 <AverageYellows
                                     avgCards={leagueSeasonStats.avg_game_yellow_cards || []}
+                                    leagueSeasonStats={leagueSeasonStats}
                                 />
                             </View>
                             <View style={appStyles.package}>
                                 <AverageScores
                                     avgGoalKicker={leagueSeasonStats.avg_game_goals_kicked || []}
+                                    leagueSeasonStats={leagueSeasonStats}
                                 />
                             </View>
                             <View style={appStyles.package}>
                                 <AverageRebounds
                                     avgRebounds={leagueSeasonStats.avg_game_goals_received || []}
+                                    leagueSeasonStats={leagueSeasonStats}
                                 />
                             </View>
                             <View style={appStyles.package}>
@@ -79,6 +89,7 @@ export const StatisticsLeaguesScreen = ({ navigation, route }: IStatisticsLeague
                                     championshipHistory={
                                         leagueSeasonStats.championship_history || []
                                     }
+                                    leagueSeasonStats={leagueSeasonStats}
                                 />
                             </View>
                         </ScrollView>
