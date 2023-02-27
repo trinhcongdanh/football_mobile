@@ -1,27 +1,36 @@
-import { View, ImageBackground, SafeAreaView, StatusBar, ScrollView } from 'react-native';
-import React, { useState } from 'react';
-import { appStyles } from '@football/app/utils/constants/appStyles';
 import { AppImages } from '@football/app/assets/images';
-import { CardGoBack } from '@football/app/components/go-back/CardGoBack';
-import { appIcons } from '@football/app/assets/icons/appIcons';
 import { ButtonOption } from '@football/app/components/button_option';
-import { getSize } from '@football/app/utils/responsive/scale';
+import { HeaderUser } from '@football/app/components/header-user/HeaderUser';
 import { ListPlayer } from '@football/app/components/list-player/ListPlayer';
 import { Position } from '@football/app/components/position/Position';
-import styles from './TeamSquadScreen.style';
-import { useViewModel } from './TeamSquadScreen.viewModel';
-import { ITeamGroupScreenProps } from './TeamSquadScreen.type';
-import { HeaderUser } from '@football/app/components/header-user/HeaderUser';
 import { appColors } from '@football/app/utils/constants/appColors';
+import { appStyles } from '@football/app/utils/constants/appStyles';
+import { getSize } from '@football/app/utils/responsive/scale';
+import React from 'react';
+import { ImageBackground, SafeAreaView, ScrollView, StatusBar, View } from 'react-native';
+import { ITeamGroupScreenProps } from './TeamSquadScreen.type';
+import { useViewModel } from './TeamSquadScreen.viewModel';
 
+export enum TeamSquadScreenType {
+    Personnel = 0,
+    Staff = 1,
+}
 // type Props = {};
 
 export const TeamSquadScreen = ({ navigation, route }: ITeamGroupScreenProps) => {
-    const { onGoBack, t, goalkeepers, defenders } = useViewModel({
+    const {
+        onGoBack,
+        t,
+        topTeamPersonnel,
+        onNavigateDataCoach,
+        onSelect,
+        setOnSelect,
+        fromTopTeam,
+        teamPersonnel,
+    } = useViewModel({
         navigation,
         route,
     });
-    const [onSelect, setOnSelect] = useState(0);
 
     return (
         <View style={appStyles.flex}>
@@ -35,6 +44,11 @@ export const TeamSquadScreen = ({ navigation, route }: ITeamGroupScreenProps) =>
                             icon={AppImages.img_angle_right}
                             color_pre={appColors.black}
                             color_after={appColors.black}
+                            title={
+                                fromTopTeam
+                                    ? t('team_squad.top_team_personnel')
+                                    : t('team_squad.team_personnel')
+                            }
                             handlePressFunction={onGoBack}
                         />
                     </View>
@@ -43,6 +57,7 @@ export const TeamSquadScreen = ({ navigation, route }: ITeamGroupScreenProps) =>
                             option_one={t('team_squad.option.players')}
                             option_two={t('team_squad.option.officials')}
                             onSelect={setOnSelect}
+                            defaultValue={onSelect}
                         />
 
                         <View
@@ -51,20 +66,19 @@ export const TeamSquadScreen = ({ navigation, route }: ITeamGroupScreenProps) =>
                                 marginBottom: getSize.m(30),
                             }}
                         >
-                            {onSelect === 0 && (
+                            {onSelect === TeamSquadScreenType.Personnel && fromTopTeam && (
                                 <ScrollView showsVerticalScrollIndicator={false}>
                                     <View style={{ marginTop: getSize.m(30) }}>
                                         <Position
                                             width={getSize.m(130)}
                                             position={t('team_squad.gk')}
                                         />
-                                        {goalkeepers.map(item => {
+                                        {topTeamPersonnel?.players?.goalkeepers.map(item => {
                                             return (
                                                 <ListPlayer
-                                                    key={item.id}
-                                                    name={item.name}
-                                                    number={item.number}
-                                                    avt={item.avt}
+                                                    key={item.player_id}
+                                                    name={item.name_he}
+                                                    avt={item.image_url}
                                                 />
                                             );
                                         })}
@@ -74,13 +88,12 @@ export const TeamSquadScreen = ({ navigation, route }: ITeamGroupScreenProps) =>
                                             width={getSize.m(130)}
                                             position={t('team_squad.df')}
                                         />
-                                        {defenders.map(item => {
+                                        {topTeamPersonnel?.players?.defence.map(item => {
                                             return (
                                                 <ListPlayer
-                                                    key={item.id}
-                                                    name={item.name}
-                                                    number={item.number}
-                                                    avt={item.avt}
+                                                    key={item.player_id}
+                                                    name={item.name_he}
+                                                    avt={item.image_url}
                                                 />
                                             );
                                         })}
@@ -90,13 +103,12 @@ export const TeamSquadScreen = ({ navigation, route }: ITeamGroupScreenProps) =>
                                             width={getSize.m(130)}
                                             position={t('team_squad.mf')}
                                         />
-                                        {goalkeepers.map(item => {
+                                        {topTeamPersonnel?.players?.midfield.map(item => {
                                             return (
                                                 <ListPlayer
-                                                    key={item.id}
-                                                    name={item.name}
-                                                    number={item.number}
-                                                    avt={item.avt}
+                                                    key={item.player_id}
+                                                    name={item.name_he}
+                                                    avt={item.image_url}
                                                 />
                                             );
                                         })}
@@ -106,18 +118,64 @@ export const TeamSquadScreen = ({ navigation, route }: ITeamGroupScreenProps) =>
                                             width={getSize.m(130)}
                                             position={t('team_squad.st')}
                                         />
-                                        {goalkeepers.map(item => {
+                                        {topTeamPersonnel?.players?.attack.map(item => {
                                             return (
                                                 <ListPlayer
-                                                    key={item.id}
-                                                    name={item.name}
-                                                    number={item.number}
-                                                    avt={item.avt}
+                                                    key={item.player_id}
+                                                    name={item.name_he}
+                                                    avt={item.image_url}
                                                 />
                                             );
                                         })}
                                     </View>
                                 </ScrollView>
+                            )}
+                            {onSelect === TeamSquadScreenType.Personnel && !fromTopTeam && (
+                                <View style={{ marginTop: getSize.m(30) }}>
+                                    {teamPersonnel?.players.map(item => {
+                                        return (
+                                            <ListPlayer
+                                                key={item.player_id}
+                                                name={item.name_he}
+                                                avt={item.image_url}
+                                            />
+                                        );
+                                    })}
+                                </View>
+                            )}
+                            {onSelect === TeamSquadScreenType.Staff && fromTopTeam && (
+                                <View style={{ marginTop: getSize.m(30) }}>
+                                    {topTeamPersonnel?.staff.map(item => {
+                                        return (
+                                            <ListPlayer
+                                                key={item.coach_id}
+                                                avt={item.image_url}
+                                                name={item.name_en}
+                                                position={item.title_en}
+                                                handleDataPlayer={() =>
+                                                    onNavigateDataCoach(item.coach_id)
+                                                }
+                                            />
+                                        );
+                                    })}
+                                </View>
+                            )}
+                            {onSelect === TeamSquadScreenType.Staff && !fromTopTeam && (
+                                <View style={{ marginTop: getSize.m(30) }}>
+                                    {teamPersonnel?.staff.map(item => {
+                                        return (
+                                            <ListPlayer
+                                                key={item.coach_id}
+                                                avt={item.image_url}
+                                                name={item.name_en}
+                                                position={item.title_en}
+                                                handleDataPlayer={() =>
+                                                    onNavigateDataCoach(item.coach_id)
+                                                }
+                                            />
+                                        );
+                                    })}
+                                </View>
                             )}
                         </View>
                     </View>

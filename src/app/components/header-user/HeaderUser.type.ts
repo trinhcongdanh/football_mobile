@@ -4,5 +4,6 @@ export type IHeaderUserProps = {
     icon: any;
     color_pre: string;
     color_after: string;
+    title?: string;
     handlePressFunction?: () => void;
 };

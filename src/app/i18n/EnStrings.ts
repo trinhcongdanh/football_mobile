@@ -179,7 +179,8 @@ const resources = {
                     players: 'שחקני הנבחרת',
                     officials: 'בעלי תפקידים',
                 },
-
+                top_team_personnel: 'סגל הנבחרת',
+                team_personnel: 'סגל הקבוצה',
                 gk: 'שוערים',
                 df: 'הגנה',
                 mf: 'קישור',

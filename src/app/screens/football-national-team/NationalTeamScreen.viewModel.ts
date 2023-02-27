@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
+import { TeamSquadScreenType } from '@football/app/screens/football-team-squad';
 import { ScreenName, TopTeamPlayerType } from '@football/app/utils/constants/enum';
 import { TopTeamModel } from '@football/core/models/TopTeamModelResponse';
 import TopTeamService from '@football/core/services/TopTeam.service';
@@ -118,8 +119,18 @@ export const useViewModel = ({ navigation, route }: INationalTeamScreenProps) =>
     };
 
     const teamSquads = [
-        { id: 1, name: t('team_squad.title'), screen: ScreenName.TeamSquadPage },
-        { id: 2, name: t('team_squad.option.officials'), screen: ScreenName.TeamStaffPage },
+        {
+            id: 1,
+            name: t('team_squad.title'),
+            screen: ScreenName.TeamSquadPage,
+            selectedTab: TeamSquadScreenType.Personnel,
+        },
+        {
+            id: 2,
+            name: t('team_squad.option.officials'),
+            screen: ScreenName.TeamSquadPage,
+            selectedTab: TeamSquadScreenType.Staff,
+        },
     ];
 
     const handleDetails = () => {

@@ -125,6 +125,7 @@ export interface TopTeamModel {
     players_appearances: PlayersAppearance[];
     isSelected: boolean;
     image_gallery: ImageGallery[];
+    team_personnel_id: string;
 }
 
 export type TopTeamModelResponse = AxiosResponse<{

@@ -857,7 +857,11 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                                 return (
                                     <TouchableOpacity
                                         onPress={() => {
-                                            navigate(item.screen);
+                                            navigate(item.screen, {
+                                                topTeamPersonnelId: topTeam?.team_personnel_id,
+                                                selectedTab: item.selectedTab,
+                                                fromTopTeam: true,
+                                            });
                                         }}
                                         style={[
                                             appStyles.flex_row_space_center,

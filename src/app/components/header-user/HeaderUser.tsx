@@ -15,6 +15,7 @@ export const HeaderUser = ({
     icon,
     color_after,
     color_pre,
+    title,
     handlePressFunction,
 }: IHeaderUserProps) => {
     const { openDrawer } = useAppNavigation();
@@ -49,6 +50,8 @@ export const HeaderUser = ({
                 </Text>
                 <Image source={AppImages.img_ball} style={styles.ic_football} />
             </View>
+            {title ? <Text style={styles.txt_title}>{title}</Text> : <View />}
+
             <TouchableOpacity onPress={onPressMenu}>
                 <LinearGradient colors={[color_pre, color_after]} style={styles.bar}>
                     <FastImage
