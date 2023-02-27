@@ -83,6 +83,7 @@ export const useViewModel = ({ navigation, route }: IFavoriteSummaryScreenProps)
     const login = useSelector((state: RootState) => state.login);
     const profile = useSelector((state: RootState) => state.createProfile);
     const guestId = useSelector((state: any) => state.guestId.guestId);
+    const profileUser = useSelector((state: RootState) => state.setProfile);
 
     function serializeParams(obj: any) {
         const a = qs.stringify(obj, { encode: false, arrayFormat: 'brackets' });
@@ -205,6 +206,7 @@ export const useViewModel = ({ navigation, route }: IFavoriteSummaryScreenProps)
     };
 
     const navigationMethodRegister = () => {
+        setSetProfile(false);
         if (isEmpty(profile.profile) || isNil(profile.profile)) {
             setScreenName(ScreenName.RegisterPage);
 
@@ -214,7 +216,9 @@ export const useViewModel = ({ navigation, route }: IFavoriteSummaryScreenProps)
                         action: ACTION,
                         token: TOKEN,
                         call: AuthData.CREATE_PROFILE,
-                        'item[guest_guid]': guestId[0],
+                        item: {
+                            guest_guid: guestId[0],
+                        },
                     })
                 )
             );
@@ -223,14 +227,10 @@ export const useViewModel = ({ navigation, route }: IFavoriteSummaryScreenProps)
         }
     };
     const isFocused = useIsFocused();
-    console.log('New Token:', login.login.token);
     useEffect(() => {
-        console.log(setProfile);
-
         if (!isFocused) return;
         if (!isEmpty(login.login)) {
             navigate(screenName);
-
             if (screenName === ScreenName.SideBar) {
                 navigation.reset({
                     index: 0,
@@ -238,7 +238,7 @@ export const useViewModel = ({ navigation, route }: IFavoriteSummaryScreenProps)
                 });
             }
         } else {
-            if (profile.success === true) {
+            if (profile.success === true && setProfile === false) {
                 dispatch(
                     loginUser(
                         serializeParams({
@@ -250,43 +250,67 @@ export const useViewModel = ({ navigation, route }: IFavoriteSummaryScreenProps)
                         })
                     )
                 );
-                // if (setProfile === true) {
-                //     console.log(login.login.token);
-                //     dispatch(
-                //         setProfileUser(
-                //             serializeParams({
-                //                 action: ACTION,
-                //                 token: login.login.token,
-                //                 call: AuthData.SET_PROFILE,
-                //                 item_id: profile.profile.tc_user,
-                //                 item: {
-                //                     FAVORITE_ISRAEL_TEAMS: ['636b6548a1c4cf43fdff2a82'],
-                //                 },
-                //             })
-                //         )
-                //     );
-                //     navigate(screenName);
-                //     if (screenName === ScreenName.SideBar) {
-                //         navigation.reset({
-                //             index: 0,
-                //             routes: [{ name: ScreenName.SideBar as never }],
-                //         });
-                //     }
-                // } else {
-                //     navigate(screenName);
-                //     if (screenName === ScreenName.SideBar) {
-                //         navigation.reset({
-                //             index: 0,
-                //             routes: [{ name: ScreenName.SideBar as never }],
-                //         });
-                //     }
-                // }
+
+                navigate(screenName);
+                if (screenName === ScreenName.SideBar) {
+                    navigation.reset({
+                        index: 0,
+                        routes: [{ name: ScreenName.SideBar as never }],
+                    });
+                }
+            } else if (profile.success === true && setProfile === true) {
+                dispatch(
+                    loginUser(
+                        serializeParams({
+                            action: ACTION,
+                            token: TOKEN,
+                            call: AuthData.LOGIN,
+                            guest_id: profile.profile.tc_user,
+                            guest_guid: guestId[0],
+                        })
+                    )
+                );
             }
         }
     }, [profile.success]);
 
     useEffect(() => {
-        console.log('Set Profile');
+        if (login.success === true && setProfile === true) {
+            let fav_team: any = [];
+            selectedFavTeams.map(item => {
+                fav_team.push(item._id);
+            });
+            let player_team: any = [];
+            selectedFavPlayers.map(item => {
+                player_team.push(item._id);
+            });
+            let fav_top_team: any = [];
+            selectedFavTopTeams.map(item => {
+                fav_top_team.push(item._id);
+            });
+            dispatch(
+                setProfileUser(
+                    serializeParams({
+                        action: ACTION,
+                        token: login.login.token,
+                        call: AuthData.SET_PROFILE,
+                        item_id: profile.profile.item_id,
+                        item: {
+                            FAVORITE_ISRAEL_TEAMS: fav_team,
+                            FAVORITE_PLAYERS: player_team,
+                            FAVORITE_NATIONAL_TEAMS: fav_top_team,
+                        },
+                    })
+                )
+            );
+            navigate(screenName);
+            if (screenName === ScreenName.SideBar) {
+                navigation.reset({
+                    index: 0,
+                    routes: [{ name: ScreenName.SideBar as never }],
+                });
+            }
+        }
     }, [login.success === true]);
     return {
         t,
@@ -309,5 +333,8 @@ export const useViewModel = ({ navigation, route }: IFavoriteSummaryScreenProps)
         navigationMethodRegister,
         profile,
         navigationSaveHomePage,
+        login,
+        setProfile,
+        profileUser,
     };
 };

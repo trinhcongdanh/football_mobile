@@ -2,7 +2,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Alert, I18nManager, ScrollView, View } from 'react-native';
-import { ThemeProvider } from 'react-native-elements';
+import { Card, ThemeProvider } from 'react-native-elements';
 import 'react-native-get-random-values';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
@@ -11,6 +11,7 @@ import 'react-native-gesture-handler';
 import { RootNavigator } from './app/routes/RootNavigator';
 import { appStyles } from './app/utils/constants/appStyles';
 import { persistor, store } from './store/store';
+import PushNotification from 'react-native-push-notification';
 import { Video } from '@football/app/components/video/Video';
 import messaging from '@react-native-firebase/messaging';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -26,11 +27,6 @@ const App = (props: any) => {
         }
     }, [i18n, i18n.language]);
 
-    useEffect(() => {
-        requestUserPermission();
-        NotificationListener();
-    }, []);
-
     const requestUserPermission = async () => {
         const authStatus = await messaging().requestPermission();
         const enabled =
@@ -39,7 +35,7 @@ const App = (props: any) => {
 
         if (enabled) {
             console.log('Authorization status:', authStatus);
-            GetFCMToken();
+            // GetFCMToken();
         }
     };
 
@@ -82,6 +78,11 @@ const App = (props: any) => {
             console.log('Notification on froground state .....', remoteMessage);
         });
     };
+
+    useEffect(() => {
+        requestUserPermission();
+        // NotificationListener();
+    }, []);
 
     return (
         <Provider store={store}>
