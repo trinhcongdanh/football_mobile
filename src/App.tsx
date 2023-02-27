@@ -4,8 +4,8 @@ import messaging from '@react-native-firebase/messaging';
 import { NavigationContainer } from '@react-navigation/native';
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Alert, I18nManager, ScrollView, View } from 'react-native';
-import { Card, ThemeProvider } from 'react-native-elements';
+import { I18nManager, View } from 'react-native';
+import { ThemeProvider } from 'react-native-elements';
 import 'react-native-get-random-values';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { Provider } from 'react-redux';
@@ -14,10 +14,6 @@ import './app/i18n/EnStrings';
 import { RootNavigator } from './app/routes/RootNavigator';
 import { appStyles } from './app/utils/constants/appStyles';
 import { persistor, store } from './store/store';
-import PushNotification from 'react-native-push-notification';
-import { Video } from '@football/app/components/video/Video';
-import messaging from '@react-native-firebase/messaging';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const queryClient = new QueryClient({
     defaultOptions: { queries: { retry: 2 } },
@@ -88,7 +84,6 @@ const App = (props: any) => {
 
     useEffect(() => {
         requestUserPermission();
-        // NotificationListener();
         NotificationListener();
     }, []);
 
