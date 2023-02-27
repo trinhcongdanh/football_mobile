@@ -54,14 +54,14 @@ export const LeaguesTable = ({ leaderBoards }: ILeaguesTableProps) => {
                         <Text style={styles.header}>{t('leagues_details.league_table.no')}</Text>
                     </View>
                 </View>
-                <TouchableOpacity
-                    onPress={onNavigateTeamDetails}
-                    style={{ marginTop: getSize.m(10) }}
-                >
-                    {listTeams.map(item => {
-                        return (
+                {listTeams.map(item => {
+                    return (
+                        <TouchableOpacity
+                            style={{ marginTop: getSize.m(10) }}
+                            onPress={() => onNavigateTeamDetails(item.team_id)}
+                            key={item.place}
+                        >
                             <LinearGradient
-                                key={item.place}
                                 start={{ x: 0, y: 0 }}
                                 end={{ x: 1, y: 1 }}
                                 colors={[
@@ -128,9 +128,9 @@ export const LeaguesTable = ({ leaderBoards }: ILeaguesTableProps) => {
                                     <Text style={styles.text_content}>{item.score}</Text>
                                 </View>
                             </LinearGradient>
-                        );
-                    })}
-                </TouchableOpacity>
+                        </TouchableOpacity>
+                    );
+                })}
             </View>
         </View>
     );

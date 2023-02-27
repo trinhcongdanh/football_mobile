@@ -28,7 +28,6 @@ import IconIonicons from 'react-native-vector-icons/Ionicons';
 import styles from './GroupPageScreen.style';
 import { IGroupPageScreenProps } from './GroupPageScreen.type';
 import { useViewModel } from './GroupPageScreen.viewModel';
-import { ListOfGames } from './layouts/list-of-games/ListOfGames';
 import { Statistics } from './layouts/statistics/Statistics';
 
 export const GroupPageScreen = ({ navigation, route }: IGroupPageScreenProps) => {
@@ -37,6 +36,10 @@ export const GroupPageScreen = ({ navigation, route }: IGroupPageScreenProps) =>
         onGoBack,
         selectYear,
         years,
+        team,
+        selectedSeason,
+        setSelectedSeason,
+        teamSeason,
         groups,
         setOpenModalYear,
         openModalYear,
@@ -54,344 +57,384 @@ export const GroupPageScreen = ({ navigation, route }: IGroupPageScreenProps) =>
 
     return (
         <View style={appStyles.flex}>
-            <ImageBackground source={AppImages.img_background} style={appStyles.flex}>
-                <StatusBar translucent backgroundColor="transparent" />
-                <SafeAreaView style={appStyles.safe_area}>
-                    <View style={appStyles.container}>
-                        <HeaderUser
-                            avt={AppImages.img_avt}
-                            point="1,325"
-                            icon={AppImages.img_angle_right}
-                            color_pre={appColors.blue_black}
-                            color_after={appColors.blue_black}
-                            handlePressFunction={onGoBack}
-                        />
-                    </View>
-                    {openModalYear && (
-                        <DropDown
-                            data={years}
-                            handleSelected={(item: any) => handleSelectedYear(item)}
-                            handleCloseModal={handleCloseModal}
-                        />
-                    )}
-                    <ScrollView>
+            {team && (
+                <ImageBackground source={AppImages.img_background} style={appStyles.flex}>
+                    <StatusBar translucent backgroundColor="transparent" />
+                    <SafeAreaView style={appStyles.safe_area}>
                         <View style={appStyles.container}>
-                            <View style={[appStyles.align_justify, { marginTop: getSize.m(16) }]}>
-                                <Avatar
-                                    source={AppImages.img_israel}
-                                    size={getSize.m(78)}
-                                    rounded
-                                    containerStyle={styles.avt_leagues}
-                                />
-                                <Text style={styles.name_leagues}>הפועל באר שבע בוגרים</Text>
-                                <Text style={styles.sub_name_leagues}>
-                                    (ליגת ONE ZERO בנקאות פרטית דיגיטלית)
-                                </Text>
-                            </View>
-                            <View>
-                                <View
-                                    style={[
-                                        appStyles.flex_row_center,
-                                        { marginTop: getSize.m(16), flex: 0 },
-                                    ]}
-                                >
-                                    <Text style={styles.season_year}>
-                                        {t('state_cup.season_game')}
-                                    </Text>
-                                    <TouchableOpacity
-                                        onPress={() => {
-                                            setOpenModalYear(!openModalYear);
-                                        }}
-                                        style={styles.calender}
-                                        activeOpacity={0.9}
-                                    >
-                                        <Text style={styles.text_calender}>{selectYear}</Text>
-                                        <Icon
-                                            name={appIcons.ic_chevron_down}
-                                            size={getSize.m(14)}
-                                            color={appColors.light_gray}
-                                            style={styles.chevron_down}
-                                        />
-                                    </TouchableOpacity>
-                                </View>
-                            </View>
+                            <HeaderUser
+                                avt={AppImages.img_avt}
+                                point="1,325"
+                                icon={AppImages.img_angle_right}
+                                color_pre={appColors.blue_black}
+                                color_after={appColors.blue_black}
+                                handlePressFunction={onGoBack}
+                            />
                         </View>
-                        <View
-                            style={[
-                                appStyles.flex,
-                                appStyles.main_container,
-                                { marginTop: getSize.m(60) },
-                            ]}
-                        >
-                            <View style={styles.info_group}>
+                        {openModalYear && (
+                            <DropDown
+                                data={years}
+                                handleSelected={(item: any) => handleSelectedYear(item)}
+                                handleCloseModal={handleCloseModal}
+                            />
+                        )}
+                        <ScrollView>
+                            <View style={appStyles.container}>
+                                <View
+                                    style={[appStyles.align_justify, { marginTop: getSize.m(16) }]}
+                                >
+                                    <Avatar
+                                        source={{ uri: team?.logo_url }}
+                                        size={getSize.m(78)}
+                                        rounded
+                                        containerStyle={styles.avt_leagues}
+                                    />
+                                    <Text style={styles.name_leagues}>{team.name_he}</Text>
+                                    <Text style={styles.sub_name_leagues}>
+                                        ({team.league_name_he})
+                                    </Text>
+                                </View>
                                 <View>
-                                    <View style={appStyles.flex_row_space_center}>
-                                        <View>
-                                            <Text style={appStyles.number}>
-                                                {t('group_page.info_group.about')}
-                                            </Text>
-                                        </View>
-                                        <View
-                                            style={[
-                                                styles.drop_down_info,
-                                                {
-                                                    backgroundColor: showInfo
-                                                        ? appColors.separator
-                                                        : appColors.blue_light,
-                                                },
-                                            ]}
+                                    <View
+                                        style={[
+                                            appStyles.flex_row_center,
+                                            { marginTop: getSize.m(16), flex: 0 },
+                                        ]}
+                                    >
+                                        <Text style={styles.season_year}>
+                                            {t('state_cup.season_game')}
+                                        </Text>
+                                        <TouchableOpacity
+                                            onPress={() => {
+                                                setOpenModalYear(!openModalYear);
+                                            }}
+                                            style={styles.calender}
+                                            activeOpacity={0.9}
                                         >
-                                            <TouchableOpacity onPress={showInfoGroup}>
-                                                <IconEntypo
-                                                    name={
-                                                        showInfo
-                                                            ? appIcons.ic_chevron_up
-                                                            : appIcons.ic_chevron_down
-                                                    }
-                                                    size={getSize.m(18)}
-                                                    color={
-                                                        showInfo
-                                                            ? appColors.text_option_unselect
-                                                            : appColors.white
-                                                    }
-                                                />
-                                            </TouchableOpacity>
-                                        </View>
+                                            <Text style={styles.text_calender}>
+                                                {selectedSeason?.team_season_name}
+                                            </Text>
+                                            <Icon
+                                                name={appIcons.ic_chevron_down}
+                                                size={getSize.m(14)}
+                                                color={appColors.light_gray}
+                                                style={styles.chevron_down}
+                                            />
+                                        </TouchableOpacity>
                                     </View>
                                 </View>
-                                {showInfo ? (
+                            </View>
+                            <View
+                                style={[
+                                    appStyles.flex,
+                                    appStyles.main_container,
+                                    { marginTop: getSize.m(60) },
+                                ]}
+                            >
+                                <View style={styles.info_group}>
                                     <View>
-                                        <View>
-                                            <View style={styles.info_group_item}>
-                                                <View>
-                                                    <Text style={styles.info_group_item_label}>
-                                                        {t('group_page.info_group.age_group')}
-                                                    </Text>
-                                                    <Text style={styles.info_group_item_content}>
-                                                        בוגרים
-                                                    </Text>
-                                                </View>
-                                                <View style={styles.ic_label}>
-                                                    <FastImage
-                                                        source={AppImages.img_user}
-                                                        style={{
-                                                            width: getSize.m(11),
-                                                            height: getSize.m(12),
-                                                        }}
-                                                    />
-                                                </View>
+                                        <View style={appStyles.flex_row_space_center}>
+                                            <View>
+                                                <Text style={appStyles.number}>
+                                                    {t('group_page.info_group.about')}
+                                                </Text>
                                             </View>
-                                            <View style={styles.info_group_item}>
-                                                <View>
-                                                    <Text style={styles.info_group_item_label}>
-                                                        {t('group_page.info_group.league')}
-                                                    </Text>
-                                                    <Text style={styles.info_group_item_content}>
-                                                        ליגת ONE ZERO בנקאות פרטית דיגיטלית
-                                                    </Text>
-                                                </View>
-                                                <View style={styles.ic_label}>
-                                                    <FastImage
-                                                        source={AppImages.img_user}
-                                                        style={{
-                                                            width: getSize.m(11),
-                                                            height: getSize.m(12),
-                                                        }}
+                                            <View
+                                                style={[
+                                                    styles.drop_down_info,
+                                                    {
+                                                        backgroundColor: showInfo
+                                                            ? appColors.separator
+                                                            : appColors.blue_light,
+                                                    },
+                                                ]}
+                                            >
+                                                <TouchableOpacity onPress={showInfoGroup}>
+                                                    <IconEntypo
+                                                        name={
+                                                            showInfo
+                                                                ? appIcons.ic_chevron_up
+                                                                : appIcons.ic_chevron_down
+                                                        }
+                                                        size={getSize.m(18)}
+                                                        color={
+                                                            showInfo
+                                                                ? appColors.text_option_unselect
+                                                                : appColors.white
+                                                        }
                                                     />
-                                                </View>
-                                            </View>
-                                            <View style={styles.info_group_item}>
-                                                <View>
-                                                    <Text style={styles.info_group_item_label}>
-                                                        {t('group_page.info_group.governing')}
-                                                    </Text>
-                                                    <Text style={styles.info_group_item_content}>
-                                                        513997569 - א.א. החברה לקידום הספורט באר שבע
-                                                        בע"מ
-                                                    </Text>
-                                                </View>
-                                                <View style={styles.ic_label}>
-                                                    <FastImage
-                                                        source={AppImages.img_building}
-                                                        style={{
-                                                            width: getSize.m(9),
-                                                            height: getSize.m(12),
-                                                        }}
-                                                    />
-                                                </View>
-                                            </View>
-                                            <View style={styles.info_group_item}>
-                                                <View>
-                                                    <Text style={styles.info_group_item_label}>
-                                                        {t('group_page.info_group.office')}
-                                                    </Text>
-                                                    <Text style={styles.info_group_item_content}>
-                                                        0778830426
-                                                    </Text>
-                                                </View>
-                                                <View style={styles.ic_label}>
-                                                    <IconFontAwesome
-                                                        name={appIcons.ic_phone}
-                                                        size={getSize.m(12)}
-                                                        color={appColors.blue_light}
-                                                    />
-                                                </View>
-                                            </View>
-                                            <View style={styles.info_group_item}>
-                                                <View>
-                                                    <Text style={styles.info_group_item_label}>
-                                                        {t('group_page.info_group.fax')}
-                                                    </Text>
-                                                    <Text style={styles.info_group_item_content}>
-                                                        0778830426
-                                                    </Text>
-                                                </View>
-                                                <View style={styles.ic_label}>
-                                                    <IconFontAwesome
-                                                        name={appIcons.ic_print}
-                                                        size={getSize.m(12)}
-                                                        color={appColors.blue_light}
-                                                    />
-                                                </View>
-                                            </View>
-                                            <View style={styles.info_group_item}>
-                                                <View>
-                                                    <Text style={styles.info_group_item_label}>
-                                                        {t('group_page.info_group.address')}
-                                                    </Text>
-                                                    <Text style={styles.info_group_item_content}>
-                                                        חיים סנה 12 באר שבע ת.ד.3242 מיקוד 84489
-                                                    </Text>
-                                                </View>
-                                                <View style={styles.ic_label}>
-                                                    <FastImage
-                                                        source={AppImages.img_user}
-                                                        style={{
-                                                            width: getSize.m(11),
-                                                            height: getSize.m(12),
-                                                        }}
-                                                    />
-                                                </View>
-                                            </View>
-                                            <View style={styles.info_group_item}>
-                                                <View>
-                                                    <Text style={styles.info_group_item_label}>
-                                                        {t('group_page.info_group.email')}
-                                                    </Text>
-                                                    <Text style={styles.info_group_item_content}>
-                                                        office@hbsfc.co.il
-                                                    </Text>
-                                                </View>
-                                                <View style={styles.ic_label}>
-                                                    <IconFontAwesome
-                                                        name={appIcons.ic_envelope}
-                                                        size={getSize.m(12)}
-                                                        color={appColors.blue_light}
-                                                    />
-                                                </View>
+                                                </TouchableOpacity>
                                             </View>
                                         </View>
-                                        <View style={styles.line} />
+                                    </View>
+                                    {showInfo && teamSeason ? (
                                         <View>
-                                            <Text style={appStyles.number}>
-                                                {t('group_page.info_group.list')}
-                                            </Text>
                                             <View>
                                                 <View style={styles.info_group_item}>
-                                                    <TouchableOpacity
-                                                        onPress={() => onNavigateStadium('a')}
-                                                    >
+                                                    <View>
                                                         <Text style={styles.info_group_item_label}>
-                                                            {t('group_page.info_group.stadium')}
+                                                            {t('group_page.info_group.age_group')}
                                                         </Text>
                                                         <Text
                                                             style={styles.info_group_item_content}
                                                         >
-                                                            באר שבע איצטדיון טוטו ע"ש טרנר
+                                                            {teamSeason.about?.group_age_he}
                                                         </Text>
-                                                    </TouchableOpacity>
+                                                    </View>
                                                     <View style={styles.ic_label}>
-                                                        <IconIonicons
-                                                            name={appIcons.ic_location_sharp}
+                                                        <FastImage
+                                                            source={AppImages.img_user}
+                                                            style={{
+                                                                width: getSize.m(11),
+                                                                height: getSize.m(12),
+                                                            }}
+                                                        />
+                                                    </View>
+                                                </View>
+                                                <View style={styles.info_group_item}>
+                                                    <View>
+                                                        <Text style={styles.info_group_item_label}>
+                                                            {t('group_page.info_group.league')}
+                                                        </Text>
+                                                        <Text
+                                                            style={styles.info_group_item_content}
+                                                        >
+                                                            {teamSeason.about.league_name_he}
+                                                        </Text>
+                                                    </View>
+                                                    <View style={styles.ic_label}>
+                                                        <FastImage
+                                                            source={AppImages.img_user}
+                                                            style={{
+                                                                width: getSize.m(11),
+                                                                height: getSize.m(12),
+                                                            }}
+                                                        />
+                                                    </View>
+                                                </View>
+                                                <View style={styles.info_group_item}>
+                                                    <View>
+                                                        <Text style={styles.info_group_item_label}>
+                                                            {t('group_page.info_group.governing')}
+                                                        </Text>
+                                                        <Text
+                                                            style={styles.info_group_item_content}
+                                                        >
+                                                            {teamSeason.about.management_he}
+                                                        </Text>
+                                                    </View>
+                                                    <View style={styles.ic_label}>
+                                                        <FastImage
+                                                            source={AppImages.img_building}
+                                                            style={{
+                                                                width: getSize.m(9),
+                                                                height: getSize.m(12),
+                                                            }}
+                                                        />
+                                                    </View>
+                                                </View>
+                                                <View style={styles.info_group_item}>
+                                                    <View>
+                                                        <Text style={styles.info_group_item_label}>
+                                                            {t('group_page.info_group.office')}
+                                                        </Text>
+                                                        <Text
+                                                            style={styles.info_group_item_content}
+                                                        >
+                                                            {teamSeason.about.office_phone}
+                                                        </Text>
+                                                    </View>
+                                                    <View style={styles.ic_label}>
+                                                        <IconFontAwesome
+                                                            name={appIcons.ic_phone}
+                                                            size={getSize.m(12)}
+                                                            color={appColors.blue_light}
+                                                        />
+                                                    </View>
+                                                </View>
+                                                <View style={styles.info_group_item}>
+                                                    <View>
+                                                        <Text style={styles.info_group_item_label}>
+                                                            {t('group_page.info_group.fax')}
+                                                        </Text>
+                                                        <Text
+                                                            style={styles.info_group_item_content}
+                                                        >
+                                                            {teamSeason.about.office_fax}
+                                                        </Text>
+                                                    </View>
+                                                    <View style={styles.ic_label}>
+                                                        <IconFontAwesome
+                                                            name={appIcons.ic_print}
+                                                            size={getSize.m(12)}
+                                                            color={appColors.blue_light}
+                                                        />
+                                                    </View>
+                                                </View>
+                                                <View style={styles.info_group_item}>
+                                                    <View>
+                                                        <Text style={styles.info_group_item_label}>
+                                                            {t('group_page.info_group.address')}
+                                                        </Text>
+                                                        <Text
+                                                            style={styles.info_group_item_content}
+                                                        >
+                                                            {teamSeason.about.address_he}
+                                                        </Text>
+                                                    </View>
+                                                    <View style={styles.ic_label}>
+                                                        <FastImage
+                                                            source={AppImages.img_user}
+                                                            style={{
+                                                                width: getSize.m(11),
+                                                                height: getSize.m(12),
+                                                            }}
+                                                        />
+                                                    </View>
+                                                </View>
+                                                <View style={styles.info_group_item}>
+                                                    <View>
+                                                        <Text style={styles.info_group_item_label}>
+                                                            {t('group_page.info_group.email')}
+                                                        </Text>
+                                                        <Text
+                                                            style={styles.info_group_item_content}
+                                                        >
+                                                            {teamSeason.about.email}
+                                                        </Text>
+                                                    </View>
+                                                    <View style={styles.ic_label}>
+                                                        <IconFontAwesome
+                                                            name={appIcons.ic_envelope}
                                                             size={getSize.m(12)}
                                                             color={appColors.blue_light}
                                                         />
                                                     </View>
                                                 </View>
                                             </View>
+                                            <View style={styles.line} />
+                                            <View>
+                                                <Text style={appStyles.number}>
+                                                    {t('group_page.info_group.list')}
+                                                </Text>
+                                                {teamSeason.about.stadiums.map(statium => {
+                                                    return (
+                                                        <View
+                                                            style={styles.info_group_item}
+                                                            key={statium.stadium_id}
+                                                        >
+                                                            <TouchableOpacity
+                                                                onPress={() =>
+                                                                    onNavigateStadium(
+                                                                        statium.stadium_id
+                                                                    )
+                                                                }
+                                                            >
+                                                                <Text
+                                                                    style={
+                                                                        styles.info_group_item_label
+                                                                    }
+                                                                >
+                                                                    {t(
+                                                                        'group_page.info_group.stadium'
+                                                                    )}
+                                                                </Text>
+                                                                <Text
+                                                                    style={
+                                                                        styles.info_group_item_content
+                                                                    }
+                                                                >
+                                                                    {statium.name_he}
+                                                                </Text>
+                                                            </TouchableOpacity>
+                                                            <View style={styles.ic_label}>
+                                                                <IconIonicons
+                                                                    name={
+                                                                        appIcons.ic_location_sharp
+                                                                    }
+                                                                    size={getSize.m(12)}
+                                                                    color={appColors.blue_light}
+                                                                />
+                                                            </View>
+                                                        </View>
+                                                    );
+                                                })}
+                                            </View>
                                         </View>
-                                    </View>
-                                ) : (
-                                    <View />
-                                )}
+                                    ) : (
+                                        <View />
+                                    )}
+                                </View>
+                                <View
+                                    style={{
+                                        marginHorizontal: getSize.m(15),
+                                        marginTop: getSize.m(23),
+                                    }}
+                                >
+                                    {groups.map(item => {
+                                        return (
+                                            <TouchableOpacity
+                                                onPress={() => {
+                                                    navigate(item.screen, {
+                                                        topTeamPersonnelId:
+                                                            teamSeason?.team_personnel_id,
+                                                        selectedTab: item.selectedTab,
+                                                        fromTopTeam: false,
+                                                    });
+                                                }}
+                                                key={item.id}
+                                                style={styles.option_menu}
+                                            >
+                                                <View style={appStyles.flex_row_align_center}>
+                                                    <View style={styles.container_img}>
+                                                        <Avatar
+                                                            source={AppImages.img_israel}
+                                                            size={getSize.m(26)}
+                                                            rounded
+                                                        />
+                                                    </View>
+                                                    <Text style={styles.text_option_menu}>
+                                                        {item.name}
+                                                    </Text>
+                                                </View>
+
+                                                <Icon
+                                                    name={appIcons.ic_arrow_left}
+                                                    size={getSize.m(13)}
+                                                    color={appColors.text_dark_blue}
+                                                    style={styles.ic_arrow_left}
+                                                />
+                                            </TouchableOpacity>
+                                        );
+                                    })}
+                                </View>
+                            </View>
+                            <View style={[appStyles.package, { backgroundColor: appColors.white }]}>
+                                {teamSeason && <LeagueTable teamSeason={teamSeason} />}
                             </View>
                             <View
-                                style={{
-                                    marginHorizontal: getSize.m(15),
-                                    marginTop: getSize.m(23),
-                                }}
+                                style={[
+                                    appStyles.package,
+                                    {
+                                        paddingHorizontal: getSize.m(0),
+                                        paddingLeft: getSize.m(16),
+                                    },
+                                ]}
                             >
-                                {groups.map(item => {
-                                    return (
-                                        <TouchableOpacity
-                                            onPress={() => {
-                                                navigate(item.screen);
-                                            }}
-                                            key={item.id}
-                                            style={styles.option_menu}
-                                        >
-                                            <View style={appStyles.flex_row_align_center}>
-                                                <View style={styles.container_img}>
-                                                    <Avatar
-                                                        source={AppImages.img_israel}
-                                                        size={getSize.m(26)}
-                                                        rounded
-                                                    />
-                                                </View>
-                                                <Text style={styles.text_option_menu}>
-                                                    {item.group}
-                                                </Text>
-                                            </View>
-
-                                            <Icon
-                                                name={appIcons.ic_arrow_left}
-                                                size={getSize.m(13)}
-                                                color={appColors.text_dark_blue}
-                                                style={styles.ic_arrow_left}
-                                            />
-                                        </TouchableOpacity>
-                                    );
-                                })}
+                                {teamSeason && <Statistics data={teamSeason.statistics} />}
                             </View>
-                        </View>
-                        <View style={[appStyles.package, { backgroundColor: appColors.white }]}>
-                            <LeagueTable />
-                        </View>
-                        <View style={appStyles.package}>
-                            <ListOfGames />
-                        </View>
-                        <View
-                            style={[
-                                appStyles.package,
-                                {
-                                    paddingHorizontal: getSize.m(0),
-                                    paddingLeft: getSize.m(16),
-                                },
-                            ]}
-                        >
-                            <Statistics />
-                        </View>
-                        <View style={{ marginHorizontal: getSize.m(28) }}>
-                            <Button
-                                style={{ borderRadius: getSize.m(15) }}
-                                title={t('group_page.statistics.btn')}
-                                onPress={handleMoreStatistics}
-                            />
-                        </View>
-                        <View style={{ height: TAB_BAR_HEIGHT + BOTTOM_SVG_HEIGHT }} />
-                    </ScrollView>
-                </SafeAreaView>
-            </ImageBackground>
+                            <View style={{ marginHorizontal: getSize.m(28) }}>
+                                <Button
+                                    style={{ borderRadius: getSize.m(15) }}
+                                    title={t('group_page.statistics.btn')}
+                                    onPress={handleMoreStatistics}
+                                />
+                            </View>
+                            <View style={{ height: TAB_BAR_HEIGHT + BOTTOM_SVG_HEIGHT }} />
+                        </ScrollView>
+                    </SafeAreaView>
+                </ImageBackground>
+            )}
         </View>
     );
 };

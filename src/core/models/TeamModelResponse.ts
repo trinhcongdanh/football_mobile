@@ -1,4 +1,5 @@
 import { AxiosResponse } from 'axios';
+
 export interface Season {
     team_season_id: string;
     team_season_name: string;

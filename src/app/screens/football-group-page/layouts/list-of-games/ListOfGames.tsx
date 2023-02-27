@@ -5,10 +5,12 @@ import { getSize } from '@football/app/utils/responsive/scale';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { ListGame } from '@football/app/components/list-game/ListGame';
 import { appIcons } from '@football/app/assets/icons/appIcons';
+import moment from 'moment';
 import { useViewModel } from './ListOfGames.viewModel';
+import { IListOfGamesProps } from './ListOfGames.type';
 
-export const ListOfGames = () => {
-    const { t, listGames, handleDetailMatch, handleStadium } = useViewModel({});
+export const ListOfGames = ({ listGames }: IListOfGamesProps) => {
+    const { t, handleDetailMatch, handleStadium } = useViewModel();
     return (
         <View>
             <Text style={[appStyles.text_topic, { marginLeft: getSize.m(6) }]}>
@@ -18,23 +20,24 @@ export const ListOfGames = () => {
                 {listGames.map(item => {
                     return (
                         <ListGame
-                            key={item.id}
-                            tournament={item.tournament}
-                            logo_home={item.logoHome}
-                            logo_away={item.logoAway}
-                            nameHome={item.nameHome}
-                            nameAway={item.nameAway}
-                            location={item.location}
+                            key={item.game_id}
+                            logo_home={item.team1.logo_url}
+                            logo_away={item.team2.logo_url}
+                            nameHome={item.team1.name_he}
+                            nameAway={item.team2.name_he}
+                            location={item.stadium_he}
                             date={item.date}
-                            result={item.result}
-                            schedule={item.schedule}
-                            // completed={item.completed}
-                            icon={appIcons.ic_arrow_left}
+                            result={item.score}
+                            schedule={item.time}
                             color={appColors.gray}
-                            details={item.details}
-                            isLive={item.isLive}
+                            icon={appIcons.ic_arrow_left}
+                            details={item.game_id}
+                            isLive={moment().isBetween(
+                                moment(`${item.date} ${item.time}`, 'DD.M.YY HH:mm'),
+                                moment(`${item.date} ${item.time}`, 'DD.M.YY HH:mm').add(2, 'hours')
+                            )}
                             handleDetailMatch={handleDetailMatch}
-                            handleStadium={handleStadium}
+                            handleStadium={() => handleStadium(item.stadium_id)}
                         />
                     );
                 })}

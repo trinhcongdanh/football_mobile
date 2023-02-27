@@ -8,8 +8,8 @@ export const useViewModel = ({ leaderBoards }: ILeaguesTableProps) => {
     const { t } = useTranslation();
     const listTeams = leaderBoards;
 
-    const onNavigateTeamDetails = () => {
-        navigate(ScreenName.GroupPagePage);
+    const onNavigateTeamDetails = (teamId: string) => {
+        navigate(ScreenName.GroupPagePage, { teamId });
     };
     return {
         t,

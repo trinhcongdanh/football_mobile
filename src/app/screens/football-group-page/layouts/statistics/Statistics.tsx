@@ -1,27 +1,27 @@
-import React from 'react';
-import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
+import { appIcons } from '@football/app/assets/icons/appIcons';
+import styles from '@football/app/screens/football-group-page/layouts/statistics/Statistics.style';
+import { appColors } from '@football/app/utils/constants/appColors';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import { getSize } from '@football/app/utils/responsive/scale';
-import IconAntDesign from 'react-native-vector-icons/AntDesign';
-import { appColors } from '@football/app/utils/constants/appColors';
+import { Statistic } from '@football/core/models/TeamSeasonResponse';
+import React from 'react';
+import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { Avatar } from 'react-native-elements';
-import { useViewModel } from './Statistics.viewModel';
-import styles from '@football/app/screens/football-group-page/layouts/statistics/Statistics.style';
-import { appIcons } from '@football/app/assets/icons/appIcons';
 import LinearGradient from 'react-native-linear-gradient';
+import IconAntDesign from 'react-native-vector-icons/AntDesign';
+import { IStatisticsProps } from './Statistics.type';
+import { useViewModel } from './Statistics.viewModel';
 
-export const Statistics = () => {
+export const Statistics = ({ data }: IStatisticsProps) => {
     const {
         t,
-        statistics,
-        players,
         activeIndexNumber,
         setActiveIndexNumber,
         dots,
         handleNextRightSlide,
         handleNextLeftSlide,
         onNavigateDataPlayer,
-    } = useViewModel({});
+    } = useViewModel();
 
     return (
         <View>
@@ -45,17 +45,20 @@ export const Statistics = () => {
                             </View>
                         </View>
                         <View style={{ marginTop: getSize.m(14) }}>
-                            {players.map(item => {
+                            {data?.map((item: Statistic, index) => {
                                 return (
-                                    <TouchableOpacity onPress={onNavigateDataPlayer} key={item.id}>
+                                    <TouchableOpacity
+                                        onPress={() => onNavigateDataPlayer(item.player_id)}
+                                        key={item.player_id}
+                                    >
                                         <LinearGradient
                                             start={{ x: 0, y: 0 }}
                                             end={{ x: 1, y: 1 }}
                                             colors={[
-                                                item.id % 2 === 1
+                                                index % 2 === 0
                                                     ? 'rgba(16, 32, 100, 0.04)'
                                                     : appColors.white,
-                                                item.id % 2 === 1
+                                                index % 2 !== 0
                                                     ? 'rgba(59, 168, 225, 0.04)'
                                                     : appColors.white,
                                             ]}
@@ -70,7 +73,7 @@ export const Statistics = () => {
                                             <View style={{ width: getSize.m(120) }}>
                                                 <View style={appStyles.flex_row_align}>
                                                     <Avatar
-                                                        source={item.avt}
+                                                        source={{ uri: item.player_image_url }}
                                                         rounded
                                                         size={getSize.m(17.33)}
                                                     />
@@ -83,7 +86,7 @@ export const Statistics = () => {
                                                             },
                                                         ]}
                                                     >
-                                                        {item.player}
+                                                        {item.player_name_en}
                                                     </Text>
                                                 </View>
                                             </View>
@@ -110,12 +113,12 @@ export const Statistics = () => {
                         snapToInterval={getSize.m(194)}
                         showsHorizontalScrollIndicator={false}
                         onScroll={e => {
-                            let slide = Math.round(
+                            const slide = Math.round(
                                 e.nativeEvent.contentOffset.x /
                                     e.nativeEvent.layoutMeasurement.width
                             );
                             if (slide !== activeIndexNumber) {
-                                setActiveIndexNumber(slide); //here we will set our active index num
+                                setActiveIndexNumber(slide); // here we will set our active index num
                             }
                         }}
                     >
@@ -219,14 +222,14 @@ export const Statistics = () => {
                                 </View>
                             </View>
                             <View style={{ marginTop: getSize.m(8) }}>
-                                {statistics.map(item => {
+                                {data.map((item: Statistic, index) => {
                                     return (
                                         <LinearGradient
                                             colors={[
-                                                item.id % 2 === 1
+                                                index % 2 === 0
                                                     ? 'rgba(16, 32, 100, 0.04)'
                                                     : appColors.gray,
-                                                item.id % 2 === 1
+                                                index % 2 !== 0
                                                     ? 'rgba(59, 168, 225, 0.04)'
                                                     : appColors.gray,
                                             ]}
@@ -237,7 +240,7 @@ export const Statistics = () => {
                                                     height: getSize.m(30),
                                                 },
                                             ]}
-                                            key={item.id}
+                                            key={item.player_id}
                                         >
                                             <View
                                                 style={{
@@ -251,7 +254,7 @@ export const Statistics = () => {
                                                         { fontSize: getSize.m(13) },
                                                     ]}
                                                 >
-                                                    {item.number_game}
+                                                    {item.games}
                                                 </Text>
                                             </View>
                                             <View
@@ -266,7 +269,7 @@ export const Statistics = () => {
                                                         { fontSize: getSize.m(13) },
                                                     ]}
                                                 >
-                                                    {item.gates}
+                                                    {item.goals}
                                                 </Text>
                                             </View>
                                             <View
@@ -281,7 +284,7 @@ export const Statistics = () => {
                                                         { fontSize: getSize.m(13) },
                                                     ]}
                                                 >
-                                                    {item.yellow_league_cup}
+                                                    {item.yellow_cards_league}
                                                 </Text>
                                             </View>
                                             <View
@@ -296,7 +299,7 @@ export const Statistics = () => {
                                                         { fontSize: getSize.m(13) },
                                                     ]}
                                                 >
-                                                    {item.yellow_tutu}
+                                                    {item.yellow_cards_toto}
                                                 </Text>
                                             </View>
                                             <View
@@ -311,7 +314,7 @@ export const Statistics = () => {
                                                         { fontSize: getSize.m(13) },
                                                     ]}
                                                 >
-                                                    {item.red_card}
+                                                    {item.red_cards}
                                                 </Text>
                                             </View>
                                             <View
@@ -326,7 +329,7 @@ export const Statistics = () => {
                                                         { fontSize: getSize.m(13) },
                                                     ]}
                                                 >
-                                                    {item.vehicle}
+                                                    {item.opening}
                                                 </Text>
                                             </View>
                                             <View
@@ -341,7 +344,7 @@ export const Statistics = () => {
                                                         { fontSize: getSize.m(13) },
                                                     ]}
                                                 >
-                                                    {item.enter_replacement}
+                                                    {item.substitutes}
                                                 </Text>
                                             </View>
                                             <View
@@ -356,7 +359,7 @@ export const Statistics = () => {
                                                         { fontSize: getSize.m(13) },
                                                     ]}
                                                 >
-                                                    {item.switched}
+                                                    {item.substituted}
                                                 </Text>
                                             </View>
                                             <View
@@ -371,7 +374,7 @@ export const Statistics = () => {
                                                         { fontSize: getSize.m(13) },
                                                     ]}
                                                 >
-                                                    {item.subtlety}
+                                                    {item.minutes_playing}
                                                 </Text>
                                             </View>
                                         </LinearGradient>
@@ -393,6 +396,7 @@ export const Statistics = () => {
                     <View style={styles.dotContainer}>
                         {dots.map((_, index) => {
                             return (
+                                // eslint-disable-next-line react/no-array-index-key
                                 <View key={index}>
                                     <View
                                         style={[
@@ -408,7 +412,7 @@ export const Statistics = () => {
                                                         : appColors.soft_grey,
                                             },
                                         ]}
-                                    ></View>
+                                    />
                                 </View>
                             );
                         })}

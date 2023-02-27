@@ -1,30 +1,93 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useTranslation } from 'react-i18next';
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
 import { ILeagueTableProps } from '@football/app/screens/football-group-page/layouts/league-table/LeagueTable.type';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { AppImages } from '@football/app/assets/images';
+import { Cycle, Round } from '@football/core/models/TeamSeasonResponse';
+import { useMount } from '@football/app/utils/hooks/useMount';
 
-export const useViewModel = ({}: ILeagueTableProps) => {
+const useViewState = () => {
+    const [openModalCycle, setOpenModalCycle] = useState(false);
+    const [selectCycle, setSelectCycle] = useState<Cycle>();
+    const [cycles, setCycles] = useState<any[]>([]);
+    const [rounds, setRounds] = useState<any[]>([]);
+    const [selectedRound, setSelectedRound] = useState<Round>();
+    return {
+        openModalCycle,
+        setOpenModalCycle,
+        selectCycle,
+        setSelectCycle,
+        cycles,
+        setCycles,
+        selectedRound,
+        setSelectedRound,
+        rounds,
+        setRounds,
+    };
+};
+
+export const useViewModel = ({ teamSeason }: ILeagueTableProps) => {
     const { navigate, goBack } = useAppNavigator();
     const { t } = useTranslation();
     // Cycle
-    const [openModalCycle, setOpenModalCycle] = useState(false);
-    const [selectCycle, setSelectCycle] = useState('34 מחזור');
-    const [cycles, setCycle] = useState<any[]>([
-        { id: 1, content: '30 מחזור', isSelected: false },
-        { id: 2, content: '31 מחזור', isSelected: false },
-        { id: 3, content: '32 מחזור', isSelected: false },
-        { id: 4, content: '33 מחזור', isSelected: false },
-        { id: 5, content: '34 מחזור', isSelected: true },
-    ]);
+
+    const state = useViewState();
+
     const handleSelectedCycle = (item: any) => {
-        setSelectCycle(item.content);
-        const newCycles = cycles.map(e => {
+        state.setSelectCycle(item.content);
+        const newCycles = state.cycles.map(e => {
             return { ...e, isSelected: e.id === item.id };
         });
-        setCycle(newCycles);
-        setOpenModalCycle(false);
+        state.setCycles(newCycles);
+        state.setOpenModalCycle(false);
     };
+
+    useMount(() => {
+        if (teamSeason?.cycles?.length) {
+            state.setCycles(
+                teamSeason.cycles.map((cycle, index) => {
+                    return {
+                        id: index,
+                        content: cycle.cycle_name_he,
+                        isSelected: index === 0,
+                    };
+                })
+            );
+            const firstCycle = teamSeason.cycles[0];
+            if (firstCycle) {
+                state.setSelectCycle(firstCycle);
+            }
+        }
+    });
+
+    useEffect(() => {
+        // state.setCycles(
+        //     teamSeason?.cycles.map((cycle, index) => {
+        //         return {
+        //             id: index,
+        //             content: cycle.cycle_name_he,
+        //             isSelected: cycle.cycle_name_he === state.selectCycle?.cycle_name_he,
+        //         };
+        //     })
+        // );
+
+        // if (state.selectCycle) {
+        //     state.setRounds(
+        //         state.selectCycle.rounds.map((round, index) => {
+        //             return {
+        //                 id: index,
+        //                 content: round.round_name_he,
+        //                 isSelected: round.round_name_he === state.selectedRound?.round_name_he,
+        //             };
+        //         })
+        //     );
+        // }
+
+        if (state.selectCycle?.rounds.length) {
+            state.setSelectedRound(state.selectCycle?.rounds[0]);
+        }
+    }, [state.selectCycle]);
 
     // Top playoff
     const [openModalPlayOff, setOpenModalPlayOff] = useState(false);
@@ -46,93 +109,20 @@ export const useViewModel = ({}: ILeagueTableProps) => {
     };
 
     const handleCloseModal = () => {
-        setOpenModalCycle(false);
+        state.setOpenModalCycle(false);
         setOpenModalPlayOff(false);
     };
-
-    const listTeams = [
-        {
-            id: 1,
-            logo: AppImages.img_israel,
-            name: 'מכבי חיפה',
-            from: 34,
-            nch: 22,
-            draw: 9,
-            the_p: 3,
-            time: '37-82',
-            no: 75,
-        },
-        {
-            id: 2,
-            logo: AppImages.img_israel,
-            name: 'הפועל באר שבע',
-            from: 34,
-            nch: 22,
-            draw: 9,
-            the_p: 3,
-            time: '37-82',
-            no: 75,
-        },
-        {
-            id: 3,
-            logo: AppImages.img_israel,
-            name: 'מכבי תל אביב',
-            from: 34,
-            nch: 22,
-            draw: 9,
-            the_p: 3,
-            time: '37-82',
-            no: 75,
-        },
-        {
-            id: 4,
-            logo: AppImages.img_israel,
-            name: 'מכבי נתניה',
-            from: 34,
-            nch: 22,
-            draw: 9,
-            the_p: 3,
-            time: '37-82',
-            no: 75,
-        },
-        {
-            id: 5,
-            logo: AppImages.img_israel,
-            name: 'מכבי נתניה',
-            from: 34,
-            nch: 22,
-            draw: 9,
-            the_p: 3,
-            time: '37-82',
-            no: 75,
-        },
-        {
-            id: 6,
-            logo: AppImages.img_israel,
-            name: 'מכבי נתניה',
-            from: 34,
-            nch: 22,
-            draw: 9,
-            the_p: 3,
-            time: '37-82',
-            no: 75,
-        },
-    ];
 
     return {
         t,
         handleSelectedCycle,
         handleSelectedPlayOff,
         handleCloseModal,
-        setOpenModalCycle,
         setOpenModalPlayOff,
-        openModalCycle,
-        cycles,
-        selectCycle,
+        ...state,
         openModalPlayOff,
         selectPlayoff,
         playOffs,
-        listTeams,
         navigate,
     };
 };
