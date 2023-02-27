@@ -2,7 +2,7 @@ import MongoDBService from '@football/core/services/mongoDB.service';
 
 class CampaignService extends MongoDBService {
     constructor() {
-        super('campaign');
+        super('team_campaign');
     }
 }
 

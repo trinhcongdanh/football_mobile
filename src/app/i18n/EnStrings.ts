@@ -488,12 +488,14 @@ const resources = {
                     draw: 'תיקו',
                     the_p: 'הפ׳',
                     no: 'נק׳',
+                    all_previous_seasons: 'לכל הקמפיינים',
                 },
                 list_game: {
                     title: 'רשימת משחקים',
                     home_away: 'בית / חוץ',
                     house: 'בית',
                     outside: 'חוץ',
+                    see_all_games: 'לכל המשחקים',
                 },
             },
             goal_national_team: {

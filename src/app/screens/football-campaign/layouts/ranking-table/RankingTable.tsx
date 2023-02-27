@@ -1,26 +1,41 @@
-import React from 'react';
-import { Image, Text, View } from 'react-native';
+import { AppFonts } from '@football/app/assets/fonts';
+import { appIcons } from '@football/app/assets/icons/appIcons';
 import { Position } from '@football/app/components/position/Position';
+import { useViewModel } from '@football/app/screens/football-campaign/layouts/ranking-table/RankingTable.viewModel';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import { getSize } from '@football/app/utils/responsive/scale';
+import React from 'react';
+import { Text, TouchableOpacity, View } from 'react-native';
 import { Avatar } from 'react-native-elements';
-import Icon from 'react-native-vector-icons/AntDesign';
-import { useTranslation } from 'react-i18next';
-import { appIcons } from '@football/app/assets/icons/appIcons';
-import { IRankingTableProps } from './RankingTable.type';
-import { useViewModel } from '@football/app/screens/football-campaign/layouts/ranking-table/RankingTable.viewModel';
 import LinearGradient from 'react-native-linear-gradient';
-import { AppFonts } from '@football/app/assets/fonts';
+import Icon from 'react-native-vector-icons/AntDesign';
+import IconFeather from 'react-native-vector-icons/Feather';
+import { IRankingTableProps } from './RankingTable.type';
 
-export const RankingTable = ({}: IRankingTableProps) => {
-    const { t, rankingTable } = useViewModel({});
+export const RankingTable = ({ data, groupName, topTeam }: IRankingTableProps) => {
+    const { t, handleSeeAll } = useViewModel(topTeam);
     return (
         <View>
-            <Text style={appStyles.statistics_title}>{t('campaign.ranking_table.title')}</Text>
+            <View style={appStyles.flex_row_space_center}>
+                <Text style={appStyles.statistics_title}>{t('campaign.ranking_table.title')}</Text>
+                <TouchableOpacity
+                    style={[appStyles.flex_row_center, { flex: 0, marginTop: getSize.m(12) }]}
+                    onPress={handleSeeAll}
+                >
+                    <Text style={appStyles.statistics_title}>
+                        {t('campaign.ranking_table.all_previous_seasons')}
+                    </Text>
+                    <IconFeather
+                        name={appIcons.ic_arrow_left}
+                        size={getSize.m(10)}
+                        color={appColors.button_dark_blue}
+                    />
+                </TouchableOpacity>
+            </View>
             <View style={{ marginTop: getSize.m(26) }}>
                 <Position
-                    position="בית 9"
+                    position={groupName}
                     color={appColors.text_dark_blue}
                     fontFamily={AppFonts.bold}
                     fontSize={getSize.m(12)}
@@ -87,17 +102,17 @@ export const RankingTable = ({}: IRankingTableProps) => {
                         </View>
                     </View>
                     <View>
-                        {rankingTable.map(item => {
+                        {data.map((item, index) => {
                             return (
                                 <LinearGradient
                                     key={item.place}
                                     start={{ x: 0, y: 0 }}
                                     end={{ x: 1, y: 1 }}
                                     colors={[
-                                        item.id % 2 === 1
+                                        index % 2 === 0
                                             ? 'rgba(16, 32, 100, 0.04)'
                                             : appColors.white,
-                                        item.id % 2 === 1
+                                        index % 2 !== 0
                                             ? 'rgba(59, 168, 225, 0.04)'
                                             : appColors.white,
                                     ]}
@@ -118,14 +133,14 @@ export const RankingTable = ({}: IRankingTableProps) => {
                                                 marginTop: getSize.m(2),
                                             }}
                                         >
-                                            {item.place_change == 'up' && (
+                                            {item.place_change === 'up' && (
                                                 <Icon
                                                     name={appIcons.ic_up}
                                                     size={8}
                                                     color={appColors.green}
                                                 />
                                             )}
-                                            {item.place_change == 'down' && (
+                                            {item.place_change === 'down' && (
                                                 <Icon
                                                     name={appIcons.ic_down}
                                                     size={8}

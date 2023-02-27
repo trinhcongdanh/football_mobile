@@ -65,19 +65,19 @@ export const PreviousCampaignsScreen = ({ navigation, route }: IPreviousCampaign
                                 </Text>
                             </LinearGradient>
                             <View>
-                                {campaigns?.map(campaign => {
+                                {campaigns?.map((campaign, index) => {
                                     return (
                                         <TouchableOpacity
                                             style={[
                                                 appStyles.flex_row_space_center,
                                                 styles.content,
                                             ]}
-                                            onPress={handleCampaignPage}
+                                            onPress={() => handleCampaignPage(index)}
                                             // eslint-disable-next-line no-underscore-dangle
                                             key={campaign._id}
                                         >
                                             <Text style={styles.name_campaign}>
-                                                {campaign.name_en}
+                                                {campaign.name_he}
                                             </Text>
                                             <Text style={styles.year_campaign}>
                                                 {campaign.season}
