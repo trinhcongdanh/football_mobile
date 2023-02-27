@@ -1,71 +1,55 @@
-import { useTranslation } from 'react-i18next';
-import { useCallback, useState, useMemo } from 'react';
-import { OfflineData } from '@football/app/utils/constants/enum';
-import { axiosClient } from '@football/core/api/configs/axiosClient';
-import { BASE_URL, DATA_SOURCE, DB } from '@football/core/api/configs/config';
-import { isEmpty, isNil } from 'lodash';
-import { CoachModel, CoachesModelResponse } from '@football/core/models/CoachModelResponse';
-import { Alert } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
-import { useMount } from '@football/app/utils/hooks/useMount';
-import AsyncStorage, { useAsyncStorage } from '@react-native-async-storage/async-storage';
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
+import { useMount } from '@football/app/utils/hooks/useMount';
+import { CoachModel } from '@football/core/models/CoachModelResponse';
+import CoachService from '@football/core/services/Coach.service';
+import { useCallback, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { IDataCoachScreenProps } from './DataCoachScreen.type';
+
+const useViewState = () => {
+    const [coach, setCoach] = useState<CoachModel>();
+    const [onSelect, setOnSelect] = useState(0);
+
+    return {
+        coach,
+        setCoach,
+        onSelect,
+        setOnSelect,
+    };
+};
+
+const useViewCallback = (route: any, viewState: any) => {
+    const { setCoach } = viewState;
+
+    const getCoachData = useCallback(async () => {
+        const [error, res] = await CoachService.findByOId(route?.params?.coachId);
+        if (error) {
+            return;
+        }
+        if (res.data.documents.length) {
+            setCoach(res.data.documents[0]);
+        }
+    }, []);
+
+    return {
+        getCoachData,
+    };
+};
 
 export const useViewModel = ({ navigation, route }: IDataCoachScreenProps) => {
     const { navigate, goBack } = useAppNavigator();
-    const [coachesData, setCoachesData] = useState<{
-        isLoading: boolean;
-        success: boolean;
-        data: CoachModel;
-    }>({ isLoading: true, success: false, data: null! });
-    // const [loadingCoachesData, setLoadingCoachesData] = useState(true);
-    // const [statusCoachesData,setStatusCoachesData]=useState(true);
     const { t } = useTranslation();
+
+    const state = useViewState();
+    const { getCoachData } = useViewCallback(route, state);
 
     const onGoBack = (): void => {
         goBack();
     };
 
-    const getCoachesData = useCallback(async () => {
-        try {
-            // const offlineData = await AsyncStorage.getItem('@players_data');
-            const offlineData = await AsyncStorage.getItem(OfflineData.coach_page);
-            if (!isEmpty(offlineData) && !isNil(offlineData)) {
-                setCoachesData({ isLoading: false, success: true, data: JSON.parse(offlineData) });
-            } else {
-                try {
-                    const { data }: CoachesModelResponse = await axiosClient.post(
-                        `${BASE_URL}/find`,
-                        {
-                            dataSource: DATA_SOURCE,
-                            database: DB,
-                            collection: 'coach',
-                        }
-                    );
-
-                    if (!isEmpty(data.documents)) {
-                        // console.log(data.documents[0]);
-                        // documents always has one element
-                        setCoachesData({
-                            isLoading: false,
-                            success: true,
-                            data: data.documents[0],
-                        });
-                    }
-                } catch (e) {
-                    // console.log(e);
-                    setCoachesData({ isLoading: false, success: false, data: null! });
-                }
-            }
-        } catch (error: any) {
-            Alert.alert(error);
-        }
-    }, []);
-
     useMount(() => {
-        getCoachesData();
+        getCoachData();
     });
-    const [onSelect, setOnSelect] = useState(0);
-    return { t, onGoBack, setOnSelect, onSelect, coachesData };
+    return { t, onGoBack, ...state };
 };
