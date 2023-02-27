@@ -17,6 +17,7 @@ import favTeamReducer from './FavTeam.slice';
 import favTopTeamReducer from './FavTopTeam.slice';
 import leagueReducer from './league/League.slice';
 import createProfileReducer from './user/CreateProfile.slice';
+import numberPhoneUserReducer from './user/RegisterNumberPhone';
 import guestIdReducer from './user/GuestId.slice';
 import loginReducer from './user/Login.slice';
 import registerFacebookReducer from './user/RegisterFacebook.slice';
@@ -27,6 +28,7 @@ const reducer = combineReducers({
     createProfile: createProfileReducer,
     login: loginReducer,
     setProfile: createProfileReducer,
+    numberPhoneUser: numberPhoneUserReducer,
     favTeams: favTeamReducer,
     favPlayers: favPlayerReducer,
     favTopTeams: favTopTeamReducer,
