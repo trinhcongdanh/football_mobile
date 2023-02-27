@@ -103,4 +103,5 @@ export enum AuthData {
     REGISTER = 'register',
     LOGIN = 'login',
     SET_PROFILE = 'set_profile',
+    REGISTER_SMS = 'register_sms',
 }

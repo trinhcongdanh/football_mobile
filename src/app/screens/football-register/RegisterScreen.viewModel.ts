@@ -1,16 +1,24 @@
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
-import { ScreenName } from '@football/app/utils/constants/enum';
+import { AuthData, ScreenName } from '@football/app/utils/constants/enum';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Keyboard } from 'react-native';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { IRegisterScreenProps } from './RegisterScreen.type';
 // import { AccessToken, LoginManager, Profile } from 'react-native-fbsdk-next';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
+import { numberPhoneUser } from 'src/store/user/RegisterNumberPhone';
+import { ACTION, TOKEN } from '@football/core/api/auth/config';
+import qs from 'qs';
 
 export const useViewModel = ({ navigation, route }: IRegisterScreenProps) => {
     const { t } = useTranslation();
     const { goBack, navigate } = useAppNavigator();
+    const dispatch = useDispatch<any>();
+    function serializeParams(obj: any) {
+        const a = qs.stringify(obj, { encode: false, arrayFormat: 'brackets' });
+        return a;
+    }
 
     const [errors, setErrors] = useState({
         numberPhone: '',
@@ -22,30 +30,38 @@ export const useViewModel = ({ navigation, route }: IRegisterScreenProps) => {
     const [phoneNumber, setPhoneNumber] = useState('');
     const handleOnChange = (e: string) => {
         setPhoneNumber(e);
+        // console.log(e);
     };
+
+    const guestId = useSelector((state: any) => state.guestId.guestId);
+    const profile = useSelector((state: any) => state.createProfile.profile);
+    const login = useSelector((state: any) => state.login);
+    const numberPhone = useSelector((state: any) => state.numberPhoneUser);
 
     const connect = () => {
         Keyboard.dismiss();
         // if (phoneNumber === '') {
         //     handleError(t('register.invalid'), 'numberPhone');
-        navigate(ScreenName.VerifyPage);
-        // } else {
-        // }
-    };
-
-    const guestId = useSelector((state: any) => state.guestId.guestId);
-    const profile = useSelector((state: any) => state.createProfile.profile);
-    const tokenLogin = useSelector((state: any) => state.login.login.token);
-
-    function serializeParams(obj: any) {
-        let str = [];
-        for (let p in obj) {
-            if (obj.hasOwnProperty(p)) {
-                str.push(p + '=' + encodeURIComponent(obj[p]));
-            }
+        // navigate(ScreenName.VerifyPage);
+        dispatch(
+            numberPhoneUser(
+                serializeParams({
+                    action: ACTION,
+                    token: login.login.token,
+                    call: AuthData.REGISTER_SMS,
+                    guest_guid: guestId[0],
+                    guest_id: login.login.user.item_id,
+                    item: {
+                        sms_phone: encodeURIComponent(phoneNumber),
+                        // sms_phone: ''.
+                    },
+                })
+            )
+        );
+        if (numberPhone.success === true) {
+            navigate(ScreenName.VerifyPage);
         }
-        return str.join('&');
-    }
+    };
 
     const connectFacebook = useCallback(async () => {
         // LoginManager.logInWithPermissions(['public_profile', 'email']).then((result: any) => {
