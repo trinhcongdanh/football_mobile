@@ -256,6 +256,7 @@ const resources = {
                 game_details: 'פרטי משחק',
                 israel: 'ישראל',
                 iceland: 'איסלנד',
+                team_topteam: 'קבוצות \\ נבחרות',
                 option: {
                     team: 'קבוצות/נבחרות',
                     games: 'משחקים',
