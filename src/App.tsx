@@ -1,19 +1,24 @@
+import { Video } from '@football/app/components/video/Video';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import messaging from '@react-native-firebase/messaging';
 import { NavigationContainer } from '@react-navigation/native';
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Alert, I18nManager, ScrollView, View } from 'react-native';
+import { I18nManager, View } from 'react-native';
 import { ThemeProvider } from 'react-native-elements';
+import 'react-native-gesture-handler';
 import 'react-native-get-random-values';
+import { QueryClient, QueryClientProvider } from 'react-query';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import './app/i18n/EnStrings';
-import 'react-native-gesture-handler';
 import { RootNavigator } from './app/routes/RootNavigator';
 import { appStyles } from './app/utils/constants/appStyles';
 import { persistor, store } from './store/store';
-import { Video } from '@football/app/components/video/Video';
-import messaging from '@react-native-firebase/messaging';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+
+const queryClient = new QueryClient({
+    defaultOptions: { queries: { retry: 2 } },
+});
 
 const App = (props: any) => {
     const { i18n } = useTranslation();
@@ -25,11 +30,6 @@ const App = (props: any) => {
             I18nManager.forceRTL(true);
         }
     }, [i18n, i18n.language]);
-
-    useEffect(() => {
-        requestUserPermission();
-        NotificationListener();
-    }, []);
 
     const requestUserPermission = async () => {
         const authStatus = await messaging().requestPermission();
@@ -83,19 +83,26 @@ const App = (props: any) => {
         });
     };
 
+    useEffect(() => {
+        requestUserPermission();
+        NotificationListener();
+    }, []);
+
     return (
-        <Provider store={store}>
-            <PersistGate loading={null} persistor={persistor}>
-                <ThemeProvider>
-                    <NavigationContainer>
-                        <View style={appStyles.flex}>
-                            <RootNavigator />
-                            <Video />
-                        </View>
-                    </NavigationContainer>
-                </ThemeProvider>
-            </PersistGate>
-        </Provider>
+        <QueryClientProvider client={queryClient}>
+            <Provider store={store}>
+                <PersistGate loading={null} persistor={persistor}>
+                    <ThemeProvider>
+                        <NavigationContainer>
+                            <View style={appStyles.flex}>
+                                <RootNavigator />
+                                <Video />
+                            </View>
+                        </NavigationContainer>
+                    </ThemeProvider>
+                </PersistGate>
+            </Provider>
+        </QueryClientProvider>
     );
 };
 
