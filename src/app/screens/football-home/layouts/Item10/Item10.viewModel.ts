@@ -1,14 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { AppImages } from '@football/app/assets/images';
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
 import { IItem10Props } from '@football/app/screens/football-home/layouts/Item10/Item10.type';
+import { ScreenName } from '@football/app/utils/constants/enum';
+import { useMount } from '@football/app/utils/hooks/useMount';
 import { LeagueModel, Season } from '@football/core/models/LeagueModelResponse';
 import { Cycle, LeagueSeasonModel, Round } from '@football/core/models/LeagueSeasonModelResponse';
 import leagueSeasonService from '@football/core/services/LeagueSeason.service';
-import { useCallback, useState, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useMount } from '@football/app/utils/hooks/useMount';
-import { ScreenName } from '@football/app/utils/constants/enum';
 
 const useViewState = (league: LeagueModel) => {
     const [selectSeason, setSelectSeason] = useState<Season>();
@@ -84,6 +83,7 @@ export const useViewModel = ({ league }: IItem10Props) => {
 
     // cycles
     const [openModalCycles, setOpenModalCycles] = useState(false);
+    const [openModalRound, setOpenModalRound] = useState(false);
 
     const onClickAllLeagues = (leagueId: string) => {
         navigate(ScreenName.LeaguesDetailsPage, { leagueId });
@@ -100,5 +100,7 @@ export const useViewModel = ({ league }: IItem10Props) => {
         openModalCycles,
         setOpenModalCycles,
         onClickAllLeagues,
+        openModalRound,
+        setOpenModalRound,
     };
 };

@@ -2,15 +2,18 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
 import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
+import { useMount } from '@football/app/utils/hooks/useMount';
+import { CupModel } from '@football/core/models/CupModelResponse';
 import { CupSeasonModel } from '@football/core/models/CupSeasonModelResponse';
 import { Cycle, Round } from '@football/core/models/LeagueSeasonModelResponse';
+import cupsService from '@football/core/services/Cups.service';
 import { useCupSeasons } from '@football/core/services/CupSeason.service';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { IStateCupScreenProps } from './StateCupScreen.type';
 
 const useViewState = ({ route }: IStateCupScreenProps) => {
-    const { cup } = route?.params;
+    const [cup, setCup] = useState<CupModel>(route?.params.cup);
     const [cupSeasons, setCupSeasons] = useState<CupSeasonModel[]>([]);
 
     const [isScroll, setIsScroll] = useState(true);
@@ -27,6 +30,7 @@ const useViewState = ({ route }: IStateCupScreenProps) => {
 
     return {
         cup,
+        setCup,
         cupSeasons,
         setCupSeasons,
         selectedCupSeason,
@@ -49,12 +53,27 @@ const useViewState = ({ route }: IStateCupScreenProps) => {
         setYears,
     };
 };
-const useViewCallback = () => {
+const useViewCallback = (route, viewState: any) => {
     const { goBack } = useAppNavigator();
     const onGoBack = (): void => {
         goBack();
     };
+
+    const { setCup } = viewState;
+
+    const getCupData = useCallback(async () => {
+        const [error, res] = await cupsService.findByOId(route?.params?.cupId);
+        if (error) {
+            return;
+        }
+
+        if (res.data.documents?.length) {
+            setCup(res.data.documents[0]);
+        }
+    }, []);
+
     return {
+        getCupData,
         onGoBack,
     };
 };
@@ -73,9 +92,16 @@ export const useViewModel = ({ route }: IStateCupScreenProps) => {
         setSelectCycle,
         setSelectRound,
     } = viewState;
-    const { onGoBack } = useViewCallback();
+    const { onGoBack, getCupData } = useViewCallback(route, viewState);
 
-    const { data: cupSeasonsData } = useCupSeasons(cup._id);
+    useMount(() => {
+        if (route?.params?.cupId) {
+            console.log('route?.params?.cupId', route?.params?.cupId)
+            getCupData();
+        }
+    });
+
+    const { data: cupSeasonsData } = useCupSeasons(cup?._id);
 
     useEffect(() => {
         const cycles = selectedCupSeason?.cycles || [];

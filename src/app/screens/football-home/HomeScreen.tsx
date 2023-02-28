@@ -1,39 +1,36 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable react/jsx-no-comment-textnodes */
-import React from 'react';
-import {
-    View,
-    ImageBackground,
-    StatusBar,
-    SafeAreaView,
-    Text,
-    ScrollView,
-    TouchableOpacity,
-} from 'react-native';
-import { useViewModel } from '@football/app/screens/football-home/HomeScreen.viewModel';
-import { IHomeScreenProps } from '@football/app/screens/football-home/HomeScreen.type';
-import { appStyles } from '@football/app/utils/constants/appStyles';
-import { AppImages } from '@football/app/assets/images';
-import { getSize } from '@football/app/utils/responsive/scale';
-import IconAntDesign from 'react-native-vector-icons/AntDesign';
-import LinearGradient from 'react-native-linear-gradient';
-import styles from '@football/app/screens/football-home/HomeScreen.styles';
-import FastImage from 'react-native-fast-image';
 import { appIcons } from '@football/app/assets/icons/appIcons';
-import { appColors } from '@football/app/utils/constants/appColors';
+import { AppImages } from '@football/app/assets/images';
+import styles from '@football/app/screens/football-home/HomeScreen.styles';
+import { IHomeScreenProps } from '@football/app/screens/football-home/HomeScreen.type';
+import { useViewModel } from '@football/app/screens/football-home/HomeScreen.viewModel';
 import { Item1 } from '@football/app/screens/football-home/layouts/Item1/Item1';
-import { Item2 } from '@football/app/screens/football-home/layouts/Item2/Item2';
-import { Item3 } from '@football/app/screens/football-home/layouts/Item3/Item3';
-import { Item4 } from '@football/app/screens/football-home/layouts/Item4/Item4';
-import { Item5 } from '@football/app/screens/football-home/layouts/Item5/Item5';
-import { Item6 } from '@football/app/screens/football-home/layouts/Item6/Item6';
-import { Item7 } from '@football/app/screens/football-home/layouts/Item7/Item7';
-import { Item8 } from '@football/app/screens/football-home/layouts/Item8/Item8';
-import { Item9 } from '@football/app/screens/football-home/layouts/Item9/Item9';
 import { Item10 } from '@football/app/screens/football-home/layouts/Item10/Item10';
 import { Item11 } from '@football/app/screens/football-home/layouts/Item11/Item11';
 import { Item12 } from '@football/app/screens/football-home/layouts/Item12/Item12';
 import { Item13 } from '@football/app/screens/football-home/layouts/Item13/Item13';
+import { Item3 } from '@football/app/screens/football-home/layouts/Item3/Item3';
+import { Item5 } from '@football/app/screens/football-home/layouts/Item5/Item5';
+import { Item6 } from '@football/app/screens/football-home/layouts/Item6/Item6';
+import { Item7 } from '@football/app/screens/football-home/layouts/Item7/Item7';
+import { Item9 } from '@football/app/screens/football-home/layouts/Item9/Item9';
+import { appColors } from '@football/app/utils/constants/appColors';
+import { appStyles } from '@football/app/utils/constants/appStyles';
+import { getSize } from '@football/app/utils/responsive/scale';
+import React from 'react';
+import {
+    ImageBackground,
+    SafeAreaView,
+    ScrollView,
+    StatusBar,
+    Text,
+    TouchableOpacity,
+    View,
+} from 'react-native';
+import FastImage from 'react-native-fast-image';
+import LinearGradient from 'react-native-linear-gradient';
+import IconAntDesign from 'react-native-vector-icons/AntDesign';
 
 export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
     const {
@@ -201,6 +198,7 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                     {/* <Item2 /> */}
                     {/* Item3 */}
                     {homeLayout?.layout.includes('my_players') &&
+                        players &&
                         players?.slice(0, 2)?.map(player => {
                             // eslint-disable-next-line no-underscore-dangle
                             return <Item3 player={player} key={player._id} />;
@@ -232,9 +230,12 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                         <Item10 league={league} />
                     )}
                     {/* Item11 */}
-                    <Item11 />
+                    {/* <Item11 /> */}
+                    {homeLayout?.layout.includes('national_cup') && <Item11 homePage={homePage} />}
+
                     {/* Item12 */}
-                    <Item12 />
+                    {homeLayout?.layout.includes('clips') && <Item12 videos={homePage.video} />}
+
                     {/* Item13 */}
                     <Item13 />
                     <View style={{ height: getSize.m(120), width: '100%' }} />

@@ -9,9 +9,10 @@ import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import IconEntypo from 'react-native-vector-icons/Entypo';
 import IconFeather from 'react-native-vector-icons/Feather';
 import IconAntDesign from 'react-native-vector-icons/AntDesign';
+import { IItem12Props } from '@football/app/screens/football-home/layouts/Item12/Item12.type';
 
-export const Item12 = () => {
-    const { t, pages, activeIndexNumber, setActiveIndexNumber, data, dots } = useViewModel({});
+export const Item12 = ({videos}: IItem12Props) => {
+    const { t, pages, activeIndexNumber, setActiveIndexNumber, data, dots } = useViewModel({videos});
     return (
         <View style={styles.container}>
             <View

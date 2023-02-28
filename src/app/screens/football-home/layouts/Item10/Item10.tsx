@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import { appIcons } from '@football/app/assets/icons/appIcons';
 import styles from '@football/app/screens/football-home/layouts/Item10/Item10.style';
 import { useViewModel } from '@football/app/screens/football-home/layouts/Item10/Item10.viewModel';
@@ -106,12 +107,12 @@ export const Item10 = ({ league }: IItem10Props) => {
                 <View style={{ flex: 1 }}>
                     <TouchableOpacity
                         onPress={() => {
-                            setOpenModalRound(!openModalRound);
+                            setOpenModalCycles(!openModalCycles);
                         }}
                         style={[
                             styles.cycle,
                             {
-                                borderColor: openModalRound
+                                borderColor: openModalCycles
                                     ? appColors.blue_light
                                     : appColors.border,
                             },
@@ -120,14 +121,14 @@ export const Item10 = ({ league }: IItem10Props) => {
                         <Text style={styles.text_cycle}>{selectCycle?.cycle_name_he}</Text>
                         <IconFeather
                             name={
-                                openModalRound ? appIcons.ic_chevron_up : appIcons.ic_chevron_down
+                                openModalCycles ? appIcons.ic_chevron_up : appIcons.ic_chevron_down
                             }
                             size={getSize.m(14)}
-                            color={openModalRound ? appColors.blue_light : appColors.light_gray}
+                            color={openModalCycles ? appColors.blue_light : appColors.light_gray}
                             style={styles.chevron_down}
                         />
                     </TouchableOpacity>
-                    {openModalRound && (
+                    {openModalCycles && (
                         <View style={[styles.drop_down_calender, { width: '80%' }]}>
                             <ScrollView showsVerticalScrollIndicator={false} nestedScrollEnabled>
                                 {leagueSeason?.cycles.map((cycle, index) => {
@@ -153,12 +154,12 @@ export const Item10 = ({ league }: IItem10Props) => {
                 <View style={{ flex: 1 }}>
                     <TouchableOpacity
                         onPress={() => {
-                            setOpenModalCycles(!openModalCycles);
+                            setOpenModalRound(!openModalRound);
                         }}
                         style={[
                             styles.cycle,
                             {
-                                borderColor: openModalCycles
+                                borderColor: openModalRound
                                     ? appColors.blue_light
                                     : appColors.border,
                             },
@@ -167,14 +168,14 @@ export const Item10 = ({ league }: IItem10Props) => {
                         <Text style={styles.text_cycle}>{selectRound?.round_name_he}</Text>
                         <IconFeather
                             name={
-                                openModalCycles ? appIcons.ic_chevron_up : appIcons.ic_chevron_down
+                                openModalRound ? appIcons.ic_chevron_up : appIcons.ic_chevron_down
                             }
                             size={getSize.m(14)}
-                            color={openModalCycles ? appColors.blue_light : appColors.light_gray}
+                            color={openModalRound ? appColors.blue_light : appColors.light_gray}
                             style={styles.chevron_down}
                         />
                     </TouchableOpacity>
-                    {openModalCycles && (
+                    {openModalRound && (
                         <View style={[styles.drop_down_calender, { width: '80%' }]}>
                             <ScrollView showsVerticalScrollIndicator={false} nestedScrollEnabled>
                                 {selectCycle?.rounds.map((round, index) => {
