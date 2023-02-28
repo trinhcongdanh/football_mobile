@@ -52,6 +52,9 @@ export enum ScreenName {
 export enum LeagueQueryKey {
     GetLeagueTypes = 'get-league-types',
 }
+export enum CupQueryKey {
+    GetCups = 'get-cups',
+}
 
 export enum LeagueSeasonQueryKey {
     GetLeagueSeason = 'get-league-season',
