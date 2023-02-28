@@ -14,7 +14,7 @@ export const Item13 = () => {
             <View
                 style={[
                     appStyles.flex_row_space_center,
-                    { marginTop: getSize.m(30), marginHorizontal: getSize.m(25) },
+                    { marginTop: getSize.m(30), marginHorizontal: getSize.m(16) },
                 ]}
             >
                 <Text style={styles.header}>ההתאחדות באינסטגרם</Text>

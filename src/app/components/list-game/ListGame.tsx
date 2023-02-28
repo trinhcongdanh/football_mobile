@@ -27,11 +27,12 @@ export const ListGame = ({
     handleDetailMatch,
     isLive,
     handleStadium,
+    style,
 }: IListGameProps) => {
     const { t } = useTranslation();
 
     return (
-        <View style={styles.main_schedule}>
+        <View style={[styles.main_schedule, style]}>
             {tournament && (
                 <TouchableOpacity
                     onPress={handleDetailMatch}
@@ -88,19 +89,57 @@ export const ListGame = ({
                         { marginLeft: getSize.m(24), marginRight: getSize.m(10) },
                     ]}
                 >
-                    <Text
-                        style={[
-                            styles.date,
-                            {
-                                color:
-                                    result !== null
-                                        ? appColors.soft_grey
-                                        : appColors.text_dark_blue,
-                            },
-                        ]}
-                    >
-                        {date}
-                    </Text>
+                    <View style={appStyles.flex_row_align}>
+                        <Text
+                            style={[
+                                styles.date,
+                                {
+                                    color:
+                                        result !== null
+                                            ? appColors.soft_grey
+                                            : appColors.text_dark_blue,
+                                },
+                            ]}
+                        >
+                            {date}
+                        </Text>
+                        {tournament && (
+                            <View style={appStyles.flex_row_align}>
+                                <View>
+                                    <Text
+                                        style={[
+                                            styles.date,
+                                            {
+                                                color:
+                                                    result !== null
+                                                        ? appColors.soft_grey
+                                                        : appColors.text_dark_blue,
+                                                marginHorizontal: getSize.m(4),
+                                            },
+                                        ]}
+                                    >
+                                        |
+                                    </Text>
+                                </View>
+                                <View>
+                                    <Text
+                                        style={[
+                                            styles.date,
+                                            {
+                                                color:
+                                                    result !== null
+                                                        ? appColors.soft_grey
+                                                        : appColors.text_dark_blue,
+                                            },
+                                        ]}
+                                    >
+                                        {schedule}
+                                    </Text>
+                                </View>
+                            </View>
+                        )}
+                    </View>
+
                     <TouchableOpacity
                         onPress={handleStadium}
                         style={[appStyles.flex_row_align, { flex: 0 }]}
@@ -184,6 +223,9 @@ export const ListGame = ({
                         >
                             - : -
                         </Text>
+                    )}
+                    {!isLive && result === null && schedule !== null && tournament && (
+                        <Text style={styles.score}>V S</Text>
                     )}
                     {!isLive && result === null && schedule !== null && (
                         <Text style={styles.score}>{schedule}</Text>
