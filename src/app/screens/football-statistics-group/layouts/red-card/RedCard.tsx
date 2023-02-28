@@ -1,19 +1,20 @@
-import React from 'react';
-import { View, Text, TouchableOpacity, Image } from 'react-native';
+import { appIcons } from '@football/app/assets/icons/appIcons';
+import { AppImages } from '@football/app/assets/images';
+import { appColors } from '@football/app/utils/constants/appColors';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import { getSize } from '@football/app/utils/responsive/scale';
-import Icon from 'react-native-vector-icons/Feather';
-import { appIcons } from '@football/app/assets/icons/appIcons';
-import { appColors } from '@football/app/utils/constants/appColors';
-import { AppImages } from '@football/app/assets/images';
+import React from 'react';
+import { Text, TouchableOpacity, View } from 'react-native';
 import { Avatar } from 'react-native-elements';
-import styles from './RedCard.style';
-import { useViewModel } from './RedCard.viewModel';
-import LinearGradient from 'react-native-linear-gradient';
 import FastImage from 'react-native-fast-image';
+import LinearGradient from 'react-native-linear-gradient';
+import Icon from 'react-native-vector-icons/Feather';
+import styles from './RedCard.style';
+import { IRedCardProps } from './RedCard.type';
+import { useViewModel } from './RedCard.viewModel';
 
-export const RedCard = () => {
-    const { t, listPlayerGoal } = useViewModel({});
+export const RedCard = ({ listGames }: IRedCardProps) => {
+    const { t } = useViewModel();
     return (
         <View style={appStyles.item_statistics}>
             <View style={[appStyles.flex_row_space_center]}>
@@ -55,15 +56,15 @@ export const RedCard = () => {
                 </View>
             </View>
             <View style={{ marginTop: getSize.m(10) }}>
-                {listPlayerGoal.map(item => {
+                {listGames.map((item, index) => {
                     return (
                         <LinearGradient
-                            key={item.id}
+                            key={item.player_id}
                             start={{ x: 0, y: 0 }}
                             end={{ x: 1, y: 1 }}
                             colors={[
-                                item.id % 2 === 1 ? 'rgba(16, 32, 100, 0.04)' : appColors.gray,
-                                item.id % 2 === 1 ? 'rgba(59, 168, 225, 0.04)' : appColors.gray,
+                                index % 2 === 0 ? 'rgba(16, 32, 100, 0.04)' : appColors.gray,
+                                index % 2 !== 0 ? 'rgba(59, 168, 225, 0.04)' : appColors.gray,
                             ]}
                             style={[appStyles.flex_row_space_center, appStyles.statistic_row]}
                         >
@@ -73,7 +74,8 @@ export const RedCard = () => {
                                         flexDirection: 'row',
                                     }}
                                 >
-                                    <Avatar source={item.avt} rounded size={18} />
+                                    <Avatar source={{ uri: item.image_url }} rounded size={18} />
+
                                     <Text
                                         style={[
                                             appStyles.statistics_content,
@@ -83,7 +85,7 @@ export const RedCard = () => {
                                             },
                                         ]}
                                     >
-                                        {item.name}
+                                        {item.name_he}
                                     </Text>
                                 </View>
                             </View>
@@ -102,7 +104,7 @@ export const RedCard = () => {
                                         { fontSize: getSize.m(14), color: appColors.white },
                                     ]}
                                 >
-                                    {item.red}
+                                    {item.num_of_cards}
                                 </Text>
                             </View>
                         </LinearGradient>

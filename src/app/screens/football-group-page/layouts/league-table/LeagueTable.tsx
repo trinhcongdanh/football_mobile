@@ -33,7 +33,7 @@ export const LeagueTable = ({ teamSeason }: ILeagueTableProps) => {
     } = useViewModel({ teamSeason });
     return (
         <>
-            <View>
+            <View style={[appStyles.package, { backgroundColor: appColors.white }]}>
                 {openModalCycle && (
                     <DropDown
                         data={cycles}

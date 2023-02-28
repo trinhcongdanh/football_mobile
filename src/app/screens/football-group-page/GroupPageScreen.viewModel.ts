@@ -109,8 +109,8 @@ export const useViewModel = ({ navigation, route }: IGroupPageScreenProps) => {
         setShowInfo(!showInfo);
     };
 
-    const handleMoreStatistics = () => {
-        navigate(ScreenName.StatisticsGroupPage);
+    const handleMoreStatistics = (statisticId: string) => {
+        navigate(ScreenName.StatisticsGroupPage, { statisticId });
     };
 
     const onNavigateStadium = (stadiumId: string) => {

@@ -16,7 +16,7 @@ import { useViewModel } from './StatisticsGroupScreen.viewModel';
 import { IStatisticsGroupScreenProps } from './StatisticsGroupScreen.type';
 
 export const StatisticsGroupScreen = ({ navigation, route }: IStatisticsGroupScreenProps) => {
-    const { t, onGoBack } = useViewModel({
+    const { t, onGoBack, teamSeasonStats } = useViewModel({
         navigation,
         route,
     });
@@ -33,24 +33,32 @@ export const StatisticsGroupScreen = ({ navigation, route }: IStatisticsGroupScr
                             title={t('statistics.group.title')}
                         />
                     </View>
-                    <ScrollView>
-                        <HeaderLogo text="הפועל באר שבע" avt={AppImages.img_aviv} />
-                        <View style={[appStyles.package, { marginTop: getSize.m(0) }]}>
-                            <ScorersOfGoals />
-                        </View>
-                        <View style={appStyles.package}>
-                            <TopScorers />
-                        </View>
-                        <View style={appStyles.package}>
-                            <YellowsCup />
-                        </View>
-                        <View style={appStyles.package}>
-                            <YellowsLeagues />
-                        </View>
-                        <View style={appStyles.package}>
-                            <RedCard />
-                        </View>
-                    </ScrollView>
+                    {teamSeasonStats && (
+                        <ScrollView>
+                            <HeaderLogo
+                                text={teamSeasonStats.team_name_he}
+                                avt={{ uri: teamSeasonStats.team_logo_url }}
+                            />
+                            <View style={[appStyles.package, { marginTop: getSize.m(0) }]}>
+                                <ScorersOfGoals listGames={teamSeasonStats.goal_kickers_league} />
+                            </View>
+                            <View style={appStyles.package}>
+                                <TopScorers listGames={teamSeasonStats.goal_kickers_national_cup} />
+                            </View>
+                            <View style={appStyles.package}>
+                                <YellowsCup listGames={teamSeasonStats.goal_kickers_toto_cup} />
+                            </View>
+                            <View style={appStyles.package}>
+                                <YellowsLeagues listGames={teamSeasonStats.yellow_cards_toto_cup} />
+                            </View>
+                            <View style={appStyles.package}>
+                                <YellowsLeagues listGames={teamSeasonStats.yellow_cards_league} />
+                            </View>
+                            <View style={appStyles.package}>
+                                <RedCard listGames={teamSeasonStats.red_cards} />
+                            </View>
+                        </ScrollView>
+                    )}
                 </SafeAreaView>
             </ImageBackground>
         </View>

@@ -409,9 +409,7 @@ export const GroupPageScreen = ({ navigation, route }: IGroupPageScreenProps) =>
                                     })}
                                 </View>
                             </View>
-                            <View style={[appStyles.package, { backgroundColor: appColors.white }]}>
-                                {teamSeason && <LeagueTable teamSeason={teamSeason} />}
-                            </View>
+                            <View>{teamSeason && <LeagueTable teamSeason={teamSeason} />}</View>
                             <View
                                 style={[
                                     appStyles.package,
@@ -424,11 +422,15 @@ export const GroupPageScreen = ({ navigation, route }: IGroupPageScreenProps) =>
                                 {teamSeason && <Statistics data={teamSeason.statistics} />}
                             </View>
                             <View style={{ marginHorizontal: getSize.m(28) }}>
-                                <Button
-                                    style={{ borderRadius: getSize.m(15) }}
-                                    title={t('group_page.statistics.btn')}
-                                    onPress={handleMoreStatistics}
-                                />
+                                {teamSeason && (
+                                    <Button
+                                        style={{ borderRadius: getSize.m(15) }}
+                                        title={t('group_page.statistics.btn')}
+                                        onPress={() =>
+                                            handleMoreStatistics(teamSeason.team_season_stats_id)
+                                        }
+                                    />
+                                )}
                             </View>
                             <View style={{ height: TAB_BAR_HEIGHT + BOTTOM_SVG_HEIGHT }} />
                         </ScrollView>
