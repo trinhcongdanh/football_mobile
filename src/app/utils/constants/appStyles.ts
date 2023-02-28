@@ -172,6 +172,7 @@ export const appStyles = StyleSheet.create({
 
     top_tap: {
         elevation: 0,
+
         backgroundColor: appColors.gray,
         marginHorizontal: getSize.m(16),
     },

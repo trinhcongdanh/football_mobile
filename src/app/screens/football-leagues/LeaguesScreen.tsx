@@ -13,9 +13,10 @@ import { TextInput } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/Feather';
 import styles from './LeaguesScreen.style';
 import { useViewModel } from './LeaguesScreen.viewModel';
+import { ILeaguesScreenProps } from './LeaguesScreen.type';
 
-export const LeaguesScreen = () => {
-    const { t, labels, onSearchLeague, submitSearchLeague } = useViewModel();
+export const LeaguesScreen = ({ navigation, route }: ILeaguesScreenProps) => {
+    const { t, labels } = useViewModel({ navigation, route });
 
     return (
         <View style={appStyles.flex}>
@@ -38,8 +39,8 @@ export const LeaguesScreen = () => {
                                 placeholder={t('leagues.place_holder')}
                                 style={styles.text_search}
                                 placeholderTextColor={appColors.blue_gray_light}
-                                onChangeText={onSearchLeague}
-                                onBlur={submitSearchLeague}
+                                // onChangeText={onSearchLeague}
+                                // onBlur={submitSearchLeague}
                                 // onSubmitEditing={submitSearchLeague}
                             />
                             <Icon
