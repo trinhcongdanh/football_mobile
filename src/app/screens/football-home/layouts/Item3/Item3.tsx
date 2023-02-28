@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import { appIcons } from '@football/app/assets/icons/appIcons';
 import { AppImages } from '@football/app/assets/images';
 import styles from '@football/app/screens/football-home/layouts/Item3/Item3.style';
@@ -11,9 +12,17 @@ import LinearGradient from 'react-native-linear-gradient';
 import { useViewModel } from '@football/app/screens/football-home/layouts/Item3/Item3.viewModel';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { GameTable1 } from '@football/app/components/game-table-1/GameTable1';
+import { IItem3Props } from './Item3.type';
 
-export const Item3 = () => {
-    const { t, pages, activeIndexNumber, setActiveIndexNumber } = useViewModel({});
+export const Item3 = ({ player }: IItem3Props) => {
+    const {
+        t,
+        pages,
+        activeIndexNumber,
+        setActiveIndexNumber,
+        onClickPlayer,
+        handleDetailMatch,
+    } = useViewModel();
     return (
         <ImageBackground
             source={AppImages.img_background_home_3}
@@ -22,7 +31,7 @@ export const Item3 = () => {
             <View style={appStyles.align_justify}>
                 <View style={styles.logo_team}>
                     <FastImage
-                        source={AppImages.img_avt_player}
+                        source={{ uri: player.image_url }}
                         style={{
                             width: getSize.m(58),
                             height: getSize.m(58),
@@ -31,17 +40,19 @@ export const Item3 = () => {
                     />
                 </View>
                 <View style={[appStyles.flex_row_align, { marginTop: getSize.m(14) }]}>
-                    <Text style={styles.text_details}>דוד קלטינס</Text>
-                    <LinearGradient
-                        colors={['rgba(255, 43, 94, 1)', 'rgba(204, 10, 45, 1)']}
-                        style={styles.icon_arrow_left}
-                    >
-                        <FastImage
-                            source={AppImages.img_angle_down}
-                            style={{ width: getSize.m(9), height: getSize.m(12) }}
-                            resizeMode={FastImage.resizeMode.contain}
-                        />
-                    </LinearGradient>
+                    <Text style={styles.text_details}>{player.name_he}</Text>
+                    <TouchableOpacity onPress={() => onClickPlayer(player._id)}>
+                        <LinearGradient
+                            colors={['rgba(255, 43, 94, 1)', 'rgba(204, 10, 45, 1)']}
+                            style={styles.icon_arrow_left}
+                        >
+                            <FastImage
+                                source={AppImages.img_angle_down}
+                                style={{ width: getSize.m(9), height: getSize.m(12) }}
+                                resizeMode={FastImage.resizeMode.contain}
+                            />
+                        </LinearGradient>
+                    </TouchableOpacity>
                 </View>
             </View>
             <ScrollView
@@ -49,11 +60,11 @@ export const Item3 = () => {
                 pagingEnabled
                 showsHorizontalScrollIndicator={false}
                 onScroll={e => {
-                    let slide = Math.round(
+                    const slide = Math.round(
                         e.nativeEvent.contentOffset.x / e.nativeEvent.layoutMeasurement.width
                     );
                     if (slide !== activeIndexNumber) {
-                        setActiveIndexNumber(slide); //here we will set our active index num
+                        setActiveIndexNumber(slide);
                     }
                 }}
             >
@@ -84,9 +95,14 @@ export const Item3 = () => {
                                 }}
                                 resizeMode={FastImage.resizeMode.contain}
                             />
-                            <Text style={styles.title_statistic}>משחקים בעונה 21/22</Text>
+                            <Text style={styles.title_statistic}>
+                                {player.homepage_info.season_name}
+                            </Text>
                         </View>
-                        <TouchableOpacity style={appStyles.flex_row_align}>
+                        <TouchableOpacity
+                            style={appStyles.flex_row_align}
+                            onPress={() => onClickPlayer(player._id)}
+                        >
                             <Text style={styles.text_see_all}>{t('home_page.see_all')}</Text>
                             <IconEntypo
                                 name={appIcons.ic_arrow_left}
@@ -95,19 +111,25 @@ export const Item3 = () => {
                             />
                         </TouchableOpacity>
                     </View>
-                    <GameTable1
-                        date="14.09.22"
-                        name_away="הפועל ב״ש"
-                        name_home="הפועל ב״ש"
-                        result="3 : 1"
-                        schedule=":"
-                        avt_away={AppImages.img_club}
-                        avt_home={AppImages.img_club}
-                        clock="45 דק׳"
-                        ticket_red="1"
-                        ticket_yellow="2"
-                        score="3"
-                    />
+                    {player.homepage_info.games.map(game => {
+                        return (
+                            <GameTable1
+                                key={game.game_id}
+                                date={game.date}
+                                name_away={game.team2.name_he}
+                                name_home={game.team1.name_he}
+                                result={game.score}
+                                schedule=":"
+                                avt_away={game.team2.logo_url}
+                                avt_home={game.team1.logo_url}
+                                clock={`${game.on_field}`}
+                                ticket_red={`${game.red_cards}`}
+                                ticket_yellow={`${game.yellow_cards}`}
+                                score={`${game.goals}`}
+                                onHandleDetailMatch={() => handleDetailMatch(game.game_id)}
+                            />
+                        );
+                    })}
                 </View>
                 <View
                     style={[
@@ -138,7 +160,10 @@ export const Item3 = () => {
                             />
                             <Text style={styles.title_statistic}>{t('home_page.statistics')}</Text>
                         </View>
-                        <TouchableOpacity style={appStyles.flex_row_align}>
+                        <TouchableOpacity
+                            style={appStyles.flex_row_align}
+                            onPress={() => onClickPlayer(player._id)}
+                        >
                             <Text style={styles.text_see_all}>{t('home_page.see_all')}</Text>
                             <IconEntypo
                                 name={appIcons.ic_arrow_left}
@@ -162,20 +187,33 @@ export const Item3 = () => {
                                 ]}
                             >
                                 <View style={appStyles.align_justify}>
-                                    <Text style={styles.content}>3</Text>
-                                    <Text style={styles.title}>ליגת העל</Text>
+                                    <Text style={styles.content}>
+                                        {player.homepage_info.goals.league_goals}
+                                    </Text>
+                                    <Text style={styles.title}>{t('home_page.league')}</Text>
                                 </View>
                                 <View style={appStyles.align_justify}>
-                                    <Text>-</Text>
-                                    <Text style={styles.title}>גביע המדינה</Text>
+                                    <Text style={styles.content}>
+                                        {player.homepage_info.goals.national_cup_goals}
+                                    </Text>
+                                    <Text style={styles.title}>{t('home_page.state_cup')}</Text>
                                 </View>
                                 <View style={appStyles.align_justify}>
-                                    <Text style={styles.content}>2</Text>
-                                    <Text style={styles.title}>גביע הטוטו</Text>
+                                    <Text style={styles.content}>
+                                        {player.homepage_info.goals.toto_cup_goals}
+                                    </Text>
+                                    <Text style={styles.title}>{t('home_page.toto_cup')}</Text>
+                                </View>
+
+                                <View style={appStyles.align_justify}>
+                                    <Text style={styles.content}>
+                                        {player.homepage_info.goals.total_goals}
+                                    </Text>
+                                    <Text style={styles.title}>{t('home_page.total_goals')}</Text>
                                 </View>
                             </View>
                         </View>
-                        <View style={{ marginTop: getSize.m(20) }}>
+                        {/* <View style={{ marginTop: getSize.m(20) }}>
                             <View style={{ marginLeft: getSize.m(16) }}>
                                 <Text style={styles.label}> {t('home_page.tickets')}</Text>
                             </View>
@@ -198,7 +236,9 @@ export const Item3 = () => {
                                 </View>
                                 <View style={appStyles.align_justify}>
                                     <View style={appStyles.flex_row_align}>
-                                        <Text style={styles.content_ticket}>x2</Text>
+                                        <Text style={styles.content_ticket}>
+                                            x{player.homepage_info.yellow_cards.total_cards}
+                                        </Text>
                                         <FastImage
                                             source={AppImages.img_ticket_red_1}
                                             style={{ width: getSize.m(24), height: getSize.m(27) }}
@@ -209,7 +249,9 @@ export const Item3 = () => {
                                 </View>
                                 <View style={appStyles.align_justify}>
                                     <View style={appStyles.flex_row_align}>
-                                        <Text style={styles.content_ticket}>x2</Text>
+                                        <Text style={styles.content_ticket}>
+                                            x{player.homepage_info.red_cards.total_cards}
+                                        </Text>
                                         <FastImage
                                             source={AppImages.img_ticket_yellow_1}
                                             style={{ width: getSize.m(24), height: getSize.m(27) }}
@@ -219,6 +261,149 @@ export const Item3 = () => {
                                     <Text style={styles.title}>גביע הטוטו</Text>
                                 </View>
                             </View>
+                        </View> */}
+                        <View style={styles.line} />
+                        <View style={{ marginTop: getSize.m(20) }}>
+                            <View style={{ marginLeft: getSize.m(16) }}>
+                                <Text style={styles.label}> {t('home_page.yellow_card')}</Text>
+                            </View>
+                            <View
+                                style={[
+                                    appStyles.flex_row_space_center,
+                                    {
+                                        marginHorizontal: getSize.m(37),
+                                        marginTop: getSize.m(20),
+                                    },
+                                ]}
+                            >
+                                <View style={appStyles.align_justify}>
+                                    <View style={{ marginBottom: getSize.m(3) }}>
+                                        <FastImage
+                                            source={AppImages.img_ticket_yellow}
+                                            resizeMode={FastImage.resizeMode.contain}
+                                            style={styles.ticket}
+                                        />
+                                        <Text style={styles.content_ticket}>
+                                            {player.homepage_info.yellow_cards.league_cards}
+                                        </Text>
+                                    </View>
+                                    <Text style={styles.title}>{t('home_page.league')}</Text>
+                                </View>
+                                <View style={appStyles.align_justify}>
+                                    <View style={{ marginBottom: getSize.m(3) }}>
+                                        <FastImage
+                                            source={AppImages.img_ticket_yellow}
+                                            resizeMode={FastImage.resizeMode.contain}
+                                            style={styles.ticket}
+                                        />
+                                        <Text style={styles.content_ticket}>
+                                            {player.homepage_info.yellow_cards.national_cup_cards}
+                                        </Text>
+                                    </View>
+                                    <Text style={styles.title}>{t('home_page.state_cup')}</Text>
+                                </View>
+                                <View style={appStyles.align_justify}>
+                                    <View style={{ marginBottom: getSize.m(3) }}>
+                                        <FastImage
+                                            source={AppImages.img_ticket_yellow}
+                                            resizeMode={FastImage.resizeMode.contain}
+                                            style={styles.ticket}
+                                        />
+                                        <Text style={styles.content_ticket}>
+                                            {player.homepage_info.yellow_cards.toto_cup_cards}
+                                        </Text>
+                                    </View>
+                                    <Text style={styles.title}>{t('home_page.toto_cup')}</Text>
+                                </View>
+                                <View style={appStyles.align_justify}>
+                                    <Text style={styles.content}>
+                                        {player.homepage_info.yellow_cards.total_cards}
+                                    </Text>
+                                    <Text style={styles.title}>{t('home_page.total')}</Text>
+                                </View>
+                            </View>
+                        </View>
+                        <View style={styles.line} />
+                        <View style={{ marginTop: getSize.m(20) }}>
+                            <View style={{ marginLeft: getSize.m(16) }}>
+                                <Text style={styles.label}> {t('home_page.red_card')}</Text>
+                            </View>
+                            <View
+                                style={[
+                                    appStyles.flex_row_space_center,
+                                    {
+                                        marginHorizontal: getSize.m(37),
+                                        marginTop: getSize.m(20),
+                                    },
+                                ]}
+                            >
+                                <View style={appStyles.align_justify}>
+                                    <View style={{ marginBottom: getSize.m(3) }}>
+                                        <FastImage
+                                            source={AppImages.img_ticket_red}
+                                            resizeMode={FastImage.resizeMode.contain}
+                                            style={styles.ticket}
+                                        />
+                                        <Text
+                                            style={[
+                                                styles.content_ticket,
+                                                {
+                                                    color: appColors.white,
+                                                },
+                                            ]}
+                                        >
+                                            {player.homepage_info.red_cards.league_cards}
+                                        </Text>
+                                    </View>
+                                    <Text style={styles.title}>{t('home_page.league')}</Text>
+                                </View>
+                                <View style={appStyles.align_justify}>
+                                    <View style={{ marginBottom: getSize.m(3) }}>
+                                        <FastImage
+                                            source={AppImages.img_ticket_red}
+                                            resizeMode={FastImage.resizeMode.contain}
+                                            style={styles.ticket}
+                                        />
+                                        <Text
+                                            style={[
+                                                styles.content_ticket,
+                                                {
+                                                    color: appColors.white,
+                                                },
+                                            ]}
+                                        >
+                                            {player.homepage_info.red_cards.national_cup_cards}
+                                        </Text>
+                                    </View>
+                                    <Text style={styles.title}>{t('home_page.state_cup')}</Text>
+                                </View>
+                                <View style={appStyles.align_justify}>
+                                    <View style={{ marginBottom: getSize.m(3) }}>
+                                        <FastImage
+                                            source={AppImages.img_ticket_red}
+                                            resizeMode={FastImage.resizeMode.contain}
+                                            style={styles.ticket}
+                                        />
+                                        <Text
+                                            style={[
+                                                styles.content_ticket,
+                                                {
+                                                    color: appColors.white,
+                                                },
+                                            ]}
+                                        >
+                                            {player.homepage_info.red_cards.toto_cup_cards}
+                                        </Text>
+                                    </View>
+                                    <Text style={styles.title}>{t('home_page.toto_cup')}</Text>
+                                </View>
+                                <View style={appStyles.align_justify}>
+                                    <Text style={styles.content}>
+                                        {player.homepage_info.red_cards.total_cards}
+                                    </Text>
+                                    <Text style={styles.title}>{t('home_page.total')}</Text>
+                                </View>
+                            </View>
                         </View>
                     </View>
                 </View>
@@ -226,6 +411,7 @@ export const Item3 = () => {
             <View style={styles.dotContainer}>
                 {pages.map((_, index) => {
                     return (
+                        // eslint-disable-next-line react/no-array-index-key
                         <View key={index}>
                             <View
                                 style={[
@@ -241,7 +427,7 @@ export const Item3 = () => {
                                                 : appColors.soft_grey,
                                     },
                                 ]}
-                            ></View>
+                            />
                         </View>
                     );
                 })}

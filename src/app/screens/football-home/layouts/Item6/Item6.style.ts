@@ -20,6 +20,22 @@ const styles = StyleSheet.create({
         lineHeight: getSize.m(16),
         color: appColors.button_dark_blue,
     },
+    option: {
+        backgroundColor: appColors.separator,
+        borderRadius: getSize.m(30),
+        paddingVertical: getSize.m(4),
+        marginHorizontal: getSize.m(10),
+    },
+    button_option_dark: {
+        paddingHorizontal: getSize.m(30),
+        paddingVertical: getSize.m(10),
+        borderRadius: getSize.m(30),
+    },
+    text_option: {
+        fontFamily: AppFonts.regular,
+        lineHeight: getSize.m(22),
+        textAlign: 'center',
+    },
 });
 
 export default styles;

@@ -1,1 +1,5 @@
-export type IItem9Props = {};
+import { HomePageModel } from '@football/core/models/HomePageModelResponse';
+
+export type IItem9Props = {
+    homePage: HomePageModel;
+};

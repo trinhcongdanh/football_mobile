@@ -6,9 +6,10 @@ import Icon from 'react-native-vector-icons/Feather';
 import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { appIcons } from '@football/app/assets/icons/appIcons';
 import { appColors } from '@football/app/utils/constants/appColors';
+import { IItem9Props } from '@football/app/screens/football-home/layouts/Item9/Item9.type';
 
-export const Item9 = () => {
-    const { t, pages, activeIndexNumber, setActiveIndexNumber, data, dots } = useViewModel({});
+export const Item9 = ({ homePage }: IItem9Props) => {
+    const { t, pages, activeIndexNumber, setActiveIndexNumber, data, dots } = useViewModel();
     return (
         <View style={styles.container}>
             <View style={{ marginVertical: getSize.m(20), marginLeft: getSize.m(18) }}>

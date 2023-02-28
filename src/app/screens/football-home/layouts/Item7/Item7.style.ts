@@ -8,6 +8,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(34, 34, 50, 0.15)',
         height: getSize.m(268),
         paddingBottom: getSize.m(20),
+        paddingTop: getSize.m(20),
         paddingHorizontal: getSize.m(14),
         justifyContent: 'center',
         alignItems: 'center',

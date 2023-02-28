@@ -3,20 +3,20 @@ import { AppImages } from '@football/app/assets/images';
 import styles from '@football/app/screens/football-home/layouts/Item7/Item7.style';
 import { useViewModel } from '@football/app/screens/football-home/layouts/Item7/Item7.viewModel';
 import { appColors } from '@football/app/utils/constants/appColors';
-import { appStyles } from '@football/app/utils/constants/appStyles';
-import IconEntypo from 'react-native-vector-icons/Entypo';
 import { getSize } from '@football/app/utils/responsive/scale';
 import React from 'react';
-import { ImageBackground, Text, TouchableOpacity, View } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
 import FastImage from 'react-native-fast-image';
+import IconEntypo from 'react-native-vector-icons/Entypo';
+import { IItem7Props } from './Item7.type';
 
-export const Item7 = () => {
-    const { t, pages, activeIndexNumber, setActiveIndexNumber } = useViewModel({});
+export const Item7 = ({ homePage }: IItem7Props) => {
+    const { t, pages, activeIndexNumber, setActiveIndexNumber } = useViewModel();
     return (
         <View style={styles.container}>
             <View>
                 <FastImage
-                    source={AppImages.img_mask_group}
+                    source={{ uri: homePage.ads.image_url }}
                     style={{
                         width: getSize.m(347),
                         height: getSize.m(247),
@@ -24,11 +24,11 @@ export const Item7 = () => {
                     }}
                     resizeMode={FastImage.resizeMode.contain}
                 />
-                <FastImage
+                {/* <FastImage
                     resizeMode={FastImage.resizeMode.contain}
                     source={AppImages.img_logo_player}
                     style={styles.logo_player}
-                />
+                /> */}
                 <View style={styles.main}>
                     <Text style={styles.title}>אחריות חברתית</Text>
                     <Text style={styles.content}>

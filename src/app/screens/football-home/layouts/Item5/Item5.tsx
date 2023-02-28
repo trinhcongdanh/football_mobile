@@ -1,21 +1,33 @@
+/* eslint-disable no-underscore-dangle */
+import { AppFonts } from '@football/app/assets/fonts';
 import { appIcons } from '@football/app/assets/icons/appIcons';
 import { AppImages } from '@football/app/assets/images';
+import { GameTable } from '@football/app/components/game_table/GameTable';
+import { ListGame } from '@football/app/components/list-game/ListGame';
 import styles from '@football/app/screens/football-home/layouts/Item5/Item5.style';
-import { appStyles } from '@football/app/utils/constants/appStyles';
-import { getSize } from '@football/app/utils/responsive/scale';
-import React from 'react';
-import { ImageBackground, Text, View, TouchableOpacity, ScrollView } from 'react-native';
-import IconEntypo from 'react-native-vector-icons/Entypo';
-import FastImage from 'react-native-fast-image';
-import LinearGradient from 'react-native-linear-gradient';
 import { useViewModel } from '@football/app/screens/football-home/layouts/Item5/Item5.viewModel';
 import { appColors } from '@football/app/utils/constants/appColors';
+import { appStyles } from '@football/app/utils/constants/appStyles';
+import { getSize } from '@football/app/utils/responsive/scale';
+import moment from 'moment';
+import React from 'react';
+import { ImageBackground, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { Avatar } from 'react-native-elements';
-import { AppFonts } from '@football/app/assets/fonts';
-import { GameTable } from '@football/app/components/game_table/GameTable';
+import FastImage from 'react-native-fast-image';
+import LinearGradient from 'react-native-linear-gradient';
+import IconEntypo from 'react-native-vector-icons/Entypo';
+import { IItem5Props } from './Item5.type';
 
-export const Item5 = () => {
-    const { t, pages, activeIndexNumber, setActiveIndexNumber, data_stats } = useViewModel({});
+export const Item5 = ({ topTeam }: IItem5Props) => {
+    const {
+        t,
+        pages,
+        activeIndexNumber,
+        setActiveIndexNumber,
+        handleStadium,
+        onClickTopTeam,
+        handleDetailMatch,
+    } = useViewModel();
     return (
         <ImageBackground
             source={AppImages.img_background_home_4}
@@ -24,7 +36,7 @@ export const Item5 = () => {
             <View style={appStyles.align_justify}>
                 <View style={styles.logo_team}>
                     <FastImage
-                        source={AppImages.img_avt_player}
+                        source={{ uri: topTeam.logo_url }}
                         style={{
                             width: getSize.m(58),
                             height: getSize.m(58),
@@ -33,17 +45,19 @@ export const Item5 = () => {
                     />
                 </View>
                 <View style={[appStyles.flex_row_align, { marginTop: getSize.m(14) }]}>
-                    <Text style={styles.text_details}>נבחרת לאומית גברים</Text>
-                    <LinearGradient
-                        colors={['rgba(255, 43, 94, 1)', 'rgba(204, 10, 45, 1)']}
-                        style={styles.icon_arrow_left}
-                    >
-                        <FastImage
-                            source={AppImages.img_angle_down}
-                            style={{ width: getSize.m(9), height: getSize.m(12) }}
-                            resizeMode={FastImage.resizeMode.contain}
-                        />
-                    </LinearGradient>
+                    <Text style={styles.text_details}>{topTeam.name_he}</Text>
+                    <TouchableOpacity onPress={() => onClickTopTeam(topTeam._id)}>
+                        <LinearGradient
+                            colors={['rgba(255, 43, 94, 1)', 'rgba(204, 10, 45, 1)']}
+                            style={styles.icon_arrow_left}
+                        >
+                            <FastImage
+                                source={AppImages.img_angle_down}
+                                style={{ width: getSize.m(9), height: getSize.m(12) }}
+                                resizeMode={FastImage.resizeMode.contain}
+                            />
+                        </LinearGradient>
+                    </TouchableOpacity>
                 </View>
             </View>
             <ScrollView
@@ -51,11 +65,11 @@ export const Item5 = () => {
                 pagingEnabled
                 showsHorizontalScrollIndicator={false}
                 onScroll={e => {
-                    let slide = Math.round(
+                    const slide = Math.round(
                         e.nativeEvent.contentOffset.x / e.nativeEvent.layoutMeasurement.width
                     );
                     if (slide !== activeIndexNumber) {
-                        setActiveIndexNumber(slide); //here we will set our active index num
+                        setActiveIndexNumber(slide); // here we will set our active index num
                     }
                 }}
             >
@@ -88,7 +102,10 @@ export const Item5 = () => {
                             />
                             <Text style={styles.title_statistic}>{t('home_page.statistics')}</Text>
                         </View>
-                        <TouchableOpacity style={appStyles.flex_row_align}>
+                        <TouchableOpacity
+                            style={appStyles.flex_row_align}
+                            onPress={() => onClickTopTeam(topTeam._id)}
+                        >
                             <Text style={styles.text_see_all}>{t('home_page.see_all')}</Text>
                             <IconEntypo
                                 name={appIcons.ic_arrow_left}
@@ -140,17 +157,17 @@ export const Item5 = () => {
                                     marginTop: getSize.m(13),
                                 }}
                             >
-                                {data_stats.map(item => {
+                                {topTeam?.homepage_info?.goal_kickers.map((item, index) => {
                                     return (
                                         <LinearGradient
-                                            key={item.id}
+                                            key={item.player_id}
                                             start={{ x: 0, y: 0 }}
                                             end={{ x: 1, y: 1 }}
                                             colors={[
-                                                item.id % 2 === 1
+                                                index % 2 === 0
                                                     ? 'rgba(16, 32, 100, 0.04)'
                                                     : appColors.white,
-                                                item.id % 2 === 1
+                                                index % 2 !== 0
                                                     ? 'rgba(59, 168, 225, 0.04)'
                                                     : appColors.white,
                                             ]}
@@ -176,7 +193,7 @@ export const Item5 = () => {
                                                     }}
                                                 >
                                                     <Avatar
-                                                        source={item.avt}
+                                                        source={{ uri: item.player_image_url }}
                                                         rounded
                                                         size={getSize.m(20)}
                                                     />
@@ -188,7 +205,7 @@ export const Item5 = () => {
                                                             },
                                                         ]}
                                                     >
-                                                        {item.gates}
+                                                        {item.player_name_he}
                                                     </Text>
                                                 </View>
                                             </View>
@@ -200,9 +217,9 @@ export const Item5 = () => {
                                                 )}
                                             </View>
                                             <View style={{ width: getSize.m(50) }}>
-                                                {item.gate !== null && (
+                                                {item.goals !== null && (
                                                     <Text style={styles.statistics_content}>
-                                                        {item.gate}
+                                                        {item.goals}
                                                     </Text>
                                                 )}
                                             </View>
@@ -244,17 +261,17 @@ export const Item5 = () => {
                                     marginTop: getSize.m(13),
                                 }}
                             >
-                                {data_stats.map(item => {
+                                {topTeam?.homepage_info?.cards.map((item, index) => {
                                     return (
                                         <LinearGradient
-                                            key={item.id}
+                                            key={item.player_id}
                                             start={{ x: 0, y: 0 }}
                                             end={{ x: 1, y: 1 }}
                                             colors={[
-                                                item.id % 2 === 1
+                                                index % 2 === 0
                                                     ? 'rgba(16, 32, 100, 0.04)'
                                                     : appColors.white,
-                                                item.id % 2 === 1
+                                                index % 2 !== 0
                                                     ? 'rgba(59, 168, 225, 0.04)'
                                                     : appColors.white,
                                             ]}
@@ -280,7 +297,7 @@ export const Item5 = () => {
                                                     }}
                                                 >
                                                     <Avatar
-                                                        source={item.avt}
+                                                        source={{ uri: item.player_image_url }}
                                                         rounded
                                                         size={getSize.m(20)}
                                                     />
@@ -292,12 +309,12 @@ export const Item5 = () => {
                                                             },
                                                         ]}
                                                     >
-                                                        {item.gates}
+                                                        {item.player_name_he}
                                                     </Text>
                                                 </View>
                                             </View>
                                             <View style={{ width: getSize.m(50) }}>
-                                                {item.games !== null && (
+                                                {item.yellow_cards !== null && (
                                                     <View>
                                                         <FastImage
                                                             source={AppImages.img_ticket_yellow}
@@ -307,13 +324,13 @@ export const Item5 = () => {
                                                             }
                                                         />
                                                         <Text style={styles.statistics_content}>
-                                                            {item.games}
+                                                            {item.yellow_cards}
                                                         </Text>
                                                     </View>
                                                 )}
                                             </View>
                                             <View style={{ width: getSize.m(50) }}>
-                                                {item.gate !== null && (
+                                                {item.red_cards !== null && (
                                                     <View>
                                                         <FastImage
                                                             source={AppImages.img_ticket_red}
@@ -330,7 +347,7 @@ export const Item5 = () => {
                                                                 },
                                                             ]}
                                                         >
-                                                            {item.gate}
+                                                            {item.red_cards}
                                                         </Text>
                                                     </View>
                                                 )}
@@ -381,7 +398,7 @@ export const Item5 = () => {
                             />
                         </TouchableOpacity>
                     </View>
-                    <GameTable
+                    {/* <GameTable
                         date="יום רביעי | 13/09/22"
                         avt_away={AppImages.img_club}
                         avt_home={AppImages.img_club}
@@ -390,12 +407,41 @@ export const Item5 = () => {
                         name_home="מכבי תל אביב"
                         result="3 : 1"
                         schedule="11:30"
-                    />
+                    /> */}
+
+                    {topTeam.homepage_info.games.map(item => {
+                        return (
+                            <ListGame
+                                key={item.game_id}
+                                logo_home={item.team1.logo_url}
+                                logo_away={item.team2.logo_url}
+                                nameHome={item.team1.name_he}
+                                nameAway={item.team2.name_he}
+                                location={item.stadium_he}
+                                date={item.date}
+                                result={item.score}
+                                schedule={item.time}
+                                // completed={item.completed}
+                                color={appColors.text_dark_blue}
+                                handleDetailMatch={() => handleDetailMatch(item.game_id)}
+                                handleStadium={() => handleStadium(item.stadium_id)}
+                                isLive={moment().isBetween(
+                                    moment(`${item.date} ${item.time}`, 'DD.M.YY HH:mm'),
+                                    moment(`${item.date} ${item.time}`, 'DD.M.YY HH:mm').add(
+                                        2,
+                                        'hours'
+                                    )
+                                )}
+                                style={{ marginTop: getSize.m(12) }}
+                            />
+                        );
+                    })}
                 </View>
             </ScrollView>
             <View style={styles.dotContainer}>
                 {pages.map((_, index) => {
                     return (
+                        // eslint-disable-next-line react/no-array-index-key
                         <View key={index}>
                             <View
                                 style={[
@@ -411,7 +457,7 @@ export const Item5 = () => {
                                                 : appColors.soft_grey,
                                     },
                                 ]}
-                            ></View>
+                            />
                         </View>
                     );
                 })}

@@ -10,4 +10,5 @@ export type IGameTable1Props = {
     ticket_red: string;
     ticket_yellow: string;
     score: string;
+    onHandleDetailMatch: any;
 };

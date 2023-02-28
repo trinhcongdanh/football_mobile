@@ -1,23 +1,30 @@
 import { AppFonts } from '@football/app/assets/fonts';
 import { appIcons } from '@football/app/assets/icons/appIcons';
 import { AppImages } from '@football/app/assets/images';
+import { ListGame } from '@football/app/components/list-game/ListGame';
 import styles from '@football/app/screens/football-home/layouts/Item1/Item1.style';
 import { useViewModel } from '@football/app/screens/football-home/layouts/Item1/Item1.viewModel';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { appStyles } from '@football/app/utils/constants/appStyles';
-import IconEntypo from 'react-native-vector-icons/Entypo';
-import IconEvilIcons from 'react-native-vector-icons/EvilIcons';
-import IconFeather from 'react-native-vector-icons/Feather';
 import { getSize } from '@football/app/utils/responsive/scale';
+import moment from 'moment';
 import React from 'react';
-import { View, ImageBackground, Text, TouchableOpacity, ScrollView } from 'react-native';
+import { ImageBackground, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { Avatar } from 'react-native-elements';
 import FastImage from 'react-native-fast-image';
 import LinearGradient from 'react-native-linear-gradient';
-import { GameTable } from '@football/app/components/game_table/GameTable';
+import IconEntypo from 'react-native-vector-icons/Entypo';
+import { IItem1Props } from './Item1.type';
 
-export const Item1 = () => {
-    const { t, pages, activeIndexNumber, setActiveIndexNumber, data_stats } = useViewModel({});
+export const Item1 = ({ team }: IItem1Props) => {
+    const {
+        t,
+        pages,
+        activeIndexNumber,
+        setActiveIndexNumber,
+        handleStadium,
+        handleDetailMatch,
+    } = useViewModel();
     return (
         <ImageBackground
             source={AppImages.img_background_home_1}
@@ -26,7 +33,7 @@ export const Item1 = () => {
             <View style={appStyles.align_justify}>
                 <View style={styles.logo_team}>
                     <FastImage
-                        source={AppImages.img_israel}
+                        source={{ uri: team.logo_url }}
                         style={{
                             width: getSize.m(58),
                             height: getSize.m(58),
@@ -35,7 +42,7 @@ export const Item1 = () => {
                     />
                 </View>
                 <View style={[appStyles.flex_row_align, { marginTop: getSize.m(14) }]}>
-                    <Text style={styles.text_details}>הפועל באר שבע בוגרים</Text>
+                    <Text style={styles.text_details}>{team.name_he}</Text>
                     <LinearGradient
                         colors={['rgba(255, 43, 94, 1)', 'rgba(204, 10, 45, 1)']}
                         style={styles.icon_arrow_left}
@@ -53,11 +60,11 @@ export const Item1 = () => {
                 pagingEnabled
                 showsHorizontalScrollIndicator={false}
                 onScroll={e => {
-                    let slide = Math.round(
+                    const slide = Math.round(
                         e.nativeEvent.contentOffset.x / e.nativeEvent.layoutMeasurement.width
                     );
                     if (slide !== activeIndexNumber) {
-                        setActiveIndexNumber(slide); //here we will set our active index num
+                        setActiveIndexNumber(slide); // here we will set our active index num
                     }
                 }}
             >
@@ -151,17 +158,17 @@ export const Item1 = () => {
                                 marginTop: getSize.m(13),
                             }}
                         >
-                            {data_stats.map(item => {
+                            {team.homepage_info.goal_kickers.map((item, index) => {
                                 return (
                                     <LinearGradient
-                                        key={item.id}
+                                        key={item.player_id}
                                         start={{ x: 0, y: 0 }}
                                         end={{ x: 1, y: 1 }}
                                         colors={[
-                                            item.id % 2 === 1
+                                            index % 2 === 0
                                                 ? 'rgba(223, 36, 56, 0.03)'
                                                 : appColors.white,
-                                            item.id % 2 === 1
+                                            index % 2 !== 0
                                                 ? 'rgba(207, 59, 61, 0.03)'
                                                 : appColors.white,
                                         ]}
@@ -187,7 +194,7 @@ export const Item1 = () => {
                                                 }}
                                             >
                                                 <Avatar
-                                                    source={item.avt}
+                                                    source={{ uri: item.player_image_url }}
                                                     rounded
                                                     size={getSize.m(20)}
                                                 />
@@ -199,14 +206,14 @@ export const Item1 = () => {
                                                         },
                                                     ]}
                                                 >
-                                                    {item.gates}
+                                                    {item.player_name_he}
                                                 </Text>
                                             </View>
                                         </View>
                                         <View style={{ width: getSize.m(40) }}>
-                                            {item.league !== null ? (
+                                            {item.league_goals !== null ? (
                                                 <Text style={styles.statistics_content}>
-                                                    {item.league}
+                                                    {item.league_goals}
                                                 </Text>
                                             ) : (
                                                 <Text
@@ -222,9 +229,9 @@ export const Item1 = () => {
                                             )}
                                         </View>
                                         <View style={{ width: getSize.m(40) }}>
-                                            {item.third_country !== null ? (
+                                            {item.national_cup_goals !== null ? (
                                                 <Text style={styles.statistics_content}>
-                                                    {item.third_country}
+                                                    {item.national_cup_goals}
                                                 </Text>
                                             ) : (
                                                 <Text
@@ -240,9 +247,9 @@ export const Item1 = () => {
                                             )}
                                         </View>
                                         <View style={{ width: getSize.m(40) }}>
-                                            {item.third_tutu !== null ? (
+                                            {item.toto_cup_goals !== null ? (
                                                 <Text style={styles.statistics_content}>
-                                                    {item.third_tutu}
+                                                    {item.toto_cup_goals}
                                                 </Text>
                                             ) : (
                                                 <Text
@@ -259,7 +266,7 @@ export const Item1 = () => {
                                         </View>
                                         <View style={{ width: getSize.m(40) }}>
                                             <Text style={styles.statistics_content}>
-                                                {item.total}
+                                                {item.total_goals}
                                             </Text>
                                         </View>
                                     </LinearGradient>
@@ -319,15 +326,25 @@ export const Item1 = () => {
                                 marginTop: getSize.m(13),
                             }}
                         >
-                            {data_stats.map(item => {
+                            {team.homepage_info.yellow_cards?.map((item, index) => {
                                 return (
-                                    <View
-                                        key={item.id}
+                                    <LinearGradient
+                                        key={item.player_id}
+                                        start={{ x: 0, y: 0 }}
+                                        end={{ x: 1, y: 1 }}
+                                        colors={[
+                                            index % 2 === 0
+                                                ? 'rgba(223, 36, 56, 0.03)'
+                                                : appColors.white,
+                                            index % 2 !== 0
+                                                ? 'rgba(207, 59, 61, 0.03)'
+                                                : appColors.white,
+                                        ]}
                                         style={[
                                             appStyles.flex_row_space_center,
                                             appStyles.statistic_row,
                                             {
-                                                paddingVertical: getSize.m(5),
+                                                paddingVertical: getSize.m(7),
                                             },
                                         ]}
                                     >
@@ -345,7 +362,7 @@ export const Item1 = () => {
                                                 }}
                                             >
                                                 <Avatar
-                                                    source={item.avt}
+                                                    source={{ uri: item.player_image_url }}
                                                     rounded
                                                     size={getSize.m(20)}
                                                 />
@@ -357,12 +374,12 @@ export const Item1 = () => {
                                                         },
                                                     ]}
                                                 >
-                                                    {item.gates}
+                                                    {item.player_name_he}
                                                 </Text>
                                             </View>
                                         </View>
                                         <View style={{ width: getSize.m(40) }}>
-                                            {item.league !== null ? (
+                                            {item.league_cards !== null ? (
                                                 <View>
                                                     <FastImage
                                                         source={AppImages.img_ticket_yellow}
@@ -370,7 +387,7 @@ export const Item1 = () => {
                                                         resizeMode={FastImage.resizeMode.contain}
                                                     />
                                                     <Text style={styles.statistics_content}>
-                                                        {item.league}
+                                                        {item.league_cards}
                                                     </Text>
                                                 </View>
                                             ) : (
@@ -382,7 +399,7 @@ export const Item1 = () => {
                                             )}
                                         </View>
                                         <View style={{ width: getSize.m(40) }}>
-                                            {item.third_country !== null ? (
+                                            {item.national_cup_cards !== null ? (
                                                 <View>
                                                     <FastImage
                                                         source={AppImages.img_ticket_yellow}
@@ -390,7 +407,7 @@ export const Item1 = () => {
                                                         resizeMode={FastImage.resizeMode.contain}
                                                     />
                                                     <Text style={styles.statistics_content}>
-                                                        {item.third_country}
+                                                        {item.national_cup_cards}
                                                     </Text>
                                                 </View>
                                             ) : (
@@ -402,7 +419,7 @@ export const Item1 = () => {
                                             )}
                                         </View>
                                         <View style={{ width: getSize.m(40) }}>
-                                            {item.third_tutu !== null ? (
+                                            {item.toto_cup_cards !== null ? (
                                                 <View>
                                                     <FastImage
                                                         source={AppImages.img_ticket_yellow}
@@ -410,7 +427,7 @@ export const Item1 = () => {
                                                         resizeMode={FastImage.resizeMode.contain}
                                                     />
                                                     <Text style={styles.statistics_content}>
-                                                        {item.third_tutu}
+                                                        {item.toto_cup_cards}
                                                     </Text>
                                                 </View>
                                             ) : (
@@ -429,11 +446,11 @@ export const Item1 = () => {
                                                     resizeMode={FastImage.resizeMode.contain}
                                                 />
                                                 <Text style={styles.statistics_content}>
-                                                    {item.total}
+                                                    {item.total_cards}
                                                 </Text>
                                             </View>
                                         </View>
-                                    </View>
+                                    </LinearGradient>
                                 );
                             })}
                         </View>
@@ -490,15 +507,25 @@ export const Item1 = () => {
                                 marginTop: getSize.m(13),
                             }}
                         >
-                            {data_stats.map(item => {
+                            {team.homepage_info.red_cards?.map((item, index) => {
                                 return (
-                                    <View
-                                        key={item.id}
+                                    <LinearGradient
+                                        key={item.player_id}
+                                        start={{ x: 0, y: 0 }}
+                                        end={{ x: 1, y: 1 }}
+                                        colors={[
+                                            index % 2 === 0
+                                                ? 'rgba(223, 36, 56, 0.03)'
+                                                : appColors.white,
+                                            index % 2 !== 0
+                                                ? 'rgba(207, 59, 61, 0.03)'
+                                                : appColors.white,
+                                        ]}
                                         style={[
                                             appStyles.flex_row_space_center,
                                             appStyles.statistic_row,
                                             {
-                                                paddingVertical: getSize.m(5),
+                                                paddingVertical: getSize.m(7),
                                             },
                                         ]}
                                     >
@@ -516,7 +543,7 @@ export const Item1 = () => {
                                                 }}
                                             >
                                                 <Avatar
-                                                    source={item.avt}
+                                                    source={{ uri: item.player_image_url }}
                                                     rounded
                                                     size={getSize.m(20)}
                                                 />
@@ -528,12 +555,12 @@ export const Item1 = () => {
                                                         },
                                                     ]}
                                                 >
-                                                    {item.gates}
+                                                    {item.player_name_he}
                                                 </Text>
                                             </View>
                                         </View>
                                         <View style={{ width: getSize.m(40) }}>
-                                            {item.league !== null ? (
+                                            {item.league_cards !== null ? (
                                                 <View>
                                                     <FastImage
                                                         source={AppImages.img_ticket_red}
@@ -543,12 +570,10 @@ export const Item1 = () => {
                                                     <Text
                                                         style={[
                                                             styles.statistics_content,
-                                                            {
-                                                                color: appColors.white,
-                                                            },
+                                                            { color: appColors.white },
                                                         ]}
                                                     >
-                                                        {item.league}
+                                                        {item.league_cards}
                                                     </Text>
                                                 </View>
                                             ) : (
@@ -560,7 +585,7 @@ export const Item1 = () => {
                                             )}
                                         </View>
                                         <View style={{ width: getSize.m(40) }}>
-                                            {item.third_country !== null ? (
+                                            {item.national_cup_cards !== null ? (
                                                 <View>
                                                     <FastImage
                                                         source={AppImages.img_ticket_red}
@@ -575,7 +600,7 @@ export const Item1 = () => {
                                                             },
                                                         ]}
                                                     >
-                                                        {item.third_country}
+                                                        {item.national_cup_cards}
                                                     </Text>
                                                 </View>
                                             ) : (
@@ -587,7 +612,7 @@ export const Item1 = () => {
                                             )}
                                         </View>
                                         <View style={{ width: getSize.m(40) }}>
-                                            {item.third_tutu !== null ? (
+                                            {item.toto_cup_cards !== null ? (
                                                 <View>
                                                     <FastImage
                                                         source={AppImages.img_ticket_red}
@@ -602,7 +627,7 @@ export const Item1 = () => {
                                                             },
                                                         ]}
                                                     >
-                                                        {item.third_tutu}
+                                                        {item.toto_cup_cards}
                                                     </Text>
                                                 </View>
                                             ) : (
@@ -626,11 +651,11 @@ export const Item1 = () => {
                                                         { color: appColors.white },
                                                     ]}
                                                 >
-                                                    {item.total}
+                                                    {item.total_cards}
                                                 </Text>
                                             </View>
                                         </View>
-                                    </View>
+                                    </LinearGradient>
                                 );
                             })}
                         </View>
@@ -674,21 +699,40 @@ export const Item1 = () => {
                             />
                         </TouchableOpacity>
                     </View>
-                    <GameTable
-                        date="יום רביעי | 13/09/22"
-                        avt_away={AppImages.img_club}
-                        avt_home={AppImages.img_club}
-                        location="טרם ידוע"
-                        name_away="מכבי תל אביב"
-                        name_home="מכבי תל אביב"
-                        result="3 : 1"
-                        schedule="11:30"
-                    />
+                    {team.homepage_info.games.map((item, index) => {
+                        return (
+                            <ListGame
+                                // eslint-disable-next-line react/no-array-index-key
+                                key={index}
+                                logo_home={item.team1.logo_url}
+                                logo_away={item.team2.logo_url}
+                                nameHome={item.team1.name_he}
+                                nameAway={item.team2.name_he}
+                                location={item.stadium_he}
+                                date={item.date}
+                                result={item.score}
+                                schedule={item.time}
+                                // completed={item.completed}
+                                color={appColors.text_dark_blue}
+                                handleDetailMatch={() => handleDetailMatch(item.game_id)}
+                                handleStadium={() => handleStadium(item.stadium_id)}
+                                isLive={moment().isBetween(
+                                    moment(`${item.date} ${item.time}`, 'DD.M.YY HH:mm'),
+                                    moment(`${item.date} ${item.time}`, 'DD.M.YY HH:mm').add(
+                                        2,
+                                        'hours'
+                                    )
+                                )}
+                                style={{ marginTop: getSize.m(12) }}
+                            />
+                        );
+                    })}
                 </View>
             </ScrollView>
             <View style={styles.dotContainer}>
                 {pages.map((_, index) => {
                     return (
+                        // eslint-disable-next-line react/no-array-index-key
                         <View key={index}>
                             <View
                                 style={[
@@ -704,7 +748,7 @@ export const Item1 = () => {
                                                 : appColors.light_gray,
                                     },
                                 ]}
-                            ></View>
+                            />
                         </View>
                     );
                 })}

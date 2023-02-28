@@ -6,7 +6,7 @@ import { appColors } from '@football/app/utils/constants/appColors';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import { getSize } from '@football/app/utils/responsive/scale';
 import React from 'react';
-import { Text, View } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import IconFeather from 'react-native-vector-icons/Feather';
 
@@ -22,6 +22,7 @@ export const GameTable1 = ({
     ticket_red,
     ticket_yellow,
     score,
+    onHandleDetailMatch,
 }: IGameTable1Props) => {
     return (
         <View style={styles.game_table}>
@@ -40,7 +41,7 @@ export const GameTable1 = ({
             >
                 <View style={appStyles.align_justify}>
                     <FastImage
-                        source={avt_home}
+                        source={{ uri: avt_home }}
                         style={{ width: getSize.m(24), height: getSize.m(24) }}
                     />
                     <Text style={styles.name_club}>{name_home}</Text>
@@ -53,27 +54,29 @@ export const GameTable1 = ({
                             <Text style={styles.result}>:</Text>
                         )}
                     </View>
-                    <View style={appStyles.flex_row_align}>
-                        <Text
-                            style={[
-                                styles.details,
-                                {
-                                    color: '#061134',
-                                },
-                            ]}
-                        >
-                            הרכב
-                        </Text>
-                        <IconFeather
-                            name={appIcons.ic_arrow_left}
-                            size={getSize.m(10)}
-                            color="#061134"
-                        />
-                    </View>
+                    <TouchableOpacity onPress={onHandleDetailMatch}>
+                        <View style={appStyles.flex_row_align}>
+                            <Text
+                                style={[
+                                    styles.details,
+                                    {
+                                        color: '#061134',
+                                    },
+                                ]}
+                            >
+                                הרכב
+                            </Text>
+                            <IconFeather
+                                name={appIcons.ic_arrow_left}
+                                size={getSize.m(10)}
+                                color="#061134"
+                            />
+                        </View>
+                    </TouchableOpacity>
                 </View>
                 <View style={appStyles.align_justify}>
                     <FastImage
-                        source={avt_away}
+                        source={{ uri: avt_away }}
                         style={{ width: getSize.m(24), height: getSize.m(24) }}
                     />
                     <Text style={styles.name_club}>{name_away}</Text>

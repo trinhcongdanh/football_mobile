@@ -10,8 +10,9 @@ import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import { Avatar } from 'react-native-elements';
 import LinearGradient from 'react-native-linear-gradient';
+import { IItem10Props } from '@football/app/screens/football-home/layouts/Item10/Item10.type';
 
-export const Item10 = () => {
+export const Item10 = ({ league }: IItem10Props) => {
     const {
         t,
         pages,
@@ -33,7 +34,7 @@ export const Item10 = () => {
         setSelectRound,
         rounds,
         data,
-    } = useViewModel({});
+    } = useViewModel();
     return (
         <View style={styles.container}>
             <View

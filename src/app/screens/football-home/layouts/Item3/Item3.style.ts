@@ -122,6 +122,21 @@ const styles = StyleSheet.create({
         lineHeight: getSize.m(17),
         marginRight: getSize.m(4),
     },
+
+    ticket: {
+        width: getSize.m(15),
+        height: getSize.m(21),
+        position: 'absolute',
+        left: getSize.m(-2.5),
+        top: getSize.m(-2.5),
+    },
+
+    line: {
+        height: getSize.m(1),
+        backgroundColor: appColors.separator,
+        marginTop: getSize.m(20),
+        marginHorizontal: getSize.m(16),
+    },
 });
 
 export default styles;

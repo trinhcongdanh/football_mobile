@@ -1,3 +1,5 @@
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable react/jsx-no-comment-textnodes */
 import React from 'react';
 import {
     View,
@@ -34,159 +36,208 @@ import { Item12 } from '@football/app/screens/football-home/layouts/Item12/Item1
 import { Item13 } from '@football/app/screens/football-home/layouts/Item13/Item13';
 
 export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
-    const { onGoBack, t, data_header, onShowSideMenu } = useViewModel({
+    const {
+        onGoBack,
+        t,
+        players,
+        onShowSideMenu,
+        onClickPlayer,
+        homePage,
+        homeLayout,
+        teams,
+        topTeams,
+        league,
+    } = useViewModel({
         navigation,
         route,
     });
     return (
         <View style={[appStyles.flex, { backgroundColor: appColors.white }]}>
             {/* Header */}
-            <ScrollView>
-                <ImageBackground
-                    source={AppImages.img_background_header_home}
-                    style={[appStyles.flex, { height: getSize.m(172) }]}
-                >
-                    <StatusBar translucent backgroundColor="transparent" />
-                    <SafeAreaView style={appStyles.safe_area}>
-                        <View style={appStyles.container}>
-                            <View style={appStyles.flex_row_space_center}>
-                                <TouchableOpacity onPress={onShowSideMenu}>
-                                    <LinearGradient
-                                        colors={['rgba(255, 43, 94, 1)', 'rgba(204, 10, 45, 1)']}
-                                        style={styles.home_side_bar}
-                                    >
-                                        <FastImage
-                                            source={AppImages.img_bars_sort}
-                                            style={{ width: getSize.m(12), height: getSize.m(14) }}
-                                            resizeMode={FastImage.resizeMode.contain}
-                                        />
-                                    </LinearGradient>
-                                </TouchableOpacity>
-                                <View>
-                                    <View style={[appStyles.flex_row_align, styles.avt]}>
-                                        <FastImage
-                                            style={{
-                                                width: getSize.m(40),
-                                                height: getSize.m(40),
-                                                borderRadius: getSize.m(40),
-                                            }}
-                                            source={AppImages.img_avt_player}
-                                        />
-                                        <FastImage
-                                            source={AppImages.img_ball_red}
-                                            style={styles.ic_football}
-                                            resizeMode={FastImage.resizeMode.contain}
-                                        />
-                                        <Text
-                                            style={[
-                                                appStyles.text_bold,
-                                                {
-                                                    marginRight: getSize.m(6),
-                                                    marginLeft: getSize.m(3),
-                                                },
+            {homePage && (
+                <ScrollView>
+                    <ImageBackground
+                        source={AppImages.img_background_header_home}
+                        style={[appStyles.flex, { height: getSize.m(172) }]}
+                    >
+                        <StatusBar translucent backgroundColor="transparent" />
+                        <SafeAreaView style={appStyles.safe_area}>
+                            <View style={appStyles.container}>
+                                <View style={appStyles.flex_row_space_center}>
+                                    <TouchableOpacity onPress={onShowSideMenu}>
+                                        <LinearGradient
+                                            colors={[
+                                                'rgba(255, 43, 94, 1)',
+                                                'rgba(204, 10, 45, 1)',
                                             ]}
-                                        >
-                                            1,325
-                                        </Text>
-                                    </View>
-                                </View>
-                                <View>
-                                    <FastImage
-                                        source={AppImages.img_logo}
-                                        style={{ width: getSize.m(36), height: getSize.m(40) }}
-                                    />
-                                </View>
-                            </View>
-                        </View>
-                        <View style={{ marginTop: getSize.m(22) }}>
-                            <ScrollView style={{ flexDirection: 'row' }} horizontal={true}>
-                                {data_header.map((item, index) => {
-                                    return (
-                                        <View
-                                            key={item.id}
-                                            style={[
-                                                appStyles.flex_row_align,
-                                                styles.header_item,
-                                                {
-                                                    marginLeft:
-                                                        index === 0 ? getSize.m(16) : getSize.m(6),
-                                                    marginRight:
-                                                        index === data_header.length - 1
-                                                            ? getSize.m(16)
-                                                            : getSize.m(6),
-                                                },
-                                            ]}
+                                            style={styles.home_side_bar}
                                         >
                                             <FastImage
-                                                source={AppImages.img_avt_player}
+                                                source={AppImages.img_bars_sort}
                                                 style={{
-                                                    width: getSize.m(30),
-                                                    height: getSize.m(30),
-                                                    borderRadius: getSize.m(30),
-                                                    marginRight: getSize.m(6),
+                                                    width: getSize.m(12),
+                                                    height: getSize.m(14),
                                                 }}
+                                                resizeMode={FastImage.resizeMode.contain}
                                             />
-                                            <Text style={styles.header_item_text}>רועי אזוט</Text>
+                                        </LinearGradient>
+                                    </TouchableOpacity>
+                                    <View>
+                                        <View style={[appStyles.flex_row_align, styles.avt]}>
+                                            <FastImage
+                                                style={{
+                                                    width: getSize.m(40),
+                                                    height: getSize.m(40),
+                                                    borderRadius: getSize.m(40),
+                                                }}
+                                                source={AppImages.img_avt_player}
+                                            />
+                                            <FastImage
+                                                source={AppImages.img_ball_red}
+                                                style={styles.ic_football}
+                                                resizeMode={FastImage.resizeMode.contain}
+                                            />
+                                            <Text
+                                                style={[
+                                                    appStyles.text_bold,
+                                                    {
+                                                        marginRight: getSize.m(6),
+                                                        marginLeft: getSize.m(3),
+                                                    },
+                                                ]}
+                                            >
+                                                1,325
+                                            </Text>
                                         </View>
-                                    );
-                                })}
-                            </ScrollView>
+                                    </View>
+                                    <View>
+                                        <FastImage
+                                            source={AppImages.img_logo}
+                                            style={{ width: getSize.m(36), height: getSize.m(40) }}
+                                        />
+                                    </View>
+                                </View>
+                            </View>
+                            <View style={{ marginTop: getSize.m(22) }}>
+                                <ScrollView style={{ flexDirection: 'row' }} horizontal>
+                                    {players?.map((item, index) => {
+                                        return (
+                                            <TouchableOpacity
+                                                // eslint-disable-next-line no-underscore-dangle
+                                                onPress={() => onClickPlayer(item._id)}
+                                                // eslint-disable-next-line no-underscore-dangle
+                                                key={item._id}
+                                            >
+                                                <View
+                                                    style={[
+                                                        appStyles.flex_row_align,
+                                                        styles.header_item,
+                                                        {
+                                                            marginLeft:
+                                                                index === 0
+                                                                    ? getSize.m(16)
+                                                                    : getSize.m(6),
+                                                            marginRight:
+                                                                index === players.length - 1
+                                                                    ? getSize.m(16)
+                                                                    : getSize.m(6),
+                                                        },
+                                                    ]}
+                                                >
+                                                    <FastImage
+                                                        source={{ uri: item.image_url }}
+                                                        style={{
+                                                            width: getSize.m(30),
+                                                            height: getSize.m(30),
+                                                            borderRadius: getSize.m(30),
+                                                            marginRight: getSize.m(6),
+                                                        }}
+                                                    />
+                                                    <Text style={styles.header_item_text}>
+                                                        {item.name_en}
+                                                    </Text>
+                                                </View>
+                                            </TouchableOpacity>
+                                        );
+                                    })}
+                                </ScrollView>
+                            </View>
+                        </SafeAreaView>
+                    </ImageBackground>
+                    {/* Video Intro */}
+                    {homeLayout?.layout.includes('video') && (
+                        <View style={styles.home_video}>
+                            <FastImage
+                                source={{ uri: homePage?.video.image_url }}
+                                style={{
+                                    width: getSize.m(347),
+                                    height: getSize.m(233),
+                                }}
+                            />
+                            <View style={styles.date}>
+                                <Text style={styles.text_date}>{homePage?.video.length}</Text>
+                            </View>
+                            <View style={styles.play_video_main}>
+                                <IconAntDesign
+                                    name={appIcons.ic_caretright}
+                                    size={getSize.m(16)}
+                                    color={appColors.white}
+                                />
+                            </View>
+                            <View style={styles.content}>
+                                <Text style={styles.text_content}>
+                                    {homePage?.video.caption_en}
+                                </Text>
+                            </View>
                         </View>
-                    </SafeAreaView>
-                </ImageBackground>
-                {/* Video Intro */}
-                <View style={styles.home_video}>
-                    <FastImage
-                        source={AppImages.img_home_team}
-                        style={{
-                            width: getSize.m(347),
-                            height: getSize.m(233),
-                        }}
-                    />
-                    <View style={styles.date}>
-                        <Text style={styles.text_date}>01:23</Text>
-                    </View>
-                    <View style={styles.play_video_main}>
-                        <IconAntDesign
-                            name={appIcons.ic_caretright}
-                            size={getSize.m(16)}
-                            color={appColors.white}
-                        />
-                    </View>
-                    <View style={styles.content}>
-                        <Text style={styles.text_content}>
-                            נבחרת ישראל זכתה במדליית זהב במכבייה בפעם השנייה
-                        </Text>
-                    </View>
-                </View>
-                {/* Player Stats */}
-                <Item1 />
-                {/* Item2 */}
-                <Item2 />
-                {/* Item3 */}
-                <Item3 />
-                {/* Item4 */}
-                <Item4 />
-                {/* Item5 */}
-                <Item5 />
-                {/* Item6 */}
-                <Item6 />
-                {/* Item7 */}
-                <Item7 />
-                {/* Item8 */}
-                <Item8 />
-                {/* Item9 */}
-                <Item9 />
-                {/* Item10 */}
-                <Item10 />
-                {/* Item11 */}
-                <Item11 />
-                {/* Item12 */}
-                <Item12 />
-                {/* Item13 */}
-                <Item13 />
-                <View style={{ height: getSize.m(120), width: '100%' }} />
-            </ScrollView>
+                    )}
+                    {/* Player Stats */}
+                    {homeLayout?.layout.includes('my_teams') &&
+                        teams?.map(team => {
+                            // eslint-disable-next-line no-underscore-dangle
+                            return <Item1 team={team} key={team._id} />;
+                        })}
+                    {/* Item2 */}
+                    {/* <Item2 /> */}
+                    {/* Item3 */}
+                    {homeLayout?.layout.includes('my_players') &&
+                        players?.slice(0, 2)?.map(player => {
+                            // eslint-disable-next-line no-underscore-dangle
+                            return <Item3 player={player} key={player._id} />;
+                        })}
+                    {/* Item4 */}
+                    {/* <Item4 /> */}
+                    {/* Item5 */}
+                    {homeLayout?.layout.includes('my_top_team') &&
+                        topTeams?.map(topTeam => {
+                            return (
+                                <>
+                                    <Item5 topTeam={topTeam} key={topTeam._id} />
+                                    {homeLayout?.layout.includes('my_top_team') && (
+                                        <Item6 topTeam={topTeam} key={topTeam._id} />
+                                    )}
+                                </>
+                            );
+                        })}
+                    {/* <Item5 topTeam={} /> */}
+                    {/* Item6 */}
+                    {/* Item7 */}
+                    {homeLayout?.layout.includes('ads') && <Item7 homePage={homePage} />}
+                    {/* Item8 */}
+                    {/* <Item8 /> */}
+                    {/* Item9 */}
+                    {homeLayout?.layout.includes('magazine') && <Item9 homePage={homePage} />}
+                    {/* Item10 */}
+                    {homeLayout?.layout.includes('leagues_table') && <Item10 league={league} />}
+                    {/* Item11 */}
+                    <Item11 />
+                    {/* Item12 */}
+                    <Item12 />
+                    {/* Item13 */}
+                    <Item13 />
+                    <View style={{ height: getSize.m(120), width: '100%' }} />
+                </ScrollView>
+            )}
         </View>
     );
 };

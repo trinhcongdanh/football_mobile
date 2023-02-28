@@ -1,1 +1,5 @@
-export type IItem5Props = {};
+import { TopTeamModel } from '@football/core/models/TopTeamModelResponse';
+
+export type IItem5Props = {
+    topTeam: TopTeamModel;
+};

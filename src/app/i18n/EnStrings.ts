@@ -605,6 +605,7 @@ const resources = {
                 game_season: 'משחקים בעונה',
                 state_cup: 'גביע המדינה',
                 toto_cup: 'גביע הטוטו',
+                total_goals: 'סה"כ',
                 games: 'משחקים',
                 list_of_game: 'רשימת משחקים',
                 all_game: 'לכל המשחקים',

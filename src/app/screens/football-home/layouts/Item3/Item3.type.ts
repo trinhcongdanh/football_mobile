@@ -1,1 +1,5 @@
-export type IItem3Props = {};
+import { PlayerModel } from '@football/core/models/PlayerModelResponse';
+
+export type IItem3Props = {
+    player: PlayerModel;
+};

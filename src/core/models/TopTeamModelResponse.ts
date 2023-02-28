@@ -126,6 +126,31 @@ export interface TopTeamModel {
     isSelected: boolean;
     image_gallery: ImageGallery[];
     team_personnel_id: string;
+    homepage_info: HomePageInfo;
+}
+
+interface Card {
+    player_id: string;
+    player_name_he: string;
+    player_name_en: string;
+    player_image_url: string;
+    yellow_cards: number;
+    red_cards: number;
+}
+
+interface HomePageInfo {
+    goal_kickers: GoalKicker1[];
+    cards: Card[];
+    games: Game[];
+}
+
+interface GoalKicker1 {
+    player_id: string;
+    player_name_he: string;
+    player_name_en: string;
+    player_image_url: string;
+    games: number;
+    goals: number;
 }
 
 export type TopTeamModelResponse = AxiosResponse<{

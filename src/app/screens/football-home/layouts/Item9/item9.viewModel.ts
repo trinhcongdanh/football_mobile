@@ -1,9 +1,9 @@
-import { useTranslation } from 'react-i18next';
+import { AppImages } from '@football/app/assets/images';
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
 import { useState } from 'react';
-import { IItem9Props } from '@football/app/screens/football-home/layouts/Item9/Item9.type';
-import { AppImages } from '@football/app/assets/images';
-export const useViewModel = ({}: IItem9Props) => {
+import { useTranslation } from 'react-i18next';
+
+export const useViewModel = () => {
     const { navigate, goBack } = useAppNavigator();
     const { t } = useTranslation();
     const pages = Array(2).fill('');
