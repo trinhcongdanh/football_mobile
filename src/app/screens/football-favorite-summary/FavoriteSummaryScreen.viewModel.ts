@@ -1,25 +1,22 @@
-import { useEffect, useState } from 'react';
-import { AuthData, ScreenName } from '@football/app/utils/constants/enum';
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
-import { useSelector, useDispatch } from 'react-redux';
+import { AuthData, ScreenName } from '@football/app/utils/constants/enum';
+import { ACTION, TOKEN } from '@football/core/api/auth/config';
 import { TeamModel } from '@football/core/models/TeamModelResponse';
-import { PlayerModel } from '@football/core/models/PlayerModelResponse';
 import { TopTeamModel } from '@football/core/models/TopTeamModelResponse';
-import { useTranslation } from 'react-i18next';
-import { axiosAuth } from '@football/core/api/auth/axiosAuth';
-import { ACTION, AUTH_URL, TOKEN } from '@football/core/api/auth/config';
-import { Alert } from 'react-native';
-import { isEmpty, isNil } from 'lodash';
-import { loginUser } from 'src/store/user/Login.slice';
-import { setProfileUser } from 'src/store/user/setProfile.slice';
-import { createProfileUser } from 'src/store/user/CreateProfile.slice';
-import { IFavoriteSummaryScreenProps } from './FavoriteSummaryScreen.type';
-import { RootState } from 'src/store/store';
 import { useIsFocused } from '@react-navigation/native';
+import { isEmpty, isNil } from 'lodash';
+import qs from 'qs';
+import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useDispatch, useSelector } from 'react-redux';
 import { resetSearchFavPlayer, SelectedPlayer } from 'src/store/FavPlayer.slice';
 import { resetFavTeam } from 'src/store/FavTeam.slice';
 import { resetTopTeams } from 'src/store/FavTopTeam.slice';
-import qs from 'qs';
+import { RootState } from 'src/store/store';
+import { createProfileUser } from 'src/store/user/CreateProfile.slice';
+import { loginUser } from 'src/store/user/Login.slice';
+import { setProfileUser } from 'src/store/user/setProfile.slice';
+import { IFavoriteSummaryScreenProps } from './FavoriteSummaryScreen.type';
 
 export const useViewModel = ({ navigation, route }: IFavoriteSummaryScreenProps) => {
     const { t } = useTranslation();
