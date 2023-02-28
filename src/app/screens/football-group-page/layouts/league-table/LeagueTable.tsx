@@ -1,17 +1,17 @@
-import { appStyles } from '@football/app/utils/constants/appStyles';
-import { getSize } from '@football/app/utils/responsive/scale';
-import React from 'react';
-import Icon from 'react-native-vector-icons/Feather';
-import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
 import { appIcons } from '@football/app/assets/icons/appIcons';
 import { appColors } from '@football/app/utils/constants/appColors';
+import { appStyles } from '@football/app/utils/constants/appStyles';
+import { ScreenName } from '@football/app/utils/constants/enum';
+import { getSize } from '@football/app/utils/responsive/scale';
+import { Cycle, Round } from '@football/core/models/TeamSeasonResponse';
+import React from 'react';
+import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { Avatar } from 'react-native-elements';
 import LinearGradient from 'react-native-linear-gradient';
-import { ScreenName } from '@football/app/utils/constants/enum';
-import { DropDown } from '@football/app/components/drop-down/DropDown';
+import Icon from 'react-native-vector-icons/Feather';
 import { ListOfGames } from '../list-of-games/ListOfGames';
-import { ILeagueTableProps } from './LeagueTable.type';
 import styles from './LeagueTable.style';
+import { ILeagueTableProps } from './LeagueTable.type';
 import { useViewModel } from './LeagueTable.viewModel';
 
 export const LeagueTable = ({ teamSeason }: ILeagueTableProps) => {
@@ -20,14 +20,10 @@ export const LeagueTable = ({ teamSeason }: ILeagueTableProps) => {
         setOpenModalCycle,
         setOpenModalPlayOff,
         openModalCycle,
-        cycles,
         selectCycle,
         openModalPlayOff,
-        selectPlayoff,
-        playOffs,
-        handleCloseModal,
-        setSelectPlayoff,
         selectedRound,
+        setSelectedRound,
         navigate,
         setSelectCycle,
     } = useViewModel({ teamSeason });
@@ -61,7 +57,7 @@ export const LeagueTable = ({ teamSeason }: ILeagueTableProps) => {
                                     },
                                 ]}
                             >
-                                <Text style={styles.text_cycle}>{selectPlayoff}</Text>
+                                <Text style={styles.text_cycle}>{selectCycle?.cycle_name_en}</Text>
                                 <Icon
                                     name={
                                         openModalPlayOff
@@ -88,11 +84,11 @@ export const LeagueTable = ({ teamSeason }: ILeagueTableProps) => {
                                         showsVerticalScrollIndicator={false}
                                         nestedScrollEnabled
                                     >
-                                        {playOffs.map((playOff: any, index: number) => {
+                                        {teamSeason.cycles.map((cycle: Cycle, index: number) => {
                                             return (
                                                 <TouchableOpacity
                                                     onPress={() => {
-                                                        setSelectPlayoff(playOff.content);
+                                                        setSelectCycle(cycle);
                                                         setOpenModalPlayOff(false);
                                                     }}
                                                     key={index.toString()}
@@ -101,7 +97,7 @@ export const LeagueTable = ({ teamSeason }: ILeagueTableProps) => {
                                                     <Text
                                                         style={styles.btn_drop_down_calender_text}
                                                     >
-                                                        {playOff.content}
+                                                        {cycle.cycle_name_en}
                                                     </Text>
                                                 </TouchableOpacity>
                                             );
@@ -124,7 +120,9 @@ export const LeagueTable = ({ teamSeason }: ILeagueTableProps) => {
                                     },
                                 ]}
                             >
-                                <Text style={styles.text_cycle}>{selectCycle?.cycle_name_he}</Text>
+                                <Text style={styles.text_cycle}>
+                                    {selectedRound?.round_name_en}
+                                </Text>
                                 <Icon
                                     name={
                                         openModalCycle
@@ -149,11 +147,11 @@ export const LeagueTable = ({ teamSeason }: ILeagueTableProps) => {
                                         showsVerticalScrollIndicator={false}
                                         nestedScrollEnabled
                                     >
-                                        {cycles.map((input: any, index: number) => {
+                                        {selectCycle?.rounds.map((round: Round, index: number) => {
                                             return (
                                                 <TouchableOpacity
                                                     onPress={() => {
-                                                        setSelectCycle(input);
+                                                        setSelectedRound(round);
                                                         setOpenModalCycle(false);
                                                     }}
                                                     key={index.toString()}
@@ -162,7 +160,7 @@ export const LeagueTable = ({ teamSeason }: ILeagueTableProps) => {
                                                     <Text
                                                         style={styles.btn_drop_down_calender_text}
                                                     >
-                                                        {input.round_name_he}
+                                                        {round.round_name_en}
                                                     </Text>
                                                 </TouchableOpacity>
                                             );
