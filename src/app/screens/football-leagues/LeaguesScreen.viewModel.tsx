@@ -1,15 +1,11 @@
 import { LeagueItemScreen } from '@football/app/screens/football-leagues/layouts/league-item/LeagueItemScreen';
 import { useAppNavigation } from '@football/app/utils/hooks/useAppNavigation';
-import { useMount } from '@football/app/utils/hooks/useMount';
 import { useAppDispatch, useAppSelector } from '@football/app/utils/hooks/useStore';
-import leagueService from '@football/core/services/League.service';
+import { LeagueTypeModel } from '@football/core/models/LeagueModelResponse';
+import leagueService, { useLeagueTypes } from '@football/core/services/League.service';
 import React, { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import {
-    resetSearchLeagues,
-    setLeagueTypes,
-    setSearchLeagues,
-} from 'src/store/league/League.slice';
+import { resetSearchLeagues, setSearchLeagues } from 'src/store/league/League.slice';
 
 type INavigationProps = {
     route: any;
@@ -21,17 +17,25 @@ const useViewState = () => {
     const searchLeagues = useAppSelector(state => {
         return state.leagues.searchLeagues;
     });
-    const leagueTypes = useAppSelector(state => state.leagues.leagueTypes);
+    const { data } = useLeagueTypes();
+    let labels: any[] = [];
 
-    const labels = leagueTypes.map(e => ({
-        id: e.index,
-        title: e.name_he,
-        name: e.name_en.split(' ').join(''),
-        renderComponent: (props: INavigationProps) => (
-            <LeagueItemScreen {...props} typeId={e.index} />
-        ),
-        component: LeagueItemScreen,
-    }));
+    let leagueTypes: LeagueTypeModel[] = [];
+    if (data) {
+        const [error, res] = data;
+        if (!error) {
+            leagueTypes = res.data.documents;
+            labels = leagueTypes.map(e => ({
+                id: e.index,
+                title: e.name_he,
+                name: e.name_en.split(' ').join(''),
+                renderComponent: (props: INavigationProps) => (
+                    <LeagueItemScreen {...props} typeId={e.index} />
+                ),
+                component: LeagueItemScreen,
+            }));
+        }
+    }
 
     return {
         searchText,
@@ -42,8 +46,7 @@ const useViewState = () => {
     };
 };
 
-const useViewCallback = () => {
-    const { searchText, setSearchText } = useViewState();
+const useViewCallback = ({ searchText, setSearchText }: any) => {
     const dispatch = useAppDispatch();
 
     const onSearchLeague = (text: string) => {
@@ -63,18 +66,7 @@ const useViewCallback = () => {
         }
     }, [dispatch, searchText]);
 
-    const getLeagueTypesData = useCallback(async () => {
-        const [error, res] = await leagueService.getTypes();
-
-        if (error) {
-            return;
-        }
-
-        dispatch(setLeagueTypes(res.data.documents));
-    }, [dispatch]);
-
     return {
-        getLeagueTypesData,
         submitSearchLeague,
         onSearchLeague,
     };
@@ -83,11 +75,10 @@ const useViewCallback = () => {
 export const useViewModel = () => {
     const { t } = useTranslation();
     const { onGoBack } = useAppNavigation();
-    const { searchLeagues, leagueTypes, labels } = useViewState();
-    const { getLeagueTypesData, submitSearchLeague, onSearchLeague } = useViewCallback();
-
-    useMount(() => {
-        getLeagueTypesData();
+    const { searchLeagues, leagueTypes, labels, searchText, setSearchText } = useViewState();
+    const { submitSearchLeague, onSearchLeague } = useViewCallback({
+        searchText,
+        setSearchLeagues,
     });
 
     return {
