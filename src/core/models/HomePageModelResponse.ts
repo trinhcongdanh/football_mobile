@@ -4,6 +4,14 @@ export interface HomePageModel {
     ads: Ads;
     default_league_id: string;
     national_cup: Nationalcup;
+    magazine: Magazine[];
+}
+
+interface Magazine {
+    image_url: string;
+    link: string;
+    caption_he: string;
+    caption_en: string;
 }
 
 interface Nationalcup {

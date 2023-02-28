@@ -9,7 +9,7 @@ import { appColors } from '@football/app/utils/constants/appColors';
 import { IItem9Props } from '@football/app/screens/football-home/layouts/Item9/Item9.type';
 
 export const Item9 = ({ homePage }: IItem9Props) => {
-    const { t, pages, activeIndexNumber, setActiveIndexNumber, data, dots } = useViewModel();
+    const { t, pages, activeIndexNumber, setActiveIndexNumber, dots } = useViewModel({ homePage });
     return (
         <View style={styles.container}>
             <View style={{ marginVertical: getSize.m(20), marginLeft: getSize.m(18) }}>
@@ -29,7 +29,7 @@ export const Item9 = ({ homePage }: IItem9Props) => {
                     }
                 }}
             >
-                {data.map((item, index) => {
+                {homePage.magazine.map((item, index) => {
                     return (
                         <View
                             // eslint-disable-next-line react/no-array-index-key
@@ -41,10 +41,10 @@ export const Item9 = ({ homePage }: IItem9Props) => {
                             }}
                         >
                             <TouchableOpacity activeOpacity={0.9}>
-                                <Image source={item.image_url} style={styles.image} />
-                                <View style={styles.date}>
+                                <Image source={{ uri: item.image_url }} style={styles.image} />
+                                {/* <View style={styles.date}>
                                     <Text style={styles.text_date}>{item.length}</Text>
-                                </View>
+                                </View> */}
                                 <View style={styles.content}>
                                     <Text style={styles.text_content}>
                                         {item.caption_he}{' '}

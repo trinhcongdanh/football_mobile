@@ -14,9 +14,14 @@ export interface LeagueModel {
     logo_url: string;
     logo_width: string;
     logo_height: string;
-    seasons: any;
+    seasons: Season[];
     search_terms: string;
     type: number;
+}
+
+export interface Season {
+    league_season_id: string;
+    league_season_name: string;
 }
 
 export type LeagueTypeModelResponse = AxiosResponse<{

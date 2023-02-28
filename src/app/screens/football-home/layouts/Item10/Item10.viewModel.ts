@@ -1,85 +1,93 @@
-import { useTranslation } from 'react-i18next';
-import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
-import { useState } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
 import { AppImages } from '@football/app/assets/images';
+import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
+import { IItem10Props } from '@football/app/screens/football-home/layouts/Item10/Item10.type';
+import { LeagueModel, Season } from '@football/core/models/LeagueModelResponse';
+import { Cycle, LeagueSeasonModel, Round } from '@football/core/models/LeagueSeasonModelResponse';
+import leagueSeasonService from '@football/core/services/LeagueSeason.service';
+import { useCallback, useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useMount } from '@football/app/utils/hooks/useMount';
+import { ScreenName } from '@football/app/utils/constants/enum';
 
-export const useViewModel = () => {
+const useViewState = (league: LeagueModel) => {
+    const [selectSeason, setSelectSeason] = useState<Season>();
+    const [leagueSeason, setLeagueSeason] = useState<LeagueSeasonModel>();
+    const [selectCycle, setSelectCycle] = useState<Cycle>();
+    const [selectRound, setSelectRound] = useState<Round>();
+
+    return {
+        selectSeason,
+        setSelectSeason,
+        leagueSeason,
+        setLeagueSeason,
+        selectCycle,
+        setSelectCycle,
+        selectRound,
+        setSelectRound,
+    };
+};
+
+const useViewCallback = (viewState: any) => {
+    const { setLeagueSeason, selectSeason } = viewState;
+
+    const getHomeLayoutData = useCallback(async () => {
+        const [error, res] = await leagueSeasonService.findByOId(selectSeason.league_season_id);
+        if (error) {
+            return;
+        }
+
+        if (res.data.documents?.length) {
+            setLeagueSeason(res.data.documents[0]);
+        }
+    }, []);
+
+    return {
+        getHomeLayoutData,
+    };
+};
+
+export const useViewModel = ({ league }: IItem10Props) => {
     const { navigate, goBack } = useAppNavigator();
     const { t } = useTranslation();
     const pages = Array(2).fill('');
+
+    const state = useViewState(league);
+    const { getHomeLayoutData } = useViewCallback(state);
+
+    useMount(() => {
+        const defaultLeagueSeason = league?.seasons.length ? league.seasons[0] : null;
+        if (defaultLeagueSeason) {
+            state.setSelectSeason(defaultLeagueSeason);
+        }
+    });
+
+    useEffect(() => {
+        if (state.selectSeason) {
+            getHomeLayoutData();
+        }
+    }, [state.selectSeason]);
+
+    useEffect(() => {
+        if (state.leagueSeason?.cycles?.length) {
+            const defaultCycle = state.leagueSeason?.cycles[0];
+            state.setSelectCycle(defaultCycle);
+            if (defaultCycle?.rounds?.length) {
+                state.setSelectRound(defaultCycle.rounds[0]);
+            }
+        }
+    }, [state.leagueSeason]);
+
     const [activeIndexNumber, setActiveIndexNumber] = useState(Number);
     // Year
     const [openModalYear, setOpenModalYear] = useState(false);
-    const [selectYear, setSelectYear] = useState('2022/23');
-    const years = ['2022/23', '2021/22', '2020/21', '2019/20', '2018/19'];
 
     // cycles
     const [openModalCycles, setOpenModalCycles] = useState(false);
-    const [selectCycles, setSelectCycles] = useState('מחזור 34');
-    const cycles = ['מחזור 34', 'מחזור 33', 'מחזור 32', 'מחזור 31', 'מחזור 30'];
 
-    // Round
-    const [openModalRound, setOpenModalRound] = useState(false);
-    const [selectRound, setSelectRound] = useState('סבב 1');
-    const rounds = ['סבב 1', 'סבב 2', 'סבב 3', 'סבב 4', 'סבב 5'];
-
-    const data = [
-        {
-            id: 1,
-            avt: AppImages.img_club,
-            name: 'מ.ס אשדוד',
-            games: '34',
-            wins: '22',
-            ties: '9',
-            difference: '3',
-            goals: '37-82',
-            score: '75',
-        },
-        {
-            id: 2,
-            avt: AppImages.img_club,
-            name: 'מ.ס אשדוד',
-            games: '34',
-            wins: '22',
-            ties: '9',
-            difference: '3',
-            goals: '37-82',
-            score: '75',
-        },
-        {
-            id: 3,
-            avt: AppImages.img_club,
-            name: 'מ.ס אשדוד',
-            games: '34',
-            wins: '22',
-            ties: '9',
-            difference: '3',
-            goals: '37-82',
-            score: '75',
-        },
-        {
-            id: 4,
-            avt: AppImages.img_club,
-            name: 'מ.ס אשדוד',
-            games: '34',
-            wins: '22',
-            ties: '9',
-            difference: '3',
-            goals: '37-82',
-            score: '75',
-        },
-        {
-            id: 5,
-            avt: AppImages.img_club,
-            name: 'מ.ס אשדוד',
-            games: '34',
-            wins: '22',
-            ties: '9',
-            difference: '3',
-            goals: '37-82',
-            score: '75',
-        },
-    ];
+    const onClickAllLeagues = (leagueId: string) => {
+        navigate(ScreenName.LeaguesDetailsPage, { leagueId });
+    };
 
     return {
         t,
@@ -88,19 +96,9 @@ export const useViewModel = () => {
         setActiveIndexNumber,
         openModalYear,
         setOpenModalYear,
-        selectYear,
-        setSelectYear,
-        years,
+        ...state,
         openModalCycles,
         setOpenModalCycles,
-        selectCycles,
-        setSelectCycles,
-        cycles,
-        openModalRound,
-        setOpenModalRound,
-        selectRound,
-        setSelectRound,
-        rounds,
-        data,
+        onClickAllLeagues,
     };
 };

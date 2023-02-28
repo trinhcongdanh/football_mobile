@@ -612,6 +612,7 @@ const resources = {
                 list_of_game: 'רשימת משחקים',
                 all_game: 'לכל המשחקים',
                 read_more: 'קרא עוד',
+                full_table: 'לטבלה המלאה',
             },
             list_game: {
                 results: 'לתוצאות המשחק בזמן אמת',

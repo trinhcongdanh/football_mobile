@@ -228,7 +228,9 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                     {/* Item9 */}
                     {homeLayout?.layout.includes('magazine') && <Item9 homePage={homePage} />}
                     {/* Item10 */}
-                    {homeLayout?.layout.includes('leagues_table') && <Item10 league={league} />}
+                    {homeLayout?.layout.includes('leagues_table') && league && (
+                        <Item10 league={league} />
+                    )}
                     {/* Item11 */}
                     <Item11 />
                     {/* Item12 */}

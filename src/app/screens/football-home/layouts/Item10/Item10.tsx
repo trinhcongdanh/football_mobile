@@ -20,21 +20,19 @@ export const Item10 = ({ league }: IItem10Props) => {
         setActiveIndexNumber,
         openModalYear,
         setOpenModalYear,
-        selectYear,
-        setSelectYear,
-        years,
+        selectSeason,
+        setSelectSeason,
         openModalCycles,
         setOpenModalCycles,
-        selectCycles,
-        setSelectCycles,
-        cycles,
+        selectCycle,
+        setSelectCycle,
         openModalRound,
         setOpenModalRound,
         selectRound,
         setSelectRound,
-        rounds,
-        data,
-    } = useViewModel();
+        onClickAllLeagues,
+        leagueSeason,
+    } = useViewModel({ league });
     return (
         <View style={styles.container}>
             <View
@@ -47,14 +45,16 @@ export const Item10 = ({ league }: IItem10Props) => {
                 ]}
             >
                 <Text style={styles.header}>ליגת העל לנוער</Text>
-                <View style={appStyles.flex_row_align}>
-                    <Text style={styles.details}>לטבלה המלאה</Text>
-                    <IconEntypo
-                        name={appIcons.ic_arrow_left}
-                        size={getSize.m(13)}
-                        color={appColors.button_dark_blue}
-                    />
-                </View>
+                <TouchableOpacity onPress={() => onClickAllLeagues(league._id)}>
+                    <View style={appStyles.flex_row_align}>
+                        <Text style={styles.details}>{t('home_page.full_table')}</Text>
+                        <IconEntypo
+                            name={appIcons.ic_arrow_left}
+                            size={getSize.m(13)}
+                            color={appColors.button_dark_blue}
+                        />
+                    </View>
+                </TouchableOpacity>
             </View>
 
             <View style={styles.drop_down_filter}>
@@ -72,7 +72,7 @@ export const Item10 = ({ league }: IItem10Props) => {
                             },
                         ]}
                     >
-                        <Text style={styles.text_cycle}>{selectYear}</Text>
+                        <Text style={styles.text_cycle}>{selectSeason?.league_season_name}</Text>
                         <IconFeather
                             name={openModalYear ? appIcons.ic_chevron_up : appIcons.ic_chevron_down}
                             size={getSize.m(14)}
@@ -83,18 +83,18 @@ export const Item10 = ({ league }: IItem10Props) => {
                     {openModalYear && (
                         <View style={[styles.drop_down_calender, { width: '80%' }]}>
                             <ScrollView showsVerticalScrollIndicator={false} nestedScrollEnabled>
-                                {years.map((year, index) => {
+                                {league.seasons.map((season, index) => {
                                     return (
                                         <TouchableOpacity
                                             onPress={() => {
-                                                setSelectYear(year);
+                                                setSelectSeason(season);
                                                 setOpenModalYear(false);
                                             }}
                                             key={index.toString()}
                                             style={styles.btn_drop_down_calender}
                                         >
                                             <Text style={styles.btn_drop_down_calender_text}>
-                                                {year}
+                                                {season.league_season_name}
                                             </Text>
                                         </TouchableOpacity>
                                     );
@@ -117,7 +117,7 @@ export const Item10 = ({ league }: IItem10Props) => {
                             },
                         ]}
                     >
-                        <Text style={styles.text_cycle}>{selectYear}</Text>
+                        <Text style={styles.text_cycle}>{selectCycle?.cycle_name_he}</Text>
                         <IconFeather
                             name={
                                 openModalRound ? appIcons.ic_chevron_up : appIcons.ic_chevron_down
@@ -130,18 +130,18 @@ export const Item10 = ({ league }: IItem10Props) => {
                     {openModalRound && (
                         <View style={[styles.drop_down_calender, { width: '80%' }]}>
                             <ScrollView showsVerticalScrollIndicator={false} nestedScrollEnabled>
-                                {rounds.map((round, index) => {
+                                {leagueSeason?.cycles.map((cycle, index) => {
                                     return (
                                         <TouchableOpacity
                                             onPress={() => {
-                                                setSelectRound(round);
-                                                setOpenModalRound(false);
+                                                setSelectCycle(cycle);
+                                                setOpenModalCycles(false);
                                             }}
                                             key={index.toString()}
                                             style={styles.btn_drop_down_calender}
                                         >
                                             <Text style={styles.btn_drop_down_calender_text}>
-                                                {round}
+                                                {cycle.cycle_name_he}
                                             </Text>
                                         </TouchableOpacity>
                                     );
@@ -164,7 +164,7 @@ export const Item10 = ({ league }: IItem10Props) => {
                             },
                         ]}
                     >
-                        <Text style={styles.text_cycle}>{selectCycles}</Text>
+                        <Text style={styles.text_cycle}>{selectRound?.round_name_he}</Text>
                         <IconFeather
                             name={
                                 openModalCycles ? appIcons.ic_chevron_up : appIcons.ic_chevron_down
@@ -177,18 +177,18 @@ export const Item10 = ({ league }: IItem10Props) => {
                     {openModalCycles && (
                         <View style={[styles.drop_down_calender, { width: '80%' }]}>
                             <ScrollView showsVerticalScrollIndicator={false} nestedScrollEnabled>
-                                {cycles.map((cycle, index) => {
+                                {selectCycle?.rounds.map((round, index) => {
                                     return (
                                         <TouchableOpacity
                                             onPress={() => {
-                                                setSelectCycles(cycle);
+                                                setSelectRound(round);
                                                 setOpenModalCycles(false);
                                             }}
                                             key={index.toString()}
                                             style={styles.btn_drop_down_calender}
                                         >
                                             <Text style={styles.btn_drop_down_calender_text}>
-                                                {cycle}
+                                                {round.round_name_he}
                                             </Text>
                                         </TouchableOpacity>
                                     );
@@ -250,17 +250,15 @@ export const Item10 = ({ league }: IItem10Props) => {
                         marginBottom: getSize.m(20),
                     }}
                 >
-                    {data.map((item, index) => {
+                    {selectRound?.leader_board?.slice(0, 10).map((item, index) => {
                         return (
                             <LinearGradient
-                                key={item.id}
+                                key={item.team_id}
                                 start={{ x: 0, y: 0 }}
                                 end={{ x: 1, y: 1 }}
                                 colors={[
-                                    item.id % 2 === 1 ? 'rgba(16, 32, 100, 0.04)' : appColors.white,
-                                    item.id % 2 === 1
-                                        ? 'rgba(59, 168, 225, 0.04)'
-                                        : appColors.white,
+                                    index % 2 === 0 ? 'rgba(16, 32, 100, 0.04)' : appColors.white,
+                                    index % 2 !== 0 ? 'rgba(59, 168, 225, 0.04)' : appColors.white,
                                 ]}
                                 style={[appStyles.flex_row_space_center, appStyles.statistic_row]}
                             >
@@ -283,9 +281,9 @@ export const Item10 = ({ league }: IItem10Props) => {
                                                 },
                                             ]}
                                         >
-                                            {index + 1}
+                                            {item.place}
                                         </Text>
-                                        <Avatar source={item.avt} rounded size={18} />
+                                        <Avatar source={{ uri: item.logo_url }} rounded size={18} />
                                         <Text
                                             style={[
                                                 appStyles.statistics_content,
@@ -294,7 +292,7 @@ export const Item10 = ({ league }: IItem10Props) => {
                                                 },
                                             ]}
                                         >
-                                            {item.name}
+                                            {item.name_he}
                                         </Text>
                                     </View>
                                 </View>
