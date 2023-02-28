@@ -1,7 +1,7 @@
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
 import { AuthData, ScreenName } from '@football/app/utils/constants/enum';
 import { axiosAuth } from '@football/core/api/auth/axiosAuth';
-import { ACTION, AUTH_URL } from '@football/core/api/auth/config';
+import { ACTION, AUTH_URL, TOKEN } from '@football/core/api/auth/config';
 import { appleAuth } from '@invertase/react-native-apple-authentication';
 import { GoogleSignin, statusCodes } from '@react-native-google-signin/google-signin';
 import { isEmpty } from 'lodash';
@@ -9,26 +9,21 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Alert, Keyboard } from 'react-native';
 // import { AccessToken, LoginManager, Profile } from 'react-native-fbsdk-next';
-import { useDispatch, useSelector } from 'react-redux';
+import { AnyIfEmpty, useDispatch, useSelector } from 'react-redux';
+import { loginUser } from 'src/store/user/Login.slice';
 import { env } from 'src/config';
 import { IConnectScreenProps } from './ConnectScreen.type';
+import qs from 'qs';
 
 export const useViewModel = ({ navigation, route }: IConnectScreenProps) => {
     const { t } = useTranslation();
     const { navigate, goBack } = useAppNavigator();
-    const dispatch = useDispatch();
-    const guestId = useSelector((state: any) => state.guestId.guestId);
-    const profile = useSelector((state: any) => state.createProfile.profile);
-    const tokenLogin = useSelector((state: any) => state.login.login);
+    const dispatch = useDispatch<any>();
 
     function serializeParams(obj: any) {
-        let str = [];
-        for (let p in obj) {
-            if (obj.hasOwnProperty(p)) {
-                str.push(p + '=' + encodeURIComponent(obj[p]));
-            }
-        }
-        return str.join('&');
+        const a = qs.stringify(obj, { encode: false, arrayFormat: 'brackets' });
+        console.log(a);
+        return a;
     }
 
     // Facebook
@@ -135,6 +130,10 @@ export const useViewModel = ({ navigation, route }: IConnectScreenProps) => {
     const [errors, setErrors] = useState({
         numberPhone: '',
     });
+    const numberPhone = useSelector((state: any) => state.numberPhoneUser);
+    const guestId = useSelector((state: any) => state.guestId.guestId);
+    const profile = useSelector((state: any) => state.createProfile.profile);
+    const login = useSelector((state: any) => state.login);
 
     const handleOnChange = (e: string) => {
         setPhoneNumber(e);
@@ -147,10 +146,24 @@ export const useViewModel = ({ navigation, route }: IConnectScreenProps) => {
 
     const Connect = () => {
         Keyboard.dismiss();
-        if (phoneNumber !== '1234') {
-            handleError(t('connect.error'), 'numberPhone');
-        }
+        dispatch(
+            loginUser(
+                serializeParams({
+                    action: ACTION,
+                    token: TOKEN,
+                    call: AuthData.LOGIN,
+                    sms_phone: encodeURIComponent(phoneNumber),
+                })
+            )
+        );
     };
+    useEffect(() => {
+        if (login.success === true) {
+            navigate(ScreenName.VerifyPage, { number: phoneNumber });
+        } else if (login.success === false && login.loading === false) {
+            handleError(t('register.invalid'), 'numberPhone');
+        }
+    }, [login.success]);
 
     return {
         errors,
