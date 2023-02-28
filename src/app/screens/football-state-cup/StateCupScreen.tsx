@@ -77,7 +77,7 @@ export const StateCupScreen = ({ route }: IStateCupScreenProps) => {
                             handleCloseModal={handleCloseModal}
                         />
                     )}
-                    <ScrollView scrollEnabled={isScroll}>
+                    <ScrollView>
                         <View style={appStyles.container}>
                             <View style={[appStyles.align_justify, { marginTop: getSize.m(16) }]}>
                                 <View style={styles.avt_leagues_container}>
