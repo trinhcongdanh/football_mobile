@@ -8,7 +8,9 @@ import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import FastImage from 'react-native-fast-image';
 
 export const Item13 = () => {
-    const { t, pages, activeIndexNumber, setActiveIndexNumber, data } = useViewModel({});
+    const { t, pages, activeIndexNumber, setActiveIndexNumber, data, openInstagram } = useViewModel(
+        {}
+    );
     return (
         <View style={styles.container}>
             <View
@@ -18,7 +20,7 @@ export const Item13 = () => {
                 ]}
             >
                 <Text style={styles.header}>ההתאחדות באינסטגרם</Text>
-                <TouchableOpacity style={styles.button}>
+                <TouchableOpacity style={styles.button} onPress={openInstagram}>
                     <View style={appStyles.flex_row_align}>
                         <Text style={styles.instagram}>isr.fa</Text>
                         <FastImage

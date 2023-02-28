@@ -18,6 +18,8 @@ import { LeagueModel } from '@football/core/models/LeagueModelResponse';
 import leaguesService from '@football/core/services/League.service';
 import { GeneralVodModel } from '@football/core/models/GeneralVodResponse';
 import GeneralVodService from '@football/core/services/GeneralVod.service';
+import { useDispatch } from 'react-redux';
+import { addVideo, setShowVideo } from 'src/store/video/Video.slice';
 
 const useViewState = () => {
     const [homePage, setHomePage] = useState<HomePageModel>();
@@ -27,6 +29,9 @@ const useViewState = () => {
     const [topTeams, setTopTeams] = useState<TopTeamModel[]>();
     const [league, setLeague] = useState<LeagueModel>();
     const [generalVod, setGeneralVod] = useState<GeneralVodModel[]>();
+    const [sourceVideo, setSourceVideo] = useState();
+    const [autoPlay, setAutoPlay] = useState(true);
+    const [display, setDisplay] = useState(false);
 
     return {
         homePage,
@@ -43,6 +48,12 @@ const useViewState = () => {
         setLeague,
         generalVod,
         setGeneralVod,
+        sourceVideo,
+        setSourceVideo,
+        autoPlay,
+        setAutoPlay,
+        display,
+        setDisplay,
     };
 };
 
@@ -186,5 +197,15 @@ export const useViewModel = ({ navigation, route }: IHomeScreenProps) => {
         navigation.openDrawer();
     };
 
-    return { t, onGoBack, ...state, onShowSideMenu, onClickPlayer };
+    const dispatch = useDispatch();
+
+    const handlePlayVideo = (video: any) => {
+        state.setDisplay(true);
+        state.setSourceVideo(video);
+        state.setAutoPlay(false);
+        dispatch(setShowVideo(true));
+        dispatch(addVideo(video));
+    };
+
+    return { t, onGoBack, ...state, onShowSideMenu, onClickPlayer, handlePlayVideo };
 };

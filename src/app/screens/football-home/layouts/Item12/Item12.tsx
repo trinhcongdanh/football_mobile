@@ -11,9 +11,10 @@ import IconFeather from 'react-native-vector-icons/Feather';
 import IconAntDesign from 'react-native-vector-icons/AntDesign';
 import { IItem12Props } from '@football/app/screens/football-home/layouts/Item12/Item12.type';
 
-export const Item12 = ({ videos }: IItem12Props) => {
+export const Item12 = ({ videos, handlePlayVideo }: IItem12Props) => {
     const { t, activeIndexNumber, setActiveIndexNumber, dots, onClickAllVideo } = useViewModel({
         videos,
+        handlePlayVideo,
     });
     return (
         <View style={styles.container}>
@@ -64,7 +65,10 @@ export const Item12 = ({ videos }: IItem12Props) => {
                                 marginHorizontal: getSize.m(12),
                             }}
                         >
-                            <TouchableOpacity activeOpacity={0.9}>
+                            <TouchableOpacity
+                                activeOpacity={0.9}
+                                onPress={() => handlePlayVideo(item.video_url)}
+                            >
                                 <Image source={{ uri: item.image_url }} style={styles.image} />
                                 <View style={styles.date}>
                                     <Text style={styles.text_date}>{item.length}</Text>

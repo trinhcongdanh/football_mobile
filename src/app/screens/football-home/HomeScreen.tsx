@@ -45,6 +45,7 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
         topTeams,
         league,
         generalVod,
+        handlePlayVideo,
     } = useViewModel({
         navigation,
         route,
@@ -164,30 +165,34 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                     </ImageBackground>
                     {/* Video Intro */}
                     {homeLayout?.layout.includes('video') && (
-                        <View style={styles.home_video}>
-                            <FastImage
-                                source={{ uri: homePage?.video.image_url }}
-                                style={{
-                                    width: getSize.m(347),
-                                    height: getSize.m(233),
-                                }}
-                            />
-                            <View style={styles.date}>
-                                <Text style={styles.text_date}>{homePage?.video.length}</Text>
-                            </View>
-                            <View style={styles.play_video_main}>
-                                <IconAntDesign
-                                    name={appIcons.ic_caretright}
-                                    size={getSize.m(16)}
-                                    color={appColors.white}
+                        <TouchableOpacity
+                            onPress={() => handlePlayVideo(homePage?.video.video_url)}
+                        >
+                            <View style={styles.home_video}>
+                                <FastImage
+                                    source={{ uri: homePage?.video.image_url }}
+                                    style={{
+                                        width: getSize.m(347),
+                                        height: getSize.m(233),
+                                    }}
                                 />
+                                <View style={styles.date}>
+                                    <Text style={styles.text_date}>{homePage?.video.length}</Text>
+                                </View>
+                                <View style={styles.play_video_main}>
+                                    <IconAntDesign
+                                        name={appIcons.ic_caretright}
+                                        size={getSize.m(16)}
+                                        color={appColors.white}
+                                    />
+                                </View>
+                                <View style={styles.content}>
+                                    <Text style={styles.text_content}>
+                                        {homePage?.video.caption_he}
+                                    </Text>
+                                </View>
                             </View>
-                            <View style={styles.content}>
-                                <Text style={styles.text_content}>
-                                    {homePage?.video.caption_he}
-                                </Text>
-                            </View>
-                        </View>
+                        </TouchableOpacity>
                     )}
                     {/* Player Stats */}
                     {homeLayout?.layout.includes('my_teams') &&
@@ -236,7 +241,7 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
 
                     {/* Item12 */}
                     {homeLayout?.layout.includes('clips') && generalVod && (
-                        <Item12 videos={generalVod} />
+                        <Item12 videos={generalVod} handlePlayVideo={handlePlayVideo} />
                     )}
 
                     {/* Item13 */}
