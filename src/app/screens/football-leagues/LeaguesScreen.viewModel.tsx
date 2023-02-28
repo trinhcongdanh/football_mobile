@@ -1,14 +1,10 @@
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
 import { LeagueItemScreen } from '@football/app/screens/football-leagues/layouts/league-item/LeagueItemScreen';
-import { useAppNavigation } from '@football/app/utils/hooks/useAppNavigation';
-import { useMount } from '@football/app/utils/hooks/useMount';
-import { useAppDispatch, useAppSelector } from '@football/app/utils/hooks/useStore';
 import { LeagueTypeModel } from '@football/core/models/LeagueModelResponse';
-import leagueService, { useLeagueTypes } from '@football/core/services/League.service';
-import LeagueTypeService from '@football/core/services/LeagueType.service';
-import React, { useCallback, useEffect, useState } from 'react';
+
+import LeagueTypeService, { useLeagueTypes } from '@football/core/services/LeagueType.service';
+import React, { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { resetSearchLeagues, setSearchLeagues } from 'src/store/league/League.slice';
 import { ILeaguesScreenProps } from './LeaguesScreen.type';
 
 // type INavigationProps = {
@@ -168,7 +164,6 @@ export const useViewModel = ({ navigation, route }: ILeaguesScreenProps) => {
             }));
         }
     }
-    console.log(labels);
 
     return {
         t,
