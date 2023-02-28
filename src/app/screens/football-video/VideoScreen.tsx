@@ -28,7 +28,6 @@ export const VideoScreen = ({ navigation, route }: IVideoScreenProps) => {
         t,
         onShowSideMenu,
         handlePlayVideo,
-
         favoriteTeamsVideo,
         favoriteTopTeamsVideo,
         favoritePlayersVideo,
@@ -90,9 +89,7 @@ export const VideoScreen = ({ navigation, route }: IVideoScreenProps) => {
                                                     >
                                                         <TouchableOpacity
                                                             activeOpacity={0.9}
-                                                            onPress={() =>
-                                                                handlePlayVideo(item.video_url)
-                                                            }
+                                                            onPress={() => handlePlayVideo(item)}
                                                         >
                                                             <Image
                                                                 source={{ uri: item.image_url }}
@@ -157,9 +154,7 @@ export const VideoScreen = ({ navigation, route }: IVideoScreenProps) => {
                                                     >
                                                         <TouchableOpacity
                                                             activeOpacity={0.9}
-                                                            onPress={() =>
-                                                                handlePlayVideo(item.video_url)
-                                                            }
+                                                            onPress={() => handlePlayVideo(item)}
                                                         >
                                                             <Image
                                                                 source={{ uri: item.image_url }}
@@ -223,9 +218,7 @@ export const VideoScreen = ({ navigation, route }: IVideoScreenProps) => {
                                                     >
                                                         <TouchableOpacity
                                                             activeOpacity={0.9}
-                                                            onPress={() =>
-                                                                handlePlayVideo(item.video_url)
-                                                            }
+                                                            onPress={() => handlePlayVideo(item)}
                                                         >
                                                             <Image
                                                                 source={{ uri: item.image_url }}

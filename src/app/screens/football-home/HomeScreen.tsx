@@ -165,9 +165,7 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                     </ImageBackground>
                     {/* Video Intro */}
                     {homeLayout?.layout.includes('video') && (
-                        <TouchableOpacity
-                            onPress={() => handlePlayVideo(homePage?.video.video_url)}
-                        >
+                        <TouchableOpacity onPress={() => handlePlayVideo(homePage?.video)}>
                             <View style={styles.home_video}>
                                 <FastImage
                                     source={{ uri: homePage?.video.image_url }}

@@ -45,12 +45,12 @@ export const useViewModel = ({ navigation, route }: IVideoScreenProps) => {
     const [sourceVideo, setSourceVideo] = useState();
     const [autoPlay, setAutoPlay] = useState(true);
 
-    const handlePlayVideo = (video: any) => {
+    const handlePlayVideo = (item: any) => {
         setDisplay(true);
-        setSourceVideo(video);
+        setSourceVideo(item);
         setAutoPlay(false);
         dispatch(setShowVideo(true));
-        dispatch(addVideo(video));
+        dispatch(addVideo(item));
     };
 
     const handleEndVideo = () => {

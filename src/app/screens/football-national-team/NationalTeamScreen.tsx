@@ -96,7 +96,7 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                             <View style={{ marginTop: getSize.m(20) }}>
                                 <TouchableOpacity
                                     activeOpacity={0.9}
-                                    onPress={() => handlePlayVideo(topTeam?.main_video.video_url)}
+                                    onPress={() => handlePlayVideo(topTeam?.main_video)}
                                 >
                                     <FastImage
                                         source={{ uri: topTeam?.main_video?.image_url }}
@@ -215,7 +215,7 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                                             >
                                                 <TouchableOpacity
                                                     activeOpacity={0.9}
-                                                    onPress={() => handlePlayVideo(item.video_url)}
+                                                    onPress={() => handlePlayVideo(item)}
                                                 >
                                                     <Image
                                                         source={{ uri: item.image_url }}

@@ -199,12 +199,12 @@ export const useViewModel = ({ navigation, route }: IHomeScreenProps) => {
 
     const dispatch = useDispatch();
 
-    const handlePlayVideo = (video: any) => {
+    const handlePlayVideo = (item: any) => {
         state.setDisplay(true);
-        state.setSourceVideo(video);
+        state.setSourceVideo(item);
         state.setAutoPlay(false);
         dispatch(setShowVideo(true));
-        dispatch(addVideo(video));
+        dispatch(addVideo(item));
     };
 
     return { t, onGoBack, ...state, onShowSideMenu, onClickPlayer, handlePlayVideo };

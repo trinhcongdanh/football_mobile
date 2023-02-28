@@ -115,7 +115,7 @@ export const Video = () => {
                     >
                         <Video_Player
                             ref={videoRef}
-                            source={{ uri: sourceVideo }}
+                            source={{ uri: sourceVideo ? sourceVideo.video_url : '' }}
                             style={styles.background_video}
                             paused={pause}
                             resizeMode="cover"
@@ -226,12 +226,11 @@ export const Video = () => {
                             }}
                         >
                             <Text style={styles.title}>
-                                אוהדים סינים נותנים שואו מדהים במשחק כדורגל, מופע של האוהדים
+                                {sourceVideo && sourceVideo.caption_he}
                             </Text>
-                            <Text style={styles.desc}>
-                                לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית קונסקטורר
-                                אדיפיסינג
-                            </Text>
+                            {sourceVideo && sourceVideo.text_he && (
+                                <Text style={styles.desc}>{sourceVideo.text_he}</Text>
+                            )}
                         </View>
                     </View>
                 </ScrollView>

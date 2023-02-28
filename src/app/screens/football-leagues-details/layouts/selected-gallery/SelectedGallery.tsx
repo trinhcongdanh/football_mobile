@@ -161,7 +161,7 @@ const SelectedGallery = ({ pagination, galleries }: ISelectedGalleryProps) => {
                             >
                                 <TouchableOpacity
                                     activeOpacity={0.9}
-                                    onPress={() => handlePlayVideo(item.video_url)}
+                                    onPress={() => handlePlayVideo(item)}
                                 >
                                     <Image source={{ uri: item.image_url }} style={styles.image} />
                                     <View style={styles.date}>
