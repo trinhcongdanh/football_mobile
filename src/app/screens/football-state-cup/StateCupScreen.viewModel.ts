@@ -78,19 +78,20 @@ export const useViewModel = ({ route }: IStateCupScreenProps) => {
     const { data: cupSeasonsData } = useCupSeasons(cup._id);
 
     useEffect(() => {
-        let cycles: any[] = selectedCupSeason?.cycles || [];
+        const cycles = selectedCupSeason?.cycles || [];
 
         // eslint-disable-next-line @typescript-eslint/no-unused-expressions
         cycles[0] ? setSelectCycle(cycles[0]) : null;
-    }, [setSelectedCupSeason, selectedCupSeason, cupSeasons]);
+    }, [selectedCupSeason]);
 
     useEffect(() => {
         const rounds = selectCycle?.rounds || [];
+
         const firstRound = rounds[0] ? rounds[0] : null;
         if (firstRound) {
             setSelectRound(firstRound);
         }
-    }, [selectCycle, setSelectCycle, setSelectRound]);
+    }, [selectCycle]);
 
     useEffect(() => {
         if (!cupSeasonsData) {
@@ -101,6 +102,17 @@ export const useViewModel = ({ route }: IStateCupScreenProps) => {
             const seasons = res.data.documents;
             setCupSeasons(seasons);
 
+            viewState.setYears(
+                (seasons?.length ? seasons : []).map(season => {
+                    return {
+                        // eslint-disable-next-line no-underscore-dangle
+                        id: season._id,
+                        content: season.name,
+                        isSelected: viewState.selectedCupSeason?.name === season.name,
+                    };
+                })
+            );
+
             if (seasons?.length) {
                 setSelectedCupSeason(seasons[0]);
             }
@@ -108,9 +120,9 @@ export const useViewModel = ({ route }: IStateCupScreenProps) => {
     }, [cupSeasonsData]);
 
     const handleSelectedYear = (item: any) => {
-        // viewState.setSelectedCupSeason(
-        //     viewState.team?.seasons.find(season => season.team_season_name === item.content)
-        // );
+        viewState.setSelectedCupSeason(
+            viewState.cupSeasons.find(season => season.name === item.content)
+        );
         viewState.setOpenModalYear(false);
     };
 

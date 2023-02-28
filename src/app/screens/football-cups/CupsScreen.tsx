@@ -14,9 +14,13 @@ import { useViewModel } from '@football/app/screens/football-cups/CupsScreen.vie
 import styles from '@football/app/screens/football-cups/CupsScreen.style';
 
 export const CupsScreen = ({ route }: ICupsScreenProps) => {
-    const { t, onGoBack, cupHolders, getTranslationText, cup } = useViewModel({
+    const { t, onGoBack, cupHolders, getTranslationText, cup, cyclesDetails } = useViewModel({
         route,
     });
+
+    const isCupHolders = !!cupHolders;
+    const data = isCupHolders ? cupHolders : cyclesDetails;
+
     return (
         <View style={appStyles.flex}>
             <ImageBackground source={AppImages.img_background} style={appStyles.flex}>
@@ -27,7 +31,7 @@ export const CupsScreen = ({ route }: ICupsScreenProps) => {
                             iconName={appIcons.ic_right_ios}
                             iconStyle={styles.ic_back}
                             goBack={onGoBack}
-                            title="מחזיקות גביע"
+                            title={isCupHolders ? 'מחזיקות גביע' : 'סיבובי הגביע'}
                         />
                     </View>
                     <ScrollView>
@@ -73,10 +77,10 @@ export const CupsScreen = ({ route }: ICupsScreenProps) => {
                                     </View>
                                 </View>
                                 <View style={{ marginTop: getSize.m(10) }}>
-                                    {cupHolders.map((item, index) => {
+                                    {data.map((item: any, index) => {
                                         return (
                                             <LinearGradient
-                                                key={item.cup_season_id}
+                                                key={index}
                                                 start={{ x: 0, y: 0 }}
                                                 end={{ x: 1, y: 1 }}
                                                 colors={[
@@ -106,7 +110,9 @@ export const CupsScreen = ({ route }: ICupsScreenProps) => {
                                                             },
                                                         ]}
                                                     >
-                                                        {item.cup_season_name}
+                                                        {isCupHolders
+                                                            ? item.cup_season_name
+                                                            : item.date}
                                                     </Text>
                                                 </View>
                                                 <View
@@ -120,11 +126,16 @@ export const CupsScreen = ({ route }: ICupsScreenProps) => {
                                                             flexDirection: 'row',
                                                         }}
                                                     >
-                                                        <Avatar
-                                                            source={{ uri: item.team_image_url }}
-                                                            rounded
-                                                            size={18}
-                                                        />
+                                                        {isCupHolders && (
+                                                            <Avatar
+                                                                source={{
+                                                                    uri: item.team_image_url,
+                                                                }}
+                                                                rounded
+                                                                size={18}
+                                                            />
+                                                        )}
+
                                                         <Text
                                                             style={[
                                                                 appStyles.statistics_content,
@@ -135,8 +146,12 @@ export const CupsScreen = ({ route }: ICupsScreenProps) => {
                                                             ]}
                                                         >
                                                             {getTranslationText({
-                                                                textEn: item.team_name_en,
-                                                                textHe: item.team_name_he,
+                                                                textEn: isCupHolders
+                                                                    ? item.team_name_en
+                                                                    : item.group_name_en,
+                                                                textHe: isCupHolders
+                                                                    ? item.team_name_he
+                                                                    : item.group_name_he,
                                                             })}
                                                         </Text>
                                                     </View>

@@ -72,7 +72,7 @@ export const StateCupScreen = ({ route }: IStateCupScreenProps) => {
                     </View>
                     {openModalYear && (
                         <DropDown
-                            data={cupSeasons}
+                            data={years}
                             handleSelected={(item: any) => handleSelectedYear(item)}
                             handleCloseModal={handleCloseModal}
                         />
@@ -131,12 +131,12 @@ export const StateCupScreen = ({ route }: IStateCupScreenProps) => {
                                 <View style={{ flex: 0.9 }}>
                                     <TouchableOpacity
                                         onPress={() => {
-                                            setOpenModalRound(!openModalRound);
+                                            setOpenModalCycle(!openModalCycle);
                                         }}
                                         style={[
                                             styles.cycle,
                                             {
-                                                borderColor: openModalRound
+                                                borderColor: openModalCycle
                                                     ? appColors.blue_light
                                                     : appColors.border,
                                             },
@@ -160,19 +160,20 @@ export const StateCupScreen = ({ route }: IStateCupScreenProps) => {
                                             style={styles.chevron_down}
                                         />
                                     </TouchableOpacity>
-                                    {openModalRound && (
+                                    {openModalCycle && (
                                         <View style={[styles.drop_down_calender, { width: '90%' }]}>
                                             <ScrollView
                                                 showsVerticalScrollIndicator={false}
                                                 nestedScrollEnabled
                                             >
-                                                {selectCycle?.rounds.map(
+                                                {selectedCupSeason?.cycles.map(
                                                     (cycle: any, index: number) => {
                                                         return (
                                                             <TouchableOpacity
                                                                 onPress={() => {
-                                                                    setSelectRound(cycle);
+                                                                    setSelectCycle(cycle);
                                                                     setOpenModalRound(false);
+                                                                    setOpenModalCycle(false);
                                                                 }}
                                                                 key={index.toString()}
                                                                 style={
@@ -197,12 +198,12 @@ export const StateCupScreen = ({ route }: IStateCupScreenProps) => {
                                 <View style={{ flex: 0.5 }}>
                                     <TouchableOpacity
                                         onPress={() => {
-                                            setOpenModalCycle(!openModalCycle);
+                                            setOpenModalRound(!openModalRound);
                                         }}
                                         style={[
                                             styles.cycle,
                                             {
-                                                borderColor: openModalCycle
+                                                borderColor: openModalRound
                                                     ? appColors.blue_light
                                                     : appColors.border,
                                             },
@@ -226,7 +227,8 @@ export const StateCupScreen = ({ route }: IStateCupScreenProps) => {
                                             style={styles.chevron_down}
                                         />
                                     </TouchableOpacity>
-                                    {openModalCycle && (
+
+                                    {openModalRound && (
                                         <View style={[styles.drop_down_calender, { width: '84%' }]}>
                                             <ScrollView
                                                 showsVerticalScrollIndicator={false}
@@ -238,6 +240,7 @@ export const StateCupScreen = ({ route }: IStateCupScreenProps) => {
                                                             <TouchableOpacity
                                                                 onPress={() => {
                                                                     setSelectRound(input);
+                                                                    setOpenModalRound(false);
                                                                     setOpenModalCycle(false);
                                                                 }}
                                                                 key={index.toString()}
@@ -270,7 +273,10 @@ export const StateCupScreen = ({ route }: IStateCupScreenProps) => {
                             <Trophy cupHolders={cup.cup_holders} cup={cup} />
                         </View>
                         <View style={styles.package}>
-                            <CupAround />
+                            <CupAround
+                                cyclesDetails={selectedCupSeason?.cycles_details || []}
+                                cup={cup}
+                            />
                         </View>
                     </ScrollView>
                 </SafeAreaView>

@@ -6,7 +6,7 @@ import { ICupsScreenProps } from './CupsScreen.type';
 export const useViewModel = ({ route }: ICupsScreenProps) => {
     const { goBack } = useAppNavigator();
     const { getTranslationText } = useTranslationText();
-    const { cupHolders, cup } = route.params;
+    const { cupHolders, cup, cyclesDetails } = route.params;
     const { t } = useTranslation();
     const onGoBack = (): void => {
         goBack();
@@ -18,5 +18,6 @@ export const useViewModel = ({ route }: ICupsScreenProps) => {
         cupHolders,
         getTranslationText,
         cup,
+        cyclesDetails,
     };
 };
