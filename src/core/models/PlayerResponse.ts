@@ -97,7 +97,7 @@ interface Team {
     seasons: Season[];
 }
 
-interface Season {
+export interface Season {
     name: string;
     goals: Goal[];
     cards: Card[];

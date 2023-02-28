@@ -676,7 +676,9 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                                             .map((item, index) => {
                                                 return (
                                                     <TouchableOpacity
-                                                        onPress={onNavigatePlayerData}
+                                                        onPress={() =>
+                                                            onNavigatePlayerData(item.player_id)
+                                                        }
                                                         key={item.player_id}
                                                         style={[
                                                             appStyles.flex_row_space_center,
@@ -762,7 +764,9 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                                             .map(item => {
                                                 return (
                                                     <TouchableOpacity
-                                                        onPress={onNavigatePlayerData}
+                                                        onPress={() =>
+                                                            onNavigatePlayerData(item.player_id)
+                                                        }
                                                         key={item.player_id}
                                                         style={[
                                                             appStyles.flex_row_space_center,

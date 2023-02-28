@@ -15,7 +15,7 @@ import { useViewModel } from './CompositionScreen.viewModel';
 
 export const CompositionScreen = ({ navigation, route }: ICompositionScreenProps) => {
     const game = route?.params?.data;
-    const { t, handleDataPlayer, options, selectOption, select } = useViewModel({
+    const { t, handleDataPlayer, options, selectOption, select, handleDataCoach } = useViewModel({
         navigation,
         route,
     });
@@ -41,7 +41,7 @@ export const CompositionScreen = ({ navigation, route }: ICompositionScreenProps
                                 name={item.name_he}
                                 number_before={item.shirt_number}
                                 avt={item.image_url}
-                                handleDataPlayer={handleDataPlayer}
+                                handleDataPlayer={() => handleDataPlayer(item.player_id)}
                             />
                         );
                     })}
@@ -55,7 +55,7 @@ export const CompositionScreen = ({ navigation, route }: ICompositionScreenProps
                                 name={item.name_he}
                                 number_before={item.shirt_number}
                                 avt={item.image_url}
-                                handleDataPlayer={handleDataPlayer}
+                                handleDataPlayer={() => handleDataPlayer(item.player_id)}
                             />
                         );
                     })}
@@ -72,7 +72,7 @@ export const CompositionScreen = ({ navigation, route }: ICompositionScreenProps
                                 name={item.name_he}
                                 number_before={item.shirt_number}
                                 avt={item.image_url}
-                                handleDataPlayer={handleDataPlayer}
+                                handleDataPlayer={() => handleDataPlayer(item.player_id)}
                             />
                         );
                     })}
@@ -85,7 +85,7 @@ export const CompositionScreen = ({ navigation, route }: ICompositionScreenProps
                                 key={item.coach_id}
                                 name={item.name_he}
                                 avt={item.image_url}
-                                handleDataPlayer={handleDataPlayer}
+                                handleDataPlayer={() => handleDataCoach(item.coach_id)}
                             />
                         );
                     })}
@@ -98,7 +98,7 @@ export const CompositionScreen = ({ navigation, route }: ICompositionScreenProps
                                 key={item.referee_id}
                                 name={item.name_he}
                                 avt={item.image_url}
-                                handleDataPlayer={handleDataPlayer}
+                                // handleDataPlayer={() => handleDataPlayer(item.player_id)}
                             />
                         );
                     })}

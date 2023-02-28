@@ -67,7 +67,7 @@ export const GoalKickerListScreen = ({ navigation, route }: IGoalKickerListScree
                                     {data.map((item: any) => {
                                         return (
                                             <TouchableOpacity
-                                                onPress={onNavigateDataPlayer}
+                                                onPress={() => onNavigateDataPlayer(item.player_id)}
                                                 style={[
                                                     appStyles.flex_row_space_center,
                                                     styles.content,

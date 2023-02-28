@@ -79,7 +79,7 @@ export const ConquerorsScreen = ({ navigation, route }: IConquerorsScreenProps) 
                                 {listItems.map(item => {
                                     return (
                                         <TouchableOpacity
-                                            onPress={onNavigateDataPlayer}
+                                            onPress={() => onNavigateDataPlayer(item.player_id)}
                                             style={[
                                                 appStyles.flex_row_space_center,
                                                 styles.content,

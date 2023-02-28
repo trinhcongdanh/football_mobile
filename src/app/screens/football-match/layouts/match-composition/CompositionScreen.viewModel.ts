@@ -21,8 +21,12 @@ export const useViewModel = ({ navigation, route }: ICompositionScreenProps) => 
     const { t } = useTranslation();
     const { navigate, goBack } = useAppNavigator();
 
-    const handleDataPlayer = () => {
-        navigate(ScreenName.DataPlayerPage);
+    const handleDataPlayer = (playerId: string) => {
+        navigate(ScreenName.DataPlayerPage, { playerId });
+    };
+
+    const handleDataCoach = (coachId: string) => {
+        navigate(ScreenName.DataCoachPage, { coachId });
     };
 
     const state = useViewState();
@@ -33,5 +37,5 @@ export const useViewModel = ({ navigation, route }: ICompositionScreenProps) => 
         state.setSelect(index);
     };
 
-    return { t, ...state, handleDataPlayer, options, selectOption };
+    return { t, ...state, handleDataPlayer, options, selectOption, handleDataCoach };
 };

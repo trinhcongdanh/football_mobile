@@ -31,7 +31,7 @@ const useViewCallback = (viewState: any) => {
     const { setLeagueSeason, selectSeason } = viewState;
 
     const getHomeLayoutData = useCallback(async () => {
-        const [error, res] = await leagueSeasonService.findByOId(selectSeason.league_season_id);
+        const [error, res] = await leagueSeasonService.findByOId(selectSeason?.league_season_id);
         if (error) {
             return;
         }

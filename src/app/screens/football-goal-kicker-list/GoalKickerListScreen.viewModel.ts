@@ -11,8 +11,8 @@ export const useViewModel = ({ navigation, route }: IGoalKickerListScreenProps) 
         goBack();
     };
 
-    const onNavigateDataPlayer = () => {
-        navigate(ScreenName.DataPlayerPage);
+    const onNavigateDataPlayer = (playerId: string) => {
+        navigate(ScreenName.DataPlayerPage, { playerId });
     };
     return {
         t,

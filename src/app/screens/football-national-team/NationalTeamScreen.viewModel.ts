@@ -110,8 +110,8 @@ export const useViewModel = ({ navigation, route }: INationalTeamScreenProps) =>
         });
     };
 
-    const onNavigatePlayerData = () => {
-        navigate(ScreenName.DataPlayerPage);
+    const onNavigatePlayerData = (playerId: string) => {
+        navigate(ScreenName.DataPlayerPage, { playerId });
     };
 
     const options = [
