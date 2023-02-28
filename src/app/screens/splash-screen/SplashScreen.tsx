@@ -82,9 +82,7 @@ export const SplashScreen = ({ navigation, route }: ISplashScreenProps) => {
         <View style={appStyles.flex}>
             <ImageBackground source={AppImages.img_background} style={appStyles.flex_center}>
                 <StatusBar translucent backgroundColor="transparent" />
-                <Image resizeMode="contain" source={AppImages.img_logo} style={styles.image} />
                 {splashData ? <LottieView source={splashData} autoPlay loop /> : null}
-                <View style={styles.background_blur} />
             </ImageBackground>
         </View>
     );
