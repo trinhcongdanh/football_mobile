@@ -23,6 +23,7 @@ const useViewState = ({ route }: IStateCupScreenProps) => {
     const [selectCycle, setSelectCycle] = useState<Cycle>();
     const [cycles, setCycles] = useState<any[]>([]);
     const [selectRound, setSelectRound] = useState<Round>();
+    const [years, setYears] = useState<any[]>();
 
     return {
         cup,
@@ -44,6 +45,8 @@ const useViewState = ({ route }: IStateCupScreenProps) => {
         setOpenModalRound,
         cycles,
         setCycles,
+        years,
+        setYears,
     };
 };
 const useViewCallback = () => {
@@ -66,7 +69,6 @@ export const useViewModel = ({ route }: IStateCupScreenProps) => {
         setCupSeasons,
         selectedCupSeason,
         setSelectedCupSeason,
-
         selectCycle,
         setSelectCycle,
         setSelectRound,
@@ -105,10 +107,23 @@ export const useViewModel = ({ route }: IStateCupScreenProps) => {
         }
     }, [cupSeasonsData]);
 
+    const handleSelectedYear = (item: any) => {
+        // viewState.setSelectedCupSeason(
+        //     viewState.team?.seasons.find(season => season.team_season_name === item.content)
+        // );
+        viewState.setOpenModalYear(false);
+    };
+
+    const handleCloseModal = () => {
+        viewState.setOpenModalYear(false);
+    };
+
     return {
         t,
         onGoBack,
         getTranslationText,
         ...viewState,
+        handleCloseModal,
+        handleSelectedYear,
     };
 };

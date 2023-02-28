@@ -34,7 +34,8 @@ export const StateCupScreen = ({ route }: IStateCupScreenProps) => {
         setOpenModalYear,
         openModalCycle,
         setOpenModalCycle,
-
+        years,
+        setYears,
         isScroll,
         cup,
         getTranslationText,
@@ -47,6 +48,9 @@ export const StateCupScreen = ({ route }: IStateCupScreenProps) => {
         setOpenModalRound,
         cycles,
         selectRound,
+        handleCloseModal,
+        handleSelectedYear,
+        setSelectRound,
     } = useViewModel({
         route,
     });
@@ -66,6 +70,13 @@ export const StateCupScreen = ({ route }: IStateCupScreenProps) => {
                             handlePressFunction={onGoBack}
                         />
                     </View>
+                    {openModalYear && (
+                        <DropDown
+                            data={cupSeasons}
+                            handleSelected={(item: any) => handleSelectedYear(item)}
+                            handleCloseModal={handleCloseModal}
+                        />
+                    )}
                     <ScrollView scrollEnabled={isScroll}>
                         <View style={appStyles.container}>
                             <View style={[appStyles.align_justify, { marginTop: getSize.m(16) }]}>
@@ -111,66 +122,143 @@ export const StateCupScreen = ({ route }: IStateCupScreenProps) => {
                                             style={styles.chevron_down}
                                         />
                                     </TouchableOpacity>
-                                    {openModalYear && (
-                                        <View style={styles.drop_down_calender}>
-                                            <ScrollView>
-                                                {cupSeasons.map((item, index: number) => {
-                                                    return (
-                                                        <TouchableOpacity
-                                                            activeOpacity={0.9}
-                                                            onPress={() => {
-                                                                setSelectedCupSeason(item);
-                                                                setOpenModalYear(false);
-                                                                setIsScroll(true);
-                                                            }}
-                                                            key={index.toString()}
-                                                            style={styles.btn_drop_down_calender}
-                                                        >
-                                                            <Text style={styles.option_year}>
-                                                                {item.name}
-                                                            </Text>
-                                                        </TouchableOpacity>
-                                                    );
-                                                })}
-                                            </ScrollView>
-                                        </View>
-                                    )}
                                 </View>
                             </View>
                             <View style={styles.line_dots} />
                         </View>
                         <View style={[appStyles.flex, appStyles.main_container]}>
                             <View style={styles.drop_down_filter}>
-                                <View style={{ flex: 0.55 }}>
+                                <View style={{ flex: 0.9 }}>
                                     <TouchableOpacity
-                                        style={styles.cycle}
                                         onPress={() => {
-                                            setOpenModalCycle(!openModalCycle);
+                                            setOpenModalRound(!openModalRound);
                                         }}
+                                        style={[
+                                            styles.cycle,
+                                            {
+                                                borderColor: openModalRound
+                                                    ? appColors.blue_light
+                                                    : appColors.border,
+                                            },
+                                        ]}
                                     >
                                         <Text style={styles.text_cycle}>
                                             {selectCycle?.cycle_name_he}
                                         </Text>
                                         <Icon
-                                            name={appIcons.ic_chevron_down}
+                                            name={
+                                                openModalRound
+                                                    ? appIcons.ic_chevron_up
+                                                    : appIcons.ic_chevron_down
+                                            }
                                             size={getSize.m(14)}
-                                            color={appColors.light_gray}
+                                            color={
+                                                openModalRound
+                                                    ? appColors.blue_light
+                                                    : appColors.light_gray
+                                            }
                                             style={styles.chevron_down}
                                         />
                                     </TouchableOpacity>
+                                    {openModalRound && (
+                                        <View style={[styles.drop_down_calender, { width: '90%' }]}>
+                                            <ScrollView
+                                                showsVerticalScrollIndicator={false}
+                                                nestedScrollEnabled
+                                            >
+                                                {selectCycle?.rounds.map(
+                                                    (cycle: any, index: number) => {
+                                                        return (
+                                                            <TouchableOpacity
+                                                                onPress={() => {
+                                                                    setSelectRound(cycle);
+                                                                    setOpenModalRound(false);
+                                                                }}
+                                                                key={index.toString()}
+                                                                style={
+                                                                    styles.btn_drop_down_calender
+                                                                }
+                                                            >
+                                                                <Text
+                                                                    style={
+                                                                        styles.btn_drop_down_calender_text
+                                                                    }
+                                                                >
+                                                                    {cycle.cycle_name_he}
+                                                                </Text>
+                                                            </TouchableOpacity>
+                                                        );
+                                                    }
+                                                )}
+                                            </ScrollView>
+                                        </View>
+                                    )}
                                 </View>
-                                <View style={{ flex: 0.45 }}>
-                                    <TouchableOpacity style={styles.cycle}>
+                                <View style={{ flex: 0.5 }}>
+                                    <TouchableOpacity
+                                        onPress={() => {
+                                            setOpenModalCycle(!openModalCycle);
+                                        }}
+                                        style={[
+                                            styles.cycle,
+                                            {
+                                                borderColor: openModalCycle
+                                                    ? appColors.blue_light
+                                                    : appColors.border,
+                                            },
+                                        ]}
+                                    >
                                         <Text style={styles.text_cycle}>
                                             {selectRound?.round_name_he}
                                         </Text>
                                         <Icon
-                                            name={appIcons.ic_chevron_down}
+                                            name={
+                                                openModalCycle
+                                                    ? appIcons.ic_chevron_up
+                                                    : appIcons.ic_chevron_down
+                                            }
                                             size={getSize.m(14)}
-                                            color={appColors.light_gray}
+                                            color={
+                                                openModalCycle
+                                                    ? appColors.blue_light
+                                                    : appColors.light_gray
+                                            }
                                             style={styles.chevron_down}
                                         />
                                     </TouchableOpacity>
+                                    {openModalCycle && (
+                                        <View style={[styles.drop_down_calender, { width: '84%' }]}>
+                                            <ScrollView
+                                                showsVerticalScrollIndicator={false}
+                                                nestedScrollEnabled
+                                            >
+                                                {selectCycle?.rounds.map(
+                                                    (input: any, index: number) => {
+                                                        return (
+                                                            <TouchableOpacity
+                                                                onPress={() => {
+                                                                    setSelectRound(input);
+                                                                    setOpenModalCycle(false);
+                                                                }}
+                                                                key={index.toString()}
+                                                                style={
+                                                                    styles.btn_drop_down_calender
+                                                                }
+                                                            >
+                                                                <Text
+                                                                    style={
+                                                                        styles.btn_drop_down_calender_text
+                                                                    }
+                                                                >
+                                                                    {input.round_name_he}
+                                                                </Text>
+                                                            </TouchableOpacity>
+                                                        );
+                                                    }
+                                                )}
+                                            </ScrollView>
+                                        </View>
+                                    )}
                                 </View>
                             </View>
                             <OptionState
