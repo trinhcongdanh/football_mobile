@@ -10,8 +10,12 @@ export const useViewModel = () => {
     const { navigate, goBack } = useAppNavigator();
     const { t } = useTranslation();
 
-    const handleSeeAll = (leagueSeasonStats: LeagueSeasonStatModel, data: GoalKicker[]) => {
-        navigate(ScreenName.StatisticDetailsPage, { data, leagueSeasonStats });
+    const handleSeeAll = (
+        leagueSeasonStats: LeagueSeasonStatModel,
+        data: GoalKicker[],
+        title: string
+    ) => {
+        navigate(ScreenName.StatisticDetailsPage, { data, leagueSeasonStats, title });
     };
 
     return {

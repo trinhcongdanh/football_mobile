@@ -49,6 +49,7 @@ module.exports = {
         'import/extensions': 'off',
         'no-unused-vars': 'warn',
         'unused-imports/no-unused-imports': 'error',
+        'no-underscore-dangle': 'off',
     },
     overrides: [
         {

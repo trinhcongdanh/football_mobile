@@ -26,12 +26,18 @@ export const AverageRebounds = ({ avgRebounds, leagueSeasonStats }: IAverageRebo
                     },
                 ]}
             >
-                <Text style={appStyles.statistics_title}>
-                    {t('statistics.leagues.average_yellow')}
+                <Text style={[appStyles.statistics_title, { fontSize: getSize.m(16) }]}>
+                    {t('statistics.leagues.average_rebounds')}
                 </Text>
                 <TouchableOpacity
                     style={appStyles.flex_row_space_center}
-                    onPress={() => handleSeeAll(leagueSeasonStats, avgRebounds)}
+                    onPress={() =>
+                        handleSeeAll(
+                            leagueSeasonStats,
+                            avgRebounds,
+                            t('statistics.leagues.average_rebounds')
+                        )
+                    }
                 >
                     <Text style={appStyles.statistics_see_all}>
                         {t('statistics.leagues.see_all')}
@@ -73,7 +79,7 @@ export const AverageRebounds = ({ avgRebounds, leagueSeasonStats }: IAverageRebo
                         {t('statistics.leagues.name_club')}
                     </Text>
                 </View>
-                <View style={{ width: getSize.m(60) }}>
+                <View style={{ width: getSize.m(80) }}>
                     <Text
                         style={[
                             appStyles.statistics_header,
@@ -82,7 +88,7 @@ export const AverageRebounds = ({ avgRebounds, leagueSeasonStats }: IAverageRebo
                             },
                         ]}
                     >
-                        {t('statistics.leagues.average')}
+                        {t('statistics.leagues.average_goal')}
                     </Text>
                 </View>
             </View>

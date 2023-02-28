@@ -79,8 +79,9 @@ export const useViewModel = ({ highlights }: IAboutLeagueProps) => {
                           text: t('leagues_details.about.exchanges'),
                           value: highlights[key],
                       };
+
                   default:
-                      return [];
+                      return null;
               }
           })
         : [];

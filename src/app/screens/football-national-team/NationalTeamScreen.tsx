@@ -71,46 +71,6 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
             <ImageBackground source={AppImages.img_background} style={appStyles.flex}>
                 <StatusBar translucent backgroundColor="transparent" />
                 <SafeAreaView style={appStyles.safe_area}>
-                    {display && (
-                        <View style={styles.video_container}>
-                            <View style={styles.ic_close}>
-                                <Icon
-                                    onPress={() => {
-                                        setDisplay(false);
-                                        setAutoPlay(true);
-                                    }}
-                                    name="close"
-                                    size={getSize.m(18)}
-                                    color={appColors.white}
-                                />
-                            </View>
-                            <View style={styles.ic_share}>
-                                <Icon
-                                    onPress={() => {}}
-                                    name="sharealt"
-                                    size={getSize.m(18)}
-                                    color={appColors.white}
-                                />
-                            </View>
-
-                            <View>
-                                <Video
-                                    loop
-                                    video={{ uri: sourceVideo }}
-                                    thumbnail={AppImages.img_thumbnail}
-                                    endThumbnail={AppImages.img_thumbnail}
-                                    videoWidth={getSize.m(1600)}
-                                    videoHeight={getSize.m(900)}
-                                    resizeMode="contain"
-                                    showDuration
-                                    onEnd={() => {
-                                        setDisplay(false);
-                                        setAutoPlay(true);
-                                    }}
-                                />
-                            </View>
-                        </View>
-                    )}
                     <View style={appStyles.container}>
                         <HeaderUser
                             avt={AppImages.img_avt}
@@ -137,9 +97,10 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                                     activeOpacity={0.9}
                                     onPress={() => handlePlayVideo(topTeam?.main_video.video_url)}
                                 >
-                                    <Image
+                                    <FastImage
                                         source={{ uri: topTeam?.main_video?.image_url }}
                                         style={styles.image_team}
+                                        resizeMode={FastImage.resizeMode.contain}
                                     />
                                     <View style={styles.date}>
                                         <Text style={styles.text_date}>

@@ -45,10 +45,10 @@ export const AboutLeague = ({ highlights }: IAboutLeagueProps) => {
                     }}
                     scrollEventThrottle={16}
                 >
-                    {aboutGames.map((item, index) => {
-                        return (
+                    {aboutGames.map((item: any, index) => {
+                        return item ? (
                             <Animated.View
-                                key={item.id}
+                                key={index}
                                 style={[
                                     appStyles.align_justify,
                                     styles.item_about,
@@ -70,7 +70,7 @@ export const AboutLeague = ({ highlights }: IAboutLeagueProps) => {
                                 <Text style={styles.title_about}>{item.text}</Text>
                                 <Text style={styles.content_about}>{item.value}</Text>
                             </Animated.View>
-                        );
+                        ) : null;
                     })}
                 </ScrollView>
             </View>

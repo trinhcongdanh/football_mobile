@@ -5,3 +5,5 @@ export const DB = 'app_dev';
 export const MAX_TOPTEAM_LASTCAMPAIGN_GAMES = 4;
 export const MAX_TOPTEAM_LASTCAMPAIGN_PLAYERAPPEARANCE = 5;
 export const MAX_LEAGUE_SEASON_STATS_ITEMS = 5;
+export const MAX_CUP_HOLDERS_ITEMS = 5;
+export const MAX_CUP_CYCLES_DETAILS_ITEMS = 5;

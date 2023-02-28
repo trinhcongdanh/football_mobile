@@ -26,12 +26,18 @@ export const AccumulationReds = ({ redCards, leagueSeasonStats }: IAccumulationR
                     },
                 ]}
             >
-                <Text style={appStyles.statistics_title}>
+                <Text style={[appStyles.statistics_title, { fontSize: getSize.m(16) }]}>
                     {t('statistics.leagues.accumulation_red')}
                 </Text>
                 <TouchableOpacity
                     style={appStyles.flex_row_space_center}
-                    onPress={() => handleSeeAll(leagueSeasonStats, redCards)}
+                    onPress={() =>
+                        handleSeeAll(
+                            leagueSeasonStats,
+                            redCards,
+                            t('statistics.leagues.accumulation_red')
+                        )
+                    }
                 >
                     <Text style={appStyles.statistics_see_all}>
                         {t('statistics.leagues.see_all')}
