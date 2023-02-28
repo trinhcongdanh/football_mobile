@@ -49,6 +49,14 @@ export enum ScreenName {
     SideBar = 'SideBar',
 }
 
+export enum LeagueQueryKey {
+    GetLeagueTypes = 'get-league-types',
+}
+
+export enum LeagueSeasonQueryKey {
+    GetLeagueSeason = 'get-league-season',
+}
+
 export enum ScreenTopTap {
     CompositionPage = 'CompositionPage',
     GamePage = 'GamePage',

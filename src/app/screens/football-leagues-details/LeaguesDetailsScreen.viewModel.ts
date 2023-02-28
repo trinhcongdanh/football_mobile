@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useAppNavigation } from '@football/app/utils/hooks/useAppNavigation';
 import { LeagueModel } from '@football/core/models/LeagueModelResponse';
 import {
@@ -5,10 +6,12 @@ import {
     Gallery,
     Highlights,
     LeagueSeasonModel,
-    Round
+    Round,
 } from '@football/core/models/LeagueSeasonModelResponse';
 import LeagueService from '@football/core/services/League.service';
-import LeagueSeasonService from '@football/core/services/LeagueSeason.service';
+import LeagueSeasonService, {
+    useLeagueSeasons,
+} from '@football/core/services/LeagueSeason.service';
 import { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
@@ -103,12 +106,13 @@ const useViewCallback = (route: any, viewState: any) => {
 export const useViewModel = ({ navigation, route }: ILeaguesDetailsScreenProps) => {
     const { onGoBack } = useAppNavigation();
     const { t } = useTranslation();
-
+    const { leagueId }: any = route.params;
+    const { data: leagueSeasonData } = useLeagueSeasons(leagueId);
     const viewState = useViewState();
-    const { getLeagueSeasonsData, getLeagueById, dispatch } = useViewCallback(route, viewState);
+    const { setAllLeagueSeasons, setSelectedLeagueSeason } = viewState;
+    const { getLeagueById, dispatch } = useViewCallback(route, viewState);
 
     const handleSelectedYear = (item: any) => {
-        // eslint-disable-next-line @typescript-eslint/dot-notation
         viewState.setSelectedLeagueSeason(
             viewState.allLeagueSeasons.find(season => season.name === item.content)
         );
@@ -122,7 +126,6 @@ export const useViewModel = ({ navigation, route }: ILeaguesDetailsScreenProps) 
     };
 
     useEffect(() => {
-        getLeagueSeasonsData();
         getLeagueById();
 
         return () => {
@@ -153,7 +156,6 @@ export const useViewModel = ({ navigation, route }: ILeaguesDetailsScreenProps) 
         if (viewState.selectedLeagueSeason?.highlights) {
             viewState.setHightlights(viewState.selectedLeagueSeason.highlights);
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [
         viewState.selectedLeagueSeason,
         viewState.allLeagueSeasons,
@@ -170,8 +172,25 @@ export const useViewModel = ({ navigation, route }: ILeaguesDetailsScreenProps) 
         if (firstRound) {
             viewState.setSelectRound(firstRound);
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [viewState.selectCycle, viewState.setSelectCycle, viewState.setSelectRound]);
+
+    useEffect(() => {
+        if (!leagueSeasonData) {
+            return;
+        }
+        const [error, res] = leagueSeasonData;
+        if (error) {
+            return;
+        }
+
+        const leagueSeasons = res.data.documents;
+
+        dispatch(setLeagueSeasons(leagueSeasons));
+        setAllLeagueSeasons(leagueSeasons);
+        if (leagueSeasons?.length) {
+            setSelectedLeagueSeason(leagueSeasons[0]);
+        }
+    }, [leagueSeasonData]);
 
     return {
         t,
