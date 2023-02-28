@@ -22,7 +22,7 @@ export const TeamCompetition = ({}: ITeamCompetitionProps) => {
                     },
                 ]}
             >
-                <Text style={appStyles.statistics_title}>
+                <Text style={[appStyles.statistics_title, { fontSize: getSize.m(16) }]}>
                     {t('statistics.leagues.team_competition')}
                 </Text>
                 <TouchableOpacity style={appStyles.flex_row_space_center}>

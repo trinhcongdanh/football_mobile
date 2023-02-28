@@ -7,6 +7,8 @@ import TopTeamService from '@football/core/services/TopTeam.service';
 import { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Dimensions } from 'react-native';
+import { useDispatch } from 'react-redux';
+import { addVideo, setShowVideo } from 'src/store/video/Video.slice';
 import { INationalTeamScreenProps } from './NationalTeamScreen.type';
 
 const useViewState = () => {
@@ -65,10 +67,14 @@ export const useViewModel = ({ navigation, route }: INationalTeamScreenProps) =>
         getTopTeamData();
     }, []);
 
+    const dispatch = useDispatch();
+
     const handlePlayVideo = (video: any) => {
         state.setDisplay(true);
         state.setSourceVideo(video);
         state.setAutoPlay(false);
+        dispatch(setShowVideo(true));
+        dispatch(addVideo(video));
     };
 
     const handleEndVideo = () => {

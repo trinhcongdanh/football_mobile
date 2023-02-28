@@ -19,7 +19,7 @@ export const LeaguesAverage = ({ data }: ILeaguesAverageProps) => {
                     },
                 ]}
             >
-                <Text style={appStyles.statistics_title}>
+                <Text style={[appStyles.statistics_title, { fontSize: getSize.m(16) }]}>
                     {t('statistics.leagues.average_league')}
                 </Text>
                 {/* <TouchableOpacity style={appStyles.flex_row_space_center}>
