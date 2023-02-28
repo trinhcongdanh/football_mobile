@@ -16,6 +16,8 @@ import { useTranslation } from 'react-i18next';
 import TopTeamService from '@football/core/services/TopTeam.service';
 import { LeagueModel } from '@football/core/models/LeagueModelResponse';
 import leaguesService from '@football/core/services/League.service';
+import { GeneralVodModel } from '@football/core/models/GeneralVodResponse';
+import GeneralVodService from '@football/core/services/GeneralVod.service';
 
 const useViewState = () => {
     const [homePage, setHomePage] = useState<HomePageModel>();
@@ -24,6 +26,7 @@ const useViewState = () => {
     const [teams, setTeams] = useState<TeamModel[]>();
     const [topTeams, setTopTeams] = useState<TopTeamModel[]>();
     const [league, setLeague] = useState<LeagueModel>();
+    const [generalVod, setGeneralVod] = useState<GeneralVodModel[]>();
 
     return {
         homePage,
@@ -38,11 +41,21 @@ const useViewState = () => {
         setTopTeams,
         league,
         setLeague,
+        generalVod,
+        setGeneralVod,
     };
 };
 
 const useViewCallback = (route: any, viewState: any) => {
-    const { setPlayers, setHomePage, setHomeLayout, setTeams, setTopTeams, setLeague } = viewState;
+    const {
+        setPlayers,
+        setHomePage,
+        setHomeLayout,
+        setTeams,
+        setTopTeams,
+        setLeague,
+        setGeneralVod,
+    } = viewState;
 
     const getHomeLayoutData = useCallback(async () => {
         const [error, res] = await HomeLayoutService.findAll();
@@ -103,6 +116,15 @@ const useViewCallback = (route: any, viewState: any) => {
         }
     }, []);
 
+    const getGeneralVodData = useCallback(async () => {
+        const [error, res] = await GeneralVodService.findAll();
+        if (error) {
+            return;
+        }
+
+        setGeneralVod(res.data.documents);
+    }, []);
+
     return {
         getHomeLayoutData,
         getHomePageData,
@@ -110,6 +132,7 @@ const useViewCallback = (route: any, viewState: any) => {
         getTeamsData,
         getTopTeamsData,
         getDefaultLeagueData,
+        getGeneralVodData,
     };
 };
 
@@ -139,6 +162,7 @@ export const useViewModel = ({ navigation, route }: IHomeScreenProps) => {
         getTeamsData,
         getTopTeamsData,
         getDefaultLeagueData,
+        getGeneralVodData,
     } = useViewCallback(route, state);
 
     const { onClickPlayer } = eventHandler(navigate);
@@ -149,6 +173,7 @@ export const useViewModel = ({ navigation, route }: IHomeScreenProps) => {
         getPlayersData();
         getTeamsData();
         getTopTeamsData();
+        getGeneralVodData();
     });
 
     useEffect(() => {

@@ -44,6 +44,7 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
         teams,
         topTeams,
         league,
+        generalVod,
     } = useViewModel({
         navigation,
         route,
@@ -234,7 +235,9 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                     {homeLayout?.layout.includes('national_cup') && <Item11 homePage={homePage} />}
 
                     {/* Item12 */}
-                    {homeLayout?.layout.includes('clips') && <Item12 videos={homePage.video} />}
+                    {homeLayout?.layout.includes('clips') && generalVod && (
+                        <Item12 videos={generalVod} />
+                    )}
 
                     {/* Item13 */}
 

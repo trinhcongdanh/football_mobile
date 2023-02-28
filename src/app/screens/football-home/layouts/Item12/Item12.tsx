@@ -11,8 +11,10 @@ import IconFeather from 'react-native-vector-icons/Feather';
 import IconAntDesign from 'react-native-vector-icons/AntDesign';
 import { IItem12Props } from '@football/app/screens/football-home/layouts/Item12/Item12.type';
 
-export const Item12 = ({videos}: IItem12Props) => {
-    const { t, pages, activeIndexNumber, setActiveIndexNumber, data, dots } = useViewModel({videos});
+export const Item12 = ({ videos }: IItem12Props) => {
+    const { t, activeIndexNumber, setActiveIndexNumber, dots, onClickAllVideo } = useViewModel({
+        videos,
+    });
     return (
         <View style={styles.container}>
             <View
@@ -26,14 +28,16 @@ export const Item12 = ({videos}: IItem12Props) => {
                 ]}
             >
                 <Text style={styles.header}>סרטונים</Text>
-                <View style={appStyles.flex_row_align}>
-                    <Text style={styles.details}>לכל הסרטונים</Text>
-                    <IconEntypo
-                        name={appIcons.ic_arrow_left}
-                        size={getSize.m(13)}
-                        color={appColors.white}
-                    />
-                </View>
+                <TouchableOpacity onPress={onClickAllVideo}>
+                    <View style={appStyles.flex_row_align}>
+                        <Text style={styles.details}>לכל הסרטונים</Text>
+                        <IconEntypo
+                            name={appIcons.ic_arrow_left}
+                            size={getSize.m(13)}
+                            color={appColors.white}
+                        />
+                    </View>
+                </TouchableOpacity>
             </View>
             <ScrollView
                 horizontal
@@ -49,7 +53,7 @@ export const Item12 = ({videos}: IItem12Props) => {
                     }
                 }}
             >
-                {data.map((item, index) => {
+                {videos.map((item, index) => {
                     return (
                         <View
                             // eslint-disable-next-line react/no-array-index-key
@@ -61,7 +65,7 @@ export const Item12 = ({videos}: IItem12Props) => {
                             }}
                         >
                             <TouchableOpacity activeOpacity={0.9}>
-                                <Image source={item.image_url} style={styles.image} />
+                                <Image source={{ uri: item.image_url }} style={styles.image} />
                                 <View style={styles.date}>
                                     <Text style={styles.text_date}>{item.length}</Text>
                                 </View>
