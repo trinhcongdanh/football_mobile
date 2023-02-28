@@ -13,11 +13,14 @@ import { ICupsScreenProps } from '@football/app/screens/football-cups/CupsScreen
 import { useViewModel } from '@football/app/screens/football-cups/CupsScreen.viewModel';
 import styles from '@football/app/screens/football-cups/CupsScreen.style';
 
-export const CupsScreen = ({ navigation, route }: ICupsScreenProps) => {
-    const { t, onGoBack, listGoals } = useViewModel({
-        navigation,
+export const CupsScreen = ({ route }: ICupsScreenProps) => {
+    const { t, onGoBack, cupHolders, getTranslationText, cup, cyclesDetails } = useViewModel({
         route,
     });
+
+    const isCupHolders = !!cupHolders;
+    const data = isCupHolders ? cupHolders : cyclesDetails;
+
     return (
         <View style={appStyles.flex}>
             <ImageBackground source={AppImages.img_background} style={appStyles.flex}>
@@ -28,11 +31,11 @@ export const CupsScreen = ({ navigation, route }: ICupsScreenProps) => {
                             iconName={appIcons.ic_right_ios}
                             iconStyle={styles.ic_back}
                             goBack={onGoBack}
-                            title="מחזיקות גביע"
+                            title={isCupHolders ? 'מחזיקות גביע' : 'סיבובי הגביע'}
                         />
                     </View>
                     <ScrollView>
-                        <HeaderLogo text="גביע המדינה" avt={AppImages.img_leagues} />
+                        <HeaderLogo text={cup?.name_he} avt={{ uri: cup?.logo_url }} />
                         <View
                             style={[
                                 appStyles.package,
@@ -74,17 +77,17 @@ export const CupsScreen = ({ navigation, route }: ICupsScreenProps) => {
                                     </View>
                                 </View>
                                 <View style={{ marginTop: getSize.m(10) }}>
-                                    {listGoals.map(item => {
+                                    {data.map((item: any, index) => {
                                         return (
                                             <LinearGradient
-                                                key={item.id}
+                                                key={index}
                                                 start={{ x: 0, y: 0 }}
                                                 end={{ x: 1, y: 1 }}
                                                 colors={[
-                                                    item.id % 2 === 1
+                                                    index % 2 === 1
                                                         ? 'rgba(16, 32, 100, 0.04)'
                                                         : appColors.gray,
-                                                    item.id % 2 === 1
+                                                    index % 2 === 1
                                                         ? 'rgba(59, 168, 225, 0.04)'
                                                         : appColors.gray,
                                                 ]}
@@ -107,7 +110,9 @@ export const CupsScreen = ({ navigation, route }: ICupsScreenProps) => {
                                                             },
                                                         ]}
                                                     >
-                                                        {item.seasion}
+                                                        {isCupHolders
+                                                            ? item.cup_season_name
+                                                            : item.date}
                                                     </Text>
                                                 </View>
                                                 <View
@@ -121,11 +126,16 @@ export const CupsScreen = ({ navigation, route }: ICupsScreenProps) => {
                                                             flexDirection: 'row',
                                                         }}
                                                     >
-                                                        <Avatar
-                                                            source={item.avt_club}
-                                                            rounded
-                                                            size={18}
-                                                        />
+                                                        {isCupHolders && (
+                                                            <Avatar
+                                                                source={{
+                                                                    uri: item.team_image_url,
+                                                                }}
+                                                                rounded
+                                                                size={18}
+                                                            />
+                                                        )}
+
                                                         <Text
                                                             style={[
                                                                 appStyles.statistics_content,
@@ -135,7 +145,14 @@ export const CupsScreen = ({ navigation, route }: ICupsScreenProps) => {
                                                                 },
                                                             ]}
                                                         >
-                                                            {item.name_club}
+                                                            {getTranslationText({
+                                                                textEn: isCupHolders
+                                                                    ? item.team_name_en
+                                                                    : item.group_name_en,
+                                                                textHe: isCupHolders
+                                                                    ? item.team_name_he
+                                                                    : item.group_name_he,
+                                                            })}
                                                         </Text>
                                                     </View>
                                                 </View>

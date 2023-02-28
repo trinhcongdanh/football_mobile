@@ -1,53 +1,28 @@
-import { useTranslation } from 'react-i18next';
-import React from 'react';
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
-import { AppImages } from '@football/app/assets/images';
+import { ITrophyProps } from '@football/app/screens/football-state-cup/layouts/Statistics/Trophy/Trophy.type';
 import { ScreenName } from '@football/app/utils/constants/enum';
+import { MAX_CUP_HOLDERS_ITEMS } from '@football/core/api/configs/config';
+import { CupHolder } from '@football/core/models/CupModelResponse';
+import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
-export const useViewModel = () => {
-    const { navigate, goBack } = useAppNavigator();
+export const useViewModel = ({ cupHolders, cup }: ITrophyProps) => {
+    const { navigate } = useAppNavigator();
     const { t } = useTranslation();
-
-    const seasonsTrophy = [
-        {
-            id: 1,
-            name_club: 'מכבי ע. פ״ת',
-            avt_club: AppImages.img_israel,
-            season: '2021/2022',
-        },
-        {
-            id: 2,
-            name_club: 'מכבי ע. פ״ת',
-            avt_club: AppImages.img_israel,
-            season: '2021/2022',
-        },
-        {
-            id: 3,
-            name_club: 'מכבי ע. פ״ת',
-            avt_club: AppImages.img_israel,
-            season: '2021/2022',
-        },
-        {
-            id: 4,
-            name_club: 'מכבי ע. פ״ת',
-            avt_club: AppImages.img_israel,
-            season: '2021/2022',
-        },
-        {
-            id: 5,
-            name_club: 'מכבי ע. פ״ת',
-            avt_club: AppImages.img_israel,
-            season: '2021/2022',
-        },
-    ];
+    const [holders, setHolders] = useState<CupHolder[]>([]);
 
     const handleCupAround = () => {
-        navigate(ScreenName.CupsPage);
+        navigate(ScreenName.CupsPage, { cupHolders, cup });
     };
+
+    useEffect(() => {
+        const cupHoldersFiltered = cupHolders.slice(0, MAX_CUP_HOLDERS_ITEMS);
+        setHolders(cupHoldersFiltered);
+    }, [cupHolders]);
 
     return {
         t,
-        seasonsTrophy,
+        holders,
         handleCupAround,
     };
 };

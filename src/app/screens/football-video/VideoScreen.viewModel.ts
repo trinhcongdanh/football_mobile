@@ -1,17 +1,22 @@
-import React, { useEffect, useState } from 'react';
 import { AppImages } from '@football/app/assets/images';
-import { Dimensions } from 'react-native';
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
+import { usePlayers, useTeams, useTopTeams } from '@football/core/services/Video.service';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { IVideoScreenProps } from './VideoScreen.type';
+import { Dimensions } from 'react-native';
 import { useDispatch } from 'react-redux';
-import { addVideo, setShowVideo, videoSlice } from 'src/store/video/Video.slice';
-import crashlytics from '@react-native-firebase/crashlytics';
-import { useMount } from '@football/app/utils/hooks/useMount';
-import { firebase } from '@react-native-firebase/auth';
+import { addVideo, setShowVideo } from 'src/store/video/Video.slice';
+import { IVideoScreenProps } from './VideoScreen.type';
 
 export const useViewModel = ({ navigation, route }: IVideoScreenProps) => {
     const { navigate, goBack } = useAppNavigator();
+    const { data: teamsData } = useTeams();
+    const { data: topTeamsData } = useTopTeams();
+    const { data: playersData } = usePlayers();
+
+    const [favoriteTeamsVideo, setFavoriteTeamsVideo] = useState<any[]>([]);
+    const [favoriteTopTeamsVideo, setFavoriteTopTeamsVideo] = useState<any[]>([]);
+    const [favoritePlayersVideo, setFavoritePlayersVideo] = useState<any[]>([]);
 
     const { t } = useTranslation();
 
@@ -84,6 +89,46 @@ export const useViewModel = ({ navigation, route }: IVideoScreenProps) => {
         setShowSideMenu(false);
     };
 
+    useEffect(() => {
+        if (!teamsData) {
+            return;
+        }
+
+        const [error, res] = teamsData;
+
+        if (!error) {
+            setFavoriteTeamsVideo(res.data.documents[0] ? res.data.documents[0].video_gallery : []);
+        }
+    }, [teamsData]);
+
+    useEffect(() => {
+        if (!topTeamsData) {
+            return;
+        }
+
+        const [error, res] = topTeamsData;
+
+        if (!error) {
+            setFavoriteTopTeamsVideo(
+                res.data.documents[2] ? res.data.documents[2].video_gallery : []
+            );
+        }
+    }, [topTeamsData]);
+
+    useEffect(() => {
+        if (!playersData) {
+            return;
+        }
+
+        const [error, res] = playersData;
+
+        if (!error) {
+            setFavoritePlayersVideo(
+                res.data.documents[3] ? res.data.documents[3].video_gallery : []
+            );
+        }
+    }, [playersData]);
+
     return {
         t,
         onShowSideMenu,
@@ -98,5 +143,8 @@ export const useViewModel = ({ navigation, route }: IVideoScreenProps) => {
         handleEndVideo,
         showSideMenu,
         closeSideMenu,
+        favoriteTeamsVideo,
+        favoriteTopTeamsVideo,
+        favoritePlayersVideo,
     };
 };

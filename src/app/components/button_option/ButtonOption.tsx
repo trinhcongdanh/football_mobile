@@ -2,7 +2,6 @@ import { AppFonts } from '@football/app/assets/fonts';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import React, { useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import { Text, TouchableOpacity, View } from 'react-native';
 import styles from './ButtonOption.style';
 import { IButtonOptionComponent } from './ButtonOption.type';
@@ -13,8 +12,6 @@ export const ButtonOption = ({
     onSelect,
     defaultValue = 0,
 }: IButtonOptionComponent) => {
-    const { t } = useTranslation();
-
     const options = [option_one, option_two];
 
     const [select, setSelect] = useState(defaultValue);

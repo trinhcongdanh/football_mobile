@@ -1,45 +1,28 @@
-import { useTranslation } from 'react-i18next';
-import React from 'react';
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
+import { ICupAroundProps } from '@football/app/screens/football-state-cup/layouts/Statistics/Cup-Around/CupAround.type';
 import { ScreenName } from '@football/app/utils/constants/enum';
+import { MAX_CUP_CYCLES_DETAILS_ITEMS } from '@football/core/api/configs/config';
+import { CupSeasonCycleDetails } from '@football/core/models/CupSeasonModelResponse';
+import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
-export const useViewModel = () => {
-    const { navigate, goBack } = useAppNavigator();
+export const useViewModel = ({ cyclesDetails, cup }: ICupAroundProps) => {
+    const { navigate } = useAppNavigator();
     const { t } = useTranslation();
-    const cupsAround = [
-        {
-            id: 1,
-            group: 'א',
-            date: '03/09/2022',
-        },
-        {
-            id: 2,
-            group: "ה' - ליגות א' דרום",
-            date: '03/09/2022',
-        },
-        {
-            id: 3,
-            group: "ה' - ליגות א' צפון",
-            date: '03/09/2022',
-        },
-        {
-            id: 4,
-            group: 'ב',
-            date: '03/09/2022',
-        },
-        {
-            id: 5,
-            group: 'ג',
-            date: '03/09/2022',
-        },
-    ];
 
     const handleStatisticDetailsScreen = () => {
-        navigate(ScreenName.CupsPage);
+        navigate(ScreenName.CupsPage, { cup, cyclesDetails });
     };
+
+    const [details, setDetails] = useState<CupSeasonCycleDetails[]>([]);
+
+    useEffect(() => {
+        const detailsFiltered = cyclesDetails.slice(0, MAX_CUP_CYCLES_DETAILS_ITEMS);
+        setDetails(detailsFiltered);
+    }, [cyclesDetails]);
     return {
         t,
-        cupsAround,
+        details,
         handleStatisticDetailsScreen,
     };
 };

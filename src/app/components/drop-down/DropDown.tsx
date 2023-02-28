@@ -1,13 +1,13 @@
+import { AppFonts } from '@football/app/assets/fonts';
+import { appIcons } from '@football/app/assets/icons/appIcons';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import { getSize } from '@football/app/utils/responsive/scale';
 import React from 'react';
+import { Text, TouchableOpacity, View } from 'react-native';
 import IconIonicons from 'react-native-vector-icons/Ionicons';
-import { View, Text, TouchableOpacity } from 'react-native';
 import { styles } from './DropDown.style';
 import { IDropDownProps } from './DropDown.type';
-import { appIcons } from '@football/app/assets/icons/appIcons';
-import { AppFonts } from '@football/app/assets/fonts';
 
 export const DropDown = ({ data, handleSelected, handleCloseModal }: IDropDownProps) => {
     return (

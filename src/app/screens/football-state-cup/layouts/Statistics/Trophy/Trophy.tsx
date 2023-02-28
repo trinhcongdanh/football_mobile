@@ -1,17 +1,19 @@
-import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
 import { appIcons } from '@football/app/assets/icons/appIcons';
-import { getSize } from '@football/app/utils/responsive/scale';
+import { ITrophyProps } from '@football/app/screens/football-state-cup/layouts/Statistics/Trophy/Trophy.type';
 import { appColors } from '@football/app/utils/constants/appColors';
-import { Avatar } from 'react-native-elements';
-import Icon from 'react-native-vector-icons/Feather';
 import { appStyles } from '@football/app/utils/constants/appStyles';
+import { getSize } from '@football/app/utils/responsive/scale';
+import React from 'react';
+import { Text, TouchableOpacity, View } from 'react-native';
+import { Avatar } from 'react-native-elements';
+import LinearGradient from 'react-native-linear-gradient';
+import Icon from 'react-native-vector-icons/Feather';
 import styles from './Trophy.style';
 import { useViewModel } from './Trophy.viewModel';
-import LinearGradient from 'react-native-linear-gradient';
 
-export const Trophy = () => {
-    const { t, seasonsTrophy, handleCupAround } = useViewModel();
+export const Trophy = ({ cupHolders, cup }: ITrophyProps) => {
+    const { t, handleCupAround, holders } = useViewModel({ cupHolders, cup });
+
     return (
         <View style={styles.item_statistics}>
             <View
@@ -54,15 +56,15 @@ export const Trophy = () => {
                 </View>
             </View>
             <View style={{ marginTop: getSize.m(10) }}>
-                {seasonsTrophy.map(item => {
+                {holders.map((item, index) => {
                     return (
                         <LinearGradient
-                            key={item.id}
+                            key={item.cup_season_id}
                             start={{ x: 0, y: 0 }}
                             end={{ x: 1, y: 1 }}
                             colors={[
-                                item.id % 2 === 1 ? 'rgba(16, 32, 100, 0.04)' : appColors.gray,
-                                item.id % 2 === 1 ? 'rgba(59, 168, 225, 0.04)' : appColors.gray,
+                                index % 2 === 1 ? 'rgba(16, 32, 100, 0.04)' : appColors.gray,
+                                index % 2 === 1 ? 'rgba(59, 168, 225, 0.04)' : appColors.gray,
                             ]}
                             style={[appStyles.flex_row_space_center, styles.itemTeam]}
                         >
@@ -73,7 +75,7 @@ export const Trophy = () => {
                                 }}
                             >
                                 <Text style={[styles.text_content, { textAlign: 'left' }]}>
-                                    {item.season}
+                                    {item.cup_season_name}
                                 </Text>
                             </View>
                             <View
@@ -87,7 +89,11 @@ export const Trophy = () => {
                                         flexDirection: 'row',
                                     }}
                                 >
-                                    <Avatar source={item.avt_club} rounded size={18} />
+                                    <Avatar
+                                        source={{ uri: item.team_image_url }}
+                                        rounded
+                                        size={18}
+                                    />
                                     <Text
                                         style={[
                                             styles.text_content,
@@ -96,7 +102,7 @@ export const Trophy = () => {
                                             },
                                         ]}
                                     >
-                                        {item.name_club}
+                                        {item.team_name_en}
                                     </Text>
                                 </View>
                             </View>

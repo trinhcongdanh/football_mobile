@@ -1,10 +1,8 @@
 import { appIcons } from '@football/app/assets/icons/appIcons';
 import { AppImages } from '@football/app/assets/images';
 import { HeaderUser } from '@football/app/components/header-user/HeaderUser';
-import { SideMenu } from '@football/app/components/side-menu/SideMenu';
 import { BOTTOM_SVG_HEIGHT } from '@football/app/routes/bottom-tab/components/bottom.tab';
 import { TAB_BAR_HEIGHT } from '@football/app/routes/bottom-tab/styles/bottom.tab.styles';
-import { SideBar } from '@football/app/routes/side-bar/SideBar';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import { getSize } from '@football/app/utils/responsive/scale';
@@ -19,15 +17,11 @@ import {
     TouchableOpacity,
     View,
 } from 'react-native';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import Carousel from 'react-native-reanimated-carousel';
 import Icon from 'react-native-vector-icons/AntDesign';
-import VideoPlayer from 'react-native-video-player';
 
 import styles from './VideoScreen.styles';
 import { IVideoScreenProps } from './VideoScreen.type';
 import { useViewModel } from './VideoScreen.viewModel';
-import { Video } from '@football/app/components/video/Video';
 
 export const VideoScreen = ({ navigation, route }: IVideoScreenProps) => {
     const {
@@ -43,6 +37,9 @@ export const VideoScreen = ({ navigation, route }: IVideoScreenProps) => {
         autoPlay,
         showSideMenu,
         closeSideMenu,
+        favoriteTeamsVideo,
+        favoriteTopTeamsVideo,
+        favoritePlayersVideo,
     } = useViewModel({
         navigation,
         route,
@@ -89,7 +86,7 @@ export const VideoScreen = ({ navigation, route }: IVideoScreenProps) => {
                                             showsHorizontalScrollIndicator={false}
                                             directionalLockEnabled
                                         >
-                                            {data.map((item, index) => {
+                                            {favoriteTeamsVideo.map((item, index) => {
                                                 return (
                                                     <View
                                                         key={index}
@@ -102,16 +99,16 @@ export const VideoScreen = ({ navigation, route }: IVideoScreenProps) => {
                                                         <TouchableOpacity
                                                             activeOpacity={0.9}
                                                             onPress={() =>
-                                                                handlePlayVideo(item.video)
+                                                                handlePlayVideo(item.video_url)
                                                             }
                                                         >
                                                             <Image
-                                                                source={item.image}
+                                                                source={{ uri: item.image_url }}
                                                                 style={[styles.image]}
                                                             />
                                                             <View style={styles.date}>
                                                                 <Text style={styles.text_date}>
-                                                                    {item.minute}
+                                                                    {item.length}
                                                                 </Text>
                                                             </View>
                                                             <View style={styles.play_video}>
@@ -123,7 +120,7 @@ export const VideoScreen = ({ navigation, route }: IVideoScreenProps) => {
                                                             </View>
                                                             <View style={styles.content}>
                                                                 <Text style={styles.text_content}>
-                                                                    {item.content}
+                                                                    {item.caption_he}
                                                                 </Text>
                                                             </View>
                                                         </TouchableOpacity>
@@ -156,7 +153,7 @@ export const VideoScreen = ({ navigation, route }: IVideoScreenProps) => {
                                             showsHorizontalScrollIndicator={false}
                                             directionalLockEnabled
                                         >
-                                            {data.map((item, index) => {
+                                            {favoriteTopTeamsVideo.map((item, index) => {
                                                 return (
                                                     <View
                                                         key={index}
@@ -169,16 +166,16 @@ export const VideoScreen = ({ navigation, route }: IVideoScreenProps) => {
                                                         <TouchableOpacity
                                                             activeOpacity={0.9}
                                                             onPress={() =>
-                                                                handlePlayVideo(item.video)
+                                                                handlePlayVideo(item.video_url)
                                                             }
                                                         >
                                                             <Image
-                                                                source={item.image}
+                                                                source={{ uri: item.image_url }}
                                                                 style={[styles.image]}
                                                             />
                                                             <View style={styles.date}>
                                                                 <Text style={styles.text_date}>
-                                                                    {item.minute}
+                                                                    {item.length}
                                                                 </Text>
                                                             </View>
                                                             <View style={styles.play_video}>
@@ -190,7 +187,7 @@ export const VideoScreen = ({ navigation, route }: IVideoScreenProps) => {
                                                             </View>
                                                             <View style={styles.content}>
                                                                 <Text style={styles.text_content}>
-                                                                    {item.content}
+                                                                    {item.caption_he}
                                                                 </Text>
                                                             </View>
                                                         </TouchableOpacity>
@@ -222,7 +219,7 @@ export const VideoScreen = ({ navigation, route }: IVideoScreenProps) => {
                                             showsHorizontalScrollIndicator={false}
                                             directionalLockEnabled
                                         >
-                                            {data.map((item, index) => {
+                                            {favoritePlayersVideo.map((item, index) => {
                                                 return (
                                                     <View
                                                         key={index}
@@ -235,16 +232,16 @@ export const VideoScreen = ({ navigation, route }: IVideoScreenProps) => {
                                                         <TouchableOpacity
                                                             activeOpacity={0.9}
                                                             onPress={() =>
-                                                                handlePlayVideo(item.video)
+                                                                handlePlayVideo(item.video_url)
                                                             }
                                                         >
                                                             <Image
-                                                                source={item.image}
+                                                                source={{ uri: item.image_url }}
                                                                 style={[styles.image]}
                                                             />
                                                             <View style={styles.date}>
                                                                 <Text style={styles.text_date}>
-                                                                    {item.minute}
+                                                                    {item.length}
                                                                 </Text>
                                                             </View>
                                                             <View style={styles.play_video}>
@@ -256,7 +253,7 @@ export const VideoScreen = ({ navigation, route }: IVideoScreenProps) => {
                                                             </View>
                                                             <View style={styles.content}>
                                                                 <Text style={styles.text_content}>
-                                                                    {item.content}
+                                                                    {item.caption_he}
                                                                 </Text>
                                                             </View>
                                                         </TouchableOpacity>

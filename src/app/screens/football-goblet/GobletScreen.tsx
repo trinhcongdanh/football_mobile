@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import { appIcons } from '@football/app/assets/icons/appIcons';
 import { AppImages } from '@football/app/assets/images';
 import { ButtonOption } from '@football/app/components/button_option';
@@ -21,14 +22,10 @@ import {
 import FastImage from 'react-native-fast-image';
 import Icon from 'react-native-vector-icons/Feather';
 import styles from './GobletScreen.style';
-import { IGobletScreenProps } from './GobletScreen.type';
 import { useViewModel } from './GobletScreen.viewModel';
 
-export const GobletScreen = ({ navigation, route }: IGobletScreenProps) => {
-    const { t, onShowSideMenu, setOnSelect, handleStateCup, onSelect, stateCups } = useViewModel({
-        navigation,
-        route,
-    });
+export const GobletScreen = () => {
+    const { t, goToStateCupPage, changeTab, cups } = useViewModel();
     return (
         <View style={[appStyles.flex]}>
             <ImageBackground source={AppImages.img_background} style={appStyles.flex}>
@@ -41,7 +38,6 @@ export const GobletScreen = ({ navigation, route }: IGobletScreenProps) => {
                             icon={AppImages.img_bars_sort}
                             color_pre={appColors.blue_light}
                             color_after={appColors.blue_dark}
-                            handlePressFunction={onShowSideMenu}
                         />
                         <View>
                             <Text style={[appStyles.text_title]}>{t('goblet.title')}</Text>
@@ -64,49 +60,42 @@ export const GobletScreen = ({ navigation, route }: IGobletScreenProps) => {
                         <ButtonOption
                             option_one={t('goblet.state_cup')}
                             option_two={t('goblet.toto_cup')}
-                            onSelect={setOnSelect}
+                            onSelect={changeTab}
                         />
-                        {onSelect === 0 ? (
-                            <ScrollView>
-                                <View style={{ paddingHorizontal: getSize.m(16) }}>
-                                    <View style={styles.state_content}>
-                                        {stateCups.map(item => {
-                                            return (
-                                                <TouchableOpacity
-                                                    style={styles.option_grid}
-                                                    key={item.id}
-                                                    onPress={handleStateCup}
+
+                        <ScrollView>
+                            <View style={{ paddingHorizontal: getSize.m(16) }}>
+                                <View style={styles.state_content}>
+                                    {cups.map(item => {
+                                        return (
+                                            <TouchableOpacity
+                                                style={styles.option_grid}
+                                                key={item._id}
+                                                onPress={() => goToStateCupPage(item)}
+                                            >
+                                                <View style={styles.image_cup}>
+                                                    <FastImage
+                                                        source={{ uri: item.logo_url }}
+                                                        style={{
+                                                            width: getSize.m(12),
+                                                            height: getSize.m(12),
+                                                        }}
+                                                        resizeMode={FastImage.resizeMode.contain}
+                                                    />
+                                                </View>
+                                                <Text
+                                                    numberOfLines={2}
+                                                    style={styles.text_option_grid}
                                                 >
-                                                    <View style={styles.image_cup}>
-                                                        <FastImage
-                                                            source={AppImages.img_state_cup}
-                                                            style={{
-                                                                width: getSize.m(12),
-                                                                height: getSize.m(12),
-                                                            }}
-                                                            resizeMode={
-                                                                FastImage.resizeMode.contain
-                                                            }
-                                                        />
-                                                    </View>
-                                                    <Text
-                                                        numberOfLines={2}
-                                                        style={styles.text_option_grid}
-                                                    >
-                                                        {item.state}
-                                                    </Text>
-                                                </TouchableOpacity>
-                                            );
-                                        })}
-                                    </View>
+                                                    {item.name_he}
+                                                </Text>
+                                            </TouchableOpacity>
+                                        );
+                                    })}
                                 </View>
-                                <View style={{ height: TAB_BAR_HEIGHT + BOTTOM_SVG_HEIGHT }} />
-                            </ScrollView>
-                        ) : (
-                            <View>
-                                <View style={{ height: TAB_BAR_HEIGHT + BOTTOM_SVG_HEIGHT }} />
                             </View>
-                        )}
+                            <View style={{ height: TAB_BAR_HEIGHT + BOTTOM_SVG_HEIGHT }} />
+                        </ScrollView>
                     </View>
                 </SafeAreaView>
             </ImageBackground>

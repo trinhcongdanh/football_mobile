@@ -1,3 +1,4 @@
 export type IOptionStateProps = {
-    label: string;
+    label: string | undefined;
+    data: any[];
 };
