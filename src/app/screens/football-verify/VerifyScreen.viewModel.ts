@@ -7,8 +7,10 @@ import { IVerifyScreenProps } from './VerifyScreen.type';
 import { useDispatch, useSelector } from 'react-redux';
 import qs from 'qs';
 import { numberPhoneUser } from 'src/store/user/RegisterNumberPhone';
-import { ACTION } from '@football/core/api/auth/config';
+import { ACTION, TOKEN } from '@football/core/api/auth/config';
 import { otpUser } from 'src/store/user/OTP.slice';
+import { useRoute } from '@react-navigation/native';
+import { loginUser } from 'src/store/user/Login.slice';
 
 export const useViewModel = ({ navigation, route }: IVerifyScreenProps) => {
     const { t } = useTranslation();
@@ -71,37 +73,14 @@ export const useViewModel = ({ navigation, route }: IVerifyScreenProps) => {
     const login = useSelector((state: any) => state.login);
     const numberPhone = useSelector((state: any) => state.numberPhoneUser);
     const otp = useSelector((state: any) => state.otpUser);
+    const routes = useRoute();
     const { number }: any = route.params;
 
     const reSendVerify = (): void => {
         // setTimeSend(true);
-        dispatch(
-            numberPhoneUser(
-                serializeParams({
-                    action: ACTION,
-                    token: login.login.token,
-                    call: AuthData.REGISTER_SMS,
-                    guest_guid: guestId[0],
-                    guest_id: login.login.user.item_id,
-                    item: {
-                        sms_phone: encodeURIComponent(number),
-                        // sms_phone: ''.
-                    },
-                })
-            )
-        );
-        handleError('', 'verifyError');
-    };
-
-    const onVerifyCode = async () => {
-        let codeOtp = '';
-        Object.values(OTP).forEach(code => {
-            codeOtp += code;
-        });
-
-        if (codeOtp.length === 4) {
+        if (routes.params!.previous_screen === ScreenName.RegisterPage) {
             dispatch(
-                otpUser(
+                numberPhoneUser(
                     serializeParams({
                         action: ACTION,
                         token: login.login.token,
@@ -110,11 +89,61 @@ export const useViewModel = ({ navigation, route }: IVerifyScreenProps) => {
                         guest_id: login.login.user.item_id,
                         item: {
                             sms_phone: encodeURIComponent(number),
-                            sms_code: codeOtp,
+                            // sms_phone: ''.
                         },
                     })
                 )
             );
+        } else if (routes.params!.previous_screen === ScreenName.ConnectPage) {
+            dispatch(
+                loginUser(
+                    serializeParams({
+                        action: ACTION,
+                        token: TOKEN,
+                        call: AuthData.LOGIN,
+                        sms_phone: encodeURIComponent(number),
+                    })
+                )
+            );
+        }
+        handleError('', 'verifyError');
+    };
+
+    const onVerifyCode = async () => {
+        let codeOtp = '';
+        Object.values(OTP).forEach(code => {
+            codeOtp += code;
+        });
+        if (codeOtp.length === 4) {
+            if (routes.params!.previous_screen === ScreenName.RegisterPage) {
+                dispatch(
+                    otpUser(
+                        serializeParams({
+                            action: ACTION,
+                            token: login.login.token,
+                            call: AuthData.REGISTER_SMS,
+                            guest_guid: guestId[0],
+                            guest_id: login.login.user.item_id,
+                            item: {
+                                sms_phone: encodeURIComponent(number),
+                                sms_code: codeOtp,
+                            },
+                        })
+                    )
+                );
+            } else if (routes.params!.previous_screen === ScreenName.ConnectPage) {
+                dispatch(
+                    loginUser(
+                        serializeParams({
+                            action: ACTION,
+                            token: TOKEN,
+                            call: AuthData.LOGIN,
+                            sms_phone: encodeURIComponent(number),
+                            sms_code: codeOtp,
+                        })
+                    )
+                );
+            }
         }
         // if (confirm) {
         //     console.log('Success!');
@@ -136,6 +165,13 @@ export const useViewModel = ({ navigation, route }: IVerifyScreenProps) => {
             handleError(t('verify.error'), 'verifyError');
         }
     }, [otp.success]);
+    useEffect(() => {
+        if (login.success === true) {
+            navigate(ScreenName.RegPage);
+        } else if (login.success === false && login.loading === false) {
+            handleError(t('verify.error'), 'verifyError');
+        }
+    }, [login.success]);
 
     return {
         inputs,
