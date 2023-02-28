@@ -51,6 +51,30 @@ const styles = StyleSheet.create({
         fontFamily: AppFonts.bold,
         marginLeft: getSize.m(4),
     },
+    drop_down_calender: {
+        position: 'absolute',
+        right: getSize.m(10),
+        top: getSize.m(48),
+        zIndex: 10,
+        backgroundColor: appColors.white,
+        borderBottomLeftRadius: getSize.m(20),
+        borderBottomRightRadius: getSize.m(20),
+        elevation: 1,
+    },
+    btn_drop_down_calender: {
+        borderColor: appColors.border,
+        borderBottomWidth: 1,
+        marginHorizontal: getSize.m(12),
+        paddingVertical: getSize.m(15),
+    },
+
+    btn_drop_down_calender_text: {
+        textAlign: 'left',
+        fontSize: getSize.m(13),
+        fontFamily: AppFonts.bold,
+        lineHeight: getSize.m(17),
+        color: appColors.text_dark_blue,
+    },
 });
 
 export default styles;
