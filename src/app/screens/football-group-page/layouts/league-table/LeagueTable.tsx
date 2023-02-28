@@ -2,7 +2,7 @@ import { appStyles } from '@football/app/utils/constants/appStyles';
 import { getSize } from '@football/app/utils/responsive/scale';
 import React from 'react';
 import Icon from 'react-native-vector-icons/Feather';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
 import { appIcons } from '@football/app/assets/icons/appIcons';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { Avatar } from 'react-native-elements';
@@ -17,8 +17,6 @@ import { useViewModel } from './LeagueTable.viewModel';
 export const LeagueTable = ({ teamSeason }: ILeagueTableProps) => {
     const {
         t,
-        handleSelectedCycle,
-        handleSelectedPlayOff,
         setOpenModalCycle,
         setOpenModalPlayOff,
         openModalCycle,
@@ -28,26 +26,14 @@ export const LeagueTable = ({ teamSeason }: ILeagueTableProps) => {
         selectPlayoff,
         playOffs,
         handleCloseModal,
+        setSelectPlayoff,
         selectedRound,
         navigate,
+        setSelectCycle,
     } = useViewModel({ teamSeason });
     return (
         <>
             <View style={[appStyles.package, { backgroundColor: appColors.white }]}>
-                {openModalCycle && (
-                    <DropDown
-                        data={cycles}
-                        handleSelected={(item: any) => handleSelectedCycle(item)}
-                        handleCloseModal={handleCloseModal}
-                    />
-                )}
-                {openModalPlayOff && (
-                    <DropDown
-                        data={playOffs}
-                        handleSelected={(item: any) => handleSelectedPlayOff(item)}
-                        handleCloseModal={handleCloseModal}
-                    />
-                )}
                 <Text style={[appStyles.text_topic, { marginLeft: getSize.m(6) }]}>
                     {t('group_page.league_table.title')}
                 </Text>
@@ -60,34 +46,131 @@ export const LeagueTable = ({ teamSeason }: ILeagueTableProps) => {
                     ]}
                 >
                     <View style={styles.drop_down_filter}>
-                        <TouchableOpacity
-                            onPress={() => {
-                                setOpenModalPlayOff(!openModalPlayOff);
-                            }}
-                            style={[styles.cycle, { marginRight: getSize.m(12), flex: 0.9 }]}
-                        >
-                            <Text style={styles.text_cycle}>{selectPlayoff}</Text>
-                            <Icon
-                                name={appIcons.ic_chevron_down}
-                                size={getSize.m(14)}
-                                color={appColors.light_gray}
-                                style={styles.chevron_down}
-                            />
-                        </TouchableOpacity>
-                        <TouchableOpacity
-                            onPress={() => {
-                                setOpenModalCycle(!openModalCycle);
-                            }}
-                            style={[styles.cycle, { flex: 0.5 }]}
-                        >
-                            <Text style={styles.text_cycle}>{selectCycle?.cycle_name_he}</Text>
-                            <Icon
-                                name={appIcons.ic_chevron_down}
-                                size={getSize.m(14)}
-                                color={appColors.light_gray}
-                                style={styles.chevron_down}
-                            />
-                        </TouchableOpacity>
+                        <View style={{ flex: 0.9 }}>
+                            <TouchableOpacity
+                                onPress={() => {
+                                    setOpenModalPlayOff(!openModalPlayOff);
+                                }}
+                                style={[
+                                    styles.cycle,
+                                    {
+                                        marginRight: getSize.m(12),
+                                        borderColor: openModalPlayOff
+                                            ? appColors.blue_light
+                                            : appColors.border,
+                                    },
+                                ]}
+                            >
+                                <Text style={styles.text_cycle}>{selectPlayoff}</Text>
+                                <Icon
+                                    name={
+                                        openModalPlayOff
+                                            ? appIcons.ic_chevron_up
+                                            : appIcons.ic_chevron_down
+                                    }
+                                    size={getSize.m(14)}
+                                    color={
+                                        openModalPlayOff
+                                            ? appColors.blue_light
+                                            : appColors.light_gray
+                                    }
+                                    style={styles.chevron_down}
+                                />
+                            </TouchableOpacity>
+                            {openModalPlayOff && (
+                                <View
+                                    style={[
+                                        styles.drop_down_calender,
+                                        { width: '90%', marginRight: getSize.m(4) },
+                                    ]}
+                                >
+                                    <ScrollView
+                                        showsVerticalScrollIndicator={false}
+                                        nestedScrollEnabled
+                                    >
+                                        {playOffs.map((playOff: any, index: number) => {
+                                            return (
+                                                <TouchableOpacity
+                                                    onPress={() => {
+                                                        setSelectPlayoff(playOff.content);
+                                                        setOpenModalPlayOff(false);
+                                                    }}
+                                                    key={index.toString()}
+                                                    style={styles.btn_drop_down_calender}
+                                                >
+                                                    <Text
+                                                        style={styles.btn_drop_down_calender_text}
+                                                    >
+                                                        {playOff.content}
+                                                    </Text>
+                                                </TouchableOpacity>
+                                            );
+                                        })}
+                                    </ScrollView>
+                                </View>
+                            )}
+                        </View>
+                        <View style={{ flex: 0.5 }}>
+                            <TouchableOpacity
+                                onPress={() => {
+                                    setOpenModalCycle(!openModalCycle);
+                                }}
+                                style={[
+                                    styles.cycle,
+                                    {
+                                        borderColor: openModalCycle
+                                            ? appColors.blue_light
+                                            : appColors.border,
+                                    },
+                                ]}
+                            >
+                                <Text style={styles.text_cycle}>{selectCycle?.cycle_name_he}</Text>
+                                <Icon
+                                    name={
+                                        openModalCycle
+                                            ? appIcons.ic_chevron_up
+                                            : appIcons.ic_chevron_down
+                                    }
+                                    size={getSize.m(14)}
+                                    color={
+                                        openModalCycle ? appColors.blue_light : appColors.light_gray
+                                    }
+                                    style={styles.chevron_down}
+                                />
+                            </TouchableOpacity>
+                            {openModalCycle && (
+                                <View
+                                    style={[
+                                        styles.drop_down_calender,
+                                        { width: '90%', marginRight: getSize.m(-4) },
+                                    ]}
+                                >
+                                    <ScrollView
+                                        showsVerticalScrollIndicator={false}
+                                        nestedScrollEnabled
+                                    >
+                                        {cycles.map((input: any, index: number) => {
+                                            return (
+                                                <TouchableOpacity
+                                                    onPress={() => {
+                                                        setSelectCycle(input);
+                                                        setOpenModalCycle(false);
+                                                    }}
+                                                    key={index.toString()}
+                                                    style={styles.btn_drop_down_calender}
+                                                >
+                                                    <Text
+                                                        style={styles.btn_drop_down_calender_text}
+                                                    >
+                                                        {input.round_name_he}
+                                                    </Text>
+                                                </TouchableOpacity>
+                                            );
+                                        })}
+                                    </ScrollView>
+                                </View>
+                            )}
+                        </View>
                     </View>
                 </View>
                 <View>

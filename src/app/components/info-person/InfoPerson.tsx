@@ -18,6 +18,7 @@ export const InfoPerson = ({
     title_2,
     title_3,
     rating,
+    style,
 }: IInfoPersonComponent) => {
     const { t } = useTranslation();
     return (
@@ -52,7 +53,7 @@ export const InfoPerson = ({
                     },
                 ]}
             >
-                <View style={[appStyles.align_justify, { width: getSize.m(100) }]}>
+                <View style={[appStyles.align_justify, style]}>
                     <Text style={styles.data}>{data_1}</Text>
                     <Text style={styles.title}>{title_1}</Text>
                 </View>

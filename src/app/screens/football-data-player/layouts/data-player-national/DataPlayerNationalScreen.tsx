@@ -52,6 +52,7 @@ export const DataPlayerNationalScreen = (props: any) => {
                             <Text style={appStyles.text_label}>{t('data_player.count')}</Text>
                             <Text style={appStyles.number}>10</Text>
                         </View>
+                        <View style={styles.line_space} />
                         <View style={[appStyles.flex_row_space_center, styles.info_player]}>
                             <Text style={appStyles.text_label}>{t('data_player.debut')}</Text>
                             <View style={appStyles.flex_row_align}>
@@ -71,6 +72,7 @@ export const DataPlayerNationalScreen = (props: any) => {
                                 </View>
                             </View>
                         </View>
+                        <View style={styles.line_space} />
                         <View style={[appStyles.flex_row_space_center, styles.info_player]}>
                             <Text style={appStyles.text_label}>{t('data_player.last')}</Text>
                             <View style={appStyles.flex_row_align}>
@@ -111,11 +113,20 @@ export const DataPlayerNationalScreen = (props: any) => {
                         <Text style={styles.text_header}>{t('data_player.details')}</Text>
                     </LinearGradient>
                     <View style={{ marginHorizontal: getSize.m(22) }}>
-                        {goals.map(item => {
+                        {goals.map((item, index) => {
                             return (
                                 <View
                                     key={item.id}
-                                    style={[appStyles.flex_row_space_center, styles.goal_team]}
+                                    style={[
+                                        appStyles.flex_row_space_center,
+                                        styles.goal_team,
+                                        {
+                                            borderBottomWidth:
+                                                index === goals.length - 1
+                                                    ? getSize.m(0)
+                                                    : getSize.m(1),
+                                        },
+                                    ]}
                                 >
                                     <Text style={[appStyles.text_label, { width: '40%' }]}>
                                         {item.team}
@@ -128,8 +139,8 @@ export const DataPlayerNationalScreen = (props: any) => {
                                     >
                                         <Icon
                                             name={appIcons.ic_arrow_left}
-                                            size={getSize.m(15)}
-                                            color={appColors.text_dark_blue}
+                                            size={getSize.m(18)}
+                                            color={appColors.text_option_unselect}
                                         />
                                     </TouchableOpacity>
                                 </View>

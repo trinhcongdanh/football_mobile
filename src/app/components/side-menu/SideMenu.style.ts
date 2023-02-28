@@ -14,11 +14,11 @@ export const styles = StyleSheet.create({
         zIndex: 10,
     },
     side_menu: {
-        paddingHorizontal: getSize.m(30),
         paddingVertical: getSize.m(24),
     },
     side_menu_close: {
         flexDirection: 'row',
+        paddingHorizontal: getSize.m(20),
     },
     side_menu_info: {
         marginTop: getSize.m(30),

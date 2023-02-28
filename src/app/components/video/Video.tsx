@@ -113,7 +113,7 @@ export const Video = () => {
                     >
                         <Video_Player
                             ref={videoRef}
-                            source={sourceVideo}
+                            source={{ uri: sourceVideo }}
                             style={styles.background_video}
                             paused={pause}
                             resizeMode="cover"

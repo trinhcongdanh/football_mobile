@@ -34,15 +34,6 @@ export const useViewModel = ({ teamSeason }: ILeagueTableProps) => {
 
     const state = useViewState();
 
-    const handleSelectedCycle = (item: any) => {
-        state.setSelectCycle(item.content);
-        const newCycles = state.cycles.map(e => {
-            return { ...e, isSelected: e.id === item.id };
-        });
-        state.setCycles(newCycles);
-        state.setOpenModalCycle(false);
-    };
-
     useMount(() => {
         if (teamSeason?.cycles?.length) {
             state.setCycles(
@@ -94,19 +85,8 @@ export const useViewModel = ({ teamSeason }: ILeagueTableProps) => {
     const [selectPlayoff, setSelectPlayoff] = useState('פלייאוף עליון');
     const [playOffs, setPlayOff] = useState<any[]>([
         { id: 1, content: 'פלייאוף עליון', isSelected: true },
-        { id: 2, content: 'פלייאוף עליון', isSelected: false },
-        { id: 3, content: 'פלייאוף עליון', isSelected: false },
-        { id: 4, content: 'פלייאוף עליון', isSelected: false },
-        { id: 5, content: 'פלייאוף עליון', isSelected: false },
+        { id: 2, content: ' עליון', isSelected: false },
     ]);
-    const handleSelectedPlayOff = (item: any) => {
-        setSelectPlayoff(item.content);
-        const newPlayOff = playOffs.map(e => {
-            return { ...e, isSelected: e.id === item.id };
-        });
-        setPlayOff(newPlayOff);
-        setOpenModalPlayOff(false);
-    };
 
     const handleCloseModal = () => {
         state.setOpenModalCycle(false);
@@ -115,8 +95,6 @@ export const useViewModel = ({ teamSeason }: ILeagueTableProps) => {
 
     return {
         t,
-        handleSelectedCycle,
-        handleSelectedPlayOff,
         handleCloseModal,
         setOpenModalPlayOff,
         ...state,
@@ -124,5 +102,6 @@ export const useViewModel = ({ teamSeason }: ILeagueTableProps) => {
         selectPlayoff,
         playOffs,
         navigate,
+        setSelectPlayoff,
     };
 };

@@ -48,7 +48,11 @@ export const DataPlayerTeamScreen = (props: any) => {
                             style={styles.calender}
                         >
                             <Text style={styles.text_calender}>{selected}</Text>
-                            <Icon name={appIcons.ic_chevron_down} size={getSize.m(14)} />
+                            <Icon
+                                name={appIcons.ic_chevron_down}
+                                color={appColors.light_gray}
+                                size={getSize.m(20)}
+                            />
                         </TouchableOpacity>
                     </View>
                     {openModal && (
@@ -214,10 +218,12 @@ export const DataPlayerTeamScreen = (props: any) => {
                                         </View>
                                         <FastImage
                                             source={AppImages.img_light_volleyball}
+                                            resizeMode={FastImage.resizeMode.contain}
                                             style={{ width: getSize.m(12), height: getSize.m(12) }}
                                         />
                                         <FastImage
                                             source={AppImages.img_ticket_red}
+                                            resizeMode={FastImage.resizeMode.contain}
                                             style={{
                                                 marginLeft: getSize.m(10),
                                                 width: getSize.m(14),
@@ -315,10 +321,12 @@ export const DataPlayerTeamScreen = (props: any) => {
                                         </View>
                                         <FastImage
                                             source={AppImages.img_light_volleyball}
+                                            resizeMode={FastImage.resizeMode.contain}
                                             style={{ width: getSize.m(12), height: getSize.m(12) }}
                                         />
                                         <FastImage
                                             source={AppImages.img_ticket_red}
+                                            resizeMode={FastImage.resizeMode.contain}
                                             style={{
                                                 marginLeft: getSize.m(10),
                                                 width: getSize.m(14),

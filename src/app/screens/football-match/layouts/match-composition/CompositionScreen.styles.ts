@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
         backgroundColor: appColors.separator,
         borderRadius: getSize.m(30),
         paddingVertical: getSize.m(4),
-        marginHorizontal: getSize.m(10),
+        // marginHorizontal: getSize.m(10),
         marginTop: getSize.m(20),
     },
 });

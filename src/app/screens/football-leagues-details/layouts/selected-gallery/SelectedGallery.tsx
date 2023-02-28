@@ -82,7 +82,7 @@ const SelectedGallery = ({ pagination, galleries }: ISelectedGalleryProps) => {
     // );
     return (
         <View>
-            {display && (
+            {/* {display && (
                 <View style={styles.video_container}>
                     <View style={styles.ic_close}>
                         <IconAntDesign
@@ -121,7 +121,7 @@ const SelectedGallery = ({ pagination, galleries }: ISelectedGalleryProps) => {
                         />
                     </View>
                 </View>
-            )}
+            )} */}
             <Text
                 style={[appStyles.text_topic, { marginLeft: getSize.m(6), color: appColors.white }]}
             >

@@ -79,14 +79,15 @@ export const useViewModel = ({ highlights }: IAboutLeagueProps) => {
                           text: t('leagues_details.about.exchanges'),
                           value: highlights[key],
                       };
-
                   default:
-                      return {};
+                      return [];
               }
           })
         : [];
     const dots = Array(4).fill('');
     const [activeIndexNumber, setActiveIndexNumber] = useState(Number);
+
+    console.log(aboutGames);
 
     return {
         t,

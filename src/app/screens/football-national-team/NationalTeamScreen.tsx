@@ -96,7 +96,7 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                             <View>
                                 <Video
                                     loop
-                                    video={sourceVideo}
+                                    video={{ uri: sourceVideo }}
                                     thumbnail={AppImages.img_thumbnail}
                                     endThumbnail={AppImages.img_thumbnail}
                                     videoWidth={getSize.m(1600)}
@@ -252,7 +252,7 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                                 <Text style={styles.text_title}>
                                     {t('national_team.team_event')}
                                 </Text>
-                                <View>
+                                <View style={{ marginTop: getSize.m(8) }}>
                                     {topTeam?.future_events?.map((item, index) => {
                                         return (
                                             <ListGame
@@ -283,6 +283,7 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                                                         'DD.M.YY HH:mm'
                                                     ).add(2, 'hours')
                                                 )}
+                                                style={{ marginTop: getSize.m(12) }}
                                             />
                                         );
                                     })}
@@ -625,7 +626,7 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                                                 );
                                             })}
                                         </View>
-                                        <View>
+                                        <View style={{ marginTop: getSize.m(8) }}>
                                             {topTeam?.last_campaign.games
                                                 .slice(0, MAX_TOPTEAM_LASTCAMPAIGN_GAMES)
                                                 .filter(game => {
@@ -674,6 +675,7 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                                                                     'DD.M.YY HH:mm'
                                                                 ).add(2, 'hours')
                                                             )}
+                                                            style={{ marginTop: getSize.m(12) }}
                                                         />
                                                     );
                                                 })}

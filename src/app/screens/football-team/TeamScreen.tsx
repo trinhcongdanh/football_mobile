@@ -35,7 +35,7 @@ export const TeamScreen = ({ navigation, route }: ITeamScreenProps) => {
     const renderItem = ({ item }: any) => {
         return !toggleBar ? (
             <TouchableOpacity
-                activeOpacity={1}
+                activeOpacity={0.7}
                 style={styles.option_grid}
                 // eslint-disable-next-line no-underscore-dangle
                 onPress={() => handleTeam(item._id)}

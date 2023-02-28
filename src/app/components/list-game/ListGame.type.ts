@@ -1,3 +1,5 @@
+import { StyleProp } from 'react-native';
+
 export type IListGameProps = {
     logo_home: string;
     logo_away: string;
@@ -14,4 +16,5 @@ export type IListGameProps = {
     isLive?: boolean;
     handleDetailMatch?: () => void;
     handleStadium?: () => void;
+    style?: StyleProp<any>;
 };

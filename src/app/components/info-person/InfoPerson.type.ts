@@ -1,3 +1,5 @@
+import { StyleProp } from 'react-native';
+
 export type IInfoPersonComponent = {
     data_1: any;
     data_2: any;
@@ -9,4 +11,5 @@ export type IInfoPersonComponent = {
     title_2: string;
     title_3: string;
     rating?: any;
+    style?: StyleProp<any>;
 };
