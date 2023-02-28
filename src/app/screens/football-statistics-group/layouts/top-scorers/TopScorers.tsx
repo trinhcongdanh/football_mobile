@@ -10,13 +10,16 @@ import Icon from 'react-native-vector-icons/Feather';
 import { ITopScorersProps } from './TopScorers.type';
 import { useViewModel } from './TopScorers.viewModel';
 
-export const TopScorers = ({ listGames }: ITopScorersProps) => {
+export const TopScorers = ({ listGames, handleTeamGoalKickersList }: ITopScorersProps) => {
     const { t } = useViewModel();
     return (
         <View style={appStyles.item_statistics}>
             <View style={[appStyles.flex_row_space_center]}>
                 <Text style={appStyles.statistics_title}>{t('statistics.group.top_scorers')}</Text>
-                <TouchableOpacity style={appStyles.flex_row_space_center}>
+                <TouchableOpacity
+                    style={appStyles.flex_row_space_center}
+                    onPress={handleTeamGoalKickersList}
+                >
                     <Text style={appStyles.statistics_see_all}>
                         {t('statistics.group.see_all')}
                     </Text>

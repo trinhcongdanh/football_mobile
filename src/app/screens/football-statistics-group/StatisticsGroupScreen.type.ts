@@ -5,3 +5,12 @@ export type IStatisticsGroupScreenProps = {
     navigation: NavigationProp<any>;
     route: RouteProp<any, ScreenName.StatisticsGroupPage>;
 };
+
+export enum TeamGoalKickersListType {
+    GoalKickersLeague,
+    GoalKickersNationalCup,
+    GoalKickersTotoCup,
+    YellowCardsTotoCup,
+    YellowCardsLeague,
+    RedCards,
+}

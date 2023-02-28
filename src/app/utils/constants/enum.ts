@@ -22,6 +22,7 @@ export enum ScreenName {
     GoalsNationalTeamPage = 'GoalsNationalTeamPage',
     PitchPage = 'PitchPage',
     ConquerorsPage = 'ConquerorsPage',
+    GoalKickerListPage = 'GoalKickerListPage',
     HistoryPage = 'HistoryPage',
     BottomTab = 'BottomTab',
     LeaguesPage = 'LeaguesPage',

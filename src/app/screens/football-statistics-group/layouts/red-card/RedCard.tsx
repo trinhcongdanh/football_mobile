@@ -13,13 +13,16 @@ import styles from './RedCard.style';
 import { IRedCardProps } from './RedCard.type';
 import { useViewModel } from './RedCard.viewModel';
 
-export const RedCard = ({ listGames }: IRedCardProps) => {
+export const RedCard = ({ listGames, handleTeamGoalKickersList }: IRedCardProps) => {
     const { t } = useViewModel();
     return (
         <View style={appStyles.item_statistics}>
             <View style={[appStyles.flex_row_space_center]}>
                 <Text style={appStyles.statistics_title}>{t('statistics.group.red_card')}</Text>
-                <TouchableOpacity style={appStyles.flex_row_space_center}>
+                <TouchableOpacity
+                    style={appStyles.flex_row_space_center}
+                    onPress={handleTeamGoalKickersList}
+                >
                     <Text style={appStyles.statistics_see_all}>
                         {t('statistics.group.see_all')}
                     </Text>

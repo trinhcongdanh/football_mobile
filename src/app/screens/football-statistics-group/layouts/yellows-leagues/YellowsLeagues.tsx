@@ -13,7 +13,7 @@ import styles from './YellowsLeagues.style';
 import { IYellowsLeagueProps } from './YellowsLeagues.type';
 import { useViewModel } from './YellowsLeagues.viewModel';
 
-export const YellowsLeagues = ({ listGames }: IYellowsLeagueProps) => {
+export const YellowsLeagues = ({ listGames, handleTeamGoalKickersList }: IYellowsLeagueProps) => {
     const { t } = useViewModel();
     return (
         <View style={appStyles.item_statistics}>
@@ -21,7 +21,10 @@ export const YellowsLeagues = ({ listGames }: IYellowsLeagueProps) => {
                 <Text style={appStyles.statistics_title}>
                     {t('statistics.group.yellow_league')}
                 </Text>
-                <TouchableOpacity style={appStyles.flex_row_space_center}>
+                <TouchableOpacity
+                    style={appStyles.flex_row_space_center}
+                    onPress={handleTeamGoalKickersList}
+                >
                     <Text style={appStyles.statistics_see_all}>
                         {t('statistics.group.see_all')}
                     </Text>

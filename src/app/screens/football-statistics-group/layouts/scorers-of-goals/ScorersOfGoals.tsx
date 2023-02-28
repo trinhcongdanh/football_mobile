@@ -10,7 +10,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import { useViewModel } from './ScorersOfGoals.viewModel';
 import { IScorersOfGoalsProps } from './ScorersOfGoals.type';
 
-export const ScorersOfGoals = ({ listGames }: IScorersOfGoalsProps) => {
+export const ScorersOfGoals = ({ listGames, handleTeamGoalKickersList }: IScorersOfGoalsProps) => {
     const { t } = useViewModel();
     return (
         <View style={appStyles.item_statistics}>
@@ -18,7 +18,10 @@ export const ScorersOfGoals = ({ listGames }: IScorersOfGoalsProps) => {
                 <Text style={appStyles.statistics_title}>
                     {t('statistics.group.scorer_of_goal')}
                 </Text>
-                <TouchableOpacity style={appStyles.flex_row_space_center}>
+                <TouchableOpacity
+                    style={appStyles.flex_row_space_center}
+                    onPress={handleTeamGoalKickersList}
+                >
                     <Text style={appStyles.statistics_see_all}>
                         {t('statistics.group.see_all')}
                     </Text>

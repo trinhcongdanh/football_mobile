@@ -2,4 +2,5 @@ import { Yellowcardstotocup } from '@football/core/models/TeamSeasonStatsRespons
 
 export type IYellowsLeagueProps = {
     listGames: Yellowcardstotocup[];
+    handleTeamGoalKickersList: any;
 };

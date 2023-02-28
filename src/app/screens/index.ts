@@ -42,3 +42,4 @@ export * from './football-cups';
 export * from './football-list-game';
 export * from './football-contact-us';
 export * from './football-terms-conditon';
+export * from './football-goal-kicker-list';

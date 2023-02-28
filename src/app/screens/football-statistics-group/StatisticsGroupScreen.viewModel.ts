@@ -1,3 +1,4 @@
+import { ScreenName } from '@football/app/utils/constants/enum';
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useTranslation } from 'react-i18next';
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
@@ -5,7 +6,7 @@ import { useState, useCallback } from 'react';
 import { TeamSeasonStatsModel } from '@football/core/models/TeamSeasonStatsResponse';
 import TeamSeasonStatsService from '@football/core/services/TeamSeasonStats.service';
 import { useMount } from '@football/app/utils/hooks/useMount';
-import { IStatisticsGroupScreenProps } from './StatisticsGroupScreen.type';
+import { IStatisticsGroupScreenProps, TeamGoalKickersListType } from './StatisticsGroupScreen.type';
 
 const useViewState = () => {
     const [teamSeasonStats, setTeamSeasonStats] = useState<TeamSeasonStatsModel>();
@@ -45,9 +46,76 @@ export const useViewModel = ({ navigation, route }: IStatisticsGroupScreenProps)
     const state = useViewState();
     const { getTeamSeasonStatsData } = useViewCallback(route, state);
 
+    const handleTeamGoalKickersList = (listType: TeamGoalKickersListType) => {
+        switch (listType) {
+            case TeamGoalKickersListType.GoalKickersLeague:
+                navigate(ScreenName.GoalKickerListPage, {
+                    teamSeasonStats: state.teamSeasonStats,
+                    data: state.teamSeasonStats?.goal_kickers_league,
+                    props: 'num_of_goals',
+                    titleLeft: t('statistics.group.player_name'),
+                    titleRight: t('statistics.group.number'),
+                });
+                break;
+
+            case TeamGoalKickersListType.GoalKickersNationalCup:
+                navigate(ScreenName.GoalKickerListPage, {
+                    teamSeasonStats: state.teamSeasonStats,
+                    data: state.teamSeasonStats?.goal_kickers_national_cup,
+                    props: 'num_of_goals',
+                    titleLeft: t('statistics.group.player_name'),
+                    titleRight: t('statistics.group.number'),
+                });
+                break;
+
+            case TeamGoalKickersListType.GoalKickersTotoCup:
+                navigate(ScreenName.GoalKickerListPage, {
+                    teamSeasonStats: state.teamSeasonStats,
+                    data: state.teamSeasonStats?.goal_kickers_toto_cup,
+                    props: 'num_of_goals',
+                    titleLeft: t('statistics.group.player_name'),
+                    titleRight: t('statistics.group.number'),
+                });
+                break;
+
+            case TeamGoalKickersListType.RedCards:
+                navigate(ScreenName.GoalKickerListPage, {
+                    teamSeasonStats: state.teamSeasonStats,
+                    data: state.teamSeasonStats?.red_cards,
+                    props: 'num_of_cards',
+                    titleLeft: t('statistics.group.player_name'),
+                    titleRight: t('statistics.group.number_red'),
+                });
+                break;
+
+            case TeamGoalKickersListType.YellowCardsLeague:
+                navigate(ScreenName.GoalKickerListPage, {
+                    teamSeasonStats: state.teamSeasonStats,
+                    data: state.teamSeasonStats?.yellow_cards_league,
+                    props: 'num_of_cards',
+                    titleLeft: t('statistics.group.player_name'),
+                    titleRight: t('statistics.group.number_yellow'),
+                });
+                break;
+
+            case TeamGoalKickersListType.YellowCardsTotoCup:
+                navigate(ScreenName.GoalKickerListPage, {
+                    teamSeasonStats: state.teamSeasonStats,
+                    data: state.teamSeasonStats?.yellow_cards_toto_cup,
+                    props: 'num_of_cards',
+                    titleLeft: t('statistics.group.player_name'),
+                    titleRight: t('statistics.group.number_yellow'),
+                });
+                break;
+
+            default:
+                break;
+        }
+    };
+
     useMount(() => {
         getTeamSeasonStatsData();
     });
 
-    return { t, onGoBack, ...state };
+    return { t, onGoBack, ...state, handleTeamGoalKickersList };
 };

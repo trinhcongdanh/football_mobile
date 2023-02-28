@@ -13,13 +13,16 @@ import styles from './YellowsCup.style';
 import { IYellowsCupProps } from './YellowsCup.type';
 import { useViewModel } from './YellowsCup.viewModel';
 
-export const YellowsCup = ({ listGames }: IYellowsCupProps) => {
+export const YellowsCup = ({ listGames, handleTeamGoalKickersList }: IYellowsCupProps) => {
     const { t } = useViewModel();
     return (
         <View style={appStyles.item_statistics}>
             <View style={[appStyles.flex_row_space_center]}>
                 <Text style={appStyles.statistics_title}>{t('statistics.group.yellow_cup')}</Text>
-                <TouchableOpacity style={appStyles.flex_row_space_center}>
+                <TouchableOpacity
+                    style={appStyles.flex_row_space_center}
+                    onPress={handleTeamGoalKickersList}
+                >
                     <Text style={appStyles.statistics_see_all}>
                         {t('statistics.group.see_all')}
                     </Text>

@@ -45,6 +45,7 @@ import {
     ListGameScreen,
     ContactUsScreen,
     TermsConditionScreen,
+    GoalKickerListScreen,
 } from '../screens';
 import { HistoryScreen } from '../screens/football-history/HistoryScreen';
 import { DataPlayerScreen } from '../screens/football-data-player/DataPlayerScreen';
@@ -89,6 +90,7 @@ export const AuthStack = () => {
             />
             <Auth.Screen name={ScreenName.PitchPage} component={PitchScreen} />
             <Auth.Screen name={ScreenName.ConquerorsPage} component={ConquerorsScreen} />
+            <Auth.Screen name={ScreenName.GoalKickerListPage} component={GoalKickerListScreen} />
             <Auth.Screen name={ScreenName.HistoryPage} component={HistoryScreen} />
             <Auth.Screen name={ScreenName.BottomTab} component={BottomTabStack} />
             <Auth.Screen name={ScreenName.SideBar} component={SideBar} />
