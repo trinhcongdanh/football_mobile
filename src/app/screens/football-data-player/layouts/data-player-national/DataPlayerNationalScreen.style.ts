@@ -125,8 +125,11 @@ const styles = StyleSheet.create({
 
     info_player: {
         paddingVertical: getSize.m(15),
-        borderBottomWidth: getSize.m(1),
-        borderColor: appColors.border,
+    },
+
+    line_space: {
+        height: getSize.m(1),
+        backgroundColor: appColors.border,
     },
 
     team_national_date: {
@@ -135,14 +138,13 @@ const styles = StyleSheet.create({
     },
 
     details: {
-        padding: getSize.m(12),
+        padding: getSize.m(10),
         backgroundColor: appColors.separator,
         borderRadius: getSize.m(30),
     },
 
     goal_team: {
         paddingVertical: getSize.m(15),
-        borderBottomWidth: getSize.m(1),
         borderColor: appColors.border,
     },
     item: {

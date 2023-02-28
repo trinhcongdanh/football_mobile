@@ -2,6 +2,8 @@ import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Dimensions } from 'react-native';
+import { useDispatch } from 'react-redux';
+import { addVideo, setShowVideo } from 'src/store/video/Video.slice';
 import { ISelectedGalleryProps } from './SelectedGallery.type';
 
 export const useViewModel = ({ galleries }: ISelectedGalleryProps) => {
@@ -44,6 +46,7 @@ export const useViewModel = ({ galleries }: ISelectedGalleryProps) => {
     // ];
     const dots = Array(data.length).fill('');
 
+    const dispatch = useDispatch();
     const [display, setDisplay] = useState(false);
     const [sourceVideo, setSourceVideo] = useState();
     const [autoPlay, setAutoPlay] = useState(true);
@@ -52,6 +55,8 @@ export const useViewModel = ({ galleries }: ISelectedGalleryProps) => {
         setDisplay(true);
         setSourceVideo(video);
         setAutoPlay(false);
+        dispatch(setShowVideo(true));
+        dispatch(addVideo(video));
     };
 
     const handleEndVideo = () => {

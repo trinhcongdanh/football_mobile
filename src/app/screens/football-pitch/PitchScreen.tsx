@@ -51,6 +51,7 @@ export const PitchScreen = ({ navigation, route }: IPitchScreenProps) => {
                                     title_2={t('pitch.contact')}
                                     title_3={t('pitch.phone')}
                                     rating={stadium?.rating_he}
+                                    style={{ width: getSize.m(100) }}
                                 />
                             </View>
                             <View

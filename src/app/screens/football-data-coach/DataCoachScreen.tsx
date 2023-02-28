@@ -1,4 +1,6 @@
+import { appIcons } from '@football/app/assets/icons/appIcons';
 import { AppImages } from '@football/app/assets/images';
+import { ButtonOption } from '@football/app/components/button_option';
 import { HeaderUser } from '@football/app/components/header-user/HeaderUser';
 import { InfoPerson } from '@football/app/components/info-person/InfoPerson';
 import { appColors } from '@football/app/utils/constants/appColors';
@@ -6,9 +8,17 @@ import { appStyles } from '@football/app/utils/constants/appStyles';
 import { getSize } from '@football/app/utils/responsive/scale';
 import React from 'react';
 import {
-    ImageBackground, SafeAreaView, ScrollView, StatusBar, Text, View
+    ImageBackground,
+    SafeAreaView,
+    ScrollView,
+    StatusBar,
+    Text,
+    TouchableOpacity,
+    View,
 } from 'react-native';
+import { Avatar } from 'react-native-elements';
 import FastImage from 'react-native-fast-image';
+import Icon from 'react-native-vector-icons/Feather';
 import styles from './DataCoachScreen.style';
 import { IDataCoachScreenProps } from './DataCoachScreen.type';
 import { useViewModel } from './DataCoachScreen.viewModel';
@@ -66,7 +76,7 @@ export const DataCoachScreen = ({ navigation, route }: IDataCoachScreenProps) =>
                                     { marginTop: getSize.m(62) },
                                 ]}
                             >
-                                {/* <View style={styles.debut_game}>
+                                <View style={styles.debut_game}>
                                     <Text style={styles.congratulations}>
                                         {t('coach.debut_game')} 🎉
                                     </Text>
@@ -75,7 +85,7 @@ export const DataCoachScreen = ({ navigation, route }: IDataCoachScreenProps) =>
                                             appStyles.flex_row_space_center,
                                             {
                                                 marginTop: getSize.m(26),
-                                                marginBottom: getSize.m(20),
+                                                marginBottom: getSize.m(14),
                                                 flexDirection: 'row-reverse',
                                             },
                                         ]}
@@ -128,15 +138,14 @@ export const DataCoachScreen = ({ navigation, route }: IDataCoachScreenProps) =>
                                             color={appColors.button_dark_blue}
                                         />
                                     </TouchableOpacity>
-                                </View> */}
+                                </View>
                                 <View>
-                                    {/* <ButtonOption
-                                        option_one={t('coach.option.team')}
-                                        option_two={t('coach.option.games')}
-                                        onSelect={setOnSelect}
-                                    /> */}
-                                    <View style={appStyles.flex_center}>
-                                        <Text style={styles.total}>{t('coach.team_topteam')}</Text>
+                                    <View style={{ marginTop: getSize.m(33) }}>
+                                        <ButtonOption
+                                            option_one={t('coach.option.team')}
+                                            option_two={t('coach.option.games')}
+                                            onSelect={setOnSelect}
+                                        />
                                     </View>
                                     {onSelect === 0 ? (
                                         <View>

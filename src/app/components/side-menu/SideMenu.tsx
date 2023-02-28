@@ -35,83 +35,90 @@ export const SideMenu = ({ navigation }: ISideMenuProps) => {
                         size={getSize.m(24)}
                     />
                 </TouchableOpacity>
-
-                <View style={[appStyles.flex_row_align_center, styles.side_menu_info]}>
-                    <View style={styles.side_menu_avt_container}>
-                        <FastImage
-                            source={AppImages.img_avt}
-                            style={styles.side_menu_avt}
-                            resizeMode={FastImage.resizeMode.contain}
-                        />
-                    </View>
-                    <View style={{ marginLeft: getSize.m(10) }}>
-                        <Text style={styles.side_menu_name}>עידו אברהמי</Text>
-                        <TouchableOpacity
-                            onPress={onNavigateStartScreen}
-                            style={[appStyles.flex_row_align_center]}
-                        >
+                <View style={{ paddingHorizontal: getSize.m(30) }}>
+                    <View style={[appStyles.flex_row_align_center, styles.side_menu_info]}>
+                        <View style={styles.side_menu_avt_container}>
                             <FastImage
-                                source={AppImages.img_arrow_right_from_bracket}
-                                style={styles.side_menu_logout_icon}
+                                source={AppImages.img_avt}
+                                style={styles.side_menu_avt}
                                 resizeMode={FastImage.resizeMode.contain}
                             />
-                            <Text style={styles.side_menu_logout_text}>התנתק</Text>
+                        </View>
+                        <View style={{ marginLeft: getSize.m(10) }}>
+                            <Text style={styles.side_menu_name}>עידו אברהמי</Text>
+                            <TouchableOpacity
+                                onPress={onNavigateStartScreen}
+                                style={[appStyles.flex_row_align_center]}
+                            >
+                                <FastImage
+                                    source={AppImages.img_arrow_right_from_bracket}
+                                    style={styles.side_menu_logout_icon}
+                                    resizeMode={FastImage.resizeMode.contain}
+                                />
+                                <Text style={styles.side_menu_logout_text}>התנתק</Text>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                    <View style={{ marginTop: getSize.m(23) }}>
+                        <TouchableOpacity
+                            onPress={() => {
+                                navigate(ScreenName.SettingsPage);
+                            }}
+                            style={appStyles.flex_row_align_center}
+                        >
+                            <FastImage
+                                source={AppImages.img_user_bold}
+                                resizeMode={FastImage.resizeMode.contain}
+                                style={{ width: getSize.m(14), height: getSize.m(12) }}
+                            />
+                            <Text style={styles.side_menu_item_text}>
+                                {t('side_menu.my_account')}
+                            </Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            onPress={() => {
+                                navigate(ScreenName.ContactUsPage);
+                            }}
+                            style={[appStyles.flex_row_align_center, { marginTop: getSize.m(28) }]}
+                        >
+                            <FastImage
+                                source={AppImages.img_message}
+                                resizeMode={FastImage.resizeMode.contain}
+                                style={{ width: getSize.m(14), height: getSize.m(12) }}
+                            />
+                            <Text style={styles.side_menu_item_text}>
+                                {t('side_menu.contact_us')}
+                            </Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            onPress={() => {
+                                navigate(ScreenName.SettingsPage);
+                            }}
+                            style={[appStyles.flex_row_align_center, { marginTop: getSize.m(28) }]}
+                        >
+                            <FastImage
+                                source={AppImages.img_gear}
+                                resizeMode={FastImage.resizeMode.contain}
+                                style={{ width: getSize.m(14), height: getSize.m(12) }}
+                            />
+                            <Text style={styles.side_menu_item_text}>
+                                {t('side_menu.definitions')}
+                            </Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            onPress={() => {
+                                navigate(ScreenName.TermsConditionPage);
+                            }}
+                            style={[appStyles.flex_row_align_center, { marginTop: getSize.m(28) }]}
+                        >
+                            <FastImage
+                                source={AppImages.img_file}
+                                resizeMode={FastImage.resizeMode.contain}
+                                style={{ width: getSize.m(14), height: getSize.m(12) }}
+                            />
+                            <Text style={styles.side_menu_item_text}>{t('side_menu.terms')}</Text>
                         </TouchableOpacity>
                     </View>
-                </View>
-                <View style={{ marginTop: getSize.m(23) }}>
-                    <TouchableOpacity
-                        onPress={() => {
-                            navigate(ScreenName.SettingsPage);
-                        }}
-                        style={appStyles.flex_row_align_center}
-                    >
-                        <FastImage
-                            source={AppImages.img_user_bold}
-                            resizeMode={FastImage.resizeMode.contain}
-                            style={{ width: getSize.m(14), height: getSize.m(12) }}
-                        />
-                        <Text style={styles.side_menu_item_text}>{t('side_menu.my_account')}</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        onPress={() => {
-                            navigate(ScreenName.ContactUsPage);
-                        }}
-                        style={[appStyles.flex_row_align_center, { marginTop: getSize.m(28) }]}
-                    >
-                        <FastImage
-                            source={AppImages.img_message}
-                            resizeMode={FastImage.resizeMode.contain}
-                            style={{ width: getSize.m(14), height: getSize.m(12) }}
-                        />
-                        <Text style={styles.side_menu_item_text}>{t('side_menu.contact_us')}</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        onPress={() => {
-                            navigate(ScreenName.SettingsPage);
-                        }}
-                        style={[appStyles.flex_row_align_center, { marginTop: getSize.m(28) }]}
-                    >
-                        <FastImage
-                            source={AppImages.img_gear}
-                            resizeMode={FastImage.resizeMode.contain}
-                            style={{ width: getSize.m(14), height: getSize.m(12) }}
-                        />
-                        <Text style={styles.side_menu_item_text}>{t('side_menu.definitions')}</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        onPress={() => {
-                            navigate(ScreenName.TermsConditionPage);
-                        }}
-                        style={[appStyles.flex_row_align_center, { marginTop: getSize.m(28) }]}
-                    >
-                        <FastImage
-                            source={AppImages.img_file}
-                            resizeMode={FastImage.resizeMode.contain}
-                            style={{ width: getSize.m(14), height: getSize.m(12) }}
-                        />
-                        <Text style={styles.side_menu_item_text}>{t('side_menu.terms')}</Text>
-                    </TouchableOpacity>
                 </View>
             </View>
         </View>

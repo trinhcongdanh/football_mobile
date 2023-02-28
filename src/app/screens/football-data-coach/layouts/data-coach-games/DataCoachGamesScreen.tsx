@@ -28,7 +28,7 @@ export const DataCoachGamesScreen = ({ games }: IDataCoachGamesScreenProps) => {
                                 {
                                     flexDirection: 'row-reverse',
                                     marginRight: getSize.m(20),
-                                    marginLeft: getSize.m(34),
+                                    marginLeft: getSize.m(24),
                                 },
                             ]}
                         >

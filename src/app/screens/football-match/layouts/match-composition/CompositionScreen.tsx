@@ -110,7 +110,7 @@ export const CompositionScreen = ({ navigation, route }: ICompositionScreenProps
         <View
             style={[
                 appStyles.flex,
-                { backgroundColor: appColors.gray, paddingHorizontal: getSize.m(16) },
+                { backgroundColor: appColors.gray, paddingHorizontal: getSize.m(24) },
             ]}
         >
             <ScrollView showsVerticalScrollIndicator={false}>
