@@ -17,6 +17,7 @@ import { ILeaguesScreenProps } from './LeaguesScreen.type';
 
 export const LeaguesScreen = ({ navigation, route }: ILeaguesScreenProps) => {
     const { t, labels } = useViewModel({ navigation, route });
+    console.log(labels);
 
     return (
         <View style={appStyles.flex}>

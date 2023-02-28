@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from '@football/app/utils/hooks/useSto
 import { LeagueTypeModel } from '@football/core/models/LeagueModelResponse';
 import leagueService, { useLeagueTypes } from '@football/core/services/League.service';
 import LeagueTypeService from '@football/core/services/LeagueType.service';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { resetSearchLeagues, setSearchLeagues } from 'src/store/league/League.slice';
 import { ILeaguesScreenProps } from './LeaguesScreen.type';
@@ -119,7 +119,7 @@ const useViewCallback = (route: any, viewState: any) => {
 
         if (res.data.documents?.length) {
             setLeagueType(res.data.documents);
-            console.log(leagueType);
+            // console.log(leagueType);
             labels = res.data.documents.map((e: any) => ({
                 id: e.index,
                 title: e.name_he,
@@ -129,7 +129,7 @@ const useViewCallback = (route: any, viewState: any) => {
                 ),
                 component: LeagueItemScreen,
             }));
-            console.log(labels);
+            // console.log(labels);
         }
     }, []);
 
@@ -147,11 +147,28 @@ export const useViewModel = ({ navigation, route }: ILeaguesScreenProps) => {
     };
 
     const state = useViewState();
-    const { getLeagueTypeData, labels } = useViewCallback(route, state);
+    const { getLeagueTypeData } = useViewCallback(route, state);
 
-    useMount(() => {
-        getLeagueTypeData();
-    });
+    const { data: leagueTypesData } = useLeagueTypes();
+    let labels: any[] = [];
+
+    let leagueTypes: LeagueTypeModel[] = [];
+    if (leagueTypesData) {
+        const [error, res] = leagueTypesData;
+        if (!error) {
+            leagueTypes = res.data.documents;
+            labels = leagueTypes.map(e => ({
+                id: e.index,
+                title: e.name_he,
+                name: e.name_en.split(' ').join(''),
+                renderComponent: (props: INavigationProps) => (
+                    <LeagueItemScreen {...props} typeId={e.index} />
+                ),
+                component: LeagueItemScreen,
+            }));
+        }
+    }
+    console.log(labels);
 
     return {
         t,
