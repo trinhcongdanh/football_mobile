@@ -5,6 +5,7 @@ import { ButtonOption } from '@football/app/components/button_option';
 import { HeaderUser } from '@football/app/components/header-user/HeaderUser';
 import { BOTTOM_SVG_HEIGHT } from '@football/app/routes/bottom-tab/components/bottom.tab';
 import { TAB_BAR_HEIGHT } from '@football/app/routes/bottom-tab/styles/bottom.tab.styles';
+import { IGobletScreenProps } from '@football/app/screens/football-goblet/GobletScreen.type';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import { getSize } from '@football/app/utils/responsive/scale';
@@ -24,8 +25,8 @@ import Icon from 'react-native-vector-icons/Feather';
 import styles from './GobletScreen.style';
 import { useViewModel } from './GobletScreen.viewModel';
 
-export const GobletScreen = () => {
-    const { t, goToStateCupPage, changeTab, cups } = useViewModel();
+export const GobletScreen = ({ navigation, route }: IGobletScreenProps) => {
+    const { t, goToStateCupPage, changeTab, cups } = useViewModel({ navigation, route });
     return (
         <View style={[appStyles.flex]}>
             <ImageBackground source={AppImages.img_background} style={appStyles.flex}>

@@ -36,7 +36,7 @@ export const DataPlayerScreen = ({ navigation, route }: IDataPlayerScreenProps) 
                                     handlePressFunction={onGoBack}
                                 />
                                 <InfoPerson
-                                    name={player.name_en}
+                                    name={player.name_he}
                                     data_1={player.date_of_birth}
                                     data_2={player.citizenship_he}
                                     data_3={player.num_of_games}

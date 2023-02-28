@@ -1,6 +1,6 @@
-import { Goalkickersleague } from '@football/core/models/TeamSeasonStatsResponse';
+import { Yellowcardstotocup } from '@football/core/models/TeamSeasonStatsResponse';
 
 export type IYellowsCupProps = {
-    listGames: Goalkickersleague[];
+    listGames: Yellowcardstotocup[];
     handleTeamGoalKickersList: any;
 };

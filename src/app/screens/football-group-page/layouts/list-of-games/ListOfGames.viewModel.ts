@@ -6,8 +6,8 @@ export const useViewModel = () => {
     const { navigate, goBack } = useAppNavigator();
     const { t } = useTranslation();
 
-    const handleDetailMatch = () => {
-        navigate(ScreenName.MatchPage);
+    const handleDetailMatch = (gameId: string) => {
+        navigate(ScreenName.MatchPage, { gameId });
     };
 
     const handleStadium = (stadiumId: string) => {

@@ -57,7 +57,7 @@ export const LeagueTable = ({ teamSeason }: ILeagueTableProps) => {
                                     },
                                 ]}
                             >
-                                <Text style={styles.text_cycle}>{selectCycle?.cycle_name_en}</Text>
+                                <Text style={styles.text_cycle}>{selectCycle?.cycle_name_he}</Text>
                                 <Icon
                                     name={
                                         openModalPlayOff
@@ -97,7 +97,7 @@ export const LeagueTable = ({ teamSeason }: ILeagueTableProps) => {
                                                     <Text
                                                         style={styles.btn_drop_down_calender_text}
                                                     >
-                                                        {cycle.cycle_name_en}
+                                                        {cycle.cycle_name_he}
                                                     </Text>
                                                 </TouchableOpacity>
                                             );
@@ -121,7 +121,7 @@ export const LeagueTable = ({ teamSeason }: ILeagueTableProps) => {
                                 ]}
                             >
                                 <Text style={styles.text_cycle}>
-                                    {selectedRound?.round_name_en}
+                                    {selectedRound?.round_name_he}
                                 </Text>
                                 <Icon
                                     name={
@@ -160,7 +160,7 @@ export const LeagueTable = ({ teamSeason }: ILeagueTableProps) => {
                                                     <Text
                                                         style={styles.btn_drop_down_calender_text}
                                                     >
-                                                        {round.round_name_en}
+                                                        {round.round_name_he}
                                                     </Text>
                                                 </TouchableOpacity>
                                             );

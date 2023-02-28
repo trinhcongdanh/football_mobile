@@ -53,6 +53,7 @@ export const useViewModel = ({ navigation, route }: IStatisticsGroupScreenProps)
                     teamSeasonStats: state.teamSeasonStats,
                     data: state.teamSeasonStats?.goal_kickers_league,
                     props: 'num_of_goals',
+                    title: t('statistics.group.scorer_of_goal'),
                     titleLeft: t('statistics.group.player_name'),
                     titleRight: t('statistics.group.number'),
                 });
@@ -63,6 +64,7 @@ export const useViewModel = ({ navigation, route }: IStatisticsGroupScreenProps)
                     teamSeasonStats: state.teamSeasonStats,
                     data: state.teamSeasonStats?.goal_kickers_national_cup,
                     props: 'num_of_goals',
+                    title: t('statistics.group.scorer_of_goal_state_cup'),
                     titleLeft: t('statistics.group.player_name'),
                     titleRight: t('statistics.group.number'),
                 });
@@ -72,9 +74,30 @@ export const useViewModel = ({ navigation, route }: IStatisticsGroupScreenProps)
                 navigate(ScreenName.GoalKickerListPage, {
                     teamSeasonStats: state.teamSeasonStats,
                     data: state.teamSeasonStats?.goal_kickers_toto_cup,
+                    title: t('statistics.group.top_scorers'),
                     props: 'num_of_goals',
                     titleLeft: t('statistics.group.player_name'),
                     titleRight: t('statistics.group.number'),
+                });
+                break;
+            case TeamGoalKickersListType.YellowCardsTotoCup:
+                navigate(ScreenName.GoalKickerListPage, {
+                    teamSeasonStats: state.teamSeasonStats,
+                    data: state.teamSeasonStats?.yellow_cards_toto_cup,
+                    title: t('statistics.group.yellow_cup'),
+                    props: 'num_of_cards',
+                    titleLeft: t('statistics.group.player_name'),
+                    titleRight: t('statistics.group.number_yellow'),
+                });
+                break;
+            case TeamGoalKickersListType.YellowCardsLeague:
+                navigate(ScreenName.GoalKickerListPage, {
+                    teamSeasonStats: state.teamSeasonStats,
+                    data: state.teamSeasonStats?.yellow_cards_league,
+                    title: t('statistics.group.yellow_league'),
+                    props: 'num_of_cards',
+                    titleLeft: t('statistics.group.player_name'),
+                    titleRight: t('statistics.group.number_yellow'),
                 });
                 break;
 
@@ -82,29 +105,10 @@ export const useViewModel = ({ navigation, route }: IStatisticsGroupScreenProps)
                 navigate(ScreenName.GoalKickerListPage, {
                     teamSeasonStats: state.teamSeasonStats,
                     data: state.teamSeasonStats?.red_cards,
+                    title: t('statistics.group.red_card'),
                     props: 'num_of_cards',
                     titleLeft: t('statistics.group.player_name'),
                     titleRight: t('statistics.group.number_red'),
-                });
-                break;
-
-            case TeamGoalKickersListType.YellowCardsLeague:
-                navigate(ScreenName.GoalKickerListPage, {
-                    teamSeasonStats: state.teamSeasonStats,
-                    data: state.teamSeasonStats?.yellow_cards_league,
-                    props: 'num_of_cards',
-                    titleLeft: t('statistics.group.player_name'),
-                    titleRight: t('statistics.group.number_yellow'),
-                });
-                break;
-
-            case TeamGoalKickersListType.YellowCardsTotoCup:
-                navigate(ScreenName.GoalKickerListPage, {
-                    teamSeasonStats: state.teamSeasonStats,
-                    data: state.teamSeasonStats?.yellow_cards_toto_cup,
-                    props: 'num_of_cards',
-                    titleLeft: t('statistics.group.player_name'),
-                    titleRight: t('statistics.group.number_yellow'),
                 });
                 break;
 

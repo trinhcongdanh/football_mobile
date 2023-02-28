@@ -1,24 +1,26 @@
-import { appIcons } from '@football/app/assets/icons/appIcons';
-import { AppImages } from '@football/app/assets/images';
-import { appColors } from '@football/app/utils/constants/appColors';
+import React from 'react';
+import { View, Text, TouchableOpacity } from 'react-native';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import { getSize } from '@football/app/utils/responsive/scale';
-import React from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
-import { Avatar } from 'react-native-elements';
-import FastImage from 'react-native-fast-image';
-import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/Feather';
-import styles from './YellowsCup.style';
-import { IYellowsCupProps } from './YellowsCup.type';
-import { useViewModel } from './YellowsCup.viewModel';
+import { appIcons } from '@football/app/assets/icons/appIcons';
+import { appColors } from '@football/app/utils/constants/appColors';
+import { Avatar } from 'react-native-elements';
+import LinearGradient from 'react-native-linear-gradient';
+import { useViewModel } from './ScoresOfGoalsStateCup.viewModel';
+import { IScoresOfGoalsStateCupProps } from '@football/app/screens/football-statistics-group/layouts/scores-of-goals-state-cup/ScoresOfGoalsStateCup.type';
 
-export const YellowsCup = ({ listGames, handleTeamGoalKickersList }: IYellowsCupProps) => {
+export const ScoresOfGoalsStateCup = ({
+    listGames,
+    handleTeamGoalKickersList,
+}: IScoresOfGoalsStateCupProps) => {
     const { t } = useViewModel();
     return (
         <View style={appStyles.item_statistics}>
             <View style={[appStyles.flex_row_space_center]}>
-                <Text style={appStyles.statistics_title}>{t('statistics.group.yellow_cup')}</Text>
+                <Text style={appStyles.statistics_title}>
+                    {t('statistics.group.scorer_of_goal_state_cup')}
+                </Text>
                 <TouchableOpacity
                     style={appStyles.flex_row_space_center}
                     onPress={handleTeamGoalKickersList}
@@ -39,6 +41,7 @@ export const YellowsCup = ({ listGames, handleTeamGoalKickersList }: IYellowsCup
                     appStyles.flex_row_space_center,
                     {
                         marginTop: getSize.m(21),
+                        paddingHorizontal: getSize.m(4),
                     },
                 ]}
             >
@@ -53,7 +56,7 @@ export const YellowsCup = ({ listGames, handleTeamGoalKickersList }: IYellowsCup
                     }}
                 >
                     <Text style={[appStyles.statistics_header, { fontSize: getSize.m(12) }]}>
-                        {t('statistics.group.number_yellow')}
+                        {t('statistics.group.number')}
                     </Text>
                 </View>
             </View>
@@ -95,17 +98,13 @@ export const YellowsCup = ({ listGames, handleTeamGoalKickersList }: IYellowsCup
                                     width: getSize.m(44),
                                 }}
                             >
-                                <FastImage
-                                    source={AppImages.img_ticket_yellow}
-                                    style={styles.ticket}
-                                />
                                 <Text
                                     style={[
                                         appStyles.statistics_content,
                                         { fontSize: getSize.m(14) },
                                     ]}
                                 >
-                                    {item.num_of_cards}
+                                    {item.num_of_goals}
                                 </Text>
                             </View>
                         </LinearGradient>

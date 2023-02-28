@@ -36,7 +36,7 @@ export const ListOfGames = ({ listGames }: IListOfGamesProps) => {
                                 moment(`${item.date} ${item.time}`, 'DD.M.YY HH:mm'),
                                 moment(`${item.date} ${item.time}`, 'DD.M.YY HH:mm').add(2, 'hours')
                             )}
-                            handleDetailMatch={handleDetailMatch}
+                            handleDetailMatch={() => handleDetailMatch(item.game_id)}
                             handleStadium={() => handleStadium(item.stadium_id)}
                         />
                     );

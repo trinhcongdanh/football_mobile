@@ -15,6 +15,7 @@ import { RedCard } from './layouts/red-card/RedCard';
 import styles from './StatisticsGroupScreen.style';
 import { useViewModel } from './StatisticsGroupScreen.viewModel';
 import { IStatisticsGroupScreenProps, TeamGoalKickersListType } from './StatisticsGroupScreen.type';
+import { ScoresOfGoalsStateCup } from '@football/app/screens/football-statistics-group/layouts/scores-of-goals-state-cup/ScoresOfGoalsStateCup';
 
 export const StatisticsGroupScreen = ({ navigation, route }: IStatisticsGroupScreenProps) => {
     const { t, onGoBack, teamSeasonStats, handleTeamGoalKickersList } = useViewModel({
@@ -53,8 +54,8 @@ export const StatisticsGroupScreen = ({ navigation, route }: IStatisticsGroupScr
                                     }
                                 />
                             </View>
-                            <View style={appStyles.package}>
-                                <TopScorers
+                            <View style={[appStyles.package]}>
+                                <ScoresOfGoalsStateCup
                                     listGames={teamSeasonStats.goal_kickers_national_cup.slice(
                                         0,
                                         MAX_LEAGUE_SEASON_STATS_ITEMS
@@ -67,7 +68,7 @@ export const StatisticsGroupScreen = ({ navigation, route }: IStatisticsGroupScr
                                 />
                             </View>
                             <View style={appStyles.package}>
-                                <YellowsCup
+                                <TopScorers
                                     listGames={teamSeasonStats.goal_kickers_toto_cup.slice(
                                         0,
                                         MAX_LEAGUE_SEASON_STATS_ITEMS
@@ -80,7 +81,7 @@ export const StatisticsGroupScreen = ({ navigation, route }: IStatisticsGroupScr
                                 />
                             </View>
                             <View style={appStyles.package}>
-                                <YellowsLeagues
+                                <YellowsCup
                                     listGames={teamSeasonStats.yellow_cards_toto_cup.slice(
                                         0,
                                         MAX_LEAGUE_SEASON_STATS_ITEMS
@@ -92,6 +93,7 @@ export const StatisticsGroupScreen = ({ navigation, route }: IStatisticsGroupScr
                                     }
                                 />
                             </View>
+
                             <View style={appStyles.package}>
                                 <YellowsLeagues
                                     listGames={teamSeasonStats.yellow_cards_league.slice(

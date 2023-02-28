@@ -85,8 +85,8 @@ export const useViewModel = ({ navigation, route }: IMatchScreenProps) => {
         getGameData();
     });
 
-    const handleStadium = () => {
-        navigate(ScreenName.PitchPage);
+    const handleStadium = (stadiumId: string) => {
+        navigate(ScreenName.PitchPage, { stadiumId });
     };
 
     return { onGoBack, ...state, handleStadium };

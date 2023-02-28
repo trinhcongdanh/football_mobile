@@ -8,8 +8,8 @@ export const useViewModel = ({ games }: IListOfGamesProps) => {
     const { t } = useTranslation();
     const listGames = games;
 
-    const onNavigateGamePersonnel = () => {
-        navigate(ScreenName.MatchPage);
+    const onNavigateGamePersonnel = (gameId: string) => {
+        navigate(ScreenName.MatchPage, { gameId });
     };
 
     const onNavigateStadium = (stadiumId: string) => {

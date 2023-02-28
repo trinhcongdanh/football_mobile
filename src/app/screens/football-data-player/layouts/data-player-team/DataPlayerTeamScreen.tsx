@@ -177,13 +177,10 @@ export const DataPlayerTeamScreen = ({ player }: IDataPlayerTeamScreenProps) => 
                                                         ? 'rgba(59, 168, 225, 0.04)'
                                                         : appColors.gray,
                                                 ]}
-                                                style={[
-                                                    appStyles.flex_row_space_center,
-                                                    styles.result,
-                                                ]}
+                                                style={[appStyles.flex_row_align, styles.result]}
                                                 key={gameIndex}
                                             >
-                                                <View>
+                                                <View style={{ width: getSize.m(50) }}>
                                                     <Text style={styles.date}>{game.date}</Text>
                                                 </View>
                                                 <View
@@ -191,6 +188,7 @@ export const DataPlayerTeamScreen = ({ player }: IDataPlayerTeamScreenProps) => 
                                                         appStyles.flex_row_space_center,
                                                         {
                                                             marginHorizontal: getSize.m(15),
+                                                            width: getSize.m(120),
                                                         },
                                                     ]}
                                                 >
@@ -212,7 +210,9 @@ export const DataPlayerTeamScreen = ({ player }: IDataPlayerTeamScreenProps) => 
                                                         </View>
                                                     </View>
                                                     <View
-                                                        style={{ marginHorizontal: getSize.m(12) }}
+                                                        style={{
+                                                            marginHorizontal: getSize.m(12),
+                                                        }}
                                                     >
                                                         <Text style={styles.score}>
                                                             {game.score}
@@ -240,7 +240,7 @@ export const DataPlayerTeamScreen = ({ player }: IDataPlayerTeamScreenProps) => 
                                                     </View>
                                                 </View>
                                                 <View style={appStyles.flex_row_align_center}>
-                                                    <View>
+                                                    <View style={{ width: getSize.m(60) }}>
                                                         <Text
                                                             style={{
                                                                 color: appColors.text_dark_blue,
@@ -250,47 +250,71 @@ export const DataPlayerTeamScreen = ({ player }: IDataPlayerTeamScreenProps) => 
                                                                 marginRight: getSize.m(2),
                                                             }}
                                                         >
-                                                            {game.goals}
+                                                            {game.goals ? game.goals : '-'}
                                                         </Text>
                                                     </View>
                                                     <FastImage
-                                                        source={AppImages.img_light_volleyball}
+                                                        source={
+                                                            game.goals
+                                                                ? AppImages.img_ball_dark
+                                                                : AppImages.img_ball_light_gray
+                                                        }
                                                         resizeMode={FastImage.resizeMode.contain}
                                                         style={{
                                                             width: getSize.m(12),
                                                             height: getSize.m(12),
                                                         }}
                                                     />
-                                                    <FastImage
-                                                        source={AppImages.img_ticket_red}
-                                                        resizeMode={FastImage.resizeMode.contain}
-                                                        style={{
-                                                            marginLeft: getSize.m(10),
-                                                            width: getSize.m(14),
-                                                            height: getSize.m(20),
-                                                        }}
-                                                    />
-                                                    <Text
-                                                        style={[
-                                                            styles.date,
-                                                            { marginLeft: getSize.m(16) },
-                                                        ]}
-                                                    >
-                                                        {game.red_cards ? game.red_cards : '-'}
-                                                    </Text>
-                                                    {game.on_field ? (
-                                                        <Icon
-                                                            name={appIcons.ic_arrow_down}
-                                                            color={appColors.red_dark}
-                                                            size={getSize.m(10)}
+                                                    <View style={appStyles.flex_row_align}>
+                                                        <FastImage
+                                                            source={
+                                                                game.red_cards &&
+                                                                AppImages.img_ticket_red
+                                                            }
+                                                            resizeMode={
+                                                                FastImage.resizeMode.contain
+                                                            }
+                                                            style={{
+                                                                marginLeft: getSize.m(10),
+                                                                width: getSize.m(14),
+                                                                height: getSize.m(20),
+                                                            }}
                                                         />
-                                                    ) : (
-                                                        <Icon
-                                                            name={appIcons.ic_arrow_up}
-                                                            color={appColors.red_dark}
-                                                            size={getSize.m(10)}
-                                                        />
-                                                    )}
+                                                        <Text
+                                                            style={{
+                                                                position: 'absolute',
+                                                                left: getSize.m(13.5),
+                                                                fontFamily: AppFonts.semibold,
+                                                                fontSize: getSize.m(10),
+                                                                color: appColors.white,
+                                                            }}
+                                                        >
+                                                            {game.red_cards ? game.red_cards : ''}
+                                                        </Text>
+                                                    </View>
+                                                    <View style={[appStyles.flex_row_align, {}]}>
+                                                        <Text
+                                                            style={[
+                                                                styles.date,
+                                                                { width: getSize.m(30) },
+                                                            ]}
+                                                        >
+                                                            {`${game.off_field}'`}
+                                                        </Text>
+                                                        {game.on_field ? (
+                                                            <Icon
+                                                                name={appIcons.ic_arrow_down}
+                                                                color={appColors.red_dark}
+                                                                size={getSize.m(10)}
+                                                            />
+                                                        ) : (
+                                                            <Icon
+                                                                name={appIcons.ic_arrow_up}
+                                                                color={appColors.green}
+                                                                size={getSize.m(10)}
+                                                            />
+                                                        )}
+                                                    </View>
                                                 </View>
                                             </LinearGradient>
                                         );
