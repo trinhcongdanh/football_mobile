@@ -25,11 +25,6 @@ export const useViewModel = ({ navigation, route }: IVerifyScreenProps) => {
         setErrors(prevState => ({ ...prevState, [input]: errorMessage }));
     };
 
-    const reSendVerify = (): void => {
-        // setTimeSend(true);
-        handleError('', 'verifyError');
-    };
-
     const inputs = Array(4).fill('');
 
     const [OTP, setOTP] = useState<any>({ 0: '', 1: '', 2: '', 3: '' });
@@ -68,7 +63,7 @@ export const useViewModel = ({ navigation, route }: IVerifyScreenProps) => {
     const dispatch = useDispatch<any>();
     function serializeParams(obj: any) {
         const a = qs.stringify(obj, { encode: false, arrayFormat: 'brackets' });
-        // console.log(a);
+        console.log(a);
         return a;
     }
     const guestId = useSelector((state: any) => state.guestId.guestId);
@@ -77,6 +72,26 @@ export const useViewModel = ({ navigation, route }: IVerifyScreenProps) => {
     const numberPhone = useSelector((state: any) => state.numberPhoneUser);
     const otp = useSelector((state: any) => state.otpUser);
     const { number }: any = route.params;
+
+    const reSendVerify = (): void => {
+        // setTimeSend(true);
+        dispatch(
+            numberPhoneUser(
+                serializeParams({
+                    action: ACTION,
+                    token: login.login.token,
+                    call: AuthData.REGISTER_SMS,
+                    guest_guid: guestId[0],
+                    guest_id: login.login.user.item_id,
+                    item: {
+                        sms_phone: encodeURIComponent(number),
+                        // sms_phone: ''.
+                    },
+                })
+            )
+        );
+        handleError('', 'verifyError');
+    };
 
     const onVerifyCode = async () => {
         let codeOtp = '';
@@ -117,7 +132,7 @@ export const useViewModel = ({ navigation, route }: IVerifyScreenProps) => {
     useEffect(() => {
         if (otp.success === true) {
             navigate(ScreenName.RegPage);
-        } else if (otp.success === false) {
+        } else if (otp.success === false && otp.loading === false) {
             handleError(t('verify.error'), 'verifyError');
         }
     }, [otp.success]);
@@ -133,5 +148,6 @@ export const useViewModel = ({ navigation, route }: IVerifyScreenProps) => {
         reSendVerify,
         onVerifyCode,
         handleChangeText,
+        number,
     };
 };
