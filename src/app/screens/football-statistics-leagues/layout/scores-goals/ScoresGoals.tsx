@@ -28,7 +28,9 @@ export const ScoresGoals = ({ goalKickers, leagueSeasonStats }: IScoresGoalsProp
                 </Text>
                 <TouchableOpacity
                     style={appStyles.flex_row_space_center}
-                    onPress={() => handleSeeAll(leagueSeasonStats, goalKickers)}
+                    onPress={() =>
+                        handleSeeAll(leagueSeasonStats, goalKickers, t('statistics.leagues.goal'))
+                    }
                 >
                     <Text style={appStyles.statistics_see_all}>
                         {t('statistics.leagues.see_all')}

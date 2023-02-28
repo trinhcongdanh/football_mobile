@@ -29,6 +29,7 @@ export enum ListType {
 
 export const StatisticDetailsScreen = ({ navigation, route }: IStatisticDetailsScreenProps) => {
     const leagueSeasonStats = route?.params?.leagueSeasonStats as LeagueSeasonStatModel;
+    const title = route?.params?.title as string;
     const data = (route?.params?.data as GoalKicker[] | Card[]) || [];
     const avgData = (route?.params?.avgData as AvgGameYellowCard[] | AvgGameGoalsKicked[]) || [];
     const hisData = (route?.params?.hisData as ChampionshipHistory[]) || [];
@@ -64,7 +65,7 @@ export const StatisticDetailsScreen = ({ navigation, route }: IStatisticDetailsS
                                             { textAlign: 'left', fontSize: getSize.m(12) },
                                         ]}
                                     >
-                                        {t('statistics.leagues.name_club')}
+                                        {t('statistics.leagues.name_player')}
                                     </Text>
                                 </View>
                                 <View style={{ width: getSize.m(120) }}>
@@ -74,9 +75,10 @@ export const StatisticDetailsScreen = ({ navigation, route }: IStatisticDetailsS
                                             { textAlign: 'left', fontSize: getSize.m(12) },
                                         ]}
                                     >
-                                        {t('statistics.leagues.name_player')}
+                                        {t('statistics.leagues.name_club')}
                                     </Text>
                                 </View>
+
                                 <View style={{ width: getSize.m(40) }}>
                                     <Text
                                         style={[
@@ -125,37 +127,7 @@ export const StatisticDetailsScreen = ({ navigation, route }: IStatisticDetailsS
                                                     </Text>
                                                 </View>
                                             )}
-                                            <View
-                                                style={{
-                                                    width: getSize.m(120),
-                                                    overflow: 'hidden',
-                                                }}
-                                            >
-                                                <View
-                                                    style={{
-                                                        flexDirection: 'row',
-                                                    }}
-                                                >
-                                                    <Avatar
-                                                        source={{
-                                                            uri: item.team_image_url,
-                                                        }}
-                                                        rounded
-                                                        size={18}
-                                                    />
-                                                    <Text
-                                                        style={[
-                                                            appStyles.statistics_content,
-                                                            {
-                                                                marginLeft: getSize.m(10),
-                                                                fontSize: getSize.m(14),
-                                                            },
-                                                        ]}
-                                                    >
-                                                        {item.team_name_he}
-                                                    </Text>
-                                                </View>
-                                            </View>
+
                                             <View
                                                 style={{
                                                     width: getSize.m(120),
@@ -184,6 +156,37 @@ export const StatisticDetailsScreen = ({ navigation, route }: IStatisticDetailsS
                                                         ]}
                                                     >
                                                         {item.player_name_he}
+                                                    </Text>
+                                                </View>
+                                            </View>
+                                            <View
+                                                style={{
+                                                    width: getSize.m(120),
+                                                    overflow: 'hidden',
+                                                }}
+                                            >
+                                                <View
+                                                    style={{
+                                                        flexDirection: 'row',
+                                                    }}
+                                                >
+                                                    <Avatar
+                                                        source={{
+                                                            uri: item.team_image_url,
+                                                        }}
+                                                        rounded
+                                                        size={18}
+                                                    />
+                                                    <Text
+                                                        style={[
+                                                            appStyles.statistics_content,
+                                                            {
+                                                                marginLeft: getSize.m(10),
+                                                                fontSize: getSize.m(14),
+                                                            },
+                                                        ]}
+                                                    >
+                                                        {item.team_name_he}
                                                     </Text>
                                                 </View>
                                             </View>
@@ -478,7 +481,7 @@ export const StatisticDetailsScreen = ({ navigation, route }: IStatisticDetailsS
                                 iconName={appIcons.ic_right_ios}
                                 iconStyle={styles.ic_back}
                                 goBack={onGoBack}
-                                title={t('statistics.leagues.goal')}
+                                title={title}
                             />
                         </View>
                         <ScrollView>

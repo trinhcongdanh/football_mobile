@@ -26,12 +26,18 @@ export const AverageScores = ({ avgGoalKicker, leagueSeasonStats }: IAverageScor
                     },
                 ]}
             >
-                <Text style={appStyles.statistics_title}>
+                <Text style={[appStyles.statistics_title, { fontSize: getSize.m(16) }]}>
                     {t('statistics.leagues.average_score')}
                 </Text>
                 <TouchableOpacity
                     style={appStyles.flex_row_space_center}
-                    onPress={() => handleSeeAll(leagueSeasonStats, avgGoalKicker)}
+                    onPress={() =>
+                        handleSeeAll(
+                            leagueSeasonStats,
+                            avgGoalKicker,
+                            t('statistics.leagues.average_score')
+                        )
+                    }
                 >
                     <Text style={appStyles.statistics_see_all}>
                         {t('statistics.leagues.see_all')}
@@ -73,7 +79,7 @@ export const AverageScores = ({ avgGoalKicker, leagueSeasonStats }: IAverageScor
                         {t('statistics.leagues.name_club')}
                     </Text>
                 </View>
-                <View style={{ width: getSize.m(60) }}>
+                <View style={{ width: getSize.m(80) }}>
                     <Text
                         style={[
                             appStyles.statistics_header,
@@ -82,7 +88,7 @@ export const AverageScores = ({ avgGoalKicker, leagueSeasonStats }: IAverageScor
                             },
                         ]}
                     >
-                        {t('statistics.leagues.average')}
+                        {t('statistics.leagues.average_goal')}
                     </Text>
                 </View>
             </View>

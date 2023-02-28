@@ -81,6 +81,8 @@ export const Video = () => {
         dispatch(resetVideo(null));
     };
 
+    console.log(sourceVideo);
+
     return (
         <View
             style={{
