@@ -1,5 +1,4 @@
 import { appIcons } from '@football/app/assets/icons/appIcons';
-import { AppImages } from '@football/app/assets/images';
 import styles from '@football/app/screens/football-home/layouts/Item7/Item7.style';
 import { useViewModel } from '@football/app/screens/football-home/layouts/Item7/Item7.viewModel';
 import { appColors } from '@football/app/utils/constants/appColors';
@@ -11,10 +10,10 @@ import IconEntypo from 'react-native-vector-icons/Entypo';
 import { IItem7Props } from './Item7.type';
 
 export const Item7 = ({ homePage }: IItem7Props) => {
-    const { t, pages, activeIndexNumber, setActiveIndexNumber } = useViewModel();
+    const { t, pages, activeIndexNumber, setActiveIndexNumber, onClickImage } = useViewModel();
     return (
         <View style={styles.container}>
-            <View>
+            <TouchableOpacity onPress={() => onClickImage(homePage.ads.link)}>
                 <FastImage
                     source={{ uri: homePage.ads.image_url }}
                     style={{
@@ -44,7 +43,7 @@ export const Item7 = ({ homePage }: IItem7Props) => {
                         />
                     </TouchableOpacity>
                 </View>
-            </View>
+            </TouchableOpacity>
         </View>
     );
 };

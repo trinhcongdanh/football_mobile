@@ -9,7 +9,9 @@ import { appColors } from '@football/app/utils/constants/appColors';
 import { IItem9Props } from '@football/app/screens/football-home/layouts/Item9/Item9.type';
 
 export const Item9 = ({ homePage }: IItem9Props) => {
-    const { t, pages, activeIndexNumber, setActiveIndexNumber, dots } = useViewModel({ homePage });
+    const { t, pages, activeIndexNumber, setActiveIndexNumber, dots, onClickImage } = useViewModel({
+        homePage,
+    });
     return (
         <View style={styles.container}>
             <View style={{ marginVertical: getSize.m(20), marginLeft: getSize.m(18) }}>
@@ -40,7 +42,10 @@ export const Item9 = ({ homePage }: IItem9Props) => {
                                 marginHorizontal: getSize.m(12),
                             }}
                         >
-                            <TouchableOpacity activeOpacity={0.9}>
+                            <TouchableOpacity
+                                activeOpacity={0.9}
+                                onPress={() => onClickImage(item.link)}
+                            >
                                 <Image source={{ uri: item.image_url }} style={styles.image} />
                                 {/* <View style={styles.date}>
                                     <Text style={styles.text_date}>{item.length}</Text>

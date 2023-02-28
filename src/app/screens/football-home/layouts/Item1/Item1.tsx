@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import { AppFonts } from '@football/app/assets/fonts';
 import { appIcons } from '@football/app/assets/icons/appIcons';
 import { AppImages } from '@football/app/assets/images';
@@ -24,6 +25,7 @@ export const Item1 = ({ team }: IItem1Props) => {
         setActiveIndexNumber,
         handleStadium,
         handleDetailMatch,
+        onNavigateTeamDetails,
     } = useViewModel();
     return (
         <ImageBackground
@@ -43,16 +45,18 @@ export const Item1 = ({ team }: IItem1Props) => {
                 </View>
                 <View style={[appStyles.flex_row_align, { marginTop: getSize.m(14) }]}>
                     <Text style={styles.text_details}>{team.name_he}</Text>
-                    <LinearGradient
-                        colors={['rgba(255, 43, 94, 1)', 'rgba(204, 10, 45, 1)']}
-                        style={styles.icon_arrow_left}
-                    >
-                        <FastImage
-                            source={AppImages.img_angle_down}
-                            style={{ width: getSize.m(9), height: getSize.m(12) }}
-                            resizeMode={FastImage.resizeMode.contain}
-                        />
-                    </LinearGradient>
+                    <TouchableOpacity onPress={() => onNavigateTeamDetails(team._id)}>
+                        <LinearGradient
+                            colors={['rgba(255, 43, 94, 1)', 'rgba(204, 10, 45, 1)']}
+                            style={styles.icon_arrow_left}
+                        >
+                            <FastImage
+                                source={AppImages.img_angle_down}
+                                style={{ width: getSize.m(9), height: getSize.m(12) }}
+                                resizeMode={FastImage.resizeMode.contain}
+                            />
+                        </LinearGradient>
+                    </TouchableOpacity>
                 </View>
             </View>
             <ScrollView
@@ -211,7 +215,7 @@ export const Item1 = ({ team }: IItem1Props) => {
                                             </View>
                                         </View>
                                         <View style={{ width: getSize.m(40) }}>
-                                            {item.league_goals !== null ? (
+                                            {item.league_goals ? (
                                                 <Text style={styles.statistics_content}>
                                                     {item.league_goals}
                                                 </Text>
@@ -229,7 +233,7 @@ export const Item1 = ({ team }: IItem1Props) => {
                                             )}
                                         </View>
                                         <View style={{ width: getSize.m(40) }}>
-                                            {item.national_cup_goals !== null ? (
+                                            {item.national_cup_goals ? (
                                                 <Text style={styles.statistics_content}>
                                                     {item.national_cup_goals}
                                                 </Text>
@@ -247,7 +251,7 @@ export const Item1 = ({ team }: IItem1Props) => {
                                             )}
                                         </View>
                                         <View style={{ width: getSize.m(40) }}>
-                                            {item.toto_cup_goals !== null ? (
+                                            {item.toto_cup_goals ? (
                                                 <Text style={styles.statistics_content}>
                                                     {item.toto_cup_goals}
                                                 </Text>
@@ -379,7 +383,7 @@ export const Item1 = ({ team }: IItem1Props) => {
                                             </View>
                                         </View>
                                         <View style={{ width: getSize.m(40) }}>
-                                            {item.league_cards !== null ? (
+                                            {item.league_cards ? (
                                                 <View>
                                                     <FastImage
                                                         source={AppImages.img_ticket_yellow}
@@ -399,7 +403,7 @@ export const Item1 = ({ team }: IItem1Props) => {
                                             )}
                                         </View>
                                         <View style={{ width: getSize.m(40) }}>
-                                            {item.national_cup_cards !== null ? (
+                                            {item.national_cup_cards ? (
                                                 <View>
                                                     <FastImage
                                                         source={AppImages.img_ticket_yellow}
@@ -419,7 +423,7 @@ export const Item1 = ({ team }: IItem1Props) => {
                                             )}
                                         </View>
                                         <View style={{ width: getSize.m(40) }}>
-                                            {item.toto_cup_cards !== null ? (
+                                            {item.toto_cup_cards ? (
                                                 <View>
                                                     <FastImage
                                                         source={AppImages.img_ticket_yellow}
@@ -560,7 +564,7 @@ export const Item1 = ({ team }: IItem1Props) => {
                                             </View>
                                         </View>
                                         <View style={{ width: getSize.m(40) }}>
-                                            {item.league_cards !== null ? (
+                                            {item.league_cards ? (
                                                 <View>
                                                     <FastImage
                                                         source={AppImages.img_ticket_red}
@@ -585,7 +589,7 @@ export const Item1 = ({ team }: IItem1Props) => {
                                             )}
                                         </View>
                                         <View style={{ width: getSize.m(40) }}>
-                                            {item.national_cup_cards !== null ? (
+                                            {item.national_cup_cards ? (
                                                 <View>
                                                     <FastImage
                                                         source={AppImages.img_ticket_red}
@@ -612,7 +616,7 @@ export const Item1 = ({ team }: IItem1Props) => {
                                             )}
                                         </View>
                                         <View style={{ width: getSize.m(40) }}>
-                                            {item.toto_cup_cards !== null ? (
+                                            {item.toto_cup_cards ? (
                                                 <View>
                                                     <FastImage
                                                         source={AppImages.img_ticket_red}

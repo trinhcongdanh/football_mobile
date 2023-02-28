@@ -17,6 +17,10 @@ export const useViewModel = () => {
         navigate(ScreenName.MatchPage, { gameId });
     };
 
+    const onNavigateTeamDetails = (teamId: string) => {
+        navigate(ScreenName.GroupPagePage, { teamId });
+    };
+
     return {
         t,
         pages,
@@ -24,5 +28,6 @@ export const useViewModel = () => {
         setActiveIndexNumber,
         handleStadium,
         handleDetailMatch,
+        onNavigateTeamDetails,
     };
 };

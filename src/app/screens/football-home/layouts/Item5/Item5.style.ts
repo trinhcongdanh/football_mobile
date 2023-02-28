@@ -160,6 +160,13 @@ const styles = StyleSheet.create({
         top: getSize.m(-3),
         left: getSize.m(18),
     },
+    img_ticket_white: {
+        width: getSize.m(14),
+        height: getSize.m(21),
+        position: 'absolute',
+        top: getSize.m(-10.5),
+        left: getSize.m(13),
+    },
 });
 
 export default styles;

@@ -152,7 +152,7 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                                                         }}
                                                     />
                                                     <Text style={styles.header_item_text}>
-                                                        {item.name_en}
+                                                        {item.name_he}
                                                     </Text>
                                                 </View>
                                             </TouchableOpacity>
@@ -184,7 +184,7 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                             </View>
                             <View style={styles.content}>
                                 <Text style={styles.text_content}>
-                                    {homePage?.video.caption_en}
+                                    {homePage?.video.caption_he}
                                 </Text>
                             </View>
                         </View>

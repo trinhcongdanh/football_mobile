@@ -2,7 +2,6 @@
 import { AppFonts } from '@football/app/assets/fonts';
 import { appIcons } from '@football/app/assets/icons/appIcons';
 import { AppImages } from '@football/app/assets/images';
-import { GameTable } from '@football/app/components/game_table/GameTable';
 import { ListGame } from '@football/app/components/list-game/ListGame';
 import styles from '@football/app/screens/football-home/layouts/Item5/Item5.style';
 import { useViewModel } from '@football/app/screens/football-home/layouts/Item5/Item5.viewModel';
@@ -210,17 +209,21 @@ export const Item5 = ({ topTeam }: IItem5Props) => {
                                                 </View>
                                             </View>
                                             <View style={{ width: getSize.m(50) }}>
-                                                {item.games !== null && (
+                                                {item.games ? (
                                                     <Text style={styles.statistics_content}>
                                                         {item.games}
                                                     </Text>
+                                                ) : (
+                                                    <Text style={styles.statistics_content}>-</Text>
                                                 )}
                                             </View>
                                             <View style={{ width: getSize.m(50) }}>
-                                                {item.goals !== null && (
+                                                {item.goals ? (
                                                     <Text style={styles.statistics_content}>
                                                         {item.goals}
                                                     </Text>
+                                                ) : (
+                                                    <Text style={styles.statistics_content}>-</Text>
                                                 )}
                                             </View>
                                         </LinearGradient>
@@ -314,7 +317,7 @@ export const Item5 = ({ topTeam }: IItem5Props) => {
                                                 </View>
                                             </View>
                                             <View style={{ width: getSize.m(50) }}>
-                                                {item.yellow_cards !== null && (
+                                                {item.yellow_cards ? (
                                                     <View>
                                                         <FastImage
                                                             source={AppImages.img_ticket_yellow}
@@ -327,10 +330,16 @@ export const Item5 = ({ topTeam }: IItem5Props) => {
                                                             {item.yellow_cards}
                                                         </Text>
                                                     </View>
+                                                ) : (
+                                                    <FastImage
+                                                        source={AppImages.img_ticket_white}
+                                                        style={styles.img_ticket_white}
+                                                        resizeMode={FastImage.resizeMode.contain}
+                                                    />
                                                 )}
                                             </View>
                                             <View style={{ width: getSize.m(50) }}>
-                                                {item.red_cards !== null && (
+                                                {item.red_cards ? (
                                                     <View>
                                                         <FastImage
                                                             source={AppImages.img_ticket_red}
@@ -350,6 +359,12 @@ export const Item5 = ({ topTeam }: IItem5Props) => {
                                                             {item.red_cards}
                                                         </Text>
                                                     </View>
+                                                ) : (
+                                                    <FastImage
+                                                        source={AppImages.img_ticket_white}
+                                                        style={styles.img_ticket_white}
+                                                        resizeMode={FastImage.resizeMode.contain}
+                                                    />
                                                 )}
                                             </View>
                                         </LinearGradient>

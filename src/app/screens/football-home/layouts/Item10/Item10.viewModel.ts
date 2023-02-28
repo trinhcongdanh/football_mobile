@@ -57,7 +57,7 @@ export const useViewModel = ({ league }: IItem10Props) => {
     useMount(() => {
         const defaultLeagueSeason = league?.seasons.length ? league.seasons[0] : null;
         if (defaultLeagueSeason) {
-            state.setSelectSeason(defaultLeagueSeason);
+            getHomeLayoutData();
         }
     });
 
