@@ -34,6 +34,7 @@ export const VerifyScreen = ({ navigation, route }: IVerifyScreenProps) => {
         reSendVerify,
         handleChangeText,
         onVerifyCode,
+        number,
     } = useViewModel({
         navigation,
         route,
@@ -54,7 +55,7 @@ export const VerifyScreen = ({ navigation, route }: IVerifyScreenProps) => {
                         <View style={styles.connect_container}>
                             <View style={{ paddingHorizontal: getSize.m(56) }}>
                                 <Text style={[appStyles.text_header]}>{t('verify.header')}</Text>
-                                <Text style={[appStyles.text_sub_header]}>052-5381648</Text>
+                                <Text style={[appStyles.text_sub_header]}>{number}</Text>
                             </View>
 
                             {/* OTP Verify */}
