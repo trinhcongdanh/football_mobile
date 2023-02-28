@@ -237,7 +237,9 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                     {homeLayout?.layout.includes('clips') && <Item12 videos={homePage.video} />}
 
                     {/* Item13 */}
-                    <Item13 />
+
+                    {homeLayout?.layout.includes('instagram') && <Item13 />}
+
                     <View style={{ height: getSize.m(120), width: '100%' }} />
                 </ScrollView>
             )}
