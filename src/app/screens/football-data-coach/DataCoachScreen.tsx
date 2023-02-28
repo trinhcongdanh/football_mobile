@@ -76,7 +76,7 @@ export const DataCoachScreen = ({ navigation, route }: IDataCoachScreenProps) =>
                                     { marginTop: getSize.m(62) },
                                 ]}
                             >
-                                <View style={styles.debut_game}>
+                                {/* <View style={styles.debut_game}>
                                     <Text style={styles.congratulations}>
                                         {t('coach.debut_game')} 🎉
                                     </Text>
@@ -138,15 +138,19 @@ export const DataCoachScreen = ({ navigation, route }: IDataCoachScreenProps) =>
                                             color={appColors.button_dark_blue}
                                         />
                                     </TouchableOpacity>
-                                </View>
+                                </View> */}
                                 <View>
-                                    <View style={{ marginTop: getSize.m(33) }}>
+                                    {/* <View style={{ marginTop: getSize.m(33) }}>
                                         <ButtonOption
                                             option_one={t('coach.option.team')}
                                             option_two={t('coach.option.games')}
                                             onSelect={setOnSelect}
                                         />
+                                    </View> */}
+                                    <View>
+                                        <Text style={styles.title}>{t('coach.option.team')}</Text>
                                     </View>
+                                    <View style={styles.line} />
                                     {onSelect === 0 ? (
                                         <View>
                                             <DataCoachTeamsScreen teams={coach.teams} />

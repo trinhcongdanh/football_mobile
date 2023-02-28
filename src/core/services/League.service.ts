@@ -23,8 +23,8 @@ class LeaguesService extends MongoDBService {
 
 const leaguesService = new LeaguesService();
 
-export const useLeagueTypes = () => {
-    return useQuery(LeagueQueryKey.GetLeagueTypes, () => leaguesService.getTypes());
-};
+// export const useLeagueTypes = () => {
+//     return useQuery(LeagueQueryKey.GetLeagueTypes, () => leaguesService.getTypes());
+// };
 
 export default leaguesService;

@@ -118,5 +118,6 @@ export enum AuthData {
     REGISTER = 'register',
     LOGIN = 'login',
     SET_PROFILE = 'set_profile',
+    GET_PROFILE = 'get_profile',
     REGISTER_SMS = 'register_sms',
 }

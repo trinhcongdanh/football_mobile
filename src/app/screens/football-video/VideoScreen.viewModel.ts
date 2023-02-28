@@ -1,10 +1,12 @@
 import { AppImages } from '@football/app/assets/images';
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
+import { useProfileUser } from '@football/core/services/auth.service';
 import { usePlayers, useTeams, useTopTeams } from '@football/core/services/Video.service';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Dimensions } from 'react-native';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from 'src/store/store';
 import { addVideo, setShowVideo } from 'src/store/video/Video.slice';
 import { IVideoScreenProps } from './VideoScreen.type';
 
@@ -19,44 +21,23 @@ export const useViewModel = ({ navigation, route }: IVideoScreenProps) => {
     const [favoritePlayersVideo, setFavoritePlayersVideo] = useState<any[]>([]);
 
     const { t } = useTranslation();
+    const [profileUser, setProfileUser] = useState();
+    const { profile } = useSelector((state: RootState) => state.createProfile);
+    const { login } = useSelector((state: RootState) => state.login);
+    const { data: profileData } = useProfileUser({ token: login.token, item_id: profile.item_id });
 
-    const data = [
-        {
-            id: 1,
-            image: AppImages.img_thumbnail,
-            minute: '04:50',
-            content: 'תוצאות הגרלת ליגת העל לעונת 2023-2024',
-            video: require('../../assets/video/neymarSkill.mp4'),
-        },
-        {
-            id: 2,
-            image: AppImages.img_gallery,
-            minute: '04:50',
-            content: 'תוצאות הגרלת ליגת העל לעונת 2023-2024',
-            video: require('../../assets/video/neymarSkill.mp4'),
-        },
-        {
-            id: 3,
-            image: AppImages.img_thumbnail,
-            minute: '04:50',
-            content: 'תוצאות הגרלת ליגת העל לעונת 2023-2024',
-            video: require('../../assets/video/neymarSkill.mp4'),
-        },
-        {
-            id: 4,
-            image: AppImages.img_gallery,
-            minute: '04:50',
-            content: 'תוצאות הגרלת ליגת העל לעונת 2023-2024',
-            video: require('../../assets/video/neymarSkill.mp4'),
-        },
-        {
-            id: 5,
-            image: AppImages.img_thumbnail,
-            minute: '04:50',
-            content: 'תוצאות הגרלת ליגת העל לעונת 2023-2024',
-            video: require('../../assets/video/neymarSkill.mp4'),
-        },
-    ];
+    useEffect(() => {
+        if (!profileData) {
+            return;
+        }
+        const [error, res] = profileData;
+        if (error) {
+            return;
+        }
+        console.log(res, profile);
+
+        setProfileUser(res.data.item);
+    }, [profileData]);
 
     const dispatch = useDispatch();
 
@@ -97,6 +78,8 @@ export const useViewModel = ({ navigation, route }: IVideoScreenProps) => {
         const [error, res] = teamsData;
 
         if (!error) {
+            // const teams = res.data.documents.filter(e => {
+            // });
             setFavoriteTeamsVideo(res.data.documents[0] ? res.data.documents[0].video_gallery : []);
         }
     }, [teamsData]);
@@ -136,7 +119,6 @@ export const useViewModel = ({ navigation, route }: IVideoScreenProps) => {
         setDisplay,
         sourceVideo,
         display,
-        data,
         width,
         autoPlay,
         setAutoPlay,

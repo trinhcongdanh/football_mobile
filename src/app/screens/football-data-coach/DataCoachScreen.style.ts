@@ -78,6 +78,20 @@ const styles = StyleSheet.create({
         color: appColors.text_dark_blue,
         fontFamily: AppFonts.bold,
     },
+    title: {
+        fontFamily: AppFonts.bold,
+        fontSize: getSize.m(16),
+        color: appColors.text_dark_blue,
+        lineHeight: getSize.m(22),
+        textAlign: 'center',
+    },
+
+    line: {
+        height: getSize.m(1),
+        backgroundColor: appColors.separator,
+        marginTop: getSize.m(22),
+        marginHorizontal: getSize.m(13),
+    },
 });
 
 export default styles;
