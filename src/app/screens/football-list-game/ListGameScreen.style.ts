@@ -40,6 +40,9 @@ const styles = StyleSheet.create({
         color: appColors.text_dark_blue,
         fontFamily: AppFonts.bold,
         lineHeight: getSize.m(18),
+        width: getSize.m(40),
+        marginLeft: getSize.m(10),
+        textAlign: 'center',
     },
 
     name_club: {

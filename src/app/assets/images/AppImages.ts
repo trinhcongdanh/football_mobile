@@ -117,4 +117,6 @@ export const AppImages = {
     img_backward_right: require('./backward_right.png'),
     img_expand: require('./expand.png'),
     img_vector: require('./Vector.png'),
+    img_ball_dark: require('./ball_dark.png'),
+    img_ball_light_gray: require('./ball_light_gray.png'),
 };

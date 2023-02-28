@@ -78,7 +78,7 @@ export const ListGameScreen = ({ navigation, route }: IListGameScreenProps) => {
                                                         : appColors.gray,
                                                 ]}
                                                 style={[
-                                                    appStyles.flex_row_space_center,
+                                                    appStyles.flex_row_align,
                                                     {
                                                         paddingVertical: getSize.m(11),
                                                         paddingHorizontal: getSize.m(8),
@@ -86,7 +86,14 @@ export const ListGameScreen = ({ navigation, route }: IListGameScreenProps) => {
                                                     },
                                                 ]}
                                             >
-                                                <View style={appStyles.flex_row_align}>
+                                                <View
+                                                    style={[
+                                                        appStyles.flex_row_align,
+                                                        {
+                                                            width: getSize.m(50),
+                                                        },
+                                                    ]}
+                                                >
                                                     <FastImage
                                                         source={AppImages.img_calendar}
                                                         resizeMode={FastImage.resizeMode.contain}
@@ -99,14 +106,27 @@ export const ListGameScreen = ({ navigation, route }: IListGameScreenProps) => {
                                                 </View>
                                                 <View
                                                     style={[
-                                                        appStyles.flex_row_space_center,
+                                                        appStyles.flex_row_align,
                                                         {
-                                                            marginHorizontal: getSize.m(15),
+                                                            marginHorizontal: getSize.m(24),
                                                         },
                                                     ]}
                                                 >
-                                                    <View style={[appStyles.flex_row_align_center]}>
-                                                        <Text style={styles.name_club}>
+                                                    <View
+                                                        style={[
+                                                            appStyles.flex_row_align_center,
+                                                            { width: getSize.m(60) },
+                                                        ]}
+                                                    >
+                                                        <Text
+                                                            style={[
+                                                                styles.name_club,
+                                                                {
+                                                                    width: getSize.m(40),
+                                                                    textAlign: 'right',
+                                                                },
+                                                            ]}
+                                                        >
                                                             {item.team1.name_he}
                                                         </Text>
                                                         <View style={styles.avt_club}>
@@ -123,13 +143,22 @@ export const ListGameScreen = ({ navigation, route }: IListGameScreenProps) => {
                                                         </View>
                                                     </View>
                                                     <View
-                                                        style={{ marginHorizontal: getSize.m(10) }}
+                                                        style={{
+                                                            marginHorizontal: getSize.m(6),
+                                                        }}
                                                     >
                                                         <Text style={styles.score}>
                                                             {item.score}
                                                         </Text>
                                                     </View>
-                                                    <View style={appStyles.flex_row_align_center}>
+                                                    <View
+                                                        style={[
+                                                            appStyles.flex_row_align_center,
+                                                            {
+                                                                width: getSize.m(60),
+                                                            },
+                                                        ]}
+                                                    >
                                                         <View style={styles.avt_club}>
                                                             <FastImage
                                                                 source={{
@@ -142,7 +171,15 @@ export const ListGameScreen = ({ navigation, route }: IListGameScreenProps) => {
                                                                 }}
                                                             />
                                                         </View>
-                                                        <Text style={styles.name_club}>
+                                                        <Text
+                                                            style={[
+                                                                styles.name_club,
+                                                                {
+                                                                    width: getSize.m(40),
+                                                                    textAlign: 'left',
+                                                                },
+                                                            ]}
+                                                        >
                                                             {item.team2.name_he}
                                                         </Text>
                                                     </View>
