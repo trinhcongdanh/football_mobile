@@ -45,7 +45,10 @@ export const OptionState = ({ label, data }: IOptionStateProps) => {
                 <View style={{ marginTop: getSize.m(10) }}>
                     {data.map(item => {
                         return (
-                            <TouchableOpacity onPress={onNavigateGame} key={item.id}>
+                            <TouchableOpacity
+                                onPress={() => onNavigateGame(item.game_id)}
+                                key={item.id}
+                            >
                                 <LinearGradient
                                     start={{ x: 0, y: 0 }}
                                     end={{ x: 1, y: 1 }}

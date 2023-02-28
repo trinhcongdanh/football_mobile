@@ -49,8 +49,10 @@ export const useViewModel = () => {
         },
     ];
 
-    const onNavigateGame = () => {
-        navigate(ScreenName.MatchPage);
+    const onNavigateGame = gameId => {
+        navigate(ScreenName.MatchPage, {
+            gameId,
+        });
     };
     return {
         t,
