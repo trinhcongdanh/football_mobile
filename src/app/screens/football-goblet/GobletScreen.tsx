@@ -25,7 +25,7 @@ import styles from './GobletScreen.style';
 import { useViewModel } from './GobletScreen.viewModel';
 
 export const GobletScreen = () => {
-    const { t, handleStateCup, changeTab, cups } = useViewModel();
+    const { t, goToStateCupPage, changeTab, cups } = useViewModel();
     return (
         <View style={[appStyles.flex]}>
             <ImageBackground source={AppImages.img_background} style={appStyles.flex}>
@@ -71,7 +71,7 @@ export const GobletScreen = () => {
                                             <TouchableOpacity
                                                 style={styles.option_grid}
                                                 key={item._id}
-                                                onPress={handleStateCup}
+                                                onPress={() => goToStateCupPage(item)}
                                             >
                                                 <View style={styles.image_cup}>
                                                     <FastImage

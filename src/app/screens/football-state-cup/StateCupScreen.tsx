@@ -1,43 +1,53 @@
+import { appIcons } from '@football/app/assets/icons/appIcons';
+import { AppImages } from '@football/app/assets/images';
+import { DropDown } from '@football/app/components/drop-down/DropDown';
+import { HeaderUser } from '@football/app/components/header-user/HeaderUser';
+import { CupAround } from '@football/app/screens/football-state-cup/layouts/Statistics/Cup-Around/CupAround';
+import { Trophy } from '@football/app/screens/football-state-cup/layouts/Statistics/Trophy/Trophy';
+import { appColors } from '@football/app/utils/constants/appColors';
+import { appStyles } from '@football/app/utils/constants/appStyles';
+import { getSize } from '@football/app/utils/responsive/scale';
+import React from 'react';
 import {
-    View,
     ImageBackground,
-    StatusBar,
     SafeAreaView,
     ScrollView,
+    StatusBar,
     Text,
     TouchableOpacity,
+    View,
 } from 'react-native';
-import React from 'react';
-import { HeaderUser } from '@football/app/components/header-user/HeaderUser';
-import Icon from 'react-native-vector-icons/Feather';
-import { appColors } from '@football/app/utils/constants/appColors';
-import { appIcons } from '@football/app/assets/icons/appIcons';
-import { appStyles } from '@football/app/utils/constants/appStyles';
-import { AppImages } from '@football/app/assets/images';
-import { getSize } from '@football/app/utils/responsive/scale';
-import { OptionState } from './layouts/option-state/OptionState';
-import { Statistics } from './layouts/Statistics/Statistics';
 import FastImage from 'react-native-fast-image';
-import { Avatar } from 'react-native-elements';
+import Icon from 'react-native-vector-icons/Feather';
+import { OptionState } from './layouts/option-state/OptionState';
 import styles from './StateCupScreen.style';
-import { useViewModel } from './StateCupScreen.viewModel';
 import { IStateCupScreenProps } from './StateCupScreen.type';
-import { Trophy } from '@football/app/screens/football-state-cup/layouts/Statistics/Trophy/Trophy';
-import { CupAround } from '@football/app/screens/football-state-cup/layouts/Statistics/Cup-Around/CupAround';
+import { useViewModel } from './StateCupScreen.viewModel';
 
-export const StateCupScreen = ({ navigation, route }: IStateCupScreenProps) => {
+export const StateCupScreen = ({ route }: IStateCupScreenProps) => {
     const {
         t,
         onGoBack,
-        setOpenModal,
-        setSelectYear,
+
         setIsScroll,
-        openModal,
-        selectYear,
-        years,
+        openModalYear,
+        setOpenModalYear,
+        openModalCycle,
+        setOpenModalCycle,
+
         isScroll,
+        cup,
+        getTranslationText,
+        cupSeasons,
+        selectedCupSeason,
+        setSelectedCupSeason,
+        selectCycle,
+        setSelectCycle,
+        openModalRound,
+        setOpenModalRound,
+        cycles,
+        selectRound,
     } = useViewModel({
-        navigation,
         route,
     });
 
@@ -61,11 +71,17 @@ export const StateCupScreen = ({ navigation, route }: IStateCupScreenProps) => {
                             <View style={[appStyles.align_justify, { marginTop: getSize.m(16) }]}>
                                 <View style={styles.avt_leagues_container}>
                                     <FastImage
-                                        source={AppImages.img_cup}
+                                        source={{ uri: cup.logo_url }}
                                         style={styles.avt_leagues}
+                                        resizeMode={FastImage.resizeMode.contain}
                                     />
                                 </View>
-                                <Text style={styles.name_leagues}>{t('state_cup.title')}</Text>
+                                <Text style={styles.name_leagues}>
+                                    {getTranslationText({
+                                        textHe: cup.name_he,
+                                        textEn: cup.name_en,
+                                    })}
+                                </Text>
                             </View>
                             <View>
                                 <View
@@ -79,13 +95,15 @@ export const StateCupScreen = ({ navigation, route }: IStateCupScreenProps) => {
                                     </Text>
                                     <TouchableOpacity
                                         onPress={() => {
-                                            setOpenModal(!openModal);
+                                            setOpenModalYear(!openModalYear);
                                             setIsScroll(!isScroll);
                                         }}
                                         style={styles.calender}
                                         activeOpacity={0.9}
                                     >
-                                        <Text style={styles.text_calender}>{selectYear}</Text>
+                                        <Text style={styles.text_calender}>
+                                            {selectedCupSeason?.name}
+                                        </Text>
                                         <Icon
                                             name={appIcons.ic_chevron_down}
                                             size={getSize.m(14)}
@@ -93,23 +111,23 @@ export const StateCupScreen = ({ navigation, route }: IStateCupScreenProps) => {
                                             style={styles.chevron_down}
                                         />
                                     </TouchableOpacity>
-                                    {openModal && (
+                                    {openModalYear && (
                                         <View style={styles.drop_down_calender}>
                                             <ScrollView>
-                                                {years.map((input: string, index: number) => {
+                                                {cupSeasons.map((item, index: number) => {
                                                     return (
                                                         <TouchableOpacity
                                                             activeOpacity={0.9}
                                                             onPress={() => {
-                                                                setSelectYear(input);
-                                                                setOpenModal(false);
+                                                                setSelectedCupSeason(item);
+                                                                setOpenModalYear(false);
                                                                 setIsScroll(true);
                                                             }}
                                                             key={index.toString()}
                                                             style={styles.btn_drop_down_calender}
                                                         >
                                                             <Text style={styles.option_year}>
-                                                                {input}
+                                                                {item.name}
                                                             </Text>
                                                         </TouchableOpacity>
                                                     );
@@ -123,31 +141,45 @@ export const StateCupScreen = ({ navigation, route }: IStateCupScreenProps) => {
                         </View>
                         <View style={[appStyles.flex, appStyles.main_container]}>
                             <View style={styles.drop_down_filter}>
-                                <TouchableOpacity style={styles.cycle}>
-                                    <Text style={styles.text_cycle}>
-                                        {t('state_cup.early_stage_game.label')}
-                                    </Text>
-                                    <Icon
-                                        name={appIcons.ic_chevron_down}
-                                        size={getSize.m(14)}
-                                        color={appColors.light_gray}
-                                        style={styles.chevron_down}
-                                    />
-                                </TouchableOpacity>
-                                <TouchableOpacity style={styles.cycle}>
-                                    <Text style={styles.text_cycle}>מחזור 3</Text>
-                                    <Icon
-                                        name={appIcons.ic_chevron_down}
-                                        size={getSize.m(14)}
-                                        color={appColors.light_gray}
-                                        style={styles.chevron_down}
-                                    />
-                                </TouchableOpacity>
+                                <View style={{ flex: 0.55 }}>
+                                    <TouchableOpacity
+                                        style={styles.cycle}
+                                        onPress={() => {
+                                            setOpenModalCycle(!openModalCycle);
+                                        }}
+                                    >
+                                        <Text style={styles.text_cycle}>
+                                            {selectCycle?.cycle_name_he}
+                                        </Text>
+                                        <Icon
+                                            name={appIcons.ic_chevron_down}
+                                            size={getSize.m(14)}
+                                            color={appColors.light_gray}
+                                            style={styles.chevron_down}
+                                        />
+                                    </TouchableOpacity>
+                                </View>
+                                <View style={{ flex: 0.45 }}>
+                                    <TouchableOpacity style={styles.cycle}>
+                                        <Text style={styles.text_cycle}>
+                                            {selectRound?.round_name_he}
+                                        </Text>
+                                        <Icon
+                                            name={appIcons.ic_chevron_down}
+                                            size={getSize.m(14)}
+                                            color={appColors.light_gray}
+                                            style={styles.chevron_down}
+                                        />
+                                    </TouchableOpacity>
+                                </View>
                             </View>
-                            <OptionState label={t('state_cup.early_stage_game.label')} />
+                            <OptionState
+                                data={selectRound?.games || []}
+                                label={selectCycle?.cycle_name_he || ''}
+                            />
                         </View>
                         <View style={styles.package}>
-                            <Trophy />
+                            <Trophy cupHolders={cup.cup_holders} cup={cup} />
                         </View>
                         <View style={styles.package}>
                             <CupAround />

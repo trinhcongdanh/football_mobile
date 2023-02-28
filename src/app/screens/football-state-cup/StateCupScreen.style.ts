@@ -66,6 +66,13 @@ const styles = StyleSheet.create({
         paddingHorizontal: getSize.m(17),
         paddingVertical: getSize.m(15),
     },
+    btn_drop_down_calender_text: {
+        textAlign: 'left',
+        fontSize: getSize.m(13),
+        fontFamily: AppFonts.bold,
+        lineHeight: getSize.m(17),
+        color: appColors.text_dark_blue,
+    },
 
     option_year: {
         textAlign: 'left',

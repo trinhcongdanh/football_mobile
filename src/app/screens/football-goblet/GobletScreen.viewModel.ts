@@ -27,38 +27,26 @@ const useViewState = () => {
 };
 
 const useViewCallback = ({ setTab }: any) => {
+    const { navigate } = useAppNavigator();
     const changeTab = (index: number) => {
         const type = index === 0 ? CupTab.NationCup : CupTab.TotoCup;
         setTab(type);
     };
+    const goToStateCupPage = (cup: CupModel) => {
+        navigate(ScreenName.StateCupPage, { cup });
+    };
     return {
         changeTab,
+        goToStateCupPage,
     };
 };
 
 export const useViewModel = () => {
-    const { navigate } = useAppNavigator();
     const { t } = useTranslation();
     const { tab, setTab, cups, setCups, shouldClearCache, setClearChace } = useViewState();
-    const { changeTab } = useViewCallback({ setTab, setCups });
+    const { changeTab, goToStateCupPage } = useViewCallback({ setTab, setCups });
     const [onSelect, setOnSelect] = useState(0);
     const { data: cupsData } = useCups(tab);
-
-    const stateCups = [
-        { id: 1, state: 'גביע המדינה' },
-        { id: 2, state: 'גביע וותיקים' },
-        { id: 3, state: 'גביע אתנה' },
-        { id: 4, state: 'גביע מדינה נשים' },
-        { id: 5, state: 'גביע לנוער על שם אבי רן ז״ל' },
-        { id: 6, state: 'גביע אתנה' },
-        { id: 7, state: 'גביע נערות' },
-        { id: 8, state: 'גביע נערים א׳ ע״ש חיים הברפלד ז״ל' },
-        { id: 9, state: 'גביע המדינה לנערות' },
-    ];
-
-    const handleStateCup = () => {
-        navigate(ScreenName.StateCupPage);
-    };
 
     useEffect(() => {
         if (!cupsData) {
@@ -77,5 +65,5 @@ export const useViewModel = () => {
         }
     }, [tab, shouldClearCache]);
 
-    return { t, setOnSelect, handleStateCup, onSelect, stateCups, changeTab, tab, cups };
+    return { t, setOnSelect, goToStateCupPage, onSelect, changeTab, tab, cups };
 };

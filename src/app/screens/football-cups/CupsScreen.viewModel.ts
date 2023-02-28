@@ -1,67 +1,22 @@
-import { AppImages } from '@football/app/assets/images';
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
+import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
 import { useTranslation } from 'react-i18next';
 import { ICupsScreenProps } from './CupsScreen.type';
 
-export const useViewModel = ({ navigation, route }: ICupsScreenProps) => {
-    const { navigate, goBack } = useAppNavigator();
+export const useViewModel = ({ route }: ICupsScreenProps) => {
+    const { goBack } = useAppNavigator();
+    const { getTranslationText } = useTranslationText();
+    const { cupHolders, cup } = route.params;
     const { t } = useTranslation();
     const onGoBack = (): void => {
         goBack();
     };
-    const listGoals = [
-        {
-            id: 1,
-            name_club: 'מכבי ע. פ״ת',
-            avt_club: AppImages.img_israel,
-            seasion: '2021/2022',
-        },
-        {
-            id: 2,
-            name_club: 'מכבי ע. פ״ת',
-            avt_club: AppImages.img_israel,
-            seasion: '2021/2022',
-        },
-        {
-            id: 3,
-            name_club: 'מכבי ע. פ״ת',
-            avt_club: AppImages.img_israel,
-            seasion: '2021/2022',
-        },
-        {
-            id: 4,
-            name_club: 'מכבי ע. פ״ת',
-            avt_club: AppImages.img_israel,
-            seasion: '2021/2022',
-        },
-        {
-            id: 5,
-            name_club: 'מכבי ע. פ״ת',
-            avt_club: AppImages.img_israel,
-            seasion: '2021/2022',
-        },
-        {
-            id: 6,
-            name_club: 'מכבי ע. פ״ת',
-            avt_club: AppImages.img_israel,
-            seasion: '2021/2022',
-        },
-        {
-            id: 7,
-            name_club: 'מכבי ע. פ״ת',
-            avt_club: AppImages.img_israel,
-            seasion: '2021/2022',
-        },
-        {
-            id: 8,
-            name_club: 'מכבי ע. פ״ת',
-            avt_club: AppImages.img_israel,
-            seasion: '2021/2022',
-        },
-    ];
+
     return {
         t,
         onGoBack,
-        listGoals,
+        cupHolders,
+        getTranslationText,
+        cup,
     };
 };

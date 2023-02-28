@@ -7,7 +7,7 @@ import styles from './OptionState.style';
 import { useViewModel } from './OptionState.viewModel';
 import { IOptionStateProps } from './OptionState.type';
 import LinearGradient from 'react-native-linear-gradient';
-export const OptionState = ({ label }: IOptionStateProps) => {
+export const OptionState = ({ label, data }: IOptionStateProps) => {
     const { t, listState, onNavigateGame } = useViewModel();
     return (
         <View
@@ -43,7 +43,7 @@ export const OptionState = ({ label }: IOptionStateProps) => {
                     </View>
                 </View>
                 <View style={{ marginTop: getSize.m(10) }}>
-                    {listState.map(item => {
+                    {data.map(item => {
                         return (
                             <TouchableOpacity onPress={onNavigateGame} key={item.id}>
                                 <LinearGradient
@@ -63,16 +63,18 @@ export const OptionState = ({ label }: IOptionStateProps) => {
                                         <Text style={styles.text_content}>{item.date}</Text>
                                     </View>
                                     <View style={{ width: getSize.m(110) }}>
-                                        <Text style={styles.text_content}>{item.play}</Text>
+                                        <Text style={styles.text_content}>
+                                            {item.team1.name_he}-{item.team2.name_he}
+                                        </Text>
                                     </View>
                                     <View style={{ width: getSize.m(80) }}>
-                                        <Text style={styles.text_content}>{item.etch}</Text>
+                                        <Text style={styles.text_content}>{item.stadium_he}</Text>
                                     </View>
                                     <View style={{ width: getSize.m(30) }}>
-                                        <Text style={styles.text_content}>{item.hour}</Text>
+                                        <Text style={styles.text_content}>{item.time}</Text>
                                     </View>
                                     <View style={{ width: getSize.m(30) }}>
-                                        <Text style={styles.text_content}>{item.toch}</Text>
+                                        <Text style={styles.text_content}>{item.score}</Text>
                                     </View>
                                 </LinearGradient>
                             </TouchableOpacity>

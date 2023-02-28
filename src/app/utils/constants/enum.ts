@@ -55,6 +55,9 @@ export enum LeagueQueryKey {
 export enum CupQueryKey {
     GetCups = 'get-cups',
 }
+export enum CupSeasonQueryKey {
+    GetCupSeason = 'get-cup-season',
+}
 
 export enum LeagueSeasonQueryKey {
     GetLeagueSeason = 'get-league-season',
