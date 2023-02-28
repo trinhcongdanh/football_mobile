@@ -58,10 +58,13 @@ export const useViewModel = ({ navigation, route }: IRegisterScreenProps) => {
                 })
             )
         );
-        if (numberPhone.success === true) {
-            navigate(ScreenName.VerifyPage);
-        }
     };
+
+    useEffect(() => {
+        if (numberPhone.success === true) {
+            navigate(ScreenName.VerifyPage, { number: phoneNumber });
+        }
+    }, [numberPhone.success]);
 
     const connectFacebook = useCallback(async () => {
         // LoginManager.logInWithPermissions(['public_profile', 'email']).then((result: any) => {

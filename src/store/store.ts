@@ -22,6 +22,7 @@ import guestIdReducer from './user/GuestId.slice';
 import loginReducer from './user/Login.slice';
 import registerFacebookReducer from './user/RegisterFacebook.slice';
 import videoReducer from './video/Video.slice';
+import otpUserSlice from 'src/store/user/OTP.slice';
 
 const reducer = combineReducers({
     guestId: guestIdReducer,
@@ -29,6 +30,7 @@ const reducer = combineReducers({
     login: loginReducer,
     setProfile: createProfileReducer,
     numberPhoneUser: numberPhoneUserReducer,
+    otpUser: otpUserSlice,
     favTeams: favTeamReducer,
     favPlayers: favPlayerReducer,
     favTopTeams: favTopTeamReducer,
