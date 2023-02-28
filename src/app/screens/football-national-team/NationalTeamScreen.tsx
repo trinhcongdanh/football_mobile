@@ -61,6 +61,7 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
         onNavigatePlayerData,
         navigate,
         topTeam,
+        setActiveIndexNumber,
     } = useViewModel({
         navigation,
         route,
@@ -127,7 +128,7 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                                     marginTop: getSize.m(18),
                                 }}
                             >
-                                <GestureHandlerRootView style={appStyles.flex}>
+                                {/* <GestureHandlerRootView style={appStyles.flex}>
                                     <Carousel
                                         loop={false}
                                         pagingEnabled
@@ -185,26 +186,90 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                                             </View>
                                         )}
                                     />
-                                </GestureHandlerRootView>
-                                <View style={styles.indicatorContainer}>
+                                </GestureHandlerRootView> */}
+                                <ScrollView
+                                    horizontal
+                                    pagingEnabled
+                                    showsHorizontalScrollIndicator={false}
+                                    directionalLockEnabled
+                                    onScroll={e => {
+                                        const slide = Math.round(
+                                            e.nativeEvent.contentOffset.x /
+                                                e.nativeEvent.layoutMeasurement.width
+                                        );
+                                        if (slide !== activeIndexNumber) {
+                                            setActiveIndexNumber(slide); // here we will set our active index num
+                                        }
+                                    }}
+                                >
                                     {topTeam?.video_gallery.map((item, index) => {
                                         return (
                                             <View
-                                                key={index.toString()}
-                                                style={[
-                                                    styles.normalDots,
-                                                    {
-                                                        width:
-                                                            index === indexDot
-                                                                ? getSize.m(18)
-                                                                : getSize.m(5),
-                                                        backgroundColor:
-                                                            index === indexDot
-                                                                ? appColors.blue_light
-                                                                : appColors.soft_grey,
-                                                    },
-                                                ]}
-                                            />
+                                                // eslint-disable-next-line react/no-array-index-key
+                                                key={index}
+                                                style={{
+                                                    flexDirection: 'row',
+                                                    justifyContent: 'center',
+                                                    marginHorizontal: getSize.m(12),
+                                                }}
+                                            >
+                                                <TouchableOpacity
+                                                    activeOpacity={0.9}
+                                                    onPress={() => handlePlayVideo(item.video_url)}
+                                                >
+                                                    <Image
+                                                        source={{ uri: item.image_url }}
+                                                        style={styles.image}
+                                                    />
+                                                    <View style={styles.date}>
+                                                        <Text style={styles.text_date}>
+                                                            {item.length}
+                                                        </Text>
+                                                    </View>
+                                                    <View style={styles.play_video}>
+                                                        <Icon
+                                                            name={appIcons.ic_caretright}
+                                                            size={getSize.m(16)}
+                                                            color={appColors.white}
+                                                        />
+                                                    </View>
+                                                    <View style={styles.content}>
+                                                        <Text style={styles.text_content}>
+                                                            {item.caption_he}{' '}
+                                                            <IconFeather
+                                                                name={appIcons.ic_arrow_left}
+                                                                size={getSize.m(12)}
+                                                                color={appColors.white}
+                                                                style={styles.ic_arrow_left}
+                                                            />
+                                                        </Text>
+                                                    </View>
+                                                </TouchableOpacity>
+                                            </View>
+                                        );
+                                    })}
+                                </ScrollView>
+                                <View style={styles.dotContainer}>
+                                    {topTeam?.video_gallery.map((_, index) => {
+                                        return (
+                                            // eslint-disable-next-line react/no-array-index-key
+                                            <View key={index}>
+                                                <View
+                                                    style={[
+                                                        styles.dot,
+                                                        {
+                                                            width:
+                                                                index === activeIndexNumber
+                                                                    ? getSize.m(18)
+                                                                    : getSize.m(5),
+                                                            backgroundColor:
+                                                                index === activeIndexNumber
+                                                                    ? appColors.blue_light
+                                                                    : appColors.soft_grey,
+                                                        },
+                                                    ]}
+                                                />
+                                            </View>
                                         );
                                     })}
                                 </View>

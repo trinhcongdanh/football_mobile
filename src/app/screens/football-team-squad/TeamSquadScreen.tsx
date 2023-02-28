@@ -150,8 +150,8 @@ export const TeamSquadScreen = ({ navigation, route }: ITeamGroupScreenProps) =>
                                             <ListPlayer
                                                 key={item.coach_id}
                                                 avt={item.image_url}
-                                                name={item.name_en}
-                                                position={item.title_en}
+                                                name={item.name_he}
+                                                position={item.title_he}
                                                 handleDataPlayer={() =>
                                                     onNavigateDataCoach(item.coach_id)
                                                 }
@@ -167,8 +167,8 @@ export const TeamSquadScreen = ({ navigation, route }: ITeamGroupScreenProps) =>
                                             <ListPlayer
                                                 key={item.coach_id}
                                                 avt={item.image_url}
-                                                name={item.name_en}
-                                                position={item.title_en}
+                                                name={item.name_he}
+                                                position={item.title_he}
                                                 handleDataPlayer={() =>
                                                     onNavigateDataCoach(item.coach_id)
                                                 }

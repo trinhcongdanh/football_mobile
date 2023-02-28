@@ -35,7 +35,7 @@ export const OptionState = ({ label, data }: IOptionStateProps) => {
                     <View style={{ width: getSize.m(80) }}>
                         <Text style={styles.header}>{t('state_cup.early_stage_game.etch')}</Text>
                     </View>
-                    <View style={{ width: getSize.m(30) }}>
+                    <View style={{ width: getSize.m(40) }}>
                         <Text style={styles.header}>{t('state_cup.early_stage_game.hour')}</Text>
                     </View>
                     <View style={{ width: getSize.m(30) }}>
@@ -73,7 +73,7 @@ export const OptionState = ({ label, data }: IOptionStateProps) => {
                                     <View style={{ width: getSize.m(80) }}>
                                         <Text style={styles.text_content}>{item.stadium_he}</Text>
                                     </View>
-                                    <View style={{ width: getSize.m(30) }}>
+                                    <View style={{ width: getSize.m(40) }}>
                                         <Text style={styles.text_content}>{item.time}</Text>
                                     </View>
                                     <View style={{ width: getSize.m(30) }}>

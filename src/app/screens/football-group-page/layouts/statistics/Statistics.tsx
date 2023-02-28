@@ -86,7 +86,7 @@ export const Statistics = ({ data }: IStatisticsProps) => {
                                                             },
                                                         ]}
                                                     >
-                                                        {item.player_name_en}
+                                                        {item.player_name_he}
                                                     </Text>
                                                 </View>
                                             </View>

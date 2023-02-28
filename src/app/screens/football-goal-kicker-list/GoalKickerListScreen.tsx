@@ -27,6 +27,7 @@ export const GoalKickerListScreen = ({ navigation, route }: IGoalKickerListScree
     const props = route?.params?.props;
     const titleLeft = route?.params?.titleLeft;
     const titleRight = route?.params?.titleRight;
+    const title = route?.params?.title;
 
     const { t, onGoBack, onNavigateDataPlayer } = useViewModel({
         navigation,
@@ -43,7 +44,7 @@ export const GoalKickerListScreen = ({ navigation, route }: IGoalKickerListScree
                                 iconName={appIcons.ic_right_ios}
                                 iconStyle={styles.ic_back}
                                 goBack={onGoBack}
-                                // title={teamSeasonStats.team_name_he}
+                                title={title}
                             />
                         </View>
                         <ScrollView>

@@ -49,7 +49,7 @@ export const MatchScreen = ({ navigation, route }: IMatchScreenProps) => {
                                 score={game.score}
                                 stadium={game.stadium_he}
                                 status={t('match.status')}
-                                handleStadium={handleStadium}
+                                handleStadium={() => handleStadium(game.stadium_id)}
                             />
                         )}
                     </View>

@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
+import { IGobletScreenProps } from '@football/app/screens/football-goblet/GobletScreen.type';
 import { ScreenName } from '@football/app/utils/constants/enum';
 import { CupModel } from '@football/core/models/CupModelResponse';
 import { useCups } from '@football/core/services/Cups.service';
@@ -41,7 +42,7 @@ const useViewCallback = ({ setTab }: any) => {
     };
 };
 
-export const useViewModel = () => {
+export const useViewModel = ({ navigation, route }: IGobletScreenProps) => {
     const { t } = useTranslation();
     const { tab, setTab, cups, setCups, shouldClearCache, setClearChace } = useViewState();
     const { changeTab, goToStateCupPage } = useViewCallback({ setTab, setCups });
