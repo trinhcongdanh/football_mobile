@@ -76,7 +76,7 @@ export const SplashScreen = ({ navigation, route }: ISplashScreenProps) => {
         if (!isLoading) {
             setTimeout(() => {
                 setAuthLoaded(true);
-            }, 5000);
+            }, 4000);
         }
     }, [splashData, isLoading]);
     const login = useSelector((state: any) => state.login);

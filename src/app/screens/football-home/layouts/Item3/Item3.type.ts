@@ -1,4 +1,4 @@
-import { PlayerModel } from '@football/core/models/PlayerResponse';
+import { PlayerModel } from '@football/core/models/PlayerModelResponse';
 
 export type IItem3Props = {
     player: PlayerModel;

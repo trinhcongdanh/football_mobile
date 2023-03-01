@@ -27,7 +27,7 @@ export interface FavPlayerState {
         listFavPlayers: PlayerModel[];
     }[];
 
-    selectedPlayers: SelectedPlayer[];
+    selectedPlayers: PlayerModel[];
     // loading: any,
     // success:any
 }

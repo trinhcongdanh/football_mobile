@@ -5,7 +5,6 @@ import { IHomeScreenProps } from '@football/app/screens/football-home/HomeScreen
 import { ScreenName } from '@football/app/utils/constants/enum';
 import { useMount } from '@football/app/utils/hooks/useMount';
 import { HomePageModel, HomeLayoutModel } from '@football/core/models/HomePageModelResponse';
-import { PlayerModel } from '@football/core/models/PlayerResponse';
 import { TeamModel } from '@football/core/models/TeamModelResponse';
 import HomeLayoutService from '@football/core/services/HomeLayout.service';
 import HomePageService from '@football/core/services/HomePage.service';
@@ -18,15 +17,23 @@ import { LeagueModel } from '@football/core/models/LeagueModelResponse';
 import leaguesService from '@football/core/services/League.service';
 import { GeneralVodModel } from '@football/core/models/GeneralVodResponse';
 import GeneralVodService from '@football/core/services/GeneralVod.service';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addVideo, setShowVideo } from 'src/store/video/Video.slice';
+import { RootState } from 'src/store/store';
+import { PlayerModel } from '@football/core/models/PlayerModelResponse';
 
 const useViewState = () => {
+    const selectedFavTeams = useSelector((state: RootState) => state.favTeams.selectedTeams);
+    const selectedFavPlayers = useSelector((state: RootState) => state.favPlayers.selectedPlayers);
+    const selectedFavTopTeams = useSelector(
+        (state: RootState) => state.favTopTeams.selectedTopTeams
+    );
+
     const [homePage, setHomePage] = useState<HomePageModel>();
     const [homeLayout, setHomeLayout] = useState<HomeLayoutModel>();
-    const [players, setPlayers] = useState<PlayerModel[]>();
-    const [teams, setTeams] = useState<TeamModel[]>();
-    const [topTeams, setTopTeams] = useState<TopTeamModel[]>();
+    const [players, setPlayers] = useState<PlayerModel[]>(selectedFavPlayers);
+    const [teams, setTeams] = useState<TeamModel[]>(selectedFavTeams);
+    const [topTeams, setTopTeams] = useState<TopTeamModel[]>(selectedFavTopTeams);
     const [league, setLeague] = useState<LeagueModel>();
     const [generalVod, setGeneralVod] = useState<GeneralVodModel[]>();
     const [sourceVideo, setSourceVideo] = useState();
@@ -169,9 +176,6 @@ export const useViewModel = ({ navigation, route }: IHomeScreenProps) => {
     const {
         getHomeLayoutData,
         getHomePageData,
-        getPlayersData,
-        getTeamsData,
-        getTopTeamsData,
         getDefaultLeagueData,
         getGeneralVodData,
     } = useViewCallback(route, state);
@@ -181,9 +185,6 @@ export const useViewModel = ({ navigation, route }: IHomeScreenProps) => {
     useMount(() => {
         getHomeLayoutData();
         getHomePageData();
-        getPlayersData();
-        getTeamsData();
-        getTopTeamsData();
         getGeneralVodData();
     });
 
@@ -194,14 +195,12 @@ export const useViewModel = ({ navigation, route }: IHomeScreenProps) => {
     }, [state.homePage]);
 
     const onShowSideMenu = () => {
-        navigation.openDrawer();
+        navigation?.openDrawer();
     };
 
     const dispatch = useDispatch();
 
     const handlePlayVideo = (item: any) => {
-        console.log('item',item);
-        
         state.setDisplay(true);
         state.setSourceVideo(item);
         state.setAutoPlay(true);

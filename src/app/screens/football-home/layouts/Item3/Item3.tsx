@@ -96,7 +96,7 @@ export const Item3 = ({ player }: IItem3Props) => {
                                 resizeMode={FastImage.resizeMode.contain}
                             />
                             <Text style={styles.title_statistic}>
-                                {player.homepage_info.season_name}
+                                {player.homepage_info?.season_name}
                             </Text>
                         </View>
                         <TouchableOpacity
@@ -111,7 +111,7 @@ export const Item3 = ({ player }: IItem3Props) => {
                             />
                         </TouchableOpacity>
                     </View>
-                    {player.homepage_info.games.map(game => {
+                    {player.homepage_info?.games.map(game => {
                         return (
                             <GameTable1
                                 key={game.game_id}
@@ -188,26 +188,26 @@ export const Item3 = ({ player }: IItem3Props) => {
                             >
                                 <View style={appStyles.align_justify}>
                                     <Text style={styles.content}>
-                                        {player.homepage_info.goals.league_goals}
+                                        {player.homepage_info?.goals.league_goals}
                                     </Text>
                                     <Text style={styles.title}>{t('home_page.league')}</Text>
                                 </View>
                                 <View style={appStyles.align_justify}>
                                     <Text style={styles.content}>
-                                        {player.homepage_info.goals.national_cup_goals}
+                                        {player.homepage_info?.goals.national_cup_goals}
                                     </Text>
                                     <Text style={styles.title}>{t('home_page.state_cup')}</Text>
                                 </View>
                                 <View style={appStyles.align_justify}>
                                     <Text style={styles.content}>
-                                        {player.homepage_info.goals.toto_cup_goals}
+                                        {player.homepage_info?.goals.toto_cup_goals}
                                     </Text>
                                     <Text style={styles.title}>{t('home_page.toto_cup')}</Text>
                                 </View>
 
                                 <View style={appStyles.align_justify}>
                                     <Text style={styles.content}>
-                                        {player.homepage_info.goals.total_goals}
+                                        {player.homepage_info?.goals.total_goals}
                                     </Text>
                                     <Text style={styles.title}>{t('home_page.total_goals')}</Text>
                                 </View>
@@ -237,7 +237,7 @@ export const Item3 = ({ player }: IItem3Props) => {
                                 <View style={appStyles.align_justify}>
                                     <View style={appStyles.flex_row_align}>
                                         <Text style={styles.content_ticket}>
-                                            x{player.homepage_info.yellow_cards.total_cards}
+                                            x{player.homepage_info?.yellow_cards.total_cards}
                                         </Text>
                                         <FastImage
                                             source={AppImages.img_ticket_red_1}
@@ -250,7 +250,7 @@ export const Item3 = ({ player }: IItem3Props) => {
                                 <View style={appStyles.align_justify}>
                                     <View style={appStyles.flex_row_align}>
                                         <Text style={styles.content_ticket}>
-                                            x{player.homepage_info.red_cards.total_cards}
+                                            x{player.homepage_info?.red_cards.total_cards}
                                         </Text>
                                         <FastImage
                                             source={AppImages.img_ticket_yellow_1}
@@ -284,7 +284,7 @@ export const Item3 = ({ player }: IItem3Props) => {
                                             style={styles.ticket}
                                         />
                                         <Text style={styles.content_ticket}>
-                                            {player.homepage_info.yellow_cards.league_cards}
+                                            {player.homepage_info?.yellow_cards.league_cards}
                                         </Text>
                                     </View>
                                     <Text style={styles.title}>{t('home_page.league')}</Text>
@@ -297,7 +297,7 @@ export const Item3 = ({ player }: IItem3Props) => {
                                             style={styles.ticket}
                                         />
                                         <Text style={styles.content_ticket}>
-                                            {player.homepage_info.yellow_cards.national_cup_cards}
+                                            {player.homepage_info?.yellow_cards.national_cup_cards}
                                         </Text>
                                     </View>
                                     <Text style={styles.title}>{t('home_page.state_cup')}</Text>
@@ -310,14 +310,14 @@ export const Item3 = ({ player }: IItem3Props) => {
                                             style={styles.ticket}
                                         />
                                         <Text style={styles.content_ticket}>
-                                            {player.homepage_info.yellow_cards.toto_cup_cards}
+                                            {player.homepage_info?.yellow_cards.toto_cup_cards}
                                         </Text>
                                     </View>
                                     <Text style={styles.title}>{t('home_page.toto_cup')}</Text>
                                 </View>
                                 <View style={appStyles.align_justify}>
                                     <Text style={styles.content}>
-                                        {player.homepage_info.yellow_cards.total_cards}
+                                        {player.homepage_info?.yellow_cards.total_cards}
                                     </Text>
                                     <Text style={styles.title}>{t('home_page.total')}</Text>
                                 </View>
@@ -352,7 +352,7 @@ export const Item3 = ({ player }: IItem3Props) => {
                                                 },
                                             ]}
                                         >
-                                            {player.homepage_info.red_cards.league_cards}
+                                            {player.homepage_info?.red_cards.league_cards}
                                         </Text>
                                     </View>
                                     <Text style={styles.title}>{t('home_page.league')}</Text>
@@ -372,7 +372,7 @@ export const Item3 = ({ player }: IItem3Props) => {
                                                 },
                                             ]}
                                         >
-                                            {player.homepage_info.red_cards.national_cup_cards}
+                                            {player.homepage_info?.red_cards.national_cup_cards}
                                         </Text>
                                     </View>
                                     <Text style={styles.title}>{t('home_page.state_cup')}</Text>
@@ -392,14 +392,14 @@ export const Item3 = ({ player }: IItem3Props) => {
                                                 },
                                             ]}
                                         >
-                                            {player.homepage_info.red_cards.toto_cup_cards}
+                                            {player.homepage_info?.red_cards.toto_cup_cards}
                                         </Text>
                                     </View>
                                     <Text style={styles.title}>{t('home_page.toto_cup')}</Text>
                                 </View>
                                 <View style={appStyles.align_justify}>
                                     <Text style={styles.content}>
-                                        {player.homepage_info.red_cards.total_cards}
+                                        {player.homepage_info?.red_cards.total_cards}
                                     </Text>
                                     <Text style={styles.title}>{t('home_page.total')}</Text>
                                 </View>

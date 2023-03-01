@@ -159,6 +159,88 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                                             </TouchableOpacity>
                                         );
                                     })}
+
+                                    {teams?.map((item, index) => {
+                                        return (
+                                            <TouchableOpacity
+                                                // eslint-disable-next-line no-underscore-dangle
+                                                onPress={() => onClickPlayer(item._id)}
+                                                // eslint-disable-next-line no-underscore-dangle
+                                                key={item._id}
+                                            >
+                                                <View
+                                                    style={[
+                                                        appStyles.flex_row_align,
+                                                        styles.header_item,
+                                                        {
+                                                            marginLeft:
+                                                                index === 0
+                                                                    ? getSize.m(16)
+                                                                    : getSize.m(6),
+                                                            marginRight:
+                                                                index === players.length - 1
+                                                                    ? getSize.m(16)
+                                                                    : getSize.m(6),
+                                                        },
+                                                    ]}
+                                                >
+                                                    <FastImage
+                                                        source={{ uri: item.logo_url }}
+                                                        style={{
+                                                            width: getSize.m(30),
+                                                            height: getSize.m(30),
+                                                            borderRadius: getSize.m(30),
+                                                            marginRight: getSize.m(6),
+                                                        }}
+                                                    />
+                                                    <Text style={styles.header_item_text}>
+                                                        {item.name_he}
+                                                    </Text>
+                                                </View>
+                                            </TouchableOpacity>
+                                        );
+                                    })}
+
+                                    {topTeams?.map((item, index) => {
+                                        return (
+                                            <TouchableOpacity
+                                                // eslint-disable-next-line no-underscore-dangle
+                                                onPress={() => onClickPlayer(item._id)}
+                                                // eslint-disable-next-line no-underscore-dangle
+                                                key={item._id}
+                                            >
+                                                <View
+                                                    style={[
+                                                        appStyles.flex_row_align,
+                                                        styles.header_item,
+                                                        {
+                                                            marginLeft:
+                                                                index === 0
+                                                                    ? getSize.m(16)
+                                                                    : getSize.m(6),
+                                                            marginRight:
+                                                                index === players.length - 1
+                                                                    ? getSize.m(16)
+                                                                    : getSize.m(6),
+                                                        },
+                                                    ]}
+                                                >
+                                                    <FastImage
+                                                        source={{ uri: item.logo_url }}
+                                                        style={{
+                                                            width: getSize.m(30),
+                                                            height: getSize.m(30),
+                                                            borderRadius: getSize.m(30),
+                                                            marginRight: getSize.m(6),
+                                                        }}
+                                                    />
+                                                    <Text style={styles.header_item_text}>
+                                                        {item.name_he}
+                                                    </Text>
+                                                </View>
+                                            </TouchableOpacity>
+                                        );
+                                    })}
                                 </ScrollView>
                             </View>
                         </SafeAreaView>
