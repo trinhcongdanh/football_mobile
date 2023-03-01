@@ -14,6 +14,7 @@ import './app/i18n/EnStrings';
 import { RootNavigator } from './app/routes/RootNavigator';
 import { appStyles } from './app/utils/constants/appStyles';
 import { persistor, store } from './store/store';
+import Orientation from 'react-native-orientation-locker';
 
 Text.defaultProps = Text.defaultProps || {};
 Text.defaultProps.allowFontScaling = false;
@@ -89,6 +90,7 @@ const App = (props: any) => {
     useEffect(() => {
         requestUserPermission();
         NotificationListener();
+        Orientation.lockToPortrait();
     }, []);
 
     return (

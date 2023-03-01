@@ -50,6 +50,10 @@ export enum ScreenName {
     SideBar = 'SideBar',
 }
 
+export enum SplashAnimationKey {
+    GetSplashAnimations = 'get-splash_animations',
+}
+
 export enum LeagueQueryKey {
     GetLeagueTypes = 'get-league-types',
 }
