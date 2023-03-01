@@ -14,6 +14,7 @@ import { loginUser } from 'src/store/user/Login.slice';
 import { env } from 'src/config';
 import { IConnectScreenProps } from './ConnectScreen.type';
 import qs from 'qs';
+import { useIsFocused } from '@react-navigation/native';
 
 export const useViewModel = ({ navigation, route }: IConnectScreenProps) => {
     const { t } = useTranslation();
@@ -157,9 +158,13 @@ export const useViewModel = ({ navigation, route }: IConnectScreenProps) => {
             )
         );
     };
+
     useEffect(() => {
         if (login.success === true) {
-            navigate(ScreenName.VerifyPage, { number: phoneNumber });
+            navigate(ScreenName.VerifyPage, {
+                number: phoneNumber,
+                previous_screen: ScreenName.ConnectPage,
+            });
         } else if (login.success === false && login.loading === false) {
             handleError(t('register.invalid'), 'numberPhone');
         }

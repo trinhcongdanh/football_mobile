@@ -6,6 +6,7 @@ import { isEmpty } from 'lodash';
 
 const initialState: any = {
     login: {},
+    isVerify: false,
 };
 
 export const loginUser = createAsyncThunk('user/loginUser', async (loginData: any) => {
@@ -26,7 +27,11 @@ export const loginUser = createAsyncThunk('user/loginUser', async (loginData: an
 export const loginSlice = createSlice({
     name: 'login',
     initialState,
-    reducers: {},
+    reducers: {
+        isVerify: (state, action) => {
+            state.isVerify = action.payload;
+        },
+    },
     extraReducers: builder => {
         builder
             .addCase(loginUser.pending, (state, action) => {
@@ -46,5 +51,5 @@ export const loginSlice = createSlice({
 });
 
 const { actions, reducer } = loginSlice;
-export const {} = actions;
+export const { isVerify } = actions;
 export default loginSlice.reducer;
