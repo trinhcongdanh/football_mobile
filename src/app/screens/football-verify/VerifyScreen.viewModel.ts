@@ -78,6 +78,7 @@ export const useViewModel = ({ navigation, route }: IVerifyScreenProps) => {
 
     const reSendVerify = (): void => {
         // setTimeSend(true);
+        // console.log(routes.params!.previous_screen);
         if (routes.params!.previous_screen === ScreenName.RegisterPage) {
             dispatch(
                 numberPhoneUser(
@@ -94,6 +95,8 @@ export const useViewModel = ({ navigation, route }: IVerifyScreenProps) => {
                     })
                 )
             );
+            dispatch(isVerifyOtp(false));
+            handleError('', 'verifyError');
         } else if (routes.params!.previous_screen === ScreenName.ConnectPage) {
             dispatch(
                 loginUser(
@@ -105,8 +108,9 @@ export const useViewModel = ({ navigation, route }: IVerifyScreenProps) => {
                     })
                 )
             );
+            dispatch(isVerify(false));
+            handleError('', 'verifyError');
         }
-        handleError('', 'verifyError');
     };
 
     const onVerifyCode = async () => {
@@ -150,21 +154,29 @@ export const useViewModel = ({ navigation, route }: IVerifyScreenProps) => {
     };
 
     useEffect(() => {
+        // console.log(otp.success);
+        // console.log(otp.loading);
+        // console.log(otp.isVerifyOtp);
+
         if (otp.success === true && otp.isVerifyOtp === true) {
             navigate(ScreenName.RegPage);
-        } else if (otp.success === false && otp.loading === false && otp.isVerifyOtp === true) {
-            handleError(t('verify.error'), 'verifyError');
         }
     }, [otp.success, otp.isVerifyOtp]);
-
+    useEffect(() => {
+        if (otp.success === false && otp.loading === false && otp.isVerifyOtp === true) {
+            handleError(t('verify.error'), 'verifyError');
+        }
+    }, [otp.loading]);
     useEffect(() => {
         if (login.success === true && login.isVerify === true) {
             navigate(ScreenName.SideBar);
-        } else if (login.success === false && login.loading === false && otp.isVerify === true) {
-            handleError(t('verify.error'), 'verifyError');
         }
     }, [login.success, login.isVerify]);
-
+    useEffect(() => {
+        if (login.success === false && login.loading === false && otp.isVerify === true) {
+            handleError(t('verify.error'), 'verifyError');
+        }
+    }, [login.loading]);
     return {
         inputs,
         errors,
