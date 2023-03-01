@@ -44,8 +44,8 @@ export const useViewModel = ({ navigation, route }: IRegScreenProps) => {
 
         if (!user.username) {
             handleError(t('reg.error.error_empty'), 'userName');
-            navigate(ScreenName.SettingsPage);
-            // navigate(ScreenName.HomePage);
+            // navigate(ScreenName.SettingsPage);
+            navigate(ScreenName.HomePage);
         } else if (!user.username.match(/[a-zA-Z0-9,#.-]+/)) {
             handleError(t('reg.error.error_valid'), 'userName');
         } else {
