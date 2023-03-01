@@ -107,7 +107,7 @@ export const BottomTabStack = () => {
                 tabBar={(props: any) => (
                     <BottomFabBar
                         mode="default"
-                        isRtl
+                        // isRtl
                         focusedButtonStyle={{
                             shadowColor: '#000',
                             shadowOffset: {
@@ -130,35 +130,11 @@ export const BottomTabStack = () => {
             >
                 <Bottom.Screen
                     options={{
-                        tabBarIcon: renderIcon(ScreenName.VideoPage),
-                        tabBarLabel: renderLabel(ScreenName.VideoPage),
+                        tabBarIcon: renderIcon(ScreenName.HomePage),
+                        tabBarLabel: renderLabel(ScreenName.HomePage),
                     }}
-                    name={ScreenName.VideoPage}
-                    component={VideoScreen}
-                />
-                <Bottom.Screen
-                    options={{
-                        tabBarIcon: renderIcon(ScreenName.GobletPage),
-                        tabBarLabel: renderLabel(ScreenName.GobletPage),
-                    }}
-                    name={ScreenName.GobletPage}
-                    component={GobletScreen}
-                />
-                <Bottom.Screen
-                    options={{
-                        tabBarIcon: renderIcon(ScreenName.PlayGroundPage),
-                        tabBarLabel: renderLabel(ScreenName.PlayGroundPage),
-                    }}
-                    name={ScreenName.PlayGroundPage}
-                    component={PlayGroundScreen}
-                />
-                <Bottom.Screen
-                    options={{
-                        tabBarIcon: renderIcon(ScreenName.TeamPage),
-                        tabBarLabel: renderLabel(ScreenName.TeamPage),
-                    }}
-                    name={ScreenName.TeamPage}
-                    component={TeamScreen}
+                    name={ScreenName.HomePage}
+                    component={HomeScreen}
                 />
                 <Bottom.Screen
                     options={{
@@ -170,11 +146,36 @@ export const BottomTabStack = () => {
                 />
                 <Bottom.Screen
                     options={{
-                        tabBarIcon: renderIcon(ScreenName.HomePage),
-                        tabBarLabel: renderLabel(ScreenName.HomePage),
+                        tabBarIcon: renderIcon(ScreenName.TeamPage),
+                        tabBarLabel: renderLabel(ScreenName.TeamPage),
                     }}
-                    name={ScreenName.HomePage}
-                    component={HomeScreen}
+                    name={ScreenName.TeamPage}
+                    component={TeamScreen}
+                />
+                <Bottom.Screen
+                    options={{
+                        tabBarIcon: renderIcon(ScreenName.PlayGroundPage),
+                        tabBarLabel: renderLabel(ScreenName.PlayGroundPage),
+                    }}
+                    name={ScreenName.PlayGroundPage}
+                    component={PlayGroundScreen}
+                />
+                <Bottom.Screen
+                    options={{
+                        tabBarIcon: renderIcon(ScreenName.GobletPage),
+                        tabBarLabel: renderLabel(ScreenName.GobletPage),
+                    }}
+                    name={ScreenName.GobletPage}
+                    component={GobletScreen}
+                />
+
+                <Bottom.Screen
+                    options={{
+                        tabBarIcon: renderIcon(ScreenName.VideoPage),
+                        tabBarLabel: renderLabel(ScreenName.VideoPage),
+                    }}
+                    name={ScreenName.VideoPage}
+                    component={VideoScreen}
                 />
             </Bottom.Navigator>
         </SafeAreaView>

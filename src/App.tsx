@@ -4,7 +4,7 @@ import messaging from '@react-native-firebase/messaging';
 import { NavigationContainer } from '@react-navigation/native';
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { I18nManager, View, Text } from 'react-native';
+import { I18nManager, View, Text, LogBox } from 'react-native';
 import { ThemeProvider } from 'react-native-elements';
 import 'react-native-get-random-values';
 import { QueryClient, QueryClientProvider } from 'react-query';
@@ -21,6 +21,7 @@ Text.defaultProps.allowFontScaling = false;
 const queryClient = new QueryClient({
     defaultOptions: { queries: { retry: 2 } },
 });
+LogBox.ignoreAllLogs(true);
 
 const App = (props: any) => {
     const { i18n } = useTranslation();
