@@ -1,18 +1,18 @@
-import { View, ScrollView, Text } from 'react-native';
-import React from 'react';
-import { appStyles } from '@football/app/utils/constants/appStyles';
-import { appColors } from '@football/app/utils/constants/appColors';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { appIcons } from '@football/app/assets/icons/appIcons';
-import { getSize } from '@football/app/utils/responsive/scale';
-import { TicketYellow } from '@football/app/components/ticket_yellow/TicketYellow';
-import { TicketRed } from '@football/app/components/ticket_red/TicketRed';
+import { AppImages } from '@football/app/assets/images';
 import { Goal } from '@football/app/components/goal/Goal';
 import { Replace } from '@football/app/components/replace/Replace';
+import { TicketRed } from '@football/app/components/ticket_red/TicketRed';
+import { TicketYellow } from '@football/app/components/ticket_yellow/TicketYellow';
+import { appColors } from '@football/app/utils/constants/appColors';
+import { appStyles } from '@football/app/utils/constants/appStyles';
+import { getSize } from '@football/app/utils/responsive/scale';
 import { Gameplay, GamePlayAction } from '@football/core/models/GameModelResponse';
+import React from 'react';
+import { ScrollView, Text, View } from 'react-native';
+import FastImage from 'react-native-fast-image';
 import styles from './GameScreen.styles';
-import { useViewModel } from './GameScreen.viewModel';
 import { IGameScreenProps } from './GameScreen.type';
+import { useViewModel } from './GameScreen.viewModel';
 
 // type Props = {};
 
@@ -40,13 +40,13 @@ export const GameScreen = ({ navigation, route }: IGameScreenProps) => {
                 <View style={{ marginTop: getSize.m(30) }}>
                     <View style={appStyles.flex_row_align_center}>
                         <View style={styles.whistle}>
-                            <Icon
-                                name={appIcons.ic_whistle}
-                                size={getSize.m(13)}
-                                color={appColors.blue_light}
+                            <FastImage
+                                source={AppImages.img_whistle}
+                                style={{ width: getSize.m(12), height: getSize.m(12) }}
+                                resizeMode={FastImage.resizeMode.contain}
                             />
                         </View>
-                        <Text>{t('match.game_move.start')}</Text>
+                        <Text style={styles.whistle_text}>{t('match.game_move.start')}</Text>
                     </View>
                     <View style={styles.line} />
                     <View>

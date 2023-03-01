@@ -1,3 +1,4 @@
+import { AppFonts } from '@football/app/assets/fonts';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { getSize } from '@football/app/utils/responsive/scale';
 import { StyleSheet } from 'react-native';
@@ -21,6 +22,13 @@ const styles = StyleSheet.create({
         position: 'absolute',
         left: getSize.m(14),
         top: getSize.m(30),
+    },
+    whistle_text: {
+        color: appColors.text_dark_blue,
+        fontFamily: AppFonts.bold,
+        lineHeight: getSize.m(18),
+        fontSize: getSize.m(13),
+        textAlign: 'center',
     },
 });
 export default styles;

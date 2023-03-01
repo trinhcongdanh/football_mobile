@@ -20,6 +20,7 @@ export const AppImages = {
     img_ticket_red: require('./ticket_red.png'),
     img_goal: require('./ball.png'),
     img_replace: require('./arrow-right-arrow-left.png'),
+    img_whistle: require('./whistle.png'),
     img_club: require('./club.png'),
     img_coach: require('./hazan.jpg'),
     img_leagues: require('./leagues.png'),

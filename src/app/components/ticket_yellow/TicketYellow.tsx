@@ -1,18 +1,18 @@
-import { View, Text, Image } from 'react-native';
-import React from 'react';
-import { getSize } from '@football/app/utils/responsive/scale';
-import { appStyles } from '@football/app/utils/constants/appStyles';
 import { AppImages } from '@football/app/assets/images';
+import { appStyles } from '@football/app/utils/constants/appStyles';
+import { getSize } from '@football/app/utils/responsive/scale';
+import React from 'react';
+import { Text, View } from 'react-native';
 import { Avatar } from 'react-native-elements';
+import FastImage from 'react-native-fast-image';
 import { styles } from './TicketYellow.styles';
 import { ITicketYellowProps } from './TicketYellow.type';
-import FastImage from 'react-native-fast-image';
 
 export const TicketYellow = ({ name, avt, minute, team, ticket }: ITicketYellowProps) => {
     return (
         <View>
             <View style={appStyles.flex_row_align_center}>
-                <Text style={styles.time}>{minute}</Text>
+                <Text style={styles.time}>{`${minute}'`}</Text>
 
                 <View style={styles.ticket}>
                     {ticket ? (
@@ -23,7 +23,7 @@ export const TicketYellow = ({ name, avt, minute, team, ticket }: ITicketYellowP
                         />
                     ) : (
                         <FastImage
-                            source={AppImages.img_ticket_yellow}
+                            source={AppImages.img_ticket_yellow_1}
                             style={{ width: getSize.m(14), height: getSize.m(18) }}
                             resizeMode={FastImage.resizeMode.contain}
                         />
