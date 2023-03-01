@@ -30,7 +30,13 @@ export const createProfileUser = createAsyncThunk(
 export const createProfileSlice = createSlice({
     name: 'createProfile',
     initialState,
-    reducers: {},
+    reducers: {
+        clearCreateProfile: (state, action) => {
+            state.profile = action.payload;
+            state.loading = null;
+            state.success = null;
+        },
+    },
 
     extraReducers: builder => {
         builder
@@ -51,5 +57,5 @@ export const createProfileSlice = createSlice({
 });
 
 const { actions, reducer } = createProfileSlice;
-export const {} = actions;
+export const { clearCreateProfile } = actions;
 export default createProfileSlice.reducer;

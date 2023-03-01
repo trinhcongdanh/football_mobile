@@ -12,14 +12,11 @@ import { appStyles } from '@football/app/utils/constants/appStyles';
 import { useTranslation } from 'react-i18next';
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
 import { ScreenName } from '@football/app/utils/constants/enum';
+import { useViewModel } from './SideMenu.viewModel';
 
 export const SideMenu = ({ navigation }: ISideMenuProps) => {
-    const { navigate, goBack } = useAppNavigator();
-    const onNavigateStartScreen = () => {
-        navigate(ScreenName.OpeningPage);
-    };
+    const { t, onGoBack, navigate, onNavigateStartScreen } = useViewModel();
 
-    const { t } = useTranslation();
     return (
         <View style={styles.side_menu_container}>
             <View style={styles.side_menu}>

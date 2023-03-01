@@ -10,7 +10,7 @@ export const ButtonOption = ({
     option_one,
     option_two,
     onSelect,
-    defaultValue = 0,
+    defaultValue,
 }: IButtonOptionComponent) => {
     const options = [option_one, option_two];
 
