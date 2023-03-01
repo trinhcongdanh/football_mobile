@@ -40,6 +40,7 @@ const reducer = combineReducers({
 });
 const persistConfig = {
     key: 'root',
+    blacklist: ['video'],
     storage: AsyncStorage,
 };
 
