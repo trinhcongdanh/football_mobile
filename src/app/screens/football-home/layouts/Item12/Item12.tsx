@@ -28,7 +28,7 @@ export const Item12 = ({ videos, handlePlayVideo }: IItem12Props) => {
                     },
                 ]}
             >
-                <Text style={styles.header}>סרטונים</Text>
+                <Text style={styles.header}>גלריית ליגה</Text>
                 <TouchableOpacity onPress={onClickAllVideo}>
                     <View style={appStyles.flex_row_align}>
                         <Text style={styles.details}>לכל הסרטונים</Text>
