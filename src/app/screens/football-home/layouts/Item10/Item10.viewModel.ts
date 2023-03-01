@@ -30,8 +30,8 @@ const useViewState = (league: LeagueModel) => {
 const useViewCallback = (viewState: any) => {
     const { setLeagueSeason, selectSeason } = viewState;
 
-    const getHomeLayoutData = useCallback(async () => {
-        const [error, res] = await leagueSeasonService.findByOId(selectSeason?.league_season_id);
+    const getHomeLayoutData = useCallback(async (id: string) => {
+        const [error, res] = await leagueSeasonService.findByOId(id);
         if (error) {
             return;
         }
@@ -54,16 +54,9 @@ export const useViewModel = ({ league }: IItem10Props) => {
     const state = useViewState(league);
     const { getHomeLayoutData } = useViewCallback(state);
 
-    useMount(() => {
-        const defaultLeagueSeason = league?.seasons.length ? league.seasons[0] : null;
-        if (defaultLeagueSeason) {
-            getHomeLayoutData();
-        }
-    });
-
     useEffect(() => {
         if (state.selectSeason) {
-            getHomeLayoutData();
+            getHomeLayoutData(state.selectSeason?.league_season_id);
         }
     }, [state.selectSeason]);
 
@@ -88,6 +81,13 @@ export const useViewModel = ({ league }: IItem10Props) => {
     const onClickAllLeagues = (leagueId: string) => {
         navigate(ScreenName.LeaguesDetailsPage, { leagueId });
     };
+
+    useMount(() => {
+        const defaultLeagueSeason = league?.seasons.length ? league.seasons[0] : null;
+        if (defaultLeagueSeason) {
+            state.setSelectSeason(defaultLeagueSeason);
+        }
+    });
 
     return {
         t,

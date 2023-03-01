@@ -29,19 +29,19 @@ export const Item7 = ({ homePage }: IItem7Props) => {
                     style={styles.logo_player}
                 /> */}
                 <View style={styles.main}>
-                    <Text style={styles.title}>אחריות חברתית</Text>
+                    {/* <Text style={styles.title}>אחריות חברתית</Text>
                     <Text style={styles.content}>
                         בואו לקחת חלק מ-לורם איפסום דולור סיט אמט, קונסקטורר ולדיק אדיפיסינג אלית
                         קולהע!
-                    </Text>
-                    <TouchableOpacity style={styles.button}>
+                    </Text> */}
+                    {/* <TouchableOpacity style={styles.button}>
                         <Text style={styles.text_button}>{t('home_page.read_more')}</Text>
                         <IconEntypo
                             name={appIcons.ic_arrow_left}
                             size={getSize.m(20)}
                             color={appColors.white}
                         />
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
                 </View>
             </TouchableOpacity>
         </View>

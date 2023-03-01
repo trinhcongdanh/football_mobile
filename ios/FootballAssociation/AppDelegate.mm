@@ -8,7 +8,7 @@
 #import <GoogleMaps/GoogleMaps.h>
 // #import <FBSDKCoreKit/FBSDKCoreKit-swift.h>
 // #import <React/RCTLinkingManager.h>
-
+#import "Orientation.h"
 #import <React/RCTAppSetupUtils.h>
 
 #if RCT_NEW_ARCH_ENABLED
@@ -158,5 +158,9 @@ static NSString *const kRNConcurrentRoot = @"concurrentRoot";
 }
 
 #endif
+
+- (UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window {
+  return [Orientation getOrientation];
+}
 
 @end

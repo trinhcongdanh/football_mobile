@@ -16,6 +16,7 @@ import com.facebook.react.modules.i18nmanager.I18nUtil;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.brentvatne.react.ReactVideoPackage;
 import com.airbnb.android.react.maps.MapsPackage;
+import org.wonday.orientation.OrientationActivityLifecycle;
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -56,6 +57,7 @@ public class MainApplication extends Application implements ReactApplication {
   @Override
   public void onCreate() {
     super.onCreate();
+    registerActivityLifecycleCallbacks(OrientationActivityLifecycle.getInstance());
     I18nUtil sharedI18nUtilInstance = I18nUtil.getInstance();
     sharedI18nUtilInstance.allowRTL(getApplicationContext(), true);
     sharedI18nUtilInstance.forceRTL(getApplicationContext(), true);
