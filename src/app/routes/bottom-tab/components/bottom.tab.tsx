@@ -73,17 +73,17 @@ export const FabTabBar: React.FC<BottomTabBarProps & CustomProps> = ({
     const tabWidth = tabsWidthValue;
     const d = getTabShape(width, height + 10, tabWidth, TAB_BAR_HEIGHT);
 
-    const initialPosition = !isRtl
-        ? -width + tabsWidthValue * (state.routes.length - 1 - state.index)
-        : -width + tabsWidthValue * state.index;
+    const initialPosition = isRtl
+        ? -width + tabsWidthValue * state.index
+        : width - tabsWidthValue * (state.index + 1);
 
-    const animatedValueLength = useSharedValue(-initialPosition);
+    const animatedValueLength = useSharedValue(initialPosition);
 
     const offset =
         tabsRealWidth < tabWidth ? tabWidth - tabsRealWidth : (tabsRealWidth - tabWidth) * -1;
 
     useEffect(() => {
-        animatedValueLength.value = initialPosition;
+        // animatedValueLength.value = initialPosition;
     }, [isRtl]);
 
     const animatedStyles = useAnimatedStyle(() => {
@@ -114,11 +114,6 @@ export const FabTabBar: React.FC<BottomTabBarProps & CustomProps> = ({
             state.index,
             springConfig || defaultSpringConfig
         );
-        /*Animated.spring(animationValueThreshold, {
-      toValue: state.index,
-      ...(springConfig || defaultSpringConfig),
-      useNativeDriver: false,
-    }).start();*/
     }, [animationValueThreshold, state.index, springConfig]);
 
     return (
@@ -213,6 +208,7 @@ export const FabTabBar: React.FC<BottomTabBarProps & CustomProps> = ({
                         {
                             width: '100%',
                             backgroundColor: 'transparent',
+
                             flex: 1,
                         },
                         animatedStyles,

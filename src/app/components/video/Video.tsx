@@ -1,25 +1,18 @@
-import { styles } from '@football/app/components/video/Video.style';
-import { appStyles } from '@football/app/utils/constants/appStyles';
-import React, { createRef, useEffect, useState } from 'react';
-import IconIonicons from 'react-native-vector-icons/Ionicons';
-import {
-    ScrollView,
-    Text,
-    View,
-    TouchableOpacity,
-    I18nManager,
-    Alert,
-    BackHandler,
-} from 'react-native';
 import { appIcons } from '@football/app/assets/icons/appIcons';
+import { AppImages } from '@football/app/assets/images';
+import { styles } from '@football/app/components/video/Video.style';
 import { appColors } from '@football/app/utils/constants/appColors';
+import { appStyles } from '@football/app/utils/constants/appStyles';
 import { getSize } from '@football/app/utils/responsive/scale';
-import Video_Player from 'react-native-video';
-import IconFontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import { BlurView } from '@react-native-community/blur';
 import Slider from '@react-native-community/slider';
+import React, { createRef, useEffect, useState } from 'react';
+import { BackHandler, I18nManager, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import FastImage from 'react-native-fast-image';
-import { AppImages } from '@football/app/assets/images';
+import Orientation from 'react-native-orientation-locker';
+import IconFontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import IconIonicons from 'react-native-vector-icons/Ionicons';
+import Video_Player from 'react-native-video';
 import { useDispatch, useSelector } from 'react-redux';
 import { resetVideo, setHiddenVideo } from 'src/store/video/Video.slice';
 
@@ -71,8 +64,8 @@ export const Video = () => {
         const minutes = time >= 60 ? Math.floor(time / 60) : 0;
         const seconds = Math.floor(time - minutes * 60);
 
-        return `${minutes >= 10 ? minutes : '0' + minutes}:${
-            seconds >= 10 ? seconds : '0' + seconds
+        return `${minutes >= 10 ? minutes : `0${minutes}`}:${
+            seconds >= 10 ? seconds : `0${seconds}`
         }`;
     };
 
@@ -81,13 +74,44 @@ export const Video = () => {
 
     const showVideo = useSelector((state: any) => state.video.showVideo);
     const sourceVideo = useSelector((state: any) => state.video.sourceVideo);
-
+    const [showControls, setShowControls] = useState(false);
+    const [fullscreen, setFullscreen] = useState(false);
     const hiddenVideo = () => {
         videoRef?.current?.seek(0);
         setPause(true);
         dispatch(setHiddenVideo(false));
         dispatch(resetVideo(null));
     };
+
+    const showFullscreen = () => {
+        setFullscreen(true);
+        setShowControls(true);
+        Orientation.lockToLandscapeLeft();
+    };
+
+    const handleOrientation = (orientation: string) => {
+        // if(orientation === 'LANDSCAPE-LEFT' || orientation === 'LANDSCAPE-RIGHT'){
+        //     setFullscreen(true);
+        //     setShowControls(true);
+        // }
+        // else {
+        // }
+    };
+
+    useEffect(() => {
+        if (showControls) {
+            Orientation.lockToLandscapeLeft();
+            videoRef.current.presentFullscreenPlayer();
+        }
+    }, [fullscreen, showControls]);
+
+    useEffect(() => {
+        Orientation.addOrientationListener(handleOrientation);
+
+        return () => {
+            Orientation.removeOrientationListener(handleOrientation);
+        };
+    }, []);
 
     useEffect(() => {
         const backAction = () => {
@@ -138,6 +162,12 @@ export const Video = () => {
                             onLoad={onLoadEnd}
                             onProgress={onProgress}
                             onEnd={onEnd}
+                            controls={showControls}
+                            onFullscreenPlayerWillDismiss={() => {
+                                Orientation.unlockAllOrientations();
+                                setShowControls(false);
+                                setFullscreen(false);
+                            }}
                         />
                         <View style={styles.controls}>
                             <View
@@ -185,11 +215,13 @@ export const Video = () => {
                                 ]}
                             >
                                 <View style={{ marginRight: getSize.m(90) }}>
-                                    <FastImage
-                                        source={AppImages.img_expand}
-                                        resizeMode={FastImage.resizeMode.contain}
-                                        style={{ width: getSize.m(14), height: getSize.m(20) }}
-                                    />
+                                    <TouchableOpacity onPress={showFullscreen}>
+                                        <FastImage
+                                            source={AppImages.img_expand}
+                                            resizeMode={FastImage.resizeMode.contain}
+                                            style={{ width: getSize.m(14), height: getSize.m(20) }}
+                                        />
+                                    </TouchableOpacity>
                                 </View>
                                 <View style={appStyles.flex_row_align_center}>
                                     <TouchableOpacity onPress={skipForward}>
