@@ -176,7 +176,7 @@ const resources = {
             team_squad: {
                 title: 'סגל נבחרת',
                 option: {
-                    players: 'שחקני הנבחרת',
+                    players: 'סגל שחקנים',
                     officials: 'בעלי תפקידים',
                 },
                 top_team_personnel: 'סגל הנבחרת',
@@ -371,6 +371,7 @@ const resources = {
                 statistics: {
                     label: 'סטטיסטיקות',
                     trophy: 'מחזיקות גביע',
+                    trophy_around: 'סיבובי גביע',
                     season: 'שנה',
                     group: 'שם הקבוצה',
                     see_all: 'ראה הכל',
@@ -603,7 +604,7 @@ const resources = {
                 total: 'סה״כ',
                 yellow_card: 'כרטיסים צהובים',
                 red_card: 'כרטיסים אדומים',
-                game_table: 'טבלת משחק',
+                game_table: 'רשימת משחקים',
                 tickets: 'כרטיסים',
                 game_season: 'משחקים בעונה',
                 state_cup: 'גביע המדינה',
