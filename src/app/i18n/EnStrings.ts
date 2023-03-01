@@ -176,7 +176,7 @@ const resources = {
             team_squad: {
                 title: 'סגל נבחרת',
                 option: {
-                    players: 'שחקני הנבחרת',
+                    players: 'סגל שחקנית',
                     officials: 'בעלי תפקידים',
                 },
                 top_team_personnel: 'סגל הנבחרת',

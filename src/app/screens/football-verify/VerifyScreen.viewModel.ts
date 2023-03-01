@@ -8,9 +8,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import qs from 'qs';
 import { numberPhoneUser } from 'src/store/user/RegisterNumberPhone';
 import { ACTION, TOKEN } from '@football/core/api/auth/config';
-import { otpUser } from 'src/store/user/OTP.slice';
-import { useRoute } from '@react-navigation/native';
-import { loginUser } from 'src/store/user/Login.slice';
+import { isVerifyOtp, otpUser } from 'src/store/user/OTP.slice';
+import { useIsFocused, useRoute } from '@react-navigation/native';
+import { isVerify, loginUser } from 'src/store/user/Login.slice';
 
 export const useViewModel = ({ navigation, route }: IVerifyScreenProps) => {
     const { t } = useTranslation();
@@ -131,6 +131,7 @@ export const useViewModel = ({ navigation, route }: IVerifyScreenProps) => {
                         })
                     )
                 );
+                dispatch(isVerifyOtp(true));
             } else if (routes.params!.previous_screen === ScreenName.ConnectPage) {
                 dispatch(
                     loginUser(
@@ -143,35 +144,26 @@ export const useViewModel = ({ navigation, route }: IVerifyScreenProps) => {
                         })
                     )
                 );
+                dispatch(isVerify(true));
             }
         }
-        // if (confirm) {
-        //     console.log('Success!');
-        // }
-        // if (codeOtp !== '1234' && codeOtp.length === 4) {
-        //     handleError(t('verify.error'), 'verifyError');
-        // } else if (codeOtp.length < 4) {
-        //     handleError('', 'verifyError');
-        // } else if (codeOtp === '1234' && codeOtp.length === 4) {
-        //     handleError('', 'verifyError');
-        //     navigate(ScreenName.BottomTab);
-        // }
     };
 
     useEffect(() => {
-        if (otp.success === true) {
+        if (otp.success === true && otp.isVerifyOtp === true) {
             navigate(ScreenName.RegPage);
-        } else if (otp.success === false && otp.loading === false) {
+        } else if (otp.success === false && otp.loading === false && otp.isVerifyOtp === true) {
             handleError(t('verify.error'), 'verifyError');
         }
-    }, [otp.success]);
+    }, [otp.success, otp.isVerifyOtp]);
+
     useEffect(() => {
-        if (login.success === true) {
-            navigate(ScreenName.RegPage);
-        } else if (login.success === false && login.loading === false) {
+        if (login.success === true && login.isVerify === true) {
+            navigate(ScreenName.SideBar);
+        } else if (login.success === false && login.loading === false && otp.isVerify === true) {
             handleError(t('verify.error'), 'verifyError');
         }
-    }, [login.success]);
+    }, [login.success, login.isVerify]);
 
     return {
         inputs,

@@ -23,6 +23,7 @@ import {
     TouchableOpacity,
     View,
 } from 'react-native';
+import FastImage from 'react-native-fast-image';
 import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -63,10 +64,13 @@ export const PlayGroundScreen = ({ navigation, route }: IPlayGroundScreenProps) 
                                     colors={[appColors.blue_light, appColors.blue_dark]}
                                     style={styles.bar}
                                 >
-                                    <Icon
-                                        name={appIcons.ic_align_right}
-                                        color={appColors.white}
-                                        size={getSize.m(20)}
+                                    <FastImage
+                                        source={AppImages.img_bars_sort}
+                                        style={{
+                                            width: getSize.m(12),
+                                            height: getSize.m(14),
+                                        }}
+                                        resizeMode={FastImage.resizeMode.contain}
                                     />
                                 </LinearGradient>
                             </TouchableOpacity>

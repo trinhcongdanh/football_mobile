@@ -62,7 +62,10 @@ export const useViewModel = ({ navigation, route }: IRegisterScreenProps) => {
 
     useEffect(() => {
         if (numberPhone.success === true) {
-            navigate(ScreenName.VerifyPage, { number: phoneNumber });
+            navigate(ScreenName.VerifyPage, {
+                number: phoneNumber,
+                previous_screen: ScreenName.RegisterPage,
+            });
         } else if (numberPhone.success === false && numberPhone.loading === false) {
             handleError(t('register.invalid'), 'numberPhone');
         }

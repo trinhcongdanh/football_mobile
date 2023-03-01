@@ -5,6 +5,7 @@ import { isEmpty } from 'lodash';
 
 const initialState: any = {
     otp: {},
+    isVerifyOtp: false,
 };
 
 export const otpUser = createAsyncThunk('user/otpUser', async (optData: any) => {
@@ -16,10 +17,8 @@ export const otpUser = createAsyncThunk('user/otpUser', async (optData: any) => 
             headers: {},
         }
     );
-    console.log(data);
 
     if (!isEmpty(data)) {
-        console.log(data);
         return data;
     }
 });
@@ -27,7 +26,11 @@ export const otpUser = createAsyncThunk('user/otpUser', async (optData: any) => 
 export const otpUserSlice = createSlice({
     name: 'otpUser',
     initialState,
-    reducers: {},
+    reducers: {
+        isVerifyOtp: (state, action) => {
+            state.isVerifyOtp = action.payload;
+        },
+    },
 
     extraReducers: builder => {
         builder
@@ -48,5 +51,5 @@ export const otpUserSlice = createSlice({
 });
 
 const { actions, reducer } = otpUserSlice;
-export const {} = actions;
+export const { isVerifyOtp } = actions;
 export default otpUserSlice.reducer;

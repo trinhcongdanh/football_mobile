@@ -7,7 +7,7 @@ import { getSize } from '@football/app/utils/responsive/scale';
 import { BlurView } from '@react-native-community/blur';
 import Slider from '@react-native-community/slider';
 import React, { createRef, useEffect, useState } from 'react';
-import { I18nManager, ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { BackHandler, I18nManager, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import Orientation from 'react-native-orientation-locker';
 import IconFontAwesome5 from 'react-native-vector-icons/FontAwesome5';
@@ -64,8 +64,8 @@ export const Video = () => {
         const minutes = time >= 60 ? Math.floor(time / 60) : 0;
         const seconds = Math.floor(time - minutes * 60);
 
-        return `${minutes >= 10 ? minutes : '0' + minutes}:${
-            seconds >= 10 ? seconds : '0' + seconds
+        return `${minutes >= 10 ? minutes : `0${minutes}`}:${
+            seconds >= 10 ? seconds : `0${seconds}`
         }`;
     };
 
@@ -77,7 +77,7 @@ export const Video = () => {
     const [showControls, setShowControls] = useState(false);
     const [fullscreen, setFullscreen] = useState(false);
     const hiddenVideo = () => {
-        videoRef.current.seek(0);
+        videoRef?.current?.seek(0);
         setPause(true);
         dispatch(setHiddenVideo(false));
         dispatch(resetVideo(null));
@@ -113,6 +113,16 @@ export const Video = () => {
         };
     }, []);
 
+    useEffect(() => {
+        const backAction = () => {
+            hiddenVideo();
+            return true;
+        };
+
+        const backHandler = BackHandler.addEventListener('hardwareBackPress', backAction);
+
+        return () => backHandler.remove();
+    }, []);
     return (
         <View
             style={{
