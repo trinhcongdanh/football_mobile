@@ -22,7 +22,7 @@ export const CupAround = ({ cyclesDetails, cup }: ICupAroundProps) => {
                     },
                 ]}
             >
-                <Text style={styles.title}>{t('state_cup.statistics.trophy')}</Text>
+                <Text style={styles.title}>{t('state_cup.statistics.trophy_around')}</Text>
                 <TouchableOpacity
                     style={appStyles.flex_row_space_center}
                     onPress={handleStatisticDetailsScreen}
