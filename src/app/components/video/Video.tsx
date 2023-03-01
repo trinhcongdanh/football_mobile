@@ -116,13 +116,14 @@ export const Video = () => {
     useEffect(() => {
         const backAction = () => {
             hiddenVideo();
-            return true;
+            return !!showVideo;
         };
 
         const backHandler = BackHandler.addEventListener('hardwareBackPress', backAction);
 
         return () => backHandler.remove();
-    }, []);
+    }, [showVideo]);
+
     return (
         <View
             style={{
