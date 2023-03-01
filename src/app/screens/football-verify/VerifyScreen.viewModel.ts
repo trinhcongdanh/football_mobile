@@ -159,7 +159,7 @@ export const useViewModel = ({ navigation, route }: IVerifyScreenProps) => {
 
     useEffect(() => {
         if (login.success === true && login.isVerify === true) {
-            navigate(ScreenName.RegPage);
+            navigate(ScreenName.SideBar);
         } else if (login.success === false && login.loading === false && otp.isVerify === true) {
             handleError(t('verify.error'), 'verifyError');
         }
