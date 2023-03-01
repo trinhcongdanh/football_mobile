@@ -23,7 +23,7 @@ const useViewCallback = (route: any, viewState: any) => {
     const { setPlayer } = viewState;
 
     const getPlayerData = useCallback(async () => {
-        const [error, res] = await PlayerService.findByOId(route.params.playerId);
+        const [error, res] = await PlayerService.findByOId(route?.params?.playerId);
         if (error) {
             return;
         }

@@ -21,7 +21,7 @@ const useViewCallback = (route: any, viewState: any) => {
     const { setPlayer } = viewState;
 
     const getPlayerData = useCallback(async () => {
-        const [error, res] = await PlayerTopTeamService.findByOId(route.params.playerId);
+        const [error, res] = await PlayerTopTeamService.findByOId(route?.params?.playerId);
         if (error) {
             return;
         }
