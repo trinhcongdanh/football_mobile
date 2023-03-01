@@ -10,6 +10,7 @@ import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import { numberPhoneUser } from 'src/store/user/RegisterNumberPhone';
 import { ACTION, TOKEN } from '@football/core/api/auth/config';
 import qs from 'qs';
+import { useIsFocused } from '@react-navigation/native';
 
 export const useViewModel = ({ navigation, route }: IRegisterScreenProps) => {
     const { t } = useTranslation();
@@ -59,8 +60,9 @@ export const useViewModel = ({ navigation, route }: IRegisterScreenProps) => {
             )
         );
     };
-
+    const isFocused = useIsFocused();
     useEffect(() => {
+        if (!isFocused) return;
         if (numberPhone.success === true) {
             navigate(ScreenName.VerifyPage, {
                 number: phoneNumber,
@@ -69,7 +71,7 @@ export const useViewModel = ({ navigation, route }: IRegisterScreenProps) => {
         } else if (numberPhone.success === false && numberPhone.loading === false) {
             handleError(t('register.invalid'), 'numberPhone');
         }
-    }, [numberPhone.success]);
+    }, [numberPhone.success, isFocused]);
 
     const connectFacebook = useCallback(async () => {
         // LoginManager.logInWithPermissions(['public_profile', 'email']).then((result: any) => {

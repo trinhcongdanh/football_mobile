@@ -159,7 +159,10 @@ export const useViewModel = ({ navigation, route }: IConnectScreenProps) => {
         );
     };
 
+    const isFocused = useIsFocused();
+
     useEffect(() => {
+        if (!isFocused) return;
         if (login.success === true) {
             navigate(ScreenName.VerifyPage, {
                 number: phoneNumber,
@@ -168,7 +171,7 @@ export const useViewModel = ({ navigation, route }: IConnectScreenProps) => {
         } else if (login.success === false && login.loading === false) {
             handleError(t('register.invalid'), 'numberPhone');
         }
-    }, [login.success]);
+    }, [login.success, isFocused]);
 
     return {
         errors,
