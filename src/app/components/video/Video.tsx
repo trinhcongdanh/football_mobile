@@ -1,8 +1,16 @@
 import { styles } from '@football/app/components/video/Video.style';
 import { appStyles } from '@football/app/utils/constants/appStyles';
-import React, { createRef, useState } from 'react';
+import React, { createRef, useEffect, useState } from 'react';
 import IconIonicons from 'react-native-vector-icons/Ionicons';
-import { ScrollView, Text, View, TouchableOpacity, I18nManager } from 'react-native';
+import {
+    ScrollView,
+    Text,
+    View,
+    TouchableOpacity,
+    I18nManager,
+    Alert,
+    BackHandler,
+} from 'react-native';
 import { appIcons } from '@football/app/assets/icons/appIcons';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { getSize } from '@football/app/utils/responsive/scale';
@@ -75,14 +83,22 @@ export const Video = () => {
     const sourceVideo = useSelector((state: any) => state.video.sourceVideo);
 
     const hiddenVideo = () => {
-        videoRef.current.seek(0);
+        videoRef?.current?.seek(0);
         setPause(true);
         dispatch(setHiddenVideo(false));
         dispatch(resetVideo(null));
     };
 
-    console.log(sourceVideo);
+    useEffect(() => {
+        const backAction = () => {
+            hiddenVideo();
+            return true;
+        };
 
+        const backHandler = BackHandler.addEventListener('hardwareBackPress', backAction);
+
+        return () => backHandler.remove();
+    }, []);
     return (
         <View
             style={{
