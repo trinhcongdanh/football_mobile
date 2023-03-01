@@ -24,12 +24,25 @@ export const loginUser = createAsyncThunk('user/loginUser', async (loginData: an
     }
 });
 
+export const logoutUser = createAsyncThunk('user/logoutUser', async (logoutData: any) => {
+    const { data }: any = await axiosAuth.post(`${AUTH_URL}`, logoutData, {
+        headers: {},
+    });
+    if (!isEmpty(data)) {
+        return data;
+    }
+});
+
 export const loginSlice = createSlice({
     name: 'login',
     initialState,
     reducers: {
         isVerify: (state, action) => {
             state.isVerify = action.payload;
+        },
+        isLogout: (state, action) => {
+            state.logoutLoading = action.payload;
+            state.logoutSuccess = action.payload;
         },
     },
     extraReducers: builder => {
@@ -46,10 +59,23 @@ export const loginSlice = createSlice({
             .addCase(loginUser.rejected, (state, action) => {
                 state.loading = false;
                 state.success = false;
+            })
+            .addCase(logoutUser.pending, (state, action) => {
+                state.logoutLoading = true;
+                state.logoutSuccess = false;
+            })
+            .addCase(logoutUser.fulfilled, (state, action) => {
+                state.logoutLoading = false;
+                state.logoutSuccess = true;
+                state.login = {};
+            })
+            .addCase(logoutUser.rejected, (state, action) => {
+                state.logoutLoading = false;
+                state.logoutSuccess = false;
             });
     },
 });
 
 const { actions, reducer } = loginSlice;
-export const { isVerify } = actions;
+export const { isVerify, isLogout } = actions;
 export default loginSlice.reducer;

@@ -13,7 +13,7 @@ export const guestIdSlice = createSlice({
             state.guestId.push(action.payload);
         },
         removeGuestId: (state, action) => {
-            state.guestId.splice(action.payload, 1);
+            state.guestId = action.payload;
         },
     },
 });

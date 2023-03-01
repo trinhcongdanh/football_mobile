@@ -15,7 +15,10 @@ export const useViewModel = () => {
     const handleNextLeftSlide = () => {};
 
     const onNavigateDataPlayer = (playerId: string) => {
-        navigate(ScreenName.DataPlayerPage, { playerId });
+        navigate(ScreenName.DataPlayerPage, {
+            playerId,
+            previous_screen: ScreenName.GroupPagePage,
+        });
     };
 
     return {

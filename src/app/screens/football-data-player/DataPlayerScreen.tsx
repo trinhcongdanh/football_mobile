@@ -4,7 +4,8 @@ import { HeaderUser } from '@football/app/components/header-user/HeaderUser';
 import { InfoPerson } from '@football/app/components/info-person/InfoPerson';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { appStyles } from '@football/app/utils/constants/appStyles';
-import React from 'react';
+import { ScreenName } from '@football/app/utils/constants/enum';
+import React, { useEffect } from 'react';
 import { ImageBackground, SafeAreaView, StatusBar, View } from 'react-native';
 import { IDataPlayerScreenProps } from './DataPlayerScreen.type';
 import { useViewModel } from './DataPlayerScreen.viewModel';
@@ -18,6 +19,14 @@ export const DataPlayerScreen = ({ navigation, route }: IDataPlayerScreenProps) 
         navigation,
         route,
     });
+
+    const previous_screen = route?.params?.previous_screen;
+
+    useEffect(() => {
+        if (previous_screen === ScreenName.GroupPagePage) {
+            setOnSelect(1);
+        }
+    }, []);
 
     return (
         <View style={appStyles.flex}>
@@ -52,6 +61,7 @@ export const DataPlayerScreen = ({ navigation, route }: IDataPlayerScreenProps) 
                                     option_one={t('data_player.option.club')}
                                     option_two={t('data_player.option.national')}
                                     onSelect={setOnSelect}
+                                    defaultValue={onSelect}
                                 />
 
                                 {onSelect === 0 ? (
