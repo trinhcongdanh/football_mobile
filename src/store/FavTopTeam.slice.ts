@@ -37,6 +37,9 @@ export const favTopTeamSlice = createSlice({
         resetTopTeams: (state, action) => {
             state.favTopTeams = [];
         },
+        resetSelectedFavTopTeams:(state,action)=>{
+            state.selectedTopTeams=[]
+        }
     },
 });
 
@@ -48,5 +51,5 @@ export function selectedFavTopTeamsAsMapSelector(state: RootState) {
 }
 
 const { actions, reducer } = favTopTeamSlice;
-export const { setFavTopTeams, pushFavTopTeam, resetTopTeams } = actions;
+export const { setFavTopTeams, pushFavTopTeam, resetTopTeams,resetSelectedFavTopTeams } = actions;
 export default favTopTeamSlice.reducer;

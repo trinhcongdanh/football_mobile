@@ -30,7 +30,13 @@ export const numberPhoneUser = createAsyncThunk(
 export const numberPhoneUserSlice = createSlice({
     name: 'numberPhoneUser',
     initialState,
-    reducers: {},
+    reducers: {
+        clearPhoneNumber: (state, action) => {
+            state.numberPhone = {};
+            state.loading = null;
+            state.success = null;
+        },
+    },
 
     extraReducers: builder => {
         builder
@@ -51,5 +57,5 @@ export const numberPhoneUserSlice = createSlice({
 });
 
 const { actions, reducer } = numberPhoneUserSlice;
-export const {} = actions;
+export const { clearPhoneNumber } = actions;
 export default numberPhoneUserSlice.reducer;

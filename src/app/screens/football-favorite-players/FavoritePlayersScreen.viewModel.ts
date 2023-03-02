@@ -184,31 +184,6 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
                                 })
                             );
                         });
-                    // selectedFavTeams.map((favTeam: TeamModel, index: number) => {
-                    //     data.documents.map(async (team_personnel: TeamPersonnelModel) => {
-                    //         if (favTeam.team_personnel_id === team_personnel._id) {
-                    //             // @ts-ignore
-                    //             const fetchedPlayers = await Promise.all(
-                    //                 team_personnel.players.map(
-                    //                     async (player_personnel: Players) => {
-                    //                         const [err, res] = await PlayerService.findByOId<
-                    //                             PlayersModelResponse
-                    //                         >(player_personnel.player_id);
-                    //                         if (err) return;
-                    //                         return res.data.documents[0];
-                    //                     }
-                    //                 )
-                    //             );
-                    //             dispatch(
-                    //                 setGroupFavPlayer({
-                    //                     id: team_personnel._id,
-                    //                     label: favTeam.name_he,
-                    //                     listFavPlayers: fetchedPlayers.filter(Boolean),
-                    //                 })
-                    //             );
-                    //         }
-                    //     });
-                    // });
                 }
             } catch (error: any) {
                 Alert.alert(error);
@@ -315,33 +290,43 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
             if (!isEmpty(selectedFavTeams)) {
                 if (isEmpty(favPlayers) || isNil(favPlayers)) {
                     try {
-                        const { data }: any = await axiosClient.post(`${BASE_URL}/find`, {
-                            dataSource: DATA_SOURCE,
-                            database: DB,
-                            collection: 'team_personnel',
-                        });
+                        const { data }: TeamPersonnelModelResponse = await axiosClient.post(
+                            `${BASE_URL}/find`,
+                            {
+                                dataSource: DATA_SOURCE,
+                                database: DB,
+                                collection: 'team_personnel',
+                            }
+                        );
 
                         if (!isEmpty(data.documents)) {
-                            selectedFavTeams.map((favTeam: TeamModel, index: number) => {
-                                data.documents.map((team_personnel: TeamPersonnelModel) => {
-                                    if (favTeam.team_personnel_id === team_personnel._id) {
-                                        var temp: Players[] = [];
-                                        team_personnel.players.map((player_personnel: Players) => {
-                                            temp.push(player_personnel);
-                                        });
-                                        dispatch(
-                                            setGroupFavPlayer({
-                                                id: team_personnel._id,
-                                                label: favTeam.name_he,
-                                                listFavPlayers: temp.map(v => ({
-                                                    ...v,
-                                                    _id: v.player_id,
-                                                })),
-                                            })
-                                        );
-                                    }
+                            selectedFavTeams
+                                .map((favTeam: TeamModel) => ({
+                                    favTeam,
+                                    team_personnel: data.documents.find(
+                                        v => v._id === favTeam.team_personnel_id
+                                    ) as TeamPersonnelModel,
+                                }))
+                                .forEach(async ({ favTeam, team_personnel }) => {
+                                    const fetchedPlayers = await Promise.all(
+                                        team_personnel.players.map(
+                                            async (player_personnel: Players) => {
+                                                const [err, res] = await PlayerService.findByOId<
+                                                    PlayersModelResponse
+                                                >(player_personnel.player_id);
+                                                if (err) return;
+                                                return res.data.documents[0];
+                                            }
+                                        )
+                                    );
+                                    dispatch(
+                                        setGroupFavPlayer({
+                                            id: team_personnel._id,
+                                            label: favTeam.name_he,
+                                            listFavPlayers: fetchedPlayers.filter(Boolean),
+                                        })
+                                    );
                                 });
-                            });
                         }
                     } catch (error: any) {
                         Alert.alert(error);
