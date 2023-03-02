@@ -39,7 +39,7 @@ export const HeaderUser = ({
                     }}
                     source={avt}
                 />
-
+                <Image source={AppImages.img_ball} style={styles.ic_football} />
                 <Text
                     style={[
                         appStyles.text_bold,
@@ -48,7 +48,6 @@ export const HeaderUser = ({
                 >
                     {point}
                 </Text>
-                <Image source={AppImages.img_ball} style={styles.ic_football} />
             </View>
             {title ? <Text style={styles.txt_title}>{title}</Text> : <View />}
 

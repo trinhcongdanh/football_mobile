@@ -273,7 +273,6 @@ export const useViewModel = ({ navigation, route }: IFavoriteSummaryScreenProps)
 
     useEffect(() => {
         if (!isFocused) return;
-        console.log('Danh');
         if (login.success === true && setProfile === true) {
             let fav_team: any = [];
             selectedFavTeams.map(item => {
@@ -295,9 +294,9 @@ export const useViewModel = ({ navigation, route }: IFavoriteSummaryScreenProps)
                         call: AuthData.SET_PROFILE,
                         item_id: profile.profile.item_id,
                         item: {
-                            FAVORITE_ISRAEL_TEAMS: fav_team,
-                            FAVORITE_PLAYERS: player_team,
-                            FAVORITE_NATIONAL_TEAMS: fav_top_team,
+                            favorite_israel_teams: fav_team,
+                            favorite_players: player_team,
+                            favorite_national_teams: fav_top_team,
                         },
                     })
                 )

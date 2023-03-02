@@ -6,7 +6,10 @@ import { AuthData, OfflineData, ScreenName } from '@football/app/utils/constants
 import { IVerifyScreenProps } from './VerifyScreen.type';
 import { useDispatch, useSelector } from 'react-redux';
 import qs from 'qs';
-import { numberPhoneUser } from 'src/store/user/RegisterNumberPhone';
+import {
+    loginNumberPhoneUser,
+    registerNumberPhoneUser,
+} from 'src/store/user/RegisterNumberPhone.slice';
 import { ACTION, TOKEN } from '@football/core/api/auth/config';
 import { isVerifyOtp, otpUser } from 'src/store/user/OTP.slice';
 import { useIsFocused, useRoute } from '@react-navigation/native';
@@ -81,7 +84,7 @@ export const useViewModel = ({ navigation, route }: IVerifyScreenProps) => {
         // console.log(routes.params!.previous_screen);
         if (routes.params!.previous_screen === ScreenName.RegisterPage) {
             dispatch(
-                numberPhoneUser(
+                registerNumberPhoneUser(
                     serializeParams({
                         action: ACTION,
                         token: login.login.token,
@@ -99,7 +102,7 @@ export const useViewModel = ({ navigation, route }: IVerifyScreenProps) => {
             handleError('', 'verifyError');
         } else if (routes.params!.previous_screen === ScreenName.ConnectPage) {
             dispatch(
-                loginUser(
+                loginNumberPhoneUser(
                     serializeParams({
                         action: ACTION,
                         token: TOKEN,
@@ -108,7 +111,7 @@ export const useViewModel = ({ navigation, route }: IVerifyScreenProps) => {
                     })
                 )
             );
-            dispatch(isVerify(false));
+            dispatch(isVerifyOtp(false));
             handleError('', 'verifyError');
         }
     };
@@ -138,7 +141,7 @@ export const useViewModel = ({ navigation, route }: IVerifyScreenProps) => {
                 dispatch(isVerifyOtp(true));
             } else if (routes.params!.previous_screen === ScreenName.ConnectPage) {
                 dispatch(
-                    loginUser(
+                    otpUser(
                         serializeParams({
                             action: ACTION,
                             token: TOKEN,
@@ -148,7 +151,7 @@ export const useViewModel = ({ navigation, route }: IVerifyScreenProps) => {
                         })
                     )
                 );
-                dispatch(isVerify(true));
+                dispatch(isVerifyOtp(true));
             }
         }
     };
@@ -158,25 +161,29 @@ export const useViewModel = ({ navigation, route }: IVerifyScreenProps) => {
         // console.log(otp.loading);
         // console.log(otp.isVerifyOtp);
 
-        if (otp.success === true && otp.isVerifyOtp === true) {
+        if (
+            otp.success === true &&
+            otp.isVerifyOtp === true &&
+            numberPhone.successRegister === true
+        ) {
             navigate(ScreenName.RegPage);
         }
-    }, [otp.success, otp.isVerifyOtp]);
+    }, [otp.success, otp.isVerifyOtp, numberPhone.successRegister]);
     useEffect(() => {
         if (otp.success === false && otp.loading === false && otp.isVerifyOtp === true) {
             handleError(t('verify.error'), 'verifyError');
         }
-    }, [otp.loading]);
+    }, [otp.loading, otp.isVerifyOtp]);
     useEffect(() => {
-        if (login.success === true && login.isVerify === true) {
+        if (numberPhone.successLogin === true && otp.isVerifyOtp === true) {
             navigate(ScreenName.SideBar);
         }
-    }, [login.success, login.isVerify]);
+    }, [numberPhone.successLogin, otp.isVerifyOtp, otp.success]);
     useEffect(() => {
-        if (login.success === false && login.loading === false && otp.isVerify === true) {
+        if (numberPhone.successLogin === false && numberPhone.loadingLogin === false) {
             handleError(t('verify.error'), 'verifyError');
         }
-    }, [login.loading]);
+    }, [numberPhone.loadingLogin, otp.isVerifyOtp]);
     return {
         inputs,
         errors,

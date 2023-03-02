@@ -17,19 +17,21 @@ import favTeamReducer from './FavTeam.slice';
 import favTopTeamReducer from './FavTopTeam.slice';
 import leagueReducer from './league/League.slice';
 import createProfileReducer from './user/CreateProfile.slice';
-import numberPhoneUserReducer from './user/RegisterNumberPhone';
+import numberPhoneUserReducer from './user/RegisterNumberPhone.slice';
 import guestIdReducer from './user/GuestId.slice';
 import loginReducer from './user/Login.slice';
 import registerFacebookReducer from './user/RegisterFacebook.slice';
 import videoReducer from './video/Video.slice';
 import otpUserSlice from 'src/store/user/OTP.slice';
 import setProfileSlice from 'src/store/user/setProfile.slice';
+import getProfileSlice from 'src/store/user/getProfile.slice';
 
 const reducer = combineReducers({
     guestId: guestIdReducer,
     createProfile: createProfileReducer,
     login: loginReducer,
     setProfile: setProfileSlice,
+    getProfile: getProfileSlice,
     numberPhoneUser: numberPhoneUserReducer,
     otpUser: otpUserSlice,
     favTeams: favTeamReducer,

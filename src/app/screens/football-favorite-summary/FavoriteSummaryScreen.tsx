@@ -57,24 +57,7 @@ export const FavoriteSummaryScreen = ({ navigation, route }: IFavoriteSummaryScr
 
     return (
         <View style={[appStyles.flex]}>
-            {setProfile === true && profile.success === false && profileUser.success === false && (
-                <View
-                    style={{
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        position: 'absolute',
-                        backgroundColor: 'rgba(0,0,0,0.5)',
-                        top: getSize.m(0),
-                        bottom: getSize.m(0),
-                        left: getSize.m(0),
-                        right: getSize.m(0),
-                        zIndex: 10,
-                    }}
-                >
-                    <ActivityIndicator size="large" />
-                </View>
-            )}
-            {setProfile === false && profile.success === false && (
+            {profile.success === false && (
                 <View
                     style={{
                         justifyContent: 'center',

@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { IRegisterScreenProps } from './RegisterScreen.type';
 // import { AccessToken, LoginManager, Profile } from 'react-native-fbsdk-next';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
-import { numberPhoneUser } from 'src/store/user/RegisterNumberPhone';
+import { registerNumberPhoneUser } from 'src/store/user/RegisterNumberPhone.slice';
 import { ACTION, TOKEN } from '@football/core/api/auth/config';
 import qs from 'qs';
 import { useIsFocused } from '@react-navigation/native';
@@ -41,11 +41,8 @@ export const useViewModel = ({ navigation, route }: IRegisterScreenProps) => {
 
     const connect = () => {
         Keyboard.dismiss();
-        // if (phoneNumber === '') {
-        //     handleError(t('register.invalid'), 'numberPhone');
-        // navigate(ScreenName.VerifyPage);
         dispatch(
-            numberPhoneUser(
+            registerNumberPhoneUser(
                 serializeParams({
                     action: ACTION,
                     token: login.login.token,
@@ -63,15 +60,15 @@ export const useViewModel = ({ navigation, route }: IRegisterScreenProps) => {
     const isFocused = useIsFocused();
     useEffect(() => {
         if (!isFocused) return;
-        if (numberPhone.success === true) {
+        if (numberPhone.successRegister === true) {
             navigate(ScreenName.VerifyPage, {
                 number: phoneNumber,
                 previous_screen: ScreenName.RegisterPage,
             });
-        } else if (numberPhone.success === false && numberPhone.loading === false) {
+        } else if (numberPhone.successRegister === false && numberPhone.loadingRegister === false) {
             handleError(t('register.invalid'), 'numberPhone');
         }
-    }, [numberPhone.success, isFocused]);
+    }, [numberPhone.successRegister, isFocused]);
 
     const connectFacebook = useCallback(async () => {
         // LoginManager.logInWithPermissions(['public_profile', 'email']).then((result: any) => {

@@ -14,7 +14,7 @@ export const styles = StyleSheet.create({
     ic_football: {
         width: getSize.m(16),
         height: getSize.m(16),
-        marginRight: getSize.m(3),
+        marginRight: getSize.m(6),
     },
     bar: {
         width: getSize.m(40),
