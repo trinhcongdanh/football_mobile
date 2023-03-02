@@ -52,11 +52,11 @@ static NSString *const kRNConcurrentRoot = @"concurrentRoot";
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
   // [GMSServices provideAPIKey:@"_YOUR_API_KEY_"];
-  [GMSServices provideAPIKey:@"AIzaSyD-bcsWEPz5OmiW9hTdcY4doQiIQYQ5v0g"]
+  [GMSServices provideAPIKey:@"AIzaSyD-bcsWEPz5OmiW9hTdcY4doQiIQYQ5v0g"];
   // [[FBSDKApplicationDelegate sharedInstance] application:application
   //                     didFinishLaunchingWithOptions:launchOptions];
   // [FBSDKApplicationDelegate.sharedInstance initializeSDK];
-  [FIRApp configgure];
+  [FIRApp configure];
   RCTAppSetupPrepareApp(application);
 
   RCTBridge *bridge = [[RCTBridge alloc] initWithDelegate:self launchOptions:launchOptions];

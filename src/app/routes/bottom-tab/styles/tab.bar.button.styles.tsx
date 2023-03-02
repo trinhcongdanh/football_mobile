@@ -28,7 +28,7 @@ export const style = StyleSheet.create({
         alignItems: 'center',
         flex: 1,
         width: '100%',
-        elevation: 12,
+        elevation: 5,
         zIndex: 12,
     },
     txt_tabbar: {

@@ -2,17 +2,15 @@
 /* eslint-disable react/no-unstable-nested-components */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { AppImages } from '@football/app/assets/images';
-import { BOTTOM_SVG_HEIGHT } from '@football/app/routes/bottom-tab/components/bottom.tab';
-import { TAB_BAR_HEIGHT } from '@football/app/routes/bottom-tab/styles/bottom.tab.styles';
 import { appColors } from '@football/app/utils/constants/appColors';
-import { getSize, height } from '@football/app/utils/responsive/scale';
+import { getSize } from '@football/app/utils/responsive/scale';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React from 'react';
 import { SafeAreaView } from 'react-native';
 import FastImage from 'react-native-fast-image';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import {
     GobletScreen,
-    GroupPageScreen,
     HomeScreen,
     LeaguesScreen,
     PlayGroundScreen,
@@ -94,8 +92,9 @@ const renderLabel = (routeName: string) => {
 };
 
 export const BottomTabStack = () => {
+    const insets = useSafeAreaInsets();
     return (
-        <SafeAreaView style={{ flex: 1 }}>
+        <SafeAreaView style={{ flex: 1, marginBottom: -insets.bottom }}>
             <Bottom.Navigator
                 initialRouteName={ScreenName.HomePage}
                 screenOptions={{
@@ -114,9 +113,9 @@ export const BottomTabStack = () => {
                                 width: 0,
                                 height: -1,
                             },
-                            shadowOpacity: 0.61,
-                            shadowRadius: 8,
-                            elevation: 14,
+                            shadowOpacity: 0.41,
+                            shadowRadius: 5,
+                            elevation: 5,
                         }}
                         bottomBarContainerStyle={{
                             position: 'absolute',
