@@ -18,6 +18,7 @@ const Input = ({
     textColor,
     input,
     inputRef,
+    keyboardType,
 }: IInputComponent) => {
     const { t } = useTranslation();
     return (
@@ -34,6 +35,7 @@ const Input = ({
                     },
                 ]}
                 placeholder={placeholder}
+                keyboardType={keyboardType}
                 onChangeText={onChangeTextInput}
                 onFocus={onFocus}
                 ref={inputRef}

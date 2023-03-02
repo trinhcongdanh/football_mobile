@@ -37,6 +37,7 @@ export const CardView = ({
                     placeholder={t('register.phoneNumber')}
                     onChangeTextInput={onChangeTextInput}
                     onFocus={handleError}
+                    keyboardType="phone-pad"
                 />
                 <Button
                     style={{ borderRadius: getSize.m(15) }}

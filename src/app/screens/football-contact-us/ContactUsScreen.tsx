@@ -85,6 +85,7 @@ export const ContactUsScreen = ({ navigation, route }: IContactUsScreenProps) =>
                                     backgroundColorCompleted={appColors.separator}
                                     textColor={appColors.light_gray}
                                     placeholder={t('contact_us.email')}
+                                    keyboardType="email-address"
                                     onChangeTextInput={text => setEmail(text)}
                                     onFocus={() => {
                                         handleError('', 'email');

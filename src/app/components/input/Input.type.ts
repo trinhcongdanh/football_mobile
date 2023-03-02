@@ -11,4 +11,5 @@ export type IInputComponent = {
     backgroundColor?: any;
     backgroundColorCompleted?: any;
     textColor?: any;
+    keyboardType?: any;
 };
