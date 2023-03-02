@@ -312,13 +312,13 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                     {/* Item8 */}
                     {/* <Item8 /> */}
                     {/* Item9 */}
-                    {homeLayout?.layout.includes('magazine') && <Item9 homePage={homePage} />}
+                    {homeLayout?.layout.includes('magazine') ? <Item9 homePage={homePage} /> : null}
                     {/* Item10 */}
-                    {homeLayout?.layout.includes('leagues_table') &&
-                        leagues?.length &&
-                        leagues.map(league => {
-                            return <Item10 league={league} key={league._id} />;
-                        })}
+                    {homeLayout?.layout.includes('leagues_table') && leagues?.length
+                        ? leagues.map(league => {
+                              return <Item10 league={league} key={league._id} />;
+                          })
+                        : null}
                     {/* Item11 */}
                     {/* <Item11 /> */}
                     {homeLayout?.layout.includes('national_cup') && <Item11 homePage={homePage} />}
