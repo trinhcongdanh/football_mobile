@@ -35,7 +35,11 @@ export const AverageRebounds = ({ avgRebounds, leagueSeasonStats }: IAverageRebo
                         handleSeeAll(
                             leagueSeasonStats,
                             avgRebounds,
-                            t('statistics.leagues.average_rebounds')
+                            t('statistics.leagues.average_rebounds'),
+                            t('statistics.leagues.location'),
+                            t('statistics.leagues.name_club'),
+                            t('statistics.leagues.average_goal'),
+                            'rebounds'
                         )
                     }
                 >
@@ -166,7 +170,11 @@ export const AverageRebounds = ({ avgRebounds, leagueSeasonStats }: IAverageRebo
                                 >
                                     {item.num_of_goals}
                                 </Text>
-                                <FastImage source={AppImages.img_goat_net} style={styles.ticket} />
+                                <FastImage
+                                    source={AppImages.img_goat_net}
+                                    style={styles.ticket}
+                                    resizeMode={FastImage.resizeMode.contain}
+                                />
                             </View>
                         </LinearGradient>
                     );

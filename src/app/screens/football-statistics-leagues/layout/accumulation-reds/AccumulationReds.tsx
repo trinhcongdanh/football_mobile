@@ -35,7 +35,11 @@ export const AccumulationReds = ({ redCards, leagueSeasonStats }: IAccumulationR
                         handleSeeAll(
                             leagueSeasonStats,
                             redCards,
-                            t('statistics.leagues.accumulation_red')
+                            t('statistics.leagues.accumulation_red'),
+                            t('statistics.leagues.name_player'),
+                            t('statistics.leagues.name_club'),
+                            t('statistics.leagues.red'),
+                            'red'
                         )
                     }
                 >

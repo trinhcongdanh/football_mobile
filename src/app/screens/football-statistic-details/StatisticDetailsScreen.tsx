@@ -20,6 +20,7 @@ import {
 import styles from './StatisticDetailsScreen.style';
 import { useViewModel } from './StatisticDetailsScreen.viewModel';
 import { IStatisticDetailsScreenProps } from './StatisticDetailsScreen.type';
+import FastImage from 'react-native-fast-image';
 
 export enum ListType {
     NormalGame = 0,
@@ -30,6 +31,10 @@ export enum ListType {
 export const StatisticDetailsScreen = ({ navigation, route }: IStatisticDetailsScreenProps) => {
     const leagueSeasonStats = route?.params?.leagueSeasonStats as LeagueSeasonStatModel;
     const title = route?.params?.title as string;
+    const name = route?.params?.name as string;
+    const team = route?.params?.team as string;
+    const result = route?.params?.result as string;
+    const ticket = route?.params?.ticket as string;
     const data = (route?.params?.data as GoalKicker[] | Card[]) || [];
     const avgData = (route?.params?.avgData as AvgGameYellowCard[] | AvgGameGoalsKicked[]) || [];
     const hisData = (route?.params?.hisData as ChampionshipHistory[]) || [];
@@ -65,7 +70,7 @@ export const StatisticDetailsScreen = ({ navigation, route }: IStatisticDetailsS
                                             { textAlign: 'left', fontSize: getSize.m(12) },
                                         ]}
                                     >
-                                        {t('statistics.leagues.name_player')}
+                                        {name}
                                     </Text>
                                 </View>
                                 <View style={{ width: getSize.m(120) }}>
@@ -75,7 +80,7 @@ export const StatisticDetailsScreen = ({ navigation, route }: IStatisticDetailsS
                                             { textAlign: 'left', fontSize: getSize.m(12) },
                                         ]}
                                     >
-                                        {t('statistics.leagues.name_club')}
+                                        {team}
                                     </Text>
                                 </View>
 
@@ -86,7 +91,7 @@ export const StatisticDetailsScreen = ({ navigation, route }: IStatisticDetailsS
                                             { fontSize: getSize.m(12) },
                                         ]}
                                     >
-                                        {t('statistics.leagues.gate')}
+                                        {result}
                                     </Text>
                                 </View>
                             </View>
@@ -195,10 +200,30 @@ export const StatisticDetailsScreen = ({ navigation, route }: IStatisticDetailsS
                                                     width: getSize.m(40),
                                                 }}
                                             >
+                                                {ticket === 'yellow' ? (
+                                                    <FastImage
+                                                        source={AppImages.img_ticket_yellow}
+                                                        style={styles.ticket}
+                                                    />
+                                                ) : null}
+
+                                                {ticket === 'red' ? (
+                                                    <FastImage
+                                                        source={AppImages.img_ticket_red}
+                                                        style={styles.ticket}
+                                                    />
+                                                ) : null}
+
                                                 <Text
                                                     style={[
                                                         appStyles.statistics_content,
-                                                        { fontSize: getSize.m(14) },
+                                                        {
+                                                            fontSize: getSize.m(14),
+                                                            color:
+                                                                ticket === 'red'
+                                                                    ? appColors.white
+                                                                    : appColors.text_dark_blue,
+                                                        },
                                                     ]}
                                                 >
                                                     {'num_of_cards' in item
@@ -238,7 +263,7 @@ export const StatisticDetailsScreen = ({ navigation, route }: IStatisticDetailsS
                                             { textAlign: 'left', fontSize: getSize.m(12) },
                                         ]}
                                     >
-                                        {t('statistics.leagues.location')}
+                                        {name}
                                     </Text>
                                 </View>
                                 <View style={{ width: getSize.m(160) }}>
@@ -248,17 +273,17 @@ export const StatisticDetailsScreen = ({ navigation, route }: IStatisticDetailsS
                                             { textAlign: 'left', fontSize: getSize.m(12) },
                                         ]}
                                     >
-                                        {t('statistics.leagues.name_club')}
+                                        {name}
                                     </Text>
                                 </View>
-                                <View style={{ width: getSize.m(60) }}>
+                                <View style={{ width: getSize.m(90) }}>
                                     <Text
                                         style={[
                                             appStyles.statistics_header,
                                             { fontSize: getSize.m(12) },
                                         ]}
                                     >
-                                        {t('statistics.leagues.average')}
+                                        {result}
                                     </Text>
                                 </View>
                             </View>
@@ -330,7 +355,7 @@ export const StatisticDetailsScreen = ({ navigation, route }: IStatisticDetailsS
                                                 style={[
                                                     appStyles.flex_row_center,
                                                     {
-                                                        width: getSize.m(60),
+                                                        width: getSize.m(90),
                                                         flex: 0,
                                                     },
                                                 ]}
@@ -345,6 +370,27 @@ export const StatisticDetailsScreen = ({ navigation, route }: IStatisticDetailsS
                                                         ? item.num_of_cards
                                                         : item.num_of_goals}
                                                 </Text>
+                                                {ticket === 'yellow' ? (
+                                                    <FastImage
+                                                        source={AppImages.img_ticket_yellow}
+                                                        style={styles.avg_ticket}
+                                                        resizeMode={FastImage.resizeMode.contain}
+                                                    />
+                                                ) : null}
+                                                {ticket === 'ball' ? (
+                                                    <FastImage
+                                                        source={AppImages.img_volleyball}
+                                                        style={styles.avg_ticket}
+                                                        resizeMode={FastImage.resizeMode.contain}
+                                                    />
+                                                ) : null}
+                                                {ticket === 'rebounds' ? (
+                                                    <FastImage
+                                                        source={AppImages.img_goat_net}
+                                                        style={styles.avg_ticket}
+                                                        resizeMode={FastImage.resizeMode.contain}
+                                                    />
+                                                ) : null}
                                             </View>
                                         </LinearGradient>
                                     );
