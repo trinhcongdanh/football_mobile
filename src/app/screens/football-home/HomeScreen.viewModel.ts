@@ -136,8 +136,6 @@ const useViewCallback = (route: any, viewState: any) => {
             });
 
         if (leagueIds?.length) {
-            console.log('leagueIds', leagueIds);
-            
             const [error, res] = await leaguesService.findByFilter({
                 $or: leagueIds,
             });
