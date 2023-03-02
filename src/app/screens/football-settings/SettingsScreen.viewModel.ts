@@ -12,7 +12,7 @@ import { resetTopTeams } from 'src/store/FavTopTeam.slice';
 import { RootState } from 'src/store/store';
 import { ISettingsScreenProps } from './SettingsScreen.type';
 
-export const useViewModel = (props: ISettingsScreenProps) => {
+export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
     const { t } = useTranslation();
     const { goBack, navigate, replace } = useAppNavigator();
     const [image, setImage] = useState<any>();
@@ -40,23 +40,32 @@ export const useViewModel = (props: ISettingsScreenProps) => {
             setImage(item.uri);
         });
     };
+    const previous_screen = route?.params?.previous_screen;
+    const onGoBack = () => {
+        if (previous_screen === ScreenName.FavTeamPage) {
+            navigate(ScreenName.SideBar);
+        } else {
+            goBack();
+        }
+    };
 
     const backFavTeam = () => {
-        replace(ScreenName.FavTeamPage, {
+        navigate(ScreenName.FavTeamPage, {
             previous_screen: ScreenName.SettingsPage,
         });
     };
 
     const backFavPlayer = () => {
-        replace(ScreenName.FavPlayerPage, {
+        navigate(ScreenName.FavPlayerPage, {
             previous_screen: ScreenName.SettingsPage,
         });
     };
 
     const backFavTopTeam = () => {
-        replace(ScreenName.FavTopTeamPage, {
+        navigate(ScreenName.FavTopTeamPage, {
             previous_screen: ScreenName.SettingsPage,
         });
+        goBack();
     };
 
     // team
@@ -185,5 +194,6 @@ export const useViewModel = (props: ISettingsScreenProps) => {
         changeFavPlayer,
         addFavTopTeam,
         changeFavTopTeam,
+        onGoBack,
     };
 };

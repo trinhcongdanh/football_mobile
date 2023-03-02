@@ -12,4 +12,5 @@ export type ICardInfoViewProps = {
     handleError: () => void;
     handleOnDate: (e: Date) => void;
     onChangeTextInput: (e: string) => void;
+    handleOnGender: (e: any) => void;
 };

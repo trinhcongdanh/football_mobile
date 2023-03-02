@@ -27,7 +27,7 @@ import { RootState } from 'src/store/store';
 export const useViewModel = ({ navigation, route }: IFavoriteTeamsScreenProps) => {
     const { t } = useTranslation();
     const dispatch = useDispatch<any>();
-    const { navigate, goBack } = useAppNavigator();
+    const { navigate, goBack, pop } = useAppNavigator();
     const [searchText, setSearchText] = useState('');
     const routes = useRoute();
     const searchTextRef = useRef<any>(null);
@@ -162,34 +162,36 @@ export const useViewModel = ({ navigation, route }: IFavoriteTeamsScreenProps) =
         }
     };
     const isFocused = useIsFocused();
-
+    const previous_screen = route?.params?.previous_screen;
     useEffect(() => {
-        if (!isFocused) return;
-        if (!isEmpty(login.login)) {
-            navigate(ScreenName.SideBar);
-            navigation.reset({
-                index: 0,
-                routes: [{ name: ScreenName.SideBar as never }],
-            });
-        } else {
-            if (profile.success === true) {
-                dispatch(
-                    loginUser(
-                        serializeParams({
-                            action: ACTION,
-                            token: TOKEN,
-                            call: AuthData.LOGIN,
-                            guest_id: profile.profile.tc_user,
-                            guest_guid: guestId[0],
-                        })
-                    )
-                );
-
+        if (previous_screen !== ScreenName.SettingsPage) {
+            if (!isFocused) return;
+            if (!isEmpty(login.login)) {
                 navigate(ScreenName.SideBar);
                 navigation.reset({
                     index: 0,
                     routes: [{ name: ScreenName.SideBar as never }],
                 });
+            } else {
+                if (profile.success === true) {
+                    dispatch(
+                        loginUser(
+                            serializeParams({
+                                action: ACTION,
+                                token: TOKEN,
+                                call: AuthData.LOGIN,
+                                guest_id: profile.profile.tc_user,
+                                guest_guid: guestId[0],
+                            })
+                        )
+                    );
+
+                    navigate(ScreenName.SideBar);
+                    navigation.reset({
+                        index: 0,
+                        routes: [{ name: ScreenName.SideBar as never }],
+                    });
+                }
             }
         }
     }, [profile.success, isFocused]);
@@ -199,6 +201,9 @@ export const useViewModel = ({ navigation, route }: IFavoriteTeamsScreenProps) =
         if (!isEmpty(params)) {
             if (params.previous_screen === ScreenName.FavSummaryPage) {
                 navigate(ScreenName.FavSummaryPage);
+            } else if (previous_screen === ScreenName.SettingsPage) {
+                navigate(ScreenName.SettingsPage, { previous_screen: ScreenName.FavTeamPage });
+                // pop(ScreenName.FavTeamPage);
             } else {
                 navigate(ScreenName.FavPlayerPage);
             }
