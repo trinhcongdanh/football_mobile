@@ -1,13 +1,13 @@
 import { AxiosResponse } from 'axios';
 
-export interface Players {
+export type Players = {
     _id: string;
     player_id: string;
     name_he: string;
     name_en: string;
     image_url: string;
     isSelected: boolean;
-}
+};
 
 // export interface Players {
 //     goalkeepers: Position[];
