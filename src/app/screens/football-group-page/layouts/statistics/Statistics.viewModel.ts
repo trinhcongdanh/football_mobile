@@ -17,7 +17,7 @@ export const useViewModel = () => {
     const onNavigateDataPlayer = (playerId: string) => {
         navigate(ScreenName.DataPlayerPage, {
             playerId,
-            previous_screen: ScreenName.GroupPagePage,
+            player_page: 1,
         });
     };
 

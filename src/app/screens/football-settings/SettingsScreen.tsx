@@ -57,6 +57,7 @@ export function SettingsScreen(props: ISettingsScreenProps) {
         changeFavPlayer,
         addFavTopTeam,
         changeFavTopTeam,
+        onGoBack,
     } = useViewModel(props);
     const [itemSelected, setItemSelected] = useState<string>(t('settings.male'));
     const male = { name: t('settings.male') };
@@ -73,7 +74,7 @@ export function SettingsScreen(props: ISettingsScreenProps) {
                 <SafeAreaView style={appStyles.safe_area}>
                     <View style={appStyles.container}>
                         <CardGoBack
-                            goBack={goBack}
+                            goBack={onGoBack}
                             iconName={appIcons.ic_x_circle}
                             iconStyle={styles.ic_circle}
                             title={t('settings.user_settings')}

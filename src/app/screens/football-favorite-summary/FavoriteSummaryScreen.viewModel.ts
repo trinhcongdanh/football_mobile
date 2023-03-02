@@ -269,9 +269,11 @@ export const useViewModel = ({ navigation, route }: IFavoriteSummaryScreenProps)
                 );
             }
         }
-    }, [profile.success]);
+    }, [profile.success, isFocused]);
 
     useEffect(() => {
+        if (!isFocused) return;
+        console.log('Danh');
         if (login.success === true && setProfile === true) {
             let fav_team: any = [];
             selectedFavTeams.map(item => {
@@ -308,7 +310,7 @@ export const useViewModel = ({ navigation, route }: IFavoriteSummaryScreenProps)
                 });
             }
         }
-    }, [login.success === true]);
+    }, [login.success, isFocused]);
     return {
         t,
         onGoBack,

@@ -20,10 +20,10 @@ export const DataPlayerScreen = ({ navigation, route }: IDataPlayerScreenProps) 
         route,
     });
 
-    const previous_screen = route?.params?.previous_screen;
+    const player_page = route?.params?.player_page;
 
     useEffect(() => {
-        if (previous_screen === ScreenName.GroupPagePage) {
+        if (player_page === 1) {
             setOnSelect(1);
         }
     }, []);

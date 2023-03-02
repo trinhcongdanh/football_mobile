@@ -75,6 +75,11 @@ export const useViewModel = ({ navigation, route }: ITeamGroupScreenProps) => {
         navigate(ScreenName.DataCoachPage, { coachId });
     };
 
+    const onNavigateDataPlayer = (playerId: string | undefined) => {
+        if (!playerId) return;
+        navigate(ScreenName.DataPlayerPage, { playerId, player_page: 1 });
+    };
+
     useMount(() => {
         if (fromTopTeam) {
             getTopTeamPersonnelData();
@@ -83,5 +88,5 @@ export const useViewModel = ({ navigation, route }: ITeamGroupScreenProps) => {
         }
     });
 
-    return { onGoBack, t, ...state, onNavigateDataCoach, fromTopTeam };
+    return { onGoBack, t, ...state, onNavigateDataCoach, fromTopTeam, onNavigateDataPlayer };
 };
