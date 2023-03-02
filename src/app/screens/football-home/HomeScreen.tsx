@@ -46,6 +46,8 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
         league,
         generalVod,
         handlePlayVideo,
+        onClickTeam,
+        onClickTopTeam,
     } = useViewModel({
         navigation,
         route,
@@ -153,7 +155,7 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                                                         }}
                                                     />
                                                     <Text style={styles.header_item_text}>
-                                                        {item.name_en}
+                                                        {item.name_he}
                                                     </Text>
                                                 </View>
                                             </TouchableOpacity>
@@ -164,7 +166,7 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                                         return (
                                             <TouchableOpacity
                                                 // eslint-disable-next-line no-underscore-dangle
-                                                onPress={() => onClickPlayer(item._id)}
+                                                onPress={() => onClickTeam(item._id)}
                                                 // eslint-disable-next-line no-underscore-dangle
                                                 key={item._id}
                                             >
@@ -205,7 +207,7 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                                         return (
                                             <TouchableOpacity
                                                 // eslint-disable-next-line no-underscore-dangle
-                                                onPress={() => onClickPlayer(item._id)}
+                                                onPress={() => onClickTopTeam(item._id)}
                                                 // eslint-disable-next-line no-underscore-dangle
                                                 key={item._id}
                                             >

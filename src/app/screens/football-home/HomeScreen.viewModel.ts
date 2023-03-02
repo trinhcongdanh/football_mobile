@@ -166,8 +166,18 @@ const eventHandler = (navigate: any) => {
         navigate(ScreenName.DataPlayerPage, { playerId });
     };
 
+    const onClickTeam = (teamId: string) => {
+        navigate(ScreenName.GroupPagePage, { teamId });
+    };
+
+    const onClickTopTeam = (topTeamId: string) => {
+        navigate(ScreenName.NationalTeamPage, { topTeamId });
+    };
+
     return {
         onClickPlayer,
+        onClickTeam,
+        onClickTopTeam,
     };
 };
 
@@ -188,7 +198,7 @@ export const useViewModel = ({ navigation, route }: IHomeScreenProps) => {
         getPlayersData,
     } = useViewCallback(route, state);
 
-    const { onClickPlayer } = eventHandler(navigate);
+    const { onClickPlayer, onClickTeam, onClickTopTeam } = eventHandler(navigate);
 
     useMount(() => {
         getHomeLayoutData();
@@ -217,5 +227,14 @@ export const useViewModel = ({ navigation, route }: IHomeScreenProps) => {
         dispatch(addVideo(item));
     };
 
-    return { t, onGoBack, ...state, onShowSideMenu, onClickPlayer, handlePlayVideo };
+    return {
+        t,
+        onGoBack,
+        ...state,
+        onShowSideMenu,
+        onClickPlayer,
+        handlePlayVideo,
+        onClickTeam,
+        onClickTopTeam,
+    };
 };
