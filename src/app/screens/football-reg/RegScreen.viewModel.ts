@@ -79,9 +79,9 @@ export const useViewModel = ({ navigation, route }: IRegScreenProps) => {
                     call: AuthData.SET_PROFILE,
                     item_id: profile.profile.item_id,
                     item: {
-                        EMAIL: userName,
-                        GENDER: gender,
-                        BIRTHDAY: date,
+                        email: userName,
+                        gender: gender,
+                        birthdate: date,
                     },
                 })
             )

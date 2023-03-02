@@ -33,6 +33,10 @@ export const setProfileSlice = createSlice({
             state.loading = null;
             state.success = null;
         },
+        statusSetProfile: (state, action) => {
+            state.loading = action.payload;
+            state.success = action.payload;
+        },
     },
     extraReducers: builder => {
         builder
@@ -53,5 +57,5 @@ export const setProfileSlice = createSlice({
 });
 
 const { actions, reducer } = setProfileSlice;
-export const { clearSetProfile } = actions;
+export const { clearSetProfile, statusSetProfile } = actions;
 export default setProfileSlice.reducer;
