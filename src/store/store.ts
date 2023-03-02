@@ -23,12 +23,13 @@ import loginReducer from './user/Login.slice';
 import registerFacebookReducer from './user/RegisterFacebook.slice';
 import videoReducer from './video/Video.slice';
 import otpUserSlice from 'src/store/user/OTP.slice';
+import setProfileSlice from 'src/store/user/setProfile.slice';
 
 const reducer = combineReducers({
     guestId: guestIdReducer,
     createProfile: createProfileReducer,
     login: loginReducer,
-    setProfile: createProfileReducer,
+    setProfile: setProfileSlice,
     numberPhoneUser: numberPhoneUserReducer,
     otpUser: otpUserSlice,
     favTeams: favTeamReducer,

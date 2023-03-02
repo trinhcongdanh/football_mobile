@@ -39,6 +39,7 @@ export const RegScreen = ({ navigation, route }: IRegScreenProps) => {
         toggleOnCheck,
         userName,
         userNameRef,
+        handleOnGender,
     } = useViewModel({
         navigation,
         route,
@@ -76,6 +77,7 @@ export const RegScreen = ({ navigation, route }: IRegScreenProps) => {
                                 other={t('reg.gender.other')}
                                 birthDateLabel={t('reg.birth_date')}
                                 handleOnDate={e => handleOnDate(e)}
+                                handleOnGender={e => handleOnGender(e)}
                             />
 
                             <View style={[appStyles.flex_row_center, { marginTop: getSize.m(30) }]}>

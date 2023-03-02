@@ -27,6 +27,7 @@ export const TeamSquadScreen = ({ navigation, route }: ITeamGroupScreenProps) =>
         setOnSelect,
         fromTopTeam,
         teamPersonnel,
+        onNavigateDataPlayer,
     } = useViewModel({
         navigation,
         route,
@@ -79,6 +80,9 @@ export const TeamSquadScreen = ({ navigation, route }: ITeamGroupScreenProps) =>
                                                     key={item.player_id}
                                                     name={item.name_he}
                                                     avt={item.image_url}
+                                                    handleDataPlayer={() =>
+                                                        onNavigateDataPlayer(item.player_id)
+                                                    }
                                                 />
                                             );
                                         })}
@@ -94,6 +98,9 @@ export const TeamSquadScreen = ({ navigation, route }: ITeamGroupScreenProps) =>
                                                     key={item.player_id}
                                                     name={item.name_he}
                                                     avt={item.image_url}
+                                                    handleDataPlayer={() =>
+                                                        onNavigateDataPlayer(item.player_id)
+                                                    }
                                                 />
                                             );
                                         })}
@@ -109,6 +116,9 @@ export const TeamSquadScreen = ({ navigation, route }: ITeamGroupScreenProps) =>
                                                     key={item.player_id}
                                                     name={item.name_he}
                                                     avt={item.image_url}
+                                                    handleDataPlayer={() =>
+                                                        onNavigateDataPlayer(item.player_id)
+                                                    }
                                                 />
                                             );
                                         })}
@@ -124,6 +134,9 @@ export const TeamSquadScreen = ({ navigation, route }: ITeamGroupScreenProps) =>
                                                     key={item.player_id}
                                                     name={item.name_he}
                                                     avt={item.image_url}
+                                                    handleDataPlayer={() =>
+                                                        onNavigateDataPlayer(item.player_id)
+                                                    }
                                                 />
                                             );
                                         })}

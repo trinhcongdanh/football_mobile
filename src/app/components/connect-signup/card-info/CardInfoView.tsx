@@ -22,7 +22,9 @@ export const CardInfoView = ({
     inputRef,
     birthDateLabel,
     onChangeTextInput,
+    handleOnGender,
 }: ICardInfoViewProps) => {
+    // const [date, setDate] = useState<Date>();
     const date = new Date();
     const [gender, setGender] = useState(0);
 
@@ -66,7 +68,10 @@ export const CardInfoView = ({
                         return (
                             <TouchableOpacity
                                 key={index.toString()}
-                                onPress={() => handleGender(index)}
+                                onPress={() => {
+                                    handleGender(index);
+                                    handleOnGender(index);
+                                }}
                                 style={[
                                     styles.select_gender,
                                     {
@@ -112,7 +117,9 @@ export const CardInfoView = ({
                             locale="he"
                             mode="date"
                             date={date}
-                            onDateChange={() => handleOnDate(date)}
+                            onDateChange={date => {
+                                handleOnDate(date);
+                            }}
                             androidVariant="nativeAndroid"
                         />
                     </View>

@@ -4,7 +4,7 @@ import { axiosAuth } from '@football/core/api/auth/axiosAuth';
 import { ACTION, AUTH_URL, TOKEN } from '@football/core/api/auth/config';
 import { appleAuth } from '@invertase/react-native-apple-authentication';
 import { GoogleSignin, statusCodes } from '@react-native-google-signin/google-signin';
-import { isEmpty } from 'lodash';
+import { isEmpty, isNil } from 'lodash';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Alert, Keyboard } from 'react-native';
@@ -15,6 +15,7 @@ import { env } from 'src/config';
 import { IConnectScreenProps } from './ConnectScreen.type';
 import qs from 'qs';
 import { useIsFocused } from '@react-navigation/native';
+import { createProfileUser } from 'src/store/user/CreateProfile.slice';
 
 export const useViewModel = ({ navigation, route }: IConnectScreenProps) => {
     const { t } = useTranslation();
@@ -122,10 +123,6 @@ export const useViewModel = ({ navigation, route }: IConnectScreenProps) => {
         goBack();
     };
 
-    const onNavigateSignUp = (): void => {
-        navigate(ScreenName.RegisterPage);
-    };
-
     const phoneNumberRef = useRef<any>(null);
     const [phoneNumber, setPhoneNumber] = useState('');
     const [errors, setErrors] = useState({
@@ -133,7 +130,7 @@ export const useViewModel = ({ navigation, route }: IConnectScreenProps) => {
     });
     const numberPhone = useSelector((state: any) => state.numberPhoneUser);
     const guestId = useSelector((state: any) => state.guestId.guestId);
-    const profile = useSelector((state: any) => state.createProfile.profile);
+    const profile = useSelector((state: any) => state.createProfile);
     const login = useSelector((state: any) => state.login);
 
     const handleOnChange = (e: string) => {
@@ -172,6 +169,48 @@ export const useViewModel = ({ navigation, route }: IConnectScreenProps) => {
             handleError(t('register.invalid'), 'numberPhone');
         }
     }, [login.success, isFocused]);
+
+    const onNavigateSignUp = () => {
+        if (isEmpty(profile.profile) || isNil(profile.profile)) {
+            dispatch(
+                createProfileUser(
+                    serializeParams({
+                        action: ACTION,
+                        token: TOKEN,
+                        call: AuthData.CREATE_PROFILE,
+                        item: {
+                            guest_guid: guestId[0],
+                        },
+                    })
+                )
+            );
+        } else {
+            navigate(ScreenName.RegisterPage);
+        }
+    };
+
+    useEffect(() => {
+        if (!isFocused) return;
+        if (!isEmpty(login.login)) {
+            navigate(ScreenName.RegisterPage);
+        } else {
+            if (profile.success === true) {
+                dispatch(
+                    loginUser(
+                        serializeParams({
+                            action: ACTION,
+                            token: TOKEN,
+                            call: AuthData.LOGIN,
+                            guest_id: profile.profile.tc_user,
+                            guest_guid: guestId[0],
+                        })
+                    )
+                );
+
+                navigate(ScreenName.RegisterPage);
+            }
+        }
+    }, [profile.success, isFocused]);
 
     return {
         errors,
