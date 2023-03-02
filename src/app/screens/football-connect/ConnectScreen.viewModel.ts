@@ -16,6 +16,7 @@ import { IConnectScreenProps } from './ConnectScreen.type';
 import qs from 'qs';
 import { useIsFocused } from '@react-navigation/native';
 import { createProfileUser } from 'src/store/user/CreateProfile.slice';
+import { loginNumberPhoneUser } from 'src/store/user/RegisterNumberPhone.slice';
 
 export const useViewModel = ({ navigation, route }: IConnectScreenProps) => {
     const { t } = useTranslation();
@@ -145,7 +146,7 @@ export const useViewModel = ({ navigation, route }: IConnectScreenProps) => {
     const Connect = () => {
         Keyboard.dismiss();
         dispatch(
-            loginUser(
+            loginNumberPhoneUser(
                 serializeParams({
                     action: ACTION,
                     token: TOKEN,
@@ -160,15 +161,15 @@ export const useViewModel = ({ navigation, route }: IConnectScreenProps) => {
 
     useEffect(() => {
         if (!isFocused) return;
-        if (login.success === true) {
+        if (numberPhone.successLogin === true) {
             navigate(ScreenName.VerifyPage, {
                 number: phoneNumber,
                 previous_screen: ScreenName.ConnectPage,
             });
-        } else if (login.success === false && login.loading === false) {
+        } else if (numberPhone.successLogin === false && numberPhone.loadingLogin === false) {
             handleError(t('register.invalid'), 'numberPhone');
         }
-    }, [login.success, isFocused]);
+    }, [numberPhone.successLogin, isFocused]);
 
     const onNavigateSignUp = () => {
         if (isEmpty(profile.profile) || isNil(profile.profile)) {

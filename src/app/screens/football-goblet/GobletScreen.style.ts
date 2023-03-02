@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
         textAlign: I18nManager.isRTL ? 'right' : 'left',
     },
     state_content: {
-        flexDirection: I18nManager.isRTL ? 'row-reverse' : 'row',
+        flexDirection: 'row',
         flexWrap: 'wrap',
         marginTop: getSize.m(28),
     },

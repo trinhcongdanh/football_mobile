@@ -1,16 +1,19 @@
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
-import { ScreenName } from '@football/app/utils/constants/enum';
+import { AuthData, ScreenName } from '@football/app/utils/constants/enum';
 import { TeamModel } from '@football/core/models/TeamModelResponse';
 import { TopTeamModel } from '@football/core/models/TopTeamModelResponse';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { launchImageLibrary } from 'react-native-image-picker';
 import { useDispatch, useSelector } from 'react-redux';
 import { resetSearchFavPlayer, SelectedPlayer } from 'src/store/FavPlayer.slice';
 import { resetFavTeam } from 'src/store/FavTeam.slice';
+import qs from 'qs';
 import { resetTopTeams } from 'src/store/FavTopTeam.slice';
 import { RootState } from 'src/store/store';
 import { ISettingsScreenProps } from './SettingsScreen.type';
+import { ACTION } from '@football/core/api/auth/config';
+import { getProfileUser } from 'src/store/user/getProfile.slice';
 
 export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
     const { t } = useTranslation();
@@ -164,8 +167,48 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
             previous_screen: ScreenName.FavSummaryPage,
         });
     };
+    const handleError = (errorMessage: string, input: string) => {
+        setErrors(prevState => ({ ...prevState, [input]: errorMessage }));
+    };
+
+    const userNameRef = useRef<any>(null);
+    const [userName, setUserName] = useState('');
+    const [errors, setErrors] = useState({
+        userName: '',
+        email: '',
+    });
+    const handleOnChangeName = (e: string) => {
+        setUserName(e);
+    };
+
+    const emailRef = useRef<any>(null);
+    const [email, setEmail] = useState('');
+    const handleOnChangeEmail = (e: string) => {
+        setUserName(e);
+    };
 
     const handleSaveChange = () => {};
+
+    const login = useSelector((state: RootState) => state.login);
+
+    function serializeParams(obj: any) {
+        const a = qs.stringify(obj, { encode: false, arrayFormat: 'brackets' });
+        console.log(a);
+        return a;
+    }
+
+    useEffect(() => {
+        dispatch(
+            getProfileUser(
+                serializeParams({
+                    action: ACTION,
+                    token: login.login.token,
+                    call: AuthData.GET_PROFILE,
+                    item: login.login.user.item_id,
+                })
+            )
+        );
+    }, []);
 
     return {
         date,
@@ -195,5 +238,18 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
         addFavTopTeam,
         changeFavTopTeam,
         onGoBack,
+        userNameRef,
+        userName,
+        setUserName,
+        handleError,
+        errors,
+        handleOnChangeName,
+        handleOnChangeEmail,
+        emailRef,
+        email,
+        setEmail,
     };
 };
+function getProfile(): any {
+    throw new Error('Function not implemented.');
+}

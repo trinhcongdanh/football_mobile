@@ -62,6 +62,7 @@ export const GobletScreen = ({ navigation, route }: IGobletScreenProps) => {
                             option_one={t('goblet.state_cup')}
                             option_two={t('goblet.toto_cup')}
                             onSelect={changeTab}
+                            defaultValue={0}
                         />
 
                         <ScrollView>

@@ -18,7 +18,7 @@ import { resetFavTeam, resetSelectedFavTeam } from 'src/store/FavTeam.slice';
 import { resetSelectedFavTopTeams, resetTopTeams } from 'src/store/FavTopTeam.slice';
 import { resetOtpUser } from 'src/store/user/OTP.slice';
 import { clearSetProfile } from 'src/store/user/setProfile.slice';
-import { clearPhoneNumber } from 'src/store/user/RegisterNumberPhone';
+import { clearPhoneNumber } from 'src/store/user/RegisterNumberPhone.slice';
 
 export const useViewModel = () => {
     const { navigate, goBack, popToTop } = useAppNavigator();

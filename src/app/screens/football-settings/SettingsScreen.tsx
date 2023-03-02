@@ -58,6 +58,16 @@ export function SettingsScreen(props: ISettingsScreenProps) {
         addFavTopTeam,
         changeFavTopTeam,
         onGoBack,
+        userNameRef,
+        userName,
+        setUserName,
+        errors,
+        handleError,
+        handleOnChangeName,
+        handleOnChangeEmail,
+        emailRef,
+        email,
+        setEmail,
     } = useViewModel(props);
     const [itemSelected, setItemSelected] = useState<string>(t('settings.male'));
     const male = { name: t('settings.male') };
@@ -114,17 +124,25 @@ export function SettingsScreen(props: ISettingsScreenProps) {
                             </View>
                             <View style={styles.first_block_container}>
                                 <Input
+                                    error={errors.userName}
                                     placeholder={t('settings.name')}
-                                    error=""
-                                    onChangeText={() => {}}
-                                    onFocus={() => {}}
+                                    onChangeTextInput={(e: string) => handleOnChangeName(e)}
+                                    onFocus={() => {
+                                        handleError('', 'userName');
+                                    }}
+                                    input={userName}
+                                    inputRef={userNameRef}
                                 />
                                 <Input
                                     styleInput={styles.input_container}
+                                    error={errors.email}
                                     placeholder={t('settings.email')}
-                                    error=""
-                                    onChangeText={() => {}}
-                                    onFocus={() => {}}
+                                    onChangeTextInput={(e: string) => handleOnChangeEmail(e)}
+                                    onFocus={() => {
+                                        handleError('', 'email');
+                                    }}
+                                    input={email}
+                                    inputRef={emailRef}
                                 />
                                 <Text style={styles.txt_gender}>{t('settings.gender')}</Text>
                                 <View style={styles.check_box_container}>
