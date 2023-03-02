@@ -35,7 +35,11 @@ export const AverageYellows = ({ avgCards, leagueSeasonStats }: IAverageYellowsP
                         handleSeeAll(
                             leagueSeasonStats,
                             avgCards,
-                            t('statistics.leagues.average_yellow')
+                            t('statistics.leagues.average_yellow'),
+                            t('statistics.leagues.location'),
+                            t('statistics.leagues.name_club'),
+                            t('statistics.leagues.average'),
+                            'yellow'
                         )
                     }
                 >
@@ -162,6 +166,7 @@ export const AverageYellows = ({ avgCards, leagueSeasonStats }: IAverageYellowsP
                                 <FastImage
                                     source={AppImages.img_ticket_yellow}
                                     style={styles.ticket}
+                                    resizeMode={FastImage.resizeMode.contain}
                                 />
                             </View>
                         </LinearGradient>

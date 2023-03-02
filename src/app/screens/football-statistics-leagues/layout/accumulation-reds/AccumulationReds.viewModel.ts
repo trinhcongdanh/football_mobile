@@ -10,9 +10,21 @@ export const useViewModel = () => {
     const handleSeeAll = (
         leagueSeasonStats: LeagueSeasonStatModel,
         data: Card[],
-        title: string
+        title: string,
+        name: string,
+        team: string,
+        result: string,
+        ticket: string
     ) => {
-        navigate(ScreenName.StatisticDetailsPage, { leagueSeasonStats, data, title });
+        navigate(ScreenName.StatisticDetailsPage, {
+            leagueSeasonStats,
+            data,
+            title,
+            name,
+            team,
+            result,
+            ticket,
+        });
     };
 
     return {

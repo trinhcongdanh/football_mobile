@@ -38,7 +38,11 @@ export const AccumulationYellows = ({
                         handleSeeAll(
                             leagueSeasonStats,
                             yellowCards,
-                            t('statistics.leagues.accumulation_yellow')
+                            t('statistics.leagues.accumulation_yellow'),
+                            t('statistics.leagues.name_player'),
+                            t('statistics.leagues.name_club'),
+                            t('statistics.leagues.yellow'),
+                            'yellow'
                         )
                     }
                 >

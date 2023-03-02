@@ -35,7 +35,11 @@ export const AverageScores = ({ avgGoalKicker, leagueSeasonStats }: IAverageScor
                         handleSeeAll(
                             leagueSeasonStats,
                             avgGoalKicker,
-                            t('statistics.leagues.average_score')
+                            t('statistics.leagues.average_score'),
+                            t('statistics.leagues.location'),
+                            t('statistics.leagues.name_club'),
+                            t('statistics.leagues.average_goal'),
+                            'ball'
                         )
                     }
                 >
@@ -171,6 +175,7 @@ export const AverageScores = ({ avgGoalKicker, leagueSeasonStats }: IAverageScor
                                 <FastImage
                                     source={AppImages.img_volleyball}
                                     style={styles.ticket}
+                                    resizeMode={FastImage.resizeMode.contain}
                                 />
                             </View>
                         </LinearGradient>

@@ -414,10 +414,10 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                                                                 start={{ x: 0, y: 0 }}
                                                                 end={{ x: 1, y: 1 }}
                                                                 colors={[
-                                                                    item.place % 2 === 1
+                                                                    index % 2 === 1
                                                                         ? 'rgba(16, 32, 100, 0.04)'
                                                                         : appColors.white,
-                                                                    item.place % 2 === 0
+                                                                    index % 2 === 1
                                                                         ? 'rgba(59, 168, 225, 0.04)'
                                                                         : appColors.white,
                                                                 ]}
@@ -919,7 +919,7 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                             })}
                         </View>
                         <View style={{ marginVertical: getSize.m(50) }}>
-                            <GestureHandlerRootView style={appStyles.flex}>
+                            {/* <GestureHandlerRootView style={appStyles.flex}>
                                 <Carousel
                                     loop
                                     pagingEnabled
@@ -953,10 +953,46 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                                         </TouchableOpacity>
                                     )}
                                 />
-                            </GestureHandlerRootView>
+                            </GestureHandlerRootView> */}
+                            <ScrollView
+                                horizontal
+                                pagingEnabled
+                                showsHorizontalScrollIndicator={false}
+                                directionalLockEnabled
+                                onScroll={e => {
+                                    const slide = Math.round(
+                                        e.nativeEvent.contentOffset.x /
+                                            e.nativeEvent.layoutMeasurement.width
+                                    );
+                                    if (slide !== activeIndexNumber) {
+                                        setActiveIndexNumber(slide); // here we will set our active index num
+                                    }
+                                }}
+                            >
+                                {topTeam?.image_gallery.map((item, index) => {
+                                    return (
+                                        <TouchableOpacity
+                                            key={index}
+                                            style={{
+                                                flexDirection: 'row',
+                                                justifyContent: 'center',
+                                                marginHorizontal: getSize.m(10),
+                                            }}
+                                        >
+                                            <View>
+                                                <Image
+                                                    source={{ uri: item.image_url }}
+                                                    style={[styles.image]}
+                                                />
+                                            </View>
+                                        </TouchableOpacity>
+                                    );
+                                })}
+                            </ScrollView>
                             <View style={styles.dotContainer}>
                                 {topTeam?.image_gallery.map((_, index) => {
                                     return (
+                                        // eslint-disable-next-line react/no-array-index-key
                                         <View key={index}>
                                             <View
                                                 style={[

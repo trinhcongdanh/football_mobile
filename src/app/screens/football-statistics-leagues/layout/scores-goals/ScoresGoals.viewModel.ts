@@ -13,9 +13,19 @@ export const useViewModel = () => {
     const handleSeeAll = (
         leagueSeasonStats: LeagueSeasonStatModel,
         data: GoalKicker[],
-        title: string
+        title: string,
+        name: string,
+        team: string,
+        result: string
     ) => {
-        navigate(ScreenName.StatisticDetailsPage, { data, leagueSeasonStats, title });
+        navigate(ScreenName.StatisticDetailsPage, {
+            data,
+            leagueSeasonStats,
+            title,
+            name,
+            team,
+            result,
+        });
     };
 
     return {
