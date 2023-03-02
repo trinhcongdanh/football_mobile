@@ -137,7 +137,7 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                                                                     ? getSize.m(16)
                                                                     : getSize.m(6),
                                                             marginRight:
-                                                                index === players.length - 1
+                                                                index === players?.length - 1
                                                                     ? getSize.m(16)
                                                                     : getSize.m(6),
                                                         },
@@ -153,7 +153,7 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                                                         }}
                                                     />
                                                     <Text style={styles.header_item_text}>
-                                                        {item.name_he}
+                                                        {item.name_en}
                                                     </Text>
                                                 </View>
                                             </TouchableOpacity>
@@ -178,7 +178,7 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                                                                     ? getSize.m(16)
                                                                     : getSize.m(6),
                                                             marginRight:
-                                                                index === players.length - 1
+                                                                index === teams.length - 1
                                                                     ? getSize.m(16)
                                                                     : getSize.m(6),
                                                         },
@@ -219,7 +219,7 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                                                                     ? getSize.m(16)
                                                                     : getSize.m(6),
                                                             marginRight:
-                                                                index === players.length - 1
+                                                                index === topTeams?.length - 1
                                                                     ? getSize.m(16)
                                                                     : getSize.m(6),
                                                         },
@@ -285,7 +285,7 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                     {/* Item3 */}
                     {homeLayout?.layout.includes('my_players') &&
                         players &&
-                        players?.slice(0, 2)?.map(player => {
+                        players?.map(player => {
                             // eslint-disable-next-line no-underscore-dangle
                             return <Item3 player={player} key={player._id} />;
                         })}

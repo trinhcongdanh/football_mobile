@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import { TopTeamModel } from '@football/core/models/TopTeamModelResponse';
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
@@ -73,6 +74,7 @@ const useViewCallback = (route: any, viewState: any) => {
         setTopTeams,
         setLeague,
         setGeneralVod,
+        players,
     } = viewState;
 
     const getHomeLayoutData = useCallback(async () => {
@@ -97,7 +99,12 @@ const useViewCallback = (route: any, viewState: any) => {
     }, []);
 
     const getPlayersData = useCallback(async () => {
-        const [error, res] = await PlayerService.findAll();
+        const playerIds = players.map((player: PlayerModel) => {
+            return { _id: { $oid: player._id } };
+        });
+        const [error, res] = await PlayerService.findByFilter({
+            $or: playerIds,
+        });
         if (error) {
             return;
         }
@@ -178,6 +185,7 @@ export const useViewModel = ({ navigation, route }: IHomeScreenProps) => {
         getHomePageData,
         getDefaultLeagueData,
         getGeneralVodData,
+        getPlayersData,
     } = useViewCallback(route, state);
 
     const { onClickPlayer } = eventHandler(navigate);
@@ -186,6 +194,7 @@ export const useViewModel = ({ navigation, route }: IHomeScreenProps) => {
         getHomeLayoutData();
         getHomePageData();
         getGeneralVodData();
+        getPlayersData();
     });
 
     useEffect(() => {
