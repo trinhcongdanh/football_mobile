@@ -14,6 +14,8 @@ import { ACTION, TOKEN } from '@football/core/api/auth/config';
 import { isVerifyOtp, otpUser } from 'src/store/user/OTP.slice';
 import { useIsFocused, useRoute } from '@react-navigation/native';
 import { isVerify, loginUser } from 'src/store/user/Login.slice';
+import { RootState } from 'src/store/store';
+import { statusSetProfile } from 'src/store/user/setProfile.slice';
 
 export const useViewModel = ({ navigation, route }: IVerifyScreenProps) => {
     const { t } = useTranslation();
@@ -75,6 +77,7 @@ export const useViewModel = ({ navigation, route }: IVerifyScreenProps) => {
     const profile = useSelector((state: any) => state.createProfile.profile);
     const login = useSelector((state: any) => state.login);
     const numberPhone = useSelector((state: any) => state.numberPhoneUser);
+    const profileUser = useSelector((state: RootState) => state.setProfile);
     const otp = useSelector((state: any) => state.otpUser);
     const routes = useRoute();
     const { number }: any = route.params;
@@ -155,30 +158,28 @@ export const useViewModel = ({ navigation, route }: IVerifyScreenProps) => {
             }
         }
     };
-
+    const isFocused = useIsFocused();
     useEffect(() => {
-        // console.log(otp.success);
-        // console.log(otp.loading);
-        // console.log(otp.isVerifyOtp);
-
+        if (!isFocused) return;
         if (
             otp.success === true &&
             otp.isVerifyOtp === true &&
             numberPhone.successRegister === true
         ) {
+            dispatch(statusSetProfile(false));
             navigate(ScreenName.RegPage);
         }
     }, [otp.success, otp.isVerifyOtp, numberPhone.successRegister]);
+    useEffect(() => {
+        if (numberPhone.successLogin === true && otp.isVerifyOtp === true && otp.success === true) {
+            navigate(ScreenName.SideBar);
+        }
+    }, [numberPhone.successLogin, otp.isVerifyOtp, otp.success]);
     useEffect(() => {
         if (otp.success === false && otp.loading === false && otp.isVerifyOtp === true) {
             handleError(t('verify.error'), 'verifyError');
         }
     }, [otp.loading, otp.isVerifyOtp]);
-    useEffect(() => {
-        if (numberPhone.successLogin === true && otp.isVerifyOtp === true) {
-            navigate(ScreenName.SideBar);
-        }
-    }, [numberPhone.successLogin, otp.isVerifyOtp, otp.success]);
     useEffect(() => {
         if (numberPhone.successLogin === false && numberPhone.loadingLogin === false) {
             handleError(t('verify.error'), 'verifyError');

@@ -203,7 +203,7 @@ export const useViewModel = ({ navigation, route }: IFavoriteSummaryScreenProps)
     };
 
     const navigationMethodRegister = () => {
-        setSetProfile(false);
+        setSetProfile(true);
         if (isEmpty(profile.profile) || isNil(profile.profile)) {
             setScreenName(ScreenName.RegisterPage);
 
