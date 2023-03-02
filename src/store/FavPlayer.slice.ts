@@ -154,6 +154,10 @@ export const favPlayerSlice = createSlice({
         ) => {
             state.searchPlayers = [];
         },
+
+        resetSelectedFavPlayer:(state, action)=>{
+            state.selectedPlayers= []
+        }
     },
     // extraReducers:builder=>{
     //     builder
@@ -196,5 +200,6 @@ export const {
     resetAllFavPlayers,
     resetGroupFavPlayer,
     resetSearchFavPlayer,
+    resetSelectedFavPlayer
 } = actions;
 export default favPlayerSlice.reducer;

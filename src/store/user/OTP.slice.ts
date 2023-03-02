@@ -30,6 +30,11 @@ export const otpUserSlice = createSlice({
         isVerifyOtp: (state, action) => {
             state.isVerifyOtp = action.payload;
         },
+        resetOtpUser: (state, action) => {
+            state.otp = {};
+            state.loading = null;
+            state.success = null;
+        },
     },
 
     extraReducers: builder => {
@@ -51,5 +56,5 @@ export const otpUserSlice = createSlice({
 });
 
 const { actions, reducer } = otpUserSlice;
-export const { isVerifyOtp } = actions;
+export const { isVerifyOtp, resetOtpUser } = actions;
 export default otpUserSlice.reducer;

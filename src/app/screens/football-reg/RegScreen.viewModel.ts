@@ -9,6 +9,7 @@ import { setProfileUser } from 'src/store/user/setProfile.slice';
 import { ACTION } from '@football/core/api/auth/config';
 import { RootState } from 'src/store/store';
 import qs from 'qs';
+import { useIsFocused } from '@react-navigation/native';
 
 export const useViewModel = ({ navigation, route }: IRegScreenProps) => {
     const { navigate, goBack } = useAppNavigator();
@@ -86,12 +87,17 @@ export const useViewModel = ({ navigation, route }: IRegScreenProps) => {
             )
         );
     };
-
+    const isFocused = useIsFocused();
     useEffect(() => {
+        if (!isFocused) return;
         if (profileUser.success === true) {
             navigate(ScreenName.SideBar);
+            navigation.reset({
+                index: 0,
+                routes: [{ name: ScreenName.SideBar as never }],
+            });
         }
-    }, [profileUser.success]);
+    }, [profileUser.success, isFocused]);
 
     return {
         errors,

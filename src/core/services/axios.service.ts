@@ -56,7 +56,7 @@ class AxiosService implements IAxiosInstance {
     };
 
     private handleErrorResponse = (error: AxiosError): Result<AxiosError> => {
-        Alert.alert(error.message);
+        // Alert.alert(error.message);
         return [error, null];
     };
 }
