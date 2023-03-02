@@ -82,6 +82,7 @@ export interface TeamModel {
     league_name_en: string;
     seasons: Season[];
     homepage_info: HomepageInfo;
+    league_id: string;
     // isSelected: boolean;
 }
 

@@ -45,7 +45,7 @@ export const Item10 = ({ league }: IItem10Props) => {
                     },
                 ]}
             >
-                <Text style={styles.header}>ליגת העל לנוער</Text>
+                <Text style={styles.header}>{league.name_he}</Text>
                 <TouchableOpacity onPress={() => onClickAllLeagues(league._id)}>
                     <View style={appStyles.flex_row_align}>
                         <Text style={styles.details}>{t('home_page.full_table')}</Text>

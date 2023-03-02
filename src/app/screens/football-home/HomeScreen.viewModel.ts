@@ -10,10 +10,8 @@ import { TeamModel } from '@football/core/models/TeamModelResponse';
 import HomeLayoutService from '@football/core/services/HomeLayout.service';
 import HomePageService from '@football/core/services/HomePage.service';
 import PlayerService from '@football/core/services/Player.service';
-import TeamService from '@football/core/services/Team.service';
 import { useCallback, useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import TopTeamService from '@football/core/services/TopTeam.service';
 import { LeagueModel } from '@football/core/models/LeagueModelResponse';
 import leaguesService from '@football/core/services/League.service';
 import { GeneralVodModel } from '@football/core/models/GeneralVodResponse';
@@ -35,7 +33,7 @@ const useViewState = () => {
     const [players, setPlayers] = useState<PlayerModel[]>(selectedFavPlayers);
     const [teams, setTeams] = useState<TeamModel[]>(selectedFavTeams);
     const [topTeams, setTopTeams] = useState<TopTeamModel[]>(selectedFavTopTeams);
-    const [league, setLeague] = useState<LeagueModel>();
+    const [leagues, setLeagues] = useState<LeagueModel[]>();
     const [generalVod, setGeneralVod] = useState<GeneralVodModel[]>();
     const [sourceVideo, setSourceVideo] = useState();
     const [autoPlay, setAutoPlay] = useState(true);
@@ -52,8 +50,8 @@ const useViewState = () => {
         setTeams,
         topTeams,
         setTopTeams,
-        league,
-        setLeague,
+        leagues,
+        setLeagues,
         generalVod,
         setGeneralVod,
         sourceVideo,
@@ -70,11 +68,10 @@ const useViewCallback = (route: any, viewState: any) => {
         setPlayers,
         setHomePage,
         setHomeLayout,
-        setTeams,
-        setTopTeams,
-        setLeague,
+        setLeagues,
         setGeneralVod,
         players,
+        teams,
     } = viewState;
 
     const getHomeLayoutData = useCallback(async () => {
@@ -112,32 +109,54 @@ const useViewCallback = (route: any, viewState: any) => {
         setPlayers(res.data.documents);
     }, []);
 
-    const getTeamsData = useCallback(async () => {
-        const [error, res] = await TeamService.findAll();
-        if (error) {
-            return;
-        }
+    // const getTeamsData = useCallback(async () => {
+    //     const [error, res] = await TeamService.findAll();
+    //     if (error) {
+    //         return;
+    //     }
 
-        setTeams(res.data.documents?.slice(0, 2));
-    }, []);
+    //     setTeams(res.data.documents?.slice(0, 2));
+    // }, []);
 
-    const getTopTeamsData = useCallback(async () => {
-        const [error, res] = await TopTeamService.findAll();
-        if (error) {
-            return;
-        }
+    // const getTopTeamsData = useCallback(async () => {
+    //     const [error, res] = await TopTeamService.findAll();
+    //     if (error) {
+    //         return;
+    //     }
 
-        setTopTeams(res.data.documents?.slice(0, 2));
-    }, []);
+    //     setTopTeams(res.data.documents?.slice(0, 2));
+    // }, []);
 
     const getDefaultLeagueData = useCallback(async (id: string) => {
-        const [error, res] = await leaguesService.findByOId(id);
-        if (error) {
-            return;
-        }
+        const leagueIds = teams
+            .map((team: TeamModel) => team.league_id)
+            .filter((value: string, index: number, array: any) => array.indexOf(value) === index)
+            .map((teamId: string) => {
+                return { _id: { $oid: teamId } };
+            });
 
-        if (res?.data?.documents[0]) {
-            setLeague(res.data.documents[0]);
+        if (leagueIds?.length) {
+            console.log('leagueIds', leagueIds);
+            
+            const [error, res] = await leaguesService.findByFilter({
+                $or: leagueIds,
+            });
+            if (error) {
+                return;
+            }
+
+            if (res?.data?.documents) {
+                setLeagues(res.data.documents);
+            }
+        } else {
+            const [error, res] = await leaguesService.findByOId(id);
+            if (error) {
+                return;
+            }
+
+            if (res?.data?.documents) {
+                setLeagues(res.data.documents);
+            }
         }
     }, []);
 
@@ -154,8 +173,8 @@ const useViewCallback = (route: any, viewState: any) => {
         getHomeLayoutData,
         getHomePageData,
         getPlayersData,
-        getTeamsData,
-        getTopTeamsData,
+        // getTeamsData,
+        // getTopTeamsData,
         getDefaultLeagueData,
         getGeneralVodData,
     };

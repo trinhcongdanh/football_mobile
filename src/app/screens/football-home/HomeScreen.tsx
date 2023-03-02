@@ -43,7 +43,7 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
         homeLayout,
         teams,
         topTeams,
-        league,
+        leagues,
         generalVod,
         handlePlayVideo,
         onClickTeam,
@@ -314,9 +314,11 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                     {/* Item9 */}
                     {homeLayout?.layout.includes('magazine') && <Item9 homePage={homePage} />}
                     {/* Item10 */}
-                    {homeLayout?.layout.includes('leagues_table') && league && (
-                        <Item10 league={league} />
-                    )}
+                    {homeLayout?.layout.includes('leagues_table') &&
+                        leagues?.length &&
+                        leagues.map(league => {
+                            return <Item10 league={league} key={league._id} />;
+                        })}
                     {/* Item11 */}
                     {/* <Item11 /> */}
                     {homeLayout?.layout.includes('national_cup') && <Item11 homePage={homePage} />}
