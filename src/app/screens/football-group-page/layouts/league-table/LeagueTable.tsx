@@ -315,14 +315,14 @@ export const LeagueTable = ({ teamSeason }: ILeagueTableProps) => {
                         })}
                     </View>
                 </View>
-                <TouchableOpacity style={styles.more_result}>
+                {/* <TouchableOpacity style={styles.more_result}>
                     <Text style={styles.text_more_result}>{t('group_page.league_table.more')}</Text>
                     <Icon
                         name={appIcons.ic_arrow_left}
                         size={getSize.m(10)}
                         style={styles.ic_more_result}
                     />
-                </TouchableOpacity>
+                </TouchableOpacity> */}
             </View>
 
             <View style={appStyles.package}>
