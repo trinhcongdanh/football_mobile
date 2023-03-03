@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 export const useViewModel = ({ videos }: IItem12Props) => {
     const { navigate, goBack } = useAppNavigator();
     const { t } = useTranslation();
-    const pages = Array(2).fill('');
+    const pages = Array(videos.length).fill('');
     const [activeIndexNumber, setActiveIndexNumber] = useState(Number);
 
     const dots = Array(videos.length).fill('');

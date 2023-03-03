@@ -109,7 +109,14 @@ export const DataPlayerTeamScreen = ({ player }: IDataPlayerTeamScreenProps) => 
                                         ]}
                                     >
                                         <Text style={appStyles.text_label}>{item.context_he}</Text>
-                                        <Text style={appStyles.number}>{item.goals}</Text>
+                                        <Text
+                                            style={[
+                                                appStyles.number,
+                                                { paddingLeft: getSize.m(10) },
+                                            ]}
+                                        >
+                                            {item.goals}
+                                        </Text>
                                     </View>
                                 );
                             })}
@@ -137,7 +144,14 @@ export const DataPlayerTeamScreen = ({ player }: IDataPlayerTeamScreenProps) => 
                                         ]}
                                     >
                                         <Text style={appStyles.text_label}>{item.name_he}</Text>
-                                        <Text style={appStyles.number}>{item.num_of_cards}</Text>
+                                        <Text
+                                            style={[
+                                                appStyles.number,
+                                                { paddingLeft: getSize.m(10) },
+                                            ]}
+                                        >
+                                            {item.num_of_cards}
+                                        </Text>
                                     </View>
                                 );
                             })}
