@@ -371,13 +371,14 @@ const resources = {
                 statistics: {
                     label: 'סטטיסטיקות',
                     trophy: 'מחזיקות גביע',
-                    trophy_around: 'סיבובי גביע',
+                    trophy_around: 'סיבובי הגביע',
                     season: 'שנה',
                     group: 'שם הקבוצה',
                     see_all: 'ראה הכל',
                     cup_around: 'סיבובי הגביע',
                     date: 'תאריך',
                     round: 'סבב',
+                    team_name: 'שם הקבוצה',
                 },
                 cup: {
                     year: 'שנה',
