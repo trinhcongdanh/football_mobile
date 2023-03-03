@@ -23,9 +23,10 @@ export const CardInfoView = ({
     birthDateLabel,
     onChangeTextInput,
     handleOnGender,
+    date,
 }: ICardInfoViewProps) => {
     // const [date, setDate] = useState<Date>();
-    const date = new Date();
+    // const date = new Date();
     const [gender, setGender] = useState(0);
 
     const genders = [male, female, other];

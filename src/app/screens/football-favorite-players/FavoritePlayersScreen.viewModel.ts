@@ -30,6 +30,7 @@ import {
     setAllFavPlayers,
     setGroupFavPlayer,
 } from 'src/store/FavPlayer.slice';
+import { setSettingFavPlayer } from 'src/store/SettingSelected.slice';
 import { RootState } from 'src/store/store';
 import { createProfileUser } from 'src/store/user/CreateProfile.slice';
 import { loginUser } from 'src/store/user/Login.slice';
@@ -191,17 +192,17 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
         }
     }, []);
 
-    function convertToCommonPlayer(player: PlayerModel | Players): SelectedPlayer {
-        return pick(player, ['name_en', 'name_he', 'image_url', '_id']);
-    }
-    const handleSelected = (player: PlayerModel | Players) => {
+    // function convertToCommonPlayer(player: PlayerModel): SelectedPlayer {
+    //     return pick(player, ['name_en', 'name_he', 'image_url', '_id']);
+    // }
+    const handleSelected = (player: PlayerModel) => {
         if (!isEmpty(favSearchPlayers)) {
-            dispatch(pushAllFavPlayers(convertToCommonPlayer(player)));
+            dispatch(pushAllFavPlayers(player));
         } else {
             if (!isEmpty(selectedFavTeams)) {
-                dispatch(pushGroupFavPlayer(convertToCommonPlayer(player)));
+                dispatch(pushGroupFavPlayer(player));
             } else {
-                dispatch(pushAllFavPlayers(convertToCommonPlayer(player)));
+                dispatch(pushAllFavPlayers(player));
             }
         }
     };
@@ -381,34 +382,37 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
         }
     };
     const isFocused = useIsFocused();
+    const previous_screen = route?.params?.previous_screen;
 
     useEffect(() => {
-        if (!isFocused) return;
-        if (!isEmpty(login.login)) {
-            navigate(ScreenName.SideBar);
-            navigation.reset({
-                index: 0,
-                routes: [{ name: ScreenName.SideBar as never }],
-            });
-        } else {
-            if (profile.success === true) {
-                dispatch(
-                    loginUser(
-                        serializeParams({
-                            action: ACTION,
-                            token: TOKEN,
-                            call: AuthData.LOGIN,
-                            guest_id: profile.profile.tc_user,
-                            guest_guid: guestId[0],
-                        })
-                    )
-                );
-
+        if (previous_screen !== ScreenName.SettingsPage) {
+            if (!isFocused) return;
+            if (!isEmpty(login.login)) {
                 navigate(ScreenName.SideBar);
                 navigation.reset({
                     index: 0,
                     routes: [{ name: ScreenName.SideBar as never }],
                 });
+            } else {
+                if (profile.success === true) {
+                    dispatch(
+                        loginUser(
+                            serializeParams({
+                                action: ACTION,
+                                token: TOKEN,
+                                call: AuthData.LOGIN,
+                                guest_id: profile.profile.tc_user,
+                                guest_guid: guestId[0],
+                            })
+                        )
+                    );
+
+                    navigate(ScreenName.SideBar);
+                    navigation.reset({
+                        index: 0,
+                        routes: [{ name: ScreenName.SideBar as never }],
+                    });
+                }
             }
         }
     }, [profile.success, isFocused]);
@@ -418,6 +422,10 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
         if (!isEmpty(params)) {
             if (params.previous_screen === ScreenName.FavSummaryPage) {
                 navigate(ScreenName.FavSummaryPage);
+            } else if (previous_screen === ScreenName.SettingsPage) {
+                navigate(ScreenName.SettingsPage, { previous_screen: ScreenName.FavPlayerPage });
+                dispatch(setSettingFavPlayer(selectedFavPlayers));
+                // pop(ScreenName.FavTeamPage);
             } else {
                 navigate(ScreenName.FavTopTeamPage);
             }

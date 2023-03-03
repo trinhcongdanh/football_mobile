@@ -23,6 +23,7 @@ import { IFavoriteTeamsScreenProps } from './FavoriteTeamsScreen.type';
 import { resetAllFavPlayers, resetGroupFavPlayer } from 'src/store/FavPlayer.slice';
 import { useIsFocused, useRoute } from '@react-navigation/native';
 import { RootState } from 'src/store/store';
+import { setSettingFavTeam } from 'src/store/SettingSelected.slice';
 
 export const useViewModel = ({ navigation, route }: IFavoriteTeamsScreenProps) => {
     const { t } = useTranslation();
@@ -203,6 +204,7 @@ export const useViewModel = ({ navigation, route }: IFavoriteTeamsScreenProps) =
                 navigate(ScreenName.FavSummaryPage);
             } else if (previous_screen === ScreenName.SettingsPage) {
                 navigate(ScreenName.SettingsPage, { previous_screen: ScreenName.FavTeamPage });
+                dispatch(setSettingFavTeam(selectedFavTeams));
                 // pop(ScreenName.FavTeamPage);
             } else {
                 navigate(ScreenName.FavPlayerPage);

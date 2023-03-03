@@ -10,6 +10,7 @@ import { ACTION } from '@football/core/api/auth/config';
 import { RootState } from 'src/store/store';
 import qs from 'qs';
 import { useIsFocused } from '@react-navigation/native';
+import { AppImages } from '@football/app/assets/images';
 
 export const useViewModel = ({ navigation, route }: IRegScreenProps) => {
     const { navigate, goBack } = useAppNavigator();
@@ -40,19 +41,22 @@ export const useViewModel = ({ navigation, route }: IRegScreenProps) => {
         setUserName(e);
     };
 
-    const [date, setDate] = useState<any>();
+    const [date, setDate] = useState<any>(new Date());
+    const [formattedDate, setFormattedDate] = useState<any>();
 
     const handleOnDate = (e: Date) => {
+        console.log(e);
+        setDate(e);
         let formattedDate = e.getFullYear() + '-' + (e.getMonth() + 1) + '-' + e.getDate();
-        setDate(formattedDate);
+        setFormattedDate(formattedDate);
     };
     const [gender, setGender] = useState<any>();
     const handleOnGender = (e: number) => {
-        if (e === 1) {
+        if (e === 0) {
             setGender('FAN_GENDER_MALE');
-        } else if (e === 2) {
+        } else if (e === 1) {
             setGender('FAN_GENDER_FEMALE');
-        } else if (e === 3) {
+        } else if (e === 2) {
             setGender('FAN_GENDER_NOT_AVAILABLE');
         }
     };
@@ -62,6 +66,11 @@ export const useViewModel = ({ navigation, route }: IRegScreenProps) => {
         console.log(a);
         return a;
     }
+    const selectedFavTeams = useSelector((state: RootState) => state.favTeams.selectedTeams);
+    const selectedFavPlayers = useSelector((state: RootState) => state.favPlayers.selectedPlayers);
+    const selectedFavTopTeams = useSelector(
+        (state: RootState) => state.favTopTeams.selectedTopTeams
+    );
 
     const login = useSelector((state: RootState) => state.login);
     const profile = useSelector((state: RootState) => state.createProfile);
@@ -70,7 +79,18 @@ export const useViewModel = ({ navigation, route }: IRegScreenProps) => {
 
     const createInfo = () => {
         Keyboard.dismiss();
-
+        let fav_team: any = [];
+        selectedFavTeams.map(item => {
+            fav_team.push(item._id);
+        });
+        let player_team: any = [];
+        selectedFavPlayers.map(item => {
+            player_team.push(item._id);
+        });
+        let fav_top_team: any = [];
+        selectedFavTopTeams.map(item => {
+            fav_top_team.push(item._id);
+        });
         dispatch(
             setProfileUser(
                 serializeParams({
@@ -81,7 +101,10 @@ export const useViewModel = ({ navigation, route }: IRegScreenProps) => {
                     item: {
                         email: userName,
                         gender: gender,
-                        birthdate: date,
+                        birthdate: formattedDate,
+                        favorite_israel_teams: fav_team,
+                        favorite_players: player_team,
+                        favorite_national_teams: fav_top_team,
                     },
                 })
             )
@@ -111,5 +134,6 @@ export const useViewModel = ({ navigation, route }: IRegScreenProps) => {
         userName,
         userNameRef,
         handleOnGender,
+        date,
     };
 };

@@ -15,6 +15,7 @@ import { Action } from 'typesafe-actions';
 import favPlayerReducer from './FavPlayer.slice';
 import favTeamReducer from './FavTeam.slice';
 import favTopTeamReducer from './FavTopTeam.slice';
+import settingSelectedReducer from './SettingSelected.slice';
 import leagueReducer from './league/League.slice';
 import createProfileReducer from './user/CreateProfile.slice';
 import numberPhoneUserReducer from './user/RegisterNumberPhone.slice';
@@ -37,6 +38,7 @@ const reducer = combineReducers({
     favTeams: favTeamReducer,
     favPlayers: favPlayerReducer,
     favTopTeams: favTopTeamReducer,
+    settingSelected: settingSelectedReducer,
     registerFacebook: registerFacebookReducer,
     leagues: leagueReducer,
     video: videoReducer,

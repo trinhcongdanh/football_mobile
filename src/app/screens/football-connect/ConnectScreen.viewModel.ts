@@ -143,7 +143,10 @@ export const useViewModel = ({ navigation, route }: IConnectScreenProps) => {
         setErrors(prevState => ({ ...prevState, [input]: errorMessage }));
     };
 
+    const [loginWithNumber, setLoginWithNumber] = useState(false);
+
     const Connect = () => {
+        setLoginWithNumber(true);
         Keyboard.dismiss();
         dispatch(
             loginNumberPhoneUser(
@@ -155,13 +158,40 @@ export const useViewModel = ({ navigation, route }: IConnectScreenProps) => {
                 })
             )
         );
+        if (isEmpty(profile.profile) || isNil(profile.profile)) {
+            dispatch(
+                createProfileUser(
+                    serializeParams({
+                        action: ACTION,
+                        token: TOKEN,
+                        call: AuthData.CREATE_PROFILE,
+                        'item[guest_guid]': guestId[0],
+                    })
+                )
+            );
+        }
     };
 
     const isFocused = useIsFocused();
 
     useEffect(() => {
         if (!isFocused) return;
-        if (numberPhone.successLogin === true) {
+        if (
+            numberPhone.successLogin === true &&
+            profile.success === true &&
+            loginWithNumber === true
+        ) {
+            dispatch(
+                loginUser(
+                    serializeParams({
+                        action: ACTION,
+                        token: TOKEN,
+                        call: AuthData.LOGIN,
+                        guest_id: profile.profile.tc_user,
+                        guest_guid: guestId[0],
+                    })
+                )
+            );
             navigate(ScreenName.VerifyPage, {
                 number: phoneNumber,
                 previous_screen: ScreenName.ConnectPage,
@@ -169,9 +199,10 @@ export const useViewModel = ({ navigation, route }: IConnectScreenProps) => {
         } else if (numberPhone.successLogin === false && numberPhone.loadingLogin === false) {
             handleError(t('register.invalid'), 'numberPhone');
         }
-    }, [numberPhone.successLogin, isFocused]);
+    }, [numberPhone.successLogin, isFocused, profile.success]);
 
     const onNavigateSignUp = () => {
+        setLoginWithNumber(false);
         if (isEmpty(profile.profile) || isNil(profile.profile)) {
             dispatch(
                 createProfileUser(
@@ -195,7 +226,7 @@ export const useViewModel = ({ navigation, route }: IConnectScreenProps) => {
         if (!isEmpty(login.login)) {
             navigate(ScreenName.RegisterPage);
         } else {
-            if (profile.success === true) {
+            if (profile.success === true && loginWithNumber === false) {
                 dispatch(
                     loginUser(
                         serializeParams({
