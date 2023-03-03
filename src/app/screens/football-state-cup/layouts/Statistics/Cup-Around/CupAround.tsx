@@ -52,7 +52,7 @@ export const CupAround = ({ cyclesDetails, cup }: ICupAroundProps) => {
                 </View>
                 <View style={{ width: getSize.m(200) }}>
                     <Text style={[styles.header, { textAlign: 'left' }]}>
-                        {t('state_cup.statistics.round')}
+                        {t('state_cup.statistics.team_name')}
                     </Text>
                 </View>
             </View>
