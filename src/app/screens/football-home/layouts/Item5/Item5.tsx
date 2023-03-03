@@ -468,8 +468,8 @@ export const Item5 = ({ topTeam }: IItem5Props) => {
                                                 : getSize.m(5),
                                         backgroundColor:
                                             index === activeIndexNumber
-                                                ? appColors.light_gray
-                                                : appColors.soft_grey,
+                                                ? appColors.white
+                                                : appColors.light_gray,
                                     },
                                 ]}
                             />
