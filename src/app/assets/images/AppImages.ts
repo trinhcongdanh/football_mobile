@@ -120,6 +120,9 @@ export const AppImages = {
     img_vector: require('./Vector.png'),
     img_ball_dark: require('./ball_dark.png'),
     img_ball_light_gray: require('./ball_light_gray.png'),
+    img_avt_man: require('./AVATAR_MAN.png'),
+    img_avt_woman: require('./AVATAR_WOMAN.png'),
+    img_avt_other: require('./AVATAR_NON-BINARY.png'),
 };
 
 export const AppJsons = {

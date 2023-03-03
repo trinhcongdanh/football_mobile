@@ -1,3 +1,4 @@
+import { AppFonts } from '@football/app/assets/fonts';
 import { appIcons } from '@football/app/assets/icons/appIcons';
 import { AppImages } from '@football/app/assets/images';
 import { Button } from '@football/app/components/button';
@@ -10,7 +11,7 @@ import { appStyles } from '@football/app/utils/constants/appStyles';
 import { getSize } from '@football/app/utils/responsive/scale';
 import { Avatar } from '@rneui/themed';
 import _ from 'lodash';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     Image,
     ImageBackground,
@@ -40,7 +41,6 @@ export function SettingsScreen(props: ISettingsScreenProps) {
         toggleSwitch2,
         toggleSwitch3,
         t,
-        date,
         handleOnDate,
         onImagePicker,
         image,
@@ -68,15 +68,28 @@ export function SettingsScreen(props: ISettingsScreenProps) {
         emailRef,
         email,
         setEmail,
+        getProfile,
+        handleOnGender,
+        handleGender,
+        genders,
+        indexGender,
+        setIndexGender,
+        dateTime,
+        favSelectedTeam,
     } = useViewModel(props);
-    const [itemSelected, setItemSelected] = useState<string>(t('settings.male'));
-    const male = { name: t('settings.male') };
-    const female = { name: t('settings.female') };
-    const other = { name: t('settings.other_gender') };
 
-    const onItemSelected = (value: string) => {
-        setItemSelected(value);
-    };
+    useEffect(() => {
+        if (getProfile.success === true) {
+            if (getProfile.getProfile.item.gender === 'FAN_GENDER_MALE') {
+                setIndexGender(0);
+            } else if (getProfile.getProfile.item.gender === 'FAN_GENDER_FEMALE') {
+                setIndexGender(1);
+            } else if (getProfile.getProfile.item.gender === 'FAN_GENDER_NOT_AVAILABLE') {
+                setIndexGender(2);
+            }
+        }
+    }, [getProfile.success]);
+
     return (
         <View style={appStyles.flex}>
             <ImageBackground source={AppImages.img_background} style={appStyles.flex}>
@@ -144,35 +157,87 @@ export function SettingsScreen(props: ISettingsScreenProps) {
                                     input={email}
                                     inputRef={emailRef}
                                 />
-                                <Text style={styles.txt_gender}>{t('settings.gender')}</Text>
-                                <View style={styles.check_box_container}>
-                                    <CheckBox
-                                        title={male.name}
-                                        onItemSelected={() => onItemSelected(male.name)}
-                                        isActive={itemSelected === male.name}
-                                    />
-                                    <CheckBox
-                                        title={female.name}
-                                        onItemSelected={() => onItemSelected(female.name)}
-                                        isActive={itemSelected === female.name}
-                                    />
-                                    <CheckBox
-                                        title={other.name}
-                                        onItemSelected={() => onItemSelected(other.name)}
-                                        isActive={itemSelected === other.name}
-                                    />
-                                </View>
-                                <Text style={styles.txt_dob}>{t('settings.dob')}</Text>
-                                <View style={styles.date_box_container}>
-                                    <DatePicker
-                                        fadeToColor="none"
-                                        textColor={appColors.text_dark_blue}
-                                        locale="he"
-                                        mode="date"
-                                        date={date}
-                                        onDateChange={() => handleOnDate(date)}
-                                        androidVariant="nativeAndroid"
-                                    />
+
+                                <View style={{ marginTop: getSize.m(30) }}>
+                                    <Text
+                                        style={[
+                                            appStyles.text_label,
+                                            {
+                                                fontFamily: AppFonts.medium,
+                                            },
+                                        ]}
+                                    >
+                                        {t('reg.gender.label')}
+                                    </Text>
+                                    <View
+                                        style={[
+                                            appStyles.flex_row_align,
+                                            {
+                                                marginTop: getSize.m(10),
+                                            },
+                                        ]}
+                                    >
+                                        {genders.map((sexual: string, index: number) => {
+                                            return (
+                                                <TouchableOpacity
+                                                    key={index.toString()}
+                                                    onPress={() => {
+                                                        handleGender(index);
+                                                        handleOnGender(index);
+                                                    }}
+                                                    style={[
+                                                        styles.select_gender,
+                                                        {
+                                                            backgroundColor:
+                                                                indexGender === index
+                                                                    ? appColors.text_dark_blue
+                                                                    : appColors.white,
+                                                        },
+                                                    ]}
+                                                >
+                                                    <Text
+                                                        style={[
+                                                            appStyles.text_label,
+                                                            {
+                                                                color:
+                                                                    index === indexGender
+                                                                        ? appColors.white
+                                                                        : appColors.text_dark_blue,
+                                                            },
+                                                        ]}
+                                                    >
+                                                        {sexual}
+                                                    </Text>
+                                                </TouchableOpacity>
+                                            );
+                                        })}
+                                    </View>
+                                    <View style={{ marginTop: getSize.m(30) }}>
+                                        <Text
+                                            style={[
+                                                appStyles.text_label,
+                                                {
+                                                    fontFamily: AppFonts.medium,
+                                                    color: appColors.light_gray,
+                                                },
+                                            ]}
+                                        >
+                                            {t('reg.birth_date')}
+                                        </Text>
+                                        <View style={styles.date_picker}>
+                                            <DatePicker
+                                                fadeToColor="none"
+                                                textColor={appColors.text_dark_blue}
+                                                locale="he"
+                                                mode="date"
+                                                date={dateTime}
+                                                onDateChange={date => {
+                                                    handleOnDate(date);
+                                                }}
+                                                androidVariant="nativeAndroid"
+                                            />
+                                        </View>
+                                    </View>
                                 </View>
                             </View>
                             <Spacer heightSpacer={getSize.m(10)} color={appColors.text_dark_blue} />

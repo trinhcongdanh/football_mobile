@@ -19,7 +19,7 @@ export interface FavPlayerState {
     groupPlayers: {
         id: string;
         label: string;
-        listFavPlayers: Position[];
+        listFavPlayers: PlayerModel[];
     }[];
     searchPlayers: {
         id: string;
@@ -63,7 +63,7 @@ export const favPlayerSlice = createSlice({
     reducers: {
         setGroupFavPlayer: (
             state,
-            action: PayloadAction<{ id: string; label: string; listFavPlayers: Position[] }>
+            action: PayloadAction<{ id: string; label: string; listFavPlayers: PlayerModel[] }>
         ) => {
             state.groupPlayers.push({
                 id: action.payload.id,
@@ -144,13 +144,13 @@ export const favPlayerSlice = createSlice({
         },
         resetGroupFavPlayer: (
             state,
-            action: PayloadAction<{ id: string; label: string; listFavPlayers: Position[] }>
+            action: PayloadAction<{ id: string; label: string; listFavPlayers: PlayerModel[] }>
         ) => {
             state.groupPlayers = [];
         },
         resetSearchFavPlayer: (
             state,
-            action: PayloadAction<{ id: string; label: string; listFavPlayers: Position[] }>
+            action: PayloadAction<{ id: string; label: string; listFavPlayers: PlayerModel[] }>
         ) => {
             state.searchPlayers = [];
         },
