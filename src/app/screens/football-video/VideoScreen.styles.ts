@@ -34,7 +34,6 @@ const styles = StyleSheet.create({
         overflow: 'hidden',
     },
     text_content: {
-        textAlign: 'center',
         fontSize: getSize.m(12),
         lineHeight: getSize.m(16),
         color: appColors.white,
