@@ -26,6 +26,7 @@ export const Item1 = ({ team }: IItem1Props) => {
         handleStadium,
         handleDetailMatch,
         onNavigateTeamDetails,
+        onNavigateStatistics,
     } = useViewModel();
     return (
         <ImageBackground
@@ -101,7 +102,10 @@ export const Item1 = ({ team }: IItem1Props) => {
                             />
                             <Text style={styles.title_statistic}>{t('home_page.statistics')}</Text>
                         </View>
-                        <TouchableOpacity style={appStyles.flex_row_align}>
+                        <TouchableOpacity
+                            style={appStyles.flex_row_align}
+                            onPress={() => onNavigateStatistics(team._id)}
+                        >
                             <Text style={styles.text_see_all}>{t('home_page.see_all')}</Text>
                             <IconEntypo
                                 name={appIcons.ic_arrow_left}
@@ -694,7 +698,10 @@ export const Item1 = ({ team }: IItem1Props) => {
                             />
                             <Text style={styles.title_statistic}>{t('home_page.game_table')}</Text>
                         </View>
-                        <TouchableOpacity style={appStyles.flex_row_align}>
+                        <TouchableOpacity
+                            style={appStyles.flex_row_align}
+                            onPress={() => onNavigateTeamDetails(team._id)}
+                        >
                             <Text style={styles.text_see_all}>{t('home_page.see_all')}</Text>
                             <IconEntypo
                                 name={appIcons.ic_arrow_left}

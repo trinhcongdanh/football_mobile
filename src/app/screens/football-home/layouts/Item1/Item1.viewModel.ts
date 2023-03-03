@@ -21,6 +21,10 @@ export const useViewModel = () => {
         navigate(ScreenName.GroupPagePage, { teamId });
     };
 
+    const onNavigateStatistics = (teamId: string) => {
+        navigate(ScreenName.StatisticsGroupPage, { teamId });
+    };
+
     return {
         t,
         pages,
@@ -29,5 +33,6 @@ export const useViewModel = () => {
         handleStadium,
         handleDetailMatch,
         onNavigateTeamDetails,
+        onNavigateStatistics,
     };
 };
