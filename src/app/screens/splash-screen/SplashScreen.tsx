@@ -1,4 +1,5 @@
 import { AppImages } from '@football/app/assets/images';
+import { AppJsons } from '@football/app/assets/images/AppImages';
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
 import { ISplashScreenProps } from '@football/app/screens/splash-screen/SplashScreen.type';
 import { appStyles } from '@football/app/utils/constants/appStyles';
@@ -52,15 +53,15 @@ export const SplashScreen = ({ navigation, route }: ISplashScreenProps) => {
     //     }
     // }, []);
     const { data: splashAnimationData, isLoading } = useSplashAnimations();
-    useEffect(() => {
-        if (!splashAnimationData) {
-            return;
-        }
-        const [error, res] = splashAnimationData;
-        if (!error && res?.data?.documents?.length) {
-            setSplashData(res.data.documents[0].lottie);
-        }
-    }, [splashAnimationData]);
+    // useEffect(() => {
+    //     if (!splashAnimationData) {
+    //         return;
+    //     }
+    //     const [error, res] = splashAnimationData;
+    //     if (!error && res?.data?.documents?.length) {
+    //         setSplashData(res.data.documents[0].lottie);
+    //     }
+    // }, [splashAnimationData]);
 
     // useMount(() => {
     //     getSplashData();
@@ -72,13 +73,18 @@ export const SplashScreen = ({ navigation, route }: ISplashScreenProps) => {
             dispatch(action);
         }
     }, []);
-    useEffect(() => {
-        if (!isLoading) {
-            setTimeout(() => {
-                setAuthLoaded(true);
-            }, 4000);
-        }
-    }, [splashData, isLoading]);
+    // useEffect(() => {
+    //     if (!isLoading) {
+    //         setTimeout(() => {
+    //             setAuthLoaded(true);
+    //         }, 4000);
+    //     }
+    // }, [splashData, isLoading]);
+
+    setTimeout(() => {
+        setAuthLoaded(true);
+    }, 4000);
+
     const login = useSelector((state: any) => state.login);
 
     useEffect(() => {
@@ -103,7 +109,7 @@ export const SplashScreen = ({ navigation, route }: ISplashScreenProps) => {
         <View style={appStyles.flex}>
             <ImageBackground source={AppImages.img_background} style={appStyles.flex_center}>
                 <StatusBar translucent backgroundColor="transparent" />
-                {splashData ? <LottieView source={splashData} autoPlay loop /> : null}
+                <LottieView source={AppJsons.splash} autoPlay loop />
             </ImageBackground>
         </View>
     );

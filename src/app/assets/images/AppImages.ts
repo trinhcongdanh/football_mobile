@@ -121,3 +121,7 @@ export const AppImages = {
     img_ball_dark: require('./ball_dark.png'),
     img_ball_light_gray: require('./ball_light_gray.png'),
 };
+
+export const AppJsons = {
+    splash: require('../json/splash.json'),
+};
