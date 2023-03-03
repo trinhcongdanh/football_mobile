@@ -279,6 +279,7 @@ const resources = {
             },
             leagues: {
                 title: 'ליגות',
+                suggestion: 'הצעות',
                 place_holder: 'חיפוש ליגה...',
                 graduates: {
                     title: 'בוגרים',

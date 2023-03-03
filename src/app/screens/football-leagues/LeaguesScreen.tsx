@@ -6,19 +6,50 @@ import { TopTaps } from '@football/app/routes/toptap/TopTap';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import { getSize } from '@football/app/utils/responsive/scale';
+import { MAX_SEARCH_LEAGUES } from '@football/core/api/configs/config';
 import React from 'react';
-import { ImageBackground, SafeAreaView, StatusBar, Text, View } from 'react-native';
+import {
+    FlatList,
+    ImageBackground,
+    SafeAreaView,
+    StatusBar,
+    Text,
+    TouchableOpacity,
+    View,
+} from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 
 import Icon from 'react-native-vector-icons/Feather';
 import styles from './LeaguesScreen.style';
-import { useViewModel } from './LeaguesScreen.viewModel';
 import { ILeaguesScreenProps } from './LeaguesScreen.type';
+import { useViewModel } from './LeaguesScreen.viewModel';
 
 export const LeaguesScreen = ({ navigation, route }: ILeaguesScreenProps) => {
-    const { t, labels } = useViewModel({ navigation, route });
-    console.log(labels);
+    const { t, labels, onSearchLeague, searchLeagueType, handleLeaguesDetails } = useViewModel({
+        navigation,
+        route,
+    });
 
+    const renderItem = ({ item, index }: any) => {
+        return (
+            <TouchableOpacity
+                style={styles.option_menu}
+                // eslint-disable-next-line no-underscore-dangle
+                onPress={() => handleLeaguesDetails(item._id)}
+            >
+                <View style={appStyles.flex_row_align_center}>
+                    <Text style={styles.text_option_menu}>{item.name_he}</Text>
+                </View>
+
+                <Icon
+                    name={appIcons.ic_arrow_left}
+                    size={getSize.s(13)}
+                    color={appColors.text_dark_blue}
+                    style={styles.ic_arrow_left}
+                />
+            </TouchableOpacity>
+        );
+    };
     return (
         <View style={appStyles.flex}>
             <ImageBackground source={AppImages.img_background} style={appStyles.flex}>
@@ -40,7 +71,7 @@ export const LeaguesScreen = ({ navigation, route }: ILeaguesScreenProps) => {
                                 placeholder={t('leagues.place_holder')}
                                 style={styles.text_search}
                                 placeholderTextColor={appColors.blue_gray_light}
-                                // onChangeText={onSearchLeague}
+                                onChangeText={onSearchLeague}
                                 // onBlur={submitSearchLeague}
                                 // onSubmitEditing={submitSearchLeague}
                             />
@@ -54,6 +85,30 @@ export const LeaguesScreen = ({ navigation, route }: ILeaguesScreenProps) => {
                     </View>
 
                     <View style={[appStyles.flex, appStyles.main_container]}>
+                        {searchLeagueType?.length ? (
+                            <View
+                                style={[
+                                    appStyles.flex,
+                                    {
+                                        backgroundColor: appColors.gray,
+                                        paddingHorizontal: getSize.m(20),
+                                    },
+                                ]}
+                            >
+                                <View>
+                                    <Text style={styles.text_suggestion}>
+                                        {t('leagues.suggestion')}
+                                    </Text>
+                                    <FlatList
+                                        showsVerticalScrollIndicator={false}
+                                        data={searchLeagueType.slice(0, MAX_SEARCH_LEAGUES)}
+                                        keyExtractor={(item: any) => item.id}
+                                        renderItem={renderItem}
+                                        numColumns={1}
+                                    />
+                                </View>
+                            </View>
+                        ) : null}
                         <TopTaps labels={labels} />
                         <View style={{ height: TAB_BAR_HEIGHT }} />
                     </View>

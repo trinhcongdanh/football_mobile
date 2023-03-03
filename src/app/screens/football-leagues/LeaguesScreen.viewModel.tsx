@@ -1,8 +1,12 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
 import { LeagueItemScreen } from '@football/app/screens/football-leagues/layouts/league-item/LeagueItemScreen';
-import { LeagueTypeModel } from '@football/core/models/LeagueModelResponse';
+import { ScreenName } from '@football/app/utils/constants/enum';
+import { LeagueModel, LeagueTypeModel } from '@football/core/models/LeagueModelResponse';
+import leaguesService from '@football/core/services/League.service';
 
 import LeagueTypeService, { useLeagueTypes } from '@football/core/services/LeagueType.service';
+import _ from 'lodash';
 import React, { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ILeaguesScreenProps } from './LeaguesScreen.type';
@@ -97,15 +101,18 @@ type INavigationProps = {
 };
 const useViewState = () => {
     const [leagueType, setLeagueType] = useState<LeagueTypeModel[]>([]);
+    const [searchLeagueType, setSearchLeagueType] = useState<LeagueModel[]>([]);
 
     return {
         leagueType,
         setLeagueType,
+        searchLeagueType,
+        setSearchLeagueType,
     };
 };
 
 const useViewCallback = (route: any, viewState: any) => {
-    const { setLeagueType, leagueType } = viewState;
+    const { setLeagueType, setSearchLeagueType } = viewState;
     let labels: any[] = [];
     const getLeagueTypeData = useCallback(async () => {
         const [error, res] = await LeagueTypeService.findAll();
@@ -129,11 +136,44 @@ const useViewCallback = (route: any, viewState: any) => {
         }
     }, []);
 
+    const searchLeagueData = useCallback(async (text: string) => {
+        const [error, res] = await leaguesService.search(text);
+        if (error) {
+            return;
+        }
+
+        setSearchLeagueType(res.data.documents);
+    }, []);
+
     return {
         getLeagueTypeData,
+        searchLeagueData,
         labels,
     };
 };
+
+const useEventHandler = (callback: any, state: any) => {
+    const { navigate } = useAppNavigator();
+
+    const onChangeText = (text: string) => {
+        if (!text?.length) {
+            state.setSearchLeagueType([]);
+            return;
+        }
+        callback.searchLeagueData(text);
+    };
+
+    const onSearchLeague = _.debounce(onChangeText, 500);
+
+    const handleLeaguesDetails = (leagueId: string) => {
+        navigate(ScreenName.LeaguesDetailsPage, { leagueId });
+    };
+    return {
+        onSearchLeague,
+        handleLeaguesDetails,
+    };
+};
+
 export const useViewModel = ({ navigation, route }: ILeaguesScreenProps) => {
     const { navigate, goBack } = useAppNavigator();
     const { t } = useTranslation();
@@ -143,7 +183,8 @@ export const useViewModel = ({ navigation, route }: ILeaguesScreenProps) => {
     };
 
     const state = useViewState();
-    const { getLeagueTypeData } = useViewCallback(route, state);
+    const callback = useViewCallback(route, state);
+    const eventHandler = useEventHandler(callback, state);
 
     const { data: leagueTypesData } = useLeagueTypes();
     let labels: any[] = [];
@@ -170,5 +211,6 @@ export const useViewModel = ({ navigation, route }: ILeaguesScreenProps) => {
         onGoBack,
         ...state,
         labels,
+        ...eventHandler,
     };
 };

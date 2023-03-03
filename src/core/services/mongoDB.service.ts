@@ -43,10 +43,13 @@ class MongoDBService {
         return this.httpClient.post('/find', { ...this.dbConfig, filter });
     }
 
-    search<T = any>(searchText: string): Promise<Result<T>> {
+    search<T = any>(searchText: string, searchProp?: string): Promise<Result<T>> {
+        const searchProperty = searchProp || 'search_terms';
+        const searchQuery = {};
+        searchQuery[`${searchProperty}`] = { $regex: `.*${searchText}.*`, $options: 'i' };
         return this.httpClient.post('/find', {
             ...this.dbConfig,
-            filter: { search_terms: { $regex: `.*${searchText}.*`, $options: 'i' } },
+            filter: searchQuery,
         });
     }
 }
