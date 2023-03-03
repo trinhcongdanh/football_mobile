@@ -17,6 +17,7 @@ import {
     TouchableOpacity,
     View,
 } from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/AntDesign';
 
 import styles from './VideoScreen.styles';
@@ -91,6 +92,15 @@ export const VideoScreen = ({ navigation, route }: IVideoScreenProps) => {
                                                             activeOpacity={0.9}
                                                             onPress={() => handlePlayVideo(item)}
                                                         >
+                                                            <LinearGradient
+                                                                colors={[
+                                                                    'transparent',
+                                                                    'rgba(0, 0, 0, 1)',
+                                                                ]}
+                                                                start={{ x: 0.5, y: 0.5 }}
+                                                                end={{ x: 1, y: 1 }}
+                                                                style={styles.gradient_img}
+                                                            />
                                                             <Image
                                                                 source={{ uri: item.image_url }}
                                                                 style={[styles.image]}
@@ -156,6 +166,15 @@ export const VideoScreen = ({ navigation, route }: IVideoScreenProps) => {
                                                             activeOpacity={0.9}
                                                             onPress={() => handlePlayVideo(item)}
                                                         >
+                                                            <LinearGradient
+                                                                colors={[
+                                                                    'transparent',
+                                                                    'rgba(0, 0, 0, 1)',
+                                                                ]}
+                                                                start={{ x: 0.5, y: 0.5 }}
+                                                                end={{ x: 1, y: 1 }}
+                                                                style={styles.gradient_img}
+                                                            />
                                                             <Image
                                                                 source={{ uri: item.image_url }}
                                                                 style={[styles.image]}
@@ -220,6 +239,15 @@ export const VideoScreen = ({ navigation, route }: IVideoScreenProps) => {
                                                             activeOpacity={0.9}
                                                             onPress={() => handlePlayVideo(item)}
                                                         >
+                                                            <LinearGradient
+                                                                colors={[
+                                                                    'transparent',
+                                                                    'rgba(0, 0, 0, 1)',
+                                                                ]}
+                                                                start={{ x: 0.5, y: 0.5 }}
+                                                                end={{ x: 1, y: 1 }}
+                                                                style={styles.gradient_img}
+                                                            />
                                                             <Image
                                                                 source={{ uri: item.image_url }}
                                                                 style={[styles.image]}
