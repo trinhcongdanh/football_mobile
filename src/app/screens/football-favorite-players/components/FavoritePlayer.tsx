@@ -79,11 +79,11 @@ export const FavoritePlayer = ({
                                 />
                             </View>
 
-                            <ActivityIndicator
+                            {/* <ActivityIndicator
                                 style={appStyles.flex_center}
                                 size="large"
                                 color={appColors.blue_dark}
-                            />
+                            /> */}
                         </View>
                     </SafeAreaView>
                 ) : (
