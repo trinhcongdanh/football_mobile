@@ -4,7 +4,7 @@ import messaging from '@react-native-firebase/messaging';
 import { NavigationContainer } from '@react-navigation/native';
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { I18nManager, View, Text, LogBox } from 'react-native';
+import { I18nManager, View, Text, LogBox, TextInput } from 'react-native';
 import { ThemeProvider } from 'react-native-elements';
 import 'react-native-get-random-values';
 import { QueryClient, QueryClientProvider } from 'react-query';
@@ -15,7 +15,12 @@ import { RootNavigator } from './app/routes/RootNavigator';
 import { appStyles } from './app/utils/constants/appStyles';
 import { persistor, store } from './store/store';
 import Orientation from 'react-native-orientation-locker';
+import { TextInput as TextInputGH } from 'react-native-gesture-handler';
 
+TextInput.defaultProps = Text.defaultProps || {};
+TextInput.defaultProps.allowFontScaling = false;
+TextInputGH.defaultProps = Text.defaultProps || {};
+TextInputGH.defaultProps?.allowFontScaling = false;
 Text.defaultProps = Text.defaultProps || {};
 Text.defaultProps.allowFontScaling = false;
 
