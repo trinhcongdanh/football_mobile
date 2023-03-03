@@ -89,8 +89,8 @@ const styles = StyleSheet.create({
         fontFamily: AppFonts.regular,
     },
     checkBox: {
-        width: getSize.m(15),
-        height: getSize.m(15),
+        width: getSize.m(20),
+        height: getSize.m(20),
         alignItems: 'center',
         justifyContent: 'center',
         borderWidth: getSize.m(1),

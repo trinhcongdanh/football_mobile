@@ -19,11 +19,10 @@ import { appColors } from '@football/app/utils/constants/appColors';
 import Icon from 'react-native-vector-icons/Feather';
 import { getSize } from '@football/app/utils/responsive/scale';
 import _ from 'lodash';
+import { ScreenName } from '@football/app/utils/constants/enum';
 import { useViewModel } from './FavoriteSummaryScreen.viewModel';
 import { IFavoriteSummaryScreenProps } from './FavoriteSummaryScreen.type';
 import styles from './FavoriteSummaryScreen.style';
-import { TeamModel } from '@football/core/models/TeamModelResponse';
-import { PlayerModel } from '@football/core/models/PlayerModelResponse';
 
 export const FavoriteSummaryScreen = ({ navigation, route }: IFavoriteSummaryScreenProps) => {
     const {
@@ -50,6 +49,7 @@ export const FavoriteSummaryScreen = ({ navigation, route }: IFavoriteSummaryScr
         login,
         setProfile,
         profileUser,
+        navigate,
     } = useViewModel({
         navigation,
         route,
@@ -272,7 +272,13 @@ export const FavoriteSummaryScreen = ({ navigation, route }: IFavoriteSummaryScr
                                     {onCheck && <Icon name="check" color="white" />}
                                 </TouchableOpacity>
                                 <Text style={styles.agree}>{t('fav_summary.save_agree')}</Text>
-                                <Text style={styles.provision}>{t('fav_summary.term_use')}</Text>
+                                <TouchableOpacity
+                                    onPress={() => navigate(ScreenName.TermsConditionPage)}
+                                >
+                                    <Text style={styles.provision}>
+                                        {t('fav_summary.term_use')}
+                                    </Text>
+                                </TouchableOpacity>
                             </View>
                             <TouchableOpacity
                                 onPress={navigationMethodRegister}

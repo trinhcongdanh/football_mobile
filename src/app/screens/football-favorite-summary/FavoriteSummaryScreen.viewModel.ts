@@ -334,5 +334,6 @@ export const useViewModel = ({ navigation, route }: IFavoriteSummaryScreenProps)
         login,
         setProfile,
         profileUser,
+        navigate,
     };
 };
