@@ -20,7 +20,7 @@ import { TextInput as TextInputGH } from 'react-native-gesture-handler';
 TextInput.defaultProps = Text.defaultProps || {};
 TextInput.defaultProps.allowFontScaling = false;
 TextInputGH.defaultProps = Text.defaultProps || {};
-TextInputGH.defaultProps?.allowFontScaling = false;
+TextInputGH.defaultProps.allowFontScaling = false;
 Text.defaultProps = Text.defaultProps || {};
 Text.defaultProps.allowFontScaling = false;
 
