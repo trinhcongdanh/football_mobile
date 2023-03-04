@@ -94,10 +94,10 @@ export const StandingScreen = ({ navigation, route }: IStandingScreenProps) => {
                                         end={{ x: 1, y: 1 }}
                                         colors={[
                                             item.id % 2 === 1
-                                                ? 'rgba(16, 32, 100, 0.04)'
+                                                ? appColors.linearLight
                                                 : appColors.gray,
                                             item.id % 2 === 1
-                                                ? 'rgba(59, 168, 225, 0.04)'
+                                                ? appColors.linearDark
                                                 : appColors.gray,
                                         ]}
                                         key={item.id}

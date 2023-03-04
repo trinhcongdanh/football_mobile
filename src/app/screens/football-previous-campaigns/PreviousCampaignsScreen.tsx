@@ -19,6 +19,7 @@ import { TopTeamModel } from '@football/core/models/TopTeamModelResponse';
 import styles from './PreviousCampaignsScreen.style';
 import { useViewModel } from './PreviousCampaignsScreen.viewModel';
 import { IPreviousCampaignsScreenProps } from './PreviousCampaignsScreen.type';
+import { appColors } from '@football/app/utils/constants/appColors';
 
 export const PreviousCampaignsScreen = ({ navigation, route }: IPreviousCampaignsScreenProps) => {
     const { t, onGoBack, campaigns, handleCampaignPage } = useViewModel({ navigation, route });
@@ -47,7 +48,7 @@ export const PreviousCampaignsScreen = ({ navigation, route }: IPreviousCampaign
                             <LinearGradient
                                 start={{ x: 0, y: 0 }}
                                 end={{ x: 1, y: 1 }}
-                                colors={['rgba(16, 32, 100, 0.04)', 'rgba(59, 168, 225, 0.04)']}
+                                colors={[appColors.linearLight, appColors.linearDark]}
                                 style={[appStyles.flex_row_space_center, styles.header]}
                             >
                                 <Text style={styles.text_header}>

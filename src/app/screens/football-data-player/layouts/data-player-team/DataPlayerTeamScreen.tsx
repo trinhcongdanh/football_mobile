@@ -91,7 +91,7 @@ export const DataPlayerTeamScreen = ({ player }: IDataPlayerTeamScreenProps) => 
                         <LinearGradient
                             start={{ x: 0, y: 0 }}
                             end={{ x: 1, y: 1 }}
-                            colors={['rgba(16, 32, 100, 0.04)', 'rgba(59, 168, 225, 0.04)']}
+                            colors={[appColors.linearLight, appColors.linearDark]}
                             style={[appStyles.flex_row_space_center, styles.header]}
                         >
                             <Text style={styles.text_header}>{t('data_player.frame')}</Text>
@@ -127,7 +127,7 @@ export const DataPlayerTeamScreen = ({ player }: IDataPlayerTeamScreenProps) => 
                             <Text style={styles.text_label}>{t('data_player.ticket.label')}</Text>
                         </View>
                         <LinearGradient
-                            colors={['rgba(16, 32, 100, 0.04)', 'rgba(59, 168, 225, 0.04)']}
+                            colors={[appColors.linearLight, appColors.linearDark]}
                             style={[appStyles.flex_row_space_center, styles.header]}
                         >
                             <Text style={styles.text_header}>{t('data_player.ticket.type')}</Text>
@@ -185,10 +185,10 @@ export const DataPlayerTeamScreen = ({ player }: IDataPlayerTeamScreenProps) => 
                                             <LinearGradient
                                                 colors={[
                                                     gameIndex % 2 === 0
-                                                        ? 'rgba(16, 32, 100,0.04)'
+                                                        ? appColors.linearLight
                                                         : appColors.gray,
                                                     gameIndex % 2 !== 0
-                                                        ? 'rgba(59, 168, 225, 0.04)'
+                                                        ? appColors.linearDark
                                                         : appColors.gray,
                                                 ]}
                                                 style={[appStyles.flex_row_align, styles.result]}

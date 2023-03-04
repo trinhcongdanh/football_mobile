@@ -230,10 +230,10 @@ export const LeagueTable = ({ teamSeason }: ILeagueTableProps) => {
                                         end={{ x: 1, y: 1 }}
                                         colors={[
                                             index % 2 === 0
-                                                ? 'rgba(16, 32, 100, 0.04)'
+                                                ? appColors.linearLight
                                                 : appColors.white,
-                                            index % 2 !== 0
-                                                ? 'rgba(59, 168, 225, 0.04)'
+                                            index % 2 === 0
+                                                ? appColors.linearDark
                                                 : appColors.white,
                                         ]}
                                         style={[

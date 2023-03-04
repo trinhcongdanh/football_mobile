@@ -159,10 +159,10 @@ export const Item2 = () => {
                                         end={{ x: 1, y: 1 }}
                                         colors={[
                                             item.id % 2 === 1
-                                                ? 'rgba(223, 36, 56, 0.03)'
+                                                ? appColors.linearLightRed
                                                 : appColors.gray,
                                             item.id % 2 === 1
-                                                ? 'rgba(207, 59, 61, 0.03)'
+                                                ? appColors.linearDarkRed
                                                 : appColors.gray,
                                         ]}
                                         style={[

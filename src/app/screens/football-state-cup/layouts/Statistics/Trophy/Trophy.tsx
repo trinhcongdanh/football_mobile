@@ -63,8 +63,8 @@ export const Trophy = ({ cupHolders, cup }: ITrophyProps) => {
                             start={{ x: 0, y: 0 }}
                             end={{ x: 1, y: 1 }}
                             colors={[
-                                index % 2 === 1 ? 'rgba(16, 32, 100, 0.04)' : appColors.gray,
-                                index % 2 === 1 ? 'rgba(59, 168, 225, 0.04)' : appColors.gray,
+                                index % 2 === 1 ? appColors.linearLight : appColors.gray,
+                                index % 2 === 1 ? appColors.linearDark : appColors.gray,
                             ]}
                             style={[appStyles.flex_row_space_center, styles.itemTeam]}
                         >
