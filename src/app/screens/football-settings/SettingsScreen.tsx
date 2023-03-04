@@ -78,18 +78,6 @@ export function SettingsScreen(props: ISettingsScreenProps) {
         favSelectedTeam,
     } = useViewModel(props);
 
-    useEffect(() => {
-        if (getProfile.success === true) {
-            if (getProfile.getProfile.item.gender === 'FAN_GENDER_MALE') {
-                setIndexGender(0);
-            } else if (getProfile.getProfile.item.gender === 'FAN_GENDER_FEMALE') {
-                setIndexGender(1);
-            } else if (getProfile.getProfile.item.gender === 'FAN_GENDER_NOT_AVAILABLE') {
-                setIndexGender(2);
-            }
-        }
-    }, [getProfile.success]);
-
     return (
         <View style={appStyles.flex}>
             <ImageBackground source={AppImages.img_background} style={appStyles.flex}>

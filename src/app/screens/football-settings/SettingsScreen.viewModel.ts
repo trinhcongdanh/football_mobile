@@ -31,6 +31,7 @@ import {
     setSettingFavPlayer,
 } from 'src/store/SettingSelected.slice';
 import { setProfileUser, statusSetProfile } from 'src/store/user/setProfile.slice';
+import TopTeamService from '@football/core/services/TopTeam.service';
 
 export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
     const { t } = useTranslation();
@@ -44,11 +45,6 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
     const toggleSwitch1 = () => setIsEnabled1(previousState => !previousState);
     const toggleSwitch2 = () => setIsEnabled2(previousState => !previousState);
     const toggleSwitch3 = () => setIsEnabled3(previousState => !previousState);
-    const selectedFavTeams = useSelector((state: RootState) => state.favTeams.selectedTeams);
-    const selectedFavPlayers = useSelector((state: RootState) => state.favPlayers.selectedPlayers);
-    const selectedFavTopTeams = useSelector(
-        (state: RootState) => state.favTopTeams.selectedTopTeams
-    );
     const settingSelected = useSelector((state: RootState) => state.settingSelected);
 
     const onImagePicker = async () => {
@@ -58,6 +54,12 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
             setImage(item.uri);
         });
     };
+
+    const [editUserName, setEditUserName] = useState(false);
+    const [editEmail, setEditEmail] = useState(false);
+    const [editGender, setEditGender] = useState(false);
+    const [editBirthday, setEditBirthday] = useState(false);
+
     const previous_screen = route?.params?.previous_screen;
     const onGoBack = () => {
         if (previous_screen === ScreenName.FavTeamPage) {
@@ -143,15 +145,18 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
         userName: '',
         email: '',
     });
-    const handleOnChangeName = (e: string) => {
-        setUserName(e);
-    };
+
     const getProfile = useSelector((state: RootState) => state.getProfile);
 
     const emailRef = useRef<any>(null);
     const [email, setEmail] = useState<any>('');
 
     const handleOnChangeEmail = (e: string) => {
+        setEditEmail(true);
+        setEmail(e);
+    };
+    const handleOnChangeName = (e: string) => {
+        setEditUserName(true);
         setUserName(e);
     };
 
@@ -165,6 +170,7 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
 
     // Gender
     const handleOnGender = (e: number) => {
+        setEditGender(true);
         if (e === 0) {
             setGender('FAN_GENDER_MALE');
         } else if (e === 1) {
@@ -176,11 +182,12 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
 
     const [gender, setGender] = useState('');
 
-    const [indexGender, setIndexGender] = useState(1);
+    const [indexGender, setIndexGender] = useState(0);
 
     const genders = [t('settings.male'), t('settings.female'), t('settings.other_gender')];
 
     const handleGender = (index: number) => {
+        setEditGender(true);
         setIndexGender(index);
     };
 
@@ -188,14 +195,32 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
     const [formattedDate, setFormattedDate] = useState<any>();
     const [dateTime, setDateTime] = useState<any>(new Date());
     const handleOnDate = (e: Date) => {
+        setEditBirthday(true);
         let formattedDate = e.getFullYear() + '-' + (e.getMonth() + 1) + '-' + e.getDate();
         setFormattedDate(formattedDate);
     };
 
     useEffect(() => {
         if (getProfile.success === true) {
-            setEmail(getProfile.getProfile.item.email);
-            setDateTime(new Date(getProfile.getProfile.item.birthdate));
+            if (editEmail === false) {
+                setEmail(getProfile.getProfile.item.email);
+            }
+            if (editUserName === false) {
+                setUserName(getProfile.getProfile.item.name);
+            }
+            if (editBirthday === false) {
+                setDateTime(new Date(getProfile.getProfile.item.birthdate));
+            }
+            if (editGender === false) {
+                setGender(getProfile.getProfile.item.gender);
+                if (getProfile.getProfile.item.gender === 'FAN_GENDER_MALE') {
+                    setIndexGender(0);
+                } else if (getProfile.getProfile.item.gender === 'FAN_GENDER_FEMALE') {
+                    setIndexGender(1);
+                } else if (getProfile.getProfile.item.gender === 'FAN_GENDER_NOT_AVAILABLE') {
+                    setIndexGender(2);
+                }
+            }
         }
     }, [getProfile.success]);
 
@@ -288,7 +313,9 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
             const fetchFavTopTeam = async () => {
                 const fetchTopTeam = await Promise.all(
                     getProfile.getProfile.item.favorite_national_teams.map(async (item: string) => {
-                        const [err, res] = await TeamService.findByOId<TopTeamModelResponse>(item);
+                        const [err, res] = await TopTeamService.findByOId<TopTeamModelResponse>(
+                            item
+                        );
                         if (err) return;
                         return res.data.documents[0];
                     })
@@ -315,7 +342,7 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
         } else if (favSelectedTopTeam?.length === 1) {
             setFirstTopTeams(favSelectedTopTeam[0]);
         }
-    }, []);
+    }, [favSelectedTopTeam]);
 
     useEffect(() => {
         dispatch(
@@ -357,7 +384,8 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
                     call: AuthData.SET_PROFILE,
                     item_id: profile.profile.item_id,
                     item: {
-                        email: userName,
+                        name: userName,
+                        email: email,
                         gender: gender,
                         birthdate: formattedDate,
                         favorite_israel_teams: fav_team,
