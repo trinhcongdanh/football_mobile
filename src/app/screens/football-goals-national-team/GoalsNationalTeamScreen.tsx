@@ -68,10 +68,10 @@ export const GoalsNationalTeamScreen = ({ navigation, route }: IGoalsNationalTea
                                                             end={{ x: 1, y: 1 }}
                                                             colors={[
                                                                 gameIndex % 2 === 0
-                                                                    ? 'rgba(16, 32, 100, 0.04)'
+                                                                    ? appColors.linearLight
                                                                     : appColors.gray,
-                                                                gameIndex % 2 !== 0
-                                                                    ? 'rgba(59, 168, 225, 0.04)'
+                                                                gameIndex % 2 === 0
+                                                                    ? appColors.linearDark
                                                                     : appColors.gray,
                                                             ]}
                                                             // eslint-disable-next-line react/no-array-index-key

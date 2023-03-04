@@ -104,11 +104,9 @@ export const StandingScreen = ({ navigation, route }: IStandingScreenProps) => {
                                         end={{ x: 1, y: 1 }}
                                         colors={[
                                             index % 2 === 0
-                                                ? 'rgba(16, 32, 100, 0.04)'
+                                                ? appColors.linearLight
                                                 : appColors.gray,
-                                            index % 2 !== 0
-                                                ? 'rgba(59, 168, 225, 0.04)'
-                                                : appColors.gray,
+                                            index % 2 === 0 ? appColors.linearDark : appColors.gray,
                                         ]}
                                         style={[
                                             appStyles.flex_row_space_center,

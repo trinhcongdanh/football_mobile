@@ -56,10 +56,10 @@ export const Statistics = ({ data }: IStatisticsProps) => {
                                             end={{ x: 1, y: 1 }}
                                             colors={[
                                                 index % 2 === 0
-                                                    ? 'rgba(16, 32, 100, 0.04)'
+                                                    ? appColors.linearLight
                                                     : appColors.white,
-                                                index % 2 !== 0
-                                                    ? 'rgba(59, 168, 225, 0.04)'
+                                                index % 2 === 0
+                                                    ? appColors.linearDark
                                                     : appColors.white,
                                             ]}
                                             style={[
@@ -227,10 +227,10 @@ export const Statistics = ({ data }: IStatisticsProps) => {
                                         <LinearGradient
                                             colors={[
                                                 index % 2 === 0
-                                                    ? 'rgba(16, 32, 100, 0.04)'
+                                                    ? appColors.linearLight
                                                     : appColors.gray,
-                                                index % 2 !== 0
-                                                    ? 'rgba(59, 168, 225, 0.04)'
+                                                index % 2 === 0
+                                                    ? appColors.linearDark
                                                     : appColors.gray,
                                             ]}
                                             style={[

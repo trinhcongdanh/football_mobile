@@ -174,10 +174,10 @@ export const Item1 = ({ team }: IItem1Props) => {
                                         end={{ x: 1, y: 1 }}
                                         colors={[
                                             index % 2 === 0
-                                                ? 'rgba(223, 36, 56, 0.03)'
+                                                ? appColors.linearLightRed
                                                 : appColors.white,
-                                            index % 2 !== 0
-                                                ? 'rgba(207, 59, 61, 0.03)'
+                                            index % 2 === 0
+                                                ? appColors.linearDarkRed
                                                 : appColors.white,
                                         ]}
                                         style={[
@@ -342,10 +342,10 @@ export const Item1 = ({ team }: IItem1Props) => {
                                         end={{ x: 1, y: 1 }}
                                         colors={[
                                             index % 2 === 0
-                                                ? 'rgba(223, 36, 56, 0.03)'
+                                                ? appColors.linearLightRed
                                                 : appColors.white,
-                                            index % 2 !== 0
-                                                ? 'rgba(207, 59, 61, 0.03)'
+                                            index % 2 === 0
+                                                ? appColors.linearDarkRed
                                                 : appColors.white,
                                         ]}
                                         style={[
@@ -523,10 +523,10 @@ export const Item1 = ({ team }: IItem1Props) => {
                                         end={{ x: 1, y: 1 }}
                                         colors={[
                                             index % 2 === 0
-                                                ? 'rgba(223, 36, 56, 0.03)'
+                                                ? appColors.linearLightRed
                                                 : appColors.white,
-                                            index % 2 !== 0
-                                                ? 'rgba(207, 59, 61, 0.03)'
+                                            index % 2 === 0
+                                                ? appColors.linearDarkRed
                                                 : appColors.white,
                                         ]}
                                         style={[

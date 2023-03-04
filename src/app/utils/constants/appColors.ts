@@ -1,3 +1,5 @@
+import { Platform } from 'react-native';
+
 export const appColors = {
     white: '#FFFFFF',
     gray: '#F9F9F9',
@@ -30,4 +32,9 @@ export const appColors = {
     button_disable: '#111F4D',
     text_disable: '#3F508E',
     green: '#34D273',
+    linearLight: Platform.OS === 'android' ? 'rgba(16, 32, 100, 0.04)' : 'rgba(59, 168, 225, 0.04)',
+    linearDark: 'rgba(59, 168, 225, 0.04)',
+    linearLightRed:
+        Platform.OS === 'android' ? 'rgba(223, 36, 56, 0.03)' : 'rgba(207, 59, 61, 0.03)',
+    linearDarkRed: 'rgba(207, 59, 61, 0.03)',
 };

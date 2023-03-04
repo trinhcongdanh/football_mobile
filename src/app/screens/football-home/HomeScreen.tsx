@@ -21,6 +21,7 @@ import { getSize } from '@football/app/utils/responsive/scale';
 import React from 'react';
 import {
     ImageBackground,
+    Platform,
     SafeAreaView,
     ScrollView,
     StatusBar,
@@ -69,7 +70,9 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                                         <TouchableOpacity onPress={onShowSideMenu}>
                                             <LinearGradient
                                                 colors={[
-                                                    'rgba(255, 43, 94, 1)',
+                                                    Platform.OS === 'android'
+                                                        ? 'rgba(255, 43, 94, 1)'
+                                                        : 'rgba(204, 10, 45, 1)',
                                                     'rgba(204, 10, 45, 1)',
                                                 ]}
                                                 style={styles.home_side_bar}

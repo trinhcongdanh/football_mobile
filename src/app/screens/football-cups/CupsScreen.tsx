@@ -85,10 +85,10 @@ export const CupsScreen = ({ route }: ICupsScreenProps) => {
                                                 end={{ x: 1, y: 1 }}
                                                 colors={[
                                                     index % 2 === 1
-                                                        ? 'rgba(16, 32, 100, 0.04)'
+                                                        ? appColors.linearLight
                                                         : appColors.gray,
                                                     index % 2 === 1
-                                                        ? 'rgba(59, 168, 225, 0.04)'
+                                                        ? appColors.linearDark
                                                         : appColors.gray,
                                                 ]}
                                                 style={[
