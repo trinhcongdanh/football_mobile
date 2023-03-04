@@ -104,7 +104,7 @@ export const Item1 = ({ team }: IItem1Props) => {
                         </View>
                         <TouchableOpacity
                             style={appStyles.flex_row_align}
-                            onPress={() => onNavigateStatistics(team._id)}
+                            onPress={() => onNavigateStatistics(team)}
                         >
                             <Text style={styles.text_see_all}>{t('home_page.see_all')}</Text>
                             <IconEntypo

@@ -1,3 +1,4 @@
+import { TeamModel } from '@football/core/models/TeamModelResponse';
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
 import { ScreenName } from '@football/app/utils/constants/enum';
 import { useState } from 'react';
@@ -21,8 +22,11 @@ export const useViewModel = () => {
         navigate(ScreenName.GroupPagePage, { teamId });
     };
 
-    const onNavigateStatistics = (teamId: string) => {
-        navigate(ScreenName.StatisticsGroupPage, { teamId });
+    const onNavigateStatistics = (team: TeamModel) => {
+        const teamSeasonId = team?.seasons?.length ? team?.seasons[0].team_season_id : null;
+
+        // eslint-disable-next-line no-underscore-dangle
+        navigate(ScreenName.StatisticsGroupPage, { teamSeasonId, teamId: team._id });
     };
 
     return {
