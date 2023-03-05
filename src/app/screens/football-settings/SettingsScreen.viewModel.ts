@@ -32,6 +32,7 @@ import {
 } from 'src/store/SettingSelected.slice';
 import { setProfileUser, statusSetProfile } from 'src/store/user/setProfile.slice';
 import TopTeamService from '@football/core/services/TopTeam.service';
+import moment from 'moment';
 
 export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
     const { t } = useTranslation();
@@ -212,8 +213,13 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
             if (editBirthday === false) {
                 if (getProfile.getProfile.item.birthdate === '') {
                     setDateTime(new Date());
+                    console.log(dateTime);
                 } else {
-                    setDateTime(new Date(getProfile.getProfile.item.birthdate));
+                    // setDateTime(new Date(getProfile.getProfile.item.birthdate));
+                    setDateTime(
+                        moment(getProfile.getProfile.item.birthdate, 'DD/MM/YYYY').toDate()
+                    );
+                    console.log(dateTime);
                 }
             }
             if (editGender === false) {
