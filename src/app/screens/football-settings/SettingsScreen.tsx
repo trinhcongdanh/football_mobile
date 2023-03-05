@@ -37,9 +37,15 @@ export function SettingsScreen(props: ISettingsScreenProps) {
         isEnabled1,
         isEnabled2,
         isEnabled3,
+        isEnabled4,
+        isEnabled5,
+        isEnabled6,
         toggleSwitch1,
         toggleSwitch2,
         toggleSwitch3,
+        toggleSwitch4,
+        toggleSwitch5,
+        toggleSwitch6,
         t,
         handleOnDate,
         onImagePicker,
@@ -77,6 +83,7 @@ export function SettingsScreen(props: ISettingsScreenProps) {
         dateTime,
         favSelectedTeam,
         editBirthday,
+        handleNotSaveChange,
     } = useViewModel(props);
 
     return (
@@ -441,10 +448,10 @@ export function SettingsScreen(props: ISettingsScreenProps) {
                                             styles.btn_switch,
                                             {
                                                 backgroundColor: isEnabled1
-                                                    ? appColors.separator
-                                                    : appColors.blue_light,
+                                                    ? appColors.blue_light
+                                                    : appColors.separator,
                                                 justifyContent: 'center',
-                                                alignItems: isEnabled1 ? 'flex-start' : 'flex-end',
+                                                alignItems: isEnabled1 ? 'flex-end' : 'flex-start',
                                             },
                                         ]}
                                     >
@@ -463,10 +470,10 @@ export function SettingsScreen(props: ISettingsScreenProps) {
                                             styles.btn_switch,
                                             {
                                                 backgroundColor: isEnabled2
-                                                    ? appColors.separator
-                                                    : appColors.blue_light,
+                                                    ? appColors.blue_light
+                                                    : appColors.separator,
                                                 justifyContent: 'center',
-                                                alignItems: isEnabled2 ? 'flex-start' : 'flex-end',
+                                                alignItems: isEnabled2 ? 'flex-end' : 'flex-start',
                                             },
                                         ]}
                                     >
@@ -485,10 +492,10 @@ export function SettingsScreen(props: ISettingsScreenProps) {
                                             styles.btn_switch,
                                             {
                                                 backgroundColor: isEnabled3
-                                                    ? appColors.separator
-                                                    : appColors.blue_light,
+                                                    ? appColors.blue_light
+                                                    : appColors.separator,
                                                 justifyContent: 'center',
-                                                alignItems: isEnabled3 ? 'flex-start' : 'flex-end',
+                                                alignItems: isEnabled3 ? 'flex-end' : 'flex-start',
                                             },
                                         ]}
                                     >
@@ -502,15 +509,15 @@ export function SettingsScreen(props: ISettingsScreenProps) {
                                     </Text>
                                     <TouchableOpacity
                                         activeOpacity={0.7}
-                                        onPress={toggleSwitch3}
+                                        onPress={toggleSwitch4}
                                         style={[
                                             styles.btn_switch,
                                             {
-                                                backgroundColor: isEnabled3
-                                                    ? appColors.separator
-                                                    : appColors.blue_light,
+                                                backgroundColor: isEnabled4
+                                                    ? appColors.blue_light
+                                                    : appColors.separator,
                                                 justifyContent: 'center',
-                                                alignItems: isEnabled3 ? 'flex-start' : 'flex-end',
+                                                alignItems: isEnabled4 ? 'flex-end' : 'flex-start',
                                             },
                                         ]}
                                     >
@@ -524,15 +531,15 @@ export function SettingsScreen(props: ISettingsScreenProps) {
                                     </Text>
                                     <TouchableOpacity
                                         activeOpacity={0.7}
-                                        onPress={toggleSwitch3}
+                                        onPress={toggleSwitch5}
                                         style={[
                                             styles.btn_switch,
                                             {
-                                                backgroundColor: isEnabled3
-                                                    ? appColors.separator
-                                                    : appColors.blue_light,
+                                                backgroundColor: isEnabled5
+                                                    ? appColors.blue_light
+                                                    : appColors.separator,
                                                 justifyContent: 'center',
-                                                alignItems: isEnabled3 ? 'flex-start' : 'flex-end',
+                                                alignItems: isEnabled5 ? 'flex-end' : 'flex-start',
                                             },
                                         ]}
                                     >
@@ -546,15 +553,15 @@ export function SettingsScreen(props: ISettingsScreenProps) {
                                     </Text>
                                     <TouchableOpacity
                                         activeOpacity={0.7}
-                                        onPress={toggleSwitch3}
+                                        onPress={toggleSwitch6}
                                         style={[
                                             styles.btn_switch,
                                             {
-                                                backgroundColor: isEnabled3
-                                                    ? appColors.separator
-                                                    : appColors.blue_light,
+                                                backgroundColor: isEnabled6
+                                                    ? appColors.blue_light
+                                                    : appColors.separator,
                                                 justifyContent: 'center',
-                                                alignItems: isEnabled3 ? 'flex-start' : 'flex-end',
+                                                alignItems: isEnabled6 ? 'flex-end' : 'flex-start',
                                             },
                                         ]}
                                     >
@@ -569,7 +576,10 @@ export function SettingsScreen(props: ISettingsScreenProps) {
                                 title={t('settings.save_changes')}
                                 onPress={handleSaveChange}
                             />
-                            <TouchableOpacity style={styles.btn_delete_account}>
+                            <TouchableOpacity
+                                onPress={handleNotSaveChange}
+                                style={styles.btn_delete_account}
+                            >
                                 <Text style={styles.txt_delete_account}>
                                     {t('settings.delete_account')}
                                 </Text>

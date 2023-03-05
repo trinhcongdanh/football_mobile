@@ -300,6 +300,10 @@ export const useViewModel = ({ navigation, route }: IFavoriteSummaryScreenProps)
                             notifications: [
                                 'FAN_NOTIFICATION_GENERAL',
                                 'FAN_NOTIFICATION_FAVORITE_PLAYERS',
+                                'FAN_NOTIFICATION_FAVORITE_ISRAEL_TEAMS',
+                                'FAN_NOTIFICATION_FAVORITE_PLAYERS_LEAGUES',
+                                'FAN_NOTIFICATION_FAVORITE_ISRAEL_TEAMS_LEAGUES',
+                                'FAN_NOTIFICATION_FAVORITE_PLAYERS_NATIONAL_TEAMS',
                             ],
                         },
                     })

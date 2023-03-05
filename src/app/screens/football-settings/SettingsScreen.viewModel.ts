@@ -40,12 +40,80 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
     const [image, setImage] = useState<any>();
     const dispatch = useDispatch<any>();
 
+    const notifications: any[] = [];
+
     const [isEnabled1, setIsEnabled1] = useState(false);
     const [isEnabled2, setIsEnabled2] = useState(false);
     const [isEnabled3, setIsEnabled3] = useState(false);
-    const toggleSwitch1 = () => setIsEnabled1(previousState => !previousState);
-    const toggleSwitch2 = () => setIsEnabled2(previousState => !previousState);
-    const toggleSwitch3 = () => setIsEnabled3(previousState => !previousState);
+    const [isEnabled4, setIsEnabled4] = useState(false);
+    const [isEnabled5, setIsEnabled5] = useState(false);
+    const [isEnabled6, setIsEnabled6] = useState(false);
+
+    const [editEnable1, setEditEnable1] = useState(false);
+    const [editEnable2, setEditEnable2] = useState(false);
+    const [editEnable3, setEditEnable3] = useState(false);
+    const [editEnable4, setEditEnable4] = useState(false);
+    const [editEnable5, setEditEnable5] = useState(false);
+    const [editEnable6, setEditEnable6] = useState(false);
+    const toggleSwitch1 = () => {
+        setIsEnabled1(true);
+        setIsEnabled1(previousState => !previousState);
+    };
+    useEffect(() => {
+        if (isEnabled1 === true) {
+            notifications.push('FAN_NOTIFICATION_GENERAL');
+        }
+    }, [isEnabled1]);
+    const toggleSwitch2 = () => {
+        setIsEnabled2(true);
+
+        setIsEnabled2(previousState => !previousState);
+    };
+    useEffect(() => {
+        if (isEnabled2 === true) {
+            notifications.push('FAN_NOTIFICATION_FAVORITE_PLAYERS');
+        }
+    }, [isEnabled2]);
+    const toggleSwitch3 = () => {
+        setIsEnabled3(true);
+
+        setIsEnabled3(previousState => !previousState);
+    };
+    useEffect(() => {
+        if (isEnabled3 === true) {
+            notifications.push('FAN_NOTIFICATION_FAVORITE_ISRAEL_TEAMS');
+        }
+    }, [isEnabled3]);
+    const toggleSwitch4 = () => {
+        setIsEnabled4(true);
+
+        setIsEnabled4(previousState => !previousState);
+    };
+    useEffect(() => {
+        if (isEnabled4 === true) {
+            notifications.push('FAN_NOTIFICATION_FAVORITE_PLAYERS_LEAGUES');
+        }
+    }, [isEnabled4]);
+    const toggleSwitch5 = () => {
+        setIsEnabled5(true);
+
+        setIsEnabled5(previousState => !previousState);
+    };
+    useEffect(() => {
+        if (isEnabled5 === true) {
+            notifications.push('FAN_NOTIFICATION_FAVORITE_ISRAEL_TEAMS_LEAGUES');
+        }
+    }, [isEnabled5]);
+    const toggleSwitch6 = () => {
+        setIsEnabled6(true);
+
+        setIsEnabled6(previousState => !previousState);
+    };
+    useEffect(() => {
+        if (isEnabled6 === true) {
+            notifications.push('FAN_NOTIFICATION_FAVORITE_PLAYERS_NATIONAL_TEAMS');
+        }
+    }, [isEnabled6]);
     const settingSelected = useSelector((state: RootState) => state.settingSelected);
 
     const onImagePicker = async () => {
@@ -72,9 +140,6 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
         } else {
             goBack();
         }
-        dispatch(resetSettingFavTeam([]));
-        dispatch(resetSettingFavPlayer([]));
-        dispatch(resetSettingFavTopTeam([]));
     };
 
     const backFavTeam = () => {
@@ -230,6 +295,41 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
                     setIndexGender(1);
                 } else if (getProfile.getProfile.item.gender === 'FAN_GENDER_NOT_AVAILABLE') {
                     setIndexGender(2);
+                    getProfile;
+                }
+            }
+            if (!isEmpty(getProfile.getProfile.item.notifications)) {
+                if (editEnable1 === false) {
+                    if (getProfile.getProfile.item.notifications[0] !== '') {
+                        setIsEnabled1(true);
+                    }
+                }
+                if (editEnable2 === false) {
+                    if (getProfile.getProfile.item.notifications[1] === '') {
+                        setIsEnabled2(true);
+                    }
+                }
+                if (editEnable3) {
+                    if (getProfile.getProfile.item.notifications[2] === '') {
+                        setIsEnabled3(true);
+                    }
+                }
+
+                if (editEnable4) {
+                    if (getProfile.getProfile.item.notifications[3] === '') {
+                        setIsEnabled4(true);
+                    }
+                }
+                if (editEnable5) {
+                    if (getProfile.getProfile.item.notifications[4] === '') {
+                        setIsEnabled5(true);
+                    }
+                }
+
+                if (editEnable6) {
+                    if (getProfile.getProfile.item.notifications[5] === '') {
+                        setIsEnabled6(true);
+                    }
                 }
             }
         }
@@ -402,10 +502,17 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
                         favorite_israel_teams: fav_team,
                         favorite_players: player_team,
                         favorite_national_teams: fav_top_team,
+                        notifications: notifications,
                     },
                 })
             )
         );
+    };
+
+    const handleNotSaveChange = () => {
+        dispatch(resetSettingFavTeam([]));
+        dispatch(resetSettingFavPlayer([]));
+        dispatch(resetSettingFavTopTeam([]));
     };
 
     return {
@@ -414,6 +521,9 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
         isEnabled1,
         isEnabled2,
         isEnabled3,
+        isEnabled4,
+        isEnabled5,
+        isEnabled6,
         t,
         goBack,
         navigate,
@@ -422,6 +532,9 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
         toggleSwitch1,
         toggleSwitch2,
         toggleSwitch3,
+        toggleSwitch4,
+        toggleSwitch5,
+        toggleSwitch6,
         backFavPlayer,
         backFavTeam,
         backFavTopTeam,
@@ -454,5 +567,6 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
         setIndexGender,
         favSelectedTeam,
         editBirthday,
+        handleNotSaveChange,
     };
 };
