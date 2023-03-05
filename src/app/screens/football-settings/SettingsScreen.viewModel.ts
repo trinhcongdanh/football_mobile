@@ -193,9 +193,10 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
 
     // Date
     const [formattedDate, setFormattedDate] = useState<any>();
-    const [dateTime, setDateTime] = useState<any>(new Date());
+    const [dateTime, setDateTime] = useState(new Date());
     const handleOnDate = (e: Date) => {
         setEditBirthday(true);
+        setDateTime(e);
         let formattedDate = e.getFullYear() + '-' + (e.getMonth() + 1) + '-' + e.getDate();
         setFormattedDate(formattedDate);
     };
@@ -209,7 +210,11 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
                 setUserName(getProfile.getProfile.item.name);
             }
             if (editBirthday === false) {
-                setDateTime(new Date(getProfile.getProfile.item.birthdate));
+                if (getProfile.getProfile.item.birthdate === '') {
+                    setDateTime(new Date());
+                } else {
+                    setDateTime(new Date(getProfile.getProfile.item.birthdate));
+                }
             }
             if (editGender === false) {
                 setGender(getProfile.getProfile.item.gender);
@@ -442,5 +447,6 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
         indexGender,
         setIndexGender,
         favSelectedTeam,
+        editBirthday,
     };
 };

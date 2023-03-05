@@ -76,6 +76,7 @@ export function SettingsScreen(props: ISettingsScreenProps) {
         setIndexGender,
         dateTime,
         favSelectedTeam,
+        editBirthday,
     } = useViewModel(props);
 
     return (
