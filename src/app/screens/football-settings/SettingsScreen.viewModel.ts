@@ -56,17 +56,17 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
     const [editEnable5, setEditEnable5] = useState(false);
     const [editEnable6, setEditEnable6] = useState(false);
     const toggleSwitch1 = () => {
-        setIsEnabled1(true);
+        setEditEnable1(true);
         setIsEnabled1(previousState => !previousState);
     };
+
     useEffect(() => {
         if (isEnabled1 === true) {
             notifications.push('FAN_NOTIFICATION_GENERAL');
         }
     }, [isEnabled1]);
     const toggleSwitch2 = () => {
-        setIsEnabled2(true);
-
+        setEditEnable2(true);
         setIsEnabled2(previousState => !previousState);
     };
     useEffect(() => {
@@ -75,7 +75,7 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
         }
     }, [isEnabled2]);
     const toggleSwitch3 = () => {
-        setIsEnabled3(true);
+        setEditEnable3(true);
 
         setIsEnabled3(previousState => !previousState);
     };
@@ -85,7 +85,7 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
         }
     }, [isEnabled3]);
     const toggleSwitch4 = () => {
-        setIsEnabled4(true);
+        setEditEnable4(true);
 
         setIsEnabled4(previousState => !previousState);
     };
@@ -95,7 +95,7 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
         }
     }, [isEnabled4]);
     const toggleSwitch5 = () => {
-        setIsEnabled5(true);
+        setEditEnable5(true);
 
         setIsEnabled5(previousState => !previousState);
     };
@@ -105,7 +105,7 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
         }
     }, [isEnabled5]);
     const toggleSwitch6 = () => {
-        setIsEnabled6(true);
+        setEditEnable6(true);
 
         setIsEnabled6(previousState => !previousState);
     };
@@ -114,6 +114,8 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
             notifications.push('FAN_NOTIFICATION_FAVORITE_PLAYERS_NATIONAL_TEAMS');
         }
     }, [isEnabled6]);
+
+    console.log(notifications);
     const settingSelected = useSelector((state: RootState) => state.settingSelected);
 
     const onImagePicker = async () => {
@@ -299,38 +301,59 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
                 }
             }
             if (!isEmpty(getProfile.getProfile.item.notifications)) {
-                if (editEnable1 === false) {
-                    if (getProfile.getProfile.item.notifications[0] !== '') {
+                // if (editEnable1 === false) {
+                //     if (getProfile.getProfile.item.notifications[0] !== '') {
+                //         setIsEnabled1(true);
+                //     }
+                // }
+                // if (editEnable2 === false) {
+                //     if (getProfile.getProfile.item.notifications[1] === '') {
+                //         setIsEnabled2(true);
+                //     }
+                // }
+                // if (editEnable3) {
+                //     if (getProfile.getProfile.item.notifications[2] === '') {
+                //         setIsEnabled3(true);
+                //     }
+                // }
+
+                // if (editEnable4) {
+                //     if (getProfile.getProfile.item.notifications[3] === '') {
+                //         setIsEnabled4(true);
+                //     }
+                // }
+                // if (editEnable5) {
+                //     if (getProfile.getProfile.item.notifications[4] === '') {
+                //         setIsEnabled5(true);
+                //     }
+                // }
+
+                // if (editEnable6) {
+                //     if (getProfile.getProfile.item.notifications[5] === '') {
+                //         setIsEnabled6(true);
+                //     }
+                // }
+
+                getProfile.getProfile.item.notifications.map((item: string) => {
+                    if (item === 'FAN_NOTIFICATION_GENERAL') {
                         setIsEnabled1(true);
                     }
-                }
-                if (editEnable2 === false) {
-                    if (getProfile.getProfile.item.notifications[1] === '') {
+                    if (item === 'FAN_NOTIFICATION_FAVORITE_PLAYERS') {
                         setIsEnabled2(true);
                     }
-                }
-                if (editEnable3) {
-                    if (getProfile.getProfile.item.notifications[2] === '') {
+                    if (item === 'FAN_NOTIFICATION_FAVORITE_ISRAEL_TEAMS') {
                         setIsEnabled3(true);
                     }
-                }
-
-                if (editEnable4) {
-                    if (getProfile.getProfile.item.notifications[3] === '') {
+                    if (item === 'FAN_NOTIFICATION_FAVORITE_PLAYERS_LEAGUES') {
                         setIsEnabled4(true);
                     }
-                }
-                if (editEnable5) {
-                    if (getProfile.getProfile.item.notifications[4] === '') {
+                    if (item === 'FAN_NOTIFICATION_FAVORITE_ISRAEL_TEAMS_LEAGUES') {
                         setIsEnabled5(true);
                     }
-                }
-
-                if (editEnable6) {
-                    if (getProfile.getProfile.item.notifications[5] === '') {
+                    if (item === 'FAN_NOTIFICATION_FAVORITE_PLAYERS_NATIONAL_TEAMS') {
                         setIsEnabled6(true);
                     }
-                }
+                });
             }
         }
     }, [getProfile.success]);
