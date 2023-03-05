@@ -99,7 +99,7 @@ export const useViewModel = ({ navigation, route }: IRegScreenProps) => {
                     call: AuthData.SET_PROFILE,
                     item_id: profile.profile.item_id,
                     item: {
-                        email: userName,
+                        name: userName,
                         gender: gender,
                         birthdate: formattedDate,
                         favorite_israel_teams: fav_team,
