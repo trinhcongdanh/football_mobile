@@ -40,7 +40,9 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
     const [image, setImage] = useState<any>();
     const dispatch = useDispatch<any>();
 
-    const notifications: any[] = [];
+    // const notifications: any[] = [];
+
+    const [notifications, setNotifications] = useState<any[]>([]);
 
     const [isEnabled1, setIsEnabled1] = useState(false);
     const [isEnabled2, setIsEnabled2] = useState(false);
@@ -62,7 +64,8 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
 
     useEffect(() => {
         if (isEnabled1 === true) {
-            notifications.push('FAN_NOTIFICATION_GENERAL');
+            setNotifications([...notifications, 'FAN_NOTIFICATION_GENERAL']);
+            // notifications.push('FAN_NOTIFICATION_GENERAL');
         }
     }, [isEnabled1]);
     const toggleSwitch2 = () => {
@@ -71,7 +74,8 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
     };
     useEffect(() => {
         if (isEnabled2 === true) {
-            notifications.push('FAN_NOTIFICATION_FAVORITE_PLAYERS');
+            // notifications.push('FAN_NOTIFICATION_FAVORITE_PLAYERS');
+            setNotifications([...notifications, 'FAN_NOTIFICATION_FAVORITE_PLAYERS']);
         }
     }, [isEnabled2]);
     const toggleSwitch3 = () => {
@@ -81,7 +85,8 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
     };
     useEffect(() => {
         if (isEnabled3 === true) {
-            notifications.push('FAN_NOTIFICATION_FAVORITE_ISRAEL_TEAMS');
+            // notifications.push('FAN_NOTIFICATION_FAVORITE_ISRAEL_TEAMS');
+            setNotifications([...notifications, 'FAN_NOTIFICATION_FAVORITE_ISRAEL_TEAMS']);
         }
     }, [isEnabled3]);
     const toggleSwitch4 = () => {
@@ -91,7 +96,8 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
     };
     useEffect(() => {
         if (isEnabled4 === true) {
-            notifications.push('FAN_NOTIFICATION_FAVORITE_PLAYERS_LEAGUES');
+            // notifications.push('FAN_NOTIFICATION_FAVORITE_PLAYERS_LEAGUES');
+            setNotifications([...notifications, 'FAN_NOTIFICATION_FAVORITE_PLAYERS_LEAGUES']);
         }
     }, [isEnabled4]);
     const toggleSwitch5 = () => {
@@ -101,7 +107,8 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
     };
     useEffect(() => {
         if (isEnabled5 === true) {
-            notifications.push('FAN_NOTIFICATION_FAVORITE_ISRAEL_TEAMS_LEAGUES');
+            // notifications.push('FAN_NOTIFICATION_FAVORITE_ISRAEL_TEAMS_LEAGUES');
+            setNotifications([...notifications, 'FAN_NOTIFICATION_FAVORITE_ISRAEL_TEAMS_LEAGUES']);
         }
     }, [isEnabled5]);
     const toggleSwitch6 = () => {
@@ -111,11 +118,14 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
     };
     useEffect(() => {
         if (isEnabled6 === true) {
-            notifications.push('FAN_NOTIFICATION_FAVORITE_PLAYERS_NATIONAL_TEAMS');
+            // notifications.push('FAN_NOTIFICATION_FAVORITE_PLAYERS_NATIONAL_TEAMS');
+            setNotifications([
+                ...notifications,
+                'FAN_NOTIFICATION_FAVORITE_PLAYERS_NATIONAL_TEAMS',
+            ]);
         }
     }, [isEnabled6]);
 
-    console.log(notifications);
     const settingSelected = useSelector((state: RootState) => state.settingSelected);
 
     const onImagePicker = async () => {
