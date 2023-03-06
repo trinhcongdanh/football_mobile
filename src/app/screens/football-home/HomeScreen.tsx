@@ -268,6 +268,7 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                                         style={{
                                             width: getSize.m(347),
                                             height: getSize.m(233),
+                                            borderRadius: getSize.m(20),
                                         }}
                                     />
                                     <View style={styles.date}>
