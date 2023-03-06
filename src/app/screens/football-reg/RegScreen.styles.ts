@@ -17,8 +17,8 @@ const styles = StyleSheet.create({
     },
 
     checkBox: {
-        width: getSize.s(15),
-        height: getSize.s(15),
+        width: getSize.s(20),
+        height: getSize.s(20),
         borderWidth: getSize.m(1),
         borderColor: appColors.blue_light,
         marginRight: getSize.m(8),

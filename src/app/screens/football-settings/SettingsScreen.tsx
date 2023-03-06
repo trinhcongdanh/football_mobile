@@ -9,16 +9,17 @@ import { Spacer } from '@football/app/components/spacer/Spacer';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import { getSize } from '@football/app/utils/responsive/scale';
+import { renderAvatar, renderUserPoints } from '@football/core/models/AvatarType.enum';
 import { Avatar } from '@rneui/themed';
 import _ from 'lodash';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import {
+    ActivityIndicator,
     Image,
     ImageBackground,
     SafeAreaView,
     ScrollView,
     StatusBar,
-    Switch,
     Text,
     TouchableOpacity,
     View,
@@ -83,11 +84,30 @@ export function SettingsScreen(props: ISettingsScreenProps) {
         dateTime,
         favSelectedTeam,
         editBirthday,
+        profileUser,
+        scrollViewRef,
         handleNotSaveChange,
     } = useViewModel(props);
 
     return (
         <View style={appStyles.flex}>
+            {profileUser.success === false ? (
+                <View
+                    style={{
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        position: 'absolute',
+                        backgroundColor: 'rgba(0,0,0,0.5)',
+                        top: getSize.m(0),
+                        bottom: getSize.m(0),
+                        left: getSize.m(0),
+                        right: getSize.m(0),
+                        zIndex: 10,
+                    }}
+                >
+                    <ActivityIndicator size="large" />
+                </View>
+            ) : null}
             <ImageBackground source={AppImages.img_background} style={appStyles.flex}>
                 <StatusBar translucent backgroundColor="transparent" />
                 <SafeAreaView style={appStyles.safe_area}>
@@ -102,16 +122,21 @@ export function SettingsScreen(props: ISettingsScreenProps) {
                     <ScrollView
                         showsVerticalScrollIndicator={false}
                         style={[appStyles.flex, { marginTop: getSize.m(10) }]}
+                        ref={scrollViewRef}
                     >
                         <View style={styles.card_view_container}>
                             <View style={styles.avatar_block}>
                                 <View style={styles.avatar_container}>
-                                    <Avatar
-                                        size={getSize.m(73)}
-                                        rounded
-                                        source={AppImages.img_avt_player}
-                                        containerStyle={{ backgroundColor: appColors.separator }}
-                                    />
+                                    <TouchableOpacity onPress={onImagePicker}>
+                                        <Avatar
+                                            size={getSize.m(73)}
+                                            rounded
+                                            source={renderAvatar(getProfile)}
+                                            containerStyle={{
+                                                backgroundColor: appColors.separator,
+                                            }}
+                                        />
+                                    </TouchableOpacity>
 
                                     <Avatar.Accessory
                                         onPress={onImagePicker}
@@ -129,7 +154,9 @@ export function SettingsScreen(props: ISettingsScreenProps) {
                                     resizeMode={FastImage.resizeMode.contain}
                                     style={styles.ic_football}
                                 />
-                                <Text style={styles.txt_avatar}>1,345</Text>
+                                <Text style={styles.txt_avatar}>
+                                    {renderUserPoints(getProfile, t)}
+                                </Text>
                             </View>
                             <View style={styles.first_block_container}>
                                 <Input

@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
     image_team: {
-        resizeMode: 'contain',
+        resizeMode: 'cover',
         width: '100%',
         height: getSize.m(240),
         borderRadius: getSize.m(20),
@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     image: {
         height: getSize.m(280),
         width: getSize.m(200),
-        resizeMode: 'contain',
+        resizeMode: 'cover',
         borderRadius: getSize.m(18),
     },
     date: {
@@ -46,6 +46,7 @@ const styles = StyleSheet.create({
         borderRadius: getSize.m(40),
         top: getSize.m(16),
         right: getSize.m(16),
+        zIndex: 101,
     },
     text_date: {
         fontSize: getSize.m(12),
@@ -60,6 +61,7 @@ const styles = StyleSheet.create({
         right: getSize.m(16),
         left: getSize.m(16),
         overflow: 'hidden',
+        zIndex: 101,
     },
     text_content: {
         textAlign: 'left',
@@ -90,6 +92,7 @@ const styles = StyleSheet.create({
         borderRadius: getSize.m(50),
         backgroundColor: 'rgba(255, 255, 255, 0.1)',
         position: 'absolute',
+        zIndex: 101,
         top: getSize.m(114),
         left: getSize.m(74),
         borderColor: 'rgba(255, 255, 255, 0.2)',
@@ -185,6 +188,16 @@ const styles = StyleSheet.create({
         height: getSize.m(5),
         marginHorizontal: getSize.m(2.5),
         borderRadius: getSize.m(5),
+    },
+
+    gradient_img: {
+        position: 'absolute',
+        zIndex: 100,
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
+        borderRadius: getSize.m(18),
     },
 });
 

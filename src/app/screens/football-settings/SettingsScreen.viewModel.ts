@@ -307,7 +307,6 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
                     setIndexGender(1);
                 } else if (getProfile.getProfile.item.gender === 'FAN_GENDER_NOT_AVAILABLE') {
                     setIndexGender(2);
-                    getProfile;
                 }
             }
             if (!isEmpty(getProfile.getProfile.item.notifications)) {
@@ -548,6 +547,15 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
         dispatch(resetSettingFavTopTeam([]));
     };
 
+    const scrollBottom = route.params?.scrollBottom;
+
+    const scrollViewRef = useRef<any>();
+    useEffect(() => {
+        if (scrollBottom == true) {
+            scrollViewRef.current.scrollToEnd({ animated: true });
+        }
+    }, []);
+
     return {
         dateTime,
         image,
@@ -601,5 +609,7 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
         favSelectedTeam,
         editBirthday,
         handleNotSaveChange,
+        profileUser,
+        scrollViewRef,
     };
 };

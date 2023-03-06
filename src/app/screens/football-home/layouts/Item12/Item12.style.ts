@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
         height: getSize.m(280),
         width: getSize.m(194),
         borderRadius: getSize.m(18),
-        resizeMode: 'contain',
+        resizeMode: 'cover',
     },
     date: {
         backgroundColor: 'rgba(0, 0, 0, 0.3)',
@@ -33,6 +33,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         borderRadius: getSize.m(40),
         top: getSize.m(16),
+        zIndex: 101,
         right: getSize.m(16),
     },
     text_date: {
@@ -47,6 +48,7 @@ const styles = StyleSheet.create({
         bottom: getSize.m(26),
         right: getSize.m(16),
         left: getSize.m(16),
+        zIndex: 101,
         overflow: 'hidden',
     },
     text_content: {
@@ -66,6 +68,7 @@ const styles = StyleSheet.create({
         borderRadius: getSize.m(50),
         backgroundColor: 'rgba(255, 255, 255, 0.2)',
         position: 'absolute',
+        zIndex: 101,
         top: getSize.m(100),
         left: getSize.m(70),
         borderColor: 'rgba(255, 255, 255, 0.4)',
@@ -82,6 +85,15 @@ const styles = StyleSheet.create({
         height: getSize.m(5),
         marginHorizontal: getSize.m(2.5),
         borderRadius: getSize.m(5),
+    },
+    gradient_img: {
+        position: 'absolute',
+        zIndex: 100,
+        top: 0,
+        left: 0,
+        height: getSize.m(280),
+        width: getSize.m(194),
+        borderRadius: getSize.m(18),
     },
 });
 

@@ -24,6 +24,13 @@ export const useAppNavigator = () => {
         navigation.dispatch(StackActions.popToTop());
     };
 
+    const navigateClearStack = (name: string) => {
+        navigation.reset({
+            index: 0,
+            routes: [{ name }],
+        });
+    };
+
     const goBack = () => {
         navigation.goBack();
     };
@@ -34,5 +41,6 @@ export const useAppNavigator = () => {
         pop,
         popToTop,
         goBack,
+        navigateClearStack,
     };
 };

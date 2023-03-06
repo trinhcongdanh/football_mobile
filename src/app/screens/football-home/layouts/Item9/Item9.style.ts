@@ -18,7 +18,6 @@ const styles = StyleSheet.create({
         height: getSize.m(280),
         width: getSize.m(194),
         borderRadius: getSize.m(18),
-        resizeMode: 'contain',
     },
     date: {
         backgroundColor: 'rgba(0, 0, 0, 0.3)',
@@ -42,6 +41,7 @@ const styles = StyleSheet.create({
         right: getSize.m(16),
         left: getSize.m(16),
         overflow: 'hidden',
+        zIndex: 101,
     },
     text_content: {
         textAlign: 'center',
@@ -66,6 +66,15 @@ const styles = StyleSheet.create({
         height: getSize.m(5),
         marginHorizontal: getSize.m(2.5),
         borderRadius: getSize.m(5),
+    },
+    gradient_img: {
+        position: 'absolute',
+        zIndex: 100,
+        top: 0,
+        left: 0,
+        height: getSize.m(280),
+        width: getSize.m(194),
+        borderRadius: getSize.m(18),
     },
 });
 

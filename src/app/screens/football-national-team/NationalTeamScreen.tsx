@@ -95,13 +95,18 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                             </View>
                             <View style={{ marginTop: getSize.m(20) }}>
                                 <TouchableOpacity
-                                    activeOpacity={0.9}
+                                    activeOpacity={1}
                                     onPress={() => handlePlayVideo(topTeam?.main_video)}
                                 >
+                                    <LinearGradient
+                                        colors={['transparent', 'rgba(0, 0, 0, 0.90)']}
+                                        start={{ x: 0, y: 0.3 }}
+                                        end={{ x: 0, y: 1 }}
+                                        style={styles.gradient_img}
+                                    />
                                     <FastImage
                                         source={{ uri: topTeam?.main_video?.image_url }}
                                         style={styles.image_team}
-                                        resizeMode={FastImage.resizeMode.contain}
                                     />
                                     <View style={styles.date}>
                                         <Text style={styles.text_date}>
@@ -217,6 +222,15 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                                                     activeOpacity={0.9}
                                                     onPress={() => handlePlayVideo(item)}
                                                 >
+                                                    <LinearGradient
+                                                        colors={[
+                                                            'transparent',
+                                                            'rgba(0, 0, 0, 0.90)',
+                                                        ]}
+                                                        start={{ x: 0, y: 0.3 }}
+                                                        end={{ x: 0, y: 1 }}
+                                                        style={styles.gradient_img}
+                                                    />
                                                     <Image
                                                         source={{ uri: item.image_url }}
                                                         style={styles.image}

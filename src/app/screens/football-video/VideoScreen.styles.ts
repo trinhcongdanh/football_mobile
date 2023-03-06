@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
     image: {
         height: getSize.m(240),
         width: getSize.m(160),
-        resizeMode: 'contain',
+        resizeMode: 'cover',
         borderRadius: getSize.m(18),
         // opacity: 0,
     },

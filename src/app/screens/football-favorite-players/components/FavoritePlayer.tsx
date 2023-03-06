@@ -71,19 +71,21 @@ export const FavoritePlayer = ({
                                     onChangeText={searchFavPlayer}
                                     onBlur={submitSearchFavPlayer}
                                 />
-                                <Icon
-                                    style={{ marginRight: getSize.m(14) }}
-                                    name={appIcons.ic_search}
-                                    color={appColors.blue_gray_dark}
-                                    size={getSize.m(16)}
-                                />
+                                <TouchableOpacity onPress={submitSearchFavPlayer}>
+                                    <Icon
+                                        style={{ marginRight: getSize.m(14) }}
+                                        name={appIcons.ic_search}
+                                        color={appColors.blue_gray_dark}
+                                        size={getSize.m(16)}
+                                    />
+                                </TouchableOpacity>
                             </View>
 
-                            {/* <ActivityIndicator
+                            <ActivityIndicator
                                 style={appStyles.flex_center}
                                 size="large"
                                 color={appColors.blue_dark}
-                            /> */}
+                            />
                         </View>
                     </SafeAreaView>
                 ) : (
@@ -119,12 +121,14 @@ export const FavoritePlayer = ({
                                             onChangeText={searchFavPlayer}
                                             onBlur={submitSearchFavPlayer}
                                         />
-                                        <Icon
-                                            style={{ marginRight: getSize.m(14) }}
-                                            name={appIcons.ic_search}
-                                            color={appColors.blue_gray_dark}
-                                            size={getSize.m(16)}
-                                        />
+                                        <TouchableOpacity onPress={submitSearchFavPlayer}>
+                                            <Icon
+                                                style={{ marginRight: getSize.m(14) }}
+                                                name={appIcons.ic_search}
+                                                color={appColors.blue_gray_dark}
+                                                size={getSize.m(16)}
+                                            />
+                                        </TouchableOpacity>
                                     </View>
                                 </View>
                                 <ScrollView>

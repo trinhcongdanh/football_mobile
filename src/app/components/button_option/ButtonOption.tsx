@@ -14,7 +14,7 @@ export const ButtonOption = ({
 }: IButtonOptionComponent) => {
     const options = [option_one, option_two];
 
-    const [select, setSelect] = useState(defaultValue);
+    const [select, setSelect] = useState(defaultValue || 0);
 
     const selectOption = (index: number): void => {
         setSelect(index);
