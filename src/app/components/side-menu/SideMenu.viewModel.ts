@@ -19,6 +19,7 @@ import { resetSelectedFavTopTeams, resetTopTeams } from 'src/store/FavTopTeam.sl
 import { resetOtpUser } from 'src/store/user/OTP.slice';
 import { clearSetProfile } from 'src/store/user/setProfile.slice';
 import { clearPhoneNumber } from 'src/store/user/RegisterNumberPhone.slice';
+import { getProfileUser } from 'src/store/user/getProfile.slice';
 
 export const useViewModel = () => {
     const { navigate, goBack, popToTop } = useAppNavigator();
@@ -95,6 +96,23 @@ export const useViewModel = () => {
             });
         }
     }, [login.logoutSuccess, isFocused]);
+
+    useEffect(() => {
+        if (login.success === true) {
+            dispatch(
+                getProfileUser(
+                    serializeParams({
+                        action: ACTION,
+                        token: login.login.token,
+                        call: AuthData.GET_PROFILE,
+                        item: login.login.user.item_id,
+                    })
+                )
+            );
+        }
+    }, [login.success]);
+
+    useEffect(() => {}, []);
 
     return {
         t,
