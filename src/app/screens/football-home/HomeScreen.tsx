@@ -18,6 +18,7 @@ import { Item9 } from '@football/app/screens/football-home/layouts/Item9/Item9';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import { getSize } from '@football/app/utils/responsive/scale';
+import { renderAvatar } from '@football/core/models/AvatarType.enum';
 import React from 'react';
 import {
     ImageBackground,
@@ -49,10 +50,12 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
         handlePlayVideo,
         onClickTeam,
         onClickTopTeam,
+        profileUser,
     } = useViewModel({
         navigation,
         route,
     });
+
     return (
         <View style={[appStyles.flex, { backgroundColor: appColors.white }]}>
             {/* Header */}
@@ -95,7 +98,7 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                                                         height: getSize.m(40),
                                                         borderRadius: getSize.m(40),
                                                     }}
-                                                    source={AppImages.img_avt_player}
+                                                    source={renderAvatar(profileUser)}
                                                 />
                                                 <FastImage
                                                     source={AppImages.img_ball_red}

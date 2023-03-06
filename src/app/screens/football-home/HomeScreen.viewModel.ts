@@ -27,6 +27,7 @@ const useViewState = () => {
     const selectedFavTopTeams = useSelector(
         (state: RootState) => state.favTopTeams.selectedTopTeams
     );
+    const profileUser = useSelector((state: RootState) => state.getProfile);
 
     const [homePage, setHomePage] = useState<HomePageModel>();
     const [homeLayout, setHomeLayout] = useState<HomeLayoutModel>();
@@ -60,6 +61,7 @@ const useViewState = () => {
         setAutoPlay,
         display,
         setDisplay,
+        profileUser,
     };
 };
 
