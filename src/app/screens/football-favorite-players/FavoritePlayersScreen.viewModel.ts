@@ -417,7 +417,11 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
             if (params.previous_screen === ScreenName.FavSummaryPage) {
                 navigate(ScreenName.FavSummaryPage);
             } else if (previous_screen === ScreenName.SettingsPage) {
-                navigate(ScreenName.SettingsPage, { previous_screen: ScreenName.FavPlayerPage });
+                navigate(ScreenName.SettingsPage, {
+                    previous_screen: ScreenName.FavPlayerPage,
+                    center: true,
+                    scrollBottom: false,
+                });
                 dispatch(setSettingFavPlayer(selectedFavPlayers));
                 // pop(ScreenName.FavTeamPage);
             } else {

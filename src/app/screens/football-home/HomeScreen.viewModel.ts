@@ -1,12 +1,12 @@
 /* eslint-disable no-underscore-dangle */
-import { TopTeamModel } from '@football/core/models/TopTeamModelResponse';
+import { TopTeamModel, TopTeamModelResponse } from '@football/core/models/TopTeamModelResponse';
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
 import { IHomeScreenProps } from '@football/app/screens/football-home/HomeScreen.type';
 import { ScreenName } from '@football/app/utils/constants/enum';
 import { useMount } from '@football/app/utils/hooks/useMount';
 import { HomePageModel, HomeLayoutModel } from '@football/core/models/HomePageModelResponse';
-import { TeamModel } from '@football/core/models/TeamModelResponse';
+import { TeamModel, TeamModelResponse } from '@football/core/models/TeamModelResponse';
 import HomeLayoutService from '@football/core/services/HomeLayout.service';
 import HomePageService from '@football/core/services/HomePage.service';
 import PlayerService from '@football/core/services/Player.service';
@@ -19,21 +19,77 @@ import GeneralVodService from '@football/core/services/GeneralVod.service';
 import { useDispatch, useSelector } from 'react-redux';
 import { addVideo, setShowVideo } from 'src/store/video/Video.slice';
 import { RootState } from 'src/store/store';
-import { PlayerModel } from '@football/core/models/PlayerModelResponse';
+import { PlayerModel, PlayersModelResponse } from '@football/core/models/PlayerModelResponse';
+import TeamService from '@football/core/services/Team.service';
+import TopTeamService from '@football/core/services/TopTeam.service';
 
 const useViewState = () => {
-    const selectedFavTeams = useSelector((state: RootState) => state.favTeams.selectedTeams);
-    const selectedFavPlayers = useSelector((state: RootState) => state.favPlayers.selectedPlayers);
-    const selectedFavTopTeams = useSelector(
-        (state: RootState) => state.favTopTeams.selectedTopTeams
-    );
     const profileUser = useSelector((state: RootState) => state.getProfile);
+
+    useEffect(() => {
+        if (profileUser.success === true) {
+            const fetchFavTeam = async () => {
+                const fetchTeam = await Promise.all(
+                    profileUser.getProfile.item.favorite_israel_teams.map(async (item: string) => {
+                        const [err, res] = await TeamService.findByOId<TeamModelResponse>(item);
+                        if (err) return;
+                        return res.data.documents[0];
+                    })
+                );
+                // console.log(fetchTeam.filter(Boolean));
+
+                setTeams(fetchTeam.filter(Boolean));
+            };
+            fetchFavTeam();
+        }
+    }, [profileUser.success]);
+
+    useEffect(() => {
+        if (profileUser.success === true) {
+            const fetchFavPlayer = async () => {
+                const fetchPlayer = await Promise.all(
+                    profileUser.getProfile.item.favorite_players.map(async (item: string) => {
+                        const [err, res] = await PlayerService.findByOId<PlayersModelResponse>(
+                            item
+                        );
+                        if (err) return;
+                        return res.data.documents[0];
+                    })
+                );
+                // console.log(fetchTeam.filter(Boolean));
+
+                setPlayers(fetchPlayer.filter(Boolean));
+            };
+            fetchFavPlayer();
+        }
+    }, [profileUser.success]);
+
+    useEffect(() => {
+        if (profileUser.success === true) {
+            const fetchFavTopTeam = async () => {
+                const fetchTopTeam = await Promise.all(
+                    profileUser.getProfile.item.favorite_national_teams.map(
+                        async (item: string) => {
+                            const [err, res] = await TopTeamService.findByOId<TopTeamModelResponse>(
+                                item
+                            );
+                            if (err) return;
+                            return res.data.documents[0];
+                        }
+                    )
+                );
+
+                setTopTeams(fetchTopTeam.filter(Boolean));
+            };
+            fetchFavTopTeam();
+        }
+    }, [profileUser.success]);
 
     const [homePage, setHomePage] = useState<HomePageModel>();
     const [homeLayout, setHomeLayout] = useState<HomeLayoutModel>();
-    const [players, setPlayers] = useState<PlayerModel[]>(selectedFavPlayers);
-    const [teams, setTeams] = useState<TeamModel[]>(selectedFavTeams);
-    const [topTeams, setTopTeams] = useState<TopTeamModel[]>(selectedFavTopTeams);
+    const [players, setPlayers] = useState<PlayerModel[]>([]);
+    const [teams, setTeams] = useState<TeamModel[]>([]);
+    const [topTeams, setTopTeams] = useState<TopTeamModel[]>([]);
     const [leagues, setLeagues] = useState<LeagueModel[]>();
     const [generalVod, setGeneralVod] = useState<GeneralVodModel[]>();
     const [sourceVideo, setSourceVideo] = useState();

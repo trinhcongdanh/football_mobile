@@ -33,6 +33,8 @@ import {
 import { setProfileUser, statusSetProfile } from 'src/store/user/setProfile.slice';
 import TopTeamService from '@football/core/services/TopTeam.service';
 import moment from 'moment';
+import { getSize } from '@football/app/utils/responsive/scale';
+import { BackHandler } from 'react-native';
 
 export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
     const { t } = useTranslation();
@@ -143,6 +145,11 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
 
     const previous_screen = route?.params?.previous_screen;
     const onGoBack = () => {
+        if (!saveChange) {
+            dispatch(resetSettingFavTeam([]));
+            dispatch(resetSettingFavPlayer([]));
+            dispatch(resetSettingFavTopTeam([]));
+        }
         if (previous_screen === ScreenName.FavTeamPage) {
             navigate(ScreenName.SideBar);
         } else if (previous_screen === ScreenName.FavPlayerPage) {
@@ -153,6 +160,31 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
             goBack();
         }
     };
+
+    const handleBackButtonClick = () => {
+        if (!saveChange) {
+            dispatch(resetSettingFavTeam([]));
+            dispatch(resetSettingFavPlayer([]));
+            dispatch(resetSettingFavTopTeam([]));
+        }
+        if (previous_screen === ScreenName.FavTeamPage) {
+            navigate(ScreenName.SideBar);
+        } else if (previous_screen === ScreenName.FavPlayerPage) {
+            navigate(ScreenName.SideBar);
+        } else if (previous_screen === ScreenName.FavTopTeamPage) {
+            navigate(ScreenName.SideBar);
+        } else {
+            goBack();
+        }
+        return true;
+    };
+
+    useEffect(() => {
+        BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
+        return () => {
+            BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
+        };
+    }, []);
 
     const backFavTeam = () => {
         navigate(ScreenName.FavTeamPage, {
@@ -310,39 +342,6 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
                 }
             }
             if (!isEmpty(getProfile.getProfile.item.notifications)) {
-                // if (editEnable1 === false) {
-                //     if (getProfile.getProfile.item.notifications[0] !== '') {
-                //         setIsEnabled1(true);
-                //     }
-                // }
-                // if (editEnable2 === false) {
-                //     if (getProfile.getProfile.item.notifications[1] === '') {
-                //         setIsEnabled2(true);
-                //     }
-                // }
-                // if (editEnable3) {
-                //     if (getProfile.getProfile.item.notifications[2] === '') {
-                //         setIsEnabled3(true);
-                //     }
-                // }
-
-                // if (editEnable4) {
-                //     if (getProfile.getProfile.item.notifications[3] === '') {
-                //         setIsEnabled4(true);
-                //     }
-                // }
-                // if (editEnable5) {
-                //     if (getProfile.getProfile.item.notifications[4] === '') {
-                //         setIsEnabled5(true);
-                //     }
-                // }
-
-                // if (editEnable6) {
-                //     if (getProfile.getProfile.item.notifications[5] === '') {
-                //         setIsEnabled6(true);
-                //     }
-                // }
-
                 getProfile.getProfile.item.notifications.map((item: string) => {
                     if (item === 'FAN_NOTIFICATION_GENERAL') {
                         setIsEnabled1(true);
@@ -487,25 +486,16 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
         }
     }, [favSelectedTopTeam]);
 
-    useEffect(() => {
-        dispatch(
-            getProfileUser(
-                serializeParams({
-                    action: ACTION,
-                    token: login.login.token,
-                    call: AuthData.GET_PROFILE,
-                    item: login.login.user.item_id,
-                })
-            )
-        );
-    }, []);
-
     // const login = useSelector((state: RootState) => state.login);
     const profile = useSelector((state: RootState) => state.createProfile);
     const guestId = useSelector((state: any) => state.guestId.guestId);
     const profileUser = useSelector((state: RootState) => state.setProfile);
+    const userLogin = useSelector((state: RootState) => state.otpUser);
+    const numberPhone = useSelector((state: any) => state.numberPhoneUser);
 
+    const [saveChange, setSaveChange] = useState(false);
     const handleSaveChange = () => {
+        setSaveChange(true);
         dispatch(statusSetProfile([]));
         let fav_team: any = [];
         favSelectedTeam.map(item => {
@@ -523,9 +513,11 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
             setProfileUser(
                 serializeParams({
                     action: ACTION,
-                    token: login.login.token,
+                    token: numberPhone.successRegister ? login.login.token : userLogin.otp.token,
                     call: AuthData.SET_PROFILE,
-                    item_id: profile.profile.item_id,
+                    item_id: numberPhone.successRegister
+                        ? profile.profile.item_id
+                        : userLogin.otp.user.item_id,
                     item: {
                         name: userName,
                         email: email,
@@ -542,17 +534,25 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
     };
 
     const handleNotSaveChange = () => {
+        setSaveChange(false);
         dispatch(resetSettingFavTeam([]));
         dispatch(resetSettingFavPlayer([]));
         dispatch(resetSettingFavTopTeam([]));
     };
 
     const scrollBottom = route.params?.scrollBottom;
+    const scrollCenter = route.params?.center;
 
     const scrollViewRef = useRef<any>();
     useEffect(() => {
         if (scrollBottom == true) {
             scrollViewRef.current.scrollToEnd({ animated: true });
+        }
+    }, []);
+
+    useEffect(() => {
+        if (scrollCenter == true) {
+            scrollViewRef.current.scrollTo({ y: getSize.m(600), animated: true });
         }
     }, []);
 
