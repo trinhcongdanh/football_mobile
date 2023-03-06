@@ -11,6 +11,8 @@ const styles = StyleSheet.create({
     club_team: {
         backgroundColor: appColors.white,
         width: '100%',
+        flex: 1,
+        position: 'relative',
     },
 
     logo_club: {
@@ -88,9 +90,14 @@ const styles = StyleSheet.create({
         fontFamily: AppFonts.bold,
     },
     drop_down_calender: {
-        borderColor: appColors.border,
-        borderWidth: 1,
-        width: '40%',
+        position: 'absolute',
+        left: getSize.m(0),
+        top: getSize.m(70),
+        zIndex: 10,
+        backgroundColor: appColors.white,
+        borderBottomLeftRadius: getSize.m(20),
+        borderBottomRightRadius: getSize.m(20),
+        elevation: 1,
     },
 
     btn_drop_down_calender: {
