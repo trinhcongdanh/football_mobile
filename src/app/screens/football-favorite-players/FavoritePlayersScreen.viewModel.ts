@@ -17,7 +17,7 @@ import { useIsFocused, useRoute } from '@react-navigation/native';
 import { isEmpty, isNil, pick } from 'lodash';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Alert } from 'react-native';
+import { Alert, Keyboard } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import {
     pushAllFavPlayers,
@@ -93,15 +93,15 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
     const favSelectedPlayers = useSelector((state: RootState) =>
         !isEmpty(selectedFavTeams)
             ? state.favPlayers.groupPlayers
-                .map(e => {
-                    return e.listFavPlayers.filter(v => v.isSelected);
-                })
-                .flat()
+                  .map(e => {
+                      return e.listFavPlayers.filter(v => v.isSelected);
+                  })
+                  .flat()
             : state.favPlayers.favPlayers
-                .map(e => {
-                    return e.listFavPlayers.filter(v => v.isSelected);
-                })
-                .flat()
+                  .map(e => {
+                      return e.listFavPlayers.filter(v => v.isSelected);
+                  })
+                  .flat()
     );
 
     const login = useSelector((state: RootState) => state.login);
@@ -198,9 +198,15 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
         }
     };
 
-    const submitSearchFavPlayer = async (text?: string) => {
-        const searchT = text || searchText;
-        if (searchT !== '') {
+    useEffect(() => {
+        if (!searchText.length) {
+            submitSearchFavPlayer();
+        }
+    }, [searchText]);
+
+    const submitSearchFavPlayer = async () => {
+        Keyboard.dismiss();
+        if (searchText !== '') {
             try {
                 dispatch(
                     resetSearchFavPlayer({
@@ -244,7 +250,7 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
                         homepage_info: true,
                     },
                     filter: {
-                        search_terms: { $regex: `.*${searchT}.*`, $options: 'i' },
+                        search_terms: { $regex: `.*${searchText}.*`, $options: 'i' },
                     },
                     limit: 100,
                 });
@@ -350,13 +356,6 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
         }
     };
 
-    const searchFavPlayer = (text: string) => {
-        setSearchText(text);
-        if (!text.length) {
-            submitSearchFavPlayer('');
-        }
-    };
-
     const onGoBack = (): void => {
         goBack();
     };
@@ -445,7 +444,6 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
         onGoSkip,
         handleContinue,
         handleSelected,
-        searchFavPlayer,
         setSearchText,
         searchText,
         favSelectedPlayers,

@@ -61,7 +61,6 @@ export const FavoritePlayersScreen = ({ navigation, route }: IFavoritePlayerScre
                 submitSearchFavPlayer={submitSearchFavPlayer}
                 searchFavPlayer={(text: string) => {
                     setSearchText(text);
-                    searchFavPlayer(text);
                 }}
                 handleSelected={(item: PlayerModel | Players) => {
                     handleSelected(item);

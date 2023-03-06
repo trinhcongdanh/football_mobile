@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { axiosClient } from '@football/core/api/configs/axiosClient';
 import { BASE_URL, DATA_SOURCE, DB } from '@football/core/api/configs/config';
 import { TeamModel, TeamModelResponse } from '@football/core/models/TeamModelResponse';
-import { Alert } from 'react-native';
+import { Alert, Keyboard } from 'react-native';
 import { isEmpty, isNil } from 'lodash';
 import { useDispatch, useSelector } from 'react-redux';
 import { useMount } from '@football/app/utils/hooks/useMount';
@@ -24,6 +24,7 @@ import { resetAllFavPlayers, resetGroupFavPlayer } from 'src/store/FavPlayer.sli
 import { useIsFocused, useRoute } from '@react-navigation/native';
 import { RootState } from 'src/store/store';
 import { setSettingFavTeam } from 'src/store/SettingSelected.slice';
+import TeamService from '@football/core/services/Team.service';
 
 export const useViewModel = ({ navigation, route }: IFavoriteTeamsScreenProps) => {
     const { t } = useTranslation();
@@ -88,38 +89,25 @@ export const useViewModel = ({ navigation, route }: IFavoriteTeamsScreenProps) =
         }
     };
 
+    useEffect(() => {
+        if (!searchText.length) {
+            submitSearchFavTeam();
+        }
+    }, [searchText]);
+
     const submitSearchFavTeam = async () => {
+        Keyboard.dismiss();
         if (searchText !== '') {
-            try {
-                dispatch(resetFavTeam([]));
-                const { data }: TeamModelResponse = await axiosClient.post(`${BASE_URL}/find`, {
-                    dataSource: DATA_SOURCE,
-                    database: DB,
-                    collection: 'team',
-                    projection: {
-                        logo_url: true,
-                        name_en: true,
-                        name_he: true,
-                        popularity: true,
-                        team_personnel_id: true,
-                        search_terms: true,
-                        league_name_he: true,
-                        league_name_en: true,
-                        seasons: true,
-                        homepage_info: true,
-                    },
-                    filter: {
-                        search_terms: { $regex: `.*${searchText}.*`, $options: 'i' },
-                    },
-                    limit: 100,
-                });
-                if (!isEmpty(data.documents)) {
-                    dispatch(resetFavTeam([]));
-                    dispatch(setFavTeams(data.documents));
-                }
-            } catch (error: any) {
-                Alert.alert(error);
+            dispatch(resetFavTeam([]));
+            const [error, res] = await TeamService.search(searchText);
+            if (error) {
+                return;
             }
+
+            console.log(res.data);
+
+            dispatch(resetFavTeam([]));
+            dispatch(setFavTeams(res.data.documents));
         } else {
             dispatch(resetFavTeam([]));
             try {
@@ -135,13 +123,6 @@ export const useViewModel = ({ navigation, route }: IFavoriteTeamsScreenProps) =
             } catch (error: any) {
                 Alert.alert(error);
             }
-        }
-    };
-
-    const searchFavTeam = (text: string) => {
-        setSearchText(text);
-        if (!text.length) {
-            submitSearchFavTeam();
         }
     };
 
@@ -228,7 +209,7 @@ export const useViewModel = ({ navigation, route }: IFavoriteTeamsScreenProps) =
         handleContinue,
         handleSelected,
         dispatch,
-        searchFavTeam,
+        // searchFavTeam,
         setSearchText,
         favTeams,
         searchText,
