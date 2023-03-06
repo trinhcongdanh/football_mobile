@@ -601,5 +601,6 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
         favSelectedTeam,
         editBirthday,
         handleNotSaveChange,
+        profileUser,
     };
 };

@@ -256,5 +256,6 @@ export const useViewModel = ({ navigation, route }: IConnectScreenProps) => {
         connectApple,
         phoneNumberRef,
         phoneNumber,
+        numberPhone,
     };
 };

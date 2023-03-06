@@ -143,5 +143,6 @@ export const useViewModel = ({ navigation, route }: IRegScreenProps) => {
         userNameRef,
         handleOnGender,
         date,
+        profileUser,
     };
 };

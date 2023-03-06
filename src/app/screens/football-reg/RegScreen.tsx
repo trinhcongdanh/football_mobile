@@ -7,6 +7,7 @@ import {
     ScrollView,
     TouchableOpacity,
     Platform,
+    ActivityIndicator,
 } from 'react-native';
 import React from 'react';
 import { appColors } from '@football/app/utils/constants/appColors';
@@ -41,6 +42,7 @@ export const RegScreen = ({ navigation, route }: IRegScreenProps) => {
         userNameRef,
         handleOnGender,
         date,
+        profileUser,
     } = useViewModel({
         navigation,
         route,
@@ -48,6 +50,23 @@ export const RegScreen = ({ navigation, route }: IRegScreenProps) => {
 
     return (
         <View style={appStyles.flex}>
+            {profileUser.success === false ? (
+                <View
+                    style={{
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        position: 'absolute',
+                        backgroundColor: 'rgba(0,0,0,0.5)',
+                        top: getSize.m(0),
+                        bottom: getSize.m(0),
+                        left: getSize.m(0),
+                        right: getSize.m(0),
+                        zIndex: 10,
+                    }}
+                >
+                    <ActivityIndicator size="large" />
+                </View>
+            ) : null}
             <ImageBackground source={AppImages.img_bg_register} style={appStyles.flex}>
                 <StatusBar translucent backgroundColor="transparent" />
                 <SafeAreaView style={appStyles.safe_area}>

@@ -6,6 +6,7 @@ import {
     SafeAreaView,
     TouchableOpacity,
     TextInput,
+    ActivityIndicator,
 } from 'react-native';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -35,6 +36,7 @@ export const VerifyScreen = ({ navigation, route }: IVerifyScreenProps) => {
         handleChangeText,
         onVerifyCode,
         number,
+        otp,
     } = useViewModel({
         navigation,
         route,
@@ -42,6 +44,23 @@ export const VerifyScreen = ({ navigation, route }: IVerifyScreenProps) => {
 
     return (
         <View style={appStyles.flex}>
+            {otp.success === false ? (
+                <View
+                    style={{
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        position: 'absolute',
+                        backgroundColor: 'rgba(0,0,0,0.5)',
+                        top: getSize.m(0),
+                        bottom: getSize.m(0),
+                        left: getSize.m(0),
+                        right: getSize.m(0),
+                        zIndex: 10,
+                    }}
+                >
+                    <ActivityIndicator size="large" />
+                </View>
+            ) : null}
             <ImageBackground source={AppImages.img_background} style={appStyles.flex}>
                 <StatusBar translucent backgroundColor="transparent" />
                 <SafeAreaView style={appStyles.safe_area}>

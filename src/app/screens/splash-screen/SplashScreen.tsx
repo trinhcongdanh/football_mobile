@@ -3,16 +3,19 @@ import { AppJsons } from '@football/app/assets/images/AppImages';
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
 import { ISplashScreenProps } from '@football/app/screens/splash-screen/SplashScreen.type';
 import { appStyles } from '@football/app/utils/constants/appStyles';
-import { ScreenName } from '@football/app/utils/constants/enum';
+import { AuthData, ScreenName } from '@football/app/utils/constants/enum';
 import { Lottie } from '@football/core/models/SplashModelResponse';
 import { useSplashAnimations } from '@football/core/services/SplashScreen.service';
 import { isEmpty, isNil } from 'lodash';
 import LottieView from 'lottie-react-native';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import qs from 'qs';
 import { ImageBackground, StatusBar, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
+import { getProfileUser } from 'src/store/user/getProfile.slice';
 import { addGuestId } from 'src/store/user/GuestId.slice';
+import { ACTION } from '@football/core/api/auth/config';
 
 const useViewModel = () => {};
 
@@ -23,7 +26,7 @@ export const SplashScreen = ({ navigation, route }: ISplashScreenProps) => {
 
     const uuid = require('uuid');
     const id = uuid.v4();
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<any>();
 
     const guestId = useSelector((state: any) => state.guestId.guestId);
 
@@ -86,6 +89,26 @@ export const SplashScreen = ({ navigation, route }: ISplashScreenProps) => {
     }, 4000);
 
     const login = useSelector((state: any) => state.login);
+
+    function serializeParams(obj: any) {
+        const a = qs.stringify(obj, { encode: false, arrayFormat: 'brackets' });
+        console.log(a);
+        return a;
+    }
+    useEffect(() => {
+        if (login.success === true) {
+            dispatch(
+                getProfileUser(
+                    serializeParams({
+                        action: ACTION,
+                        token: login.login.token,
+                        call: AuthData.GET_PROFILE,
+                        item: login.login.user.item_id,
+                    })
+                )
+            );
+        }
+    }, [login.success]);
 
     useEffect(() => {
         if (authLoaded) {
