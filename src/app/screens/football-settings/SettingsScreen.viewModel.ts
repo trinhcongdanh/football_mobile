@@ -307,7 +307,6 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
                     setIndexGender(1);
                 } else if (getProfile.getProfile.item.gender === 'FAN_GENDER_NOT_AVAILABLE') {
                     setIndexGender(2);
-                    getProfile;
                 }
             }
             if (!isEmpty(getProfile.getProfile.item.notifications)) {

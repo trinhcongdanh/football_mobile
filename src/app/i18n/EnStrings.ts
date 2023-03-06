@@ -66,6 +66,7 @@ const resources = {
                 contact_us: 'צור קשר',
                 definitions: 'הגדרות',
                 terms: 'תנאי שימוש ומדינות פרטיות',
+                guest: 'אורח',
             },
             connect: {
                 title: 'התחברות',
@@ -684,6 +685,7 @@ const resources = {
                 contact_us: 'Contact us',
                 definitions: 'Definitions',
                 terms: 'Terms of use and private states',
+                guest: 'Guest',
             },
             connect: {
                 title: 'Connection',
