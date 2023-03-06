@@ -7,6 +7,7 @@ import { IVerifyScreenProps } from './VerifyScreen.type';
 import { useDispatch, useSelector } from 'react-redux';
 import qs from 'qs';
 import {
+    clearPhoneNumber,
     loginNumberPhoneUser,
     registerNumberPhoneUser,
 } from 'src/store/user/RegisterNumberPhone.slice';
@@ -26,6 +27,7 @@ export const useViewModel = ({ navigation, route }: IVerifyScreenProps) => {
     });
 
     const onGoBack = (): void => {
+        dispatch(clearPhoneNumber([]));
         goBack();
     };
     const handleError = (errorMessage: string, input: string): void => {
@@ -127,6 +129,7 @@ export const useViewModel = ({ navigation, route }: IVerifyScreenProps) => {
         });
         if (codeOtp.length === 4) {
             if (routes.params!.previous_screen === ScreenName.RegisterPage) {
+                console.log('danh');
                 dispatch(
                     otpUser(
                         serializeParams({

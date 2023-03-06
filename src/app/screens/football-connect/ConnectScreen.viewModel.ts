@@ -190,10 +190,13 @@ export const useViewModel = ({ navigation, route }: IConnectScreenProps) => {
                 previous_screen: ScreenName.ConnectPage,
             });
         }
+    }, [numberPhone.successLogin, isFocused, profile.success]);
+
+    useEffect(() => {
         if (numberPhone.successLogin === false && numberPhone.loadingLogin === false) {
             handleError(t('register.invalid'), 'numberPhone');
         }
-    }, [numberPhone.successLogin, isFocused, profile.success]);
+    }, [numberPhone.successLogin, numberPhone.loadingLogin]);
 
     const onNavigateSignUp = () => {
         navigate(ScreenName.FavTeamPage);
