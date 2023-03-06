@@ -127,12 +127,16 @@ export function SettingsScreen(props: ISettingsScreenProps) {
                         <View style={styles.card_view_container}>
                             <View style={styles.avatar_block}>
                                 <View style={styles.avatar_container}>
-                                    <Avatar
-                                        size={getSize.m(73)}
-                                        rounded
-                                        source={renderAvatar(getProfile)}
-                                        containerStyle={{ backgroundColor: appColors.separator }}
-                                    />
+                                    <TouchableOpacity onPress={onImagePicker}>
+                                        <Avatar
+                                            size={getSize.m(73)}
+                                            rounded
+                                            source={renderAvatar(getProfile)}
+                                            containerStyle={{
+                                                backgroundColor: appColors.separator,
+                                            }}
+                                        />
+                                    </TouchableOpacity>
 
                                     <Avatar.Accessory
                                         onPress={onImagePicker}
