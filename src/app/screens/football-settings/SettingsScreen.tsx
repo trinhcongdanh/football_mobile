@@ -91,7 +91,7 @@ export function SettingsScreen(props: ISettingsScreenProps) {
 
     return (
         <View style={appStyles.flex}>
-            {profileUser.success === false ? (
+            {profileUser.loading === true ? (
                 <View
                     style={{
                         justifyContent: 'center',

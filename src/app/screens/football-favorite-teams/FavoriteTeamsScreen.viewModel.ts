@@ -18,6 +18,7 @@ import {
     pushFavTeam,
     resetFavTeam,
     selectedFavTeamsAsMapSelector,
+    resetSelectedFavTeam,
 } from 'src/store/FavTeam.slice';
 import { IFavoriteTeamsScreenProps } from './FavoriteTeamsScreen.type';
 import { resetAllFavPlayers, resetGroupFavPlayer } from 'src/store/FavPlayer.slice';
@@ -43,6 +44,25 @@ export const useViewModel = ({ navigation, route }: IFavoriteTeamsScreenProps) =
     }, [favTeams, selectedFavTeamsMap]);
 
     const selectedFavTeams = useSelector((state: RootState) => state.favTeams.selectedTeams);
+    const getProfile = useSelector((state: RootState) => state.getProfile);
+
+    const [favSelectedTeam, setFavSelectedTeam] = useState<TeamModel[]>([]);
+    useEffect(() => {
+        if (getProfile.success === true) {
+            const fetchFavTeam = async () => {
+                const fetchTeam = await Promise.all(
+                    getProfile.getProfile.item.favorite_israel_teams.map(async (item: string) => {
+                        const [err, res] = await TeamService.findByOId<TeamModelResponse>(item);
+                        if (err) return;
+                        return res.data.documents[0];
+                    })
+                );
+                // console.log(fetchTeam.filter(Boolean));
+                setFavSelectedTeam(fetchTeam.filter(Boolean));
+            };
+            fetchFavTeam();
+        }
+    }, [getProfile.success]);
 
     const login = useSelector((state: any) => state.login);
     const profile = useSelector((state: any) => state.createProfile);
@@ -76,18 +96,34 @@ export const useViewModel = ({ navigation, route }: IFavoriteTeamsScreenProps) =
     }, []);
 
     const handleSelected = (team: TeamModel) => {
-        const params = routes.params;
-        dispatch(pushFavTeam(team));
-        if (!isEmpty(params)) {
-            if (params.previous_screen !== ScreenName.FavSummaryPage) {
+        if (!getProfile.success) {
+            const params = routes.params;
+            dispatch(pushFavTeam(team));
+            if (!isEmpty(params)) {
+                if (params.previous_screen !== ScreenName.FavSummaryPage) {
+                    dispatch(resetGroupFavPlayer({ id: '', label: '', listFavPlayers: [] }));
+                    dispatch(resetAllFavPlayers({ id: '', label: '', listFavPlayers: [] }));
+                }
+            } else {
                 dispatch(resetGroupFavPlayer({ id: '', label: '', listFavPlayers: [] }));
                 dispatch(resetAllFavPlayers({ id: '', label: '', listFavPlayers: [] }));
             }
         } else {
-            dispatch(resetGroupFavPlayer({ id: '', label: '', listFavPlayers: [] }));
-            dispatch(resetAllFavPlayers({ id: '', label: '', listFavPlayers: [] }));
+            // dispatch(pushFavTeam(team));
+            if (favSelectedTeam.length < 3) {
+                setFavSelectedTeam([...favSelectedTeam, team]);
+                // console.log(favSelectedTeam);
+            }
         }
     };
+    useEffect(() => {
+        // console.log(favSelectedTeam);
+        dispatch(resetSelectedFavTeam([]));
+        favSelectedTeam.map((item: TeamModel) => {
+            // console.log(item);
+            dispatch(pushFavTeam(item));
+        });
+    }, [favSelectedTeam]);
 
     useEffect(() => {
         if (!searchText.length) {
@@ -187,8 +223,12 @@ export const useViewModel = ({ navigation, route }: IFavoriteTeamsScreenProps) =
             if (params.previous_screen === ScreenName.FavSummaryPage) {
                 navigate(ScreenName.FavSummaryPage);
             } else if (previous_screen === ScreenName.SettingsPage) {
-                navigate(ScreenName.SettingsPage, { previous_screen: ScreenName.FavTeamPage });
-                dispatch(setSettingFavTeam(selectedFavTeams));
+                navigate(ScreenName.SettingsPage, {
+                    previous_screen: ScreenName.FavTeamPage,
+                    center: true,
+                    scrollBottom: false,
+                });
+                dispatch(setSettingFavTeam(favSelectedTeam));
                 // pop(ScreenName.FavTeamPage);
             } else {
                 navigate(ScreenName.FavPlayerPage);
@@ -218,5 +258,7 @@ export const useViewModel = ({ navigation, route }: IFavoriteTeamsScreenProps) =
         formattedFavTeams,
         searchTextRef,
         submitSearchFavTeam,
+        favSelectedTeam,
+        getProfile,
     };
 };

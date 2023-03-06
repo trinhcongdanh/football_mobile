@@ -105,28 +105,11 @@ export const useViewModel = () => {
     const getProfile = useSelector((state: RootState) => state.getProfile);
     const profileUser = useSelector((state: RootState) => state.setProfile);
     const numberPhone = useSelector((state: any) => state.numberPhoneUser);
+    const userLogin = useSelector((state: RootState) => state.otpUser);
 
     const [userName, setUserName] = useState('');
     const [avt, setAvt] = useState();
-    useEffect(() => {
-        if (!isFocused) return;
-        if (
-            login.success === true &&
-            profileUser.success === true &&
-            numberPhone.successRegister === true
-        ) {
-            dispatch(
-                getProfileUser(
-                    serializeParams({
-                        action: ACTION,
-                        token: login.login.token,
-                        call: AuthData.GET_PROFILE,
-                        item: login.login.user.item_id,
-                    })
-                )
-            );
-        }
-    }, [login.success, profileUser.success, numberPhone.successRegister, isFocused]);
+
     useEffect(() => {
         if (!isFocused) return;
         if (
@@ -148,19 +131,19 @@ export const useViewModel = () => {
     }, [login.success, profileUser.success, numberPhone.successRegister]);
     useEffect(() => {
         if (!isFocused) return;
-        if (login.success === true && numberPhone.successLogin === true) {
+        if (userLogin.success === true && numberPhone.successLogin === true) {
             dispatch(
                 getProfileUser(
                     serializeParams({
                         action: ACTION,
-                        token: login.login.token,
+                        token: userLogin.otp.token,
                         call: AuthData.GET_PROFILE,
-                        item: login.login.user.item_id,
+                        item: userLogin.otp.user.item_id,
                     })
                 )
             );
         }
-    }, [login.success, numberPhone.successLogin, isFocused]);
+    }, [userLogin.success, numberPhone.successLogin, isFocused]);
 
     useEffect(() => {
         if (getProfile.success) {
@@ -188,7 +171,7 @@ export const useViewModel = () => {
         if (isEmpty(getProfile.getProfile)) {
             navigate(ScreenName.RegisterPage);
         } else {
-            navigate(ScreenName.SettingsPage, { scrollBottom: false });
+            navigate(ScreenName.SettingsPage, { scrollBottom: false, center: false });
         }
     };
 
@@ -196,7 +179,7 @@ export const useViewModel = () => {
         if (isEmpty(getProfile.getProfile)) {
             navigate(ScreenName.RegisterPage);
         } else {
-            navigate(ScreenName.SettingsPage, { scrollBottom: true });
+            navigate(ScreenName.SettingsPage, { scrollBottom: true, center: false });
         }
     };
 
