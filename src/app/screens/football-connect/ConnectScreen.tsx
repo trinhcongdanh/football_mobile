@@ -48,7 +48,7 @@ export const ConnectScreen = ({ navigation, route }: IConnectScreenProps) => {
 
     return (
         <View style={[appStyles.flex]}>
-            {numberPhone.successLogin === false ? (
+            {numberPhone.loadingLogin === true ? (
                 <View
                     style={{
                         justifyContent: 'center',

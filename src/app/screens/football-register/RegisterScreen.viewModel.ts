@@ -65,10 +65,11 @@ export const useViewModel = ({ navigation, route }: IRegisterScreenProps) => {
                 number: phoneNumber,
                 previous_screen: ScreenName.RegisterPage,
             });
-        } else if (numberPhone.successRegister === false && numberPhone.loadingRegister === false) {
+        }
+        if (numberPhone.successRegister === false && numberPhone.loadingRegister === false) {
             handleError(t('register.invalid'), 'numberPhone');
         }
-    }, [numberPhone.successRegister, isFocused]);
+    }, [numberPhone.successRegister, isFocused, numberPhone.loadingRegister]);
 
     const connectFacebook = useCallback(async () => {
         // LoginManager.logInWithPermissions(['public_profile', 'email']).then((result: any) => {
