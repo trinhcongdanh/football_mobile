@@ -7,7 +7,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { IRegisterScreenProps } from './RegisterScreen.type';
 // import { AccessToken, LoginManager, Profile } from 'react-native-fbsdk-next';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
-import { registerNumberPhoneUser } from 'src/store/user/RegisterNumberPhone.slice';
+import {
+    clearPhoneNumber,
+    registerNumberPhoneUser,
+} from 'src/store/user/RegisterNumberPhone.slice';
 import { ACTION, TOKEN } from '@football/core/api/auth/config';
 import qs from 'qs';
 import { useIsFocused } from '@react-navigation/native';

@@ -19,7 +19,7 @@ import { resetSelectedFavTopTeams, resetTopTeams } from 'src/store/FavTopTeam.sl
 import { resetOtpUser } from 'src/store/user/OTP.slice';
 import { clearSetProfile } from 'src/store/user/setProfile.slice';
 import { clearPhoneNumber } from 'src/store/user/RegisterNumberPhone.slice';
-import { getProfileUser } from 'src/store/user/getProfile.slice';
+import { clearGetProfile, getProfileUser } from 'src/store/user/getProfile.slice';
 import { RootState } from 'src/store/store';
 import { AppImages } from '@football/app/assets/images';
 import { isEmpty } from 'lodash';
@@ -85,6 +85,8 @@ export const useViewModel = () => {
         dispatch(clearSetProfile([]));
         // Clear Phone Number
         dispatch(clearPhoneNumber([]));
+        // Clear getProfile
+        dispatch(clearGetProfile([]));
     };
     const isFocused = useIsFocused();
     useEffect(() => {
@@ -107,13 +109,11 @@ export const useViewModel = () => {
     const [userName, setUserName] = useState('');
     const [avt, setAvt] = useState();
     useEffect(() => {
+        if (!isFocused) return;
         if (
-            (login.success === true &&
-                profileUser.success === true &&
-                numberPhone.successRegister === true) ||
-            (login.success === true &&
-                profileUser.success === true &&
-                numberPhone.successLogin === true)
+            login.success === true &&
+            profileUser.success === true &&
+            numberPhone.successRegister === true
         ) {
             dispatch(
                 getProfileUser(
@@ -126,8 +126,9 @@ export const useViewModel = () => {
                 )
             );
         }
-    }, [login.success, profileUser.success, numberPhone.successRegister, numberPhone.successLogin]);
+    }, [login.success, profileUser.success, numberPhone.successRegister, isFocused]);
     useEffect(() => {
+        if (!isFocused) return;
         if (
             login.success === true &&
             profileUser.success === true &&
@@ -146,6 +147,7 @@ export const useViewModel = () => {
         }
     }, [login.success, profileUser.success, numberPhone.successRegister]);
     useEffect(() => {
+        if (!isFocused) return;
         if (login.success === true && numberPhone.successLogin === true) {
             dispatch(
                 getProfileUser(
@@ -158,7 +160,7 @@ export const useViewModel = () => {
                 )
             );
         }
-    }, [login.success, numberPhone.successLogin]);
+    }, [login.success, numberPhone.successLogin, isFocused]);
 
     useEffect(() => {
         if (getProfile.success) {
@@ -184,14 +186,18 @@ export const useViewModel = () => {
 
     const handleAccount = () => {
         if (isEmpty(getProfile.getProfile)) {
-            navigate(ScreenName.RegisterPage, { scrollBottom: false });
+            navigate(ScreenName.RegisterPage);
         } else {
-            navigate(ScreenName.SettingsPage);
+            navigate(ScreenName.SettingsPage, { scrollBottom: false });
         }
     };
 
     const handleBottomSettingPage = () => {
-        navigate(ScreenName.SettingsPage, { scrollBottom: true });
+        if (isEmpty(getProfile.getProfile)) {
+            navigate(ScreenName.RegisterPage);
+        } else {
+            navigate(ScreenName.SettingsPage, { scrollBottom: true });
+        }
     };
 
     return {
