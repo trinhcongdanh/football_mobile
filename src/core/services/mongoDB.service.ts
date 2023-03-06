@@ -52,6 +52,13 @@ class MongoDBService {
             filter: searchQuery,
         });
     }
+
+    filter<T = any>(filter: any): Promise<Result<T>> {
+        return this.httpClient.post('/find', {
+            ...this.dbConfig,
+            filter,
+        });
+    }
 }
 
 export default MongoDBService;

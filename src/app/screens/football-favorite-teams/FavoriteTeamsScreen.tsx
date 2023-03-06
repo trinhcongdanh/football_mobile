@@ -15,7 +15,7 @@ export const FavoriteTeamsScreen = ({ navigation, route }: IFavoriteTeamsScreenP
         handleContinue,
         handleSelected,
         searchText,
-        searchFavTeam,
+        // searchFavTeam,
         setSearchText,
         profile,
         selectedFavTeams,
@@ -52,7 +52,7 @@ export const FavoriteTeamsScreen = ({ navigation, route }: IFavoriteTeamsScreenP
                 submitSearchFavTeam={submitSearchFavTeam}
                 searchFavTeam={(text: string) => {
                     setSearchText(text);
-                    searchFavTeam(text);
+                    // searchFavTeam(text);
                 }}
                 onGoSkip={onGoSkip}
                 onGoBack={onGoBack}
