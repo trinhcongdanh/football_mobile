@@ -12,7 +12,7 @@ export const isGuessUser = (profileUser: any) => {
 };
 
 export const renderAvatar = (profileUser: any) => {
-    if (isGuessUser(profileUser.getProfile) || !profileUser?.getProfile?.item) {
+    if (isGuessUser(profileUser) || !profileUser?.getProfile?.item) {
         return AppImages.img_avt_other;
     }
 
@@ -32,7 +32,7 @@ export const renderAvatar = (profileUser: any) => {
 };
 
 export const renderUserPoints = (profileUser: any, t: any) => {
-    if (isGuessUser(profileUser.getProfile)) {
+    if (isGuessUser(profileUser)) {
         return t('side_menu.guest');
     }
 

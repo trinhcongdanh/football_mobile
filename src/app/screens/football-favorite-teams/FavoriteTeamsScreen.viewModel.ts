@@ -88,10 +88,6 @@ export const useViewModel = ({ navigation, route }: IFavoriteTeamsScreenProps) =
         }
     };
 
-    const searchFavTeam = (text: string) => {
-        setSearchText(text);
-    };
-
     const submitSearchFavTeam = async () => {
         if (searchText !== '') {
             try {
@@ -139,6 +135,13 @@ export const useViewModel = ({ navigation, route }: IFavoriteTeamsScreenProps) =
             } catch (error: any) {
                 Alert.alert(error);
             }
+        }
+    };
+
+    const searchFavTeam = (text: string) => {
+        setSearchText(text);
+        if (!text.length) {
+            submitSearchFavTeam();
         }
     };
 

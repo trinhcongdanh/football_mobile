@@ -1,5 +1,6 @@
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
 import { AuthData, ScreenName } from '@football/app/utils/constants/enum';
+import { serializeParams } from '@football/app/utils/functions/quick-functions';
 import { useMount } from '@football/app/utils/hooks/useMount';
 import { ACTION, TOKEN } from '@football/core/api/auth/config';
 import { axiosClient } from '@football/core/api/configs/axiosClient';
@@ -92,15 +93,15 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
     const favSelectedPlayers = useSelector((state: RootState) =>
         !isEmpty(selectedFavTeams)
             ? state.favPlayers.groupPlayers
-                  .map(e => {
-                      return e.listFavPlayers.filter(v => v.isSelected);
-                  })
-                  .flat()
+                .map(e => {
+                    return e.listFavPlayers.filter(v => v.isSelected);
+                })
+                .flat()
             : state.favPlayers.favPlayers
-                  .map(e => {
-                      return e.listFavPlayers.filter(v => v.isSelected);
-                  })
-                  .flat()
+                .map(e => {
+                    return e.listFavPlayers.filter(v => v.isSelected);
+                })
+                .flat()
     );
 
     const login = useSelector((state: RootState) => state.login);
@@ -108,16 +109,6 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
     const guestId = useSelector((state: any) => state.guestId.guestId);
     const uuid = require('uuid');
     let id = uuid.v4();
-
-    function serializeParams(obj: any) {
-        let str = [];
-        for (let p in obj) {
-            if (obj.hasOwnProperty(p)) {
-                str.push(p + '=' + encodeURIComponent(obj[p]));
-            }
-        }
-        return str.join('&');
-    }
 
     const getPlayersData = useCallback(async () => {
         if (isEmpty(favPlayers) || isNil(favPlayers)) {
@@ -207,12 +198,9 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
         }
     };
 
-    const searchFavPlayer = (text: string) => {
-        setSearchText(text);
-    };
-
-    const submitSearchFavPlayer = async () => {
-        if (searchText !== '') {
+    const submitSearchFavPlayer = async (text?: string) => {
+        const searchT = text || searchText;
+        if (searchT !== '') {
             try {
                 dispatch(
                     resetSearchFavPlayer({
@@ -256,7 +244,7 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
                         homepage_info: true,
                     },
                     filter: {
-                        search_terms: { $regex: `.*${searchText}.*`, $options: 'i' },
+                        search_terms: { $regex: `.*${searchT}.*`, $options: 'i' },
                     },
                     limit: 100,
                 });
@@ -359,6 +347,13 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
                     }
                 }
             }
+        }
+    };
+
+    const searchFavPlayer = (text: string) => {
+        setSearchText(text);
+        if (!text.length) {
+            submitSearchFavPlayer('');
         }
     };
 
