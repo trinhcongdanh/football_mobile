@@ -89,8 +89,8 @@ const resources = {
             },
             settings: {
                 user_settings: 'הגדרות משתמש',
-                name: 'עידו אברהמי',
-                email: 'IdoAvrahami@Fmail.com',
+                name: 'שם מלא',
+                email: 'דוא"ל',
                 gender: 'מגדר',
                 male: 'זכר',
                 female: 'נקבה',
@@ -707,8 +707,8 @@ const resources = {
             },
             settings: {
                 user_settings: 'User settings',
-                name: 'Ido Abrahami',
-                email: 'IdoAvrahami@Fmail.com',
+                name: 'Full Name',
+                email: 'Email',
                 gender: 'Gender',
                 male: 'Male',
                 female: 'Female',
