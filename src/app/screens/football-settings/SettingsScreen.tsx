@@ -9,6 +9,7 @@ import { Spacer } from '@football/app/components/spacer/Spacer';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import { getSize } from '@football/app/utils/responsive/scale';
+import { renderAvatar, renderUserPoints } from '@football/core/models/AvatarType.enum';
 import { Avatar } from '@rneui/themed';
 import _ from 'lodash';
 import React, { useEffect, useState } from 'react';
@@ -128,7 +129,7 @@ export function SettingsScreen(props: ISettingsScreenProps) {
                                     <Avatar
                                         size={getSize.m(73)}
                                         rounded
-                                        source={AppImages.img_avt_player}
+                                        source={renderAvatar(getProfile)}
                                         containerStyle={{ backgroundColor: appColors.separator }}
                                     />
 
@@ -148,7 +149,9 @@ export function SettingsScreen(props: ISettingsScreenProps) {
                                     resizeMode={FastImage.resizeMode.contain}
                                     style={styles.ic_football}
                                 />
-                                <Text style={styles.txt_avatar}>1,345</Text>
+                                <Text style={styles.txt_avatar}>
+                                    {renderUserPoints(getProfile, t)}
+                                </Text>
                             </View>
                             <View style={styles.first_block_container}>
                                 <Input
