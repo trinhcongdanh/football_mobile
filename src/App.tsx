@@ -16,6 +16,7 @@ import { appStyles } from './app/utils/constants/appStyles';
 import { persistor, store } from './store/store';
 import Orientation from 'react-native-orientation-locker';
 import { TextInput as TextInputGH } from 'react-native-gesture-handler';
+import { EventProvider } from 'react-native-outside-press';
 
 TextInput.defaultProps = Text.defaultProps || {};
 TextInput.defaultProps.allowFontScaling = false;
@@ -104,10 +105,12 @@ const App = (props: any) => {
                 <PersistGate loading={null} persistor={persistor}>
                     <ThemeProvider>
                         <NavigationContainer>
-                            <View style={appStyles.flex}>
-                                <RootNavigator />
-                                <Video />
-                            </View>
+                            <EventProvider style={{ flex: 1 }}>
+                                <View style={appStyles.flex}>
+                                    <RootNavigator />
+                                    <Video />
+                                </View>
+                            </EventProvider>
                         </NavigationContainer>
                     </ThemeProvider>
                 </PersistGate>
