@@ -8,14 +8,14 @@ export enum AvatarType {
 }
 
 export const renderAvatar = (profileUser: any) => {
-    if (isEmpty(profileUser.getProfile)) {
+    if (isEmpty(profileUser.getProfile) || !profileUser?.getProfile?.item) {
         return AppImages.img_avt_other;
     }
 
-    if (profileUser.getProfile.item.avatar_image) {
+    if (profileUser?.getProfile?.item?.avatar_image) {
         return { uri: profileUser.getProfile.item.avatar_image };
     }
-    switch (profileUser.getProfile.item.gender) {
+    switch (profileUser?.getProfile?.item?.gender) {
         case AvatarType.FAN_GENDER_MALE:
             return AppImages.img_avt_man;
 
