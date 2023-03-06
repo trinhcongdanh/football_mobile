@@ -89,16 +89,16 @@ export const VideoScreen = ({ navigation, route }: IVideoScreenProps) => {
                                                         }}
                                                     >
                                                         <TouchableOpacity
-                                                            activeOpacity={0.9}
+                                                            activeOpacity={1}
                                                             onPress={() => handlePlayVideo(item)}
                                                         >
                                                             <LinearGradient
                                                                 colors={[
                                                                     'transparent',
-                                                                    'rgba(0, 0, 0, 1)',
+                                                                    'rgba(0, 0, 0, 0.92)',
                                                                 ]}
-                                                                start={{ x: 0.5, y: 0.5 }}
-                                                                end={{ x: 1, y: 1 }}
+                                                                start={{ x: 0, y: 0.3 }}
+                                                                end={{ x: 0, y: 1 }}
                                                                 style={styles.gradient_img}
                                                             />
                                                             <Image
@@ -163,16 +163,16 @@ export const VideoScreen = ({ navigation, route }: IVideoScreenProps) => {
                                                         }}
                                                     >
                                                         <TouchableOpacity
-                                                            activeOpacity={0.9}
+                                                            activeOpacity={1}
                                                             onPress={() => handlePlayVideo(item)}
                                                         >
                                                             <LinearGradient
                                                                 colors={[
                                                                     'transparent',
-                                                                    'rgba(0, 0, 0, 1)',
+                                                                    'rgba(0, 0, 0, 0.92)',
                                                                 ]}
-                                                                start={{ x: 0.5, y: 0.5 }}
-                                                                end={{ x: 1, y: 1 }}
+                                                                start={{ x: 0, y: 0.3 }}
+                                                                end={{ x: 0, y: 1 }}
                                                                 style={styles.gradient_img}
                                                             />
                                                             <Image
@@ -236,16 +236,16 @@ export const VideoScreen = ({ navigation, route }: IVideoScreenProps) => {
                                                         }}
                                                     >
                                                         <TouchableOpacity
-                                                            activeOpacity={0.9}
+                                                            activeOpacity={1}
                                                             onPress={() => handlePlayVideo(item)}
                                                         >
                                                             <LinearGradient
                                                                 colors={[
                                                                     'transparent',
-                                                                    'rgba(0, 0, 0, 1)',
+                                                                    'rgba(0, 0, 0, 0.92)',
                                                                 ]}
-                                                                start={{ x: 0.5, y: 0.5 }}
-                                                                end={{ x: 1, y: 1 }}
+                                                                start={{ x: 0, y: 0.3 }}
+                                                                end={{ x: 0, y: 1 }}
                                                                 style={styles.gradient_img}
                                                             />
                                                             <Image

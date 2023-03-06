@@ -18,7 +18,7 @@ import { Item9 } from '@football/app/screens/football-home/layouts/Item9/Item9';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import { getSize } from '@football/app/utils/responsive/scale';
-import { renderAvatar } from '@football/core/models/AvatarType.enum';
+import { renderAvatar, renderUserPoints } from '@football/core/models/AvatarType.enum';
 import React from 'react';
 import {
     ImageBackground,
@@ -114,7 +114,7 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                                                         },
                                                     ]}
                                                 >
-                                                    1,325
+                                                    {renderUserPoints(profileUser, t)}
                                                 </Text>
                                             </View>
                                         </View>
