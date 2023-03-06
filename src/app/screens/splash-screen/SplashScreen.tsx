@@ -16,6 +16,7 @@ import { ImageBackground, StatusBar, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProfileUser } from 'src/store/user/getProfile.slice';
 import { addGuestId } from 'src/store/user/GuestId.slice';
+import { RootState } from 'src/store/store';
 
 const useViewModel = () => {};
 
@@ -90,21 +91,6 @@ export const SplashScreen = ({ navigation, route }: ISplashScreenProps) => {
     }, 4000);
 
     const login = useSelector((state: any) => state.login);
-
-    useEffect(() => {
-        if (login.success === true) {
-            dispatch(
-                getProfileUser(
-                    serializeParams({
-                        action: ACTION,
-                        token: login.login.token,
-                        call: AuthData.GET_PROFILE,
-                        item: login.login.user.item_id,
-                    })
-                )
-            );
-        }
-    }, [login.success]);
 
     useEffect(() => {
         if (authLoaded) {

@@ -126,3 +126,9 @@ export enum AuthData {
     REGISTER_SMS = 'register_sms',
     LOGOUT = 'logout',
 }
+
+export enum Gender {
+    OTHER = 'FAN_GENDER_NOT_AVAILABLE',
+    MALE = 'FAN_GENDER_MALE',
+    FEMALE = 'FAN_GENDER_FEMALE',
+}

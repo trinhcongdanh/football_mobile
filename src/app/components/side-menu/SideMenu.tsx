@@ -15,7 +15,15 @@ import { ScreenName } from '@football/app/utils/constants/enum';
 import { useViewModel } from './SideMenu.viewModel';
 
 export const SideMenu = ({ navigation }: ISideMenuProps) => {
-    const { t, onGoBack, navigate, onNavigateStartScreen } = useViewModel();
+    const {
+        t,
+        onGoBack,
+        navigate,
+        onNavigateStartScreen,
+        userName,
+        avt,
+        handleAccount,
+    } = useViewModel();
 
     return (
         <View style={styles.side_menu_container}>
@@ -36,13 +44,13 @@ export const SideMenu = ({ navigation }: ISideMenuProps) => {
                     <View style={[appStyles.flex_row_align_center, styles.side_menu_info]}>
                         <View style={styles.side_menu_avt_container}>
                             <FastImage
-                                source={AppImages.img_avt}
+                                source={avt}
                                 style={styles.side_menu_avt}
                                 resizeMode={FastImage.resizeMode.contain}
                             />
                         </View>
                         <View style={{ marginLeft: getSize.m(10) }}>
-                            <Text style={styles.side_menu_name}>עידו אברהמי</Text>
+                            <Text style={styles.side_menu_name}>{userName}</Text>
                             <TouchableOpacity
                                 onPress={onNavigateStartScreen}
                                 style={[appStyles.flex_row_align_center]}
@@ -58,9 +66,7 @@ export const SideMenu = ({ navigation }: ISideMenuProps) => {
                     </View>
                     <View style={{ marginTop: getSize.m(23) }}>
                         <TouchableOpacity
-                            onPress={() => {
-                                navigate(ScreenName.SettingsPage);
-                            }}
+                            onPress={handleAccount}
                             style={appStyles.flex_row_align_center}
                         >
                             <FastImage
