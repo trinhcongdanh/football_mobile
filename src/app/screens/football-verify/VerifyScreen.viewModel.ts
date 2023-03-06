@@ -120,6 +120,7 @@ export const useViewModel = ({ navigation, route }: IVerifyScreenProps) => {
     };
 
     const onVerifyCode = async () => {
+        handleError('', 'verifyError');
         let codeOtp = '';
         Object.values(OTP).forEach(code => {
             codeOtp += code;
@@ -178,11 +179,15 @@ export const useViewModel = ({ navigation, route }: IVerifyScreenProps) => {
     useEffect(() => {
         if (otp.success === false && otp.loading === false && otp.isVerifyOtp === true) {
             handleError(t('verify.error'), 'verifyError');
+            setOTP({ 0: '', 1: '', 2: '', 3: '' });
+            setNextInputIndex(0);
         }
     }, [otp.loading, otp.isVerifyOtp]);
     useEffect(() => {
         if (numberPhone.successLogin === false && numberPhone.loadingLogin === false) {
             handleError(t('verify.error'), 'verifyError');
+            setOTP({ 0: '', 1: '', 2: '', 3: '' });
+            setNextInputIndex(0);
         }
     }, [numberPhone.loadingLogin, otp.isVerifyOtp]);
     return {
@@ -198,5 +203,6 @@ export const useViewModel = ({ navigation, route }: IVerifyScreenProps) => {
         handleChangeText,
         number,
         otp,
+        numberPhone,
     };
 };

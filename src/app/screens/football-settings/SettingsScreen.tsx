@@ -12,7 +12,7 @@ import { getSize } from '@football/app/utils/responsive/scale';
 import { renderAvatar, renderUserPoints } from '@football/core/models/AvatarType.enum';
 import { Avatar } from '@rneui/themed';
 import _ from 'lodash';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import {
     ActivityIndicator,
     Image,
@@ -20,7 +20,6 @@ import {
     SafeAreaView,
     ScrollView,
     StatusBar,
-    Switch,
     Text,
     TouchableOpacity,
     View,
@@ -86,6 +85,7 @@ export function SettingsScreen(props: ISettingsScreenProps) {
         favSelectedTeam,
         editBirthday,
         profileUser,
+        scrollViewRef,
         handleNotSaveChange,
     } = useViewModel(props);
 
@@ -122,6 +122,7 @@ export function SettingsScreen(props: ISettingsScreenProps) {
                     <ScrollView
                         showsVerticalScrollIndicator={false}
                         style={[appStyles.flex, { marginTop: getSize.m(10) }]}
+                        ref={scrollViewRef}
                     >
                         <View style={styles.card_view_container}>
                             <View style={styles.avatar_block}>

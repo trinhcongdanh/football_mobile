@@ -184,10 +184,14 @@ export const useViewModel = () => {
 
     const handleAccount = () => {
         if (isEmpty(getProfile.getProfile)) {
-            navigate(ScreenName.RegisterPage);
+            navigate(ScreenName.RegisterPage, { scrollBottom: false });
         } else {
             navigate(ScreenName.SettingsPage);
         }
+    };
+
+    const handleBottomSettingPage = () => {
+        navigate(ScreenName.SettingsPage, { scrollBottom: true });
     };
 
     return {
@@ -198,5 +202,6 @@ export const useViewModel = () => {
         userName,
         avt,
         handleAccount,
+        handleBottomSettingPage,
     };
 };

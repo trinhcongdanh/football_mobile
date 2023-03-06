@@ -42,7 +42,7 @@ export const RegisterScreen = ({ navigation, route }: IRegisterScreenProps) => {
 
     return (
         <View style={appStyles.flex}>
-            {numberPhone.successRegister === false ? (
+            {numberPhone.loadingRegister === true ? (
                 <View
                     style={{
                         justifyContent: 'center',

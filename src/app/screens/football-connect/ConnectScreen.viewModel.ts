@@ -143,10 +143,7 @@ export const useViewModel = ({ navigation, route }: IConnectScreenProps) => {
         setErrors(prevState => ({ ...prevState, [input]: errorMessage }));
     };
 
-    const [loginWithNumber, setLoginWithNumber] = useState(false);
-
     const Connect = () => {
-        setLoginWithNumber(true);
         Keyboard.dismiss();
         dispatch(
             loginNumberPhoneUser(
@@ -176,11 +173,7 @@ export const useViewModel = ({ navigation, route }: IConnectScreenProps) => {
 
     useEffect(() => {
         if (!isFocused) return;
-        if (
-            numberPhone.successLogin === true &&
-            profile.success === true &&
-            loginWithNumber === true
-        ) {
+        if (numberPhone.successLogin === true && profile.success === true) {
             dispatch(
                 loginUser(
                     serializeParams({
@@ -196,53 +189,15 @@ export const useViewModel = ({ navigation, route }: IConnectScreenProps) => {
                 number: phoneNumber,
                 previous_screen: ScreenName.ConnectPage,
             });
-        } else if (numberPhone.successLogin === false && numberPhone.loadingLogin === false) {
+        }
+        if (numberPhone.successLogin === false && numberPhone.loadingLogin === false) {
             handleError(t('register.invalid'), 'numberPhone');
         }
     }, [numberPhone.successLogin, isFocused, profile.success]);
 
     const onNavigateSignUp = () => {
-        setLoginWithNumber(false);
-        if (isEmpty(profile.profile) || isNil(profile.profile)) {
-            dispatch(
-                createProfileUser(
-                    serializeParams({
-                        action: ACTION,
-                        token: TOKEN,
-                        call: AuthData.CREATE_PROFILE,
-                        item: {
-                            guest_guid: guestId[0],
-                        },
-                    })
-                )
-            );
-        } else {
-            navigate(ScreenName.RegisterPage);
-        }
+        navigate(ScreenName.FavTeamPage);
     };
-
-    useEffect(() => {
-        if (!isFocused) return;
-        if (!isEmpty(login.login)) {
-            navigate(ScreenName.RegisterPage);
-        } else {
-            if (profile.success === true && loginWithNumber === false) {
-                dispatch(
-                    loginUser(
-                        serializeParams({
-                            action: ACTION,
-                            token: TOKEN,
-                            call: AuthData.LOGIN,
-                            guest_id: profile.profile.tc_user,
-                            guest_guid: guestId[0],
-                        })
-                    )
-                );
-
-                navigate(ScreenName.RegisterPage);
-            }
-        }
-    }, [profile.success, isFocused]);
 
     return {
         errors,
