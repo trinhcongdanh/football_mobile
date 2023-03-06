@@ -7,8 +7,12 @@ export enum AvatarType {
     FAN_GENDER_NOT_AVAILABLE = 'FAN_GENDER_NOT_AVAILABLE',
 }
 
+export const isGuessUser = (profileUser: any) => {
+    return isEmpty(profileUser.getProfile);
+};
+
 export const renderAvatar = (profileUser: any) => {
-    if (isEmpty(profileUser.getProfile) || !profileUser?.getProfile?.item) {
+    if (isGuessUser(profileUser.getProfile) || !profileUser?.getProfile?.item) {
         return AppImages.img_avt_other;
     }
 
@@ -28,7 +32,7 @@ export const renderAvatar = (profileUser: any) => {
 };
 
 export const renderUserPoints = (profileUser: any, t: any) => {
-    if (isEmpty(profileUser.getProfile)) {
+    if (isGuessUser(profileUser.getProfile)) {
         return t('side_menu.guest');
     }
 
