@@ -547,6 +547,15 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
         dispatch(resetSettingFavTopTeam([]));
     };
 
+    const scrollBottom = route.params?.scrollBottom;
+
+    const scrollViewRef = useRef<any>();
+    useEffect(() => {
+        if (scrollBottom == true) {
+            scrollViewRef.current.scrollToEnd({ animated: true });
+        }
+    }, []);
+
     return {
         dateTime,
         image,
@@ -601,5 +610,6 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
         editBirthday,
         handleNotSaveChange,
         profileUser,
+        scrollViewRef,
     };
 };

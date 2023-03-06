@@ -23,6 +23,7 @@ export const SideMenu = ({ navigation }: ISideMenuProps) => {
         userName,
         avt,
         handleAccount,
+        handleBottomSettingPage,
     } = useViewModel();
 
     return (
@@ -94,9 +95,7 @@ export const SideMenu = ({ navigation }: ISideMenuProps) => {
                             </Text>
                         </TouchableOpacity>
                         <TouchableOpacity
-                            onPress={() => {
-                                navigate(ScreenName.SettingsPage);
-                            }}
+                            onPress={handleBottomSettingPage}
                             style={[appStyles.flex_row_align_center, { marginTop: getSize.m(28) }]}
                         >
                             <FastImage

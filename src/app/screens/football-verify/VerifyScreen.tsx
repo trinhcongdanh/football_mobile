@@ -37,6 +37,7 @@ export const VerifyScreen = ({ navigation, route }: IVerifyScreenProps) => {
         onVerifyCode,
         number,
         otp,
+        numberPhone,
     } = useViewModel({
         navigation,
         route,
@@ -44,7 +45,41 @@ export const VerifyScreen = ({ navigation, route }: IVerifyScreenProps) => {
 
     return (
         <View style={appStyles.flex}>
-            {otp.success === false ? (
+            {otp.loading === true ? (
+                <View
+                    style={{
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        position: 'absolute',
+                        backgroundColor: 'rgba(0,0,0,0.5)',
+                        top: getSize.m(0),
+                        bottom: getSize.m(0),
+                        left: getSize.m(0),
+                        right: getSize.m(0),
+                        zIndex: 10,
+                    }}
+                >
+                    <ActivityIndicator size="large" />
+                </View>
+            ) : null}
+            {numberPhone.loadingRegister === true ? (
+                <View
+                    style={{
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        position: 'absolute',
+                        backgroundColor: 'rgba(0,0,0,0.5)',
+                        top: getSize.m(0),
+                        bottom: getSize.m(0),
+                        left: getSize.m(0),
+                        right: getSize.m(0),
+                        zIndex: 10,
+                    }}
+                >
+                    <ActivityIndicator size="large" />
+                </View>
+            ) : null}
+            {numberPhone.loadingLogin === true ? (
                 <View
                     style={{
                         justifyContent: 'center',
