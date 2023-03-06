@@ -155,5 +155,6 @@ export const useViewModel = ({ navigation, route }: IRegisterScreenProps) => {
         onNavigateConnect,
         connectFacebook,
         connectGoogle,
+        numberPhone,
     };
 };

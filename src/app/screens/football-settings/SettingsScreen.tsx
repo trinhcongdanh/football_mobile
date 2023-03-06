@@ -13,6 +13,7 @@ import { Avatar } from '@rneui/themed';
 import _ from 'lodash';
 import React, { useEffect, useState } from 'react';
 import {
+    ActivityIndicator,
     Image,
     ImageBackground,
     SafeAreaView,
@@ -83,11 +84,29 @@ export function SettingsScreen(props: ISettingsScreenProps) {
         dateTime,
         favSelectedTeam,
         editBirthday,
+        profileUser,
         handleNotSaveChange,
     } = useViewModel(props);
 
     return (
         <View style={appStyles.flex}>
+            {profileUser.success === false ? (
+                <View
+                    style={{
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        position: 'absolute',
+                        backgroundColor: 'rgba(0,0,0,0.5)',
+                        top: getSize.m(0),
+                        bottom: getSize.m(0),
+                        left: getSize.m(0),
+                        right: getSize.m(0),
+                        zIndex: 10,
+                    }}
+                >
+                    <ActivityIndicator size="large" />
+                </View>
+            ) : null}
             <ImageBackground source={AppImages.img_background} style={appStyles.flex}>
                 <StatusBar translucent backgroundColor="transparent" />
                 <SafeAreaView style={appStyles.safe_area}>

@@ -48,7 +48,7 @@ const App = (props: any) => {
 
         if (enabled) {
             console.log('Authorization status:', authStatus);
-            // GetFCMToken();
+            GetFCMToken();
         }
     };
 

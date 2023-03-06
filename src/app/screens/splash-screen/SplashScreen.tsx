@@ -14,7 +14,6 @@ import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ImageBackground, StatusBar, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from 'src/store/store';
 import { getProfileUser } from 'src/store/user/getProfile.slice';
 import { addGuestId } from 'src/store/user/GuestId.slice';
 
@@ -27,7 +26,7 @@ export const SplashScreen = ({ navigation, route }: ISplashScreenProps) => {
 
     const uuid = require('uuid');
     const id = uuid.v4();
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<any>();
 
     const guestId = useSelector((state: any) => state.guestId.guestId);
 
@@ -78,20 +77,6 @@ export const SplashScreen = ({ navigation, route }: ISplashScreenProps) => {
         }
     }, []);
 
-    const login = useSelector((state: any) => state.login);
-    useEffect(() => {
-        dispatch(
-            getProfileUser(
-                serializeParams({
-                    action: ACTION,
-                    token: login.login.token,
-                    call: AuthData.GET_PROFILE,
-                    item: login.login.user.item_id,
-                })
-            )
-        );
-    }, []);
-
     // useEffect(() => {
     //     if (!isLoading) {
     //         setTimeout(() => {
@@ -103,6 +88,23 @@ export const SplashScreen = ({ navigation, route }: ISplashScreenProps) => {
     setTimeout(() => {
         setAuthLoaded(true);
     }, 4000);
+
+    const login = useSelector((state: any) => state.login);
+
+    useEffect(() => {
+        if (login.success === true) {
+            dispatch(
+                getProfileUser(
+                    serializeParams({
+                        action: ACTION,
+                        token: login.login.token,
+                        call: AuthData.GET_PROFILE,
+                        item: login.login.user.item_id,
+                    })
+                )
+            );
+        }
+    }, [login.success]);
 
     useEffect(() => {
         if (authLoaded) {

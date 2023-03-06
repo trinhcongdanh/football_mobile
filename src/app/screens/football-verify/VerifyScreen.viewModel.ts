@@ -166,7 +166,7 @@ export const useViewModel = ({ navigation, route }: IVerifyScreenProps) => {
             otp.isVerifyOtp === true &&
             numberPhone.successRegister === true
         ) {
-            dispatch(statusSetProfile(false));
+            dispatch(statusSetProfile(null));
             navigate(ScreenName.RegPage);
         }
     }, [otp.success, otp.isVerifyOtp, numberPhone.successRegister]);
@@ -197,5 +197,6 @@ export const useViewModel = ({ navigation, route }: IVerifyScreenProps) => {
         onVerifyCode,
         handleChangeText,
         number,
+        otp,
     };
 };

@@ -6,6 +6,7 @@ import {
     SafeAreaView,
     Text,
     ScrollView,
+    ActivityIndicator,
 } from 'react-native';
 import React from 'react';
 import { AppImages } from '@football/app/assets/images';
@@ -32,6 +33,7 @@ export const RegisterScreen = ({ navigation, route }: IRegisterScreenProps) => {
         onNavigateConnect,
         connectFacebook,
         connectGoogle,
+        numberPhone,
     } = useViewModel({
         navigation,
         route,
@@ -40,6 +42,23 @@ export const RegisterScreen = ({ navigation, route }: IRegisterScreenProps) => {
 
     return (
         <View style={appStyles.flex}>
+            {numberPhone.successRegister === false ? (
+                <View
+                    style={{
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        position: 'absolute',
+                        backgroundColor: 'rgba(0,0,0,0.5)',
+                        top: getSize.m(0),
+                        bottom: getSize.m(0),
+                        left: getSize.m(0),
+                        right: getSize.m(0),
+                        zIndex: 10,
+                    }}
+                >
+                    <ActivityIndicator size="large" />
+                </View>
+            ) : null}
             <ImageBackground source={AppImages.img_bg_register} style={appStyles.flex}>
                 <StatusBar translucent backgroundColor="transparent" />
                 <SafeAreaView style={appStyles.safe_area}>
