@@ -3,7 +3,9 @@ import { AppJsons } from '@football/app/assets/images/AppImages';
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
 import { ISplashScreenProps } from '@football/app/screens/splash-screen/SplashScreen.type';
 import { appStyles } from '@football/app/utils/constants/appStyles';
-import { ScreenName } from '@football/app/utils/constants/enum';
+import { AuthData, ScreenName } from '@football/app/utils/constants/enum';
+import { serializeParams } from '@football/app/utils/functions/quick-functions';
+import { ACTION } from '@football/core/api/auth/config';
 import { Lottie } from '@football/core/models/SplashModelResponse';
 import { useSplashAnimations } from '@football/core/services/SplashScreen.service';
 import { isEmpty, isNil } from 'lodash';
@@ -12,6 +14,8 @@ import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ImageBackground, StatusBar, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from 'src/store/store';
+import { getProfileUser } from 'src/store/user/getProfile.slice';
 import { addGuestId } from 'src/store/user/GuestId.slice';
 
 const useViewModel = () => {};
@@ -73,6 +77,21 @@ export const SplashScreen = ({ navigation, route }: ISplashScreenProps) => {
             dispatch(action);
         }
     }, []);
+
+    const login = useSelector((state: any) => state.login);
+    useEffect(() => {
+        dispatch(
+            getProfileUser(
+                serializeParams({
+                    action: ACTION,
+                    token: login.login.token,
+                    call: AuthData.GET_PROFILE,
+                    item: login.login.user.item_id,
+                })
+            )
+        );
+    }, []);
+
     // useEffect(() => {
     //     if (!isLoading) {
     //         setTimeout(() => {
@@ -84,8 +103,6 @@ export const SplashScreen = ({ navigation, route }: ISplashScreenProps) => {
     setTimeout(() => {
         setAuthLoaded(true);
     }, 4000);
-
-    const login = useSelector((state: any) => state.login);
 
     useEffect(() => {
         if (authLoaded) {
