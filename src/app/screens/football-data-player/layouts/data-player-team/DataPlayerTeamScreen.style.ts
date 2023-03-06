@@ -93,11 +93,11 @@ const styles = StyleSheet.create({
         position: 'absolute',
         left: getSize.m(0),
         top: getSize.m(70),
-        zIndex: 10,
+        zIndex: 1000000000000,
+        width: '37%',
         backgroundColor: appColors.white,
         borderBottomLeftRadius: getSize.m(20),
         borderBottomRightRadius: getSize.m(20),
-        elevation: 1,
     },
 
     btn_drop_down_calender: {

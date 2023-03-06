@@ -79,7 +79,12 @@ export const DataPlayerTeamScreen = ({ player }: IDataPlayerTeamScreenProps) => 
                                                         key={index.toString()}
                                                         style={styles.btn_drop_down_calender}
                                                     >
-                                                        <Text style={{ textAlign: 'left' }}>
+                                                        <Text
+                                                            style={[
+                                                                styles.text_calender,
+                                                                { textAlign: 'left' },
+                                                            ]}
+                                                        >
                                                             {season.name}
                                                         </Text>
                                                     </TouchableOpacity>
