@@ -7,6 +7,7 @@ import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { appIcons } from '@football/app/assets/icons/appIcons';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { IItem9Props } from '@football/app/screens/football-home/layouts/Item9/Item9.type';
+import LinearGradient from 'react-native-linear-gradient';
 
 export const Item9 = ({ homePage }: IItem9Props) => {
     const { t, pages, activeIndexNumber, setActiveIndexNumber, dots, onClickImage } = useViewModel({
@@ -46,6 +47,12 @@ export const Item9 = ({ homePage }: IItem9Props) => {
                                 activeOpacity={0.9}
                                 onPress={() => onClickImage(item.link)}
                             >
+                                <LinearGradient
+                                    colors={['transparent', 'rgba(0, 0, 0, 0.92)']}
+                                    start={{ x: 0, y: 0.3 }}
+                                    end={{ x: 0, y: 1 }}
+                                    style={styles.gradient_img}
+                                />
                                 <Image source={{ uri: item.image_url }} style={styles.image} />
                                 {/* <View style={styles.date}>
                                     <Text style={styles.text_date}>{item.length}</Text>

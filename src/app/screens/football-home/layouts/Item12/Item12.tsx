@@ -10,6 +10,7 @@ import IconEntypo from 'react-native-vector-icons/Entypo';
 import IconFeather from 'react-native-vector-icons/Feather';
 import IconAntDesign from 'react-native-vector-icons/AntDesign';
 import { IItem12Props } from '@football/app/screens/football-home/layouts/Item12/Item12.type';
+import LinearGradient from 'react-native-linear-gradient';
 
 export const Item12 = ({ videos, handlePlayVideo }: IItem12Props) => {
     const { t, activeIndexNumber, setActiveIndexNumber, dots, onClickAllVideo } = useViewModel({
@@ -66,9 +67,15 @@ export const Item12 = ({ videos, handlePlayVideo }: IItem12Props) => {
                             }}
                         >
                             <TouchableOpacity
-                                activeOpacity={0.9}
+                                activeOpacity={1}
                                 onPress={() => handlePlayVideo(item)}
                             >
+                                <LinearGradient
+                                    colors={['transparent', 'rgba(0, 0, 0, 0.92)']}
+                                    start={{ x: 0, y: 0.3 }}
+                                    end={{ x: 0, y: 1 }}
+                                    style={styles.gradient_img}
+                                />
                                 <Image source={{ uri: item.image_url }} style={styles.image} />
                                 <View style={styles.date}>
                                     <Text style={styles.text_date}>{item.length}</Text>
