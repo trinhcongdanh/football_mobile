@@ -154,7 +154,7 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
             previous_screen === ScreenName.FavPlayerPage ||
             previous_screen === ScreenName.FavTopTeamPage
         ) {
-            navigate(ScreenName.SplashPage);
+            replace(ScreenName.SideBar);
         } else {
             goBack();
         }
