@@ -35,16 +35,12 @@ export const LeaguesDetailsScreen = ({ navigation, route }: ILeaguesDetailsScree
         setOpenModalYear,
         handleSelectedYear,
         handleCloseModal,
-        setOpenModalCycle,
-        setOpenModalPlayOff,
         setSelectCycle,
         setSelectRound,
         openModalYear,
         years,
-        openModalCycle,
         selectRound,
         selectCycle,
-        openModalPlayOff,
         league,
         galleries,
         highlights,
@@ -127,17 +123,9 @@ export const LeaguesDetailsScreen = ({ navigation, route }: ILeaguesDetailsScree
                                 <View style={{ flex: 0.9 }}>
                                     <DropdownField
                                         options={selectedLeagueSeason?.cycles || []}
-                                        isOpen={openModalPlayOff}
-                                        onPress={() => {
-                                            setOpenModalPlayOff(!openModalPlayOff);
-                                        }}
-                                        closeDropdown={() => {
-                                            setOpenModalPlayOff(false);
-                                        }}
-                                        title={selectCycle?.cycle_name_he || ''}
-                                        onPressItem={(cycle: any) => {
+                                        selectedValue={selectCycle}
+                                        onPressItem={cycle => {
                                             setSelectCycle(cycle);
-                                            setOpenModalPlayOff(false);
                                         }}
                                         itemTitleField="cycle_name_he"
                                     />
@@ -145,17 +133,9 @@ export const LeaguesDetailsScreen = ({ navigation, route }: ILeaguesDetailsScree
                                 <View style={{ flex: 0.5 }}>
                                     <DropdownField
                                         options={selectCycle?.rounds || []}
-                                        isOpen={openModalCycle}
-                                        onPress={() => {
-                                            setOpenModalCycle(!openModalCycle);
-                                        }}
-                                        closeDropdown={() => {
-                                            setOpenModalCycle(false);
-                                        }}
-                                        title={selectRound?.round_name_he || ''}
-                                        onPressItem={(input: any) => {
-                                            setSelectRound(input);
-                                            setOpenModalCycle(false);
+                                        selectedValue={selectRound}
+                                        onPressItem={round => {
+                                            setSelectRound(round);
                                         }}
                                         itemTitleField="round_name_he"
                                     />

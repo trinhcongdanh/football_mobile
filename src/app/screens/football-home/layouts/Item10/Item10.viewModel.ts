@@ -71,12 +71,6 @@ export const useViewModel = ({ league }: IItem10Props) => {
     }, [state.leagueSeason]);
 
     const [activeIndexNumber, setActiveIndexNumber] = useState(Number);
-    // Year
-    const [openModalYear, setOpenModalYear] = useState(false);
-
-    // cycles
-    const [openModalCycles, setOpenModalCycles] = useState(false);
-    const [openModalRound, setOpenModalRound] = useState(false);
 
     const onClickAllLeagues = (leagueId: string) => {
         navigate(ScreenName.LeaguesDetailsPage, { leagueId });
@@ -94,13 +88,7 @@ export const useViewModel = ({ league }: IItem10Props) => {
         pages,
         activeIndexNumber,
         setActiveIndexNumber,
-        openModalYear,
-        setOpenModalYear,
         ...state,
-        openModalCycles,
-        setOpenModalCycles,
         onClickAllLeagues,
-        openModalRound,
-        setOpenModalRound,
     };
 };

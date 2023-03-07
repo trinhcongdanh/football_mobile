@@ -7,6 +7,7 @@ const styles = StyleSheet.create({
     container: {
         backgroundColor: appColors.white,
         elevation: 10,
+        zIndex: 10,
     },
     header: {
         fontFamily: AppFonts.bold,
@@ -25,6 +26,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         marginTop: getSize.m(20),
+        zIndex: 10,
     },
     cycle: {
         flexDirection: 'row',

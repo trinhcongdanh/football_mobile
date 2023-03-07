@@ -1,17 +1,17 @@
 /* eslint-disable no-underscore-dangle */
 import { appIcons } from '@football/app/assets/icons/appIcons';
+import DropdownField from '@football/app/components/dropdown-field/DropdownField';
 import styles from '@football/app/screens/football-home/layouts/Item10/Item10.style';
+import { IItem10Props } from '@football/app/screens/football-home/layouts/Item10/Item10.type';
 import { useViewModel } from '@football/app/screens/football-home/layouts/Item10/Item10.viewModel';
 import { appColors } from '@football/app/utils/constants/appColors';
-import { getSize } from '@football/app/utils/responsive/scale';
-import IconEntypo from 'react-native-vector-icons/Entypo';
-import IconFeather from 'react-native-vector-icons/Feather';
-import React from 'react';
-import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { appStyles } from '@football/app/utils/constants/appStyles';
+import { getSize } from '@football/app/utils/responsive/scale';
+import React from 'react';
+import { Text, TouchableOpacity, View } from 'react-native';
 import { Avatar } from 'react-native-elements';
 import LinearGradient from 'react-native-linear-gradient';
-import { IItem10Props } from '@football/app/screens/football-home/layouts/Item10/Item10.type';
+import IconEntypo from 'react-native-vector-icons/Entypo';
 
 export const Item10 = ({ league }: IItem10Props) => {
     const {
@@ -19,16 +19,10 @@ export const Item10 = ({ league }: IItem10Props) => {
         pages,
         activeIndexNumber,
         setActiveIndexNumber,
-        openModalYear,
-        setOpenModalYear,
         selectSeason,
         setSelectSeason,
-        openModalCycles,
-        setOpenModalCycles,
         selectCycle,
         setSelectCycle,
-        openModalRound,
-        setOpenModalRound,
         selectRound,
         setSelectRound,
         onClickAllLeagues,
@@ -60,143 +54,34 @@ export const Item10 = ({ league }: IItem10Props) => {
 
             <View style={styles.drop_down_filter}>
                 <View style={{ flex: 1 }}>
-                    <TouchableOpacity
-                        onPress={() => {
-                            setOpenModalYear(!openModalYear);
+                    <DropdownField
+                        options={league.seasons || []}
+                        selectedValue={selectSeason}
+                        onPressItem={season => {
+                            setSelectSeason(season);
                         }}
-                        style={[
-                            styles.cycle,
-                            {
-                                borderColor: openModalYear
-                                    ? appColors.blue_light
-                                    : appColors.border,
-                            },
-                        ]}
-                    >
-                        <Text style={styles.text_cycle}>{selectSeason?.league_season_name}</Text>
-                        <IconFeather
-                            name={openModalYear ? appIcons.ic_chevron_up : appIcons.ic_chevron_down}
-                            size={getSize.m(14)}
-                            color={openModalYear ? appColors.blue_light : appColors.light_gray}
-                            style={styles.chevron_down}
-                        />
-                    </TouchableOpacity>
-                    {openModalYear && (
-                        <View style={[styles.drop_down_calender, { width: '80%' }]}>
-                            <ScrollView showsVerticalScrollIndicator={false} nestedScrollEnabled>
-                                {league.seasons.map((season, index) => {
-                                    return (
-                                        <TouchableOpacity
-                                            onPress={() => {
-                                                setSelectSeason(season);
-                                                setOpenModalYear(false);
-                                            }}
-                                            key={index.toString()}
-                                            style={styles.btn_drop_down_calender}
-                                        >
-                                            <Text style={styles.btn_drop_down_calender_text}>
-                                                {season.league_season_name}
-                                            </Text>
-                                        </TouchableOpacity>
-                                    );
-                                })}
-                            </ScrollView>
-                        </View>
-                    )}
+                        itemTitleField="league_season_name"
+                    />
                 </View>
                 <View style={{ flex: 1 }}>
-                    <TouchableOpacity
-                        onPress={() => {
-                            setOpenModalCycles(!openModalCycles);
+                    <DropdownField
+                        options={leagueSeason?.cycles || []}
+                        selectedValue={selectCycle}
+                        onPressItem={cycle => {
+                            setSelectCycle(cycle);
                         }}
-                        style={[
-                            styles.cycle,
-                            {
-                                borderColor: openModalCycles
-                                    ? appColors.blue_light
-                                    : appColors.border,
-                            },
-                        ]}
-                    >
-                        <Text style={styles.text_cycle}>{selectCycle?.cycle_name_he}</Text>
-                        <IconFeather
-                            name={
-                                openModalCycles ? appIcons.ic_chevron_up : appIcons.ic_chevron_down
-                            }
-                            size={getSize.m(14)}
-                            color={openModalCycles ? appColors.blue_light : appColors.light_gray}
-                            style={styles.chevron_down}
-                        />
-                    </TouchableOpacity>
-                    {openModalCycles && (
-                        <View style={[styles.drop_down_calender, { width: '80%' }]}>
-                            <ScrollView showsVerticalScrollIndicator={false} nestedScrollEnabled>
-                                {leagueSeason?.cycles.map((cycle, index) => {
-                                    return (
-                                        <TouchableOpacity
-                                            onPress={() => {
-                                                setSelectCycle(cycle);
-                                                setOpenModalCycles(false);
-                                            }}
-                                            key={index.toString()}
-                                            style={styles.btn_drop_down_calender}
-                                        >
-                                            <Text style={styles.btn_drop_down_calender_text}>
-                                                {cycle.cycle_name_he}
-                                            </Text>
-                                        </TouchableOpacity>
-                                    );
-                                })}
-                            </ScrollView>
-                        </View>
-                    )}
+                        itemTitleField="cycle_name_he"
+                    />
                 </View>
                 <View style={{ flex: 1 }}>
-                    <TouchableOpacity
-                        onPress={() => {
-                            setOpenModalRound(!openModalRound);
+                    <DropdownField
+                        options={selectCycle?.rounds || []}
+                        selectedValue={selectRound}
+                        onPressItem={round => {
+                            setSelectRound(round);
                         }}
-                        style={[
-                            styles.cycle,
-                            {
-                                borderColor: openModalRound
-                                    ? appColors.blue_light
-                                    : appColors.border,
-                            },
-                        ]}
-                    >
-                        <Text style={styles.text_cycle}>{selectRound?.round_name_he}</Text>
-                        <IconFeather
-                            name={
-                                openModalRound ? appIcons.ic_chevron_up : appIcons.ic_chevron_down
-                            }
-                            size={getSize.m(14)}
-                            color={openModalRound ? appColors.blue_light : appColors.light_gray}
-                            style={styles.chevron_down}
-                        />
-                    </TouchableOpacity>
-                    {openModalRound && (
-                        <View style={[styles.drop_down_calender, { width: '80%' }]}>
-                            <ScrollView showsVerticalScrollIndicator={false} nestedScrollEnabled>
-                                {selectCycle?.rounds.map((round, index) => {
-                                    return (
-                                        <TouchableOpacity
-                                            onPress={() => {
-                                                setSelectRound(round);
-                                                setOpenModalCycles(false);
-                                            }}
-                                            key={index.toString()}
-                                            style={styles.btn_drop_down_calender}
-                                        >
-                                            <Text style={styles.btn_drop_down_calender_text}>
-                                                {round.round_name_he}
-                                            </Text>
-                                        </TouchableOpacity>
-                                    );
-                                })}
-                            </ScrollView>
-                        </View>
-                    )}
+                        itemTitleField="round_name_he"
+                    />
                 </View>
             </View>
             <View style={{ marginTop: getSize.m(14) }}>
@@ -249,6 +134,7 @@ export const Item10 = ({ league }: IItem10Props) => {
                         marginTop: getSize.m(14),
                         marginHorizontal: getSize.m(17),
                         marginBottom: getSize.m(20),
+                        zIndex: 1,
                     }}
                 >
                     {selectRound?.leader_board?.slice(0, 10).map((item, index) => {

@@ -3,7 +3,7 @@ import { appIcons } from '@football/app/assets/icons/appIcons';
 import { IDropdownFieldProps } from '@football/app/components/dropdown-field/DropdownField.type';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { getSize } from '@football/app/utils/responsive/scale';
-import React from 'react';
+import React, { useState } from 'react';
 import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import OutsidePressHandler from 'react-native-outside-press';
 import Icon from 'react-native-vector-icons/Feather';
@@ -11,40 +11,62 @@ import { styles } from './DropdownField.style';
 
 const DropdownField = ({
     onPress,
-    title,
-    isOpen,
     options = [],
     onPressItem,
     itemTitleField = '',
+    selectedValue,
     closeDropdown,
 }: IDropdownFieldProps) => {
+    const [openModal, setOpenModal] = useState(false);
+
     return (
-        <OutsidePressHandler onOutsidePress={closeDropdown}>
+        <OutsidePressHandler
+            onOutsidePress={() => {
+                setOpenModal(false);
+                if (closeDropdown) {
+                    closeDropdown();
+                }
+            }}
+            disabled={false}
+        >
             <View style={styles.container}>
                 <TouchableOpacity
-                    onPress={onPress}
+                    activeOpacity={1}
+                    onPress={() => {
+                        setOpenModal(true);
+                        if (onPress) {
+                            onPress();
+                        }
+                    }}
                     style={[
                         styles.fieldContainer,
                         {
-                            borderColor: isOpen ? appColors.blue_light : appColors.border,
+                            borderColor: openModal ? appColors.blue_light : appColors.border,
                         },
                     ]}
                 >
-                    <Text style={styles.title}>{title}</Text>
+                    <Text style={styles.title}>
+                        {selectedValue ? selectedValue[itemTitleField] : ''}
+                    </Text>
                     <Icon
-                        name={isOpen ? appIcons.ic_chevron_up : appIcons.ic_chevron_down}
+                        name={openModal ? appIcons.ic_chevron_up : appIcons.ic_chevron_down}
                         size={getSize.m(14)}
-                        color={isOpen ? appColors.blue_light : appColors.light_gray}
+                        color={openModal ? appColors.blue_light : appColors.light_gray}
                         style={styles.chevronDown}
                     />
                 </TouchableOpacity>
-                {isOpen && (
+                {openModal && (
                     <View style={[styles.itemsContainer]}>
-                        <ScrollView showsVerticalScrollIndicator={false} nestedScrollEnabled>
+                        <ScrollView nestedScrollEnabled>
                             {options.map((opt: any, index: number) => {
                                 return (
                                     <TouchableOpacity
-                                        onPress={() => onPressItem(opt)}
+                                        onPress={() => {
+                                            setOpenModal(!openModal);
+                                            if (onPressItem) {
+                                                onPressItem(opt);
+                                            }
+                                        }}
                                         key={index}
                                         style={styles.itemContainer}
                                     >
