@@ -56,6 +56,9 @@ export const favTopTeamSlice = createSlice({
                 );
             }
         },
+        addSelectedFavTopTeamsProfile:(state,action)=>{
+            state.selectedTopTeamsProfile=action.payload;
+        },
         resetSelectedFavTopTeamsProfile:(state,action)=>{
             state.selectedTopTeamsProfile= []
         }
@@ -78,5 +81,5 @@ export function selectedFavTopTeamsProfileAsMapSelector(state: RootState) {
 
 
 const { actions, reducer } = favTopTeamSlice;
-export const { setFavTopTeams, pushFavTopTeam, resetTopTeams,resetSelectedFavTopTeams,resetSelectedFavTopTeamsProfile, pushFavTopTeamProfile } = actions;
+export const { setFavTopTeams, pushFavTopTeam, resetTopTeams,resetSelectedFavTopTeams,resetSelectedFavTopTeamsProfile, pushFavTopTeamProfile,addSelectedFavTopTeamsProfile } = actions;
 export default favTopTeamSlice.reducer;

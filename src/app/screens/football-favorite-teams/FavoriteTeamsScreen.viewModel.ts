@@ -60,6 +60,9 @@ export const useViewModel = ({ navigation, route }: IFavoriteTeamsScreenProps) =
     const getProfile = useSelector((state: RootState) => state.getProfile);
 
     const [favSelectedTeam, setFavSelectedTeam] = useState<TeamModel[]>([]);
+    const changeTeams = route.params?.changeTeams;
+    // const favTeamsSelected = route.params?.favTeamsSelected;
+
     useEffect(() => {
         if (getProfile.success === true) {
             const fetchFavTeam = async () => {
@@ -71,8 +74,8 @@ export const useViewModel = ({ navigation, route }: IFavoriteTeamsScreenProps) =
                     })
                 );
                 // console.log(fetchTeam.filter(Boolean));
-                if (!isEmpty(selectedTeamsProfile)) {
-                    console.log('Danh');
+                if (changeTeams) {
+                    // console.log(favTeamsSelected);
                     setFavSelectedTeam(selectedTeamsProfile);
                 } else {
                     setFavSelectedTeam(fetchTeam.filter(Boolean));
@@ -138,7 +141,7 @@ export const useViewModel = ({ navigation, route }: IFavoriteTeamsScreenProps) =
         // console.log(favSelectedTeam);
         // dispatch(resetSelectedFavTeam([]));
         if (isEmpty(selectedTeamsProfile)) {
-            favSelectedTeam.map((item: TeamModel) => {
+            favSelectedTeam?.map((item: TeamModel) => {
                 dispatch(pushFavTeamProfile(item));
             });
         }
@@ -246,6 +249,9 @@ export const useViewModel = ({ navigation, route }: IFavoriteTeamsScreenProps) =
                     previous_screen: ScreenName.FavTeamPage,
                     center: true,
                     scrollBottom: false,
+                    selectedPlayers: true,
+                    selectedTeams: true,
+                    selectedTopTeams: true,
                 });
                 dispatch(setSettingFavTeam(selectedTeamsProfile));
                 // pop(ScreenName.FavTeamPage);
