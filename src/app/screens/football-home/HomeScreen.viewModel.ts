@@ -1,94 +1,41 @@
+import { isGuessUser } from '@football/core/models/AvatarType.enum';
 /* eslint-disable no-underscore-dangle */
-import { TopTeamModel, TopTeamModelResponse } from '@football/core/models/TopTeamModelResponse';
+import { TopTeamModel } from '@football/core/models/TopTeamModelResponse';
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
 import { IHomeScreenProps } from '@football/app/screens/football-home/HomeScreen.type';
 import { ScreenName } from '@football/app/utils/constants/enum';
 import { useMount } from '@football/app/utils/hooks/useMount';
-import { HomePageModel, HomeLayoutModel } from '@football/core/models/HomePageModelResponse';
-import { TeamModel, TeamModelResponse } from '@football/core/models/TeamModelResponse';
+import { GeneralVodModel } from '@football/core/models/GeneralVodResponse';
+import { HomeLayoutModel, HomePageModel } from '@football/core/models/HomePageModelResponse';
+import { LeagueModel } from '@football/core/models/LeagueModelResponse';
+import { PlayerModel } from '@football/core/models/PlayerModelResponse';
+import { TeamModel } from '@football/core/models/TeamModelResponse';
+import GeneralVodService from '@football/core/services/GeneralVod.service';
 import HomeLayoutService from '@football/core/services/HomeLayout.service';
 import HomePageService from '@football/core/services/HomePage.service';
-import PlayerService from '@football/core/services/Player.service';
-import { useCallback, useState, useEffect } from 'react';
-import { useTranslation } from 'react-i18next';
-import { LeagueModel } from '@football/core/models/LeagueModelResponse';
 import leaguesService from '@football/core/services/League.service';
-import { GeneralVodModel } from '@football/core/models/GeneralVodResponse';
-import GeneralVodService from '@football/core/services/GeneralVod.service';
-import { useDispatch, useSelector } from 'react-redux';
-import { addVideo, setShowVideo } from 'src/store/video/Video.slice';
-import { RootState } from 'src/store/store';
-import { PlayerModel, PlayersModelResponse } from '@football/core/models/PlayerModelResponse';
+import PlayerService from '@football/core/services/Player.service';
 import TeamService from '@football/core/services/Team.service';
 import TopTeamService from '@football/core/services/TopTeam.service';
+import { useCallback, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from 'src/store/store';
+import { addVideo, setShowVideo } from 'src/store/video/Video.slice';
 
 const useViewState = () => {
     const profileUser = useSelector((state: RootState) => state.getProfile);
-
-    useEffect(() => {
-        if (profileUser.success === true) {
-            const fetchFavTeam = async () => {
-                const fetchTeam = await Promise.all(
-                    profileUser.getProfile.item.favorite_israel_teams.map(async (item: string) => {
-                        const [err, res] = await TeamService.findByOId<TeamModelResponse>(item);
-                        if (err) return;
-                        return res.data.documents[0];
-                    })
-                );
-                // console.log(fetchTeam.filter(Boolean));
-
-                setTeams(fetchTeam.filter(Boolean));
-            };
-            fetchFavTeam();
-        }
-    }, [profileUser.success]);
-
-    useEffect(() => {
-        if (profileUser.success === true) {
-            const fetchFavPlayer = async () => {
-                const fetchPlayer = await Promise.all(
-                    profileUser.getProfile.item.favorite_players.map(async (item: string) => {
-                        const [err, res] = await PlayerService.findByOId<PlayersModelResponse>(
-                            item
-                        );
-                        if (err) return;
-                        return res.data.documents[0];
-                    })
-                );
-                // console.log(fetchTeam.filter(Boolean));
-
-                setPlayers(fetchPlayer.filter(Boolean));
-            };
-            fetchFavPlayer();
-        }
-    }, [profileUser.success]);
-
-    useEffect(() => {
-        if (profileUser.success === true) {
-            const fetchFavTopTeam = async () => {
-                const fetchTopTeam = await Promise.all(
-                    profileUser.getProfile.item.favorite_national_teams.map(
-                        async (item: string) => {
-                            const [err, res] = await TopTeamService.findByOId<TopTeamModelResponse>(
-                                item
-                            );
-                            if (err) return;
-                            return res.data.documents[0];
-                        }
-                    )
-                );
-
-                setTopTeams(fetchTopTeam.filter(Boolean));
-            };
-            fetchFavTopTeam();
-        }
-    }, [profileUser.success]);
+    const selectedFavTeams = useSelector((state: RootState) => state.favTeams.selectedTeams);
+    const selectedFavPlayers = useSelector((state: RootState) => state.favPlayers.selectedPlayers);
+    const selectedFavTopTeams = useSelector(
+        (state: RootState) => state.favTopTeams.selectedTopTeams
+    );
 
     const [homePage, setHomePage] = useState<HomePageModel>();
     const [homeLayout, setHomeLayout] = useState<HomeLayoutModel>();
     const [players, setPlayers] = useState<PlayerModel[]>([]);
-    const [teams, setTeams] = useState<TeamModel[]>([]);
+    const [teams, setTeams] = useState<TeamModel[]>();
     const [topTeams, setTopTeams] = useState<TopTeamModel[]>([]);
     const [leagues, setLeagues] = useState<LeagueModel[]>();
     const [generalVod, setGeneralVod] = useState<GeneralVodModel[]>();
@@ -118,6 +65,9 @@ const useViewState = () => {
         display,
         setDisplay,
         profileUser,
+        selectedFavTeams,
+        selectedFavPlayers,
+        selectedFavTopTeams,
     };
 };
 
@@ -128,10 +78,13 @@ const useViewCallback = (route: any, viewState: any) => {
         setHomeLayout,
         setLeagues,
         setGeneralVod,
-        players,
         teams,
+        profileUser,
+        setTeams,
+        setTopTeams,
     } = viewState;
 
+    const user = profileUser?.getProfile.item;
     const getHomeLayoutData = useCallback(async () => {
         const [error, res] = await HomeLayoutService.findAll();
         if (error) {
@@ -154,8 +107,8 @@ const useViewCallback = (route: any, viewState: any) => {
     }, []);
 
     const getPlayersData = useCallback(async () => {
-        const playerIds = players.map((player: PlayerModel) => {
-            return { _id: { $oid: player._id } };
+        const playerIds = user?.favorite_players.map((id: string) => {
+            return { _id: { $oid: id } };
         });
         const [error, res] = await PlayerService.findByFilter({
             $or: playerIds,
@@ -167,23 +120,33 @@ const useViewCallback = (route: any, viewState: any) => {
         setPlayers(res.data.documents);
     }, []);
 
-    // const getTeamsData = useCallback(async () => {
-    //     const [error, res] = await TeamService.findAll();
-    //     if (error) {
-    //         return;
-    //     }
+    const getTeamsData = useCallback(async () => {
+        const ids = user?.favorite_israel_teams.map((id: string) => {
+            return { _id: { $oid: id } };
+        });
+        const [error, res] = await TeamService.findByFilter({
+            $or: ids,
+        });
+        if (error) {
+            return;
+        }
 
-    //     setTeams(res.data.documents?.slice(0, 2));
-    // }, []);
+        setTeams(res.data.documents);
+    }, []);
 
-    // const getTopTeamsData = useCallback(async () => {
-    //     const [error, res] = await TopTeamService.findAll();
-    //     if (error) {
-    //         return;
-    //     }
+    const getTopTeamsData = useCallback(async () => {
+        const ids = user?.favorite_national_teams.map((id: string) => {
+            return { _id: { $oid: id } };
+        });
+        const [error, res] = await TopTeamService.findByFilter({
+            $or: ids,
+        });
+        if (error) {
+            return;
+        }
 
-    //     setTopTeams(res.data.documents?.slice(0, 2));
-    // }, []);
+        setTopTeams(res.data.documents);
+    }, []);
 
     const getDefaultLeagueData = useCallback(async (id: string) => {
         const leagueIds = teams
@@ -229,8 +192,8 @@ const useViewCallback = (route: any, viewState: any) => {
         getHomeLayoutData,
         getHomePageData,
         getPlayersData,
-        // getTeamsData,
-        // getTopTeamsData,
+        getTeamsData,
+        getTopTeamsData,
         getDefaultLeagueData,
         getGeneralVodData,
     };
@@ -271,6 +234,8 @@ export const useViewModel = ({ navigation, route }: IHomeScreenProps) => {
         getDefaultLeagueData,
         getGeneralVodData,
         getPlayersData,
+        getTeamsData,
+        getTopTeamsData,
     } = useViewCallback(route, state);
 
     const { onClickPlayer, onClickTeam, onClickTopTeam } = eventHandler(navigate);
@@ -279,8 +244,19 @@ export const useViewModel = ({ navigation, route }: IHomeScreenProps) => {
         getHomeLayoutData();
         getHomePageData();
         getGeneralVodData();
-        getPlayersData();
     });
+
+    useEffect(() => {
+        if (isGuessUser(state.profileUser)) {
+            state.setPlayers(state.selectedFavPlayers);
+            state.setTeams(state.selectedFavTeams);
+            state.setTopTeams(state.selectedFavTopTeams);
+        } else {
+            getTeamsData();
+            getPlayersData();
+            getTopTeamsData();
+        }
+    }, [state.profileUser.success]);
 
     useEffect(() => {
         if (state.homePage) {

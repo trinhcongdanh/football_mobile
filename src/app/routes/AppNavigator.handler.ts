@@ -1,5 +1,5 @@
 import { ScreenName } from '@football/app/utils/constants/enum';
-import { ParamListBase, StackActions, useNavigation } from '@react-navigation/native';
+import { ParamListBase, StackActions, useNavigation, NavigationState } from '@react-navigation/native';
 
 // export type NavigationParam = ParamListBase & {
 //     previous_screen: ScreenName;
@@ -26,7 +26,7 @@ export const useAppNavigator = () => {
 
     const navigateClearStack = (name: string) => {
         navigation.reset({
-            index: 0,
+            index: 1,
             routes: [{ name }],
         });
     };

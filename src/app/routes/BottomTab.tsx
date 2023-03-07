@@ -4,11 +4,14 @@
 import { AppImages } from '@football/app/assets/images';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { getSize } from '@football/app/utils/responsive/scale';
+import { isGuessUser } from '@football/core/models/AvatarType.enum';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React from 'react';
 import { SafeAreaView } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useSelector } from 'react-redux';
+import { RootState } from 'src/store/store';
 import {
     GobletScreen,
     HomeScreen,
@@ -93,6 +96,8 @@ const renderLabel = (routeName: string) => {
 
 export const BottomTabStack = () => {
     const insets = useSafeAreaInsets();
+    const profileUser = useSelector((state: RootState) => state.getProfile);
+
     return (
         <SafeAreaView style={{ flex: 1, marginBottom: -insets.bottom }}>
             <Bottom.Navigator
@@ -158,6 +163,14 @@ export const BottomTabStack = () => {
                     }}
                     name={ScreenName.PlayGroundPage}
                     component={PlayGroundScreen}
+                    listeners={({ navigation, route }) => ({
+                        tabPress: e => {
+                            if (isGuessUser(profileUser)) {
+                                e.preventDefault();
+                                navigation.navigate(ScreenName.RegisterPage);
+                            }
+                        },
+                    })}
                 />
                 <Bottom.Screen
                     options={{
