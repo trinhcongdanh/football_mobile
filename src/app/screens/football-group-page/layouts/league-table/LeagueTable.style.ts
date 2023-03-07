@@ -11,6 +11,7 @@ const styles = StyleSheet.create({
         borderRadius: getSize.m(15),
         flexDirection: 'row',
         justifyContent: 'space-between',
+        zIndex: 10,
     },
     cycle: {
         flexDirection: 'row',

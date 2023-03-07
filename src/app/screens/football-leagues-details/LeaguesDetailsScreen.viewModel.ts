@@ -24,8 +24,6 @@ const useViewState = () => {
 
     // Game season
     const [openModalYear, setOpenModalYear] = useState(false);
-    const [openModalPlayOff, setOpenModalPlayOff] = useState(false);
-    const [openModalCycle, setOpenModalCycle] = useState(false);
 
     // Few properties changes when selectedLeagueSeason change
     const [selectedLeagueSeason, setSelectedLeagueSeason] = useState<LeagueSeasonModel>();
@@ -44,10 +42,6 @@ const useViewState = () => {
         setAllLeagueSeasons,
         openModalYear,
         setOpenModalYear,
-        openModalPlayOff,
-        setOpenModalPlayOff,
-        openModalCycle,
-        setOpenModalCycle,
         selectedLeagueSeason,
         setSelectedLeagueSeason,
         selectCycle,
@@ -121,8 +115,6 @@ export const useViewModel = ({ navigation, route }: ILeaguesDetailsScreenProps) 
 
     const handleCloseModal = () => {
         viewState.setOpenModalYear(false);
-        viewState.setOpenModalCycle(false);
-        viewState.setOpenModalPlayOff(false);
     };
 
     useEffect(() => {

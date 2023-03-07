@@ -13,6 +13,7 @@ const styles = StyleSheet.create({
         width: '100%',
         flex: 1,
         position: 'relative',
+        zIndex: 10,
     },
 
     logo_club: {

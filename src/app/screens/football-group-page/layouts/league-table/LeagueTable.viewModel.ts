@@ -7,12 +7,9 @@ import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 const useViewState = () => {
-    const [openModalCycle, setOpenModalCycle] = useState(false);
     const [selectCycle, setSelectCycle] = useState<Cycle>();
     const [selectedRound, setSelectedRound] = useState<Round>();
     return {
-        openModalCycle,
-        setOpenModalCycle,
         selectCycle,
         setSelectCycle,
         selectedRound,
@@ -42,20 +39,9 @@ export const useViewModel = ({ teamSeason }: ILeagueTableProps) => {
         }
     }, [state.selectCycle]);
 
-    // Top playoff
-    const [openModalPlayOff, setOpenModalPlayOff] = useState(false);
-
-    const handleCloseModal = () => {
-        state.setOpenModalCycle(false);
-        setOpenModalPlayOff(false);
-    };
-
     return {
         t,
-        handleCloseModal,
-        setOpenModalPlayOff,
         ...state,
-        openModalPlayOff,
         navigate,
     };
 };

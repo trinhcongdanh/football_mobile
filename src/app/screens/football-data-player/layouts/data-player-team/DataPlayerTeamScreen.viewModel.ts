@@ -7,13 +7,10 @@ import { IDataPlayerTeamScreenProps } from './DataPlayerTeamScreen.type';
 
 const useViewState = () => {
     const [selectedSeason, setSelectedSeason] = useState<Season>();
-    const [openModal, setOpenModal] = useState(false);
 
     return {
         selectedSeason,
         setSelectedSeason,
-        openModal,
-        setOpenModal,
     };
 };
 

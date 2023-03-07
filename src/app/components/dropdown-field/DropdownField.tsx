@@ -58,7 +58,7 @@ const DropdownField = ({
                 {openModal && (
                     <View style={[styles.itemsContainer]}>
                         <ScrollView nestedScrollEnabled>
-                            {options.map((opt: any, index: number) => {
+                            {options?.map((opt: any, index: number) => {
                                 return (
                                     <TouchableOpacity
                                         onPress={() => {

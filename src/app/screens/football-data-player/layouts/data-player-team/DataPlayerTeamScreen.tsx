@@ -5,27 +5,20 @@ import { appColors } from '@football/app/utils/constants/appColors';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import { getSize } from '@football/app/utils/responsive/scale';
 import React from 'react';
-import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { ScrollView, Text, View } from 'react-native';
 import { Avatar } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/Feather';
 // import { IDataPlayerTeamScreenProps } from './DataPlayerTeamScreen.type';
 import { AppFonts } from '@football/app/assets/fonts';
+import DropdownField from '@football/app/components/dropdown-field/DropdownField';
 import { IDataPlayerTeamScreenProps } from '@football/app/screens/football-data-player/layouts/data-player-team/DataPlayerTeamScreen.type';
 import FastImage from 'react-native-fast-image';
 import LinearGradient from 'react-native-linear-gradient';
-import { Season } from '@football/core/models/PlayerResponse';
 import styles from './DataPlayerTeamScreen.style';
 import { useViewModel } from './DataPlayerTeamScreen.viewModel';
 
 export const DataPlayerTeamScreen = ({ player }: IDataPlayerTeamScreenProps) => {
-    const {
-        t,
-        onGoBack,
-        setOpenModal,
-        setSelectedSeason,
-        openModal,
-        selectedSeason,
-    } = useViewModel({ player });
+    const { t, onGoBack, setSelectedSeason, selectedSeason } = useViewModel({ player });
 
     return (
         <ScrollView showsVerticalScrollIndicator={false}>
@@ -43,57 +36,17 @@ export const DataPlayerTeamScreen = ({ player }: IDataPlayerTeamScreenProps) => 
                             <Text style={styles.club_name}>{player.team.name_he}</Text>
                             <Text style={styles.club_desc}>({player.team.league_name_he})</Text>
                         </View>
-                        <View style={{ flex: 1 }}>
-                            <View
-                                style={[appStyles.align_justify, { marginVertical: getSize.m(16) }]}
-                            >
-                                <TouchableOpacity
-                                    onPress={() => {
-                                        setOpenModal(!openModal);
-                                    }}
-                                    style={styles.calender}
-                                >
-                                    <Text style={styles.text_calender}>{selectedSeason?.name}</Text>
-                                    <Icon
-                                        name={appIcons.ic_chevron_down}
-                                        color={appColors.light_gray}
-                                        size={getSize.m(20)}
-                                    />
-                                </TouchableOpacity>
-                            </View>
-
-                            {openModal && (
-                                <View style={styles.drop_down_calender}>
-                                    <ScrollView
-                                        showsVerticalScrollIndicator={false}
-                                        nestedScrollEnabled
-                                    >
-                                        {player.team.seasons.map(
-                                            (season: Season, index: number) => {
-                                                return (
-                                                    <TouchableOpacity
-                                                        onPress={() => {
-                                                            setSelectedSeason(season);
-                                                            setOpenModal(false);
-                                                        }}
-                                                        key={index.toString()}
-                                                        style={styles.btn_drop_down_calender}
-                                                    >
-                                                        <Text
-                                                            style={[
-                                                                styles.text_calender,
-                                                                { textAlign: 'left' },
-                                                            ]}
-                                                        >
-                                                            {season.name}
-                                                        </Text>
-                                                    </TouchableOpacity>
-                                                );
-                                            }
-                                        )}
-                                    </ScrollView>
-                                </View>
-                            )}
+                        <View
+                            style={{ flex: 1, marginBottom: getSize.m(20), width: getSize.m(130) }}
+                        >
+                            <DropdownField
+                                options={player.team.seasons || []}
+                                selectedValue={selectedSeason}
+                                onPressItem={season => {
+                                    setSelectedSeason(season);
+                                }}
+                                itemTitleField="name"
+                            />
                         </View>
                     </View>
                     <View style={[styles.item, { marginTop: getSize.m(30) }]}>

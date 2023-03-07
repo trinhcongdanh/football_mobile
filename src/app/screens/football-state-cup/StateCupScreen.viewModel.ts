@@ -19,8 +19,6 @@ const useViewState = ({ route }: IStateCupScreenProps) => {
     const [isScroll, setIsScroll] = useState(true);
 
     const [openModalYear, setOpenModalYear] = useState(false);
-    const [openModalCycle, setOpenModalCycle] = useState(false);
-    const [openModalRound, setOpenModalRound] = useState(false);
 
     const [selectedCupSeason, setSelectedCupSeason] = useState<CupSeasonModel>();
     const [selectCycle, setSelectCycle] = useState<Cycle>();
@@ -37,16 +35,12 @@ const useViewState = ({ route }: IStateCupScreenProps) => {
         setSelectedCupSeason,
         openModalYear,
         setOpenModalYear,
-        openModalCycle,
-        setOpenModalCycle,
         isScroll,
         setIsScroll,
         selectCycle,
         setSelectCycle,
         setSelectRound,
         selectRound,
-        openModalRound,
-        setOpenModalRound,
         cycles,
         setCycles,
         years,
