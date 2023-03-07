@@ -1,13 +1,12 @@
+import { getProfileUser } from 'src/store/user/getProfile.slice';
+import { isGuessUser } from '@football/core/models/AvatarType.enum';
 /* eslint-disable no-underscore-dangle */
 import { TopTeamModel } from '@football/core/models/TopTeamModelResponse';
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
 import { IHomeScreenProps } from '@football/app/screens/football-home/HomeScreen.type';
 import { AuthData, ScreenName } from '@football/app/utils/constants/enum';
-import { serializeParams } from '@football/app/utils/functions/quick-functions';
 import { useMount } from '@football/app/utils/hooks/useMount';
-import { axiosAuth } from '@football/core/api/auth/axiosAuth';
-import { ACTION, AUTH_URL } from '@football/core/api/auth/config';
 import { GeneralVodModel } from '@football/core/models/GeneralVodResponse';
 import { HomeLayoutModel, HomePageModel } from '@football/core/models/HomePageModelResponse';
 import { LeagueModel } from '@football/core/models/LeagueModelResponse';
@@ -20,12 +19,16 @@ import leaguesService from '@football/core/services/League.service';
 import PlayerService from '@football/core/services/Player.service';
 import TeamService from '@football/core/services/Team.service';
 import TopTeamService from '@football/core/services/TopTeam.service';
-import { isEmpty } from 'lodash';
 import { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'src/store/store';
 import { addVideo, setShowVideo } from 'src/store/video/Video.slice';
+import { serializeParams } from '@football/app/utils/functions/quick-functions';
+import { ACTION, AUTH_URL } from '@football/core/api/auth/config';
+import { axiosAuth } from '@football/core/api/auth/axiosAuth';
+import { isEmpty } from 'lodash';
+import { userInfo } from 'os';
 
 const useViewState = () => {
     const selectedFavTeams = useSelector((state: RootState) => state.favTeams.selectedTeams);

@@ -8,7 +8,7 @@ export enum AvatarType {
 }
 
 export const isGuessUser = (profileUser: any) => {
-    return isEmpty(profileUser.getProfile);
+    return isEmpty(profileUser?.getProfile);
 };
 
 export const renderAvatar = (profileUser: any) => {
