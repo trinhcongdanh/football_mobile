@@ -11,11 +11,17 @@ import {
     pushGroupFavPlayer,
     resetSearchFavPlayer,
     resetSelectedFavPlayer,
+    resetSelectedFavPlayerProfile,
     SelectedPlayer,
 } from 'src/store/FavPlayer.slice';
-import { pushFavTeam, resetSelectedFavTeam, resetFavTeam } from 'src/store/FavTeam.slice';
+import {
+    pushFavTeam,
+    resetSelectedFavTeam,
+    resetFavTeam,
+    resetSelectedFavTeamProfile,
+} from 'src/store/FavTeam.slice';
 import qs from 'qs';
-import { resetTopTeams } from 'src/store/FavTopTeam.slice';
+import { resetSelectedFavTopTeamsProfile, resetTopTeams } from 'src/store/FavTopTeam.slice';
 import { RootState } from 'src/store/store';
 import { ISettingsScreenProps } from './SettingsScreen.type';
 import { ACTION } from '@football/core/api/auth/config';
@@ -149,6 +155,9 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
             dispatch(resetSettingFavTeam([]));
             dispatch(resetSettingFavPlayer([]));
             dispatch(resetSettingFavTopTeam([]));
+            dispatch(resetSelectedFavTeamProfile([]));
+            dispatch(resetSelectedFavPlayerProfile([]));
+            dispatch(resetSelectedFavTopTeamsProfile([]));
         }
         if (previous_screen === ScreenName.FavTeamPage) {
             navigate(ScreenName.SideBar);
@@ -159,30 +168,41 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
         } else {
             goBack();
         }
-    };
-
-    const handleBackButtonClick = () => {
-        if (!saveChange) {
-            dispatch(resetSettingFavTeam([]));
-            dispatch(resetSettingFavPlayer([]));
-            dispatch(resetSettingFavTopTeam([]));
-        }
-        if (previous_screen === ScreenName.FavTeamPage) {
-            navigate(ScreenName.SideBar);
-        } else if (previous_screen === ScreenName.FavPlayerPage) {
-            navigate(ScreenName.SideBar);
-        } else if (previous_screen === ScreenName.FavTopTeamPage) {
-            navigate(ScreenName.SideBar);
-        } else {
-            goBack();
-        }
+        dispatch(resetSelectedFavTeamProfile([]));
+        dispatch(resetSelectedFavPlayerProfile([]));
+        dispatch(resetSelectedFavTopTeamsProfile([]));
         return true;
     };
 
+    // const handleBackButtonClick = () => {
+    //     if (!saveChange) {
+    //         dispatch(resetSettingFavTeam([]));
+    //         dispatch(resetSettingFavPlayer([]));
+    //         dispatch(resetSettingFavTopTeam([]));
+    //         dispatch(resetSelectedFavTeamProfile([]));
+    //         dispatch(resetSelectedFavPlayerProfile([]));
+    //         dispatch(resetSelectedFavTopTeamsProfile([]));
+    //     }
+    //     if (previous_screen === ScreenName.FavTeamPage) {
+    //         navigate(ScreenName.SideBar);
+    //     } else if (previous_screen === ScreenName.FavPlayerPage) {
+    //         navigate(ScreenName.SideBar);
+    //     } else if (previous_screen === ScreenName.FavTopTeamPage) {
+    //         navigate(ScreenName.SideBar);
+    //     } else {
+    //         goBack();
+    //     }
+    //     dispatch(resetSelectedFavTeamProfile([]));
+    //     dispatch(resetSelectedFavPlayerProfile([]));
+    //     dispatch(resetSelectedFavTopTeamsProfile([]));
+
+    //     return true;
+    // };
+
     useEffect(() => {
-        BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
+        BackHandler.addEventListener('hardwareBackPress', onGoBack);
         return () => {
-            BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
+            BackHandler.removeEventListener('hardwareBackPress', onGoBack);
         };
     }, []);
 
@@ -538,6 +558,9 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
         dispatch(resetSettingFavTeam([]));
         dispatch(resetSettingFavPlayer([]));
         dispatch(resetSettingFavTopTeam([]));
+        dispatch(resetSelectedFavTeamProfile([]));
+        dispatch(resetSelectedFavPlayerProfile([]));
+        dispatch(resetSelectedFavTopTeamsProfile([]));
     };
 
     const scrollBottom = route.params?.scrollBottom;

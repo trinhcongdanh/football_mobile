@@ -14,6 +14,19 @@ import {
 import { ACTION, TOKEN } from '@football/core/api/auth/config';
 import qs from 'qs';
 import { useIsFocused } from '@react-navigation/native';
+import { clearCreateProfile } from 'src/store/user/CreateProfile.slice';
+import { removeGuestId } from 'src/store/user/GuestId.slice';
+import { resetFavTeam, resetSelectedFavTeam } from 'src/store/FavTeam.slice';
+import {
+    resetAllFavPlayers,
+    resetGroupFavPlayer,
+    resetSelectedFavPlayer,
+} from 'src/store/FavPlayer.slice';
+import { resetSelectedFavTopTeams, resetTopTeams } from 'src/store/FavTopTeam.slice';
+import { resetOtpUser } from 'src/store/user/OTP.slice';
+import { clearSetProfile } from 'src/store/user/setProfile.slice';
+import { clearGetProfile } from 'src/store/user/getProfile.slice';
+import { clearLogin } from 'src/store/user/Login.slice';
 
 export const useViewModel = ({ navigation, route }: IRegisterScreenProps) => {
     const { t } = useTranslation();
@@ -145,6 +158,40 @@ export const useViewModel = ({ navigation, route }: IRegisterScreenProps) => {
     };
 
     const onNavigateConnect = () => {
+        dispatch(clearCreateProfile({}));
+        dispatch(removeGuestId([]));
+        // Clear Fav Team
+        dispatch(resetFavTeam([]));
+        dispatch(resetSelectedFavTeam([]));
+        // Clear Fav Player
+        dispatch(
+            resetAllFavPlayers({
+                id: '',
+                label: '',
+                listFavPlayers: [],
+            })
+        );
+        dispatch(
+            resetGroupFavPlayer({
+                id: '',
+                label: '',
+                listFavPlayers: [],
+            })
+        );
+        dispatch(resetSelectedFavPlayer([]));
+        // Clear Fav Top Team
+        dispatch(resetTopTeams([]));
+        dispatch(resetSelectedFavTopTeams([]));
+        // Clear otp
+        dispatch(resetOtpUser([]));
+        // Clear setProfile
+        dispatch(clearSetProfile([]));
+        // Clear Phone Number
+        dispatch(clearPhoneNumber([]));
+        // Clear getProfile
+        dispatch(clearGetProfile([]));
+        // Clear Login
+        dispatch(clearLogin({}));
         navigate(ScreenName.ConnectPage);
     };
 

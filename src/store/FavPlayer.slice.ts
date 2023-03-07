@@ -28,6 +28,7 @@ export interface FavPlayerState {
     }[];
 
     selectedPlayers: PlayerModel[];
+    selectedPlayersProfile: PlayerModel[];
     // loading: any,
     // success:any
 }
@@ -37,6 +38,7 @@ const initialState: FavPlayerState = {
     groupPlayers: [],
     searchPlayers: [],
     selectedPlayers: [],
+    selectedPlayersProfile:[]
     // loading:null,
     // success:null,
 };
@@ -157,7 +159,25 @@ export const favPlayerSlice = createSlice({
 
         resetSelectedFavPlayer:(state, action)=>{
             state.selectedPlayers= []
-        }
+        },
+
+        pushAllFavPlayersProfile: (state, action: PayloadAction<SelectedPlayer>) => {
+            const player = action.payload;
+
+            if (
+                !state.selectedPlayersProfile.some((favPlayer) => favPlayer._id === player._id) &&
+                state.selectedPlayersProfile.length < MAX_TEAM_NUM
+            ) {
+                state.selectedPlayersProfile = [...state.selectedPlayersProfile, player];
+            } else {
+                state.selectedPlayersProfile = state.selectedPlayersProfile.filter(
+                    item => item._id !== player._id
+                );
+            }
+        },
+        resetSelectedFavPlayerProfile:(state, action)=>{
+            state.selectedPlayersProfile= []
+        },
     },
     // extraReducers:builder=>{
     //     builder
@@ -188,6 +208,12 @@ export function selectedFavPlayersAsMapSelector(state: RootState) {
         return result;
     }, new Map<string, SelectedPlayer>);
 }
+export function selectedFavPlayersProfileAsMapSelector(state: RootState) {
+    return state.favPlayers.selectedPlayersProfile.reduce((result, player) => {
+       result.set(player._id, player)
+        return result;
+    }, new Map<string, SelectedPlayer>);
+}
 
 const { actions, reducer } = favPlayerSlice;
 export const {
@@ -200,6 +226,8 @@ export const {
     resetAllFavPlayers,
     resetGroupFavPlayer,
     resetSearchFavPlayer,
-    resetSelectedFavPlayer
+    resetSelectedFavPlayer,
+    pushAllFavPlayersProfile,
+    resetSelectedFavPlayerProfile
 } = actions;
 export default favPlayerSlice.reducer;

@@ -19,6 +19,8 @@ import {
     resetFavTeam,
     selectedFavTeamsAsMapSelector,
     resetSelectedFavTeam,
+    selectedFavTeamsProfileAsMapSelector,
+    pushFavTeamProfile,
 } from 'src/store/FavTeam.slice';
 import { IFavoriteTeamsScreenProps } from './FavoriteTeamsScreen.type';
 import { resetAllFavPlayers, resetGroupFavPlayer } from 'src/store/FavPlayer.slice';
@@ -36,6 +38,7 @@ export const useViewModel = ({ navigation, route }: IFavoriteTeamsScreenProps) =
     const searchTextRef = useRef<any>(null);
 
     const selectedFavTeamsMap = useSelector(selectedFavTeamsAsMapSelector);
+    const selectedFavTeamsProfileMap = useSelector(selectedFavTeamsProfileAsMapSelector);
 
     const favTeams = useSelector((state: RootState) => state.favTeams.favTeams);
 
@@ -43,7 +46,17 @@ export const useViewModel = ({ navigation, route }: IFavoriteTeamsScreenProps) =
         return favTeams.map(team => ({ ...team, isSelected: selectedFavTeamsMap.has(team._id) }));
     }, [favTeams, selectedFavTeamsMap]);
 
+    const formattedFavTeamsProfile = useMemo(() => {
+        return favTeams.map(team => ({
+            ...team,
+            isSelected: selectedFavTeamsProfileMap.has(team._id),
+        }));
+    }, [favTeams, selectedFavTeamsProfileMap]);
+
     const selectedFavTeams = useSelector((state: RootState) => state.favTeams.selectedTeams);
+    const selectedTeamsProfile = useSelector(
+        (state: RootState) => state.favTeams.selectedTeamsProfile
+    );
     const getProfile = useSelector((state: RootState) => state.getProfile);
 
     const [favSelectedTeam, setFavSelectedTeam] = useState<TeamModel[]>([]);
@@ -58,7 +71,12 @@ export const useViewModel = ({ navigation, route }: IFavoriteTeamsScreenProps) =
                     })
                 );
                 // console.log(fetchTeam.filter(Boolean));
-                setFavSelectedTeam(fetchTeam.filter(Boolean));
+                if (!isEmpty(selectedTeamsProfile)) {
+                    console.log('Danh');
+                    setFavSelectedTeam(selectedTeamsProfile);
+                } else {
+                    setFavSelectedTeam(fetchTeam.filter(Boolean));
+                }
             };
             fetchFavTeam();
         }
@@ -109,20 +127,21 @@ export const useViewModel = ({ navigation, route }: IFavoriteTeamsScreenProps) =
                 dispatch(resetAllFavPlayers({ id: '', label: '', listFavPlayers: [] }));
             }
         } else {
-            // dispatch(pushFavTeam(team));
-            if (favSelectedTeam.length < 3) {
-                setFavSelectedTeam([...favSelectedTeam, team]);
-                // console.log(favSelectedTeam);
-            }
+            dispatch(pushFavTeamProfile(team));
+            // if (favSelectedTeam.length < 3) {
+            //     setFavSelectedTeam([...favSelectedTeam, team]);
+            //     // console.log(favSelectedTeam);
+            // }
         }
     };
     useEffect(() => {
         // console.log(favSelectedTeam);
-        dispatch(resetSelectedFavTeam([]));
-        favSelectedTeam.map((item: TeamModel) => {
-            // console.log(item);
-            dispatch(pushFavTeam(item));
-        });
+        // dispatch(resetSelectedFavTeam([]));
+        if (isEmpty(selectedTeamsProfile)) {
+            favSelectedTeam.map((item: TeamModel) => {
+                dispatch(pushFavTeamProfile(item));
+            });
+        }
     }, [favSelectedTeam]);
 
     useEffect(() => {
@@ -228,7 +247,7 @@ export const useViewModel = ({ navigation, route }: IFavoriteTeamsScreenProps) =
                     center: true,
                     scrollBottom: false,
                 });
-                dispatch(setSettingFavTeam(favSelectedTeam));
+                dispatch(setSettingFavTeam(selectedTeamsProfile));
                 // pop(ScreenName.FavTeamPage);
             } else {
                 navigate(ScreenName.FavPlayerPage);
@@ -260,5 +279,7 @@ export const useViewModel = ({ navigation, route }: IFavoriteTeamsScreenProps) =
         submitSearchFavTeam,
         favSelectedTeam,
         getProfile,
+        formattedFavTeamsProfile,
+        selectedTeamsProfile,
     };
 };
