@@ -17,12 +17,22 @@ import { BackHandler } from 'react-native';
 import { launchImageLibrary } from 'react-native-image-picker';
 import { useDispatch, useSelector } from 'react-redux';
 import {
+    addSelectedFavPlayerProfile,
     resetSearchFavPlayer,
     resetSelectedFavPlayerProfile,
     SelectedPlayer,
 } from 'src/store/FavPlayer.slice';
-import { resetFavTeam, resetSelectedFavTeamProfile } from 'src/store/FavTeam.slice';
-import { resetSelectedFavTopTeamsProfile, resetTopTeams } from 'src/store/FavTopTeam.slice';
+import {
+    addSelectedFavTeam,
+    addSelectedFavTeamProfile,
+    resetFavTeam,
+    resetSelectedFavTeamProfile,
+} from 'src/store/FavTeam.slice';
+import {
+    addSelectedFavTopTeamsProfile,
+    resetSelectedFavTopTeamsProfile,
+    resetTopTeams,
+} from 'src/store/FavTopTeam.slice';
 import {
     resetSettingFavPlayer,
     resetSettingFavTeam,
@@ -65,20 +75,31 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
         if (isEnabled1 === true) {
             setNotifications([...notifications, 'FAN_NOTIFICATION_GENERAL']);
             // notifications.push('FAN_NOTIFICATION_GENERAL');
+        } else {
+            const notify = notifications.filter(item => {
+                return item !== 'FAN_NOTIFICATION_GENERAL';
+            });
+            setNotifications(notify);
         }
     }, [isEnabled1]);
     const toggleSwitch2 = () => {
-        setEditEnable2(true);
+        setEditEnable1(true);
+
         setIsEnabled2(previousState => !previousState);
     };
     useEffect(() => {
         if (isEnabled2 === true) {
             // notifications.push('FAN_NOTIFICATION_FAVORITE_PLAYERS');
             setNotifications([...notifications, 'FAN_NOTIFICATION_FAVORITE_PLAYERS']);
+        } else {
+            const notify = notifications.filter(item => {
+                return item !== 'FAN_NOTIFICATION_FAVORITE_PLAYERS';
+            });
+            setNotifications(notify);
         }
     }, [isEnabled2]);
     const toggleSwitch3 = () => {
-        setEditEnable3(true);
+        setEditEnable1(true);
 
         setIsEnabled3(previousState => !previousState);
     };
@@ -86,10 +107,15 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
         if (isEnabled3 === true) {
             // notifications.push('FAN_NOTIFICATION_FAVORITE_ISRAEL_TEAMS');
             setNotifications([...notifications, 'FAN_NOTIFICATION_FAVORITE_ISRAEL_TEAMS']);
+        } else {
+            const notify = notifications.filter(item => {
+                return item !== 'FAN_NOTIFICATION_FAVORITE_ISRAEL_TEAMS';
+            });
+            setNotifications(notify);
         }
     }, [isEnabled3]);
     const toggleSwitch4 = () => {
-        setEditEnable4(true);
+        setEditEnable1(true);
 
         setIsEnabled4(previousState => !previousState);
     };
@@ -97,10 +123,15 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
         if (isEnabled4 === true) {
             // notifications.push('FAN_NOTIFICATION_FAVORITE_PLAYERS_LEAGUES');
             setNotifications([...notifications, 'FAN_NOTIFICATION_FAVORITE_PLAYERS_LEAGUES']);
+        } else {
+            const notify = notifications.filter(item => {
+                return item !== 'FAN_NOTIFICATION_FAVORITE_PLAYERS_LEAGUES';
+            });
+            setNotifications(notify);
         }
     }, [isEnabled4]);
     const toggleSwitch5 = () => {
-        setEditEnable5(true);
+        setEditEnable1(true);
 
         setIsEnabled5(previousState => !previousState);
     };
@@ -108,10 +139,15 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
         if (isEnabled5 === true) {
             // notifications.push('FAN_NOTIFICATION_FAVORITE_ISRAEL_TEAMS_LEAGUES');
             setNotifications([...notifications, 'FAN_NOTIFICATION_FAVORITE_ISRAEL_TEAMS_LEAGUES']);
+        } else {
+            const notify = notifications.filter(item => {
+                return item !== 'FAN_NOTIFICATION_FAVORITE_ISRAEL_TEAMS_LEAGUES';
+            });
+            setNotifications(notify);
         }
     }, [isEnabled5]);
     const toggleSwitch6 = () => {
-        setEditEnable6(true);
+        setEditEnable1(true);
 
         setIsEnabled6(previousState => !previousState);
     };
@@ -122,8 +158,15 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
                 ...notifications,
                 'FAN_NOTIFICATION_FAVORITE_PLAYERS_NATIONAL_TEAMS',
             ]);
+        } else {
+            const notify = notifications.filter(item => {
+                return item !== 'FAN_NOTIFICATION_FAVORITE_PLAYERS_NATIONAL_TEAMS';
+            });
+            setNotifications(notify);
         }
     }, [isEnabled6]);
+
+    // console.log(notifications);
 
     const settingSelected = useSelector((state: RootState) => state.settingSelected);
 
@@ -162,31 +205,6 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
         return true;
     };
 
-    // const handleBackButtonClick = () => {
-    //     if (!saveChange) {
-    //         dispatch(resetSettingFavTeam([]));
-    //         dispatch(resetSettingFavPlayer([]));
-    //         dispatch(resetSettingFavTopTeam([]));
-    //         dispatch(resetSelectedFavTeamProfile([]));
-    //         dispatch(resetSelectedFavPlayerProfile([]));
-    //         dispatch(resetSelectedFavTopTeamsProfile([]));
-    //     }
-    //     if (previous_screen === ScreenName.FavTeamPage) {
-    //         navigate(ScreenName.SideBar);
-    //     } else if (previous_screen === ScreenName.FavPlayerPage) {
-    //         navigate(ScreenName.SideBar);
-    //     } else if (previous_screen === ScreenName.FavTopTeamPage) {
-    //         navigate(ScreenName.SideBar);
-    //     } else {
-    //         goBack();
-    //     }
-    //     dispatch(resetSelectedFavTeamProfile([]));
-    //     dispatch(resetSelectedFavPlayerProfile([]));
-    //     dispatch(resetSelectedFavTopTeamsProfile([]));
-
-    //     return true;
-    // };
-
     useEffect(() => {
         BackHandler.addEventListener('hardwareBackPress', onGoBack);
         return () => {
@@ -197,18 +215,22 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
     const backFavTeam = () => {
         navigate(ScreenName.FavTeamPage, {
             previous_screen: ScreenName.SettingsPage,
+            changeTeams: true,
+            favTeamsSelected: favSelectedTeam,
         });
     };
 
     const backFavPlayer = () => {
         navigate(ScreenName.FavPlayerPage, {
             previous_screen: ScreenName.SettingsPage,
+            changePlayers: true,
         });
     };
 
     const backFavTopTeam = () => {
         navigate(ScreenName.FavTopTeamPage, {
             previous_screen: ScreenName.SettingsPage,
+            changeTopTeams: true,
         });
     };
 
@@ -216,6 +238,7 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
         dispatch(resetFavTeam([]));
         navigate(ScreenName.FavTeamPage, {
             previous_screen: ScreenName.SettingsPage,
+            changeTeams: true,
         });
     };
 
@@ -223,6 +246,7 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
         dispatch(resetFavTeam([]));
         navigate(ScreenName.FavTeamPage, {
             previous_screen: ScreenName.SettingsPage,
+            changeTeams: true,
         });
     };
 
@@ -230,6 +254,7 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
         dispatch(resetSearchFavPlayer({ id: '', label: '', listFavPlayers: [] }));
         navigate(ScreenName.FavPlayerPage, {
             previous_screen: ScreenName.SettingsPage,
+            changePlayers: true,
         });
     };
 
@@ -237,6 +262,7 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
         dispatch(resetSearchFavPlayer({ id: '', label: '', listFavPlayers: [] }));
         navigate(ScreenName.FavPlayerPage, {
             previous_screen: ScreenName.SettingsPage,
+            changePlayers: true,
         });
     };
 
@@ -244,6 +270,7 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
         dispatch(resetTopTeams([]));
         navigate(ScreenName.FavTopTeamPage, {
             previous_screen: ScreenName.SettingsPage,
+            changeTopTeams: true,
         });
     };
 
@@ -251,6 +278,7 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
         dispatch(resetTopTeams([]));
         navigate(ScreenName.FavTopTeamPage, {
             previous_screen: ScreenName.SettingsPage,
+            changeTopTeams: true,
         });
     };
     const handleError = (errorMessage: string, input: string) => {
@@ -349,7 +377,7 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
                     setIndexGender(2);
                 }
             }
-            if (!isEmpty(getProfile.getProfile.item.notifications)) {
+            if (!isEmpty(getProfile.getProfile.item.notifications) && !editEnable1) {
                 getProfile.getProfile.item.notifications.map((item: string) => {
                     if (item === 'FAN_NOTIFICATION_GENERAL') {
                         setIsEnabled1(true);
@@ -370,11 +398,13 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
                         setIsEnabled6(true);
                     }
                 });
+                setNotifications(getProfile.getProfile.item.notifications);
             }
         }
     }, [getProfile.success]);
 
     const [favSelectedTeam, setFavSelectedTeam] = useState<TeamModel[]>([]);
+    const selectedTeams = route.params?.selectedTeams;
 
     useEffect(() => {
         if (getProfile.success === true) {
@@ -387,10 +417,12 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
                     })
                 );
                 // console.log(fetchTeam.filter(Boolean));
-                if (!isEmpty(settingSelected.settingFavTeams)) {
+                if (selectedTeams) {
                     setFavSelectedTeam(settingSelected.settingFavTeams);
+                    dispatch(addSelectedFavTeamProfile(settingSelected.settingFavTeams));
                 } else {
                     setFavSelectedTeam(fetchTeam.filter(Boolean));
+                    dispatch(addSelectedFavTeamProfile(fetchTeam.filter(Boolean)));
                 }
             };
             fetchFavTeam();
@@ -416,6 +448,7 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
     }, [favSelectedTeam]);
 
     const [favSelectedPlayer, setFavSelectedPlayer] = useState<PlayerModel[]>([]);
+    const selectedPlayers = route.params?.selectedPlayers;
     useEffect(() => {
         if (getProfile.success === true) {
             const fetchFavPlayer = async () => {
@@ -429,10 +462,12 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
                     })
                 );
                 // console.log(fetchTeam.filter(Boolean));
-                if (!isEmpty(settingSelected.settingFavPlayers)) {
+                if (selectedPlayers) {
                     setFavSelectedPlayer(settingSelected.settingFavPlayers);
+                    dispatch(addSelectedFavPlayerProfile(settingSelected.settingFavPlayers));
                 } else {
                     setFavSelectedPlayer(fetchPlayer.filter(Boolean));
+                    dispatch(addSelectedFavPlayerProfile(fetchPlayer.filter(Boolean)));
                 }
             };
             fetchFavPlayer();
@@ -458,6 +493,7 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
     }, [favSelectedPlayer]);
 
     const [favSelectedTopTeam, setFavSelectedTopTeam] = useState<TopTeamModel[]>([]);
+    const selectedTopTeams = route.params?.selectedTopTeams;
     useEffect(() => {
         if (getProfile.success === true) {
             const fetchFavTopTeam = async () => {
@@ -471,10 +507,12 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
                     })
                 );
                 // console.log(fetchTeam.filter(Boolean));
-                if (!isEmpty(settingSelected.settingFavTopTeams)) {
+                if (selectedTopTeams) {
                     setFavSelectedTopTeam(settingSelected.settingFavTopTeams);
+                    dispatch(addSelectedFavTopTeamsProfile(settingSelected.settingFavTopTeams));
                 } else {
                     setFavSelectedTopTeam(fetchTopTeam.filter(Boolean));
+                    dispatch(addSelectedFavTopTeamsProfile(fetchTopTeam.filter(Boolean)));
                 }
             };
             fetchFavTopTeam();
@@ -533,7 +571,7 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
                         favorite_israel_teams: fav_team,
                         favorite_players: player_team,
                         favorite_national_teams: fav_top_team,
-                        notifications,
+                        notifications: notifications,
                     },
                 })
             )

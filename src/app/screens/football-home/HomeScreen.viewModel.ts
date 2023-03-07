@@ -124,6 +124,7 @@ const useViewCallback = (route: any, viewState: any) => {
         const playerIds = user?.favorite_players?.map((id: string) => {
             return { _id: { $oid: id } };
         });
+        console.log(playerIds);
 
         console.log('user?.favorite_players', user?.favorite_players);
         const [error, res] = await PlayerService.findByFilter({
@@ -148,9 +149,11 @@ const useViewCallback = (route: any, viewState: any) => {
         const [error, res] = await TeamService.findByFilter({
             $or: ids,
         });
+
         if (error) {
             return;
         }
+        console.log(res.data.documents);
 
         setTeams(res.data.documents);
     }, []);

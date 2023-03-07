@@ -1,6 +1,5 @@
 /* eslint-disable no-underscore-dangle */
 import { PlayerModel } from '@football/core/models/PlayerModelResponse';
-import { Position } from '@football/core/models/TeamPersonnelResponse';
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from 'src/store/store';
@@ -175,6 +174,9 @@ export const favPlayerSlice = createSlice({
                 );
             }
         },
+        addSelectedFavPlayerProfile:(state,action)=>{
+            state.selectedPlayersProfile=action.payload;
+        },
         resetSelectedFavPlayerProfile:(state, action)=>{
             state.selectedPlayersProfile= []
         },
@@ -228,6 +230,7 @@ export const {
     resetSearchFavPlayer,
     resetSelectedFavPlayer,
     pushAllFavPlayersProfile,
-    resetSelectedFavPlayerProfile
+    resetSelectedFavPlayerProfile,
+    addSelectedFavPlayerProfile
 } = actions;
 export default favPlayerSlice.reducer;

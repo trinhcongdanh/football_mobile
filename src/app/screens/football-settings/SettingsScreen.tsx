@@ -466,7 +466,7 @@ export function SettingsScreen(props: ISettingsScreenProps) {
                                 <Text style={styles.txt_tutorial}>{t('settings.tutorial')}</Text>
                                 <View style={styles.block_notifications}>
                                     <Text style={styles.txt_before_game}>
-                                        {t('settings.nofity_1')}
+                                        {t('settings.notify_1')}
                                     </Text>
                                     <TouchableOpacity
                                         activeOpacity={0.7}

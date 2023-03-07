@@ -115,6 +115,8 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
         (state: RootState) => state.favPlayers.selectedPlayersProfile
     );
     const [favSelectedPlayer, setFavSelectedPlayer] = useState<PlayerModel[]>([]);
+    const changePlayers = route.params?.changePlayers;
+
     useEffect(() => {
         if (getProfile.success === true) {
             const fetchFavPlayer = async () => {
@@ -128,7 +130,7 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
                     })
                 );
                 // console.log(fetchTeam.filter(Boolean));
-                if (!isEmpty(selectedPlayersProfile)) {
+                if (changePlayers) {
                     setFavSelectedPlayer(selectedPlayersProfile);
                 } else {
                     setFavSelectedPlayer(fetchPlayer.filter(Boolean));
@@ -505,6 +507,9 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
                     previous_screen: ScreenName.FavPlayerPage,
                     center: true,
                     scrollBottom: false,
+                    selectedPlayers: true,
+                    selectedTeams: true,
+                    selectedTopTeams: true,
                 });
                 dispatch(setSettingFavPlayer(selectedPlayersProfile));
                 // pop(ScreenName.FavTeamPage);
