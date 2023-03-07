@@ -33,9 +33,12 @@ export const useViewModel = () => {
     const onGoBack = (): void => {
         goBack();
     };
-    const guestId = useSelector((state: any) => state.guestId.guestId);
-    const profile = useSelector((state: any) => state.createProfile.profile);
+
     const login = useSelector((state: any) => state.login);
+    const getProfile = useSelector((state: RootState) => state.getProfile);
+    const profileUser = useSelector((state: RootState) => state.setProfile);
+    const numberPhone = useSelector((state: any) => state.numberPhoneUser);
+    const userLogin = useSelector((state: RootState) => state.otpUser);
 
     function serializeParams(obj: any) {
         const a = qs.stringify(obj, { encode: false, arrayFormat: 'brackets' });
@@ -49,7 +52,7 @@ export const useViewModel = () => {
             logoutUser(
                 serializeParams({
                     action: ACTION,
-                    token: login.login.token,
+                    token: numberPhone.successRegister ? login.login.token : userLogin.otp.token,
                     call: AuthData.LOGOUT,
                 })
             )
@@ -101,11 +104,6 @@ export const useViewModel = () => {
             });
         }
     }, [login.logoutSuccess, isFocused]);
-
-    const getProfile = useSelector((state: RootState) => state.getProfile);
-    const profileUser = useSelector((state: RootState) => state.setProfile);
-    const numberPhone = useSelector((state: any) => state.numberPhoneUser);
-    const userLogin = useSelector((state: RootState) => state.otpUser);
 
     const [userName, setUserName] = useState('');
     const [avt, setAvt] = useState();

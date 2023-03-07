@@ -91,10 +91,17 @@ export const SplashScreen = ({ navigation, route }: ISplashScreenProps) => {
     }, 4000);
 
     const login = useSelector((state: any) => state.login);
+    const userLogin = useSelector((state: RootState) => state.otpUser);
 
     useEffect(() => {
         if (authLoaded) {
             if (!isEmpty(login.login) && !isNil(login.login)) {
+                navigate(ScreenName.SideBar);
+                navigation.reset({
+                    index: 0,
+                    routes: [{ name: ScreenName.SideBar as never }],
+                });
+            } else if (!isEmpty(userLogin.otp) && !isNil(userLogin.otp)) {
                 navigate(ScreenName.SideBar);
                 navigation.reset({
                     index: 0,

@@ -155,42 +155,19 @@ export const useViewModel = ({ navigation, route }: IConnectScreenProps) => {
                 })
             )
         );
-        if (isEmpty(profile.profile) || isNil(profile.profile)) {
-            dispatch(
-                createProfileUser(
-                    serializeParams({
-                        action: ACTION,
-                        token: TOKEN,
-                        call: AuthData.CREATE_PROFILE,
-                        'item[guest_guid]': guestId[0],
-                    })
-                )
-            );
-        }
     };
 
     const isFocused = useIsFocused();
 
     useEffect(() => {
         if (!isFocused) return;
-        if (numberPhone.successLogin === true && profile.success === true) {
-            dispatch(
-                loginUser(
-                    serializeParams({
-                        action: ACTION,
-                        token: TOKEN,
-                        call: AuthData.LOGIN,
-                        guest_id: profile.profile.tc_user,
-                        guest_guid: guestId[0],
-                    })
-                )
-            );
+        if (numberPhone.successLogin === true) {
             navigate(ScreenName.VerifyPage, {
                 number: phoneNumber,
                 previous_screen: ScreenName.ConnectPage,
             });
         }
-    }, [numberPhone.successLogin, isFocused, profile.success]);
+    }, [numberPhone.successLogin, isFocused]);
 
     useEffect(() => {
         if (numberPhone.successLogin === false && numberPhone.loadingLogin === false) {

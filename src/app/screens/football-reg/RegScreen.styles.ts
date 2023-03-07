@@ -23,6 +23,8 @@ const styles = StyleSheet.create({
         borderColor: appColors.blue_light,
         marginRight: getSize.m(8),
         borderRadius: getSize.m(3),
+        justifyContent: 'center',
+        alignItems: 'center',
     },
 });
 

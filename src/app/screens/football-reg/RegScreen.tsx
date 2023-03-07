@@ -43,6 +43,7 @@ export const RegScreen = ({ navigation, route }: IRegScreenProps) => {
         handleOnGender,
         date,
         profileUser,
+        handleProvision,
     } = useViewModel({
         navigation,
         route,
@@ -119,7 +120,9 @@ export const RegScreen = ({ navigation, route }: IRegScreenProps) => {
                                     {onCheck && <Icon name="check" color="white" />}
                                 </TouchableOpacity>
                                 <Text style={styles.agree}>{t('reg.agree')}</Text>
-                                <Text style={styles.provision}>{t('reg.provision')}</Text>
+                                <TouchableOpacity onPress={handleProvision}>
+                                    <Text style={styles.provision}>{t('reg.provision')}</Text>
+                                </TouchableOpacity>
                             </View>
                             <View
                                 style={{

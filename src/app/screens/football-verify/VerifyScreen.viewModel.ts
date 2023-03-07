@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Alert, Keyboard } from 'react-native';
+import { Alert, BackHandler, Keyboard } from 'react-native';
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
 import { AuthData, OfflineData, ScreenName } from '@football/app/utils/constants/enum';
 import { IVerifyScreenProps } from './VerifyScreen.type';
@@ -30,6 +30,20 @@ export const useViewModel = ({ navigation, route }: IVerifyScreenProps) => {
         dispatch(clearPhoneNumber([]));
         goBack();
     };
+
+    const handleBackButtonClick = () => {
+        dispatch(clearPhoneNumber([]));
+        goBack();
+        return true;
+    };
+
+    useEffect(() => {
+        BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
+        return () => {
+            BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
+        };
+    }, []);
+
     const handleError = (errorMessage: string, input: string): void => {
         setErrors(prevState => ({ ...prevState, [input]: errorMessage }));
     };
@@ -177,6 +191,10 @@ export const useViewModel = ({ navigation, route }: IVerifyScreenProps) => {
     useEffect(() => {
         if (numberPhone.successLogin === true && otp.isVerifyOtp === true && otp.success === true) {
             navigate(ScreenName.SideBar);
+            navigation.reset({
+                index: 0,
+                routes: [{ name: ScreenName.SideBar as never }],
+            });
         }
     }, [numberPhone.successLogin, otp.isVerifyOtp, otp.success]);
     useEffect(() => {
