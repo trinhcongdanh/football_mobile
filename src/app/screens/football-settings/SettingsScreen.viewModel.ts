@@ -141,7 +141,7 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
         if (!saveChange) {
             dispatch(resetSettingFavTeam([]));
             dispatch(resetSettingFavPlayer([]));
-            dispatch(resetSettingFavTopTeam([]));;
+            dispatch(resetSettingFavTopTeam([]));
         }
         dispatch(resetSelectedFavTeamProfile([]));
         dispatch(resetSelectedFavPlayerProfile([]));
@@ -151,7 +151,7 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
             previous_screen === ScreenName.FavPlayerPage ||
             previous_screen === ScreenName.FavTopTeamPage
         ) {
-            navigate(ScreenName.SideBar);
+            navigate(ScreenName.SplashPage);
         } else {
             goBack();
         }
