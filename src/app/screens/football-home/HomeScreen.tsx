@@ -23,6 +23,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import {
     Dimensions,
     ImageBackground,
+    LogBox,
     Platform,
     SafeAreaView,
     ScrollView,
@@ -66,7 +67,8 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
             setOpacity(true);
         }, 200);
     };
-
+    LogBox.ignoreLogs(['Warning: Encountered two children with the same key']);
+    LogBox.ignoreLogs(['Warning: Each child in a list should have a unique "key" prop']);
     return (
         <View style={[appStyles.flex, { backgroundColor: appColors.white }]}>
             {/* Header */}

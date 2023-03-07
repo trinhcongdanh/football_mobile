@@ -35,7 +35,7 @@ const useViewState = () => {
     const [homePage, setHomePage] = useState<HomePageModel>();
     const [homeLayout, setHomeLayout] = useState<HomeLayoutModel>();
     const [players, setPlayers] = useState<PlayerModel[]>([]);
-    const [teams, setTeams] = useState<TeamModel[]>();
+    const [teams, setTeams] = useState<TeamModel[]>([]);
     const [topTeams, setTopTeams] = useState<TopTeamModel[]>([]);
     const [leagues, setLeagues] = useState<LeagueModel[]>();
     const [generalVod, setGeneralVod] = useState<GeneralVodModel[]>();
@@ -107,9 +107,11 @@ const useViewCallback = (route: any, viewState: any) => {
     }, []);
 
     const getPlayersData = useCallback(async () => {
-        const playerIds = user?.favorite_players.map((id: string) => {
+        const playerIds = user?.favorite_players?.map((id: string) => {
             return { _id: { $oid: id } };
         });
+        console.log('playerIds', playerIds);
+        
         const [error, res] = await PlayerService.findByFilter({
             $or: playerIds,
         });
@@ -121,7 +123,7 @@ const useViewCallback = (route: any, viewState: any) => {
     }, []);
 
     const getTeamsData = useCallback(async () => {
-        const ids = user?.favorite_israel_teams.map((id: string) => {
+        const ids = user?.favorite_israel_teams?.map((id: string) => {
             return { _id: { $oid: id } };
         });
         const [error, res] = await TeamService.findByFilter({
@@ -135,7 +137,7 @@ const useViewCallback = (route: any, viewState: any) => {
     }, []);
 
     const getTopTeamsData = useCallback(async () => {
-        const ids = user?.favorite_national_teams.map((id: string) => {
+        const ids = user?.favorite_national_teams?.map((id: string) => {
             return { _id: { $oid: id } };
         });
         const [error, res] = await TopTeamService.findByFilter({
