@@ -19,7 +19,7 @@ export const getProfileUser = createAsyncThunk('user/getProfile', async (getProf
     );
 
     if (!isEmpty(data)) {
-        console.log(data);
+        console.log('get profile response', data);
         return data;
     }
 });
