@@ -37,6 +37,7 @@ import { setSettingFavPlayer } from 'src/store/SettingSelected.slice';
 import { RootState } from 'src/store/store';
 import { createProfileUser } from 'src/store/user/CreateProfile.slice';
 import { loginUser } from 'src/store/user/Login.slice';
+import { text } from 'stream/consumers';
 import { IFavoritePlayerScreenProps } from './FavoritePlayersScreen.type';
 
 export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) => {
@@ -245,13 +246,13 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
     const [focusSearch, setFocusSearch] = useState(false);
 
     const handleFocusSearch = () => {
-        setFocusSearch(true);
-        if (!searchText.length && focusSearch) {
-            submitSearchFavPlayer();
-        }
+        // setFocusSearch(true);
     };
 
     useEffect(() => {
+        if (searchText.length) {
+            setFocusSearch(() => true);
+        }
         if (!searchText.length && focusSearch) {
             submitSearchFavPlayer();
         }
@@ -546,5 +547,6 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
         favSelectedPlayer,
         getProfile,
         selectedPlayersProfile,
+        setFocusSearch,
     };
 };
