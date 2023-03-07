@@ -33,6 +33,7 @@ export const FavoritePlayersScreen = ({ navigation, route }: IFavoritePlayerScre
         getProfile,
         favSelectedPlayer,
         selectedPlayersProfile,
+        setFocusSearch,
     } = useViewModel({
         navigation,
         route,
@@ -61,7 +62,7 @@ export const FavoritePlayersScreen = ({ navigation, route }: IFavoritePlayerScre
                 searchText={searchText}
                 onGoSkip={onGoSkip}
                 onGoBack={onGoBack}
-                handleFocusSearch={handleFocusSearch}
+                // handleFocusSearch={() => setFocusSearch(true)}
                 handleContinue={handleContinue}
                 submitSearchFavPlayer={submitSearchFavPlayer}
                 searchFavPlayer={(text: string) => {

@@ -122,6 +122,7 @@ export const FavoritePlayer = ({
                                             placeholderTextColor={appColors.blue_gray_dark}
                                             onChangeText={searchFavPlayer}
                                             onBlur={submitSearchFavPlayer}
+                                            onFocus={handleFocusSearch}
                                         />
                                         <TouchableOpacity onPress={submitSearchFavPlayer}>
                                             <Icon
