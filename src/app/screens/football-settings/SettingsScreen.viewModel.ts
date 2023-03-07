@@ -6,20 +6,12 @@ import { useState, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { launchImageLibrary } from 'react-native-image-picker';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-    pushAllFavPlayers,
-    pushGroupFavPlayer,
-    resetSearchFavPlayer,
-    resetSelectedFavPlayer,
-    SelectedPlayer,
-} from 'src/store/FavPlayer.slice';
-import { pushFavTeam, resetSelectedFavTeam, resetFavTeam } from 'src/store/FavTeam.slice';
+import { resetSearchFavPlayer, SelectedPlayer } from 'src/store/FavPlayer.slice';
+import { resetFavTeam } from 'src/store/FavTeam.slice';
 import qs from 'qs';
 import { resetTopTeams } from 'src/store/FavTopTeam.slice';
 import { RootState } from 'src/store/store';
-import { ISettingsScreenProps } from './SettingsScreen.type';
 import { ACTION } from '@football/core/api/auth/config';
-import { getProfileUser } from 'src/store/user/getProfile.slice';
 import TeamService from '@football/core/services/Team.service';
 import PlayerService from '@football/core/services/Player.service';
 import { PlayerModel, PlayersModelResponse } from '@football/core/models/PlayerModelResponse';
@@ -28,13 +20,13 @@ import {
     resetSettingFavPlayer,
     resetSettingFavTeam,
     resetSettingFavTopTeam,
-    setSettingFavPlayer,
 } from 'src/store/SettingSelected.slice';
 import { setProfileUser, statusSetProfile } from 'src/store/user/setProfile.slice';
 import TopTeamService from '@football/core/services/TopTeam.service';
 import moment from 'moment';
 import { getSize } from '@football/app/utils/responsive/scale';
 import { BackHandler } from 'react-native';
+import { ISettingsScreenProps } from './SettingsScreen.type';
 
 export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
     const { t } = useTranslation();
@@ -52,6 +44,7 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
     const [isEnabled4, setIsEnabled4] = useState(false);
     const [isEnabled5, setIsEnabled5] = useState(false);
     const [isEnabled6, setIsEnabled6] = useState(false);
+    const [saveChange, setSaveChange] = useState(false);
 
     const [editEnable1, setEditEnable1] = useState(false);
     const [editEnable2, setEditEnable2] = useState(false);
@@ -150,39 +143,23 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
             dispatch(resetSettingFavPlayer([]));
             dispatch(resetSettingFavTopTeam([]));
         }
-        if (previous_screen === ScreenName.FavTeamPage) {
-            navigate(ScreenName.SideBar);
-        } else if (previous_screen === ScreenName.FavPlayerPage) {
-            navigate(ScreenName.SideBar);
-        } else if (previous_screen === ScreenName.FavTopTeamPage) {
+        if (
+            previous_screen === ScreenName.FavTeamPage ||
+            previous_screen === ScreenName.FavPlayerPage ||
+            previous_screen === ScreenName.FavTopTeamPage
+        ) {
             navigate(ScreenName.SideBar);
         } else {
             goBack();
         }
-    };
 
-    const handleBackButtonClick = () => {
-        if (!saveChange) {
-            dispatch(resetSettingFavTeam([]));
-            dispatch(resetSettingFavPlayer([]));
-            dispatch(resetSettingFavTopTeam([]));
-        }
-        if (previous_screen === ScreenName.FavTeamPage) {
-            navigate(ScreenName.SideBar);
-        } else if (previous_screen === ScreenName.FavPlayerPage) {
-            navigate(ScreenName.SideBar);
-        } else if (previous_screen === ScreenName.FavTopTeamPage) {
-            navigate(ScreenName.SideBar);
-        } else {
-            goBack();
-        }
         return true;
     };
 
     useEffect(() => {
-        BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
+        BackHandler.addEventListener('hardwareBackPress', onGoBack);
         return () => {
-            BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
+            BackHandler.removeEventListener('hardwareBackPress', onGoBack);
         };
     }, []);
 
@@ -307,7 +284,7 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
     const handleOnDate = (e: Date) => {
         setEditBirthday(true);
         setDateTime(e);
-        let formattedDate = e.getFullYear() + '-' + (e.getMonth() + 1) + '-' + e.getDate();
+        const formattedDate = `${e.getFullYear()}-${e.getMonth() + 1}-${e.getDate()}`;
         setFormattedDate(formattedDate);
     };
 
@@ -493,19 +470,18 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
     const userLogin = useSelector((state: RootState) => state.otpUser);
     const numberPhone = useSelector((state: any) => state.numberPhoneUser);
 
-    const [saveChange, setSaveChange] = useState(false);
     const handleSaveChange = () => {
         setSaveChange(true);
         dispatch(statusSetProfile([]));
-        let fav_team: any = [];
+        const fav_team: any = [];
         favSelectedTeam.map(item => {
             fav_team.push(item._id);
         });
-        let player_team: any = [];
+        const player_team: any = [];
         favSelectedPlayer.map(item => {
             player_team.push(item._id);
         });
-        let fav_top_team: any = [];
+        const fav_top_team: any = [];
         favSelectedTopTeam.map(item => {
             fav_top_team.push(item._id);
         });
@@ -520,13 +496,13 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
                         : userLogin.otp.user.item_id,
                     item: {
                         name: userName,
-                        email: email,
-                        gender: gender,
+                        email,
+                        gender,
                         birthdate: formattedDate,
                         favorite_israel_teams: fav_team,
                         favorite_players: player_team,
                         favorite_national_teams: fav_top_team,
-                        notifications: notifications,
+                        notifications,
                     },
                 })
             )
