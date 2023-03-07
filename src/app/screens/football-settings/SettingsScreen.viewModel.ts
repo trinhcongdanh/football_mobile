@@ -16,13 +16,17 @@ import { useTranslation } from 'react-i18next';
 import { BackHandler } from 'react-native';
 import { launchImageLibrary } from 'react-native-image-picker';
 import { useDispatch, useSelector } from 'react-redux';
-import { resetSearchFavPlayer, resetSelectedFavPlayerProfile, SelectedPlayer } from 'src/store/FavPlayer.slice';
+import {
+    resetSearchFavPlayer,
+    resetSelectedFavPlayerProfile,
+    SelectedPlayer,
+} from 'src/store/FavPlayer.slice';
 import { resetFavTeam, resetSelectedFavTeamProfile } from 'src/store/FavTeam.slice';
 import { resetSelectedFavTopTeamsProfile, resetTopTeams } from 'src/store/FavTopTeam.slice';
 import {
     resetSettingFavPlayer,
     resetSettingFavTeam,
-    resetSettingFavTopTeam
+    resetSettingFavTopTeam,
 } from 'src/store/SettingSelected.slice';
 import { RootState } from 'src/store/store';
 import { setProfileUser, statusSetProfile } from 'src/store/user/setProfile.slice';
@@ -138,14 +142,13 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
 
     const previous_screen = route?.params?.previous_screen;
     const onGoBack = () => {
-        if (!saveChange) {
-            dispatch(resetSettingFavTeam([]));
-            dispatch(resetSettingFavPlayer([]));
-            dispatch(resetSettingFavTopTeam([]));
-        }
+        dispatch(resetSettingFavTeam([]));
+        dispatch(resetSettingFavPlayer([]));
+        dispatch(resetSettingFavTopTeam([]));
         dispatch(resetSelectedFavTeamProfile([]));
         dispatch(resetSelectedFavPlayerProfile([]));
         dispatch(resetSelectedFavTopTeamsProfile([]));
+
         if (
             previous_screen === ScreenName.FavTeamPage ||
             previous_screen === ScreenName.FavPlayerPage ||
