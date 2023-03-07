@@ -40,6 +40,11 @@ export const loginSlice = createSlice({
         isVerify: (state, action) => {
             state.isVerify = action.payload;
         },
+        clearLogin: (state, action) => {
+            state.login = {};
+            state.loading = null;
+            state.success = null;
+        },
         isLogout: (state, action) => {
             state.logoutLoading = action.payload;
             state.logoutSuccess = action.payload;
@@ -81,5 +86,5 @@ export const loginSlice = createSlice({
 });
 
 const { actions, reducer } = loginSlice;
-export const { isVerify, isLogout, isLogin } = actions;
+export const { isVerify, isLogout, isLogin, clearLogin } = actions;
 export default loginSlice.reducer;

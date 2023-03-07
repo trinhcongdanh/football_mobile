@@ -1,31 +1,31 @@
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
 import { AuthData, ScreenName } from '@football/app/utils/constants/enum';
+import { getSize } from '@football/app/utils/responsive/scale';
+import { ACTION } from '@football/core/api/auth/config';
+import { PlayerModel, PlayersModelResponse } from '@football/core/models/PlayerModelResponse';
 import { TeamModel, TeamModelResponse } from '@football/core/models/TeamModelResponse';
 import { TopTeamModel, TopTeamModelResponse } from '@football/core/models/TopTeamModelResponse';
-import { useState, useEffect, useRef } from 'react';
+import PlayerService from '@football/core/services/Player.service';
+import TeamService from '@football/core/services/Team.service';
+import TopTeamService from '@football/core/services/TopTeam.service';
+import { isEmpty } from 'lodash';
+import moment from 'moment';
+import qs from 'qs';
+import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { BackHandler } from 'react-native';
 import { launchImageLibrary } from 'react-native-image-picker';
 import { useDispatch, useSelector } from 'react-redux';
-import { resetSearchFavPlayer, SelectedPlayer } from 'src/store/FavPlayer.slice';
-import { resetFavTeam } from 'src/store/FavTeam.slice';
-import qs from 'qs';
-import { resetTopTeams } from 'src/store/FavTopTeam.slice';
-import { RootState } from 'src/store/store';
-import { ACTION } from '@football/core/api/auth/config';
-import TeamService from '@football/core/services/Team.service';
-import PlayerService from '@football/core/services/Player.service';
-import { PlayerModel, PlayersModelResponse } from '@football/core/models/PlayerModelResponse';
-import { isEmpty } from 'lodash';
+import { resetSearchFavPlayer, resetSelectedFavPlayerProfile, SelectedPlayer } from 'src/store/FavPlayer.slice';
+import { resetFavTeam, resetSelectedFavTeamProfile } from 'src/store/FavTeam.slice';
+import { resetSelectedFavTopTeamsProfile, resetTopTeams } from 'src/store/FavTopTeam.slice';
 import {
     resetSettingFavPlayer,
     resetSettingFavTeam,
-    resetSettingFavTopTeam,
+    resetSettingFavTopTeam
 } from 'src/store/SettingSelected.slice';
+import { RootState } from 'src/store/store';
 import { setProfileUser, statusSetProfile } from 'src/store/user/setProfile.slice';
-import TopTeamService from '@football/core/services/TopTeam.service';
-import moment from 'moment';
-import { getSize } from '@football/app/utils/responsive/scale';
-import { BackHandler } from 'react-native';
 import { ISettingsScreenProps } from './SettingsScreen.type';
 
 export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
@@ -141,8 +141,11 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
         if (!saveChange) {
             dispatch(resetSettingFavTeam([]));
             dispatch(resetSettingFavPlayer([]));
-            dispatch(resetSettingFavTopTeam([]));
+            dispatch(resetSettingFavTopTeam([]));;
         }
+        dispatch(resetSelectedFavTeamProfile([]));
+        dispatch(resetSelectedFavPlayerProfile([]));
+        dispatch(resetSelectedFavTopTeamsProfile([]));
         if (
             previous_screen === ScreenName.FavTeamPage ||
             previous_screen === ScreenName.FavPlayerPage ||
@@ -152,9 +155,33 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
         } else {
             goBack();
         }
-
         return true;
     };
+
+    // const handleBackButtonClick = () => {
+    //     if (!saveChange) {
+    //         dispatch(resetSettingFavTeam([]));
+    //         dispatch(resetSettingFavPlayer([]));
+    //         dispatch(resetSettingFavTopTeam([]));
+    //         dispatch(resetSelectedFavTeamProfile([]));
+    //         dispatch(resetSelectedFavPlayerProfile([]));
+    //         dispatch(resetSelectedFavTopTeamsProfile([]));
+    //     }
+    //     if (previous_screen === ScreenName.FavTeamPage) {
+    //         navigate(ScreenName.SideBar);
+    //     } else if (previous_screen === ScreenName.FavPlayerPage) {
+    //         navigate(ScreenName.SideBar);
+    //     } else if (previous_screen === ScreenName.FavTopTeamPage) {
+    //         navigate(ScreenName.SideBar);
+    //     } else {
+    //         goBack();
+    //     }
+    //     dispatch(resetSelectedFavTeamProfile([]));
+    //     dispatch(resetSelectedFavPlayerProfile([]));
+    //     dispatch(resetSelectedFavTopTeamsProfile([]));
+
+    //     return true;
+    // };
 
     useEffect(() => {
         BackHandler.addEventListener('hardwareBackPress', onGoBack);
@@ -514,6 +541,9 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
         dispatch(resetSettingFavTeam([]));
         dispatch(resetSettingFavPlayer([]));
         dispatch(resetSettingFavTopTeam([]));
+        dispatch(resetSelectedFavTeamProfile([]));
+        dispatch(resetSelectedFavPlayerProfile([]));
+        dispatch(resetSelectedFavTopTeamsProfile([]));
     };
 
     const scrollBottom = route.params?.scrollBottom;

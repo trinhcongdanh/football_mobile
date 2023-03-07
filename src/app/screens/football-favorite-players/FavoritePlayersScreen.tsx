@@ -29,6 +29,10 @@ export const FavoritePlayersScreen = ({ navigation, route }: IFavoritePlayerScre
         selectedFavPlayers,
         formattedFavPlayers,
         submitSearchFavPlayer,
+        handleFocusSearch,
+        getProfile,
+        favSelectedPlayer,
+        selectedPlayersProfile,
     } = useViewModel({
         navigation,
         route,
@@ -57,6 +61,7 @@ export const FavoritePlayersScreen = ({ navigation, route }: IFavoritePlayerScre
                 searchText={searchText}
                 onGoSkip={onGoSkip}
                 onGoBack={onGoBack}
+                handleFocusSearch={handleFocusSearch}
                 handleContinue={handleContinue}
                 submitSearchFavPlayer={submitSearchFavPlayer}
                 searchFavPlayer={(text: string) => {
@@ -68,7 +73,7 @@ export const FavoritePlayersScreen = ({ navigation, route }: IFavoritePlayerScre
                 newFav={
                     !isEmpty(favSearchPlayers) ? formattedSearchFavPlayers : formattedFavPlayers
                 }
-                favSelected={selectedFavPlayers}
+                favSelected={getProfile.success ? selectedPlayersProfile : selectedFavPlayers}
                 title={t('favorite_player.title')}
                 placeholder={t('favorite_player.place_holder')}
                 chosen={t('favorite_player.chosen')}

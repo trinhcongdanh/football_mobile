@@ -21,12 +21,14 @@ import { Alert, Keyboard } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import {
     pushAllFavPlayers,
+    pushAllFavPlayersProfile,
     pushGroupFavPlayer,
     resetAllFavPlayers,
     resetGroupFavPlayer,
     resetSearchFavPlayer,
     searchFavPlayers,
     selectedFavPlayersAsMapSelector,
+    selectedFavPlayersProfileAsMapSelector,
     SelectedPlayer,
     setAllFavPlayers,
     setGroupFavPlayer,
@@ -43,8 +45,13 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
     const dispatch = useDispatch<any>();
     const [searchText, setSearchText] = useState('');
     const routes = useRoute();
+    const getProfile = useSelector((state: RootState) => state.getProfile);
 
-    const selectedFavPlayersMap = useSelector(selectedFavPlayersAsMapSelector);
+    const selectedFavPlayersMap = useSelector(
+        getProfile.success
+            ? selectedFavPlayersProfileAsMapSelector
+            : selectedFavPlayersAsMapSelector
+    );
     const selectedFavTeams = useSelector((state: RootState) => state.favTeams.selectedTeams);
     const selectedFavPlayers = useSelector((state: RootState) => state.favPlayers.selectedPlayers);
 
@@ -103,6 +110,32 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
                   })
                   .flat()
     );
+    const selectedPlayersProfile = useSelector(
+        (state: RootState) => state.favPlayers.selectedPlayersProfile
+    );
+    const [favSelectedPlayer, setFavSelectedPlayer] = useState<PlayerModel[]>([]);
+    useEffect(() => {
+        if (getProfile.success === true) {
+            const fetchFavPlayer = async () => {
+                const fetchPlayer = await Promise.all(
+                    getProfile.getProfile.item.favorite_players.map(async (item: string) => {
+                        const [err, res] = await PlayerService.findByOId<PlayersModelResponse>(
+                            item
+                        );
+                        if (err) return;
+                        return res.data.documents[0];
+                    })
+                );
+                // console.log(fetchTeam.filter(Boolean));
+                if (!isEmpty(selectedPlayersProfile)) {
+                    setFavSelectedPlayer(selectedPlayersProfile);
+                } else {
+                    setFavSelectedPlayer(fetchPlayer.filter(Boolean));
+                }
+            };
+            fetchFavPlayer();
+        }
+    }, [getProfile.success]);
 
     const login = useSelector((state: RootState) => state.login);
     const profile = useSelector((state: RootState) => state.createProfile);
@@ -187,22 +220,42 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
     //     return pick(player, ['name_en', 'name_he', 'image_url', '_id']);
     // }
     const handleSelected = (player: PlayerModel) => {
-        if (!isEmpty(favSearchPlayers)) {
-            dispatch(pushAllFavPlayers(player));
-        } else {
-            if (!isEmpty(selectedFavTeams)) {
-                dispatch(pushGroupFavPlayer(player));
-            } else {
+        if (!getProfile.success) {
+            if (!isEmpty(favSearchPlayers)) {
                 dispatch(pushAllFavPlayers(player));
+            } else {
+                if (!isEmpty(selectedFavTeams)) {
+                    dispatch(pushGroupFavPlayer(player));
+                } else {
+                    dispatch(pushAllFavPlayers(player));
+                }
             }
+        }
+        dispatch(pushAllFavPlayersProfile(player));
+    };
+
+    useEffect(() => {
+        if (isEmpty(selectedPlayersProfile)) {
+            favSelectedPlayer.map((item: PlayerModel) => {
+                dispatch(pushAllFavPlayersProfile(item));
+            });
+        }
+    }, [favSelectedPlayer]);
+
+    const [focusSearch, setFocusSearch] = useState(false);
+
+    const handleFocusSearch = () => {
+        setFocusSearch(true);
+        if (!searchText.length && focusSearch) {
+            submitSearchFavPlayer();
         }
     };
 
     useEffect(() => {
-        if (!searchText.length) {
+        if (!searchText.length && focusSearch) {
             submitSearchFavPlayer();
         }
-    }, [searchText]);
+    }, [searchText, focusSearch]);
 
     const submitSearchFavPlayer = async () => {
         Keyboard.dismiss();
@@ -263,6 +316,7 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
                             listFavPlayers: [],
                         })
                     );
+
                     dispatch(
                         searchFavPlayers({
                             id: id,
@@ -282,6 +336,20 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
                     listFavPlayers: [],
                 })
             );
+            dispatch(
+                resetAllFavPlayers({
+                    id: '',
+                    label: '',
+                    listFavPlayers: [],
+                })
+            );
+            dispatch(
+                resetGroupFavPlayer({
+                    id: '',
+                    label: '',
+                    listFavPlayers: [],
+                })
+            );
             if (!isEmpty(selectedFavTeams)) {
                 if (isEmpty(favPlayers) || isNil(favPlayers)) {
                     try {
@@ -295,6 +363,13 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
                         );
 
                         if (!isEmpty(data.documents)) {
+                            dispatch(
+                                resetGroupFavPlayer({
+                                    id: '',
+                                    label: '',
+                                    listFavPlayers: [],
+                                })
+                            );
                             selectedFavTeams
                                 .map((favTeam: TeamModel) => ({
                                     favTeam,
@@ -314,6 +389,7 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
                                             }
                                         )
                                     );
+
                                     dispatch(
                                         setGroupFavPlayer({
                                             id: team_personnel._id,
@@ -340,6 +416,13 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
                         );
 
                         if (!isEmpty(data.documents)) {
+                            dispatch(
+                                resetAllFavPlayers({
+                                    id: '',
+                                    label: '',
+                                    listFavPlayers: [],
+                                })
+                            );
                             dispatch(
                                 setAllFavPlayers({
                                     id: id,
@@ -422,7 +505,7 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
                     center: true,
                     scrollBottom: false,
                 });
-                dispatch(setSettingFavPlayer(selectedFavPlayers));
+                dispatch(setSettingFavPlayer(selectedPlayersProfile));
                 // pop(ScreenName.FavTeamPage);
             } else {
                 navigate(ScreenName.FavTopTeamPage);
@@ -459,5 +542,9 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
         selectedFavPlayers,
         formattedFavPlayers,
         submitSearchFavPlayer,
+        handleFocusSearch,
+        favSelectedPlayer,
+        getProfile,
+        selectedPlayersProfile,
     };
 };
