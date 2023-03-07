@@ -130,6 +130,10 @@ export const useViewModel = ({ navigation, route }: IRegScreenProps) => {
         }
     }, [profileUser.success, isFocused]);
 
+    const handleProvision = () => {
+        navigate(ScreenName.TermsConditionPage);
+    };
+
     return {
         errors,
         onCheck,
@@ -144,5 +148,6 @@ export const useViewModel = ({ navigation, route }: IRegScreenProps) => {
         handleOnGender,
         date,
         profileUser,
+        handleProvision,
     };
 };
