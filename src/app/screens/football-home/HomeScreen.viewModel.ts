@@ -107,11 +107,13 @@ const useViewCallback = (route: any, viewState: any) => {
     }, []);
 
     const getPlayersData = useCallback(async () => {
+        if (!user?.favorite_players?.length) {
+            return;
+        }
         const playerIds = user?.favorite_players?.map((id: string) => {
             return { _id: { $oid: id } };
         });
-        console.log('playerIds', playerIds);
-        
+
         const [error, res] = await PlayerService.findByFilter({
             $or: playerIds,
         });
@@ -123,7 +125,10 @@ const useViewCallback = (route: any, viewState: any) => {
     }, []);
 
     const getTeamsData = useCallback(async () => {
-        const ids = user?.favorite_israel_teams?.map((id: string) => {
+        if (!user?.favorite_israel_teams?.length) {
+            return;
+        }
+        const ids = user.favorite_israel_teams.map((id: string) => {
             return { _id: { $oid: id } };
         });
         const [error, res] = await TeamService.findByFilter({
@@ -137,6 +142,9 @@ const useViewCallback = (route: any, viewState: any) => {
     }, []);
 
     const getTopTeamsData = useCallback(async () => {
+        if (!user?.favorite_national_teams?.length) {
+            return;
+        }
         const ids = user?.favorite_national_teams?.map((id: string) => {
             return { _id: { $oid: id } };
         });
