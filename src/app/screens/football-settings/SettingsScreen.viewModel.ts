@@ -34,7 +34,7 @@ import { ISettingsScreenProps } from './SettingsScreen.type';
 
 export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
     const { t } = useTranslation();
-    const { goBack, navigate, replace } = useAppNavigator();
+    const { goBack, navigate, replace, popToTop } = useAppNavigator();
     const [image, setImage] = useState<any>();
     const dispatch = useDispatch<any>();
 
@@ -154,7 +154,8 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
             previous_screen === ScreenName.FavPlayerPage ||
             previous_screen === ScreenName.FavTopTeamPage
         ) {
-            replace(ScreenName.SideBar);
+            popToTop();
+            navigate(ScreenName.SideBar);
         } else {
             goBack();
         }

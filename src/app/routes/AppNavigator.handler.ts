@@ -26,7 +26,7 @@ export const useAppNavigator = () => {
 
     const navigateClearStack = (name: string) => {
         navigation.reset({
-            index: 1,
+            index: 0,
             routes: [{ name }],
         });
     };
