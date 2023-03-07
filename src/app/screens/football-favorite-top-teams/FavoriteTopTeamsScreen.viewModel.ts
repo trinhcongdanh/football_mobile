@@ -193,8 +193,8 @@ export const useViewModel = ({ navigation, route }: IFavoriteTopTeamsScreenProps
                 previous_screen: ScreenName.FavTopTeamPage,
                 center: true,
                 scrollBottom: false,
-                selectedPlayers: true,
-                selectedTeams: true,
+                // selectedPlayers: true,
+                // selectedTeams: true,
                 selectedTopTeams: true,
             });
             dispatch(setSettingFavTopTeam(selectedFavTopTeamsProfile));
