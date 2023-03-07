@@ -19,8 +19,9 @@ import { appColors } from '@football/app/utils/constants/appColors';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import { getSize } from '@football/app/utils/responsive/scale';
 import { renderAvatar, renderUserPoints } from '@football/core/models/AvatarType.enum';
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
+    Dimensions,
     ImageBackground,
     Platform,
     SafeAreaView,
@@ -55,6 +56,16 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
         navigation,
         route,
     });
+
+    const scrollViewRef = useRef<any>();
+    const [opacity, setOpacity] = useState(false);
+
+    const scrollToEnd = () => {
+        scrollViewRef.current?.scrollToEnd({ animated: true });
+        setTimeout(() => {
+            setOpacity(true);
+        }, 200);
+    };
 
     return (
         <View style={[appStyles.flex, { backgroundColor: appColors.white }]}>
@@ -130,7 +141,15 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                                     </View>
                                 </View>
                                 <View style={{ marginTop: getSize.m(22) }}>
-                                    <ScrollView style={{ flexDirection: 'row' }} horizontal>
+                                    <ScrollView
+                                        style={{
+                                            flexDirection: 'row-reverse',
+                                            opacity: opacity ? 1 : 0,
+                                        }}
+                                        horizontal
+                                        onContentSizeChange={scrollToEnd}
+                                        ref={scrollViewRef}
+                                    >
                                         {players?.map((item, index) => {
                                             return (
                                                 <TouchableOpacity
