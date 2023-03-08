@@ -63,27 +63,10 @@ export const useViewModel = ({ navigation, route }: IFavoriteTopTeamsScreenProps
     const changeTopTeams = route.params?.changeTopTeams;
 
     useEffect(() => {
-        if (getProfile.success === true) {
-            const fetchFavTopTeam = async () => {
-                const fetchTopTeam = await Promise.all(
-                    getProfile.getProfile.item.favorite_national_teams.map(async (item: string) => {
-                        const [err, res] = await TopTeamService.findByOId<TopTeamModelResponse>(
-                            item
-                        );
-                        if (err) return;
-                        return res.data.documents[0];
-                    })
-                );
-                // console.log(fetchTeam.filter(Boolean));
-                if (changeTopTeams) {
-                    setFavSelectedTopTeam(selectedFavTopTeamsProfile);
-                } else {
-                    setFavSelectedTopTeam(fetchTopTeam.filter(Boolean));
-                }
-            };
-            fetchFavTopTeam();
+        if (changeTopTeams) {
+            setFavSelectedTopTeam(selectedFavTopTeamsProfile);
         }
-    }, [getProfile.success]);
+    }, [changeTopTeams]);
 
     const login = useSelector((state: RootState) => state.login);
     const profile = useSelector((state: RootState) => state.createProfile);
@@ -193,8 +176,8 @@ export const useViewModel = ({ navigation, route }: IFavoriteTopTeamsScreenProps
                 previous_screen: ScreenName.FavTopTeamPage,
                 center: true,
                 scrollBottom: false,
-                // selectedPlayers: true,
-                // selectedTeams: true,
+                selectedPlayers: true,
+                selectedTeams: true,
                 selectedTopTeams: true,
             });
             dispatch(setSettingFavTopTeam(selectedFavTopTeamsProfile));

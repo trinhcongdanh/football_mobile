@@ -70,29 +70,13 @@ export const useViewModel = ({ navigation, route }: IFavoriteTeamsScreenProps) =
         (state: RootState) => state.favTeams.selectedTeamsProfile
     );
     const getProfile = useSelector((state: RootState) => state.getProfile);
-
     const [favSelectedTeam, setFavSelectedTeam] = useState<TeamModel[]>([]);
+    const changeTeams = route.params?.changeTeams;
     useEffect(() => {
-        if (getProfile.success === true) {
-            const fetchFavTeam = async () => {
-                const fetchTeam = await Promise.all(
-                    getProfile.getProfile.item.favorite_israel_teams.map(async (item: string) => {
-                        const [err, res] = await TeamService.findByOId<TeamModelResponse>(item);
-                        if (err) return;
-                        return res.data.documents[0];
-                    })
-                );
-                // console.log(fetchTeam.filter(Boolean));
-                if (!isEmpty(selectedTeamsProfile)) {
-                    console.log('Danh');
-                    setFavSelectedTeam(selectedTeamsProfile);
-                } else {
-                    setFavSelectedTeam(fetchTeam.filter(Boolean));
-                }
-            };
-            fetchFavTeam();
+        if (changeTeams) {
+            setFavSelectedTeam(selectedTeamsProfile);
         }
-    }, [getProfile.success]);
+    }, [changeTeams]);
 
     const login = useSelector((state: any) => state.login);
     const profile = useSelector((state: any) => state.createProfile);
@@ -275,9 +259,9 @@ export const useViewModel = ({ navigation, route }: IFavoriteTeamsScreenProps) =
                     previous_screen: ScreenName.FavTeamPage,
                     center: true,
                     scrollBottom: false,
-                    // selectedPlayers: true,
+                    selectedPlayers: true,
                     selectedTeams: true,
-                    // selectedTopTeams: true,
+                    selectedTopTeams: true,
                 });
                 dispatch(setSettingFavTeam(selectedTeamsProfile));
                 // pop(ScreenName.FavTeamPage);
