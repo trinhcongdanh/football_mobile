@@ -135,16 +135,19 @@ export const useViewModel = ({ navigation, route }: IFavoriteSummaryScreenProps)
     };
 
     const backFavTeam = () => {
+        dispatch(resetFavTeam([]));
         navigate(ScreenName.FavTeamPage, {
             previous_screen: ScreenName.FavSummaryPage,
         });
     };
     const backFavPlayer = () => {
+        dispatch(resetSearchFavPlayer({ id: '', label: '', listFavPlayers: [] }));
         navigate(ScreenName.FavPlayerPage, {
             previous_screen: ScreenName.FavSummaryPage,
         });
     };
     const backFavTopTeam = () => {
+        dispatch(resetTopTeams([]));
         navigate(ScreenName.FavTopTeamPage, {
             previous_screen: ScreenName.FavSummaryPage,
         });

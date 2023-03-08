@@ -575,9 +575,9 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
         favSelectedTeam.map(item => {
             fav_team.push(item._id);
         });
-        const player_team: string[] = [];
+        const fav_player: string[] = [];
         favSelectedPlayer.map(item => {
-            player_team.push(item._id);
+            fav_player.push(item._id);
         });
         const fav_top_team: string[] = [];
         favSelectedTopTeam.map(item => {
@@ -597,10 +597,10 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
                         email,
                         gender,
                         birthdate: formattedDate,
-                        favorite_israel_teams: fav_team,
-                        favorite_players: player_team,
-                        favorite_national_teams: fav_top_team,
-                        notifications: notifications,
+                        favorite_israel_teams: isEmpty(fav_team) ? '' : fav_team,
+                        favorite_players: isEmpty(fav_player) ? '' : fav_player,
+                        favorite_national_teams: isEmpty(fav_top_team) ? '' : fav_top_team,
+                        notifications: isEmpty(notifications) ? '' : notifications,
                     },
                 })
             )
