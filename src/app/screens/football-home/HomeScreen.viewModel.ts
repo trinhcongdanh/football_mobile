@@ -21,7 +21,7 @@ import PlayerService from '@football/core/services/Player.service';
 import TeamService from '@football/core/services/Team.service';
 import TopTeamService from '@football/core/services/TopTeam.service';
 import { isEmpty } from 'lodash';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'src/store/store';
@@ -34,6 +34,10 @@ const useViewState = () => {
         (state: RootState) => state.favTopTeams.selectedTopTeams
     );
     const userLogin = useSelector((state: any) => state.otpUser);
+    const userLoginData = useMemo(() => {
+        return userLogin;
+    }, [userLogin]);
+    console.log('userLoginData', userLoginData);
 
     // const profileUser = useSelector((state: RootState) => state.getProfile);
     const [profileUser, setProfileUser] = useState();
@@ -301,6 +305,10 @@ export const useViewModel = ({ navigation, route }: IHomeScreenProps) => {
     useMount(() => {
         if (state.userLogin.success && !state.profileUser) {
             getUser(state.userLogin);
+        } else {
+            state.setPlayers(state.selectedFavPlayers);
+            state.setTeams(state.selectedFavTeams);
+            state.setTopTeams(state.selectedFavTopTeams);
         }
         getHomeLayoutData();
         getHomePageData();
