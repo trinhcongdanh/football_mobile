@@ -75,7 +75,7 @@ export const FavoriteTeam = ({
                                     style={styles.text_search}
                                     placeholderTextColor={appColors.blue_gray_dark}
                                     onChangeText={searchFavTeam}
-                                    onBlur={submitSearchFavTeam}
+                                    onSubmitEditing={submitSearchFavTeam}
                                 />
 
                                 <TouchableOpacity onPress={submitSearchFavTeam}>

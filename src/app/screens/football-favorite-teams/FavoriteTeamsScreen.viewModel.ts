@@ -124,15 +124,9 @@ export const useViewModel = ({ navigation, route }: IFavoriteTeamsScreenProps) =
             }
         } else {
             dispatch(pushFavTeamProfile(team));
-            // if (favSelectedTeam.length < 3) {
-            //     setFavSelectedTeam([...favSelectedTeam, team]);
-            //     // console.log(favSelectedTeam);
-            // }
         }
     };
     useEffect(() => {
-        // console.log(favSelectedTeam);
-        // dispatch(resetSelectedFavTeam([]));
         if (isEmpty(selectedTeamsProfile)) {
             favSelectedTeam.map((item: TeamModel) => {
                 dispatch(pushFavTeamProfile(item));

@@ -136,9 +136,10 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
     const guestId = useSelector((state: any) => state.guestId.guestId);
     const uuid = require('uuid');
     let id = uuid.v4();
+    const [focusSearch, setFocusSearch] = useState(false);
 
     const getPlayersData = useCallback(async () => {
-        if (isEmpty(favPlayers) || isNil(favPlayers)) {
+        if ((isEmpty(favPlayers) || isNil(favPlayers)) && focusSearch === false) {
             state.setIsLoading(true);
 
             try {
@@ -166,7 +167,7 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
     }, []);
 
     const getTeamPersonnel = useCallback(async () => {
-        if (isEmpty(favPlayers) || isNil(favPlayers)) {
+        if ((isEmpty(favPlayers) || isNil(favPlayers)) && focusSearch === false) {
             state.setIsLoading(true);
 
             try {
@@ -230,8 +231,9 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
             } else {
                 dispatch(pushAllFavPlayers(player));
             }
+        } else {
+            dispatch(pushAllFavPlayersProfile(player));
         }
-        dispatch(pushAllFavPlayersProfile(player));
     };
 
     useEffect(() => {
@@ -241,8 +243,6 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
             });
         }
     }, [favSelectedPlayer]);
-
-    const [focusSearch, setFocusSearch] = useState(false);
 
     const handleFocusSearch = () => {
         // setFocusSearch(true);
@@ -439,13 +439,13 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
         }
     };
 
-    useEffect(() => {
-        return () => {
-            // componentwillunmount in functional component.
-            // Anything in here is fired on component unmount.
-            setSearchText('');
-        };
-    }, []);
+    // useEffect(() => {
+    //     return () => {
+    //         // componentwillunmount in functional component.
+    //         // Anything in here is fired on component unmount.
+    //         setSearchText('');
+    //     };
+    // }, []);
 
     const onGoBack = (): void => {
         goBack();
