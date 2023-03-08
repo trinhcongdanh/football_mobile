@@ -169,6 +169,7 @@ export const Video = () => {
                             style={styles.background_video}
                             paused={pause}
                             resizeMode="cover"
+                            muted={false}
                             onLoad={onLoadEnd}
                             onProgress={onProgress}
                             onEnd={onEnd}

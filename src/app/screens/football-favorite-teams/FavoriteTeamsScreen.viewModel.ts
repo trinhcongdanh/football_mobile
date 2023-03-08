@@ -28,6 +28,7 @@ import { useIsFocused, useRoute } from '@react-navigation/native';
 import { RootState } from 'src/store/store';
 import { setSettingFavTeam } from 'src/store/SettingSelected.slice';
 import TeamService from '@football/core/services/Team.service';
+import { addGuestId } from 'src/store/user/GuestId.slice';
 
 const useViewState = () => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -77,10 +78,6 @@ export const useViewModel = ({ navigation, route }: IFavoriteTeamsScreenProps) =
             setFavSelectedTeam(selectedTeamsProfile);
         }
     }, [changeTeams]);
-
-    const login = useSelector((state: any) => state.login);
-    const profile = useSelector((state: any) => state.createProfile);
-    const guestId = useSelector((state: any) => state.guestId.guestId);
 
     function serializeParams(obj: any) {
         let str = [];
@@ -147,7 +144,6 @@ export const useViewModel = ({ navigation, route }: IFavoriteTeamsScreenProps) =
         if (!searchText.length) {
             submitSearchFavTeam();
         }
-
     }, [searchText]);
 
     useEffect(() => {
@@ -198,6 +194,19 @@ export const useViewModel = ({ navigation, route }: IFavoriteTeamsScreenProps) =
         dispatch(resetFavTeam([]));
         goBack();
     };
+
+    const login = useSelector((state: any) => state.login);
+    const profile = useSelector((state: any) => state.createProfile);
+    const guestId = useSelector((state: any) => state.guestId.guestId);
+
+    const uuid = require('uuid');
+    const id = uuid.v4();
+    useEffect(() => {
+        if (guestId.length === 0) {
+            dispatch(addGuestId(id));
+        }
+    }, []);
+
     const onGoSkip = () => {
         if (isEmpty(profile.profile) || isNil(profile.profile)) {
             dispatch(
