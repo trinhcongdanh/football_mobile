@@ -109,15 +109,15 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
     const favSelectedPlayers = useSelector((state: RootState) =>
         !isEmpty(selectedFavTeams)
             ? state.favPlayers.groupPlayers
-                .map(e => {
-                    return e.listFavPlayers.filter(v => v.isSelected);
-                })
-                .flat()
+                  .map(e => {
+                      return e.listFavPlayers.filter(v => v.isSelected);
+                  })
+                  .flat()
             : state.favPlayers.favPlayers
-                .map(e => {
-                    return e.listFavPlayers.filter(v => v.isSelected);
-                })
-                .flat()
+                  .map(e => {
+                      return e.listFavPlayers.filter(v => v.isSelected);
+                  })
+                  .flat()
     );
     const selectedPlayersProfile = useSelector(
         (state: RootState) => state.favPlayers.selectedPlayersProfile
@@ -126,37 +126,10 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
     const changePlayers = route.params?.changePlayers;
 
     useEffect(() => {
-        if (getProfile.success === true) {
-            const fetchFavPlayer = async () => {
-                const fetchPlayer = await Promise.all(
-                    getProfile.getProfile.item.favorite_players.map(async (item: string) => {
-                        const [err, res] = await PlayerService.findByOId<PlayersModelResponse>(
-                            item
-                        );
-                        if (err) return;
-                        return res.data.documents[0];
-                    })
-                );
-                // const playerIds = getProfile.getProfile.item?.favorite_players?.map((id: string) => {
-                //     return { _id: { $oid: id } };
-                // });
-
-                // const [error, res] = await PlayerService.findByFilter({
-                //     $or: playerIds,
-                // });
-
-                console.log('fetchPlayer', fetchPlayer);
-
-                // console.log(fetchTeam.filter(Boolean));
-                if (changePlayers) {
-                    setFavSelectedPlayer(selectedPlayersProfile);
-                } else {
-                    setFavSelectedPlayer(fetchPlayer.filter(Boolean));
-                }
-            };
-            fetchFavPlayer();
+        if (changePlayers) {
+            setFavSelectedPlayer(selectedPlayersProfile);
         }
-    }, [getProfile.success]);
+    }, [changePlayers]);
 
     const login = useSelector((state: RootState) => state.login);
     const profile = useSelector((state: RootState) => state.createProfile);
@@ -538,8 +511,8 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
                     center: true,
                     scrollBottom: false,
                     selectedPlayers: true,
-                    // selectedTeams: true,
-                    // selectedTopTeams: true,
+                    selectedTeams: true,
+                    selectedTopTeams: true,
                 });
                 dispatch(setSettingFavPlayer(selectedPlayersProfile));
                 // pop(ScreenName.FavTeamPage);
