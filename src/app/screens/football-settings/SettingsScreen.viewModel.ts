@@ -571,15 +571,15 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
     const handleSaveChange = () => {
         setSaveChange(true);
         dispatch(statusSetProfile([]));
-        const fav_team: any = [];
+        const fav_team: string[] = [];
         favSelectedTeam.map(item => {
             fav_team.push(item._id);
         });
-        const player_team: any = [];
+        const player_team: string[] = [];
         favSelectedPlayer.map(item => {
             player_team.push(item._id);
         });
-        const fav_top_team: any = [];
+        const fav_top_team: string[] = [];
         favSelectedTopTeam.map(item => {
             fav_top_team.push(item._id);
         });
