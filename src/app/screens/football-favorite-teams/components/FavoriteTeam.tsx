@@ -44,6 +44,7 @@ export const FavoriteTeam = ({
     searchFavTeam,
     searchTextRef,
     submitSearchFavTeam,
+    isLoading,
 }: IFavoriteTeamProps) => {
     return (
         <View style={[appStyles.flex]}>
@@ -86,12 +87,13 @@ export const FavoriteTeam = ({
                                     />
                                 </TouchableOpacity>
                             </View>
-
-                            <ActivityIndicator
-                                style={appStyles.flex_center}
-                                size="large"
-                                color={appColors.blue_dark}
-                            />
+                            {isLoading && (
+                                <ActivityIndicator
+                                    style={appStyles.flex_center}
+                                    size="large"
+                                    color={appColors.blue_dark}
+                                />
+                            )}
                         </View>
                     </SafeAreaView>
                 ) : (

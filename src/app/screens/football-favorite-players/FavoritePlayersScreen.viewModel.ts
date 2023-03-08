@@ -14,7 +14,7 @@ import {
 } from '@football/core/models/TeamPersonnelResponse';
 import PlayerService from '@football/core/services/Player.service';
 import { useIsFocused, useRoute } from '@react-navigation/native';
-import { isEmpty, isNil, pick } from 'lodash';
+import { isEmpty, isNil } from 'lodash';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Alert, Keyboard } from 'react-native';
@@ -29,7 +29,6 @@ import {
     searchFavPlayers,
     selectedFavPlayersAsMapSelector,
     selectedFavPlayersProfileAsMapSelector,
-    SelectedPlayer,
     setAllFavPlayers,
     setGroupFavPlayer,
 } from 'src/store/FavPlayer.slice';
@@ -37,14 +36,23 @@ import { setSettingFavPlayer } from 'src/store/SettingSelected.slice';
 import { RootState } from 'src/store/store';
 import { createProfileUser } from 'src/store/user/CreateProfile.slice';
 import { loginUser } from 'src/store/user/Login.slice';
-import { text } from 'stream/consumers';
 import { IFavoritePlayerScreenProps } from './FavoritePlayersScreen.type';
+
+const useViewState = () => {
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+
+    return {
+        isLoading,
+        setIsLoading,
+    };
+};
 
 export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) => {
     const { t } = useTranslation();
     const { navigate, goBack } = useAppNavigator();
     const dispatch = useDispatch<any>();
     const [searchText, setSearchText] = useState('');
+    const state = useViewState();
     const routes = useRoute();
     const getProfile = useSelector((state: RootState) => state.getProfile);
 
@@ -80,7 +88,7 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
     const formattedFavPlayers = useMemo(() => {
         return favPlayers.map(favPlayer => {
             return {
-                id: id,
+                id,
                 label: favPlayer.label,
                 listFavPlayers: favPlayer.listFavPlayers.map(player => ({
                     ...player,
@@ -129,6 +137,16 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
                         return res.data.documents[0];
                     })
                 );
+                // const playerIds = getProfile.getProfile.item?.favorite_players?.map((id: string) => {
+                //     return { _id: { $oid: id } };
+                // });
+
+                // const [error, res] = await PlayerService.findByFilter({
+                //     $or: playerIds,
+                // });
+
+                console.log('fetchPlayer', fetchPlayer);
+
                 // console.log(fetchTeam.filter(Boolean));
                 if (changePlayers) {
                     setFavSelectedPlayer(selectedPlayersProfile);
@@ -148,6 +166,8 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
 
     const getPlayersData = useCallback(async () => {
         if (isEmpty(favPlayers) || isNil(favPlayers)) {
+            state.setIsLoading(true);
+
             try {
                 const { data }: PlayersModelResponse = await axiosClient.post(`${BASE_URL}/find`, {
                     dataSource: DATA_SOURCE,
@@ -158,7 +178,7 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
                 if (!isEmpty(data.documents)) {
                     dispatch(
                         setAllFavPlayers({
-                            id: id,
+                            id,
                             label: t('favorite_player.group'),
                             listFavPlayers: data.documents,
                         })
@@ -166,12 +186,16 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
                 }
             } catch (error: any) {
                 Alert.alert(error);
+            } finally {
+                state.setIsLoading(false);
             }
         }
     }, []);
 
     const getTeamPersonnel = useCallback(async () => {
         if (isEmpty(favPlayers) || isNil(favPlayers)) {
+            state.setIsLoading(true);
+
             try {
                 const { data }: TeamPersonnelModelResponse = await axiosClient.post(
                     `${BASE_URL}/find`,
@@ -215,6 +239,8 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
                 }
             } catch (error: any) {
                 Alert.alert(error);
+            } finally {
+                state.setIsLoading(false);
             }
         }
     }, []);
@@ -226,12 +252,10 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
         if (!getProfile.success) {
             if (!isEmpty(favSearchPlayers)) {
                 dispatch(pushAllFavPlayers(player));
+            } else if (!isEmpty(selectedFavTeams)) {
+                dispatch(pushGroupFavPlayer(player));
             } else {
-                if (!isEmpty(selectedFavTeams)) {
-                    dispatch(pushGroupFavPlayer(player));
-                } else {
-                    dispatch(pushAllFavPlayers(player));
-                }
+                dispatch(pushAllFavPlayers(player));
             }
         }
         dispatch(pushAllFavPlayersProfile(player));
@@ -262,6 +286,7 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
 
     const submitSearchFavPlayer = async () => {
         Keyboard.dismiss();
+        state.setIsLoading(true);
         if (searchText !== '') {
             try {
                 dispatch(
@@ -322,14 +347,17 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
 
                     dispatch(
                         searchFavPlayers({
-                            id: id,
+                            id,
                             label: '',
                             listFavPlayers: data.documents,
                         })
                     );
                 }
+                state.setIsLoading(false);
             } catch (error: any) {
                 Alert.alert(error);
+            } finally {
+                state.setIsLoading(false);
             }
         } else {
             dispatch(
@@ -404,41 +432,37 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
                         }
                     } catch (error: any) {
                         Alert.alert(error);
+                    } finally {
+                        state.setIsLoading(false);
                     }
                 }
-            } else {
-                if (isEmpty(favPlayers) || isNil(favPlayers)) {
-                    try {
-                        const { data }: PlayersModelResponse = await axiosClient.post(
-                            `${BASE_URL}/find`,
-                            {
-                                dataSource: DATA_SOURCE,
-                                database: DB,
-                                collection: 'player',
-                            }
-                        );
-
-                        if (!isEmpty(data.documents)) {
-                            dispatch(
-                                resetAllFavPlayers({
-                                    id: '',
-                                    label: '',
-                                    listFavPlayers: [],
-                                })
-                            );
-                            dispatch(
-                                setAllFavPlayers({
-                                    id: id,
-                                    label: t('favorite_player.group'),
-                                    listFavPlayers: data.documents,
-                                })
-                            );
+            } else if (isEmpty(favPlayers) || isNil(favPlayers)) {
+                try {
+                    const { data }: PlayersModelResponse = await axiosClient.post(
+                        `${BASE_URL}/find`,
+                        {
+                            dataSource: DATA_SOURCE,
+                            database: DB,
+                            collection: 'player',
                         }
-                    } catch (error: any) {
-                        Alert.alert(error);
+                    );
+
+                    if (!isEmpty(data.documents)) {
+                        dispatch(
+                            setAllFavPlayers({
+                                id,
+                                label: t('favorite_player.group'),
+                                listFavPlayers: data.documents,
+                            })
+                        );
                     }
+                } catch (error: any) {
+                    Alert.alert(error);
+                } finally {
+                    state.setIsLoading(false);
                 }
             }
+            state.setIsLoading(false);
         }
     };
 
@@ -473,32 +497,30 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
                     index: 0,
                     routes: [{ name: ScreenName.SideBar as never }],
                 });
-            } else {
-                if (profile.success === true) {
-                    dispatch(
-                        loginUser(
-                            serializeParams({
-                                action: ACTION,
-                                token: TOKEN,
-                                call: AuthData.LOGIN,
-                                guest_id: profile.profile.tc_user,
-                                guest_guid: guestId[0],
-                            })
-                        )
-                    );
+            } else if (profile.success === true) {
+                dispatch(
+                    loginUser(
+                        serializeParams({
+                            action: ACTION,
+                            token: TOKEN,
+                            call: AuthData.LOGIN,
+                            guest_id: profile.profile.tc_user,
+                            guest_guid: guestId[0],
+                        })
+                    )
+                );
 
-                    navigate(ScreenName.SideBar);
-                    navigation.reset({
-                        index: 0,
-                        routes: [{ name: ScreenName.SideBar as never }],
-                    });
-                }
+                navigate(ScreenName.SideBar);
+                navigation.reset({
+                    index: 0,
+                    routes: [{ name: ScreenName.SideBar as never }],
+                });
             }
         }
     }, [profile.success, isFocused]);
 
     const handleContinue = () => {
-        const params = routes.params;
+        const { params } = routes;
         if (!isEmpty(params)) {
             if (params.previous_screen === ScreenName.FavSummaryPage) {
                 navigate(ScreenName.FavSummaryPage);
@@ -553,5 +575,6 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
         getProfile,
         selectedPlayersProfile,
         setFocusSearch,
+        ...state,
     };
 };

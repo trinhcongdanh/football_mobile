@@ -29,10 +29,22 @@ import { RootState } from 'src/store/store';
 import { setSettingFavTeam } from 'src/store/SettingSelected.slice';
 import TeamService from '@football/core/services/Team.service';
 
+const useViewState = () => {
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+
+    return {
+        isLoading,
+        setIsLoading,
+    };
+};
+
 export const useViewModel = ({ navigation, route }: IFavoriteTeamsScreenProps) => {
     const { t } = useTranslation();
     const dispatch = useDispatch<any>();
     const { navigate, goBack, pop } = useAppNavigator();
+
+    const state = useViewState();
+
     const [searchText, setSearchText] = useState('');
     const routes = useRoute();
     const searchTextRef = useRef<any>(null);
@@ -98,6 +110,7 @@ export const useViewModel = ({ navigation, route }: IFavoriteTeamsScreenProps) =
 
     const getTeamsData = useCallback(async () => {
         if (isEmpty(favTeams) || isNil(favTeams)) {
+            state.setIsLoading(true);
             try {
                 const { data }: TeamModelResponse = await axiosClient.post(`${BASE_URL}/find`, {
                     dataSource: DATA_SOURCE,
@@ -109,6 +122,8 @@ export const useViewModel = ({ navigation, route }: IFavoriteTeamsScreenProps) =
                 }
             } catch (error: any) {
                 Alert.alert(error);
+            } finally {
+                state.setIsLoading(false);
             }
         }
     }, []);
@@ -152,6 +167,8 @@ export const useViewModel = ({ navigation, route }: IFavoriteTeamsScreenProps) =
 
     const submitSearchFavTeam = async () => {
         Keyboard.dismiss();
+        state.setIsLoading(true);
+
         if (searchText !== '') {
             dispatch(resetFavTeam([]));
             const [error, res] = await TeamService.search(searchText);
@@ -163,6 +180,7 @@ export const useViewModel = ({ navigation, route }: IFavoriteTeamsScreenProps) =
 
             dispatch(resetFavTeam([]));
             dispatch(setFavTeams(res.data.documents));
+            state.setIsLoading(false);
         } else {
             dispatch(resetFavTeam([]));
             try {
@@ -177,6 +195,8 @@ export const useViewModel = ({ navigation, route }: IFavoriteTeamsScreenProps) =
                 }
             } catch (error: any) {
                 Alert.alert(error);
+            } finally {
+                state.setIsLoading(false);
             }
         }
     };
@@ -284,5 +304,6 @@ export const useViewModel = ({ navigation, route }: IFavoriteTeamsScreenProps) =
         getProfile,
         formattedFavTeamsProfile,
         selectedTeamsProfile,
+        ...state,
     };
 };
