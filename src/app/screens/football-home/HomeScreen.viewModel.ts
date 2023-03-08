@@ -124,9 +124,7 @@ const useViewCallback = (route: any, viewState: any) => {
         const playerIds = user?.favorite_players?.map((id: string) => {
             return { _id: { $oid: id } };
         });
-        console.log(playerIds);
 
-        console.log('user?.favorite_players', user?.favorite_players);
         const [error, res] = await PlayerService.findByFilter({
             $or: playerIds,
         });
@@ -153,8 +151,6 @@ const useViewCallback = (route: any, viewState: any) => {
         if (error) {
             return;
         }
-        console.log(res.data.documents);
-
         setTeams(res.data.documents);
     }, []);
 
@@ -304,7 +300,6 @@ export const useViewModel = ({ navigation, route }: IHomeScreenProps) => {
 
     useMount(() => {
         if (state.userLogin.success && !state.profileUser) {
-            console.log('state.userLogin', state.userLogin);
             getUser(state.userLogin);
         }
         getHomeLayoutData();

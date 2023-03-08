@@ -109,15 +109,15 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
     const favSelectedPlayers = useSelector((state: RootState) =>
         !isEmpty(selectedFavTeams)
             ? state.favPlayers.groupPlayers
-                  .map(e => {
-                      return e.listFavPlayers.filter(v => v.isSelected);
-                  })
-                  .flat()
+                .map(e => {
+                    return e.listFavPlayers.filter(v => v.isSelected);
+                })
+                .flat()
             : state.favPlayers.favPlayers
-                  .map(e => {
-                      return e.listFavPlayers.filter(v => v.isSelected);
-                  })
-                  .flat()
+                .map(e => {
+                    return e.listFavPlayers.filter(v => v.isSelected);
+                })
+                .flat()
     );
     const selectedPlayersProfile = useSelector(
         (state: RootState) => state.favPlayers.selectedPlayersProfile
@@ -465,6 +465,14 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
             state.setIsLoading(false);
         }
     };
+
+    useEffect(() => {
+        return () => {
+            // componentwillunmount in functional component.
+            // Anything in here is fired on component unmount.
+            setSearchText('');
+        };
+    }, []);
 
     const onGoBack = (): void => {
         goBack();

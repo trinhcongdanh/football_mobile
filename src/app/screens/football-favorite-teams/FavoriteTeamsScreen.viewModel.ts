@@ -163,7 +163,16 @@ export const useViewModel = ({ navigation, route }: IFavoriteTeamsScreenProps) =
         if (!searchText.length) {
             submitSearchFavTeam();
         }
+
     }, [searchText]);
+
+    useEffect(() => {
+        return () => {
+            // componentwillunmount in functional component.
+            // Anything in here is fired on component unmount.
+            setSearchText('');
+        };
+    }, []);
 
     const submitSearchFavTeam = async () => {
         Keyboard.dismiss();
