@@ -26,12 +26,15 @@ import {
     resetAllFavPlayers,
     resetGroupFavPlayer,
     resetSearchFavPlayer,
+    resetSelectedFavPlayer,
     searchFavPlayers,
     selectedFavPlayersAsMapSelector,
     selectedFavPlayersProfileAsMapSelector,
     setAllFavPlayers,
     setGroupFavPlayer,
 } from 'src/store/FavPlayer.slice';
+import { resetSelectedFavTeam } from 'src/store/FavTeam.slice';
+import { resetSelectedFavTopTeams } from 'src/store/FavTopTeam.slice';
 import { setSettingFavPlayer } from 'src/store/SettingSelected.slice';
 import { RootState } from 'src/store/store';
 import { createProfileUser } from 'src/store/user/CreateProfile.slice';
@@ -451,6 +454,9 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
         goBack();
     };
     const onGoSkip = () => {
+        dispatch(resetSelectedFavTeam([]));
+        dispatch(resetSelectedFavPlayer([]));
+        dispatch(resetSelectedFavTopTeams([]));
         if (isEmpty(profile.profile) || isNil(profile.profile)) {
             dispatch(
                 createProfileUser(
