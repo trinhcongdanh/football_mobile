@@ -12,6 +12,7 @@ import qs from 'qs';
 import { useIsFocused } from '@react-navigation/native';
 import { AppImages } from '@football/app/assets/images';
 import { AvatarType } from '@football/core/models/AvatarType.enum';
+import { isEmpty } from 'lodash';
 
 export const useViewModel = ({ navigation, route }: IRegScreenProps) => {
     const { navigate, goBack } = useAppNavigator();
@@ -80,15 +81,15 @@ export const useViewModel = ({ navigation, route }: IRegScreenProps) => {
 
     const createInfo = () => {
         Keyboard.dismiss();
-        let fav_team: any = [];
+        let fav_team: string[] = [];
         selectedFavTeams.map(item => {
             fav_team.push(item._id);
         });
-        let player_team: any = [];
+        let fav_player: string[] = [];
         selectedFavPlayers.map(item => {
-            player_team.push(item._id);
+            fav_player.push(item._id);
         });
-        let fav_top_team: any = [];
+        let fav_top_team: string[] = [];
         selectedFavTopTeams.map(item => {
             fav_top_team.push(item._id);
         });
@@ -103,9 +104,9 @@ export const useViewModel = ({ navigation, route }: IRegScreenProps) => {
                         name: userName,
                         gender: gender,
                         birthdate: formattedDate,
-                        favorite_israel_teams: fav_team,
-                        favorite_players: player_team,
-                        favorite_national_teams: fav_top_team,
+                        favorite_israel_teams: isEmpty(fav_team) ? '' : fav_team,
+                        favorite_players: isEmpty(fav_player) ? '' : fav_player,
+                        favorite_national_teams: isEmpty(fav_top_team) ? '' : fav_top_team,
                         notifications: '',
                     },
                 })

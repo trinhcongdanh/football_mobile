@@ -123,6 +123,7 @@ export const AppImages = {
     img_avt_man: require('./AVATAR_MAN.png'),
     img_avt_woman: require('./AVATAR_WOMAN.png'),
     img_avt_other: require('./AVATAR_NON-BINARY.png'),
+    img_ball_white: require('./ball_white.png'),
 };
 
 export const AppJsons = {
