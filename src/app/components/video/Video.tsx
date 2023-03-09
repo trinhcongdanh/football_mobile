@@ -132,6 +132,7 @@ export const Video = () => {
             BackHandler.addEventListener('hardwareBackPress', backAction);
             return () => BackHandler.removeEventListener('hardwareBackPress', backAction);
         }
+        console.log(showVideo);
     }, [showVideo]);
     return (
         <View
