@@ -105,14 +105,7 @@ export const useViewModel = ({ navigation, route }: IRegScreenProps) => {
                         favorite_israel_teams: fav_team,
                         favorite_players: player_team,
                         favorite_national_teams: fav_top_team,
-                        notifications: [
-                            'FAN_NOTIFICATION_GENERAL',
-                            'FAN_NOTIFICATION_FAVORITE_PLAYERS',
-                            'FAN_NOTIFICATION_FAVORITE_ISRAEL_TEAMS',
-                            'FAN_NOTIFICATION_FAVORITE_PLAYERS_LEAGUES',
-                            'FAN_NOTIFICATION_FAVORITE_ISRAEL_TEAMS_LEAGUES',
-                            'FAN_NOTIFICATION_FAVORITE_PLAYERS_NATIONAL_TEAMS',
-                        ],
+                        notifications: '',
                     },
                 })
             )
