@@ -12,6 +12,7 @@ import { ACTION } from '@football/core/api/auth/config';
 import qs from 'qs';
 import { useIsFocused } from '@react-navigation/native';
 import { clearAllData } from '@football/app/utils/functions/clearAllData';
+import { clearUserData } from '@football/app/utils/functions/clearUserData';
 
 export const useViewModel = ({ navigation, route }: IRegisterScreenProps) => {
     const { t } = useTranslation();
@@ -142,7 +143,7 @@ export const useViewModel = ({ navigation, route }: IRegisterScreenProps) => {
 
     const onGoBack = () => {
         if (!isLogin) {
-            clearAllData(dispatch);
+            clearUserData(dispatch);
         }
 
         goBack();

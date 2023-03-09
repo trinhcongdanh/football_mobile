@@ -212,6 +212,7 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
     }, []);
 
     const backFavTeam = () => {
+        dispatch(resetFavTeam([]));
         navigate(ScreenName.FavTeamPage, {
             previous_screen: ScreenName.SettingsPage,
             changeTeams: true,
@@ -219,6 +220,7 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
     };
 
     const backFavPlayer = () => {
+        dispatch(resetSearchFavPlayer({ id: '', label: '', listFavPlayers: [] }));
         navigate(ScreenName.FavPlayerPage, {
             previous_screen: ScreenName.SettingsPage,
             changePlayers: true,
@@ -226,6 +228,7 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
     };
 
     const backFavTopTeam = () => {
+        dispatch(resetTopTeams([]));
         navigate(ScreenName.FavTopTeamPage, {
             previous_screen: ScreenName.SettingsPage,
             changeTopTeams: true,

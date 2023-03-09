@@ -1,5 +1,6 @@
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
 import { AuthData, ScreenName } from '@football/app/utils/constants/enum';
+import { clearFavoriteData } from '@football/app/utils/functions/clearFavoriteData';
 import { ACTION, TOKEN } from '@football/core/api/auth/config';
 import { TeamModel } from '@football/core/models/TeamModelResponse';
 import { TopTeamModel } from '@football/core/models/TopTeamModelResponse';
@@ -9,13 +10,9 @@ import qs from 'qs';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-    resetSearchFavPlayer,
-    resetSelectedFavPlayer,
-    SelectedPlayer,
-} from 'src/store/FavPlayer.slice';
-import { resetFavTeam, resetSelectedFavTeam } from 'src/store/FavTeam.slice';
-import { resetSelectedFavTopTeams, resetTopTeams } from 'src/store/FavTopTeam.slice';
+import { resetSearchFavPlayer, SelectedPlayer } from 'src/store/FavPlayer.slice';
+import { resetFavTeam } from 'src/store/FavTeam.slice';
+import { resetTopTeams } from 'src/store/FavTopTeam.slice';
 import { RootState } from 'src/store/store';
 import { createProfileUser } from 'src/store/user/CreateProfile.slice';
 import { addGuestId } from 'src/store/user/GuestId.slice';
@@ -177,9 +174,8 @@ export const useViewModel = ({ navigation, route }: IFavoriteSummaryScreenProps)
 
     const navigationHomePage = () => {
         setSetProfile(false);
-        dispatch(resetSelectedFavTeam([]));
-        dispatch(resetSelectedFavPlayer([]));
-        dispatch(resetSelectedFavTopTeams([]));
+        clearFavoriteData(dispatch);
+
         if (isEmpty(profile.profile) || isNil(profile.profile)) {
             setScreenName(ScreenName.SideBar);
             dispatch(
