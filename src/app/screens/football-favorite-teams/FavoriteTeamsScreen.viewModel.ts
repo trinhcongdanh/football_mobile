@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-underscore-dangle */
 import { useRef, useCallback, useState } from 'react';
@@ -10,25 +9,46 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useMount } from '@football/app/utils/hooks/useMount';
 import { RootState } from 'src/store/store';
 import TeamService from '@football/core/services/Team.service';
-import { IFavoriteTeamsScreenProps } from './FavoriteTeamsScreen.type';
 import _, { isEmpty, isNil } from 'lodash';
 import { createProfileUser } from 'src/store/user/CreateProfile.slice';
-import { serializeParams } from '@football/app/utils/functions/quick-functions';
 import { AuthData, ScreenName } from '@football/app/utils/constants/enum';
 import { ACTION, TOKEN } from '@football/core/api/auth/config';
-import { resetFavTeam } from 'src/store/FavTeam.slice';
+import {
+    pushFavTeam,
+    pushFavTeamProfile,
+    resetFavTeam,
+    selectedFavTeamsAsMapSelector,
+} from 'src/store/FavTeam.slice';
 import { setSettingFavTeam } from 'src/store/SettingSelected.slice';
 import { MAX_FAVORITES_TEAM } from '@football/core/api/configs/config';
+import { IFavoriteTeamsScreenProps } from './FavoriteTeamsScreen.type';
+
+function serializeParams(obj: any) {
+    const str = [];
+    // eslint-disable-next-line no-restricted-syntax
+    for (const p in obj) {
+        // eslint-disable-next-line no-prototype-builtins
+        if (obj.hasOwnProperty(p)) {
+            str.push(`${p}=${encodeURIComponent(obj[p])}`);
+        }
+    }
+    return str.join('&');
+}
 
 const useViewState = () => {
+    const selectedFavTeamsMap = useSelector(selectedFavTeamsAsMapSelector);
+    const selectedTeamsProfile = useSelector(
+        (state: RootState) => state.favTeams.selectedTeamsProfile
+    );
+    const array = selectedFavTeamsMap.size
+        ? Array.from(selectedFavTeamsMap, ([name, value]) => ({ ...value }))
+        : selectedTeamsProfile;
+
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const searchTextRef = useRef<any>(null);
     const [teams, setTeams] = useState<TeamModel[]>();
-    const [selectedFavTeams, setSelectedFavTeams] = useState<TeamModel[]>([]);
+    const [selectedFavTeams, setSelectedFavTeams] = useState<TeamModel[]>(array);
 
-    const formattedFavTeams = [];
-    const formattedFavTeamsProfile = [];
-    const selectedTeamsProfile = [];
     const getProfile = useSelector((state: RootState) => state.getProfile);
     const profile = useSelector((state: any) => state.createProfile);
 
@@ -36,11 +56,8 @@ const useViewState = () => {
         isLoading,
         setIsLoading,
         searchTextRef,
-        formattedFavTeams,
         selectedFavTeams,
         setSelectedFavTeams,
-        formattedFavTeamsProfile,
-        selectedTeamsProfile,
         getProfile,
         profile,
         teams,
@@ -101,7 +118,7 @@ const useViewCallback = (route: any, viewState: any) => {
                     selectedTeams: true,
                     // selectedTopTeams: true,
                 });
-                dispatch(setSettingFavTeam(viewState.selectedTeamsProfile));
+                dispatch(setSettingFavTeam(selectedFavTeams));
                 // pop(ScreenName.FavTeamPage);
             } else {
                 navigate(ScreenName.FavPlayerPage);
@@ -117,20 +134,23 @@ const useViewCallback = (route: any, viewState: any) => {
      */
     const handleSelected = (team: TeamModel) => {
         let newSelectedFavTeams = [...selectedFavTeams];
-        const a = newSelectedFavTeams.find((t: TeamModel) => t._id === team._id);
-        if (a) {
+        const existFavTeam = newSelectedFavTeams.find((t: TeamModel) => t._id === team._id);
+        if (existFavTeam) {
             newSelectedFavTeams = newSelectedFavTeams.filter(
                 (selectedFavTeam: TeamModel) => selectedFavTeam._id !== team._id
             );
         } else if (newSelectedFavTeams.length < MAX_FAVORITES_TEAM) {
             newSelectedFavTeams.push(team);
+            if (!getProfile?.success) {
+                dispatch(pushFavTeam(team));
+            } else {
+                dispatch(pushFavTeamProfile(team));
+            }
         }
         setSelectedFavTeams(newSelectedFavTeams);
     };
 
     const searchTeams = useCallback(async (searchText: string) => {
-        console.log('search teams', searchText);
-        
         setIsLoading(true);
 
         try {
@@ -149,19 +169,13 @@ const useViewCallback = (route: any, viewState: any) => {
 
     const getTeamsData = useCallback(async () => {
         setIsLoading(true);
+
         try {
             const [error, res] = await TeamService.findAll();
             if (error) {
                 return;
             }
-
-            const allTeams = res.data.documents.map((team: TeamModel) => ({
-                ...team,
-                isSelected: getProfile?.getProfile?.item?.favorite_players
-                    ? getProfile.getProfile.item.favorite_players.includes(allTeams._id)
-                    : false,
-            }));
-            setTeams(allTeams);
+            setTeams(res.data.documents);
         } catch (error: any) {
             Alert.alert(error);
         } finally {
@@ -173,11 +187,6 @@ const useViewCallback = (route: any, viewState: any) => {
         Keyboard.dismiss();
         searchTeams(text);
     };
-
-    // const searchLiveFavTeam = (text: string) => {
-    //     setSearchText(text);
-    //     searchTeams(text);
-    // };
 
     const onSearchFavTeam = _.debounce(searchTeams, 500);
 

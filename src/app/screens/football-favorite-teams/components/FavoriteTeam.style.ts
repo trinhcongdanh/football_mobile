@@ -20,6 +20,10 @@ const styles = StyleSheet.create({
         textAlign: I18nManager.isRTL ? 'right' : 'left',
     },
 
+    loading: {
+        top: getSize.m(50),
+    },
+
     name_club: {
         fontSize: getSize.m(14),
         fontFamily: AppFonts.bold,

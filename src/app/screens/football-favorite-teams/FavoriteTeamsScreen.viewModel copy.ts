@@ -185,8 +185,6 @@ export const useViewModel = ({ navigation, route }: IFavoriteTeamsScreenProps) =
                 return;
             }
 
-            console.log(res.data);
-
             dispatch(resetFavTeam([]));
             dispatch(setFavTeams(res.data.documents));
             state.setIsLoading(false);

@@ -54,7 +54,7 @@ export const FavoriteTeamsScreen = ({ navigation, route }: IFavoriteTeamsScreenP
             {teams && (
                 <FavoriteTeam
                     searchTextRef={searchTextRef}
-                    submitSearchFavTeam={() => submitSearchFavTeam(searchTextRef?.current?.text)}
+                    submitSearchFavTeam={(text: string) => submitSearchFavTeam(text)}
                     searchFavTeam={onSearchFavTeam}
                     // searchFavTeam={(text: string) => {
                     //     // setSearchText(text);
