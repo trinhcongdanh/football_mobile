@@ -18,6 +18,8 @@ import { launchImageLibrary } from 'react-native-image-picker';
 import { useDispatch, useSelector } from 'react-redux';
 import {
     addSelectedFavPlayerProfile,
+    resetAllFavPlayers,
+    resetGroupFavPlayer,
     resetSearchFavPlayer,
     resetSelectedFavPlayerProfile,
     SelectedPlayer,
@@ -221,6 +223,20 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
 
     const backFavPlayer = () => {
         dispatch(resetSearchFavPlayer({ id: '', label: '', listFavPlayers: [] }));
+        dispatch(
+            resetAllFavPlayers({
+                id: '',
+                label: '',
+                listFavPlayers: [],
+            })
+        );
+        dispatch(
+            resetGroupFavPlayer({
+                id: '',
+                label: '',
+                listFavPlayers: [],
+            })
+        );
         navigate(ScreenName.FavPlayerPage, {
             previous_screen: ScreenName.SettingsPage,
             changePlayers: true,
@@ -253,6 +269,20 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
 
     const addFavPlayer = (index: number) => {
         dispatch(resetSearchFavPlayer({ id: '', label: '', listFavPlayers: [] }));
+        dispatch(
+            resetAllFavPlayers({
+                id: '',
+                label: '',
+                listFavPlayers: [],
+            })
+        );
+        dispatch(
+            resetGroupFavPlayer({
+                id: '',
+                label: '',
+                listFavPlayers: [],
+            })
+        );
         navigate(ScreenName.FavPlayerPage, {
             previous_screen: ScreenName.SettingsPage,
             changePlayers: true,
@@ -261,6 +291,20 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
 
     const changeFavPlayer = (index: number) => {
         dispatch(resetSearchFavPlayer({ id: '', label: '', listFavPlayers: [] }));
+        dispatch(
+            resetAllFavPlayers({
+                id: '',
+                label: '',
+                listFavPlayers: [],
+            })
+        );
+        dispatch(
+            resetGroupFavPlayer({
+                id: '',
+                label: '',
+                listFavPlayers: [],
+            })
+        );
         navigate(ScreenName.FavPlayerPage, {
             previous_screen: ScreenName.SettingsPage,
             changePlayers: true,

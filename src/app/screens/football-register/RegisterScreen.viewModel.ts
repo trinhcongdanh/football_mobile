@@ -2,7 +2,7 @@ import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
 import { AuthData, ScreenName } from '@football/app/utils/constants/enum';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Keyboard } from 'react-native';
+import { BackHandler, Keyboard } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { IRegisterScreenProps } from './RegisterScreen.type';
 // import { AccessToken, LoginManager, Profile } from 'react-native-fbsdk-next';
@@ -147,7 +147,15 @@ export const useViewModel = ({ navigation, route }: IRegisterScreenProps) => {
         }
 
         goBack();
+        return true;
     };
+
+    useEffect(() => {
+        BackHandler.addEventListener('hardwareBackPress', onGoBack);
+        return () => {
+            BackHandler.removeEventListener('hardwareBackPress', onGoBack);
+        };
+    }, []);
 
     const onNavigateConnect = () => {
         clearAllData(dispatch);

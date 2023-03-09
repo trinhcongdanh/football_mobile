@@ -18,25 +18,6 @@ export const clearUserData = (dispatch: any) => {
     dispatch(clearCreateProfile({}));
     dispatch(removeGuestId([]));
     // Clear Fav Team
-    dispatch(resetFavTeam([]));
-    // Clear Fav Player
-    dispatch(
-        resetAllFavPlayers({
-            id: '',
-            label: '',
-            listFavPlayers: [],
-        })
-    );
-    dispatch(resetSearchFavPlayer({ id: '', label: '', listFavPlayers: [] }));
-    dispatch(
-        resetGroupFavPlayer({
-            id: '',
-            label: '',
-            listFavPlayers: [],
-        })
-    );
-    // Clear Fav Top Team
-    dispatch(resetTopTeams([]));
     // Clear otp
     dispatch(resetOtpUser([]));
     // Clear setProfile
