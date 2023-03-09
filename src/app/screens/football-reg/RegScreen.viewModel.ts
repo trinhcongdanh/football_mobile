@@ -13,6 +13,7 @@ import { useIsFocused } from '@react-navigation/native';
 import { AppImages } from '@football/app/assets/images';
 import { AvatarType } from '@football/core/models/AvatarType.enum';
 import { isEmpty } from 'lodash';
+import { clearFavoriteData } from '@football/app/utils/functions/clearFavoriteData';
 
 export const useViewModel = ({ navigation, route }: IRegScreenProps) => {
     const { navigate, goBack } = useAppNavigator();
@@ -122,6 +123,7 @@ export const useViewModel = ({ navigation, route }: IRegScreenProps) => {
                 index: 0,
                 routes: [{ name: ScreenName.SideBar as never }],
             });
+            clearFavoriteData(dispatch);
         }
     }, [profileUser.success, isFocused]);
 
