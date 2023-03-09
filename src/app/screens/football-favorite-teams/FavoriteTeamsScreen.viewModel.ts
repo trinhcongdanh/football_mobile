@@ -87,21 +87,7 @@ const useViewCallback = (route: any, viewState: any) => {
         dispatch(resetFavTeam([]));
         goBack();
     };
-
-    const login = useSelector((state: any) => state.login);
-    const profile = useSelector((state: any) => state.createProfile);
-    const guestId = useSelector((state: any) => state.guestId.guestId);
-
-    const uuid = require('uuid');
-    const id = uuid.v4();
-    useEffect(() => {
-        if (guestId.length === 0) {
-            dispatch(addGuestId(id));
-        }
-    }, []);
-
     const onGoSkip = () => {
-        clearFavoriteData(dispatch);
         if (isEmpty(profile.profile) || isNil(profile.profile)) {
             dispatch(
                 createProfileUser(
@@ -184,11 +170,17 @@ const useViewCallback = (route: any, viewState: any) => {
     const getTeamsData = useCallback(async () => {
         setIsLoading(true);
 
+        const favoriteTeamIds = getProfile.getProfile?.item?.favorite_israel_teams || [];
+
         try {
             const [error, res] = await TeamService.findAll();
             if (error) {
                 return;
             }
+            // const favoriteTeams = res.data.documents.filter((team: TeamModel) =>
+            //     favoriteTeamIds.includes(team._id)
+            // );
+            // setSelectedFavTeams(favoriteTeams);
             setTeams(res.data.documents);
         } catch (error: any) {
             Alert.alert(error);
