@@ -1,5 +1,6 @@
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
 import { AuthData, ScreenName } from '@football/app/utils/constants/enum';
+import { clearFavoriteData } from '@football/app/utils/functions/clearFavoriteData';
 import { serializeParams } from '@football/app/utils/functions/quick-functions';
 import { useMount } from '@football/app/utils/hooks/useMount';
 import { ACTION, TOKEN } from '@football/core/api/auth/config';
@@ -109,15 +110,15 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
     const favSelectedPlayers = useSelector((state: RootState) =>
         !isEmpty(selectedFavTeams)
             ? state.favPlayers.groupPlayers
-                .map(e => {
-                    return e.listFavPlayers.filter(v => v.isSelected);
-                })
-                .flat()
+                  .map(e => {
+                      return e.listFavPlayers.filter(v => v.isSelected);
+                  })
+                  .flat()
             : state.favPlayers.favPlayers
-                .map(e => {
-                    return e.listFavPlayers.filter(v => v.isSelected);
-                })
-                .flat()
+                  .map(e => {
+                      return e.listFavPlayers.filter(v => v.isSelected);
+                  })
+                  .flat()
     );
     const selectedPlayersProfile = useSelector(
         (state: RootState) => state.favPlayers.selectedPlayersProfile
@@ -126,46 +127,20 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
     const changePlayers = route.params?.changePlayers;
 
     useEffect(() => {
-        if (getProfile.success === true) {
-            const fetchFavPlayer = async () => {
-                const fetchPlayer = await Promise.all(
-                    getProfile.getProfile.item.favorite_players.map(async (item: string) => {
-                        const [err, res] = await PlayerService.findByOId<PlayersModelResponse>(
-                            item
-                        );
-                        if (err) return;
-                        return res.data.documents[0];
-                    })
-                );
-                // const playerIds = getProfile.getProfile.item?.favorite_players?.map((id: string) => {
-                //     return { _id: { $oid: id } };
-                // });
-
-                // const [error, res] = await PlayerService.findByFilter({
-                //     $or: playerIds,
-                // });
-
-                console.log('fetchPlayer', fetchPlayer);
-
-                // console.log(fetchTeam.filter(Boolean));
-                if (changePlayers) {
-                    setFavSelectedPlayer(selectedPlayersProfile);
-                } else {
-                    setFavSelectedPlayer(fetchPlayer.filter(Boolean));
-                }
-            };
-            fetchFavPlayer();
+        if (changePlayers) {
+            setFavSelectedPlayer(selectedPlayersProfile);
         }
-    }, [getProfile.success]);
+    }, [changePlayers]);
 
     const login = useSelector((state: RootState) => state.login);
     const profile = useSelector((state: RootState) => state.createProfile);
     const guestId = useSelector((state: any) => state.guestId.guestId);
     const uuid = require('uuid');
     let id = uuid.v4();
+    const [focusSearch, setFocusSearch] = useState(false);
 
     const getPlayersData = useCallback(async () => {
-        if (isEmpty(favPlayers) || isNil(favPlayers)) {
+        if ((isEmpty(favPlayers) || isNil(favPlayers)) && focusSearch === false) {
             state.setIsLoading(true);
 
             try {
@@ -193,7 +168,7 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
     }, []);
 
     const getTeamPersonnel = useCallback(async () => {
-        if (isEmpty(favPlayers) || isNil(favPlayers)) {
+        if ((isEmpty(favPlayers) || isNil(favPlayers)) && focusSearch === false) {
             state.setIsLoading(true);
 
             try {
@@ -257,8 +232,9 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
             } else {
                 dispatch(pushAllFavPlayers(player));
             }
+        } else {
+            dispatch(pushAllFavPlayersProfile(player));
         }
-        dispatch(pushAllFavPlayersProfile(player));
     };
 
     useEffect(() => {
@@ -268,8 +244,6 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
             });
         }
     }, [favSelectedPlayer]);
-
-    const [focusSearch, setFocusSearch] = useState(false);
 
     const handleFocusSearch = () => {
         // setFocusSearch(true);
@@ -466,18 +440,19 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
         }
     };
 
-    useEffect(() => {
-        return () => {
-            // componentwillunmount in functional component.
-            // Anything in here is fired on component unmount.
-            setSearchText('');
-        };
-    }, []);
+    // useEffect(() => {
+    //     return () => {
+    //         // componentwillunmount in functional component.
+    //         // Anything in here is fired on component unmount.
+    //         setSearchText('');
+    //     };
+    // }, []);
 
     const onGoBack = (): void => {
         goBack();
     };
     const onGoSkip = () => {
+        clearFavoriteData(dispatch);
         if (isEmpty(profile.profile) || isNil(profile.profile)) {
             dispatch(
                 createProfileUser(
@@ -538,8 +513,8 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
                     center: true,
                     scrollBottom: false,
                     selectedPlayers: true,
-                    // selectedTeams: true,
-                    // selectedTopTeams: true,
+                    selectedTeams: true,
+                    selectedTopTeams: true,
                 });
                 dispatch(setSettingFavPlayer(selectedPlayersProfile));
                 // pop(ScreenName.FavTeamPage);

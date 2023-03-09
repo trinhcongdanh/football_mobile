@@ -7,26 +7,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { IRegisterScreenProps } from './RegisterScreen.type';
 // import { AccessToken, LoginManager, Profile } from 'react-native-fbsdk-next';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
-import {
-    clearPhoneNumber,
-    registerNumberPhoneUser,
-} from 'src/store/user/RegisterNumberPhone.slice';
-import { ACTION, TOKEN } from '@football/core/api/auth/config';
+import { registerNumberPhoneUser } from 'src/store/user/RegisterNumberPhone.slice';
+import { ACTION } from '@football/core/api/auth/config';
 import qs from 'qs';
 import { useIsFocused } from '@react-navigation/native';
-import { clearCreateProfile } from 'src/store/user/CreateProfile.slice';
-import { removeGuestId } from 'src/store/user/GuestId.slice';
-import { resetFavTeam, resetSelectedFavTeam } from 'src/store/FavTeam.slice';
-import {
-    resetAllFavPlayers,
-    resetGroupFavPlayer,
-    resetSelectedFavPlayer,
-} from 'src/store/FavPlayer.slice';
-import { resetSelectedFavTopTeams, resetTopTeams } from 'src/store/FavTopTeam.slice';
-import { resetOtpUser } from 'src/store/user/OTP.slice';
-import { clearSetProfile } from 'src/store/user/setProfile.slice';
-import { clearGetProfile } from 'src/store/user/getProfile.slice';
-import { clearLogin } from 'src/store/user/Login.slice';
+import { clearAllData } from '@football/app/utils/functions/clearAllData';
+import { clearUserData } from '@football/app/utils/functions/clearUserData';
 
 export const useViewModel = ({ navigation, route }: IRegisterScreenProps) => {
     const { t } = useTranslation();
@@ -153,45 +139,18 @@ export const useViewModel = ({ navigation, route }: IRegisterScreenProps) => {
         //     }
         // }
     }, []);
+    const isLogin = route?.params?.isLogin;
+
     const onGoBack = () => {
+        if (!isLogin) {
+            clearUserData(dispatch);
+        }
+
         goBack();
     };
 
     const onNavigateConnect = () => {
-        dispatch(clearCreateProfile({}));
-        dispatch(removeGuestId([]));
-        // Clear Fav Team
-        dispatch(resetFavTeam([]));
-        dispatch(resetSelectedFavTeam([]));
-        // Clear Fav Player
-        dispatch(
-            resetAllFavPlayers({
-                id: '',
-                label: '',
-                listFavPlayers: [],
-            })
-        );
-        dispatch(
-            resetGroupFavPlayer({
-                id: '',
-                label: '',
-                listFavPlayers: [],
-            })
-        );
-        dispatch(resetSelectedFavPlayer([]));
-        // Clear Fav Top Team
-        dispatch(resetTopTeams([]));
-        dispatch(resetSelectedFavTopTeams([]));
-        // Clear otp
-        dispatch(resetOtpUser([]));
-        // Clear setProfile
-        dispatch(clearSetProfile([]));
-        // Clear Phone Number
-        dispatch(clearPhoneNumber([]));
-        // Clear getProfile
-        dispatch(clearGetProfile([]));
-        // Clear Login
-        dispatch(clearLogin({}));
+        clearAllData(dispatch);
         navigate(ScreenName.ConnectPage);
     };
 

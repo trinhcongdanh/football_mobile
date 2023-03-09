@@ -87,7 +87,21 @@ const useViewCallback = (route: any, viewState: any) => {
         dispatch(resetFavTeam([]));
         goBack();
     };
+
+    const login = useSelector((state: any) => state.login);
+    const profile = useSelector((state: any) => state.createProfile);
+    const guestId = useSelector((state: any) => state.guestId.guestId);
+
+    const uuid = require('uuid');
+    const id = uuid.v4();
+    useEffect(() => {
+        if (guestId.length === 0) {
+            dispatch(addGuestId(id));
+        }
+    }, []);
+
     const onGoSkip = () => {
+        clearFavoriteData(dispatch);
         if (isEmpty(profile.profile) || isNil(profile.profile)) {
             dispatch(
                 createProfileUser(
