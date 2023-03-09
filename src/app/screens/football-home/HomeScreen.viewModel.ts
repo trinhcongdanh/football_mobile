@@ -34,12 +34,8 @@ const useViewState = () => {
         (state: RootState) => state.favTopTeams.selectedTopTeams
     );
     const userLogin = useSelector((state: any) => state.otpUser);
-    console.log('userLogin', userLogin);
-    
+    const login = useSelector((state: any) => state.login);
 
-    const aaaa = useSelector((state: RootState) => state.getProfile);
-    console.log('aaaa', aaaa);
-    
     const [profileUser, setProfileUser] = useState();
     const [homePage, setHomePage] = useState<HomePageModel>();
     const [homeLayout, setHomeLayout] = useState<HomeLayoutModel>();
@@ -79,6 +75,7 @@ const useViewState = () => {
         selectedFavPlayers,
         selectedFavTopTeams,
         userLogin,
+        login,
     };
 };
 
@@ -97,6 +94,7 @@ const useViewCallback = (route: any, viewState: any) => {
         selectedFavPlayers,
         selectedFavTeams,
         selectedFavTopTeams,
+        login,
     } = viewState;
 
     const getHomeLayoutData = useCallback(async () => {
@@ -217,14 +215,18 @@ const useViewCallback = (route: any, viewState: any) => {
     }, []);
 
     const getUser = useCallback(async (userLogin: any) => {
+        const authToken = userLogin?.otp?.token ? userLogin?.otp?.token : login?.login?.token;
+        const authItem = userLogin?.otp?.user?.item_id
+            ? userLogin.otp.user.item_id
+            : login?.login?.user?.item_id;
         if (userLogin?.success) {
             const { data }: any = await axiosAuth.post(
                 `${AUTH_URL}`,
                 serializeParams({
                     action: ACTION,
-                    token: userLogin.otp.token,
+                    token: authToken,
                     call: AuthData.GET_PROFILE,
-                    item: userLogin.otp.user.item_id,
+                    item: authItem,
                 }),
 
                 {
@@ -305,7 +307,7 @@ export const useViewModel = ({ navigation, route }: IHomeScreenProps) => {
     useMount(() => {
         if (state.userLogin.success && !state.profileUser) {
             getUser(state.userLogin);
-        }else {
+        } else {
             state.setPlayers(state.selectedFavPlayers);
             state.setTeams(state.selectedFavTeams);
             state.setTopTeams(state.selectedFavTopTeams);
