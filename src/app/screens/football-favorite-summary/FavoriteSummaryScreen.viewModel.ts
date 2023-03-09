@@ -18,6 +18,7 @@ import { resetFavTeam, resetSelectedFavTeam } from 'src/store/FavTeam.slice';
 import { resetSelectedFavTopTeams, resetTopTeams } from 'src/store/FavTopTeam.slice';
 import { RootState } from 'src/store/store';
 import { createProfileUser } from 'src/store/user/CreateProfile.slice';
+import { addGuestId } from 'src/store/user/GuestId.slice';
 import { loginUser } from 'src/store/user/Login.slice';
 import { setProfileUser } from 'src/store/user/setProfile.slice';
 import { IFavoriteSummaryScreenProps } from './FavoriteSummaryScreen.type';
@@ -27,6 +28,7 @@ export const useViewModel = ({ navigation, route }: IFavoriteSummaryScreenProps)
     const dispatch = useDispatch<any>();
     const { navigate, goBack } = useAppNavigator();
     const [onCheck, setonCheck] = useState(false);
+
     // team
     const [firstTeams, setFirstTeams] = useState<TeamModel>();
     const [secondTeams, setSecondTeams] = useState<TeamModel>();
@@ -85,6 +87,14 @@ export const useViewModel = ({ navigation, route }: IFavoriteSummaryScreenProps)
     const profile = useSelector((state: RootState) => state.createProfile);
     const guestId = useSelector((state: any) => state.guestId.guestId);
     const profileUser = useSelector((state: RootState) => state.setProfile);
+
+    const uuid = require('uuid');
+    const id = uuid.v4();
+    useEffect(() => {
+        if (guestId.length === 0) {
+            dispatch(addGuestId(id));
+        }
+    }, [guestId]);
 
     function serializeParams(obj: any) {
         const a = qs.stringify(obj, { encode: false, arrayFormat: 'brackets' });
