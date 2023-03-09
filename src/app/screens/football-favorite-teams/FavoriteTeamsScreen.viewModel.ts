@@ -18,7 +18,6 @@ import {
     pushFavTeam,
     resetFavTeam,
     selectedFavTeamsAsMapSelector,
-    resetSelectedFavTeam,
     selectedFavTeamsProfileAsMapSelector,
     pushFavTeamProfile,
 } from 'src/store/FavTeam.slice';
@@ -33,6 +32,7 @@ import { RootState } from 'src/store/store';
 import { setSettingFavTeam } from 'src/store/SettingSelected.slice';
 import TeamService from '@football/core/services/Team.service';
 import { addGuestId } from 'src/store/user/GuestId.slice';
+import { clearFavoriteData } from '@football/app/utils/functions/clearFavoriteData';
 
 const useViewState = () => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -116,16 +116,9 @@ export const useViewModel = ({ navigation, route }: IFavoriteTeamsScreenProps) =
     const handleSelected = (team: TeamModel) => {
         if (!getProfile.success) {
             dispatch(pushFavTeam(team));
-
-            if (previous_screen !== ScreenName.FavSummaryPage) {
-                dispatch(resetGroupFavPlayer({ id: '', label: '', listFavPlayers: [] }));
-                dispatch(resetAllFavPlayers({ id: '', label: '', listFavPlayers: [] }));
-                dispatch(resetSearchFavPlayer({ id: '', label: '', listFavPlayers: [] }));
-            } else {
-                dispatch(resetGroupFavPlayer({ id: '', label: '', listFavPlayers: [] }));
-                dispatch(resetAllFavPlayers({ id: '', label: '', listFavPlayers: [] }));
-                dispatch(resetSearchFavPlayer({ id: '', label: '', listFavPlayers: [] }));
-            }
+            dispatch(resetGroupFavPlayer({ id: '', label: '', listFavPlayers: [] }));
+            dispatch(resetAllFavPlayers({ id: '', label: '', listFavPlayers: [] }));
+            dispatch(resetSearchFavPlayer({ id: '', label: '', listFavPlayers: [] }));
         } else {
             dispatch(pushFavTeamProfile(team));
         }
@@ -206,6 +199,7 @@ export const useViewModel = ({ navigation, route }: IFavoriteTeamsScreenProps) =
     }, []);
 
     const onGoSkip = () => {
+        clearFavoriteData(dispatch);
         if (isEmpty(profile.profile) || isNil(profile.profile)) {
             dispatch(
                 createProfileUser(

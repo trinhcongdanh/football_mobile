@@ -10,6 +10,7 @@ import { AuthData } from '@football/app/utils/constants/enum';
 import { IWelcomeScreenProps } from '@football/app/screens/football-welcome/WelcomeScreen.type';
 import { ScreenName } from '@football/app/utils/constants/enum';
 import { useDispatch, useSelector } from 'react-redux';
+import { clearFavoriteData } from '@football/app/utils/functions/clearFavoriteData';
 
 export const useViewModel = ({ navigation, route }: IWelcomeScreenProps) => {
     const { navigate, goBack } = useAppNavigator();
@@ -33,9 +34,16 @@ export const useViewModel = ({ navigation, route }: IWelcomeScreenProps) => {
     const onNavigateFavTeam = () => {
         navigate(ScreenName.FavTeamPage);
     };
+    const onNavigateConnect = () => {
+        clearFavoriteData(dispatch);
+        navigation.navigate(ScreenName.ConnectPage, {
+            isReset: true,
+        });
+    };
 
     return {
         t,
         onNavigateFavTeam,
+        onNavigateConnect,
     };
 };

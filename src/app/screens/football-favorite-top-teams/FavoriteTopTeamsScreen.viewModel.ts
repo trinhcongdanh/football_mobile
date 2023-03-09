@@ -16,7 +16,6 @@ import { createProfileUser } from 'src/store/user/CreateProfile.slice';
 import {
     setFavTopTeams,
     pushFavTopTeam,
-    resetTopTeams,
     selectedFavTopTeamsAsMapSelector,
     selectedFavTopTeamsProfileAsMapSelector,
     pushFavTopTeamProfile,
@@ -24,7 +23,7 @@ import {
 import { IFavoriteTopTeamsScreenProps } from './FavoriteTopTeamsScreen.type';
 import { RootState } from 'src/store/store';
 import { setSettingFavTopTeam } from 'src/store/SettingSelected.slice';
-import TopTeamService from '@football/core/services/TopTeam.service';
+import { clearFavoriteData } from '@football/app/utils/functions/clearFavoriteData';
 
 export const useViewModel = ({ navigation, route }: IFavoriteTopTeamsScreenProps) => {
     const { t } = useTranslation();
@@ -118,6 +117,7 @@ export const useViewModel = ({ navigation, route }: IFavoriteTopTeamsScreenProps
         goBack();
     };
     const onGoSkip = () => {
+        clearFavoriteData(dispatch);
         if (isEmpty(profile.profile) || isNil(profile.profile)) {
             dispatch(
                 createProfileUser(

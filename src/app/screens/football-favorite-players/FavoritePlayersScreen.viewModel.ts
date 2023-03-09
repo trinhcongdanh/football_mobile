@@ -1,5 +1,6 @@
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
 import { AuthData, ScreenName } from '@football/app/utils/constants/enum';
+import { clearFavoriteData } from '@football/app/utils/functions/clearFavoriteData';
 import { serializeParams } from '@football/app/utils/functions/quick-functions';
 import { useMount } from '@football/app/utils/hooks/useMount';
 import { ACTION, TOKEN } from '@football/core/api/auth/config';
@@ -451,6 +452,7 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
         goBack();
     };
     const onGoSkip = () => {
+        clearFavoriteData(dispatch);
         if (isEmpty(profile.profile) || isNil(profile.profile)) {
             dispatch(
                 createProfileUser(
