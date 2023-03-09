@@ -1,5 +1,5 @@
 /* eslint-disable no-underscore-dangle */
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     Text,
     TouchableOpacity,
@@ -10,7 +10,6 @@ import {
     ScrollView,
     ActivityIndicator,
     Image,
-    TouchableWithoutFeedback,
 } from 'react-native';
 import { getSize } from '@football/app/utils/responsive/scale';
 import Icon from 'react-native-vector-icons/Feather';
@@ -22,10 +21,10 @@ import { isEmpty } from 'lodash';
 import { TeamModel } from '@football/core/models/TeamModelResponse';
 import { HeaderFav } from '@football/app/components/header-fav/HeaderFav';
 import { Button } from '@football/app/components/button';
+import { TextInput } from 'react-native-gesture-handler';
+import { AppFonts } from '@football/app/assets/fonts';
 import styles from './FavoriteTeam.style';
 import { IFavoriteTeamProps } from './FavoriteTeam.types';
-import { AppFonts } from '@football/app/assets/fonts';
-import { TextInput } from 'react-native-gesture-handler';
 
 export const FavoriteTeam = ({
     onGoSkip,
@@ -36,21 +35,32 @@ export const FavoriteTeam = ({
     number,
     title,
     placeholder,
-    newFav,
+    teams,
     favSelected,
     chosen,
     button,
-    searchText,
     searchFavTeam,
     searchTextRef,
     submitSearchFavTeam,
     isLoading,
 }: IFavoriteTeamProps) => {
+    const [favTeams, setFavTeams] = useState<TeamModel[]>();
+    const [searchText, setSearchText] = useState('');
+
+    useEffect(() => {
+        setFavTeams(
+            teams.map(team => ({
+                ...team,
+                isSelected: favSelected.filter(t => t._id === team._id).length > 0,
+            }))
+        );
+        // console.log('favSelected', favSelected);
+    }, [favSelected, teams]);
     return (
         <View style={[appStyles.flex]}>
             <ImageBackground source={AppImages.img_bg_register} style={appStyles.flex}>
                 <StatusBar translucent backgroundColor="transparent" />
-                {isEmpty(newFav) ? (
+                {isEmpty(favTeams) ? (
                     <SafeAreaView style={appStyles.safe_area}>
                         <View style={[appStyles.flex, appStyles.container]}>
                             <HeaderFav goSkip={onGoSkip} goBack={onGoBack} onIndex={onIndex} />
@@ -70,7 +80,6 @@ export const FavoriteTeam = ({
                             <View style={[appStyles.flex_row_space_center, styles.search]}>
                                 <TextInput
                                     ref={searchTextRef}
-                                    value={searchText}
                                     placeholder={placeholder}
                                     style={styles.text_search}
                                     placeholderTextColor={appColors.blue_gray_dark}
@@ -122,7 +131,6 @@ export const FavoriteTeam = ({
 
                                     <View style={[appStyles.flex_row_space_center, styles.search]}>
                                         <TextInput
-                                            value={searchText}
                                             placeholder={placeholder}
                                             style={styles.text_search}
                                             placeholderTextColor={appColors.blue_gray_dark}
@@ -143,7 +151,7 @@ export const FavoriteTeam = ({
 
                                 <ScrollView>
                                     <View style={styles.content_item}>
-                                        {newFav?.map((item, index) => {
+                                        {favTeams?.map((item, index) => {
                                             return (
                                                 <TouchableOpacity
                                                     key={item._id}
