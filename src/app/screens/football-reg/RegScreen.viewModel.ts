@@ -11,6 +11,7 @@ import { RootState } from 'src/store/store';
 import qs from 'qs';
 import { useIsFocused } from '@react-navigation/native';
 import { AppImages } from '@football/app/assets/images';
+import { AvatarType } from '@football/core/models/AvatarType.enum';
 
 export const useViewModel = ({ navigation, route }: IRegScreenProps) => {
     const { navigate, goBack } = useAppNavigator();
@@ -50,14 +51,14 @@ export const useViewModel = ({ navigation, route }: IRegScreenProps) => {
         let formattedDate = e.getFullYear() + '-' + (e.getMonth() + 1) + '-' + e.getDate();
         setFormattedDate(formattedDate);
     };
-    const [gender, setGender] = useState<any>();
+    const [gender, setGender] = useState<any>(AvatarType.FAN_GENDER_MALE);
     const handleOnGender = (e: number) => {
         if (e === 0) {
-            setGender('FAN_GENDER_MALE');
+            setGender(AvatarType.FAN_GENDER_MALE);
         } else if (e === 1) {
-            setGender('FAN_GENDER_FEMALE');
+            setGender(AvatarType.FAN_GENDER_FEMALE);
         } else if (e === 2) {
-            setGender('FAN_GENDER_NOT_AVAILABLE');
+            setGender(AvatarType.FAN_GENDER_NOT_AVAILABLE);
         }
     };
 
