@@ -23,7 +23,11 @@ import {
     pushFavTeamProfile,
 } from 'src/store/FavTeam.slice';
 import { IFavoriteTeamsScreenProps } from './FavoriteTeamsScreen.type';
-import { resetAllFavPlayers, resetGroupFavPlayer } from 'src/store/FavPlayer.slice';
+import {
+    resetAllFavPlayers,
+    resetGroupFavPlayer,
+    resetSearchFavPlayer,
+} from 'src/store/FavPlayer.slice';
 import { useIsFocused, useRoute } from '@react-navigation/native';
 import { RootState } from 'src/store/store';
 import { setSettingFavTeam } from 'src/store/SettingSelected.slice';
@@ -111,16 +115,16 @@ export const useViewModel = ({ navigation, route }: IFavoriteTeamsScreenProps) =
 
     const handleSelected = (team: TeamModel) => {
         if (!getProfile.success) {
-            const params = routes.params;
             dispatch(pushFavTeam(team));
-            if (!isEmpty(params)) {
-                if (params.previous_screen !== ScreenName.FavSummaryPage) {
-                    dispatch(resetGroupFavPlayer({ id: '', label: '', listFavPlayers: [] }));
-                    dispatch(resetAllFavPlayers({ id: '', label: '', listFavPlayers: [] }));
-                }
+
+            if (previous_screen !== ScreenName.FavSummaryPage) {
+                dispatch(resetGroupFavPlayer({ id: '', label: '', listFavPlayers: [] }));
+                dispatch(resetAllFavPlayers({ id: '', label: '', listFavPlayers: [] }));
+                dispatch(resetSearchFavPlayer({ id: '', label: '', listFavPlayers: [] }));
             } else {
                 dispatch(resetGroupFavPlayer({ id: '', label: '', listFavPlayers: [] }));
                 dispatch(resetAllFavPlayers({ id: '', label: '', listFavPlayers: [] }));
+                dispatch(resetSearchFavPlayer({ id: '', label: '', listFavPlayers: [] }));
             }
         } else {
             dispatch(pushFavTeamProfile(team));
@@ -253,24 +257,19 @@ export const useViewModel = ({ navigation, route }: IFavoriteTeamsScreenProps) =
     }, [profile.success, isFocused]);
 
     const handleContinue = () => {
-        const params = routes.params;
-        if (!isEmpty(params)) {
-            if (params.previous_screen === ScreenName.FavSummaryPage) {
-                navigate(ScreenName.FavSummaryPage);
-            } else if (previous_screen === ScreenName.SettingsPage) {
-                navigate(ScreenName.SettingsPage, {
-                    previous_screen: ScreenName.FavTeamPage,
-                    center: true,
-                    scrollBottom: false,
-                    selectedPlayers: true,
-                    selectedTeams: true,
-                    selectedTopTeams: true,
-                });
-                dispatch(setSettingFavTeam(selectedTeamsProfile));
-                // pop(ScreenName.FavTeamPage);
-            } else {
-                navigate(ScreenName.FavPlayerPage);
-            }
+        if (previous_screen === ScreenName.FavSummaryPage) {
+            navigate(ScreenName.FavSummaryPage);
+        } else if (previous_screen === ScreenName.SettingsPage) {
+            navigate(ScreenName.SettingsPage, {
+                previous_screen: ScreenName.FavTeamPage,
+                center: true,
+                scrollBottom: false,
+                selectedPlayers: true,
+                selectedTeams: true,
+                selectedTopTeams: true,
+            });
+            dispatch(setSettingFavTeam(selectedTeamsProfile));
+            // pop(ScreenName.FavTeamPage);
         } else {
             navigate(ScreenName.FavPlayerPage);
         }

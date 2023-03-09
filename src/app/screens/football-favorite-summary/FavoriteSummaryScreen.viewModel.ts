@@ -9,9 +9,13 @@ import qs from 'qs';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
-import { resetSearchFavPlayer, SelectedPlayer } from 'src/store/FavPlayer.slice';
-import { resetFavTeam } from 'src/store/FavTeam.slice';
-import { resetTopTeams } from 'src/store/FavTopTeam.slice';
+import {
+    resetSearchFavPlayer,
+    resetSelectedFavPlayer,
+    SelectedPlayer,
+} from 'src/store/FavPlayer.slice';
+import { resetFavTeam, resetSelectedFavTeam } from 'src/store/FavTeam.slice';
+import { resetSelectedFavTopTeams, resetTopTeams } from 'src/store/FavTopTeam.slice';
 import { RootState } from 'src/store/store';
 import { createProfileUser } from 'src/store/user/CreateProfile.slice';
 import { loginUser } from 'src/store/user/Login.slice';
@@ -163,9 +167,11 @@ export const useViewModel = ({ navigation, route }: IFavoriteSummaryScreenProps)
 
     const navigationHomePage = () => {
         setSetProfile(false);
+        dispatch(resetSelectedFavTeam([]));
+        dispatch(resetSelectedFavPlayer([]));
+        dispatch(resetSelectedFavTopTeams([]));
         if (isEmpty(profile.profile) || isNil(profile.profile)) {
             setScreenName(ScreenName.SideBar);
-
             dispatch(
                 createProfileUser(
                     serializeParams({
@@ -238,27 +244,7 @@ export const useViewModel = ({ navigation, route }: IFavoriteSummaryScreenProps)
                 });
             }
         } else {
-            if (profile.success === true && setProfile === false) {
-                dispatch(
-                    loginUser(
-                        serializeParams({
-                            action: ACTION,
-                            token: TOKEN,
-                            call: AuthData.LOGIN,
-                            guest_id: profile.profile.tc_user,
-                            guest_guid: guestId[0],
-                        })
-                    )
-                );
-
-                navigate(screenName);
-                if (screenName === ScreenName.SideBar) {
-                    navigation.reset({
-                        index: 0,
-                        routes: [{ name: ScreenName.SideBar as never }],
-                    });
-                }
-            } else if (profile.success === true && setProfile === true) {
+            if (profile.success) {
                 dispatch(
                     loginUser(
                         serializeParams({
@@ -276,7 +262,7 @@ export const useViewModel = ({ navigation, route }: IFavoriteSummaryScreenProps)
 
     useEffect(() => {
         if (!isFocused) return;
-        if (login.success === true && setProfile === true) {
+        if (login.success) {
             let fav_team: any = [];
             selectedFavTeams.map(item => {
                 fav_team.push(item._id);
@@ -297,17 +283,10 @@ export const useViewModel = ({ navigation, route }: IFavoriteSummaryScreenProps)
                         call: AuthData.SET_PROFILE,
                         item_id: profile.profile.item_id,
                         item: {
-                            favorite_israel_teams: fav_team,
-                            favorite_players: player_team,
-                            favorite_national_teams: fav_top_team,
-                            notifications: [
-                                'FAN_NOTIFICATION_GENERAL',
-                                'FAN_NOTIFICATION_FAVORITE_PLAYERS',
-                                'FAN_NOTIFICATION_FAVORITE_ISRAEL_TEAMS',
-                                'FAN_NOTIFICATION_FAVORITE_PLAYERS_LEAGUES',
-                                'FAN_NOTIFICATION_FAVORITE_ISRAEL_TEAMS_LEAGUES',
-                                'FAN_NOTIFICATION_FAVORITE_PLAYERS_NATIONAL_TEAMS',
-                            ],
+                            favorite_israel_teams: setProfile ? fav_team : '',
+                            favorite_players: setProfile ? player_team : '',
+                            favorite_national_teams: setProfile ? fav_top_team : '',
+                            notifications: '',
                         },
                     })
                 )
