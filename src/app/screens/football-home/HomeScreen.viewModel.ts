@@ -34,8 +34,12 @@ const useViewState = () => {
         (state: RootState) => state.favTopTeams.selectedTopTeams
     );
     const userLogin = useSelector((state: any) => state.otpUser);
+    console.log('userLogin', userLogin);
+    
 
-    // const profileUser = useSelector((state: RootState) => state.getProfile);
+    const aaaa = useSelector((state: RootState) => state.getProfile);
+    console.log('aaaa', aaaa);
+    
     const [profileUser, setProfileUser] = useState();
     const [homePage, setHomePage] = useState<HomePageModel>();
     const [homeLayout, setHomeLayout] = useState<HomeLayoutModel>();
@@ -301,6 +305,10 @@ export const useViewModel = ({ navigation, route }: IHomeScreenProps) => {
     useMount(() => {
         if (state.userLogin.success && !state.profileUser) {
             getUser(state.userLogin);
+        }else {
+            state.setPlayers(state.selectedFavPlayers);
+            state.setTeams(state.selectedFavTeams);
+            state.setTopTeams(state.selectedFavTopTeams);
         }
         getHomeLayoutData();
         getHomePageData();
