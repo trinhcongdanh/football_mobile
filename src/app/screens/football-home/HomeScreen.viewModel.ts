@@ -304,6 +304,10 @@ export const useViewModel = ({ navigation, route }: IHomeScreenProps) => {
     useMount(() => {
         if (state.userLogin.success && !state.profileUser) {
             getUser(state.userLogin);
+        } else {
+            state.setPlayers(state.selectedFavPlayers);
+            state.setTeams(state.selectedFavTeams);
+            state.setTopTeams(state.selectedFavTopTeams);
         }
         getHomeLayoutData();
         getHomePageData();
