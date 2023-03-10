@@ -296,9 +296,6 @@ export const useViewModel = ({ navigation, route }: IHomeScreenProps) => {
         getHomePageData,
         getDefaultLeagueData,
         getGeneralVodData,
-        getPlayersData,
-        getTeamsData,
-        getTopTeamsData,
         getUser,
     } = useViewCallback(route, state);
 

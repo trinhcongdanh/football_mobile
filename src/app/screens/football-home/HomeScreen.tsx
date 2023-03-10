@@ -74,7 +74,7 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
     const colorCustom = useSelector((state: any) => state.colorCustom.colorCustom);
 
     return (
-        <View style={[appStyles.flex, { backgroundColor: appColors.white }]}>
+        <View style={[appStyles.flex, { backgroundColor: appColors.gray2 }]}>
             {/* Header */}
             {homePage && (
                 <>

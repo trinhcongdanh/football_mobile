@@ -30,7 +30,8 @@ export const styles = StyleSheet.create({
     itemsContainer: {
         position: 'absolute',
         right: 0,
-        top: getSize.m(38),
+        // top: getSize.m(38),
+        top: 0,
         zIndex: 1000,
         backgroundColor: appColors.white,
         borderBottomLeftRadius: getSize.m(20),

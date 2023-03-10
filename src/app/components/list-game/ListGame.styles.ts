@@ -73,12 +73,23 @@ export const styles = StyleSheet.create({
         width: getSize.m(65),
         height: getSize.m(39),
     },
-    circle: {
+    circle_right: {
         backgroundColor: appColors.gray,
         position: 'absolute',
         height: getSize.m(30),
-        width: getSize.m(30),
-        borderRadius: getSize.m(30),
+        width: getSize.m(15),
+        borderTopRightRadius: getSize.m(30),
+        borderBottomRightRadius: getSize.m(30),
+        left: getSize.m(-10),
+    },
+    circle_left: {
+        backgroundColor: appColors.gray,
+        position: 'absolute',
+        height: getSize.m(30),
+        width: getSize.m(20),
+        borderTopLeftRadius: getSize.m(30),
+        borderBottomLeftRadius: getSize.m(30),
+        right: getSize.m(-10),
     },
     details: {
         fontSize: getSize.m(12),
