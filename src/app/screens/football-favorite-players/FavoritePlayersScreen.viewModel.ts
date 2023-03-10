@@ -506,7 +506,9 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
         const { params } = routes;
         if (!isEmpty(params)) {
             if (params.previous_screen === ScreenName.FavSummaryPage) {
-                navigate(ScreenName.FavSummaryPage);
+                navigate(ScreenName.FavSummaryPage, {
+                    editFav: true,
+                });
             } else if (previous_screen === ScreenName.SettingsPage) {
                 navigate(ScreenName.SettingsPage, {
                     previous_screen: ScreenName.FavPlayerPage,

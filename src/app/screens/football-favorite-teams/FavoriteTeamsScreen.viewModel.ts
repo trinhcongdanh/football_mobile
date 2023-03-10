@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-underscore-dangle */
-import { useRef, useCallback, useState } from 'react';
+import { useRef, useCallback, useState, useEffect } from 'react';
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
 import { useTranslation } from 'react-i18next';
 import { TeamModel } from '@football/core/models/TeamModelResponse';
@@ -18,10 +18,20 @@ import {
     pushFavTeamProfile,
     resetFavTeam,
     selectedFavTeamsAsMapSelector,
+    selectedFavTeamsProfileAsMapSelector,
 } from 'src/store/FavTeam.slice';
 import { setSettingFavTeam } from 'src/store/SettingSelected.slice';
 import { MAX_FAVORITES_TEAM } from '@football/core/api/configs/config';
 import { IFavoriteTeamsScreenProps } from './FavoriteTeamsScreen.type';
+import { loginUser } from 'src/store/user/Login.slice';
+import { useIsFocused, useNavigation } from '@react-navigation/native';
+import {
+    resetAllFavPlayers,
+    resetGroupFavPlayer,
+    resetSearchFavPlayer,
+    resetSelectedFavPlayer,
+} from 'src/store/FavPlayer.slice';
+import { clearFavoriteData } from '@football/app/utils/functions/clearFavoriteData';
 
 function serializeParams(obj: any) {
     const str = [];
@@ -36,21 +46,26 @@ function serializeParams(obj: any) {
 }
 
 const useViewState = () => {
-    const selectedFavTeamsMap = useSelector(selectedFavTeamsAsMapSelector);
-    const selectedTeamsProfile = useSelector(
-        (state: RootState) => state.favTeams.selectedTeamsProfile
+    const getProfile = useSelector((state: RootState) => state.getProfile);
+    const profile = useSelector((state: any) => state.createProfile);
+    const guestId = useSelector((state: any) => state.guestId.guestId);
+    const login = useSelector((state: any) => state.login);
+
+    const selectedFavTeamsMap = useSelector(
+        getProfile.success ? selectedFavTeamsProfileAsMapSelector : selectedFavTeamsAsMapSelector
     );
+    const selectedTeams = useSelector((state: RootState) =>
+        getProfile.success ? state.favTeams.selectedTeamsProfile : state.favTeams.selectedTeams
+    );
+
     const array = selectedFavTeamsMap.size
         ? Array.from(selectedFavTeamsMap, ([name, value]) => ({ ...value }))
-        : selectedTeamsProfile;
+        : selectedTeams;
 
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const searchTextRef = useRef<any>(null);
     const [teams, setTeams] = useState<TeamModel[]>();
     const [selectedFavTeams, setSelectedFavTeams] = useState<TeamModel[]>(array);
-
-    const getProfile = useSelector((state: RootState) => state.getProfile);
-    const profile = useSelector((state: any) => state.createProfile);
 
     return {
         isLoading,
@@ -62,6 +77,8 @@ const useViewState = () => {
         profile,
         teams,
         setTeams,
+        guestId,
+        login,
     };
 };
 /**
@@ -78,16 +95,24 @@ const useViewCallback = (route: any, viewState: any) => {
         selectedFavTeams,
         setSelectedFavTeams,
         profile,
+        guestId,
+        login,
     } = viewState;
 
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<any>();
     const { navigate, goBack, pop } = useAppNavigator();
 
     const onGoBack = (): void => {
         dispatch(resetFavTeam([]));
         goBack();
     };
+
+    const { params } = route;
+    const isFocused = useIsFocused();
+    const navigation = useNavigation();
+
     const onGoSkip = () => {
+        clearFavoriteData(dispatch);
         if (isEmpty(profile.profile) || isNil(profile.profile)) {
             dispatch(
                 createProfileUser(
@@ -104,27 +129,61 @@ const useViewCallback = (route: any, viewState: any) => {
         }
     };
 
-    const handleContinue = () => {
-        const { params } = route;
-        if (!isEmpty(params)) {
-            if (params.previous_screen === ScreenName.FavSummaryPage) {
-                navigate(ScreenName.FavSummaryPage);
-            } else if (params.previous_screen === ScreenName.SettingsPage) {
-                navigate(ScreenName.SettingsPage, {
-                    previous_screen: ScreenName.FavTeamPage,
-                    center: true,
-                    scrollBottom: false,
-                    // selectedPlayers: true,
-                    selectedTeams: true,
-                    // selectedTopTeams: true,
+    useEffect(() => {
+        if (params?.previous_screen !== ScreenName.SettingsPage) {
+            if (!isFocused) return;
+            if (!isEmpty(login.login)) {
+                navigate(ScreenName.SideBar);
+                navigation.reset({
+                    index: 0,
+                    routes: [{ name: ScreenName.SideBar as never }],
                 });
-                dispatch(setSettingFavTeam(selectedFavTeams));
-                // pop(ScreenName.FavTeamPage);
             } else {
-                navigate(ScreenName.FavPlayerPage);
+                if (profile.success === true) {
+                    dispatch(
+                        loginUser(
+                            serializeParams({
+                                action: ACTION,
+                                token: TOKEN,
+                                call: AuthData.LOGIN,
+                                guest_id: profile.profile.tc_user,
+                                guest_guid: guestId[0],
+                            })
+                        )
+                    );
+
+                    navigate(ScreenName.SideBar);
+                    navigation.reset({
+                        index: 0,
+                        routes: [{ name: ScreenName.SideBar as never }],
+                    });
+                }
             }
+        }
+    }, [profile.success, isFocused]);
+
+    const handleContinue = () => {
+        if (params?.previous_screen === ScreenName.FavSummaryPage) {
+            navigate(ScreenName.FavSummaryPage, {
+                editFav: true,
+            });
+        } else if (params?.previous_screen === ScreenName.SettingsPage) {
+            navigate(ScreenName.SettingsPage, {
+                previous_screen: ScreenName.FavTeamPage,
+                center: true,
+                scrollBottom: false,
+                // selectedPlayers: true,
+                selectedTeams: true,
+                // selectedTopTeams: true,
+            });
+            dispatch(setSettingFavTeam(selectedFavTeams));
+            // pop(ScreenName.FavTeamPage);
         } else {
             navigate(ScreenName.FavPlayerPage);
+            dispatch(resetGroupFavPlayer({ id: '', label: '', listFavPlayers: [] }));
+            dispatch(resetAllFavPlayers({ id: '', label: '', listFavPlayers: [] }));
+            dispatch(resetSearchFavPlayer({ id: '', label: '', listFavPlayers: [] }));
+            dispatch(resetSelectedFavPlayer([]));
         }
     };
 
@@ -139,6 +198,11 @@ const useViewCallback = (route: any, viewState: any) => {
             newSelectedFavTeams = newSelectedFavTeams.filter(
                 (selectedFavTeam: TeamModel) => selectedFavTeam._id !== team._id
             );
+            if (!getProfile?.success) {
+                dispatch(pushFavTeam(team));
+            } else {
+                dispatch(pushFavTeamProfile(team));
+            }
         } else if (newSelectedFavTeams.length < MAX_FAVORITES_TEAM) {
             newSelectedFavTeams.push(team);
             if (!getProfile?.success) {

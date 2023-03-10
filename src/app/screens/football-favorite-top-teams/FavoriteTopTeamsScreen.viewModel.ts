@@ -184,7 +184,9 @@ export const useViewModel = ({ navigation, route }: IFavoriteTopTeamsScreenProps
             dispatch(setSettingFavTopTeam(selectedFavTopTeamsProfile));
             // pop(ScreenName.FavTeamPage);
         } else {
-            navigate(ScreenName.FavSummaryPage);
+            navigate(ScreenName.FavSummaryPage, {
+                editFav: true,
+            });
         }
     };
     useMount(() => {
