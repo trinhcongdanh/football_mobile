@@ -16,6 +16,7 @@ import { BottomTabNavigationOptions } from '@react-navigation/bottom-tabs';
 import { appColors } from '@football/app/utils/constants/appColors';
 import LinearGradient from 'react-native-linear-gradient';
 import { style } from '../styles/tab.bar.button.styles';
+import { useSelector } from 'react-redux';
 
 interface Props {
     mode: 'default' | 'square';
@@ -150,6 +151,8 @@ export const TabBarButton: React.FC<Props> = memo(
             };
         });
 
+        const colorCustom = useSelector((state: any) => state.colorCustom.colorCustom);
+
         return (
             <View style={style.wrapper}>
                 <RNReanimated.View
@@ -171,7 +174,7 @@ export const TabBarButton: React.FC<Props> = memo(
                         onLongPress={onLongPress}
                     >
                         <LinearGradient
-                            colors={[appColors.blue_light, appColors.blue_dark]}
+                            colors={[colorCustom, colorCustom]}
                             style={[
                                 {
                                     width,

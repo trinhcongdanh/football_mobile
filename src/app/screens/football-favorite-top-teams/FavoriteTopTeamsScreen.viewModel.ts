@@ -101,8 +101,9 @@ export const useViewModel = ({ navigation, route }: IFavoriteTopTeamsScreenProps
     const handleSelected = (topTeam: TopTeamModel) => {
         if (!getProfile.success) {
             dispatch(pushFavTopTeam(topTeam));
+        } else {
+            dispatch(pushFavTopTeamProfile(topTeam));
         }
-        dispatch(pushFavTopTeamProfile(topTeam));
     };
 
     useEffect(() => {

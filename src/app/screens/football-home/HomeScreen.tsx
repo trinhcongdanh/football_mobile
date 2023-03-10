@@ -35,6 +35,7 @@ import {
 import FastImage from 'react-native-fast-image';
 import LinearGradient from 'react-native-linear-gradient';
 import IconAntDesign from 'react-native-vector-icons/AntDesign';
+import { useSelector } from 'react-redux';
 
 export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
     const {
@@ -69,6 +70,9 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
     };
     LogBox.ignoreLogs(['Warning: Encountered two children with the same key']);
     LogBox.ignoreLogs(['Warning: Each child in a list should have a unique "key" prop']);
+
+    const colorCustom = useSelector((state: any) => state.colorCustom.colorCustom);
+
     return (
         <View style={[appStyles.flex, { backgroundColor: appColors.white }]}>
             {/* Header */}
@@ -87,9 +91,9 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                                             <LinearGradient
                                                 colors={[
                                                     Platform.OS === 'android'
-                                                        ? 'rgba(255, 43, 94, 1)'
-                                                        : 'rgba(204, 10, 45, 1)',
-                                                    'rgba(204, 10, 45, 1)',
+                                                        ? colorCustom
+                                                        : colorCustom,
+                                                    colorCustom,
                                                 ]}
                                                 style={styles.home_side_bar}
                                             >
@@ -116,6 +120,7 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                                                 <FastImage
                                                     source={AppImages.img_ball_red}
                                                     style={styles.ic_football}
+                                                    tintColor={colorCustom}
                                                     resizeMode={FastImage.resizeMode.contain}
                                                 />
                                                 <Text

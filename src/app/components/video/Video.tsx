@@ -175,7 +175,7 @@ export const Video = () => {
                             onProgress={onProgress}
                             onEnd={onEnd}
                             controls={Platform.OS === 'ios' ? true : showControls}
-                            fullscreen
+                            fullscreen={fullscreen}
                             onFullscreenPlayerWillDismiss={() => {
                                 // Orientation.unlockAllOrientations();
                                 setShowControls(false);
