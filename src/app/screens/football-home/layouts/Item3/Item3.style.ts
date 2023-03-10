@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
     label: {
         fontFamily: AppFonts.bold,
         fontSize: getSize.m(13),
-        color: appColors.light_gray,
+        color: appColors.blue_black,
         lineHeight: getSize.m(17),
     },
 
@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
         fontSize: getSize.m(12),
         fontFamily: AppFonts.medium,
         lineHeight: getSize.m(16),
-        color: appColors.light_gray,
+        color: appColors.blue_black,
         marginTop: getSize.m(4),
     },
 

@@ -11,6 +11,7 @@ import { MAX_TOPTEAM_LASTCAMPAIGN_GAMES } from '@football/core/api/configs/confi
 import moment from 'moment';
 import React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
+import Icon from 'react-native-vector-icons/Feather';
 import { IItem6Props } from './Item6.type';
 
 export const Item6 = ({ topTeam }: IItem6Props) => {
@@ -71,7 +72,25 @@ export const Item6 = ({ topTeam }: IItem6Props) => {
     //     </View>
     // );
     return (
-        <View style={{ marginTop: getSize.m(26) }}>
+        <View style={{ paddingTop: getSize.m(26), backgroundColor: appColors.gray2 }}>
+            <View
+                style={[
+                    appStyles.flex_row_space_center,
+                    {
+                        paddingHorizontal: getSize.m(18),
+                    },
+                ]}
+            >
+                <Text style={styles.header}>{t('home_page.list_of_game')}</Text>
+                <TouchableOpacity style={appStyles.flex_row_align}>
+                    <Text style={styles.see_all}>{t('home_page.all_game')}</Text>
+                    <Icon
+                        name={appIcons.ic_arrow_left}
+                        size={getSize.m(13)}
+                        color={appColors.text_dark_blue}
+                    />
+                </TouchableOpacity>
+            </View>
             <Position
                 position={topTeam?.last_campaign?.group_name_he}
                 color={appColors.text_dark_blue}
@@ -115,7 +134,7 @@ export const Item6 = ({ topTeam }: IItem6Props) => {
                     );
                 })}
             </View>
-            <View style={{ marginTop: getSize.m(8) }}>
+            <View style={{ paddingHorizontal: getSize.m(20) }}>
                 {topTeam?.homepage_info.games
                     .slice(0, MAX_TOPTEAM_LASTCAMPAIGN_GAMES)
                     .filter(game => {
@@ -146,7 +165,7 @@ export const Item6 = ({ topTeam }: IItem6Props) => {
                                 schedule={item.time}
                                 // completed={item.completed}
                                 icon={appIcons.ic_arrow_left}
-                                color={appColors.gray}
+                                color={appColors.gray2}
                                 details={item.game_id}
                                 handleDetailMatch={() => handleDetailMatch(item.game_id)}
                                 handleStadium={() => handleStadium(item.stadium_id)}
@@ -157,7 +176,7 @@ export const Item6 = ({ topTeam }: IItem6Props) => {
                                         'hours'
                                     )
                                 )}
-                                style={{ marginTop: getSize.m(12) }}
+                                style={{ marginVertical: getSize.m(12) }}
                             />
                         );
                     })}

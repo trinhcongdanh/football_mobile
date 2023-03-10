@@ -689,7 +689,7 @@ export const Item1 = ({ team }: IItem1Props) => {
                     >
                         <View style={appStyles.flex_row_align}>
                             <FastImage
-                                source={AppImages.img_light_volleyball}
+                                source={AppImages.img_ball_light_gray}
                                 style={{
                                     width: getSize.m(14),
                                     height: getSize.m(14),
@@ -710,34 +710,36 @@ export const Item1 = ({ team }: IItem1Props) => {
                             />
                         </TouchableOpacity>
                     </View>
-                    {team.homepage_info.games.map((item, index) => {
-                        return (
-                            <ListGame
-                                // eslint-disable-next-line react/no-array-index-key
-                                key={index}
-                                logo_home={item.team1.logo_url}
-                                logo_away={item.team2.logo_url}
-                                nameHome={item.team1.name_he}
-                                nameAway={item.team2.name_he}
-                                location={item.stadium_he}
-                                date={item.date}
-                                result={item.score}
-                                schedule={item.time}
-                                // completed={item.completed}
-                                color={appColors.text_dark_blue}
-                                handleDetailMatch={() => handleDetailMatch(item.game_id)}
-                                handleStadium={() => handleStadium(item.stadium_id)}
-                                isLive={moment().isBetween(
-                                    moment(`${item.date} ${item.time}`, 'DD.M.YY HH:mm'),
-                                    moment(`${item.date} ${item.time}`, 'DD.M.YY HH:mm').add(
-                                        2,
-                                        'hours'
-                                    )
-                                )}
-                                style={{ marginTop: getSize.m(12) }}
-                            />
-                        );
-                    })}
+                    <View style={{ padding: getSize.m(10) }}>
+                        {team.homepage_info.games.map((item, index) => {
+                            return (
+                                <ListGame
+                                    // eslint-disable-next-line react/no-array-index-key
+                                    key={index}
+                                    logo_home={item.team1.logo_url}
+                                    logo_away={item.team2.logo_url}
+                                    nameHome={item.team1.name_he}
+                                    nameAway={item.team2.name_he}
+                                    location={item.stadium_he}
+                                    date={item.date}
+                                    result={item.score}
+                                    schedule={item.time}
+                                    // completed={item.completed}
+                                    color={appColors.gray2}
+                                    handleDetailMatch={() => handleDetailMatch(item.game_id)}
+                                    handleStadium={() => handleStadium(item.stadium_id)}
+                                    isLive={moment().isBetween(
+                                        moment(`${item.date} ${item.time}`, 'DD.M.YY HH:mm'),
+                                        moment(`${item.date} ${item.time}`, 'DD.M.YY HH:mm').add(
+                                            2,
+                                            'hours'
+                                        )
+                                    )}
+                                    style={{ marginTop: getSize.m(12) }}
+                                />
+                            );
+                        })}
+                    </View>
                 </View>
             </ScrollView>
             <View style={styles.dotContainer}>

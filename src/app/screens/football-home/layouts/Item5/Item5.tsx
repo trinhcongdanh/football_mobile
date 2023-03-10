@@ -163,12 +163,8 @@ export const Item5 = ({ topTeam }: IItem5Props) => {
                                             start={{ x: 0, y: 0 }}
                                             end={{ x: 1, y: 1 }}
                                             colors={[
-                                                index % 2 === 0
-                                                    ? appColors.linearLight
-                                                    : appColors.white,
-                                                index % 2 === 0
-                                                    ? appColors.linearDark
-                                                    : appColors.white,
+                                                index % 2 === 0 ? '#f3f4f7' : appColors.white,
+                                                index % 2 === 0 ? '#f5fbfd' : appColors.white,
                                             ]}
                                             style={[
                                                 appStyles.flex_row_space_center,
@@ -201,6 +197,7 @@ export const Item5 = ({ topTeam }: IItem5Props) => {
                                                             styles.statistics_content,
                                                             {
                                                                 marginLeft: getSize.m(6),
+                                                                textAlignVertical: 'center',
                                                             },
                                                         ]}
                                                     >
@@ -271,12 +268,8 @@ export const Item5 = ({ topTeam }: IItem5Props) => {
                                             start={{ x: 0, y: 0 }}
                                             end={{ x: 1, y: 1 }}
                                             colors={[
-                                                index % 2 === 0
-                                                    ? appColors.linearLight
-                                                    : appColors.white,
-                                                index % 2 === 0
-                                                    ? appColors.linearDark
-                                                    : appColors.white,
+                                                index % 2 === 0 ? '#f3f4f7' : appColors.white,
+                                                index % 2 === 0 ? '#f5fbfd' : appColors.white,
                                             ]}
                                             style={[
                                                 appStyles.flex_row_space_center,
@@ -381,6 +374,7 @@ export const Item5 = ({ topTeam }: IItem5Props) => {
                         {
                             marginLeft: getSize.m(8),
                             marginRight: getSize.m(25),
+                            backgroundColor: appColors.gray2,
                         },
                     ]}
                 >
@@ -395,7 +389,7 @@ export const Item5 = ({ topTeam }: IItem5Props) => {
                     >
                         <View style={appStyles.flex_row_align}>
                             <FastImage
-                                source={AppImages.img_light_volleyball}
+                                source={AppImages.img_ball_light_gray}
                                 style={{
                                     width: getSize.m(14),
                                     height: getSize.m(14),
@@ -424,33 +418,35 @@ export const Item5 = ({ topTeam }: IItem5Props) => {
                         schedule="11:30"
                     /> */}
 
-                    {topTeam.homepage_info.games.map(item => {
-                        return (
-                            <ListGame
-                                key={item.game_id}
-                                logo_home={item.team1.logo_url}
-                                logo_away={item.team2.logo_url}
-                                nameHome={item.team1.name_he}
-                                nameAway={item.team2.name_he}
-                                location={item.stadium_he}
-                                date={item.date}
-                                result={item.score}
-                                schedule={item.time}
-                                // completed={item.completed}
-                                color={appColors.text_dark_blue}
-                                handleDetailMatch={() => handleDetailMatch(item.game_id)}
-                                handleStadium={() => handleStadium(item.stadium_id)}
-                                isLive={moment().isBetween(
-                                    moment(`${item.date} ${item.time}`, 'DD.M.YY HH:mm'),
-                                    moment(`${item.date} ${item.time}`, 'DD.M.YY HH:mm').add(
-                                        2,
-                                        'hours'
-                                    )
-                                )}
-                                style={{ marginTop: getSize.m(12) }}
-                            />
-                        );
-                    })}
+                    <View style={{ padding: getSize.m(5), zIndex: 0, position: 'relative' }}>
+                        {topTeam.homepage_info.games.map(item => {
+                            return (
+                                <ListGame
+                                    key={item.game_id}
+                                    logo_home={item.team1.logo_url}
+                                    logo_away={item.team2.logo_url}
+                                    nameHome={item.team1.name_he}
+                                    nameAway={item.team2.name_he}
+                                    location={item.stadium_he}
+                                    date={item.date}
+                                    result={item.score}
+                                    schedule={item.time}
+                                    // completed={item.completed}
+                                    color={appColors.gray2}
+                                    handleDetailMatch={() => handleDetailMatch(item.game_id)}
+                                    handleStadium={() => handleStadium(item.stadium_id)}
+                                    isLive={moment().isBetween(
+                                        moment(`${item.date} ${item.time}`, 'DD.M.YY HH:mm'),
+                                        moment(`${item.date} ${item.time}`, 'DD.M.YY HH:mm').add(
+                                            2,
+                                            'hours'
+                                        )
+                                    )}
+                                    style={{ marginTop: getSize.m(12) }}
+                                />
+                            );
+                        })}
+                    </View>
                 </View>
             </ScrollView>
             <View style={styles.dotContainer}>

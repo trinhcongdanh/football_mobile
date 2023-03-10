@@ -28,11 +28,11 @@ export const Item11 = ({ homePage }: IItem11Props) => {
                     resizeMode={FastImage.resizeMode.contain}
                     style={styles.logo}
                 />
-                <FastImage
+                {/* <FastImage
                     source={AppImages.img_cup_state}
                     resizeMode={FastImage.resizeMode.contain}
                     style={styles.cup}
-                />
+                /> */}
                 <TouchableOpacity style={styles.button}>
                     <FastImage
                         source={AppImages.img_button}

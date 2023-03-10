@@ -56,25 +56,29 @@ const DropdownField = ({
                     />
                 </TouchableOpacity>
                 {openModal && (
-                    <View style={[styles.itemsContainer]}>
-                        <ScrollView nestedScrollEnabled>
-                            {options?.map((opt: any, index: number) => {
-                                return (
-                                    <TouchableOpacity
-                                        onPress={() => {
-                                            setOpenModal(!openModal);
-                                            if (onPressItem) {
-                                                onPressItem(opt);
-                                            }
-                                        }}
-                                        key={index}
-                                        style={styles.itemContainer}
-                                    >
-                                        <Text style={styles.itemTitle}>{opt[itemTitleField]}</Text>
-                                    </TouchableOpacity>
-                                );
-                            })}
-                        </ScrollView>
+                    <View style={{ position: 'relative' }}>
+                        <View style={[styles.itemsContainer]}>
+                            <ScrollView nestedScrollEnabled>
+                                {options?.map((opt: any, index: number) => {
+                                    return (
+                                        <TouchableOpacity
+                                            onPress={() => {
+                                                setOpenModal(!openModal);
+                                                if (onPressItem) {
+                                                    onPressItem(opt);
+                                                }
+                                            }}
+                                            key={index}
+                                            style={styles.itemContainer}
+                                        >
+                                            <Text style={styles.itemTitle}>
+                                                {opt[itemTitleField]}
+                                            </Text>
+                                        </TouchableOpacity>
+                                    );
+                                })}
+                            </ScrollView>
+                        </View>
                     </View>
                 )}
             </View>
