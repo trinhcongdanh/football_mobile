@@ -20,7 +20,6 @@ export const Item6 = ({ topTeam }: IItem6Props) => {
         pages,
         activeIndexNumber,
         setActiveIndexNumber,
-        data,
         options,
         select,
         setSelect,
