@@ -292,7 +292,6 @@ export const useViewModel = ({ navigation, route }: IFavoriteSummaryScreenProps)
                             favorite_israel_teams: setProfile ? fav_team : '',
                             favorite_players: setProfile ? player_team : '',
                             favorite_national_teams: setProfile ? fav_top_team : '',
-                            notifications: '',
                         },
                     })
                 )

@@ -25,6 +25,7 @@ export const useViewModel = () => {
 
     const login = useSelector((state: any) => state.login);
     const getProfile = useSelector((state: RootState) => state.getProfile);
+    const profile = useSelector((state: RootState) => state.createProfile);
     const profileUser = useSelector((state: RootState) => state.setProfile);
     const numberPhone = useSelector((state: any) => state.numberPhoneUser);
     const userLogin = useSelector((state: RootState) => state.otpUser);
@@ -78,7 +79,7 @@ export const useViewModel = () => {
                         action: ACTION,
                         token: login.login.token,
                         call: AuthData.GET_PROFILE,
-                        item: login.login.user.item_id,
+                        item: profile.profile.item_id,
                     })
                 )
             );
