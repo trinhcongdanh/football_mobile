@@ -13,13 +13,7 @@ import _, { isEmpty, isNil } from 'lodash';
 import { createProfileUser } from 'src/store/user/CreateProfile.slice';
 import { AuthData, ScreenName } from '@football/app/utils/constants/enum';
 import { ACTION, TOKEN } from '@football/core/api/auth/config';
-import {
-    pushFavTeam,
-    pushFavTeamProfile,
-    resetFavTeam,
-    selectedFavTeamsAsMapSelector,
-    selectedFavTeamsProfileAsMapSelector,
-} from 'src/store/FavTeam.slice';
+import { pushFavTeam, resetFavTeam, selectedFavTeamsAsMapSelector } from 'src/store/FavTeam.slice';
 import { setSettingFavTeam } from 'src/store/SettingSelected.slice';
 import { MAX_FAVORITES_TEAM } from '@football/core/api/configs/config';
 import { IFavoriteTeamsScreenProps } from './FavoriteTeamsScreen.type';
@@ -51,12 +45,8 @@ const useViewState = () => {
     const guestId = useSelector((state: any) => state.guestId.guestId);
     const login = useSelector((state: any) => state.login);
 
-    const selectedFavTeamsMap = useSelector(
-        getProfile.success ? selectedFavTeamsProfileAsMapSelector : selectedFavTeamsAsMapSelector
-    );
-    const selectedTeams = useSelector((state: RootState) =>
-        getProfile.success ? state.favTeams.selectedTeamsProfile : state.favTeams.selectedTeams
-    );
+    const selectedFavTeamsMap = useSelector(selectedFavTeamsAsMapSelector);
+    const selectedTeams = useSelector((state: RootState) => state.favTeams.selectedTeams);
 
     const array = selectedFavTeamsMap.size
         ? Array.from(selectedFavTeamsMap, ([name, value]) => ({ ...value }))
@@ -172,9 +162,9 @@ const useViewCallback = (route: any, viewState: any) => {
                 previous_screen: ScreenName.FavTeamPage,
                 center: true,
                 scrollBottom: false,
-                // selectedPlayers: true,
+                selectedPlayers: true,
                 selectedTeams: true,
-                // selectedTopTeams: true,
+                selectedTopTeams: true,
             });
             dispatch(setSettingFavTeam(selectedFavTeams));
             // pop(ScreenName.FavTeamPage);
@@ -198,18 +188,10 @@ const useViewCallback = (route: any, viewState: any) => {
             newSelectedFavTeams = newSelectedFavTeams.filter(
                 (selectedFavTeam: TeamModel) => selectedFavTeam._id !== team._id
             );
-            if (!getProfile?.success) {
-                dispatch(pushFavTeam(team));
-            } else {
-                dispatch(pushFavTeamProfile(team));
-            }
+            dispatch(pushFavTeam(team));
         } else if (newSelectedFavTeams.length < MAX_FAVORITES_TEAM) {
             newSelectedFavTeams.push(team);
-            if (!getProfile?.success) {
-                dispatch(pushFavTeam(team));
-            } else {
-                dispatch(pushFavTeamProfile(team));
-            }
+            dispatch(pushFavTeam(team));
         }
         setSelectedFavTeams(newSelectedFavTeams);
     };

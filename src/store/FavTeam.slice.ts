@@ -39,29 +39,16 @@ export const favTeamSlice = createSlice({
                 state.selectedTeams = state.selectedTeams.filter(item => item._id !== team._id);
             }
         },
-        pushFavTeamProfile: (state, action: PayloadAction<TeamModel>) => {
-            const team = action.payload;
-            if (
-                !state.selectedTeamsProfile.some(favTeam =>
-                    favTeam._id===team._id
-                ) && state.selectedTeamsProfile.length < MAX_TEAM_NUM
-            ) {
-                state.selectedTeamsProfile = [...state.selectedTeamsProfile, team];
-            } else {
-                state.selectedTeamsProfile = state.selectedTeamsProfile.filter(item => item._id !== team._id);
-            }
+       
+
+        addSelectedFavTeam:(state,action)=>{
+            state.selectedTeams=action.payload;
         },
 
-        addSelectedFavTeamProfile:(state,action)=>{
-            state.selectedTeamsProfile=action.payload;
-        },
         resetSelectedFavTeam:(state,action)=>{
             state.selectedTeams = []
         },
 
-        resetSelectedFavTeamProfile:(state, action)=>{
-            state.selectedTeamsProfile=[]
-        },
         
     },
 });
@@ -73,12 +60,7 @@ export function selectedFavTeamsAsMapSelector(state: RootState) {
     }, new Map<string, TeamModel>);
 }
 
-export function selectedFavTeamsProfileAsMapSelector(state: RootState) {
-    return state.favTeams.selectedTeamsProfile.reduce((result, team) => {
-       result.set(team._id, team)
-        return result;
-    }, new Map<string, TeamModel>);
-}
+
 const { actions, reducer } = favTeamSlice;
-export const { setFavTeams, pushFavTeam, resetFavTeam,resetSelectedFavTeam,resetSelectedFavTeamProfile,pushFavTeamProfile,addSelectedFavTeamProfile } = actions;
+export const { setFavTeams, pushFavTeam, resetFavTeam,resetSelectedFavTeam,addSelectedFavTeam } = actions;
 export default favTeamSlice.reducer;

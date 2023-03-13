@@ -24,11 +24,7 @@ import {
     resetSelectedFavPlayerProfile,
     SelectedPlayer,
 } from 'src/store/FavPlayer.slice';
-import {
-    addSelectedFavTeamProfile,
-    resetFavTeam,
-    resetSelectedFavTeamProfile,
-} from 'src/store/FavTeam.slice';
+import { addSelectedFavTeam, resetFavTeam } from 'src/store/FavTeam.slice';
 import {
     addSelectedFavTopTeamsProfile,
     resetSelectedFavTopTeamsProfile,
@@ -189,7 +185,6 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
         dispatch(resetSettingFavTeam([]));
         dispatch(resetSettingFavPlayer([]));
         dispatch(resetSettingFavTopTeam([]));
-        dispatch(resetSelectedFavTeamProfile([]));
         dispatch(resetSelectedFavPlayerProfile([]));
         dispatch(resetSelectedFavTopTeamsProfile([]));
 
@@ -449,9 +444,7 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
     }, [getProfile.success]);
 
     const [favSelectedTeam, setFavSelectedTeam] = useState<TeamModel[]>([]);
-    const selectedTeamsProfile = useSelector(
-        (state: RootState) => state.favTeams.selectedTeamsProfile
-    );
+    const selectedFavTeams = useSelector((state: RootState) => state.favTeams.selectedTeams);
     const selectedTeams = route.params?.selectedTeams;
 
     useEffect(() => {
@@ -467,17 +460,17 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
                 // console.log(fetchTeam.filter(Boolean));
                 if (!isEmpty(settingSelected.settingFavTeams)) {
                     setFavSelectedTeam(settingSelected.settingFavTeams);
-                    dispatch(addSelectedFavTeamProfile(settingSelected.settingFavTeams));
+                    dispatch(addSelectedFavTeam(settingSelected.settingFavTeams));
                 } else if (
                     isEmpty(settingSelected.settingFavTeams) &&
-                    isEmpty(selectedTeamsProfile) &&
+                    isEmpty(selectedFavTeams) &&
                     selectedTeams
                 ) {
                     setFavSelectedTeam(settingSelected.settingFavTeams);
-                    dispatch(addSelectedFavTeamProfile(settingSelected.settingFavTeams));
+                    dispatch(addSelectedFavTeam(settingSelected.settingFavTeams));
                 } else {
                     setFavSelectedTeam(fetchTeam.filter(Boolean));
-                    dispatch(addSelectedFavTeamProfile(fetchTeam.filter(Boolean)));
+                    dispatch(addSelectedFavTeam(fetchTeam.filter(Boolean)));
                 }
             };
             fetchFavTeam();
@@ -659,7 +652,6 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
         dispatch(resetSettingFavTeam([]));
         dispatch(resetSettingFavPlayer([]));
         dispatch(resetSettingFavTopTeam([]));
-        dispatch(resetSelectedFavTeamProfile([]));
         dispatch(resetSelectedFavPlayerProfile([]));
         dispatch(resetSelectedFavTopTeamsProfile([]));
     };

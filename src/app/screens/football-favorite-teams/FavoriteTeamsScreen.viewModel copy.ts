@@ -163,7 +163,6 @@ export const useViewModel = ({ navigation, route }: IFavoriteTeamsScreenProps) =
         if (!searchText.length) {
             submitSearchFavTeam();
         }
-
     }, [searchText]);
 
     useEffect(() => {
