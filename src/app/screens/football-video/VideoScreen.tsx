@@ -17,6 +17,7 @@ import {
     TouchableOpacity,
     View,
 } from 'react-native';
+import { Button } from 'react-native-elements';
 import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/AntDesign';
 
@@ -54,6 +55,19 @@ export const VideoScreen = ({ navigation, route }: IVideoScreenProps) => {
                                 color_after={appColors.blue_dark}
                                 handlePressFunction={onShowSideMenu}
                             />
+                            <Button
+                                title="TEST MODAL"
+                                onPress={() => {
+                                    global.props.showAlert({
+                                        title: 'Test title',
+                                        subTitle: 'Test sub title',
+                                        submitFunc: () => {
+                                            alert('Test');
+                                        },
+                                    });
+                                }}
+                            />
+
                             <View>
                                 <Text style={[appStyles.text_title]}>{t('video.title')}</Text>
                             </View>

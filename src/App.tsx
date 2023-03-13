@@ -17,6 +17,7 @@ import { persistor, store } from './store/store';
 import Orientation from 'react-native-orientation-locker';
 import { TextInput as TextInputGH } from 'react-native-gesture-handler';
 import { EventProvider } from 'react-native-outside-press';
+import { AppConsumer, AppProvider } from '@football/core/api/contexts/AppProvider';
 
 TextInput.defaultProps = Text.defaultProps || {};
 TextInput.defaultProps.allowFontScaling = false;
@@ -101,20 +102,29 @@ const App = (props: any) => {
 
     return (
         <QueryClientProvider client={queryClient}>
-            <Provider store={store}>
-                <PersistGate loading={null} persistor={persistor}>
-                    <ThemeProvider>
-                        <NavigationContainer>
-                            <EventProvider style={{ flex: 1 }}>
-                                <View style={appStyles.flex}>
-                                    <RootNavigator />
-                                    <Video />
-                                </View>
-                            </EventProvider>
-                        </NavigationContainer>
-                    </ThemeProvider>
-                </PersistGate>
-            </Provider>
+            <AppProvider {...props}>
+                <AppConsumer>
+                    {funcs => {
+                        global.props = { ...funcs };
+                        return (
+                            <Provider store={store}>
+                                <PersistGate loading={null} persistor={persistor}>
+                                    <ThemeProvider>
+                                        <NavigationContainer>
+                                            <EventProvider style={{ flex: 1 }}>
+                                                <View style={appStyles.flex}>
+                                                    <RootNavigator />
+                                                    <Video />
+                                                </View>
+                                            </EventProvider>
+                                        </NavigationContainer>
+                                    </ThemeProvider>
+                                </PersistGate>
+                            </Provider>
+                        );
+                    }}
+                </AppConsumer>
+            </AppProvider>
         </QueryClientProvider>
     );
 };
