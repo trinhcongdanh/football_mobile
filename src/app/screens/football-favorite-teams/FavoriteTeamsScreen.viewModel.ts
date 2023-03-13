@@ -26,6 +26,7 @@ import {
     resetSelectedFavPlayer,
 } from 'src/store/FavPlayer.slice';
 import { clearFavoriteData } from '@football/app/utils/functions/clearFavoriteData';
+import sortBy from 'lodash/sortBy';
 
 function serializeParams(obj: any) {
     const str = [];
@@ -200,12 +201,12 @@ const useViewCallback = (route: any, viewState: any) => {
         setIsLoading(true);
 
         try {
-            const [error, res] = await TeamService.search(searchText);
+            const [error, res] = await TeamService.searchFavTeam(searchText);
             if (error) {
                 return;
             }
-
-            setTeams(res.data.documents);
+            const sortByName = sortBy(res.data.documents, ['name_he']);
+            setTeams(sortByName);
         } catch (error: any) {
             Alert.alert(error);
         } finally {
@@ -219,15 +220,12 @@ const useViewCallback = (route: any, viewState: any) => {
         const favoriteTeamIds = getProfile.getProfile?.item?.favorite_israel_teams || [];
 
         try {
-            const [error, res] = await TeamService.findAll();
+            const [error, res] = await TeamService.findAllFavTeam();
             if (error) {
                 return;
             }
-            // const favoriteTeams = res.data.documents.filter((team: TeamModel) =>
-            //     favoriteTeamIds.includes(team._id)
-            // );
-            // setSelectedFavTeams(favoriteTeams);
-            setTeams(res.data.documents);
+            const sortByName = sortBy(res.data.documents, ['name_he']);
+            setTeams(sortByName);
         } catch (error: any) {
             Alert.alert(error);
         } finally {

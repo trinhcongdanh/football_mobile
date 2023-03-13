@@ -13,7 +13,10 @@ const axiosConfig: AxiosRequestConfig = {
     },
     paramsSerializer: (params: any) => queryString.stringify(params),
 };
-
+export interface MongoDBFindConfig {
+    filter: object;
+    limit?: number;
+}
 class MongoDBService {
     httpClient: AxiosService;
 
@@ -53,10 +56,12 @@ class MongoDBService {
         });
     }
 
-    filter<T = any>(filter: any): Promise<Result<T>> {
+    find<TFind extends MongoDBFindConfig = MongoDBFindConfig, TResult = any>(
+        config: TFind
+    ): Promise<Result<TResult>> {
         return this.httpClient.post('/find', {
             ...this.dbConfig,
-            filter,
+            ...config,
         });
     }
 }

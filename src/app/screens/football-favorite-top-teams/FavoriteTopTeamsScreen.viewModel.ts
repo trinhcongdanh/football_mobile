@@ -22,6 +22,8 @@ import { IFavoriteTopTeamsScreenProps } from './FavoriteTopTeamsScreen.type';
 import { RootState } from 'src/store/store';
 import { setSettingFavTopTeam } from 'src/store/SettingSelected.slice';
 import { clearFavoriteData } from '@football/app/utils/functions/clearFavoriteData';
+import TopTeamService from '@football/core/services/TopTeam.service';
+import sortBy from 'lodash/sortBy';
 
 export const useViewModel = ({ navigation, route }: IFavoriteTopTeamsScreenProps) => {
     const { t } = useTranslation();
@@ -63,14 +65,13 @@ export const useViewModel = ({ navigation, route }: IFavoriteTopTeamsScreenProps
     const getTopTeamsData = useCallback(async () => {
         if (isEmpty(favTopTeams) || isNil(favTopTeams)) {
             try {
-                const { data }: TopTeamModelResponse = await axiosClient.post(`${BASE_URL}/find`, {
-                    dataSource: DATA_SOURCE,
-                    database: DB,
-                    collection: 'top_team',
-                });
-                if (!isEmpty(data.documents)) {
-                    dispatch(setFavTopTeams(data.documents));
+                const [error, res] = await TopTeamService.findAllFavTopTeam();
+                if (error) {
+                    return;
                 }
+                const sortByName = sortBy(res.data.documents, ['name_he']);
+
+                dispatch(setFavTopTeams(sortByName));
             } catch (error: any) {
                 Alert.alert(error);
             }

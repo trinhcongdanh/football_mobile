@@ -71,6 +71,7 @@ export interface HomepageInfo {
 }
 
 export interface TeamModel {
+    sort(name_he: string): unknown;
     _id: string;
     logo_url: string;
     name_en: string;
