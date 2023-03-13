@@ -108,7 +108,6 @@ export const useViewModel = ({ navigation, route }: IRegScreenProps) => {
                         favorite_israel_teams: isEmpty(fav_team) ? '' : fav_team,
                         favorite_players: isEmpty(fav_player) ? '' : fav_player,
                         favorite_national_teams: isEmpty(fav_top_team) ? '' : fav_top_team,
-                        notifications: '',
                     },
                 })
             )
