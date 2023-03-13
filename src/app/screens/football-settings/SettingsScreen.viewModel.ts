@@ -183,6 +183,12 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
         popToTop();
         navigate(ScreenName.SideBar);
 
+        // dispatch(resetSelectedFavTeamProfile([]));
+        // dispatch(resetSelectedFavPlayerProfile([]));
+        // dispatch(resetSelectedFavTopTeamsProfile([]));
+
+        // popToTop();
+        // navigate(ScreenName.SideBar);
         return true;
     };
 
@@ -611,15 +617,15 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
             setProfileUser(
                 serializeParams({
                     action: ACTION,
-                    token: numberPhone.successRegister ? login.login.token : userLogin.otp.token,
+                    token: numberPhone.successLogin ? userLogin.otp.token : login.login.token,
                     call: AuthData.SET_PROFILE,
-                    item_id: numberPhone.successRegister
-                        ? profile.profile.item_id
-                        : userLogin.otp.user.item_id,
+                    item_id: numberPhone.successLogin
+                        ? userLogin.otp.user.item_id
+                        : profile.profile.item_id,
                     item: {
                         name: userName,
-                        email,
-                        gender,
+                        email: email,
+                        gender: gender,
                         birthdate: formattedDate,
                         favorite_israel_teams: isEmpty(fav_team) ? '' : fav_team,
                         favorite_players: isEmpty(fav_player) ? '' : fav_player,
