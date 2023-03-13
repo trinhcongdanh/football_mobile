@@ -7,9 +7,13 @@ class TeamService extends MongoDBService {
         super('team');
     }
 
-    searchFavTeam(searchText: string, limit = 100): Promise<Result<TeamModelResponse>> {
-        const filter = { limit, search_terms: { $regex: `.*${searchText}.*`, $options: 'i' } };
-        return this.filter(filter);
+    findAllFavTeam(): Promise<Result<TeamModelResponse>> {
+        return this.httpClient.post('/find', { ...this.dbConfig, limit: 100 });
+    }
+
+    async searchFavTeam(searchText: string): Promise<Result<TeamModelResponse>> {
+        const filter = { search_terms: { $regex: `.*${searchText}.*`, $options: 'i' } };
+        return await this.find({ filter, limit: 100 });
     }
 }
 

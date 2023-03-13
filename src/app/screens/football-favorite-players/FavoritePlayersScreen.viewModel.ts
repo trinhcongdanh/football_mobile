@@ -36,6 +36,8 @@ import { RootState } from 'src/store/store';
 import { createProfileUser } from 'src/store/user/CreateProfile.slice';
 import { loginUser } from 'src/store/user/Login.slice';
 import { IFavoritePlayerScreenProps } from './FavoritePlayersScreen.type';
+import sortBy from 'lodash/sortBy';
+import TeamPersonnelService from '@football/core/services/TeamPersonnel.service';
 
 const useViewState = () => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -132,21 +134,19 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
             state.setIsLoading(true);
 
             try {
-                const { data }: PlayersModelResponse = await axiosClient.post(`${BASE_URL}/find`, {
-                    dataSource: DATA_SOURCE,
-                    database: DB,
-                    collection: 'player',
-                });
-
-                if (!isEmpty(data.documents)) {
-                    dispatch(
-                        setAllFavPlayers({
-                            id,
-                            label: t('favorite_player.group'),
-                            listFavPlayers: data.documents,
-                        })
-                    );
+                const [error, res] = await PlayerService.findAllFavPlayer();
+                if (error) {
+                    return;
                 }
+                const sortByName = sortBy(res.data.documents, ['name_he']);
+
+                dispatch(
+                    setAllFavPlayers({
+                        id,
+                        label: t('favorite_player.group'),
+                        listFavPlayers: sortByName,
+                    })
+                );
             } catch (error: any) {
                 Alert.alert(error);
             } finally {
@@ -160,46 +160,37 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
             state.setIsLoading(true);
 
             try {
-                const { data }: TeamPersonnelModelResponse = await axiosClient.post(
-                    `${BASE_URL}/find`,
-                    {
-                        dataSource: DATA_SOURCE,
-                        database: DB,
-                        collection: 'team_personnel',
-                    }
-                );
-
-                if (!isEmpty(data.documents)) {
-                    // const team_personnel_players = (data.documents as TeamPersonnelModel[])
-                    //     .map(t => t.players)
-                    //     .flat();
-
-                    selectedFavTeams
-                        .map((favTeam: TeamModel) => ({
-                            favTeam,
-                            team_personnel: data.documents.find(
-                                v => v._id === favTeam.team_personnel_id
-                            ) as TeamPersonnelModel,
-                        }))
-                        .forEach(async ({ favTeam, team_personnel }) => {
-                            const fetchedPlayers = await Promise.all(
-                                team_personnel.players.map(async (player_personnel: Players) => {
-                                    const [err, res] = await PlayerService.findByOId<
-                                        PlayersModelResponse
-                                    >(player_personnel.player_id);
-                                    if (err) return;
-                                    return res.data.documents[0];
-                                })
-                            );
-                            dispatch(
-                                setGroupFavPlayer({
-                                    id: team_personnel._id,
-                                    label: favTeam.name_he,
-                                    listFavPlayers: fetchedPlayers.filter(Boolean),
-                                })
-                            );
-                        });
+                const [error, res] = await TeamPersonnelService.findAll();
+                if (error) {
+                    return;
                 }
+                const sortByName = sortBy(res.data.documents, ['name_he']);
+
+                selectedFavTeams
+                    .map((favTeam: TeamModel) => ({
+                        favTeam,
+                        team_personnel: sortByName.find(
+                            (v: TeamPersonnelModel) => v._id === favTeam.team_personnel_id
+                        ) as TeamPersonnelModel,
+                    }))
+                    .forEach(async ({ favTeam, team_personnel }) => {
+                        const fetchedPlayers = await Promise.all(
+                            team_personnel.players.map(async (player_personnel: Players) => {
+                                const [err, res] = await PlayerService.findByOId<
+                                    PlayersModelResponse
+                                >(player_personnel.player_id);
+                                if (err) return;
+                                return res.data.documents[0];
+                            })
+                        );
+                        dispatch(
+                            setGroupFavPlayer({
+                                id: team_personnel._id,
+                                label: favTeam.name_he,
+                                listFavPlayers: fetchedPlayers.filter(Boolean),
+                            })
+                        );
+                    });
             } catch (error: any) {
                 Alert.alert(error);
             } finally {
@@ -265,49 +256,20 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
                         listFavPlayers: [],
                     })
                 );
-                const { data }: PlayersModelResponse = await axiosClient.post(`${BASE_URL}/find`, {
-                    dataSource: DATA_SOURCE,
-                    database: DB,
-                    collection: 'player',
-                    projection: {
-                        search_terms: true,
-                        name_en: true,
-                        image_url: true,
-                        image_width: true,
-                        image_height: true,
-                        name_he: true,
-                        team: true,
-                        top_team: true,
-                        date_of_birth: true,
-                        citizenship_he: true,
-                        citizenship_en: true,
-                        citizenship_image_url: true,
-                        num_of_games: true,
-                        homepage_info: true,
-                    },
-                    filter: {
-                        search_terms: { $regex: `.*${searchText}.*`, $options: 'i' },
-                    },
-                    limit: 100,
-                });
-
-                if (!isEmpty(data.documents)) {
-                    dispatch(
-                        resetSearchFavPlayer({
-                            id: '',
-                            label: '',
-                            listFavPlayers: [],
-                        })
-                    );
-
-                    dispatch(
-                        searchFavPlayers({
-                            id,
-                            label: '',
-                            listFavPlayers: data.documents,
-                        })
-                    );
+                const [error, res] = await PlayerService.searchFavPlayer(searchText);
+                if (error) {
+                    return;
                 }
+                const sortByName = sortBy(res.data.documents, ['name_he']);
+
+                dispatch(
+                    searchFavPlayers({
+                        id,
+                        label: '',
+                        listFavPlayers: sortByName,
+                    })
+                );
+
                 state.setIsLoading(false);
             } catch (error: any) {
                 Alert.alert(error);
@@ -339,52 +301,47 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
             if (!isEmpty(selectedFavTeams) && !changePlayers) {
                 if (isEmpty(favPlayers) || isNil(favPlayers)) {
                     try {
-                        const { data }: TeamPersonnelModelResponse = await axiosClient.post(
-                            `${BASE_URL}/find`,
-                            {
-                                dataSource: DATA_SOURCE,
-                                database: DB,
-                                collection: 'team_personnel',
-                            }
-                        );
-
-                        if (!isEmpty(data.documents)) {
-                            dispatch(
-                                resetGroupFavPlayer({
-                                    id: '',
-                                    label: '',
-                                    listFavPlayers: [],
-                                })
-                            );
-                            selectedFavTeams
-                                .map((favTeam: TeamModel) => ({
-                                    favTeam,
-                                    team_personnel: data.documents.find(
-                                        v => v._id === favTeam.team_personnel_id
-                                    ) as TeamPersonnelModel,
-                                }))
-                                .forEach(async ({ favTeam, team_personnel }) => {
-                                    const fetchedPlayers = await Promise.all(
-                                        team_personnel.players.map(
-                                            async (player_personnel: Players) => {
-                                                const [err, res] = await PlayerService.findByOId<
-                                                    PlayersModelResponse
-                                                >(player_personnel.player_id);
-                                                if (err) return;
-                                                return res.data.documents[0];
-                                            }
-                                        )
-                                    );
-
-                                    dispatch(
-                                        setGroupFavPlayer({
-                                            id: team_personnel._id,
-                                            label: favTeam.name_he,
-                                            listFavPlayers: fetchedPlayers.filter(Boolean),
-                                        })
-                                    );
-                                });
+                        const [error, res] = await TeamPersonnelService.findAll();
+                        if (error) {
+                            return;
                         }
+                        const sortByName = sortBy(res.data.documents, ['name_he']);
+
+                        dispatch(
+                            resetGroupFavPlayer({
+                                id: '',
+                                label: '',
+                                listFavPlayers: [],
+                            })
+                        );
+                        selectedFavTeams
+                            .map((favTeam: TeamModel) => ({
+                                favTeam,
+                                team_personnel: sortByName.find(
+                                    v => v._id === favTeam.team_personnel_id
+                                ) as TeamPersonnelModel,
+                            }))
+                            .forEach(async ({ favTeam, team_personnel }) => {
+                                const fetchedPlayers = await Promise.all(
+                                    team_personnel.players.map(
+                                        async (player_personnel: Players) => {
+                                            const [err, res] = await PlayerService.findByOId<
+                                                PlayersModelResponse
+                                            >(player_personnel.player_id);
+                                            if (err) return;
+                                            return res.data.documents[0];
+                                        }
+                                    )
+                                );
+
+                                dispatch(
+                                    setGroupFavPlayer({
+                                        id: team_personnel._id,
+                                        label: favTeam.name_he,
+                                        listFavPlayers: fetchedPlayers.filter(Boolean),
+                                    })
+                                );
+                            });
                     } catch (error: any) {
                         Alert.alert(error);
                     } finally {
@@ -393,24 +350,19 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
                 }
             } else if (isEmpty(favPlayers) || isNil(favPlayers)) {
                 try {
-                    const { data }: PlayersModelResponse = await axiosClient.post(
-                        `${BASE_URL}/find`,
-                        {
-                            dataSource: DATA_SOURCE,
-                            database: DB,
-                            collection: 'player',
-                        }
-                    );
-
-                    if (!isEmpty(data.documents)) {
-                        dispatch(
-                            setAllFavPlayers({
-                                id,
-                                label: t('favorite_player.group'),
-                                listFavPlayers: data.documents,
-                            })
-                        );
+                    const [error, res] = await PlayerService.findAllFavPlayer();
+                    if (error) {
+                        return;
                     }
+                    const sortByName = sortBy(res.data.documents, ['name_he']);
+
+                    dispatch(
+                        setAllFavPlayers({
+                            id,
+                            label: t('favorite_player.group'),
+                            listFavPlayers: sortByName,
+                        })
+                    );
                 } catch (error: any) {
                     Alert.alert(error);
                 } finally {
