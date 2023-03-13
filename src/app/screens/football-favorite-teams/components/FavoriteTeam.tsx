@@ -1,5 +1,5 @@
 /* eslint-disable no-underscore-dangle */
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     Text,
     TouchableOpacity,
@@ -10,7 +10,6 @@ import {
     ScrollView,
     ActivityIndicator,
     Image,
-    TouchableWithoutFeedback,
 } from 'react-native';
 import { getSize } from '@football/app/utils/responsive/scale';
 import Icon from 'react-native-vector-icons/Feather';
@@ -22,10 +21,10 @@ import { isEmpty } from 'lodash';
 import { TeamModel } from '@football/core/models/TeamModelResponse';
 import { HeaderFav } from '@football/app/components/header-fav/HeaderFav';
 import { Button } from '@football/app/components/button';
+import { TextInput } from 'react-native-gesture-handler';
+import { AppFonts } from '@football/app/assets/fonts';
 import styles from './FavoriteTeam.style';
 import { IFavoriteTeamProps } from './FavoriteTeam.types';
-import { AppFonts } from '@football/app/assets/fonts';
-import { TextInput } from 'react-native-gesture-handler';
 
 export const FavoriteTeam = ({
     onGoSkip,
@@ -36,21 +35,36 @@ export const FavoriteTeam = ({
     number,
     title,
     placeholder,
-    newFav,
+    teams,
     favSelected,
     chosen,
     button,
-    searchText,
     searchFavTeam,
     searchTextRef,
     submitSearchFavTeam,
     isLoading,
 }: IFavoriteTeamProps) => {
+    const [favTeams, setFavTeams] = useState<TeamModel[]>();
+    const [searchText, setSearchText] = useState('');
+    const handleTextChange = (newValue: string) => {
+        setSearchText(newValue);
+        searchFavTeam(newValue);
+    };
+
+    useEffect(() => {
+        setFavTeams(
+            teams.map(team => ({
+                ...team,
+                isSelected: favSelected.filter(t => t._id === team._id).length > 0,
+            }))
+        );
+        // console.log('favSelected', favSelected);
+    }, [favSelected, teams]);
     return (
         <View style={[appStyles.flex]}>
             <ImageBackground source={AppImages.img_bg_register} style={appStyles.flex}>
                 <StatusBar translucent backgroundColor="transparent" />
-                {isEmpty(newFav) ? (
+                {/* {isEmpty(favTeams) ? (
                     <SafeAreaView style={appStyles.safe_area}>
                         <View style={[appStyles.flex, appStyles.container]}>
                             <HeaderFav goSkip={onGoSkip} goBack={onGoBack} onIndex={onIndex} />
@@ -70,15 +84,14 @@ export const FavoriteTeam = ({
                             <View style={[appStyles.flex_row_space_center, styles.search]}>
                                 <TextInput
                                     ref={searchTextRef}
-                                    value={searchText}
                                     placeholder={placeholder}
                                     style={styles.text_search}
                                     placeholderTextColor={appColors.blue_gray_dark}
-                                    onChangeText={searchFavTeam}
-                                    onSubmitEditing={submitSearchFavTeam}
+                                    onChangeText={handleTextChange}
+                                    onBlur={() => submitSearchFavTeam(searchText)}
                                 />
 
-                                <TouchableOpacity onPress={submitSearchFavTeam}>
+                                <TouchableOpacity onPress={() => submitSearchFavTeam(searchText)}>
                                     <Icon
                                         style={{ marginRight: getSize.m(14) }}
                                         name={appIcons.ic_search}
@@ -98,185 +111,186 @@ export const FavoriteTeam = ({
                     </SafeAreaView>
                 ) : (
                     <>
-                        <SafeAreaView style={appStyles.safe_area}>
-                            <View style={[appStyles.flex, { marginTop: getSize.m(10) }]}>
-                                <View style={{ paddingHorizontal: getSize.m(16) }}>
-                                    <HeaderFav
-                                        goSkip={onGoSkip}
-                                        goBack={onGoBack}
-                                        onIndex={onIndex}
-                                    />
+                        
+                    </>
+                )} */}
 
-                                    <View style={{ marginTop: getSize.m(15) }}>
-                                        <Text
+                <SafeAreaView style={appStyles.safe_area}>
+                    <View style={[appStyles.flex, { marginTop: getSize.m(10) }]}>
+                        <View style={{ paddingHorizontal: getSize.m(16) }}>
+                            <HeaderFav goSkip={onGoSkip} goBack={onGoBack} onIndex={onIndex} />
+
+                            <View style={{ marginTop: getSize.m(15) }}>
+                                <Text
+                                    style={[
+                                        appStyles.text_title,
+                                        {
+                                            marginTop: getSize.m(0),
+                                        },
+                                    ]}
+                                >
+                                    {title}
+                                </Text>
+                            </View>
+
+                            <View style={[appStyles.flex_row_space_center, styles.search]}>
+                                <TextInput
+                                    placeholder={placeholder}
+                                    style={styles.text_search}
+                                    placeholderTextColor={appColors.blue_gray_dark}
+                                    onChangeText={handleTextChange}
+                                    // onBlur={() => submitSearchFavTeam(searchText)}
+                                />
+
+                                <TouchableOpacity onPress={() => submitSearchFavTeam(searchText)}>
+                                    <Icon
+                                        style={{ marginRight: getSize.m(14) }}
+                                        name={appIcons.ic_search}
+                                        color={appColors.blue_gray_dark}
+                                        size={getSize.m(16)}
+                                    />
+                                </TouchableOpacity>
+                            </View>
+                            {isLoading && (
+                                <ActivityIndicator
+                                    style={[appStyles.flex_center, styles.loading]}
+                                    size="large"
+                                    color={appColors.blue_dark}
+                                />
+                            )}
+                        </View>
+
+                        <ScrollView>
+                            <View style={styles.content_item}>
+                                {favTeams?.map((item, index) => {
+                                    return (
+                                        <TouchableOpacity
+                                            key={item._id}
                                             style={[
-                                                appStyles.text_title,
+                                                styles.item,
                                                 {
-                                                    marginTop: getSize.m(0),
+                                                    backgroundColor:
+                                                        item.isSelected === true
+                                                            ? 'rgba(20, 36, 86, 1)'
+                                                            : 'transparent',
+                                                    borderWidth:
+                                                        item.isSelected === true
+                                                            ? getSize.m(1)
+                                                            : getSize.m(0),
                                                 },
                                             ]}
+                                            onPress={() => {
+                                                handleSelected(item);
+                                            }}
                                         >
-                                            {title}
-                                        </Text>
-                                    </View>
-
-                                    <View style={[appStyles.flex_row_space_center, styles.search]}>
-                                        <TextInput
-                                            value={searchText}
-                                            placeholder={placeholder}
-                                            style={styles.text_search}
-                                            placeholderTextColor={appColors.blue_gray_dark}
-                                            onChangeText={searchFavTeam}
-                                            onBlur={submitSearchFavTeam}
-                                        />
-
-                                        <TouchableOpacity onPress={submitSearchFavTeam}>
-                                            <Icon
-                                                style={{ marginRight: getSize.m(14) }}
-                                                name={appIcons.ic_search}
-                                                color={appColors.blue_gray_dark}
-                                                size={getSize.m(16)}
+                                            <Image
+                                                source={{ uri: item.logo_url }}
+                                                style={[
+                                                    styles.image_item,
+                                                    {
+                                                        borderRadius:
+                                                            onIndex === 1
+                                                                ? getSize.m(28)
+                                                                : getSize.m(0),
+                                                    },
+                                                ]}
                                             />
-                                        </TouchableOpacity>
-                                    </View>
-                                </View>
-
-                                <ScrollView>
-                                    <View style={styles.content_item}>
-                                        {newFav?.map((item, index) => {
-                                            return (
-                                                <TouchableOpacity
-                                                    key={item._id}
-                                                    style={[
-                                                        styles.item,
-                                                        {
-                                                            backgroundColor:
-                                                                item.isSelected === true
-                                                                    ? 'rgba(20, 36, 86, 1)'
-                                                                    : 'transparent',
-                                                            borderWidth:
-                                                                item.isSelected === true
-                                                                    ? getSize.m(1)
-                                                                    : getSize.m(0),
-                                                        },
-                                                    ]}
-                                                    onPress={() => {
-                                                        handleSelected(item);
-                                                    }}
-                                                >
-                                                    <Image
-                                                        source={{ uri: item.logo_url }}
-                                                        style={[
-                                                            styles.image_item,
-                                                            {
-                                                                borderRadius:
-                                                                    onIndex === 1
-                                                                        ? getSize.m(28)
-                                                                        : getSize.m(0),
-                                                            },
-                                                        ]}
+                                            <Text numberOfLines={2} style={styles.name_item}>
+                                                {item.name_he}
+                                            </Text>
+                                            {item.isSelected === true && (
+                                                <View style={styles.check}>
+                                                    <Icon
+                                                        name={appIcons.ic_check}
+                                                        size={getSize.m(10)}
+                                                        color={appColors.white}
+                                                        style={styles.ic_check}
                                                     />
-                                                    <Text
-                                                        numberOfLines={2}
-                                                        style={styles.name_item}
-                                                    >
-                                                        {item.name_he}
-                                                    </Text>
-                                                    {item.isSelected === true && (
-                                                        <View style={styles.check}>
-                                                            <Icon
-                                                                name={appIcons.ic_check}
-                                                                size={getSize.m(10)}
-                                                                color={appColors.white}
-                                                                style={styles.ic_check}
-                                                            />
-                                                        </View>
-                                                    )}
-                                                </TouchableOpacity>
-                                            );
-                                        })}
-                                    </View>
-                                </ScrollView>
-                            </View>
-                        </SafeAreaView>
-                        <View style={styles.select_item}>
-                            <View style={styles.result_select}>
-                                <View style={styles.image_select}>
-                                    {favSelected.map((item, index) => {
-                                        return (
-                                            <View
-                                                key={index.toString()}
-                                                style={{ marginLeft: getSize.m(6) }}
-                                            >
-                                                <Image
-                                                    source={{ uri: item.logo_url }}
-                                                    style={[
-                                                        styles.image_item,
-                                                        {
-                                                            borderRadius:
-                                                                onIndex === 1
-                                                                    ? getSize.m(28)
-                                                                    : getSize.m(0),
-                                                        },
-                                                    ]}
-                                                />
-                                                <View style={styles.index}>
-                                                    <Text style={styles.text_index}>
-                                                        {index + 1}
-                                                    </Text>
                                                 </View>
-                                            </View>
-                                        );
-                                    })}
-                                </View>
-                                <View>
-                                    <Text style={styles.result_number}>
-                                        <Text
-                                            style={{
-                                                fontFamily: AppFonts.regular,
-                                            }}
-                                        >
-                                            {chosen}
-                                        </Text>
-
-                                        <Text
-                                            style={{
-                                                color:
-                                                    favSelected.length > 0
-                                                        ? appColors.blue_light
-                                                        : appColors.white,
-                                                fontFamily:
-                                                    favSelected.length > 0
-                                                        ? AppFonts.semibold
-                                                        : AppFonts.regular,
-                                            }}
-                                        >
-                                            {favSelected.length}
-                                        </Text>
-                                        <Text
-                                            style={{
-                                                fontFamily: AppFonts.regular,
-                                            }}
-                                        >
-                                            /{number}
-                                        </Text>
-                                    </Text>
-                                </View>
+                                            )}
+                                        </TouchableOpacity>
+                                    );
+                                })}
                             </View>
-                            <View
-                                style={{
-                                    paddingHorizontal: getSize.m(32),
-                                    paddingBottom: getSize.m(36),
-                                }}
-                            >
-                                <Button
-                                    style={styles.button_continue}
-                                    title={button}
-                                    onPress={handleContinue}
-                                />
+                        </ScrollView>
+                    </View>
+                </SafeAreaView>
+                {!isEmpty(favTeams) && (
+                    <View style={styles.select_item}>
+                        <View style={styles.result_select}>
+                            <View style={styles.image_select}>
+                                {favSelected.map((item, index) => {
+                                    return (
+                                        <View
+                                            key={index.toString()}
+                                            style={{ marginLeft: getSize.m(6) }}
+                                        >
+                                            <Image
+                                                source={{ uri: item.logo_url }}
+                                                style={[
+                                                    styles.image_item,
+                                                    {
+                                                        borderRadius:
+                                                            onIndex === 1
+                                                                ? getSize.m(28)
+                                                                : getSize.m(0),
+                                                    },
+                                                ]}
+                                            />
+                                            <View style={styles.index}>
+                                                <Text style={styles.text_index}>{index + 1}</Text>
+                                            </View>
+                                        </View>
+                                    );
+                                })}
+                            </View>
+                            <View>
+                                <Text style={styles.result_number}>
+                                    <Text
+                                        style={{
+                                            fontFamily: AppFonts.regular,
+                                        }}
+                                    >
+                                        {chosen}
+                                    </Text>
+
+                                    <Text
+                                        style={{
+                                            color:
+                                                favSelected.length > 0
+                                                    ? appColors.blue_light
+                                                    : appColors.white,
+                                            fontFamily:
+                                                favSelected.length > 0
+                                                    ? AppFonts.semibold
+                                                    : AppFonts.regular,
+                                        }}
+                                    >
+                                        {favSelected.length}
+                                    </Text>
+                                    <Text
+                                        style={{
+                                            fontFamily: AppFonts.regular,
+                                        }}
+                                    >
+                                        /{number}
+                                    </Text>
+                                </Text>
                             </View>
                         </View>
-                    </>
+                        <View
+                            style={{
+                                paddingHorizontal: getSize.m(32),
+                                paddingBottom: getSize.m(36),
+                            }}
+                        >
+                            <Button
+                                style={styles.button_continue}
+                                title={button}
+                                onPress={handleContinue}
+                            />
+                        </View>
+                    </View>
                 )}
             </ImageBackground>
         </View>

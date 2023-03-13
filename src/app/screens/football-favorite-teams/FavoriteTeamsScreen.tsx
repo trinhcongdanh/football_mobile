@@ -1,11 +1,12 @@
-import React from 'react';
-import { View, ActivityIndicator } from 'react-native';
 import { appStyles } from '@football/app/utils/constants/appStyles';
-import { FavoriteTeam } from './components/FavoriteTeam';
-import { TeamModel } from '@football/core/models/TeamModelResponse';
-import { useViewModel } from './FavoriteTeamsScreen.viewModel';
-import { IFavoriteTeamsScreenProps } from './FavoriteTeamsScreen.type';
 import { getSize } from '@football/app/utils/responsive/scale';
+import { MAX_FAVORITES_TEAM } from '@football/core/api/configs/config';
+import { TeamModel } from '@football/core/models/TeamModelResponse';
+import React from 'react';
+import { ActivityIndicator, View } from 'react-native';
+import { FavoriteTeam } from './components/FavoriteTeam';
+import { IFavoriteTeamsScreenProps } from './FavoriteTeamsScreen.type';
+import { useViewModel } from './FavoriteTeamsScreen.viewModel';
 
 export const FavoriteTeamsScreen = ({ navigation, route }: IFavoriteTeamsScreenProps) => {
     const {
@@ -14,9 +15,7 @@ export const FavoriteTeamsScreen = ({ navigation, route }: IFavoriteTeamsScreenP
         onGoSkip,
         handleContinue,
         handleSelected,
-        searchText,
         // searchFavTeam,
-        setSearchText,
         profile,
         selectedFavTeams,
         formattedFavTeams,
@@ -24,9 +23,10 @@ export const FavoriteTeamsScreen = ({ navigation, route }: IFavoriteTeamsScreenP
         getProfile,
         submitSearchFavTeam,
         formattedFavTeamsProfile,
-        favSelectedTeam,
         isLoading,
         selectedTeamsProfile,
+        onSearchFavTeam,
+        teams,
     } = useViewModel({
         navigation,
         route,
@@ -34,7 +34,7 @@ export const FavoriteTeamsScreen = ({ navigation, route }: IFavoriteTeamsScreenP
 
     return (
         <View style={[appStyles.flex]}>
-            {profile.success === false && (
+            {profile?.success === false && (
                 <View
                     style={{
                         justifyContent: 'center',
@@ -51,30 +51,34 @@ export const FavoriteTeamsScreen = ({ navigation, route }: IFavoriteTeamsScreenP
                     <ActivityIndicator size="large" />
                 </View>
             )}
-            <FavoriteTeam
-                searchTextRef={searchTextRef}
-                searchText={searchText}
-                submitSearchFavTeam={submitSearchFavTeam}
-                searchFavTeam={(text: string) => {
-                    setSearchText(text);
-                    // searchFavTeam(text);
-                }}
-                onGoSkip={onGoSkip}
-                onGoBack={onGoBack}
-                handleContinue={handleContinue}
-                handleSelected={(item: TeamModel) => {
-                    handleSelected(item);
-                }}
-                isLoading={isLoading}
-                newFav={getProfile.success ? formattedFavTeamsProfile : formattedFavTeams}
-                favSelected={getProfile.success ? selectedTeamsProfile : selectedFavTeams}
-                title={t('favorite_team.title')}
-                placeholder={t('favorite_team.place_holder')}
-                chosen={t('favorite_team.chosen')}
-                button={t('favorite_team.button')}
-                number={3}
-                onIndex={0}
-            />
+            {teams && (
+                <FavoriteTeam
+                    searchTextRef={searchTextRef}
+                    submitSearchFavTeam={(text: string) => submitSearchFavTeam(text)}
+                    searchFavTeam={onSearchFavTeam}
+                    // searchFavTeam={(text: string) => {
+                    //     // setSearchText(text);
+                    //     // searchFavTeam(text);
+                    //     onSearchFavTeam(text);
+                    // }}
+                    onGoSkip={onGoSkip}
+                    onGoBack={onGoBack}
+                    handleContinue={handleContinue}
+                    handleSelected={(item: TeamModel) => {
+                        handleSelected(item);
+                    }}
+                    isLoading={isLoading}
+                    // newFav={getProfile?.success ? formattedFavTeamsProfile : formattedFavTeams}
+                    favSelected={selectedFavTeams}
+                    teams={teams}
+                    title={t('favorite_team.title')}
+                    placeholder={t('favorite_team.place_holder')}
+                    chosen={t('favorite_team.chosen')}
+                    button={t('favorite_team.button')}
+                    number={MAX_FAVORITES_TEAM}
+                    onIndex={0}
+                />
+            )}
         </View>
     );
 };

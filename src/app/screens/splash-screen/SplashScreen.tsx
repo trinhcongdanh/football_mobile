@@ -74,6 +74,7 @@ export const SplashScreen = ({ navigation, route }: ISplashScreenProps) => {
     const [authLoaded, setAuthLoaded] = useState(false);
     useEffect(() => {
         if (guestId.length === 0) {
+            console.log('Danh');
             const action = addGuestId(id);
             dispatch(action);
         }

@@ -17,8 +17,6 @@ import {
     setFavTopTeams,
     pushFavTopTeam,
     selectedFavTopTeamsAsMapSelector,
-    selectedFavTopTeamsProfileAsMapSelector,
-    pushFavTopTeamProfile,
 } from 'src/store/FavTopTeam.slice';
 import { IFavoriteTopTeamsScreenProps } from './FavoriteTopTeamsScreen.type';
 import { RootState } from 'src/store/store';
@@ -32,7 +30,6 @@ export const useViewModel = ({ navigation, route }: IFavoriteTopTeamsScreenProps
     const getProfile = useSelector((state: RootState) => state.getProfile);
 
     const selectedFavTopTeamsMap = useSelector(selectedFavTopTeamsAsMapSelector);
-    const selectedFavTopTeamsProfileMap = useSelector(selectedFavTopTeamsProfileAsMapSelector);
 
     const favTopTeams = useSelector((state: RootState) => state.favTopTeams.favTopTeams);
 
@@ -43,29 +40,11 @@ export const useViewModel = ({ navigation, route }: IFavoriteTopTeamsScreenProps
         }));
     }, [favTopTeams, selectedFavTopTeamsMap]);
 
-    const formattedFavTopTeamsProfile = useMemo(() => {
-        return favTopTeams.map(topTeam => ({
-            ...topTeam,
-            isSelected: selectedFavTopTeamsProfileMap.has(topTeam._id),
-        }));
-    }, [favTopTeams, selectedFavTopTeamsProfileMap]);
-
     const selectedFavTopTeams = useSelector(
         (state: RootState) => state.favTopTeams.selectedTopTeams
     );
 
-    const selectedFavTopTeamsProfile = useSelector(
-        (state: RootState) => state.favTopTeams.selectedTopTeamsProfile
-    );
-
     const [favSelectedTopTeam, setFavSelectedTopTeam] = useState<TopTeamModel[]>([]);
-    const changeTopTeams = route.params?.changeTopTeams;
-
-    useEffect(() => {
-        if (changeTopTeams) {
-            setFavSelectedTopTeam(selectedFavTopTeamsProfile);
-        }
-    }, [changeTopTeams]);
 
     const login = useSelector((state: RootState) => state.login);
     const profile = useSelector((state: RootState) => state.createProfile);
@@ -99,17 +78,13 @@ export const useViewModel = ({ navigation, route }: IFavoriteTopTeamsScreenProps
     }, []);
 
     const handleSelected = (topTeam: TopTeamModel) => {
-        if (!getProfile.success) {
-            dispatch(pushFavTopTeam(topTeam));
-        } else {
-            dispatch(pushFavTopTeamProfile(topTeam));
-        }
+        dispatch(pushFavTopTeam(topTeam));
     };
 
     useEffect(() => {
-        if (isEmpty(selectedFavTopTeamsProfile)) {
+        if (isEmpty(selectedFavTopTeams)) {
             favSelectedTopTeam.map((item: TopTeamModel) => {
-                dispatch(pushFavTopTeamProfile(item));
+                dispatch(pushFavTopTeam(item));
             });
         }
     }, [favSelectedTopTeam]);
@@ -181,10 +156,12 @@ export const useViewModel = ({ navigation, route }: IFavoriteTopTeamsScreenProps
                 selectedTeams: true,
                 selectedTopTeams: true,
             });
-            dispatch(setSettingFavTopTeam(selectedFavTopTeamsProfile));
+            dispatch(setSettingFavTopTeam(selectedFavTopTeams));
             // pop(ScreenName.FavTeamPage);
         } else {
-            navigate(ScreenName.FavSummaryPage);
+            navigate(ScreenName.FavSummaryPage, {
+                editFav: true,
+            });
         }
     };
     useMount(() => {
@@ -201,8 +178,6 @@ export const useViewModel = ({ navigation, route }: IFavoriteTopTeamsScreenProps
         formattedFavTopTeams,
         selectedFavTopTeams,
         profile,
-        formattedFavTopTeamsProfile,
-        selectedFavTopTeamsProfile,
         getProfile,
     };
 };

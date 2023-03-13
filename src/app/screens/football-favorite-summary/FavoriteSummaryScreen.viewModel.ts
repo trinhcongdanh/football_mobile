@@ -9,6 +9,7 @@ import { isEmpty, isNil } from 'lodash';
 import qs from 'qs';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { BackHandler } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { resetSearchFavPlayer, SelectedPlayer } from 'src/store/FavPlayer.slice';
 import { resetFavTeam } from 'src/store/FavTeam.slice';
@@ -99,9 +100,23 @@ export const useViewModel = ({ navigation, route }: IFavoriteSummaryScreenProps)
         return a;
     }
 
-    const onGoBack = (): void => {
-        goBack();
+    const editFav = route?.params?.editFav;
+
+    const onGoBack = () => {
+        if (editFav) {
+            navigate(ScreenName.FavTopTeamPage);
+        } else {
+            goBack();
+        }
+        return true;
     };
+
+    useEffect(() => {
+        BackHandler.addEventListener('hardwareBackPress', onGoBack);
+        return () => {
+            BackHandler.removeEventListener('hardwareBackPress', onGoBack);
+        };
+    }, []);
 
     const addFavTeam = (index: number) => {
         dispatch(resetFavTeam([]));
