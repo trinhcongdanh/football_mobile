@@ -27,7 +27,6 @@ export interface FavPlayerState {
     }[];
 
     selectedPlayers: PlayerModel[];
-    selectedPlayersProfile: PlayerModel[];
     // loading: any,
     // success:any
 }
@@ -37,7 +36,7 @@ const initialState: FavPlayerState = {
     groupPlayers: [],
     searchPlayers: [],
     selectedPlayers: [],
-    selectedPlayersProfile:[]
+
     // loading:null,
     // success:null,
 };
@@ -160,48 +159,11 @@ export const favPlayerSlice = createSlice({
             state.selectedPlayers= []
         },
 
-        pushAllFavPlayersProfile: (state, action: PayloadAction<SelectedPlayer>) => {
-            const player = action.payload;
-
-            if (
-                !state.selectedPlayersProfile.some((favPlayer) => favPlayer._id === player._id) &&
-                state.selectedPlayersProfile.length < MAX_TEAM_NUM
-            ) {
-                state.selectedPlayersProfile = [...state.selectedPlayersProfile, player];
-            } else {
-                state.selectedPlayersProfile = state.selectedPlayersProfile.filter(
-                    item => item._id !== player._id
-                );
-            }
-        },
-        addSelectedFavPlayerProfile:(state,action)=>{
-            state.selectedPlayersProfile=action.payload;
-        },
-        resetSelectedFavPlayerProfile:(state, action)=>{
-            state.selectedPlayersProfile= []
-        },
+        addSelectedFavPlayer:(state, action)=>{
+            state.selectedPlayers=action.payload;
+        } 
     },
-    // extraReducers:builder=>{
-    //     builder
-    //     .addCase(searchFilterPlayers.pending, (state, action) => {
-    //         state.loading = true;
-    //         state.success = false;
-    //     })
-    //     .addCase(searchFilterPlayers.fulfilled, (state, action) => {
-    //         state.loading = false;
-    //         state.success = true;
-    //         console.log(action.payload);
-    //         state.searchPlayers.push({
-    //             id: 'a',
-    //             label: '',
-    //             listFavPlayers: [...action.payload?.documents],
-    //         });
-    //     })
-    //     .addCase(searchFilterPlayers.rejected, (state, action) => {
-    //         state.loading = false;
-    //         state.success = false;
-    //     });
-    // }
+
 });
 
 export function selectedFavPlayersAsMapSelector(state: RootState) {
@@ -210,12 +172,7 @@ export function selectedFavPlayersAsMapSelector(state: RootState) {
         return result;
     }, new Map<string, SelectedPlayer>);
 }
-export function selectedFavPlayersProfileAsMapSelector(state: RootState) {
-    return state.favPlayers.selectedPlayersProfile.reduce((result, player) => {
-       result.set(player._id, player)
-        return result;
-    }, new Map<string, SelectedPlayer>);
-}
+
 
 const { actions, reducer } = favPlayerSlice;
 export const {
@@ -229,8 +186,6 @@ export const {
     resetGroupFavPlayer,
     resetSearchFavPlayer,
     resetSelectedFavPlayer,
-    pushAllFavPlayersProfile,
-    resetSelectedFavPlayerProfile,
-    addSelectedFavPlayerProfile
+    addSelectedFavPlayer
 } = actions;
 export default favPlayerSlice.reducer;
