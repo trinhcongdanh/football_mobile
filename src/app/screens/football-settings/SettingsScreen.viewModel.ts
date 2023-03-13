@@ -180,17 +180,9 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
         dispatch(resetSettingFavTeam([]));
         dispatch(resetSettingFavPlayer([]));
         dispatch(resetSettingFavTopTeam([]));
+        popToTop();
+        navigate(ScreenName.SideBar);
 
-        if (
-            previous_screen === ScreenName.FavTeamPage ||
-            previous_screen === ScreenName.FavPlayerPage ||
-            previous_screen === ScreenName.FavTopTeamPage
-        ) {
-            popToTop();
-            navigate(ScreenName.SideBar);
-        } else {
-            goBack();
-        }
         return true;
     };
 
