@@ -1,6 +1,7 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable no-underscore-dangle */
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
 import { AuthData, ScreenName } from '@football/app/utils/constants/enum';
-import { clearFavoriteData } from '@football/app/utils/functions/clearFavoriteData';
 import { serializeParams } from '@football/app/utils/functions/quick-functions';
 import { useMount } from '@football/app/utils/hooks/useMount';
 import { ACTION, TOKEN } from '@football/core/api/auth/config';
@@ -14,6 +15,7 @@ import {
     TeamPersonnelModelResponse,
 } from '@football/core/models/TeamPersonnelResponse';
 import PlayerService from '@football/core/services/Player.service';
+import TeamPersonnelService from '@football/core/services/TeamPersonnel.service';
 import { useIsFocused, useRoute } from '@react-navigation/native';
 import { isEmpty, isNil } from 'lodash';
 import { useCallback, useEffect, useMemo, useState } from 'react';
@@ -41,29 +43,25 @@ import { IFavoritePlayerScreenProps } from './FavoritePlayersScreen.type';
 
 const useViewState = () => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [searchText, setSearchText] = useState<string>('');
+    const [favSelectedPlayer, setFavSelectedPlayer] = useState<PlayerModel[]>([]);
+    const [focusSearch, setFocusSearch] = useState(false);
 
-    return {
-        isLoading,
-        setIsLoading,
-    };
-};
-
-export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) => {
-    const { t } = useTranslation();
-    const { navigate, goBack } = useAppNavigator();
-    const dispatch = useDispatch<any>();
-    const [searchText, setSearchText] = useState('');
-    const state = useViewState();
-    const routes = useRoute();
     const getProfile = useSelector((state: RootState) => state.getProfile);
+    const selectedFavTeams = useSelector((state: RootState) => state.favTeams.selectedTeams);
+    const selectedFavPlayers = useSelector((state: RootState) => state.favPlayers.selectedPlayers);
+    const login = useSelector((state: RootState) => state.login);
+    const profile = useSelector((state: RootState) => state.createProfile);
+    const guestId = useSelector((state: RootState) => state.guestId.guestId);
+    const selectedPlayersProfile = useSelector(
+        (state: RootState) => state.favPlayers.selectedPlayersProfile
+    );
 
     const selectedFavPlayersMap = useSelector(
         getProfile.success
             ? selectedFavPlayersProfileAsMapSelector
             : selectedFavPlayersAsMapSelector
     );
-    const selectedFavTeams = useSelector((state: RootState) => state.favTeams.selectedTeams);
-    const selectedFavPlayers = useSelector((state: RootState) => state.favPlayers.selectedPlayers);
 
     const favPlayers = useSelector((state: RootState) =>
         !isEmpty(selectedFavTeams) ? state.favPlayers.groupPlayers : state.favPlayers.favPlayers
@@ -89,7 +87,6 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
     const formattedFavPlayers = useMemo(() => {
         return favPlayers.map(favPlayer => {
             return {
-                id,
                 label: favPlayer.label,
                 listFavPlayers: favPlayer.listFavPlayers.map(player => ({
                     ...player,
@@ -108,106 +105,135 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
     );
 
     const favSelectedPlayers = useSelector((state: RootState) =>
-        !isEmpty(selectedFavTeams)
-            ? state.favPlayers.groupPlayers
-                  .map(e => {
-                      return e.listFavPlayers.filter(v => v.isSelected);
-                  })
-                  .flat()
-            : state.favPlayers.favPlayers
-                  .map(e => {
-                      return e.listFavPlayers.filter(v => v.isSelected);
-                  })
-                  .flat()
+        (!isEmpty(selectedFavTeams) ? state.favPlayers.groupPlayers : state.favPlayers.favPlayers)
+            .map(e => e.listFavPlayers.filter(v => v.isSelected))
+            .flat()
     );
-    const selectedPlayersProfile = useSelector(
-        (state: RootState) => state.favPlayers.selectedPlayersProfile
-    );
-    const [favSelectedPlayer, setFavSelectedPlayer] = useState<PlayerModel[]>([]);
-    const changePlayers = route.params?.changePlayers;
+    return {
+        isLoading,
+        setIsLoading,
+        searchText,
+        setSearchText,
+        favSelectedPlayer,
+        setFavSelectedPlayer,
+        focusSearch,
+        setFocusSearch,
+        getProfile,
+        selectedFavTeams,
+        selectedFavPlayers,
+        selectedPlayersProfile,
+        selectedFavPlayersMap,
+        favPlayers,
+        favSearchPlayers,
+        formattedSearchFavPlayers,
+        formattedFavPlayers,
+        favSelectedSearchPlayers,
+        favSelectedPlayers,
+        login,
+        profile,
+        guestId,
+    };
+};
 
-    useEffect(() => {
-        if (changePlayers) {
-            setFavSelectedPlayer(selectedPlayersProfile);
-        }
-    }, [changePlayers]);
-
-    const login = useSelector((state: RootState) => state.login);
-    const profile = useSelector((state: RootState) => state.createProfile);
-    const guestId = useSelector((state: any) => state.guestId.guestId);
+const useViewCallback = (route: any, viewState: any) => {
+    const {
+        setFavSelectedPlayer,
+        favPlayers,
+        setIsLoading,
+        selectedFavTeams,
+        searchText,
+    } = viewState;
+    const dispatch = useDispatch();
+    // eslint-disable-next-line global-require, @typescript-eslint/no-var-requires
     const uuid = require('uuid');
-    let id = uuid.v4();
-    const [focusSearch, setFocusSearch] = useState(false);
+    const generateId = uuid.v4();
+    const { t } = useTranslation();
+
+    const getPlayerByIds = async (inputIds: Array<string>) => {
+        if (inputIds.length) {
+            return;
+        }
+        const ids = inputIds.map((id: string) => {
+            return { _id: { $oid: id } };
+        });
+        console.log('player ids', ids);
+
+        const [error, res] = await PlayerService.findByFilter({
+            $or: ids,
+        });
+        if (error) {
+            return;
+        }
+
+        // eslint-disable-next-line consistent-return
+        return res.data.documents;
+    };
+
+    const getFavoritePlayers = useCallback(async (favoritePlayers: Array<string>) => {
+        return getPlayerByIds(favoritePlayers);
+    }, []);
 
     const getPlayersData = useCallback(async () => {
-        if ((isEmpty(favPlayers) || isNil(favPlayers)) && focusSearch === false) {
-            state.setIsLoading(true);
+        if (isEmpty(favPlayers) || isNil(favPlayers)) {
+            setIsLoading(true);
 
             try {
-                const { data }: PlayersModelResponse = await axiosClient.post(`${BASE_URL}/find`, {
-                    dataSource: DATA_SOURCE,
-                    database: DB,
-                    collection: 'player',
-                });
+                const [error, res] = await PlayerService.findAll();
+                if (error) {
+                    return;
+                }
 
-                if (!isEmpty(data.documents)) {
+                if (!isEmpty(res.data.documents)) {
                     dispatch(
                         setAllFavPlayers({
-                            id,
+                            id: generateId,
                             label: t('favorite_player.group'),
-                            listFavPlayers: data.documents,
+                            listFavPlayers: res.data.documents,
                         })
                     );
                 }
             } catch (error: any) {
                 Alert.alert(error);
             } finally {
-                state.setIsLoading(false);
+                setIsLoading(false);
             }
         }
     }, []);
 
     const getTeamPersonnel = useCallback(async () => {
-        if ((isEmpty(favPlayers) || isNil(favPlayers)) && focusSearch === false) {
-            state.setIsLoading(true);
+        if (isEmpty(favPlayers) || isNil(favPlayers)) {
+            setIsLoading(true);
 
             try {
-                const { data }: TeamPersonnelModelResponse = await axiosClient.post(
-                    `${BASE_URL}/find`,
-                    {
-                        dataSource: DATA_SOURCE,
-                        database: DB,
-                        collection: 'team_personnel',
-                    }
-                );
+                const [error, res] = await TeamPersonnelService.findAll();
+                if (error) {
+                    return;
+                }
 
-                if (!isEmpty(data.documents)) {
-                    // const team_personnel_players = (data.documents as TeamPersonnelModel[])
-                    //     .map(t => t.players)
-                    //     .flat();
-
+                if (!isEmpty(res.data.documents)) {
                     selectedFavTeams
                         .map((favTeam: TeamModel) => ({
                             favTeam,
-                            team_personnel: data.documents.find(
-                                v => v._id === favTeam.team_personnel_id
-                            ) as TeamPersonnelModel,
+                            team_personnel: res.data.documents.find(
+                                (v: TeamPersonnelModel) => v._id === favTeam.team_personnel_id
+                            ),
                         }))
                         .forEach(async ({ favTeam, team_personnel }) => {
-                            const fetchedPlayers = await Promise.all(
-                                team_personnel.players.map(async (player_personnel: Players) => {
-                                    const [err, res] = await PlayerService.findByOId<
-                                        PlayersModelResponse
-                                    >(player_personnel.player_id);
-                                    if (err) return;
-                                    return res.data.documents[0];
-                                })
-                            );
+                            // const fetchedPlayers = await Promise.all(
+                            //     team_personnel.players.map(async (player_personnel: Players) => {
+                            //         const [err, res] = await PlayerService.findByOId<
+                            //             PlayersModelResponse
+                            //         >(player_personnel.player_id);
+                            //         if (err) return;
+                            //         return res.data.documents[0];
+                            //     })
+                            // );
+                            const listFavPlayers = getPlayerByIds(team_personnel.players);
                             dispatch(
                                 setGroupFavPlayer({
                                     id: team_personnel._id,
                                     label: favTeam.name_he,
-                                    listFavPlayers: fetchedPlayers.filter(Boolean),
+                                    listFavPlayers,
                                 })
                             );
                         });
@@ -215,52 +241,13 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
             } catch (error: any) {
                 Alert.alert(error);
             } finally {
-                state.setIsLoading(false);
+                setIsLoading(false);
             }
         }
     }, []);
-
-    // function convertToCommonPlayer(player: PlayerModel): SelectedPlayer {
-    //     return pick(player, ['name_en', 'name_he', 'image_url', '_id']);
-    // }
-    const handleSelected = (player: PlayerModel) => {
-        if (!getProfile.success) {
-            if (!isEmpty(favSearchPlayers)) {
-                dispatch(pushAllFavPlayers(player));
-            } else if (!isEmpty(selectedFavTeams)) {
-                dispatch(pushGroupFavPlayer(player));
-            } else {
-                dispatch(pushAllFavPlayers(player));
-            }
-        } else {
-            dispatch(pushAllFavPlayersProfile(player));
-        }
-    };
-
-    useEffect(() => {
-        if (isEmpty(selectedPlayersProfile)) {
-            favSelectedPlayer.map((item: PlayerModel) => {
-                dispatch(pushAllFavPlayersProfile(item));
-            });
-        }
-    }, [favSelectedPlayer]);
-
-    const handleFocusSearch = () => {
-        // setFocusSearch(true);
-    };
-
-    useEffect(() => {
-        if (searchText.length) {
-            setFocusSearch(() => true);
-        }
-        if (!searchText.length && focusSearch) {
-            submitSearchFavPlayer();
-        }
-    }, [searchText, focusSearch]);
-
     const submitSearchFavPlayer = async () => {
         Keyboard.dismiss();
-        state.setIsLoading(true);
+        setIsLoading(true);
         if (searchText !== '') {
             try {
                 dispatch(
@@ -321,17 +308,17 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
 
                     dispatch(
                         searchFavPlayers({
-                            id,
+                            id: generateId,
                             label: '',
                             listFavPlayers: data.documents,
                         })
                     );
                 }
-                state.setIsLoading(false);
+                setIsLoading(false);
             } catch (error: any) {
                 Alert.alert(error);
             } finally {
-                state.setIsLoading(false);
+                setIsLoading(false);
             }
         } else {
             dispatch(
@@ -407,7 +394,7 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
                     } catch (error: any) {
                         Alert.alert(error);
                     } finally {
-                        state.setIsLoading(false);
+                        setIsLoading(false);
                     }
                 }
             } else if (isEmpty(favPlayers) || isNil(favPlayers)) {
@@ -424,7 +411,7 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
                     if (!isEmpty(data.documents)) {
                         dispatch(
                             setAllFavPlayers({
-                                id,
+                                id: generateId,
                                 label: t('favorite_player.group'),
                                 listFavPlayers: data.documents,
                             })
@@ -433,27 +420,97 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
                 } catch (error: any) {
                     Alert.alert(error);
                 } finally {
-                    state.setIsLoading(false);
+                    setIsLoading(false);
                 }
             }
-            state.setIsLoading(false);
+            setIsLoading(false);
         }
     };
 
-    // useEffect(() => {
-    //     return () => {
-    //         // componentwillunmount in functional component.
-    //         // Anything in here is fired on component unmount.
-    //         setSearchText('');
-    //     };
-    // }, []);
+    return {
+        getFavoritePlayers,
+        getPlayersData,
+        getTeamPersonnel,
+        submitSearchFavPlayer,
+    };
+};
+export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) => {
+    const { t } = useTranslation();
+    const { navigate, goBack } = useAppNavigator();
+    const dispatch = useDispatch();
+    const routes = useRoute();
+
+    const viewState = useViewState();
+
+    const changePlayers = route.params?.changePlayers;
+
+    const {
+        getFavoritePlayers,
+        submitSearchFavPlayer,
+        getTeamPersonnel,
+        getPlayersData,
+    } = useViewCallback(route, viewState);
+
+    useEffect(() => {
+        if (viewState.getProfile.success === true) {
+            console.log('sdasdas');
+            
+            if (changePlayers) {
+                viewState.setFavSelectedPlayer(viewState.selectedPlayersProfile);
+            } else {
+                getFavoritePlayers(viewState.getProfile.getProfile.item.favorite_players);
+            }
+        }
+    }, [viewState.getProfile.success]);
+
+    const handleSelected = (player: PlayerModel) => {
+        if (!viewState.getProfile.success) {
+            if (!isEmpty(viewState.favSearchPlayers)) {
+                dispatch(pushAllFavPlayers(player));
+            } else if (!isEmpty(viewState.selectedFavTeams)) {
+                dispatch(pushGroupFavPlayer(player));
+            } else {
+                dispatch(pushAllFavPlayers(player));
+            }
+        }
+        dispatch(pushAllFavPlayersProfile(player));
+    };
+
+    useEffect(() => {
+        if (isEmpty(viewState.selectedPlayersProfile)) {
+            viewState.favSelectedPlayer.map((item: PlayerModel) => {
+                dispatch(pushAllFavPlayersProfile(item));
+                return null;
+            });
+        }
+    }, [viewState.favSelectedPlayer]);
+
+    const handleFocusSearch = () => {
+        // setFocusSearch(true);
+    };
+
+    useEffect(() => {
+        if (viewState.searchText.length) {
+            viewState.setFocusSearch(() => true);
+        }
+        if (!viewState.searchText.length && viewState.focusSearch) {
+            submitSearchFavPlayer();
+        }
+    }, [viewState.searchText, viewState.focusSearch]);
+
+    useEffect(() => {
+        return () => {
+            // componentwillunmount in functional component.
+            // Anything in here is fired on component unmount.
+            viewState.setSearchText('');
+        };
+    }, []);
 
     const onGoBack = (): void => {
         goBack();
     };
     const onGoSkip = () => {
-        clearFavoriteData(dispatch);
-        if (isEmpty(profile.profile) || isNil(profile.profile)) {
+        if (isEmpty(viewState.profile.profile) || isNil(viewState.profile.profile)) {
             dispatch(
                 createProfileUser(
                     serializeParams({
@@ -469,54 +526,54 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
         }
     };
     const isFocused = useIsFocused();
-    const previous_screen = route?.params?.previous_screen;
+    const previousScreen = route?.params?.previous_screen;
 
-    useEffect(() => {
-        if (previous_screen !== ScreenName.SettingsPage) {
-            if (!isFocused) return;
-            if (!isEmpty(login.login)) {
-                navigate(ScreenName.SideBar);
-                navigation.reset({
-                    index: 0,
-                    routes: [{ name: ScreenName.SideBar as never }],
-                });
-            } else if (profile.success === true) {
-                dispatch(
-                    loginUser(
-                        serializeParams({
-                            action: ACTION,
-                            token: TOKEN,
-                            call: AuthData.LOGIN,
-                            guest_id: profile.profile.tc_user,
-                            guest_guid: guestId[0],
-                        })
-                    )
-                );
+    // useEffect(() => {
+    //     if (previousScreen !== ScreenName.SettingsPage) {
+    //         if (!isFocused) return;
+    //         if (!isEmpty(viewState.login.login)) {
+    //             navigate(ScreenName.SideBar);
+    //             navigation.reset({
+    //                 index: 0,
+    //                 routes: [{ name: ScreenName.SideBar as never }],
+    //             });
+    //         } else if (viewState.profile.success === true) {
+    //             dispatch(
+    //                 loginUser(
+    //                     serializeParams({
+    //                         action: ACTION,
+    //                         token: TOKEN,
+    //                         call: AuthData.LOGIN,
+    //                         guest_id: profile.profile.tc_user,
+    //                         guest_guid: guestId[0],
+    //                     })
+    //                 )
+    //             );
 
-                navigate(ScreenName.SideBar);
-                navigation.reset({
-                    index: 0,
-                    routes: [{ name: ScreenName.SideBar as never }],
-                });
-            }
-        }
-    }, [profile.success, isFocused]);
+    //             navigate(ScreenName.SideBar);
+    //             navigation.reset({
+    //                 index: 0,
+    //                 routes: [{ name: ScreenName.SideBar as never }],
+    //             });
+    //         }
+    //     }
+    // }, [viewState.profile.success, isFocused]);
 
     const handleContinue = () => {
         const { params } = routes;
         if (!isEmpty(params)) {
             if (params.previous_screen === ScreenName.FavSummaryPage) {
                 navigate(ScreenName.FavSummaryPage);
-            } else if (previous_screen === ScreenName.SettingsPage) {
+            } else if (previousScreen === ScreenName.SettingsPage) {
                 navigate(ScreenName.SettingsPage, {
                     previous_screen: ScreenName.FavPlayerPage,
                     center: true,
                     scrollBottom: false,
                     selectedPlayers: true,
-                    selectedTeams: true,
-                    selectedTopTeams: true,
+                    // selectedTeams: true,
+                    // selectedTopTeams: true,
                 });
-                dispatch(setSettingFavPlayer(selectedPlayersProfile));
+                dispatch(setSettingFavPlayer(viewState.selectedPlayersProfile));
                 // pop(ScreenName.FavTeamPage);
             } else {
                 navigate(ScreenName.FavTopTeamPage);
@@ -527,7 +584,7 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
     };
 
     useMount(() => {
-        if (!isEmpty(selectedFavTeams)) {
+        if (!isEmpty(viewState.selectedFavTeams)) {
             getTeamPersonnel();
             dispatch(resetAllFavPlayers({ id: '', label: '', listFavPlayers: [] }));
         } else {
@@ -542,22 +599,8 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
         onGoSkip,
         handleContinue,
         handleSelected,
-        setSearchText,
-        searchText,
-        favSelectedPlayers,
-        favPlayers,
-        profile,
-        favSearchPlayers,
-        favSelectedSearchPlayers,
-        formattedSearchFavPlayers,
-        selectedFavPlayers,
-        formattedFavPlayers,
         submitSearchFavPlayer,
         handleFocusSearch,
-        favSelectedPlayer,
-        getProfile,
-        selectedPlayersProfile,
-        setFocusSearch,
-        ...state,
+        ...viewState,
     };
 };

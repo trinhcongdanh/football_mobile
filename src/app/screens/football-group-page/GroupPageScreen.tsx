@@ -409,7 +409,14 @@ export const GroupPageScreen = ({ navigation, route }: IGroupPageScreenProps) =>
                                     })}
                                 </View>
                             </View>
-                            <View>{teamSeason && <LeagueTable teamSeason={teamSeason} />}</View>
+                            <View>
+                                {
+                                    // eslint-disable-next-line @typescript-eslint/prefer-optional-chain
+                                    teamSeason && teamSeason.league_season_id ? (
+                                        <LeagueTable leagueSeasonId={teamSeason.league_season_id} />
+                                    ) : null
+                                }
+                            </View>
                             <View
                                 style={[
                                     appStyles.package,

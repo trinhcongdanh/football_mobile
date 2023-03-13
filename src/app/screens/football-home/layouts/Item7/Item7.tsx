@@ -19,9 +19,9 @@ export const Item7 = ({ homePage }: IItem7Props) => {
                     style={{
                         width: getSize.m(347),
                         height: getSize.m(247),
-                        borderRadius: getSize.m(17),
+                        borderRadius: getSize.m(20),
                     }}
-                    resizeMode={FastImage.resizeMode.contain}
+                    // resizeMode={FastImage.resizeMode.contain}
                 />
                 {/* <FastImage
                     resizeMode={FastImage.resizeMode.contain}

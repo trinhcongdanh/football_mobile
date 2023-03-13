@@ -7,7 +7,15 @@ import { getSize } from '@football/app/utils/responsive/scale';
 import { BlurView } from '@react-native-community/blur';
 import Slider from '@react-native-community/slider';
 import React, { createRef, useEffect, useState } from 'react';
-import { BackHandler, I18nManager, ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import {
+    BackHandler,
+    I18nManager,
+    Platform,
+    ScrollView,
+    Text,
+    TouchableOpacity,
+    View,
+} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import Orientation from 'react-native-orientation-locker';
 import IconFontAwesome5 from 'react-native-vector-icons/FontAwesome5';
@@ -124,6 +132,7 @@ export const Video = () => {
             BackHandler.addEventListener('hardwareBackPress', backAction);
             return () => BackHandler.removeEventListener('hardwareBackPress', backAction);
         }
+        console.log(showVideo);
     }, [showVideo]);
     return (
         <View
@@ -161,10 +170,12 @@ export const Video = () => {
                             style={styles.background_video}
                             paused={pause}
                             resizeMode="cover"
+                            ignoreSilentSwitch={'ignore'}
                             onLoad={onLoadEnd}
                             onProgress={onProgress}
                             onEnd={onEnd}
-                            controls={showControls}
+                            controls={Platform.OS === 'ios' ? true : showControls}
+                            fullscreen={fullscreen}
                             onFullscreenPlayerWillDismiss={() => {
                                 // Orientation.unlockAllOrientations();
                                 setShowControls(false);

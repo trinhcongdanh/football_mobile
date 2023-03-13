@@ -1,5 +1,6 @@
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
 import { AuthData, ScreenName } from '@football/app/utils/constants/enum';
+import { clearFavoriteData } from '@football/app/utils/functions/clearFavoriteData';
 import { ACTION, TOKEN } from '@football/core/api/auth/config';
 import { TeamModel } from '@football/core/models/TeamModelResponse';
 import { TopTeamModel } from '@football/core/models/TopTeamModelResponse';
@@ -14,6 +15,7 @@ import { resetFavTeam } from 'src/store/FavTeam.slice';
 import { resetTopTeams } from 'src/store/FavTopTeam.slice';
 import { RootState } from 'src/store/store';
 import { createProfileUser } from 'src/store/user/CreateProfile.slice';
+import { addGuestId } from 'src/store/user/GuestId.slice';
 import { loginUser } from 'src/store/user/Login.slice';
 import { setProfileUser } from 'src/store/user/setProfile.slice';
 import { IFavoriteSummaryScreenProps } from './FavoriteSummaryScreen.type';
@@ -23,6 +25,7 @@ export const useViewModel = ({ navigation, route }: IFavoriteSummaryScreenProps)
     const dispatch = useDispatch<any>();
     const { navigate, goBack } = useAppNavigator();
     const [onCheck, setonCheck] = useState(false);
+
     // team
     const [firstTeams, setFirstTeams] = useState<TeamModel>();
     const [secondTeams, setSecondTeams] = useState<TeamModel>();
@@ -82,6 +85,14 @@ export const useViewModel = ({ navigation, route }: IFavoriteSummaryScreenProps)
     const guestId = useSelector((state: any) => state.guestId.guestId);
     const profileUser = useSelector((state: RootState) => state.setProfile);
 
+    const uuid = require('uuid');
+    const id = uuid.v4();
+    useEffect(() => {
+        if (guestId.length === 0) {
+            dispatch(addGuestId(id));
+        }
+    }, [guestId]);
+
     function serializeParams(obj: any) {
         const a = qs.stringify(obj, { encode: false, arrayFormat: 'brackets' });
         console.log(a);
@@ -135,16 +146,19 @@ export const useViewModel = ({ navigation, route }: IFavoriteSummaryScreenProps)
     };
 
     const backFavTeam = () => {
+        dispatch(resetFavTeam([]));
         navigate(ScreenName.FavTeamPage, {
             previous_screen: ScreenName.FavSummaryPage,
         });
     };
     const backFavPlayer = () => {
+        dispatch(resetSearchFavPlayer({ id: '', label: '', listFavPlayers: [] }));
         navigate(ScreenName.FavPlayerPage, {
             previous_screen: ScreenName.FavSummaryPage,
         });
     };
     const backFavTopTeam = () => {
+        dispatch(resetTopTeams([]));
         navigate(ScreenName.FavTopTeamPage, {
             previous_screen: ScreenName.FavSummaryPage,
         });
@@ -160,9 +174,10 @@ export const useViewModel = ({ navigation, route }: IFavoriteSummaryScreenProps)
 
     const navigationHomePage = () => {
         setSetProfile(false);
+        clearFavoriteData(dispatch);
+
         if (isEmpty(profile.profile) || isNil(profile.profile)) {
             setScreenName(ScreenName.SideBar);
-
             dispatch(
                 createProfileUser(
                     serializeParams({
@@ -235,27 +250,7 @@ export const useViewModel = ({ navigation, route }: IFavoriteSummaryScreenProps)
                 });
             }
         } else {
-            if (profile.success === true && setProfile === false) {
-                dispatch(
-                    loginUser(
-                        serializeParams({
-                            action: ACTION,
-                            token: TOKEN,
-                            call: AuthData.LOGIN,
-                            guest_id: profile.profile.tc_user,
-                            guest_guid: guestId[0],
-                        })
-                    )
-                );
-
-                navigate(screenName);
-                if (screenName === ScreenName.SideBar) {
-                    navigation.reset({
-                        index: 0,
-                        routes: [{ name: ScreenName.SideBar as never }],
-                    });
-                }
-            } else if (profile.success === true && setProfile === true) {
+            if (profile.success) {
                 dispatch(
                     loginUser(
                         serializeParams({
@@ -273,7 +268,7 @@ export const useViewModel = ({ navigation, route }: IFavoriteSummaryScreenProps)
 
     useEffect(() => {
         if (!isFocused) return;
-        if (login.success === true && setProfile === true) {
+        if (login.success) {
             let fav_team: any = [];
             selectedFavTeams.map(item => {
                 fav_team.push(item._id);
@@ -294,17 +289,9 @@ export const useViewModel = ({ navigation, route }: IFavoriteSummaryScreenProps)
                         call: AuthData.SET_PROFILE,
                         item_id: profile.profile.item_id,
                         item: {
-                            favorite_israel_teams: fav_team,
-                            favorite_players: player_team,
-                            favorite_national_teams: fav_top_team,
-                            notifications: [
-                                'FAN_NOTIFICATION_GENERAL',
-                                'FAN_NOTIFICATION_FAVORITE_PLAYERS',
-                                'FAN_NOTIFICATION_FAVORITE_ISRAEL_TEAMS',
-                                'FAN_NOTIFICATION_FAVORITE_PLAYERS_LEAGUES',
-                                'FAN_NOTIFICATION_FAVORITE_ISRAEL_TEAMS_LEAGUES',
-                                'FAN_NOTIFICATION_FAVORITE_PLAYERS_NATIONAL_TEAMS',
-                            ],
+                            favorite_israel_teams: setProfile ? fav_team : '',
+                            favorite_players: setProfile ? player_team : '',
+                            favorite_national_teams: setProfile ? fav_top_team : '',
                         },
                     })
                 )

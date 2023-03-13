@@ -34,6 +34,7 @@ export const FavoritePlayersScreen = ({ navigation, route }: IFavoritePlayerScre
         favSelectedPlayer,
         selectedPlayersProfile,
         setFocusSearch,
+        isLoading,
     } = useViewModel({
         navigation,
         route,
@@ -74,6 +75,7 @@ export const FavoritePlayersScreen = ({ navigation, route }: IFavoritePlayerScre
                 newFav={
                     !isEmpty(favSearchPlayers) ? formattedSearchFavPlayers : formattedFavPlayers
                 }
+                isLoading={isLoading}
                 favSelected={getProfile.success ? selectedPlayersProfile : selectedFavPlayers}
                 title={t('favorite_player.title')}
                 placeholder={t('favorite_player.place_holder')}

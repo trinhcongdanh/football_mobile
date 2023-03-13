@@ -102,6 +102,14 @@ export interface Season {
     goals: Goal[];
     cards: Card[];
     games_by_context: Gamesbycontext[];
+    goals_league: number;
+    goals_national_cup: number;
+    goals_toto_cup: number;
+    goals_total: number;
+    yellow_cards_league: number;
+    yellow_cards_toto_cup: number;
+    red_cards: number;
+    total_cards: number;
 }
 
 interface Gamesbycontext {

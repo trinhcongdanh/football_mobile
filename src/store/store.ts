@@ -26,6 +26,7 @@ import videoReducer from './video/Video.slice';
 import otpUserSlice from 'src/store/user/OTP.slice';
 import setProfileSlice from 'src/store/user/setProfile.slice';
 import getProfileSlice from 'src/store/user/getProfile.slice';
+import colorCustomReducer from 'src/store/color/ColorCustom.slice';
 
 const reducer = combineReducers({
     guestId: guestIdReducer,
@@ -42,6 +43,7 @@ const reducer = combineReducers({
     registerFacebook: registerFacebookReducer,
     leagues: leagueReducer,
     video: videoReducer,
+    colorCustom: colorCustomReducer,
 });
 const persistConfig = {
     key: 'root',

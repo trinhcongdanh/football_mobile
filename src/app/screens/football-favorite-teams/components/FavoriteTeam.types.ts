@@ -17,4 +17,5 @@ export type IFavoriteTeamProps = {
     searchFavTeam: (text: string) => void;
     submitSearchFavTeam: () => void;
     searchTextRef: any;
+    isLoading: boolean;
 };

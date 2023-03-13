@@ -18,12 +18,13 @@ import { launchImageLibrary } from 'react-native-image-picker';
 import { useDispatch, useSelector } from 'react-redux';
 import {
     addSelectedFavPlayerProfile,
+    resetAllFavPlayers,
+    resetGroupFavPlayer,
     resetSearchFavPlayer,
     resetSelectedFavPlayerProfile,
     SelectedPlayer,
 } from 'src/store/FavPlayer.slice';
 import {
-    addSelectedFavTeam,
     addSelectedFavTeamProfile,
     resetFavTeam,
     resetSelectedFavTeamProfile,
@@ -192,16 +193,8 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
         dispatch(resetSelectedFavPlayerProfile([]));
         dispatch(resetSelectedFavTopTeamsProfile([]));
 
-        if (
-            previous_screen === ScreenName.FavTeamPage ||
-            previous_screen === ScreenName.FavPlayerPage ||
-            previous_screen === ScreenName.FavTopTeamPage
-        ) {
-            popToTop();
-            navigate(ScreenName.SideBar);
-        } else {
-            goBack();
-        }
+        popToTop();
+        navigate(ScreenName.SideBar);
         return true;
     };
 
@@ -213,14 +206,29 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
     }, []);
 
     const backFavTeam = () => {
+        dispatch(resetFavTeam([]));
         navigate(ScreenName.FavTeamPage, {
             previous_screen: ScreenName.SettingsPage,
             changeTeams: true,
-            favTeamsSelected: favSelectedTeam,
         });
     };
 
     const backFavPlayer = () => {
+        dispatch(resetSearchFavPlayer({ id: '', label: '', listFavPlayers: [] }));
+        dispatch(
+            resetAllFavPlayers({
+                id: '',
+                label: '',
+                listFavPlayers: [],
+            })
+        );
+        dispatch(
+            resetGroupFavPlayer({
+                id: '',
+                label: '',
+                listFavPlayers: [],
+            })
+        );
         navigate(ScreenName.FavPlayerPage, {
             previous_screen: ScreenName.SettingsPage,
             changePlayers: true,
@@ -228,6 +236,7 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
     };
 
     const backFavTopTeam = () => {
+        dispatch(resetTopTeams([]));
         navigate(ScreenName.FavTopTeamPage, {
             previous_screen: ScreenName.SettingsPage,
             changeTopTeams: true,
@@ -252,6 +261,20 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
 
     const addFavPlayer = (index: number) => {
         dispatch(resetSearchFavPlayer({ id: '', label: '', listFavPlayers: [] }));
+        dispatch(
+            resetAllFavPlayers({
+                id: '',
+                label: '',
+                listFavPlayers: [],
+            })
+        );
+        dispatch(
+            resetGroupFavPlayer({
+                id: '',
+                label: '',
+                listFavPlayers: [],
+            })
+        );
         navigate(ScreenName.FavPlayerPage, {
             previous_screen: ScreenName.SettingsPage,
             changePlayers: true,
@@ -260,6 +283,20 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
 
     const changeFavPlayer = (index: number) => {
         dispatch(resetSearchFavPlayer({ id: '', label: '', listFavPlayers: [] }));
+        dispatch(
+            resetAllFavPlayers({
+                id: '',
+                label: '',
+                listFavPlayers: [],
+            })
+        );
+        dispatch(
+            resetGroupFavPlayer({
+                id: '',
+                label: '',
+                listFavPlayers: [],
+            })
+        );
         navigate(ScreenName.FavPlayerPage, {
             previous_screen: ScreenName.SettingsPage,
             changePlayers: true,
@@ -404,6 +441,9 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
     }, [getProfile.success]);
 
     const [favSelectedTeam, setFavSelectedTeam] = useState<TeamModel[]>([]);
+    const selectedTeamsProfile = useSelector(
+        (state: RootState) => state.favTeams.selectedTeamsProfile
+    );
     const selectedTeams = route.params?.selectedTeams;
 
     useEffect(() => {
@@ -417,7 +457,14 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
                     })
                 );
                 // console.log(fetchTeam.filter(Boolean));
-                if (selectedTeams) {
+                if (!isEmpty(settingSelected.settingFavTeams)) {
+                    setFavSelectedTeam(settingSelected.settingFavTeams);
+                    dispatch(addSelectedFavTeamProfile(settingSelected.settingFavTeams));
+                } else if (
+                    isEmpty(settingSelected.settingFavTeams) &&
+                    isEmpty(selectedTeamsProfile) &&
+                    selectedTeams
+                ) {
                     setFavSelectedTeam(settingSelected.settingFavTeams);
                     dispatch(addSelectedFavTeamProfile(settingSelected.settingFavTeams));
                 } else {
@@ -448,6 +495,9 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
     }, [favSelectedTeam]);
 
     const [favSelectedPlayer, setFavSelectedPlayer] = useState<PlayerModel[]>([]);
+    const selectedPlayersProfile = useSelector(
+        (state: RootState) => state.favPlayers.selectedPlayersProfile
+    );
     const selectedPlayers = route.params?.selectedPlayers;
     useEffect(() => {
         if (getProfile.success === true) {
@@ -462,7 +512,15 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
                     })
                 );
                 // console.log(fetchTeam.filter(Boolean));
-                if (selectedPlayers) {
+
+                if (!isEmpty(settingSelected.settingFavPlayers)) {
+                    setFavSelectedPlayer(settingSelected.settingFavPlayers);
+                    dispatch(addSelectedFavPlayerProfile(settingSelected.settingFavPlayers));
+                } else if (
+                    isEmpty(settingSelected.settingFavPlayers) &&
+                    isEmpty(selectedPlayersProfile) &&
+                    selectedPlayers
+                ) {
                     setFavSelectedPlayer(settingSelected.settingFavPlayers);
                     dispatch(addSelectedFavPlayerProfile(settingSelected.settingFavPlayers));
                 } else {
@@ -493,6 +551,9 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
     }, [favSelectedPlayer]);
 
     const [favSelectedTopTeam, setFavSelectedTopTeam] = useState<TopTeamModel[]>([]);
+    const selectedFavTopTeamsProfile = useSelector(
+        (state: RootState) => state.favTopTeams.selectedTopTeamsProfile
+    );
     const selectedTopTeams = route.params?.selectedTopTeams;
     useEffect(() => {
         if (getProfile.success === true) {
@@ -506,8 +567,15 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
                         return res.data.documents[0];
                     })
                 );
-                // console.log(fetchTeam.filter(Boolean));
-                if (selectedTopTeams) {
+
+                if (!isEmpty(settingSelected.settingFavTopTeams)) {
+                    setFavSelectedTopTeam(settingSelected.settingFavTopTeams);
+                    dispatch(addSelectedFavTopTeamsProfile(settingSelected.settingFavTopTeams));
+                } else if (
+                    isEmpty(settingSelected.settingFavTopTeams) &&
+                    isEmpty(selectedFavTopTeamsProfile) &&
+                    selectedTopTeams
+                ) {
                     setFavSelectedTopTeam(settingSelected.settingFavTopTeams);
                     dispatch(addSelectedFavTopTeamsProfile(settingSelected.settingFavTopTeams));
                 } else {
@@ -542,15 +610,15 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
     const handleSaveChange = () => {
         setSaveChange(true);
         dispatch(statusSetProfile([]));
-        const fav_team: any = [];
+        const fav_team: string[] = [];
         favSelectedTeam.map(item => {
             fav_team.push(item._id);
         });
-        const player_team: any = [];
+        const fav_player: string[] = [];
         favSelectedPlayer.map(item => {
-            player_team.push(item._id);
+            fav_player.push(item._id);
         });
-        const fav_top_team: any = [];
+        const fav_top_team: string[] = [];
         favSelectedTopTeam.map(item => {
             fav_top_team.push(item._id);
         });
@@ -558,20 +626,20 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
             setProfileUser(
                 serializeParams({
                     action: ACTION,
-                    token: numberPhone.successRegister ? login.login.token : userLogin.otp.token,
+                    token: numberPhone.successLogin ? userLogin.otp.token : login.login.token,
                     call: AuthData.SET_PROFILE,
-                    item_id: numberPhone.successRegister
-                        ? profile.profile.item_id
-                        : userLogin.otp.user.item_id,
+                    item_id: numberPhone.successLogin
+                        ? userLogin.otp.user.item_id
+                        : profile.profile.item_id,
                     item: {
                         name: userName,
-                        email,
-                        gender,
+                        email: email,
+                        gender: gender,
                         birthdate: formattedDate,
-                        favorite_israel_teams: fav_team,
-                        favorite_players: player_team,
-                        favorite_national_teams: fav_top_team,
-                        notifications: notifications,
+                        favorite_israel_teams: isEmpty(fav_team) ? '' : fav_team,
+                        favorite_players: isEmpty(fav_player) ? '' : fav_player,
+                        favorite_national_teams: isEmpty(fav_top_team) ? '' : fav_top_team,
+                        notifications: isEmpty(notifications) ? '' : notifications,
                     },
                 })
             )

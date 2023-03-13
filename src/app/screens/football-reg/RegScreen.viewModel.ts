@@ -11,6 +11,9 @@ import { RootState } from 'src/store/store';
 import qs from 'qs';
 import { useIsFocused } from '@react-navigation/native';
 import { AppImages } from '@football/app/assets/images';
+import { AvatarType } from '@football/core/models/AvatarType.enum';
+import { isEmpty } from 'lodash';
+import { clearFavoriteData } from '@football/app/utils/functions/clearFavoriteData';
 
 export const useViewModel = ({ navigation, route }: IRegScreenProps) => {
     const { navigate, goBack } = useAppNavigator();
@@ -50,14 +53,14 @@ export const useViewModel = ({ navigation, route }: IRegScreenProps) => {
         let formattedDate = e.getFullYear() + '-' + (e.getMonth() + 1) + '-' + e.getDate();
         setFormattedDate(formattedDate);
     };
-    const [gender, setGender] = useState<any>();
+    const [gender, setGender] = useState<any>(AvatarType.FAN_GENDER_MALE);
     const handleOnGender = (e: number) => {
         if (e === 0) {
-            setGender('FAN_GENDER_MALE');
+            setGender(AvatarType.FAN_GENDER_MALE);
         } else if (e === 1) {
-            setGender('FAN_GENDER_FEMALE');
+            setGender(AvatarType.FAN_GENDER_FEMALE);
         } else if (e === 2) {
-            setGender('FAN_GENDER_NOT_AVAILABLE');
+            setGender(AvatarType.FAN_GENDER_NOT_AVAILABLE);
         }
     };
 
@@ -79,15 +82,15 @@ export const useViewModel = ({ navigation, route }: IRegScreenProps) => {
 
     const createInfo = () => {
         Keyboard.dismiss();
-        let fav_team: any = [];
+        let fav_team: string[] = [];
         selectedFavTeams.map(item => {
             fav_team.push(item._id);
         });
-        let player_team: any = [];
+        let fav_player: string[] = [];
         selectedFavPlayers.map(item => {
-            player_team.push(item._id);
+            fav_player.push(item._id);
         });
-        let fav_top_team: any = [];
+        let fav_top_team: string[] = [];
         selectedFavTopTeams.map(item => {
             fav_top_team.push(item._id);
         });
@@ -102,17 +105,9 @@ export const useViewModel = ({ navigation, route }: IRegScreenProps) => {
                         name: userName,
                         gender: gender,
                         birthdate: formattedDate,
-                        favorite_israel_teams: fav_team,
-                        favorite_players: player_team,
-                        favorite_national_teams: fav_top_team,
-                        notifications: [
-                            'FAN_NOTIFICATION_GENERAL',
-                            'FAN_NOTIFICATION_FAVORITE_PLAYERS',
-                            'FAN_NOTIFICATION_FAVORITE_ISRAEL_TEAMS',
-                            'FAN_NOTIFICATION_FAVORITE_PLAYERS_LEAGUES',
-                            'FAN_NOTIFICATION_FAVORITE_ISRAEL_TEAMS_LEAGUES',
-                            'FAN_NOTIFICATION_FAVORITE_PLAYERS_NATIONAL_TEAMS',
-                        ],
+                        favorite_israel_teams: isEmpty(fav_team) ? '' : fav_team,
+                        favorite_players: isEmpty(fav_player) ? '' : fav_player,
+                        favorite_national_teams: isEmpty(fav_top_team) ? '' : fav_top_team,
                     },
                 })
             )
@@ -127,6 +122,7 @@ export const useViewModel = ({ navigation, route }: IRegScreenProps) => {
                 index: 0,
                 routes: [{ name: ScreenName.SideBar as never }],
             });
+            clearFavoriteData(dispatch);
         }
     }, [profileUser.success, isFocused]);
 

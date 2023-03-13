@@ -18,21 +18,38 @@ import {
     pushFavTeam,
     resetFavTeam,
     selectedFavTeamsAsMapSelector,
-    resetSelectedFavTeam,
     selectedFavTeamsProfileAsMapSelector,
     pushFavTeamProfile,
 } from 'src/store/FavTeam.slice';
 import { IFavoriteTeamsScreenProps } from './FavoriteTeamsScreen.type';
-import { resetAllFavPlayers, resetGroupFavPlayer } from 'src/store/FavPlayer.slice';
+import {
+    resetAllFavPlayers,
+    resetGroupFavPlayer,
+    resetSearchFavPlayer,
+} from 'src/store/FavPlayer.slice';
 import { useIsFocused, useRoute } from '@react-navigation/native';
 import { RootState } from 'src/store/store';
 import { setSettingFavTeam } from 'src/store/SettingSelected.slice';
 import TeamService from '@football/core/services/Team.service';
+import { addGuestId } from 'src/store/user/GuestId.slice';
+import { clearFavoriteData } from '@football/app/utils/functions/clearFavoriteData';
+
+const useViewState = () => {
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+
+    return {
+        isLoading,
+        setIsLoading,
+    };
+};
 
 export const useViewModel = ({ navigation, route }: IFavoriteTeamsScreenProps) => {
     const { t } = useTranslation();
     const dispatch = useDispatch<any>();
     const { navigate, goBack, pop } = useAppNavigator();
+
+    const state = useViewState();
+
     const [searchText, setSearchText] = useState('');
     const routes = useRoute();
     const searchTextRef = useRef<any>(null);
@@ -58,33 +75,13 @@ export const useViewModel = ({ navigation, route }: IFavoriteTeamsScreenProps) =
         (state: RootState) => state.favTeams.selectedTeamsProfile
     );
     const getProfile = useSelector((state: RootState) => state.getProfile);
-
     const [favSelectedTeam, setFavSelectedTeam] = useState<TeamModel[]>([]);
+    const changeTeams = route.params?.changeTeams;
     useEffect(() => {
-        if (getProfile.success === true) {
-            const fetchFavTeam = async () => {
-                const fetchTeam = await Promise.all(
-                    getProfile.getProfile.item.favorite_israel_teams.map(async (item: string) => {
-                        const [err, res] = await TeamService.findByOId<TeamModelResponse>(item);
-                        if (err) return;
-                        return res.data.documents[0];
-                    })
-                );
-                // console.log(fetchTeam.filter(Boolean));
-                if (!isEmpty(selectedTeamsProfile)) {
-                    console.log('Danh');
-                    setFavSelectedTeam(selectedTeamsProfile);
-                } else {
-                    setFavSelectedTeam(fetchTeam.filter(Boolean));
-                }
-            };
-            fetchFavTeam();
+        if (changeTeams) {
+            setFavSelectedTeam(selectedTeamsProfile);
         }
-    }, [getProfile.success]);
-
-    const login = useSelector((state: any) => state.login);
-    const profile = useSelector((state: any) => state.createProfile);
-    const guestId = useSelector((state: any) => state.guestId.guestId);
+    }, [changeTeams]);
 
     function serializeParams(obj: any) {
         let str = [];
@@ -98,6 +95,7 @@ export const useViewModel = ({ navigation, route }: IFavoriteTeamsScreenProps) =
 
     const getTeamsData = useCallback(async () => {
         if (isEmpty(favTeams) || isNil(favTeams)) {
+            state.setIsLoading(true);
             try {
                 const { data }: TeamModelResponse = await axiosClient.post(`${BASE_URL}/find`, {
                     dataSource: DATA_SOURCE,
@@ -109,34 +107,23 @@ export const useViewModel = ({ navigation, route }: IFavoriteTeamsScreenProps) =
                 }
             } catch (error: any) {
                 Alert.alert(error);
+            } finally {
+                state.setIsLoading(false);
             }
         }
     }, []);
 
     const handleSelected = (team: TeamModel) => {
         if (!getProfile.success) {
-            const params = routes.params;
             dispatch(pushFavTeam(team));
-            if (!isEmpty(params)) {
-                if (params.previous_screen !== ScreenName.FavSummaryPage) {
-                    dispatch(resetGroupFavPlayer({ id: '', label: '', listFavPlayers: [] }));
-                    dispatch(resetAllFavPlayers({ id: '', label: '', listFavPlayers: [] }));
-                }
-            } else {
-                dispatch(resetGroupFavPlayer({ id: '', label: '', listFavPlayers: [] }));
-                dispatch(resetAllFavPlayers({ id: '', label: '', listFavPlayers: [] }));
-            }
+            dispatch(resetGroupFavPlayer({ id: '', label: '', listFavPlayers: [] }));
+            dispatch(resetAllFavPlayers({ id: '', label: '', listFavPlayers: [] }));
+            dispatch(resetSearchFavPlayer({ id: '', label: '', listFavPlayers: [] }));
         } else {
             dispatch(pushFavTeamProfile(team));
-            // if (favSelectedTeam.length < 3) {
-            //     setFavSelectedTeam([...favSelectedTeam, team]);
-            //     // console.log(favSelectedTeam);
-            // }
         }
     };
     useEffect(() => {
-        // console.log(favSelectedTeam);
-        // dispatch(resetSelectedFavTeam([]));
         if (isEmpty(selectedTeamsProfile)) {
             favSelectedTeam.map((item: TeamModel) => {
                 dispatch(pushFavTeamProfile(item));
@@ -150,8 +137,18 @@ export const useViewModel = ({ navigation, route }: IFavoriteTeamsScreenProps) =
         }
     }, [searchText]);
 
+    useEffect(() => {
+        return () => {
+            // componentwillunmount in functional component.
+            // Anything in here is fired on component unmount.
+            setSearchText('');
+        };
+    }, []);
+
     const submitSearchFavTeam = async () => {
         Keyboard.dismiss();
+        state.setIsLoading(true);
+
         if (searchText !== '') {
             dispatch(resetFavTeam([]));
             const [error, res] = await TeamService.search(searchText);
@@ -163,6 +160,7 @@ export const useViewModel = ({ navigation, route }: IFavoriteTeamsScreenProps) =
 
             dispatch(resetFavTeam([]));
             dispatch(setFavTeams(res.data.documents));
+            state.setIsLoading(false);
         } else {
             dispatch(resetFavTeam([]));
             try {
@@ -177,6 +175,8 @@ export const useViewModel = ({ navigation, route }: IFavoriteTeamsScreenProps) =
                 }
             } catch (error: any) {
                 Alert.alert(error);
+            } finally {
+                state.setIsLoading(false);
             }
         }
     };
@@ -185,7 +185,21 @@ export const useViewModel = ({ navigation, route }: IFavoriteTeamsScreenProps) =
         dispatch(resetFavTeam([]));
         goBack();
     };
+
+    const login = useSelector((state: any) => state.login);
+    const profile = useSelector((state: any) => state.createProfile);
+    const guestId = useSelector((state: any) => state.guestId.guestId);
+
+    const uuid = require('uuid');
+    const id = uuid.v4();
+    useEffect(() => {
+        if (guestId.length === 0) {
+            dispatch(addGuestId(id));
+        }
+    }, []);
+
     const onGoSkip = () => {
+        clearFavoriteData(dispatch);
         if (isEmpty(profile.profile) || isNil(profile.profile)) {
             dispatch(
                 createProfileUser(
@@ -237,24 +251,19 @@ export const useViewModel = ({ navigation, route }: IFavoriteTeamsScreenProps) =
     }, [profile.success, isFocused]);
 
     const handleContinue = () => {
-        const params = routes.params;
-        if (!isEmpty(params)) {
-            if (params.previous_screen === ScreenName.FavSummaryPage) {
-                navigate(ScreenName.FavSummaryPage);
-            } else if (previous_screen === ScreenName.SettingsPage) {
-                navigate(ScreenName.SettingsPage, {
-                    previous_screen: ScreenName.FavTeamPage,
-                    center: true,
-                    scrollBottom: false,
-                    // selectedPlayers: true,
-                    selectedTeams: true,
-                    // selectedTopTeams: true,
-                });
-                dispatch(setSettingFavTeam(selectedTeamsProfile));
-                // pop(ScreenName.FavTeamPage);
-            } else {
-                navigate(ScreenName.FavPlayerPage);
-            }
+        if (previous_screen === ScreenName.FavSummaryPage) {
+            navigate(ScreenName.FavSummaryPage);
+        } else if (previous_screen === ScreenName.SettingsPage) {
+            navigate(ScreenName.SettingsPage, {
+                previous_screen: ScreenName.FavTeamPage,
+                center: true,
+                scrollBottom: false,
+                selectedPlayers: true,
+                selectedTeams: true,
+                selectedTopTeams: true,
+            });
+            dispatch(setSettingFavTeam(selectedTeamsProfile));
+            // pop(ScreenName.FavTeamPage);
         } else {
             navigate(ScreenName.FavPlayerPage);
         }
@@ -284,5 +293,6 @@ export const useViewModel = ({ navigation, route }: IFavoriteTeamsScreenProps) =
         getProfile,
         formattedFavTeamsProfile,
         selectedTeamsProfile,
+        ...state,
     };
 };

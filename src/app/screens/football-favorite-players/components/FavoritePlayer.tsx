@@ -41,6 +41,7 @@ export const FavoritePlayer = ({
     searchFavPlayer,
     submitSearchFavPlayer,
     handleFocusSearch,
+    isLoading,
 }: IFavoritePlayerProps) => {
     return (
         <View style={[appStyles.flex]}>
@@ -70,7 +71,7 @@ export const FavoritePlayer = ({
                                     style={styles.text_search}
                                     placeholderTextColor={appColors.blue_gray_dark}
                                     onChangeText={searchFavPlayer}
-                                    onBlur={submitSearchFavPlayer}
+                                    onSubmitEditing={submitSearchFavPlayer}
                                     onFocus={handleFocusSearch}
                                 />
                                 <TouchableOpacity onPress={submitSearchFavPlayer}>
@@ -82,12 +83,13 @@ export const FavoritePlayer = ({
                                     />
                                 </TouchableOpacity>
                             </View>
-
-                            <ActivityIndicator
-                                style={appStyles.flex_center}
-                                size="large"
-                                color={appColors.blue_dark}
-                            />
+                            {isLoading && (
+                                <ActivityIndicator
+                                    style={appStyles.flex_center}
+                                    size="large"
+                                    color={appColors.blue_dark}
+                                />
+                            )}
                         </View>
                     </SafeAreaView>
                 ) : (

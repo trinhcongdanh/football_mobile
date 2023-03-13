@@ -9,6 +9,7 @@ export interface TeamSeasonModel {
     about: About;
     cycles: Cycle[];
     statistics: Statistic[];
+    league_season_id: string;
 }
 
 export interface Statistic {

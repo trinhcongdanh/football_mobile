@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     },
 
     stats_content: {
-        backgroundColor: appColors.white,
+        backgroundColor: appColors.gray2,
         width: getSize.m(303),
         height: getSize.m(389),
         borderRadius: getSize.m(15),

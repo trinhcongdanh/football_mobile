@@ -23,4 +23,5 @@ export type IFavoritePlayerProps = {
     searchFavPlayer: (text: string) => void;
     submitSearchFavPlayer: () => void;
     handleFocusSearch?: () => void;
+    isLoading: boolean;
 };

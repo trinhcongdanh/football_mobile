@@ -156,7 +156,7 @@ export const LeaguesDetailsScreen = ({ navigation, route }: ILeaguesDetailsScree
                         <View style={styles.package}>
                             <AboutLeague highlights={highlights} />
                         </View>
-                        <View
+                        {/* <View
                             style={{
                                 marginTop: getSize.m(10),
                                 paddingVertical: getSize.m(20),
@@ -164,7 +164,7 @@ export const LeaguesDetailsScreen = ({ navigation, route }: ILeaguesDetailsScree
                             }}
                         >
                             <SelectedGallery galleries={galleries} />
-                        </View>
+                        </View> */}
                         {/* <View style={styles.package}>
                             <SelectedMagazine galleries={galleries} />
                         </View> */}

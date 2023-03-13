@@ -251,6 +251,11 @@ const resources = {
                 team: 'נבחרת',
                 games: 'משחקים',
                 details: 'פרטים',
+                league_cup_toto: 'גביע הטוטו/גביע הליגה',
+                total: 'סך הכל',
+                yellow_league: 'צהוב - ליגה/גביע המדינה',
+                yellow_cup_toto: 'צהוב - גביע הטוטו/גביע הליגה',
+                red: 'אדום',
             },
             coach: {
                 debut_game: 'משחק בכורה',

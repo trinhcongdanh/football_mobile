@@ -166,9 +166,9 @@ export const ListGame = ({
                 </View>
             )}
 
-            <View style={appStyles.flex_row_space}>
-                <View style={[styles.circle, { right: getSize.m(-30), backgroundColor: color }]} />
-                <View style={[styles.circle, { left: getSize.m(-30), backgroundColor: color }]} />
+            <View style={[appStyles.flex_row_space, { position: 'relative' }]}>
+                <View style={[styles.circle_left, { backgroundColor: color }]} />
+                <View style={[styles.circle_right, { backgroundColor: color }]} />
             </View>
             <View style={{ paddingHorizontal: getSize.m(14) }}>
                 <View style={styles.line_dots} />

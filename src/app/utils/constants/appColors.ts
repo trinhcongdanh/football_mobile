@@ -3,6 +3,7 @@ import { Platform } from 'react-native';
 export const appColors = {
     white: '#FFFFFF',
     gray: '#F9F9F9',
+    gray2: '#f8f8fb',
     text_grey: '#B3B6C8',
     text_dark_blue: '#020047',
     border: '#E9F1F4',

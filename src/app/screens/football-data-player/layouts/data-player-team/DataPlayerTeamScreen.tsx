@@ -63,28 +63,61 @@ export const DataPlayerTeamScreen = ({ player }: IDataPlayerTeamScreenProps) => 
                             <Text style={styles.text_header}>{t('data_player.gates')}</Text>
                         </LinearGradient>
                         <View style={{ marginHorizontal: getSize.m(22) }}>
-                            {selectedSeason?.goals.map((item, index) => {
+                            {/* {selectedSeason?.goals.map((item, index) => {
                                 return (
-                                    <View
-                                        // eslint-disable-next-line react/no-array-index-key
-                                        key={index}
-                                        style={[
-                                            appStyles.flex_row_space_center,
-                                            { marginTop: getSize.m(14) },
-                                        ]}
-                                    >
-                                        <Text style={appStyles.text_label}>{item.context_he}</Text>
-                                        <Text
-                                            style={[
-                                                appStyles.number,
-                                                { paddingLeft: getSize.m(10) },
-                                            ]}
-                                        >
-                                            {item.goals}
-                                        </Text>
-                                    </View>
+                                    
                                 );
-                            })}
+                            })} */}
+
+                            <View
+                                style={[
+                                    appStyles.flex_row_space_center,
+                                    { marginTop: getSize.m(14) },
+                                ]}
+                            >
+                                <Text style={appStyles.text_label}>{t('home_page.league')}</Text>
+                                <Text style={[appStyles.number, { paddingLeft: getSize.m(10) }]}>
+                                    {selectedSeason?.goals_league}
+                                </Text>
+                            </View>
+
+                            <View
+                                style={[
+                                    appStyles.flex_row_space_center,
+                                    { marginTop: getSize.m(14) },
+                                ]}
+                            >
+                                <Text style={appStyles.text_label}>{t('state_cup.title')}</Text>
+                                <Text style={[appStyles.number, { paddingLeft: getSize.m(10) }]}>
+                                    {selectedSeason?.goals_national_cup}
+                                </Text>
+                            </View>
+
+                            <View
+                                style={[
+                                    appStyles.flex_row_space_center,
+                                    { marginTop: getSize.m(14) },
+                                ]}
+                            >
+                                <Text style={appStyles.text_label}>
+                                    {t('data_player.league_cup_toto')}
+                                </Text>
+                                <Text style={[appStyles.number, { paddingLeft: getSize.m(10) }]}>
+                                    {selectedSeason?.goals_toto_cup}
+                                </Text>
+                            </View>
+
+                            <View
+                                style={[
+                                    appStyles.flex_row_space_center,
+                                    { marginTop: getSize.m(14) },
+                                ]}
+                            >
+                                <Text style={appStyles.text_label}>{t('data_player.total')}</Text>
+                                <Text style={[appStyles.number, { paddingLeft: getSize.m(10) }]}>
+                                    {selectedSeason?.goals_total}
+                                </Text>
+                            </View>
                         </View>
                     </View>
                     <View style={[styles.item, { marginTop: getSize.m(30) }]}>
@@ -99,7 +132,7 @@ export const DataPlayerTeamScreen = ({ player }: IDataPlayerTeamScreenProps) => 
                             <Text style={styles.text_header}>{t('data_player.ticket.amount')}</Text>
                         </LinearGradient>
                         <View style={{ marginHorizontal: getSize.m(22) }}>
-                            {selectedSeason?.cards.map((item, index) => {
+                            {/* {selectedSeason?.cards.map((item, index) => {
                                 return (
                                     <View
                                         key={index}
@@ -119,7 +152,58 @@ export const DataPlayerTeamScreen = ({ player }: IDataPlayerTeamScreenProps) => 
                                         </Text>
                                     </View>
                                 );
-                            })}
+                            })} */}
+                            <View
+                                style={[
+                                    appStyles.flex_row_space_center,
+                                    { marginTop: getSize.m(14) },
+                                ]}
+                            >
+                                <Text style={appStyles.text_label}>
+                                    {t('data_player.yellow_league')}
+                                </Text>
+                                <Text style={[appStyles.number, { paddingLeft: getSize.m(10) }]}>
+                                    {selectedSeason?.yellow_cards_league}
+                                </Text>
+                            </View>
+
+                            <View
+                                style={[
+                                    appStyles.flex_row_space_center,
+                                    { marginTop: getSize.m(14) },
+                                ]}
+                            >
+                                <Text style={appStyles.text_label}>
+                                    {t('data_player.yellow_cup_toto')}
+                                </Text>
+                                <Text style={[appStyles.number, { paddingLeft: getSize.m(10) }]}>
+                                    {selectedSeason?.yellow_cards_toto_cup}
+                                </Text>
+                            </View>
+
+                            <View
+                                style={[
+                                    appStyles.flex_row_space_center,
+                                    { marginTop: getSize.m(14) },
+                                ]}
+                            >
+                                <Text style={appStyles.text_label}>{t('data_player.red')}</Text>
+                                <Text style={[appStyles.number, { paddingLeft: getSize.m(10) }]}>
+                                    {selectedSeason?.red_cards}
+                                </Text>
+                            </View>
+
+                            <View
+                                style={[
+                                    appStyles.flex_row_space_center,
+                                    { marginTop: getSize.m(14) },
+                                ]}
+                            >
+                                <Text style={appStyles.text_label}>{t('data_player.total')}</Text>
+                                <Text style={[appStyles.number, { paddingLeft: getSize.m(10) }]}>
+                                    {selectedSeason?.total_cards}
+                                </Text>
+                            </View>
                         </View>
                     </View>
                     <View style={{ marginLeft: getSize.m(22), marginTop: getSize.m(30) }}>

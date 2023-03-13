@@ -12,16 +12,10 @@ import { getSize } from '@football/app/utils/responsive/scale';
 
 export const WelcomeScreen = ({ navigation, route }: IWelcomeScreenProps) => {
     const { i18n } = useTranslation();
-    const { t, onNavigateFavTeam } = useViewModel({
+    const { t, onNavigateFavTeam, onNavigateConnect } = useViewModel({
         navigation,
         route,
     });
-
-    const onNavigateConnect = () => {
-        navigation.navigate(ScreenName.ConnectPage, {
-            isReset: true,
-        });
-    };
 
     return (
         <View style={appStyles.flex}>

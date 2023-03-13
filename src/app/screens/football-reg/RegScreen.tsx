@@ -51,7 +51,7 @@ export const RegScreen = ({ navigation, route }: IRegScreenProps) => {
 
     return (
         <View style={appStyles.flex}>
-            {profileUser.success === false ? (
+            {profileUser.loading === true ? (
                 <View
                     style={{
                         justifyContent: 'center',

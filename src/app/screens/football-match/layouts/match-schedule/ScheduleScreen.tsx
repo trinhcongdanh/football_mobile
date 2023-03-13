@@ -11,7 +11,7 @@ import { IScheduleScreenProps } from './ScheduleScreen.type';
 // type Props = {};
 
 export const ScheduleScreen = ({ navigation, route }: IScheduleScreenProps) => {
-    const { t } = useViewModel({
+    const { t, handleStadium, handleDetailMatch } = useViewModel({
         navigation,
         route,
     });
@@ -44,6 +44,8 @@ export const ScheduleScreen = ({ navigation, route }: IScheduleScreenProps) => {
                             result={item.score}
                             schedule={item.time}
                             details={item.game_id}
+                            handleDetailMatch={() => handleDetailMatch(item.game_id)}
+                            handleStadium={() => handleStadium(item.stadium_id)}
                             isLive={moment().isBetween(
                                 moment(`${item.date} ${item.time}`, 'DD.M.YY HH:mm'),
                                 moment(`${item.date} ${item.time}`, 'DD.M.YY HH:mm').add(2, 'hours')
