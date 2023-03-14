@@ -37,10 +37,11 @@ export const Item5 = ({ topTeam }: IItem5Props) => {
                     <FastImage
                         source={{ uri: topTeam.logo_url }}
                         style={{
-                            width: getSize.m(58),
-                            height: getSize.m(58),
-                            borderRadius: getSize.m(62),
+                            width: getSize.m(55),
+                            height: getSize.m(55),
+                            borderRadius: getSize.m(50),
                         }}
+                        resizeMode={FastImage.resizeMode.contain}
                     />
                 </View>
                 <View style={[appStyles.flex_row_align, { marginTop: getSize.m(14) }]}>
@@ -389,14 +390,16 @@ export const Item5 = ({ topTeam }: IItem5Props) => {
                     >
                         <View style={appStyles.flex_row_align}>
                             <FastImage
-                                source={AppImages.img_ball_light_gray}
+                                source={AppImages.img_volleyball}
                                 style={{
                                     width: getSize.m(14),
                                     height: getSize.m(14),
                                 }}
                                 resizeMode={FastImage.resizeMode.contain}
                             />
-                            <Text style={styles.title_statistic}>{t('home_page.game_table')}</Text>
+                            <Text style={styles.title_statistic}>
+                                {t('home_page.top_team_second_tab_title')}
+                            </Text>
                         </View>
                         <TouchableOpacity style={appStyles.flex_row_align}>
                             <Text style={styles.text_see_all}>{t('home_page.see_all')}</Text>
@@ -432,6 +435,7 @@ export const Item5 = ({ topTeam }: IItem5Props) => {
                                     result={item.score}
                                     schedule={item.time}
                                     // completed={item.completed}
+                                    details={item.game_id}
                                     color={appColors.gray2}
                                     handleDetailMatch={() => handleDetailMatch(item.game_id)}
                                     handleStadium={() => handleStadium(item.stadium_id)}

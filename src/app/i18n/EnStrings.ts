@@ -629,6 +629,7 @@ const resources = {
                 all_game: 'לכל המשחקים',
                 read_more: 'קרא עוד',
                 full_table: 'לטבלה המלאה',
+                top_team_second_tab_title: 'טבלת משחק',
             },
             list_game: {
                 results: 'לתוצאות המשחק בזמן אמת',
@@ -1238,6 +1239,7 @@ const resources = {
                 list_of_game: 'List of games',
                 all_game: 'For all games',
                 read_more: 'Read More',
+                top_team_second_tab_title: 'טבלת משחק',
             },
             list_game: {
                 results: 'For the results of the game in real time',
