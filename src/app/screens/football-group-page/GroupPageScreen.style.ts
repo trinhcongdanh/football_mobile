@@ -89,8 +89,8 @@ const styles = StyleSheet.create({
         marginTop: getSize.m(-50),
     },
     info_group_item: {
-        flexDirection: I18nManager.isRTL ? 'row-reverse' : 'row',
-        justifyContent: I18nManager.isRTL ? 'flex-end' : 'flex-start',
+        flexDirection: 'row-reverse',
+        justifyContent: 'flex-end',
         alignItems: 'center',
         marginTop: getSize.m(18),
         marginLeft: getSize.m(48),

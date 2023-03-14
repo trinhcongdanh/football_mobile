@@ -7,6 +7,7 @@ import { isEmpty } from 'lodash';
 
 const initialState: any = {
     profile: {},
+    saveFavorite: false,
 };
 
 export const createProfileUser = createAsyncThunk(
@@ -36,6 +37,10 @@ export const createProfileSlice = createSlice({
             state.loading = null;
             state.success = null;
         },
+
+        saveChooseFavorite: (state, action) => {
+            state.saveFavorite = action.payload;
+        },
     },
 
     extraReducers: builder => {
@@ -57,5 +62,5 @@ export const createProfileSlice = createSlice({
 });
 
 const { actions, reducer } = createProfileSlice;
-export const { clearCreateProfile } = actions;
+export const { clearCreateProfile, saveChooseFavorite } = actions;
 export default createProfileSlice.reducer;

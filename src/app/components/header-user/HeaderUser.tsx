@@ -5,7 +5,7 @@ import { getSize } from '@football/app/utils/responsive/scale';
 import { renderAvatar, renderUserPoints } from '@football/core/models/AvatarType.enum';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Image, Text, TouchableOpacity, View } from 'react-native';
+import { I18nManager, Image, Text, TouchableOpacity, View } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import LinearGradient from 'react-native-linear-gradient';
 import { useSelector } from 'react-redux';
@@ -37,6 +37,21 @@ export const HeaderUser = ({
 
     return (
         <View style={[appStyles.flex_space_center, styles.header]}>
+            <TouchableOpacity onPress={onPressMenu}>
+                <LinearGradient colors={[color_pre, color_after]} style={styles.bar}>
+                    <FastImage
+                        source={icon}
+                        resizeMode={FastImage.resizeMode.contain}
+                        style={{
+                            width: getSize.m(12),
+                            height: getSize.m(12),
+                            transform: [{ rotate: I18nManager.isRTL ? '0deg' : '180deg' }],
+                        }}
+                    />
+                </LinearGradient>
+            </TouchableOpacity>
+            {title ? <Text style={styles.txt_title}>{title}</Text> : <View />}
+
             <View style={[appStyles.flex_row_space_center, styles.avt]}>
                 <FastImage
                     style={{
@@ -56,20 +71,6 @@ export const HeaderUser = ({
                     {renderUserPoints(profileUser, t)}
                 </Text>
             </View>
-            {title ? <Text style={styles.txt_title}>{title}</Text> : <View />}
-
-            <TouchableOpacity onPress={onPressMenu}>
-                <LinearGradient colors={[color_pre, color_after]} style={styles.bar}>
-                    <FastImage
-                        source={icon}
-                        resizeMode={FastImage.resizeMode.contain}
-                        style={{
-                            width: getSize.m(12),
-                            height: getSize.m(12),
-                        }}
-                    />
-                </LinearGradient>
-            </TouchableOpacity>
         </View>
     );
 };

@@ -17,6 +17,7 @@ import { Item7 } from '@football/app/screens/football-home/layouts/Item7/Item7';
 import { Item9 } from '@football/app/screens/football-home/layouts/Item9/Item9';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { appStyles } from '@football/app/utils/constants/appStyles';
+import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
 import { getSize } from '@football/app/utils/responsive/scale';
 import { renderAvatar, renderUserPoints } from '@football/core/models/AvatarType.enum';
 import React, { useEffect, useRef, useState } from 'react';
@@ -72,6 +73,7 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
     LogBox.ignoreLogs(['Warning: Each child in a list should have a unique "key" prop']);
 
     const colorCustom = useSelector((state: any) => state.colorCustom.colorCustom);
+    const { getTranslationText } = useTranslationText();
 
     return (
         <View style={[appStyles.flex, { backgroundColor: appColors.gray2 }]}>
@@ -191,7 +193,10 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                                                             }}
                                                         />
                                                         <Text style={styles.header_item_text}>
-                                                            {item.name_he}
+                                                            {getTranslationText({
+                                                                textHe: item.name_he,
+                                                                textEn: item.name_en,
+                                                            })}
                                                         </Text>
                                                     </View>
                                                 </TouchableOpacity>
@@ -232,7 +237,10 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                                                             }}
                                                         />
                                                         <Text style={styles.header_item_text}>
-                                                            {item.name_he}
+                                                            {getTranslationText({
+                                                                textHe: item.name_he,
+                                                                textEn: item.name_en,
+                                                            })}
                                                         </Text>
                                                     </View>
                                                 </TouchableOpacity>
@@ -273,7 +281,10 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                                                             }}
                                                         />
                                                         <Text style={styles.header_item_text}>
-                                                            {item.name_he}
+                                                            {getTranslationText({
+                                                                textHe: item.name_he,
+                                                                textEn: item.name_en,
+                                                            })}
                                                         </Text>
                                                     </View>
                                                 </TouchableOpacity>
@@ -311,7 +322,10 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                                     </View>
                                     <View style={styles.content}>
                                         <Text style={styles.text_content}>
-                                            {homePage?.video.caption_he}
+                                            {getTranslationText({
+                                                textHe: homePage?.video.caption_he,
+                                                textEn: homePage?.video.caption_en,
+                                            })}
                                         </Text>
                                     </View>
                                 </View>

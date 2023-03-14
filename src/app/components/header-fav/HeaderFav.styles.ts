@@ -2,10 +2,10 @@ import { AppFonts } from '@football/app/assets/fonts';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { getSize } from '@football/app/utils/responsive/scale';
 import { StyleSheet, I18nManager } from 'react-native';
-
+console.log(I18nManager.isRTL);
 export const styles = StyleSheet.create({
     header: {
-        flexDirection: I18nManager.isRTL ? 'row-reverse' : 'row',
+        flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
     },

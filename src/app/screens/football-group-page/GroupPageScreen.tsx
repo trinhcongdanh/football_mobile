@@ -8,6 +8,7 @@ import { TAB_BAR_HEIGHT } from '@football/app/routes/bottom-tab/styles/bottom.ta
 import { LeagueTable } from '@football/app/screens/football-group-page/layouts/league-table/LeagueTable';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { appStyles } from '@football/app/utils/constants/appStyles';
+import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
 import { getSize } from '@football/app/utils/responsive/scale';
 import React from 'react';
 import {
@@ -54,6 +55,7 @@ export const GroupPageScreen = ({ navigation, route }: IGroupPageScreenProps) =>
         navigation,
         route,
     });
+    const { getTranslationText } = useTranslationText();
 
     return (
         <View style={appStyles.flex}>
@@ -65,7 +67,7 @@ export const GroupPageScreen = ({ navigation, route }: IGroupPageScreenProps) =>
                             <HeaderUser
                                 avt={AppImages.img_avt}
                                 point="1,325"
-                                icon={AppImages.img_angle_right}
+                                icon={AppImages.img_angle_arrow}
                                 color_pre={appColors.blue_black}
                                 color_after={appColors.blue_black}
                                 handlePressFunction={onGoBack}
@@ -89,9 +91,19 @@ export const GroupPageScreen = ({ navigation, route }: IGroupPageScreenProps) =>
                                         rounded
                                         containerStyle={styles.avt_leagues}
                                     />
-                                    <Text style={styles.name_leagues}>{team.name_he}</Text>
+                                    <Text style={styles.name_leagues}>
+                                        {getTranslationText({
+                                            textHe: team.name_he,
+                                            textEn: team.name_en,
+                                        })}
+                                    </Text>
                                     <Text style={styles.sub_name_leagues}>
-                                        ({team.league_name_he})
+                                        (
+                                        {getTranslationText({
+                                            textHe: team.league_name_he,
+                                            textEn: team.league_name_en,
+                                        })}
+                                        )
                                     </Text>
                                 </View>
                                 <View>

@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useAppNavigation } from '@football/app/utils/hooks/useAppNavigation';
+import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
 import { LeagueModel } from '@football/core/models/LeagueModelResponse';
 import {
     Cycle,
@@ -100,6 +101,7 @@ const useViewCallback = (route: any, viewState: any) => {
 export const useViewModel = ({ navigation, route }: ILeaguesDetailsScreenProps) => {
     const { onGoBack } = useAppNavigation();
     const { t } = useTranslation();
+    const { getTranslationText } = useTranslationText();
     const { leagueId }: any = route.params;
     const { data: leagueSeasonData } = useLeagueSeasons(leagueId);
     const viewState = useViewState();
@@ -189,6 +191,7 @@ export const useViewModel = ({ navigation, route }: ILeaguesDetailsScreenProps) 
         onGoBack,
         handleSelectedYear,
         handleCloseModal,
+        getTranslationText,
         ...viewState,
     };
 };

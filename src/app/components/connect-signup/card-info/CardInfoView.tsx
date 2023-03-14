@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, I18nManager } from 'react-native';
 import React, { useState } from 'react';
 import { getSize } from '@football/app/utils/responsive/scale';
 import { appStyles } from '@football/app/utils/constants/appStyles';
@@ -115,7 +115,7 @@ export const CardInfoView = ({
                         <DatePicker
                             fadeToColor="none"
                             textColor={appColors.text_dark_blue}
-                            locale="he"
+                            locale={I18nManager.isRTL ? 'he' : 'en'}
                             mode="date"
                             date={date}
                             onDateChange={date => {

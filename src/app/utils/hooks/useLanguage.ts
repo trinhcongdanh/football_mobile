@@ -1,8 +1,8 @@
 import { useTranslation } from 'react-i18next';
 
 interface ITranslationTextProps {
-    textHe: string;
-    textEn: string;
+    textHe: string | undefined;
+    textEn: string | undefined;
 }
 
 export enum Locale {
