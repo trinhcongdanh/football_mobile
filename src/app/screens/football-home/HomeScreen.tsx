@@ -54,6 +54,8 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
         onClickTeam,
         onClickTopTeam,
         profileUser,
+        userLogin,
+        onClickGuestRegistration,
     } = useViewModel({
         navigation,
         route,
@@ -72,7 +74,7 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
     LogBox.ignoreLogs(['Warning: Each child in a list should have a unique "key" prop']);
 
     const colorCustom = useSelector((state: any) => state.colorCustom.colorCustom);
-
+    const isGuest = !userLogin?.success;
     return (
         <View style={[appStyles.flex, { backgroundColor: appColors.gray2 }]}>
             {/* Header */}
@@ -279,6 +281,32 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                                                 </TouchableOpacity>
                                             );
                                         })}
+                                        {isGuest && (
+                                            <TouchableOpacity onPress={onClickGuestRegistration}>
+                                                <View
+                                                    style={[
+                                                        appStyles.flex_row_align,
+                                                        styles.header_item,
+                                                        {
+                                                            marginHorizontal: getSize.m(16),
+                                                        },
+                                                    ]}
+                                                >
+                                                    <FastImage
+                                                        source={AppImages.img_guest_regist}
+                                                        style={{
+                                                            width: getSize.m(30),
+                                                            height: getSize.m(30),
+                                                            borderRadius: getSize.m(30),
+                                                            marginRight: getSize.m(6),
+                                                        }}
+                                                    />
+                                                    <Text style={styles.header_item_text}>
+                                                        {t('home_page.edit_favorites')}
+                                                    </Text>
+                                                </View>
+                                            </TouchableOpacity>
+                                        )}
                                     </ScrollView>
                                 </View>
                             </SafeAreaView>

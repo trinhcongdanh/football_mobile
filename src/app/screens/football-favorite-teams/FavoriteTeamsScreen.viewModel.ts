@@ -121,6 +121,9 @@ const useViewCallback = (route: any, viewState: any) => {
     };
 
     useEffect(() => {
+        if (params?.previous_screen === ScreenName.HomePage) {
+            return;
+        }
         if (params?.previous_screen !== ScreenName.SettingsPage) {
             if (!isFocused) return;
             if (!isEmpty(login.login)) {
@@ -169,6 +172,10 @@ const useViewCallback = (route: any, viewState: any) => {
             });
             dispatch(setSettingFavTeam(selectedFavTeams));
             // pop(ScreenName.FavTeamPage);
+        } else if (params?.previous_screen === ScreenName.HomePage) {
+            navigate(ScreenName.FavPlayerPage, {
+                previous_screen: ScreenName.HomePage,
+            });
         } else {
             navigate(ScreenName.FavPlayerPage);
             dispatch(resetGroupFavPlayer({ id: '', label: '', listFavPlayers: [] }));

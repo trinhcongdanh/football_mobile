@@ -275,10 +275,18 @@ const eventHandler = (navigate: any) => {
         navigate(ScreenName.NationalTeamPage, { topTeamId });
     };
 
+    const onClickGuestRegistration = () => {
+        navigate(ScreenName.FavTeamPage, {
+            previous_screen: ScreenName.HomePage,
+            changeTeams: true,
+        });
+    };
+
     return {
         onClickPlayer,
         onClickTeam,
         onClickTopTeam,
+        onClickGuestRegistration,
     };
 };
 
@@ -299,7 +307,9 @@ export const useViewModel = ({ navigation, route }: IHomeScreenProps) => {
         getUser,
     } = useViewCallback(route, state);
 
-    const { onClickPlayer, onClickTeam, onClickTopTeam } = eventHandler(navigate);
+    const { onClickPlayer, onClickTeam, onClickTopTeam, onClickGuestRegistration } = eventHandler(
+        navigate
+    );
 
     useMount(() => {
         if (state.userLogin.success && !state.profileUser) {
@@ -357,5 +367,6 @@ export const useViewModel = ({ navigation, route }: IHomeScreenProps) => {
         handlePlayVideo,
         onClickTeam,
         onClickTopTeam,
+        onClickGuestRegistration,
     };
 };

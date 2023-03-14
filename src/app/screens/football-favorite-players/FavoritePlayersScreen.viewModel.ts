@@ -116,15 +116,15 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
     const favSelectedPlayers = useSelector((state: RootState) =>
         !isEmpty(selectedFavTeams) && !changePlayers
             ? state.favPlayers.groupPlayers
-                  .map(e => {
-                      return e.listFavPlayers.filter(v => v.isSelected);
-                  })
-                  .flat()
+                .map(e => {
+                    return e.listFavPlayers.filter(v => v.isSelected);
+                })
+                .flat()
             : state.favPlayers.favPlayers
-                  .map(e => {
-                      return e.listFavPlayers.filter(v => v.isSelected);
-                  })
-                  .flat()
+                .map(e => {
+                    return e.listFavPlayers.filter(v => v.isSelected);
+                })
+                .flat()
     );
 
     const [focusSearch, setFocusSearch] = useState(false);
@@ -405,6 +405,9 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
     const previous_screen = route?.params?.previous_screen;
 
     useEffect(() => {
+        if (previous_screen === ScreenName.HomePage) {
+            return;
+        }
         if (previous_screen !== ScreenName.SettingsPage) {
             if (!isFocused) return;
             if (!isEmpty(login.login)) {
@@ -453,6 +456,10 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
                 });
                 dispatch(setSettingFavPlayer(selectedFavPlayers));
                 // pop(ScreenName.FavTeamPage);
+            } else if (previous_screen === ScreenName.HomePage) {
+                navigate(ScreenName.FavTopTeamPage, {
+                    previous_screen: ScreenName.HomePage,
+                });
             } else {
                 navigate(ScreenName.FavTopTeamPage);
             }
