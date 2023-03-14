@@ -8,9 +8,12 @@ import FastImage from 'react-native-fast-image';
 import { ILeaguesTableProps } from '@football/app/screens/football-leagues-details/layouts/leagues-table/LeaguesTable.type';
 import styles from './LeaguesTable.style';
 import { useViewModel } from './LeaguesTable.viewModel';
+import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
 
 export const LeaguesTable = ({ leaderBoards }: ILeaguesTableProps) => {
     const { t, listTeams, onNavigateTeamDetails } = useViewModel({ leaderBoards });
+    const { getTranslationText } = useTranslationText();
+
     return (
         <View
             style={{
@@ -101,7 +104,10 @@ export const LeaguesTable = ({ leaderBoards }: ILeaguesTableProps) => {
                                                 },
                                             ]}
                                         >
-                                            {item.name_he}
+                                            {getTranslationText({
+                                                textHe: item.name_he,
+                                                textEn: item.name_en,
+                                            })}
                                         </Text>
                                     </View>
                                 </View>

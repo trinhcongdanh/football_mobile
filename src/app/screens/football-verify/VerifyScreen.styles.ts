@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: getSize.m(28),
         justifyContent: 'space-between',
         alignItems: 'center',
-        flexDirection: I18nManager.isRTL ? 'row-reverse' : 'row-reverse',
+        flexDirection: I18nManager.isRTL ? 'row-reverse' : 'row',
         marginTop: getSize.m(37),
     },
     // otp_Box: {

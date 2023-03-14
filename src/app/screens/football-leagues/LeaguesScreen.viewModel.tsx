@@ -2,6 +2,7 @@
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
 import { LeagueItemScreen } from '@football/app/screens/football-leagues/layouts/league-item/LeagueItemScreen';
 import { ScreenName } from '@football/app/utils/constants/enum';
+import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
 import { LeagueModel, LeagueTypeModel } from '@football/core/models/LeagueModelResponse';
 import leaguesService from '@football/core/services/League.service';
 
@@ -177,6 +178,7 @@ const useEventHandler = (callback: any, state: any) => {
 export const useViewModel = ({ navigation, route }: ILeaguesScreenProps) => {
     const { navigate, goBack } = useAppNavigator();
     const { t } = useTranslation();
+    const { getTranslationText } = useTranslationText();
 
     const onGoBack = (): void => {
         goBack();
@@ -196,8 +198,16 @@ export const useViewModel = ({ navigation, route }: ILeaguesScreenProps) => {
             leagueTypes = res.data.documents;
             labels = leagueTypes.map(e => ({
                 id: e.index,
-                title: e.name_he,
-                name: e.name_en.split(' ').join(''),
+                title: getTranslationText({
+                    textHe: e.name_he,
+                    textEn: e.name_en,
+                }),
+                name: getTranslationText({
+                    textHe: e.name_he,
+                    textEn: e.name_en,
+                })
+                    .split(' ')
+                    .join(''),
                 renderComponent: (props: INavigationProps) => (
                     <LeagueItemScreen {...props} typeId={e.index} />
                 ),

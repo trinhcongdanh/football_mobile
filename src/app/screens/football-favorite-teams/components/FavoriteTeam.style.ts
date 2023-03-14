@@ -112,9 +112,8 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
     result_number: {
-        fontSize: getSize.m(14),
-        color: appColors.white,
-        lineHeight: getSize.m(24),
+        flexDirection: I18nManager.isRTL ? 'row' : 'row-reverse',
+        alignItems: 'center',
     },
     image_select: {
         flexDirection: I18nManager.isRTL ? 'row-reverse' : 'row',

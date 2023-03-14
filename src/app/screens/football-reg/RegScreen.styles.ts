@@ -9,6 +9,7 @@ const styles = StyleSheet.create({
         color: appColors.white,
         fontSize: getSize.s(13),
         fontFamily: AppFonts.bold,
+        marginLeft: I18nManager.isRTL ? getSize.m(0) : getSize.m(3),
     },
     agree: {
         color: appColors.white,

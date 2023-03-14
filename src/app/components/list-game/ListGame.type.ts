@@ -3,9 +3,9 @@ import { StyleProp } from 'react-native';
 export type IListGameProps = {
     logo_home: string;
     logo_away: string;
-    nameHome: string;
-    nameAway: string;
-    location: string;
+    nameHome: string | undefined;
+    nameAway: string | undefined;
+    location: string | undefined;
     date: string;
     result: any;
     schedule: any;

@@ -11,6 +11,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import { AppFonts } from '@football/app/assets/fonts';
 import { useViewModel } from './Statistics.viewModel';
 import { IStatisticsProps } from './Statistics.type';
+import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
 
 export const Statistics = ({ selectedRoundName, statistics, statisticsId }: IStatisticsProps) => {
     const {
@@ -25,6 +26,7 @@ export const Statistics = ({ selectedRoundName, statistics, statisticsId }: ISta
         statistics,
         statisticsId,
     });
+    const { getTranslationText } = useTranslationText();
 
     const renderStatistics = (data: any[]) => {
         return (
@@ -130,7 +132,10 @@ export const Statistics = ({ selectedRoundName, statistics, statisticsId }: ISta
                                                     },
                                                 ]}
                                             >
-                                                {item.name_he}
+                                                {getTranslationText({
+                                                    textHe: item.name_he,
+                                                    textEn: item.name_en,
+                                                })}
                                             </Text>
                                         </View>
                                     </View>

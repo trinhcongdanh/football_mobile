@@ -5,11 +5,11 @@ import { AppFonts } from '@football/app/assets/fonts';
 
 export const styles = StyleSheet.create({
     header: {
-        flexDirection: I18nManager.isRTL ? 'row-reverse' : 'row',
+        flexDirection: 'row',
     },
 
     avt: {
-        flexDirection: I18nManager.isRTL ? 'row-reverse' : 'row',
+        flexDirection: 'row-reverse',
     },
     ic_football: {
         width: getSize.m(16),

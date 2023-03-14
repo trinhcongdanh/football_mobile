@@ -26,6 +26,7 @@ import { Button } from '@football/app/components/button';
 import styles from './FavoriteTopTeam.style';
 import { IFavoriteTeamProps } from './FavoriteTopTeam.types';
 import { AppFonts } from '@football/app/assets/fonts';
+import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
 
 export const FavoriteTopTeam = ({
     onGoSkip,
@@ -41,6 +42,7 @@ export const FavoriteTopTeam = ({
     chosen,
     button,
 }: IFavoriteTeamProps) => {
+    const { getTranslationText } = useTranslationText();
     return (
         <View style={[appStyles.flex]}>
             <ImageBackground source={AppImages.img_bg_register} style={appStyles.flex}>
@@ -136,7 +138,10 @@ export const FavoriteTopTeam = ({
                                                         numberOfLines={2}
                                                         style={styles.name_item}
                                                     >
-                                                        {item.name_he}
+                                                        {getTranslationText({
+                                                            textHe: item.name_he,
+                                                            textEn: item.name_en,
+                                                        })}
                                                     </Text>
                                                     {item.isSelected === true && (
                                                         <View style={styles.check}>
@@ -186,37 +191,47 @@ export const FavoriteTopTeam = ({
                                     })}
                                 </View>
                                 <View>
-                                    <Text style={styles.result_number}>
+                                    <View style={styles.result_number}>
                                         <Text
                                             style={{
                                                 fontFamily: AppFonts.regular,
+                                                fontSize: getSize.m(14),
+                                                color: appColors.white,
+                                                lineHeight: getSize.m(24),
                                             }}
                                         >
                                             {chosen}
                                         </Text>
+                                        <View style={styles.result_number}>
+                                            <Text
+                                                style={{
+                                                    fontFamily: AppFonts.regular,
+                                                    fontSize: getSize.m(14),
+                                                    color: appColors.white,
+                                                    lineHeight: getSize.m(24),
+                                                }}
+                                            >
+                                                /{number}
+                                            </Text>
 
-                                        <Text
-                                            style={{
-                                                color:
-                                                    favSelected.length > 0
-                                                        ? appColors.blue_light
-                                                        : appColors.white,
-                                                fontFamily:
-                                                    favSelected.length > 0
-                                                        ? AppFonts.semibold
-                                                        : AppFonts.regular,
-                                            }}
-                                        >
-                                            {favSelected.length}
-                                        </Text>
-                                        <Text
-                                            style={{
-                                                fontFamily: AppFonts.regular,
-                                            }}
-                                        >
-                                            /{number}
-                                        </Text>
-                                    </Text>
+                                            <Text
+                                                style={{
+                                                    color:
+                                                        favSelected.length > 0
+                                                            ? appColors.blue_light
+                                                            : appColors.white,
+                                                    fontFamily:
+                                                        favSelected.length > 0
+                                                            ? AppFonts.semibold
+                                                            : AppFonts.regular,
+                                                    fontSize: getSize.m(14),
+                                                    lineHeight: getSize.m(24),
+                                                }}
+                                            >
+                                                {favSelected.length}
+                                            </Text>
+                                        </View>
+                                    </View>
                                 </View>
                             </View>
                             <View

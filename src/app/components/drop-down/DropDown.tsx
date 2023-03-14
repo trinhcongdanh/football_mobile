@@ -4,12 +4,14 @@ import { appColors } from '@football/app/utils/constants/appColors';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import { getSize } from '@football/app/utils/responsive/scale';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import IconIonicons from 'react-native-vector-icons/Ionicons';
 import { styles } from './DropDown.style';
 import { IDropDownProps } from './DropDown.type';
 
 export const DropDown = ({ data, handleSelected, handleCloseModal }: IDropDownProps) => {
+    const { t } = useTranslation();
     return (
         <View style={styles.background_opacity}>
             <TouchableOpacity style={StyleSheet.absoluteFillObject} onPress={handleCloseModal} />
@@ -24,9 +26,9 @@ export const DropDown = ({ data, handleSelected, handleCloseModal }: IDropDownPr
                             style={{ fontFamily: AppFonts.bold }}
                         />
                     </TouchableOpacity>
-                    <Text style={styles.title_drop_down}>ליגת הבורסה לניירות ערך</Text>
+                    <Text style={styles.title_drop_down}>{t('drop_down.title')}</Text>
                     <View>
-                        <Text style={styles.label_drop_down}>בחר עונה</Text>
+                        <Text style={styles.label_drop_down}>{t('drop_down.label')}</Text>
                         {data.map((item: any) => {
                             return (
                                 <TouchableOpacity
