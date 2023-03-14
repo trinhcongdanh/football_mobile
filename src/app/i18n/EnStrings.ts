@@ -20,6 +20,12 @@ const resources = {
                 complete: 'השלמת הרשמה',
                 guest: 'המשך כאורח',
                 login_as_guest: 'לא לשמור, והיכנס כאורח',
+                popUp: {
+                    title: 'להמשיך בלי לשמור?',
+                    text: 'בטוחים שאתם רוצים להיכנס כאורחים בלי לשמור את המועדפים?',
+                    option1: 'חזרה להרשמה',
+                    option2: 'לא לשמור, והיכנס כאורח',
+                },
             },
             welcome: {
                 splash: 'עמוד ספלאש',
@@ -644,6 +650,12 @@ const resources = {
                 complete: 'Completion of registration',
                 guest: 'Continue as a guest',
                 login_as_guest: 'Do not save, and log in as a guest',
+                popUp: {
+                    title: 'Continue without saving?',
+                    text: 'Are you sure you want to enter as guest without saving your favorites?',
+                    option1: 'Back to registration',
+                    option2: 'Don’t save and enter as guest',
+                },
             },
             welcome: {
                 splash: 'Splash page',

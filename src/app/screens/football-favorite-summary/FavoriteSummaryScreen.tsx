@@ -50,6 +50,7 @@ export const FavoriteSummaryScreen = ({ navigation, route }: IFavoriteSummaryScr
         setProfile,
         profileUser,
         navigate,
+        askBeforeGo,
     } = useViewModel({
         navigation,
         route,
@@ -309,7 +310,7 @@ export const FavoriteSummaryScreen = ({ navigation, route }: IFavoriteSummaryScr
                                         marginTop: getSize.m(80),
                                         marginBottom: getSize.m(16),
                                     }}
-                                    onPress={navigationHomePage}
+                                    onPress={askBeforeGo}
                                 >
                                     <Text style={styles.bottom_text}>
                                         {t('fav_summary.login_as_guest')}

@@ -210,6 +210,22 @@ export const useViewModel = ({ navigation, route }: IFavoriteSummaryScreenProps)
         }
     };
 
+    const askBeforeGo = () => {
+        global.props.showAlert({
+            title: t('fav_summary.popUp.title'),
+            subTitle: t('fav_summary.popUp.text'),
+            option1: t('fav_summary.popUp.option1'),
+            option2: t('fav_summary.popUp.option2'),
+            onOption1: () => {
+                global.props.closeAlert();
+            },
+            onOption2: () => {
+                global.props.closeAlert();
+                navigationHomePage();
+            },
+        });
+    };
+
     const navigationSaveHomePage = () => {
         setSetProfile(true);
         if (isEmpty(profile.profile) || isNil(profile.profile)) {
@@ -345,5 +361,6 @@ export const useViewModel = ({ navigation, route }: IFavoriteSummaryScreenProps)
         setProfile,
         profileUser,
         navigate,
+        askBeforeGo,
     };
 };

@@ -54,6 +54,7 @@ export const VideoScreen = ({ navigation, route }: IVideoScreenProps) => {
                                 color_after={appColors.blue_dark}
                                 handlePressFunction={onShowSideMenu}
                             />
+
                             <View>
                                 <Text style={[appStyles.text_title]}>{t('video.title')}</Text>
                             </View>
