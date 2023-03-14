@@ -164,15 +164,17 @@ export const useViewModel = ({ navigation, route }: IFavoriteTopTeamsScreenProps
             // pop(ScreenName.FavTeamPage);
         } else if (previous_screen === ScreenName.HomePage) {
             // if()
-            navigate(ScreenName.FavSummaryPage, {
-                previous_screen: ScreenName.HomePage,
-            });
-
-            // navigate(ScreenName.SideBar);
-            // navigation.reset({
-            //     index: 0,
-            //     routes: [{ name: ScreenName.SideBar as never }],
-            // });
+            if (profile.saveFavorite) {
+                navigate(ScreenName.SideBar);
+                navigation.reset({
+                    index: 0,
+                    routes: [{ name: ScreenName.SideBar as never }],
+                });
+            } else {
+                navigate(ScreenName.FavSummaryPage, {
+                    previous_screen: ScreenName.HomePage,
+                });
+            }
         } else {
             navigate(ScreenName.FavSummaryPage, {
                 editFav: true,
