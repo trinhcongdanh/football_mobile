@@ -5,6 +5,7 @@ import { HeaderUser } from '@football/app/components/header-user/HeaderUser';
 import { InfoPerson } from '@football/app/components/info-person/InfoPerson';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { appStyles } from '@football/app/utils/constants/appStyles';
+import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
 import { getSize } from '@football/app/utils/responsive/scale';
 import React from 'react';
 import {
@@ -38,6 +39,7 @@ export const DataCoachScreen = ({ navigation, route }: IDataCoachScreenProps) =>
     // if (coachesData.success == false) {
     //     return <></>;
     // }
+    const { getTranslationText } = useTranslationText();
 
     return (
         <View style={appStyles.flex}>
@@ -49,7 +51,7 @@ export const DataCoachScreen = ({ navigation, route }: IDataCoachScreenProps) =>
                             <HeaderUser
                                 avt={AppImages.img_avt}
                                 point="1,325"
-                                icon={AppImages.img_angle_right}
+                                icon={AppImages.img_angle_arrow}
                                 color_pre={appColors.blue_black}
                                 color_after={appColors.blue_black}
                                 handlePressFunction={onGoBack}
@@ -58,10 +60,16 @@ export const DataCoachScreen = ({ navigation, route }: IDataCoachScreenProps) =>
                         <ScrollView showsVerticalScrollIndicator={false}>
                             <View style={appStyles.container}>
                                 <InfoPerson
-                                    name={coach.name_he}
+                                    name={getTranslationText({
+                                        textHe: coach.name_he,
+                                        textEn: coach.name_en,
+                                    })}
                                     data_3={coach.num_of_games}
                                     data_1={coach.date_of_birth}
-                                    data_2={coach.citizenship_he}
+                                    data_2={getTranslationText({
+                                        textHe: coach.citizenship_he,
+                                        textEn: coach.citizenship_en,
+                                    })}
                                     avt={coach.image_url}
                                     img_logo={coach.citizenship_image_url}
                                     title_1={t('data_player.birthday')}

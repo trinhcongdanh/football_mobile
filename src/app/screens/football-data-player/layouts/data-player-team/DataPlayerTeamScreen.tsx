@@ -5,7 +5,7 @@ import { appColors } from '@football/app/utils/constants/appColors';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import { getSize } from '@football/app/utils/responsive/scale';
 import React from 'react';
-import { ScrollView, Text, View } from 'react-native';
+import { I18nManager, ScrollView, Text, View } from 'react-native';
 import { Avatar } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/Feather';
 // import { IDataPlayerTeamScreenProps } from './DataPlayerTeamScreen.type';
@@ -16,9 +16,11 @@ import FastImage from 'react-native-fast-image';
 import LinearGradient from 'react-native-linear-gradient';
 import styles from './DataPlayerTeamScreen.style';
 import { useViewModel } from './DataPlayerTeamScreen.viewModel';
+import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
 
 export const DataPlayerTeamScreen = ({ player }: IDataPlayerTeamScreenProps) => {
     const { t, onGoBack, setSelectedSeason, selectedSeason } = useViewModel({ player });
+    const { getTranslationText } = useTranslationText();
 
     return (
         <ScrollView showsVerticalScrollIndicator={false}>
@@ -33,8 +35,21 @@ export const DataPlayerTeamScreen = ({ player }: IDataPlayerTeamScreenProps) => 
                             />
                         </View>
                         <View style={[appStyles.align_justify, { marginTop: getSize.m(54) }]}>
-                            <Text style={styles.club_name}>{player.team.name_he}</Text>
-                            <Text style={styles.club_desc}>({player.team.league_name_he})</Text>
+                            <Text style={styles.club_name}>
+                                {' '}
+                                {getTranslationText({
+                                    textHe: player.team.name_he,
+                                    textEn: player.team.name_en,
+                                })}
+                            </Text>
+                            <Text style={styles.club_desc}>
+                                (
+                                {getTranslationText({
+                                    textHe: player.team.league_name_he,
+                                    textEn: player.team.league_name_en,
+                                })}
+                                )
+                            </Text>
                         </View>
                         <View
                             style={{ flex: 1, marginBottom: getSize.m(20), width: getSize.m(130) }}
@@ -219,7 +234,12 @@ export const DataPlayerTeamScreen = ({ player }: IDataPlayerTeamScreenProps) => 
                                     ]}
                                 >
                                     <Text style={styles.frame}>{t('data_player.frame')}:</Text>
-                                    <Text style={appStyles.text_label}>{item.context_he}</Text>
+                                    <Text style={appStyles.text_label}>
+                                        {getTranslationText({
+                                            textHe: item.context_he,
+                                            textEn: item.context_en,
+                                        })}
+                                    </Text>
                                 </View>
                                 <View
                                     style={[
@@ -257,7 +277,10 @@ export const DataPlayerTeamScreen = ({ player }: IDataPlayerTeamScreenProps) => 
                                                 >
                                                     <View style={[appStyles.flex_row_align_center]}>
                                                         <Text style={styles.name_club}>
-                                                            {game.team1.name_he}
+                                                            {getTranslationText({
+                                                                textHe: game.team1.name_he,
+                                                                textEn: game.team1.name_en,
+                                                            })}
                                                         </Text>
                                                         <View style={styles.avt_club}>
                                                             <FastImage
@@ -298,7 +321,10 @@ export const DataPlayerTeamScreen = ({ player }: IDataPlayerTeamScreenProps) => 
                                                             style={styles.name_club}
                                                             numberOfLines={2}
                                                         >
-                                                            {game.team2.name_he}
+                                                            {getTranslationText({
+                                                                textHe: game.team2.name_he,
+                                                                textEn: game.team2.name_en,
+                                                            })}
                                                         </Text>
                                                     </View>
                                                 </View>
@@ -310,7 +336,12 @@ export const DataPlayerTeamScreen = ({ player }: IDataPlayerTeamScreenProps) => 
                                                                 fontSize: getSize.m(11),
                                                                 lineHeight: getSize.m(16.5),
                                                                 fontFamily: AppFonts.medium,
-                                                                marginRight: getSize.m(2),
+                                                                marginRight: I18nManager.isRTL
+                                                                    ? getSize.m(2)
+                                                                    : getSize.m(0),
+                                                                marginLeft: I18nManager.isRTL
+                                                                    ? getSize.m(0)
+                                                                    : getSize.m(50),
                                                             }}
                                                         >
                                                             {game.goals ? game.goals : '-'}
@@ -339,6 +370,9 @@ export const DataPlayerTeamScreen = ({ player }: IDataPlayerTeamScreenProps) => 
                                                             }
                                                             style={{
                                                                 marginLeft: getSize.m(10),
+                                                                marginRight: I18nManager.isRTL
+                                                                    ? 0
+                                                                    : getSize.m(2),
                                                                 width: getSize.m(14),
                                                                 height: getSize.m(20),
                                                             }}

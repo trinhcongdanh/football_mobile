@@ -5,6 +5,7 @@ import { InfoPerson } from '@football/app/components/info-person/InfoPerson';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import { ScreenName } from '@football/app/utils/constants/enum';
+import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
 import React, { useEffect } from 'react';
 import { ImageBackground, SafeAreaView, StatusBar, View } from 'react-native';
 import { IDataPlayerScreenProps } from './DataPlayerScreen.type';
@@ -28,6 +29,8 @@ export const DataPlayerScreen = ({ navigation, route }: IDataPlayerScreenProps) 
         }
     }, []);
 
+    const { getTranslationText } = useTranslationText();
+
     return (
         <View style={appStyles.flex}>
             <ImageBackground source={AppImages.img_background} style={appStyles.flex}>
@@ -39,15 +42,21 @@ export const DataPlayerScreen = ({ navigation, route }: IDataPlayerScreenProps) 
                                 <HeaderUser
                                     avt={AppImages.img_avt}
                                     point="1,325"
-                                    icon={AppImages.img_angle_right}
+                                    icon={AppImages.img_angle_arrow}
                                     color_pre={appColors.blue_black}
                                     color_after={appColors.blue_black}
                                     handlePressFunction={onGoBack}
                                 />
                                 <InfoPerson
-                                    name={player.name_he}
+                                    name={getTranslationText({
+                                        textHe: player.name_he,
+                                        textEn: player.name_en,
+                                    })}
                                     data_1={player.date_of_birth}
-                                    data_2={player.citizenship_he}
+                                    data_2={getTranslationText({
+                                        textHe: player.citizenship_he,
+                                        textEn: player.citizenship_en,
+                                    })}
                                     data_3={player.num_of_games}
                                     avt={player.image_url}
                                     img_logo={player.citizenship_image_url}

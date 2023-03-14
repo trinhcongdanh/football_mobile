@@ -43,6 +43,7 @@ export const ContactUsScreen = ({ navigation, route }: IContactUsScreenProps) =>
         errors,
         submitContact,
     } = useViewModel({ navigation, route });
+
     return (
         <View style={appStyles.flex}>
             <ImageBackground source={AppImages.img_background} style={appStyles.flex}>
@@ -59,7 +60,7 @@ export const ContactUsScreen = ({ navigation, route }: IContactUsScreenProps) =>
                     <ScrollView>
                         <View style={styles.contact_us_conatiner}>
                             <View style={styles.title}>
-                                <Text style={styles.title_text}>התאחדות לכדורגל בישראל</Text>
+                                <Text style={styles.title_text}>{t('contact.title')}</Text>
                             </View>
                             <View style={{ marginTop: getSize.m(16) }}>
                                 <Input

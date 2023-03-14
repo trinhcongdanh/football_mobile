@@ -31,11 +31,19 @@ export const CupsScreen = ({ route }: ICupsScreenProps) => {
                             iconName={appIcons.ic_right_ios}
                             iconStyle={styles.ic_back}
                             goBack={onGoBack}
-                            title={isCupHolders ? 'מחזיקות גביע' : 'סיבובי הגביע'}
+                            title={
+                                isCupHolders ? t('state_cup.cup.trophy') : t('state_cup.cup.around')
+                            }
                         />
                     </View>
                     <ScrollView>
-                        <HeaderLogo text={cup?.name_he} avt={{ uri: cup?.logo_url }} />
+                        <HeaderLogo
+                            text={getTranslationText({
+                                textHe: cup?.name_he,
+                                textEn: cup?.name_en,
+                            })}
+                            avt={{ uri: cup?.logo_url }}
+                        />
                         <View
                             style={[
                                 appStyles.package,
@@ -51,7 +59,7 @@ export const CupsScreen = ({ route }: ICupsScreenProps) => {
                                         },
                                     ]}
                                 >
-                                    <View style={{ width: getSize.m(80) }}>
+                                    <View style={{ width: getSize.m(84) }}>
                                         <Text
                                             style={[
                                                 appStyles.statistics_header,
@@ -99,7 +107,7 @@ export const CupsScreen = ({ route }: ICupsScreenProps) => {
                                                 <View
                                                     style={{
                                                         overflow: 'hidden',
-                                                        width: getSize.m(80),
+                                                        width: getSize.m(84),
                                                     }}
                                                 >
                                                     <Text

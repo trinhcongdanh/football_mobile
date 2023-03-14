@@ -1,6 +1,7 @@
 import { appIcons } from '@football/app/assets/icons/appIcons';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { appStyles } from '@football/app/utils/constants/appStyles';
+import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
 import { getSize } from '@football/app/utils/responsive/scale';
 import React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
@@ -12,6 +13,8 @@ import { useViewModel } from './TopScorers.viewModel';
 
 export const TopScorers = ({ listGames, handleTeamGoalKickersList }: ITopScorersProps) => {
     const { t } = useViewModel();
+    const { getTranslationText } = useTranslationText();
+
     return (
         <View style={appStyles.item_statistics}>
             <View style={[appStyles.flex_row_space_center]}>
@@ -24,7 +27,7 @@ export const TopScorers = ({ listGames, handleTeamGoalKickersList }: ITopScorers
                         {t('statistics.group.see_all')}
                     </Text>
                     <Icon
-                        name={appIcons.ic_arrow_left}
+                        name={appIcons.ic_left_ios}
                         size={getSize.m(10)}
                         color={appColors.button_dark_blue}
                         style={appStyles.statistic_ic_arrow}
@@ -84,7 +87,10 @@ export const TopScorers = ({ listGames, handleTeamGoalKickersList }: ITopScorers
                                             },
                                         ]}
                                     >
-                                        {item.name_he}
+                                        {getTranslationText({
+                                            textHe: item.name_he,
+                                            textEn: item.name_en,
+                                        })}
                                     </Text>
                                 </View>
                             </View>

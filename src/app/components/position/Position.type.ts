@@ -1,5 +1,5 @@
 export type IPositionProps = {
-    position: string;
+    position: string | undefined;
     color?: any;
     width?: any;
     fontWeight?: any;

@@ -48,6 +48,8 @@ type CustomProps = {
      * Enable right to left
      */
     isRtl?: boolean;
+
+    isEng?: boolean;
 };
 
 export const FabTabBar: React.FC<BottomTabBarProps & CustomProps> = ({
@@ -59,6 +61,7 @@ export const FabTabBar: React.FC<BottomTabBarProps & CustomProps> = ({
     focusedButtonStyle,
     mode = 'default',
     isRtl = false,
+    isEng = false,
 }) => {
     const currentDescriptor = descriptors[state.routes[state.index].key];
 
@@ -73,7 +76,7 @@ export const FabTabBar: React.FC<BottomTabBarProps & CustomProps> = ({
     const tabWidth = tabsWidthValue;
     const d = getTabShape(width, height + 10, tabWidth, TAB_BAR_HEIGHT);
 
-    const initialPosition = isRtl
+    const initialPosition = (isEng ? !isRtl : isRtl)
         ? -width + tabsWidthValue * state.index
         : width - tabsWidthValue * (state.index + 1);
 

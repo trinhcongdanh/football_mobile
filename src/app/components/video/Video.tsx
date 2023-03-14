@@ -3,6 +3,7 @@ import { AppImages } from '@football/app/assets/images';
 import { styles } from '@football/app/components/video/Video.style';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { appStyles } from '@football/app/utils/constants/appStyles';
+import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
 import { getSize } from '@football/app/utils/responsive/scale';
 import { BlurView } from '@react-native-community/blur';
 import Slider from '@react-native-community/slider';
@@ -134,6 +135,8 @@ export const Video = () => {
         }
         console.log(showVideo);
     }, [showVideo]);
+
+    const { getTranslationText } = useTranslationText();
     return (
         <View
             style={{
@@ -287,10 +290,19 @@ export const Video = () => {
                             }}
                         >
                             <Text style={styles.title}>
-                                {sourceVideo && sourceVideo.caption_he}
+                                {sourceVideo &&
+                                    getTranslationText({
+                                        textHe: sourceVideo.caption_he,
+                                        textEn: sourceVideo.caption_en,
+                                    })}
                             </Text>
                             {sourceVideo && sourceVideo.text_he && (
-                                <Text style={styles.desc}>{sourceVideo.text_he}</Text>
+                                <Text style={styles.desc}>
+                                    {getTranslationText({
+                                        textHe: sourceVideo.text_he,
+                                        textEn: sourceVideo.text_en,
+                                    })}
+                                </Text>
                             )}
                         </View>
                     </View>

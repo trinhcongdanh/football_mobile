@@ -10,9 +10,12 @@ import LinearGradient from 'react-native-linear-gradient';
 import { MAX_LEAGUE_SEASON_STATS_ITEMS } from '@football/core/api/configs/config';
 import { useViewModel } from './ScoresGoals.viewModel';
 import { IScoresGoalsProps } from './ScoresGoals.type';
+import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
 
 export const ScoresGoals = ({ goalKickers, leagueSeasonStats }: IScoresGoalsProps) => {
     const { t, handleSeeAll } = useViewModel();
+    const { getTranslationText } = useTranslationText();
+
     return (
         <View style={appStyles.item_statistics}>
             <View
@@ -43,7 +46,7 @@ export const ScoresGoals = ({ goalKickers, leagueSeasonStats }: IScoresGoalsProp
                         {t('statistics.leagues.see_all')}
                     </Text>
                     <Icon
-                        name={appIcons.ic_arrow_left}
+                        name={appIcons.ic_left_ios}
                         size={getSize.m(10)}
                         color={appColors.button_dark_blue}
                         style={appStyles.statistic_ic_arrow}
@@ -124,7 +127,10 @@ export const ScoresGoals = ({ goalKickers, leagueSeasonStats }: IScoresGoalsProp
                                             },
                                         ]}
                                     >
-                                        {item.player_name_he}
+                                        {getTranslationText({
+                                            textHe: item.player_name_he,
+                                            textEn: item.player_name_en,
+                                        })}
                                     </Text>
                                 </View>
                             </View>
@@ -153,7 +159,10 @@ export const ScoresGoals = ({ goalKickers, leagueSeasonStats }: IScoresGoalsProp
                                             },
                                         ]}
                                     >
-                                        {item.team_name_he}
+                                        {getTranslationText({
+                                            textHe: item.team_name_he,
+                                            textEn: item.team_name_en,
+                                        })}
                                     </Text>
                                 </View>
                             </View>

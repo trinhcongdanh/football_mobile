@@ -3,6 +3,7 @@ import { HeaderUser } from '@football/app/components/header-user/HeaderUser';
 import { InfoPerson } from '@football/app/components/info-person/InfoPerson';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { appStyles } from '@football/app/utils/constants/appStyles';
+import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
 import { getSize } from '@football/app/utils/responsive/scale';
 import React from 'react';
 import {
@@ -23,6 +24,8 @@ import { useViewModel } from './PitchScreen.viewModel';
 
 export const PitchScreen = ({ navigation, route }: IPitchScreenProps) => {
     const { t, onGoBack, stadium } = useViewModel({ navigation, route });
+    const { getTranslationText } = useTranslationText();
+
     return (
         <View style={appStyles.flex}>
             {stadium && (
@@ -33,7 +36,7 @@ export const PitchScreen = ({ navigation, route }: IPitchScreenProps) => {
                             <HeaderUser
                                 avt={AppImages.img_avt}
                                 point="1,325"
-                                icon={AppImages.img_angle_right}
+                                icon={AppImages.img_angle_arrow}
                                 color_pre={appColors.blue_black}
                                 color_after={appColors.blue_black}
                                 handlePressFunction={onGoBack}
@@ -42,15 +45,27 @@ export const PitchScreen = ({ navigation, route }: IPitchScreenProps) => {
                         <ScrollView>
                             <View style={appStyles.container}>
                                 <InfoPerson
-                                    name={stadium?.name_he}
-                                    data_1={stadium?.address_he}
-                                    data_2={stadium?.contact_he}
+                                    name={getTranslationText({
+                                        textHe: stadium?.name_he,
+                                        textEn: stadium?.name_en,
+                                    })}
+                                    data_1={getTranslationText({
+                                        textHe: stadium?.address_he,
+                                        textEn: stadium?.address_en,
+                                    })}
+                                    data_2={getTranslationText({
+                                        textHe: stadium?.contact_he,
+                                        textEn: stadium?.contact_en,
+                                    })}
                                     data_3={stadium?.phone}
                                     avt={stadium?.image_url}
                                     title_1={t('pitch.address')}
                                     title_2={t('pitch.contact')}
                                     title_3={t('pitch.phone')}
-                                    rating={stadium?.rating_he}
+                                    rating={getTranslationText({
+                                        textHe: stadium?.rating_he,
+                                        textEn: stadium?.rating_en,
+                                    })}
                                     style={{ width: getSize.m(100) }}
                                 />
                             </View>
@@ -161,7 +176,10 @@ export const PitchScreen = ({ navigation, route }: IPitchScreenProps) => {
                                                                     },
                                                                 ]}
                                                             >
-                                                                {item.name_he}
+                                                                {getTranslationText({
+                                                                    textHe: item.name_he,
+                                                                    textEn: item.name_en,
+                                                                })}
                                                             </Text>
                                                         </View>
                                                     </View>
@@ -179,7 +197,10 @@ export const PitchScreen = ({ navigation, route }: IPitchScreenProps) => {
                                                                 },
                                                             ]}
                                                         >
-                                                            {item.age_he}
+                                                            {getTranslationText({
+                                                                textHe: item.age_he,
+                                                                textEn: item.age_en,
+                                                            })}
                                                         </Text>
                                                     </View>
                                                     <View

@@ -35,6 +35,7 @@ import {
 import styles from './NationalTeamScreen.style';
 import { useViewModel } from './NationalTeamScreen.viewModel';
 import { INationalTeamScreenProps } from './NationalTeamScreen.type';
+import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
 
 export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenProps) => {
     const {
@@ -67,6 +68,8 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
         route,
     });
     const [indexDot, setIndexDot] = useState(0);
+    const { getTranslationText } = useTranslationText();
+
     return (
         <View style={appStyles.flex}>
             <ImageBackground source={AppImages.img_background} style={appStyles.flex}>
@@ -76,7 +79,7 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                         <HeaderUser
                             avt={AppImages.img_avt}
                             point="1,325"
-                            icon={AppImages.img_angle_right}
+                            icon={AppImages.img_angle_arrow}
                             color_pre={appColors.black}
                             color_after={appColors.black}
                             handlePressFunction={onGoBack}
@@ -91,7 +94,12 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                                         style={styles.image_logo}
                                     />
                                 </View>
-                                <Text style={styles.text_title}>{topTeam?.name_he}</Text>
+                                <Text style={styles.text_title}>
+                                    {getTranslationText({
+                                        textHe: topTeam?.name_he,
+                                        textEn: topTeam?.name_en,
+                                    })}
+                                </Text>
                             </View>
                             <View style={{ marginTop: getSize.m(20) }}>
                                 <TouchableOpacity
@@ -122,7 +130,10 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                                     </View>
                                     <View style={styles.content}>
                                         <Text style={styles.text_content}>
-                                            {topTeam?.main_video?.caption_he}
+                                            {getTranslationText({
+                                                textHe: topTeam?.main_video?.caption_he,
+                                                textEn: topTeam?.main_video?.caption_en,
+                                            })}
                                         </Text>
                                     </View>
                                 </TouchableOpacity>
@@ -249,9 +260,12 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                                                     </View>
                                                     <View style={styles.content}>
                                                         <Text style={styles.text_content}>
-                                                            {item.caption_he}{' '}
+                                                            {getTranslationText({
+                                                                textHe: item.caption_he,
+                                                                textEn: item.caption_en,
+                                                            })}
                                                             <IconFeather
-                                                                name={appIcons.ic_arrow_left}
+                                                                name={appIcons.ic_left_ios}
                                                                 size={getSize.m(12)}
                                                                 color={appColors.white}
                                                                 style={styles.ic_arrow_left}
@@ -298,12 +312,24 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                                             <ListGame
                                                 // eslint-disable-next-line react/no-array-index-key
                                                 key={index}
-                                                tournament={item.name_he}
+                                                tournament={getTranslationText({
+                                                    textHe: item.name_he,
+                                                    textEn: item.name_en,
+                                                })}
                                                 logo_home={item.team1.logo_url}
                                                 logo_away={item.team2.logo_url}
-                                                nameHome={item.team1.name_he}
-                                                nameAway={item.team2.name_he}
-                                                location={item.stadium_he}
+                                                nameHome={getTranslationText({
+                                                    textHe: item.team1.name_he,
+                                                    textEn: item.team1.name_en,
+                                                })}
+                                                nameAway={getTranslationText({
+                                                    textHe: item.team2.name_he,
+                                                    textEn: item.team2.name_en,
+                                                })}
+                                                location={getTranslationText({
+                                                    textHe: item.stadium_he,
+                                                    textEn: item.stadium_en,
+                                                })}
                                                 date={item.date}
                                                 result={item.score}
                                                 schedule={item.time}
@@ -332,10 +358,13 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                         </View>
                         <View>
                             <HeaderLogo
-                                text={topTeam?.last_campaign?.name_he}
+                                text={getTranslationText({
+                                    textHe: topTeam?.last_campaign?.name_he,
+                                    textEn: topTeam?.last_campaign?.name_en,
+                                })}
                                 avt={AppImages.img_israel}
                                 details={t('national_team.previous_campaigns')}
-                                icon={appIcons.ic_arrow_left}
+                                icon={appIcons.ic_left_ios}
                                 handleNavigation={() => handleNavigation()}
                             />
                             <View
@@ -352,7 +381,10 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                                     </View>
                                     <View style={{ marginTop: getSize.m(26) }}>
                                         <Position
-                                            position={topTeam?.last_campaign?.group_name_he}
+                                            position={getTranslationText({
+                                                textHe: topTeam?.last_campaign?.group_name_he,
+                                                textEn: topTeam?.last_campaign?.group_name_en,
+                                            })}
                                             color={appColors.text_dark_blue}
                                             fontFamily={AppFonts.bold}
                                             fontSize={getSize.m(11)}
@@ -518,7 +550,12 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                                                                                 },
                                                                             ]}
                                                                         >
-                                                                            {item.name_he}
+                                                                            {getTranslationText({
+                                                                                textHe:
+                                                                                    item.name_he,
+                                                                                textEn:
+                                                                                    item.name_en,
+                                                                            })}
                                                                         </Text>
                                                                     </View>
                                                                 </View>
@@ -622,7 +659,10 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                                     </View>
                                     <View style={{ marginTop: getSize.m(26) }}>
                                         <Position
-                                            position={topTeam?.last_campaign?.group_name_he}
+                                            position={getTranslationText({
+                                                textHe: topTeam?.last_campaign?.group_name_he,
+                                                textEn: topTeam?.last_campaign?.group_name_en,
+                                            })}
                                             color={appColors.text_dark_blue}
                                             fontFamily={AppFonts.bold}
                                             fontSize={getSize.m(11)}
@@ -689,14 +729,23 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                                                             key={item.game_id}
                                                             logo_home={item.team1.logo_url}
                                                             logo_away={item.team2.logo_url}
-                                                            nameHome={item.team1.name_he}
-                                                            nameAway={item.team2.name_he}
-                                                            location={item.stadium_he}
+                                                            nameHome={getTranslationText({
+                                                                textHe: item.team1.name_he,
+                                                                textEn: item.team1.name_en,
+                                                            })}
+                                                            nameAway={getTranslationText({
+                                                                textHe: item.team2.name_he,
+                                                                textEn: item.team2.name_en,
+                                                            })}
+                                                            location={getTranslationText({
+                                                                textHe: item.stadium_he,
+                                                                textEn: item.stadium_en,
+                                                            })}
                                                             date={item.date}
                                                             result={item.score}
                                                             schedule={item.time}
                                                             // completed={item.completed}
-                                                            icon={appIcons.ic_arrow_left}
+                                                            icon={appIcons.ic_left_ios}
                                                             color={appColors.gray}
                                                             details={item.game_id}
                                                             handleDetailMatch={() =>
@@ -742,7 +791,7 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                                                 {t('national_team.conquerors.full_list')}
                                             </Text>
                                             <IconFeather
-                                                name={appIcons.ic_arrow_left}
+                                                name={appIcons.ic_left_ios}
                                                 size={getSize.m(10)}
                                                 color={appColors.button_dark_blue}
                                                 style={appStyles.statistic_ic_arrow}
@@ -788,7 +837,10 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                                                                     },
                                                                 ]}
                                                             >
-                                                                {item.name_he}
+                                                                {getTranslationText({
+                                                                    textHe: item.name_he,
+                                                                    textEn: item.name_en,
+                                                                })}
                                                             </Text>
                                                         </View>
                                                         <View>
@@ -830,7 +882,7 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                                                 {t('national_team.performances.full_list')}
                                             </Text>
                                             <IconFeather
-                                                name={appIcons.ic_arrow_left}
+                                                name={appIcons.ic_left_ios}
                                                 size={getSize.m(10)}
                                                 color={appColors.button_dark_blue}
                                                 style={appStyles.statistic_ic_arrow}
@@ -875,7 +927,10 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                                                                     },
                                                                 ]}
                                                             >
-                                                                {item.name_he}
+                                                                {getTranslationText({
+                                                                    textHe: item.name_he,
+                                                                    textEn: item.name_en,
+                                                                })}
                                                             </Text>
                                                         </View>
                                                         <View>
@@ -924,7 +979,7 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                                             <Text style={styles.name_player}>{item.name}</Text>
                                         </View>
                                         <IconFeather
-                                            name={appIcons.ic_arrow_left}
+                                            name={appIcons.ic_left_ios}
                                             color={appColors.text_dark_blue}
                                             style={{ fontFamily: AppFonts.bold }}
                                         />

@@ -22,6 +22,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { TopTeamModel } from '@football/core/models/TopTeamModelResponse';
 import { Game } from '@football/core/models/TeamModelResponse';
+import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
 
 export const ListGameScreen = ({ navigation, route }: IListGameScreenProps) => {
     const topTeam = route?.params?.topTeam as TopTeamModel;
@@ -29,6 +30,8 @@ export const ListGameScreen = ({ navigation, route }: IListGameScreenProps) => {
         navigation,
         route,
     });
+    const { getTranslationText } = useTranslationText();
+
     return (
         <View style={appStyles.flex}>
             <ImageBackground source={AppImages.img_background} style={appStyles.flex}>
@@ -44,7 +47,10 @@ export const ListGameScreen = ({ navigation, route }: IListGameScreenProps) => {
                     </View>
                     <ScrollView>
                         <HeaderLogo
-                            text={topTeam.last_campaign.name_he}
+                            text={getTranslationText({
+                                textHe: topTeam.last_campaign.name_he,
+                                textEn: topTeam.last_campaign.name_en,
+                            })}
                             avt={{ uri: topTeam.logo_url }}
                         />
                         <View
@@ -127,7 +133,10 @@ export const ListGameScreen = ({ navigation, route }: IListGameScreenProps) => {
                                                                 },
                                                             ]}
                                                         >
-                                                            {item.team1.name_he}
+                                                            {getTranslationText({
+                                                                textHe: item.team1.name_he,
+                                                                textEn: item.team1.name_en,
+                                                            })}
                                                         </Text>
                                                         <View style={styles.avt_club}>
                                                             <FastImage
@@ -180,7 +189,10 @@ export const ListGameScreen = ({ navigation, route }: IListGameScreenProps) => {
                                                                 },
                                                             ]}
                                                         >
-                                                            {item.team2.name_he}
+                                                            {getTranslationText({
+                                                                textHe: item.team2.name_he,
+                                                                textEn: item.team2.name_en,
+                                                            })}
                                                         </Text>
                                                     </View>
                                                 </View>
@@ -202,7 +214,10 @@ export const ListGameScreen = ({ navigation, route }: IListGameScreenProps) => {
                                                             }}
                                                         />
                                                         <Text style={styles.location}>
-                                                            {item.stadium_he}
+                                                            {getTranslationText({
+                                                                textHe: item.stadium_he,
+                                                                textEn: item.stadium_en,
+                                                            })}
                                                         </Text>
                                                     </View>
                                                 </TouchableOpacity>

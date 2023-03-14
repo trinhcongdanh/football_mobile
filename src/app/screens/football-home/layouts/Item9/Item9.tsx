@@ -8,15 +8,18 @@ import { appIcons } from '@football/app/assets/icons/appIcons';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { IItem9Props } from '@football/app/screens/football-home/layouts/Item9/Item9.type';
 import LinearGradient from 'react-native-linear-gradient';
+import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
 
 export const Item9 = ({ homePage }: IItem9Props) => {
     const { t, pages, activeIndexNumber, setActiveIndexNumber, dots, onClickImage } = useViewModel({
         homePage,
     });
+    const { getTranslationText } = useTranslationText();
+
     return (
         <View style={styles.container}>
             <View style={{ marginVertical: getSize.m(20), marginLeft: getSize.m(18) }}>
-                <Text style={styles.header}>מגזין ההתאחדות</Text>
+                <Text style={styles.header}>{t('home_page.magazine')}</Text>
             </View>
             <ScrollView
                 horizontal
@@ -59,9 +62,12 @@ export const Item9 = ({ homePage }: IItem9Props) => {
                                 </View> */}
                                 <View style={styles.content}>
                                     <Text style={styles.text_content}>
-                                        {item.caption_he}{' '}
+                                        {getTranslationText({
+                                            textHe: item.caption_he,
+                                            textEn: item.caption_en,
+                                        })}
                                         <Icon
-                                            name={appIcons.ic_arrow_left}
+                                            name={appIcons.ic_left_ios}
                                             size={getSize.m(12)}
                                             color={appColors.white}
                                             style={styles.ic_arrow_left}

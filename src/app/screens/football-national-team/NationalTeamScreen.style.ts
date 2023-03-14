@@ -156,6 +156,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: getSize.m(30),
         paddingVertical: getSize.m(10),
         borderRadius: getSize.m(30),
+        flex: I18nManager.isRTL ? 0 : 1,
     },
 
     text_option: {

@@ -2,6 +2,7 @@ import { appIcons } from '@football/app/assets/icons/appIcons';
 import { ITrophyProps } from '@football/app/screens/football-state-cup/layouts/Statistics/Trophy/Trophy.type';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { appStyles } from '@football/app/utils/constants/appStyles';
+import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
 import { getSize } from '@football/app/utils/responsive/scale';
 import React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
@@ -13,6 +14,7 @@ import { useViewModel } from './Trophy.viewModel';
 
 export const Trophy = ({ cupHolders, cup }: ITrophyProps) => {
     const { t, handleCupAround, holders } = useViewModel({ cupHolders, cup });
+    const { getTranslationText } = useTranslationText();
 
     return (
         <View style={styles.item_statistics}>
@@ -28,7 +30,7 @@ export const Trophy = ({ cupHolders, cup }: ITrophyProps) => {
                 <TouchableOpacity style={appStyles.flex_row_space_center} onPress={handleCupAround}>
                     <Text style={styles.see_all}>{t('state_cup.statistics.see_all')}</Text>
                     <Icon
-                        name={appIcons.ic_arrow_left}
+                        name={appIcons.ic_left_ios}
                         size={getSize.m(10)}
                         color={appColors.button_dark_blue}
                         style={styles.ic_arrow}
@@ -102,7 +104,10 @@ export const Trophy = ({ cupHolders, cup }: ITrophyProps) => {
                                             },
                                         ]}
                                     >
-                                        {item.team_name_en}
+                                        {getTranslationText({
+                                            textHe: item.team_name_he,
+                                            textEn: item.team_name_en,
+                                        })}
                                     </Text>
                                 </View>
                             </View>

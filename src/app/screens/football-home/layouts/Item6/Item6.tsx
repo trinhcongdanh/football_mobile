@@ -6,6 +6,7 @@ import styles from '@football/app/screens/football-home/layouts/Item6/Item6.styl
 import { useViewModel } from '@football/app/screens/football-home/layouts/Item6/Item6.viewModel';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { appStyles } from '@football/app/utils/constants/appStyles';
+import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
 import { getSize } from '@football/app/utils/responsive/scale';
 import { MAX_TOPTEAM_LASTCAMPAIGN_GAMES } from '@football/core/api/configs/config';
 import moment from 'moment';
@@ -70,6 +71,8 @@ export const Item6 = ({ topTeam }: IItem6Props) => {
     //         </View>
     //     </View>
     // );
+    const { getTranslationText } = useTranslationText();
+
     return (
         <View style={{ paddingTop: getSize.m(26), backgroundColor: appColors.gray2 }}>
             <View
@@ -84,14 +87,17 @@ export const Item6 = ({ topTeam }: IItem6Props) => {
                 <TouchableOpacity style={appStyles.flex_row_align}>
                     <Text style={styles.see_all}>{t('home_page.all_game')}</Text>
                     <Icon
-                        name={appIcons.ic_arrow_left}
+                        name={appIcons.ic_left_ios}
                         size={getSize.m(13)}
                         color={appColors.text_dark_blue}
                     />
                 </TouchableOpacity>
             </View>
             <Position
-                position={topTeam?.last_campaign?.group_name_he}
+                position={getTranslationText({
+                    textHe: topTeam?.last_campaign?.group_name_he,
+                    textEn: topTeam?.last_campaign?.group_name_en,
+                })}
                 color={appColors.text_dark_blue}
                 fontFamily={AppFonts.bold}
                 fontSize={getSize.m(11)}
@@ -156,14 +162,23 @@ export const Item6 = ({ topTeam }: IItem6Props) => {
                                 key={item.game_id}
                                 logo_home={item.team1.logo_url}
                                 logo_away={item.team2.logo_url}
-                                nameHome={item.team1.name_he}
-                                nameAway={item.team2.name_he}
-                                location={item.stadium_he}
+                                nameHome={getTranslationText({
+                                    textHe: item.team1.name_he,
+                                    textEn: item.team1.name_en,
+                                })}
+                                nameAway={getTranslationText({
+                                    textHe: item.team2.name_he,
+                                    textEn: item.team2.name_en,
+                                })}
+                                location={getTranslationText({
+                                    textHe: item.stadium_he,
+                                    textEn: item.stadium_en,
+                                })}
                                 date={item.date}
                                 result={item.score}
                                 schedule={item.time}
                                 // completed={item.completed}
-                                icon={appIcons.ic_arrow_left}
+                                icon={appIcons.ic_left_ios}
                                 color={appColors.gray2}
                                 details={item.game_id}
                                 handleDetailMatch={() => handleDetailMatch(item.game_id)}

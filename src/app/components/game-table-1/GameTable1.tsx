@@ -6,6 +6,7 @@ import { appColors } from '@football/app/utils/constants/appColors';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import { getSize } from '@football/app/utils/responsive/scale';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { Text, TouchableOpacity, View } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import IconFeather from 'react-native-vector-icons/Feather';
@@ -24,6 +25,8 @@ export const GameTable1 = ({
     score,
     onHandleDetailMatch,
 }: IGameTable1Props) => {
+    const { t } = useTranslation();
+
     return (
         <View style={styles.game_table}>
             <View style={appStyles.flex_row_align}>
@@ -127,7 +130,7 @@ export const GameTable1 = ({
                             }}
                             resizeMode={FastImage.resizeMode.contain}
                         />
-                        <Text style={styles.title}>שערים</Text>
+                        <Text style={styles.title}>{t('table_game.gates')}</Text>
                     </View>
                 </View>
 
@@ -169,7 +172,7 @@ export const GameTable1 = ({
                             }}
                             resizeMode={FastImage.resizeMode.contain}
                         />
-                        <Text style={styles.title}>כרטיסים</Text>
+                        <Text style={styles.title}>{t('table_game.tickets')}</Text>
                     </View>
                 </View>
                 <View style={appStyles.align_justify}>
@@ -184,7 +187,7 @@ export const GameTable1 = ({
                             }}
                             resizeMode={FastImage.resizeMode.contain}
                         />
-                        <Text style={styles.title}>זמן משחק</Text>
+                        <Text style={styles.title}>{t('table_game.playing_time')}</Text>
                     </View>
                 </View>
             </View>

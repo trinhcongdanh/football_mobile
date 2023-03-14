@@ -5,7 +5,14 @@ import styles from '@football/app/screens/football-home/layouts/Item3/Item3.styl
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import { getSize } from '@football/app/utils/responsive/scale';
 import React from 'react';
-import { ImageBackground, Text, View, TouchableOpacity, ScrollView } from 'react-native';
+import {
+    ImageBackground,
+    Text,
+    View,
+    TouchableOpacity,
+    ScrollView,
+    I18nManager,
+} from 'react-native';
 import IconEntypo from 'react-native-vector-icons/Entypo';
 import FastImage from 'react-native-fast-image';
 import LinearGradient from 'react-native-linear-gradient';
@@ -13,6 +20,7 @@ import { useViewModel } from '@football/app/screens/football-home/layouts/Item3/
 import { appColors } from '@football/app/utils/constants/appColors';
 import { GameTable1 } from '@football/app/components/game-table-1/GameTable1';
 import { IItem3Props } from './Item3.type';
+import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
 
 export const Item3 = ({ player }: IItem3Props) => {
     const {
@@ -23,6 +31,8 @@ export const Item3 = ({ player }: IItem3Props) => {
         onClickPlayer,
         handleDetailMatch,
     } = useViewModel();
+    const { getTranslationText } = useTranslationText();
+
     return (
         <ImageBackground
             source={AppImages.img_background_home_3}
@@ -40,7 +50,12 @@ export const Item3 = ({ player }: IItem3Props) => {
                     />
                 </View>
                 <View style={[appStyles.flex_row_align, { marginTop: getSize.m(14) }]}>
-                    <Text style={styles.text_details}>{player.name_he}</Text>
+                    <Text style={styles.text_details}>
+                        {getTranslationText({
+                            textHe: player.name_he,
+                            textEn: player.name_en,
+                        })}
+                    </Text>
                     <TouchableOpacity onPress={() => onClickPlayer(player._id)}>
                         <LinearGradient
                             colors={['rgba(255, 43, 94, 1)', 'rgba(204, 10, 45, 1)']}
@@ -48,7 +63,11 @@ export const Item3 = ({ player }: IItem3Props) => {
                         >
                             <FastImage
                                 source={AppImages.img_angle_down}
-                                style={{ width: getSize.m(9), height: getSize.m(12) }}
+                                style={{
+                                    width: getSize.m(9),
+                                    height: getSize.m(12),
+                                    transform: [{ rotate: I18nManager.isRTL ? '0deg' : '180deg' }],
+                                }}
                                 resizeMode={FastImage.resizeMode.contain}
                             />
                         </LinearGradient>
@@ -105,7 +124,7 @@ export const Item3 = ({ player }: IItem3Props) => {
                         >
                             <Text style={styles.text_see_all}>{t('home_page.see_all')}</Text>
                             <IconEntypo
-                                name={appIcons.ic_arrow_left}
+                                name={appIcons.ic_left_ios}
                                 size={getSize.m(13)}
                                 color={appColors.button_dark_blue}
                             />
@@ -116,8 +135,14 @@ export const Item3 = ({ player }: IItem3Props) => {
                             <GameTable1
                                 key={game.game_id}
                                 date={game.date}
-                                name_away={game.team2.name_he}
-                                name_home={game.team1.name_he}
+                                name_away={getTranslationText({
+                                    textHe: game.team2.name_he,
+                                    textEn: game.team2.name_en,
+                                })}
+                                name_home={getTranslationText({
+                                    textHe: game.team1.name_he,
+                                    textEn: game.team1.name_en,
+                                })}
                                 result={game.score}
                                 schedule=":"
                                 avt_away={game.team2.logo_url}
@@ -166,7 +191,7 @@ export const Item3 = ({ player }: IItem3Props) => {
                         >
                             <Text style={styles.text_see_all}>{t('home_page.see_all')}</Text>
                             <IconEntypo
-                                name={appIcons.ic_arrow_left}
+                                name={appIcons.ic_left_ios}
                                 size={getSize.m(13)}
                                 color={appColors.button_dark_blue}
                             />

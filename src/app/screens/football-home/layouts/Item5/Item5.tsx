@@ -7,10 +7,18 @@ import styles from '@football/app/screens/football-home/layouts/Item5/Item5.styl
 import { useViewModel } from '@football/app/screens/football-home/layouts/Item5/Item5.viewModel';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { appStyles } from '@football/app/utils/constants/appStyles';
+import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
 import { getSize } from '@football/app/utils/responsive/scale';
 import moment from 'moment';
 import React from 'react';
-import { ImageBackground, ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import {
+    I18nManager,
+    ImageBackground,
+    ScrollView,
+    Text,
+    TouchableOpacity,
+    View,
+} from 'react-native';
 import { Avatar } from 'react-native-elements';
 import FastImage from 'react-native-fast-image';
 import LinearGradient from 'react-native-linear-gradient';
@@ -27,6 +35,8 @@ export const Item5 = ({ topTeam }: IItem5Props) => {
         onClickTopTeam,
         handleDetailMatch,
     } = useViewModel();
+    const { getTranslationText } = useTranslationText();
+
     return (
         <ImageBackground
             source={AppImages.img_background_home_4}
@@ -45,7 +55,12 @@ export const Item5 = ({ topTeam }: IItem5Props) => {
                     />
                 </View>
                 <View style={[appStyles.flex_row_align, { marginTop: getSize.m(14) }]}>
-                    <Text style={styles.text_details}>{topTeam.name_he}</Text>
+                    <Text style={styles.text_details}>
+                        {getTranslationText({
+                            textHe: topTeam.name_he,
+                            textEn: topTeam.name_en,
+                        })}
+                    </Text>
                     <TouchableOpacity onPress={() => onClickTopTeam(topTeam._id)}>
                         <LinearGradient
                             colors={['rgba(255, 43, 94, 1)', 'rgba(204, 10, 45, 1)']}
@@ -53,7 +68,11 @@ export const Item5 = ({ topTeam }: IItem5Props) => {
                         >
                             <FastImage
                                 source={AppImages.img_angle_down}
-                                style={{ width: getSize.m(9), height: getSize.m(12) }}
+                                style={{
+                                    width: getSize.m(9),
+                                    height: getSize.m(12),
+                                    transform: [{ rotate: I18nManager.isRTL ? '0deg' : '180deg' }],
+                                }}
                                 resizeMode={FastImage.resizeMode.contain}
                             />
                         </LinearGradient>
@@ -108,7 +127,7 @@ export const Item5 = ({ topTeam }: IItem5Props) => {
                         >
                             <Text style={styles.text_see_all}>{t('home_page.see_all')}</Text>
                             <IconEntypo
-                                name={appIcons.ic_arrow_left}
+                                name={appIcons.ic_left_ios}
                                 size={getSize.m(13)}
                                 color={appColors.button_dark_blue}
                             />
@@ -202,7 +221,10 @@ export const Item5 = ({ topTeam }: IItem5Props) => {
                                                             },
                                                         ]}
                                                     >
-                                                        {item.player_name_he}
+                                                        {getTranslationText({
+                                                            textHe: item.player_name_he,
+                                                            textEn: item.player_name_en,
+                                                        })}
                                                     </Text>
                                                 </View>
                                             </View>
@@ -306,7 +328,10 @@ export const Item5 = ({ topTeam }: IItem5Props) => {
                                                             },
                                                         ]}
                                                     >
-                                                        {item.player_name_he}
+                                                        {getTranslationText({
+                                                            textHe: item.player_name_he,
+                                                            textEn: item.player_name_en,
+                                                        })}
                                                     </Text>
                                                 </View>
                                             </View>
@@ -404,7 +429,7 @@ export const Item5 = ({ topTeam }: IItem5Props) => {
                         <TouchableOpacity style={appStyles.flex_row_align}>
                             <Text style={styles.text_see_all}>{t('home_page.see_all')}</Text>
                             <IconEntypo
-                                name={appIcons.ic_arrow_left}
+                                name={appIcons.ic_left_ios}
                                 size={getSize.m(13)}
                                 color={appColors.button_dark_blue}
                             />
@@ -428,9 +453,18 @@ export const Item5 = ({ topTeam }: IItem5Props) => {
                                     key={item.game_id}
                                     logo_home={item.team1.logo_url}
                                     logo_away={item.team2.logo_url}
-                                    nameHome={item.team1.name_he}
-                                    nameAway={item.team2.name_he}
-                                    location={item.stadium_he}
+                                    nameHome={getTranslationText({
+                                        textHe: item.team1.name_he,
+                                        textEn: item.team1.name_en,
+                                    })}
+                                    nameAway={getTranslationText({
+                                        textHe: item.team2.name_he,
+                                        textEn: item.team2.name_en,
+                                    })}
+                                    location={getTranslationText({
+                                        textHe: item.stadium_he,
+                                        textEn: item.stadium_en,
+                                    })}
                                     date={item.date}
                                     result={item.score}
                                     schedule={item.time}

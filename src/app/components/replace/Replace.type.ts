@@ -1,8 +1,8 @@
 export type IReplaceProps = {
-    name_up: string;
-    name_down: string;
+    name_up: string | undefined;
+    name_down: string | undefined;
     avt_up: string;
     avt_down: string;
     minute: any;
-    team: string;
+    team: string | undefined;
 };

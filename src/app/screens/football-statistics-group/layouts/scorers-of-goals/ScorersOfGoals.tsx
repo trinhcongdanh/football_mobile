@@ -9,9 +9,12 @@ import { Avatar } from 'react-native-elements';
 import LinearGradient from 'react-native-linear-gradient';
 import { useViewModel } from './ScorersOfGoals.viewModel';
 import { IScorersOfGoalsProps } from './ScorersOfGoals.type';
+import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
 
 export const ScorersOfGoals = ({ listGames, handleTeamGoalKickersList }: IScorersOfGoalsProps) => {
     const { t } = useViewModel();
+    const { getTranslationText } = useTranslationText();
+
     return (
         <View style={appStyles.item_statistics}>
             <View style={[appStyles.flex_row_space_center]}>
@@ -26,7 +29,7 @@ export const ScorersOfGoals = ({ listGames, handleTeamGoalKickersList }: IScorer
                         {t('statistics.group.see_all')}
                     </Text>
                     <Icon
-                        name={appIcons.ic_arrow_left}
+                        name={appIcons.ic_left_ios}
                         size={getSize.m(10)}
                         color={appColors.button_dark_blue}
                         style={appStyles.statistic_ic_arrow}
@@ -86,7 +89,10 @@ export const ScorersOfGoals = ({ listGames, handleTeamGoalKickersList }: IScorer
                                             },
                                         ]}
                                     >
-                                        {item.name_he}
+                                        {getTranslationText({
+                                            textHe: item.name_he,
+                                            textEn: item.name_en,
+                                        })}
                                     </Text>
                                 </View>
                             </View>

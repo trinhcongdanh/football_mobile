@@ -7,8 +7,11 @@ import styles from './OptionState.style';
 import { useViewModel } from './OptionState.viewModel';
 import { IOptionStateProps } from './OptionState.type';
 import LinearGradient from 'react-native-linear-gradient';
+import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
 export const OptionState = ({ label, data }: IOptionStateProps) => {
     const { t, listState, onNavigateGame } = useViewModel();
+    const { getTranslationText } = useTranslationText();
+
     return (
         <View
             style={{
@@ -63,11 +66,24 @@ export const OptionState = ({ label, data }: IOptionStateProps) => {
                                     </View>
                                     <View style={{ width: getSize.m(110) }}>
                                         <Text style={styles.text_content}>
-                                            {item.team1.name_he}-{item.team2.name_he}
+                                            {getTranslationText({
+                                                textHe: item.team1.name_he,
+                                                textEn: item.team1.name_en,
+                                            })}
+                                            -
+                                            {getTranslationText({
+                                                textHe: item.team2.name_he,
+                                                textEn: item.team2.name_en,
+                                            })}
                                         </Text>
                                     </View>
                                     <View style={{ width: getSize.m(80) }}>
-                                        <Text style={styles.text_content}>{item.stadium_he}</Text>
+                                        <Text style={styles.text_content}>
+                                            {getTranslationText({
+                                                textHe: item.stadium_he,
+                                                textEn: item.stadium_en,
+                                            })}
+                                        </Text>
                                     </View>
                                     <View style={{ width: getSize.m(40) }}>
                                         <Text style={styles.text_content}>{item.time}</Text>

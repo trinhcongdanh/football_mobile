@@ -8,6 +8,7 @@ import Input from '@football/app/components/input/Input';
 import { Spacer } from '@football/app/components/spacer/Spacer';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { appStyles } from '@football/app/utils/constants/appStyles';
+import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
 import { getSize } from '@football/app/utils/responsive/scale';
 import { renderAvatar, renderUserPoints } from '@football/core/models/AvatarType.enum';
 import { Avatar } from '@rneui/themed';
@@ -15,6 +16,7 @@ import _ from 'lodash';
 import React from 'react';
 import {
     ActivityIndicator,
+    I18nManager,
     Image,
     ImageBackground,
     SafeAreaView,
@@ -88,6 +90,8 @@ export function SettingsScreen(props: ISettingsScreenProps) {
         scrollViewRef,
         handleNotSaveChange,
     } = useViewModel(props);
+
+    const { getTranslationText } = useTranslationText();
 
     return (
         <View style={appStyles.flex}>
@@ -251,7 +255,7 @@ export function SettingsScreen(props: ISettingsScreenProps) {
                                             <DatePicker
                                                 fadeToColor="none"
                                                 textColor={appColors.text_dark_blue}
-                                                locale="he"
+                                                locale={I18nManager.isRTL ? 'he' : 'en'}
                                                 mode="date"
                                                 date={dateTime}
                                                 onDateChange={date => {
@@ -330,7 +334,10 @@ export function SettingsScreen(props: ISettingsScreenProps) {
                                                                 numberOfLines={2}
                                                                 style={styles.txt_add_group}
                                                             >
-                                                                {item.name_he}
+                                                                {getTranslationText({
+                                                                    textHe: item.name_he,
+                                                                    textEn: item.name_en,
+                                                                })}
                                                             </Text>
                                                         </>
                                                     )}
@@ -389,7 +396,10 @@ export function SettingsScreen(props: ISettingsScreenProps) {
                                                                 numberOfLines={2}
                                                                 style={styles.txt_add_group}
                                                             >
-                                                                {item.name_he}
+                                                                {getTranslationText({
+                                                                    textHe: item.name_he,
+                                                                    textEn: item.name_en,
+                                                                })}
                                                             </Text>
                                                         </>
                                                     )}
@@ -448,7 +458,10 @@ export function SettingsScreen(props: ISettingsScreenProps) {
                                                                 numberOfLines={2}
                                                                 style={styles.txt_add_group}
                                                             >
-                                                                {item.name_he}
+                                                                {getTranslationText({
+                                                                    textHe: item.name_he,
+                                                                    textEn: item.name_en,
+                                                                })}
                                                             </Text>
                                                         </>
                                                     )}

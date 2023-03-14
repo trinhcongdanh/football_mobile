@@ -8,6 +8,7 @@ import { TAB_BAR_HEIGHT } from '@football/app/routes/bottom-tab/styles/bottom.ta
 import { IGobletScreenProps } from '@football/app/screens/football-goblet/GobletScreen.type';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { appStyles } from '@football/app/utils/constants/appStyles';
+import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
 import { getSize } from '@football/app/utils/responsive/scale';
 import React from 'react';
 import {
@@ -27,6 +28,8 @@ import { useViewModel } from './GobletScreen.viewModel';
 
 export const GobletScreen = ({ navigation, route }: IGobletScreenProps) => {
     const { t, goToStateCupPage, changeTab, cups } = useViewModel({ navigation, route });
+    const { getTranslationText } = useTranslationText();
+
     return (
         <View style={[appStyles.flex]}>
             <ImageBackground source={AppImages.img_background} style={appStyles.flex}>
@@ -89,7 +92,10 @@ export const GobletScreen = ({ navigation, route }: IGobletScreenProps) => {
                                                     numberOfLines={2}
                                                     style={styles.text_option_grid}
                                                 >
-                                                    {item.name_he}
+                                                    {getTranslationText({
+                                                        textHe: item.name_he,
+                                                        textEn: item.name_en,
+                                                    })}
                                                 </Text>
                                             </TouchableOpacity>
                                         );

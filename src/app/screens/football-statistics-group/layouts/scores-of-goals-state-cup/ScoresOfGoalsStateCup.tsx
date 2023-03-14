@@ -9,12 +9,14 @@ import { Avatar } from 'react-native-elements';
 import LinearGradient from 'react-native-linear-gradient';
 import { useViewModel } from './ScoresOfGoalsStateCup.viewModel';
 import { IScoresOfGoalsStateCupProps } from '@football/app/screens/football-statistics-group/layouts/scores-of-goals-state-cup/ScoresOfGoalsStateCup.type';
+import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
 
 export const ScoresOfGoalsStateCup = ({
     listGames,
     handleTeamGoalKickersList,
 }: IScoresOfGoalsStateCupProps) => {
     const { t } = useViewModel();
+    const { getTranslationText } = useTranslationText();
     return (
         <View style={appStyles.item_statistics}>
             <View style={[appStyles.flex_row_space_center]}>
@@ -29,7 +31,7 @@ export const ScoresOfGoalsStateCup = ({
                         {t('statistics.group.see_all')}
                     </Text>
                     <Icon
-                        name={appIcons.ic_arrow_left}
+                        name={appIcons.ic_left_ios}
                         size={getSize.m(10)}
                         color={appColors.button_dark_blue}
                         style={appStyles.statistic_ic_arrow}
@@ -89,7 +91,10 @@ export const ScoresOfGoalsStateCup = ({
                                             },
                                         ]}
                                     >
-                                        {item.name_he}
+                                        {getTranslationText({
+                                            textHe: item.name_he,
+                                            textEn: item.name_en,
+                                        })}
                                     </Text>
                                 </View>
                             </View>
