@@ -7,13 +7,19 @@ export const AppConsumer = AppContext.Consumer;
 const alertInitialState = {
     title: '',
     subTitle: '',
-    submitFunc: () => {},
+    option1: '',
+    option2: '',
+    onOption1: () => {},
+    onOption2: () => {},
 };
 
 export interface IAlertData {
     title: string;
     subTitle: string;
-    submitFunc: () => void;
+    option1: string;
+    option2: string;
+    onOption1: void;
+    onOption2: void;
 }
 
 export class AppProvider extends Component {
@@ -38,7 +44,7 @@ export class AppProvider extends Component {
 
     render() {
         const { alertData, alertVisible } = this.state;
-        const { title, subTitle, submitFunc } = alertData;
+        const { title, subTitle, onOption1, onOption2, option1, option2 } = alertData;
         const funcs = {
             showAlert: this.showAlert,
             closeAlert: this.closeAlert,
@@ -52,9 +58,11 @@ export class AppProvider extends Component {
                     visible={alertVisible}
                     title={title}
                     subTitle={subTitle}
-                    onClose={this.closeAlert}
+                    onOption1={onOption1}
+                    onOption2={onOption2}
+                    option1={option1}
+                    option2={option2}
                     onDismiss={this.closeAlert}
-                    onOk={submitFunc}
                 />
             </AppContext.Provider>
         );

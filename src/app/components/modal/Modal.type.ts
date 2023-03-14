@@ -2,7 +2,9 @@ export type IModalProps = {
     visible: boolean;
     title: string;
     subTitle: string;
+    option1: string;
+    option2: string;
     onDismiss?: () => void;
-    onClose?: () => void;
-    onOk?: () => void;
+    onOption1?: () => void;
+    onOption2?: () => void;
 };

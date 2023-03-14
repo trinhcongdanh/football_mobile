@@ -36,4 +36,12 @@ export const styles = StyleSheet.create({
         textAlign: 'center',
         lineHeight: getSize.m(20.8),
     },
+    centeredView: {
+        backgroundColor: '#061134a6',
+        width: '100%',
+        height: '100%',
+        alignContent: 'center',
+        flex: 1,
+        justifyContent: 'center',
+    },
 });
