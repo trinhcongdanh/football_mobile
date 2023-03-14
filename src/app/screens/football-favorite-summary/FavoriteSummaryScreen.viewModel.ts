@@ -15,7 +15,7 @@ import { resetSearchFavPlayer, SelectedPlayer } from 'src/store/FavPlayer.slice'
 import { resetFavTeam } from 'src/store/FavTeam.slice';
 import { resetTopTeams } from 'src/store/FavTopTeam.slice';
 import { RootState } from 'src/store/store';
-import { createProfileUser } from 'src/store/user/CreateProfile.slice';
+import { createProfileUser, saveChooseFavorite } from 'src/store/user/CreateProfile.slice';
 import { addGuestId } from 'src/store/user/GuestId.slice';
 import { loginUser } from 'src/store/user/Login.slice';
 import { setProfileUser } from 'src/store/user/setProfile.slice';
@@ -189,6 +189,7 @@ export const useViewModel = ({ navigation, route }: IFavoriteSummaryScreenProps)
 
     const navigationHomePage = () => {
         setSetProfile(false);
+        dispatch(saveChooseFavorite(false));
         clearFavoriteData(dispatch);
 
         if (isEmpty(profile.profile) || isNil(profile.profile)) {
@@ -228,6 +229,7 @@ export const useViewModel = ({ navigation, route }: IFavoriteSummaryScreenProps)
 
     const navigationSaveHomePage = () => {
         setSetProfile(true);
+        dispatch(saveChooseFavorite(true));
         if (isEmpty(profile.profile) || isNil(profile.profile)) {
             setScreenName(ScreenName.SideBar);
 

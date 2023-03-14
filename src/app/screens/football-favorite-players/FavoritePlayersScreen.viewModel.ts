@@ -18,7 +18,7 @@ import { useIsFocused, useRoute } from '@react-navigation/native';
 import { isEmpty, isNil } from 'lodash';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Alert, Keyboard } from 'react-native';
+import { Alert, I18nManager, Keyboard } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import {
     pushAllFavPlayers,
@@ -164,7 +164,9 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
                 if (error) {
                     return;
                 }
-                const sortByName = sortBy(res.data.documents, ['name_he']);
+                const sortByName = sortBy(res.data.documents, [
+                    I18nManager.isRTL ? 'name_he' : 'name_en',
+                ]);
 
                 selectedFavTeams
                     .map((favTeam: TeamModel) => ({
@@ -186,7 +188,7 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
                         dispatch(
                             setGroupFavPlayer({
                                 id: team_personnel._id,
-                                label: favTeam.name_he,
+                                label: I18nManager.isRTL ? favTeam.name_he : favTeam.name_en,
                                 listFavPlayers: fetchedPlayers.filter(Boolean),
                             })
                         );
@@ -260,7 +262,9 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
                 if (error) {
                     return;
                 }
-                const sortByName = sortBy(res.data.documents, ['name_he']);
+                const sortByName = sortBy(res.data.documents, [
+                    I18nManager.isRTL ? 'name_he' : 'name_en',
+                ]);
 
                 dispatch(
                     searchFavPlayers({
@@ -305,7 +309,9 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
                         if (error) {
                             return;
                         }
-                        const sortByName = sortBy(res.data.documents, ['name_he']);
+                        const sortByName = sortBy(res.data.documents, [
+                            I18nManager.isRTL ? 'name_he' : 'name_en',
+                        ]);
 
                         dispatch(
                             resetGroupFavPlayer({
@@ -337,7 +343,9 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
                                 dispatch(
                                     setGroupFavPlayer({
                                         id: team_personnel._id,
-                                        label: favTeam.name_he,
+                                        label: I18nManager.isRTL
+                                            ? favTeam.name_he
+                                            : favTeam.name_en,
                                         listFavPlayers: fetchedPlayers.filter(Boolean),
                                     })
                                 );
@@ -354,7 +362,9 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
                     if (error) {
                         return;
                     }
-                    const sortByName = sortBy(res.data.documents, ['name_he']);
+                    const sortByName = sortBy(res.data.documents, [
+                        I18nManager.isRTL ? 'name_he' : 'name_en',
+                    ]);
 
                     dispatch(
                         setAllFavPlayers({

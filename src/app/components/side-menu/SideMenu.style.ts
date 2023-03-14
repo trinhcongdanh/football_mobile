@@ -1,7 +1,7 @@
 import { AppFonts } from '@football/app/assets/fonts';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { getSize } from '@football/app/utils/responsive/scale';
-import { StyleSheet } from 'react-native';
+import { I18nManager, StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
     side_menu_container: {
@@ -17,7 +17,7 @@ export const styles = StyleSheet.create({
         paddingVertical: getSize.m(24),
     },
     side_menu_close: {
-        flexDirection: 'row',
+        flexDirection: I18nManager.isRTL ? 'row' : 'row-reverse',
         paddingHorizontal: getSize.m(20),
     },
     side_menu_info: {

@@ -120,7 +120,7 @@ export const appStyles = StyleSheet.create({
         marginTop: getSize.m(4),
         lineHeight: getSize.m(11.7),
         fontFamily: AppFonts.medium,
-        textAlign: I18nManager.isRTL ? 'left' : 'right',
+        textAlign: I18nManager.isRTL ? 'right' : 'left',
     },
     account_container: {
         backgroundColor: appColors.white,

@@ -45,6 +45,7 @@ export const LeaguesDetailsScreen = ({ navigation, route }: ILeaguesDetailsScree
         galleries,
         highlights,
         selectedLeagueSeason,
+        getTranslationText,
     } = useViewModel({
         navigation,
         route,
@@ -59,7 +60,7 @@ export const LeaguesDetailsScreen = ({ navigation, route }: ILeaguesDetailsScree
                         <HeaderUser
                             avt={AppImages.img_avt}
                             point="1,325"
-                            icon={AppImages.img_angle_right}
+                            icon={AppImages.img_angle_arrow}
                             color_pre={appColors.blue_black}
                             color_after={appColors.blue_black}
                             handlePressFunction={onGoBack}
@@ -86,7 +87,12 @@ export const LeaguesDetailsScreen = ({ navigation, route }: ILeaguesDetailsScree
                                         }}
                                     />
                                 </View>
-                                <Text style={styles.name_leagues}>{league?.name_he}</Text>
+                                <Text style={styles.name_leagues}>
+                                    {getTranslationText({
+                                        textHe: league?.name_he,
+                                        textEn: league?.name_en,
+                                    })}
+                                </Text>
                             </View>
                             <View>
                                 <View
@@ -127,7 +133,10 @@ export const LeaguesDetailsScreen = ({ navigation, route }: ILeaguesDetailsScree
                                         onPressItem={cycle => {
                                             setSelectCycle(cycle);
                                         }}
-                                        itemTitleField="cycle_name_he"
+                                        itemTitleField={getTranslationText({
+                                            textHe: 'cycle_name_he',
+                                            textEn: 'cycle_name_en',
+                                        })}
                                     />
                                 </View>
                                 <View style={{ flex: 0.5 }}>
@@ -137,7 +146,10 @@ export const LeaguesDetailsScreen = ({ navigation, route }: ILeaguesDetailsScree
                                         onPressItem={round => {
                                             setSelectRound(round);
                                         }}
-                                        itemTitleField="round_name_he"
+                                        itemTitleField={getTranslationText({
+                                            textHe: 'round_name_he',
+                                            textEn: 'round_name_en',
+                                        })}
                                     />
                                 </View>
                             </View>
@@ -148,7 +160,12 @@ export const LeaguesDetailsScreen = ({ navigation, route }: ILeaguesDetailsScree
                         </View>
                         <View style={styles.package}>
                             <Statistics
-                                selectedRoundName={selectRound?.round_name_he || ''}
+                                selectedRoundName={
+                                    getTranslationText({
+                                        textHe: selectRound?.round_name_he,
+                                        textEn: selectRound?.round_name_en,
+                                    }) || ''
+                                }
                                 statistics={selectRound?.statistics}
                                 statisticsId={selectedLeagueSeason?.league_season_stats_id}
                             />

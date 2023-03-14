@@ -61,7 +61,9 @@ export const SideMenu = ({ navigation }: ISideMenuProps) => {
                                     style={styles.side_menu_logout_icon}
                                     resizeMode={FastImage.resizeMode.contain}
                                 />
-                                <Text style={styles.side_menu_logout_text}>התנתק</Text>
+                                <Text style={styles.side_menu_logout_text}>
+                                    {t('side_menu.logout')}
+                                </Text>
                             </TouchableOpacity>
                         </View>
                     </View>

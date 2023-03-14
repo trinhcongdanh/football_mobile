@@ -21,6 +21,7 @@ export const CardView = ({
     connectGoogle,
     connectApple,
     option,
+    buttonTitle,
 }: ICardViewProps) => {
     const { t } = useTranslation();
     return (
@@ -43,7 +44,7 @@ export const CardView = ({
                     style={{ borderRadius: getSize.m(15) }}
                     disabled={input !== '' ? false : true}
                     onPress={connect}
-                    title={t('register.submit')}
+                    title={buttonTitle}
                 />
 
                 <View style={{ paddingHorizontal: getSize.m(17) }}>

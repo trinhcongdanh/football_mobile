@@ -73,6 +73,7 @@ const resources = {
                 definitions: 'הגדרות',
                 terms: 'תנאי שימוש ומדינות פרטיות',
                 guest: 'אורח',
+                logout: 'התנתק',
             },
             connect: {
                 title: 'התחברות',
@@ -636,6 +637,10 @@ const resources = {
                 results: 'לתוצאות המשחק בזמן אמת',
                 composition: 'הרכב',
             },
+            drop_down: {
+                title: 'ליגת הבורסה לניירות ערך',
+                label: 'בחר עונה',
+            },
         },
     },
     en: {
@@ -705,6 +710,7 @@ const resources = {
                 definitions: 'Definitions',
                 terms: 'Terms of use and private states',
                 guest: 'Guest',
+                logout: 'Disconnected',
             },
             connect: {
                 title: 'Connection',
@@ -1246,6 +1252,10 @@ const resources = {
             list_game: {
                 results: 'For the results of the game in real time',
                 composition: 'Composition',
+            },
+            drop_down: {
+                title: 'Stock Exchange League',
+                label: 'Select a season',
             },
         },
     },

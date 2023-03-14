@@ -23,6 +23,7 @@ import { ScreenName } from '@football/app/utils/constants/enum';
 import { useViewModel } from './FavoriteSummaryScreen.viewModel';
 import { IFavoriteSummaryScreenProps } from './FavoriteSummaryScreen.type';
 import styles from './FavoriteSummaryScreen.style';
+import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
 
 export const FavoriteSummaryScreen = ({ navigation, route }: IFavoriteSummaryScreenProps) => {
     const {
@@ -55,6 +56,8 @@ export const FavoriteSummaryScreen = ({ navigation, route }: IFavoriteSummaryScr
         navigation,
         route,
     });
+
+    const { getTranslationText } = useTranslationText();
 
     return (
         <View style={[appStyles.flex]}>
@@ -132,7 +135,10 @@ export const FavoriteSummaryScreen = ({ navigation, route }: IFavoriteSummaryScr
                                                             numberOfLines={2}
                                                             style={styles.txt_add_group}
                                                         >
-                                                            {item.name_he}
+                                                            {getTranslationText({
+                                                                textHe: item.name_he,
+                                                                textEn: item.name_en,
+                                                            })}
                                                         </Text>
                                                     </>
                                                 )}
@@ -188,7 +194,10 @@ export const FavoriteSummaryScreen = ({ navigation, route }: IFavoriteSummaryScr
                                                             numberOfLines={2}
                                                             style={styles.txt_add_group}
                                                         >
-                                                            {item.name_he}
+                                                            {getTranslationText({
+                                                                textHe: item.name_he,
+                                                                textEn: item.name_en,
+                                                            })}
                                                         </Text>
                                                     </>
                                                 )}
@@ -246,7 +255,10 @@ export const FavoriteSummaryScreen = ({ navigation, route }: IFavoriteSummaryScr
                                                             numberOfLines={2}
                                                             style={styles.txt_add_group}
                                                         >
-                                                            {item.name_he}
+                                                            {getTranslationText({
+                                                                textHe: item.name_he,
+                                                                textEn: item.name_en,
+                                                            })}
                                                         </Text>
                                                     </>
                                                 )}

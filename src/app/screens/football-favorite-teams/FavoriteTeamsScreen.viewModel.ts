@@ -4,7 +4,7 @@ import { useRef, useCallback, useState, useEffect } from 'react';
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
 import { useTranslation } from 'react-i18next';
 import { TeamModel } from '@football/core/models/TeamModelResponse';
-import { Alert, Keyboard } from 'react-native';
+import { Alert, I18nManager, Keyboard } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { useMount } from '@football/app/utils/hooks/useMount';
 import { RootState } from 'src/store/store';
@@ -212,7 +212,9 @@ const useViewCallback = (route: any, viewState: any) => {
             if (error) {
                 return;
             }
-            const sortByName = sortBy(res.data.documents, ['name_he']);
+            const sortByName = sortBy(res.data.documents, [
+                I18nManager.isRTL ? 'name_he' : 'name_en',
+            ]);
             setTeams(sortByName);
         } catch (error: any) {
             Alert.alert(error);
@@ -231,7 +233,9 @@ const useViewCallback = (route: any, viewState: any) => {
             if (error) {
                 return;
             }
-            const sortByName = sortBy(res.data.documents, ['name_he']);
+            const sortByName = sortBy(res.data.documents, [
+                I18nManager.isRTL ? 'name_he' : 'name_en',
+            ]);
             setTeams(sortByName);
         } catch (error: any) {
             Alert.alert(error);

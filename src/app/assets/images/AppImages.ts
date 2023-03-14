@@ -1,3 +1,5 @@
+import { I18nManager } from 'react-native';
+
 /* eslint-disable global-require */
 export const AppImages = {
     img_logo: require('./logo.png'),
@@ -65,7 +67,7 @@ export const AppImages = {
     img_user_bold: require('./user_bold.png'),
     img_building: require('./building.png'),
     img_bars_sort: require('./bars_sort.png'),
-    img_angle_right: require('./angle_right.png'),
+    img_angle_arrow: require('./angle_right.png'),
     img_light_volleyball: require('./light_volleyball.png'),
     img_calendar: require('./calendar.png'),
     img_location_dot: require('./location_dot.png'),
