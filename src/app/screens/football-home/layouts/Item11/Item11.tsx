@@ -40,9 +40,9 @@ export const Item11 = ({ homePage }: IItem11Props) => {
                         resizeMode={FastImage.resizeMode.contain}
                     />
                     <View style={[appStyles.flex_row_align, styles.content_button]}>
-                        <Text style={styles.text_button}>גביע המדינה</Text>
+                        <Text style={styles.text_button}>{t('home_page.state_cup')}</Text>
                         <IconEntypo
-                            name={appIcons.ic_arrow_left}
+                            name={appIcons.ic_left_ios}
                             size={getSize.m(20)}
                             color={appColors.white}
                         />

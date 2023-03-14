@@ -16,12 +16,14 @@ import styles from './StatisticsGroupScreen.style';
 import { useViewModel } from './StatisticsGroupScreen.viewModel';
 import { IStatisticsGroupScreenProps, TeamGoalKickersListType } from './StatisticsGroupScreen.type';
 import { ScoresOfGoalsStateCup } from '@football/app/screens/football-statistics-group/layouts/scores-of-goals-state-cup/ScoresOfGoalsStateCup';
+import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
 
 export const StatisticsGroupScreen = ({ navigation, route }: IStatisticsGroupScreenProps) => {
     const { t, onGoBack, teamSeasonStats, handleTeamGoalKickersList } = useViewModel({
         navigation,
         route,
     });
+    const { getTranslationText } = useTranslationText();
     return (
         <View style={appStyles.flex}>
             <ImageBackground source={AppImages.img_background} style={appStyles.flex}>
@@ -38,7 +40,10 @@ export const StatisticsGroupScreen = ({ navigation, route }: IStatisticsGroupScr
                     {teamSeasonStats && (
                         <ScrollView>
                             <HeaderLogo
-                                text={teamSeasonStats.team_name_he}
+                                text={getTranslationText({
+                                    textHe: teamSeasonStats.team_name_he,
+                                    textEn: teamSeasonStats.team_name_en,
+                                })}
                                 avt={{ uri: teamSeasonStats.team_logo_url }}
                             />
                             <View style={[appStyles.package, { marginTop: getSize.m(0) }]}>

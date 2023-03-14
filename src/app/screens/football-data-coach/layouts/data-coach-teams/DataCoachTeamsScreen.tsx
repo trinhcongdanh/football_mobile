@@ -7,11 +7,13 @@ import { SvgUri } from 'react-native-svg';
 import { useViewModel } from './DataCoachTeamsScreen.viewModel';
 import { IDataCoachTeamsScreenProps } from './DataCoachTeamsScreen.type';
 import LinearGradient from 'react-native-linear-gradient';
+import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
 
 // type Props = {};
 
 export const DataCoachTeamsScreen = ({ teams }: IDataCoachTeamsScreenProps) => {
     const { t, onGoBack } = useViewModel({ teams });
+    const { getTranslationText } = useTranslationText();
 
     return (
         <View>
@@ -89,7 +91,10 @@ export const DataCoachTeamsScreen = ({ teams }: IDataCoachTeamsScreenProps) => {
                                                 },
                                             ]}
                                         >
-                                            {item.name_he}
+                                            {getTranslationText({
+                                                textHe: item.name_he,
+                                                textEn: item.name_en,
+                                            })}
                                         </Text>
                                     </View>
                                 </View>
@@ -100,7 +105,10 @@ export const DataCoachTeamsScreen = ({ teams }: IDataCoachTeamsScreenProps) => {
                                     }}
                                 >
                                     <Text style={appStyles.statistics_content}>
-                                        {item.age_group_he}
+                                        {getTranslationText({
+                                            textHe: item.age_group_he,
+                                            textEn: item.age_group_en,
+                                        })}
                                     </Text>
                                 </View>
                                 <View
@@ -109,7 +117,10 @@ export const DataCoachTeamsScreen = ({ teams }: IDataCoachTeamsScreenProps) => {
                                     }}
                                 >
                                     <Text style={appStyles.statistics_content}>
-                                        {item.position_he}
+                                        {getTranslationText({
+                                            textHe: item.position_he,
+                                            textEn: item.position_en,
+                                        })}
                                     </Text>
                                 </View>
                             </LinearGradient>

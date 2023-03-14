@@ -86,7 +86,12 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                     <View>
                         <ImageBackground
                             source={AppImages.img_background_header_home}
-                            style={[{ height: getSize.m(172), zIndex: 1000 }]}
+                            style={[
+                                {
+                                    height: getSize.m(172),
+                                    zIndex: 1000,
+                                },
+                            ]}
                         >
                             <StatusBar translucent backgroundColor="transparent" />
                             <SafeAreaView style={appStyles.safe_area}>

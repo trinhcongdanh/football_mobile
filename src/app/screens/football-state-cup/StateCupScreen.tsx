@@ -63,7 +63,7 @@ export const StateCupScreen = ({ route }: IStateCupScreenProps) => {
                                 <HeaderUser
                                     avt={AppImages.img_avt}
                                     point="1,325"
-                                    icon={AppImages.img_angle_right}
+                                    icon={AppImages.img_angle_arrow}
                                     color_pre={appColors.blue_black}
                                     color_after={appColors.blue_black}
                                     handlePressFunction={onGoBack}
@@ -139,7 +139,10 @@ export const StateCupScreen = ({ route }: IStateCupScreenProps) => {
                                                 onPressItem={cycle => {
                                                     setSelectCycle(cycle);
                                                 }}
-                                                itemTitleField="cycle_name_he"
+                                                itemTitleField={getTranslationText({
+                                                    textHe: 'cycle_name_he',
+                                                    textEn: 'cycle_name_en',
+                                                })}
                                             />
                                         </View>
                                         <View style={{ flex: 0.5 }}>
@@ -149,13 +152,21 @@ export const StateCupScreen = ({ route }: IStateCupScreenProps) => {
                                                 onPressItem={round => {
                                                     setSelectRound(round);
                                                 }}
-                                                itemTitleField="round_name_he"
+                                                itemTitleField={getTranslationText({
+                                                    textHe: 'round_name_he',
+                                                    textEn: 'round_name_en',
+                                                })}
                                             />
                                         </View>
                                     </View>
                                     <OptionState
                                         data={selectRound?.games || []}
-                                        label={selectCycle?.cycle_name_he || ''}
+                                        label={
+                                            getTranslationText({
+                                                textHe: selectCycle?.cycle_name_he,
+                                                textEn: selectCycle?.cycle_name_en,
+                                            }) || ''
+                                        }
                                     />
                                 </View>
                                 <View style={styles.package}>

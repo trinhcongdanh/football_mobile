@@ -2,6 +2,7 @@ import { appIcons } from '@football/app/assets/icons/appIcons';
 import { ICupAroundProps } from '@football/app/screens/football-state-cup/layouts/Statistics/Cup-Around/CupAround.type';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { appStyles } from '@football/app/utils/constants/appStyles';
+import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
 import { getSize } from '@football/app/utils/responsive/scale';
 import React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
@@ -12,6 +13,8 @@ import { useViewModel } from './CupAround.viewModel';
 
 export const CupAround = ({ cyclesDetails, cup }: ICupAroundProps) => {
     const { t, details, handleStatisticDetailsScreen } = useViewModel({ cyclesDetails, cup });
+    const { getTranslationText } = useTranslationText();
+
     return (
         <View style={styles.item_statistics}>
             <View
@@ -29,7 +32,7 @@ export const CupAround = ({ cyclesDetails, cup }: ICupAroundProps) => {
                 >
                     <Text style={styles.see_all}>{t('state_cup.statistics.see_all')}</Text>
                     <Icon
-                        name={appIcons.ic_arrow_left}
+                        name={appIcons.ic_left_ios}
                         size={getSize.m(10)}
                         color={appColors.button_dark_blue}
                         style={styles.ic_arrow}
@@ -84,7 +87,10 @@ export const CupAround = ({ cyclesDetails, cup }: ICupAroundProps) => {
                                 }}
                             >
                                 <Text style={[styles.text_content, { textAlign: 'left' }]}>
-                                    {item.group_name_he}
+                                    {getTranslationText({
+                                        textHe: item.group_name_he,
+                                        textEn: item.group_name_en,
+                                    })}
                                 </Text>
                             </View>
                         </LinearGradient>

@@ -8,6 +8,7 @@ import { Game } from '@football/core/models/GameModelResponse';
 import moment from 'moment';
 import { useViewModel } from './ScheduleScreen.viewModel';
 import { IScheduleScreenProps } from './ScheduleScreen.type';
+import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
 // type Props = {};
 
 export const ScheduleScreen = ({ navigation, route }: IScheduleScreenProps) => {
@@ -23,6 +24,8 @@ export const ScheduleScreen = ({ navigation, route }: IScheduleScreenProps) => {
     // if (games.success == false) {
     //     return <></>;
     // }
+    const { getTranslationText } = useTranslationText();
+
     return (
         <View
             style={[
@@ -37,9 +40,18 @@ export const ScheduleScreen = ({ navigation, route }: IScheduleScreenProps) => {
                             key={item.game_id}
                             logo_home={item.team1.logo_url}
                             logo_away={item.team2.logo_url}
-                            nameHome={item.team1.name_he}
-                            nameAway={item.team2.name_he}
-                            location={item.stadium_he}
+                            nameHome={getTranslationText({
+                                textHe: item.team1.name_he,
+                                textEn: item.team1.name_en,
+                            })}
+                            nameAway={getTranslationText({
+                                textHe: item.team2.name_he,
+                                textEn: item.team2.name_en,
+                            })}
+                            location={getTranslationText({
+                                textHe: item.stadium_he,
+                                textEn: item.stadium_en,
+                            })}
                             date={item.date}
                             result={item.score}
                             schedule={item.time}

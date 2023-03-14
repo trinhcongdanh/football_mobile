@@ -5,6 +5,7 @@ import { TicketRed } from '@football/app/components/ticket_red/TicketRed';
 import { TicketYellow } from '@football/app/components/ticket_yellow/TicketYellow';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { appStyles } from '@football/app/utils/constants/appStyles';
+import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
 import { getSize } from '@football/app/utils/responsive/scale';
 import { Gameplay, GamePlayAction } from '@football/core/models/GameModelResponse';
 import React from 'react';
@@ -29,6 +30,8 @@ export const GameScreen = ({ navigation, route }: IGameScreenProps) => {
     // if (gamePlay.success == false) {
     //     return <></>;
     // }
+    const { getTranslationText } = useTranslationText();
+
     return (
         <View
             style={[
@@ -56,36 +59,63 @@ export const GameScreen = ({ navigation, route }: IGameScreenProps) => {
                                 <View key={index} style={{ marginTop: getSize.m(item.minute) }}>
                                     {item.action === GamePlayAction.YellowCard && (
                                         <TicketYellow
-                                            name={item.player.name_he}
+                                            name={getTranslationText({
+                                                textHe: item.player.name_he,
+                                                textEn: item.player.name_en,
+                                            })}
                                             avt={item.player.image_url}
                                             minute={item.minute}
-                                            team={item.team_name_he}
+                                            team={getTranslationText({
+                                                textHe: item.team_name_he,
+                                                textEn: item.team_name_en,
+                                            })}
                                         />
                                     )}
                                     {item.action === GamePlayAction.RedCard && (
                                         <TicketRed
-                                            name={item.player.name_he}
+                                            name={getTranslationText({
+                                                textHe: item.player.name_he,
+                                                textEn: item.player.name_en,
+                                            })}
                                             avt={item.player.image_url}
                                             minute={item.minute}
-                                            team={item.team_name_he}
+                                            team={getTranslationText({
+                                                textHe: item.team_name_he,
+                                                textEn: item.team_name_en,
+                                            })}
                                         />
                                     )}
                                     {item.action === GamePlayAction.Goal && (
                                         <Goal
-                                            name={item.player.name_he}
+                                            name={getTranslationText({
+                                                textHe: item.player.name_he,
+                                                textEn: item.player.name_en,
+                                            })}
                                             avt={item.player.image_url}
                                             minute={item.minute}
-                                            team={item.team_name_he}
+                                            team={getTranslationText({
+                                                textHe: item.team_name_he,
+                                                textEn: item.team_name_en,
+                                            })}
                                         />
                                     )}
                                     {item.action === GamePlayAction.Exchange && (
                                         <Replace
-                                            name_up={item.player_up.name_he}
-                                            name_down={item.player_down.name_he}
+                                            name_up={getTranslationText({
+                                                textHe: item.player_up.name_he,
+                                                textEn: item.player_up.name_en,
+                                            })}
+                                            name_down={getTranslationText({
+                                                textHe: item.player_down.name_he,
+                                                textEn: item.player_down.name_en,
+                                            })}
                                             avt_up={item.player_up.image_url}
                                             avt_down={item.player_down.image_url}
                                             minute={item.minute}
-                                            team={item.team_name_he}
+                                            team={getTranslationText({
+                                                textHe: item.team_name_he,
+                                                textEn: item.team_name_en,
+                                            })}
                                         />
                                     )}
                                 </View>

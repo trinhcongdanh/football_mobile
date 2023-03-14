@@ -12,6 +12,7 @@ import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
 import { getSize } from '@football/app/utils/responsive/scale';
 import React from 'react';
 import {
+    I18nManager,
     ImageBackground,
     SafeAreaView,
     ScrollView,
@@ -183,14 +184,23 @@ export const GroupPageScreen = ({ navigation, route }: IGroupPageScreenProps) =>
                                         <View>
                                             <View>
                                                 <View style={styles.info_group_item}>
-                                                    <View>
+                                                    <View
+                                                        style={{
+                                                            alignItems: 'flex-start',
+                                                        }}
+                                                    >
                                                         <Text style={styles.info_group_item_label}>
                                                             {t('group_page.info_group.age_group')}
                                                         </Text>
                                                         <Text
                                                             style={styles.info_group_item_content}
                                                         >
-                                                            {teamSeason.about?.group_age_he}
+                                                            {getTranslationText({
+                                                                textHe:
+                                                                    teamSeason.about?.group_age_he,
+                                                                textEn:
+                                                                    teamSeason.about?.group_age_en,
+                                                            })}
                                                         </Text>
                                                     </View>
                                                     <View style={styles.ic_label}>
@@ -204,14 +214,23 @@ export const GroupPageScreen = ({ navigation, route }: IGroupPageScreenProps) =>
                                                     </View>
                                                 </View>
                                                 <View style={styles.info_group_item}>
-                                                    <View>
+                                                    <View
+                                                        style={{
+                                                            alignItems: 'flex-start',
+                                                        }}
+                                                    >
                                                         <Text style={styles.info_group_item_label}>
                                                             {t('group_page.info_group.league')}
                                                         </Text>
                                                         <Text
                                                             style={styles.info_group_item_content}
                                                         >
-                                                            {teamSeason.about.league_name_he}
+                                                            {getTranslationText({
+                                                                textHe:
+                                                                    teamSeason.about.league_name_he,
+                                                                textEn:
+                                                                    teamSeason.about.league_name_en,
+                                                            })}
                                                         </Text>
                                                     </View>
                                                     <View style={styles.ic_label}>
@@ -225,14 +244,23 @@ export const GroupPageScreen = ({ navigation, route }: IGroupPageScreenProps) =>
                                                     </View>
                                                 </View>
                                                 <View style={styles.info_group_item}>
-                                                    <View>
+                                                    <View
+                                                        style={{
+                                                            alignItems: 'flex-start',
+                                                        }}
+                                                    >
                                                         <Text style={styles.info_group_item_label}>
                                                             {t('group_page.info_group.governing')}
                                                         </Text>
                                                         <Text
                                                             style={styles.info_group_item_content}
                                                         >
-                                                            {teamSeason.about.management_he}
+                                                            {getTranslationText({
+                                                                textHe:
+                                                                    teamSeason.about.management_he,
+                                                                textEn:
+                                                                    teamSeason.about.management_en,
+                                                            })}
                                                         </Text>
                                                     </View>
                                                     <View style={styles.ic_label}>
@@ -246,7 +274,11 @@ export const GroupPageScreen = ({ navigation, route }: IGroupPageScreenProps) =>
                                                     </View>
                                                 </View>
                                                 <View style={styles.info_group_item}>
-                                                    <View>
+                                                    <View
+                                                        style={{
+                                                            alignItems: 'flex-start',
+                                                        }}
+                                                    >
                                                         <Text style={styles.info_group_item_label}>
                                                             {t('group_page.info_group.office')}
                                                         </Text>
@@ -265,7 +297,11 @@ export const GroupPageScreen = ({ navigation, route }: IGroupPageScreenProps) =>
                                                     </View>
                                                 </View>
                                                 <View style={styles.info_group_item}>
-                                                    <View>
+                                                    <View
+                                                        style={{
+                                                            alignItems: 'flex-start',
+                                                        }}
+                                                    >
                                                         <Text style={styles.info_group_item_label}>
                                                             {t('group_page.info_group.fax')}
                                                         </Text>
@@ -284,14 +320,21 @@ export const GroupPageScreen = ({ navigation, route }: IGroupPageScreenProps) =>
                                                     </View>
                                                 </View>
                                                 <View style={styles.info_group_item}>
-                                                    <View>
+                                                    <View
+                                                        style={{
+                                                            alignItems: 'flex-start',
+                                                        }}
+                                                    >
                                                         <Text style={styles.info_group_item_label}>
                                                             {t('group_page.info_group.address')}
                                                         </Text>
                                                         <Text
                                                             style={styles.info_group_item_content}
                                                         >
-                                                            {teamSeason.about.address_he}
+                                                            {getTranslationText({
+                                                                textHe: teamSeason.about.address_he,
+                                                                textEn: teamSeason.about.address_en,
+                                                            })}
                                                         </Text>
                                                     </View>
                                                     <View style={styles.ic_label}>
@@ -305,7 +348,11 @@ export const GroupPageScreen = ({ navigation, route }: IGroupPageScreenProps) =>
                                                     </View>
                                                 </View>
                                                 <View style={styles.info_group_item}>
-                                                    <View>
+                                                    <View
+                                                        style={{
+                                                            alignItems: 'flex-start',
+                                                        }}
+                                                    >
                                                         <Text style={styles.info_group_item_label}>
                                                             {t('group_page.info_group.email')}
                                                         </Text>
@@ -356,7 +403,10 @@ export const GroupPageScreen = ({ navigation, route }: IGroupPageScreenProps) =>
                                                                         styles.info_group_item_content
                                                                     }
                                                                 >
-                                                                    {statium.name_he}
+                                                                    {getTranslationText({
+                                                                        textHe: statium.name_he,
+                                                                        textEn: statium.name_en,
+                                                                    })}
                                                                 </Text>
                                                             </TouchableOpacity>
                                                             <View style={styles.ic_label}>
@@ -411,7 +461,7 @@ export const GroupPageScreen = ({ navigation, route }: IGroupPageScreenProps) =>
                                                 </View>
 
                                                 <Icon
-                                                    name={appIcons.ic_arrow_left}
+                                                    name={appIcons.ic_left_ios}
                                                     size={getSize.m(13)}
                                                     color={appColors.text_dark_blue}
                                                     style={styles.ic_arrow_left}

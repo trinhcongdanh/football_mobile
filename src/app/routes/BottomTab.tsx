@@ -2,12 +2,13 @@
 /* eslint-disable react/no-unstable-nested-components */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { AppImages } from '@football/app/assets/images';
+import i18n from '@football/app/i18n/EnStrings';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { getSize } from '@football/app/utils/responsive/scale';
 import { isGuessUser } from '@football/core/models/AvatarType.enum';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React from 'react';
-import { SafeAreaView } from 'react-native';
+import { I18nManager, SafeAreaView } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useSelector } from 'react-redux';
@@ -71,19 +72,19 @@ const renderLabel = (routeName: string) => {
     let label = '';
     switch (routeName) {
         case ScreenName.HomePage:
-            label = 'בית';
+            label = I18nManager.isRTL ? 'בית' : 'Home';
             break;
         case ScreenName.LeaguesPage:
-            label = 'ליגות';
+            label = I18nManager.isRTL ? 'ליגות' : 'Leagues';
             break;
         case ScreenName.TeamPage:
-            label = 'נבחרות';
+            label = I18nManager.isRTL ? 'נבחרות' : 'Teams';
             break;
         case ScreenName.PlayGroundPage:
-            label = 'שאלון';
+            label = I18nManager.isRTL ? 'שאלון' : 'Question';
             break;
         case ScreenName.GobletPage:
-            label = 'גביע';
+            label = I18nManager.isRTL ? 'גביע' : 'Goblet';
             break;
         case ScreenName.VideoPage:
             label = 'VOD';
@@ -111,7 +112,8 @@ export const BottomTabStack = () => {
                 tabBar={(props: any) => (
                     <BottomFabBar
                         mode="default"
-                        // isRtl
+                        // isRtl={true}
+                        isEng={I18nManager.isRTL ? false : true}
                         focusedButtonStyle={{
                             shadowColor: '#000',
                             shadowOffset: {

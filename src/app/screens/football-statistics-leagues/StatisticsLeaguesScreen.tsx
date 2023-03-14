@@ -3,6 +3,7 @@ import { AppImages } from '@football/app/assets/images';
 import { CardGoBack } from '@football/app/components/go-back/CardGoBack';
 import { HeaderLogo } from '@football/app/components/header-logo/HeaderLogo';
 import { appStyles } from '@football/app/utils/constants/appStyles';
+import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
 import { getSize } from '@football/app/utils/responsive/scale';
 import React from 'react';
 import { ImageBackground, SafeAreaView, ScrollView, StatusBar, View } from 'react-native';
@@ -23,6 +24,7 @@ export const StatisticsLeaguesScreen = ({ navigation, route }: IStatisticsLeague
         navigation,
         route,
     });
+    const { getTranslationText } = useTranslationText();
     return (
         <View style={appStyles.flex}>
             {leagueSeasonStats && (
@@ -39,7 +41,10 @@ export const StatisticsLeaguesScreen = ({ navigation, route }: IStatisticsLeague
                         </View>
                         <ScrollView>
                             <HeaderLogo
-                                text={leagueSeasonStats.league_name_he}
+                                text={getTranslationText({
+                                    textHe: leagueSeasonStats.league_name_he,
+                                    textEn: leagueSeasonStats.league_name_en,
+                                })}
                                 avt={{ uri: leagueSeasonStats.league_logo_url }}
                             />
                             <View style={[appStyles.package, { marginTop: getSize.m(0) }]}>

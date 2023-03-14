@@ -4,6 +4,7 @@ import { HeaderUser } from '@football/app/components/header-user/HeaderUser';
 import { TopTaps } from '@football/app/routes/toptap/TopTap';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { appStyles } from '@football/app/utils/constants/appStyles';
+import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
 import React from 'react';
 import { ImageBackground, SafeAreaView, StatusBar, View } from 'react-native';
 import { IMatchScreenProps } from './MatchScreen.type';
@@ -23,6 +24,7 @@ export const MatchScreen = ({ navigation, route }: IMatchScreenProps) => {
     // if (gamesData.success == false) {
     //     return <></>;
     // }
+    const { getTranslationText } = useTranslationText();
 
     return (
         <View style={appStyles.flex}>
@@ -33,21 +35,33 @@ export const MatchScreen = ({ navigation, route }: IMatchScreenProps) => {
                         <HeaderUser
                             avt={AppImages.img_avt}
                             point="1,325"
-                            icon={AppImages.img_angle_right}
+                            icon={AppImages.img_angle_arrow}
                             color_pre={appColors.text_dark_blue}
                             color_after={appColors.text_dark_blue}
                             handlePressFunction={onGoBack}
                         />
                         {game && (
                             <HeaderComposition
-                                title={game.context_name_he}
+                                title={getTranslationText({
+                                    textHe: game.context_name_he,
+                                    textEn: game.context_name_en,
+                                })}
                                 season={game.season}
                                 avt_away={game.team2.logo_url}
                                 avt_home={game.team1.logo_url}
-                                name_home={game.team1.name_he}
-                                name_away={game.team2.name_he}
+                                name_home={getTranslationText({
+                                    textHe: game.team1.name_he,
+                                    textEn: game.team1.name_en,
+                                })}
+                                name_away={getTranslationText({
+                                    textHe: game.team2.name_he,
+                                    textEn: game.team2.name_en,
+                                })}
                                 score={game.score}
-                                stadium={game.stadium_he}
+                                stadium={getTranslationText({
+                                    textHe: game.stadium_he,
+                                    textEn: game.stadium_en,
+                                })}
                                 status={t('match.status')}
                                 handleStadium={() => handleStadium(game.stadium_id)}
                             />

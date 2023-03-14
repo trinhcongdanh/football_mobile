@@ -25,6 +25,7 @@ import { TopTeamPlayerType } from '@football/app/utils/constants/enum';
 import styles from './ConquerorsScreen.style';
 import { useViewModel } from './ConquerorsScreen.viewModel';
 import { IConquerorsScreenProps } from './ConquerorsScreen.type';
+import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
 
 export const ConquerorsScreen = ({ navigation, route }: IConquerorsScreenProps) => {
     const topTeam = route?.params?.topTeam as TopTeamModel;
@@ -38,6 +39,9 @@ export const ConquerorsScreen = ({ navigation, route }: IConquerorsScreenProps) 
         navigation,
         route,
     });
+
+    const { getTranslationText } = useTranslationText();
+
     return (
         <View style={appStyles.flex}>
             <ImageBackground source={AppImages.img_background} style={appStyles.flex}>
@@ -93,7 +97,10 @@ export const ConquerorsScreen = ({ navigation, route }: IConquerorsScreenProps) 
                                                     rounded
                                                 />
                                                 <Text style={styles.name_player}>
-                                                    {item.name_he}
+                                                    {getTranslationText({
+                                                        textHe: item.name_he,
+                                                        textEn: item.name_en,
+                                                    })}
                                                 </Text>
                                             </View>
                                             <Text style={styles.number}>

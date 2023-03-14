@@ -19,7 +19,7 @@ export const Item13 = () => {
                     { marginTop: getSize.m(30), marginHorizontal: getSize.m(16) },
                 ]}
             >
-                <Text style={styles.header}>ההתאחדות באינסטגרם</Text>
+                <Text style={styles.header}>{t('home_page.instagram')}</Text>
                 <TouchableOpacity style={styles.button} onPress={openInstagram}>
                     <View style={appStyles.flex_row_align}>
                         <Text style={styles.instagram}>isr.fa</Text>

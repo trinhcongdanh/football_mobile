@@ -11,9 +11,12 @@ import FastImage from 'react-native-fast-image';
 import LinearGradient from 'react-native-linear-gradient';
 import styles from './DataPlayerNationalScreen.style';
 import { useViewModel } from './DataPlayerNationalScreen.viewModel';
+import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
 
 export const DataPlayerNationalScreen = ({ player }: IDataPlayerNationalScreenProps) => {
     const { t, onNavigateGoalTopTeam } = useViewModel({ player });
+    const { getTranslationText } = useTranslationText();
+
     return (
         <ScrollView showsVerticalScrollIndicator={false}>
             {player && (
@@ -31,7 +34,12 @@ export const DataPlayerNationalScreen = ({ player }: IDataPlayerNationalScreenPr
                                 { marginTop: getSize.m(54), marginBottom: getSize.m(20) },
                             ]}
                         >
-                            <Text style={styles.name_national}>{player.top_team.name_he}</Text>
+                            <Text style={styles.name_national}>
+                                {getTranslationText({
+                                    textHe: player.top_team.name_he,
+                                    textEn: player.top_team.name_en,
+                                })}
+                            </Text>
                         </View>
                     </View>
                     <View style={[styles.item, { marginTop: getSize.m(30) }]}>
@@ -49,7 +57,10 @@ export const DataPlayerNationalScreen = ({ player }: IDataPlayerNationalScreenPr
                                 <View style={appStyles.flex_row_align}>
                                     <View style={styles.team_national_date}>
                                         <Text style={appStyles.text_label}>
-                                            {player.top_team.debut_game_against.name_he}
+                                            {getTranslationText({
+                                                textHe: player.top_team.debut_game_against.name_he,
+                                                textEn: player.top_team.debut_game_against.name_en,
+                                            })}
                                         </Text>
                                         <Text style={styles.date}>
                                             {player.top_team.debut_game_against.date}
@@ -75,7 +86,10 @@ export const DataPlayerNationalScreen = ({ player }: IDataPlayerNationalScreenPr
                                 <View style={appStyles.flex_row_align}>
                                     <View style={styles.team_national_date}>
                                         <Text style={appStyles.text_label}>
-                                            {player.top_team.last_game_against.name_he}
+                                            {getTranslationText({
+                                                textHe: player.top_team.last_game_against.name_he,
+                                                textEn: player.top_team.last_game_against.name_en,
+                                            })}
                                         </Text>
                                         <Text style={styles.date}>
                                             {player.top_team.last_game_against.date}
@@ -132,7 +146,10 @@ export const DataPlayerNationalScreen = ({ player }: IDataPlayerNationalScreenPr
                                         ]}
                                     >
                                         <Text style={[appStyles.text_label, { width: '40%' }]}>
-                                            {item.context_he}
+                                            {getTranslationText({
+                                                textHe: item.context_he,
+                                                textEn: item.context_en,
+                                            })}
                                         </Text>
                                         <Text style={[appStyles.number]}>{item.games}</Text>
                                         <Text style={[appStyles.number]}>{item.goals}</Text>
@@ -143,7 +160,7 @@ export const DataPlayerNationalScreen = ({ player }: IDataPlayerNationalScreenPr
                                             style={[styles.details]}
                                         >
                                             <Icon
-                                                name={appIcons.ic_arrow_left}
+                                                name={appIcons.ic_left_ios}
                                                 size={getSize.m(18)}
                                                 color={appColors.text_option_unselect}
                                             />

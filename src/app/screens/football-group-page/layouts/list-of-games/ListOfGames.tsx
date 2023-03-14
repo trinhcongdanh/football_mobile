@@ -8,9 +8,12 @@ import { appIcons } from '@football/app/assets/icons/appIcons';
 import moment from 'moment';
 import { useViewModel } from './ListOfGames.viewModel';
 import { IListOfGamesProps } from './ListOfGames.type';
+import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
 
 export const ListOfGames = ({ listGames }: IListOfGamesProps) => {
     const { t, handleDetailMatch, handleStadium } = useViewModel();
+    const { getTranslationText } = useTranslationText();
+
     return (
         <View>
             <Text style={[appStyles.text_topic, { marginLeft: getSize.m(6) }]}>
@@ -23,14 +26,23 @@ export const ListOfGames = ({ listGames }: IListOfGamesProps) => {
                             key={item.game_id}
                             logo_home={item.team1.logo_url}
                             logo_away={item.team2.logo_url}
-                            nameHome={item.team1.name_he}
-                            nameAway={item.team2.name_he}
-                            location={item.stadium_he}
+                            nameHome={getTranslationText({
+                                textHe: item.team1.name_he,
+                                textEn: item.team1.name_en,
+                            })}
+                            nameAway={getTranslationText({
+                                textHe: item.team2.name_he,
+                                textEn: item.team2.name_en,
+                            })}
+                            location={getTranslationText({
+                                textHe: item.stadium_he,
+                                textEn: item.stadium_en,
+                            })}
                             date={item.date}
                             result={item.score}
                             schedule={item.time}
                             color={appColors.gray}
-                            icon={appIcons.ic_arrow_left}
+                            icon={appIcons.ic_left_ios}
                             details={item.game_id}
                             isLive={moment().isBetween(
                                 moment(`${item.date} ${item.time}`, 'DD.M.YY HH:mm'),

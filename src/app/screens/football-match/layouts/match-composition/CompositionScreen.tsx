@@ -3,6 +3,7 @@ import { ListPlayer } from '@football/app/components/list-player/ListPlayer';
 import { Position } from '@football/app/components/position/Position';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { appStyles } from '@football/app/utils/constants/appStyles';
+import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
 import { getSize } from '@football/app/utils/responsive/scale';
 import { Team } from '@football/core/models/GameModelResponse';
 import React from 'react';
@@ -26,6 +27,8 @@ export const CompositionScreen = ({ navigation, route }: ICompositionScreenProps
     //     return <></>;
     // }
 
+    const { getTranslationText } = useTranslationText();
+
     const renderList = (team: Team) => {
         return (
             <>
@@ -38,7 +41,10 @@ export const CompositionScreen = ({ navigation, route }: ICompositionScreenProps
                         return (
                             <ListPlayer
                                 key={item.player_id}
-                                name={item.name_he}
+                                name={getTranslationText({
+                                    textHe: item.name_he,
+                                    textEn: item.name_en,
+                                })}
                                 number_before={item.shirt_number}
                                 avt={item.image_url}
                                 handleDataPlayer={() => handleDataPlayer(item.player_id)}
@@ -52,7 +58,10 @@ export const CompositionScreen = ({ navigation, route }: ICompositionScreenProps
                         return (
                             <ListPlayer
                                 key={item.player_id}
-                                name={item.name_he}
+                                name={getTranslationText({
+                                    textHe: item.name_he,
+                                    textEn: item.name_en,
+                                })}
                                 number_before={item.shirt_number}
                                 avt={item.image_url}
                                 handleDataPlayer={() => handleDataPlayer(item.player_id)}
@@ -69,7 +78,10 @@ export const CompositionScreen = ({ navigation, route }: ICompositionScreenProps
                         return (
                             <ListPlayer
                                 key={item.player_id}
-                                name={item.name_he}
+                                name={getTranslationText({
+                                    textHe: item.name_he,
+                                    textEn: item.name_en,
+                                })}
                                 number_before={item.shirt_number}
                                 avt={item.image_url}
                                 handleDataPlayer={() => handleDataPlayer(item.player_id)}
@@ -83,7 +95,10 @@ export const CompositionScreen = ({ navigation, route }: ICompositionScreenProps
                         return (
                             <ListPlayer
                                 key={item.coach_id}
-                                name={item.name_he}
+                                name={getTranslationText({
+                                    textHe: item.name_he,
+                                    textEn: item.name_en,
+                                })}
                                 avt={item.image_url}
                                 handleDataPlayer={() => handleDataCoach(item.coach_id)}
                             />
@@ -96,7 +111,10 @@ export const CompositionScreen = ({ navigation, route }: ICompositionScreenProps
                         return (
                             <ListPlayer
                                 key={item.referee_id}
-                                name={item.name_he}
+                                name={getTranslationText({
+                                    textHe: item.name_he,
+                                    textEn: item.name_en,
+                                })}
                                 avt={item.image_url}
                                 // handleDataPlayer={() => handleDataPlayer(item.player_id)}
                             />

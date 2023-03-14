@@ -1,6 +1,6 @@
 export type IGoalProps = {
-    name: string;
+    name: string | undefined;
     avt: string;
     minute: any;
-    team: string;
+    team: string | undefined;
 };

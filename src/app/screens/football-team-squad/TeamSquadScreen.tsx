@@ -5,6 +5,7 @@ import { ListPlayer } from '@football/app/components/list-player/ListPlayer';
 import { Position } from '@football/app/components/position/Position';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { appStyles } from '@football/app/utils/constants/appStyles';
+import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
 import { getSize } from '@football/app/utils/responsive/scale';
 import React from 'react';
 import { ImageBackground, SafeAreaView, ScrollView, StatusBar, View } from 'react-native';
@@ -33,6 +34,8 @@ export const TeamSquadScreen = ({ navigation, route }: ITeamGroupScreenProps) =>
         route,
     });
 
+    const { getTranslationText } = useTranslationText();
+
     return (
         <View style={appStyles.flex}>
             <ImageBackground source={AppImages.img_background} style={appStyles.flex}>
@@ -42,7 +45,7 @@ export const TeamSquadScreen = ({ navigation, route }: ITeamGroupScreenProps) =>
                         <HeaderUser
                             avt={AppImages.img_avt}
                             point="1,325"
-                            icon={AppImages.img_angle_right}
+                            icon={AppImages.img_angle_arrow}
                             color_pre={appColors.black}
                             color_after={appColors.black}
                             title={
@@ -78,7 +81,10 @@ export const TeamSquadScreen = ({ navigation, route }: ITeamGroupScreenProps) =>
                                             return (
                                                 <ListPlayer
                                                     key={item.player_id}
-                                                    name={item.name_he}
+                                                    name={getTranslationText({
+                                                        textHe: item.name_he,
+                                                        textEn: item.name_en,
+                                                    })}
                                                     avt={item.image_url}
                                                     handleDataPlayer={() =>
                                                         onNavigateDataPlayer(item.player_id)
@@ -96,7 +102,10 @@ export const TeamSquadScreen = ({ navigation, route }: ITeamGroupScreenProps) =>
                                             return (
                                                 <ListPlayer
                                                     key={item.player_id}
-                                                    name={item.name_he}
+                                                    name={getTranslationText({
+                                                        textHe: item.name_he,
+                                                        textEn: item.name_en,
+                                                    })}
                                                     avt={item.image_url}
                                                     handleDataPlayer={() =>
                                                         onNavigateDataPlayer(item.player_id)
@@ -114,7 +123,10 @@ export const TeamSquadScreen = ({ navigation, route }: ITeamGroupScreenProps) =>
                                             return (
                                                 <ListPlayer
                                                     key={item.player_id}
-                                                    name={item.name_he}
+                                                    name={getTranslationText({
+                                                        textHe: item.name_he,
+                                                        textEn: item.name_en,
+                                                    })}
                                                     avt={item.image_url}
                                                     handleDataPlayer={() =>
                                                         onNavigateDataPlayer(item.player_id)
@@ -132,7 +144,10 @@ export const TeamSquadScreen = ({ navigation, route }: ITeamGroupScreenProps) =>
                                             return (
                                                 <ListPlayer
                                                     key={item.player_id}
-                                                    name={item.name_he}
+                                                    name={getTranslationText({
+                                                        textHe: item.name_he,
+                                                        textEn: item.name_en,
+                                                    })}
                                                     avt={item.image_url}
                                                     handleDataPlayer={() =>
                                                         onNavigateDataPlayer(item.player_id)
@@ -149,7 +164,10 @@ export const TeamSquadScreen = ({ navigation, route }: ITeamGroupScreenProps) =>
                                         return (
                                             <ListPlayer
                                                 key={item.player_id}
-                                                name={item.name_he}
+                                                name={getTranslationText({
+                                                    textHe: item.name_he,
+                                                    textEn: item.name_en,
+                                                })}
                                                 avt={item.image_url}
                                                 handleDataPlayer={() =>
                                                     onNavigateDataPlayer(item.player_id)
@@ -166,8 +184,14 @@ export const TeamSquadScreen = ({ navigation, route }: ITeamGroupScreenProps) =>
                                             <ListPlayer
                                                 key={item.coach_id}
                                                 avt={item.image_url}
-                                                name={item.name_he}
-                                                position={item.title_he}
+                                                name={getTranslationText({
+                                                    textHe: item.name_he,
+                                                    textEn: item.name_en,
+                                                })}
+                                                position={getTranslationText({
+                                                    textHe: item.title_he,
+                                                    textEn: item.title_en,
+                                                })}
                                                 handleDataPlayer={() =>
                                                     onNavigateDataCoach(item.coach_id)
                                                 }
@@ -183,8 +207,14 @@ export const TeamSquadScreen = ({ navigation, route }: ITeamGroupScreenProps) =>
                                             <ListPlayer
                                                 key={item.coach_id}
                                                 avt={item.image_url}
-                                                name={item.name_he}
-                                                position={item.title_he}
+                                                name={getTranslationText({
+                                                    textHe: item.name_he,
+                                                    textEn: item.name_en,
+                                                })}
+                                                position={getTranslationText({
+                                                    textHe: item.title_he,
+                                                    textEn: item.title_en,
+                                                })}
                                                 handleDataPlayer={() =>
                                                     onNavigateDataCoach(item.coach_id)
                                                 }

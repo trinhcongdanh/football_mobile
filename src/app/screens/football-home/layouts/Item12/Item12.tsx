@@ -11,12 +11,15 @@ import IconFeather from 'react-native-vector-icons/Feather';
 import IconAntDesign from 'react-native-vector-icons/AntDesign';
 import { IItem12Props } from '@football/app/screens/football-home/layouts/Item12/Item12.type';
 import LinearGradient from 'react-native-linear-gradient';
+import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
 
 export const Item12 = ({ videos, handlePlayVideo }: IItem12Props) => {
     const { t, activeIndexNumber, setActiveIndexNumber, dots, onClickAllVideo } = useViewModel({
         videos,
         handlePlayVideo,
     });
+    const { getTranslationText } = useTranslationText();
+
     return (
         <View style={styles.container}>
             <View
@@ -29,12 +32,12 @@ export const Item12 = ({ videos, handlePlayVideo }: IItem12Props) => {
                     },
                 ]}
             >
-                <Text style={styles.header}>גלריית ליגה</Text>
+                <Text style={styles.header}>{t('home_page.league_gallery')}</Text>
                 <TouchableOpacity onPress={onClickAllVideo}>
                     <View style={appStyles.flex_row_align}>
-                        <Text style={styles.details}>לכל הסרטונים</Text>
+                        <Text style={styles.details}>{t('home_page.all_video')}</Text>
                         <IconEntypo
-                            name={appIcons.ic_arrow_left}
+                            name={appIcons.ic_left_ios}
                             size={getSize.m(13)}
                             color={appColors.white}
                         />
@@ -89,9 +92,12 @@ export const Item12 = ({ videos, handlePlayVideo }: IItem12Props) => {
                                 </View>
                                 <View style={styles.content}>
                                     <Text style={styles.text_content}>
-                                        {item.caption_he}{' '}
+                                        {getTranslationText({
+                                            textHe: item.caption_he,
+                                            textEn: item.caption_en,
+                                        })}
                                         <IconFeather
-                                            name={appIcons.ic_arrow_left}
+                                            name={appIcons.ic_left_ios}
                                             size={getSize.m(12)}
                                             color={appColors.white}
                                             style={styles.ic_arrow_left}

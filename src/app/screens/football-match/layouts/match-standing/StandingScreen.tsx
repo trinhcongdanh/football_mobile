@@ -10,6 +10,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import { LeaderBoard } from '@football/core/models/GameModelResponse';
 import { useViewModel } from './StandingScreen.viewModel';
 import { IStandingScreenProps } from './StandingScreen.type';
+import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
 
 export const StandingScreen = ({ navigation, route }: IStandingScreenProps) => {
     const game = route?.params?.data;
@@ -25,6 +26,8 @@ export const StandingScreen = ({ navigation, route }: IStandingScreenProps) => {
     // if (leaderBoard.success == false) {
     //     return <></>;
     // }
+
+    const { getTranslationText } = useTranslationText();
 
     return (
         <View
@@ -44,7 +47,7 @@ export const StandingScreen = ({ navigation, route }: IStandingScreenProps) => {
                                 },
                             ]}
                         >
-                            <View style={{ width: getSize.m(30) }}>
+                            <View style={{ width: getSize.m(34) }}>
                                 <Text
                                     style={[
                                         appStyles.statistics_header,
@@ -116,7 +119,7 @@ export const StandingScreen = ({ navigation, route }: IStandingScreenProps) => {
                                         <View
                                             style={[
                                                 appStyles.flex_row_align,
-                                                { width: getSize.m(30) },
+                                                { width: getSize.m(34) },
                                             ]}
                                         >
                                             <Text style={appStyles.statistics_content}>
@@ -163,7 +166,10 @@ export const StandingScreen = ({ navigation, route }: IStandingScreenProps) => {
                                                         { marginLeft: getSize.m(6) },
                                                     ]}
                                                 >
-                                                    {item.name_he}
+                                                    {getTranslationText({
+                                                        textHe: item.name_he,
+                                                        textEn: item.name_en,
+                                                    })}
                                                 </Text>
                                             </View>
                                         </View>

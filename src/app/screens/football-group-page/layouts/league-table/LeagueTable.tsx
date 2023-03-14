@@ -2,6 +2,7 @@ import DropdownField from '@football/app/components/dropdown-field/DropdownField
 import { appColors } from '@football/app/utils/constants/appColors';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import { ScreenName } from '@football/app/utils/constants/enum';
+import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
 import { getSize } from '@football/app/utils/responsive/scale';
 import React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
@@ -22,6 +23,7 @@ export const LeagueTable = ({ leagueSeasonId }: ILeagueTableProps) => {
         setSelectCycle,
         leagueSeason,
     } = useViewModel({ leagueSeasonId });
+    const { getTranslationText } = useTranslationText();
     return (
         <>
             {leagueSeason && (
@@ -39,7 +41,10 @@ export const LeagueTable = ({ leagueSeasonId }: ILeagueTableProps) => {
                                         onPressItem={cycle => {
                                             setSelectCycle(cycle);
                                         }}
-                                        itemTitleField="cycle_name_he"
+                                        itemTitleField={getTranslationText({
+                                            textHe: 'cycle_name_he',
+                                            textEn: 'cycle_name_en',
+                                        })}
                                     />
                                 </View>
                                 <View style={{ flex: 0.5 }}>
@@ -49,7 +54,10 @@ export const LeagueTable = ({ leagueSeasonId }: ILeagueTableProps) => {
                                         onPressItem={round => {
                                             setSelectedRound(round);
                                         }}
-                                        itemTitleField="round_name_he"
+                                        itemTitleField={getTranslationText({
+                                            textHe: 'round_name_he',
+                                            textEn: 'round_name_en',
+                                        })}
                                     />
                                 </View>
                             </View>
@@ -160,7 +168,10 @@ export const LeagueTable = ({ leagueSeasonId }: ILeagueTableProps) => {
                                                                 },
                                                             ]}
                                                         >
-                                                            {item.name_he}
+                                                            {getTranslationText({
+                                                                textHe: item.name_he,
+                                                                textEn: item.name_en,
+                                                            })}
                                                         </Text>
                                                     </View>
                                                 </View>

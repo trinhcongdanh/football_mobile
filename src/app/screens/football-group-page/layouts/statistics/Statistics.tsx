@@ -2,10 +2,11 @@ import { appIcons } from '@football/app/assets/icons/appIcons';
 import styles from '@football/app/screens/football-group-page/layouts/statistics/Statistics.style';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { appStyles } from '@football/app/utils/constants/appStyles';
+import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
 import { getSize } from '@football/app/utils/responsive/scale';
 import { Statistic } from '@football/core/models/TeamSeasonResponse';
 import React from 'react';
-import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { I18nManager, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { Avatar } from 'react-native-elements';
 import LinearGradient from 'react-native-linear-gradient';
 import IconAntDesign from 'react-native-vector-icons/AntDesign';
@@ -22,6 +23,8 @@ export const Statistics = ({ data }: IStatisticsProps) => {
         handleNextLeftSlide,
         onNavigateDataPlayer,
     } = useViewModel();
+
+    const { getTranslationText } = useTranslationText();
 
     return (
         <View>
@@ -86,7 +89,10 @@ export const Statistics = ({ data }: IStatisticsProps) => {
                                                             },
                                                         ]}
                                                     >
-                                                        {item.player_name_he}
+                                                        {getTranslationText({
+                                                            textHe: item.player_name_he,
+                                                            textEn: item.player_name_en,
+                                                        })}
                                                     </Text>
                                                 </View>
                                             </View>
@@ -98,7 +104,12 @@ export const Statistics = ({ data }: IStatisticsProps) => {
                     </View>
 
                     <TouchableOpacity
-                        style={{ position: 'absolute', top: getSize.m(10), left: getSize.m(130) }}
+                        style={{
+                            position: 'absolute',
+                            top: getSize.m(10),
+                            left: getSize.m(130),
+                            transform: [{ rotate: I18nManager.isRTL ? '0deg' : '180deg' }],
+                        }}
                         onPress={handleNextRightSlide}
                     >
                         <IconAntDesign
@@ -384,7 +395,12 @@ export const Statistics = ({ data }: IStatisticsProps) => {
                         </View>
                     </ScrollView>
                     <TouchableOpacity
-                        style={{ position: 'absolute', top: getSize.m(10), right: getSize.m(2) }}
+                        style={{
+                            position: 'absolute',
+                            top: getSize.m(10),
+                            right: getSize.m(2),
+                            transform: [{ rotate: I18nManager.isRTL ? '0deg' : '180deg' }],
+                        }}
                         onPress={handleNextLeftSlide}
                     >
                         <IconAntDesign

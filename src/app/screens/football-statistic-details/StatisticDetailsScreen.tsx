@@ -21,6 +21,7 @@ import styles from './StatisticDetailsScreen.style';
 import { useViewModel } from './StatisticDetailsScreen.viewModel';
 import { IStatisticDetailsScreenProps } from './StatisticDetailsScreen.type';
 import FastImage from 'react-native-fast-image';
+import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
 
 export enum ListType {
     NormalGame = 0,
@@ -43,6 +44,8 @@ export const StatisticDetailsScreen = ({ navigation, route }: IStatisticDetailsS
         navigation,
         route,
     });
+
+    const { getTranslationText } = useTranslationText();
 
     const renderLists = (listType: ListType) => {
         switch (listType) {
@@ -160,7 +163,10 @@ export const StatisticDetailsScreen = ({ navigation, route }: IStatisticDetailsS
                                                             },
                                                         ]}
                                                     >
-                                                        {item.player_name_he}
+                                                        {getTranslationText({
+                                                            textHe: item.player_name_he,
+                                                            textEn: item.player_name_en,
+                                                        })}
                                                     </Text>
                                                 </View>
                                             </View>
@@ -191,7 +197,10 @@ export const StatisticDetailsScreen = ({ navigation, route }: IStatisticDetailsS
                                                             },
                                                         ]}
                                                     >
-                                                        {item.team_name_he}
+                                                        {getTranslationText({
+                                                            textHe: item.team_name_he,
+                                                            textEn: item.team_name_en,
+                                                        })}
                                                     </Text>
                                                 </View>
                                             </View>
@@ -532,7 +541,10 @@ export const StatisticDetailsScreen = ({ navigation, route }: IStatisticDetailsS
                         </View>
                         <ScrollView>
                             <HeaderLogo
-                                text={leagueSeasonStats.league_name_he}
+                                text={getTranslationText({
+                                    textHe: leagueSeasonStats.league_name_he,
+                                    textEn: leagueSeasonStats.league_name_en,
+                                })}
                                 avt={{ uri: leagueSeasonStats.league_logo_url }}
                             />
                             {renderLists(

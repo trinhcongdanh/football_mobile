@@ -5,6 +5,7 @@ import { BOTTOM_SVG_HEIGHT } from '@football/app/routes/bottom-tab/components/bo
 import { TAB_BAR_HEIGHT } from '@football/app/routes/bottom-tab/styles/bottom.tab.styles';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { appStyles } from '@football/app/utils/constants/appStyles';
+import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
 import { getSize } from '@football/app/utils/responsive/scale';
 import React, { useState } from 'react';
 import {
@@ -38,6 +39,7 @@ export const VideoScreen = ({ navigation, route }: IVideoScreenProps) => {
     });
 
     const [indexDot, setIndexDot] = useState(0);
+    const { getTranslationText } = useTranslationText();
 
     return (
         <View style={appStyles.flex}>
@@ -120,7 +122,10 @@ export const VideoScreen = ({ navigation, route }: IVideoScreenProps) => {
                                                             </View>
                                                             <View style={styles.content}>
                                                                 <Text style={styles.text_content}>
-                                                                    {item.caption_he}
+                                                                    {getTranslationText({
+                                                                        textHe: item.caption_he,
+                                                                        textEn: item.caption_en,
+                                                                    })}
                                                                 </Text>
                                                             </View>
                                                         </TouchableOpacity>
@@ -194,7 +199,10 @@ export const VideoScreen = ({ navigation, route }: IVideoScreenProps) => {
                                                             </View>
                                                             <View style={styles.content}>
                                                                 <Text style={styles.text_content}>
-                                                                    {item.caption_he}
+                                                                    {getTranslationText({
+                                                                        textHe: item.caption_he,
+                                                                        textEn: item.caption_en,
+                                                                    })}
                                                                 </Text>
                                                             </View>
                                                         </TouchableOpacity>
@@ -267,7 +275,10 @@ export const VideoScreen = ({ navigation, route }: IVideoScreenProps) => {
                                                             </View>
                                                             <View style={styles.content}>
                                                                 <Text style={styles.text_content}>
-                                                                    {item.caption_he}
+                                                                    {getTranslationText({
+                                                                        textHe: item.caption_he,
+                                                                        textEn: item.caption_en,
+                                                                    })}
                                                                 </Text>
                                                             </View>
                                                         </TouchableOpacity>

@@ -6,6 +6,7 @@ import { IItem10Props } from '@football/app/screens/football-home/layouts/Item10
 import { useViewModel } from '@football/app/screens/football-home/layouts/Item10/Item10.viewModel';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { appStyles } from '@football/app/utils/constants/appStyles';
+import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
 import { getSize } from '@football/app/utils/responsive/scale';
 import React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
@@ -28,6 +29,8 @@ export const Item10 = ({ league }: IItem10Props) => {
         onClickAllLeagues,
         leagueSeason,
     } = useViewModel({ league });
+    const { getTranslationText } = useTranslationText();
+
     return (
         <View style={styles.container}>
             <View
@@ -39,12 +42,18 @@ export const Item10 = ({ league }: IItem10Props) => {
                     },
                 ]}
             >
-                <Text style={styles.header}>{league.name_he}</Text>
+                <Text style={styles.header}>
+                    {' '}
+                    {getTranslationText({
+                        textHe: league.name_he,
+                        textEn: league.name_en,
+                    })}
+                </Text>
                 <TouchableOpacity onPress={() => onClickAllLeagues(league._id)}>
                     <View style={appStyles.flex_row_align}>
                         <Text style={styles.details}>{t('home_page.full_table')}</Text>
                         <IconEntypo
-                            name={appIcons.ic_arrow_left}
+                            name={appIcons.ic_left_ios}
                             size={getSize.m(13)}
                             color={appColors.button_dark_blue}
                         />
@@ -70,7 +79,10 @@ export const Item10 = ({ league }: IItem10Props) => {
                         onPressItem={cycle => {
                             setSelectCycle(cycle);
                         }}
-                        itemTitleField="cycle_name_he"
+                        itemTitleField={getTranslationText({
+                            textHe: 'cycle_name_he',
+                            textEn: 'cycle_name_en',
+                        })}
                     />
                 </View>
                 <View style={{ flex: 1 }}>
@@ -80,7 +92,10 @@ export const Item10 = ({ league }: IItem10Props) => {
                         onPressItem={round => {
                             setSelectRound(round);
                         }}
-                        itemTitleField="round_name_he"
+                        itemTitleField={getTranslationText({
+                            textHe: 'round_name_he',
+                            textEn: 'round_name_en',
+                        })}
                     />
                 </View>
             </View>
@@ -179,7 +194,10 @@ export const Item10 = ({ league }: IItem10Props) => {
                                                 },
                                             ]}
                                         >
-                                            {item.name_he}
+                                            {getTranslationText({
+                                                textHe: item.name_he,
+                                                textEn: item.name_en,
+                                            })}
                                         </Text>
                                     </View>
                                 </View>

@@ -1,7 +1,7 @@
 import { AppFonts } from '@football/app/assets/fonts';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { getSize } from '@football/app/utils/responsive/scale';
-import { StyleSheet } from 'react-native';
+import { I18nManager, StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
     container: {
@@ -30,6 +30,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: getSize.m(30),
         paddingVertical: getSize.m(10),
         borderRadius: getSize.m(30),
+        flex: I18nManager.isRTL ? 0 : 1,
     },
     text_option: {
         fontFamily: AppFonts.regular,
