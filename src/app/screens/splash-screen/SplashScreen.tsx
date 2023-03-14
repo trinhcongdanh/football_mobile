@@ -18,12 +18,13 @@ import { getProfileUser } from 'src/store/user/getProfile.slice';
 import { addGuestId } from 'src/store/user/GuestId.slice';
 import { RootState } from 'src/store/store';
 import { useMount } from '@football/app/utils/hooks/useMount';
+import { NotificationData } from '@football/core/models/NotificationModel';
 
 const useViewModel = () => {};
 
 export const SplashScreen = ({ navigation, route }: ISplashScreenProps) => {
     const { t, i18n } = useTranslation();
-    const { navigate } = useAppNavigator();
+    const { navigate, replace } = useAppNavigator();
     const [splashData, setSplashData] = useState<Lottie>();
 
     const uuid = require('uuid');
@@ -112,6 +113,61 @@ export const SplashScreen = ({ navigation, route }: ISplashScreenProps) => {
 
     useEffect(() => {
         if (authLoaded) {
+            const notificationData = global?.notificationData?.data as NotificationData;
+            if (notificationData) {
+                switch (notificationData.target_type) {
+                    case 'top_team':
+                        replace(ScreenName.NationalTeamPage, {
+                            topTeamId: notificationData.target_id,
+                        });
+
+                        break;
+                    case 'campaign':
+                        replace(ScreenName.CampaignPage, {
+                            campaignId: notificationData.target_id,
+                        });
+                        break;
+
+                    case 'stadium':
+                        replace(ScreenName.PitchPage, { stadiumId: notificationData.target_id });
+                        break;
+
+                    case 'game':
+                        replace(ScreenName.MatchPage, {
+                            gameId: notificationData.target_id,
+                            selectedTab: notificationData.target_section,
+                        });
+                        break;
+
+                    case 'coach':
+                        replace(ScreenName.DataCoachPage, { coachId: notificationData.target_id });
+                        break;
+
+                    case 'player':
+                        replace(ScreenName.DataPlayerPage, {
+                            playerId: notificationData.target_id,
+                            selectedTab: notificationData.target_section,
+                        });
+                        break;
+
+                    case 'questionnaire':
+                        replace(ScreenName.PlayGroundPage);
+                        break;
+                    case 'cup':
+                        replace(ScreenName.StateCupPage, {
+                            cupId: notificationData.target_id,
+                        });
+                        break;
+
+                    default:
+                        replace(ScreenName.SideBar);
+                        break;
+                }
+
+                global.notificationData = null;
+                return;
+            }
+
             if (!isEmpty(login.login) && !isNil(login.login)) {
                 navigate(ScreenName.SideBar);
                 navigation.reset({

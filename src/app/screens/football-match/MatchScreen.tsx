@@ -12,7 +12,7 @@ import { useViewModel } from './MatchScreen.viewModel';
 // type Props = {};
 
 export const MatchScreen = ({ navigation, route }: IMatchScreenProps) => {
-    const { t, onGoBack, labels, game, handleStadium } = useViewModel({
+    const { t, onGoBack, labels, game, handleStadium, defaultTab } = useViewModel({
         navigation,
         route,
     });
@@ -54,7 +54,7 @@ export const MatchScreen = ({ navigation, route }: IMatchScreenProps) => {
                         )}
                     </View>
                     <View style={[appStyles.flex, appStyles.main_container]}>
-                        {game && <TopTaps labels={labels} data={game} />}
+                        {game && <TopTaps labels={labels} data={game} defaultTab={defaultTab} />}
                     </View>
                 </SafeAreaView>
             </ImageBackground>

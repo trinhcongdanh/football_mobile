@@ -43,12 +43,15 @@ const useViewState = () => {
         },
     ]);
 
+    const [defaultTab, setDefaultTab] = useState(ScreenTopTap.CompositionPage);
     return {
         game,
         setGame,
         t,
         labels,
         setLabels,
+        defaultTab,
+        setDefaultTab,
     };
 };
 
@@ -78,11 +81,27 @@ export const useViewModel = ({ navigation, route }: IMatchScreenProps) => {
     };
 
     const state = useViewState();
-
     const { getGameData } = useViewCallback(route, state);
 
     useMount(() => {
         getGameData();
+        const { selectedTab } = route.params;
+        if (selectedTab) {
+            switch (selectedTab) {
+                case 'lineup':
+                    state.setDefaultTab(ScreenTopTap.CompositionPage);
+                    break;
+                case 'leader_board':
+                    state.setDefaultTab(ScreenTopTap.StandingPage);
+                    break;
+                case 'games':
+                    state.setDefaultTab(ScreenTopTap.SchedulePage);
+                    break;
+                default:
+                    state.setDefaultTab(ScreenTopTap.CompositionPage);
+                    break;
+            }
+        }
     });
 
     const handleStadium = (stadiumId: string) => {

@@ -1,12 +1,17 @@
+/* eslint-disable @typescript-eslint/dot-notation */
 import { Video } from '@football/app/components/video/Video';
+import { AppConsumer, AppProvider } from '@football/core/api/contexts/AppProvider';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import messaging from '@react-native-firebase/messaging';
 import { NavigationContainer } from '@react-navigation/native';
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { I18nManager, View, Text, LogBox, TextInput, StatusBar } from 'react-native';
+import { I18nManager, LogBox, Text, TextInput, View } from 'react-native';
 import { ThemeProvider } from 'react-native-elements';
+import { TextInput as TextInputGH } from 'react-native-gesture-handler';
 import 'react-native-get-random-values';
+import Orientation from 'react-native-orientation-locker';
+import { EventProvider } from 'react-native-outside-press';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
@@ -14,10 +19,6 @@ import './app/i18n/EnStrings';
 import { RootNavigator } from './app/routes/RootNavigator';
 import { appStyles } from './app/utils/constants/appStyles';
 import { persistor, store } from './store/store';
-import Orientation from 'react-native-orientation-locker';
-import { TextInput as TextInputGH } from 'react-native-gesture-handler';
-import { EventProvider } from 'react-native-outside-press';
-import { AppConsumer, AppProvider } from '@football/core/api/contexts/AppProvider';
 
 TextInput.defaultProps = Text.defaultProps || {};
 TextInput.defaultProps.allowFontScaling = false;
@@ -87,6 +88,7 @@ const App = (props: any) => {
                         'Notification caused app to open from quit state:',
                         remoteMessage.notification
                     );
+                    global['notificationData'] = remoteMessage;
                 }
             });
         messaging().onMessage(async remoteMessage => {

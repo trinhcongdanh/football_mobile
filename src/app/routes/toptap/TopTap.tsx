@@ -8,6 +8,7 @@ import { getSize } from '../../utils/responsive/scale';
 
 interface Props {
     labels: any;
+    defaultTab: string;
     // eslint-disable-next-line react/require-default-props
     data?: any;
 }
@@ -27,7 +28,7 @@ const TabLabel = ({ focused, title }: any) => (
         {title}
     </Text>
 );
-export const TopTaps = ({ labels, data }: Props) => {
+export const TopTaps = ({ labels, data, defaultTab }: Props) => {
     if (labels.length === 0) {
         return <View />;
     }
@@ -39,6 +40,7 @@ export const TopTaps = ({ labels, data }: Props) => {
                 tabBarItemStyle: appStyles.top_tap_item,
                 tabBarIndicatorStyle: appStyles.top_tap_indicator,
             }}
+            initialRouteName={defaultTab}
         >
             {labels.map((item: any) => {
                 if (item.renderComponent) {
