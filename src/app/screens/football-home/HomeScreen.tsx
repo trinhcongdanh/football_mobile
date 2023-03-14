@@ -23,6 +23,7 @@ import { renderAvatar, renderUserPoints } from '@football/core/models/AvatarType
 import React, { useEffect, useRef, useState } from 'react';
 import {
     Dimensions,
+    I18nManager,
     ImageBackground,
     LogBox,
     Platform,
@@ -66,11 +67,12 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
     const [opacity, setOpacity] = useState(false);
 
     const scrollToEnd = () => {
-        scrollViewRef.current?.scrollToEnd({ animated: true });
+        scrollViewRef.current?.scrollToEnd();
         setTimeout(() => {
             setOpacity(true);
         }, 200);
     };
+    const notScroll = () => {};
     LogBox.ignoreLogs(['Warning: Encountered two children with the same key']);
     LogBox.ignoreLogs(['Warning: Each child in a list should have a unique "key" prop']);
 
@@ -160,11 +162,15 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                                 <View style={{ marginTop: getSize.m(22) }}>
                                     <ScrollView
                                         style={{
-                                            flexDirection: 'row-reverse',
-                                            opacity: opacity ? 1 : 0,
+                                            flexDirection: I18nManager.isRTL
+                                                ? 'row-reverse'
+                                                : 'row',
+                                            opacity: I18nManager.isRTL ? (opacity ? 1 : 0) : 1,
                                         }}
                                         horizontal
-                                        onContentSizeChange={scrollToEnd}
+                                        onContentSizeChange={
+                                            I18nManager.isRTL ? scrollToEnd : notScroll
+                                        }
                                         ref={scrollViewRef}
                                     >
                                         {players?.map((item, index) => {
