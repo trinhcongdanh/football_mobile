@@ -35,7 +35,7 @@ LogBox.ignoreAllLogs(true);
 const App = (props: any) => {
     const { i18n } = useTranslation();
     useEffect(() => {
-        i18n.changeLanguage('heb');
+        i18n.changeLanguage('en');
         if (i18n.language === 'en') {
             I18nManager.forceRTL(false);
         } else {
