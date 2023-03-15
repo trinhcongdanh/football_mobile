@@ -74,9 +74,9 @@ const resources = {
                 terms: 'תנאי שימוש ומדינות פרטיות',
                 guest: 'אורח',
                 logout: 'התנתק',
-                are_you_want_logout: 'Are you sure you want to logout?',
-                yes: 'Yes',
-                no: 'No',
+                are_you_want_logout: 'בטוחים שאתם רוצים לצאת?',
+                yes: 'כן',
+                no: 'לא',
             },
             connect: {
                 title: 'התחברות',
