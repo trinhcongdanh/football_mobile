@@ -60,7 +60,7 @@ public class MainApplication extends Application implements ReactApplication {
     registerActivityLifecycleCallbacks(OrientationActivityLifecycle.getInstance());
     I18nUtil sharedI18nUtilInstance = I18nUtil.getInstance();
     sharedI18nUtilInstance.allowRTL(getApplicationContext(), true);
-    sharedI18nUtilInstance.forceRTL(getApplicationContext(), true);
+    // sharedI18nUtilInstance.forceRTL(getApplicationContext(), true);
     // If you opted-in for the New Architecture, we enable the TurboModule system
     ReactFeatureFlags.useTurboModules = BuildConfig.IS_NEW_ARCHITECTURE_ENABLED;
     SoLoader.init(this, /* native exopackage */ false);
