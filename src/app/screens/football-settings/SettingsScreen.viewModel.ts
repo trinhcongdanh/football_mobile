@@ -624,8 +624,8 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
                         : profile.profile.item_id,
                     item: {
                         name: userName,
-                        email: email,
-                        gender: gender,
+                        email,
+                        gender,
                         birthdate: formattedDate,
                         favorite_israel_teams: isEmpty(fav_team) ? '' : fav_team,
                         favorite_players: isEmpty(fav_player) ? '' : fav_player,
@@ -649,16 +649,19 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
 
     const scrollViewRef = useRef<any>();
     useEffect(() => {
-        if (scrollBottom == true) {
-            scrollViewRef.current.scrollToEnd({ animated: true });
+        if (!scrollViewRef?.current) {
+            return;
         }
-    }, []);
-
-    useEffect(() => {
-        if (scrollCenter == true) {
-            scrollViewRef.current.scrollTo({ y: getSize.m(600), animated: true });
+        if (scrollBottom === true) {
+            setTimeout(() => {
+                scrollViewRef.current.scrollToEnd({ animated: true });
+            }, 100);
+        } else if (scrollCenter === true) {
+            setTimeout(() => {
+                scrollViewRef.current.scrollTo({ y: getSize.m(600), animated: true });
+            }, 100);
         }
-    }, []);
+    }, [scrollViewRef.current]);
 
     return {
         dateTime,

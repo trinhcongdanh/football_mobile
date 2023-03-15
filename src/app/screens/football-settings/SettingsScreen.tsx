@@ -29,7 +29,6 @@ import {
 import DatePicker from 'react-native-date-picker';
 import FastImage from 'react-native-fast-image';
 import Icon from 'react-native-vector-icons/Feather';
-import { CheckBox } from './layout/check-box/CheckBox';
 import { styles } from './SettingsScreen.styles';
 import { ISettingsScreenProps } from './SettingsScreen.type';
 import { useViewModel } from './SettingsScreen.viewModel';
@@ -125,8 +124,9 @@ export function SettingsScreen(props: ISettingsScreenProps) {
                     </View>
                     <ScrollView
                         showsVerticalScrollIndicator={false}
+                        scrollToOverflowEnabled
                         style={[appStyles.flex, { marginTop: getSize.m(10) }]}
-                        ref={scrollViewRef}
+                        ref={ref => (scrollViewRef.current = ref)}
                     >
                         <View style={styles.card_view_container}>
                             <View style={styles.avatar_block}>
