@@ -38,16 +38,28 @@ export const useViewModel = () => {
 
     const onNavigateStartScreen = () => {
         // dispatch(isLogout);
-        dispatch(
-            logoutUser(
-                serializeParams({
-                    action: ACTION,
-                    token: numberPhone.successLogin ? userLogin.otp.token : login.login.token,
-                    call: AuthData.LOGOUT,
-                })
-            )
-        );
-        clearAllData(dispatch);
+        global.props.showAlert({
+            title: t('side_menu.logout'),
+            subTitle: t('side_menu.are_you_want_logout'),
+            option1: t('side_menu.yes'),
+            option2: t('side_menu.no'),
+            onOption1: () => {
+                global.props.closeAlert();
+                dispatch(
+                    logoutUser(
+                        serializeParams({
+                            action: ACTION,
+                            token: numberPhone.successLogin ? userLogin.otp.token : login.login.token,
+                            call: AuthData.LOGOUT,
+                        })
+                    )
+                );
+                clearAllData(dispatch);
+            },
+            onOption2: () => {
+                global.props.closeAlert();
+            },
+        });
     };
     const isFocused = useIsFocused();
     useEffect(() => {
