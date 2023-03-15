@@ -20,9 +20,8 @@ import { appStyles } from '@football/app/utils/constants/appStyles';
 import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
 import { getSize } from '@football/app/utils/responsive/scale';
 import { renderAvatar, renderUserPoints } from '@football/core/models/AvatarType.enum';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import {
-    Dimensions,
     I18nManager,
     ImageBackground,
     LogBox,
@@ -335,7 +334,9 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                             </SafeAreaView>
                         </ImageBackground>
                     </View>
-                    <ScrollView style={{ marginTop: getSize.m(-40), paddingTop: getSize.m(40) }}>
+                    <ScrollView
+                        style={{ marginTop: getSize.m(-40), paddingTop: getSize.m(40), zIndex: -1 }}
+                    >
                         {/* Video Intro */}
                         {homeLayout?.layout.includes('video') && (
                             <TouchableOpacity onPress={() => handlePlayVideo(homePage?.video)}>
