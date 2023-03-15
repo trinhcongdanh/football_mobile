@@ -132,3 +132,7 @@ export enum Gender {
     MALE = 'FAN_GENDER_MALE',
     FEMALE = 'FAN_GENDER_FEMALE',
 }
+
+export enum Restart {
+    key_restart_for_rtl = 'KEY_RESTART_FOR_RTL',
+}

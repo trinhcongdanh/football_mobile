@@ -18,7 +18,10 @@ import { PersistGate } from 'redux-persist/integration/react';
 import './app/i18n/EnStrings';
 import { RootNavigator } from './app/routes/RootNavigator';
 import { appStyles } from './app/utils/constants/appStyles';
+import { NativeModules } from 'react-native';
+import RNRestart from 'react-native-restart';
 import { persistor, store } from './store/store';
+import { Restart } from '@football/app/utils/constants/enum';
 
 TextInput.defaultProps = Text.defaultProps || {};
 TextInput.defaultProps.allowFontScaling = false;
@@ -34,14 +37,28 @@ LogBox.ignoreAllLogs(true);
 
 const App = (props: any) => {
     const { i18n } = useTranslation();
+    const locale = NativeModules.I18nManager.localeIdentifier;
+
     useEffect(() => {
-        i18n.changeLanguage('heb');
-        if (i18n.language === 'en') {
-            I18nManager.forceRTL(false);
-        } else {
+        i18n.changeLanguage(locale === 'heb' ? 'heb' : 'en');
+        if (i18n.language === 'heb') {
             I18nManager.forceRTL(true);
+            AsyncStorage.getItem(Restart.key_restart_for_rtl).then(isRestarted => {
+                console.log('isRestarted:' + isRestarted);
+                if (isRestarted === null) {
+                    AsyncStorage.setItem(Restart.key_restart_for_rtl, '1').then(() => {
+                        console.log('call restart before: ');
+                        RNRestart.Restart();
+                        console.log('call restart after: ');
+                    });
+                } else {
+                    console.log('isRestarted: here');
+                }
+            });
+        } else {
+            I18nManager.forceRTL(false);
         }
-    }, [i18n, i18n.language]);
+    }, []);
 
     const requestUserPermission = async () => {
         const authStatus = await messaging().requestPermission();
