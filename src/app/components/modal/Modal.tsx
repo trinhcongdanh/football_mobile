@@ -36,7 +36,7 @@ const Alert = ({
     return (
         <>
             <Modal
-                animationType="slide"
+                animationType="fade"
                 transparent
                 statusBarTranslucent
                 visible={visible}
