@@ -164,12 +164,8 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                                             flexDirection: I18nManager.isRTL
                                                 ? 'row-reverse'
                                                 : 'row',
-                                            opacity: I18nManager.isRTL ? (opacity ? 1 : 0) : 1,
                                         }}
                                         horizontal
-                                        onContentSizeChange={
-                                            I18nManager.isRTL ? scrollToEnd : notScroll
-                                        }
                                         ref={scrollViewRef}
                                     >
                                         {players?.map((item, index) => {
