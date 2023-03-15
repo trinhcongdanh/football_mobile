@@ -141,6 +141,7 @@ export const useViewModel = ({ navigation, route }: IRegisterScreenProps) => {
     }, []);
     const isLogin = route?.params?.isLogin;
 
+    console.log(isLogin);
     const onGoBack = () => {
         if (!isLogin) {
             clearUserData(dispatch);
