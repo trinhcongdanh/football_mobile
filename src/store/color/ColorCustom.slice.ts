@@ -1,15 +1,20 @@
+import { appColors } from '@football/app/utils/constants/appColors';
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState: any = {
-    colorCustom: '#F2CE08',
+    colorCustom: appColors.blue_light,
 };
 
 export const colorCustomSlice = createSlice({
     name: 'colorCustom',
     initialState,
-    reducers: {},
+    reducers: {
+        changeColor: (state, action) => {
+            state.colorCustom = action.payload;
+        },
+    },
 });
 
 const { actions, reducer } = colorCustomSlice;
-export const {} = actions;
+export const { changeColor } = actions;
 export default colorCustomSlice.reducer;

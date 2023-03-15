@@ -95,15 +95,13 @@ export const AppImages = {
     img_cups_outline: require('./cup-outline.png'),
     img_video_square_outline: require('./video-square-outline.png'),
     img_product: require('./image-product-1.jpg'),
-    img_background_header_home: require('./background_header_home.png'),
+    img_background_header_home: I18nManager.isRTL
+        ? require('./background_header_home.png')
+        : require('./background_header_home_reserve.png'),
     img_home_team: require('./home_team.png'),
-    img_background_home_1: require('./background_home_1.png'),
     img_angle_down: require('./angle-down.png'),
     img_chess_queen: require('./chess-queen.png'),
     img_ticket_white: require('./ticket_white.png'),
-    img_background_home_2: require('./background_home_2.png'),
-    img_background_home_3: require('./background_home_3.png'),
-    img_background_home_4: require('./background_home_4.png'),
     img_clock_solid: require('./clock_solid.png'),
     img_ticket_solid: require('./ticket_solid.png'),
     img_futbol_solid: require('./futbol_solid.png'),
@@ -127,6 +125,12 @@ export const AppImages = {
     img_avt_other: require('./AVATAR_NON-BINARY.png'),
     img_ball_white: require('./ball_white.png'),
     img_guest_regist: require('./guest_regist.png'),
+    img_home_background_favorite: require('./home_background_favorite.png'),
+    img_home_background_favorite_2: require('./home_background_favorite_2.png'),
+    img_decoration_background: require('./img_decoration_background.png'),
+    img_decoration_background_2: require('./img_decoration_background_2.png'),
+    img_decoration_header_home: require('./decoration_header_home.png'),
+    img_dot_header_home: require('./dot_header_home.png'),
 };
 
 export const AppJsons = {

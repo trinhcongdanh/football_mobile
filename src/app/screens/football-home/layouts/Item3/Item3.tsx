@@ -22,7 +22,7 @@ import { GameTable1 } from '@football/app/components/game-table-1/GameTable1';
 import { IItem3Props } from './Item3.type';
 import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
 
-export const Item3 = ({ player }: IItem3Props) => {
+export const Item3 = ({ player, color }: IItem3Props) => {
     const {
         t,
         pages,
@@ -35,9 +35,14 @@ export const Item3 = ({ player }: IItem3Props) => {
 
     return (
         <ImageBackground
-            source={AppImages.img_background_home_3}
+            source={AppImages.img_home_background_favorite_2}
             style={[appStyles.flex, { height: getSize.m(528), marginTop: getSize.m(46) }]}
         >
+            <FastImage
+                source={AppImages.img_decoration_background_2}
+                tintColor={color}
+                style={{ height: getSize.m(230), width: '100%', position: 'absolute' }}
+            />
             <View style={appStyles.align_justify}>
                 <View style={styles.logo_team}>
                     <FastImage
@@ -57,10 +62,7 @@ export const Item3 = ({ player }: IItem3Props) => {
                         })}
                     </Text>
                     <TouchableOpacity onPress={() => onClickPlayer(player._id)}>
-                        <LinearGradient
-                            colors={['rgba(255, 43, 94, 1)', 'rgba(204, 10, 45, 1)']}
-                            style={styles.icon_arrow_left}
-                        >
+                        <LinearGradient colors={[color, color]} style={styles.icon_arrow_left}>
                             <FastImage
                                 source={AppImages.img_angle_down}
                                 style={{

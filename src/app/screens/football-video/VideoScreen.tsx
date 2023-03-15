@@ -20,6 +20,7 @@ import {
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/AntDesign';
+import { useSelector } from 'react-redux';
 
 import styles from './VideoScreen.styles';
 import { IVideoScreenProps } from './VideoScreen.type';
@@ -41,6 +42,8 @@ export const VideoScreen = ({ navigation, route }: IVideoScreenProps) => {
     const [indexDot, setIndexDot] = useState(0);
     const { getTranslationText } = useTranslationText();
 
+    const colorCustom = useSelector((state: any) => state.colorCustom.colorCustom);
+
     return (
         <View style={appStyles.flex}>
             <ImageBackground source={AppImages.img_background} style={appStyles.flex}>
@@ -52,8 +55,8 @@ export const VideoScreen = ({ navigation, route }: IVideoScreenProps) => {
                                 avt={AppImages.img_avt}
                                 point="1,325"
                                 icon={AppImages.img_bars_sort}
-                                color_pre={appColors.blue_light}
-                                color_after={appColors.blue_dark}
+                                color_pre={colorCustom}
+                                color_after={colorCustom}
                                 handlePressFunction={onShowSideMenu}
                             />
 

@@ -25,7 +25,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import IconEntypo from 'react-native-vector-icons/Entypo';
 import { IItem1Props } from './Item1.type';
 
-export const Item1 = ({ team }: IItem1Props) => {
+export const Item1 = ({ team, color }: IItem1Props) => {
     const {
         t,
         pages,
@@ -40,9 +40,14 @@ export const Item1 = ({ team }: IItem1Props) => {
 
     return (
         <ImageBackground
-            source={AppImages.img_background_home_1}
+            source={AppImages.img_home_background_favorite}
             style={[appStyles.flex, { height: getSize.m(527), marginTop: getSize.m(46) }]}
         >
+            <FastImage
+                source={AppImages.img_decoration_background}
+                tintColor={color}
+                style={{ height: getSize.m(527), width: '100%', position: 'absolute' }}
+            />
             <View style={appStyles.align_justify}>
                 <View style={styles.logo_team}>
                     <FastImage
@@ -62,10 +67,7 @@ export const Item1 = ({ team }: IItem1Props) => {
                         })}
                     </Text>
                     <TouchableOpacity onPress={() => onNavigateTeamDetails(team._id)}>
-                        <LinearGradient
-                            colors={['rgba(255, 43, 94, 1)', 'rgba(204, 10, 45, 1)']}
-                            style={styles.icon_arrow_left}
-                        >
+                        <LinearGradient colors={[color, color]} style={styles.icon_arrow_left}>
                             <FastImage
                                 source={AppImages.img_angle_down}
                                 style={{

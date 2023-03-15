@@ -49,7 +49,9 @@ export const useViewModel = () => {
                     logoutUser(
                         serializeParams({
                             action: ACTION,
-                            token: numberPhone.successLogin ? userLogin.otp.token : login.login.token,
+                            token: numberPhone.successLogin
+                                ? userLogin.otp.token
+                                : login.login.token,
                             call: AuthData.LOGOUT,
                         })
                     )
@@ -111,6 +113,7 @@ export const useViewModel = () => {
                 )
             );
         }
+        console.log('Danh');
     }, [userLogin.success, numberPhone.successLogin, isFocused]);
 
     useEffect(() => {

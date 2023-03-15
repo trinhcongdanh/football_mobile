@@ -26,6 +26,8 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'src/store/store';
 import { addVideo, setShowVideo } from 'src/store/video/Video.slice';
+import { changeColor } from 'src/store/color/ColorCustom.slice';
+import { appColors } from '@football/app/utils/constants/appColors';
 
 const useViewState = () => {
     const selectedFavTeams = useSelector((state: RootState) => state.favTeams.selectedTeams);
@@ -35,6 +37,8 @@ const useViewState = () => {
     );
     const userLogin = useSelector((state: any) => state.otpUser);
     const login = useSelector((state: any) => state.login);
+    const getProfile = useSelector((state: RootState) => state.getProfile);
+    const colorCustom = useSelector((state: any) => state.colorCustom.colorCustom);
 
     const [profileUser, setProfileUser] = useState();
     const [homePage, setHomePage] = useState<HomePageModel>();
@@ -76,6 +80,8 @@ const useViewState = () => {
         selectedFavTopTeams,
         userLogin,
         login,
+        getProfile,
+        colorCustom,
     };
 };
 
@@ -234,6 +240,8 @@ const useViewCallback = (route: any, viewState: any) => {
                 }
             );
 
+            console.log(data);
+
             if (!isEmpty(data)) {
                 setProfileUser({
                     getProfile: data,
@@ -343,6 +351,14 @@ export const useViewModel = ({ navigation, route }: IHomeScreenProps) => {
             getDefaultLeagueData(state.homePage.default_league_id);
         }
     }, [state.homePage]);
+
+    useEffect(() => {
+        dispatch(
+            changeColor(
+                state.teams[0]?.team_color ? state.teams[0].team_color : appColors.blue_light
+            )
+        );
+    }, [state.teams[0]?.team_color]);
 
     const onShowSideMenu = () => {
         navigation?.openDrawer();
