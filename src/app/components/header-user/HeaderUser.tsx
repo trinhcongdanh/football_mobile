@@ -32,7 +32,7 @@ export const HeaderUser = ({
             openDrawer();
         }
     };
-
+    const colorCustom = useSelector((state: any) => state.colorCustom.colorCustom);
     const profileUser = useSelector((state: RootState) => state.getProfile);
 
     return (
@@ -61,7 +61,12 @@ export const HeaderUser = ({
                     }}
                     source={renderAvatar(profileUser)}
                 />
-                <Image source={AppImages.img_ball} style={styles.ic_football} />
+                <FastImage
+                    tintColor={colorCustom}
+                    source={AppImages.img_ball}
+                    style={styles.ic_football}
+                    resizeMode={FastImage.resizeMode.contain}
+                />
                 <Text
                     style={[
                         appStyles.text_bold,

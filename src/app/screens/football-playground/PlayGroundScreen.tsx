@@ -26,6 +26,7 @@ import {
 import FastImage from 'react-native-fast-image';
 import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { useSelector } from 'react-redux';
 
 export const PlayGroundScreen = ({ navigation, route }: IPlayGroundScreenProps) => {
     const { t, onGoBack, onShowSideMenu } = useViewModel({ navigation, route });
@@ -41,6 +42,8 @@ export const PlayGroundScreen = ({ navigation, route }: IPlayGroundScreenProps) 
     const selectOption = (index: number): void => {
         setSelect(index);
     };
+    const colorCustom = useSelector((state: any) => state.colorCustom.colorCustom);
+
     return (
         <View style={appStyles.flex}>
             <ImageBackground
@@ -61,7 +64,7 @@ export const PlayGroundScreen = ({ navigation, route }: IPlayGroundScreenProps) 
 
                             <TouchableOpacity onPress={onShowSideMenu}>
                                 <LinearGradient
-                                    colors={[appColors.blue_light, appColors.blue_dark]}
+                                    colors={[colorCustom, colorCustom]}
                                     style={styles.bar}
                                 >
                                     <FastImage

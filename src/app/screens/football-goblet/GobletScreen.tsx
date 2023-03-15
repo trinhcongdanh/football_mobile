@@ -23,12 +23,14 @@ import {
 } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import Icon from 'react-native-vector-icons/Feather';
+import { useSelector } from 'react-redux';
 import styles from './GobletScreen.style';
 import { useViewModel } from './GobletScreen.viewModel';
 
 export const GobletScreen = ({ navigation, route }: IGobletScreenProps) => {
     const { t, goToStateCupPage, changeTab, cups } = useViewModel({ navigation, route });
     const { getTranslationText } = useTranslationText();
+    const colorCustom = useSelector((state: any) => state.colorCustom.colorCustom);
 
     return (
         <View style={[appStyles.flex]}>
@@ -40,8 +42,8 @@ export const GobletScreen = ({ navigation, route }: IGobletScreenProps) => {
                             avt={AppImages.img_avt}
                             point="1,325"
                             icon={AppImages.img_bars_sort}
-                            color_pre={appColors.blue_light}
-                            color_after={appColors.blue_dark}
+                            color_pre={colorCustom}
+                            color_after={colorCustom}
                         />
                         <View>
                             <Text style={[appStyles.text_title]}>{t('goblet.title')}</Text>

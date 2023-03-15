@@ -79,6 +79,7 @@ export interface TeamModel {
     popularity: number;
     team_personnel_id: string;
     search_terms: string;
+    team_color: string;
     league_name_he: string;
     league_name_en: string;
     seasons: Season[];

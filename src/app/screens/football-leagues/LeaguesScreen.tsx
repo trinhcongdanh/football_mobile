@@ -20,6 +20,7 @@ import {
 import { TextInput } from 'react-native-gesture-handler';
 
 import Icon from 'react-native-vector-icons/Feather';
+import { useSelector } from 'react-redux';
 import styles from './LeaguesScreen.style';
 import { ILeaguesScreenProps } from './LeaguesScreen.type';
 import { useViewModel } from './LeaguesScreen.viewModel';
@@ -29,6 +30,7 @@ export const LeaguesScreen = ({ navigation, route }: ILeaguesScreenProps) => {
         navigation,
         route,
     });
+    const colorCustom = useSelector((state: any) => state.colorCustom.colorCustom);
 
     const renderItem = ({ item, index }: any) => {
         return (
@@ -42,7 +44,7 @@ export const LeaguesScreen = ({ navigation, route }: ILeaguesScreenProps) => {
                 </View>
 
                 <Icon
-                    name={appIcons.ic_arrow_left}
+                    name={appIcons.ic_left_ios}
                     size={getSize.s(13)}
                     color={appColors.text_dark_blue}
                     style={styles.ic_arrow_left}
@@ -60,8 +62,8 @@ export const LeaguesScreen = ({ navigation, route }: ILeaguesScreenProps) => {
                             avt={AppImages.img_avt}
                             point="1,325"
                             icon={AppImages.img_bars_sort}
-                            color_pre={appColors.blue_light}
-                            color_after={appColors.blue_dark}
+                            color_pre={colorCustom}
+                            color_after={colorCustom}
                         />
                         <View>
                             <Text style={[appStyles.text_title]}>{t('leagues.title')}</Text>

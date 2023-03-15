@@ -36,7 +36,8 @@ import {
 import FastImage from 'react-native-fast-image';
 import LinearGradient from 'react-native-linear-gradient';
 import IconAntDesign from 'react-native-vector-icons/AntDesign';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { changeColor } from 'src/store/color/ColorCustom.slice';
 
 export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
     const {
@@ -56,6 +57,7 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
         onClickTopTeam,
         profileUser,
         userLogin,
+        colorCustom,
         onClickGuestRegistration,
     } = useViewModel({
         navigation,
@@ -75,7 +77,6 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
     LogBox.ignoreLogs(['Warning: Encountered two children with the same key']);
     LogBox.ignoreLogs(['Warning: Each child in a list should have a unique "key" prop']);
 
-    const colorCustom = useSelector((state: any) => state.colorCustom.colorCustom);
     const isGuest = !userLogin?.success;
     const { getTranslationText } = useTranslationText();
 
@@ -91,11 +92,34 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                                 {
                                     height: getSize.m(172),
                                     zIndex: 1000,
+                                    overflow: 'hidden',
                                 },
                             ]}
                         >
+                            <FastImage
+                                source={AppImages.img_dot_header_home}
+                                tintColor={colorCustom}
+                                resizeMode={FastImage.resizeMode.contain}
+                                style={{
+                                    height: getSize.m(64),
+                                    // width: '100%',
+                                    width: getSize.m(94),
+                                    position: 'absolute',
+                                    bottom: getSize.m(-50),
+                                    right: I18nManager.isRTL ? undefined : getSize.m(30),
+                                    left: I18nManager.isRTL ? getSize.m(220) : undefined,
+                                }}
+                            />
+
                             <StatusBar translucent backgroundColor="transparent" />
-                            <SafeAreaView style={appStyles.safe_area}>
+                            <SafeAreaView
+                                style={[
+                                    appStyles.safe_area,
+                                    {
+                                        zIndex: 100000,
+                                    },
+                                ]}
+                            >
                                 <View style={appStyles.container}>
                                     <View style={appStyles.flex_row_space_center}>
                                         <TouchableOpacity onPress={onShowSideMenu}>
@@ -129,7 +153,7 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                                                     source={renderAvatar(profileUser)}
                                                 />
                                                 <FastImage
-                                                    source={AppImages.img_ball_red}
+                                                    source={AppImages.img_ball}
                                                     style={styles.ic_football}
                                                     tintColor={colorCustom}
                                                     resizeMode={FastImage.resizeMode.contain}
@@ -372,7 +396,7 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                         {homeLayout?.layout.includes('my_teams') &&
                             teams?.map(team => {
                                 // eslint-disable-next-line no-underscore-dangle
-                                return <Item1 team={team} key={team._id} />;
+                                return <Item1 color={colorCustom} team={team} key={team._id} />;
                             })}
                         {/* Item2 */}
                         {/* <Item2 /> */}
@@ -381,7 +405,9 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                             players &&
                             players?.map(player => {
                                 // eslint-disable-next-line no-underscore-dangle
-                                return <Item3 player={player} key={player._id} />;
+                                return (
+                                    <Item3 color={colorCustom} player={player} key={player._id} />
+                                );
                             })}
                         {/* Item4 */}
                         {/* <Item4 /> */}
@@ -390,7 +416,11 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                             topTeams?.map(topTeam => {
                                 return (
                                     <>
-                                        <Item5 topTeam={topTeam} key={topTeam._id} />
+                                        <Item5
+                                            color={colorCustom}
+                                            topTeam={topTeam}
+                                            key={topTeam._id}
+                                        />
                                         {homeLayout?.layout.includes('my_top_team') && (
                                             <Item6 topTeam={topTeam} key={topTeam._id} />
                                         )}
