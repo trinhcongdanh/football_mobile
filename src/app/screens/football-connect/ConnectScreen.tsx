@@ -84,6 +84,7 @@ export const ConnectScreen = ({ navigation, route }: IConnectScreenProps) => {
                                 }}
                                 title={t('connect.title')}
                             />
+
                             <CardView
                                 option="0"
                                 placeHolderText={t('connect.placeholder')}
@@ -100,6 +101,7 @@ export const ConnectScreen = ({ navigation, route }: IConnectScreenProps) => {
                                 connectFacebook={connectFacebook}
                                 connectGoogle={connectGoogle}
                             />
+
                             <View
                                 style={[
                                     appStyles.flex_row_center,
@@ -117,6 +119,7 @@ export const ConnectScreen = ({ navigation, route }: IConnectScreenProps) => {
                                     {' '}
                                     {t('connect.nosignUp')}
                                 </Text>
+
                                 <TouchableOpacity onPress={onNavigateSignUp}>
                                     <Text
                                         style={{

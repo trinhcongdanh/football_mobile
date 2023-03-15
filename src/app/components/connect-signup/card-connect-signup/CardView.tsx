@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, Image } from 'react-native';
+import { View, Text, TouchableOpacity, Image, ScrollView, FlatList } from 'react-native';
 import React from 'react';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import { getSize } from '@football/app/utils/responsive/scale';
@@ -40,6 +40,7 @@ export const CardView = ({
                     onFocus={handleError}
                     keyboardType="phone-pad"
                 />
+
                 <Button
                     style={{ borderRadius: getSize.m(15) }}
                     disabled={input !== '' ? false : true}
