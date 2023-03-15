@@ -154,7 +154,7 @@ export const useViewModel = ({ navigation, route }: IFavoriteTopTeamsScreenProps
         if (previous_screen === ScreenName.SettingsPage) {
             navigate(ScreenName.SettingsPage, {
                 previous_screen: ScreenName.FavTopTeamPage,
-                center: true,
+                position: route?.params?.position,
                 scrollBottom: false,
                 selectedPlayers: true,
                 selectedTeams: true,

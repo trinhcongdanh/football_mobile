@@ -88,6 +88,7 @@ export function SettingsScreen(props: ISettingsScreenProps) {
         profileUser,
         scrollViewRef,
         handleNotSaveChange,
+        handleScroll,
     } = useViewModel(props);
 
     const { getTranslationText } = useTranslationText();
@@ -127,6 +128,7 @@ export function SettingsScreen(props: ISettingsScreenProps) {
                         scrollToOverflowEnabled
                         style={[appStyles.flex, { marginTop: getSize.m(10) }]}
                         ref={ref => (scrollViewRef.current = ref)}
+                        onScroll={handleScroll}
                     >
                         <View style={styles.card_view_container}>
                             <View style={styles.avatar_block}>

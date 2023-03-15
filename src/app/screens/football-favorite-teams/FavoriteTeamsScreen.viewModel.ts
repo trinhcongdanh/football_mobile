@@ -164,7 +164,7 @@ const useViewCallback = (route: any, viewState: any) => {
         } else if (params?.previous_screen === ScreenName.SettingsPage) {
             navigate(ScreenName.SettingsPage, {
                 previous_screen: ScreenName.FavTeamPage,
-                center: true,
+                position: params.position,
                 scrollBottom: false,
                 selectedPlayers: true,
                 selectedTeams: true,

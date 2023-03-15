@@ -43,6 +43,7 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
     // const notifications: any[] = [];
 
     const [notifications, setNotifications] = useState<any[]>([]);
+    const [scrollPosition, setSrollPosition] = useState<number>();
 
     const [isEnabled1, setIsEnabled1] = useState(false);
     const [isEnabled2, setIsEnabled2] = useState(false);
@@ -204,6 +205,7 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
         navigate(ScreenName.FavTeamPage, {
             previous_screen: ScreenName.SettingsPage,
             changeTeams: true,
+            position: scrollPosition,
         });
     };
 
@@ -226,6 +228,7 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
         navigate(ScreenName.FavPlayerPage, {
             previous_screen: ScreenName.SettingsPage,
             changePlayers: true,
+            position: scrollPosition,
         });
     };
 
@@ -234,6 +237,7 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
         navigate(ScreenName.FavTopTeamPage, {
             previous_screen: ScreenName.SettingsPage,
             changeTopTeams: true,
+            position: scrollPosition,
         });
     };
 
@@ -242,6 +246,7 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
         navigate(ScreenName.FavTeamPage, {
             previous_screen: ScreenName.SettingsPage,
             changeTeams: true,
+            position: scrollPosition,
         });
     };
 
@@ -250,6 +255,7 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
         navigate(ScreenName.FavTeamPage, {
             previous_screen: ScreenName.SettingsPage,
             changeTeams: true,
+            position: scrollPosition,
         });
     };
 
@@ -272,6 +278,7 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
         navigate(ScreenName.FavPlayerPage, {
             previous_screen: ScreenName.SettingsPage,
             changePlayers: true,
+            position: scrollPosition,
         });
     };
 
@@ -294,6 +301,7 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
         navigate(ScreenName.FavPlayerPage, {
             previous_screen: ScreenName.SettingsPage,
             changePlayers: true,
+            position: scrollPosition,
         });
     };
 
@@ -302,6 +310,7 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
         navigate(ScreenName.FavTopTeamPage, {
             previous_screen: ScreenName.SettingsPage,
             changeTopTeams: true,
+            position: scrollPosition,
         });
     };
 
@@ -310,6 +319,7 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
         navigate(ScreenName.FavTopTeamPage, {
             previous_screen: ScreenName.SettingsPage,
             changeTopTeams: true,
+            position: scrollPosition,
         });
     };
     const handleError = (errorMessage: string, input: string) => {
@@ -646,12 +656,13 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
 
     const scrollBottom = route.params?.scrollBottom;
     const scrollCenter = route.params?.center;
-
+    const position = route.params?.position;
     const scrollViewRef = useRef<any>();
     useEffect(() => {
         if (!scrollViewRef?.current) {
             return;
         }
+
         if (scrollBottom === true) {
             setTimeout(() => {
                 scrollViewRef.current.scrollToEnd({ animated: true });
@@ -660,8 +671,16 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
             setTimeout(() => {
                 scrollViewRef.current.scrollTo({ y: getSize.m(600), animated: true });
             }, 100);
+        } else if (position) {
+            console.log('position', position);
+            
+            scrollViewRef.current.scrollTo({ y: position, animated: true });
         }
     }, [scrollViewRef.current]);
+
+    const handleScroll = (event: any) => {
+        setSrollPosition(event.nativeEvent.contentOffset.y);
+    };
 
     return {
         dateTime,
@@ -718,5 +737,6 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
         handleNotSaveChange,
         profileUser,
         scrollViewRef,
+        handleScroll,
     };
 };
