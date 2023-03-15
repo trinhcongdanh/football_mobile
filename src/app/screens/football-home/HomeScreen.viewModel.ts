@@ -12,7 +12,7 @@ import { GeneralVodModel } from '@football/core/models/GeneralVodResponse';
 import { HomeLayoutModel, HomePageModel } from '@football/core/models/HomePageModelResponse';
 import { LeagueModel } from '@football/core/models/LeagueModelResponse';
 import { PlayerModel } from '@football/core/models/PlayerModelResponse';
-import { TeamModel } from '@football/core/models/TeamModelResponse';
+import { TeamModel, TeamModelResponse } from '@football/core/models/TeamModelResponse';
 import GeneralVodService from '@football/core/services/GeneralVod.service';
 import HomeLayoutService from '@football/core/services/HomeLayout.service';
 import HomePageService from '@football/core/services/HomePage.service';
@@ -149,17 +149,29 @@ const useViewCallback = (route: any, viewState: any) => {
         if (!user?.favorite_israel_teams?.length) {
             return;
         }
-        const ids = user.favorite_israel_teams.map((id: string) => {
-            return { _id: { $oid: id } };
-        });
-        const [error, res] = await TeamService.findByFilter({
-            $or: ids,
-        });
+        // const ids = user.favorite_israel_teams.map((id: string) => {
+        //     return { _id: { $oid: id } };
+        // });
 
-        if (error) {
-            return;
-        }
-        setTeams(res.data.documents);
+        const favTeamsSelected = await Promise.all(
+            user.favorite_israel_teams.map(async (id: string) => {
+                const [err, res] = await TeamService.findByOId<TeamModelResponse>(id);
+                if (err) return;
+                return res.data.documents[0];
+            })
+        );
+
+        // console.log(ids);
+
+        // const [error, res] = await TeamService.findByFilter({
+        //     $or: ids,
+        // });
+
+        // if (error) {
+        //     return;
+        // }
+        // console.log(favTeamsSelected);
+        setTeams(favTeamsSelected);
     }, []);
 
     const getTopTeamsData = useCallback(async (user: any) => {
