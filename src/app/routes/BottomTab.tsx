@@ -169,7 +169,7 @@ export const BottomTabStack = () => {
                         tabPress: e => {
                             if (isGuessUser(profileUser)) {
                                 e.preventDefault();
-                                navigation.navigate(ScreenName.RegisterPage);
+                                navigation.navigate(ScreenName.RegisterPage, { isLogin: true });
                             }
                         },
                     })}
