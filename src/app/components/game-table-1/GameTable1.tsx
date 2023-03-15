@@ -67,10 +67,10 @@ export const GameTable1 = ({
                                     },
                                 ]}
                             >
-                                הרכב
+                                {t('home_page.composition')}
                             </Text>
                             <IconFeather
-                                name={appIcons.ic_arrow_left}
+                                name={appIcons.ic_left_ios}
                                 size={getSize.m(10)}
                                 color="#061134"
                             />

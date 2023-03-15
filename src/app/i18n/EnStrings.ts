@@ -636,6 +636,7 @@ const resources = {
                 league_gallery: 'ליגה גלריית',
                 all_video: 'הסרטונים לכל',
                 instagram: 'ההתאחדות באינסטגרם',
+                composition: 'הרכב',
             },
             list_game: {
                 results: 'לתוצאות המשחק בזמן אמת',
@@ -1285,6 +1286,7 @@ const resources = {
                 league_gallery: 'League gallery',
                 all_video: 'The videos are for everyone',
                 instagram: 'The association on Instagram',
+                composition: 'Composition',
             },
             list_game: {
                 results: 'For the results of the game in real time',
