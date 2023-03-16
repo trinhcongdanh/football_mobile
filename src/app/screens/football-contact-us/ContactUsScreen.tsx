@@ -54,13 +54,13 @@ export const ContactUsScreen = ({ navigation, route }: IContactUsScreenProps) =>
                             iconName={appIcons.ic_right_ios}
                             iconStyle={styles.ic_back}
                             goBack={onGoBack}
-                            title={t('side_menu.contact_us')}
+                            title={t('contact_us.contact_us')}
                         />
                     </View>
                     <ScrollView>
                         <View style={styles.contact_us_conatiner}>
                             <View style={styles.title}>
-                                <Text style={styles.title_text}>{t('contact.title')}</Text>
+                                <Text style={styles.title_text}>{t('contact_us.header')}</Text>
                             </View>
                             <View style={{ marginTop: getSize.m(16) }}>
                                 <Input

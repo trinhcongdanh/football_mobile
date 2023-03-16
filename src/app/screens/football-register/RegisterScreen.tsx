@@ -71,8 +71,8 @@ export const RegisterScreen = ({ navigation, route }: IRegisterScreenProps) => {
                         <ScrollView showsVerticalScrollIndicator={false}>
                             <CardHeaderView
                                 option="1"
-                                title={t('welcome.sign_up')}
-                                sub_title={t('welcome.join_us')}
+                                title={t('register.title')}
+                                sub_title={t('register.sub_title')}
                             />
                             <CardView
                                 option="1"
@@ -89,6 +89,9 @@ export const RegisterScreen = ({ navigation, route }: IRegisterScreenProps) => {
                                     handleError('', 'numberPhone');
                                 }}
                                 connect={connect}
+                                facebook={t('register.fb')}
+                                google={t('register.gg')}
+                                apple={t('register.apple')}
                             />
                             <View
                                 style={[

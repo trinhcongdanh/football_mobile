@@ -91,6 +91,10 @@ const styles = StyleSheet.create({
         fontFamily: AppFonts.semibold,
         textAlign: 'center',
     },
+    result_number_container: {
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
     result_number: {
         flexDirection: I18nManager.isRTL ? 'row' : 'row-reverse',
         alignItems: 'center',

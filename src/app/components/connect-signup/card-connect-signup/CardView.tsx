@@ -22,6 +22,9 @@ export const CardView = ({
     connectApple,
     option,
     buttonTitle,
+    facebook,
+    google,
+    apple,
 }: ICardViewProps) => {
     const { t } = useTranslation();
     return (
@@ -75,7 +78,7 @@ export const CardView = ({
                             style={styles.image_link}
                         />
 
-                        <Text style={styles.text_link}>{t('connect.fb')}</Text>
+                        <Text style={styles.text_link}>{facebook}</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
                         onPress={connectGoogle}
@@ -91,7 +94,7 @@ export const CardView = ({
                             resizeMode={FastImage.resizeMode.contain}
                             style={styles.image_link}
                         />
-                        <Text style={styles.text_link}> {t('connect.gg')}</Text>
+                        <Text style={styles.text_link}> {google}</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
                         onPress={connectApple}
@@ -107,7 +110,7 @@ export const CardView = ({
                             resizeMode={FastImage.resizeMode.contain}
                             style={styles.image_link}
                         />
-                        <Text style={styles.text_link}> {t('connect.apple')} </Text>
+                        <Text style={styles.text_link}> {apple} </Text>
                     </TouchableOpacity>
                 </View>
             </View>

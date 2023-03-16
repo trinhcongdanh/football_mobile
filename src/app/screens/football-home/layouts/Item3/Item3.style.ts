@@ -127,8 +127,8 @@ const styles = StyleSheet.create({
         width: getSize.m(15),
         height: getSize.m(21),
         position: 'absolute',
-        left: getSize.m(-2.5),
-        top: getSize.m(-2.5),
+        left: getSize.m(-3.8),
+        top: getSize.m(-2),
     },
 
     line: {

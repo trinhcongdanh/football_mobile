@@ -12,4 +12,7 @@ export type ICardViewProps = {
     connectGoogle: () => void;
     connectApple?: () => void;
     option: any;
+    google: string;
+    facebook: string;
+    apple: string;
 };
