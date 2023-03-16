@@ -191,7 +191,7 @@ export const FavoriteTopTeam = ({
                                     })}
                                 </View>
                                 <View>
-                                    <View style={styles.result_number}>
+                                    <View style={styles.result_number_container}>
                                         <Text
                                             style={{
                                                 fontFamily: AppFonts.regular,

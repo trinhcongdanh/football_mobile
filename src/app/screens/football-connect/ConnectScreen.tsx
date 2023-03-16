@@ -100,6 +100,9 @@ export const ConnectScreen = ({ navigation, route }: IConnectScreenProps) => {
                                 connectApple={connectApple}
                                 connectFacebook={connectFacebook}
                                 connectGoogle={connectGoogle}
+                                facebook={t('connect.fb')}
+                                google={t('connect.gg')}
+                                apple={t('connect.apple')}
                             />
 
                             <View

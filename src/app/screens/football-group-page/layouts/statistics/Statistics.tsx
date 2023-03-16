@@ -31,9 +31,9 @@ export const Statistics = ({ data }: IStatisticsProps) => {
             <Text style={[appStyles.text_topic, { marginLeft: getSize.m(6) }]}>
                 {t('group_page.statistics.title')}
             </Text>
-            <View style={{ marginTop: getSize.m(30), marginBottom: getSize.m(21) }}>
+            <View style={{ marginTop: getSize.m(0), marginBottom: getSize.m(21) }}>
                 <View style={{ flexDirection: 'row' }}>
-                    <View style={{ marginTop: getSize.m(8) }}>
+                    <View style={{ marginTop: I18nManager.isRTL ? getSize.m(8) : getSize.m(22) }}>
                         <View
                             style={{
                                 flexDirection: 'row',

@@ -93,7 +93,7 @@ export const FavoriteSummaryScreen = ({ navigation, route }: IFavoriteSummaryScr
                                     backFav={backFavTeam}
                                     leftIcon
                                     headerTitle={t('fav_summary.group')}
-                                    headerSkip={t('settings.sleep')}
+                                    headerSkip={t('fav_summary.change')}
                                     iconName={appIcons.ic_left_ios}
                                 />
                                 <View style={styles.item_render}>
@@ -152,7 +152,7 @@ export const FavoriteSummaryScreen = ({ navigation, route }: IFavoriteSummaryScr
                                     backFav={backFavPlayer}
                                     leftIcon
                                     headerTitle={t('fav_summary.favorite')}
-                                    headerSkip={t('settings.sleep')}
+                                    headerSkip={t('fav_summary.change')}
                                     iconName={appIcons.ic_left_ios}
                                 />
                                 <View style={styles.item_render}>
@@ -211,7 +211,7 @@ export const FavoriteSummaryScreen = ({ navigation, route }: IFavoriteSummaryScr
                                     backFav={backFavTopTeam}
                                     leftIcon
                                     headerTitle={t('fav_summary.national_team')}
-                                    headerSkip={t('settings.sleep')}
+                                    headerSkip={t('fav_summary.change')}
                                     iconName={appIcons.ic_left_ios}
                                 />
                                 <View style={styles.item_render}>
