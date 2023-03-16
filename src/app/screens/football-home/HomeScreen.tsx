@@ -357,6 +357,12 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                         {homeLayout?.layout.includes('video') && (
                             <TouchableOpacity onPress={() => handlePlayVideo(homePage?.video)}>
                                 <View style={styles.home_video}>
+                                    <LinearGradient
+                                        colors={['transparent', 'rgba(0, 0, 0, 0.92)']}
+                                        start={{ x: 0, y: 0.3 }}
+                                        end={{ x: 0, y: 1 }}
+                                        style={styles.gradient_img}
+                                    />
                                     <FastImage
                                         source={{ uri: homePage?.video.image_url }}
                                         style={{
