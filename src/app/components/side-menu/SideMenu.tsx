@@ -1,17 +1,15 @@
+import { appIcons } from '@football/app/assets/icons/appIcons';
+import { AppImages } from '@football/app/assets/images';
+import { ISideMenuProps } from '@football/app/components/side-menu/SideMenu.type';
+import { appColors } from '@football/app/utils/constants/appColors';
+import { appStyles } from '@football/app/utils/constants/appStyles';
+import { ScreenName } from '@football/app/utils/constants/enum';
 import { getSize } from '@football/app/utils/responsive/scale';
 import React from 'react';
-import IconAntDesign from 'react-native-vector-icons/AntDesign';
 import { Text, TouchableOpacity, View } from 'react-native';
-import { styles } from './SideMenu.style';
-import { appIcons } from '@football/app/assets/icons/appIcons';
-import { appColors } from '@football/app/utils/constants/appColors';
-import { ISideMenuProps } from '@football/app/components/side-menu/SideMenu.type';
 import FastImage from 'react-native-fast-image';
-import { AppImages } from '@football/app/assets/images';
-import { appStyles } from '@football/app/utils/constants/appStyles';
-import { useTranslation } from 'react-i18next';
-import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
-import { ScreenName } from '@football/app/utils/constants/enum';
+import IconAntDesign from 'react-native-vector-icons/AntDesign';
+import { styles } from './SideMenu.style';
 import { useViewModel } from './SideMenu.viewModel';
 
 export const SideMenu = ({ navigation }: ISideMenuProps) => {
@@ -24,6 +22,8 @@ export const SideMenu = ({ navigation }: ISideMenuProps) => {
         avt,
         handleAccount,
         handleBottomSettingPage,
+        resetNotifications,
+        notifications,
     } = useViewModel();
 
     return (
@@ -75,7 +75,7 @@ export const SideMenu = ({ navigation }: ISideMenuProps) => {
                             <FastImage
                                 source={AppImages.img_user_bold}
                                 resizeMode={FastImage.resizeMode.contain}
-                                style={{ width: getSize.m(14), height: getSize.m(12) }}
+                                style={{ width: getSize.m(16), height: getSize.m(14) }}
                             />
                             <Text style={styles.side_menu_item_text}>
                                 {t('side_menu.my_account')}
@@ -90,7 +90,7 @@ export const SideMenu = ({ navigation }: ISideMenuProps) => {
                             <FastImage
                                 source={AppImages.img_message}
                                 resizeMode={FastImage.resizeMode.contain}
-                                style={{ width: getSize.m(14), height: getSize.m(12) }}
+                                style={{ width: getSize.m(16), height: getSize.m(14) }}
                             />
                             <Text style={styles.side_menu_item_text}>
                                 {t('side_menu.contact_us')}
@@ -103,7 +103,7 @@ export const SideMenu = ({ navigation }: ISideMenuProps) => {
                             <FastImage
                                 source={AppImages.img_gear}
                                 resizeMode={FastImage.resizeMode.contain}
-                                style={{ width: getSize.m(14), height: getSize.m(12) }}
+                                style={{ width: getSize.m(16), height: getSize.m(14) }}
                             />
                             <Text style={styles.side_menu_item_text}>
                                 {t('side_menu.definitions')}
@@ -118,9 +118,30 @@ export const SideMenu = ({ navigation }: ISideMenuProps) => {
                             <FastImage
                                 source={AppImages.img_file}
                                 resizeMode={FastImage.resizeMode.contain}
-                                style={{ width: getSize.m(14), height: getSize.m(12) }}
+                                style={{ width: getSize.m(16), height: getSize.m(14) }}
                             />
                             <Text style={styles.side_menu_item_text}>{t('side_menu.terms')}</Text>
+                        </TouchableOpacity>
+
+                        <TouchableOpacity
+                            onPress={resetNotifications}
+                            style={[appStyles.flex_row_align_center, { marginTop: getSize.m(28) }]}
+                        >
+                            <FastImage
+                                source={AppImages.img_bell}
+                                resizeMode={FastImage.resizeMode.contain}
+                                style={{ width: getSize.m(16), height: getSize.m(14) }}
+                            />
+                            <Text style={styles.side_menu_item_text}>
+                                {t('side_menu.notification')}
+                            </Text>
+                            {notifications.length > 0 && (
+                                <View style={styles.side_menu_notification}>
+                                    <Text style={styles.text_inside_notification}>
+                                        {notifications.length}
+                                    </Text>
+                                </View>
+                            )}
                         </TouchableOpacity>
                     </View>
                 </View>

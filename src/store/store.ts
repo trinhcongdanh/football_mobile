@@ -1,3 +1,4 @@
+/* eslint-disable import/no-named-as-default */
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { configureStore, ThunkAction } from '@reduxjs/toolkit';
 import { combineReducers } from 'redux';
@@ -11,22 +12,23 @@ import {
     REGISTER,
     REHYDRATE,
 } from 'redux-persist';
+import colorCustomReducer from 'src/store/color/ColorCustom.slice';
+import notificationReducer from 'src/store/notification/Notification.slice';
+import getProfileSlice from 'src/store/user/getProfile.slice';
+import otpUserSlice from 'src/store/user/OTP.slice';
+import setProfileSlice from 'src/store/user/setProfile.slice';
 import { Action } from 'typesafe-actions';
 import favPlayerReducer from './FavPlayer.slice';
 import favTeamReducer from './FavTeam.slice';
 import favTopTeamReducer from './FavTopTeam.slice';
-import settingSelectedReducer from './SettingSelected.slice';
 import leagueReducer from './league/League.slice';
+import settingSelectedReducer from './SettingSelected.slice';
 import createProfileReducer from './user/CreateProfile.slice';
-import numberPhoneUserReducer from './user/RegisterNumberPhone.slice';
 import guestIdReducer from './user/GuestId.slice';
 import loginReducer from './user/Login.slice';
 import registerFacebookReducer from './user/RegisterFacebook.slice';
+import numberPhoneUserReducer from './user/RegisterNumberPhone.slice';
 import videoReducer from './video/Video.slice';
-import otpUserSlice from 'src/store/user/OTP.slice';
-import setProfileSlice from 'src/store/user/setProfile.slice';
-import getProfileSlice from 'src/store/user/getProfile.slice';
-import colorCustomReducer from 'src/store/color/ColorCustom.slice';
 
 const reducer = combineReducers({
     guestId: guestIdReducer,
@@ -44,6 +46,7 @@ const reducer = combineReducers({
     leagues: leagueReducer,
     video: videoReducer,
     colorCustom: colorCustomReducer,
+    notifications: notificationReducer,
 });
 const persistConfig = {
     key: 'root',

@@ -80,6 +80,7 @@ export const AppImages = {
     img_users: require('./users.png'),
     img_arrow_right_from_bracket: require('./arrow-right-from-bracket.png'),
     img_file: require('./file.png'),
+    img_bell: require('./bell.png'),
     img_gear: require('./gear.png'),
     img_message: require('./message.png'),
     img_home: require('./home.png'),

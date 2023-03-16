@@ -313,6 +313,7 @@ const eventHandler = (navigate: any) => {
 export const useViewModel = ({ navigation, route }: IHomeScreenProps) => {
     const { navigate, goBack } = useAppNavigator();
     const { t } = useTranslation();
+    const dispatch = useDispatch();
 
     const onGoBack = (): void => {
         goBack();
@@ -375,8 +376,6 @@ export const useViewModel = ({ navigation, route }: IHomeScreenProps) => {
     const onShowSideMenu = () => {
         navigation?.openDrawer();
     };
-
-    const dispatch = useDispatch();
 
     const handlePlayVideo = (item: any) => {
         state.setDisplay(true);

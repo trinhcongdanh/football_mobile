@@ -77,6 +77,7 @@ const resources = {
                 are_you_want_logout: 'בטוחים שאתם רוצים לצאת?',
                 yes: 'כן',
                 no: 'לא',
+                notification: 'התראות',
             },
             connect: {
                 title: 'התחברות',
@@ -730,6 +731,7 @@ const resources = {
                 are_you_want_logout: 'Are you sure you want to logout?',
                 yes: 'Yes',
                 no: 'No',
+                notification: 'התראות',
             },
             connect: {
                 title: 'Connection',

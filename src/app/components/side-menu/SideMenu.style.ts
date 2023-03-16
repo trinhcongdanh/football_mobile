@@ -69,4 +69,26 @@ export const styles = StyleSheet.create({
         color: appColors.button_dark_blue,
         marginLeft: getSize.m(10),
     },
+
+    side_menu_notification: {
+        textAlignVertical: 'center',
+        paddingVertical: getSize.m(0),
+        color: appColors.white,
+        position: 'absolute',
+        width: getSize.m(12),
+        height: getSize.m(12),
+        borderRadius: getSize.m(10),
+        backgroundColor: appColors.red,
+        lineHeight: 0,
+        padding: getSize.m(0),
+        textAlign: 'center',
+        top: 0,
+        left: getSize.m(-3),
+    },
+
+    text_inside_notification: {
+        color: 'white',
+        fontSize: getSize.m(8),
+        textAlign: 'center',
+    },
 });

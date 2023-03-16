@@ -65,14 +65,6 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
     });
 
     const scrollViewRef = useRef<any>();
-    const [opacity, setOpacity] = useState(false);
-
-    const scrollToEnd = () => {
-        scrollViewRef.current?.scrollToEnd();
-        setTimeout(() => {
-            setOpacity(true);
-        }, 200);
-    };
     const notScroll = () => {};
     LogBox.ignoreLogs(['Warning: Encountered two children with the same key']);
     LogBox.ignoreLogs(['Warning: Each child in a list should have a unique "key" prop']);
@@ -191,6 +183,10 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                                         }}
                                         horizontal
                                         ref={scrollViewRef}
+                                        onContentSizeChange={() =>
+                                            I18nManager.isRTL &&
+                                            scrollViewRef.current?.scrollToEnd()
+                                        }
                                     >
                                         {players?.map((item, index) => {
                                             return (

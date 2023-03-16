@@ -12,6 +12,7 @@ import { RootState } from 'src/store/store';
 import { AppImages } from '@football/app/assets/images';
 import { isEmpty } from 'lodash';
 import { clearAllData } from '@football/app/utils/functions/clearAllData';
+import { clearNotifications } from 'src/store/notification/Notification.slice';
 
 export const useViewModel = () => {
     const { navigate, goBack, popToTop } = useAppNavigator();
@@ -29,10 +30,10 @@ export const useViewModel = () => {
     const profileUser = useSelector((state: RootState) => state.setProfile);
     const numberPhone = useSelector((state: any) => state.numberPhoneUser);
     const userLogin = useSelector((state: RootState) => state.otpUser);
+    const notifications = useSelector((state: RootState) => state.notifications.notifications);
 
     function serializeParams(obj: any) {
         const a = qs.stringify(obj, { encode: false, arrayFormat: 'brackets' });
-        console.log(a);
         return a;
     }
 
@@ -154,6 +155,10 @@ export const useViewModel = () => {
         }
     };
 
+    const resetNotifications = () => {
+        dispatch(clearNotifications());
+    };
+
     return {
         t,
         onGoBack,
@@ -163,5 +168,7 @@ export const useViewModel = () => {
         avt,
         handleAccount,
         handleBottomSettingPage,
+        resetNotifications,
+        notifications,
     };
 };
