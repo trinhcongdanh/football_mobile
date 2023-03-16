@@ -83,7 +83,7 @@ static NSString *const kRNConcurrentRoot = @"concurrentRoot";
   rootViewController.view = rootView;
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
-  [[RCTI18nUtil sharedInstance] forceRTL:YES];
+  // [[RCTI18nUtil sharedInstance] forceRTL:YES];
   [[RCTI18nUtil sharedInstance] allowRTL:YES];
   // [[FBSDKApplicationDelegate sharedInstance] application:application
   //   didFinishLaunchingWithOptions:launchOptions];
