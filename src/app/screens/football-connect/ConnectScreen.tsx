@@ -74,7 +74,10 @@ export const ConnectScreen = ({ navigation, route }: IConnectScreenProps) => {
                             iconStyle={styles.ic_back}
                             goBack={onGoBack}
                         />
-                        <ScrollView showsVerticalScrollIndicator={false}>
+                        <ScrollView
+                            keyboardShouldPersistTaps="handled"
+                            showsVerticalScrollIndicator={false}
+                        >
                             <CardHeaderView
                                 option="0"
                                 style={{

@@ -730,7 +730,7 @@ const resources = {
                 submit: 'Send Verification Code',
                 alreadyUser: 'Already have an account? ',
                 connect: 'Login',
-                invalid_phone_number: 'Invalid phone number',
+                invalid: 'Invalid phone number',
                 fb: 'Register with Facebook',
                 gg: 'Register with Google',
                 apple: 'Register with Apple',

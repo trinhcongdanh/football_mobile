@@ -68,7 +68,10 @@ export const RegisterScreen = ({ navigation, route }: IRegisterScreenProps) => {
                             iconStyle={styles.ic_back}
                             goBack={onGoBack}
                         />
-                        <ScrollView showsVerticalScrollIndicator={false}>
+                        <ScrollView
+                            keyboardShouldPersistTaps="handled"
+                            showsVerticalScrollIndicator={false}
+                        >
                             <CardHeaderView
                                 option="1"
                                 title={t('register.title')}
