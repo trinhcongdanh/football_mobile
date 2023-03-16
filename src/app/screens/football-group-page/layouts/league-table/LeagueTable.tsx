@@ -32,7 +32,7 @@ export const LeagueTable = ({ leagueSeasonId }: ILeagueTableProps) => {
                         <Text style={[appStyles.text_topic, { marginLeft: getSize.m(6) }]}>
                             {t('group_page.league_table.title')}
                         </Text>
-                        <View style={[appStyles.flex]}>
+                        <View style={[appStyles.flex, { zIndex: 1 }]}>
                             <View style={styles.drop_down_filter}>
                                 <View style={{ flex: 0.9 }}>
                                     <DropdownField
