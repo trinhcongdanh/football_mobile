@@ -9,7 +9,7 @@ export const MainStack = () => {
     return (
         <Main.Navigator
             initialRouteName={ScreenName.SettingsPage}
-            screenOptions={{ headerShown: false }}
+            screenOptions={{ headerShown: false, animationTypeForReplace: 'pop' }}
         >
             <Main.Screen name={ScreenName.SettingsPage} component={SettingsScreen} />
         </Main.Navigator>

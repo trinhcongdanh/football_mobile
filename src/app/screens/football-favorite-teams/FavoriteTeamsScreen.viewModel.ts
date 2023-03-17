@@ -162,15 +162,17 @@ const useViewCallback = (route: any, viewState: any) => {
                 editFav: true,
             });
         } else if (params?.previous_screen === ScreenName.SettingsPage) {
-            navigate(ScreenName.SettingsPage, {
-                previous_screen: ScreenName.FavTeamPage,
-                position: params.position,
-                scrollBottom: false,
-                selectedPlayers: true,
-                selectedTeams: true,
-                selectedTopTeams: true,
-            });
-            dispatch(setSettingFavTeam(selectedFavTeams));
+            // navigate(ScreenName.SettingsPage, {
+            //     previous_screen: ScreenName.FavTeamPage,
+            //     position: params.position,
+            //     scrollBottom: false,
+            //     selectedPlayers: true,
+            //     selectedTeams: true,
+            //     selectedTopTeams: true,
+            // });
+            route.params.handleAfterSelectTeam(selectedFavTeams);
+            goBack();
+            // dispatch(setSettingFavTeam(selectedFavTeams));
             // pop(ScreenName.FavTeamPage);
         } else if (params?.previous_screen === ScreenName.HomePage) {
             navigate(ScreenName.FavPlayerPage, {

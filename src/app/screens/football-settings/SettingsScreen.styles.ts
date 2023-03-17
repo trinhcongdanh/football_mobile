@@ -246,4 +246,15 @@ export const styles = StyleSheet.create({
         paddingHorizontal: getSize.m(14),
         paddingVertical: getSize.m(5),
     },
+    loading: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        position: 'absolute',
+        backgroundColor: 'rgba(0,0,0,0.5)',
+        top: getSize.m(0),
+        bottom: getSize.m(0),
+        left: getSize.m(0),
+        right: getSize.m(0),
+        zIndex: 10,
+    },
 });

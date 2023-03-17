@@ -9,3 +9,5 @@ export const MAX_CUP_HOLDERS_ITEMS = 5;
 export const MAX_CUP_CYCLES_DETAILS_ITEMS = 5;
 export const MAX_SEARCH_LEAGUES = 3;
 export const MAX_FAVORITES_TEAM = 3;
+export const MAX_FAVORITES_PLAYER = 3;
+export const MAX_FAVORITES_TOPTEAM = 2;

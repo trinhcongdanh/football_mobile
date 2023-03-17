@@ -456,15 +456,17 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
                     editFav: true,
                 });
             } else if (previous_screen === ScreenName.SettingsPage) {
-                navigate(ScreenName.SettingsPage, {
-                    previous_screen: ScreenName.FavPlayerPage,
-                    position: route?.params?.position,
-                    scrollBottom: false,
-                    selectedPlayers: true,
-                    selectedTeams: true,
-                    selectedTopTeams: true,
-                });
-                dispatch(setSettingFavPlayer(selectedFavPlayers));
+                // navigate(ScreenName.SettingsPage, {
+                //     previous_screen: ScreenName.FavPlayerPage,
+                //     position: route?.params?.position,
+                //     scrollBottom: false,
+                //     selectedPlayers: true,
+                //     selectedTeams: true,
+                //     selectedTopTeams: true,
+                // });
+                // dispatch(setSettingFavPlayer(selectedFavPlayers));
+                route?.params?.handleAfterSelectPlayers(selectedFavPlayers);
+                goBack();
                 // pop(ScreenName.FavTeamPage);
             } else if (previous_screen === ScreenName.HomePage) {
                 navigate(ScreenName.FavTopTeamPage, {
