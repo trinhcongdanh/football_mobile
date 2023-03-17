@@ -8,6 +8,7 @@ import { getSize } from '@football/app/utils/responsive/scale';
 import { isGuessUser } from '@football/core/models/AvatarType.enum';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { I18nManager, SafeAreaView } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -25,7 +26,7 @@ import { ScreenName } from '../utils/constants/enum';
 import { BottomFabBar } from './bottom-tab';
 
 const Bottom = createBottomTabNavigator();
-
+const { t } = useTranslation();
 const renderIcon = (routeName: string) => {
     let icon: any = '';
     let icon_outline: any = '';
@@ -72,19 +73,19 @@ const renderLabel = (routeName: string) => {
     let label = '';
     switch (routeName) {
         case ScreenName.HomePage:
-            label = I18nManager.isRTL ? 'בית' : 'Home';
+            label = t('bottom_tab.home');
             break;
         case ScreenName.LeaguesPage:
-            label = I18nManager.isRTL ? 'ליגות' : 'Leagues';
+            label = t('bottom_tab.leagues');
             break;
         case ScreenName.TeamPage:
-            label = I18nManager.isRTL ? 'נבחרות' : 'Teams';
+            label = t('bottom_tab.teams');
             break;
         case ScreenName.PlayGroundPage:
-            label = I18nManager.isRTL ? 'שאלון' : 'Question';
+            label = t('bottom_tab.question');
             break;
         case ScreenName.GobletPage:
-            label = I18nManager.isRTL ? 'גביע' : 'Goblet';
+            label = t('bottom_tab.goblet');
             break;
         case ScreenName.VideoPage:
             label = 'VOD';

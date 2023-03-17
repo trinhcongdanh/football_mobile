@@ -6,7 +6,7 @@ import messaging from '@react-native-firebase/messaging';
 import { NavigationContainer } from '@react-navigation/native';
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { I18nManager, LogBox, Text, TextInput, View } from 'react-native';
+import { I18nManager, LogBox, Platform, Text, TextInput, View } from 'react-native';
 import { ThemeProvider } from 'react-native-elements';
 import { TextInput as TextInputGH } from 'react-native-gesture-handler';
 import 'react-native-get-random-values';
@@ -37,7 +37,10 @@ LogBox.ignoreAllLogs(true);
 
 const App = (props: any) => {
     const { i18n } = useTranslation();
-    const locale = NativeModules.I18nManager.localeIdentifier;
+    const locale =
+        Platform.OS === 'android'
+            ? NativeModules.I18nManager.localeIdentifier
+            : NativeModules.SettingsManager.settings.AppleLocale;
 
     useEffect(() => {
         i18n.changeLanguage(locale === 'heb' ? 'heb' : 'en');
