@@ -118,7 +118,7 @@ export const Video = () => {
         if (showControls) {
             Orientation.lockToLandscapeLeft();
             videoRef.current.presentFullscreenPlayer();
-        } else {
+        } else if (Platform.OS === 'android') {
             Orientation.lockToPortrait();
         }
     }, [fullscreen, showControls]);
@@ -186,8 +186,10 @@ export const Video = () => {
                             onEnd={onEnd}
                             controls={showControls}
                             fullscreen={fullscreen}
-                            onFullscreenPlayerWillDismiss={() => {
+                            fullscreenOrientation="landscape"
+                            onFullscreenPlayerDidDismiss={() => {
                                 // Orientation.unlockAllOrientations();
+                                Orientation.lockToPortrait();
                                 setShowControls(false);
                                 setFullscreen(false);
                             }}
