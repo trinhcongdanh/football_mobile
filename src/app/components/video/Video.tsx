@@ -87,7 +87,6 @@ export const Video = () => {
     const [fullscreen, setFullscreen] = useState(false);
     const hiddenVideo = () => {
         videoRef?.current?.seek(0);
-        videoRef.current.pause();
         setPause(true);
         dispatch(setHiddenVideo(false));
         dispatch(resetVideo(null));
@@ -175,26 +174,28 @@ export const Video = () => {
                             minHeight: getSize.m(900),
                         }}
                     >
-                        <Video_Player
-                            ref={videoRef}
-                            source={{ uri: sourceVideo ? sourceVideo.video_url : '' }}
-                            style={styles.background_video}
-                            paused={pause}
-                            resizeMode="cover"
-                            ignoreSilentSwitch="ignore"
-                            onLoad={onLoadEnd}
-                            onProgress={onProgress}
-                            onEnd={onEnd}
-                            controls={showControls}
-                            fullscreen={fullscreen}
-                            fullscreenOrientation="landscape"
-                            onFullscreenPlayerDidDismiss={() => {
-                                // Orientation.unlockAllOrientations();
-                                Orientation.lockToPortrait();
-                                setShowControls(false);
-                                setFullscreen(false);
-                            }}
-                        />
+                        {showVideo && (
+                            <Video_Player
+                                ref={videoRef}
+                                source={{ uri: sourceVideo ? sourceVideo.video_url : '' }}
+                                style={styles.background_video}
+                                paused={pause}
+                                resizeMode="cover"
+                                ignoreSilentSwitch="ignore"
+                                onLoad={onLoadEnd}
+                                onProgress={onProgress}
+                                onEnd={onEnd}
+                                controls={showControls}
+                                fullscreen={fullscreen}
+                                fullscreenOrientation="landscape"
+                                onFullscreenPlayerDidDismiss={() => {
+                                    // Orientation.unlockAllOrientations();
+                                    Orientation.lockToPortrait();
+                                    setShowControls(false);
+                                    setFullscreen(false);
+                                }}
+                            />
+                        )}
                         <View style={styles.controls}>
                             <View
                                 style={[
