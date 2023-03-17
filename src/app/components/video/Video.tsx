@@ -93,9 +93,16 @@ export const Video = () => {
     };
 
     const showFullscreen = () => {
-        setFullscreen(true);
-        setShowControls(true);
-        Orientation.lockToLandscapeLeft();
+        if (Platform.OS === 'ios') {
+            setShowControls(false);
+            if (videoRef?.current?.presentFullscreenPlayer) {
+                videoRef?.current?.presentFullscreenPlayer();
+            }
+        } else {
+            setFullscreen(true);
+            setShowControls(true);
+            Orientation.lockToLandscapeLeft();
+        }
     };
 
     const handleOrientation = (orientation: string) => {
@@ -173,11 +180,11 @@ export const Video = () => {
                             style={styles.background_video}
                             paused={pause}
                             resizeMode="cover"
-                            ignoreSilentSwitch={'ignore'}
+                            ignoreSilentSwitch="ignore"
                             onLoad={onLoadEnd}
                             onProgress={onProgress}
                             onEnd={onEnd}
-                            controls={Platform.OS === 'ios' ? true : showControls}
+                            controls={showControls}
                             fullscreen={fullscreen}
                             onFullscreenPlayerWillDismiss={() => {
                                 // Orientation.unlockAllOrientations();
