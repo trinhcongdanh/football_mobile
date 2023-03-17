@@ -22,7 +22,7 @@ import { NativeModules } from 'react-native';
 import RNRestart from 'react-native-restart';
 import { persistor, store } from './store/store';
 import { Restart } from '@football/app/utils/constants/enum';
-
+import * as RNLocalize from 'react-native-localize';
 TextInput.defaultProps = Text.defaultProps || {};
 TextInput.defaultProps.allowFontScaling = false;
 TextInputGH.defaultProps = Text.defaultProps || {};
@@ -37,13 +37,19 @@ LogBox.ignoreAllLogs(true);
 
 const App = (props: any) => {
     const { i18n } = useTranslation();
-    const locale =
-        Platform.OS === 'android'
-            ? NativeModules.I18nManager.localeIdentifier
-            : NativeModules.SettingsManager.settings.AppleLocale;
+
+    let langCode = RNLocalize.getCountry();
+
+    langCode =
+        Platform.OS === 'ios'
+            ? NativeModules.SettingsManager.settings.AppleLocale ||
+              NativeModules.SettingsManager.settings.AppleLanguages[0] // iOS 13
+            : NativeModules.I18nManager.localeIdentifier;
+
+    const locale = langCode.substring(0, 2).toLocaleLowerCase();
 
     useEffect(() => {
-        i18n.changeLanguage(locale === 'he' ? 'heb' : 'en');
+        i18n.changeLanguage(locale === 'he' || locale === 'iw' ? 'heb' : 'en');
         if (i18n.language === 'heb') {
             I18nManager.forceRTL(true);
             AsyncStorage.getItem(Restart.key_restart_for_rtl).then(isRestarted => {
