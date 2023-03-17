@@ -43,7 +43,7 @@ const App = (props: any) => {
             : NativeModules.SettingsManager.settings.AppleLocale;
 
     useEffect(() => {
-        i18n.changeLanguage(locale === 'heb' ? 'heb' : 'en');
+        i18n.changeLanguage(locale === 'he' ? 'heb' : 'en');
         if (i18n.language === 'heb') {
             I18nManager.forceRTL(true);
             AsyncStorage.getItem(Restart.key_restart_for_rtl).then(isRestarted => {

@@ -102,8 +102,8 @@ export const Video = () => {
         } else {
             setFullscreen(true);
             setShowControls(true);
-            Orientation.lockToLandscapeLeft();
         }
+        Orientation.lockToLandscapeLeft();
     };
 
     const handleOrientation = (orientation: string) => {
