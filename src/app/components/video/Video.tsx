@@ -87,6 +87,7 @@ export const Video = () => {
     const [fullscreen, setFullscreen] = useState(false);
     const hiddenVideo = () => {
         videoRef?.current?.seek(0);
+        videoRef.current.pause();
         setPause(true);
         dispatch(setHiddenVideo(false));
         dispatch(resetVideo(null));
