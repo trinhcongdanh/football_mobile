@@ -1,5 +1,6 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { SideBar } from '@football/app/routes/side-bar/SideBar';
 import { ScreenName } from '../utils/constants/enum';
 import { RegScreen } from '../screens/football-reg/RegScreen';
 import { WelcomeScreen } from '../screens/football-welcome/WelcomeScreen';
@@ -51,7 +52,6 @@ import { HistoryScreen } from '../screens/football-history/HistoryScreen';
 import { DataPlayerScreen } from '../screens/football-data-player/DataPlayerScreen';
 import { DataCoachScreen } from '../screens/football-data-coach/DataCoachScreen';
 import { BottomTabStack } from './BottomTab';
-import { SideBar } from '@football/app/routes/side-bar/SideBar';
 
 const Auth = createNativeStackNavigator();
 
@@ -59,7 +59,7 @@ export const AuthStack = () => {
     return (
         <Auth.Navigator
             initialRouteName={ScreenName.SplashPage}
-            screenOptions={{ headerShown: false }}
+            screenOptions={{ headerShown: false, animationTypeForReplace: 'pop' }}
         >
             <Auth.Screen name={ScreenName.SplashPage} component={SplashScreen} />
             <Auth.Screen name={ScreenName.OpeningPage} component={WelcomeScreen} />

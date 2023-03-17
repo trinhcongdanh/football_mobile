@@ -152,15 +152,17 @@ export const useViewModel = ({ navigation, route }: IFavoriteTopTeamsScreenProps
 
     const handleContinue = () => {
         if (previous_screen === ScreenName.SettingsPage) {
-            navigate(ScreenName.SettingsPage, {
-                previous_screen: ScreenName.FavTopTeamPage,
-                position: route?.params?.position,
-                scrollBottom: false,
-                selectedPlayers: true,
-                selectedTeams: true,
-                selectedTopTeams: true,
-            });
-            dispatch(setSettingFavTopTeam(selectedFavTopTeams));
+            // navigate(ScreenName.SettingsPage, {
+            //     previous_screen: ScreenName.FavTopTeamPage,
+            //     position: route?.params?.position,
+            //     scrollBottom: false,
+            //     selectedPlayers: true,
+            //     selectedTeams: true,
+            //     selectedTopTeams: true,
+            // });
+            // dispatch(setSettingFavTopTeam(selectedFavTopTeams));
+            route.params?.handleAfterSelectTopTeams(selectedFavTopTeams);
+            goBack();
             // pop(ScreenName.FavTeamPage);
         } else if (previous_screen === ScreenName.HomePage) {
             // if()

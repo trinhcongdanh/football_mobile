@@ -1,5 +1,3 @@
-/* eslint-disable react/no-array-index-key */
-/* eslint-disable react-native/no-inline-styles */
 import { AppFonts } from '@football/app/assets/fonts';
 import { appIcons } from '@football/app/assets/icons/appIcons';
 import { AppImages } from '@football/app/assets/images';
@@ -10,16 +8,17 @@ import Input from '@football/app/components/input/Input';
 import { Spacer } from '@football/app/components/spacer/Spacer';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { appStyles } from '@football/app/utils/constants/appStyles';
+import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
 import { getSize } from '@football/app/utils/responsive/scale';
 import { renderAvatar, renderUserPoints } from '@football/core/models/AvatarType.enum';
 import { Avatar } from '@rneui/themed';
-import React, { useRef } from 'react';
+import _ from 'lodash';
+import React from 'react';
 import {
     ActivityIndicator,
     I18nManager,
     Image,
     ImageBackground,
-    LogBox,
     SafeAreaView,
     ScrollView,
     StatusBar,
@@ -36,49 +35,85 @@ import { useViewModel } from './SettingsScreen.viewModel';
 
 export function SettingsScreen(props: ISettingsScreenProps) {
     const {
-        setProfile,
-        getProfile,
-        onGoBack,
+        goBack,
+        isEnabled1,
+        isEnabled2,
+        isEnabled3,
+        isEnabled4,
+        isEnabled5,
+        isEnabled6,
+        toggleSwitch1,
+        toggleSwitch2,
+        toggleSwitch3,
+        toggleSwitch4,
+        toggleSwitch5,
+        toggleSwitch6,
         t,
-        getTranslationText,
-        handleSaveChange,
-        handleNotSaveChange,
+        handleOnDate,
         onImagePicker,
-        errors,
-        handleError,
+        image,
+        backFavPlayer,
+        backFavTeam,
+        backFavTopTeam,
+        handleSaveChange,
+        teams,
+        players,
+        topTeams,
+        addFavTeam,
+        changeFavTeam,
+        addFavPlayer,
+        changeFavPlayer,
+        addFavTopTeam,
+        changeFavTopTeam,
+        onGoBack,
+        userNameRef,
         userName,
         setUserName,
+        errors,
+        handleError,
+        handleOnChangeName,
+        handleOnChangeEmail,
+        emailRef,
         email,
         setEmail,
+        getProfile,
+        handleOnGender,
+        handleGender,
         genders,
-        gender,
-        birthDate,
-        handleOnSelectGender,
-        handleChangeBirthDate,
-        notifications,
-        handleChangeNotification,
-        selectedTeams,
-        selectedPlayers,
-        selectedTopTeams,
-        backFavTeam,
-        backFavPlayer,
-        backFavTopTeam,
-        scrollBottom,
+        indexGender,
+        setIndexGender,
+        dateTime,
+        favSelectedTeam,
+        editBirthday,
+        profileUser,
+        scrollViewRef,
+        handleNotSaveChange,
+        handleScroll,
     } = useViewModel(props);
-    const scrollViewRef = useRef<any>();
 
-    LogBox.ignoreLogs(['Non-serializable values were found in the navigation state']);
+    const { getTranslationText } = useTranslationText();
+
     return (
         <View style={appStyles.flex}>
-            {setProfile.loading && (
-                <View style={styles.loading}>
+            {profileUser.loading === true ? (
+                <View
+                    style={{
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        position: 'absolute',
+                        backgroundColor: 'rgba(0,0,0,0.5)',
+                        top: getSize.m(0),
+                        bottom: getSize.m(0),
+                        left: getSize.m(0),
+                        right: getSize.m(0),
+                        zIndex: 10,
+                    }}
+                >
                     <ActivityIndicator size="large" />
                 </View>
-            )}
-
+            ) : null}
             <ImageBackground source={AppImages.img_background} style={appStyles.flex}>
                 <StatusBar translucent backgroundColor="transparent" />
-
                 <SafeAreaView style={appStyles.safe_area}>
                     <View style={appStyles.container}>
                         <CardGoBack
@@ -88,15 +123,12 @@ export function SettingsScreen(props: ISettingsScreenProps) {
                             title={t('settings.user_settings')}
                         />
                     </View>
-
                     <ScrollView
                         showsVerticalScrollIndicator={false}
                         scrollToOverflowEnabled
-                        ref={scrollViewRef}
-                        onContentSizeChange={() =>
-                            scrollBottom && scrollViewRef.current?.scrollToEnd()
-                        }
                         style={[appStyles.flex, { marginTop: getSize.m(10) }]}
+                        ref={ref => (scrollViewRef.current = ref)}
+                        onScroll={handleScroll}
                     >
                         <View style={styles.card_view_container}>
                             <View style={styles.avatar_block}>
@@ -122,7 +154,6 @@ export function SettingsScreen(props: ISettingsScreenProps) {
                                     />
                                 </View>
                             </View>
-
                             <View style={styles.txt_container_avatar}>
                                 <FastImage
                                     source={AppImages.img_ball}
@@ -133,26 +164,27 @@ export function SettingsScreen(props: ISettingsScreenProps) {
                                     {renderUserPoints(getProfile, t)}
                                 </Text>
                             </View>
-
                             <View style={styles.first_block_container}>
                                 <Input
                                     error={errors.userName}
                                     placeholder={t('settings.name')}
-                                    onChangeTextInput={setUserName}
+                                    onChangeTextInput={(e: string) => handleOnChangeName(e)}
                                     onFocus={() => {
                                         handleError('', 'userName');
                                     }}
                                     input={userName}
+                                    inputRef={userNameRef}
                                 />
                                 <Input
                                     styleInput={styles.input_container}
                                     error={errors.email}
                                     placeholder={t('settings.email')}
-                                    onChangeTextInput={setEmail}
+                                    onChangeTextInput={(e: string) => handleOnChangeEmail(e)}
                                     onFocus={() => {
                                         handleError('', 'email');
                                     }}
                                     input={email}
+                                    inputRef={emailRef}
                                 />
 
                                 <View style={{ marginTop: getSize.m(30) }}>
@@ -174,18 +206,19 @@ export function SettingsScreen(props: ISettingsScreenProps) {
                                             },
                                         ]}
                                     >
-                                        {genders.map((sexual: any, index: number) => {
+                                        {genders.map((sexual: string, index: number) => {
                                             return (
                                                 <TouchableOpacity
                                                     key={index.toString()}
                                                     onPress={() => {
-                                                        handleOnSelectGender(sexual.value);
+                                                        handleGender(index);
+                                                        handleOnGender(index);
                                                     }}
                                                     style={[
                                                         styles.select_gender,
                                                         {
                                                             backgroundColor:
-                                                                sexual.value === gender
+                                                                indexGender === index
                                                                     ? appColors.text_dark_blue
                                                                     : appColors.white,
                                                         },
@@ -196,13 +229,13 @@ export function SettingsScreen(props: ISettingsScreenProps) {
                                                             appStyles.text_label,
                                                             {
                                                                 color:
-                                                                    sexual.value === gender
+                                                                    index === indexGender
                                                                         ? appColors.white
                                                                         : appColors.text_dark_blue,
                                                             },
                                                         ]}
                                                     >
-                                                        {sexual.text}
+                                                        {sexual}
                                                     </Text>
                                                 </TouchableOpacity>
                                             );
@@ -226,9 +259,9 @@ export function SettingsScreen(props: ISettingsScreenProps) {
                                                 textColor={appColors.text_dark_blue}
                                                 locale={I18nManager.isRTL ? 'he' : 'en'}
                                                 mode="date"
-                                                date={birthDate}
+                                                date={dateTime}
                                                 onDateChange={date => {
-                                                    handleChangeBirthDate(date);
+                                                    handleOnDate(date);
                                                 }}
                                                 androidVariant="nativeAndroid"
                                             />
@@ -236,9 +269,7 @@ export function SettingsScreen(props: ISettingsScreenProps) {
                                     </View>
                                 </View>
                             </View>
-
                             <Spacer heightSpacer={getSize.m(10)} color={appColors.text_dark_blue} />
-
                             <View style={styles.block_container}>
                                 <View
                                     style={[
@@ -265,14 +296,35 @@ export function SettingsScreen(props: ISettingsScreenProps) {
                                     />
 
                                     <View style={styles.item_render}>
-                                        {selectedTeams.map((item, index) => {
+                                        {teams.map((item, index) => {
                                             return (
-                                                <View key={index} style={styles.item_container}>
-                                                    {item ? (
+                                                <View
+                                                    key={index.toString()}
+                                                    style={styles.item_container}
+                                                >
+                                                    {_.isEmpty(item) ? (
+                                                        <>
+                                                            <TouchableOpacity
+                                                                style={styles.btn_add}
+                                                                onPress={() => addFavTeam(index)}
+                                                            >
+                                                                <Icon
+                                                                    name={appIcons.ic_plus}
+                                                                    size={getSize.m(14)}
+                                                                    color={appColors.blue_light}
+                                                                />
+                                                            </TouchableOpacity>
+                                                            <Text style={styles.txt_no_group}>
+                                                                {t('fav_summary.add_group')}
+                                                            </Text>
+                                                        </>
+                                                    ) : (
                                                         <>
                                                             <TouchableOpacity
                                                                 style={styles.btn_img}
-                                                                onPress={backFavTeam}
+                                                                onPress={() =>
+                                                                    changeFavTeam(item._id)
+                                                                }
                                                             >
                                                                 <Image
                                                                     resizeMode="cover"
@@ -290,31 +342,13 @@ export function SettingsScreen(props: ISettingsScreenProps) {
                                                                 })}
                                                             </Text>
                                                         </>
-                                                    ) : (
-                                                        <>
-                                                            <TouchableOpacity
-                                                                style={styles.btn_add}
-                                                                onPress={backFavTeam}
-                                                            >
-                                                                <Icon
-                                                                    name={appIcons.ic_plus}
-                                                                    size={getSize.m(14)}
-                                                                    color={appColors.blue_light}
-                                                                />
-                                                            </TouchableOpacity>
-                                                            <Text style={styles.txt_no_group}>
-                                                                {t('fav_summary.add_group')}
-                                                            </Text>
-                                                        </>
                                                     )}
                                                 </View>
                                             );
                                         })}
                                     </View>
                                 </View>
-
                                 <Spacer heightSpacer={getSize.m(1)} color={appColors.separator} />
-
                                 <View style={styles.mr_top_component}>
                                     <HeaderAdded
                                         backFav={backFavPlayer}
@@ -324,17 +358,35 @@ export function SettingsScreen(props: ISettingsScreenProps) {
                                         iconName={appIcons.ic_left_ios}
                                     />
                                     <View style={styles.item_render}>
-                                        {selectedPlayers.map((item, index) => {
+                                        {players.map((item, index) => {
                                             return (
                                                 <View
                                                     key={index.toString()}
                                                     style={styles.item_container}
                                                 >
-                                                    {item ? (
+                                                    {_.isEmpty(item) ? (
+                                                        <>
+                                                            <TouchableOpacity
+                                                                style={styles.btn_add}
+                                                                onPress={() => addFavPlayer(index)}
+                                                            >
+                                                                <Icon
+                                                                    name={appIcons.ic_plus}
+                                                                    size={getSize.m(14)}
+                                                                    color={appColors.blue_light}
+                                                                />
+                                                            </TouchableOpacity>
+                                                            <Text style={styles.txt_no_group}>
+                                                                {t('fav_summary.add_actress')}
+                                                            </Text>
+                                                        </>
+                                                    ) : (
                                                         <>
                                                             <TouchableOpacity
                                                                 style={styles.btn_img}
-                                                                onPress={backFavPlayer}
+                                                                onPress={() =>
+                                                                    changeFavPlayer(index)
+                                                                }
                                                             >
                                                                 <Image
                                                                     resizeMode="cover"
@@ -352,31 +404,13 @@ export function SettingsScreen(props: ISettingsScreenProps) {
                                                                 })}
                                                             </Text>
                                                         </>
-                                                    ) : (
-                                                        <>
-                                                            <TouchableOpacity
-                                                                style={styles.btn_add}
-                                                                onPress={backFavPlayer}
-                                                            >
-                                                                <Icon
-                                                                    name={appIcons.ic_plus}
-                                                                    size={getSize.m(14)}
-                                                                    color={appColors.blue_light}
-                                                                />
-                                                            </TouchableOpacity>
-                                                            <Text style={styles.txt_no_group}>
-                                                                {t('fav_summary.add_actress')}
-                                                            </Text>
-                                                        </>
                                                     )}
                                                 </View>
                                             );
                                         })}
                                     </View>
                                 </View>
-
                                 <Spacer heightSpacer={getSize.m(1)} color={appColors.separator} />
-
                                 <View style={styles.mr_top_component}>
                                     <HeaderAdded
                                         backFav={backFavTopTeam}
@@ -386,17 +420,35 @@ export function SettingsScreen(props: ISettingsScreenProps) {
                                         iconName={appIcons.ic_left_ios}
                                     />
                                     <View style={styles.item_render}>
-                                        {selectedTopTeams.map((item, index) => {
+                                        {topTeams.map((item, index) => {
                                             return (
                                                 <View
                                                     key={index.toString()}
                                                     style={styles.item_container}
                                                 >
-                                                    {item ? (
+                                                    {_.isEmpty(item) ? (
+                                                        <>
+                                                            <TouchableOpacity
+                                                                style={styles.btn_add}
+                                                                onPress={() => addFavTopTeam(index)}
+                                                            >
+                                                                <Icon
+                                                                    name={appIcons.ic_plus}
+                                                                    size={getSize.m(14)}
+                                                                    color={appColors.blue_light}
+                                                                />
+                                                            </TouchableOpacity>
+                                                            <Text style={styles.txt_no_group}>
+                                                                {t('fav_summary.add_squad')}
+                                                            </Text>
+                                                        </>
+                                                    ) : (
                                                         <>
                                                             <TouchableOpacity
                                                                 style={styles.btn_img}
-                                                                onPress={backFavTopTeam}
+                                                                onPress={() =>
+                                                                    changeFavTopTeam(item._id)
+                                                                }
                                                             >
                                                                 <Image
                                                                     resizeMode="cover"
@@ -414,22 +466,6 @@ export function SettingsScreen(props: ISettingsScreenProps) {
                                                                 })}
                                                             </Text>
                                                         </>
-                                                    ) : (
-                                                        <>
-                                                            <TouchableOpacity
-                                                                style={styles.btn_add}
-                                                                onPress={backFavTopTeam}
-                                                            >
-                                                                <Icon
-                                                                    name={appIcons.ic_plus}
-                                                                    size={getSize.m(14)}
-                                                                    color={appColors.blue_light}
-                                                                />
-                                                            </TouchableOpacity>
-                                                            <Text style={styles.txt_no_group}>
-                                                                {t('fav_summary.add_squad')}
-                                                            </Text>
-                                                        </>
                                                     )}
                                                 </View>
                                             );
@@ -437,51 +473,145 @@ export function SettingsScreen(props: ISettingsScreenProps) {
                                     </View>
                                 </View>
                             </View>
-
                             <Spacer heightSpacer={getSize.m(10)} color={appColors.text_dark_blue} />
                             <View style={styles.block_container}>
                                 <Text style={styles.txt_title_block}>
                                     {t('settings.notifications')}
                                 </Text>
                                 <Text style={styles.txt_tutorial}>{t('settings.tutorial')}</Text>
-                                {notifications.map(notification => {
-                                    return (
-                                        <View key={notification.id}>
-                                            <View style={styles.block_notifications}>
-                                                <Text style={styles.txt_before_game}>
-                                                    {notification.text}
-                                                </Text>
-                                                <TouchableOpacity
-                                                    activeOpacity={0.7}
-                                                    onPress={() =>
-                                                        handleChangeNotification(notification)
-                                                    }
-                                                    style={[
-                                                        styles.btn_switch,
-                                                        {
-                                                            backgroundColor: notification.isOn
-                                                                ? appColors.blue_light
-                                                                : appColors.separator,
-                                                            justifyContent: 'center',
-                                                            alignItems: notification.isOn
-                                                                ? 'flex-end'
-                                                                : 'flex-start',
-                                                        },
-                                                    ]}
-                                                >
-                                                    <View style={styles.btn_switch_circle} />
-                                                </TouchableOpacity>
-                                            </View>
-                                            <Spacer
-                                                heightSpacer={getSize.m(1)}
-                                                color={appColors.separator}
-                                            />
-                                        </View>
-                                    );
-                                })}
+                                <View style={styles.block_notifications}>
+                                    <Text style={styles.txt_before_game}>
+                                        {t('settings.notify_1')}
+                                    </Text>
+                                    <TouchableOpacity
+                                        activeOpacity={0.7}
+                                        onPress={toggleSwitch1}
+                                        style={[
+                                            styles.btn_switch,
+                                            {
+                                                backgroundColor: isEnabled1
+                                                    ? appColors.blue_light
+                                                    : appColors.separator,
+                                                justifyContent: 'center',
+                                                alignItems: isEnabled1 ? 'flex-end' : 'flex-start',
+                                            },
+                                        ]}
+                                    >
+                                        <View style={styles.btn_switch_circle} />
+                                    </TouchableOpacity>
+                                </View>
+                                <Spacer heightSpacer={getSize.m(1)} color={appColors.separator} />
+                                <View style={styles.block_notifications}>
+                                    <Text style={styles.txt_before_game}>
+                                        {t('settings.notify_2')}
+                                    </Text>
+                                    <TouchableOpacity
+                                        activeOpacity={0.7}
+                                        onPress={toggleSwitch2}
+                                        style={[
+                                            styles.btn_switch,
+                                            {
+                                                backgroundColor: isEnabled2
+                                                    ? appColors.blue_light
+                                                    : appColors.separator,
+                                                justifyContent: 'center',
+                                                alignItems: isEnabled2 ? 'flex-end' : 'flex-start',
+                                            },
+                                        ]}
+                                    >
+                                        <View style={styles.btn_switch_circle} />
+                                    </TouchableOpacity>
+                                </View>
+                                <Spacer heightSpacer={getSize.m(1)} color={appColors.separator} />
+                                <View style={styles.block_notifications}>
+                                    <Text style={styles.txt_before_game}>
+                                        {t('settings.notify_3')}
+                                    </Text>
+                                    <TouchableOpacity
+                                        activeOpacity={0.7}
+                                        onPress={toggleSwitch3}
+                                        style={[
+                                            styles.btn_switch,
+                                            {
+                                                backgroundColor: isEnabled3
+                                                    ? appColors.blue_light
+                                                    : appColors.separator,
+                                                justifyContent: 'center',
+                                                alignItems: isEnabled3 ? 'flex-end' : 'flex-start',
+                                            },
+                                        ]}
+                                    >
+                                        <View style={styles.btn_switch_circle} />
+                                    </TouchableOpacity>
+                                </View>
+                                <Spacer heightSpacer={getSize.m(1)} color={appColors.separator} />
+                                <View style={styles.block_notifications}>
+                                    <Text style={styles.txt_before_game}>
+                                        {t('settings.notify_4')}
+                                    </Text>
+                                    <TouchableOpacity
+                                        activeOpacity={0.7}
+                                        onPress={toggleSwitch4}
+                                        style={[
+                                            styles.btn_switch,
+                                            {
+                                                backgroundColor: isEnabled4
+                                                    ? appColors.blue_light
+                                                    : appColors.separator,
+                                                justifyContent: 'center',
+                                                alignItems: isEnabled4 ? 'flex-end' : 'flex-start',
+                                            },
+                                        ]}
+                                    >
+                                        <View style={styles.btn_switch_circle} />
+                                    </TouchableOpacity>
+                                </View>
+                                <Spacer heightSpacer={getSize.m(1)} color={appColors.separator} />
+                                <View style={styles.block_notifications}>
+                                    <Text style={styles.txt_before_game}>
+                                        {t('settings.notify_5')}
+                                    </Text>
+                                    <TouchableOpacity
+                                        activeOpacity={0.7}
+                                        onPress={toggleSwitch5}
+                                        style={[
+                                            styles.btn_switch,
+                                            {
+                                                backgroundColor: isEnabled5
+                                                    ? appColors.blue_light
+                                                    : appColors.separator,
+                                                justifyContent: 'center',
+                                                alignItems: isEnabled5 ? 'flex-end' : 'flex-start',
+                                            },
+                                        ]}
+                                    >
+                                        <View style={styles.btn_switch_circle} />
+                                    </TouchableOpacity>
+                                </View>
+                                <Spacer heightSpacer={getSize.m(1)} color={appColors.separator} />
+                                <View style={styles.block_notifications}>
+                                    <Text style={styles.txt_before_game}>
+                                        {t('settings.notify_6')}
+                                    </Text>
+                                    <TouchableOpacity
+                                        activeOpacity={0.7}
+                                        onPress={toggleSwitch6}
+                                        style={[
+                                            styles.btn_switch,
+                                            {
+                                                backgroundColor: isEnabled6
+                                                    ? appColors.blue_light
+                                                    : appColors.separator,
+                                                justifyContent: 'center',
+                                                alignItems: isEnabled6 ? 'flex-end' : 'flex-start',
+                                            },
+                                        ]}
+                                    >
+                                        <View style={styles.btn_switch_circle} />
+                                    </TouchableOpacity>
+                                </View>
                             </View>
                         </View>
-
                         <View style={styles.btn_bottom_container}>
                             <Button
                                 style={{ borderRadius: getSize.m(15) }}
