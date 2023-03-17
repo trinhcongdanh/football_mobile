@@ -666,6 +666,13 @@ const resources = {
                 tickets: 'כרטיסים',
                 playing_time: 'זמן משחק',
             },
+            bottom_tab: {
+                home: 'בית',
+                leagues: 'ליגות',
+                teams: 'נבחרות',
+                question: 'שאלון',
+                goblet: 'גביע',
+            },
         },
     },
     en: {
@@ -1323,6 +1330,13 @@ const resources = {
                 gates: 'Goals',
                 tickets: 'Cards',
                 playing_time: 'Playing time',
+            },
+            bottom_tab: {
+                home: 'Home',
+                leagues: 'Leagues',
+                teams: 'Teams',
+                question: 'Question',
+                goblet: 'Goblet',
             },
         },
     },
