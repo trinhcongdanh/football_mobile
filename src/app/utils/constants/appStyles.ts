@@ -1,5 +1,5 @@
 import { AppFonts } from '@football/app/assets/fonts';
-import { StyleSheet, I18nManager, Platform } from 'react-native';
+import { StyleSheet, I18nManager, Platform, StatusBar } from 'react-native';
 import { getSize } from '../responsive/scale';
 import { appColors } from './appColors';
 
@@ -138,7 +138,7 @@ export const appStyles = StyleSheet.create({
     },
     safe_area: {
         flex: 1,
-        paddingTop: Platform.OS === 'android' ? 30 : 0,
+        paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
     },
 
     main_container: {
