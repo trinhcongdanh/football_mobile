@@ -12,11 +12,11 @@ import Icon from 'react-native-vector-icons/Feather';
 import { AppFonts } from '@football/app/assets/fonts';
 import DropdownField from '@football/app/components/dropdown-field/DropdownField';
 import { IDataPlayerTeamScreenProps } from '@football/app/screens/football-data-player/layouts/data-player-team/DataPlayerTeamScreen.type';
+import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
 import FastImage from 'react-native-fast-image';
 import LinearGradient from 'react-native-linear-gradient';
 import styles from './DataPlayerTeamScreen.style';
 import { useViewModel } from './DataPlayerTeamScreen.viewModel';
-import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
 
 export const DataPlayerTeamScreen = ({ player }: IDataPlayerTeamScreenProps) => {
     const { t, onGoBack, setSelectedSeason, selectedSeason } = useViewModel({ player });
@@ -252,14 +252,14 @@ export const DataPlayerTeamScreen = ({ player }: IDataPlayerTeamScreenProps) => 
                                     {item.games.map((game, gameIndex) => {
                                         return (
                                             <LinearGradient
-                                                colors={[
+                                                colors={
                                                     gameIndex % 2 === 0
-                                                        ? appColors.linearLight
-                                                        : appColors.gray,
-                                                    gameIndex % 2 !== 0
-                                                        ? appColors.linearDark
-                                                        : appColors.gray,
-                                                ]}
+                                                        ? [
+                                                              appColors.linearLight,
+                                                              appColors.linearDark,
+                                                          ]
+                                                        : [appColors.gray, appColors.gray]
+                                                }
                                                 style={[appStyles.flex_row_align, styles.result]}
                                                 key={gameIndex}
                                             >
@@ -417,141 +417,6 @@ export const DataPlayerTeamScreen = ({ player }: IDataPlayerTeamScreenProps) => 
                                         );
                                     })}
                                 </View>
-                                {/* <View
-                                    style={[
-                                        styles.title_frame,
-                                        { marginHorizontal: getSize.m(22) },
-                                    ]}
-                                >
-                                    <Text style={styles.frame}>{t('data_player.frame')}:</Text>
-                                    <Text style={appStyles.text_label}>מסלול אירופה</Text>
-                                </View>
-                                <View
-                                    style={[
-                                        {
-                                            marginHorizontal: getSize.m(10),
-                                            marginTop: getSize.m(12),
-                                        },
-                                    ]}
-                                >
-                                    {datas.map(item => {
-                                        return (
-                                            <LinearGradient
-                                                colors={[
-                                                    item.id % 2 === 1
-                                                        ? 'rgba(16, 32, 100, 0.04)'
-                                                        : appColors.gray,
-                                                    item.id % 2 === 1
-                                                        ? 'rgba(59, 168, 225, 0.04)'
-                                                        : appColors.gray,
-                                                ]}
-                                                style={[
-                                                    appStyles.flex_row_space_center,
-                                                    styles.result,
-                                                ]}
-                                                key={item.id}
-                                            >
-                                                <View>
-                                                    <Text style={styles.date}>{item.date}</Text>
-                                                </View>
-                                                <View
-                                                    style={[
-                                                        appStyles.flex_row_space_center,
-                                                        {
-                                                            marginHorizontal: getSize.m(15),
-                                                        },
-                                                    ]}
-                                                >
-                                                    <View style={[appStyles.flex_row_align_center]}>
-                                                        <Text style={styles.name_club}>
-                                                            {item.home}
-                                                        </Text>
-                                                        <View style={styles.avt_club}>
-                                                            <FastImage
-                                                                source={AppImages.img_albania}
-                                                                style={{
-                                                                    width: getSize.m(24),
-                                                                    height: getSize.m(24),
-                                                                    borderRadius: getSize.m(24),
-                                                                }}
-                                                            />
-                                                        </View>
-                                                    </View>
-                                                    <View
-                                                        style={{ marginHorizontal: getSize.m(12) }}
-                                                    >
-                                                        <Text style={styles.score}>
-                                                            {item.result}
-                                                        </Text>
-                                                    </View>
-                                                    <View style={appStyles.flex_row_align_center}>
-                                                        <View style={styles.avt_club}>
-                                                            <FastImage
-                                                                source={AppImages.img_albania}
-                                                                style={{
-                                                                    width: getSize.m(24),
-                                                                    height: getSize.m(24),
-                                                                    borderRadius: getSize.m(24),
-                                                                }}
-                                                            />
-                                                        </View>
-                                                        <Text
-                                                            style={styles.name_club}
-                                                            numberOfLines={2}
-                                                        >
-                                                            {item.away}
-                                                        </Text>
-                                                    </View>
-                                                </View>
-                                                <View style={appStyles.flex_row_align_center}>
-                                                    <View>
-                                                        <Text
-                                                            style={{
-                                                                color: appColors.text_dark_blue,
-                                                                fontSize: getSize.m(11),
-                                                                lineHeight: getSize.m(16.5),
-                                                                fontFamily: AppFonts.medium,
-                                                                marginRight: getSize.m(2),
-                                                            }}
-                                                        >
-                                                            -
-                                                        </Text>
-                                                    </View>
-                                                    <FastImage
-                                                        source={AppImages.img_light_volleyball}
-                                                        resizeMode={FastImage.resizeMode.contain}
-                                                        style={{
-                                                            width: getSize.m(12),
-                                                            height: getSize.m(12),
-                                                        }}
-                                                    />
-                                                    <FastImage
-                                                        source={AppImages.img_ticket_red}
-                                                        resizeMode={FastImage.resizeMode.contain}
-                                                        style={{
-                                                            marginLeft: getSize.m(10),
-                                                            width: getSize.m(14),
-                                                            height: getSize.m(20),
-                                                        }}
-                                                    />
-                                                    <Text
-                                                        style={[
-                                                            styles.date,
-                                                            { marginLeft: getSize.m(16) },
-                                                        ]}
-                                                    >
-                                                        {item.time}
-                                                    </Text>
-                                                    <Icon
-                                                        name={appIcons.ic_arrow_down}
-                                                        color={appColors.red_dark}
-                                                        size={getSize.m(10)}
-                                                    />
-                                                </View>
-                                            </LinearGradient>
-                                        );
-                                    })}
-                                </View> */}
                             </View>
                         );
                     })}

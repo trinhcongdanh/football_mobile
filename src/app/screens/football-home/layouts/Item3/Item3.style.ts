@@ -33,8 +33,9 @@ const styles = StyleSheet.create({
     stats_content: {
         backgroundColor: appColors.gray,
         width: getSize.m(303),
-        height: getSize.m(389),
+        minHeight: getSize.m(389),
         borderRadius: getSize.m(15),
+        marginBottom: getSize.m(15),
         marginTop: getSize.m(14),
         paddingTop: getSize.m(16),
         paddingBottom: getSize.m(23.5),
