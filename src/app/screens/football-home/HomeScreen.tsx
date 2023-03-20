@@ -20,7 +20,7 @@ import { appStyles } from '@football/app/utils/constants/appStyles';
 import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
 import { getSize } from '@football/app/utils/responsive/scale';
 import { renderAvatar, renderUserPoints } from '@football/core/models/AvatarType.enum';
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import {
     I18nManager,
     ImageBackground,
@@ -36,8 +36,6 @@ import {
 import FastImage from 'react-native-fast-image';
 import LinearGradient from 'react-native-linear-gradient';
 import IconAntDesign from 'react-native-vector-icons/AntDesign';
-import { useDispatch, useSelector } from 'react-redux';
-import { changeColor } from 'src/store/color/ColorCustom.slice';
 
 export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
     const {
@@ -71,6 +69,12 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
 
     const isGuest = !userLogin?.success;
     const { getTranslationText } = useTranslationText();
+
+    const scrollToTheEnd = () => {
+        if(I18nManager.isRTL && Platform.OS === 'android') {
+            scrollViewRef.current?.scrollToEnd();
+        }
+    };
 
     return (
         <View style={[appStyles.flex, { backgroundColor: appColors.gray2 }]}>
@@ -183,10 +187,7 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                                         }}
                                         horizontal
                                         ref={scrollViewRef}
-                                        onContentSizeChange={() =>
-                                            I18nManager.isRTL &&
-                                            scrollViewRef.current?.scrollToEnd()
-                                        }
+                                        onContentSizeChange={scrollToTheEnd}
                                     >
                                         {players?.map((item, index) => {
                                             return (
