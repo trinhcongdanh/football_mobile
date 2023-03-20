@@ -30,6 +30,11 @@ export const useViewModel = () => {
     const profileUser = useSelector((state: RootState) => state.setProfile);
     const numberPhone = useSelector((state: any) => state.numberPhoneUser);
     const userLogin = useSelector((state: RootState) => state.otpUser);
+    const authToken = userLogin?.otp?.token ? userLogin?.otp?.token : login?.login?.token;
+    const authItem = userLogin?.otp?.user?.item_id
+        ? userLogin.otp.user.item_id
+        : login?.login?.user?.item_id;
+
     const notifications = useSelector((state: RootState) => state.notifications.notifications);
 
     function serializeParams(obj: any) {
@@ -50,9 +55,7 @@ export const useViewModel = () => {
                     logoutUser(
                         serializeParams({
                             action: ACTION,
-                            token: numberPhone.successLogin
-                                ? userLogin.otp.token
-                                : login.login.token,
+                            token: authToken,
                             call: AuthData.LOGOUT,
                         })
                     )
@@ -83,39 +86,19 @@ export const useViewModel = () => {
 
     useEffect(() => {
         if (!isFocused) return;
-        if (
-            login.success === true &&
-            profileUser.success === true &&
-            numberPhone.successRegister === true
-        ) {
+        if (userLogin.success) {
             dispatch(
                 getProfileUser(
                     serializeParams({
                         action: ACTION,
-                        token: login.login.token,
+                        token: authToken,
                         call: AuthData.GET_PROFILE,
-                        item: profile.profile.item_id,
+                        item: authItem,
                     })
                 )
             );
         }
-    }, [login.success, profileUser.success, numberPhone.successRegister]);
-    useEffect(() => {
-        if (!isFocused) return;
-        if (userLogin.success === true && numberPhone.successLogin === true) {
-            dispatch(
-                getProfileUser(
-                    serializeParams({
-                        action: ACTION,
-                        token: userLogin.otp.token,
-                        call: AuthData.GET_PROFILE,
-                        item: userLogin.otp.user.item_id,
-                    })
-                )
-            );
-        }
-        console.log('Danh');
-    }, [userLogin.success, numberPhone.successLogin, isFocused]);
+    }, [userLogin.success]);
 
     useEffect(() => {
         if (getProfile.success) {
