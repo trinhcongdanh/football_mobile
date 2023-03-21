@@ -1,12 +1,12 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
 import { AuthData, ScreenName } from '@football/app/utils/constants/enum';
-import { ACTION, TOKEN } from '@football/core/api/auth/config';
+import { ACTION, CLIENT_ID, REDIRECT_URI, TOKEN } from '@football/core/api/auth/config';
 import { appleAuth, appleAuthAndroid } from '@invertase/react-native-apple-authentication';
-import { GoogleSignin } from '@react-native-google-signin/google-signin';
+import { GoogleSignin, statusCodes } from '@react-native-google-signin/google-signin';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Keyboard, Platform } from 'react-native';
+import { Alert, Keyboard, Platform } from 'react-native';
 // import { AccessToken, LoginManager, Profile } from 'react-native-fbsdk-next';
 import { useIsFocused } from '@react-navigation/native';
 import {
@@ -196,25 +196,38 @@ const useEventHandler = (state: any) => {
     }, [getInfoFromToken]);
 
     const connectGoogle = useCallback(async () => {
-        // try {
-        //     await GoogleSignin.hasPlayServices();
-        //     await GoogleSignin.signIn().then((result: any) => {
-        //         console.log(result);
-        //     });
-        // } catch (error: any) {
-        //     if (error.code === statusCodes.SIGN_IN_CANCELLED) {
-        //         // user cancelled the login flow
-        //         Alert.alert('User cancelled the login flow !');
-        //     } else if (error.code === statusCodes.IN_PROGRESS) {
-        //         Alert.alert('Signin in progress');
-        //         // operation (f.e. sign in) is in progress already
-        //     } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
-        //         Alert.alert('Google play services not available or outdated !');
-        //         // play services not available or outdated
-        //     } else {
-        //         console.log(error);
-        //     }
-        // }
+        try {
+            await GoogleSignin.hasPlayServices();
+            await GoogleSignin.signIn().then((result: any) => {
+                console.log(result);
+                if (result) {
+                    dispatch(
+                        otpUser(
+                            serializeParams({
+                                action: ACTION,
+                                token: TOKEN,
+                                call: AuthData.LOGIN,
+                                google_client_id: env.GOOGLE_CLIENT_ID,
+                                google_client_secret: env.GOOGLE_CLIENT_SECRET,
+                            })
+                        )
+                    );
+                }
+            });
+        } catch (error: any) {
+            if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+                // user cancelled the login flow
+                Alert.alert('User cancelled the login flow !');
+            } else if (error.code === statusCodes.IN_PROGRESS) {
+                Alert.alert('Signin in progress');
+                // operation (f.e. sign in) is in progress already
+            } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+                Alert.alert('Google play services not available or outdated !');
+                // play services not available or outdated
+            } else {
+                console.log(error);
+            }
+        }
     }, []);
 
     // Apple Developer
@@ -316,7 +329,7 @@ const useEffectHandler = (state: any, eventHandler: any) => {
     // Google Account
     useEffect(() => {
         GoogleSignin.configure({
-            webClientId: '476796468470-2e0e3qgmfo76l4c2juqiu3gvgmts0v32.apps.googleusercontent.com',
+            webClientId: '944318847741-94kj3g75lbks4a16fntgcf73bfup4ocq.apps.googleusercontent.com',
             offlineAccess: true,
         });
     }, []);

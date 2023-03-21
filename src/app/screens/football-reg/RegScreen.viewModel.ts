@@ -89,10 +89,14 @@ export const useViewModel = ({ navigation, route }: IRegScreenProps) => {
     }
     useEffect(() => {
         if (!isEmpty(infoSocial)) {
-            setUserName(infoSocial.name);
-            setDate(moment(infoSocial.birthday, 'DD/MM/YYYY').toDate());
+            setUserName(infoSocial?.name || '');
+            setDate(
+                infoSocial?.birthday
+                    ? moment(infoSocial?.birthday, 'DD/MM/YYYY').toDate()
+                    : new Date()
+            );
 
-            switch (infoSocial.gender) {
+            switch (infoSocial?.gender) {
                 case GenderSocial.male:
                     setGender(Gender.MALE);
                 case GenderSocial.female:

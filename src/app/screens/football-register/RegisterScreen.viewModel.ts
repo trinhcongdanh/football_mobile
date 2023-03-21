@@ -280,6 +280,24 @@ const useEventHandler = (state: any) => {
             await GoogleSignin.hasPlayServices();
             await GoogleSignin.signIn().then((result: any) => {
                 console.log(result);
+                if (result) {
+                    dispatch(setInfoSocial(result.user));
+                    dispatch(
+                        otpUser(
+                            serializeParams({
+                                action: ACTION,
+                                token: login.login.token,
+                                guest_guid: guestId[0],
+                                guest_id: login.login.user.item_id,
+                                call: AuthData.REGISTER,
+                                item: {
+                                    google_client_id: env.GOOGLE_CLIENT_ID,
+                                    google_client_secret: env.GOOGLE_CLIENT_SECRET,
+                                },
+                            })
+                        )
+                    );
+                }
             });
         } catch (error: any) {
             if (error.code === statusCodes.SIGN_IN_CANCELLED) {
@@ -342,7 +360,7 @@ const useEffectHandler = (state: any, eventHandler: any) => {
 
     useEffect(() => {
         GoogleSignin.configure({
-            webClientId: '476796468470-2e0e3qgmfo76l4c2juqiu3gvgmts0v32.apps.googleusercontent.com',
+            webClientId: '944318847741-94kj3g75lbks4a16fntgcf73bfup4ocq.apps.googleusercontent.com',
             offlineAccess: true,
         });
     }, []);
