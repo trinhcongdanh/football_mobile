@@ -142,7 +142,7 @@ const useEventHandler = (state: any) => {
     const getInfoFromToken = useCallback((token: string) => {
         const PROFILE_REQUEST_PARAMS = {
             fields: {
-                string: 'id, name, first_name, last_name, email, picture',
+                string: 'id, name, first_name, last_name, email, picture, birthday, gender, link',
             },
         };
         // getProfile
@@ -163,7 +163,7 @@ const useEventHandler = (state: any) => {
 
     // Facebook Login
     const connectFacebook = useCallback(() => {
-        LoginManager.logInWithPermissions(['email']).then((result: any) => {
+        LoginManager.logInWithPermissions(['public_profile', 'email']).then((result: any) => {
             console.log('login is progressing.');
             if (result.isCancelled) {
                 console.log('login is cancelled.');
