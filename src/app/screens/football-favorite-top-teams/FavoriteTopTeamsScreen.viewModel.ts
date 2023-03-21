@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { axiosClient } from '@football/core/api/configs/axiosClient';
 import { BASE_URL, DATA_SOURCE, DB } from '@football/core/api/configs/config';
 import { TopTeamModel, TopTeamModelResponse } from '@football/core/models/TopTeamModelResponse';
-import { Alert } from 'react-native';
+import { Alert, BackHandler } from 'react-native';
 import { isEmpty, isNil } from 'lodash';
 import { useDispatch, useSelector } from 'react-redux';
 import { useMount } from '@football/app/utils/hooks/useMount';
@@ -17,6 +17,7 @@ import {
     setFavTopTeams,
     pushFavTopTeam,
     selectedFavTopTeamsAsMapSelector,
+    resetTopTeams,
 } from 'src/store/FavTopTeam.slice';
 import { IFavoriteTopTeamsScreenProps } from './FavoriteTopTeamsScreen.type';
 import { RootState } from 'src/store/store';
@@ -90,9 +91,19 @@ export const useViewModel = ({ navigation, route }: IFavoriteTopTeamsScreenProps
         }
     }, [favSelectedTopTeam]);
 
-    const onGoBack = (): void => {
+    const onGoBack = () => {
+        dispatch(resetTopTeams([]));
         goBack();
+        return true;
     };
+
+    useEffect(() => {
+        BackHandler.addEventListener('hardwareBackPress', onGoBack);
+        return () => {
+            BackHandler.removeEventListener('hardwareBackPress', onGoBack);
+        };
+    }, []);
+
     const onGoSkip = () => {
         clearFavoriteData(dispatch);
         if (isEmpty(profile.profile) || isNil(profile.profile)) {

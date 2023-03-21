@@ -6,13 +6,11 @@ import { RootState } from 'src/store/store';
 export interface FavTeamState {
     favTeams: TeamModel[];
     selectedTeams: TeamModel[];
-    selectedTeamsProfile: TeamModel[];
 }
 
 const initialState: FavTeamState = {
     favTeams: [],
     selectedTeams: [],
-    selectedTeamsProfile:[],
 };
 
 const MAX_TEAM_NUM = 3;

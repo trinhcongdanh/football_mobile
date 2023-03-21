@@ -1,18 +1,13 @@
 import { PlayerModel } from '@football/core/models/PlayerModelResponse';
-import { Position } from '@football/core/models/TeamPersonnelResponse';
-import { SelectedPlayer } from 'src/store/FavPlayer.slice';
 
 export type IFavoritePlayerProps = {
     onGoSkip: () => void;
     onGoBack: () => void;
-    handleSelected: (item: PlayerModel | Position) => void;
+    handleSelected: (item: PlayerModel) => void;
     handleContinue: () => void;
-    newFav: {
-        id: string;
-        label: string;
-        listFavPlayers: PlayerModel[] | Position[];
-    }[];
-    favSelected: SelectedPlayer[];
+    newFav: PlayerModel[];
+
+    favSelected: PlayerModel[];
     title: string;
     placeholder: string;
     chosen: string;

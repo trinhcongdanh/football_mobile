@@ -20,12 +20,7 @@ import TeamService from '@football/core/services/Team.service';
 import TopTeamService from '@football/core/services/TopTeam.service';
 import { isEmpty } from 'lodash';
 import { BackHandler } from 'react-native';
-import {
-    addSelectedFavPlayer,
-    resetAllFavPlayers,
-    resetGroupFavPlayer,
-    resetSearchFavPlayer,
-} from 'src/store/FavPlayer.slice';
+import { addSelectedFavPlayer, resetFavPlayer } from 'src/store/FavPlayer.slice';
 import { addSelectedFavTeam, resetFavTeam } from 'src/store/FavTeam.slice';
 import { addSelectedFavTopTeams, resetTopTeams } from 'src/store/FavTopTeam.slice';
 import { RootState } from 'src/store/store';
@@ -400,21 +395,7 @@ const useEventHandler = (state: any, route: any) => {
      *  Navigate to FavoritePlayer screen
      */
     const backFavPlayer = () => {
-        dispatch(resetSearchFavPlayer({ id: '', label: '', listFavPlayers: [] }));
-        dispatch(
-            resetAllFavPlayers({
-                id: '',
-                label: '',
-                listFavPlayers: [],
-            })
-        );
-        dispatch(
-            resetGroupFavPlayer({
-                id: '',
-                label: '',
-                listFavPlayers: [],
-            })
-        );
+        dispatch(resetFavPlayer([]));
         dispatch(addSelectedFavPlayer(selectedPlayers.filter((player: PlayerModel) => player)));
         navigate(ScreenName.FavPlayerPage, {
             previous_screen: ScreenName.SettingsPage,

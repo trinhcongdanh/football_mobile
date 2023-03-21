@@ -20,8 +20,6 @@ export const FavoritePlayersScreen = ({ navigation, route }: IFavoritePlayerScre
         setSearchText,
         searchText,
         profile,
-        favSearchPlayers,
-        formattedSearchFavPlayers,
         selectedFavPlayers,
         formattedFavPlayers,
         submitSearchFavPlayer,
@@ -60,12 +58,10 @@ export const FavoritePlayersScreen = ({ navigation, route }: IFavoritePlayerScre
                 searchFavPlayer={(text: string) => {
                     setSearchText(text);
                 }}
-                handleSelected={(item: PlayerModel | Players) => {
+                handleSelected={(item: PlayerModel) => {
                     handleSelected(item);
                 }}
-                newFav={
-                    !isEmpty(favSearchPlayers) ? formattedSearchFavPlayers : formattedFavPlayers
-                }
+                newFav={formattedFavPlayers}
                 isLoading={isLoading}
                 favSelected={selectedFavPlayers}
                 title={t('favorite_player.title')}
