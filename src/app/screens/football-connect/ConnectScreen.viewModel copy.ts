@@ -1,33 +1,24 @@
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
 import { AuthData, ScreenName } from '@football/app/utils/constants/enum';
-import { axiosAuth } from '@football/core/api/auth/axiosAuth';
-import { ACTION, AUTH_URL, TOKEN } from '@football/core/api/auth/config';
+import { ACTION, TOKEN } from '@football/core/api/auth/config';
 import { appleAuth } from '@invertase/react-native-apple-authentication';
-import { GoogleSignin, statusCodes } from '@react-native-google-signin/google-signin';
-import { isEmpty, isNil } from 'lodash';
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Alert, Keyboard, Platform } from 'react-native';
+import { Keyboard } from 'react-native';
 // import { AccessToken, LoginManager, Profile } from 'react-native-fbsdk-next';
-import { AnyIfEmpty, useDispatch, useSelector } from 'react-redux';
-import { loginUser } from 'src/store/user/Login.slice';
-import { env } from 'src/config';
-import { IConnectScreenProps } from './ConnectScreen.type';
+import { useDispatch, useSelector } from 'react-redux';
 import qs from 'qs';
 import { useIsFocused } from '@react-navigation/native';
-import { createProfileUser } from 'src/store/user/CreateProfile.slice';
 import { loginNumberPhoneUser } from 'src/store/user/RegisterNumberPhone.slice';
-import { v4 as uuid } from 'uuid';
-import 'react-native-get-random-values';
-import { appleAuthAndroid } from '@invertase/react-native-apple-authentication';
-import jwt_decode from 'jwt-decode';
+import { IConnectScreenProps } from './ConnectScreen.type';
 
 export const useViewModel = ({ navigation, route }: IConnectScreenProps) => {
     const { t } = useTranslation();
     const { navigate, goBack } = useAppNavigator();
     const dispatch = useDispatch<any>();
+    const user = null;
     const [credentialStateForUser, updateCredentialStateForUser] = useState(-1);
-let user = null;
     function serializeParams(obj: any) {
         const a = qs.stringify(obj, { encode: false, arrayFormat: 'brackets' });
         console.log(a);
@@ -103,7 +94,7 @@ let user = null;
         // }
     }, []);
 
-    const fetchAndUpdateCredentialState = async (updateCredentialStateForUser) => {
+    const fetchAndUpdateCredentialState = async updateCredentialStateForUser => {
         if (user === null) {
             updateCredentialStateForUser('N/A');
         } else {
@@ -131,94 +122,57 @@ let user = null;
         //     appleAuthRequestResponse.user
         // );
 
-        // console.log(credentialState);
+        // console.log('credentialState', credentialState);
 
         // // use credentialState response to ensure the user is authenticated
         // if (credentialState === appleAuth.State.AUTHORIZED) {
         //     // user is authenticated
-        // }
-        if(Platform.OS === 'android') {
+        //     console.log('uath ne');
 
-            const rawNonce = uuid();
-            const state = uuid();
-    
-            // Configure the request
-            appleAuthAndroid.configure({
-                // The Service ID you registered with Apple
-                clientId: 'il.org.football.mobile.ios.android',
-    
-                // Return URL added to your Apple dev console. We intercept this redirect, but it must still match
-                // the URL you provided to Apple. It can be an empty route on your backend as it's never called.
-                redirectUri: 'https://www.football.org.il/',
-    
-                // The type of response requested - code, id_token, or both.
-                responseType: appleAuthAndroid.ResponseType.ALL,
-    
-                // The amount of user information requested from Apple.
-                scope: appleAuthAndroid.Scope.NAME,
-    
-                // Random nonce value that will be SHA256 hashed before sending to Apple.
-                nonce: rawNonce,
-    
-                // Unique state value used to prevent CSRF attacks. A UUID will be generated if nothing is provided.
-                state,
+        // }
+
+        try {
+            const appleAuthRequestResponse = await appleAuth.performRequest({
+                requestedOperation: appleAuth.Operation.LOGIN,
+                requestedScopes: [appleAuth.Scope.EMAIL, appleAuth.Scope.FULL_NAME],
             });
-    
-            // Open the browser window for user sign in
-            const response = await appleAuthAndroid.signIn();
-            
-            console.log('response', response);
-            const { email, sub, code } = jwt_decode(response.id_token);
-            console.log('email', email);
-            console.log('subject', sub);
-            console.log('code', response.code);
-        } else {
-            try {
-                const appleAuthRequestResponse = await appleAuth.performRequest({
-                    requestedOperation: appleAuth.Operation.LOGIN,
-                    requestedScopes: [appleAuth.Scope.EMAIL, appleAuth.Scope.FULL_NAME],
-                });
-    
-                console.log('appleAuthRequestResponse', appleAuthRequestResponse);
-    
-                const {
-                    user: newUser,
-                    email,
-                    nonce,
-                    identityToken,
-                    realUserStatus /* etc */,
-                } = appleAuthRequestResponse;
-    
-                user = newUser;
-    
-                fetchAndUpdateCredentialState(updateCredentialStateForUser).catch(error =>
-                    updateCredentialStateForUser(`Error: ${error.code}`)
-                );
-    
-                if (identityToken) {
-                    // e.g. sign in with Firebase Auth using `nonce` & `identityToken`
-                    console.log(nonce, identityToken);
-                } else {
-                    // no token - failed sign-in?
-                }
-    
-                if (realUserStatus === appleAuth.UserStatus.LIKELY_REAL) {
-                    console.log("I'm a real person!");
-                }
-    
-                console.warn(`Apple Authentication Completed, ${user}, ${email}`);
-            } catch (error) {
-                if (error?.code === appleAuth.Error.CANCELED) {
-                    console.warn('User canceled Apple Sign in.');
-                } else {
-                    console.error(error);
-                }
+
+            console.log('appleAuthRequestResponse', appleAuthRequestResponse);
+
+            const {
+                user: newUser,
+                email,
+                nonce,
+                identityToken,
+                realUserStatus /* etc */,
+            } = appleAuthRequestResponse;
+
+            user = newUser;
+
+            fetchAndUpdateCredentialState(updateCredentialStateForUser).catch(error =>
+                updateCredentialStateForUser(`Error: ${error.code}`)
+            );
+
+            if (identityToken) {
+                // e.g. sign in with Firebase Auth using `nonce` & `identityToken`
+                console.log(nonce, identityToken);
+            } else {
+                // no token - failed sign-in?
+            }
+
+            if (realUserStatus === appleAuth.UserStatus.LIKELY_REAL) {
+                console.log("I'm a real person!");
+            }
+
+            console.warn(`Apple Authentication Completed, ${user}, ${email}`);
+        } catch (error) {
+            if (error?.code === appleAuth.Error.CANCELED) {
+                console.warn('User canceled Apple Sign in.');
+            } else {
+                console.error(error);
             }
         }
-
-        
     };
-
     const onGoBack = (): void => {
         goBack();
     };
@@ -273,6 +227,13 @@ let user = null;
             handleError(t('register.invalid'), 'numberPhone');
         }
     }, [numberPhone.successLogin, numberPhone.loadingLogin]);
+
+    useEffect(() => {
+        // onCredentialRevoked returns a function that will remove the event listener. useEffect will call this function when the component unmounts
+        return appleAuth.onCredentialRevoked(async () => {
+            console.warn('If this function executes, User Credentials have been Revoked');
+        });
+    }, []); // passing in an empty array as the second argument ensures this is only ran once when component mounts initially.
 
     const onNavigateSignUp = () => {
         navigate(ScreenName.FavTeamPage);
