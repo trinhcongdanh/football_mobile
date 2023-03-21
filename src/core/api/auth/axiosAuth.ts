@@ -13,6 +13,7 @@ axiosAuth.interceptors.request.use(request => {
 axiosAuth.interceptors.response.use(
     response => {
         if (response.config.responseType === 'document') {
+            console.log('Response', response.data);
             return response.data;
         }
 

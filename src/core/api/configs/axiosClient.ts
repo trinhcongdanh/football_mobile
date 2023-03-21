@@ -18,7 +18,9 @@ axiosClient.interceptors.request.use(request => {
 });
 axiosClient.interceptors.response.use(
     response => {
+        
         if (response.config.responseType === 'document') {
+            console.log('Response', response.data);
             return response.data;
         }
         return response;
