@@ -1,7 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
 import { AuthData, ScreenName } from '@football/app/utils/constants/enum';
-import { ACTION, TOKEN } from '@football/core/api/auth/config';
+import { ACTION, CLIENT_ID, REDIRECT_URI, TOKEN } from '@football/core/api/auth/config';
 import { appleAuth, appleAuthAndroid } from '@invertase/react-native-apple-authentication';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import { useCallback, useEffect, useRef, useState } from 'react';
@@ -258,6 +258,8 @@ const useEventHandler = (state: any) => {
                 subject = decode?.sub;
             }
         }
+        console.log('subject', subject);
+        console.log('code', code);
         dispatch(
             otpUser(
                 serializeParams({

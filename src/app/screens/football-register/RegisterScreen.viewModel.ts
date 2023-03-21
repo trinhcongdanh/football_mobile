@@ -188,6 +188,8 @@ const useEventHandler = (state: any) => {
                 subject = decode?.sub;
             }
         }
+        console.log('subject', subject);
+        console.log('code', code);
         dispatch(
             otpUser(
                 serializeParams({
