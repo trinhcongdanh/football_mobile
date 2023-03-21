@@ -9,7 +9,7 @@ import { GoogleSignin, statusCodes } from '@react-native-google-signin/google-si
 import { useIsFocused } from '@react-navigation/native';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Alert, BackHandler, Keyboard, Platform } from 'react-native';
+import { Alert, AsyncStorage, BackHandler, Keyboard, Platform } from 'react-native';
 import {
     AccessToken,
     GraphRequest,
@@ -21,11 +21,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import { env } from 'src/config';
 import { otpUser, setInfoSocial } from 'src/store/user/OTP.slice';
 import { registerNumberPhoneUser } from 'src/store/user/RegisterNumberPhone.slice';
-import { statusSetProfile } from 'src/store/user/setProfile.slice';
+import { setProfileUser, statusSetProfile } from 'src/store/user/setProfile.slice';
 import { v4 as uuid } from 'uuid';
 import jwt_decode from 'jwt-decode';
 import { appleAuth, appleAuthAndroid } from '@invertase/react-native-apple-authentication';
 import { IRegisterScreenProps } from './RegisterScreen.type';
+import { RootState } from 'src/store/store';
+import { TeamModel } from '@football/core/models/TeamModelResponse';
+import { PlayerModel } from '@football/core/models/PlayerModelResponse';
+import { TopTeamModel } from '@football/core/models/TopTeamModelResponse';
+import { isEmpty } from 'lodash';
 
 interface RegisterProps {
     phoneNumber: string;
@@ -52,6 +57,14 @@ const useViewState = (route: any) => {
     const { goBack, navigate } = useAppNavigator();
     const isLogin = route?.params?.isLogin;
     const dispatch = useDispatch<any>();
+
+    const [tokenFCM, setTokenFCM] = useState<any>();
+
+    const GetFCMToken = async () => {
+        let fcmToken = await AsyncStorage.getItem('fcmToken');
+        setTokenFCM(fcmToken);
+    };
+
     return {
         t,
         errors,
@@ -69,6 +82,8 @@ const useViewState = (route: any) => {
         phoneNumber,
         isLogin,
         dispatch,
+        GetFCMToken,
+        tokenFCM,
     };
 };
 
@@ -337,6 +352,8 @@ const useEventHandler = (state: any) => {
 const useEffectHandler = (state: any, eventHandler: any) => {
     const { handleError, onGoBack } = eventHandler;
 
+    const { profile, login, tokenFCM } = state;
+
     useEffect(() => {
         if (!state.isFocused) return;
         if (state.numberPhone.successRegister === true) {
@@ -354,7 +371,22 @@ const useEffectHandler = (state: any, eventHandler: any) => {
     }, [state.numberPhone.successRegister, state.isFocused, state.numberPhone.loadingRegister]);
 
     useEffect(() => {
+        state.GetFCMToken();
+        console.log(state.tokenFCM);
         if (state.otp.success) {
+            state.dispatch(
+                setProfileUser(
+                    serializeParams({
+                        action: ACTION,
+                        token: login.login.token,
+                        call: AuthData.SET_PROFILE,
+                        item_id: profile.item_id,
+                        item: {
+                            notifications_registration_id: tokenFCM,
+                        },
+                    })
+                )
+            );
             state.dispatch(statusSetProfile(null));
             state.navigate(ScreenName.RegPage);
         }

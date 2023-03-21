@@ -1,10 +1,4 @@
-import { useDispatch } from 'react-redux';
-import {
-    resetAllFavPlayers,
-    resetGroupFavPlayer,
-    resetSearchFavPlayer,
-    resetSelectedFavPlayer,
-} from 'src/store/FavPlayer.slice';
+import { resetFavPlayer, resetSelectedFavPlayer } from 'src/store/FavPlayer.slice';
 import { resetFavTeam, resetSelectedFavTeam } from 'src/store/FavTeam.slice';
 import { resetSelectedFavTopTeams, resetTopTeams } from 'src/store/FavTopTeam.slice';
 import { clearCreateProfile } from 'src/store/user/CreateProfile.slice';
@@ -22,21 +16,7 @@ export const clearAllData = (dispatch: any) => {
     dispatch(resetFavTeam([]));
     dispatch(resetSelectedFavTeam([]));
     // Clear Fav Player
-    dispatch(
-        resetAllFavPlayers({
-            id: '',
-            label: '',
-            listFavPlayers: [],
-        })
-    );
-    dispatch(resetSearchFavPlayer({ id: '', label: '', listFavPlayers: [] }));
-    dispatch(
-        resetGroupFavPlayer({
-            id: '',
-            label: '',
-            listFavPlayers: [],
-        })
-    );
+    dispatch(resetFavPlayer([]));
     dispatch(resetSelectedFavPlayer([]));
     // Clear Fav Top Team
     dispatch(resetTopTeams([]));

@@ -140,96 +140,65 @@ export const FavoritePlayer = ({
                                     </View>
                                 </View>
                                 <ScrollView>
-                                    {newFav.map((items: any, index: number) => {
-                                        return (
-                                            <View key={index.toString()}>
-                                                <View
-                                                    style={{
-                                                        marginTop: getSize.m(13),
-                                                        paddingHorizontal: getSize.m(16),
+                                    <View style={styles.content_item}>
+                                        {newFav.map((item: any, index: number) => {
+                                            return (
+                                                <TouchableOpacity
+                                                    key={index.toString()}
+                                                    style={[
+                                                        styles.item,
+                                                        {
+                                                            backgroundColor:
+                                                                item.isSelected === true
+                                                                    ? 'rgba(20, 36, 86, 1)'
+                                                                    : 'transparent',
+                                                            borderWidth:
+                                                                item.isSelected === true
+                                                                    ? getSize.m(1)
+                                                                    : getSize.m(0),
+                                                        },
+                                                    ]}
+                                                    onPress={() => {
+                                                        handleSelected(item);
                                                     }}
                                                 >
-                                                    <Text style={styles.name_club}>
-                                                        {items.label}
+                                                    <Image
+                                                        source={{
+                                                            uri: item.image_url,
+                                                        }}
+                                                        style={[
+                                                            styles.image_item,
+                                                            {
+                                                                borderRadius:
+                                                                    onIndex === 1
+                                                                        ? getSize.m(28)
+                                                                        : getSize.m(0),
+                                                            },
+                                                        ]}
+                                                    />
+                                                    <Text
+                                                        numberOfLines={2}
+                                                        style={styles.name_item}
+                                                    >
+                                                        {getTranslationText({
+                                                            textHe: item.name_he,
+                                                            textEn: item.name_en,
+                                                        })}
                                                     </Text>
-                                                </View>
-
-                                                <View style={styles.content_item}>
-                                                    {items.listFavPlayers.map(
-                                                        (item: any, index: number) => {
-                                                            return (
-                                                                <TouchableOpacity
-                                                                    key={index.toString()}
-                                                                    style={[
-                                                                        styles.item,
-                                                                        {
-                                                                            backgroundColor:
-                                                                                item.isSelected ===
-                                                                                true
-                                                                                    ? 'rgba(20, 36, 86, 1)'
-                                                                                    : 'transparent',
-                                                                            borderWidth:
-                                                                                item.isSelected ===
-                                                                                true
-                                                                                    ? getSize.m(1)
-                                                                                    : getSize.m(0),
-                                                                        },
-                                                                    ]}
-                                                                    onPress={() => {
-                                                                        handleSelected(item);
-                                                                    }}
-                                                                >
-                                                                    <Image
-                                                                        source={{
-                                                                            uri: item.image_url,
-                                                                        }}
-                                                                        style={[
-                                                                            styles.image_item,
-                                                                            {
-                                                                                borderRadius:
-                                                                                    onIndex === 1
-                                                                                        ? getSize.m(
-                                                                                              28
-                                                                                          )
-                                                                                        : getSize.m(
-                                                                                              0
-                                                                                          ),
-                                                                            },
-                                                                        ]}
-                                                                    />
-                                                                    <Text
-                                                                        numberOfLines={2}
-                                                                        style={styles.name_item}
-                                                                    >
-                                                                        {getTranslationText({
-                                                                            textHe: item.name_he,
-                                                                            textEn: item.name_en,
-                                                                        })}
-                                                                    </Text>
-                                                                    {item.isSelected === true && (
-                                                                        <View style={styles.check}>
-                                                                            <Icon
-                                                                                name={
-                                                                                    appIcons.ic_check
-                                                                                }
-                                                                                size={getSize.m(10)}
-                                                                                color={
-                                                                                    appColors.white
-                                                                                }
-                                                                                style={
-                                                                                    styles.ic_check
-                                                                                }
-                                                                            />
-                                                                        </View>
-                                                                    )}
-                                                                </TouchableOpacity>
-                                                            );
-                                                        }
+                                                    {item.isSelected === true && (
+                                                        <View style={styles.check}>
+                                                            <Icon
+                                                                name={appIcons.ic_check}
+                                                                size={getSize.m(10)}
+                                                                color={appColors.white}
+                                                                style={styles.ic_check}
+                                                            />
+                                                        </View>
                                                     )}
-                                                </View>
-                                            </View>
-                                        );
-                                    })}
+                                                </TouchableOpacity>
+                                            );
+                                        })}
+                                    </View>
                                 </ScrollView>
                             </View>
                         </SafeAreaView>

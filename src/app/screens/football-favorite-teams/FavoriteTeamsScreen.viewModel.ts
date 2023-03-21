@@ -4,7 +4,7 @@ import { useRef, useCallback, useState, useEffect } from 'react';
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
 import { useTranslation } from 'react-i18next';
 import { TeamModel } from '@football/core/models/TeamModelResponse';
-import { Alert, I18nManager, Keyboard } from 'react-native';
+import { Alert, BackHandler, I18nManager, Keyboard } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { useMount } from '@football/app/utils/hooks/useMount';
 import { RootState } from 'src/store/store';
@@ -19,12 +19,7 @@ import { MAX_FAVORITES_TEAM } from '@football/core/api/configs/config';
 import { IFavoriteTeamsScreenProps } from './FavoriteTeamsScreen.type';
 import { loginUser } from 'src/store/user/Login.slice';
 import { useIsFocused, useNavigation } from '@react-navigation/native';
-import {
-    resetAllFavPlayers,
-    resetGroupFavPlayer,
-    resetSearchFavPlayer,
-    resetSelectedFavPlayer,
-} from 'src/store/FavPlayer.slice';
+import { resetSelectedFavPlayer } from 'src/store/FavPlayer.slice';
 import { clearFavoriteData } from '@football/app/utils/functions/clearFavoriteData';
 import sortBy from 'lodash/sortBy';
 
@@ -93,10 +88,18 @@ const useViewCallback = (route: any, viewState: any) => {
     const dispatch = useDispatch<any>();
     const { navigate, goBack, pop } = useAppNavigator();
 
-    const onGoBack = (): void => {
+    const onGoBack = () => {
         dispatch(resetFavTeam([]));
         goBack();
+        return true;
     };
+
+    useEffect(() => {
+        BackHandler.addEventListener('hardwareBackPress', onGoBack);
+        return () => {
+            BackHandler.removeEventListener('hardwareBackPress', onGoBack);
+        };
+    }, []);
 
     const { params } = route;
     const isFocused = useIsFocused();
@@ -180,9 +183,6 @@ const useViewCallback = (route: any, viewState: any) => {
             });
         } else {
             navigate(ScreenName.FavPlayerPage);
-            dispatch(resetGroupFavPlayer({ id: '', label: '', listFavPlayers: [] }));
-            dispatch(resetAllFavPlayers({ id: '', label: '', listFavPlayers: [] }));
-            dispatch(resetSearchFavPlayer({ id: '', label: '', listFavPlayers: [] }));
             dispatch(resetSelectedFavPlayer([]));
         }
     };

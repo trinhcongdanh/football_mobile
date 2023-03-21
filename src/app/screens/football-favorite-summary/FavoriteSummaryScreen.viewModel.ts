@@ -2,6 +2,7 @@ import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
 import { AuthData, ScreenName } from '@football/app/utils/constants/enum';
 import { clearFavoriteData } from '@football/app/utils/functions/clearFavoriteData';
 import { ACTION, TOKEN } from '@football/core/api/auth/config';
+import { PlayerModel } from '@football/core/models/PlayerModelResponse';
 import { TeamModel } from '@football/core/models/TeamModelResponse';
 import { TopTeamModel } from '@football/core/models/TopTeamModelResponse';
 import { useIsFocused } from '@react-navigation/native';
@@ -11,7 +12,7 @@ import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { BackHandler } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { resetSearchFavPlayer, SelectedPlayer } from 'src/store/FavPlayer.slice';
+import { resetFavPlayer } from 'src/store/FavPlayer.slice';
 import { resetFavTeam } from 'src/store/FavTeam.slice';
 import { resetTopTeams } from 'src/store/FavTopTeam.slice';
 import { RootState } from 'src/store/store';
@@ -46,9 +47,9 @@ export const useViewModel = ({ navigation, route }: IFavoriteSummaryScreenProps)
     }, []);
 
     // player
-    const [firstPlayers, setFirstPlayers] = useState<SelectedPlayer>();
-    const [secondPlayers, setSecondPlayers] = useState<SelectedPlayer>();
-    const [thirdPlayers, setThirdPlayers] = useState<SelectedPlayer>();
+    const [firstPlayers, setFirstPlayers] = useState<PlayerModel>();
+    const [secondPlayers, setSecondPlayers] = useState<PlayerModel>();
+    const [thirdPlayers, setThirdPlayers] = useState<PlayerModel>();
     const players = [firstPlayers, secondPlayers, thirdPlayers];
     useEffect(() => {
         if (selectedFavPlayers.length === 3) {
@@ -133,14 +134,14 @@ export const useViewModel = ({ navigation, route }: IFavoriteSummaryScreenProps)
     };
 
     const addFavPlayer = (index: number) => {
-        dispatch(resetSearchFavPlayer({ id: '', label: '', listFavPlayers: [] }));
+        dispatch(resetFavPlayer([]));
         navigate(ScreenName.FavPlayerPage, {
             previous_screen: ScreenName.FavSummaryPage,
         });
     };
 
     const changeFavPlayer = (index: number) => {
-        dispatch(resetSearchFavPlayer({ id: '', label: '', listFavPlayers: [] }));
+        dispatch(resetFavPlayer([]));
         navigate(ScreenName.FavPlayerPage, {
             previous_screen: ScreenName.FavSummaryPage,
         });
@@ -167,7 +168,7 @@ export const useViewModel = ({ navigation, route }: IFavoriteSummaryScreenProps)
         });
     };
     const backFavPlayer = () => {
-        dispatch(resetSearchFavPlayer({ id: '', label: '', listFavPlayers: [] }));
+        dispatch(resetFavPlayer([]));
         navigate(ScreenName.FavPlayerPage, {
             previous_screen: ScreenName.FavSummaryPage,
         });
