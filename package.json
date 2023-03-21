@@ -6,6 +6,7 @@
         "all": "rm -rf yarn.lock && rm -rf package-lock.json && rm -rf node_modules/ && rm -fr $TMPDIR/metro* && yarn install",
         "android": "react-native run-android",
         "ios": "react-native run-ios",
+        "real-ios": "react-native run-ios --device iPhone",
         "start": "react-native start",
         "eslint": "eslint --quiet --ext js,jsx,ts,tsx src --fix",
         "lint": "tsc && eslint --quiet --ext js,jsx,ts,tsx src",
