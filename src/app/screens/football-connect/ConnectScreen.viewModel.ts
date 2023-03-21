@@ -7,12 +7,12 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Keyboard, Platform } from 'react-native';
 // import { AccessToken, LoginManager, Profile } from 'react-native-fbsdk-next';
-import { useDispatch, useSelector } from 'react-redux';
-import qs from 'qs';
 import { useIsFocused } from '@react-navigation/native';
+import qs from 'qs';
+import 'react-native-get-random-values';
+import { useDispatch, useSelector } from 'react-redux';
 import { loginNumberPhoneUser } from 'src/store/user/RegisterNumberPhone.slice';
 import { v4 as uuid } from 'uuid';
-import 'react-native-get-random-values';
 
 import jwt_decode from 'jwt-decode';
 import { IConnectScreenProps } from './ConnectScreen.type';
@@ -21,8 +21,6 @@ export const useViewModel = ({ navigation, route }: IConnectScreenProps) => {
     const { t } = useTranslation();
     const { navigate, goBack } = useAppNavigator();
     const dispatch = useDispatch<any>();
-    const [credentialStateForUser, updateCredentialStateForUser] = useState(-1);
-    const user = null;
     function serializeParams(obj: any) {
         const a = qs.stringify(obj, { encode: false, arrayFormat: 'brackets' });
         console.log(a);
@@ -98,19 +96,6 @@ export const useViewModel = ({ navigation, route }: IConnectScreenProps) => {
         // }
     }, []);
 
-    const fetchAndUpdateCredentialState = async updateCredentialStateForUser => {
-        if (user === null) {
-            updateCredentialStateForUser('N/A');
-        } else {
-            const credentialState = await appleAuth.getCredentialStateForUser(user);
-            if (credentialState === appleAuth.State.AUTHORIZED) {
-                updateCredentialStateForUser('AUTHORIZED');
-            } else {
-                updateCredentialStateForUser(credentialState);
-            }
-        }
-    };
-
     // Apple Developer
     const connectApple = async () => {
         // const appleAuthRequestResponse = await appleAuth.performRequest({
@@ -132,6 +117,9 @@ export const useViewModel = ({ navigation, route }: IConnectScreenProps) => {
         // if (credentialState === appleAuth.State.AUTHORIZED) {
         //     // user is authenticated
         // }
+
+        let subject = '';
+        let code = '';
         if (Platform.OS === 'android') {
             const rawNonce = uuid();
             const state = uuid();
@@ -162,53 +150,14 @@ export const useViewModel = ({ navigation, route }: IConnectScreenProps) => {
             const response = await appleAuthAndroid.signIn();
 
             console.log('response', response);
-            const { email, sub, code } = jwt_decode(response.id_token);
-            console.log('email', email);
-            console.log('subject', sub);
-            console.log('code', response.code);
+            // const { email, sub, code } = jwt_decode(response.id_token);
+            // console.log('email', email);
+            // console.log('subject', sub);
+            // console.log('code', response.code);
+            const decode = jwt_decode(`${response.id_token}`);
+            code = decode.code;
+            subject = decode.sub;
         } else {
-            // try {
-            //     const appleAuthRequestResponse = await appleAuth.performRequest({
-            //         requestedOperation: appleAuth.Operation.LOGIN,
-            //         requestedScopes: [appleAuth.Scope.EMAIL, appleAuth.Scope.FULL_NAME],
-            //     });
-
-            //     console.log('appleAuthRequestResponse', appleAuthRequestResponse);
-
-            //     const {
-            //         user: newUser,
-            //         email,
-            //         nonce,
-            //         identityToken,
-            //         realUserStatus /* etc */,
-            //     } = appleAuthRequestResponse;
-
-            //     user = newUser;
-
-            //     fetchAndUpdateCredentialState(updateCredentialStateForUser).catch(error =>
-            //         updateCredentialStateForUser(`Error: ${error.code}`)
-            //     );
-
-            //     if (identityToken) {
-            //         // e.g. sign in with Firebase Auth using `nonce` & `identityToken`
-            //         console.log(nonce, identityToken);
-            //     } else {
-            //         // no token - failed sign-in?
-            //     }
-
-            //     if (realUserStatus === appleAuth.UserStatus.LIKELY_REAL) {
-            //         console.log("I'm a real person!");
-            //     }
-
-            //     console.warn(`Apple Authentication Completed, ${user}, ${email}`);
-            // } catch (error) {
-            //     if (error?.code === appleAuth.Error.CANCELED) {
-            //         console.warn('User canceled Apple Sign in.');
-            //     } else {
-            //         console.error(error);
-            //     }
-            // }
-
             const appleAuthRequestResponse = await appleAuth.performRequest({
                 requestedOperation: appleAuth.Operation.LOGIN,
                 // Note: it appears putting FULL_NAME first is important, see issue #293
@@ -226,10 +175,13 @@ export const useViewModel = ({ navigation, route }: IConnectScreenProps) => {
             if (credentialState === appleAuth.State.AUTHORIZED) {
                 // user is authenticated
                 console.log('appleAuthRequestResponse', appleAuthRequestResponse);
-                const { email, sub, code } = jwt_decode(appleAuthRequestResponse.identityToken);
-                console.log('email', email);
-                console.log('subject', sub);
-                console.log('code', response.code);
+                // const { email, sub, code } = jwt_decode(appleAuthRequestResponse.identityToken);
+                // console.log('email', email);
+                // console.log('subject', sub);
+                // console.log('code', response.code);
+                const decode = jwt_decode(`${appleAuthRequestResponse.identityToken}`);
+                code = decode?.code;
+                subject = decode?.sub;
             }
         }
     };
