@@ -131,6 +131,8 @@ const useEventHandler = (state: any) => {
         );
     };
 
+    // Handle error response when phone number is wrong
+
     const handleError = (errorMessage: string, input: string) => {
         state.setErrors((prevState: LoginProps) => ({ ...prevState, [input]: errorMessage }));
     };
