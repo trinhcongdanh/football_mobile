@@ -52,6 +52,8 @@ const useViewState = () => {
     const [autoPlay, setAutoPlay] = useState(true);
     const [display, setDisplay] = useState(false);
 
+    const isGuest = !userLogin?.success;
+
     return {
         homePage,
         setHomePage,
@@ -82,6 +84,7 @@ const useViewState = () => {
         login,
         getProfile,
         colorCustom,
+        isGuest,
     };
 };
 
@@ -387,6 +390,7 @@ export const useViewModel = ({ navigation, route }: IHomeScreenProps) => {
 
     return {
         t,
+        navigate,
         onGoBack,
         ...state,
         onShowSideMenu,

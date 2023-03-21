@@ -137,7 +137,11 @@ export const useViewModel = () => {
         if (isEmpty(getProfile.getProfile)) {
             navigate(ScreenName.RegisterPage, { isLogin: true });
         } else {
-            navigate(ScreenName.SettingsPage, { scrollBottom: false, center: false });
+            navigate(ScreenName.SettingsPage, {
+                scrollBottom: false,
+                center: false,
+                previousScreen: ScreenName.HomePage,
+            });
         }
     };
 
@@ -145,7 +149,11 @@ export const useViewModel = () => {
         if (isEmpty(getProfile.getProfile)) {
             navigate(ScreenName.RegisterPage, { isLogin: true });
         } else {
-            navigate(ScreenName.SettingsPage, { scrollBottom: true, center: false });
+            navigate(ScreenName.SettingsPage, {
+                scrollBottom: true,
+                center: false,
+                previousScreen: ScreenName.HomePage,
+            });
         }
     };
 

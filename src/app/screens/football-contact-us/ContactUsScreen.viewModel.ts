@@ -41,6 +41,18 @@ export const useViewModel = ({ navigation, route }: IContactUsScreenProps) => {
     };
 
     const submitContact = async () => {
+        global.props.showAlert({
+            title: t('side_menu.message'),
+            subTitle: t('side_menu.thank_you'),
+            option1: t('side_menu.ok'),
+            onOption1: () => {
+                global.props.closeAlert();
+                setName('');
+                setEmail('');
+                setTitle('');
+                setContent('');
+            },
+        });
         const postData = {
             action: ACTION,
             token: authToken,
@@ -62,6 +74,18 @@ export const useViewModel = ({ navigation, route }: IContactUsScreenProps) => {
         );
 
         if (!isEmpty(data)) {
+            global.props.showAlert({
+                title: t('side_menu.message'),
+                subTitle: t('side_menu.thank_you'),
+                option1: t('side_menu.ok'),
+                onOption1: () => {
+                    global.props.closeAlert();
+                    setName('');
+                    setEmail('');
+                    setTitle('');
+                    setContent('');
+                },
+            });
             return data;
         }
     };

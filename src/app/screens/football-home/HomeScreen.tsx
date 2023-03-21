@@ -17,9 +17,11 @@ import { Item7 } from '@football/app/screens/football-home/layouts/Item7/Item7';
 import { Item9 } from '@football/app/screens/football-home/layouts/Item9/Item9';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { appStyles } from '@football/app/utils/constants/appStyles';
+import { ScreenName } from '@football/app/utils/constants/enum';
 import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
 import { getSize } from '@football/app/utils/responsive/scale';
 import { renderAvatar, renderUserPoints } from '@football/core/models/AvatarType.enum';
+import { isEmpty } from 'lodash';
 import React, { useRef } from 'react';
 import {
     I18nManager,
@@ -41,6 +43,7 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
     const {
         onGoBack,
         t,
+        navigate,
         players,
         onShowSideMenu,
         onClickPlayer,
@@ -57,6 +60,7 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
         userLogin,
         colorCustom,
         onClickGuestRegistration,
+        getProfile,
     } = useViewModel({
         navigation,
         route,
@@ -73,6 +77,14 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
     const scrollToTheEnd = () => {
         if (I18nManager.isRTL && Platform.OS === 'android') {
             scrollViewRef.current?.scrollToEnd();
+        }
+    };
+
+    const onPressAvatar = () => {
+        if (isEmpty(getProfile.getProfile)) {
+            navigate(ScreenName.RegisterPage, { isLogin: true });
+        } else {
+            navigate(ScreenName.SettingsPage);
         }
     };
 
@@ -140,14 +152,16 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                                         </TouchableOpacity>
                                         <View>
                                             <View style={[appStyles.flex_row_align, styles.avt]}>
-                                                <FastImage
-                                                    style={{
-                                                        width: getSize.m(40),
-                                                        height: getSize.m(40),
-                                                        borderRadius: getSize.m(40),
-                                                    }}
-                                                    source={renderAvatar(profileUser)}
-                                                />
+                                                <TouchableOpacity onPress={onPressAvatar}>
+                                                    <FastImage
+                                                        style={{
+                                                            width: getSize.m(40),
+                                                            height: getSize.m(40),
+                                                            borderRadius: getSize.m(40),
+                                                        }}
+                                                        source={renderAvatar(profileUser)}
+                                                    />
+                                                </TouchableOpacity>
                                                 <FastImage
                                                     source={AppImages.img_ball}
                                                     style={styles.ic_football}

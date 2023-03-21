@@ -98,10 +98,18 @@ const Alert = ({
                             </View>
                         </View>
                         <View style={[{ width: '100%', marginTop: getSize.m(30) }]}>
-                            <Button style={styles.button_ok} title={option1} onPress={onOption1} />
-                            <TouchableOpacity style={styles.button_sign_up} onPress={onOption2}>
-                                <Text style={styles.text_button_sign_up}>{option2}</Text>
-                            </TouchableOpacity>
+                            {option1 && (
+                                <Button
+                                    style={styles.button_ok}
+                                    title={option1}
+                                    onPress={onOption1}
+                                />
+                            )}
+                            {option2 && (
+                                <TouchableOpacity style={styles.button_sign_up} onPress={onOption2}>
+                                    <Text style={styles.text_button_sign_up}>{option2}</Text>
+                                </TouchableOpacity>
+                            )}
                         </View>
                     </View>
                 </View>

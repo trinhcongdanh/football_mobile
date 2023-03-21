@@ -85,6 +85,9 @@ const resources = {
                 no: 'לא',
                 notification: 'התראות',
                 logout_with_guest: 'מחק מועדפים וצא?',
+                ok: 'Ok',
+                message: 'Message',
+                thank_you: 'תודה. ההודעה שלך נשלחה.',
             },
             connect: {
                 title: 'התחברות',
@@ -755,6 +758,9 @@ const resources = {
                 no: 'No',
                 notification: 'התראות',
                 logout_with_guest: 'Delete my favorites and logout?',
+                ok: 'Ok',
+                message: 'Message',
+                thank_you: 'Thank you. Your message was sent!',
             },
             connect: {
                 title: 'Login',

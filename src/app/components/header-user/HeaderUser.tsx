@@ -1,8 +1,11 @@
 import { AppImages } from '@football/app/assets/images';
+import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
 import { appStyles } from '@football/app/utils/constants/appStyles';
+import { ScreenName } from '@football/app/utils/constants/enum';
 import { useAppNavigation } from '@football/app/utils/hooks/useAppNavigation';
 import { getSize } from '@football/app/utils/responsive/scale';
 import { renderAvatar, renderUserPoints } from '@football/core/models/AvatarType.enum';
+import { isEmpty } from 'lodash';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { I18nManager, Image, Text, TouchableOpacity, View } from 'react-native';
@@ -24,6 +27,8 @@ export const HeaderUser = ({
 }: IHeaderUserProps) => {
     const { openDrawer } = useAppNavigation();
     const { t } = useTranslation();
+    const { navigate } = useAppNavigator();
+    const getProfile = useSelector((state: RootState) => state.getProfile);
 
     const onPressMenu = () => {
         if (handlePressFunction) {
@@ -32,6 +37,15 @@ export const HeaderUser = ({
             openDrawer();
         }
     };
+
+    const onPressAvatar = () => {
+        if (isEmpty(getProfile.getProfile)) {
+            navigate(ScreenName.RegisterPage, { isLogin: true });
+        } else {
+            navigate(ScreenName.SettingsPage);
+        }
+    };
+
     const colorCustom = useSelector((state: any) => state.colorCustom.colorCustom);
     const profileUser = useSelector((state: RootState) => state.getProfile);
 
@@ -53,14 +67,16 @@ export const HeaderUser = ({
             {title ? <Text style={styles.txt_title}>{title}</Text> : <View />}
 
             <View style={[appStyles.flex_row_space_center, styles.avt]}>
-                <FastImage
-                    style={{
-                        width: getSize.m(40),
-                        height: getSize.m(40),
-                        borderRadius: getSize.m(40),
-                    }}
-                    source={renderAvatar(profileUser)}
-                />
+                <TouchableOpacity onPress={onPressAvatar}>
+                    <FastImage
+                        style={{
+                            width: getSize.m(40),
+                            height: getSize.m(40),
+                            borderRadius: getSize.m(40),
+                        }}
+                        source={renderAvatar(profileUser)}
+                    />
+                </TouchableOpacity>
                 <FastImage
                     tintColor={colorCustom}
                     source={AppImages.img_ball}

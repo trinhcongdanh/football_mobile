@@ -205,7 +205,7 @@ const useViewState = () => {
  * @param state
  * @returns
  */
-const useEventHandler = (state: any) => {
+const useEventHandler = (state: any, route: any) => {
     const { goBack, navigate, replace, popToTop } = useAppNavigator();
     const {
         numberPhone,
@@ -225,8 +225,13 @@ const useEventHandler = (state: any) => {
     const dispatch = useDispatch<any>();
 
     const onGoBack = () => {
-        popToTop();
-        navigate(ScreenName.SideBar);
+        const previousScreen = route?.params?.previousScreen;
+        if (previousScreen && previousScreen === ScreenName.HomePage) {
+            popToTop();
+            navigate(ScreenName.SideBar);
+        } else {
+            goBack();
+        }
     };
 
     /**
@@ -631,7 +636,7 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
 
     const state = useViewState();
     const callback = useViewCallback(state);
-    const eventHandler = useEventHandler(state);
+    const eventHandler = useEventHandler(state, route);
     useEffectHandler(state, callback, eventHandler);
 
     return {
