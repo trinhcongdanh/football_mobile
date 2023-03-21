@@ -33,6 +33,7 @@ export const RegisterScreen = ({ navigation, route }: IRegisterScreenProps) => {
         onNavigateConnect,
         connectFacebook,
         connectGoogle,
+        connectApple,
         numberPhone,
     } = useViewModel({
         navigation,
@@ -91,6 +92,7 @@ export const RegisterScreen = ({ navigation, route }: IRegisterScreenProps) => {
                                 handleError={() => {
                                     handleError('', 'numberPhone');
                                 }}
+                                connectApple={connectApple}
                                 connect={connect}
                                 facebook={t('register.fb')}
                                 google={t('register.gg')}

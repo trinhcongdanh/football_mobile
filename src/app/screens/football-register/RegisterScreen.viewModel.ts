@@ -1,10 +1,15 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
 import { AuthData, ScreenName } from '@football/app/utils/constants/enum';
+import { clearAllData } from '@football/app/utils/functions/clearAllData';
+import { clearUserData } from '@football/app/utils/functions/clearUserData';
+import { serializeParams } from '@football/app/utils/functions/quick-functions';
+import { ACTION, CLIENT_ID, REDIRECT_URI } from '@football/core/api/auth/config';
+import { GoogleSignin, statusCodes } from '@react-native-google-signin/google-signin';
+import { useIsFocused } from '@react-navigation/native';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Alert, BackHandler, Keyboard } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
-import { IRegisterScreenProps } from './RegisterScreen.type';
+import { Alert, BackHandler, Keyboard, Platform } from 'react-native';
 import {
     AccessToken,
     GraphRequest,
@@ -12,18 +17,15 @@ import {
     LoginManager,
     Profile,
 } from 'react-native-fbsdk-next';
-import { GoogleSignin, statusCodes } from '@react-native-google-signin/google-signin';
-import { registerNumberPhoneUser } from 'src/store/user/RegisterNumberPhone.slice';
-import { ACTION, TOKEN } from '@football/core/api/auth/config';
-import qs from 'qs';
-import { RouteProp, useIsFocused } from '@react-navigation/native';
-import { clearAllData } from '@football/app/utils/functions/clearAllData';
-import { clearUserData } from '@football/app/utils/functions/clearUserData';
-import { otpUser, setInfoSocial } from 'src/store/user/OTP.slice';
+import { useDispatch, useSelector } from 'react-redux';
 import { env } from 'src/config';
-import { setProfileUser, statusSetProfile } from 'src/store/user/setProfile.slice';
-import { serializeParams } from '@football/app/utils/functions/quick-functions';
-import { ISettingsScreenProps } from '@football/app/screens/football-settings/SettingsScreen.type';
+import { otpUser, setInfoSocial } from 'src/store/user/OTP.slice';
+import { registerNumberPhoneUser } from 'src/store/user/RegisterNumberPhone.slice';
+import { statusSetProfile } from 'src/store/user/setProfile.slice';
+import { v4 as uuid } from 'uuid';
+import jwt_decode from 'jwt-decode';
+import { appleAuth, appleAuthAndroid } from '@invertase/react-native-apple-authentication';
+import { IRegisterScreenProps } from './RegisterScreen.type';
 
 interface RegisterProps {
     phoneNumber: string;
@@ -146,6 +148,63 @@ const useEventHandler = (state: any) => {
         );
     };
 
+    const connectApple = async () => {
+        let subject = '';
+        let code = '';
+        if (Platform.OS === 'android') {
+            // Configure the request
+            appleAuthAndroid.configure({
+                clientId: CLIENT_ID,
+                redirectUri: REDIRECT_URI,
+                responseType: appleAuthAndroid.ResponseType.ALL,
+                scope: appleAuthAndroid.Scope.NAME,
+                nonce: uuid(),
+                state: uuid(),
+            });
+
+            // Open the browser window for user sign in
+            const response = await appleAuthAndroid.signIn();
+
+            console.log('response', response);
+            const decode = jwt_decode(`${response.id_token}`);
+            code = response.code;
+            subject = decode?.sub;
+        } else {
+            const appleAuthRequestResponse = await appleAuth.performRequest({
+                requestedOperation: appleAuth.Operation.LOGIN,
+                // Note: it appears putting FULL_NAME first is important, see issue #293
+                requestedScopes: [appleAuth.Scope.FULL_NAME, appleAuth.Scope.EMAIL],
+            });
+
+            const credentialState = await appleAuth.getCredentialStateForUser(
+                appleAuthRequestResponse.user
+            );
+
+            console.log('credentialState', credentialState);
+            // use credentialState response to ensure the user is authenticated
+            if (credentialState === appleAuth.State.AUTHORIZED) {
+                const decode = jwt_decode(`${appleAuthRequestResponse.identityToken}`);
+                code = appleAuthRequestResponse?.code;
+                subject = decode?.sub;
+            }
+        }
+        dispatch(
+            otpUser(
+                serializeParams({
+                    action: ACTION,
+                    token: login.login.token,
+                    guest_guid: guestId[0],
+                    guest_id: login.login.user.item_id,
+                    call: AuthData.REGISTER,
+                    item: {
+                        apple_client_id: subject,
+                        apple_client_secret: code,
+                    },
+                })
+            )
+        );
+    };
+
     /**
      * Handle token to get profile in facebook account
      * @param token
@@ -246,6 +305,7 @@ const useEventHandler = (state: any) => {
         handleError,
         connect,
         onNavigateConnect,
+        connectApple,
     };
 };
 

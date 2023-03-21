@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
 import { AuthData, ScreenName } from '@football/app/utils/constants/enum';
 import { ACTION, TOKEN } from '@football/core/api/auth/config';
@@ -13,19 +14,19 @@ import {
     GraphRequest,
     GraphRequestManager,
     LoginManager,
-    Profile
+    Profile,
 } from 'react-native-fbsdk-next';
 import 'react-native-get-random-values';
 import { useDispatch, useSelector } from 'react-redux';
 import { env } from 'src/config';
 import { loginNumberPhoneUser } from 'src/store/user/RegisterNumberPhone.slice';
 import { v4 as uuid } from 'uuid';
-import { IConnectScreenProps } from './ConnectScreen.type';
 
 import { serializeParams } from '@football/app/utils/functions/quick-functions';
 import jwt_decode from 'jwt-decode';
 import { RootState } from 'src/store/store';
 import { otpUser } from 'src/store/user/OTP.slice';
+import { IConnectScreenProps } from './ConnectScreen.type';
 
 interface LoginProps {
     phoneNumber: string;
@@ -218,65 +219,26 @@ const useEventHandler = (state: any) => {
 
     // Apple Developer
     const connectApple = async () => {
-        // const appleAuthRequestResponse = await appleAuth.performRequest({
-        //     requestedOperation: appleAuth.Operation.LOGIN,
-        //     requestedScopes: [appleAuth.Scope.EMAIL, appleAuth.Scope.FULL_NAME],
-        // });
-
-        // console.log(appleAuthRequestResponse);
-
-        // // get current authentication state for user
-        // // /!\ This method must be tested on a real device. On the iOS simulator it always throws an error.
-        // const credentialState = await appleAuth.getCredentialStateForUser(
-        //     appleAuthRequestResponse.user
-        // );
-
-        // console.log(credentialState);
-
-        // // use credentialState response to ensure the user is authenticated
-        // if (credentialState === appleAuth.State.AUTHORIZED) {
-        //     // user is authenticated
-        // }
-
         let subject = '';
         let code = '';
         if (Platform.OS === 'android') {
-            const rawNonce = uuid();
-            const state = uuid();
-
             // Configure the request
             appleAuthAndroid.configure({
-                // The Service ID you registered with Apple
-                clientId: 'il.org.football.mobile.ios.android',
-
-                // Return URL added to your Apple dev console. We intercept this redirect, but it must still match
-                // the URL you provided to Apple. It can be an empty route on your backend as it's never called.
-                redirectUri: 'https://www.football.org.il/',
-
-                // The type of response requested - code, id_token, or both.
+                clientId: CLIENT_ID,
+                redirectUri: REDIRECT_URI,
                 responseType: appleAuthAndroid.ResponseType.ALL,
-
-                // The amount of user information requested from Apple.
                 scope: appleAuthAndroid.Scope.NAME,
-
-                // Random nonce value that will be SHA256 hashed before sending to Apple.
-                nonce: rawNonce,
-
-                // Unique state value used to prevent CSRF attacks. A UUID will be generated if nothing is provided.
-                state,
+                nonce: uuid(),
+                state: uuid(),
             });
 
             // Open the browser window for user sign in
             const response = await appleAuthAndroid.signIn();
 
             console.log('response', response);
-            // const { email, sub, code } = jwt_decode(response.id_token);
-            // console.log('email', email);
-            // console.log('subject', sub);
-            // console.log('code', response.code);
             const decode = jwt_decode(`${response.id_token}`);
-            code = decode.code;
-            subject = decode.sub;
+            code = response.code;
+            subject = decode?.sub;
         } else {
             const appleAuthRequestResponse = await appleAuth.performRequest({
                 requestedOperation: appleAuth.Operation.LOGIN,
@@ -284,8 +246,6 @@ const useEventHandler = (state: any) => {
                 requestedScopes: [appleAuth.Scope.FULL_NAME, appleAuth.Scope.EMAIL],
             });
 
-            // get current authentication state for user
-            // /!\ This method must be tested on a real device. On the iOS simulator it always throws an error.
             const credentialState = await appleAuth.getCredentialStateForUser(
                 appleAuthRequestResponse.user
             );
@@ -293,17 +253,22 @@ const useEventHandler = (state: any) => {
             console.log('credentialState', credentialState);
             // use credentialState response to ensure the user is authenticated
             if (credentialState === appleAuth.State.AUTHORIZED) {
-                // user is authenticated
-                console.log('appleAuthRequestResponse', appleAuthRequestResponse);
-                // const { email, sub, code } = jwt_decode(appleAuthRequestResponse.identityToken);
-                // console.log('email', email);
-                // console.log('subject', sub);
-                // console.log('code', response.code);
                 const decode = jwt_decode(`${appleAuthRequestResponse.identityToken}`);
-                code = decode?.code;
+                code = appleAuthRequestResponse?.code;
                 subject = decode?.sub;
             }
         }
+        dispatch(
+            otpUser(
+                serializeParams({
+                    action: ACTION,
+                    token: TOKEN,
+                    call: AuthData.LOGIN,
+                    apple_client_id: subject,
+                    apple_client_secret: code,
+                })
+            )
+        );
     };
 
     return {
