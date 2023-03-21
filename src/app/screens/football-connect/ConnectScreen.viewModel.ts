@@ -221,9 +221,11 @@ export const useViewModel = ({ navigation, route }: IConnectScreenProps) => {
                 appleAuthRequestResponse.user
             );
 
+            console.log('credentialState', credentialState);
             // use credentialState response to ensure the user is authenticated
             if (credentialState === appleAuth.State.AUTHORIZED) {
                 // user is authenticated
+                
             }
         }
     };
