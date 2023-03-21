@@ -2,17 +2,26 @@ import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
 import { AuthData, ScreenName } from '@football/app/utils/constants/enum';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { BackHandler, Keyboard } from 'react-native';
+import { Alert, BackHandler, Keyboard } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { IRegisterScreenProps } from './RegisterScreen.type';
-// import { AccessToken, LoginManager, Profile } from 'react-native-fbsdk-next';
-import { GoogleSignin } from '@react-native-google-signin/google-signin';
+import {
+    AccessToken,
+    GraphRequest,
+    GraphRequestManager,
+    LoginManager,
+    Profile,
+} from 'react-native-fbsdk-next';
+import { GoogleSignin, statusCodes } from '@react-native-google-signin/google-signin';
 import { registerNumberPhoneUser } from 'src/store/user/RegisterNumberPhone.slice';
-import { ACTION } from '@football/core/api/auth/config';
+import { ACTION, TOKEN } from '@football/core/api/auth/config';
 import qs from 'qs';
 import { useIsFocused } from '@react-navigation/native';
 import { clearAllData } from '@football/app/utils/functions/clearAllData';
 import { clearUserData } from '@football/app/utils/functions/clearUserData';
+import { otpUser, setInfoSocial } from 'src/store/user/OTP.slice';
+import { env } from 'src/config';
+import { setProfileUser, statusSetProfile } from 'src/store/user/setProfile.slice';
 
 export const useViewModel = ({ navigation, route }: IRegisterScreenProps) => {
     const { t } = useTranslation();
@@ -40,6 +49,7 @@ export const useViewModel = ({ navigation, route }: IRegisterScreenProps) => {
     const profile = useSelector((state: any) => state.createProfile.profile);
     const login = useSelector((state: any) => state.login);
     const numberPhone = useSelector((state: any) => state.numberPhoneUser);
+    const otp = useSelector((state: any) => state.otpUser);
 
     const connect = () => {
         Keyboard.dismiss();
@@ -73,43 +83,81 @@ export const useViewModel = ({ navigation, route }: IRegisterScreenProps) => {
         }
     }, [numberPhone.successRegister, isFocused, numberPhone.loadingRegister]);
 
-    const connectFacebook = useCallback(async () => {
-        // LoginManager.logInWithPermissions(['public_profile', 'email']).then((result: any) => {
-        //     if (result.isCancelled) {
-        //     } else {
-        //         Profile.getCurrentProfile().then(currentProfile => {
-        //             if (currentProfile) {
-        //                 console.log(currentProfile);
-        //             }
-        //         });
-        //         AccessToken.getCurrentAccessToken().then((data: any) => {
-        //             console.log(data.accessToken.toString());
-        //         });
-        //     }
-        // });
-        // try {
-        //     const { data }: any = await axiosAuth.post(
-        //         `${AUTH_URL}`,
-        //         serializeParams({
-        //             action: ACTION,
-        //             token: tokenLogin,
-        //             call: AuthData.REGISTER,
-        //             guest_id: profile.tc_user,
-        //             guest_guid: guestId[0],
-        //             'item[facebook_app_id]': env.FACEBOOK_APPID,
-        //             'item[facebook_app_secret]': env.FACEBOOK_SECRET_KEY,
-        //         }),
-        //         {
-        //             headers: {},
-        //         }
-        //     );
-        //     if (!isEmpty(data)) {
-        //         console.log(data);
-        //     }
-        // } catch (error: any) {
-        //     Alert.alert(error);
-        // }
+    const [imgUrl, setImgUrl] = useState<string>();
+    const [name, setName] = useState<string>();
+    const [date, setDate] = useState<string>();
+    const [gender, setGender] = useState<string>();
+
+    const getInfoFromToken = useCallback((token: string) => {
+        const PROFILE_REQUEST_PARAMS = {
+            fields: {
+                string: 'id, name, first_name, last_name, email, picture, birthday, gender, link',
+            },
+        };
+        // getProfile
+        const profileRequest = new GraphRequest(
+            '/me',
+            { token, parameters: PROFILE_REQUEST_PARAMS },
+            (error, result: any) => {
+                if (error) {
+                    console.log('Login Info has an error:', error);
+                } else {
+                    console.log('result:', result);
+                    dispatch(setInfoSocial(result));
+                    // setImgUrl(result.picture.data.url);
+                    // setName(result.name);
+                    // setDate(result.birthday);
+                    // setGender(result.gender);
+                }
+            }
+        );
+        new GraphRequestManager().addRequest(profileRequest).start();
     }, []);
+
+    const connectFacebook = useCallback(async () => {
+        await LoginManager.logInWithPermissions(['public_profile', 'email']).then(
+            async (result: any) => {
+                console.log('login is progressing.');
+                if (result.isCancelled) {
+                    console.log('login is cancelled.');
+                } else {
+                    await Profile.getCurrentProfile().then(currentProfile => {
+                        if (currentProfile) {
+                            console.log(currentProfile);
+                        }
+                    });
+                    await AccessToken.getCurrentAccessToken().then((data: any) => {
+                        console.log(data);
+                        getInfoFromToken(data?.accessToken.toString());
+                        if (data) {
+                            dispatch(
+                                otpUser(
+                                    serializeParams({
+                                        action: ACTION,
+                                        token: login.login.token,
+                                        guest_guid: guestId[0],
+                                        guest_id: login.login.user.item_id,
+                                        call: AuthData.REGISTER,
+                                        item: {
+                                            facebook_app_id: env.FACEBOOK_APPID,
+                                            facebook_app_secret: env.FACEBOOK_SECRET_KEY,
+                                        },
+                                    })
+                                )
+                            );
+                        }
+                    });
+                }
+            }
+        );
+    }, [getInfoFromToken]);
+
+    useEffect(() => {
+        if (otp.success) {
+            dispatch(statusSetProfile(null));
+            navigate(ScreenName.RegPage);
+        }
+    }, [otp.success]);
 
     useEffect(() => {
         GoogleSignin.configure({
@@ -119,25 +167,25 @@ export const useViewModel = ({ navigation, route }: IRegisterScreenProps) => {
     }, []);
 
     const connectGoogle = useCallback(async () => {
-        // try {
-        //     await GoogleSignin.hasPlayServices();
-        //     await GoogleSignin.signIn().then((result: any) => {
-        //         console.log(result);
-        //     });
-        // } catch (error: any) {
-        //     if (error.code === statusCodes.SIGN_IN_CANCELLED) {
-        //         // user cancelled the login flow
-        //         Alert.alert('User cancelled the login flow !');
-        //     } else if (error.code === statusCodes.IN_PROGRESS) {
-        //         Alert.alert('Signin in progress');
-        //         // operation (f.e. sign in) is in progress already
-        //     } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
-        //         Alert.alert('Google play services not available or outdated !');
-        //         // play services not available or outdated
-        //     } else {
-        //         console.log(error);
-        //     }
-        // }
+        try {
+            await GoogleSignin.hasPlayServices();
+            await GoogleSignin.signIn().then((result: any) => {
+                console.log(result);
+            });
+        } catch (error: any) {
+            if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+                // user cancelled the login flow
+                Alert.alert('User cancelled the login flow !');
+            } else if (error.code === statusCodes.IN_PROGRESS) {
+                Alert.alert('Signin in progress');
+                // operation (f.e. sign in) is in progress already
+            } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+                Alert.alert('Google play services not available or outdated !');
+                // play services not available or outdated
+            } else {
+                console.log(error);
+            }
+        }
     }, []);
     const isLogin = route?.params?.isLogin;
 

@@ -8,7 +8,13 @@ import { isEmpty, isNil } from 'lodash';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Alert, Keyboard } from 'react-native';
-// import { AccessToken, LoginManager, Profile } from 'react-native-fbsdk-next';
+import {
+    AccessToken,
+    GraphRequest,
+    GraphRequestManager,
+    LoginManager,
+    Profile,
+} from 'react-native-fbsdk-next';
 import { AnyIfEmpty, useDispatch, useSelector } from 'react-redux';
 import { loginUser } from 'src/store/user/Login.slice';
 import { env } from 'src/config';
@@ -17,64 +23,174 @@ import qs from 'qs';
 import { useIsFocused } from '@react-navigation/native';
 import { createProfileUser } from 'src/store/user/CreateProfile.slice';
 import { loginNumberPhoneUser } from 'src/store/user/RegisterNumberPhone.slice';
+import { otpUser } from 'src/store/user/OTP.slice';
+import { serializeParams } from '@football/app/utils/functions/quick-functions';
+import { RootState } from 'src/store/store';
 
-export const useViewModel = ({ navigation, route }: IConnectScreenProps) => {
+interface LoginProps {
+    phoneNumber: string;
+}
+
+/**
+ * view settings variables
+ * @returns
+ */
+
+const useViewState = () => {
     const { t } = useTranslation();
-    const { navigate, goBack } = useAppNavigator();
+    const numberPhone = useSelector((state: RootState) => state.numberPhoneUser);
+    const guestId = useSelector((state: RootState) => state.guestId.guestId);
+    const profile = useSelector((state: RootState) => state.createProfile);
+    const login = useSelector((state: RootState) => state.login);
+    const socialLogin = useSelector((state: RootState) => state.otpUser);
+    const [imgUrl, setImgUrl] = useState<string>();
+    const phoneNumberRef = useRef<string>(null);
+    const [phoneNumber, setPhoneNumber] = useState('');
+    const [errors, setErrors] = useState({
+        numberPhone: '',
+    });
+    const { navigate, goBack, replace } = useAppNavigator();
+    const isFocused = useIsFocused();
+
+    return {
+        t,
+        numberPhone,
+        guestId,
+        profile,
+        login,
+        socialLogin,
+        imgUrl,
+        setImgUrl,
+        isFocused,
+        phoneNumberRef,
+        phoneNumber,
+        setPhoneNumber,
+        errors,
+        setErrors,
+        navigate,
+        goBack,
+        replace,
+    };
+};
+
+/**
+ * State use event handler
+ * @param state
+ * @returns
+ */
+
+const useEventHandler = (state: any) => {
     const dispatch = useDispatch<any>();
+    const {
+        t,
+        numberPhone,
+        guestId,
+        profile,
+        login,
+        socialLogin,
+        imgUrl,
+        setImgUrl,
+        setPhoneNumber,
+        errors,
+        setErrors,
+        phoneNumber,
+        navigate,
+        goBack,
+        replace,
+    } = state;
+    // Go back previous screen
+    const onGoBack = (): void => {
+        goBack();
+    };
 
-    function serializeParams(obj: any) {
-        const a = qs.stringify(obj, { encode: false, arrayFormat: 'brackets' });
-        console.log(a);
-        return a;
-    }
+    // Go back flow register
+    const onNavigateSignUp = () => {
+        navigate(ScreenName.FavTeamPage);
+    };
 
-    // Facebook
-    const connectFacebook = useCallback(async () => {
-        // LoginManager.logInWithPermissions(['public_profile', 'email']).then((result: any) => {
-        //     if (result.isCancelled) {
-        //     } else {
-        //         Profile.getCurrentProfile().then(currentProfile => {
-        //             if (currentProfile) {
-        //                 console.log(currentProfile);
-        //             }
-        //         });
-        //         AccessToken.getCurrentAccessToken().then((data: any) => {
-        //             console.log(data.accessToken.toString());
-        //         });
-        //     }
-        // });
-        // try {
-        //     const { data }: any = await axiosAuth.post(
-        //         `${AUTH_URL}`,
-        //         serializeParams({
-        //             action: ACTION,
-        //             token: tokenLogin[0].token,
-        //             call: AuthData.REGISTER,
-        //             guest_id: profile[0].tc_user,
-        //             guest_guid: guestId[0],
-        //             'item[facebook_app_id]': env.FACEBOOK_APPID,
-        //             'item[facebook_app_secret]': env.FACEBOOK_SECRET_KEY,
-        //         }),
-        //         {
-        //             headers: {},
-        //         }
-        //     );
-        //     if (!isEmpty(data)) {
-        //         console.log(data);
-        //     }
-        // } catch (error: any) {
-        //     Alert.alert(error);
-        // }
+    /**
+     * Handle changing phone number
+     * @param e
+     */
+    const handleOnChange = (e: string) => {
+        setPhoneNumber(e);
+    };
+
+    // Login with phone number
+    const Connect = () => {
+        Keyboard.dismiss();
+        dispatch(
+            loginNumberPhoneUser(
+                serializeParams({
+                    action: ACTION,
+                    token: TOKEN,
+                    call: AuthData.LOGIN,
+                    sms_phone: encodeURIComponent(phoneNumber),
+                })
+            )
+        );
+    };
+
+    const handleError = (errorMessage: string, input: string) => {
+        state.setErrors((prevState: LoginProps) => ({ ...prevState, [input]: errorMessage }));
+    };
+
+    /**
+     * Handle token to get profile in facebook account
+     * @param token
+     */
+    const getInfoFromToken = useCallback((token: string) => {
+        const PROFILE_REQUEST_PARAMS = {
+            fields: {
+                string: 'id, name, first_name, last_name, email, picture, birthday, gender, link',
+            },
+        };
+        // getProfile
+        const profileRequest = new GraphRequest(
+            '/me',
+            { token, parameters: PROFILE_REQUEST_PARAMS },
+            (error, result: any) => {
+                if (error) {
+                    console.log('Login Info has an error:', error);
+                } else {
+                    console.log('result:', result);
+                    setImgUrl(result.picture.data.url);
+                }
+            }
+        );
+        new GraphRequestManager().addRequest(profileRequest).start();
     }, []);
 
-    // Google Account
-    useEffect(() => {
-        GoogleSignin.configure({
-            webClientId: '476796468470-2e0e3qgmfo76l4c2juqiu3gvgmts0v32.apps.googleusercontent.com',
-            offlineAccess: true,
+    // Facebook Login
+    const connectFacebook = useCallback(() => {
+        LoginManager.logInWithPermissions(['public_profile', 'email']).then((result: any) => {
+            console.log('login is progressing.');
+            if (result.isCancelled) {
+                console.log('login is cancelled.');
+            } else {
+                Profile.getCurrentProfile().then(currentProfile => {
+                    if (currentProfile) {
+                        console.log(currentProfile);
+                    }
+                });
+                AccessToken.getCurrentAccessToken().then((data: any) => {
+                    console.log(data);
+                    getInfoFromToken(data?.accessToken.toString());
+                    dispatch(
+                        otpUser(
+                            serializeParams({
+                                action: ACTION,
+                                token: TOKEN,
+                                call: AuthData.LOGIN,
+                                facebook_app_id: env.FACEBOOK_APPID,
+                                facebook_app_secret: env.FACEBOOK_SECRET_KEY,
+                            })
+                        )
+                    );
+                });
+            }
         });
-    }, []);
+    }, [getInfoFromToken]);
 
     const connectGoogle = useCallback(async () => {
         // try {
@@ -120,77 +236,65 @@ export const useViewModel = ({ navigation, route }: IConnectScreenProps) => {
             // user is authenticated
         }
     };
-    const onGoBack = (): void => {
-        goBack();
-    };
-
-    const phoneNumberRef = useRef<any>(null);
-    const [phoneNumber, setPhoneNumber] = useState('');
-    const [errors, setErrors] = useState({
-        numberPhone: '',
-    });
-    const numberPhone = useSelector((state: any) => state.numberPhoneUser);
-    const guestId = useSelector((state: any) => state.guestId.guestId);
-    const profile = useSelector((state: any) => state.createProfile);
-    const login = useSelector((state: any) => state.login);
-
-    const handleOnChange = (e: string) => {
-        setPhoneNumber(e);
-    };
-    // console.log(phoneNumber);
-
-    const handleError = (errorMessage: string, input: string): void => {
-        setErrors(prevState => ({ ...prevState, [input]: errorMessage }));
-    };
-
-    const Connect = () => {
-        Keyboard.dismiss();
-        dispatch(
-            loginNumberPhoneUser(
-                serializeParams({
-                    action: ACTION,
-                    token: TOKEN,
-                    call: AuthData.LOGIN,
-                    sms_phone: encodeURIComponent(phoneNumber),
-                })
-            )
-        );
-    };
-
-    const isFocused = useIsFocused();
-
-    useEffect(() => {
-        if (!isFocused) return;
-        if (numberPhone.successLogin === true) {
-            navigate(ScreenName.VerifyPage, {
-                number: phoneNumber,
-                previous_screen: ScreenName.ConnectPage,
-            });
-        }
-    }, [numberPhone.successLogin, isFocused]);
-
-    useEffect(() => {
-        if (numberPhone.successLogin === false && numberPhone.loadingLogin === false) {
-            handleError(t('register.invalid'), 'numberPhone');
-        }
-    }, [numberPhone.successLogin, numberPhone.loadingLogin]);
-
-    const onNavigateSignUp = () => {
-        navigate(ScreenName.FavTeamPage);
-    };
 
     return {
-        errors,
-        handleError,
-        handleOnChange,
-        Connect,
-        onNavigateSignUp,
         onGoBack,
+        handleOnChange,
+        onNavigateSignUp,
+        Connect,
         connectFacebook,
         connectGoogle,
         connectApple,
-        phoneNumberRef,
-        phoneNumber,
-        numberPhone,
+        handleError,
+    };
+};
+
+/**
+ * Handle effect to listening variables change here.
+ * @param state
+ * @param eventHandler
+ */
+const useEffectHandler = (state: any, eventHandler: any) => {
+    const { handleError } = eventHandler;
+    useEffect(() => {
+        if (!state.isFocused) return;
+        if (state.socialLogin.success) {
+            state.replace(ScreenName.SideBar);
+        }
+    }, [state.socialLogin.success, state.isFocused]);
+
+    useEffect(() => {
+        if (!state.isFocused) return;
+        if (state.numberPhone.successLogin === true) {
+            state.navigate(ScreenName.VerifyPage, {
+                number: state.phoneNumber,
+                previous_screen: ScreenName.ConnectPage,
+            });
+        }
+    }, [state.numberPhone.successLogin, state.isFocused]);
+
+    useEffect(() => {
+        if (state.numberPhone.successLogin === false && state.numberPhone.loadingLogin === false) {
+            handleError(state.t('register.invalid'), 'numberPhone');
+        }
+    }, [state.numberPhone.successLogin, state.numberPhone.loadingLogin]);
+
+    // Google Account
+    useEffect(() => {
+        GoogleSignin.configure({
+            webClientId: '476796468470-2e0e3qgmfo76l4c2juqiu3gvgmts0v32.apps.googleusercontent.com',
+            offlineAccess: true,
+        });
+    }, []);
+};
+
+export const useViewModel = ({ navigation, route }: IConnectScreenProps) => {
+    const state = useViewState();
+    const eventHandler = useEventHandler(state);
+    useEffectHandler(state, eventHandler);
+
+    return {
+        ...eventHandler,
+        ...state,
     };
 };
