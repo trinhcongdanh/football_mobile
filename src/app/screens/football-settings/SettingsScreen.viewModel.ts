@@ -268,7 +268,7 @@ const useEventHandler = (state: any) => {
                         favorite_israel_teams: isEmpty(favTeamIds) ? '' : favTeamIds,
                         favorite_players: isEmpty(favPlayersIds) ? '' : favPlayersIds,
                         favorite_national_teams: isEmpty(favTopTeamIds) ? '' : favTopTeamIds,
-                        notifications: isEmpty(notificationIds) ? '' : notificationIds,
+                        approved_notifications: isEmpty(notificationIds) ? '' : notificationIds,
                     },
                 })
             )
@@ -588,7 +588,7 @@ const useEffectHandler = (state: any, callback: any, eventHandler: any) => {
         const originNotifications = Object.assign([], state.notifications);
         originNotifications.forEach((notification: NotificationSetting) => {
             // eslint-disable-next-line no-param-reassign
-            notification.isOn = getProfile.getProfile.item.notifications.includes(
+            notification.isOn = getProfile.getProfile.item.approved_notifications.includes(
                 notification.value
             );
         });

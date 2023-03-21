@@ -14,11 +14,29 @@ import { AppImages } from '@football/app/assets/images';
 import { AvatarType } from '@football/core/models/AvatarType.enum';
 import { isEmpty } from 'lodash';
 import { clearFavoriteData } from '@football/app/utils/functions/clearFavoriteData';
+import moment from 'moment';
+
+enum GenderSocial {
+    male = 'male',
+    female = 'female',
+    other = 'other',
+}
+
+enum Gender {
+    MALE = 'FAN_GENDER_MALE',
+    FEMALE = 'FAN_GENDER_FEMALE',
+    OTHER = 'FAN_GENDER_NOT_AVAILABLE',
+}
 
 export const useViewModel = ({ navigation, route }: IRegScreenProps) => {
     const { navigate, goBack } = useAppNavigator();
     const { t } = useTranslation();
     const dispatch = useDispatch<any>();
+    const login = useSelector((state: RootState) => state.login);
+    const profile = useSelector((state: RootState) => state.createProfile);
+    const guestId = useSelector((state: any) => state.guestId.guestId);
+    const profileUser = useSelector((state: RootState) => state.setProfile);
+    const infoSocial = useSelector((state: any) => state.otpUser.infoSocial);
 
     const [errors, setErrors] = useState({
         userName: '',
@@ -69,16 +87,28 @@ export const useViewModel = ({ navigation, route }: IRegScreenProps) => {
         console.log(a);
         return a;
     }
+    useEffect(() => {
+        if (!isEmpty(infoSocial)) {
+            setUserName(infoSocial.name);
+            setDate(moment(infoSocial.birthday, 'DD/MM/YYYY').toDate());
+
+            switch (infoSocial.gender) {
+                case GenderSocial.male:
+                    setGender(Gender.MALE);
+                case GenderSocial.female:
+                    setGender(Gender.FEMALE);
+                case GenderSocial.other:
+                    setGender(Gender.OTHER);
+                default:
+                    setGender(Gender.MALE);
+            }
+        }
+    }, [infoSocial]);
     const selectedFavTeams = useSelector((state: RootState) => state.favTeams.selectedTeams);
     const selectedFavPlayers = useSelector((state: RootState) => state.favPlayers.selectedPlayers);
     const selectedFavTopTeams = useSelector(
         (state: RootState) => state.favTopTeams.selectedTopTeams
     );
-
-    const login = useSelector((state: RootState) => state.login);
-    const profile = useSelector((state: RootState) => state.createProfile);
-    const guestId = useSelector((state: any) => state.guestId.guestId);
-    const profileUser = useSelector((state: RootState) => state.setProfile);
 
     const createInfo = () => {
         Keyboard.dismiss();

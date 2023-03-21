@@ -1,5 +1,5 @@
 import { View, Text, TouchableOpacity, I18nManager } from 'react-native';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { getSize } from '@football/app/utils/responsive/scale';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import { appColors } from '@football/app/utils/constants/appColors';
@@ -8,6 +8,8 @@ import styles from './CardInfoView.style';
 import { ICardInfoViewProps } from './CardInfoView.types';
 import Input from '../../input/Input';
 import { AppFonts } from '@football/app/assets/fonts';
+import { useSelector } from 'react-redux';
+import { isEmpty } from 'lodash';
 
 export const CardInfoView = ({
     errors,
@@ -27,6 +29,27 @@ export const CardInfoView = ({
 }: ICardInfoViewProps) => {
     // const [date, setDate] = useState<Date>();
     // const date = new Date();
+    const infoSocial = useSelector((state: any) => state.otpUser.infoSocial);
+    enum GenderSocial {
+        male = 'male',
+        female = 'female',
+        other = 'other',
+    }
+    useEffect(() => {
+        if (!isEmpty(infoSocial)) {
+            switch (infoSocial.gender) {
+                case GenderSocial.male:
+                    setGender(0);
+                case GenderSocial.female:
+                    setGender(1);
+                case GenderSocial.other:
+                    setGender(2);
+                default:
+                    setGender(0);
+            }
+        }
+    }, [infoSocial]);
+
     const [gender, setGender] = useState(0);
 
     const genders = [male, female, other];
