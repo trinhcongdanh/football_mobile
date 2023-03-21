@@ -71,7 +71,7 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
     const { getTranslationText } = useTranslationText();
 
     const scrollToTheEnd = () => {
-        if(I18nManager.isRTL && Platform.OS === 'android') {
+        if (I18nManager.isRTL && Platform.OS === 'android') {
             scrollViewRef.current?.scrollToEnd();
         }
     };

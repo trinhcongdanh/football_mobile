@@ -36,6 +36,11 @@ export const useViewModel = () => {
         : login?.login?.user?.item_id;
 
     const notifications = useSelector((state: RootState) => state.notifications.notifications);
+    const selectedFavTeams = useSelector((state: RootState) => state.favTeams.selectedTeams);
+    const selectedFavPlayers = useSelector((state: RootState) => state.favPlayers.selectedPlayers);
+    const selectedFavTopTeams = useSelector(
+        (state: RootState) => state.favTopTeams.selectedTopTeams
+    );
 
     function serializeParams(obj: any) {
         const a = qs.stringify(obj, { encode: false, arrayFormat: 'brackets' });
@@ -44,9 +49,15 @@ export const useViewModel = () => {
 
     const onNavigateStartScreen = () => {
         // dispatch(isLogout);
+        const isGuest = !userLogin?.success;
+        const isGuestWithFavourite =
+            isGuest &&
+            (selectedFavTeams.length || selectedFavPlayers.length || selectedFavTopTeams.length);
         global.props.showAlert({
             title: t('side_menu.logout'),
-            subTitle: t('side_menu.are_you_want_logout'),
+            subTitle: isGuestWithFavourite
+                ? t('side_menu.logout_with_guest')
+                : t('side_menu.are_you_want_logout'),
             option1: t('side_menu.yes'),
             option2: t('side_menu.no'),
             onOption1: () => {
