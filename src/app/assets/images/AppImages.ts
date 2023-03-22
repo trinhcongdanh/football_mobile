@@ -132,6 +132,8 @@ export const AppImages = {
     img_decoration_background_2: require('./img_decoration_background_2.png'),
     img_decoration_header_home: require('./decoration_header_home.png'),
     img_dot_header_home: require('./dot_header_home.png'),
+    img_background_arrow: require('./background_arrow.png'),
+    img_background_black: require('./background_black.png'),
 };
 
 export const AppJsons = {
