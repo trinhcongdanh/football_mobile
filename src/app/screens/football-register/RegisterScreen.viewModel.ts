@@ -9,7 +9,7 @@ import { GoogleSignin, statusCodes } from '@react-native-google-signin/google-si
 import { useIsFocused } from '@react-navigation/native';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Alert, AsyncStorage, BackHandler, Keyboard, Platform } from 'react-native';
+import { Alert, BackHandler, Keyboard, Platform } from 'react-native';
 import {
     AccessToken,
     GraphRequest,
@@ -26,11 +26,7 @@ import { v4 as uuid } from 'uuid';
 import jwt_decode from 'jwt-decode';
 import { appleAuth, appleAuthAndroid } from '@invertase/react-native-apple-authentication';
 import { IRegisterScreenProps } from './RegisterScreen.type';
-import { RootState } from 'src/store/store';
-import { TeamModel } from '@football/core/models/TeamModelResponse';
-import { PlayerModel } from '@football/core/models/PlayerModelResponse';
-import { TopTeamModel } from '@football/core/models/TopTeamModelResponse';
-import { isEmpty } from 'lodash';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 interface RegisterProps {
     phoneNumber: string;
@@ -387,9 +383,10 @@ const useEffectHandler = (state: any, eventHandler: any) => {
                     })
                 )
             );
-            state.dispatch(statusSetProfile(null));
+
             state.navigate(ScreenName.RegPage);
         }
+        state.dispatch(statusSetProfile(null));
     }, [state.otp.success]);
 
     useEffect(() => {

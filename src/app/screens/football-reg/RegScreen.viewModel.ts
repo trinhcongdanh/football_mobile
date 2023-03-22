@@ -37,6 +37,7 @@ export const useViewModel = ({ navigation, route }: IRegScreenProps) => {
     const guestId = useSelector((state: any) => state.guestId.guestId);
     const profileUser = useSelector((state: RootState) => state.setProfile);
     const infoSocial = useSelector((state: any) => state.otpUser.infoSocial);
+    const [finishRegister, setFinishRegister] = useState(false);
 
     const [errors, setErrors] = useState({
         userName: '',
@@ -63,13 +64,10 @@ export const useViewModel = ({ navigation, route }: IRegScreenProps) => {
     };
 
     const [date, setDate] = useState<any>(new Date());
-    const [formattedDate, setFormattedDate] = useState<any>();
 
     const handleOnDate = (e: Date) => {
         console.log(e);
         setDate(e);
-        let formattedDate = e.getFullYear() + '-' + (e.getMonth() + 1) + '-' + e.getDate();
-        setFormattedDate(formattedDate);
     };
     const [gender, setGender] = useState<any>(AvatarType.FAN_GENDER_MALE);
     const handleOnGender = (e: number) => {
@@ -96,6 +94,8 @@ export const useViewModel = ({ navigation, route }: IRegScreenProps) => {
                     : new Date()
             );
 
+            console.log(date);
+
             switch (infoSocial?.gender) {
                 case GenderSocial.male:
                     setGender(Gender.MALE);
@@ -116,6 +116,7 @@ export const useViewModel = ({ navigation, route }: IRegScreenProps) => {
 
     const createInfo = () => {
         Keyboard.dismiss();
+        setFinishRegister(true);
         let fav_team: string[] = [];
         selectedFavTeams.map(item => {
             fav_team.push(item._id);
@@ -138,7 +139,7 @@ export const useViewModel = ({ navigation, route }: IRegScreenProps) => {
                     item: {
                         name: userName,
                         gender: gender,
-                        birthdate: formattedDate,
+                        birthdate: moment(date).format('YYYY-MM-DD'),
                         favorite_israel_teams: isEmpty(fav_team) ? '' : fav_team,
                         favorite_players: isEmpty(fav_player) ? '' : fav_player,
                         favorite_national_teams: isEmpty(fav_top_team) ? '' : fav_top_team,
@@ -150,7 +151,7 @@ export const useViewModel = ({ navigation, route }: IRegScreenProps) => {
     const isFocused = useIsFocused();
     useEffect(() => {
         if (!isFocused) return;
-        if (profileUser.success === true) {
+        if (profileUser.success && finishRegister) {
             navigate(ScreenName.SideBar);
             navigation.reset({
                 index: 0,
@@ -158,7 +159,7 @@ export const useViewModel = ({ navigation, route }: IRegScreenProps) => {
             });
             clearFavoriteData(dispatch);
         }
-    }, [profileUser.success, isFocused]);
+    }, [profileUser.success, finishRegister, isFocused]);
 
     const handleProvision = () => {
         navigate(ScreenName.TermsConditionPage);
