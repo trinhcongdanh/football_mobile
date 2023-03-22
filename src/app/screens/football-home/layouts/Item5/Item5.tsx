@@ -449,7 +449,7 @@ export const Item5 = ({ topTeam, color }: IItem5Props) => {
                     /> */}
 
                     <View style={{ padding: getSize.m(5), zIndex: 0, position: 'relative' }}>
-                        {topTeam.homepage_info.games.map(item => {
+                        {topTeam.homepage_info?.games.map(item => {
                             return (
                                 <ListGame
                                     key={item.game_id}

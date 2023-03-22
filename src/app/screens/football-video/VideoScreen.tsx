@@ -90,7 +90,7 @@ export const VideoScreen = ({ navigation, route }: IVideoScreenProps) => {
                                             showsHorizontalScrollIndicator={false}
                                             directionalLockEnabled
                                         >
-                                            {favoriteTeamsVideo.map((item, index) => {
+                                            {favoriteTeamsVideo?.map((item, index) => {
                                                 return (
                                                     <View
                                                         key={index}
@@ -167,7 +167,7 @@ export const VideoScreen = ({ navigation, route }: IVideoScreenProps) => {
                                             showsHorizontalScrollIndicator={false}
                                             directionalLockEnabled
                                         >
-                                            {favoriteTopTeamsVideo.map((item, index) => {
+                                            {favoriteTopTeamsVideo?.map((item, index) => {
                                                 return (
                                                     <View
                                                         key={index}
@@ -243,7 +243,7 @@ export const VideoScreen = ({ navigation, route }: IVideoScreenProps) => {
                                             showsHorizontalScrollIndicator={false}
                                             directionalLockEnabled
                                         >
-                                            {favoritePlayersVideo.map((item, index) => {
+                                            {favoritePlayersVideo?.map((item, index) => {
                                                 return (
                                                     <View
                                                         key={index}

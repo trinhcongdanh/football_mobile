@@ -187,7 +187,7 @@ export const Item1 = ({ team, color }: IItem1Props) => {
                                 marginTop: getSize.m(13),
                             }}
                         >
-                            {team.homepage_info.goal_kickers.map((item, index) => {
+                            {team.homepage_info?.goal_kickers.map((item, index) => {
                                 return (
                                     <LinearGradient
                                         key={item.player_id}
@@ -358,7 +358,7 @@ export const Item1 = ({ team, color }: IItem1Props) => {
                                 marginTop: getSize.m(13),
                             }}
                         >
-                            {team.homepage_info.yellow_cards?.map((item, index) => {
+                            {team.homepage_info?.yellow_cards?.map((item, index) => {
                                 return (
                                     <LinearGradient
                                         key={item.player_id}
@@ -542,7 +542,7 @@ export const Item1 = ({ team, color }: IItem1Props) => {
                                 marginTop: getSize.m(13),
                             }}
                         >
-                            {team.homepage_info.red_cards?.map((item, index) => {
+                            {team.homepage_info?.red_cards?.map((item, index) => {
                                 return (
                                     <LinearGradient
                                         key={item.player_id}
@@ -741,7 +741,7 @@ export const Item1 = ({ team, color }: IItem1Props) => {
                         </TouchableOpacity>
                     </View>
                     <View style={{ padding: getSize.m(10) }}>
-                        {team.homepage_info.games.map((item, index) => {
+                        {team.homepage_info?.games.map((item, index) => {
                             return (
                                 <ListGame
                                     // eslint-disable-next-line react/no-array-index-key

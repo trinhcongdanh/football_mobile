@@ -140,7 +140,7 @@ export const Item6 = ({ topTeam }: IItem6Props) => {
                 })}
             </View>
             <View style={{ paddingHorizontal: getSize.m(20) }}>
-                {topTeam?.homepage_info.games
+                {topTeam?.homepage_info?.games
                     .slice(0, MAX_TOPTEAM_LASTCAMPAIGN_GAMES)
                     .filter(game => {
                         switch (select) {
