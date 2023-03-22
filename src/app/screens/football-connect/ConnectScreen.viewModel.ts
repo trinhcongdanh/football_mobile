@@ -11,6 +11,7 @@ import { Alert, Keyboard, Platform } from 'react-native';
 import { useIsFocused } from '@react-navigation/native';
 import {
     AccessToken,
+    AuthenticationToken,
     GraphRequest,
     GraphRequestManager,
     LoginManager,
@@ -168,34 +169,58 @@ const useEventHandler = (state: any) => {
     }, []);
 
     // Facebook Login
-    const connectFacebook = useCallback(() => {
-        LoginManager.logInWithPermissions(['public_profile', 'email']).then((result: any) => {
-            console.log('login is progressing.');
-            if (result.isCancelled) {
-                console.log('login is cancelled.');
-            } else {
-                Profile.getCurrentProfile().then(currentProfile => {
-                    if (currentProfile) {
-                        console.log(currentProfile);
+    const connectFacebook = useCallback(async () => {
+        await LoginManager.logInWithPermissions(['public_profile', 'email']).then(
+            async (result: any) => {
+                console.log('login is progressing.');
+                if (result.isCancelled) {
+                    console.log('login is cancelled.');
+                } else {
+                    await Profile.getCurrentProfile().then(currentProfile => {
+                        if (currentProfile) {
+                            console.log(currentProfile);
+                        }
+                    });
+                    if (Platform.OS === 'ios') {
+                        await AuthenticationToken.getAuthenticationTokenIOS().then((data: any) => {
+                            console.log(data?.authenticationToken);
+                            getInfoFromToken(data?.authenticationToken.toString());
+                            if (data) {
+                                dispatch(
+                                    otpUser(
+                                        serializeParams({
+                                            action: ACTION,
+                                            token: TOKEN,
+                                            call: AuthData.LOGIN,
+                                            facebook_app_id: env.FACEBOOK_APPID,
+                                            facebook_app_secret: env.FACEBOOK_SECRET_KEY,
+                                        })
+                                    )
+                                );
+                            }
+                        });
+                    } else {
+                        await AccessToken.getCurrentAccessToken().then((data: any) => {
+                            console.log(data);
+                            getInfoFromToken(data?.accessToken.toString());
+                            if (data) {
+                                dispatch(
+                                    otpUser(
+                                        serializeParams({
+                                            action: ACTION,
+                                            token: TOKEN,
+                                            call: AuthData.LOGIN,
+                                            facebook_app_id: env.FACEBOOK_APPID,
+                                            facebook_app_secret: env.FACEBOOK_SECRET_KEY,
+                                        })
+                                    )
+                                );
+                            }
+                        });
                     }
-                });
-                AccessToken.getCurrentAccessToken().then((data: any) => {
-                    console.log(data);
-                    getInfoFromToken(data?.accessToken.toString());
-                    dispatch(
-                        otpUser(
-                            serializeParams({
-                                action: ACTION,
-                                token: TOKEN,
-                                call: AuthData.LOGIN,
-                                facebook_app_id: env.FACEBOOK_APPID,
-                                facebook_app_secret: env.FACEBOOK_SECRET_KEY,
-                            })
-                        )
-                    );
-                });
+                }
             }
-        });
+        );
     }, [getInfoFromToken]);
 
     const connectGoogle = useCallback(async () => {

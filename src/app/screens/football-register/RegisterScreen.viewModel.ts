@@ -12,6 +12,7 @@ import { useTranslation } from 'react-i18next';
 import { Alert, BackHandler, Keyboard, Platform } from 'react-native';
 import {
     AccessToken,
+    AuthenticationToken,
     GraphRequest,
     GraphRequestManager,
     LoginManager,
@@ -251,27 +252,51 @@ const useEventHandler = (state: any) => {
                             console.log(currentProfile);
                         }
                     });
-                    await AccessToken.getCurrentAccessToken().then((data: any) => {
-                        console.log(data);
-                        getInfoFromToken(data?.accessToken.toString());
-                        if (data) {
-                            dispatch(
-                                otpUser(
-                                    serializeParams({
-                                        action: ACTION,
-                                        token: login.login.token,
-                                        guest_guid: guestId[0],
-                                        guest_id: login.login.user.item_id,
-                                        call: AuthData.REGISTER,
-                                        item: {
-                                            facebook_app_id: env.FACEBOOK_APPID,
-                                            facebook_app_secret: env.FACEBOOK_SECRET_KEY,
-                                        },
-                                    })
-                                )
-                            );
-                        }
-                    });
+                    if (Platform.OS === 'ios') {
+                        await AuthenticationToken.getAuthenticationTokenIOS().then((data: any) => {
+                            console.log(data?.authenticationToken);
+                            getInfoFromToken(data?.authenticationToken.toString());
+                            if (data) {
+                                dispatch(
+                                    otpUser(
+                                        serializeParams({
+                                            action: ACTION,
+                                            token: login.login.token,
+                                            guest_guid: guestId[0],
+                                            guest_id: login.login.user.item_id,
+                                            call: AuthData.REGISTER,
+                                            item: {
+                                                facebook_app_id: env.FACEBOOK_APPID,
+                                                facebook_app_secret: env.FACEBOOK_SECRET_KEY,
+                                            },
+                                        })
+                                    )
+                                );
+                            }
+                        });
+                    } else {
+                        await AccessToken.getCurrentAccessToken().then((data: any) => {
+                            console.log(data);
+                            getInfoFromToken(data?.accessToken.toString());
+                            if (data) {
+                                dispatch(
+                                    otpUser(
+                                        serializeParams({
+                                            action: ACTION,
+                                            token: login.login.token,
+                                            guest_guid: guestId[0],
+                                            guest_id: login.login.user.item_id,
+                                            call: AuthData.REGISTER,
+                                            item: {
+                                                facebook_app_id: env.FACEBOOK_APPID,
+                                                facebook_app_secret: env.FACEBOOK_SECRET_KEY,
+                                            },
+                                        })
+                                    )
+                                );
+                            }
+                        });
+                    }
                 }
             }
         );
