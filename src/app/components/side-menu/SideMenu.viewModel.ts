@@ -13,22 +13,22 @@ import { AppImages } from '@football/app/assets/images';
 import { isEmpty } from 'lodash';
 import { clearAllData } from '@football/app/utils/functions/clearAllData';
 import { clearNotifications } from 'src/store/notification/Notification.slice';
+import { setProfileUser } from 'src/store/user/setProfile.slice';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { serializeParams } from '@football/app/utils/functions/quick-functions';
+import { ISideMenuProps } from '@football/app/components/side-menu/SideMenu.type';
 
-export const useViewModel = () => {
+/**
+ * view settings variables
+ * @returns
+ */
+const useViewState = () => {
     const { navigate, goBack, popToTop } = useAppNavigator();
     const navigation = useNavigation();
     const { t } = useTranslation();
     const dispatch = useDispatch<any>();
-
-    const onGoBack = (): void => {
-        goBack();
-    };
-
     const login = useSelector((state: any) => state.login);
     const getProfile = useSelector((state: RootState) => state.getProfile);
-    const profile = useSelector((state: RootState) => state.createProfile);
-    const profileUser = useSelector((state: RootState) => state.setProfile);
-    const numberPhone = useSelector((state: any) => state.numberPhoneUser);
     const userLogin = useSelector((state: RootState) => state.otpUser);
     const authToken = userLogin?.otp?.token ? userLogin?.otp?.token : login?.login?.token;
     const authItem = userLogin?.otp?.user?.item_id
@@ -46,11 +46,61 @@ export const useViewModel = () => {
         isGuest &&
         (selectedFavTeams.length || selectedFavPlayers.length || selectedFavTopTeams.length);
 
-    function serializeParams(obj: any) {
-        const a = qs.stringify(obj, { encode: false, arrayFormat: 'brackets' });
-        return a;
-    }
+    const [tokenFCM, setTokenFCM] = useState<any>();
 
+    const GetFCMToken = async () => {
+        let fcmToken = await AsyncStorage.getItem('fcmToken');
+        setTokenFCM(fcmToken);
+    };
+
+    const isFocused = useIsFocused();
+
+    const [userName, setUserName] = useState('');
+    const [avt, setAvt] = useState();
+
+    return {
+        navigate,
+        goBack,
+        popToTop,
+        navigation,
+        t,
+        dispatch,
+        login,
+        getProfile,
+        userLogin,
+        authToken,
+        authItem,
+        notifications,
+        selectedFavTeams,
+        selectedFavPlayers,
+        selectedFavTopTeams,
+        isGuest,
+        isGuestWithFavourite,
+        tokenFCM,
+        GetFCMToken,
+        isFocused,
+        userName,
+        setUserName,
+        avt,
+        setAvt,
+    };
+};
+
+/**
+ * States use event handler
+ * @param state
+ * @returns
+ */
+
+const useEventHandler = (state: any) => {
+    const { navigate, goBack, t, dispatch, getProfile, authToken, isGuestWithFavourite } = state;
+
+    // Go back previous Screen
+    const onGoBack = () => {
+        goBack();
+    };
+
+    // Log out current account
     const onNavigateStartScreen = () => {
         // dispatch(isLogout);
         global.props.showAlert({
@@ -78,38 +128,118 @@ export const useViewModel = () => {
             },
         });
     };
-    const isFocused = useIsFocused();
+
+    // Handle Account
+    const handleAccount = () => {
+        if (isEmpty(getProfile.getProfile)) {
+            // Navigate to Register Screen if is guest user
+            navigate(ScreenName.RegisterPage, { isLogin: true });
+        } else {
+            // Navigate to Setting Screen if already logged in
+            navigate(ScreenName.SettingsPage, {
+                scrollBottom: false,
+                center: false,
+                previousScreen: ScreenName.HomePage,
+            });
+        }
+    };
+
+    // Handle Account
+    const handleBottomSettingPage = () => {
+        if (isEmpty(getProfile.getProfile)) {
+            // Navigate to Register Screen if is guest user
+            navigate(ScreenName.RegisterPage, { isLogin: true });
+        } else {
+            // Navigate to Setting Screen and scroll to notification if already logged in
+            navigate(ScreenName.SettingsPage, {
+                scrollBottom: true,
+                center: false,
+                previousScreen: ScreenName.HomePage,
+            });
+        }
+    };
+
+    // Reset notifications
+    const resetNotifications = () => {
+        dispatch(clearNotifications());
+    };
+
+    return {
+        onGoBack,
+        onNavigateStartScreen,
+        handleAccount,
+        handleBottomSettingPage,
+        resetNotifications,
+    };
+};
+
+/**
+ * Handle effect to listening variables change here.
+ * @param state
+ * @param eventHandler
+ */
+
+const useEffectHandler = (state: any, eventHandler: any) => {
+    const {
+        t,
+        dispatch,
+        login,
+        getProfile,
+        userLogin,
+        authToken,
+        authItem,
+        tokenFCM,
+        GetFCMToken,
+        isFocused,
+        setUserName,
+        setAvt,
+    } = state;
+
     useEffect(() => {
         if (!isFocused) return;
-        if (login.logoutSuccess === true) {
-            dispatch(isLogout(null));
-            dispatch(isLogin(null));
-            navigate(ScreenName.SplashPage);
-            navigation.reset({
+        if (state.login.logoutSuccess === true) {
+            state.dispatch(isLogout(null));
+            state.dispatch(isLogin(null));
+            state.navigate(ScreenName.SplashPage);
+            state.navigation.reset({
                 index: 0,
                 routes: [{ name: ScreenName.SplashPage as never }],
             });
         }
     }, [login.logoutSuccess, isFocused]);
 
-    const [userName, setUserName] = useState('');
-    const [avt, setAvt] = useState();
-
     useEffect(() => {
+        GetFCMToken();
+        console.log(tokenFCM);
         if (!isFocused) return;
-        if (userLogin.success) {
+        if (userLogin.success && tokenFCM) {
             dispatch(
                 getProfileUser(
                     serializeParams({
                         action: ACTION,
                         token: authToken,
                         call: AuthData.GET_PROFILE,
-                        item: authItem,
+                        item_id: authItem,
+                        item: {},
+                    })
+                )
+            );
+
+            dispatch(
+                setProfileUser(
+                    serializeParams({
+                        action: ACTION,
+                        token: authToken,
+                        call: AuthData.SET_PROFILE,
+                        item_id: authItem,
+                        item: {
+                            notifications_registration_id: tokenFCM,
+                        },
                     })
                 )
             );
         }
-    }, [userLogin.success]);
+    }, [userLogin.success, isFocused, tokenFCM]);
 
     useEffect(() => {
         if (getProfile.success) {
@@ -132,46 +262,20 @@ export const useViewModel = () => {
             setUserName(t('side_menu.guest'));
         }
     }, [getProfile.success]);
+};
 
-    const handleAccount = () => {
-        if (isEmpty(getProfile.getProfile)) {
-            navigate(ScreenName.RegisterPage, { isLogin: true });
-        } else {
-            navigate(ScreenName.SettingsPage, {
-                scrollBottom: false,
-                center: false,
-                previousScreen: ScreenName.HomePage,
-            });
-        }
-    };
-
-    const handleBottomSettingPage = () => {
-        if (isEmpty(getProfile.getProfile)) {
-            navigate(ScreenName.RegisterPage, { isLogin: true });
-        } else {
-            navigate(ScreenName.SettingsPage, {
-                scrollBottom: true,
-                center: false,
-                previousScreen: ScreenName.HomePage,
-            });
-        }
-    };
-
-    const resetNotifications = () => {
-        dispatch(clearNotifications());
-    };
+/**
+ * Main model
+ * @param param0
+ * @returns
+ */
+export const useViewModel = ({ navigation }: ISideMenuProps) => {
+    const state = useViewState();
+    const eventHandler = useEventHandler(state);
+    useEffectHandler(state, eventHandler);
 
     return {
-        t,
-        onGoBack,
-        navigate,
-        onNavigateStartScreen,
-        userName,
-        avt,
-        handleAccount,
-        handleBottomSettingPage,
-        resetNotifications,
-        notifications,
-        isGuestWithFavourite,
+        ...eventHandler,
+        ...state,
     };
 };

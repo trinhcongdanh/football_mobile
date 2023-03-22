@@ -54,13 +54,6 @@ const useViewState = (route: any) => {
     const isLogin = route?.params?.isLogin;
     const dispatch = useDispatch<any>();
 
-    const [tokenFCM, setTokenFCM] = useState<any>();
-
-    const GetFCMToken = async () => {
-        let fcmToken = await AsyncStorage.getItem('fcmToken');
-        setTokenFCM(fcmToken);
-    };
-
     return {
         t,
         errors,
@@ -78,8 +71,6 @@ const useViewState = (route: any) => {
         phoneNumber,
         isLogin,
         dispatch,
-        GetFCMToken,
-        tokenFCM,
     };
 };
 
@@ -348,7 +339,7 @@ const useEventHandler = (state: any) => {
 const useEffectHandler = (state: any, eventHandler: any) => {
     const { handleError, onGoBack } = eventHandler;
 
-    const { profile, login, tokenFCM } = state;
+    const { profile, login } = state;
 
     useEffect(() => {
         if (!state.isFocused) return;
@@ -367,23 +358,7 @@ const useEffectHandler = (state: any, eventHandler: any) => {
     }, [state.numberPhone.successRegister, state.isFocused, state.numberPhone.loadingRegister]);
 
     useEffect(() => {
-        state.GetFCMToken();
-        console.log(state.tokenFCM);
         if (state.otp.success) {
-            state.dispatch(
-                setProfileUser(
-                    serializeParams({
-                        action: ACTION,
-                        token: login.login.token,
-                        call: AuthData.SET_PROFILE,
-                        item_id: profile.item_id,
-                        item: {
-                            notifications_registration_id: tokenFCM,
-                        },
-                    })
-                )
-            );
-
             state.navigate(ScreenName.RegPage);
         }
         state.dispatch(statusSetProfile(null));

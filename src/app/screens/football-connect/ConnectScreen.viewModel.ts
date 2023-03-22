@@ -53,12 +53,8 @@ const useViewState = () => {
     });
     const { navigate, goBack, replace } = useAppNavigator();
     const isFocused = useIsFocused();
-    const [tokenFCM, setTokenFCM] = useState<any>();
 
-    const GetFCMToken = async () => {
-        let fcmToken = await AsyncStorage.getItem('fcmToken');
-        setTokenFCM(fcmToken);
-    };
+    const dispatch = useDispatch<any>();
     return {
         t,
         numberPhone,
@@ -77,8 +73,7 @@ const useViewState = () => {
         navigate,
         goBack,
         replace,
-        GetFCMToken,
-        tokenFCM,
+        dispatch,
     };
 };
 
@@ -89,7 +84,6 @@ const useViewState = () => {
  */
 
 const useEventHandler = (state: any) => {
-    const dispatch = useDispatch<any>();
     const {
         t,
         numberPhone,
@@ -106,6 +100,7 @@ const useEventHandler = (state: any) => {
         navigate,
         goBack,
         replace,
+        dispatch,
     } = state;
     // Go back previous screen
     const onGoBack = (): void => {
@@ -313,7 +308,7 @@ const useEventHandler = (state: any) => {
  */
 const useEffectHandler = (state: any, eventHandler: any) => {
     const { handleError } = eventHandler;
-    const { profile, login, tokenFCM } = state;
+    const { profile, login } = state;
 
     useEffect(() => {
         if (!state.isFocused) return;

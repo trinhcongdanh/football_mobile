@@ -25,7 +25,9 @@ export const SideMenu = ({ navigation }: ISideMenuProps) => {
         resetNotifications,
         isGuestWithFavourite,
         notifications,
-    } = useViewModel();
+    } = useViewModel({
+        navigation,
+    });
 
     return (
         <View style={styles.side_menu_container}>
