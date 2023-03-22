@@ -18,6 +18,7 @@ import {
     TouchableOpacity,
     View,
 } from 'react-native';
+import FastImage from 'react-native-fast-image';
 import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/AntDesign';
 import { useSelector } from 'react-redux';
@@ -46,7 +47,12 @@ export const VideoScreen = ({ navigation, route }: IVideoScreenProps) => {
 
     return (
         <View style={appStyles.flex}>
-            <ImageBackground source={AppImages.img_background} style={appStyles.flex}>
+            <ImageBackground source={AppImages.img_background_black} style={appStyles.flex}>
+                <FastImage
+                    source={AppImages.img_decoration_background}
+                    tintColor={colorCustom}
+                    style={{ height: '100%', width: '100%', position: 'absolute' }}
+                />
                 <StatusBar translucent backgroundColor="transparent" />
                 <SafeAreaView style={appStyles.safe_area}>
                     <ScrollView>

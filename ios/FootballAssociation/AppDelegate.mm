@@ -6,8 +6,8 @@
 #import "React/RCTI18nUtil.h"
 #import <Firebase.h>
 #import <GoogleMaps/GoogleMaps.h>
-// #import <FBSDKCoreKit/FBSDKCoreKit-swift.h>
-// #import <React/RCTLinkingManager.h>
+#import <FBSDKCoreKit/FBSDKCoreKit-swift.h>
+#import <React/RCTLinkingManager.h>
 #import "Orientation.h"
 #import <React/RCTAppSetupUtils.h>
 
@@ -34,28 +34,30 @@ static NSString *const kRNConcurrentRoot = @"concurrentRoot";
 
 @implementation AppDelegate
 
-// - (BOOL)application:(UIApplication *)application 
-//             openURL:(NSURL *)url 
-//             options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
+- (BOOL)application:(UIApplication *)app
+            openURL:(NSURL *)url
+            options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options
+{
+  if ([[FBSDKApplicationDelegate sharedInstance] application:app openURL:url options:options]) {
+    return YES;
+  }
 
-//   // if ([[FBSDKApplicationDelegate sharedInstance] application:application openURL:url options:options]) {
-//   //   return YES;
-//   // }
+  if ([RCTLinkingManager application:app openURL:url options:options]) {
+    return YES;
+  }
 
-//   // if ([RCTLinkingManager application:application openURL:url options:options]) {
-//   //   return YES;
-//   // }
-
-//   return YES;
-// }
+  return NO;
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
   // [GMSServices provideAPIKey:@"_YOUR_API_KEY_"];
   [GMSServices provideAPIKey:@"AIzaSyD-bcsWEPz5OmiW9hTdcY4doQiIQYQ5v0g"];
-  // [[FBSDKApplicationDelegate sharedInstance] application:application
-  //                     didFinishLaunchingWithOptions:launchOptions];
-  // [FBSDKApplicationDelegate.sharedInstance initializeSDK];
+
+  [[FBSDKApplicationDelegate sharedInstance] application:application
+                      didFinishLaunchingWithOptions:launchOptions];
+                      
+  [FBSDKApplicationDelegate.sharedInstance initializeSDK];
   [FIRApp configure];
   RCTAppSetupPrepareApp(application);
 
