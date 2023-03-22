@@ -53,6 +53,7 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
         return favPlayers.map(player => ({
             ...player,
             isSelected: selectedFavPlayersMap.has(player._id),
+            number: selectedFavPlayersMap.has(player._id) ? 1 : 0,
         }));
     }, [favPlayers, selectedFavPlayersMap]);
     // console.log(formattedFavPlayers);

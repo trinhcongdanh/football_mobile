@@ -1,5 +1,5 @@
 /* eslint-disable no-underscore-dangle */
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     Text,
     TouchableOpacity,
@@ -7,7 +7,6 @@ import {
     ImageBackground,
     StatusBar,
     SafeAreaView,
-    TextInput,
     ScrollView,
     ActivityIndicator,
     Image,
@@ -17,16 +16,15 @@ import Icon from 'react-native-vector-icons/Feather';
 import { appIcons } from '@football/app/assets/icons/appIcons';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { AppImages } from '@football/app/assets/images';
-import { SvgUri } from 'react-native-svg';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import { isEmpty } from 'lodash';
 import { TopTeamModel } from '@football/core/models/TopTeamModelResponse';
 import { HeaderFav } from '@football/app/components/header-fav/HeaderFav';
 import { Button } from '@football/app/components/button';
-import styles from './FavoriteTopTeam.style';
-import { IFavoriteTeamProps } from './FavoriteTopTeam.types';
 import { AppFonts } from '@football/app/assets/fonts';
 import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
+import styles from './FavoriteTopTeam.style';
+import { IFavoriteTeamProps } from './FavoriteTopTeam.types';
 
 export const FavoriteTopTeam = ({
     onGoSkip,
@@ -43,6 +41,21 @@ export const FavoriteTopTeam = ({
     button,
 }: IFavoriteTeamProps) => {
     const { getTranslationText } = useTranslationText();
+
+    const [favTopTeams, setFavTopTeams] = useState<TopTeamModel[]>();
+    useEffect(() => {
+        const filterTopTeams = newFav
+            .map(topTeam => ({
+                ...topTeam,
+                isSelected: favSelected.filter(t => t._id === topTeam._id).length > 0,
+            }))
+            .sort((a, b) => {
+                return (b.isSelected ? 1 : 0) - (a.isSelected ? 1 : 0);
+            });
+        setFavTopTeams(filterTopTeams);
+        // console.log('favSelected', favSelected);
+    }, [favSelected, newFav]);
+
     return (
         <View style={[appStyles.flex]}>
             <ImageBackground source={AppImages.img_bg_register} style={appStyles.flex}>
@@ -100,7 +113,7 @@ export const FavoriteTopTeam = ({
 
                                 <ScrollView>
                                     <View style={styles.content_item}>
-                                        {newFav?.map((item: TopTeamModel, index: number) => {
+                                        {favTopTeams?.map((item: TopTeamModel, index: number) => {
                                             return (
                                                 <TouchableOpacity
                                                     key={item._id}

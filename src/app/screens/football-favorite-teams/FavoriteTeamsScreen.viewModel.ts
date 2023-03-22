@@ -9,19 +9,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useMount } from '@football/app/utils/hooks/useMount';
 import { RootState } from 'src/store/store';
 import TeamService from '@football/core/services/Team.service';
-import _, { isEmpty, isNil } from 'lodash';
-import { createProfileUser } from 'src/store/user/CreateProfile.slice';
-import { AuthData, ScreenName } from '@football/app/utils/constants/enum';
-import { ACTION, TOKEN } from '@football/core/api/auth/config';
+import _ from 'lodash';
+import { ScreenName } from '@football/app/utils/constants/enum';
 import { pushFavTeam, resetFavTeam, selectedFavTeamsAsMapSelector } from 'src/store/FavTeam.slice';
-import { setSettingFavTeam } from 'src/store/SettingSelected.slice';
 import { MAX_FAVORITES_TEAM } from '@football/core/api/configs/config';
-import { IFavoriteTeamsScreenProps } from './FavoriteTeamsScreen.type';
-import { loginUser } from 'src/store/user/Login.slice';
 import { useIsFocused, useNavigation } from '@react-navigation/native';
 import { resetSelectedFavPlayer } from 'src/store/FavPlayer.slice';
 import { clearFavoriteData } from '@football/app/utils/functions/clearFavoriteData';
 import sortBy from 'lodash/sortBy';
+import { IFavoriteTeamsScreenProps } from './FavoriteTeamsScreen.type';
 
 function serializeParams(obj: any) {
     const str = [];
@@ -217,7 +213,10 @@ const useViewCallback = (route: any, viewState: any) => {
             }
             const sortByName = sortBy(res.data.documents, [
                 I18nManager.isRTL ? 'name_he' : 'name_en',
-            ]);
+            ]).map(team => ({
+                ...team,
+                number: selectedFavTeams.filter((t: any) => t._id === team._id).length,
+            }));
             setTeams(sortByName);
         } catch (error: any) {
             Alert.alert(error);
@@ -229,8 +228,6 @@ const useViewCallback = (route: any, viewState: any) => {
     const getTeamsData = useCallback(async () => {
         setIsLoading(true);
 
-        const favoriteTeamIds = getProfile.getProfile?.item?.favorite_israel_teams || [];
-
         try {
             const [error, res] = await TeamService.findAllFavTeam();
             if (error) {
@@ -238,7 +235,10 @@ const useViewCallback = (route: any, viewState: any) => {
             }
             const sortByName = sortBy(res.data.documents, [
                 I18nManager.isRTL ? 'name_he' : 'name_en',
-            ]);
+            ]).map(team => ({
+                ...team,
+                number: selectedFavTeams.filter((t: any) => t._id === team._id).length,
+            }));
             setTeams(sortByName);
         } catch (error: any) {
             Alert.alert(error);

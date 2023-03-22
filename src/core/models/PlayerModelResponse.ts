@@ -193,6 +193,7 @@ export interface PlayerModel {
     num_of_games: number;
     homepage_info: HomepageInfo;
     isSelected: boolean;
+    number?: number;
 }
 
 export type PlayersModelResponse = AxiosResponse<{

@@ -1,13 +1,16 @@
+/* eslint-disable no-underscore-dangle */
+import { AppFonts } from '@football/app/assets/fonts';
 import { appIcons } from '@football/app/assets/icons/appIcons';
 import { AppImages } from '@football/app/assets/images';
 import { Button } from '@football/app/components/button';
 import { HeaderFav } from '@football/app/components/header-fav/HeaderFav';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { appStyles } from '@football/app/utils/constants/appStyles';
+import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
 import { getSize } from '@football/app/utils/responsive/scale';
+import { PlayerModel } from '@football/core/models/PlayerModelResponse';
 import { isEmpty } from 'lodash';
-import { AppFonts } from '@football/app/assets/fonts';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     ActivityIndicator,
     Image,
@@ -18,12 +21,11 @@ import {
     Text,
     TextInput,
     TouchableOpacity,
-    View,
+    View
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 import styles from './FavoritePlayer.style';
 import { IFavoritePlayerProps } from './FavoritePlayer.types';
-import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
 
 export const FavoritePlayer = ({
     onGoSkip,
@@ -45,7 +47,19 @@ export const FavoritePlayer = ({
     isLoading,
 }: IFavoritePlayerProps) => {
     const { getTranslationText } = useTranslationText();
+    const [favPlayers, setFavPlayers] = useState<PlayerModel[]>();
 
+    useEffect(() => {
+        const filterPlayers = newFav
+            .map(player => ({
+                ...player,
+                isSelected: favSelected.filter(t => t._id === player._id).length > 0,
+            }))
+            .sort((a, b) => {
+                return (b.number ? 1 : 0) - (a.number ? 1 : 0);
+            });
+        setFavPlayers(filterPlayers);
+    }, [favSelected, newFav]);
     return (
         <View style={[appStyles.flex]}>
             <ImageBackground source={AppImages.img_bg_register} style={appStyles.flex}>
@@ -141,7 +155,7 @@ export const FavoritePlayer = ({
                                 </View>
                                 <ScrollView>
                                     <View style={styles.content_item}>
-                                        {newFav.map((item: any, index: number) => {
+                                        {favPlayers.map((item: any, index: number) => {
                                             return (
                                                 <TouchableOpacity
                                                     key={index.toString()}

@@ -1,31 +1,27 @@
 /* eslint-disable no-underscore-dangle */
+import { AppFonts } from '@football/app/assets/fonts';
+import { appIcons } from '@football/app/assets/icons/appIcons';
+import { AppImages } from '@football/app/assets/images';
+import { Button } from '@football/app/components/button';
+import { HeaderFav } from '@football/app/components/header-fav/HeaderFav';
+import { appColors } from '@football/app/utils/constants/appColors';
+import { appStyles } from '@football/app/utils/constants/appStyles';
+import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
+import { getSize } from '@football/app/utils/responsive/scale';
+import { TeamModel } from '@football/core/models/TeamModelResponse';
+import { isEmpty } from 'lodash';
 import React, { useEffect, useState } from 'react';
 import {
-    Text,
-    TouchableOpacity,
-    View,
-    ImageBackground,
-    StatusBar,
-    SafeAreaView,
-    ScrollView,
     ActivityIndicator,
-    Image,
+    Image, ImageBackground, SafeAreaView,
+    ScrollView, StatusBar, Text,
+    TouchableOpacity,
+    View
 } from 'react-native';
-import { getSize } from '@football/app/utils/responsive/scale';
-import Icon from 'react-native-vector-icons/Feather';
-import { appIcons } from '@football/app/assets/icons/appIcons';
-import { appColors } from '@football/app/utils/constants/appColors';
-import { AppImages } from '@football/app/assets/images';
-import { appStyles } from '@football/app/utils/constants/appStyles';
-import { isEmpty } from 'lodash';
-import { TeamModel } from '@football/core/models/TeamModelResponse';
-import { HeaderFav } from '@football/app/components/header-fav/HeaderFav';
-import { Button } from '@football/app/components/button';
 import { TextInput } from 'react-native-gesture-handler';
-import { AppFonts } from '@football/app/assets/fonts';
+import Icon from 'react-native-vector-icons/Feather';
 import styles from './FavoriteTeam.style';
 import { IFavoriteTeamProps } from './FavoriteTeam.types';
-import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
 
 export const FavoriteTeam = ({
     onGoSkip,
@@ -53,12 +49,15 @@ export const FavoriteTeam = ({
     };
 
     useEffect(() => {
-        setFavTeams(
-            teams.map(team => ({
+        const filterTeams = teams
+            .map(team => ({
                 ...team,
                 isSelected: favSelected.filter(t => t._id === team._id).length > 0,
             }))
-        );
+            .sort((a, b) => {
+                return (b.number ? 1 : 0) - (a.number ? 1 : 0);
+            });
+        setFavTeams(filterTeams);
         // console.log('favSelected', favSelected);
     }, [favSelected, teams]);
 
