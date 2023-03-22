@@ -247,49 +247,51 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                                             );
                                         })}
 
-                                        {teams?.map((item, index) => {
-                                            return (
-                                                <TouchableOpacity
-                                                    // eslint-disable-next-line no-underscore-dangle
-                                                    onPress={() => onClickTeam(item._id)}
-                                                    // eslint-disable-next-line no-underscore-dangle
-                                                    key={item._id}
-                                                >
-                                                    <View
-                                                        style={[
-                                                            appStyles.flex_row_align,
-                                                            styles.header_item,
-                                                            {
-                                                                marginLeft:
-                                                                    index === 0
-                                                                        ? getSize.m(16)
-                                                                        : getSize.m(6),
-                                                                marginRight:
-                                                                    index === teams.length - 1
-                                                                        ? getSize.m(16)
-                                                                        : getSize.m(6),
-                                                            },
-                                                        ]}
+                                        {teams
+                                            ?.filter(item => item)
+                                            .map((item, index) => {
+                                                return (
+                                                    <TouchableOpacity
+                                                        // eslint-disable-next-line no-underscore-dangle
+                                                        onPress={() => onClickTeam(item._id)}
+                                                        // eslint-disable-next-line no-underscore-dangle
+                                                        key={item._id}
                                                     >
-                                                        <FastImage
-                                                            source={{ uri: item.logo_url }}
-                                                            style={{
-                                                                width: getSize.m(30),
-                                                                height: getSize.m(30),
-                                                                borderRadius: getSize.m(30),
-                                                                marginRight: getSize.m(6),
-                                                            }}
-                                                        />
-                                                        <Text style={styles.header_item_text}>
-                                                            {getTranslationText({
-                                                                textHe: item.name_he,
-                                                                textEn: item.name_en,
-                                                            })}
-                                                        </Text>
-                                                    </View>
-                                                </TouchableOpacity>
-                                            );
-                                        })}
+                                                        <View
+                                                            style={[
+                                                                appStyles.flex_row_align,
+                                                                styles.header_item,
+                                                                {
+                                                                    marginLeft:
+                                                                        index === 0
+                                                                            ? getSize.m(16)
+                                                                            : getSize.m(6),
+                                                                    marginRight:
+                                                                        index === teams.length - 1
+                                                                            ? getSize.m(16)
+                                                                            : getSize.m(6),
+                                                                },
+                                                            ]}
+                                                        >
+                                                            <FastImage
+                                                                source={{ uri: item.logo_url }}
+                                                                style={{
+                                                                    width: getSize.m(30),
+                                                                    height: getSize.m(30),
+                                                                    borderRadius: getSize.m(30),
+                                                                    marginRight: getSize.m(6),
+                                                                }}
+                                                            />
+                                                            <Text style={styles.header_item_text}>
+                                                                {getTranslationText({
+                                                                    textHe: item.name_he,
+                                                                    textEn: item.name_en,
+                                                                })}
+                                                            </Text>
+                                                        </View>
+                                                    </TouchableOpacity>
+                                                );
+                                            })}
 
                                         {topTeams?.map((item, index) => {
                                             return (
@@ -411,10 +413,12 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                         )}
                         {/* Player Stats */}
                         {homeLayout?.layout.includes('my_teams') &&
-                            teams?.map(team => {
-                                // eslint-disable-next-line no-underscore-dangle
-                                return <Item1 color={colorCustom} team={team} key={team._id} />;
-                            })}
+                            teams
+                                ?.filter(team => team)
+                                .map(team => {
+                                    // eslint-disable-next-line no-underscore-dangle
+                                    return <Item1 color={colorCustom} team={team} key={team._id} />;
+                                })}
                         {/* Item2 */}
                         {/* <Item2 /> */}
                         {/* Item3 */}

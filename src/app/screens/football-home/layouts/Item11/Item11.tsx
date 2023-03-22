@@ -16,7 +16,7 @@ export const Item11 = ({ homePage }: IItem11Props) => {
         homePage,
     });
     return (
-        <TouchableOpacity onPress={() => onClickCup(homePage.national_cup.cup_id)}>
+        <TouchableOpacity onPress={() => onClickCup(homePage.national_cup?.cup_id)}>
             <View style={styles.container}>
                 <FastImage
                     source={AppImages.img_mask_group_1}
@@ -24,7 +24,7 @@ export const Item11 = ({ homePage }: IItem11Props) => {
                     resizeMode={FastImage.resizeMode.contain}
                 />
                 <FastImage
-                    source={{ uri: homePage.national_cup.image_url }}
+                    source={{ uri: homePage?.national_cup?.image_url }}
                     resizeMode={FastImage.resizeMode.contain}
                     style={styles.logo}
                 />
