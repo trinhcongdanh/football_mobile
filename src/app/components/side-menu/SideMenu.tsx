@@ -23,6 +23,7 @@ export const SideMenu = ({ navigation }: ISideMenuProps) => {
         handleAccount,
         handleBottomSettingPage,
         resetNotifications,
+        isGuestWithFavourite,
         notifications,
     } = useViewModel();
 
@@ -62,7 +63,9 @@ export const SideMenu = ({ navigation }: ISideMenuProps) => {
                                     resizeMode={FastImage.resizeMode.contain}
                                 />
                                 <Text style={styles.side_menu_logout_text}>
-                                    {t('side_menu.logout')}
+                                    {isGuestWithFavourite
+                                        ? t('side_menu.logout_with_guest_title')
+                                        : t('side_menu.logout')}
                                 </Text>
                             </TouchableOpacity>
                         </View>

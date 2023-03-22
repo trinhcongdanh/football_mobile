@@ -84,7 +84,7 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
         if (isEmpty(getProfile.getProfile)) {
             navigate(ScreenName.RegisterPage, { isLogin: true });
         } else {
-            navigate(ScreenName.SettingsPage);
+            navigate(ScreenName.SettingsPage, { previousScreen: ScreenName.HomePage });
         }
     };
 

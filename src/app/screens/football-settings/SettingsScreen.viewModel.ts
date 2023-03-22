@@ -597,12 +597,6 @@ const useEffectHandler = (state: any, callback: any, eventHandler: any) => {
         }, 0);
     }, [getProfile.success]);
 
-    useEffect(() => {
-        BackHandler.addEventListener('hardwareBackPress', eventHandler.onGoBack);
-        return () => {
-            BackHandler.removeEventListener('hardwareBackPress', eventHandler.onGoBack);
-        };
-    }, []);
 };
 
 /**
@@ -613,12 +607,31 @@ const useEffectHandler = (state: any, callback: any, eventHandler: any) => {
 export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
     const { t } = useTranslation();
     const { getTranslationText } = useTranslationText();
+    const { goBack, navigate, replace, popToTop } = useAppNavigator();
     const scrollBottom = route.params?.scrollBottom;
 
     const state = useViewState();
     const callback = useViewCallback(state);
     const eventHandler = useEventHandler(state, route);
     useEffectHandler(state, callback, eventHandler);
+
+    const backAction = () => {
+        const previousScreen = route?.params?.previousScreen;
+        if (previousScreen && previousScreen === ScreenName.HomePage) {
+            popToTop();
+            navigate(ScreenName.SideBar);
+        } else {
+            goBack();
+        }
+        return false;
+    };
+
+    useEffect(() => {
+        BackHandler.addEventListener('hardwareBackPress', backAction);
+        return () => {
+            BackHandler.removeEventListener('hardwareBackPress', backAction);
+        };
+    }, []);
 
     return {
         t,
