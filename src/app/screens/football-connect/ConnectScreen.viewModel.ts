@@ -27,6 +27,7 @@ import jwt_decode from 'jwt-decode';
 import { RootState } from 'src/store/store';
 import { otpUser } from 'src/store/user/OTP.slice';
 import { IConnectScreenProps } from './ConnectScreen.type';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 interface LoginProps {
     phoneNumber: string;
@@ -52,7 +53,12 @@ const useViewState = () => {
     });
     const { navigate, goBack, replace } = useAppNavigator();
     const isFocused = useIsFocused();
+    const [tokenFCM, setTokenFCM] = useState<any>();
 
+    const GetFCMToken = async () => {
+        let fcmToken = await AsyncStorage.getItem('fcmToken');
+        setTokenFCM(fcmToken);
+    };
     return {
         t,
         numberPhone,
@@ -71,6 +77,8 @@ const useViewState = () => {
         navigate,
         goBack,
         replace,
+        GetFCMToken,
+        tokenFCM,
     };
 };
 
@@ -305,6 +313,8 @@ const useEventHandler = (state: any) => {
  */
 const useEffectHandler = (state: any, eventHandler: any) => {
     const { handleError } = eventHandler;
+    const { profile, login, tokenFCM } = state;
+
     useEffect(() => {
         if (!state.isFocused) return;
         if (state.socialLogin.success) {

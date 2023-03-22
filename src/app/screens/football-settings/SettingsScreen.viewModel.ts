@@ -222,11 +222,14 @@ const useEventHandler = (state: any, route: any) => {
     const onGoBack = () => {
         const previousScreen = route?.params?.previousScreen;
         if (previousScreen && previousScreen === ScreenName.HomePage) {
+            console.log('Go Back 1');
             popToTop();
             navigate(ScreenName.SideBar);
         } else {
+            console.log('Go Back 2');
             goBack();
         }
+        return true;
     };
 
     /**
@@ -596,7 +599,6 @@ const useEffectHandler = (state: any, callback: any, eventHandler: any) => {
             getTopTeamsData(profile);
         }, 0);
     }, [getProfile.success]);
-
 };
 
 /**
@@ -627,9 +629,9 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
     };
 
     useEffect(() => {
-        BackHandler.addEventListener('hardwareBackPress', backAction);
+        BackHandler.addEventListener('hardwareBackPress', eventHandler.onGoBack);
         return () => {
-            BackHandler.removeEventListener('hardwareBackPress', backAction);
+            BackHandler.removeEventListener('hardwareBackPress', eventHandler.onGoBack);
         };
     }, []);
 
