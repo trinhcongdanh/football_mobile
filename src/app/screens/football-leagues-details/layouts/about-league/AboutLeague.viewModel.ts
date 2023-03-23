@@ -75,7 +75,7 @@ export const useViewModel = ({ highlights }: IAboutLeagueProps) => {
                           id: index,
                           icon: AppImages.img_clock,
                           text: t('leagues_details.about.pause'),
-                          value: highlights[key],
+                          value: `${highlights[key]} ${t('leagues_details.about.minutes')}`,
                       };
 
                   case 'num_of_exchanges':

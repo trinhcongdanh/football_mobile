@@ -43,7 +43,7 @@ export const LeaguesAverage = ({ data }: ILeaguesAverageProps) => {
                     },
                 ]}
             >
-                <View style={{ width: getSize.m(120) }}>
+                <View style={{ width: getSize.m(122) }}>
                     <Text
                         style={[
                             appStyles.statistics_header,
@@ -79,7 +79,7 @@ export const LeaguesAverage = ({ data }: ILeaguesAverageProps) => {
                         >
                             <View
                                 style={{
-                                    width: getSize.m(120),
+                                    width: getSize.m(122),
                                     overflow: 'hidden',
                                 }}
                             >

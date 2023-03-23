@@ -392,6 +392,7 @@ const useEffectHandler = (state: any, eventHandler: any) => {
     useEffect(() => {
         GoogleSignin.configure({
             webClientId: '944318847741-94kj3g75lbks4a16fntgcf73bfup4ocq.apps.googleusercontent.com',
+            iosClientId: '944318847741-gb60139lsfe4dq64nh471kjhsjginuk4.apps.googleusercontent.com',
             offlineAccess: true,
         });
     }, []);
