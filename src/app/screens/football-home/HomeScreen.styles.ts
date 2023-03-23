@@ -24,6 +24,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: getSize.m(15),
         backgroundColor: 'rgba(255, 255, 255, 0.13)',
         borderRadius: getSize.m(46),
+        marginHorizontal: getSize.m(6),
     },
 
     header_item_text: {

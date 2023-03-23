@@ -215,16 +215,6 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                                                         style={[
                                                             appStyles.flex_row_align,
                                                             styles.header_item,
-                                                            {
-                                                                marginLeft:
-                                                                    index === 0
-                                                                        ? getSize.m(16)
-                                                                        : getSize.m(6),
-                                                                marginRight:
-                                                                    index === players?.length - 1
-                                                                        ? getSize.m(16)
-                                                                        : getSize.m(6),
-                                                            },
                                                         ]}
                                                     >
                                                         <FastImage
@@ -261,16 +251,6 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                                                             style={[
                                                                 appStyles.flex_row_align,
                                                                 styles.header_item,
-                                                                {
-                                                                    marginLeft:
-                                                                        index === 0
-                                                                            ? getSize.m(16)
-                                                                            : getSize.m(6),
-                                                                    marginRight:
-                                                                        index === teams.length - 1
-                                                                            ? getSize.m(16)
-                                                                            : getSize.m(6),
-                                                                },
                                                             ]}
                                                         >
                                                             <FastImage
@@ -305,16 +285,6 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                                                         style={[
                                                             appStyles.flex_row_align,
                                                             styles.header_item,
-                                                            {
-                                                                marginLeft:
-                                                                    index === 0
-                                                                        ? getSize.m(16)
-                                                                        : getSize.m(6),
-                                                                marginRight:
-                                                                    index === topTeams?.length - 1
-                                                                        ? getSize.m(16)
-                                                                        : getSize.m(6),
-                                                            },
                                                         ]}
                                                     >
                                                         <FastImage

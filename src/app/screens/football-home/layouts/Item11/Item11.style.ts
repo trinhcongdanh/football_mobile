@@ -1,7 +1,7 @@
 import { AppFonts } from '@football/app/assets/fonts';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { getSize } from '@football/app/utils/responsive/scale';
-import { StyleSheet } from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
     container: {
@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
     },
     button: {
         position: 'absolute',
-        right: getSize.m(10),
+        right: Platform.OS === 'android' ? getSize.m(30) : getSize.m(50),
         bottom: getSize.m(60),
         zIndex: 0,
     },
