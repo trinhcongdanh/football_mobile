@@ -20,10 +20,13 @@ import styles from './PreviousCampaignsScreen.style';
 import { useViewModel } from './PreviousCampaignsScreen.viewModel';
 import { IPreviousCampaignsScreenProps } from './PreviousCampaignsScreen.type';
 import { appColors } from '@football/app/utils/constants/appColors';
+import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
 
 export const PreviousCampaignsScreen = ({ navigation, route }: IPreviousCampaignsScreenProps) => {
     const { t, onGoBack, campaigns, handleCampaignPage } = useViewModel({ navigation, route });
     const topTeam = route?.params?.topTeam as TopTeamModel;
+    const { getTranslationText } = useTranslationText();
+
     return (
         <View style={appStyles.flex}>
             <ImageBackground source={AppImages.img_background} style={appStyles.flex}>
@@ -34,11 +37,20 @@ export const PreviousCampaignsScreen = ({ navigation, route }: IPreviousCampaign
                             iconName={appIcons.ic_right_ios}
                             iconStyle={styles.ic_back}
                             goBack={onGoBack}
-                            title={t('previous_campaigns.title')}
+                            title={getTranslationText({
+                                textHe: topTeam?.name_he,
+                                textEn: topTeam?.name_en,
+                            })}
                         />
                     </View>
                     <ScrollView>
-                        <HeaderLogo text={topTeam.name_he} logo={{ uri: topTeam.logo_url }} />
+                        <HeaderLogo
+                            text={getTranslationText({
+                                textHe: topTeam?.name_he,
+                                textEn: topTeam?.name_en,
+                            })}
+                            logo={{ uri: topTeam.logo_url }}
+                        />
                         <View
                             style={[
                                 appStyles.package,
@@ -78,7 +90,10 @@ export const PreviousCampaignsScreen = ({ navigation, route }: IPreviousCampaign
                                             key={campaign._id}
                                         >
                                             <Text style={styles.name_campaign}>
-                                                {campaign.name_he}
+                                                {getTranslationText({
+                                                    textHe: campaign.name_he,
+                                                    textEn: campaign.name_en,
+                                                })}
                                             </Text>
                                             <Text style={styles.year_campaign}>
                                                 {campaign.season}

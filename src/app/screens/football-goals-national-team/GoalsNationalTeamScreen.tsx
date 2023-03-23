@@ -14,12 +14,15 @@ import LinearGradient from 'react-native-linear-gradient';
 import styles from './GoalsNationalTeamScreen.style';
 import { useViewModel } from './GoalsNationalTeamScreen.viewModel';
 import { IGoalsNationalTeamScreenProps } from './GoalsNationalTeamScreen.type';
+import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
 
 export const GoalsNationalTeamScreen = ({ navigation, route }: IGoalsNationalTeamScreenProps) => {
     const { t, onGoBack, player } = useViewModel({
         navigation,
         route,
     });
+    const { getTranslationText } = useTranslationText();
+
     return (
         <View style={appStyles.flex}>
             <ImageBackground source={AppImages.img_background} style={appStyles.flex}>
@@ -31,12 +34,18 @@ export const GoalsNationalTeamScreen = ({ navigation, route }: IGoalsNationalTea
                                 iconName={appIcons.ic_right_ios}
                                 iconStyle={styles.ic_back}
                                 goBack={onGoBack}
-                                title={player.league_title_he}
+                                title={getTranslationText({
+                                    textHe: player.league_title_he,
+                                    textEn: player.league_title_en,
+                                })}
                             />
                         </View>
                         <ScrollView>
                             <HeaderLogo
-                                text={player.player_name_he}
+                                text={getTranslationText({
+                                    textHe: player.player_name_he,
+                                    textEn: player.player_name_en,
+                                })}
                                 avt={{ uri: player.player_image_url }}
                             />
                             <View
@@ -54,7 +63,10 @@ export const GoalsNationalTeamScreen = ({ navigation, route }: IGoalsNationalTea
                                         // eslint-disable-next-line react/no-array-index-key
                                         <View style={{ marginTop: getSize.m(20) }} key={index}>
                                             <Position
-                                                position={item.context_he}
+                                                position={getTranslationText({
+                                                    textHe: item.context_he,
+                                                    textEn: item.context_en,
+                                                })}
                                                 color={appColors.text_dark_blue}
                                                 width={getSize.m(60)}
                                                 fontFamily={AppFonts.bold}
@@ -108,7 +120,12 @@ export const GoalsNationalTeamScreen = ({ navigation, route }: IGoalsNationalTea
                                                                     ]}
                                                                 >
                                                                     <Text style={styles.name_club}>
-                                                                        {game.team1.name_he}
+                                                                        {getTranslationText({
+                                                                            textHe:
+                                                                                game.team1.name_he,
+                                                                            textEn:
+                                                                                game.team1.name_en,
+                                                                        })}
                                                                     </Text>
                                                                     <View style={styles.avt_club}>
                                                                         <FastImage
@@ -168,7 +185,12 @@ export const GoalsNationalTeamScreen = ({ navigation, route }: IGoalsNationalTea
                                                                         />
                                                                     </View>
                                                                     <Text style={styles.name_club}>
-                                                                        {game.team2.name_he}
+                                                                        {getTranslationText({
+                                                                            textHe:
+                                                                                game.team2.name_he,
+                                                                            textEn:
+                                                                                game.team2.name_en,
+                                                                        })}
                                                                     </Text>
                                                                 </View>
                                                             </View>

@@ -77,7 +77,7 @@ export const styles = StyleSheet.create({
         backgroundColor: appColors.gray,
         position: 'absolute',
         height: getSize.m(30),
-        width: getSize.m(15),
+        width: getSize.m(20),
         borderTopRightRadius: getSize.m(30),
         borderBottomRightRadius: getSize.m(30),
         left: getSize.m(-10),

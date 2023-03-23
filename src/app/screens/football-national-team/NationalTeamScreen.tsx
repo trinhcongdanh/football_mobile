@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import {
+    I18nManager,
     Image,
     ImageBackground,
     SafeAreaView,
@@ -651,7 +652,7 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                                                 {t('national_team.ranking_table.details')}
                                             </Text>
                                             <IconFeather
-                                                name={appIcons.ic_arrow_left}
+                                                name={appIcons.ic_left_ios}
                                                 size={getSize.m(10)}
                                                 color={appColors.button_dark_blue}
                                             />
@@ -679,6 +680,9 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                                                                     index === select
                                                                         ? appColors.button_dark_blue
                                                                         : appColors.separator,
+                                                                width: I18nManager.isRTL
+                                                                    ? 'auto'
+                                                                    : getSize.m(120),
                                                             },
                                                         ]}
                                                         key={index.toString()}

@@ -62,6 +62,7 @@ export const ScheduleScreen = ({ navigation, route }: IScheduleScreenProps) => {
                                 moment(`${item.date} ${item.time}`, 'DD.M.YY HH:mm'),
                                 moment(`${item.date} ${item.time}`, 'DD.M.YY HH:mm').add(2, 'hours')
                             )}
+                            color={appColors.gray}
                         />
                     );
                 })}

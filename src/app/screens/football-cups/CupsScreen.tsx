@@ -70,7 +70,9 @@ export const CupsScreen = ({ route }: ICupsScreenProps) => {
                                                 },
                                             ]}
                                         >
-                                            {t('state_cup.cup.year')}
+                                            {isCupHolders
+                                                ? t('state_cup.cup.year')
+                                                : t('state_cup.cup.date')}
                                         </Text>
                                     </View>
                                     <View style={{ width: getSize.m(180) }}>
