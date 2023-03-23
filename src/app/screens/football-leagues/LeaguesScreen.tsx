@@ -5,6 +5,7 @@ import { TAB_BAR_HEIGHT } from '@football/app/routes/bottom-tab/styles/bottom.ta
 import { TopTaps } from '@football/app/routes/toptap/TopTap';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { appStyles } from '@football/app/utils/constants/appStyles';
+import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
 import { getSize } from '@football/app/utils/responsive/scale';
 import { MAX_SEARCH_LEAGUES } from '@football/core/api/configs/config';
 import React from 'react';
@@ -31,7 +32,7 @@ export const LeaguesScreen = ({ navigation, route }: ILeaguesScreenProps) => {
         route,
     });
     const colorCustom = useSelector((state: any) => state.colorCustom.colorCustom);
-
+    const { getTranslationText } = useTranslationText();
     const renderItem = ({ item, index }: any) => {
         return (
             <TouchableOpacity
@@ -40,7 +41,12 @@ export const LeaguesScreen = ({ navigation, route }: ILeaguesScreenProps) => {
                 onPress={() => handleLeaguesDetails(item._id)}
             >
                 <View style={appStyles.flex_row_align_center}>
-                    <Text style={styles.text_option_menu}>{item.name_he}</Text>
+                    <Text style={styles.text_option_menu}>
+                        {getTranslationText({
+                            textHe: item.name_he,
+                            textEn: item.name_en,
+                        })}
+                    </Text>
                 </View>
 
                 <Icon
