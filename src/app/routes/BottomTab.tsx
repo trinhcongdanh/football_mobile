@@ -26,34 +26,33 @@ import { ScreenName } from '../utils/constants/enum';
 import { BottomFabBar } from './bottom-tab';
 
 const Bottom = createBottomTabNavigator();
-const { t } = useTranslation();
 const renderIcon = (routeName: string) => {
     let icon: any = '';
-    let icon_outline: any = '';
+    let iconOutline: any = '';
     switch (routeName) {
         case ScreenName.HomePage:
             icon = AppImages.img_home;
-            icon_outline = AppImages.img_home_outline;
+            iconOutline = AppImages.img_home_outline;
             break;
         case ScreenName.LeaguesPage:
             icon = AppImages.img_security;
-            icon_outline = AppImages.img_security_outline;
+            iconOutline = AppImages.img_security_outline;
             break;
         case ScreenName.TeamPage:
             icon = AppImages.img_people;
-            icon_outline = AppImages.img_people_outline;
+            iconOutline = AppImages.img_people_outline;
             break;
         case ScreenName.PlayGroundPage:
             icon = AppImages.img_message_question;
-            icon_outline = AppImages.img_message_question_outline;
+            iconOutline = AppImages.img_message_question_outline;
             break;
         case ScreenName.GobletPage:
             icon = AppImages.img_cups;
-            icon_outline = AppImages.img_cups_outline;
+            iconOutline = AppImages.img_cups_outline;
             break;
         case ScreenName.VideoPage:
             icon = AppImages.img_video_square;
-            icon_outline = AppImages.img_video_square_outline;
+            iconOutline = AppImages.img_video_square_outline;
             break;
         default:
             break;
@@ -61,7 +60,7 @@ const renderIcon = (routeName: string) => {
 
     return ({ focused }: any) => (
         <FastImage
-            source={!focused ? icon_outline : icon}
+            source={!focused ? iconOutline : icon}
             resizeMode={FastImage.resizeMode.contain}
             style={{ width: getSize.m(25), height: getSize.m(25) }}
             // color={focused ? appColors.white : appColors.stroke}
@@ -69,34 +68,8 @@ const renderIcon = (routeName: string) => {
     );
 };
 
-const renderLabel = (routeName: string) => {
-    let label = '';
-    switch (routeName) {
-        case ScreenName.HomePage:
-            label = t('bottom_tab.home');
-            break;
-        case ScreenName.LeaguesPage:
-            label = t('bottom_tab.leagues');
-            break;
-        case ScreenName.TeamPage:
-            label = t('bottom_tab.teams');
-            break;
-        case ScreenName.PlayGroundPage:
-            label = t('bottom_tab.question');
-            break;
-        case ScreenName.GobletPage:
-            label = t('bottom_tab.goblet');
-            break;
-        case ScreenName.VideoPage:
-            label = 'VOD';
-            break;
-        default:
-            break;
-    }
-    return label;
-};
-
 export const BottomTabStack = () => {
+    const { t } = useTranslation();
     const insets = useSafeAreaInsets();
     const profileUser = useSelector((state: RootState) => state.getProfile);
 
@@ -138,7 +111,7 @@ export const BottomTabStack = () => {
                 <Bottom.Screen
                     options={{
                         tabBarIcon: renderIcon(ScreenName.HomePage),
-                        tabBarLabel: renderLabel(ScreenName.HomePage),
+                        tabBarLabel: t('bottom_tab.home'),
                     }}
                     name={ScreenName.HomePage}
                     component={HomeScreen}
@@ -146,7 +119,7 @@ export const BottomTabStack = () => {
                 <Bottom.Screen
                     options={{
                         tabBarIcon: renderIcon(ScreenName.LeaguesPage),
-                        tabBarLabel: renderLabel(ScreenName.LeaguesPage),
+                        tabBarLabel: t('bottom_tab.leagues'),
                     }}
                     name={ScreenName.LeaguesPage}
                     component={LeaguesScreen}
@@ -154,7 +127,7 @@ export const BottomTabStack = () => {
                 <Bottom.Screen
                     options={{
                         tabBarIcon: renderIcon(ScreenName.TeamPage),
-                        tabBarLabel: renderLabel(ScreenName.TeamPage),
+                        tabBarLabel: t('bottom_tab.teams'),
                     }}
                     name={ScreenName.TeamPage}
                     component={TeamScreen}
@@ -162,7 +135,7 @@ export const BottomTabStack = () => {
                 <Bottom.Screen
                     options={{
                         tabBarIcon: renderIcon(ScreenName.PlayGroundPage),
-                        tabBarLabel: renderLabel(ScreenName.PlayGroundPage),
+                        tabBarLabel: t('bottom_tab.question'),
                     }}
                     name={ScreenName.PlayGroundPage}
                     component={PlayGroundScreen}
@@ -178,7 +151,7 @@ export const BottomTabStack = () => {
                 <Bottom.Screen
                     options={{
                         tabBarIcon: renderIcon(ScreenName.GobletPage),
-                        tabBarLabel: renderLabel(ScreenName.GobletPage),
+                        tabBarLabel: t('bottom_tab.goblet'),
                     }}
                     name={ScreenName.GobletPage}
                     component={GobletScreen}
@@ -187,7 +160,7 @@ export const BottomTabStack = () => {
                 <Bottom.Screen
                     options={{
                         tabBarIcon: renderIcon(ScreenName.VideoPage),
-                        tabBarLabel: renderLabel(ScreenName.VideoPage),
+                        tabBarLabel: 'VOD',
                     }}
                     name={ScreenName.VideoPage}
                     component={VideoScreen}

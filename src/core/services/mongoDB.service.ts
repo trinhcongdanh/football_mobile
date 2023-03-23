@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { API_KEY, BASE_URL, DATA_SOURCE, DB } from '@football/core/api/configs/config';
+import { getDeepKeys } from '@football/core/helpers/util';
 import AxiosService, { Result } from '@football/core/services/axios.service';
 import { AxiosRequestConfig } from 'axios';
 import queryString from 'query-string';
@@ -35,15 +36,33 @@ class MongoDBService {
     }
 
     findAll<T = any>(): Promise<Result<T>> {
-        return this.httpClient.post('/find', { ...this.dbConfig });
+        return this.httpClient.post('/find', { ...this.dbConfig }).then((response: any) => {
+            const documents = response[1]?.data?.documents;
+            if (documents?.length) {
+                console.log(`keysOfProps ${this.collection}`, getDeepKeys(documents[0]));
+            }
+            return response;
+        });
     }
 
     findByOId<T = any>(oid: string): Promise<Result<T>> {
-        return this.httpClient.post('/find', { ...this.dbConfig, filter: { _id: { $oid: oid } } });
+        return this.httpClient.post('/find', { ...this.dbConfig, filter: { _id: { $oid: oid } } }).then((response: any) => {
+            const documents = response[1]?.data?.documents;
+            if (documents?.length) {
+                console.log(`keysOfProps ${this.collection}`, getDeepKeys(documents[0]));
+            }
+            return response;
+        });
     }
 
     findByFilter<T = any>(filter: any): Promise<Result<T>> {
-        return this.httpClient.post('/find', { ...this.dbConfig, filter });
+        return this.httpClient.post('/find', { ...this.dbConfig, filter }).then((response: any) => {
+            const documents = response[1]?.data?.documents;
+            if (documents?.length) {
+                console.log(`keysOfProps ${this.collection}`, getDeepKeys(documents[0]));
+            }
+            return response;
+        });
     }
 
     search<T = any>(searchText: string, searchProp?: string): Promise<Result<T>> {
