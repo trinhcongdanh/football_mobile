@@ -153,7 +153,7 @@ const styles = StyleSheet.create({
         marginHorizontal: getSize.m(10),
     },
     button_option_dark: {
-        paddingHorizontal: getSize.m(30),
+        paddingHorizontal: getSize.m(20),
         paddingVertical: getSize.m(10),
         borderRadius: getSize.m(30),
         flex: I18nManager.isRTL ? 0 : 1,

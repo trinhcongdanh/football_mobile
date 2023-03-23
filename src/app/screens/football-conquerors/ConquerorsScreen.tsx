@@ -60,8 +60,19 @@ export const ConquerorsScreen = ({ navigation, route }: IConquerorsScreenProps) 
                         />
                     </View>
                     <ScrollView>
-                        <HeaderLogo text={topTeam.name_he} avt={{ uri: topTeam.logo_url }} />
-                        <View style={[appStyles.package, { marginTop: getSize.m(0) }]}>
+                        <HeaderLogo
+                            text={getTranslationText({
+                                textHe: topTeam.name_he,
+                                textEn: topTeam.name_en,
+                            })}
+                            avt={{ uri: topTeam.logo_url }}
+                        />
+                        <View
+                            style={[
+                                appStyles.package,
+                                { marginTop: getSize.m(0), minHeight: getSize.m(900) },
+                            ]}
+                        >
                             <LinearGradient
                                 colors={[
                                     'rgba(255, 255, 255, 0.05)',
@@ -70,14 +81,15 @@ export const ConquerorsScreen = ({ navigation, route }: IConquerorsScreenProps) 
                                 ]}
                                 style={[appStyles.flex_row_space_center, styles.header]}
                             >
+                                <Text style={styles.text_header}>{t('conquerors.name')}</Text>
                                 <Text style={styles.text_header}>
+                                    {' '}
                                     {t(
                                         type === TopTeamPlayerType.Appearances
                                             ? 'conquerors.appearances'
                                             : 'conquerors.number_of_goals'
                                     )}
                                 </Text>
-                                <Text style={styles.text_header}>{t('conquerors.number')}</Text>
                             </LinearGradient>
                             <View>
                                 {listItems.map(item => {

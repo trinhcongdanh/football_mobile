@@ -42,7 +42,7 @@ export const ListGameScreen = ({ navigation, route }: IListGameScreenProps) => {
                             iconName={appIcons.ic_right_ios}
                             iconStyle={styles.ic_back}
                             goBack={onGoBack}
-                            title="רשימת משחקים"
+                            title={t('national_team.list_game.title')}
                         />
                     </View>
                     <ScrollView>
@@ -128,7 +128,7 @@ export const ListGameScreen = ({ navigation, route }: IListGameScreenProps) => {
                                                             style={[
                                                                 styles.name_club,
                                                                 {
-                                                                    width: getSize.m(40),
+                                                                    width: getSize.m(44),
                                                                     textAlign: 'right',
                                                                 },
                                                             ]}
@@ -184,7 +184,7 @@ export const ListGameScreen = ({ navigation, route }: IListGameScreenProps) => {
                                                             style={[
                                                                 styles.name_club,
                                                                 {
-                                                                    width: getSize.m(40),
+                                                                    width: getSize.m(44),
                                                                     textAlign: 'left',
                                                                 },
                                                             ]}
