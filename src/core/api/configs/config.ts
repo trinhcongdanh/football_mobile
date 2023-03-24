@@ -11,3 +11,4 @@ export const MAX_SEARCH_LEAGUES = 3;
 export const MAX_FAVORITES_TEAM = 3;
 export const MAX_FAVORITES_PLAYER = 3;
 export const MAX_FAVORITES_TOPTEAM = 2;
+export const MAX_GAME_IN_FAVORITES_TEAM = 3;

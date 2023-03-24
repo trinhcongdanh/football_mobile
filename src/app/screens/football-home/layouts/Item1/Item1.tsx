@@ -9,6 +9,7 @@ import { appColors } from '@football/app/utils/constants/appColors';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
 import { getSize } from '@football/app/utils/responsive/scale';
+import { MAX_GAME_IN_FAVORITES_TEAM } from '@football/core/api/configs/config';
 import moment from 'moment';
 import React from 'react';
 import {
@@ -741,43 +742,45 @@ export const Item1 = ({ team, color }: IItem1Props) => {
                         </TouchableOpacity>
                     </View>
                     <View style={{ padding: getSize.m(10) }}>
-                        {team.homepage_info?.games.map((item, index) => {
-                            return (
-                                <ListGame
-                                    // eslint-disable-next-line react/no-array-index-key
-                                    key={index}
-                                    logo_home={item.team1.logo_url}
-                                    logo_away={item.team2.logo_url}
-                                    nameHome={getTranslationText({
-                                        textHe: item.team1.name_he,
-                                        textEn: item.team1.name_en,
-                                    })}
-                                    nameAway={getTranslationText({
-                                        textHe: item.team2.name_he,
-                                        textEn: item.team2.name_en,
-                                    })}
-                                    location={getTranslationText({
-                                        textHe: item.stadium_he,
-                                        textEn: item.stadium_en,
-                                    })}
-                                    date={item.date}
-                                    result={item.score}
-                                    schedule={item.time}
-                                    // completed={item.completed}
-                                    color={appColors.gray2}
-                                    handleDetailMatch={() => handleDetailMatch(item.game_id)}
-                                    handleStadium={() => handleStadium(item.stadium_id)}
-                                    isLive={moment().isBetween(
-                                        moment(`${item.date} ${item.time}`, 'DD.M.YY HH:mm'),
-                                        moment(`${item.date} ${item.time}`, 'DD.M.YY HH:mm').add(
-                                            2,
-                                            'hours'
-                                        )
-                                    )}
-                                    style={{ marginTop: getSize.m(12) }}
-                                />
-                            );
-                        })}
+                        {team.homepage_info?.games
+                            ?.slice(0, MAX_GAME_IN_FAVORITES_TEAM)
+                            .map((item, index) => {
+                                return (
+                                    <ListGame
+                                        // eslint-disable-next-line react/no-array-index-key
+                                        key={index}
+                                        logo_home={item.team1.logo_url}
+                                        logo_away={item.team2.logo_url}
+                                        nameHome={getTranslationText({
+                                            textHe: item.team1.name_he,
+                                            textEn: item.team1.name_en,
+                                        })}
+                                        nameAway={getTranslationText({
+                                            textHe: item.team2.name_he,
+                                            textEn: item.team2.name_en,
+                                        })}
+                                        location={getTranslationText({
+                                            textHe: item.stadium_he,
+                                            textEn: item.stadium_en,
+                                        })}
+                                        date={item.date}
+                                        result={item.score}
+                                        schedule={item.time}
+                                        // completed={item.completed}
+                                        color={appColors.gray2}
+                                        handleDetailMatch={() => handleDetailMatch(item.game_id)}
+                                        handleStadium={() => handleStadium(item.stadium_id)}
+                                        isLive={moment().isBetween(
+                                            moment(`${item.date} ${item.time}`, 'DD.M.YY HH:mm'),
+                                            moment(
+                                                `${item.date} ${item.time}`,
+                                                'DD.M.YY HH:mm'
+                                            ).add(2, 'hours')
+                                        )}
+                                        style={{ marginTop: getSize.m(12) }}
+                                    />
+                                );
+                            })}
                     </View>
                 </View>
             </ScrollView>
