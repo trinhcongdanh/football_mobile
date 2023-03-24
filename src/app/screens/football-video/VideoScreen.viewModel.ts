@@ -1,8 +1,10 @@
 import { AppImages } from '@football/app/assets/images';
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
+import { useMount } from '@football/app/utils/hooks/useMount';
 import { useProfileUser } from '@football/core/services/auth.service';
+import GeneralVodService from '@football/core/services/GeneralVod.service';
 import { usePlayers, useTeams, useTopTeams } from '@football/core/services/Video.service';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Dimensions } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
@@ -19,6 +21,7 @@ export const useViewModel = ({ navigation, route }: IVideoScreenProps) => {
     const [favoriteTeamsVideo, setFavoriteTeamsVideo] = useState<any[]>([]);
     const [favoriteTopTeamsVideo, setFavoriteTopTeamsVideo] = useState<any[]>([]);
     const [favoritePlayersVideo, setFavoritePlayersVideo] = useState<any[]>([]);
+    const [generalVod, setGeneralVod] = useState<GeneralVodModel[]>([]);
 
     const { t } = useTranslation();
     const [profileUser, setProfileUser] = useState();
@@ -70,6 +73,15 @@ export const useViewModel = ({ navigation, route }: IVideoScreenProps) => {
         setShowSideMenu(false);
     };
 
+    const getGeneralVodData = useCallback(async () => {
+        const [error, res] = await GeneralVodService.findAll();
+        if (error) {
+            return;
+        }
+
+        setGeneralVod(res.data.documents);
+    }, []);
+
     useEffect(() => {
         if (!teamsData) {
             return;
@@ -112,6 +124,10 @@ export const useViewModel = ({ navigation, route }: IVideoScreenProps) => {
         }
     }, [playersData]);
 
+    useMount(() => {
+        getGeneralVodData();
+    });
+
     return {
         t,
         onShowSideMenu,
@@ -128,5 +144,6 @@ export const useViewModel = ({ navigation, route }: IVideoScreenProps) => {
         favoriteTeamsVideo,
         favoriteTopTeamsVideo,
         favoritePlayersVideo,
+        generalVod,
     };
 };

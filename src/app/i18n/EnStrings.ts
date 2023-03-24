@@ -381,6 +381,9 @@ const resources = {
                 fav_nation_team: {
                     label: 'נבחרות מועדפות',
                 },
+                general_vod: {
+                    label: 'סירטונים נבחרים',
+                },
             },
             goblet: {
                 title: 'גביע',
@@ -1056,6 +1059,9 @@ const resources = {
                 },
                 fav_nation_team: {
                     label: 'Favorite national teams',
+                },
+                general_vod: {
+                    label: 'Selected videos',
                 },
             },
             goblet: {
