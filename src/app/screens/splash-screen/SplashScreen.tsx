@@ -25,8 +25,6 @@ const useViewModel = () => {};
 export const SplashScreen = ({ navigation, route }: ISplashScreenProps) => {
     const { t, i18n } = useTranslation();
     const { navigate, replace } = useAppNavigator();
-    const [splashData, setSplashData] = useState<Lottie>();
-
     const uuid = require('uuid');
     const id = uuid.v4();
     const dispatch = useDispatch<any>();
@@ -58,7 +56,6 @@ export const SplashScreen = ({ navigation, route }: ISplashScreenProps) => {
     //         setSplashData(res.documents[0].lottie);
     //     }
     // }, []);
-    const { data: splashAnimationData, isLoading } = useSplashAnimations();
     // useEffect(() => {
     //     if (!splashAnimationData) {
     //         return;
