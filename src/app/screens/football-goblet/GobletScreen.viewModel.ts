@@ -24,8 +24,8 @@ const useViewState = () => {
     const [shouldClearCache, setClearChace] = useState(true); // First time when we change tab 1 to tab 2, should clear cache
     const [onSelect, setOnSelect] = useState(0);
 
-    // const [searchText, setSearchText] = useState('');
-    // const searchTextRef = useRef<any>(null);
+    const [searchText, setSearchText] = useState<any>(null);
+    const searchTextRef = useRef<any>(null);
 
     return {
         tab,
@@ -37,9 +37,9 @@ const useViewState = () => {
         navigate,
         onSelect,
         setOnSelect,
-        // searchText,
-        // setSearchText,
-        // searchTextRef,
+        searchText,
+        setSearchText,
+        searchTextRef,
     };
 };
 
@@ -50,7 +50,7 @@ const useViewState = () => {
  * @returns
  */
 const useEventHandler = (state: any, callback: any) => {
-    const { setTab, navigate, setCups, tab } = state;
+    const { setTab, navigate, setCups, tab, setSearchText } = state;
     const { searchCupsData } = callback;
     const changeTab = (index: number) => {
         const type = index === 0 ? CupTab.NationCup : CupTab.TotoCup;
@@ -70,6 +70,7 @@ const useEventHandler = (state: any, callback: any) => {
         changeTab,
         goToStateCupPage,
         onSearchCup,
+        onChangeText,
     };
 };
 
@@ -102,7 +103,7 @@ const useViewCallback = (state: any, route: any) => {
  */
 
 const useEffectHandler = (state: any, callback: any, eventHandler: any) => {
-    const { tab, setCups, shouldClearCache, setClearChace } = state;
+    const { tab, setCups, shouldClearCache, setClearChace, setSearchText } = state;
 
     const { data: cupsData } = useCups(tab);
     useEffect(() => {
@@ -118,6 +119,7 @@ const useEffectHandler = (state: any, callback: any, eventHandler: any) => {
     useEffect(() => {
         if (shouldClearCache && tab === CupTab.TotoCup) {
             setCups([]);
+            setSearchText('');
             setClearChace(false);
         }
     }, [tab, shouldClearCache]);
