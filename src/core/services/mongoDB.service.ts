@@ -46,13 +46,15 @@ class MongoDBService {
     }
 
     findByOId<T = any>(oid: string): Promise<Result<T>> {
-        return this.httpClient.post('/find', { ...this.dbConfig, filter: { _id: { $oid: oid } } }).then((response: any) => {
-            const documents = response[1]?.data?.documents;
-            if (documents?.length) {
-                console.log(`keysOfProps ${this.collection}`, getDeepKeys(documents[0]));
-            }
-            return response;
-        });
+        return this.httpClient
+            .post('/find', { ...this.dbConfig, filter: { _id: { $oid: oid } } })
+            .then((response: any) => {
+                const documents = response[1]?.data?.documents;
+                if (documents?.length) {
+                    console.log(`keysOfProps ${this.collection}`, getDeepKeys(documents[0]));
+                }
+                return response;
+            });
     }
 
     findByFilter<T = any>(filter: any): Promise<Result<T>> {
@@ -78,11 +80,20 @@ class MongoDBService {
     find<TFind extends MongoDBFindConfig = MongoDBFindConfig, TResult = any>(
         config: TFind
     ): Promise<Result<TResult>> {
+        console.log(config);
         return this.httpClient.post('/find', {
             ...this.dbConfig,
             ...config,
         });
     }
+
+    // findCup<T = any>(config: any): Promise<Result<T>> {
+    //     console.log('Config find cups:', config);
+    //     return this.httpClient.post('/find', {
+    //         ...this.dbConfig,
+    //         filter: config,
+    //     });
+    // }
 }
 
 export default MongoDBService;

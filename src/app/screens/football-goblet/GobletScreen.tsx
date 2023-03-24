@@ -28,7 +28,20 @@ import styles from './GobletScreen.style';
 import { useViewModel } from './GobletScreen.viewModel';
 
 export const GobletScreen = ({ navigation, route }: IGobletScreenProps) => {
-    const { t, goToStateCupPage, changeTab, cups } = useViewModel({ navigation, route });
+    const {
+        t,
+        goToStateCupPage,
+        changeTab,
+        cups,
+        onSearchCup,
+        // searchText,
+        // setSearchText,
+        // searchTextRef,
+        tab,
+    } = useViewModel({
+        navigation,
+        route,
+    });
     const { getTranslationText } = useTranslationText();
     const colorCustom = useSelector((state: any) => state.colorCustom.colorCustom);
 
@@ -53,6 +66,9 @@ export const GobletScreen = ({ navigation, route }: IGobletScreenProps) => {
                                 placeholder={t('leagues.place_holder')}
                                 style={styles.text_search}
                                 placeholderTextColor={appColors.blue_gray_light}
+                                onChangeText={(text: string) => onSearchCup(text, tab)}
+                                // ref={searchTextRef}
+                                // value={searchText}
                             />
                             <Icon
                                 style={{ marginRight: getSize.m(14) }}

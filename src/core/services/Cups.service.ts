@@ -14,6 +14,11 @@ class CupsService extends MongoDBService {
             type,
         });
     }
+
+    searchCups(searchText: string, type: number): Promise<Result<CupsModelResponse>> {
+        const filter = { search_terms: { $regex: `.*${searchText}.*`, $options: 'i' }, type: type };
+        return this.find({ filter });
+    }
 }
 
 const cupsService = new CupsService();
