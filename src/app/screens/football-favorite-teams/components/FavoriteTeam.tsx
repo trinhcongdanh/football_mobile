@@ -13,10 +13,14 @@ import { isEmpty } from 'lodash';
 import React, { useEffect, useState } from 'react';
 import {
     ActivityIndicator,
-    Image, ImageBackground, SafeAreaView,
-    ScrollView, StatusBar, Text,
+    Image,
+    ImageBackground,
+    SafeAreaView,
+    ScrollView,
+    StatusBar,
+    Text,
     TouchableOpacity,
-    View
+    View,
 } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/Feather';
@@ -55,7 +59,7 @@ export const FavoriteTeam = ({
                 isSelected: favSelected.filter(t => t._id === team._id).length > 0,
             }))
             .sort((a, b) => {
-                return (b.number ? 1 : 0) - (a.number ? 1 : 0);
+                return (b.isSelected ? 1 : 0) - (a.isSelected ? 1 : 0);
             });
         setFavTeams(filterTeams);
         // console.log('favSelected', favSelected);

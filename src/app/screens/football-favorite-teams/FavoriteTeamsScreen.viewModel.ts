@@ -213,10 +213,7 @@ const useViewCallback = (route: any, viewState: any) => {
             }
             const sortByName = sortBy(res.data.documents, [
                 I18nManager.isRTL ? 'name_he' : 'name_en',
-            ]).map(team => ({
-                ...team,
-                number: selectedFavTeams.filter((t: any) => t._id === team._id).length,
-            }));
+            ]);
             setTeams(sortByName);
         } catch (error: any) {
             Alert.alert(error);
@@ -235,10 +232,7 @@ const useViewCallback = (route: any, viewState: any) => {
             }
             const sortByName = sortBy(res.data.documents, [
                 I18nManager.isRTL ? 'name_he' : 'name_en',
-            ]).map(team => ({
-                ...team,
-                number: selectedFavTeams.filter((t: any) => t._id === team._id).length,
-            }));
+            ]);
             setTeams(sortByName);
         } catch (error: any) {
             Alert.alert(error);
