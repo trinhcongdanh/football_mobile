@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
 import { LeagueItemScreen } from '@football/app/screens/football-leagues/layouts/league-item/LeagueItemScreen';
@@ -12,90 +13,6 @@ import React, { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ILeaguesScreenProps } from './LeaguesScreen.type';
 
-// type INavigationProps = {
-//     route: any;
-//     navigation: any;
-// };
-// const useViewState = () => {
-//     const [searchText, setSearchText] = useState('');
-
-//     const searchLeagues = useAppSelector(state => {
-//         return state.leagues.searchLeagues;
-//     });
-//     const { data } = useLeagueTypes();
-//     let labels: any[] = [];
-
-//     let leagueTypes: LeagueTypeModel[] = [];
-//     if (data) {
-//         const [error, res] = data;
-//         if (!error) {
-//             leagueTypes = res.data.documents;
-// labels = leagueTypes.map(e => ({
-//     id: e.index,
-//     title: e.name_he,
-//     name: e.name_en.split(' ').join(''),
-//     renderComponent: (props: INavigationProps) => (
-//         <LeagueItemScreen {...props} typeId={e.index} />
-//     ),
-//     component: LeagueItemScreen,
-// }));
-//         }
-//     }
-
-//     return {
-//         searchText,
-//         setSearchText,
-//         searchLeagues,
-//         leagueTypes,
-//         labels,
-//     };
-// };
-
-// const useViewCallback = ({ searchText, setSearchText }: any) => {
-//     const dispatch = useAppDispatch();
-
-//     const onSearchLeague = (text: string) => {
-//         setSearchText(text);
-//     };
-
-//     const submitSearchLeague = useCallback(async () => {
-//         if (searchText !== '') {
-//             dispatch(resetSearchLeagues());
-//             const [error, res] = await leagueService.searchLeague(searchText);
-
-//             if (error) {
-//                 return;
-//             }
-
-//             dispatch(setSearchLeagues(res.data.documents));
-//         }
-//     }, [dispatch, searchText]);
-
-//     return {
-//         submitSearchLeague,
-//         onSearchLeague,
-//     };
-// };
-
-// export const useViewModel = () => {
-//     const { t } = useTranslation();
-//     const { onGoBack } = useAppNavigation();
-//     const { searchLeagues, leagueTypes, labels, searchText, setSearchText } = useViewState();
-//     const { submitSearchLeague, onSearchLeague } = useViewCallback({
-//         searchText,
-//         setSearchLeagues,
-//     });
-
-//     return {
-//         t,
-//         onGoBack,
-//         labels,
-//         leagueTypes,
-//         searchLeagues,
-//         onSearchLeague,
-//         submitSearchLeague,
-//     };
-// };
 type INavigationProps = {
     route: any;
     navigation: any;
@@ -125,11 +42,11 @@ const useViewCallback = (route: any, viewState: any) => {
             setLeagueType(res.data.documents);
             // console.log(leagueType);
             labels = res.data.documents.map((e: any) => ({
-                id: e.index,
+                id: e._id,
                 title: e.name_he,
                 name: e.name_en.split(' ').join(''),
                 renderComponent: (props: INavigationProps) => (
-                    <LeagueItemScreen {...props} typeId={e.index} />
+                    <LeagueItemScreen {...props} typeId={e._id} />
                 ),
                 component: LeagueItemScreen,
             }));
@@ -197,7 +114,7 @@ export const useViewModel = ({ navigation, route }: ILeaguesScreenProps) => {
         if (!error) {
             leagueTypes = res.data.documents;
             labels = leagueTypes.map(e => ({
-                id: e.index,
+                id: e._id,
                 title: getTranslationText({
                     textHe: e.name_he,
                     textEn: e.name_en,
@@ -209,7 +126,7 @@ export const useViewModel = ({ navigation, route }: ILeaguesScreenProps) => {
                     .split(' ')
                     .join(''),
                 renderComponent: (props: INavigationProps) => (
-                    <LeagueItemScreen {...props} typeId={e.index} />
+                    <LeagueItemScreen {...props} typeId={e._id} />
                 ),
                 component: LeagueItemScreen,
             }));

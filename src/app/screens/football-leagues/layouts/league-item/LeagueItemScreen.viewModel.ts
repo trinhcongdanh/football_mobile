@@ -1,9 +1,8 @@
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
 import { ScreenName } from '@football/app/utils/constants/enum';
 import { useMount } from '@football/app/utils/hooks/useMount';
-import { axiosClient } from '@football/core/api/configs/axiosClient';
-import { BASE_URL, DATA_SOURCE, DB } from '@football/core/api/configs/config';
-import { LeagueModel, LeagueModelResponse } from '@football/core/models/LeagueModelResponse';
+import { LeagueModel } from '@football/core/models/LeagueModelResponse';
+import leaguesService from '@football/core/services/League.service';
 import { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Alert } from 'react-native';
@@ -69,16 +68,12 @@ export const useViewModel = ({ navigation, route, typeId }: ILeagueItemScreenPro
 
     const getLeaguesByType = useCallback(async () => {
         try {
-            const { data }: LeagueModelResponse = await axiosClient.post(`${BASE_URL}/find`, {
-                dataSource: DATA_SOURCE,
-                database: DB,
-                collection: 'league',
-                filter: {
-                    type: { $eq: typeId },
-                },
-            });
+            const [error, res] = await leaguesService.findByFilter({ type: typeId });
+            if (error) {
+                return;
+            }
 
-            setOptionsLeagues(data.documents);
+            setOptionsLeagues(res.data.documents);
         } catch (error: any) {
             Alert.alert(error);
         }
