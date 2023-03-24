@@ -34,10 +34,11 @@ export const GobletScreen = ({ navigation, route }: IGobletScreenProps) => {
         changeTab,
         cups,
         onSearchCup,
-        // searchText,
-        // setSearchText,
-        // searchTextRef,
+        searchText,
+        setSearchText,
+        searchTextRef,
         tab,
+        onChangeText,
     } = useViewModel({
         navigation,
         route,
@@ -66,9 +67,15 @@ export const GobletScreen = ({ navigation, route }: IGobletScreenProps) => {
                                 placeholder={t('leagues.place_holder')}
                                 style={styles.text_search}
                                 placeholderTextColor={appColors.blue_gray_light}
-                                onChangeText={(text: string) => onSearchCup(text, tab)}
-                                // ref={searchTextRef}
-                                // value={searchText}
+                                onChangeText={(text: string) => {
+                                    setSearchText(text);
+                                    onSearchCup(text, tab);
+                                }}
+                                ref={searchTextRef}
+                                value={searchText}
+                                // onKeyPress={(e: any) => {
+                                //     handleKeyPress(e);
+                                // }}
                             />
                             <Icon
                                 style={{ marginRight: getSize.m(14) }}
