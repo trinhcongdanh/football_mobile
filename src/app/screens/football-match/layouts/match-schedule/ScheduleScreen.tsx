@@ -34,7 +34,7 @@ export const ScheduleScreen = ({ navigation, route }: IScheduleScreenProps) => {
             ]}
         >
             <ScrollView showsVerticalScrollIndicator={false}>
-                {game?.games.map((item: Game) => {
+                {game?.games?.map((item: Game) => {
                     return (
                         <ListGame
                             key={item.game_id}

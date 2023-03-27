@@ -99,7 +99,7 @@ export const StandingScreen = ({ navigation, route }: IStandingScreenProps) => {
                             </View>
                         </View>
                         <View>
-                            {game?.leader_board.map((item: LeaderBoard, index: number) => {
+                            {game?.leader_board?.map((item: LeaderBoard, index: number) => {
                                 return (
                                     <LinearGradient
                                         key={item.place}

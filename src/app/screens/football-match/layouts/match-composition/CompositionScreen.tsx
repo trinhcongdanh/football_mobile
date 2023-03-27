@@ -37,7 +37,7 @@ export const CompositionScreen = ({ navigation, route }: ICompositionScreenProps
                         width={getSize.m(130)}
                         position={t('match.composition.main_lineup')}
                     />
-                    {team?.lineup?.opening.map(item => {
+                    {team?.lineup?.opening?.map(item => {
                         return (
                             <ListPlayer
                                 key={item.player_id}
@@ -54,7 +54,7 @@ export const CompositionScreen = ({ navigation, route }: ICompositionScreenProps
                 </View>
                 <View style={{ marginTop: getSize.m(30) }}>
                     <Position width={getSize.m(130)} position={t('match.composition.replace')} />
-                    {team?.lineup?.substitutes.map(item => {
+                    {team?.lineup?.substitutes?.map(item => {
                         return (
                             <ListPlayer
                                 key={item.player_id}
@@ -74,7 +74,7 @@ export const CompositionScreen = ({ navigation, route }: ICompositionScreenProps
                         width={getSize.m(130)}
                         position={t('match.composition.not_partner')}
                     />
-                    {team?.lineup?.not_participated.map(item => {
+                    {team?.lineup?.not_participated?.map(item => {
                         return (
                             <ListPlayer
                                 key={item.player_id}
@@ -91,7 +91,7 @@ export const CompositionScreen = ({ navigation, route }: ICompositionScreenProps
                 </View>
                 <View style={{ marginTop: getSize.m(30) }}>
                     <Position width={getSize.m(130)} position={t('match.composition.coach')} />
-                    {team?.lineup?.coaches.map(item => {
+                    {team?.lineup?.coaches?.map(item => {
                         return (
                             <ListPlayer
                                 key={item.coach_id}
@@ -107,7 +107,7 @@ export const CompositionScreen = ({ navigation, route }: ICompositionScreenProps
                 </View>
                 <View style={{ marginTop: getSize.m(30) }}>
                     <Position width={getSize.m(130)} position={t('match.composition.referees')} />
-                    {team?.lineup?.referees.map(item => {
+                    {team?.lineup?.referees?.map(item => {
                         return (
                             <ListPlayer
                                 key={item.referee_id}
@@ -133,7 +133,7 @@ export const CompositionScreen = ({ navigation, route }: ICompositionScreenProps
         >
             <ScrollView showsVerticalScrollIndicator={false}>
                 <View style={[appStyles.flex_row_space, styles.option]}>
-                    {options.map((option: string, index: number) => {
+                    {options?.map((option: string, index: number) => {
                         return (
                             <TouchableOpacity
                                 style={[

@@ -29,18 +29,18 @@ const useViewState = () => {
             name: ScreenTopTap.GamePage,
             title: t('match.game_move.title'),
         },
-        {
-            id: 3,
-            component: ScheduleScreen,
-            name: ScreenTopTap.SchedulePage,
-            title: t('match.schedule.title'),
-        },
-        {
-            id: 4,
-            component: StandingScreen,
-            name: ScreenTopTap.StandingPage,
-            title: t('match.standing.title'),
-        },
+        // {
+        //     id: 3,
+        //     component: ScheduleScreen,
+        //     name: ScreenTopTap.SchedulePage,
+        //     title: t('match.schedule.title'),
+        // },
+        // {
+        //     id: 4,
+        //     component: StandingScreen,
+        //     name: ScreenTopTap.StandingPage,
+        //     title: t('match.standing.title'),
+        // },
     ]);
 
     const [defaultTab, setDefaultTab] = useState(ScreenTopTap.CompositionPage);

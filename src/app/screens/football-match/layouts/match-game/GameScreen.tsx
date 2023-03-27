@@ -53,7 +53,7 @@ export const GameScreen = ({ navigation, route }: IGameScreenProps) => {
                     </View>
                     <View style={styles.line} />
                     <View>
-                        {game?.gameplay.map((item: Gameplay, index: number) => {
+                        {game?.gameplay?.map((item: Gameplay, index: number) => {
                             return (
                                 // eslint-disable-next-line react/no-array-index-key
                                 <View key={index} style={{ marginTop: getSize.m(item.minute) }}>
