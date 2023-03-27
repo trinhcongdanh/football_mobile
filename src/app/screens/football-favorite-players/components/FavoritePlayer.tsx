@@ -21,7 +21,7 @@ import {
     Text,
     TextInput,
     TouchableOpacity,
-    View
+    View,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 import styles from './FavoritePlayer.style';
@@ -59,6 +59,7 @@ export const FavoritePlayer = ({
                 return (b.number ? 1 : 0) - (a.number ? 1 : 0);
             });
         setFavPlayers(filterPlayers);
+        console.log('favPlayers', favPlayers);
     }, [favSelected, newFav]);
     return (
         <View style={[appStyles.flex]}>
@@ -155,7 +156,7 @@ export const FavoritePlayer = ({
                                 </View>
                                 <ScrollView>
                                     <View style={styles.content_item}>
-                                        {favPlayers.map((item: any, index: number) => {
+                                        {favPlayers?.map((item: any, index: number) => {
                                             return (
                                                 <TouchableOpacity
                                                     key={index.toString()}
