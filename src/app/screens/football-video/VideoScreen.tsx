@@ -1,5 +1,6 @@
 import { appIcons } from '@football/app/assets/icons/appIcons';
 import { AppImages } from '@football/app/assets/images';
+import { CardGoBack } from '@football/app/components/go-back/CardGoBack';
 import { HeaderUser } from '@football/app/components/header-user/HeaderUser';
 import { BOTTOM_SVG_HEIGHT } from '@football/app/routes/bottom-tab/components/bottom.tab';
 import { TAB_BAR_HEIGHT } from '@football/app/routes/bottom-tab/styles/bottom.tab.styles';
@@ -36,6 +37,8 @@ export const VideoScreen = ({ navigation, route }: IVideoScreenProps) => {
         favoriteTopTeamsVideo,
         favoritePlayersVideo,
         generalVod,
+        isBack,
+        goBack,
     } = useViewModel({
         navigation,
         route,
@@ -58,14 +61,23 @@ export const VideoScreen = ({ navigation, route }: IVideoScreenProps) => {
                 <SafeAreaView style={appStyles.safe_area}>
                     <ScrollView>
                         <View style={appStyles.container}>
-                            <HeaderUser
-                                avt={AppImages.img_avt}
-                                point="1,325"
-                                icon={AppImages.img_bars_sort}
-                                color_pre={colorCustom}
-                                color_after={colorCustom}
-                                handlePressFunction={onShowSideMenu}
-                            />
+                            {isBack ? (
+                                <CardGoBack
+                                    iconName={appIcons.ic_right_ios}
+                                    iconStyle={styles.ic_back}
+                                    goBack={goBack}
+                                    title={t('statistics.group.title')}
+                                />
+                            ) : (
+                                <HeaderUser
+                                    avt={AppImages.img_avt}
+                                    point="1,325"
+                                    icon={isBack ? appIcons.ic_right_ios : AppImages.img_bars_sort}
+                                    color_pre={colorCustom}
+                                    color_after={colorCustom}
+                                    handlePressFunction={onShowSideMenu}
+                                />
+                            )}
 
                             <View>
                                 <Text style={[appStyles.text_title]}>{t('video.title')}</Text>

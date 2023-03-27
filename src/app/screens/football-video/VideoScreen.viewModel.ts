@@ -13,7 +13,7 @@ import { addVideo, setShowVideo } from 'src/store/video/Video.slice';
 import { IVideoScreenProps } from './VideoScreen.type';
 
 export const useViewModel = ({ navigation, route }: IVideoScreenProps) => {
-    const { navigate, goBack } = useAppNavigator();
+    const { navigate, goBack, openDrawer } = useAppNavigator();
     const { data: teamsData } = useTeams();
     const { data: topTeamsData } = useTopTeams();
     const { data: playersData } = usePlayers();
@@ -28,6 +28,8 @@ export const useViewModel = ({ navigation, route }: IVideoScreenProps) => {
     const { profile } = useSelector((state: RootState) => state.createProfile);
     const { login } = useSelector((state: RootState) => state.login);
     const { data: profileData } = useProfileUser({ token: login.token, item_id: profile.item_id });
+
+    const isBack = route?.params?.isBack;
 
     useEffect(() => {
         if (!profileData) {
@@ -66,7 +68,7 @@ export const useViewModel = ({ navigation, route }: IVideoScreenProps) => {
     const [showSideMenu, setShowSideMenu] = useState(false);
 
     const onShowSideMenu = () => {
-        navigation.openDrawer();
+        openDrawer();
     };
 
     const closeSideMenu = () => {
@@ -145,5 +147,7 @@ export const useViewModel = ({ navigation, route }: IVideoScreenProps) => {
         favoriteTopTeamsVideo,
         favoritePlayersVideo,
         generalVod,
+        isBack,
+        goBack,
     };
 };

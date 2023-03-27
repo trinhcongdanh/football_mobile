@@ -107,6 +107,7 @@ const styles = StyleSheet.create({
         marginTop: getSize.m(20),
         marginHorizontal: getSize.m(5),
     },
+    ic_back: { alignItems: I18nManager.isRTL ? 'flex-start' : 'flex-end' },
 });
 
 export default styles;

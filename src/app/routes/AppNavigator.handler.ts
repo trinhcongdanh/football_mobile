@@ -1,5 +1,5 @@
 import { ScreenName } from '@football/app/utils/constants/enum';
-import { ParamListBase, StackActions, useNavigation, NavigationState } from '@react-navigation/native';
+import { ParamListBase, StackActions, useNavigation, NavigationState, DrawerActions } from '@react-navigation/native';
 
 // export type NavigationParam = ParamListBase & {
 //     previous_screen: ScreenName;
@@ -35,6 +35,10 @@ export const useAppNavigator = () => {
         navigation.goBack();
     };
 
+    const openDrawer = () => {
+        navigation.dispatch(DrawerActions.openDrawer());
+    };
+
     return {
         navigate,
         replace,
@@ -42,5 +46,6 @@ export const useAppNavigator = () => {
         popToTop,
         goBack,
         navigateClearStack,
+        openDrawer,
     };
 };

@@ -13,7 +13,7 @@ export const useViewModel = ({ videos }: IItem12Props) => {
     const dots = Array(videos.length).fill('');
 
     const onClickAllVideo = () => {
-        navigate(ScreenName.VideoPage);
+        navigate(ScreenName.VideoPage, { isBack: true });
     };
     return {
         t,
