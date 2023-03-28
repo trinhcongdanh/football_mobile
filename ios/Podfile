@@ -18,7 +18,6 @@ target 'FootballAssociation' do
     'react-native-google-maps',
     'Google-Maps-iOS-Utils',
     'GoogleMaps',
-    'react-native-video/VideoCaching'
   ]
   # # Convert all permission pods into static libraries
   pre_install do |installer|
