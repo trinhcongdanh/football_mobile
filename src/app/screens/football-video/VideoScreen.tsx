@@ -61,23 +61,14 @@ export const VideoScreen = ({ navigation, route }: IVideoScreenProps) => {
                 <SafeAreaView style={appStyles.safe_area}>
                     <ScrollView>
                         <View style={appStyles.container}>
-                            {isBack ? (
-                                <CardGoBack
-                                    iconName={appIcons.ic_right_ios}
-                                    iconStyle={styles.ic_back}
-                                    goBack={goBack}
-                                    title={t('statistics.group.title')}
-                                />
-                            ) : (
-                                <HeaderUser
-                                    avt={AppImages.img_avt}
-                                    point="1,325"
-                                    icon={isBack ? appIcons.ic_right_ios : AppImages.img_bars_sort}
-                                    color_pre={colorCustom}
-                                    color_after={colorCustom}
-                                    handlePressFunction={onShowSideMenu}
-                                />
-                            )}
+                            <HeaderUser
+                                avt={AppImages.img_avt}
+                                point="1,325"
+                                icon={AppImages.img_bars_sort}
+                                color_pre={colorCustom}
+                                color_after={colorCustom}
+                                handlePressFunction={onShowSideMenu}
+                            />
 
                             <View>
                                 <Text style={[appStyles.text_title]}>{t('video.title')}</Text>
