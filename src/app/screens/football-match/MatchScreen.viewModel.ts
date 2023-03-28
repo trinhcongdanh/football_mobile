@@ -14,34 +14,8 @@ import { IMatchScreenProps } from './MatchScreen.type';
 
 const useViewState = () => {
     const [game, setGame] = useState<GameModel>();
-    const { t } = useTranslation();
 
-    const [labels, setLabels] = useState<any[]>([
-        {
-            id: 1,
-            component: CompositionScreen,
-            name: ScreenTopTap.CompositionPage,
-            title: t('match.composition.title'),
-        },
-        {
-            id: 2,
-            component: GameScreen,
-            name: ScreenTopTap.GamePage,
-            title: t('match.game_move.title'),
-        },
-        // {
-        //     id: 3,
-        //     component: ScheduleScreen,
-        //     name: ScreenTopTap.SchedulePage,
-        //     title: t('match.schedule.title'),
-        // },
-        // {
-        //     id: 4,
-        //     component: StandingScreen,
-        //     name: ScreenTopTap.StandingPage,
-        //     title: t('match.standing.title'),
-        // },
-    ]);
+    const [labels, setLabels] = useState<any[]>();
 
     const [defaultTab, setDefaultTab] = useState(ScreenTopTap.CompositionPage);
     return {
@@ -56,7 +30,9 @@ const useViewState = () => {
 };
 
 const useViewCallback = (route: any, viewState: any) => {
-    const { setGame } = viewState;
+    const { setGame, setLabels } = viewState;
+    const { t } = useTranslation();
+
     const getGameData = useCallback(async () => {
         const [error, res] = await gameService.findByOId(route?.params?.gameId);
         if (error) {
@@ -64,7 +40,52 @@ const useViewCallback = (route: any, viewState: any) => {
         }
 
         if (res.data.documents?.length) {
-            setGame(res.data.documents[0]);
+            const game = res.data.documents[0] as GameModel;
+            setGame(game);
+
+            if (game.game_type === 2) {
+                setLabels([
+                    {
+                        id: 1,
+                        component: CompositionScreen,
+                        name: ScreenTopTap.CompositionPage,
+                        title: t('match.composition.title'),
+                    },
+                    {
+                        id: 2,
+                        component: GameScreen,
+                        name: ScreenTopTap.GamePage,
+                        title: t('match.game_move.title'),
+                    },
+                ]);
+            } else {
+                setLabels([
+                    {
+                        id: 1,
+                        component: CompositionScreen,
+                        name: ScreenTopTap.CompositionPage,
+                        title: t('match.composition.title'),
+                    },
+                    {
+                        id: 2,
+                        component: GameScreen,
+                        name: ScreenTopTap.GamePage,
+                        title: t('match.game_move.title'),
+                    },
+                    {
+                        id: 3,
+                        component: ScheduleScreen,
+                        name: ScreenTopTap.SchedulePage,
+                        title: t('match.schedule.title'),
+                    },
+                    {
+                        id: 4,
+                        component: StandingScreen,
+                        name: ScreenTopTap.StandingPage,
+                        title: t('match.standing.title'),
+                    },
+                ]);
+            }
         }
     }, []);
 
