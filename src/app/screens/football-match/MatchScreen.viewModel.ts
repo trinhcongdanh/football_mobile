@@ -95,6 +95,7 @@ const useViewCallback = (route: any, viewState: any) => {
 
 export const useViewModel = ({ navigation, route }: IMatchScreenProps) => {
     const { navigate, goBack } = useAppNavigator();
+    const { t } = useTranslation();
 
     const onGoBack = (): void => {
         goBack();
@@ -128,5 +129,5 @@ export const useViewModel = ({ navigation, route }: IMatchScreenProps) => {
         navigate(ScreenName.PitchPage, { stadiumId });
     };
 
-    return { onGoBack, ...state, handleStadium };
+    return { onGoBack, ...state, handleStadium, t };
 };
