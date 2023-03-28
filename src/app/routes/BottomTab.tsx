@@ -7,9 +7,10 @@ import { appColors } from '@football/app/utils/constants/appColors';
 import { getSize } from '@football/app/utils/responsive/scale';
 import { isGuessUser } from '@football/core/models/AvatarType.enum';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { RouteProp } from '@react-navigation/native';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { I18nManager, SafeAreaView } from 'react-native';
+import { I18nManager, LogBox, SafeAreaView } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useSelector } from 'react-redux';
@@ -68,15 +69,21 @@ const renderIcon = (routeName: string) => {
     );
 };
 
-export const BottomTabStack = () => {
+export type ISideBarProps = {
+    route: RouteProp<any, ScreenName.BottomTab>;
+};
+
+export const BottomTabStack = ({ route }: ISideBarProps) => {
     const { t } = useTranslation();
     const insets = useSafeAreaInsets();
     const profileUser = useSelector((state: RootState) => state.getProfile);
+    LogBox.ignoreLogs(['source.uri should not be an empty string']);
+    const isBackVideo = route?.params?.isBackVideo;
 
     return (
         <SafeAreaView style={{ flex: 1, marginBottom: -insets.bottom }}>
             <Bottom.Navigator
-                initialRouteName={ScreenName.HomePage}
+                initialRouteName={isBackVideo ? ScreenName.VideoPage : ScreenName.HomePage}
                 screenOptions={{
                     tabBarActiveTintColor: appColors.white,
                     tabBarInactiveTintColor: appColors.text_grey,

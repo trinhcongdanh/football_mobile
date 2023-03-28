@@ -5,10 +5,17 @@ import { ScreenName } from '@football/app/utils/constants/enum';
 import { BottomTabStack } from '@football/app/routes/BottomTab';
 import { SafeAreaView } from 'react-native';
 import { appStyles } from '@football/app/utils/constants/appStyles';
+import { RouteProp, useRoute } from '@react-navigation/native';
 
 const Drawer = createDrawerNavigator();
 
-export const SideBar = () => {
+export type ISideBarProps = {
+    route: RouteProp<any, ScreenName.SideBar>;
+};
+
+export const SideBar = ({ route }: ISideBarProps) => {
+    const isBackVideo = route?.params?.isBackVideo;
+    console.log('isBackVideo', isBackVideo);
     return (
         <SafeAreaView
             style={[
@@ -26,7 +33,11 @@ export const SideBar = () => {
                 }}
                 drawerContent={props => <SideMenu {...props} />}
             >
-                <Drawer.Screen name={ScreenName.BottomTab} component={BottomTabStack} />
+                <Drawer.Screen
+                    name={ScreenName.BottomTab}
+                    component={BottomTabStack}
+                    initialParams={{ isBackVideo: isBackVideo }}
+                />
             </Drawer.Navigator>
         </SafeAreaView>
     );
