@@ -138,7 +138,7 @@ export const appStyles = StyleSheet.create({
     },
     safe_area: {
         flex: 1,
-        paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
+        paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : getSize.m(10),
     },
 
     main_container: {
@@ -172,7 +172,6 @@ export const appStyles = StyleSheet.create({
 
     top_tap: {
         elevation: 0,
-
         backgroundColor: appColors.gray,
         marginHorizontal: getSize.m(16),
     },

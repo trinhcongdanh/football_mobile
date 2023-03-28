@@ -19,7 +19,6 @@ const TabLabel = ({ focused, title }: any) => (
         style={{
             color: focused ? appColors.text_dark_blue : appColors.text_option_unselect,
             fontFamily: focused ? AppFonts.bold : AppFonts.medium,
-
             lineHeight: getSize.m(18),
             width: getSize.m(90), // Fix losing the last character of the text
             textAlign: 'center',
