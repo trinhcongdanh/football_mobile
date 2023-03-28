@@ -1,5 +1,5 @@
 import { appColors } from '@football/app/utils/constants/appColors';
-import { StyleSheet } from 'react-native';
+import { I18nManager, StyleSheet } from 'react-native';
 import { getSize } from '@football/app/utils/responsive/scale';
 import { AppFonts } from '@football/app/assets/fonts';
 
@@ -49,11 +49,9 @@ export const styles = StyleSheet.create({
         borderRadius: getSize.m(40),
     },
     progress_bar: {
-        height: getSize.m(4),
-        backgroundColor: appColors.text_option_unselect,
-        marginHorizontal: getSize.m(19),
-        width: getSize.m(200),
-        borderRadius: getSize.m(10),
+        flexDirection: I18nManager.isRTL ? 'row' : 'row-reverse',
+        justifyContent: 'space-between',
+        alignItems: 'center',
     },
     minutes: {
         fontFamily: AppFonts.regular,

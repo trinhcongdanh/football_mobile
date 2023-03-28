@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/dot-notation */
 import { Video } from '@football/app/components/video/Video';
+
 import { AppConsumer, AppProvider } from '@football/core/api/contexts/AppProvider';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import messaging from '@react-native-firebase/messaging';
@@ -23,6 +24,7 @@ import RNRestart from 'react-native-restart';
 import { persistor, store } from './store/store';
 import { Restart } from '@football/app/utils/constants/enum';
 import * as RNLocalize from 'react-native-localize';
+
 TextInput.defaultProps = Text.defaultProps || {};
 TextInput.defaultProps.allowFontScaling = false;
 TextInputGH.defaultProps = Text.defaultProps || {};
@@ -34,6 +36,10 @@ const queryClient = new QueryClient({
     defaultOptions: { queries: { retry: 2 } },
 });
 LogBox.ignoreAllLogs(true);
+LogBox.ignoreLogs([
+    "Invariant Violation: ViewPropTypes has been removed from React Native. Migrate to ViewPropTypes exported from 'deprecated-react-native-prop-types'.",
+    'NativeBase: The contrast ratio of',
+]);
 
 const App = (props: any) => {
     const { i18n } = useTranslation();
