@@ -21,7 +21,6 @@ const useViewState = () => {
     return {
         game,
         setGame,
-        t,
         labels,
         setLabels,
         defaultTab,
