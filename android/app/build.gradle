@@ -265,7 +265,6 @@ dependencies {
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
     // implementation project(':react-native-vector-icons')
 
-    implementation project(':react-native-video')
     implementation project(':react-native-maps')
     implementation "androidx.appcompat:appcompat:1.0.0"
     implementation 'com.facebook.android:facebook-android-sdk:[4,5)'
