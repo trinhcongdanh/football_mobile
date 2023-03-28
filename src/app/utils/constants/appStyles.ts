@@ -138,7 +138,7 @@ export const appStyles = StyleSheet.create({
     },
     safe_area: {
         flex: 1,
-        paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : getSize.m(10),
+        paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
     },
 
     main_container: {
