@@ -13,7 +13,7 @@ import { resetVideo, setHiddenVideo } from 'src/store/video/Video.slice';
 const useViewState = () => {
     const showVideo = useSelector((state: any) => state.video.showVideo);
     const sourceVideo = useSelector((state: any) => state.video.sourceVideo);
-    const videoRef = createRef<any>();
+    const videoRef = useRef<any>();
     const [currentTime, setCurrentTime] = useState(0);
     const [duration, setDuration] = useState(0);
     const [pause, setPause] = useState(false);
@@ -69,6 +69,7 @@ const useEventHandler = (state: any) => {
         setShowControls,
         setFullscreen,
         dispatch,
+        duration,
     } = state;
 
     /**
@@ -111,7 +112,8 @@ const useEventHandler = (state: any) => {
         }
 
         if (state === 'playing') {
-            videoRef.current.getDuration().then((duration: any) => {
+            videoRef.current?.getDuration().then((duration: any) => {
+                console.log('duration', duration);
                 setDuration(duration);
             });
         }
