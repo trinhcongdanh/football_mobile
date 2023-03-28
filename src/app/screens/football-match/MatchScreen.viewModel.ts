@@ -106,7 +106,7 @@ export const useViewModel = ({ navigation, route }: IMatchScreenProps) => {
 
     useMount(() => {
         getGameData();
-        const { selectedTab } = route.params;
+        const selectedTab = route?.params?.selectedTab;
         if (selectedTab) {
             switch (selectedTab) {
                 case 'lineup':
