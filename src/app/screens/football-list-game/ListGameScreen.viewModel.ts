@@ -10,8 +10,8 @@ export const useViewModel = ({ navigation, route }: IListGameScreenProps) => {
         goBack();
     };
 
-    const onNavigateGame = () => {
-        navigate(ScreenName.MatchPage);
+    const onNavigateGame = (gameId: string) => {
+        navigate(ScreenName.MatchPage, { gameId });
     };
 
     const onNavigateStadium = (stadiumId: string) => {

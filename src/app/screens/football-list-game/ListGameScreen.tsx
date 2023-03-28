@@ -69,7 +69,7 @@ export const ListGameScreen = ({ navigation, route }: IListGameScreenProps) => {
                                 {topTeam?.last_campaign.games.map((item: Game, index: number) => {
                                     return (
                                         <TouchableOpacity
-                                            onPress={onNavigateGame}
+                                            onPress={() => onNavigateGame(item.game_id)}
                                             key={item.game_id}
                                         >
                                             <LinearGradient

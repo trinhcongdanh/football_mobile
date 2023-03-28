@@ -135,7 +135,7 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                                             marginTop:
                                                 Platform.OS === 'android'
                                                     ? getSize.m(10)
-                                                    : getSize.m(20),
+                                                    : getSize.m(40),
                                         },
                                     ]}
                                 >

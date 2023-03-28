@@ -24,7 +24,7 @@ export const DataPlayerNationalScreen = ({ player }: IDataPlayerNationalScreenPr
                     <View style={[appStyles.align_justify, styles.team_national]}>
                         <View style={styles.logo_club}>
                             <FastImage
-                                source={{ uri: player.top_team.logo_url }}
+                                source={{ uri: player?.top_team?.logo_url }}
                                 style={{ width: getSize.m(50), height: getSize.m(56) }}
                             />
                         </View>
@@ -36,8 +36,8 @@ export const DataPlayerNationalScreen = ({ player }: IDataPlayerNationalScreenPr
                         >
                             <Text style={styles.name_national}>
                                 {getTranslationText({
-                                    textHe: player.top_team.name_he,
-                                    textEn: player.top_team.name_en,
+                                    textHe: player?.top_team?.name_he,
+                                    textEn: player?.top_team?.name_en,
                                 })}
                             </Text>
                         </View>
@@ -49,7 +49,9 @@ export const DataPlayerNationalScreen = ({ player }: IDataPlayerNationalScreenPr
                         <View style={{ marginHorizontal: getSize.m(22) }}>
                             <View style={[appStyles.flex_row_space_center, styles.info_player]}>
                                 <Text style={appStyles.text_label}>{t('data_player.count')}</Text>
-                                <Text style={appStyles.number}>{player.top_team.appearances}</Text>
+                                <Text style={appStyles.number}>
+                                    {player?.top_team?.appearances}
+                                </Text>
                             </View>
                             <View style={styles.line_space} />
                             <View style={[appStyles.flex_row_space_center, styles.info_player]}>
@@ -58,18 +60,20 @@ export const DataPlayerNationalScreen = ({ player }: IDataPlayerNationalScreenPr
                                     <View style={styles.team_national_date}>
                                         <Text style={appStyles.text_label}>
                                             {getTranslationText({
-                                                textHe: player.top_team.debut_game_against.name_he,
-                                                textEn: player.top_team.debut_game_against.name_en,
+                                                textHe:
+                                                    player?.top_team?.debut_game_against?.name_he,
+                                                textEn:
+                                                    player?.top_team?.debut_game_against?.name_en,
                                             })}
                                         </Text>
                                         <Text style={styles.date}>
-                                            {player.top_team.debut_game_against.date}
+                                            {player?.top_team?.debut_game_against?.date}
                                         </Text>
                                     </View>
                                     <View style={styles.logo_national}>
                                         <FastImage
                                             source={{
-                                                uri: player.top_team.debut_game_against.logo_url,
+                                                uri: player?.top_team?.debut_game_against?.logo_url,
                                             }}
                                             style={{
                                                 width: getSize.m(28),
@@ -87,19 +91,21 @@ export const DataPlayerNationalScreen = ({ player }: IDataPlayerNationalScreenPr
                                     <View style={styles.team_national_date}>
                                         <Text style={appStyles.text_label}>
                                             {getTranslationText({
-                                                textHe: player.top_team.last_game_against.name_he,
-                                                textEn: player.top_team.last_game_against.name_en,
+                                                textHe:
+                                                    player?.top_team?.last_game_against?.name_he,
+                                                textEn:
+                                                    player?.top_team?.last_game_against?.name_en,
                                             })}
                                         </Text>
                                         <Text style={styles.date}>
-                                            {player.top_team.last_game_against.date}
+                                            {player?.top_team?.last_game_against?.date}
                                         </Text>
                                     </View>
 
                                     <View style={styles.logo_national}>
                                         <FastImage
                                             source={{
-                                                uri: player.top_team.last_game_against.logo_url,
+                                                uri: player?.top_team?.last_game_against?.logo_url,
                                             }}
                                             style={{
                                                 width: getSize.m(28),
@@ -130,16 +136,16 @@ export const DataPlayerNationalScreen = ({ player }: IDataPlayerNationalScreenPr
                             <Text style={styles.text_header}>{t('data_player.details')}</Text>
                         </LinearGradient>
                         <View style={{ marginHorizontal: getSize.m(22) }}>
-                            {player.top_team.goals.map((item, index) => {
+                            {player?.top_team?.goals?.map((item, index) => {
                                 return (
                                     <View
-                                        key={item.player_top_team_goals_id}
+                                        key={item?.player_top_team_goals_id}
                                         style={[
                                             appStyles.flex_row_space_center,
                                             styles.goal_team,
                                             {
                                                 borderBottomWidth:
-                                                    index === player.top_team.goals.length - 1
+                                                    index === player?.top_team.goals?.length - 1
                                                         ? getSize.m(0)
                                                         : getSize.m(1),
                                             },
@@ -147,15 +153,17 @@ export const DataPlayerNationalScreen = ({ player }: IDataPlayerNationalScreenPr
                                     >
                                         <Text style={[appStyles.text_label, { width: '40%' }]}>
                                             {getTranslationText({
-                                                textHe: item.context_he,
-                                                textEn: item.context_en,
+                                                textHe: item?.context_he,
+                                                textEn: item?.context_en,
                                             })}
                                         </Text>
-                                        <Text style={[appStyles.number]}>{item.games}</Text>
-                                        <Text style={[appStyles.number]}>{item.goals}</Text>
+                                        <Text style={[appStyles.number]}>{item?.games}</Text>
+                                        <Text style={[appStyles.number]}>{item?.goals}</Text>
                                         <TouchableOpacity
                                             onPress={() =>
-                                                onNavigateGoalTopTeam(item.player_top_team_goals_id)
+                                                onNavigateGoalTopTeam(
+                                                    item?.player_top_team_goals_id
+                                                )
                                             }
                                             style={[styles.details]}
                                         >
