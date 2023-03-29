@@ -16,7 +16,7 @@ export const styles = StyleSheet.create({
     },
     container_video: {
         zIndex: 3,
-        top: getSize.m(220),
+        top: getSize.m(400),
         backgroundColor: 'rgba(3, 16, 32, 1)',
         borderTopRightRadius: getSize.m(30),
         borderTopLeftRadius: getSize.m(30),

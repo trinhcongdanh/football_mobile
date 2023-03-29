@@ -31,6 +31,7 @@ export const Video = () => {
         showFullscreen,
         hiddenVideo,
         formatTime,
+        onFullScreenChange,
         onReady,
     } = useViewModel({});
     return (
@@ -64,20 +65,20 @@ export const Video = () => {
                         }}
                     >
                         {showVideo && (
-                            <View pointerEvents="none">
+                            <View>
                                 <YoutubePlayer
                                     ref={videoRef}
                                     height={getSize.m(210)}
                                     play={pause}
                                     videoId={sourceVideo.video_url.split('=')[1]}
-                                    initialPlayerParams={{ controls: false }}
+                                    initialPlayerParams={{ controls: true }}
                                     onChangeState={onStateChange}
                                     onReady={() => onReady}
-                                    onFullScreenChange={showFullscreen}
+                                    onFullScreenChange={onFullScreenChange}
                                 />
                             </View>
                         )}
-                        <View style={styles.controls}>
+                        {/* <View style={styles.controls}>
                             <View
                                 style={[
                                     styles.progress_bar,
@@ -174,7 +175,7 @@ export const Video = () => {
                                     </TouchableOpacity>
                                 </View>
                             </View>
-                        </View>
+                        </View> */}
                         <View
                             style={{
                                 paddingVertical: getSize.m(26),

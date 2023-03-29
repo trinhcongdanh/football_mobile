@@ -134,23 +134,32 @@ const useEventHandler = (state: any) => {
         setPause(false);
         dispatch(setHiddenVideo(false));
         dispatch(resetVideo(null));
+        Orientation.lockToPortrait();
     };
 
     // show full screen
     const showFullscreen = () => {
-        if (Platform.OS === 'ios') {
-            setShowControls(false);
-            if (videoRef.current?.setFullscreen(true)) {
-                // videoRef?.current?.presentFullscreenPlayer();
-                // videoRef.current?.setFullscreen(true);
-                const iframe = videoRef.current?.webViewRef;
-                iframe?.injectJavaScript('document.querySelector("video").webkitEnterFullscreen()');
-            }
+        // if (Platform.OS === 'ios') {
+        //     setShowControls(false);
+        //     if (videoRef.current?.setFullscreen(true)) {
+        //         // videoRef?.current?.presentFullscreenPlayer();
+        //         // videoRef.current?.setFullscreen(true);
+        //         const iframe = videoRef.current?.webViewRef;
+        //         iframe?.injectJavaScript('document.querySelector("video").webkitEnterFullscreen()');
+        //     }
+        // } else {
+        //     setFullscreen(true);
+        //     setShowControls(true);
+        // }
+        // Orientation.lockToLandscapeLeft();
+    };
+
+    const onFullScreenChange = (status: boolean) => {
+        if (status) {
+            Orientation.lockToLandscapeLeft();
         } else {
-            setFullscreen(true);
-            setShowControls(true);
+            Orientation.lockToPortrait();
         }
-        Orientation.lockToLandscapeLeft();
     };
 
     /**
@@ -182,6 +191,7 @@ const useEventHandler = (state: any) => {
         backAction,
         hiddenVideo,
         onReady,
+        onFullScreenChange,
     };
 };
 
@@ -266,7 +276,7 @@ const useEffectHandler = (state: any, eventHandler: any) => {
  * @param param0
  * @returns
  */
-export const useViewModel = ({}: IVideoProps) => {
+export const useViewModel = ({ }: IVideoProps) => {
     const state = useViewState();
     const eventHandler = useEventHandler(state);
     useEffectHandler(state, eventHandler);
