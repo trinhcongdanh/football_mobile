@@ -175,8 +175,8 @@ export const ListGame = ({
             </View>
             <View
                 style={[
-                    appStyles.flex_row_space_center,
-                    { marginHorizontal: getSize.m(36), flexDirection: 'row-reverse' },
+                    appStyles.flex_row_center,
+                    { marginHorizontal: getSize.m(36), flexDirection: 'row-reverse', flex: 0 },
                 ]}
             >
                 <View style={[appStyles.align_justify]}>

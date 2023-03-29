@@ -1,6 +1,7 @@
 import { AppFonts } from '@football/app/assets/fonts';
 import { appIcons } from '@football/app/assets/icons/appIcons';
 import { ListGame } from '@football/app/components/list-game/ListGame';
+import { ListGame_Test } from '@football/app/components/list-game/ListGame_test';
 import { Position } from '@football/app/components/position/Position';
 import styles from '@football/app/screens/football-home/layouts/Item6/Item6.style';
 import { useViewModel } from '@football/app/screens/football-home/layouts/Item6/Item6.viewModel';
@@ -158,7 +159,7 @@ export const Item6 = ({ topTeam }: IItem6Props) => {
                     })
                     .map(item => {
                         return (
-                            <ListGame
+                            <ListGame_Test
                                 key={item.game_id}
                                 logo_home={item.team1.logo_url}
                                 logo_away={item.team2.logo_url}
