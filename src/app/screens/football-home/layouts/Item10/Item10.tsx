@@ -158,10 +158,11 @@ export const Item10 = ({ league }: IItem10Props) => {
                                 key={item.team_id}
                                 start={{ x: 0, y: 0 }}
                                 end={{ x: 1, y: 1 }}
-                                colors={[
-                                    index % 2 === 0 ? appColors.linearLight : appColors.white,
-                                    index % 2 !== 0 ? appColors.linearDark : appColors.white,
-                                ]}
+                                colors={
+                                    index % 2 === 0
+                                        ? [appColors.linearLight, appColors.linearDark]
+                                        : [appColors.white, appColors.white]
+                                }
                                 style={[appStyles.flex_row_space_center, appStyles.statistic_row]}
                             >
                                 <View
