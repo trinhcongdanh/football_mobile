@@ -9,6 +9,12 @@ export const styles = StyleSheet.create({
         borderRadius: getSize.m(60),
         padding: getSize.m(2),
     },
+    resize_name_club: {
+        width: getSize.m(100),
+        height: getSize.m(90),
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+    },
     name_club: {
         fontSize: getSize.m(15),
         color: appColors.white,

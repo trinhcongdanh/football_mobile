@@ -48,8 +48,8 @@ export const LeagueItemScreen = ({ navigation, route, typeId }: ILeagueItemScree
                 appStyles.flex,
                 {
                     backgroundColor: appColors.gray,
-                    paddingHorizontal: getSize.m(20),
-                    paddingTop: getSize.m(30),
+                    paddingHorizontal: getSize.m(4),
+                    paddingTop: getSize.m(60),
                 },
             ]}
         >

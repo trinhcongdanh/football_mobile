@@ -30,7 +30,10 @@ export const ScheduleScreen = ({ navigation, route }: IScheduleScreenProps) => {
         <View
             style={[
                 appStyles.flex,
-                { backgroundColor: appColors.gray, paddingHorizontal: getSize.m(16) },
+                {
+                    backgroundColor: appColors.gray,
+                    paddingTop: getSize.m(40),
+                },
             ]}
         >
             <ScrollView showsVerticalScrollIndicator={false}>

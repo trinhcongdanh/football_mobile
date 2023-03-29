@@ -147,6 +147,7 @@ export const appStyles = StyleSheet.create({
         borderTopLeftRadius: getSize.m(30),
         borderTopRightRadius: getSize.m(30),
         paddingVertical: getSize.m(20),
+        // overflow: 'hidden',
     },
     text_dark: {
         fontFamily: AppFonts.bold,
@@ -173,7 +174,7 @@ export const appStyles = StyleSheet.create({
     top_tap: {
         elevation: 0,
         backgroundColor: appColors.gray,
-        marginHorizontal: getSize.m(16),
+        position: 'absolute',
     },
     top_tap_item: {
         width: getSize.m(90),

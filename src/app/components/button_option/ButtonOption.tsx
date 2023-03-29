@@ -13,18 +13,13 @@ export const ButtonOption = ({
     onSelect,
     defaultValue,
 }: IButtonOptionComponent) => {
-    // const options = [option_one, option_two];
-    const [options, setOptions] = useState<any[]>([]);
-    useEffect(() => {
-        if (option_one) {
-            setOptions(preOptions => [...preOptions, option_one]);
-        }
-        if (option_two) {
-            setOptions(preOptions => [...preOptions, option_two]);
-        }
-    }, []);
+    const options = [option_one, option_two];
+    // const [options, setOptions] = useState<any[]>([]);
+    // useEffect(() => {
+    //     setOptions(preOptions => [option_one, option_two]);
+    // }, []);
 
-    console.log(options);
+    // console.log(options);
     const [select, setSelect] = useState(defaultValue || 0);
 
     const selectOption = (index: number): void => {
@@ -35,34 +30,37 @@ export const ButtonOption = ({
         <View style={[appStyles.flex_row_space, styles.option]}>
             {options.map((option: any, index: number) => {
                 return (
-                    <TouchableOpacity
-                        style={[
-                            styles.button_option_dark,
-                            {
-                                backgroundColor:
-                                    index === select
-                                        ? appColors.button_dark_blue
-                                        : appColors.separator,
-                            },
-                        ]}
-                        key={index.toString()}
-                        onPress={() => selectOption(index)}
-                    >
-                        <Text
+                    option && (
+                        <TouchableOpacity
                             style={[
-                                styles.text_option,
+                                styles.button_option_dark,
                                 {
-                                    color:
+                                    backgroundColor:
                                         index === select
-                                            ? appColors.white
-                                            : appColors.text_option_unselect,
-                                    fontFamily: index === select ? AppFonts.bold : AppFonts.medium,
+                                            ? appColors.button_dark_blue
+                                            : appColors.separator,
                                 },
                             ]}
+                            key={index.toString()}
+                            onPress={() => selectOption(index)}
                         >
-                            {option}
-                        </Text>
-                    </TouchableOpacity>
+                            <Text
+                                style={[
+                                    styles.text_option,
+                                    {
+                                        color:
+                                            index === select
+                                                ? appColors.white
+                                                : appColors.text_option_unselect,
+                                        fontFamily:
+                                            index === select ? AppFonts.bold : AppFonts.medium,
+                                    },
+                                ]}
+                            >
+                                {option}
+                            </Text>
+                        </TouchableOpacity>
+                    )
                 );
             })}
         </View>

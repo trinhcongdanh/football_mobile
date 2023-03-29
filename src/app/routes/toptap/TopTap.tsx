@@ -40,6 +40,7 @@ export const TopTaps = ({ labels, data, defaultTab }: Props) => {
                 tabBarIndicatorStyle: appStyles.top_tap_indicator,
             }}
             initialRouteName={defaultTab}
+            style={{ marginHorizontal: getSize.m(17) }}
         >
             {labels.map((item: any) => {
                 if (item.renderComponent) {

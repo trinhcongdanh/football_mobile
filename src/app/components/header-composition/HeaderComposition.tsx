@@ -50,7 +50,9 @@ export const HeaderComposition = ({
                     <View style={styles.avt_club}>
                         <Avatar rounded size={60} source={{ uri: avt_home }} />
                     </View>
-                    <Text style={styles.name_club}>{name_home}</Text>
+                    <View style={styles.resize_name_club}>
+                        <Text style={styles.name_club}>{name_home}</Text>
+                    </View>
                 </View>
                 <View style={[appStyles.align_justify]}>
                     <Text style={styles.score}>{score}</Text>
@@ -60,8 +62,9 @@ export const HeaderComposition = ({
                     <View style={styles.avt_club}>
                         <Avatar rounded size={getSize.m(60)} source={{ uri: avt_away }} />
                     </View>
-
-                    <Text style={styles.name_club}>{name_away}</Text>
+                    <View style={styles.resize_name_club}>
+                        <Text style={styles.name_club}>{name_away}</Text>
+                    </View>
                 </View>
             </View>
             <TouchableOpacity
