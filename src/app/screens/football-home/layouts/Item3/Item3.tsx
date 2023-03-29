@@ -36,12 +36,12 @@ export const Item3 = ({ player, color }: IItem3Props) => {
     return (
         <ImageBackground
             source={AppImages.img_home_background_favorite_2}
-            style={[appStyles.flex, { height: getSize.m(528), marginTop: getSize.m(46) }]}
+            style={[appStyles.flex, { height: '100%', marginTop: getSize.m(46) }]}
         >
             <FastImage
                 source={AppImages.img_decoration_background_2}
                 tintColor={color}
-                style={{ height: getSize.m(230), width: '100%', position: 'absolute' }}
+                style={{ height: '100%', width: '100%', position: 'absolute' }}
             />
             <View style={appStyles.align_justify}>
                 <View style={styles.logo_team}>
