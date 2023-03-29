@@ -179,7 +179,7 @@ export const FavTopTeam = ({ topTeam, color }: IFavTopTeamProps) => {
                                     marginTop: getSize.m(13),
                                 }}
                             >
-                                {topTeam?.homepage_info?.goal_kickers.map((item, index) => {
+                                {topTeam?.homepage_info?.goal_kickers?.slice(0, 4)?.map((item, index) => {
                                     return (
                                         <LinearGradient
                                             key={item.player_id}
@@ -287,7 +287,7 @@ export const FavTopTeam = ({ topTeam, color }: IFavTopTeamProps) => {
                                     marginTop: getSize.m(13),
                                 }}
                             >
-                                {topTeam?.homepage_info?.cards.map((item, index) => {
+                                {topTeam?.homepage_info?.cards?.slice(0, 3)?.map((item, index) => {
                                     return (
                                         <LinearGradient
                                             key={item.player_id}
@@ -450,7 +450,7 @@ export const FavTopTeam = ({ topTeam, color }: IFavTopTeamProps) => {
                     /> */}
 
                     <View style={{ padding: getSize.m(5), zIndex: 0, position: 'relative' }}>
-                        {topTeam.homepage_info?.games.map(item => {
+                        {topTeam.homepage_info?.games?.slice(0, 3)?.map(item => {
                             return (
                                 <ListGame_Test
                                     key={item.game_id}

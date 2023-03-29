@@ -189,7 +189,7 @@ export const FavTeam = ({ team, color }: IFavTeamProps) => {
                                 marginTop: getSize.m(13),
                             }}
                         >
-                            {team.homepage_info?.goal_kickers.map((item, index) => {
+                            {team.homepage_info?.goal_kickers?.slice(0, 3).map((item, index) => {
                                 return (
                                     <LinearGradient
                                         key={item.player_id}
@@ -360,7 +360,7 @@ export const FavTeam = ({ team, color }: IFavTeamProps) => {
                                 marginTop: getSize.m(13),
                             }}
                         >
-                            {team.homepage_info?.yellow_cards?.map((item, index) => {
+                            {team.homepage_info?.yellow_cards?.slice(0, 2)?.map((item, index) => {
                                 return (
                                     <LinearGradient
                                         key={item.player_id}
@@ -544,7 +544,7 @@ export const FavTeam = ({ team, color }: IFavTeamProps) => {
                                 marginTop: getSize.m(13),
                             }}
                         >
-                            {team.homepage_info?.red_cards?.map((item, index) => {
+                            {team.homepage_info?.red_cards?.slice(0, 2)?.map((item, index) => {
                                 return (
                                     <LinearGradient
                                         key={item.player_id}

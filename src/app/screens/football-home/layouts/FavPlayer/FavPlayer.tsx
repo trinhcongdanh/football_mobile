@@ -21,6 +21,7 @@ import { appColors } from '@football/app/utils/constants/appColors';
 import { GameTable1 } from '@football/app/components/game-table-1/GameTable1';
 import { IFavPlayerProps } from './FavPlayer.type';
 import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
+import { MAX_FAVORITES_PLAYER } from '@football/core/api/configs/config';
 
 export const FavPlayer = ({ player, color }: IFavPlayerProps) => {
     const {
@@ -132,7 +133,7 @@ export const FavPlayer = ({ player, color }: IFavPlayerProps) => {
                             />
                         </TouchableOpacity>
                     </View>
-                    {player.homepage_info?.games?.map(game => {
+                    {player.homepage_info?.games?.slice(0, MAX_FAVORITES_PLAYER).map(game => {
                         return (
                             <GameTable1
                                 key={game.game_id}
