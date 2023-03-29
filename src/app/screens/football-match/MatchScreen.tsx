@@ -68,7 +68,9 @@ export const MatchScreen = ({ navigation, route }: IMatchScreenProps) => {
                         )}
                     </View>
                     <View style={[appStyles.flex, appStyles.main_container]}>
-                        {(game && labels) ? <TopTaps labels={labels} data={game} defaultTab={defaultTab} /> : null}
+                        {game && labels ? (
+                            <TopTaps labels={labels} data={game} defaultTab={defaultTab} />
+                        ) : null}
                     </View>
                 </SafeAreaView>
             </ImageBackground>
