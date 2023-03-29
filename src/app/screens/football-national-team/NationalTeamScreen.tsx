@@ -15,12 +15,9 @@ import { appStyles } from '@football/app/utils/constants/appStyles';
 import { HeaderUser } from '@football/app/components/header-user/HeaderUser';
 import { appIcons } from '@football/app/assets/icons/appIcons';
 import { appColors } from '@football/app/utils/constants/appColors';
-import Video from 'react-native-video-player';
 import { getSize } from '@football/app/utils/responsive/scale';
 import Icon from 'react-native-vector-icons/AntDesign';
 import IconFeather from 'react-native-vector-icons/Feather';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import Carousel from 'react-native-reanimated-carousel';
 import { ListGame } from '@football/app/components/list-game/ListGame';
 import { HeaderLogo } from '@football/app/components/header-logo/HeaderLogo';
 import { Position } from '@football/app/components/position/Position';
@@ -33,11 +30,11 @@ import {
     MAX_TOPTEAM_LASTCAMPAIGN_GAMES,
     MAX_TOPTEAM_LASTCAMPAIGN_PLAYERAPPEARANCE,
 } from '@football/core/api/configs/config';
+import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
+import { ListGame_Test } from '@football/app/components/list-game/ListGame_test';
 import styles from './NationalTeamScreen.style';
 import { useViewModel } from './NationalTeamScreen.viewModel';
 import { INationalTeamScreenProps } from './NationalTeamScreen.type';
-import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
-import { ListGame_Test } from '@football/app/components/list-game/ListGame_test';
 
 export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenProps) => {
     const {
@@ -103,43 +100,45 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                                     })}
                                 </Text>
                             </View>
-                            <View style={{ marginTop: getSize.m(20) }}>
-                                <TouchableOpacity
-                                    activeOpacity={1}
-                                    onPress={() => handlePlayVideo(topTeam?.main_video)}
-                                >
-                                    <LinearGradient
-                                        colors={['transparent', 'rgba(0, 0, 0, 0.90)']}
-                                        start={{ x: 0, y: 0.3 }}
-                                        end={{ x: 0, y: 1 }}
-                                        style={styles.gradient_img}
-                                    />
-                                    <FastImage
-                                        source={{ uri: topTeam?.main_video?.image_url }}
-                                        style={styles.image_team}
-                                    />
-                                    <View style={styles.date}>
-                                        <Text style={styles.text_date}>
-                                            {topTeam?.main_video?.length}
-                                        </Text>
-                                    </View>
-                                    <View style={styles.play_video_main}>
-                                        <Icon
-                                            name={appIcons.ic_caretright}
-                                            size={getSize.m(16)}
-                                            color={appColors.white}
+                            {topTeam?.main_video && (
+                                <View style={{ marginTop: getSize.m(20) }}>
+                                    <TouchableOpacity
+                                        activeOpacity={1}
+                                        onPress={() => handlePlayVideo(topTeam?.main_video)}
+                                    >
+                                        <LinearGradient
+                                            colors={['transparent', 'rgba(0, 0, 0, 0.90)']}
+                                            start={{ x: 0, y: 0.3 }}
+                                            end={{ x: 0, y: 1 }}
+                                            style={styles.gradient_img}
                                         />
-                                    </View>
-                                    <View style={styles.content}>
-                                        <Text style={styles.text_content}>
-                                            {getTranslationText({
-                                                textHe: topTeam?.main_video?.caption_he,
-                                                textEn: topTeam?.main_video?.caption_en,
-                                            })}
-                                        </Text>
-                                    </View>
-                                </TouchableOpacity>
-                            </View>
+                                        <FastImage
+                                            source={{ uri: topTeam?.main_video?.image_url }}
+                                            style={styles.image_team}
+                                        />
+                                        <View style={styles.date}>
+                                            <Text style={styles.text_date}>
+                                                {topTeam?.main_video?.length}
+                                            </Text>
+                                        </View>
+                                        <View style={styles.play_video_main}>
+                                            <Icon
+                                                name={appIcons.ic_caretright}
+                                                size={getSize.m(16)}
+                                                color={appColors.white}
+                                            />
+                                        </View>
+                                        <View style={styles.content}>
+                                            <Text style={styles.text_content}>
+                                                {getTranslationText({
+                                                    textHe: topTeam?.main_video?.caption_he,
+                                                    textEn: topTeam?.main_video?.caption_en,
+                                                })}
+                                            </Text>
+                                        </View>
+                                    </TouchableOpacity>
+                                </View>
+                            )}
                             <View
                                 style={{
                                     marginHorizontal: getSize.m(-16),
