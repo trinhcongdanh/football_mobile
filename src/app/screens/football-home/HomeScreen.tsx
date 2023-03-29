@@ -98,7 +98,10 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                             source={AppImages.img_background_header_home}
                             style={[
                                 {
-                                    height: getSize.m(172),
+                                    height:
+                                        Platform.OS === 'android' ? getSize.m(172) : getSize.m(132),
+                                    borderBottomLeftRadius:
+                                        Platform.OS === 'android' ? 0 : getSize.m(30),
                                     zIndex: 1000,
                                     overflow: 'hidden',
                                 },
@@ -128,17 +131,7 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                                     },
                                 ]}
                             >
-                                <View
-                                    style={[
-                                        appStyles.container,
-                                        {
-                                            marginTop:
-                                                Platform.OS === 'android'
-                                                    ? StatusBar.currentHeight
-                                                    : getSize.m(40),
-                                        },
-                                    ]}
-                                >
+                                <View style={[appStyles.container]}>
                                     <View style={appStyles.flex_row_space_center}>
                                         <TouchableOpacity onPress={onShowSideMenu}>
                                             <LinearGradient
