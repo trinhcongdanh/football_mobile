@@ -78,8 +78,8 @@ export const styles = StyleSheet.create({
         fontSize: getSize.m(16),
         color: appColors.text_dark_blue,
         textAlign: 'left',
-        marginLeft: I18nManager.isRTL ? getSize.m(4) : 0,
-        marginRight: I18nManager.isRTL ? 0 : getSize.m(4),
+        marginRight: I18nManager.isRTL ? getSize.m(4) : 0,
+        marginLeft: I18nManager.isRTL ? 0 : getSize.m(4),
     },
     mr_top: {
         marginTop: getSize.m(20),
