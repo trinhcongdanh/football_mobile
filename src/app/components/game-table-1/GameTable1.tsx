@@ -32,59 +32,66 @@ export const GameTable1 = ({
             <View style={appStyles.flex_row_align}>
                 <Text style={styles.date}>{date}</Text>
             </View>
-            <View
-                style={[
-                    appStyles.flex_row_space_center,
-                    {
-                        marginTop: getSize.m(14),
-                        paddingHorizontal: getSize.m(25),
-                        marginBottom: getSize.m(11),
-                    },
-                ]}
-            >
-                <View style={appStyles.align_justify}>
-                    <FastImage
-                        source={{ uri: avt_home }}
-                        style={{ width: getSize.m(24), height: getSize.m(24) }}
-                    />
-                    <Text style={styles.name_club}>{name_home}</Text>
-                </View>
-                <View style={appStyles.align_justify}>
-                    <View style={styles.container_result}>
-                        {result !== null ? (
-                            <Text style={styles.result}>{result}</Text>
-                        ) : (
-                            <Text style={styles.result}>:</Text>
-                        )}
-                    </View>
-                    <TouchableOpacity onPress={onHandleDetailMatch}>
-                        <View style={appStyles.flex_row_align}>
-                            <Text
-                                style={[
-                                    styles.details,
-                                    {
-                                        color: '#061134',
-                                    },
-                                ]}
-                            >
-                                {t('home_page.composition')}
-                            </Text>
-                            <IconFeather
-                                name={appIcons.ic_left_ios}
-                                size={getSize.m(10)}
-                                color="#061134"
-                            />
+            <View style={[appStyles.align_justify]}>
+                <View
+                    style={[
+                        appStyles.flex_row_space_center,
+                        {
+                            marginTop: getSize.m(14),
+                            paddingHorizontal: getSize.m(25),
+                            marginBottom: getSize.m(11),
+                        },
+                    ]}
+                >
+                    <View style={appStyles.align_justify}>
+                        <FastImage
+                            source={{ uri: avt_home }}
+                            style={{ width: getSize.m(24), height: getSize.m(24) }}
+                        />
+                        <View style={styles.resize_name_club}>
+                            <Text style={styles.name_club}>{name_home}</Text>
                         </View>
-                    </TouchableOpacity>
-                </View>
-                <View style={appStyles.align_justify}>
-                    <FastImage
-                        source={{ uri: avt_away }}
-                        style={{ width: getSize.m(24), height: getSize.m(24) }}
-                    />
-                    <Text style={styles.name_club}>{name_away}</Text>
+                    </View>
+                    <View style={appStyles.align_justify}>
+                        <View style={styles.container_result}>
+                            {result !== null ? (
+                                <Text style={styles.result}>{result}</Text>
+                            ) : (
+                                <Text style={styles.result}>:</Text>
+                            )}
+                        </View>
+                        <TouchableOpacity onPress={onHandleDetailMatch}>
+                            <View style={appStyles.flex_row_align}>
+                                <Text
+                                    style={[
+                                        styles.details,
+                                        {
+                                            color: '#061134',
+                                        },
+                                    ]}
+                                >
+                                    {t('home_page.composition')}
+                                </Text>
+                                <IconFeather
+                                    name={appIcons.ic_left_ios}
+                                    size={getSize.m(10)}
+                                    color="#061134"
+                                />
+                            </View>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={appStyles.align_justify}>
+                        <FastImage
+                            source={{ uri: avt_away }}
+                            style={{ width: getSize.m(24), height: getSize.m(24) }}
+                        />
+                        <View style={styles.resize_name_club}>
+                            <Text style={styles.name_club}>{name_away}</Text>
+                        </View>
+                    </View>
                 </View>
             </View>
+
             <View style={appStyles.flex_row_space}>
                 <View
                     style={[

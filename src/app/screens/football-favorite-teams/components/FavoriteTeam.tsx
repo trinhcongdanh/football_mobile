@@ -122,7 +122,7 @@ export const FavoriteTeam = ({
                 )} */}
 
                 <SafeAreaView style={appStyles.safe_area}>
-                    <View style={[appStyles.flex, { marginTop: getSize.m(10) }]}>
+                    <View style={[appStyles.flex, { marginTop: StatusBar.currentHeight }]}>
                         <View style={{ paddingHorizontal: getSize.m(16) }}>
                             <HeaderFav goSkip={onGoSkip} goBack={onGoBack} onIndex={onIndex} />
 

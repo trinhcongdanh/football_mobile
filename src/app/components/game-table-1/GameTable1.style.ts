@@ -21,12 +21,20 @@ const styles = StyleSheet.create({
         marginLeft: getSize.m(28),
     },
 
+    resize_name_club: {
+        width: getSize.m(100),
+        height: getSize.m(60),
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+    },
+
     name_club: {
         fontFamily: AppFonts.bold,
         fontSize: getSize.m(13),
         lineHeight: getSize.m(17),
         color: appColors.blue_black,
         marginTop: getSize.m(5),
+        textAlign: 'center',
     },
     container_result: {
         paddingVertical: getSize.m(6),

@@ -128,17 +128,7 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                                     },
                                 ]}
                             >
-                                <View
-                                    style={[
-                                        appStyles.container,
-                                        {
-                                            marginTop:
-                                                Platform.OS === 'android'
-                                                    ? getSize.m(10)
-                                                    : getSize.m(40),
-                                        },
-                                    ]}
-                                >
+                                <View style={[appStyles.container]}>
                                     <View style={appStyles.flex_row_space_center}>
                                         <TouchableOpacity onPress={onShowSideMenu}>
                                             <LinearGradient
@@ -202,7 +192,7 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                                         </View>
                                     </View>
                                 </View>
-                                <View style={{ marginTop: getSize.m(22) }}>
+                                <View style={{ marginTop: getSize.m(30) }}>
                                     <ScrollView
                                         style={{
                                             flexDirection: I18nManager.isRTL
