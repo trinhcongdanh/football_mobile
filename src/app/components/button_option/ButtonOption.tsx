@@ -1,7 +1,8 @@
 import { AppFonts } from '@football/app/assets/fonts';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { appStyles } from '@football/app/utils/constants/appStyles';
-import React, { useState } from 'react';
+import { isEmpty } from 'lodash';
+import React, { useEffect, useState } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import styles from './ButtonOption.style';
 import { IButtonOptionComponent } from './ButtonOption.type';
@@ -12,8 +13,18 @@ export const ButtonOption = ({
     onSelect,
     defaultValue,
 }: IButtonOptionComponent) => {
-    const options = [option_one, option_two];
+    // const options = [option_one, option_two];
+    const [options, setOptions] = useState<any[]>([]);
+    useEffect(() => {
+        if (option_one) {
+            setOptions(preOptions => [...preOptions, option_one]);
+        }
+        if (option_two) {
+            setOptions(preOptions => [...preOptions, option_two]);
+        }
+    }, []);
 
+    console.log(options);
     const [select, setSelect] = useState(defaultValue || 0);
 
     const selectOption = (index: number): void => {
@@ -22,7 +33,7 @@ export const ButtonOption = ({
     };
     return (
         <View style={[appStyles.flex_row_space, styles.option]}>
-            {options.map((option: string, index: number) => {
+            {options.map((option: any, index: number) => {
                 return (
                     <TouchableOpacity
                         style={[
