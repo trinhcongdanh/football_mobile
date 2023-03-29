@@ -63,7 +63,7 @@ export const appStyles = StyleSheet.create({
     },
     container: {
         paddingHorizontal: getSize.m(16),
-        marginTop: getSize.m(10),
+        marginTop: StatusBar.currentHeight,
     },
     text_title: {
         fontFamily: AppFonts.bold,
@@ -138,7 +138,7 @@ export const appStyles = StyleSheet.create({
     },
     safe_area: {
         flex: 1,
-        paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
+        // paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
     },
 
     main_container: {

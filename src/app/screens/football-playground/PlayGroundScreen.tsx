@@ -52,7 +52,7 @@ export const PlayGroundScreen = ({ navigation, route }: IPlayGroundScreenProps) 
             >
                 <StatusBar translucent backgroundColor="transparent" />
                 <SafeAreaView style={appStyles.safe_area}>
-                    <View style={{ marginTop: getSize.m(10) }}>
+                    <View style={{ marginTop: StatusBar.currentHeight }}>
                         <View style={[appStyles.flex_space_center, styles.header]}>
                             <View>
                                 <Image source={AppImages.img_x_circle} />
