@@ -5,16 +5,16 @@ import { AppImages } from '@football/app/assets/images';
 import styles from '@football/app/screens/football-home/HomeScreen.styles';
 import { IHomeScreenProps } from '@football/app/screens/football-home/HomeScreen.type';
 import { useViewModel } from '@football/app/screens/football-home/HomeScreen.viewModel';
-import { Item1 } from '@football/app/screens/football-home/layouts/Item1/Item1';
-import { Item10 } from '@football/app/screens/football-home/layouts/Item10/Item10';
-import { Item11 } from '@football/app/screens/football-home/layouts/Item11/Item11';
-import { Item12 } from '@football/app/screens/football-home/layouts/Item12/Item12';
-import { Item13 } from '@football/app/screens/football-home/layouts/Item13/Item13';
-import { Item3 } from '@football/app/screens/football-home/layouts/Item3/Item3';
-import { Item5 } from '@football/app/screens/football-home/layouts/Item5/Item5';
-import { Item6 } from '@football/app/screens/football-home/layouts/Item6/Item6';
-import { Item7 } from '@football/app/screens/football-home/layouts/Item7/Item7';
-import { Item9 } from '@football/app/screens/football-home/layouts/Item9/Item9';
+import { FavTeam } from '@football/app/screens/football-home/layouts/FavTeam/FavTeam';
+import { FavPlayer } from '@football/app/screens/football-home/layouts/FavPlayer/FavPlayer';
+import { FavTopTeam } from '@football/app/screens/football-home/layouts/FavTopTeam/FavTopTeam';
+import { LeaguesTable } from '@football/app/screens/football-home/layouts/LeaguesTable/LeaguesTable';
+import { NationalCup } from '@football/app/screens/football-home/layouts/NationalCup/NationalCup';
+import { Video } from '@football/app/screens/football-home/layouts/Video/Video';
+import { Instagram } from '@football/app/screens/football-home/layouts/Instagram/Instagram';
+import { ListOfGameTopTeam } from '@football/app/screens/football-home/layouts/ListOfGameTopTeam/ListOfGameTopTeam';
+import { SocialResponsibility } from '@football/app/screens/football-home/layouts/SocialResponsibility/SocialResponsibility';
+import { Magazine } from '@football/app/screens/football-home/layouts/Magazine/Magazine';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import { ScreenName } from '@football/app/utils/constants/enum';
@@ -387,7 +387,9 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                                 ?.filter(team => team)
                                 .map(team => {
                                     // eslint-disable-next-line no-underscore-dangle
-                                    return <Item1 color={colorCustom} team={team} key={team._id} />;
+                                    return (
+                                        <FavTeam color={colorCustom} team={team} key={team._id} />
+                                    );
                                 })}
                         {/* Item2 */}
                         {/* <Item2 /> */}
@@ -397,7 +399,11 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                             players?.map(player => {
                                 // eslint-disable-next-line no-underscore-dangle
                                 return (
-                                    <Item3 color={colorCustom} player={player} key={player._id} />
+                                    <FavPlayer
+                                        color={colorCustom}
+                                        player={player}
+                                        key={player._id}
+                                    />
                                 );
                             })}
                         {/* Item4 */}
@@ -407,13 +413,16 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                             topTeams?.map(topTeam => {
                                 return (
                                     <>
-                                        <Item5
+                                        <FavTopTeam
                                             color={colorCustom}
                                             topTeam={topTeam}
                                             key={topTeam._id}
                                         />
                                         {homeLayout?.layout.includes('my_top_team') && (
-                                            <Item6 topTeam={topTeam} key={topTeam._id} />
+                                            <ListOfGameTopTeam
+                                                topTeam={topTeam}
+                                                key={topTeam._id}
+                                            />
                                         )}
                                     </>
                                 );
@@ -421,33 +430,35 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                         {/* <Item5 topTeam={} /> */}
                         {/* Item6 */}
                         {/* Item7 */}
-                        {homeLayout?.layout.includes('ads') && <Item7 homePage={homePage} />}
+                        {homeLayout?.layout.includes('ads') && (
+                            <SocialResponsibility homePage={homePage} />
+                        )}
                         {/* Item8 */}
                         {/* <Item8 /> */}
                         {/* Item9 */}
                         {homeLayout?.layout.includes('magazine') ? (
-                            <Item9 homePage={homePage} />
+                            <Magazine homePage={homePage} />
                         ) : null}
                         {/* Item10 */}
                         {homeLayout?.layout.includes('leagues_table') && leagues?.length
                             ? leagues.map(league => {
-                                  return <Item10 league={league} key={league._id} />;
+                                  return <LeaguesTable league={league} key={league._id} />;
                               })
                             : null}
                         {/* Item11 */}
                         {/* <Item11 /> */}
                         {homeLayout?.layout.includes('national_cup') && (
-                            <Item11 homePage={homePage} />
+                            <NationalCup homePage={homePage} />
                         )}
 
                         {/* Item12 */}
                         {homeLayout?.layout.includes('clips') && generalVod && (
-                            <Item12 videos={generalVod} handlePlayVideo={handlePlayVideo} />
+                            <Video videos={generalVod} handlePlayVideo={handlePlayVideo} />
                         )}
 
                         {/* Item13 */}
 
-                        {homeLayout?.layout.includes('instagram') && <Item13 />}
+                        {homeLayout?.layout.includes('instagram') && <Instagram />}
 
                         <View style={{ height: getSize.m(120), width: '100%' }} />
                     </ScrollView>
