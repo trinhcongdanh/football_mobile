@@ -65,20 +65,28 @@ export const DataPlayerScreen = ({ navigation, route }: IDataPlayerScreenProps) 
                                     title_3={t('data_player.number')}
                                 />
                             </View>
-                            <View style={[appStyles.flex, appStyles.main_container]}>
-                                <ButtonOption
-                                    option_one={t('data_player.option.club')}
-                                    option_two={t('data_player.option.national')}
-                                    onSelect={setOnSelect}
-                                    defaultValue={onSelect}
-                                />
+                            {!player.team && !player.top_team ? null : (
+                                <View style={[appStyles.flex, appStyles.main_container]}>
+                                    <ButtonOption
+                                        option_one={
+                                            player.team ? t('data_player.option.club') : null
+                                        }
+                                        option_two={
+                                            player.top_team
+                                                ? t('data_player.option.national')
+                                                : null
+                                        }
+                                        onSelect={setOnSelect}
+                                        defaultValue={onSelect}
+                                    />
 
-                                {onSelect === 0 ? (
-                                    <DataPlayerTeamScreen player={player} />
-                                ) : (
-                                    <DataPlayerNationalScreen player={player} />
-                                )}
-                            </View>
+                                    {onSelect === 0 ? (
+                                        <DataPlayerTeamScreen player={player} />
+                                    ) : (
+                                        <DataPlayerNationalScreen player={player} />
+                                    )}
+                                </View>
+                            )}
                         </SafeAreaView>
                     </>
                 )}
