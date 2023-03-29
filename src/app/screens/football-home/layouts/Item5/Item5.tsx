@@ -3,6 +3,7 @@ import { AppFonts } from '@football/app/assets/fonts';
 import { appIcons } from '@football/app/assets/icons/appIcons';
 import { AppImages } from '@football/app/assets/images';
 import { ListGame } from '@football/app/components/list-game/ListGame';
+import { ListGame_Test } from '@football/app/components/list-game/ListGame_test';
 import styles from '@football/app/screens/football-home/layouts/Item5/Item5.style';
 import { useViewModel } from '@football/app/screens/football-home/layouts/Item5/Item5.viewModel';
 import { appColors } from '@football/app/utils/constants/appColors';
@@ -451,7 +452,7 @@ export const Item5 = ({ topTeam, color }: IItem5Props) => {
                     <View style={{ padding: getSize.m(5), zIndex: 0, position: 'relative' }}>
                         {topTeam.homepage_info?.games.map(item => {
                             return (
-                                <ListGame
+                                <ListGame_Test
                                     key={item.game_id}
                                     logo_home={item.team1.logo_url}
                                     logo_away={item.team2.logo_url}

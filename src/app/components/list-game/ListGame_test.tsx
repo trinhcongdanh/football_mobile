@@ -205,9 +205,13 @@ export const ListGame_Test = ({
                             />
                         </View>
 
-                        <View style={styles.resize_name_club}>
-                            <Text style={styles.name_club}>{nameHome}</Text>
-                        </View>
+                        {nameHome || nameAway ? (
+                            <View style={styles.resize_name_club}>
+                                <Text numberOfLines={3} style={styles.name_club}>
+                                    {nameHome}
+                                </Text>
+                            </View>
+                        ) : null}
                     </View>
                     <View
                         style={[
@@ -215,6 +219,8 @@ export const ListGame_Test = ({
                             styles.time,
                             {
                                 backgroundColor: result === null ? appColors.white : '#F8FDFF',
+                                marginHorizontal:
+                                    nameHome || nameAway ? getSize.m(0) : getSize.m(40),
                             },
                         ]}
                     >
@@ -260,16 +266,22 @@ export const ListGame_Test = ({
                                 source={{ uri: logo_away }}
                             />
                         </View>
-
-                        <View style={styles.resize_name_club}>
-                            <Text style={styles.name_club}>{nameAway}</Text>
-                        </View>
+                        {nameHome || nameAway ? (
+                            <View style={styles.resize_name_club}>
+                                <Text numberOfLines={3} style={styles.name_club}>
+                                    {nameAway}
+                                </Text>
+                            </View>
+                        ) : null}
                     </View>
                 </View>
             </View>
             {details && (
                 <TouchableOpacity
-                    style={[appStyles.flex_row_center, { flex: 0 }]}
+                    style={[
+                        appStyles.flex_row_center,
+                        { flex: 0, marginTop: nameHome || nameAway ? getSize.m(0) : getSize.m(14) },
+                    ]}
                     onPress={handleDetailMatch}
                 >
                     {isLive ? (

@@ -37,6 +37,7 @@ import styles from './NationalTeamScreen.style';
 import { useViewModel } from './NationalTeamScreen.viewModel';
 import { INationalTeamScreenProps } from './NationalTeamScreen.type';
 import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
+import { ListGame_Test } from '@football/app/components/list-game/ListGame_test';
 
 export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenProps) => {
     const {
@@ -729,7 +730,7 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                                                 })
                                                 .map(item => {
                                                     return (
-                                                        <ListGame
+                                                        <ListGame_Test
                                                             key={item.game_id}
                                                             logo_home={item.team1.logo_url}
                                                             logo_away={item.team2.logo_url}
