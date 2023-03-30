@@ -659,6 +659,7 @@ const resources = {
                 all_video: 'לכל הסרטונים',
                 instagram: 'ההתאחדות באינסטגרם',
                 composition: 'הרכב',
+                game_detail: 'פרטי משחק',
             },
             list_game: {
                 results: 'לתוצאות המשחק בזמן אמת',
@@ -1342,6 +1343,7 @@ const resources = {
                 all_video: 'See all',
                 instagram: 'Instagram',
                 composition: 'Lineup',
+                game_detail: 'Game details',
             },
             list_game: {
                 results: 'Game live data',

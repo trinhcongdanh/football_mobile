@@ -24,12 +24,20 @@ const styles = StyleSheet.create({
         color: appColors.light_gray,
         lineHeight: getSize.m(15.6),
     },
+
+    resize_name_club: {
+        width: getSize.m(80),
+        height: getSize.m(40),
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+    },
     name_club: {
         fontFamily: AppFonts.bold,
         fontSize: getSize.m(13),
         lineHeight: getSize.m(17),
         color: appColors.blue_black,
         marginTop: getSize.m(5),
+        textAlign: 'center',
     },
     container_result: {
         paddingVertical: getSize.m(6),
