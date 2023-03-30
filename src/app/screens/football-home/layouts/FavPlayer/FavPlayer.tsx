@@ -133,7 +133,7 @@ export const FavPlayer = ({ player, color }: IFavPlayerProps) => {
                             />
                         </TouchableOpacity>
                     </View>
-                    {player.homepage_info?.games?.slice(0, MAX_FAVORITES_PLAYER).map(game => {
+                    {player.homepage_info?.games?.slice(0, 2).map(game => {
                         return (
                             <GameTable1
                                 key={game.game_id}
@@ -150,10 +150,10 @@ export const FavPlayer = ({ player, color }: IFavPlayerProps) => {
                                 schedule=":"
                                 avt_away={game.team2.logo_url}
                                 avt_home={game.team1.logo_url}
-                                clock={`${game.on_field}`}
-                                ticket_red={`${game.red_cards}`}
-                                ticket_yellow={`${game.yellow_cards}`}
-                                score={`${game.goals}`}
+                                clock={`${game.on_field || 0}`}
+                                ticket_red={`${game.red_cards || 0}`}
+                                ticket_yellow={`${game.yellow_cards || 0}`}
+                                score={`${game.goals || 0}`}
                                 onHandleDetailMatch={() => handleDetailMatch(game.game_id)}
                             />
                         );
