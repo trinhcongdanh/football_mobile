@@ -54,7 +54,7 @@ export const GameTable = ({
                     appStyles.flex_row_space_center,
                     {
                         marginTop: getSize.m(14),
-                        paddingHorizontal: getSize.m(20),
+                        paddingHorizontal: getSize.m(10),
                         marginBottom: getSize.m(18),
                     },
                 ]}
