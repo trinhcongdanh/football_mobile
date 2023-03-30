@@ -212,7 +212,7 @@ const useEffectHandler = (state: any, eventHandler: any) => {
         GetFCMToken();
         console.log(tokenFCM);
         if (!isFocused) return;
-        if (userLogin.success && tokenFCM) {
+        if (userLogin.success) {
             dispatch(
                 getProfileUser(
                     serializeParams({
