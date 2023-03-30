@@ -44,6 +44,7 @@ import {
     VideoScreen,
     CupsScreen,
     ListGameScreen,
+    FullListGameScreen,
     ContactUsScreen,
     TermsConditionScreen,
     GoalKickerListScreen,
@@ -123,6 +124,7 @@ export const AuthStack = () => {
             <Auth.Screen name={ScreenName.ConfirmationPage} component={ConfirmationScreen} />
             <Auth.Screen name={ScreenName.CupsPage} component={CupsScreen} />
             <Auth.Screen name={ScreenName.ListGamePage} component={ListGameScreen} />
+            <Auth.Screen name={ScreenName.FullListGamePage} component={FullListGameScreen} />
             <Auth.Screen name={ScreenName.ContactUsPage} component={ContactUsScreen} />
             <Auth.Screen name={ScreenName.TermsConditionPage} component={TermsConditionScreen} />
         </Auth.Navigator>

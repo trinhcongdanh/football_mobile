@@ -45,6 +45,7 @@ export enum ScreenName {
     ConfirmationPage = 'ConfirmationPage',
     CupsPage = 'CupsPage',
     ListGamePage = 'ListGamePage',
+    FullListGamePage = 'FullListGamePage',
     ContactUsPage = 'ContactUsPage',
     TermsConditionPage = 'TermsConditionPage',
     SideBar = 'SideBar',

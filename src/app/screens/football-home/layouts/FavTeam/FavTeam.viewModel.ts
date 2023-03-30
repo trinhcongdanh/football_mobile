@@ -18,8 +18,9 @@ export const useViewModel = () => {
         navigate(ScreenName.MatchPage, { gameId });
     };
 
-    const onNavigateTeamDetails = (teamId: string) => {
-        navigate(ScreenName.GroupPagePage, { teamId });
+    const onNavigateTeamDetails = (team: TeamModel) => {
+        // navigate(ScreenName.GroupPagePage, { teamId });
+        navigate(ScreenName.FullListGamePage, { team });
     };
 
     const onNavigateStatistics = (team: TeamModel) => {
