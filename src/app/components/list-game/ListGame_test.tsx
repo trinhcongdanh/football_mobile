@@ -207,7 +207,7 @@ export const ListGame_Test = ({
 
                         {nameHome || nameAway ? (
                             <View style={styles.resize_name_club}>
-                                <Text numberOfLines={3} style={styles.name_club}>
+                                <Text numberOfLines={2} style={styles.name_club}>
                                     {nameHome}
                                 </Text>
                             </View>
@@ -220,7 +220,7 @@ export const ListGame_Test = ({
                             {
                                 backgroundColor: result === null ? appColors.white : '#F8FDFF',
                                 marginHorizontal:
-                                    nameHome || nameAway ? getSize.m(0) : getSize.m(40),
+                                    nameHome || nameAway ? getSize.m(20) : getSize.m(40),
                             },
                         ]}
                     >
@@ -268,7 +268,7 @@ export const ListGame_Test = ({
                         </View>
                         {nameHome || nameAway ? (
                             <View style={styles.resize_name_club}>
-                                <Text numberOfLines={3} style={styles.name_club}>
+                                <Text numberOfLines={2} style={styles.name_club}>
                                     {nameAway}
                                 </Text>
                             </View>

@@ -2,6 +2,7 @@
 import { AppFonts } from '@football/app/assets/fonts';
 import { appIcons } from '@football/app/assets/icons/appIcons';
 import { AppImages } from '@football/app/assets/images';
+import { GameTable } from '@football/app/components/game_table/GameTable';
 import { ListGame } from '@football/app/components/list-game/ListGame';
 import { ListGame_Test } from '@football/app/components/list-game/ListGame_test';
 import styles from '@football/app/screens/football-home/layouts/FavTopTeam/FavTopTeam.style';
@@ -179,79 +180,85 @@ export const FavTopTeam = ({ topTeam, color }: IFavTopTeamProps) => {
                                     marginTop: getSize.m(13),
                                 }}
                             >
-                                {topTeam?.homepage_info?.goal_kickers?.slice(0, 4)?.map((item, index) => {
-                                    return (
-                                        <LinearGradient
-                                            key={item.player_id}
-                                            start={{ x: 0, y: 0 }}
-                                            end={{ x: 1, y: 1 }}
-                                            colors={[
-                                                index % 2 === 0 ? '#f3f4f7' : appColors.white,
-                                                index % 2 === 0 ? '#f5fbfd' : appColors.white,
-                                            ]}
-                                            style={[
-                                                appStyles.flex_row_space_center,
-                                                appStyles.statistic_row,
-                                                {
-                                                    paddingVertical: getSize.m(7),
-                                                },
-                                            ]}
-                                        >
-                                            <View
+                                {topTeam?.homepage_info?.goal_kickers
+                                    ?.slice(0, 4)
+                                    ?.map((item, index) => {
+                                        return (
+                                            <LinearGradient
+                                                key={item.player_id}
+                                                start={{ x: 0, y: 0 }}
+                                                end={{ x: 1, y: 1 }}
+                                                colors={[
+                                                    index % 2 === 0 ? '#f3f4f7' : appColors.white,
+                                                    index % 2 === 0 ? '#f5fbfd' : appColors.white,
+                                                ]}
                                                 style={[
+                                                    appStyles.flex_row_space_center,
+                                                    appStyles.statistic_row,
                                                     {
-                                                        width: getSize.m(160),
-                                                        overflow: 'hidden',
+                                                        paddingVertical: getSize.m(7),
                                                     },
                                                 ]}
                                             >
                                                 <View
-                                                    style={{
-                                                        flexDirection: 'row',
-                                                    }}
+                                                    style={[
+                                                        {
+                                                            width: getSize.m(160),
+                                                            overflow: 'hidden',
+                                                        },
+                                                    ]}
                                                 >
-                                                    <Avatar
-                                                        source={{ uri: item.player_image_url }}
-                                                        rounded
-                                                        size={getSize.m(20)}
-                                                    />
-                                                    <Text
-                                                        style={[
-                                                            styles.statistics_content,
-                                                            {
-                                                                marginLeft: getSize.m(6),
-                                                                textAlignVertical: 'center',
-                                                            },
-                                                        ]}
+                                                    <View
+                                                        style={{
+                                                            flexDirection: 'row',
+                                                        }}
                                                     >
-                                                        {getTranslationText({
-                                                            textHe: item.player_name_he,
-                                                            textEn: item.player_name_en,
-                                                        })}
-                                                    </Text>
+                                                        <Avatar
+                                                            source={{ uri: item.player_image_url }}
+                                                            rounded
+                                                            size={getSize.m(20)}
+                                                        />
+                                                        <Text
+                                                            style={[
+                                                                styles.statistics_content,
+                                                                {
+                                                                    marginLeft: getSize.m(6),
+                                                                    textAlignVertical: 'center',
+                                                                },
+                                                            ]}
+                                                        >
+                                                            {getTranslationText({
+                                                                textHe: item.player_name_he,
+                                                                textEn: item.player_name_en,
+                                                            })}
+                                                        </Text>
+                                                    </View>
                                                 </View>
-                                            </View>
-                                            <View style={{ width: getSize.m(50) }}>
-                                                {item.games ? (
-                                                    <Text style={styles.statistics_content}>
-                                                        {item.games}
-                                                    </Text>
-                                                ) : (
-                                                    <Text style={styles.statistics_content}>-</Text>
-                                                )}
-                                            </View>
-                                            <View style={{ width: getSize.m(50) }}>
-                                                {item.goals ? (
-                                                    <Text style={styles.statistics_content}>
-                                                        {item.goals}
-                                                    </Text>
-                                                ) : (
-                                                    <Text style={styles.statistics_content}>-</Text>
-                                                )}
-                                            </View>
-                                        </LinearGradient>
-                                    );
-                                })}
+                                                <View style={{ width: getSize.m(50) }}>
+                                                    {item.games ? (
+                                                        <Text style={styles.statistics_content}>
+                                                            {item.games}
+                                                        </Text>
+                                                    ) : (
+                                                        <Text style={styles.statistics_content}>
+                                                            -
+                                                        </Text>
+                                                    )}
+                                                </View>
+                                                <View style={{ width: getSize.m(50) }}>
+                                                    {item.goals ? (
+                                                        <Text style={styles.statistics_content}>
+                                                            {item.goals}
+                                                        </Text>
+                                                    ) : (
+                                                        <Text style={styles.statistics_content}>
+                                                            -
+                                                        </Text>
+                                                    )}
+                                                </View>
+                                            </LinearGradient>
+                                        );
+                                    })}
                             </View>
                         </View>
                         <View style={styles.line} />
@@ -438,42 +445,62 @@ export const FavTopTeam = ({ topTeam, color }: IFavTopTeamProps) => {
                             />
                         </TouchableOpacity>
                     </View>
-                    {/* <GameTable
-                        date="יום רביעי | 13/09/22"
-                        avt_away={AppImages.img_club}
-                        avt_home={AppImages.img_club}
-                        location="טרם ידוע"
-                        name_away="מכבי תל אביב"
-                        name_home="מכבי תל אביב"
-                        result="3 : 1"
-                        schedule="11:30"
-                    /> */}
 
                     <View style={{ padding: getSize.m(5), zIndex: 0, position: 'relative' }}>
                         {topTeam.homepage_info?.games?.slice(0, 3)?.map(item => {
                             return (
-                                <ListGame_Test
+                                // <ListGame_Test
+                                //     key={item.game_id}
+                                //     logo_home={item.team1.logo_url}
+                                //     logo_away={item.team2.logo_url}
+                                // nameHome={getTranslationText({
+                                //     textHe: item.team1.name_he,
+                                //     textEn: item.team1.name_en,
+                                // })}
+                                //     nameAway={getTranslationText({
+                                //         textHe: item.team2.name_he,
+                                //         textEn: item.team2.name_en,
+                                //     })}
+                                // location={getTranslationText({
+                                //     textHe: item.stadium_he,
+                                //     textEn: item.stadium_en,
+                                // })}
+                                //     date={item.date}
+                                //     result={item.score}
+                                //     schedule={item.time}
+                                //     // completed={item.completed}
+                                //     details={item.game_id}
+                                //     color={appColors.gray2}
+                                //     handleDetailMatch={() => handleDetailMatch(item.game_id)}
+                                //     handleStadium={() => handleStadium(item.stadium_id)}
+                                // isLive={moment().isBetween(
+                                //     moment(`${item.date} ${item.time}`, 'DD.M.YY HH:mm'),
+                                //     moment(`${item.date} ${item.time}`, 'DD.M.YY HH:mm').add(
+                                //         2,
+                                //         'hours'
+                                //     )
+                                // )}
+                                //     style={{ marginTop: getSize.m(12) }}
+                                // />
+                                <GameTable
                                     key={item.game_id}
-                                    logo_home={item.team1.logo_url}
-                                    logo_away={item.team2.logo_url}
-                                    nameHome={getTranslationText({
-                                        textHe: item.team1.name_he,
-                                        textEn: item.team1.name_en,
+                                    date={item?.date}
+                                    avt_away={item?.team2?.logo_url}
+                                    avt_home={item?.team1?.logo_url}
+                                    name_away={getTranslationText({
+                                        textHe: item?.team2?.name_he,
+                                        textEn: item?.team2?.name_en,
                                     })}
-                                    nameAway={getTranslationText({
-                                        textHe: item.team2.name_he,
-                                        textEn: item.team2.name_en,
+                                    name_home={getTranslationText({
+                                        textHe: item?.team1?.name_he,
+                                        textEn: item?.team1?.name_en,
                                     })}
+                                    result={item?.score}
+                                    schedule={item?.time}
                                     location={getTranslationText({
-                                        textHe: item.stadium_he,
-                                        textEn: item.stadium_en,
+                                        textHe: item?.stadium_he,
+                                        textEn: item?.stadium_en,
                                     })}
-                                    date={item.date}
-                                    result={item.score}
-                                    schedule={item.time}
-                                    // completed={item.completed}
-                                    details={item.game_id}
-                                    color={appColors.gray2}
                                     handleDetailMatch={() => handleDetailMatch(item.game_id)}
                                     handleStadium={() => handleStadium(item.stadium_id)}
                                     isLive={moment().isBetween(
@@ -483,7 +510,6 @@ export const FavTopTeam = ({ topTeam, color }: IFavTopTeamProps) => {
                                             'hours'
                                         )
                                     )}
-                                    style={{ marginTop: getSize.m(12) }}
                                 />
                             );
                         })}

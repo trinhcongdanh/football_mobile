@@ -163,7 +163,7 @@ export const PitchScreen = ({ navigation, route }: IPitchScreenProps) => {
                                                             }}
                                                         >
                                                             <Avatar
-                                                                source={{ uri: item.logo_url }}
+                                                                source={{ uri: item?.logo_url }}
                                                                 rounded
                                                                 size={18}
                                                             />
@@ -177,8 +177,8 @@ export const PitchScreen = ({ navigation, route }: IPitchScreenProps) => {
                                                                 ]}
                                                             >
                                                                 {getTranslationText({
-                                                                    textHe: item.name_he,
-                                                                    textEn: item.name_en,
+                                                                    textHe: item?.name_he,
+                                                                    textEn: item?.name_en,
                                                                 })}
                                                             </Text>
                                                         </View>
@@ -198,8 +198,8 @@ export const PitchScreen = ({ navigation, route }: IPitchScreenProps) => {
                                                             ]}
                                                         >
                                                             {getTranslationText({
-                                                                textHe: item.age_he,
-                                                                textEn: item.age_en,
+                                                                textHe: item?.age_he,
+                                                                textEn: item?.age_en,
                                                             })}
                                                         </Text>
                                                     </View>

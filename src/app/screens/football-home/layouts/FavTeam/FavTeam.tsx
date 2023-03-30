@@ -768,7 +768,9 @@ export const FavTeam = ({ team, color }: IFavTeamProps) => {
                                         date={item.date}
                                         result={item.score}
                                         schedule={item.time}
+                                        icon={appIcons.ic_left_ios}
                                         // completed={item.completed}
+                                        details={item.game_id}
                                         color={appColors.gray2}
                                         handleDetailMatch={() => handleDetailMatch(item.game_id)}
                                         handleStadium={() => handleStadium(item.stadium_id)}
