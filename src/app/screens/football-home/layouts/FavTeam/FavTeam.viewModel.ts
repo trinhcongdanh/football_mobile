@@ -28,9 +28,8 @@ export const useViewModel = () => {
 
     const onNavigateStatistics = (team: TeamModel) => {
         const teamSeasonId = team?.seasons?.length ? team?.seasons[0].team_season_id : null;
-
         // eslint-disable-next-line no-underscore-dangle
-        navigate(ScreenName.StatisticsGroupPage, { teamSeasonId, teamId: team._id });
+        navigate(ScreenName.StatisticsGroupPage, { teamSeasonId });
     };
 
     return {

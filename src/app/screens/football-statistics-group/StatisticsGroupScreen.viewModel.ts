@@ -1,3 +1,5 @@
+/* eslint-disable no-underscore-dangle */
+import TeamSeasonService from '@football/core/services/TeamSeason.service';
 import { ScreenName } from '@football/app/utils/constants/enum';
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useTranslation } from 'react-i18next';
@@ -6,6 +8,7 @@ import { useState, useCallback } from 'react';
 import { TeamSeasonStatsModel } from '@football/core/models/TeamSeasonStatsResponse';
 import TeamSeasonStatsService from '@football/core/services/TeamSeasonStats.service';
 import { useMount } from '@football/app/utils/hooks/useMount';
+import { TeamSeasonModel } from '../../../core/models/TeamSeasonResponse';
 import { IStatisticsGroupScreenProps, TeamGoalKickersListType } from './StatisticsGroupScreen.type';
 
 const useViewState = () => {
@@ -20,18 +23,40 @@ const useViewCallback = (route: any, viewState: any) => {
     const { setTeamSeasonStats } = viewState;
 
     const getTeamSeasonStatsData = useCallback(async () => {
-        const api = route?.params?.statisticId
-            ? TeamSeasonStatsService.findByOId(route?.params?.statisticId)
-            : TeamSeasonStatsService.findByFilter({
-                  team_season_id: route?.params?.teamSeasonId,
-                  team_id: route?.params?.teamId,
-              });
-        const [error, res] = await api;
+        const statisticId = route?.params?.statisticId;
+
+        if (statisticId) {
+            const [error, res] = await TeamSeasonStatsService.findByOId(statisticId);
+            if (error) {
+                return;
+            }
+            if (res?.data?.documents?.length > 0) {
+                setTeamSeasonStats(res.data.documents[0]);
+            }
+
+            return;
+        }
+
+        const teamSeasonId = route?.params?.teamSeasonId;
+        const [error, res] = await TeamSeasonService.findByOId(teamSeasonId);
         if (error) {
             return;
         }
+
         if (res?.data?.documents?.length > 0) {
-            setTeamSeasonStats(res.data.documents[0]);
+            const teamSeason = res.data.documents[0] as TeamSeasonModel;
+
+            const [teamSeasonStatError, teamSeasonStatRes] = await TeamSeasonStatsService.findByOId(
+                teamSeason._id
+            );
+
+            if (teamSeasonStatError) {
+                return;
+            }
+
+            if (teamSeasonStatRes?.data?.documents?.length > 0) {
+                setTeamSeasonStats(teamSeasonStatRes.data.documents[0]);
+            }
         }
     }, []);
 
