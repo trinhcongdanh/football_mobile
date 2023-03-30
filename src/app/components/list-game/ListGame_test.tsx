@@ -239,7 +239,7 @@ export const ListGame_Test = ({
                         {!isLive && result === null && schedule !== null && tournament && (
                             <Text style={styles.score}>V S</Text>
                         )}
-                        {!isLive && result === null && schedule !== null && (
+                        {!isLive && result === null && schedule !== null && !tournament && (
                             <Text style={styles.score}>{schedule}</Text>
                         )}
 

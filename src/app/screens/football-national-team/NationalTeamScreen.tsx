@@ -35,6 +35,7 @@ import { ListGame_Test } from '@football/app/components/list-game/ListGame_test'
 import styles from './NationalTeamScreen.style';
 import { useViewModel } from './NationalTeamScreen.viewModel';
 import { INationalTeamScreenProps } from './NationalTeamScreen.type';
+import { isEmpty } from 'lodash';
 
 export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenProps) => {
     const {
@@ -100,7 +101,7 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                                     })}
                                 </Text>
                             </View>
-                            {topTeam?.main_video && (
+                            {topTeam?.main_video ? (
                                 <View style={{ marginTop: getSize.m(20) }}>
                                     <TouchableOpacity
                                         activeOpacity={1}
@@ -138,14 +139,15 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                                         </View>
                                     </TouchableOpacity>
                                 </View>
-                            )}
-                            <View
-                                style={{
-                                    marginHorizontal: getSize.m(-16),
-                                    marginTop: getSize.m(18),
-                                }}
-                            >
-                                {/* <GestureHandlerRootView style={appStyles.flex}>
+                            ) : null}
+                            {!isEmpty(topTeam?.video_gallery) ? (
+                                <View
+                                    style={{
+                                        marginHorizontal: getSize.m(-16),
+                                        marginTop: getSize.m(18),
+                                    }}
+                                >
+                                    {/* <GestureHandlerRootView style={appStyles.flex}>
                                     <Carousel
                                         loop={false}
                                         pagingEnabled
@@ -204,158 +206,168 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                                         )}
                                     />
                                 </GestureHandlerRootView> */}
-                                <ScrollView
-                                    horizontal
-                                    pagingEnabled
-                                    showsHorizontalScrollIndicator={false}
-                                    directionalLockEnabled
-                                    onScroll={e => {
-                                        const slide = Math.round(
-                                            e.nativeEvent.contentOffset.x /
-                                                e.nativeEvent.layoutMeasurement.width
-                                        );
-                                        if (slide !== activeIndexNumber) {
-                                            setActiveIndexNumber(slide); // here we will set our active index num
-                                        }
+                                    <ScrollView
+                                        horizontal
+                                        pagingEnabled
+                                        showsHorizontalScrollIndicator={false}
+                                        directionalLockEnabled
+                                        onScroll={e => {
+                                            const slide = Math.round(
+                                                e.nativeEvent.contentOffset.x /
+                                                    e.nativeEvent.layoutMeasurement.width
+                                            );
+                                            if (slide !== activeIndexNumber) {
+                                                setActiveIndexNumber(slide); // here we will set our active index num
+                                            }
+                                        }}
+                                    >
+                                        {topTeam?.video_gallery.map((item, index) => {
+                                            return (
+                                                <View
+                                                    // eslint-disable-next-line react/no-array-index-key
+                                                    key={index}
+                                                    style={{
+                                                        flexDirection: 'row',
+                                                        justifyContent: 'center',
+                                                        marginHorizontal: getSize.m(12),
+                                                    }}
+                                                >
+                                                    <TouchableOpacity
+                                                        activeOpacity={0.9}
+                                                        onPress={() => handlePlayVideo(item)}
+                                                    >
+                                                        <LinearGradient
+                                                            colors={[
+                                                                'transparent',
+                                                                'rgba(0, 0, 0, 0.90)',
+                                                            ]}
+                                                            start={{ x: 0, y: 0.3 }}
+                                                            end={{ x: 0, y: 1 }}
+                                                            style={styles.gradient_img}
+                                                        />
+                                                        <Image
+                                                            source={{ uri: item.image_url }}
+                                                            style={styles.image}
+                                                        />
+                                                        <View style={styles.date}>
+                                                            <Text style={styles.text_date}>
+                                                                {item.length}
+                                                            </Text>
+                                                        </View>
+                                                        <View style={styles.play_video}>
+                                                            <Icon
+                                                                name={appIcons.ic_caretright}
+                                                                size={getSize.m(16)}
+                                                                color={appColors.white}
+                                                            />
+                                                        </View>
+                                                        <View style={styles.content}>
+                                                            <Text style={styles.text_content}>
+                                                                {getTranslationText({
+                                                                    textHe: item.caption_he,
+                                                                    textEn: item.caption_en,
+                                                                })}
+                                                                <IconFeather
+                                                                    name={appIcons.ic_left_ios}
+                                                                    size={getSize.m(12)}
+                                                                    color={appColors.white}
+                                                                    style={styles.ic_arrow_left}
+                                                                />
+                                                            </Text>
+                                                        </View>
+                                                    </TouchableOpacity>
+                                                </View>
+                                            );
+                                        })}
+                                    </ScrollView>
+                                    <View style={styles.dotContainer}>
+                                        {topTeam?.video_gallery.map((_, index) => {
+                                            return (
+                                                // eslint-disable-next-line react/no-array-index-key
+                                                <View key={index}>
+                                                    <View
+                                                        style={[
+                                                            styles.dot,
+                                                            {
+                                                                width:
+                                                                    index === activeIndexNumber
+                                                                        ? getSize.m(18)
+                                                                        : getSize.m(5),
+                                                                backgroundColor:
+                                                                    index === activeIndexNumber
+                                                                        ? appColors.blue_light
+                                                                        : appColors.soft_grey,
+                                                            },
+                                                        ]}
+                                                    />
+                                                </View>
+                                            );
+                                        })}
+                                    </View>
+                                </View>
+                            ) : null}
+
+                            {!isEmpty(topTeam?.future_events) ? (
+                                <View
+                                    style={{
+                                        marginTop: getSize.m(40),
                                     }}
                                 >
-                                    {topTeam?.video_gallery.map((item, index) => {
-                                        return (
-                                            <View
-                                                // eslint-disable-next-line react/no-array-index-key
-                                                key={index}
-                                                style={{
-                                                    flexDirection: 'row',
-                                                    justifyContent: 'center',
-                                                    marginHorizontal: getSize.m(12),
-                                                }}
-                                            >
-                                                <TouchableOpacity
-                                                    activeOpacity={0.9}
-                                                    onPress={() => handlePlayVideo(item)}
-                                                >
-                                                    <LinearGradient
-                                                        colors={[
-                                                            'transparent',
-                                                            'rgba(0, 0, 0, 0.90)',
-                                                        ]}
-                                                        start={{ x: 0, y: 0.3 }}
-                                                        end={{ x: 0, y: 1 }}
-                                                        style={styles.gradient_img}
-                                                    />
-                                                    <Image
-                                                        source={{ uri: item.image_url }}
-                                                        style={styles.image}
-                                                    />
-                                                    <View style={styles.date}>
-                                                        <Text style={styles.text_date}>
-                                                            {item.length}
-                                                        </Text>
-                                                    </View>
-                                                    <View style={styles.play_video}>
-                                                        <Icon
-                                                            name={appIcons.ic_caretright}
-                                                            size={getSize.m(16)}
-                                                            color={appColors.white}
-                                                        />
-                                                    </View>
-                                                    <View style={styles.content}>
-                                                        <Text style={styles.text_content}>
-                                                            {getTranslationText({
-                                                                textHe: item.caption_he,
-                                                                textEn: item.caption_en,
-                                                            })}
-                                                            <IconFeather
-                                                                name={appIcons.ic_left_ios}
-                                                                size={getSize.m(12)}
-                                                                color={appColors.white}
-                                                                style={styles.ic_arrow_left}
-                                                            />
-                                                        </Text>
-                                                    </View>
-                                                </TouchableOpacity>
-                                            </View>
-                                        );
-                                    })}
-                                </ScrollView>
-                                <View style={styles.dotContainer}>
-                                    {topTeam?.video_gallery.map((_, index) => {
-                                        return (
-                                            // eslint-disable-next-line react/no-array-index-key
-                                            <View key={index}>
-                                                <View
-                                                    style={[
-                                                        styles.dot,
-                                                        {
-                                                            width:
-                                                                index === activeIndexNumber
-                                                                    ? getSize.m(18)
-                                                                    : getSize.m(5),
-                                                            backgroundColor:
-                                                                index === activeIndexNumber
-                                                                    ? appColors.blue_light
-                                                                    : appColors.soft_grey,
-                                                        },
-                                                    ]}
+                                    <Text style={styles.text_title}>
+                                        {t('national_team.team_event')}
+                                    </Text>
+                                    <View style={{ marginTop: getSize.m(8) }}>
+                                        {topTeam?.future_events?.slice(0, 3).map((item, index) => {
+                                            return (
+                                                <ListGame_Test
+                                                    // eslint-disable-next-line react/no-array-index-key
+                                                    key={index}
+                                                    tournament={getTranslationText({
+                                                        textHe: item.name_he,
+                                                        textEn: item.name_en,
+                                                    })}
+                                                    logo_home={item.team1.logo_url}
+                                                    logo_away={item.team2.logo_url}
+                                                    nameHome={getTranslationText({
+                                                        textHe: item.team1.name_he,
+                                                        textEn: item.team1.name_en,
+                                                    })}
+                                                    nameAway={getTranslationText({
+                                                        textHe: item.team2.name_he,
+                                                        textEn: item.team2.name_en,
+                                                    })}
+                                                    location={getTranslationText({
+                                                        textHe: item.stadium_he,
+                                                        textEn: item.stadium_en,
+                                                    })}
+                                                    date={item.date}
+                                                    result={item.score}
+                                                    schedule={item.time}
+                                                    // completed={item.completed}
+                                                    color={appColors.text_dark_blue}
+                                                    handleDetailMatch={() =>
+                                                        handleDetailMatch(item.object_id)
+                                                    }
+                                                    handleStadium={() =>
+                                                        handleStadium(item.stadium_id)
+                                                    }
+                                                    isLive={moment().isBetween(
+                                                        moment(
+                                                            `${item.date} ${item.time}`,
+                                                            'DD.M.YY HH:mm'
+                                                        ),
+                                                        moment(
+                                                            `${item.date} ${item.time}`,
+                                                            'DD.M.YY HH:mm'
+                                                        ).add(2, 'hours')
+                                                    )}
+                                                    style={{ marginTop: getSize.m(12) }}
                                                 />
-                                            </View>
-                                        );
-                                    })}
+                                            );
+                                        })}
+                                    </View>
                                 </View>
-                            </View>
-                            <View style={{ marginTop: getSize.m(44) }}>
-                                <Text style={styles.text_title}>
-                                    {t('national_team.team_event')}
-                                </Text>
-                                <View style={{ marginTop: getSize.m(8) }}>
-                                    {topTeam?.future_events?.map((item, index) => {
-                                        return (
-                                            <ListGame
-                                                // eslint-disable-next-line react/no-array-index-key
-                                                key={index}
-                                                tournament={getTranslationText({
-                                                    textHe: item.name_he,
-                                                    textEn: item.name_en,
-                                                })}
-                                                logo_home={item.team1.logo_url}
-                                                logo_away={item.team2.logo_url}
-                                                nameHome={getTranslationText({
-                                                    textHe: item.team1.name_he,
-                                                    textEn: item.team1.name_en,
-                                                })}
-                                                nameAway={getTranslationText({
-                                                    textHe: item.team2.name_he,
-                                                    textEn: item.team2.name_en,
-                                                })}
-                                                location={getTranslationText({
-                                                    textHe: item.stadium_he,
-                                                    textEn: item.stadium_en,
-                                                })}
-                                                date={item.date}
-                                                result={item.score}
-                                                schedule={item.time}
-                                                // completed={item.completed}
-                                                color={appColors.text_dark_blue}
-                                                handleDetailMatch={() =>
-                                                    handleDetailMatch(item.object_id)
-                                                }
-                                                handleStadium={() => handleStadium(item.stadium_id)}
-                                                isLive={moment().isBetween(
-                                                    moment(
-                                                        `${item.date} ${item.time}`,
-                                                        'DD.M.YY HH:mm'
-                                                    ),
-                                                    moment(
-                                                        `${item.date} ${item.time}`,
-                                                        'DD.M.YY HH:mm'
-                                                    ).add(2, 'hours')
-                                                )}
-                                                style={{ marginTop: getSize.m(12) }}
-                                            />
-                                        );
-                                    })}
-                                </View>
-                            </View>
+                            ) : null}
                         </View>
                         <View>
                             <HeaderLogo
@@ -410,7 +422,7 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                                                         {t('national_team.ranking_table.place')}
                                                     </Text>
                                                 </View>
-                                                <View style={{ width: getSize.m(80) }}>
+                                                <View style={{ width: getSize.m(60) }}>
                                                     <Text
                                                         style={[
                                                             appStyles.statistics_header,
@@ -420,32 +432,32 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                                                         {t('national_team.ranking_table.team')}
                                                     </Text>
                                                 </View>
-                                                <View style={{ width: getSize.m(30) }}>
+                                                <View style={{ width: getSize.m(28) }}>
                                                     <Text style={appStyles.statistics_header}>
                                                         {t('national_team.ranking_table.mash')}
                                                     </Text>
                                                 </View>
-                                                <View style={{ width: getSize.m(30) }}>
+                                                <View style={{ width: getSize.m(28) }}>
                                                     <Text style={appStyles.statistics_header}>
                                                         {t('national_team.ranking_table.nch')}
                                                     </Text>
                                                 </View>
-                                                <View style={{ width: getSize.m(30) }}>
+                                                <View style={{ width: getSize.m(28) }}>
                                                     <Text style={appStyles.statistics_header}>
                                                         {t('national_team.ranking_table.draw')}
                                                     </Text>
                                                 </View>
-                                                <View style={{ width: getSize.m(30) }}>
+                                                <View style={{ width: getSize.m(28) }}>
                                                     <Text style={appStyles.statistics_header}>
                                                         {t('national_team.ranking_table.the_p')}
                                                     </Text>
                                                 </View>
-                                                <View style={{ width: getSize.m(40) }}>
+                                                <View style={{ width: getSize.m(38) }}>
                                                     <Text style={appStyles.statistics_header}>
                                                         {t('national_team.ranking_table.time')}
                                                     </Text>
                                                 </View>
-                                                <View style={{ width: getSize.m(30) }}>
+                                                <View style={{ width: getSize.m(28) }}>
                                                     <Text style={appStyles.statistics_header}>
                                                         {t('national_team.ranking_table.no')}
                                                     </Text>
@@ -484,7 +496,7 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                                                                             appStyles.statistics_content
                                                                         }
                                                                     >
-                                                                        {item.place}
+                                                                        {index + 1}
                                                                     </Text>
                                                                     <View
                                                                         style={{
@@ -524,14 +536,14 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                                                                 <View
                                                                     style={[
                                                                         {
-                                                                            width: getSize.m(80),
-                                                                            overflow: 'hidden',
+                                                                            width: getSize.m(60),
                                                                         },
                                                                     ]}
                                                                 >
                                                                     <View
                                                                         style={{
                                                                             flexDirection: 'row',
+                                                                            alignItems: 'center',
                                                                         }}
                                                                     >
                                                                         <Avatar
@@ -542,6 +554,7 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                                                                             size={20}
                                                                         />
                                                                         <Text
+                                                                            numberOfLines={2}
                                                                             style={[
                                                                                 appStyles.statistics_content,
                                                                                 {
@@ -561,7 +574,7 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                                                                     </View>
                                                                 </View>
                                                                 <View
-                                                                    style={{ width: getSize.m(30) }}
+                                                                    style={{ width: getSize.m(28) }}
                                                                 >
                                                                     <Text
                                                                         style={
@@ -572,7 +585,7 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                                                                     </Text>
                                                                 </View>
                                                                 <View
-                                                                    style={{ width: getSize.m(30) }}
+                                                                    style={{ width: getSize.m(28) }}
                                                                 >
                                                                     <Text
                                                                         style={
@@ -583,7 +596,7 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                                                                     </Text>
                                                                 </View>
                                                                 <View
-                                                                    style={{ width: getSize.m(30) }}
+                                                                    style={{ width: getSize.m(28) }}
                                                                 >
                                                                     <Text
                                                                         style={
@@ -594,7 +607,7 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                                                                     </Text>
                                                                 </View>
                                                                 <View
-                                                                    style={{ width: getSize.m(30) }}
+                                                                    style={{ width: getSize.m(28) }}
                                                                 >
                                                                     <Text
                                                                         style={
@@ -605,7 +618,7 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                                                                     </Text>
                                                                 </View>
                                                                 <View
-                                                                    style={{ width: getSize.m(40) }}
+                                                                    style={{ width: getSize.m(38) }}
                                                                 >
                                                                     <Text
                                                                         style={
@@ -616,7 +629,7 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                                                                     </Text>
                                                                 </View>
                                                                 <View
-                                                                    style={{ width: getSize.m(30) }}
+                                                                    style={{ width: getSize.m(28) }}
                                                                 >
                                                                     <Text
                                                                         style={
