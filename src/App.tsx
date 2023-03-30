@@ -55,7 +55,7 @@ const App = (props: any) => {
     const locale = langCode.substring(0, 2).toLocaleLowerCase();
 
     useEffect(() => {
-        i18n.changeLanguage('heb');
+        i18n.changeLanguage(locale === 'he' || locale === 'iw' ? 'heb' : 'en');
         if (i18n.language === 'heb') {
             I18nManager.forceRTL(true);
             AsyncStorage.getItem(Restart.key_restart_for_rtl).then(isRestarted => {
