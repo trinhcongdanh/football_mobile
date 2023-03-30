@@ -70,9 +70,9 @@ export const useViewModel = ({ navigation, route }: IFavoriteTopTeamsScreenProps
                 if (error) {
                     return;
                 }
-                const sortByName = sortBy(res.data.documents, ['name_he']);
+                // const sortByName = sortBy(res.data.documents, ['name_he']);
 
-                dispatch(setFavTopTeams(sortByName));
+                dispatch(setFavTopTeams(res.data.documents));
             } catch (error: any) {
                 Alert.alert(error);
             }
