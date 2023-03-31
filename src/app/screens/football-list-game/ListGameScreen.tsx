@@ -135,7 +135,7 @@ export const ListGameScreen = ({ navigation, route }: IListGameScreenProps) => {
                                                             style={[
                                                                 styles.name_club,
                                                                 {
-                                                                    width: getSize.m(44),
+                                                                    width: getSize.m(50),
                                                                     textAlign: 'center',
                                                                 },
                                                             ]}
@@ -188,7 +188,7 @@ export const ListGameScreen = ({ navigation, route }: IListGameScreenProps) => {
                                                             style={[
                                                                 styles.name_club,
                                                                 {
-                                                                    width: getSize.m(44),
+                                                                    width: getSize.m(50),
                                                                     textAlign: 'center',
                                                                 },
                                                             ]}
