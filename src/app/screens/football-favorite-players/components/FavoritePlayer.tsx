@@ -15,6 +15,7 @@ import {
     ActivityIndicator,
     Image,
     ImageBackground,
+    LogBox,
     SafeAreaView,
     ScrollView,
     StatusBar,
@@ -49,6 +50,9 @@ export const FavoritePlayer = ({
     const { getTranslationText } = useTranslationText();
     const [favPlayers, setFavPlayers] = useState<PlayerModel[]>();
 
+    LogBox.ignoreLogs(['source.uri should not be an empty string']);
+    LogBox.ignoreLogs(['SerializableStateInvariantMiddleware']);
+
     useEffect(() => {
         const filterPlayers = newFav
             .map(player => ({
@@ -59,7 +63,6 @@ export const FavoritePlayer = ({
                 return (b.number ? 1 : 0) - (a.number ? 1 : 0);
             });
         setFavPlayers(filterPlayers);
-        console.log('favPlayers', favPlayers);
     }, [favSelected, newFav]);
     return (
         <View style={[appStyles.flex]}>

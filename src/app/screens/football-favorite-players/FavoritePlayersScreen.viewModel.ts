@@ -37,6 +37,7 @@ const useViewState = () => {
 export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) => {
     const { t } = useTranslation();
     const { navigate, goBack } = useAppNavigator();
+    const { params } = route;
     const dispatch = useDispatch<any>();
     const [searchText, setSearchText] = useState('');
     const state = useViewState();
@@ -161,22 +162,11 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
         };
     }, []);
     const onGoSkip = () => {
-        // clearFavoriteData(dispatch);
-        // if (isEmpty(profile.profile) || isNil(profile.profile)) {
-        //     dispatch(
-        //         createProfileUser(
-        //             serializeParams({
-        //                 action: ACTION,
-        //                 token: TOKEN,
-        //                 call: AuthData.CREATE_PROFILE,
-        //                 'item[guest_guid]': guestId[0],
-        //             })
-        //         )
-        //     );
-        // } else {
-        //     navigate(ScreenName.SideBar);
-        // }
-        navigate(ScreenName.FavSummaryPage);
+        if (params?.previous_screen === ScreenName.SettingsPage) {
+            goBack();
+        } else {
+            navigate(ScreenName.FavSummaryPage);
+        }
     };
     const isFocused = useIsFocused();
     const previous_screen = route?.params?.previous_screen;
@@ -216,7 +206,6 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
     // }, [profile.success, isFocused]);
 
     const handleContinue = () => {
-        const { params } = routes;
         if (!isEmpty(params)) {
             if (params.previous_screen === ScreenName.FavSummaryPage) {
                 navigate(ScreenName.FavSummaryPage, {

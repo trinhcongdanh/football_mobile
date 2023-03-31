@@ -179,7 +179,6 @@ export const ListGame_Test = ({
                         appStyles.flex_row_space_center,
                         {
                             marginHorizontal: getSize.m(36),
-                            flexDirection: 'row-reverse',
                         },
                     ]}
                 >

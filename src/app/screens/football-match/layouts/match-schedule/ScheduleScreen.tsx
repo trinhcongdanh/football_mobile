@@ -9,6 +9,7 @@ import moment from 'moment';
 import { useViewModel } from './ScheduleScreen.viewModel';
 import { IScheduleScreenProps } from './ScheduleScreen.type';
 import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
+import { ListGame_Test } from '@football/app/components/list-game/ListGame_test';
 // type Props = {};
 
 export const ScheduleScreen = ({ navigation, route }: IScheduleScreenProps) => {
@@ -39,7 +40,7 @@ export const ScheduleScreen = ({ navigation, route }: IScheduleScreenProps) => {
             <ScrollView showsVerticalScrollIndicator={false}>
                 {game?.games?.map((item: Game) => {
                     return (
-                        <ListGame
+                        <ListGame_Test
                             key={item.game_id}
                             logo_home={item.team1.logo_url}
                             logo_away={item.team2.logo_url}
@@ -58,7 +59,7 @@ export const ScheduleScreen = ({ navigation, route }: IScheduleScreenProps) => {
                             date={item.date}
                             result={item.score}
                             schedule={item.time}
-                            details={item.game_id}
+                            // details={item.game_id}
                             handleDetailMatch={() => handleDetailMatch(item.game_id)}
                             handleStadium={() => handleStadium(item.stadium_id)}
                             isLive={moment().isBetween(

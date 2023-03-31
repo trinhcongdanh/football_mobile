@@ -102,59 +102,13 @@ const useViewCallback = (route: any, viewState: any) => {
     const navigation = useNavigation();
 
     const onGoSkip = () => {
-        clearFavoriteData(dispatch);
-        // if (isEmpty(profile.profile) || isNil(profile.profile)) {
-        //     dispatch(
-        //         createProfileUser(
-        //             serializeParams({
-        //                 action: ACTION,
-        //                 token: TOKEN,
-        //                 call: AuthData.CREATE_PROFILE,
-        //                 'item[guest_guid]': guestId[0],
-        //             })
-        //         )
-        //     );
-        // } else {
-        //     navigate(ScreenName.SideBar);
-        // }
-        navigate(ScreenName.FavSummaryPage);
+        if (params?.previous_screen === ScreenName.SettingsPage) {
+            goBack();
+        } else {
+            clearFavoriteData(dispatch);
+            navigate(ScreenName.FavSummaryPage);
+        }
     };
-
-    // useEffect(() => {
-    //     if (params?.previous_screen === ScreenName.HomePage) {
-    //         return;
-    //     }
-    //     if (params?.previous_screen !== ScreenName.SettingsPage) {
-    //         if (!isFocused) return;
-    //         if (!isEmpty(login.login)) {
-    //             navigate(ScreenName.SideBar);
-    //             navigation.reset({
-    //                 index: 0,
-    //                 routes: [{ name: ScreenName.SideBar as never }],
-    //             });
-    //         } else {
-    //             if (profile.success === true) {
-    //                 dispatch(
-    //                     loginUser(
-    //                         serializeParams({
-    //                             action: ACTION,
-    //                             token: TOKEN,
-    //                             call: AuthData.LOGIN,
-    //                             guest_id: profile.profile.tc_user,
-    //                             guest_guid: guestId[0],
-    //                         })
-    //                     )
-    //                 );
-
-    //                 navigate(ScreenName.SideBar);
-    //                 navigation.reset({
-    //                     index: 0,
-    //                     routes: [{ name: ScreenName.SideBar as never }],
-    //                 });
-    //             }
-    //         }
-    //     }
-    // }, [profile.success, isFocused]);
 
     const handleContinue = () => {
         if (params?.previous_screen === ScreenName.FavSummaryPage) {
