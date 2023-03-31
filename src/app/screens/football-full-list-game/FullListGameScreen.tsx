@@ -10,6 +10,7 @@ import { appStyles } from '@football/app/utils/constants/appStyles';
 import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
 import { getSize } from '@football/app/utils/responsive/scale';
 import { Game, TeamModel } from '@football/core/models/TeamModelResponse';
+import { TopTeamModel } from '@football/core/models/TopTeamModelResponse';
 import moment from 'moment';
 import React from 'react';
 import {
