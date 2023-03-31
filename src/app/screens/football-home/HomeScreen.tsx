@@ -5,16 +5,16 @@ import { AppImages } from '@football/app/assets/images';
 import styles from '@football/app/screens/football-home/HomeScreen.styles';
 import { IHomeScreenProps } from '@football/app/screens/football-home/HomeScreen.type';
 import { useViewModel } from '@football/app/screens/football-home/HomeScreen.viewModel';
-import { FavTeam } from '@football/app/screens/football-home/layouts/FavTeam/FavTeam';
 import { FavPlayer } from '@football/app/screens/football-home/layouts/FavPlayer/FavPlayer';
+import { FavTeam } from '@football/app/screens/football-home/layouts/FavTeam/FavTeam';
 import { FavTopTeam } from '@football/app/screens/football-home/layouts/FavTopTeam/FavTopTeam';
-import { LeaguesTable } from '@football/app/screens/football-home/layouts/LeaguesTable/LeaguesTable';
-import { NationalCup } from '@football/app/screens/football-home/layouts/NationalCup/NationalCup';
-import { Video } from '@football/app/screens/football-home/layouts/Video/Video';
 import { Instagram } from '@football/app/screens/football-home/layouts/Instagram/Instagram';
+import { LeaguesTable } from '@football/app/screens/football-home/layouts/LeaguesTable/LeaguesTable';
 import { ListOfGameTopTeam } from '@football/app/screens/football-home/layouts/ListOfGameTopTeam/ListOfGameTopTeam';
-import { SocialResponsibility } from '@football/app/screens/football-home/layouts/SocialResponsibility/SocialResponsibility';
 import { Magazine } from '@football/app/screens/football-home/layouts/Magazine/Magazine';
+import { NationalCup } from '@football/app/screens/football-home/layouts/NationalCup/NationalCup';
+import { SocialResponsibility } from '@football/app/screens/football-home/layouts/SocialResponsibility/SocialResponsibility';
+import { Video } from '@football/app/screens/football-home/layouts/Video/Video';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import { ScreenName } from '@football/app/utils/constants/enum';
@@ -33,7 +33,7 @@ import {
     StatusBar,
     Text,
     TouchableOpacity,
-    View,
+    View
 } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import LinearGradient from 'react-native-linear-gradient';
@@ -442,6 +442,7 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                         {homeLayout?.layout.includes('magazine') ? (
                             <Magazine homePage={homePage} />
                         ) : null}
+
                         {/* Item10 */}
                         {homeLayout?.layout.includes('leagues_table') && leagues?.length
                             ? leagues.map(league => {

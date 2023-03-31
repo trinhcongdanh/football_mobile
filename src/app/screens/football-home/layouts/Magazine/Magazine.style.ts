@@ -6,7 +6,7 @@ import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
     container: {
         backgroundColor: '#fafcffs',
-        height: getSize.m(379),
+        // height: getSize.m(379),
     },
     header: {
         fontFamily: AppFonts.bold,

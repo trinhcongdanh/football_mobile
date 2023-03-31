@@ -1,14 +1,15 @@
+import { appIcons } from '@football/app/assets/icons/appIcons';
+import { CustomCarousel } from '@football/app/components/carousel/Carousel';
 import styles from '@football/app/screens/football-home/layouts/Magazine/Magazine.style';
+import { IMagazineProps } from '@football/app/screens/football-home/layouts/Magazine/Magazine.type';
 import { useViewModel } from '@football/app/screens/football-home/layouts/Magazine/Magazine.viewModel';
+import { appColors } from '@football/app/utils/constants/appColors';
+import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
 import { getSize } from '@football/app/utils/responsive/scale';
 import React from 'react';
-import Icon from 'react-native-vector-icons/Feather';
-import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
-import { appIcons } from '@football/app/assets/icons/appIcons';
-import { appColors } from '@football/app/utils/constants/appColors';
-import { IMagazineProps } from '@football/app/screens/football-home/layouts/Magazine/Magazine.type';
+import { Image, Text, TouchableOpacity, View } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
+import Icon from 'react-native-vector-icons/Feather';
 
 export const Magazine = ({ homePage }: IMagazineProps) => {
     const { t, pages, activeIndexNumber, setActiveIndexNumber, dots, onClickImage } = useViewModel({
@@ -21,21 +22,13 @@ export const Magazine = ({ homePage }: IMagazineProps) => {
             <View style={{ marginVertical: getSize.m(20), marginLeft: getSize.m(18) }}>
                 <Text style={styles.header}>{t('home_page.magazine')}</Text>
             </View>
-            <ScrollView
-                horizontal
-                pagingEnabled
-                showsHorizontalScrollIndicator={false}
-                directionalLockEnabled
-                onScroll={e => {
-                    const slide = Math.round(
-                        e.nativeEvent.contentOffset.x / e.nativeEvent.layoutMeasurement.width
-                    );
-                    if (slide !== activeIndexNumber) {
-                        setActiveIndexNumber(slide); // here we will set our active index num
-                    }
-                }}
-            >
-                {homePage.magazine.map((item, index) => {
+
+            <CustomCarousel
+                data={homePage.magazine}
+                height={getSize.m(300)}
+                widthPerItem={getSize.m(200)}
+                itemPerPage={1}
+                renderItem={({ item, index }) => {
                     return (
                         <View
                             // eslint-disable-next-line react/no-array-index-key
@@ -57,9 +50,6 @@ export const Magazine = ({ homePage }: IMagazineProps) => {
                                     style={styles.gradient_img}
                                 />
                                 <Image source={{ uri: item.image_url }} style={styles.image} />
-                                {/* <View style={styles.date}>
-                                    <Text style={styles.text_date}>{item.length}</Text>
-                                </View> */}
                                 <View style={styles.content}>
                                     <Text style={styles.text_content}>
                                         {getTranslationText({
@@ -77,32 +67,8 @@ export const Magazine = ({ homePage }: IMagazineProps) => {
                             </TouchableOpacity>
                         </View>
                     );
-                })}
-            </ScrollView>
-            <View style={styles.dotContainer}>
-                {dots.map((_, index) => {
-                    return (
-                        // eslint-disable-next-line react/no-array-index-key
-                        <View key={index}>
-                            <View
-                                style={[
-                                    styles.dot,
-                                    {
-                                        width:
-                                            index === activeIndexNumber
-                                                ? getSize.m(18)
-                                                : getSize.m(5),
-                                        backgroundColor:
-                                            index === activeIndexNumber
-                                                ? appColors.text_dark_blue
-                                                : appColors.soft_grey,
-                                    },
-                                ]}
-                            />
-                        </View>
-                    );
-                })}
-            </View>
+                }}
+            />
         </View>
     );
 };
