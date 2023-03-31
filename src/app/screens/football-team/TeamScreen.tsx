@@ -13,6 +13,7 @@ import {
     FlatList,
     ImageBackground,
     SafeAreaView,
+    ScrollView,
     StatusBar,
     Text,
     TouchableOpacity,
@@ -37,53 +38,7 @@ export const TeamScreen = ({ navigation, route }: ITeamScreenProps) => {
     const colorCustom = useSelector((state: any) => state.colorCustom.colorCustom);
 
     const renderItem = ({ item }: any) => {
-        return !toggleBar ? (
-            <TouchableOpacity
-                activeOpacity={0.7}
-                style={styles.option_grid}
-                // eslint-disable-next-line no-underscore-dangle
-                onPress={() => handleTeam(item._id)}
-            >
-                <View style={styles.container_logo}>
-                    <FastImage
-                        resizeMode="contain"
-                        source={{ uri: item.logo_url }}
-                        style={styles.logo}
-                    />
-                </View>
-                <Text numberOfLines={2} style={styles.text_option_grid}>
-                    {getTranslationText({
-                        textHe: item.name_he,
-                        textEn: item.name_en,
-                    })}
-                </Text>
-            </TouchableOpacity>
-        ) : (
-            <TouchableOpacity
-                style={styles.option_menu}
-                activeOpacity={0}
-                // eslint-disable-next-line no-underscore-dangle
-                onPress={() => handleTeam(item._id)}
-            >
-                <View style={appStyles.flex_row_align_center}>
-                    <View style={styles.container_logo}>
-                        <FastImage
-                            resizeMode="contain"
-                            source={{ uri: item.logo_url }}
-                            style={styles.logo}
-                        />
-                    </View>
-                    <Text style={styles.text_option_menu}>{item.name_he}</Text>
-                </View>
-
-                <Icon
-                    name={appIcons.ic_arrow_left}
-                    size={getSize.s(13)}
-                    color={appColors.text_dark_blue}
-                    style={styles.ic_arrow_left}
-                />
-            </TouchableOpacity>
-        );
+        return;
     };
 
     return (
@@ -105,26 +60,43 @@ export const TeamScreen = ({ navigation, route }: ITeamScreenProps) => {
                         </View>
                     </View>
                     <View style={[appStyles.flex, appStyles.main_container]}>
-                        <View style={{ paddingHorizontal: getSize.m(26) }}>
-                            {toggleBar ? (
-                                <FlatList
-                                    showsVerticalScrollIndicator={false}
-                                    data={topTeams}
-                                    keyExtractor={(item: any) => item.id}
-                                    renderItem={renderItem}
-                                    numColumns={1}
-                                    key={1}
-                                />
-                            ) : (
-                                <FlatList
-                                    showsVerticalScrollIndicator={false}
-                                    data={topTeams}
-                                    keyExtractor={(item: any) => item.id}
-                                    renderItem={renderItem}
-                                    numColumns={3}
-                                    key={3}
-                                />
-                            )}
+                        <View
+                            style={{
+                                paddingHorizontal: getSize.m(26),
+                            }}
+                        >
+                            <ScrollView>
+                                <View style={styles.state_content}>
+                                    {topTeams?.map(item => {
+                                        return (
+                                            <TouchableOpacity
+                                                activeOpacity={0.5}
+                                                key={item?._id}
+                                                style={styles.option_grid}
+                                                // eslint-disable-next-line no-underscore-dangle
+                                                onPress={() => handleTeam(item?._id)}
+                                            >
+                                                <View style={styles.container_logo}>
+                                                    <FastImage
+                                                        resizeMode="contain"
+                                                        source={{ uri: item?.logo_url }}
+                                                        style={styles.logo}
+                                                    />
+                                                </View>
+                                                <Text
+                                                    numberOfLines={2}
+                                                    style={styles.text_option_grid}
+                                                >
+                                                    {getTranslationText({
+                                                        textHe: item?.name_he,
+                                                        textEn: item?.name_en,
+                                                    })}
+                                                </Text>
+                                            </TouchableOpacity>
+                                        );
+                                    })}
+                                </View>
+                            </ScrollView>
                         </View>
                         <View style={{ height: TAB_BAR_HEIGHT + BOTTOM_SVG_HEIGHT }} />
                     </View>
