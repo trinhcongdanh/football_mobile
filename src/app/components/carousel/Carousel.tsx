@@ -2,7 +2,7 @@ import { ICarouselProps } from '@football/app/components/carousel/Carousel.types
 import { appColors } from '@football/app/utils/constants/appColors';
 import { getSize } from '@football/app/utils/responsive/scale';
 import React, { useState } from 'react';
-import { Dimensions, View } from 'react-native';
+import { Dimensions, I18nManager, View } from 'react-native';
 import Carousel from 'react-native-reanimated-carousel';
 import styles from './Carousel.style';
 
@@ -14,6 +14,8 @@ export const CustomCarousel = ({
     widthPerItem,
     activePageColor = appColors.text_dark_blue,
     autoPlay,
+    // eslint-disable-next-line no-nested-ternary
+    defaultIndex = I18nManager.isRTL ? (data?.length ? data.length - 1 : 0) : 0,
 }: ICarouselProps) => {
     const PAGE_WIDTH = Dimensions.get('window').width;
     const COUNT = itemPerPage || 1.5;
@@ -26,11 +28,12 @@ export const CustomCarousel = ({
         },
     };
 
-    const [active, setActive] = useState(0);
+    const [active, setActive] = useState(defaultIndex);
     return (
         <View style={{ alignItems: 'center' }}>
             <Carousel
                 autoPlay={autoPlay}
+                defaultIndex={defaultIndex}
                 {...baseOptions}
                 loop={false}
                 data={data}

@@ -7,4 +7,5 @@ export type ICarouselProps = {
     center?: boolean;
     activePageColor?: string;
     autoPlay?: boolean;
+    defaultIndex?: number;
 };
