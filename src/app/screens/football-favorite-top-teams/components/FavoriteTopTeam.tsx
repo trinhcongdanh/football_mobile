@@ -10,6 +10,7 @@ import {
     ScrollView,
     ActivityIndicator,
     Image,
+    LogBox,
 } from 'react-native';
 import { getSize } from '@football/app/utils/responsive/scale';
 import Icon from 'react-native-vector-icons/Feather';
@@ -55,6 +56,8 @@ export const FavoriteTopTeam = ({
         setFavTopTeams(filterTopTeams);
         // console.log('favSelected', favSelected);
     }, [favSelected, newFav]);
+
+    LogBox.ignoreAllLogs(true);
 
     return (
         <View style={[appStyles.flex]}>

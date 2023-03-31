@@ -42,7 +42,6 @@ export const HeaderComposition = ({
                     {
                         marginTop: getSize.m(24),
                         marginHorizontal: getSize.m(36),
-                        flexDirection: 'row-reverse',
                     },
                 ]}
             >

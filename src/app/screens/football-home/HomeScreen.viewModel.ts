@@ -369,7 +369,7 @@ export const useViewModel = ({ navigation, route }: IHomeScreenProps) => {
     }, [state.homePage]);
 
     useEffect(() => {
-        console.log(state.teams[0]?.team_color);
+        console.log('state.teams[0]?.team_color', state.teams[0]?.team_color);
         dispatch(
             changeColor(
                 state.teams[0]?.team_color ? state.teams[0].team_color : appColors.blue_light

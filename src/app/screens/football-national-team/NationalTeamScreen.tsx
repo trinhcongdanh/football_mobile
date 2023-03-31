@@ -401,7 +401,7 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                                             color={appColors.text_dark_blue}
                                             fontFamily={AppFonts.bold}
                                             fontSize={getSize.m(11)}
-                                            width={getSize.m(130)}
+                                            backgroundColor={appColors.white}
                                         />
                                         <View>
                                             <View
