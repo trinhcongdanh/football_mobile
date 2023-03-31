@@ -3,7 +3,7 @@ import { appColors } from '@football/app/utils/constants/appColors';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import { getSize } from '@football/app/utils/responsive/scale';
 import React from 'react';
-import { Text, View } from 'react-native';
+import { I18nManager, Text, View } from 'react-native';
 import { Avatar } from 'react-native-elements';
 import FastImage from 'react-native-fast-image';
 import Icon from 'react-native-vector-icons/AntDesign';
@@ -37,15 +37,10 @@ export const Replace = ({ name_up, name_down, avt_up, avt_down, minute, team }: 
                         containerStyle={styles.avt_away}
                     />
                 </View>
-                <View
-                    style={[
-                        appStyles.flex_row_align_center,
-                        { marginRight: getSize.m(28), flexDirection: 'row-reverse' },
-                    ]}
-                >
+                <View style={[appStyles.flex_row_align_center, { marginLeft: getSize.m(28) }]}>
                     <Text style={styles.name_player}>{name_up}</Text>
                     <Icon
-                        name="caretleft"
+                        name={I18nManager.isRTL ? 'caretleft' : 'caretright'}
                         size={12}
                         color={appColors.blue_light}
                         style={styles.ic_arrow}
