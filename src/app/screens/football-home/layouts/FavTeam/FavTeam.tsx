@@ -708,7 +708,6 @@ export const FavTeam = ({ team, color }: IFavTeamProps) => {
                         {
                             marginLeft: getSize.m(8),
                             marginRight: getSize.m(25),
-                            width: getSize.m(340),
                         },
                     ]}
                 >

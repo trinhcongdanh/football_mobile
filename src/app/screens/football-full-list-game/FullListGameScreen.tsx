@@ -10,6 +10,7 @@ import { appStyles } from '@football/app/utils/constants/appStyles';
 import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
 import { getSize } from '@football/app/utils/responsive/scale';
 import { Game, TeamModel } from '@football/core/models/TeamModelResponse';
+import moment from 'moment';
 import React from 'react';
 import {
     ImageBackground,
@@ -70,6 +71,7 @@ export const FullListGameScreen = ({ navigation, route }: IFullListGameScreenPro
                                         <TouchableOpacity
                                             onPress={() => onNavigateGame(item.game_id)}
                                             key={item.game_id}
+                                            style={{ width: '100%' }}
                                         >
                                             <LinearGradient
                                                 start={{ x: 0, y: 0 }}
@@ -83,7 +85,7 @@ export const FullListGameScreen = ({ navigation, route }: IFullListGameScreenPro
                                                         : appColors.gray,
                                                 ]}
                                                 style={[
-                                                    appStyles.flex_row_align,
+                                                    appStyles.flex_row_space_center,
                                                     {
                                                         paddingVertical: getSize.m(11),
                                                         paddingHorizontal: getSize.m(8),
@@ -95,7 +97,7 @@ export const FullListGameScreen = ({ navigation, route }: IFullListGameScreenPro
                                                     style={[
                                                         appStyles.flex_row_align,
                                                         {
-                                                            width: getSize.m(50),
+                                                            width: '20%',
                                                         },
                                                     ]}
                                                 >
@@ -107,28 +109,33 @@ export const FullListGameScreen = ({ navigation, route }: IFullListGameScreenPro
                                                             height: getSize.m(13),
                                                         }}
                                                     />
-                                                    <Text style={styles.calendar}>{item.date}</Text>
+                                                    <Text style={styles.calendar}>
+                                                        {moment(item.date, 'YYYY-MM-DD').format(
+                                                            'YY/MM/DD'
+                                                        )}
+                                                    </Text>
                                                 </View>
                                                 <View
                                                     style={[
                                                         appStyles.flex_row_align,
                                                         {
-                                                            marginHorizontal: getSize.m(24),
+                                                            width: '56%',
                                                         },
                                                     ]}
                                                 >
                                                     <View
                                                         style={[
                                                             appStyles.flex_row_align_center,
-                                                            { width: getSize.m(60) },
+                                                            { width: getSize.m(56) },
                                                         ]}
                                                     >
                                                         <Text
+                                                            numberOfLines={2}
                                                             style={[
                                                                 styles.name_club,
                                                                 {
                                                                     width: getSize.m(44),
-                                                                    textAlign: 'right',
+                                                                    textAlign: 'center',
                                                                 },
                                                             ]}
                                                         >
@@ -150,11 +157,7 @@ export const FullListGameScreen = ({ navigation, route }: IFullListGameScreenPro
                                                             />
                                                         </View>
                                                     </View>
-                                                    <View
-                                                        style={{
-                                                            marginHorizontal: getSize.m(6),
-                                                        }}
-                                                    >
+                                                    <View>
                                                         <Text style={styles.score}>
                                                             {item.score}
                                                         </Text>
@@ -163,7 +166,7 @@ export const FullListGameScreen = ({ navigation, route }: IFullListGameScreenPro
                                                         style={[
                                                             appStyles.flex_row_align_center,
                                                             {
-                                                                width: getSize.m(60),
+                                                                width: getSize.m(56),
                                                             },
                                                         ]}
                                                     >
@@ -180,11 +183,12 @@ export const FullListGameScreen = ({ navigation, route }: IFullListGameScreenPro
                                                             />
                                                         </View>
                                                         <Text
+                                                            numberOfLines={2}
                                                             style={[
                                                                 styles.name_club,
                                                                 {
                                                                     width: getSize.m(44),
-                                                                    textAlign: 'left',
+                                                                    textAlign: 'center',
                                                                 },
                                                             ]}
                                                         >
@@ -200,6 +204,7 @@ export const FullListGameScreen = ({ navigation, route }: IFullListGameScreenPro
                                                         onNavigateStadium(item.stadium_id)
                                                     }
                                                     key={item.game_id}
+                                                    style={{ width: '20%' }}
                                                 >
                                                     <View style={appStyles.flex_row_align}>
                                                         <FastImage
@@ -212,7 +217,10 @@ export const FullListGameScreen = ({ navigation, route }: IFullListGameScreenPro
                                                                 height: getSize.m(11),
                                                             }}
                                                         />
-                                                        <Text style={styles.location}>
+                                                        <Text
+                                                            numberOfLines={2}
+                                                            style={styles.location}
+                                                        >
                                                             {getTranslationText({
                                                                 textHe: item.stadium_he,
                                                                 textEn: item.stadium_en,
