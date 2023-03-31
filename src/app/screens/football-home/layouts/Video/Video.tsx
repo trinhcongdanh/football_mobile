@@ -1,17 +1,18 @@
 import { appIcons } from '@football/app/assets/icons/appIcons';
+import { CustomCarousel } from '@football/app/components/carousel/Carousel';
 import styles from '@football/app/screens/football-home/layouts/Video/Video.style';
+import { IVideoProps } from '@football/app/screens/football-home/layouts/Video/Video.type';
 import { useViewModel } from '@football/app/screens/football-home/layouts/Video/Video.viewModel';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { appStyles } from '@football/app/utils/constants/appStyles';
+import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
 import { getSize } from '@football/app/utils/responsive/scale';
 import React from 'react';
-import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { Image, Text, TouchableOpacity, View } from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
+import IconAntDesign from 'react-native-vector-icons/AntDesign';
 import IconEntypo from 'react-native-vector-icons/Entypo';
 import IconFeather from 'react-native-vector-icons/Feather';
-import IconAntDesign from 'react-native-vector-icons/AntDesign';
-import { IVideoProps } from '@football/app/screens/football-home/layouts/Video/Video.type';
-import LinearGradient from 'react-native-linear-gradient';
-import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
 
 export const Video = ({ videos, handlePlayVideo }: IVideoProps) => {
     const { t, activeIndexNumber, setActiveIndexNumber, dots, onClickAllVideo } = useViewModel({
@@ -44,21 +45,12 @@ export const Video = ({ videos, handlePlayVideo }: IVideoProps) => {
                     </View>
                 </TouchableOpacity>
             </View>
-            <ScrollView
-                horizontal
-                pagingEnabled
-                showsHorizontalScrollIndicator={false}
-                directionalLockEnabled
-                onScroll={e => {
-                    const slide = Math.round(
-                        e.nativeEvent.contentOffset.x / e.nativeEvent.layoutMeasurement.width
-                    );
-                    if (slide !== activeIndexNumber) {
-                        setActiveIndexNumber(slide); // here we will set our active index num
-                    }
-                }}
-            >
-                {videos.map((item, index) => {
+
+            <CustomCarousel
+                data={videos}
+                height={getSize.m(300)}
+                activePageColor={appColors.white}
+                renderItem={({ item, index }) => {
                     return (
                         <View
                             // eslint-disable-next-line react/no-array-index-key
@@ -107,32 +99,8 @@ export const Video = ({ videos, handlePlayVideo }: IVideoProps) => {
                             </TouchableOpacity>
                         </View>
                     );
-                })}
-            </ScrollView>
-            <View style={styles.dotContainer}>
-                {dots.map((_, index) => {
-                    return (
-                        // eslint-disable-next-line react/no-array-index-key
-                        <View key={index}>
-                            <View
-                                style={[
-                                    styles.dot,
-                                    {
-                                        width:
-                                            index === activeIndexNumber
-                                                ? getSize.m(18)
-                                                : getSize.m(5),
-                                        backgroundColor:
-                                            index === activeIndexNumber
-                                                ? appColors.white
-                                                : appColors.soft_grey,
-                                    },
-                                ]}
-                            />
-                        </View>
-                    );
-                })}
-            </View>
+                }}
+            />
         </View>
     );
 };
