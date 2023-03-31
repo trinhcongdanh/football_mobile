@@ -12,7 +12,7 @@ import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
 import { getSize } from '@football/app/utils/responsive/scale';
 import {
     MAX_TOPTEAM_LASTCAMPAIGN_GAMES,
-    MAX_TOPTEAM_LASTCAMPAIGN_PLAYERAPPEARANCE
+    MAX_TOPTEAM_LASTCAMPAIGN_PLAYERAPPEARANCE,
 } from '@football/core/api/configs/config';
 import { isEmpty } from 'lodash';
 import moment from 'moment';
@@ -26,7 +26,7 @@ import {
     StatusBar,
     Text,
     TouchableOpacity,
-    View
+    View,
 } from 'react-native';
 import { Avatar } from 'react-native-elements';
 import FastImage from 'react-native-fast-image';
@@ -949,7 +949,7 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                                     )}
                                 />
                             </GestureHandlerRootView> */}
-                            <ScrollView
+                            {/* <ScrollView
                                 horizontal
                                 pagingEnabled
                                 showsHorizontalScrollIndicator={false}
@@ -1007,7 +1007,33 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                                         </View>
                                     );
                                 })}
-                            </View>
+                            </View> */}
+                            <GestureHandlerRootView>
+                                <CustomCarousel
+                                    data={topTeam ? topTeam.image_gallery : []}
+                                    height={getSize.m(300)}
+                                    activePageColor={appColors.white}
+                                    renderItem={({ item, index }) => {
+                                        return (
+                                            <TouchableOpacity
+                                                key={index}
+                                                style={{
+                                                    flexDirection: 'row',
+                                                    justifyContent: 'center',
+                                                    marginHorizontal: getSize.m(10),
+                                                }}
+                                            >
+                                                <View>
+                                                    <Image
+                                                        source={{ uri: item.image_url }}
+                                                        style={[styles.image]}
+                                                    />
+                                                </View>
+                                            </TouchableOpacity>
+                                        );
+                                    }}
+                                />
+                            </GestureHandlerRootView>
                         </View>
                     </ScrollView>
                 </SafeAreaView>
