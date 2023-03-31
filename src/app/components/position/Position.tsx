@@ -4,32 +4,41 @@ import { getSize } from '@football/app/utils/responsive/scale';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import { styles } from './Position.styles';
 import { IPositionProps } from './Position.type';
+import { appColors } from '@football/app/utils/constants/appColors';
 
 export const Position = ({
     position,
     color,
-    width,
+    backgroundColor,
     fontWeight,
     fontFamily,
     fontSize,
 }: IPositionProps) => {
     return (
-        <View style={[appStyles.flex_row_space_center, { marginBottom: getSize.m(24) }]}>
-            <View style={[styles.line, { width: width }]} />
-            <Text
+        <View style={[appStyles.align_justify, { marginBottom: getSize.m(24) }]}>
+            <View style={[styles.line]} />
+            <View
                 style={[
-                    styles.text_or,
+                    styles.container_text,
                     {
-                        color: color,
-                        fontWeight: fontWeight,
-                        fontFamily: fontFamily,
-                        fontSize: fontSize,
+                        backgroundColor: backgroundColor ? backgroundColor : appColors.gray,
                     },
                 ]}
             >
-                {position}
-            </Text>
-            <View style={[styles.line, { width: width }]} />
+                <Text
+                    style={[
+                        styles.text_or,
+                        {
+                            color: color,
+                            fontWeight: fontWeight,
+                            fontFamily: fontFamily,
+                            fontSize: fontSize,
+                        },
+                    ]}
+                >
+                    {position}
+                </Text>
+            </View>
         </View>
     );
 };
