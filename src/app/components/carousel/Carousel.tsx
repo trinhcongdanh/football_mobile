@@ -13,6 +13,7 @@ export const CustomCarousel = ({
     height,
     widthPerItem,
     activePageColor = appColors.text_dark_blue,
+    autoPlay,
 }: ICarouselProps) => {
     const PAGE_WIDTH = Dimensions.get('window').width;
     const COUNT = itemPerPage || 1.5;
@@ -29,6 +30,7 @@ export const CustomCarousel = ({
     return (
         <View style={{ alignItems: 'center' }}>
             <Carousel
+                autoPlay={autoPlay}
                 {...baseOptions}
                 loop={false}
                 data={data}

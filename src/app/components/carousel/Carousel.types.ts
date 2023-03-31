@@ -6,4 +6,5 @@ export type ICarouselProps = {
     renderItem: (item: any) => any;
     center?: boolean;
     activePageColor?: string;
+    autoPlay?: boolean;
 };

@@ -1,3 +1,21 @@
+import { AppFonts } from '@football/app/assets/fonts';
+import { appIcons } from '@football/app/assets/icons/appIcons';
+import { AppImages } from '@football/app/assets/images';
+import { CustomCarousel } from '@football/app/components/carousel/Carousel';
+import { HeaderLogo } from '@football/app/components/header-logo/HeaderLogo';
+import { HeaderUser } from '@football/app/components/header-user/HeaderUser';
+import { ListGame_Test } from '@football/app/components/list-game/ListGame_test';
+import { Position } from '@football/app/components/position/Position';
+import { appColors } from '@football/app/utils/constants/appColors';
+import { appStyles } from '@football/app/utils/constants/appStyles';
+import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
+import { getSize } from '@football/app/utils/responsive/scale';
+import {
+    MAX_TOPTEAM_LASTCAMPAIGN_GAMES,
+    MAX_TOPTEAM_LASTCAMPAIGN_PLAYERAPPEARANCE
+} from '@football/core/api/configs/config';
+import { isEmpty } from 'lodash';
+import moment from 'moment';
 import React, { useState } from 'react';
 import {
     I18nManager,
@@ -8,34 +26,17 @@ import {
     StatusBar,
     Text,
     TouchableOpacity,
-    View,
+    View
 } from 'react-native';
-import { AppImages } from '@football/app/assets/images';
-import { appStyles } from '@football/app/utils/constants/appStyles';
-import { HeaderUser } from '@football/app/components/header-user/HeaderUser';
-import { appIcons } from '@football/app/assets/icons/appIcons';
-import { appColors } from '@football/app/utils/constants/appColors';
-import { getSize } from '@football/app/utils/responsive/scale';
+import { Avatar } from 'react-native-elements';
+import FastImage from 'react-native-fast-image';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/AntDesign';
 import IconFeather from 'react-native-vector-icons/Feather';
-import { ListGame } from '@football/app/components/list-game/ListGame';
-import { HeaderLogo } from '@football/app/components/header-logo/HeaderLogo';
-import { Position } from '@football/app/components/position/Position';
-import { Avatar } from 'react-native-elements';
-import LinearGradient from 'react-native-linear-gradient';
-import { AppFonts } from '@football/app/assets/fonts';
-import FastImage from 'react-native-fast-image';
-import moment from 'moment';
-import {
-    MAX_TOPTEAM_LASTCAMPAIGN_GAMES,
-    MAX_TOPTEAM_LASTCAMPAIGN_PLAYERAPPEARANCE,
-} from '@football/core/api/configs/config';
-import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
-import { ListGame_Test } from '@football/app/components/list-game/ListGame_test';
 import styles from './NationalTeamScreen.style';
-import { useViewModel } from './NationalTeamScreen.viewModel';
 import { INationalTeamScreenProps } from './NationalTeamScreen.type';
-import { isEmpty } from 'lodash';
+import { useViewModel } from './NationalTeamScreen.viewModel';
 
 export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenProps) => {
     const {
@@ -140,173 +141,81 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                                     </TouchableOpacity>
                                 </View>
                             ) : null}
-                            {!isEmpty(topTeam?.video_gallery) ? (
-                                <View
-                                    style={{
-                                        marginHorizontal: getSize.m(-16),
-                                        marginTop: getSize.m(18),
-                                    }}
-                                >
-                                    {/* <GestureHandlerRootView style={appStyles.flex}>
-                                    <Carousel
-                                        loop={false}
-                                        pagingEnabled
-                                        snapEnabled
-                                        width={width}
-                                        height={getSize.m(280)}
-                                        scrollAnimationDuration={1000}
-                                        autoPlayInterval={4000}
-                                        mode="parallax"
-                                        modeConfig={{
-                                            parallaxScrollingScale: 1,
-                                            parallaxScrollingOffset: getSize.m(160),
-                                            parallaxAdjacentItemScale: 0.9,
-                                        }}
-                                        autoPlay={autoPlay}
-                                        defaultIndex={0}
-                                        onSnapToItem={index => {
-                                            // setIndexDot(index);
-                                        }}
-                                        data={topTeam?.video_gallery}
-                                        renderItem={({ item, index }) => (
-                                            <View
-                                                key={index}
-                                                style={{
-                                                    flexDirection: 'row',
-                                                    justifyContent: 'center',
-                                                }}
-                                            >
-                                                <TouchableOpacity
-                                                    activeOpacity={0.9}
-                                                    onPress={() => handlePlayVideo(item.video_url)}
-                                                >
-                                                    <Image
-                                                        source={{ uri: item.image_url }}
-                                                        style={[styles.image]}
-                                                    />
-                                                    <View style={styles.date}>
-                                                        <Text style={styles.text_date}>
-                                                            {item.length}
-                                                        </Text>
-                                                    </View>
-                                                    <View style={styles.play_video}>
-                                                        <Icon
-                                                            name={appIcons.ic_caretright}
-                                                            size={getSize.m(16)}
-                                                            color={appColors.white}
-                                                        />
-                                                    </View>
-                                                    <View style={styles.content}>
-                                                        <Text style={styles.text_content}>
-                                                            {item.caption_he}
-                                                        </Text>
-                                                    </View>
-                                                </TouchableOpacity>
-                                            </View>
-                                        )}
-                                    />
-                                </GestureHandlerRootView> */}
-                                    <ScrollView
-                                        horizontal
-                                        pagingEnabled
-                                        showsHorizontalScrollIndicator={false}
-                                        directionalLockEnabled
-                                        onScroll={e => {
-                                            const slide = Math.round(
-                                                e.nativeEvent.contentOffset.x /
-                                                    e.nativeEvent.layoutMeasurement.width
-                                            );
-                                            if (slide !== activeIndexNumber) {
-                                                setActiveIndexNumber(slide); // here we will set our active index num
-                                            }
+
+                            <GestureHandlerRootView>
+                                {!isEmpty(topTeam?.video_gallery) ? (
+                                    <View
+                                        style={{
+                                            marginHorizontal: getSize.m(-16),
+                                            marginTop: getSize.m(18),
                                         }}
                                     >
-                                        {topTeam?.video_gallery.map((item, index) => {
-                                            return (
-                                                <View
-                                                    // eslint-disable-next-line react/no-array-index-key
-                                                    key={index}
-                                                    style={{
-                                                        flexDirection: 'row',
-                                                        justifyContent: 'center',
-                                                        marginHorizontal: getSize.m(12),
-                                                    }}
-                                                >
-                                                    <TouchableOpacity
-                                                        activeOpacity={0.9}
-                                                        onPress={() => handlePlayVideo(item)}
-                                                    >
-                                                        <LinearGradient
-                                                            colors={[
-                                                                'transparent',
-                                                                'rgba(0, 0, 0, 0.90)',
-                                                            ]}
-                                                            start={{ x: 0, y: 0.3 }}
-                                                            end={{ x: 0, y: 1 }}
-                                                            style={styles.gradient_img}
-                                                        />
-                                                        <Image
-                                                            source={{ uri: item.image_url }}
-                                                            style={styles.image}
-                                                        />
-                                                        <View style={styles.date}>
-                                                            <Text style={styles.text_date}>
-                                                                {item.length}
-                                                            </Text>
-                                                        </View>
-                                                        <View style={styles.play_video}>
-                                                            <Icon
-                                                                name={appIcons.ic_caretright}
-                                                                size={getSize.m(16)}
-                                                                color={appColors.white}
-                                                            />
-                                                        </View>
-                                                        <View style={styles.content}>
-                                                            <Text style={styles.text_content}>
-                                                                {getTranslationText({
-                                                                    textHe: item.caption_he,
-                                                                    textEn: item.caption_en,
-                                                                })}
-                                                                <IconFeather
-                                                                    name={appIcons.ic_left_ios}
-                                                                    size={getSize.m(12)}
-                                                                    color={appColors.white}
-                                                                    style={styles.ic_arrow_left}
-                                                                />
-                                                            </Text>
-                                                        </View>
-                                                    </TouchableOpacity>
-                                                </View>
-                                            );
-                                        })}
-                                    </ScrollView>
-                                    <View style={styles.dotContainer}>
-                                        {topTeam?.video_gallery.map((_, index) => {
-                                            return (
-                                                // eslint-disable-next-line react/no-array-index-key
-                                                <View key={index}>
+                                        <CustomCarousel
+                                            data={topTeam ? topTeam.video_gallery : []}
+                                            height={getSize.m(300)}
+                                            activePageColor={appColors.white}
+                                            renderItem={({ item, index }) => {
+                                                return (
                                                     <View
-                                                        style={[
-                                                            styles.dot,
-                                                            {
-                                                                width:
-                                                                    index === activeIndexNumber
-                                                                        ? getSize.m(18)
-                                                                        : getSize.m(5),
-                                                                backgroundColor:
-                                                                    index === activeIndexNumber
-                                                                        ? appColors.blue_light
-                                                                        : appColors.soft_grey,
-                                                            },
-                                                        ]}
-                                                    />
-                                                </View>
-                                            );
-                                        })}
+                                                        // eslint-disable-next-line react/no-array-index-key
+                                                        key={index}
+                                                        style={{
+                                                            flexDirection: 'row',
+                                                            justifyContent: 'center',
+                                                            marginHorizontal: getSize.m(12),
+                                                        }}
+                                                    >
+                                                        <TouchableOpacity
+                                                            activeOpacity={0.9}
+                                                            onPress={() => handlePlayVideo(item)}
+                                                        >
+                                                            <LinearGradient
+                                                                colors={[
+                                                                    'transparent',
+                                                                    'rgba(0, 0, 0, 0.90)',
+                                                                ]}
+                                                                start={{ x: 0, y: 0.3 }}
+                                                                end={{ x: 0, y: 1 }}
+                                                                style={styles.gradient_img}
+                                                            />
+                                                            <Image
+                                                                source={{ uri: item.image_url }}
+                                                                style={styles.image}
+                                                            />
+                                                            <View style={styles.date}>
+                                                                <Text style={styles.text_date}>
+                                                                    {item.length}
+                                                                </Text>
+                                                            </View>
+                                                            <View style={styles.play_video}>
+                                                                <Icon
+                                                                    name={appIcons.ic_caretright}
+                                                                    size={getSize.m(16)}
+                                                                    color={appColors.white}
+                                                                />
+                                                            </View>
+                                                            <View style={styles.content}>
+                                                                <Text style={styles.text_content}>
+                                                                    {getTranslationText({
+                                                                        textHe: item.caption_he,
+                                                                        textEn: item.caption_en,
+                                                                    })}
+                                                                    <IconFeather
+                                                                        name={appIcons.ic_left_ios}
+                                                                        size={getSize.m(12)}
+                                                                        color={appColors.white}
+                                                                        style={styles.ic_arrow_left}
+                                                                    />
+                                                                </Text>
+                                                            </View>
+                                                        </TouchableOpacity>
+                                                    </View>
+                                                );
+                                            }}
+                                        />
                                     </View>
-                                </View>
-                            ) : null}
-
+                                ) : null}
+                            </GestureHandlerRootView>
                             {!isEmpty(topTeam?.future_events) ? (
                                 <View
                                     style={{
