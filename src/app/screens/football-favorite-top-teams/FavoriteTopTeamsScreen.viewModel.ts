@@ -105,22 +105,11 @@ export const useViewModel = ({ navigation, route }: IFavoriteTopTeamsScreenProps
     }, []);
 
     const onGoSkip = () => {
-        // clearFavoriteData(dispatch);
-        // if (isEmpty(profile.profile) || isNil(profile.profile)) {
-        //     dispatch(
-        //         createProfileUser(
-        //             serializeParams({
-        //                 action: ACTION,
-        //                 token: TOKEN,
-        //                 call: AuthData.CREATE_PROFILE,
-        //                 'item[guest_guid]': guestId[0],
-        //             })
-        //         )
-        //     );
-        // } else {
-        //     navigate(ScreenName.SideBar);
-        // }
-        navigate(ScreenName.FavSummaryPage);
+        if (previous_screen === ScreenName.SettingsPage) {
+            goBack();
+        } else {
+            navigate(ScreenName.FavSummaryPage);
+        }
     };
 
     const isFocused = useIsFocused();

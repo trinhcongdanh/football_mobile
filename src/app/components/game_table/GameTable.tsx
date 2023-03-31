@@ -61,13 +61,13 @@ export const GameTable = ({
             >
                 <View style={appStyles.align_justify}>
                     <FastImage
-                        source={{ uri: avt_away }}
+                        source={{ uri: avt_home }}
                         style={{ width: getSize.m(24), height: getSize.m(24) }}
                     />
                     {name_home || name_away ? (
                         <View style={styles.resize_name_club}>
                             <Text numberOfLines={2} style={styles.name_club}>
-                                {name_away}
+                                {name_home}
                             </Text>
                         </View>
                     ) : null}
@@ -119,13 +119,13 @@ export const GameTable = ({
                 </View>
                 <View style={appStyles.align_justify}>
                     <FastImage
-                        source={{ uri: avt_home }}
+                        source={{ uri: avt_away }}
                         style={{ width: getSize.m(24), height: getSize.m(24) }}
                     />
                     {name_home || name_away ? (
                         <View style={styles.resize_name_club}>
                             <Text numberOfLines={2} style={styles.name_club}>
-                                {name_home}
+                                {name_away}
                             </Text>
                         </View>
                     ) : null}

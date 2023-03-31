@@ -15,6 +15,7 @@ import {
     ActivityIndicator,
     Image,
     ImageBackground,
+    LogBox,
     SafeAreaView,
     ScrollView,
     StatusBar,
@@ -66,6 +67,8 @@ export const FavoriteTeam = ({
     }, [favSelected, teams]);
 
     const { getTranslationText } = useTranslationText();
+
+    LogBox.ignoreAllLogs(true);
     return (
         <View style={[appStyles.flex]}>
             <ImageBackground source={AppImages.img_bg_register} style={appStyles.flex}>

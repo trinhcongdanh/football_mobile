@@ -38,6 +38,7 @@ const styles = StyleSheet.create({
         lineHeight: getSize.m(21),
         fontFamily: AppFonts.medium,
         color: appColors.text_option_unselect,
+        marginRight: getSize.m(22),
     },
 });
 
