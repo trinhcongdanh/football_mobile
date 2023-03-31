@@ -292,7 +292,7 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                             <View
                                 style={[
                                     appStyles.package,
-                                    { marginTop: getSize.m(0), backgroundColor: appColors.white },
+                                    { marginTop: getSize.m(-1), backgroundColor: appColors.white },
                                 ]}
                             >
                                 <View>

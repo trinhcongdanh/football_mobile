@@ -40,8 +40,8 @@ const styles = StyleSheet.create({
         color: appColors.text_dark_blue,
         fontFamily: AppFonts.bold,
         lineHeight: getSize.m(18),
-        width: getSize.m(40),
-        marginLeft: getSize.m(10),
+        width: getSize.m(30),
+        marginLeft: getSize.m(20),
         textAlign: 'center',
     },
 
@@ -65,6 +65,7 @@ const styles = StyleSheet.create({
         lineHeight: getSize.m(14.5),
         fontFamily: AppFonts.semibold,
         marginLeft: getSize.m(5),
+        width: getSize.m(50),
     },
 });
 
