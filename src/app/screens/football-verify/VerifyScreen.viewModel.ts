@@ -25,28 +25,29 @@ export const useViewModel = ({ navigation, route }: IVerifyScreenProps) => {
     const [errors, setErrors] = useState({
         verifyError: '',
     });
-
-    const onGoBack = (): void => {
-        dispatch(clearPhoneNumber([]));
-        goBack();
+    const handleError = (errorMessage: string, input: string): void => {
+        setErrors(prevState => ({ ...prevState, [input]: errorMessage }));
     };
 
-    const handleBackButtonClick = () => {
+    const onGoBack = () => {
         dispatch(clearPhoneNumber([]));
+
         goBack();
         return true;
     };
 
+    // const handleBackButtonClick = () => {
+    //     dispatch(clearPhoneNumber([]));
+    //     goBack();
+    //     return true;
+    // };
+
     useEffect(() => {
-        BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
+        BackHandler.addEventListener('hardwareBackPress', onGoBack);
         return () => {
-            BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
+            BackHandler.removeEventListener('hardwareBackPress', onGoBack);
         };
     }, []);
-
-    const handleError = (errorMessage: string, input: string): void => {
-        setErrors(prevState => ({ ...prevState, [input]: errorMessage }));
-    };
 
     const inputs = Array(4).fill('');
 
@@ -211,6 +212,10 @@ export const useViewModel = ({ navigation, route }: IVerifyScreenProps) => {
             setNextInputIndex(0);
         }
     }, [numberPhone.loadingLogin, otp.isVerifyOtp]);
+
+    useEffect(() => {
+        handleError('', 'verifyError');
+    }, []);
     return {
         inputs,
         errors,
