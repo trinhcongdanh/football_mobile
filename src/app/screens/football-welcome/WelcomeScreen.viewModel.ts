@@ -11,6 +11,7 @@ import { IWelcomeScreenProps } from '@football/app/screens/football-welcome/Welc
 import { ScreenName } from '@football/app/utils/constants/enum';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearFavoriteData } from '@football/app/utils/functions/clearFavoriteData';
+import { clearPhoneNumber } from 'src/store/user/RegisterNumberPhone.slice';
 
 export const useViewModel = ({ navigation, route }: IWelcomeScreenProps) => {
     const { navigate, goBack } = useAppNavigator();
@@ -35,6 +36,7 @@ export const useViewModel = ({ navigation, route }: IWelcomeScreenProps) => {
         navigate(ScreenName.FavTeamPage);
     };
     const onNavigateConnect = () => {
+        dispatch(clearPhoneNumber([]));
         clearFavoriteData(dispatch);
         navigation.navigate(ScreenName.ConnectPage, {
             isReset: true,
