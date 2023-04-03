@@ -89,6 +89,7 @@ const resources = {
                 ok: 'Ok',
                 message: 'Message',
                 thank_you: 'תודה. ההודעה שלך נשלחה.',
+                language: 'For English',
             },
             connect: {
                 title: 'התחברות',
@@ -769,6 +770,7 @@ const resources = {
                 ok: 'Ok',
                 message: 'Message',
                 thank_you: 'Thank you. Your message was sent!',
+                language: 'לחץ לעברית',
             },
             connect: {
                 title: 'Login',

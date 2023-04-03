@@ -11,6 +11,7 @@ import FastImage from 'react-native-fast-image';
 import IconAntDesign from 'react-native-vector-icons/AntDesign';
 import { styles } from './SideMenu.style';
 import { useViewModel } from './SideMenu.viewModel';
+import { ChangeLanguage } from '@football/app/components/change-language/ChangeLanguage';
 
 export const SideMenu = ({ navigation }: ISideMenuProps) => {
     const {
@@ -149,6 +150,14 @@ export const SideMenu = ({ navigation }: ISideMenuProps) => {
                             )}
                         </TouchableOpacity>
                     </View>
+                </View>
+                <View
+                    style={{
+                        marginTop: getSize.m(300),
+                        alignItems: 'center',
+                    }}
+                >
+                    <ChangeLanguage color="#000" borderBottomColor="#000" />
                 </View>
             </View>
         </View>

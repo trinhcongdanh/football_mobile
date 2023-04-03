@@ -2,13 +2,14 @@ import { View, Image, Text, ImageBackground, TouchableOpacity, StatusBar } from 
 import React from 'react';
 import { AppImages } from '@football/app/assets/images';
 import { useTranslation } from 'react-i18next';
-import { ScreenName } from '@football/app/utils/constants/enum';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import { Button } from '@football/app/components/button';
 import styles from './WelcomeScreen.styles';
 import { IWelcomeScreenProps } from './WelcomeScreen.type';
 import { useViewModel } from '@football/app/screens/football-welcome/WelcomeScreen.viewModel';
 import { getSize } from '@football/app/utils/responsive/scale';
+import { ChangeLanguage } from '@football/app/components/change-language/ChangeLanguage';
+import { appColors } from '@football/app/utils/constants/appColors';
 
 export const WelcomeScreen = ({ navigation, route }: IWelcomeScreenProps) => {
     const { i18n } = useTranslation();
@@ -40,6 +41,12 @@ export const WelcomeScreen = ({ navigation, route }: IWelcomeScreenProps) => {
                     <TouchableOpacity style={styles.button_sign_up} onPress={onNavigateConnect}>
                         <Text style={styles.text_button_sign_up}>{t('welcome.create')}</Text>
                     </TouchableOpacity>
+                    <View style={{ marginTop: getSize.m(16) }}>
+                        <ChangeLanguage
+                            color={appColors.white}
+                            borderBottomColor={appColors.white}
+                        />
+                    </View>
                 </View>
             </ImageBackground>
         </View>
