@@ -14,16 +14,18 @@ import 'react-native-get-random-values';
 import Orientation from 'react-native-orientation-locker';
 import { EventProvider } from 'react-native-outside-press';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import { Provider } from 'react-redux';
+import { Provider, useSelector } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import './app/i18n/EnStrings';
 import { RootNavigator } from './app/routes/RootNavigator';
 import { appStyles } from './app/utils/constants/appStyles';
 import { NativeModules } from 'react-native';
 import RNRestart from 'react-native-restart';
-import { persistor, store } from './store/store';
+import { RootState, persistor, store } from './store/store';
 import { Restart } from '@football/app/utils/constants/enum';
 import * as RNLocalize from 'react-native-localize';
+import i18n from './app/i18n/EnStrings';
+import ChangeLanguageService from '@football/core/services/ChangeLanguage.service';
 
 TextInput.defaultProps = Text.defaultProps || {};
 TextInput.defaultProps.allowFontScaling = false;
@@ -42,8 +44,6 @@ LogBox.ignoreLogs([
 ]);
 
 const App = (props: any) => {
-    const { i18n } = useTranslation();
-
     let langCode = RNLocalize.getCountry();
 
     langCode =
@@ -55,24 +55,17 @@ const App = (props: any) => {
     const locale = langCode.substring(0, 2).toLocaleLowerCase();
 
     useEffect(() => {
-        i18n.changeLanguage(locale === 'he' || locale === 'iw' ? 'heb' : 'en');
-        if (i18n.language === 'heb') {
-            I18nManager.forceRTL(true);
-            AsyncStorage.getItem(Restart.key_restart_for_rtl).then(isRestarted => {
-                console.log('isRestarted:' + isRestarted);
-                if (isRestarted === null) {
-                    AsyncStorage.setItem(Restart.key_restart_for_rtl, '1').then(() => {
-                        console.log('call restart before: ');
-                        RNRestart.Restart();
-                        console.log('call restart after: ');
-                    });
+        AsyncStorage.getItem(Restart.language).then(isClickChanged => {
+            if (isClickChanged === null) {
+                i18n.changeLanguage(locale === 'he' || locale === 'iw' ? 'heb' : 'en');
+                if (i18n.language === 'heb') {
+                    I18nManager.forceRTL(true);
+                    ChangeLanguageService.changedLanguage(Restart.key_restart_for_rtl, '1');
                 } else {
-                    console.log('isRestarted: here');
+                    I18nManager.forceRTL(false);
                 }
-            });
-        } else {
-            I18nManager.forceRTL(false);
-        }
+            }
+        });
     }, []);
 
     const requestUserPermission = async () => {

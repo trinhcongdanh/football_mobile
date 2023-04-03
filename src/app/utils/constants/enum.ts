@@ -137,4 +137,7 @@ export enum Gender {
 
 export enum Restart {
     key_restart_for_rtl = 'KEY_RESTART_FOR_RTL',
+    key_restart_for_ltr = 'KEY_RESTART_FOR_LTR',
+    Restart = 'Restart',
+    language = 'LANGUAGE',
 }

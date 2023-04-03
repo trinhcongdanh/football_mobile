@@ -3,7 +3,7 @@ import { AppJsons } from '@football/app/assets/images/AppImages';
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
 import { ISplashScreenProps } from '@football/app/screens/splash-screen/SplashScreen.type';
 import { appStyles } from '@football/app/utils/constants/appStyles';
-import { AuthData, ScreenName } from '@football/app/utils/constants/enum';
+import { AuthData, Restart, ScreenName } from '@football/app/utils/constants/enum';
 import { serializeParams } from '@football/app/utils/functions/quick-functions';
 import { ACTION } from '@football/core/api/auth/config';
 import { Lottie } from '@football/core/models/SplashModelResponse';
@@ -12,13 +12,23 @@ import { isEmpty, isNil } from 'lodash';
 import LottieView from 'lottie-react-native';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ImageBackground, StatusBar, View } from 'react-native';
+import {
+    I18nManager,
+    ImageBackground,
+    NativeModules,
+    Platform,
+    StatusBar,
+    View,
+} from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProfileUser } from 'src/store/user/getProfile.slice';
 import { addGuestId } from 'src/store/user/GuestId.slice';
 import { RootState } from 'src/store/store';
 import { useMount } from '@football/app/utils/hooks/useMount';
 import { NotificationData } from '@football/core/models/NotificationModel';
+import * as RNLocalize from 'react-native-localize';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import RNRestart from 'react-native-restart';
 
 const useViewModel = () => {};
 
