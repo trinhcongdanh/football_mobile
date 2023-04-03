@@ -25,6 +25,7 @@ import { useSelector } from 'react-redux';
 import styles from './LeaguesScreen.style';
 import { ILeaguesScreenProps } from './LeaguesScreen.type';
 import { useViewModel } from './LeaguesScreen.viewModel';
+import { BackGround } from '@football/app/components/background/BackGround';
 
 export const LeaguesScreen = ({ navigation, route }: ILeaguesScreenProps) => {
     const { t, labels, onSearchLeague, searchLeagueType, handleLeaguesDetails } = useViewModel({
@@ -60,7 +61,7 @@ export const LeaguesScreen = ({ navigation, route }: ILeaguesScreenProps) => {
     };
     return (
         <View style={appStyles.flex}>
-            <ImageBackground source={AppImages.img_background} style={appStyles.flex}>
+            <BackGround>
                 <StatusBar translucent backgroundColor="transparent" />
                 <SafeAreaView style={appStyles.safe_area}>
                     <View style={appStyles.container}>
@@ -121,7 +122,7 @@ export const LeaguesScreen = ({ navigation, route }: ILeaguesScreenProps) => {
                         <View style={{ height: TAB_BAR_HEIGHT }} />
                     </View>
                 </SafeAreaView>
-            </ImageBackground>
+            </BackGround>
         </View>
     );
 };

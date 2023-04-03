@@ -25,6 +25,7 @@ import { IDataCoachScreenProps } from './DataCoachScreen.type';
 import { useViewModel } from './DataCoachScreen.viewModel';
 import { DataCoachGamesScreen } from './layouts/data-coach-games';
 import { DataCoachTeamsScreen } from './layouts/data-coach-teams';
+import { BackGround } from '@football/app/components/background/BackGround';
 
 // type Props = {};
 
@@ -44,7 +45,7 @@ export const DataCoachScreen = ({ navigation, route }: IDataCoachScreenProps) =>
     return (
         <View style={appStyles.flex}>
             {coach && (
-                <ImageBackground source={AppImages.img_background} style={appStyles.flex}>
+                <BackGround>
                     <StatusBar translucent backgroundColor="transparent" />
                     <SafeAreaView style={appStyles.safe_area}>
                         <View style={appStyles.container}>
@@ -270,7 +271,7 @@ export const DataCoachScreen = ({ navigation, route }: IDataCoachScreenProps) =>
                             </View>
                         </ScrollView>
                     </SafeAreaView>
-                </ImageBackground>
+                </BackGround>
             )}
         </View>
     );

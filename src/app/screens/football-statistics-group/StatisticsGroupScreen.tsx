@@ -17,6 +17,7 @@ import { useViewModel } from './StatisticsGroupScreen.viewModel';
 import { IStatisticsGroupScreenProps, TeamGoalKickersListType } from './StatisticsGroupScreen.type';
 import { ScoresOfGoalsStateCup } from '@football/app/screens/football-statistics-group/layouts/scores-of-goals-state-cup/ScoresOfGoalsStateCup';
 import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
+import { BackGround } from '@football/app/components/background/BackGround';
 
 export const StatisticsGroupScreen = ({ navigation, route }: IStatisticsGroupScreenProps) => {
     const { t, onGoBack, teamSeasonStats, handleTeamGoalKickersList } = useViewModel({
@@ -26,7 +27,7 @@ export const StatisticsGroupScreen = ({ navigation, route }: IStatisticsGroupScr
     const { getTranslationText } = useTranslationText();
     return (
         <View style={appStyles.flex}>
-            <ImageBackground source={AppImages.img_background} style={appStyles.flex}>
+            <BackGround>
                 <StatusBar translucent backgroundColor="transparent" />
                 <SafeAreaView style={appStyles.safe_area}>
                     <View style={appStyles.container}>
@@ -126,7 +127,7 @@ export const StatisticsGroupScreen = ({ navigation, route }: IStatisticsGroupScr
                         </ScrollView>
                     )}
                 </SafeAreaView>
-            </ImageBackground>
+            </BackGround>
         </View>
     );
 };

@@ -25,6 +25,7 @@ import { useSelector } from 'react-redux';
 import styles from './TeamScreen.style';
 import { ITeamScreenProps } from './TeamScreen.type';
 import { useViewModel } from './TeamScreen.viewModel';
+import { BackGround } from '@football/app/components/background/BackGround';
 
 // type Props = {};
 
@@ -43,7 +44,7 @@ export const TeamScreen = ({ navigation, route }: ITeamScreenProps) => {
 
     return (
         <View style={appStyles.flex}>
-            <ImageBackground source={AppImages.img_background} style={appStyles.flex}>
+            <BackGround>
                 <StatusBar translucent backgroundColor="transparent" />
                 <SafeAreaView style={appStyles.safe_area}>
                     <View style={appStyles.container}>
@@ -101,7 +102,7 @@ export const TeamScreen = ({ navigation, route }: ITeamScreenProps) => {
                         <View style={{ height: TAB_BAR_HEIGHT + BOTTOM_SVG_HEIGHT }} />
                     </View>
                 </SafeAreaView>
-            </ImageBackground>
+            </BackGround>
         </View>
     );
 };

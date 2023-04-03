@@ -20,6 +20,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import styles from './GoalKickerList.style';
 import { IGoalKickerListScreenProps } from './GoalKickerListScreen.type';
 import { useViewModel } from './GoalKickerListScreen.viewModel';
+import { BackGround } from '@football/app/components/background/BackGround';
 
 export const GoalKickerListScreen = ({ navigation, route }: IGoalKickerListScreenProps) => {
     const teamSeasonStats = route?.params?.teamSeasonStats as TeamSeasonStatsModel;
@@ -35,7 +36,7 @@ export const GoalKickerListScreen = ({ navigation, route }: IGoalKickerListScree
     });
     return (
         <View style={appStyles.flex}>
-            <ImageBackground source={AppImages.img_background} style={appStyles.flex}>
+            <BackGround>
                 <StatusBar translucent backgroundColor="transparent" />
                 {teamSeasonStats && (
                     <SafeAreaView style={appStyles.safe_area}>
@@ -94,7 +95,7 @@ export const GoalKickerListScreen = ({ navigation, route }: IGoalKickerListScree
                         </ScrollView>
                     </SafeAreaView>
                 )}
-            </ImageBackground>
+            </BackGround>
         </View>
     );
 };

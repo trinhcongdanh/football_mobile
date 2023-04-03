@@ -21,6 +21,7 @@ import { useViewModel } from './PreviousCampaignsScreen.viewModel';
 import { IPreviousCampaignsScreenProps } from './PreviousCampaignsScreen.type';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
+import { BackGround } from '@football/app/components/background/BackGround';
 
 export const PreviousCampaignsScreen = ({ navigation, route }: IPreviousCampaignsScreenProps) => {
     const { t, onGoBack, campaigns, handleCampaignPage } = useViewModel({ navigation, route });
@@ -29,7 +30,7 @@ export const PreviousCampaignsScreen = ({ navigation, route }: IPreviousCampaign
 
     return (
         <View style={appStyles.flex}>
-            <ImageBackground source={AppImages.img_background} style={appStyles.flex}>
+            <BackGround>
                 <StatusBar translucent backgroundColor="transparent" />
                 <SafeAreaView style={appStyles.safe_area}>
                     <View style={appStyles.container}>
@@ -105,7 +106,7 @@ export const PreviousCampaignsScreen = ({ navigation, route }: IPreviousCampaign
                         </View>
                     </ScrollView>
                 </SafeAreaView>
-            </ImageBackground>
+            </BackGround>
         </View>
     );
 };

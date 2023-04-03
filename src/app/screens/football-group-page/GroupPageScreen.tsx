@@ -31,6 +31,7 @@ import styles from './GroupPageScreen.style';
 import { IGroupPageScreenProps } from './GroupPageScreen.type';
 import { useViewModel } from './GroupPageScreen.viewModel';
 import { Statistics } from './layouts/statistics/Statistics';
+import { BackGround } from '@football/app/components/background/BackGround';
 
 export const GroupPageScreen = ({ navigation, route }: IGroupPageScreenProps) => {
     const {
@@ -61,7 +62,7 @@ export const GroupPageScreen = ({ navigation, route }: IGroupPageScreenProps) =>
     return (
         <View style={appStyles.flex}>
             {team && (
-                <ImageBackground source={AppImages.img_background} style={appStyles.flex}>
+                <BackGround>
                     <StatusBar translucent backgroundColor="transparent" />
                     <SafeAreaView style={appStyles.safe_area}>
                         <View style={appStyles.container}>
@@ -504,7 +505,7 @@ export const GroupPageScreen = ({ navigation, route }: IGroupPageScreenProps) =>
                             <View style={{ height: TAB_BAR_HEIGHT + BOTTOM_SVG_HEIGHT }} />
                         </ScrollView>
                     </SafeAreaView>
-                </ImageBackground>
+                </BackGround>
             )}
         </View>
     );

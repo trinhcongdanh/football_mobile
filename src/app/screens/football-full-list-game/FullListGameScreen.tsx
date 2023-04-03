@@ -1,5 +1,6 @@
 import { appIcons } from '@football/app/assets/icons/appIcons';
 import { AppImages } from '@football/app/assets/images';
+import { BackGround } from '@football/app/components/background/BackGround';
 import { CardGoBack } from '@football/app/components/go-back/CardGoBack';
 import { HeaderLogo } from '@football/app/components/header-logo/HeaderLogo';
 import { IFullListGameScreenProps } from '@football/app/screens/football-full-list-game/FullListGameScreen.type';
@@ -35,7 +36,7 @@ export const FullListGameScreen = ({ navigation, route }: IFullListGameScreenPro
 
     return (
         <View style={appStyles.flex}>
-            <ImageBackground source={AppImages.img_background} style={appStyles.flex}>
+            <BackGround>
                 <StatusBar translucent backgroundColor="transparent" />
                 <SafeAreaView style={appStyles.safe_area}>
                     <View style={appStyles.container}>
@@ -237,7 +238,7 @@ export const FullListGameScreen = ({ navigation, route }: IFullListGameScreenPro
                         </View>
                     </ScrollView>
                 </SafeAreaView>
-            </ImageBackground>
+            </BackGround>
         </View>
     );
 };

@@ -24,6 +24,7 @@ import { TopTeamModel } from '@football/core/models/TopTeamModelResponse';
 import { Game } from '@football/core/models/TeamModelResponse';
 import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
 import moment from 'moment';
+import { BackGround } from '@football/app/components/background/BackGround';
 
 export const ListGameScreen = ({ navigation, route }: IListGameScreenProps) => {
     const topTeam = route?.params?.topTeam as TopTeamModel;
@@ -35,7 +36,7 @@ export const ListGameScreen = ({ navigation, route }: IListGameScreenProps) => {
 
     return (
         <View style={appStyles.flex}>
-            <ImageBackground source={AppImages.img_background} style={appStyles.flex}>
+            <BackGround>
                 <StatusBar translucent backgroundColor="transparent" />
                 <SafeAreaView style={appStyles.safe_area}>
                     <View style={appStyles.container}>
@@ -237,7 +238,7 @@ export const ListGameScreen = ({ navigation, route }: IListGameScreenProps) => {
                         </View>
                     </ScrollView>
                 </SafeAreaView>
-            </ImageBackground>
+            </BackGround>
         </View>
     );
 };

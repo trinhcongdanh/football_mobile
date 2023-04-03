@@ -9,6 +9,7 @@ import { getSize } from '@football/app/utils/responsive/scale';
 import styles from './HistoryScreen.style';
 import { useViewModel } from './HistoryScreen.viewModel';
 import { IHistoryScreenProps } from './HistoryScreen.type';
+import { BackGround } from '@football/app/components/background/BackGround';
 
 export const HistoryScreen = ({ navigation, route }: IHistoryScreenProps) => {
     const { onGoBack, t, datas } = useViewModel({
@@ -17,7 +18,7 @@ export const HistoryScreen = ({ navigation, route }: IHistoryScreenProps) => {
     });
     return (
         <View style={appStyles.flex}>
-            <ImageBackground source={AppImages.img_background} style={appStyles.flex}>
+            <BackGround>
                 <StatusBar translucent backgroundColor="transparent" />
                 <SafeAreaView style={appStyles.safe_area}>
                     <View style={appStyles.container}>
@@ -71,7 +72,7 @@ export const HistoryScreen = ({ navigation, route }: IHistoryScreenProps) => {
                         </ScrollView>
                     </View>
                 </SafeAreaView>
-            </ImageBackground>
+            </BackGround>
         </View>
     );
 };

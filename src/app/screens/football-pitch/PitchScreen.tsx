@@ -21,6 +21,7 @@ import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import styles from './PitchScreen.style';
 import { IPitchScreenProps } from './PitchScreen.type';
 import { useViewModel } from './PitchScreen.viewModel';
+import { BackGround } from '@football/app/components/background/BackGround';
 
 export const PitchScreen = ({ navigation, route }: IPitchScreenProps) => {
     const { t, onGoBack, stadium } = useViewModel({ navigation, route });
@@ -29,7 +30,7 @@ export const PitchScreen = ({ navigation, route }: IPitchScreenProps) => {
     return (
         <View style={appStyles.flex}>
             {stadium && (
-                <ImageBackground source={AppImages.img_background} style={appStyles.flex}>
+                <BackGround>
                     <StatusBar translucent backgroundColor="transparent" />
                     <SafeAreaView style={appStyles.safe_area}>
                         <View style={appStyles.container}>
@@ -251,7 +252,7 @@ export const PitchScreen = ({ navigation, route }: IPitchScreenProps) => {
                             </View>
                         </ScrollView>
                     </SafeAreaView>
-                </ImageBackground>
+                </BackGround>
             )}
         </View>
     );

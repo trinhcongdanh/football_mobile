@@ -1,5 +1,6 @@
 import { appIcons } from '@football/app/assets/icons/appIcons';
 import { AppImages } from '@football/app/assets/images';
+import { BackGround } from '@football/app/components/background/BackGround';
 import { Button } from '@football/app/components/button';
 import { CardGoBack } from '@football/app/components/go-back/CardGoBack';
 import Input from '@football/app/components/input/Input';
@@ -46,7 +47,7 @@ export const ContactUsScreen = ({ navigation, route }: IContactUsScreenProps) =>
 
     return (
         <View style={appStyles.flex}>
-            <ImageBackground source={AppImages.img_background} style={appStyles.flex}>
+            <BackGround>
                 <StatusBar translucent backgroundColor="transparent" />
                 <SafeAreaView style={appStyles.safe_area}>
                     <View style={appStyles.container}>
@@ -142,7 +143,7 @@ export const ContactUsScreen = ({ navigation, route }: IContactUsScreenProps) =>
                         </View>
                     </ScrollView>
                 </SafeAreaView>
-            </ImageBackground>
+            </BackGround>
         </View>
     );
 };

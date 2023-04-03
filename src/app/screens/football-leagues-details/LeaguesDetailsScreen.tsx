@@ -27,6 +27,7 @@ import { Statistics } from './layouts/Statistics/Statistics';
 import styles from './LeaguesDetailsScreen.style';
 import { ILeaguesDetailsScreenProps } from './LeaguesDetailsScreen.type';
 import { useViewModel } from './LeaguesDetailsScreen.viewModel';
+import { BackGround } from '@football/app/components/background/BackGround';
 
 export const LeaguesDetailsScreen = ({ navigation, route }: ILeaguesDetailsScreenProps) => {
     const {
@@ -53,7 +54,7 @@ export const LeaguesDetailsScreen = ({ navigation, route }: ILeaguesDetailsScree
 
     return (
         <View style={appStyles.flex}>
-            <ImageBackground source={AppImages.img_background} style={appStyles.flex}>
+            <BackGround>
                 <StatusBar translucent backgroundColor="transparent" />
                 <SafeAreaView style={appStyles.safe_area}>
                     <View style={appStyles.container}>
@@ -187,7 +188,7 @@ export const LeaguesDetailsScreen = ({ navigation, route }: ILeaguesDetailsScree
                         </View> */}
                     </ScrollView>
                 </SafeAreaView>
-            </ImageBackground>
+            </BackGround>
         </View>
     );
 };

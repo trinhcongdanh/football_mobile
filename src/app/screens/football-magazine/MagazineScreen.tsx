@@ -16,6 +16,7 @@ import { getSize } from '@football/app/utils/responsive/scale';
 import styles from './MagazineScreen.style';
 import { useViewModel } from './MagazineScreen.viewModel';
 import { IMagazineScreenProps } from './MagazineScreen.type';
+import { BackGround } from '@football/app/components/background/BackGround';
 
 export const MagazineScreen = ({ navigation, route }: IMagazineScreenProps) => {
     const { t, onGoBack, contents } = useViewModel({
@@ -24,7 +25,7 @@ export const MagazineScreen = ({ navigation, route }: IMagazineScreenProps) => {
     });
     return (
         <View style={appStyles.flex}>
-            <ImageBackground source={AppImages.img_background} style={appStyles.flex}>
+            <BackGround>
                 <StatusBar translucent backgroundColor="transparent" />
                 <SafeAreaView style={appStyles.safe_area}>
                     <View style={appStyles.container}>
@@ -61,7 +62,7 @@ export const MagazineScreen = ({ navigation, route }: IMagazineScreenProps) => {
                         </View>
                     </ScrollView>
                 </SafeAreaView>
-            </ImageBackground>
+            </BackGround>
         </View>
     );
 };
