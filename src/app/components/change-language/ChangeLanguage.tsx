@@ -16,9 +16,11 @@ export const ChangeLanguage = ({ color, borderBottomColor }: IChangeLanguageComp
         i18n.changeLanguage(i18n.language === 'en' ? 'heb' : 'en');
         if (i18n.language === 'heb') {
             I18nManager.forceRTL(true);
+            ChangeLanguageService.removeLanguage(Restart.key_restart_for_ltr);
             ChangeLanguageService.changedLanguage(Restart.key_restart_for_rtl, '1');
         } else {
             I18nManager.forceRTL(false);
+            ChangeLanguageService.removeLanguage(Restart.key_restart_for_rtl);
             ChangeLanguageService.changedLanguage(Restart.key_restart_for_ltr, '1');
         }
     };
