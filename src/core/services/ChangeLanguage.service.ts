@@ -16,6 +16,10 @@ class ChangeLanguage {
             }
         });
     }
+
+    removeLanguage(key: string): void {
+        AsyncStorage.removeItem(key);
+    }
 }
 
 export default new ChangeLanguage();
