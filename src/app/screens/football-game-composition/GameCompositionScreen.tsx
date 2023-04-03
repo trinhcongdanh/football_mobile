@@ -9,6 +9,7 @@ import { HeaderComposition } from '@football/app/components/header-composition/H
 import { TopTaps } from '@football/app/routes/toptap/TopTap';
 import { useViewModel } from './GameCompositionScreen.viewModel';
 import { IGameCompositionScreenProps } from './GameCompositionScreen.type';
+import { BackGround } from '@football/app/components/background/BackGround';
 
 export const GameCompositionScreen = ({ navigation, route }: IGameCompositionScreenProps) => {
     const { t, onGoBack, labels, handleStadium } = useViewModel({
@@ -18,7 +19,7 @@ export const GameCompositionScreen = ({ navigation, route }: IGameCompositionScr
 
     return (
         <View style={appStyles.flex}>
-            <ImageBackground source={AppImages.img_background} style={appStyles.flex}>
+            <BackGround>
                 <StatusBar translucent backgroundColor="transparent" />
                 <SafeAreaView style={appStyles.safe_area}>
                     <View style={appStyles.container}>
@@ -47,7 +48,7 @@ export const GameCompositionScreen = ({ navigation, route }: IGameCompositionScr
                         <TopTaps labels={labels} />
                     </View>
                 </SafeAreaView>
-            </ImageBackground>
+            </BackGround>
         </View>
     );
 };

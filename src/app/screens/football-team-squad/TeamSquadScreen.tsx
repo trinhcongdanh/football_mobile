@@ -11,6 +11,7 @@ import React from 'react';
 import { ImageBackground, SafeAreaView, ScrollView, StatusBar, View } from 'react-native';
 import { ITeamGroupScreenProps } from './TeamSquadScreen.type';
 import { useViewModel } from './TeamSquadScreen.viewModel';
+import { BackGround } from '@football/app/components/background/BackGround';
 
 export enum TeamSquadScreenType {
     Personnel = 0,
@@ -38,7 +39,7 @@ export const TeamSquadScreen = ({ navigation, route }: ITeamGroupScreenProps) =>
 
     return (
         <View style={appStyles.flex}>
-            <ImageBackground source={AppImages.img_background} style={appStyles.flex}>
+            <BackGround>
                 <StatusBar translucent backgroundColor="transparent" />
                 <SafeAreaView style={appStyles.safe_area}>
                     <View style={appStyles.container}>
@@ -226,7 +227,7 @@ export const TeamSquadScreen = ({ navigation, route }: ITeamGroupScreenProps) =>
                         </View>
                     </View>
                 </SafeAreaView>
-            </ImageBackground>
+            </BackGround>
         </View>
     );
 };

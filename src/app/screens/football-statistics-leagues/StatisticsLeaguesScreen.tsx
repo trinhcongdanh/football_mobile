@@ -18,6 +18,7 @@ import { ScoresGoals } from './layout/scores-goals/ScoresGoals';
 import styles from './StatisticsLeaguesScreen.style';
 import { IStatisticsLeaguesScreenProps } from './StatisticsLeaguesScreen.type';
 import { useViewModel } from './StatisticsLeaguesScreen.viewModel';
+import { BackGround } from '@football/app/components/background/BackGround';
 
 export const StatisticsLeaguesScreen = ({ navigation, route }: IStatisticsLeaguesScreenProps) => {
     const { t, onGoBack, leagueSeasonStats } = useViewModel({
@@ -28,7 +29,7 @@ export const StatisticsLeaguesScreen = ({ navigation, route }: IStatisticsLeague
     return (
         <View style={appStyles.flex}>
             {leagueSeasonStats && (
-                <ImageBackground source={AppImages.img_background} style={appStyles.flex}>
+                <BackGround>
                     <StatusBar translucent backgroundColor="transparent" />
                     <SafeAreaView style={appStyles.safe_area}>
                         <View style={appStyles.container}>
@@ -99,7 +100,7 @@ export const StatisticsLeaguesScreen = ({ navigation, route }: IStatisticsLeague
                             </View>
                         </ScrollView>
                     </SafeAreaView>
-                </ImageBackground>
+                </BackGround>
             )}
         </View>
     );

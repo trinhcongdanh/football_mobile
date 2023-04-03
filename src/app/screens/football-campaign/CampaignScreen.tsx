@@ -11,6 +11,7 @@ import { ICampaignScreenProps } from './CampaignScreen.type';
 import { useViewModel } from './CampaignScreen.viewModel';
 import { ListOfGames } from './layouts/list-of-games/ListOfGames';
 import { RankingTable } from './layouts/ranking-table/RankingTable';
+import { BackGround } from '@football/app/components/background/BackGround';
 
 export const CampaignScreen = ({ navigation, route }: ICampaignScreenProps) => {
     const { t, onGoBack, campaign, topTeam } = useViewModel({ navigation, route });
@@ -18,7 +19,7 @@ export const CampaignScreen = ({ navigation, route }: ICampaignScreenProps) => {
     return (
         <View style={appStyles.flex}>
             {campaign && (
-                <ImageBackground source={AppImages.img_background} style={appStyles.flex}>
+                <BackGround>
                     <StatusBar translucent backgroundColor="transparent" />
                     <SafeAreaView style={appStyles.safe_area}>
                         <View style={appStyles.container}>
@@ -52,7 +53,7 @@ export const CampaignScreen = ({ navigation, route }: ICampaignScreenProps) => {
                             </View>
                         </ScrollView>
                     </SafeAreaView>
-                </ImageBackground>
+                </BackGround>
             )}
         </View>
     );

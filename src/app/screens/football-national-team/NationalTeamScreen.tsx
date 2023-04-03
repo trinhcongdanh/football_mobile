@@ -37,6 +37,7 @@ import IconFeather from 'react-native-vector-icons/Feather';
 import styles from './NationalTeamScreen.style';
 import { INationalTeamScreenProps } from './NationalTeamScreen.type';
 import { useViewModel } from './NationalTeamScreen.viewModel';
+import { BackGround } from '@football/app/components/background/BackGround';
 
 export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenProps) => {
     const {
@@ -73,7 +74,7 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
 
     return (
         <View style={appStyles.flex}>
-            <ImageBackground source={AppImages.img_background} style={appStyles.flex}>
+            <BackGround>
                 <StatusBar translucent backgroundColor="transparent" />
                 <SafeAreaView style={appStyles.safe_area}>
                     <View style={appStyles.container}>
@@ -1037,7 +1038,7 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                         </View>
                     </ScrollView>
                 </SafeAreaView>
-            </ImageBackground>
+            </BackGround>
         </View>
     );
 };

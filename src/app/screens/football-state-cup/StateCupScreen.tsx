@@ -24,6 +24,7 @@ import { OptionState } from './layouts/option-state/OptionState';
 import styles from './StateCupScreen.style';
 import { IStateCupScreenProps } from './StateCupScreen.type';
 import { useViewModel } from './StateCupScreen.viewModel';
+import { BackGround } from '@football/app/components/background/BackGround';
 
 export const StateCupScreen = ({ route }: IStateCupScreenProps) => {
     const {
@@ -54,7 +55,7 @@ export const StateCupScreen = ({ route }: IStateCupScreenProps) => {
 
     return (
         <View style={appStyles.flex}>
-            <ImageBackground source={AppImages.img_background} style={appStyles.flex}>
+            <BackGround>
                 {cup && (
                     <>
                         <StatusBar translucent backgroundColor="transparent" />
@@ -182,7 +183,7 @@ export const StateCupScreen = ({ route }: IStateCupScreenProps) => {
                         </SafeAreaView>
                     </>
                 )}
-            </ImageBackground>
+            </BackGround>
         </View>
     );
 };

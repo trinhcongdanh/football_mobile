@@ -10,6 +10,7 @@ import { ListPlayer } from '@football/app/components/list-player/ListPlayer';
 import styles from './TeamStaffScreen.style';
 import { useViewModel } from './TeamStaffScreen.viewModel';
 import { ITeamStaffScreenProps } from './TeamStaffScreen.type';
+import { BackGround } from '@football/app/components/background/BackGround';
 
 export const TeamStaffScreen = ({ navigation, route }: ITeamStaffScreenProps) => {
     const { t, onGoBack, setOnSelect, onSelect, teamStaffs, onNavigateDataCoach } = useViewModel({
@@ -19,7 +20,7 @@ export const TeamStaffScreen = ({ navigation, route }: ITeamStaffScreenProps) =>
 
     return (
         <View style={appStyles.flex}>
-            <ImageBackground source={AppImages.img_background} style={appStyles.flex}>
+            <BackGround>
                 <StatusBar translucent backgroundColor="transparent" />
                 <SafeAreaView style={appStyles.safe_area}>
                     <View style={appStyles.container}>
@@ -59,7 +60,7 @@ export const TeamStaffScreen = ({ navigation, route }: ITeamStaffScreenProps) =>
                         </View>
                     </View>
                 </SafeAreaView>
-            </ImageBackground>
+            </BackGround>
         </View>
     );
 };

@@ -33,6 +33,7 @@ import Icon from 'react-native-vector-icons/Feather';
 import { styles } from './SettingsScreen.styles';
 import { ISettingsScreenProps } from './SettingsScreen.type';
 import { useViewModel } from './SettingsScreen.viewModel';
+import { BackGround } from '@football/app/components/background/BackGround';
 
 export function SettingsScreen(props: ISettingsScreenProps) {
     const {
@@ -76,7 +77,7 @@ export function SettingsScreen(props: ISettingsScreenProps) {
                 </View>
             )}
 
-            <ImageBackground source={AppImages.img_background} style={appStyles.flex}>
+            <BackGround>
                 <StatusBar translucent backgroundColor="transparent" />
 
                 <SafeAreaView style={appStyles.safe_area}>
@@ -499,7 +500,7 @@ export function SettingsScreen(props: ISettingsScreenProps) {
                         </View>
                     </ScrollView>
                 </SafeAreaView>
-            </ImageBackground>
+            </BackGround>
         </View>
     );
 }

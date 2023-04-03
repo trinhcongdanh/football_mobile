@@ -130,6 +130,7 @@ export const AppImages = {
     img_home_background_favorite_2: require('./home_background_favorite_2.png'),
     img_decoration_background: require('./img_decoration_background.png'),
     img_decoration_background_2: require('./img_decoration_background_2.png'),
+    img_decoration_background_3: require('./decoration_background.png'),
     img_decoration_header_home: require('./decoration_header_home.png'),
     img_dot_header_home: require('./dot_header_home.png'),
     img_background_arrow: require('./background_arrow.png'),

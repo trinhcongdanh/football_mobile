@@ -9,6 +9,7 @@ import React from 'react';
 import { ImageBackground, SafeAreaView, StatusBar, View } from 'react-native';
 import { IMatchScreenProps } from './MatchScreen.type';
 import { useViewModel } from './MatchScreen.viewModel';
+import { BackGround } from '@football/app/components/background/BackGround';
 
 // type Props = {};
 
@@ -28,7 +29,7 @@ export const MatchScreen = ({ navigation, route }: IMatchScreenProps) => {
 
     return (
         <View style={appStyles.flex}>
-            <ImageBackground source={AppImages.img_background} style={appStyles.flex}>
+            <BackGround>
                 <StatusBar translucent backgroundColor="transparent" />
                 <SafeAreaView style={appStyles.safe_area}>
                     <View style={appStyles.container}>
@@ -73,7 +74,7 @@ export const MatchScreen = ({ navigation, route }: IMatchScreenProps) => {
                         ) : null}
                     </View>
                 </SafeAreaView>
-            </ImageBackground>
+            </BackGround>
         </View>
     );
 };

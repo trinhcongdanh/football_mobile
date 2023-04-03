@@ -12,6 +12,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import { ICupsScreenProps } from '@football/app/screens/football-cups/CupsScreen.type';
 import { useViewModel } from '@football/app/screens/football-cups/CupsScreen.viewModel';
 import styles from '@football/app/screens/football-cups/CupsScreen.style';
+import { BackGround } from '@football/app/components/background/BackGround';
 
 export const CupsScreen = ({ route }: ICupsScreenProps) => {
     const { t, onGoBack, cupHolders, getTranslationText, cup, cyclesDetails } = useViewModel({
@@ -23,7 +24,7 @@ export const CupsScreen = ({ route }: ICupsScreenProps) => {
 
     return (
         <View style={appStyles.flex}>
-            <ImageBackground source={AppImages.img_background} style={appStyles.flex}>
+            <BackGround>
                 <StatusBar translucent backgroundColor="transparent" />
                 <SafeAreaView style={appStyles.safe_area}>
                     <View style={appStyles.container}>
@@ -174,7 +175,7 @@ export const CupsScreen = ({ route }: ICupsScreenProps) => {
                         </View>
                     </ScrollView>
                 </SafeAreaView>
-            </ImageBackground>
+            </BackGround>
         </View>
     );
 };

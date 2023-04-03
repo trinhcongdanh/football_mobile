@@ -22,6 +22,7 @@ import { useViewModel } from './StatisticDetailsScreen.viewModel';
 import { IStatisticDetailsScreenProps } from './StatisticDetailsScreen.type';
 import FastImage from 'react-native-fast-image';
 import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
+import { BackGround } from '@football/app/components/background/BackGround';
 
 export enum ListType {
     NormalGame = 0,
@@ -528,7 +529,7 @@ export const StatisticDetailsScreen = ({ navigation, route }: IStatisticDetailsS
     return (
         <View style={appStyles.flex}>
             {leagueSeasonStats && (
-                <ImageBackground source={AppImages.img_background} style={appStyles.flex}>
+                <BackGround>
                     <StatusBar translucent backgroundColor="transparent" />
                     <SafeAreaView style={appStyles.safe_area}>
                         <View style={appStyles.container}>
@@ -557,7 +558,7 @@ export const StatisticDetailsScreen = ({ navigation, route }: IStatisticDetailsS
                             )}
                         </ScrollView>
                     </SafeAreaView>
-                </ImageBackground>
+                </BackGround>
             )}
         </View>
     );

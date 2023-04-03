@@ -26,6 +26,7 @@ import styles from './ConquerorsScreen.style';
 import { useViewModel } from './ConquerorsScreen.viewModel';
 import { IConquerorsScreenProps } from './ConquerorsScreen.type';
 import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
+import { BackGround } from '@football/app/components/background/BackGround';
 
 export const ConquerorsScreen = ({ navigation, route }: IConquerorsScreenProps) => {
     const topTeam = route?.params?.topTeam as TopTeamModel;
@@ -44,7 +45,7 @@ export const ConquerorsScreen = ({ navigation, route }: IConquerorsScreenProps) 
 
     return (
         <View style={appStyles.flex}>
-            <ImageBackground source={AppImages.img_background} style={appStyles.flex}>
+            <BackGround>
                 <StatusBar translucent backgroundColor="transparent" />
                 <SafeAreaView style={appStyles.safe_area}>
                     <View style={appStyles.container}>
@@ -127,7 +128,7 @@ export const ConquerorsScreen = ({ navigation, route }: IConquerorsScreenProps) 
                         </View>
                     </ScrollView>
                 </SafeAreaView>
-            </ImageBackground>
+            </BackGround>
         </View>
     );
 };

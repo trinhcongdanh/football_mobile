@@ -12,6 +12,7 @@ import { IDataPlayerScreenProps } from './DataPlayerScreen.type';
 import { useViewModel } from './DataPlayerScreen.viewModel';
 import { DataPlayerNationalScreen } from './layouts/data-player-national/DataPlayerNationalScreen';
 import { DataPlayerTeamScreen } from './layouts/data-player-team';
+import { BackGround } from '@football/app/components/background/BackGround';
 
 // type Props = {};
 
@@ -33,7 +34,7 @@ export const DataPlayerScreen = ({ navigation, route }: IDataPlayerScreenProps) 
 
     return (
         <View style={appStyles.flex}>
-            <ImageBackground source={AppImages.img_background} style={appStyles.flex}>
+            <BackGround>
                 {player && (
                     <>
                         <StatusBar translucent backgroundColor="transparent" />
@@ -90,7 +91,7 @@ export const DataPlayerScreen = ({ navigation, route }: IDataPlayerScreenProps) 
                         </SafeAreaView>
                     </>
                 )}
-            </ImageBackground>
+            </BackGround>
         </View>
     );
 };

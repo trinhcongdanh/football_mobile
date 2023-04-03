@@ -26,6 +26,7 @@ import Icon from 'react-native-vector-icons/Feather';
 import { useSelector } from 'react-redux';
 import styles from './GobletScreen.style';
 import { useViewModel } from './GobletScreen.viewModel';
+import { BackGround } from '@football/app/components/background/BackGround';
 
 export const GobletScreen = ({ navigation, route }: IGobletScreenProps) => {
     const {
@@ -48,7 +49,7 @@ export const GobletScreen = ({ navigation, route }: IGobletScreenProps) => {
 
     return (
         <View style={[appStyles.flex]}>
-            <ImageBackground source={AppImages.img_background} style={appStyles.flex}>
+            <BackGround>
                 <StatusBar translucent backgroundColor="transparent" />
                 <SafeAreaView style={appStyles.safe_area}>
                     <View style={appStyles.container}>
@@ -131,7 +132,7 @@ export const GobletScreen = ({ navigation, route }: IGobletScreenProps) => {
                         </ScrollView>
                     </View>
                 </SafeAreaView>
-            </ImageBackground>
+            </BackGround>
         </View>
     );
 };

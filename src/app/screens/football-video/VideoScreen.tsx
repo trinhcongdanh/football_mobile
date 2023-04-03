@@ -27,6 +27,7 @@ import { useSelector } from 'react-redux';
 import styles from './VideoScreen.styles';
 import { IVideoScreenProps } from './VideoScreen.type';
 import { useViewModel } from './VideoScreen.viewModel';
+import { BackGround } from '@football/app/components/background/BackGround';
 
 export const VideoScreen = ({ navigation, route }: IVideoScreenProps) => {
     const {
@@ -51,12 +52,7 @@ export const VideoScreen = ({ navigation, route }: IVideoScreenProps) => {
 
     return (
         <View style={appStyles.flex}>
-            <ImageBackground source={AppImages.img_background_black} style={appStyles.flex}>
-                <FastImage
-                    source={AppImages.img_decoration_background}
-                    tintColor={colorCustom}
-                    style={{ height: '100%', width: '100%', position: 'absolute' }}
-                />
+            <BackGround>
                 <StatusBar translucent backgroundColor="transparent" />
                 <SafeAreaView style={appStyles.safe_area}>
                     <ScrollView>
@@ -383,7 +379,7 @@ export const VideoScreen = ({ navigation, route }: IVideoScreenProps) => {
                         <View style={{ height: TAB_BAR_HEIGHT + BOTTOM_SVG_HEIGHT }} />
                     </ScrollView>
                 </SafeAreaView>
-            </ImageBackground>
+            </BackGround>
         </View>
     );
 };
