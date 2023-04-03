@@ -131,7 +131,7 @@ export const RegScreen = ({ navigation, route }: IRegScreenProps) => {
                                 }}
                             >
                                 <Button
-                                    disabled={!onCheck}
+                                    disabled={!onCheck || !userName}
                                     style={{ borderRadius: getSize.m(15) }}
                                     title={t('reg.button')}
                                     onPress={createInfo}
