@@ -34,6 +34,7 @@ import { styles } from './SettingsScreen.styles';
 import { ISettingsScreenProps } from './SettingsScreen.type';
 import { useViewModel } from './SettingsScreen.viewModel';
 import { BackGround } from '@football/app/components/background/BackGround';
+import { ChangeLanguage } from '@football/app/components/change-language/ChangeLanguage';
 
 export function SettingsScreen(props: ISettingsScreenProps) {
     const {
@@ -489,6 +490,12 @@ export function SettingsScreen(props: ISettingsScreenProps) {
                                 title={t('settings.save_changes')}
                                 onPress={handleSaveChange}
                             />
+                            <View style={{ marginTop: getSize.m(10), marginBottom: getSize.m(20) }}>
+                                <ChangeLanguage
+                                    color={appColors.white}
+                                    borderBottomColor={appColors.white}
+                                />
+                            </View>
                             <TouchableOpacity
                                 onPress={handleNotSaveChange}
                                 style={styles.btn_delete_account}
