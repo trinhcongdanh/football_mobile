@@ -166,23 +166,24 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                                                         source={renderAvatar(profileUser)}
                                                     />
                                                 </TouchableOpacity>
+
+                                                <Text
+                                                    style={[
+                                                        appStyles.text_bold,
+                                                        {
+                                                            marginRight: getSize.m(3),
+                                                            marginLeft: getSize.m(10),
+                                                        },
+                                                    ]}
+                                                >
+                                                    {renderUserPoints(profileUser, t)}
+                                                </Text>
                                                 <FastImage
                                                     source={AppImages.img_ball}
                                                     style={styles.ic_football}
                                                     tintColor={colorCustom}
                                                     resizeMode={FastImage.resizeMode.contain}
                                                 />
-                                                <Text
-                                                    style={[
-                                                        appStyles.text_bold,
-                                                        {
-                                                            marginRight: getSize.m(6),
-                                                            marginLeft: getSize.m(3),
-                                                        },
-                                                    ]}
-                                                >
-                                                    {renderUserPoints(profileUser, t)}
-                                                </Text>
                                             </View>
                                         </View>
                                         <View>

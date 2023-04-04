@@ -15,8 +15,6 @@ const styles = StyleSheet.create({
     ic_football: {
         width: getSize.m(16),
         height: getSize.m(16),
-        marginRight: getSize.m(3),
-        marginLeft: getSize.m(17),
     },
 
     header_item: {
