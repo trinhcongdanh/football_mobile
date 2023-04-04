@@ -1,3 +1,5 @@
+import { StyleProp } from 'react-native';
+
 export type IDropdownFieldProps = {
     options: any;
     itemTitleField: string | undefined;
@@ -6,4 +8,5 @@ export type IDropdownFieldProps = {
     closeDropdown?: () => void;
     selectedValue: any;
     isOpen?: boolean;
+    width?: StyleProp<any>;
 };

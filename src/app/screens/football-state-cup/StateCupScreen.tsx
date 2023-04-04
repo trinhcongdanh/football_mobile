@@ -146,7 +146,7 @@ export const StateCupScreen = ({ route }: IStateCupScreenProps) => {
                                                 })}
                                             />
                                         </View>
-                                        <View style={{ flex: 0.5 }}>
+                                        <View style={{ flex: 0.6 }}>
                                             <DropdownField
                                                 options={selectCycle?.rounds || []}
                                                 selectedValue={selectRound}

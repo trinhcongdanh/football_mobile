@@ -16,6 +16,7 @@ const DropdownField = ({
     itemTitleField = '',
     selectedValue,
     closeDropdown,
+    width,
 }: IDropdownFieldProps) => {
     const [openModal, setOpenModal] = useState(false);
 
@@ -45,7 +46,7 @@ const DropdownField = ({
                         },
                     ]}
                 >
-                    <Text style={styles.title}>
+                    <Text numberOfLines={1} style={[styles.title]}>
                         {selectedValue ? selectedValue[itemTitleField] : ''}
                     </Text>
                     <Icon
