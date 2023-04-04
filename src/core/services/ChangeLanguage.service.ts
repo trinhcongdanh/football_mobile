@@ -2,11 +2,11 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import RNRestart from 'react-native-restart';
 
 class ChangeLanguage {
-    changedLanguage(key: string, data: string): void {
-        AsyncStorage.getItem(key).then(isRestarted => {
+    async changedLanguage(key: string, data: string): Promise<void> {
+        await AsyncStorage.getItem(key).then(async isRestarted => {
             console.log('isRestarted:' + isRestarted);
             if (isRestarted === null) {
-                AsyncStorage.setItem(key, data).then(() => {
+                await AsyncStorage.setItem(key, data).then(() => {
                     console.log('call restart before: ');
                     RNRestart.Restart();
                     console.log('call restart after: ');
@@ -17,8 +17,8 @@ class ChangeLanguage {
         });
     }
 
-    removeLanguage(key: string): void {
-        AsyncStorage.removeItem(key);
+    async removeLanguage(key: string): Promise<void> {
+        await AsyncStorage.removeItem(key);
     }
 }
 
