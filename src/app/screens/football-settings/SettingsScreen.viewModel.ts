@@ -85,8 +85,8 @@ const useViewState = () => {
     const [image, setImage] = useState<string>();
     const [userName, setUserName] = useState<string>('');
     const [email, setEmail] = useState<string>('');
-    const [birthDate, setBirthDate] = useState(new Date());
-    const [gender, setGender] = useState(genders[0].value);
+    const [birthDate, setBirthDate] = useState<string>('');
+    const [gender, setGender] = useState<string>('');
 
     const [errors, setErrors] = useState<SettingProps>({
         userName: '',
@@ -192,6 +192,7 @@ const useViewState = () => {
         setSelectedPlayers,
         selectedTopTeams,
         setSelectedTopTeams,
+        t,
     };
 };
 
@@ -264,10 +265,7 @@ const useEventHandler = (state: any, route: any) => {
                         ? userLogin.otp.user.item_id
                         : createProfile.profile.item_id,
                     item: {
-                        name: userName,
                         email,
-                        gender,
-                        birthdate: moment(birthDate).format('YYYY-MM-DD'),
                         favorite_israel_teams: isEmpty(favTeamIds) ? '' : favTeamIds,
                         favorite_players: isEmpty(favPlayersIds) ? '' : favPlayersIds,
                         favorite_national_teams: isEmpty(favTopTeamIds) ? '' : favTopTeamIds,
@@ -302,23 +300,23 @@ const useEventHandler = (state: any, route: any) => {
         state.setErrors((prevState: SettingProps) => ({ ...prevState, [input]: errorMessage }));
     };
 
-    /**
-     * Handle changing gender
-     * @param value
-     */
-    const handleOnSelectGender = (value: string) => {
-        state.setEditGender(true);
-        state.setGender(value);
-    };
+    // /**
+    //  * Handle changing gender
+    //  * @param value
+    //  */
+    // const handleOnSelectGender = (value: string) => {
+    //     state.setEditGender(true);
+    //     state.setGender(value);
+    // };
 
-    /**
-     * Handle changing birthdate
-     * @param newDate
-     */
-    const handleChangeBirthDate = (newDate: Date) => {
-        state.setEditBirthday(true);
-        state.setBirthDate(newDate);
-    };
+    // /**
+    //  * Handle changing birthdate
+    //  * @param newDate
+    //  */
+    // const handleChangeBirthDate = (newDate: Date) => {
+    //     state.setEditBirthday(true);
+    //     state.setBirthDate(newDate);
+    // };
 
     /**
      * Handle changing notification
@@ -432,8 +430,8 @@ const useEventHandler = (state: any, route: any) => {
         handleNotSaveChange,
         onImagePicker,
         handleError,
-        handleOnSelectGender,
-        handleChangeBirthDate,
+        // handleOnSelectGender,
+        // handleChangeBirthDate,
         handleChangeNotification,
         backFavTeam,
         backFavPlayer,
@@ -559,7 +557,15 @@ const useEffectHandler = (state: any, callback: any, eventHandler: any) => {
     const { getTeamsData, getPlayersData, getTopTeamsData } = callback;
 
     // Listening for user profile change
-    const { getProfile, setEmail, setUserName, setBirthDate, setGender, setNotifications } = state;
+    const {
+        getProfile,
+        setEmail,
+        setUserName,
+        setBirthDate,
+        setGender,
+        setNotifications,
+        t,
+    } = state;
     useEffect(() => {
         if (getProfile.success !== true) {
             return;
@@ -571,8 +577,21 @@ const useEffectHandler = (state: any, callback: any, eventHandler: any) => {
         }
         setEmail(profile.email);
         setUserName(profile.name);
-        setBirthDate(moment(getProfile.getProfile.item.birthdate, 'DD/MM/YYYY').toDate());
-        setGender(profile.gender);
+        setBirthDate(getProfile.getProfile.item.birthdate);
+
+        switch (profile?.gender) {
+            case Gender.MALE:
+                setGender(t('settings.male'));
+                break;
+            case Gender.FEMALE:
+                setGender(t('settings.female'));
+                break;
+            case Gender.OTHER:
+                setGender(t('settings.other_gender'));
+                break;
+            default:
+                setGender(t('settings.other_gender'));
+        }
 
         const originNotifications = Object.assign([], state.notifications);
         originNotifications.forEach((notification: NotificationSetting) => {
@@ -607,7 +626,6 @@ const useEffectHandler = (state: any, callback: any, eventHandler: any) => {
  * @returns
  */
 export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
-    const { t } = useTranslation();
     const { getTranslationText } = useTranslationText();
     const { goBack, navigate, replace, popToTop } = useAppNavigator();
     const scrollBottom = route.params?.scrollBottom;
@@ -636,7 +654,6 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
     }, []);
 
     return {
-        t,
         getTranslationText,
         ...eventHandler,
         ...state,
