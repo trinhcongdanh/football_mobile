@@ -30,7 +30,7 @@ export const InfoPerson = ({
                     rounded
                     containerStyle={styles.avt_person}
                 />
-                <View style={[appStyles.flex_row_align, { marginTop: getSize.m(16) }]}>
+                <View style={[appStyles.align_justify, { marginTop: getSize.m(16) }]}>
                     <View>
                         <Text style={styles.name_person}>{name}</Text>
                     </View>

@@ -158,11 +158,7 @@ export const PitchScreen = ({ navigation, route }: IPitchScreenProps) => {
                                                             overflow: 'hidden',
                                                         }}
                                                     >
-                                                        <View
-                                                            style={{
-                                                                flexDirection: 'row',
-                                                            }}
-                                                        >
+                                                        <View style={appStyles.flex_row_align}>
                                                             <Avatar
                                                                 source={{ uri: item?.logo_url }}
                                                                 rounded
