@@ -8,6 +8,7 @@ import { useViewModel } from './OptionState.viewModel';
 import { IOptionStateProps } from './OptionState.type';
 import LinearGradient from 'react-native-linear-gradient';
 import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
+import moment from 'moment';
 export const OptionState = ({ label, data }: IOptionStateProps) => {
     const { t, listState, onNavigateGame } = useViewModel();
     const { getTranslationText } = useTranslationText();
@@ -62,7 +63,9 @@ export const OptionState = ({ label, data }: IOptionStateProps) => {
                                     style={[appStyles.flex_row_space_center, styles.itemTeam]}
                                 >
                                     <View style={{ width: getSize.m(60) }}>
-                                        <Text style={styles.text_content}>{item.date}</Text>
+                                        <Text style={styles.text_content}>
+                                            {moment(item.date, 'YYYY-MM-DD').format('DD/MM/YY')}
+                                        </Text>
                                     </View>
                                     <View style={{ width: getSize.m(110) }}>
                                         <Text style={styles.text_content}>
@@ -86,7 +89,9 @@ export const OptionState = ({ label, data }: IOptionStateProps) => {
                                         </Text>
                                     </View>
                                     <View style={{ width: getSize.m(40) }}>
-                                        <Text style={styles.text_content}>{item.time}</Text>
+                                        <Text style={styles.text_content}>
+                                            {moment(item.time, 'HH:mm:ss').format('HH:mm')}
+                                        </Text>
                                     </View>
                                     <View style={{ width: getSize.m(30) }}>
                                         <Text style={styles.text_content}>{item.score}</Text>
