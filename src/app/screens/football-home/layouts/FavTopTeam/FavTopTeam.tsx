@@ -425,7 +425,7 @@ export const FavTopTeam = ({ topTeam, color }: IFavTopTeamProps) => {
                     >
                         <View style={appStyles.flex_row_align}>
                             <FastImage
-                                source={AppImages.img_volleyball}
+                                source={AppImages.img_ball_light_gray}
                                 style={{
                                     width: getSize.m(14),
                                     height: getSize.m(14),
