@@ -55,14 +55,17 @@ const App = (props: any) => {
     const locale = langCode.substring(0, 2).toLocaleLowerCase();
 
     useEffect(() => {
+        console.log('Language 58', i18n.language);
         AsyncStorage.getItem(Restart.language).then(isClickChanged => {
+            console.log('isClickChanged', isClickChanged);
             if (isClickChanged === null) {
                 i18n.changeLanguage(locale === 'he' || locale === 'iw' ? 'heb' : 'en');
                 if (i18n.language === 'heb') {
                     I18nManager.forceRTL(true);
-                    ChangeLanguageService.changedLanguage(Restart.key_restart_for_rtl, '1');
+                    // ChangeLanguageService.changedLanguage(Restart.key_restart_for_rtl, '1');
                 } else {
                     I18nManager.forceRTL(false);
+                    // ChangeLanguageService.changedLanguage(Restart.key_restart_for_ltr, '1');
                 }
             }
         });
