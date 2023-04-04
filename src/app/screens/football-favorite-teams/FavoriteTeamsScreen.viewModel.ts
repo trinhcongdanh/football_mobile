@@ -81,6 +81,13 @@ const useViewCallback = (route: any, viewState: any) => {
         login,
     } = viewState;
 
+    // eslint-disable-next-line no-new-object
+    const sortByName: any = new Object();
+    if (I18nManager.isRTL) {
+        sortByName.name_he = 1;
+    } else {
+        sortByName.name_en = 1;
+    }
     const dispatch = useDispatch<any>();
     const { navigate, goBack, pop } = useAppNavigator();
 
@@ -161,14 +168,14 @@ const useViewCallback = (route: any, viewState: any) => {
         setIsLoading(true);
 
         try {
-            const [error, res] = await TeamService.searchFavTeam(searchText);
+            const [error, res] = await TeamService.searchFavTeam(searchText, { ...sortByName });
             if (error) {
                 return;
             }
-            const sortByName = sortBy(res.data.documents, [
-                I18nManager.isRTL ? 'name_he' : 'name_en',
-            ]);
-            setTeams(sortByName);
+            // const sortByName = sortBy(res.data.documents, [
+            //     I18nManager.isRTL ? 'name_he' : 'name_en',
+            // ]);
+            setTeams(res.data.documents);
         } catch (error: any) {
             Alert.alert(error);
         } finally {
@@ -178,16 +185,15 @@ const useViewCallback = (route: any, viewState: any) => {
 
     const getTeamsData = useCallback(async () => {
         setIsLoading(true);
-
         try {
-            const [error, res] = await TeamService.findAllFavTeam();
+            const [error, res] = await TeamService.findAllFavTeam({ ...sortByName });
             if (error) {
                 return;
             }
-            const sortByName = sortBy(res.data.documents, [
-                I18nManager.isRTL ? 'name_he' : 'name_en',
-            ]);
-            setTeams(sortByName);
+            // const sortByName = sortBy(res.data.documents, [
+            //     I18nManager.isRTL ? 'name_he' : 'name_en',
+            // ]);
+            setTeams(res.data.documents);
         } catch (error: any) {
             Alert.alert(error);
         } finally {

@@ -80,7 +80,6 @@ class MongoDBService {
     find<TFind extends MongoDBFindConfig = MongoDBFindConfig, TResult = any>(
         config: TFind
     ): Promise<Result<TResult>> {
-        console.log(config);
         return this.httpClient.post('/find', {
             ...this.dbConfig,
             ...config,

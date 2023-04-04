@@ -47,7 +47,13 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
     const login = useSelector((state: RootState) => state.login);
     const profile = useSelector((state: RootState) => state.createProfile);
     const guestId = useSelector((state: any) => state.guestId.guestId);
-
+    // eslint-disable-next-line no-new-object
+    const sortByName: any = new Object();
+    if (I18nManager.isRTL) {
+        sortByName.name_he = 1;
+    } else {
+        sortByName.name_en = 1;
+    }
     const selectedFavPlayersMap = useSelector(selectedFavPlayersAsMapSelector);
     const favPlayers = useSelector((state: RootState) => state.favPlayers.favPlayers);
     const formattedFavPlayers = useMemo(() => {
@@ -64,17 +70,16 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
     const [focusSearch, setFocusSearch] = useState(false);
 
     const getPlayersData = useCallback(async () => {
+
         if ((isEmpty(favPlayers) || isNil(favPlayers)) && focusSearch === false) {
             state.setIsLoading(true);
 
             try {
-                const [error, res] = await PlayerService.findAllFavPlayer();
+                const [error, res] = await PlayerService.findAllFavPlayer(sortByName);
                 if (error) {
                     return;
                 }
-                const sortByName = sortBy(res.data.documents, ['name_he']);
-
-                dispatch(setFavPlayers(sortByName));
+                dispatch(setFavPlayers(res.data.documents));
             } catch (error: any) {
                 Alert.alert(error);
             } finally {
@@ -113,16 +118,13 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
         state.setIsLoading(true);
         if (searchText !== '') {
             dispatch(resetFavPlayer([]));
-            const [error, res] = await PlayerService.searchFavPlayer(searchText);
+            const [error, res] = await PlayerService.searchFavPlayer(searchText, sortByName);
             if (error) {
                 return;
             }
-            const sortByName = sortBy(res.data.documents, [
-                I18nManager.isRTL ? 'name_he' : 'name_en',
-            ]);
 
             dispatch(resetFavPlayer([]));
-            dispatch(setFavPlayers(sortByName));
+            dispatch(setFavPlayers(res.data.documents));
             state.setIsLoading(false);
         } else {
             dispatch(resetFavPlayer([]));
