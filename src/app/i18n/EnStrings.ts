@@ -390,6 +390,7 @@ const resources = {
                 title: 'גביע',
                 state_cup: 'גביע מדינה',
                 toto_cup: 'גביע טוטו',
+                search_placeholder: 'חיפוש גביע',
             },
             state_cup: {
                 title: 'גביע המדינה',
@@ -1071,6 +1072,7 @@ const resources = {
                 title: 'Cup',
                 state_cup: 'National Cup',
                 toto_cup: 'Toto Cup',
+                search_placeholder: 'Search cup',
             },
             state_cup: {
                 title: 'State cup',
