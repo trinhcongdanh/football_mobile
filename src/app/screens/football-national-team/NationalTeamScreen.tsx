@@ -90,7 +90,10 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                             <MainVideo topTeam={topTeam} />
 
                             {/* Video Fallery */}
-                            <VideoGallery topTeam={topTeam} />
+                            {/* <VideoGallery topTeam={topTeam} /> */}
+                            <GestureHandlerRootView>
+                                <VideoGallery topTeam={topTeam} />
+                            </GestureHandlerRootView>
 
                             {/* Future Events */}
                             <FutureEvents topTeam={topTeam} />

@@ -31,51 +31,51 @@ export const CustomCarousel = ({
 
     const [active, setActive] = useState(defaultIndex);
     return (
-        <GestureHandlerRootView>
-            <View style={{ alignItems: 'center' }}>
-                <Carousel
-                    autoPlay={autoPlay}
-                    defaultIndex={defaultIndex}
-                    {...baseOptions}
-                    loop={false}
-                    data={data}
-                    scrollAnimationDuration={1000}
-                    mode="parallax"
-                    panGestureHandlerProps={{
-                        activeOffsetX: [-10, 10],
-                    }}
-                    modeConfig={{
-                        parallaxScrollingScale: 1,
-                        parallaxScrollingOffset: widthPerItem ? widthPerItem * 0.92 : 50,
-                        parallaxAdjacentItemScale: 0.9,
-                    }}
-                    pagingEnabled
-                    onSnapToItem={(index: number) => setActive(index)}
-                    renderItem={renderItem}
-                />
-
-                <View style={styles.dotContainer}>
-                    {data.map((_, index) => {
-                        return (
-                            // eslint-disable-next-line react/no-array-index-key
-                            <View key={index}>
-                                <View
-                                    style={[
-                                        styles.dot,
-                                        {
-                                            width: index === active ? getSize.m(18) : getSize.m(5),
-                                            backgroundColor:
-                                                index === active
-                                                    ? activePageColor
-                                                    : appColors.soft_grey,
-                                        },
-                                    ]}
-                                />
-                            </View>
-                        );
-                    })}
-                </View>
+        <View style={{ alignItems: 'center' }}>
+            {/* <GestureHandlerRootView> */}
+            <Carousel
+                autoPlay={autoPlay}
+                defaultIndex={defaultIndex}
+                {...baseOptions}
+                loop={false}
+                data={data}
+                scrollAnimationDuration={1000}
+                windowSize={PAGE_WIDTH}
+                mode="parallax"
+                panGestureHandlerProps={{
+                    activeOffsetX: [-10, 10],
+                }}
+                modeConfig={{
+                    parallaxScrollingScale: 1,
+                    parallaxScrollingOffset: widthPerItem ? widthPerItem * 0.92 : 50,
+                    parallaxAdjacentItemScale: 0.9,
+                }}
+                pagingEnabled
+                onSnapToItem={(index: number) => setActive(index)}
+                renderItem={renderItem}
+            />
+            {/* </GestureHandlerRootView> */}
+            <View style={styles.dotContainer}>
+                {data.map((_, index) => {
+                    return (
+                        // eslint-disable-next-line react/no-array-index-key
+                        <View key={index}>
+                            <View
+                                style={[
+                                    styles.dot,
+                                    {
+                                        width: index === active ? getSize.m(18) : getSize.m(5),
+                                        backgroundColor:
+                                            index === active
+                                                ? activePageColor
+                                                : appColors.soft_grey,
+                                    },
+                                ]}
+                            />
+                        </View>
+                    );
+                })}
             </View>
-        </GestureHandlerRootView>
+        </View>
     );
 };
