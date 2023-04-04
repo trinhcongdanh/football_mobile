@@ -33,7 +33,7 @@ export const NationalCup = ({ homePage }: INationalCupProps) => {
                     resizeMode={FastImage.resizeMode.contain}
                     style={styles.cup}
                 /> */}
-                <TouchableOpacity style={styles.button}>
+                {/* <TouchableOpacity style={styles.button}>
                     <FastImage
                         source={AppImages.img_button}
                         style={{ width: getSize.m(154), height: getSize.m(33) }}
@@ -47,7 +47,7 @@ export const NationalCup = ({ homePage }: INationalCupProps) => {
                             color={appColors.white}
                         />
                     </View>
-                </TouchableOpacity>
+                </TouchableOpacity> */}
             </View>
         </TouchableOpacity>
     );
