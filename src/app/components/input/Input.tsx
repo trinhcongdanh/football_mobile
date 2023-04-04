@@ -19,6 +19,7 @@ const Input = ({
     input,
     inputRef,
     keyboardType,
+    editable,
 }: IInputComponent) => {
     const { t } = useTranslation();
     return (
@@ -39,6 +40,7 @@ const Input = ({
                 onChangeText={onChangeTextInput}
                 onFocus={onFocus}
                 ref={inputRef}
+                editable={editable}
             />
             {input === '' && (
                 <View style={{ position: 'absolute', top: getSize.m(19), left: getSize.m(16) }}>

@@ -55,8 +55,8 @@ export function SettingsScreen(props: ISettingsScreenProps) {
         genders,
         gender,
         birthDate,
-        handleOnSelectGender,
-        handleChangeBirthDate,
+        // handleOnSelectGender,
+        // handleChangeBirthDate,
         notifications,
         handleChangeNotification,
         selectedTeams,
@@ -137,15 +137,7 @@ export function SettingsScreen(props: ISettingsScreenProps) {
                             </View>
 
                             <View style={styles.first_block_container}>
-                                <Input
-                                    error={errors.userName}
-                                    placeholder={t('settings.name')}
-                                    onChangeTextInput={setUserName}
-                                    onFocus={() => {
-                                        handleError('', 'userName');
-                                    }}
-                                    input={userName}
-                                />
+                                <Input editable={false} input={userName} />
                                 <Input
                                     styleInput={styles.input_container}
                                     error={errors.email}
@@ -168,15 +160,9 @@ export function SettingsScreen(props: ISettingsScreenProps) {
                                     >
                                         {t('reg.gender.label')}
                                     </Text>
-                                    <View
-                                        style={[
-                                            appStyles.flex_row_align,
-                                            {
-                                                marginTop: getSize.m(10),
-                                            },
-                                        ]}
-                                    >
-                                        {genders.map((sexual: any, index: number) => {
+                                    <View style={{ marginTop: getSize.m(10) }}>
+                                        <Input editable={false} input={gender} />
+                                        {/* {genders.map((sexual: any, index: number) => {
                                             return (
                                                 <TouchableOpacity
                                                     key={index.toString()}
@@ -208,7 +194,7 @@ export function SettingsScreen(props: ISettingsScreenProps) {
                                                     </Text>
                                                 </TouchableOpacity>
                                             );
-                                        })}
+                                        })} */}
                                     </View>
                                     <View style={{ marginTop: getSize.m(30) }}>
                                         <Text
@@ -222,8 +208,9 @@ export function SettingsScreen(props: ISettingsScreenProps) {
                                         >
                                             {t('reg.birth_date')}
                                         </Text>
-                                        <View style={styles.date_picker}>
-                                            <DatePicker
+                                        <View style={{ marginTop: getSize.m(10) }}>
+                                            <Input editable={false} input={birthDate} />
+                                            {/* <DatePicker
                                                 fadeToColor="none"
                                                 textColor={appColors.text_dark_blue}
                                                 locale={I18nManager.isRTL ? 'he' : 'en'}
@@ -233,7 +220,7 @@ export function SettingsScreen(props: ISettingsScreenProps) {
                                                     handleChangeBirthDate(date);
                                                 }}
                                                 androidVariant="nativeAndroid"
-                                            />
+                                            /> */}
                                         </View>
                                     </View>
                                 </View>
