@@ -41,6 +41,7 @@ const styles = StyleSheet.create({
         color: appColors.white,
         lineHeight: getSize.m(15),
         fontFamily: AppFonts.semibold,
+        textAlign: 'center',
         height: getSize.m(30),
     },
     check: {
