@@ -146,7 +146,7 @@ export const GroupPageScreen = ({ navigation, route }: IGroupPageScreenProps) =>
                                 ]}
                             >
                                 <View style={styles.info_group}>
-                                    <View>
+                                    <TouchableOpacity onPress={showInfoGroup}>
                                         <View style={appStyles.flex_row_space_center}>
                                             <View>
                                                 <Text style={appStyles.number}>
@@ -163,24 +163,22 @@ export const GroupPageScreen = ({ navigation, route }: IGroupPageScreenProps) =>
                                                     },
                                                 ]}
                                             >
-                                                <TouchableOpacity onPress={showInfoGroup}>
-                                                    <IconEntypo
-                                                        name={
-                                                            showInfo
-                                                                ? appIcons.ic_chevron_up
-                                                                : appIcons.ic_chevron_down
-                                                        }
-                                                        size={getSize.m(18)}
-                                                        color={
-                                                            showInfo
-                                                                ? appColors.text_option_unselect
-                                                                : appColors.white
-                                                        }
-                                                    />
-                                                </TouchableOpacity>
+                                                <IconEntypo
+                                                    name={
+                                                        showInfo
+                                                            ? appIcons.ic_chevron_up
+                                                            : appIcons.ic_chevron_down
+                                                    }
+                                                    size={getSize.m(18)}
+                                                    color={
+                                                        showInfo
+                                                            ? appColors.text_option_unselect
+                                                            : appColors.white
+                                                    }
+                                                />
                                             </View>
                                         </View>
-                                    </View>
+                                    </TouchableOpacity>
                                     {showInfo && teamSeason ? (
                                         <View>
                                             <View>
