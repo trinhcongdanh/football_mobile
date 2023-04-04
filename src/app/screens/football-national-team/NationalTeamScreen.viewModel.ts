@@ -13,25 +13,10 @@ import { INationalTeamScreenProps } from './NationalTeamScreen.type';
 
 const useViewState = () => {
     const [topTeam, setTopTeam] = useState<TopTeamModel>();
-    const [activeIndexNumber, setActiveIndexNumber] = useState(Number);
-    const [display, setDisplay] = useState(false);
-    const [sourceVideo, setSourceVideo] = useState();
-    const [autoPlay, setAutoPlay] = useState(true);
-    const [select, setSelect] = useState(0);
 
     return {
         topTeam,
         setTopTeam,
-        activeIndexNumber,
-        setActiveIndexNumber,
-        display,
-        setDisplay,
-        sourceVideo,
-        setSourceVideo,
-        autoPlay,
-        setAutoPlay,
-        select,
-        setSelect,
     };
 };
 
@@ -67,98 +52,18 @@ export const useViewModel = ({ navigation, route }: INationalTeamScreenProps) =>
         getTopTeamData();
     }, []);
 
-    const dispatch = useDispatch();
-
-    const handlePlayVideo = (item: any) => {
-        state.setDisplay(true);
-        state.setSourceVideo(item);
-        state.setAutoPlay(false);
-        dispatch(setShowVideo(true));
-        dispatch(addVideo(item));
-    };
-
-    const handleEndVideo = () => {
-        state.setAutoPlay(true);
-        state.setDisplay(false);
-    };
-
     const { width } = Dimensions.get('window');
-
-    const handleDetailMatch = (gameId: any) => {
-        navigate(ScreenName.MatchPage, { gameId });
-    };
-
-    const handleStadium = (stadiumId: string) => {
-        navigate(ScreenName.PitchPage, { stadiumId });
-    };
 
     const handleNavigation = () => {
         navigate(ScreenName.PreviousCampaignsPage, { topTeam: state.topTeam });
     };
 
-    const onNavigateGoalKickers = () => {
-        navigate(ScreenName.ConquerorsPage, {
-            topTeam: state.topTeam,
-            type: TopTeamPlayerType.GoalKickers,
-        });
-    };
-
-    const onNavigateAppearances = () => {
-        navigate(ScreenName.ConquerorsPage, {
-            topTeam: state.topTeam,
-            type: TopTeamPlayerType.Appearances,
-        });
-    };
-
-    const onNavigatePlayerData = (playerId: string) => {
-        navigate(ScreenName.DataPlayerPage, { playerId });
-    };
-
-    const options = [
-        t('national_team.list_game.home_away'),
-        t('national_team.list_game.house'),
-        t('national_team.list_game.outside'),
-    ];
-
-    const selectOption = (index: any) => {
-        state.setSelect(index);
-    };
-
-    const teamSquads = [
-        {
-            id: 1,
-            name: t('team_squad.title'),
-            screen: ScreenName.TeamSquadPage,
-            selectedTab: TeamSquadScreenType.Personnel,
-        },
-        {
-            id: 2,
-            name: t('team_squad.option.officials'),
-            screen: ScreenName.TeamSquadPage,
-            selectedTab: TeamSquadScreenType.Staff,
-        },
-    ];
-
-    const handleDetails = () => {
-        navigate(ScreenName.ListGamePage, { topTeam: state.topTeam });
-    };
-
     return {
         t,
         onGoBack,
-        handlePlayVideo,
-        handleDetailMatch,
         handleNavigation,
-        selectOption,
         width,
-        options,
-        handleDetails,
-        handleStadium,
-        onNavigateGoalKickers,
-        onNavigateAppearances,
-        onNavigatePlayerData,
         navigate,
         ...state,
-        teamSquads,
     };
 };
