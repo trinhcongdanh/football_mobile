@@ -126,14 +126,14 @@ export function SettingsScreen(props: ISettingsScreenProps) {
                             </View>
 
                             <View style={styles.txt_container_avatar}>
+                                <Text style={styles.txt_avatar}>
+                                    {renderUserPoints(getProfile, t)}
+                                </Text>
                                 <FastImage
                                     source={AppImages.img_ball}
                                     resizeMode={FastImage.resizeMode.contain}
                                     style={styles.ic_football}
                                 />
-                                <Text style={styles.txt_avatar}>
-                                    {renderUserPoints(getProfile, t)}
-                                </Text>
                             </View>
 
                             <View style={styles.first_block_container}>
