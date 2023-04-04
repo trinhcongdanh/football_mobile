@@ -33,7 +33,7 @@ import {
     StatusBar,
     Text,
     TouchableOpacity,
-    View
+    View,
 } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import LinearGradient from 'react-native-linear-gradient';
@@ -96,6 +96,7 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                     <View>
                         <ImageBackground
                             source={AppImages.img_background_header_home}
+                            imageStyle={{ width: '102%', marginLeft: getSize.m(-2) }}
                             style={[
                                 {
                                     height:
