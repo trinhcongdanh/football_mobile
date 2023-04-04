@@ -28,6 +28,7 @@ import styles from './LeaguesDetailsScreen.style';
 import { ILeaguesDetailsScreenProps } from './LeaguesDetailsScreen.type';
 import { useViewModel } from './LeaguesDetailsScreen.viewModel';
 import { BackGround } from '@football/app/components/background/BackGround';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 export const LeaguesDetailsScreen = ({ navigation, route }: ILeaguesDetailsScreenProps) => {
     const {
@@ -172,7 +173,9 @@ export const LeaguesDetailsScreen = ({ navigation, route }: ILeaguesDetailsScree
                             />
                         </View>
                         <View style={styles.package}>
-                            <AboutLeague highlights={highlights} />
+                            <GestureHandlerRootView>
+                                <AboutLeague highlights={highlights} />
+                            </GestureHandlerRootView>
                         </View>
                         {/* <View
                             style={{

@@ -78,7 +78,7 @@ export const AboutLeague = ({ highlights }: IAboutLeagueProps) => {
                 <CustomCarousel
                     data={aboutGames?.filter(item => item) || []}
                     height={getSize.m(300)}
-                    itemPerPage={2}
+                    widthPerItem={windowWidth / 4}
                     renderItem={({ item, index }) => {
                         return (
                             <Animated.View
