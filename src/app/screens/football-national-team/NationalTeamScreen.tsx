@@ -1,52 +1,29 @@
 import { AppFonts } from '@football/app/assets/fonts';
 import { appIcons } from '@football/app/assets/icons/appIcons';
 import { AppImages } from '@football/app/assets/images';
-import { CustomCarousel } from '@football/app/components/carousel/Carousel';
+import { BackGround } from '@football/app/components/background/BackGround';
 import { HeaderLogo } from '@football/app/components/header-logo/HeaderLogo';
 import { HeaderUser } from '@football/app/components/header-user/HeaderUser';
-import { ListGame_Test } from '@football/app/components/list-game/ListGame_test';
 import { Position } from '@football/app/components/position/Position';
+import { Appearances } from '@football/app/screens/football-national-team/layout/appearances/Appearances';
+import { FutureEvents } from '@football/app/screens/football-national-team/layout/future-events/FutureEvents';
+import { GamesList } from '@football/app/screens/football-national-team/layout/games-list/GamesList';
+import { GoalKickers } from '@football/app/screens/football-national-team/layout/goal-kickers/GoalKickers';
+import { ImageGallery } from '@football/app/screens/football-national-team/layout/image-gallery/ImageGallery';
+import { MainVideo } from '@football/app/screens/football-national-team/layout/main-video/MainVideo';
+import { Rankings } from '@football/app/screens/football-national-team/layout/rankings/Rankings';
+import { TeamPersonnel } from '@football/app/screens/football-national-team/layout/team-personnel/TeamPersonnel';
+import { VideoGallery } from '@football/app/screens/football-national-team/layout/video-gallery/VideoGallery';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
 import { getSize } from '@football/app/utils/responsive/scale';
-import {
-    MAX_TOPTEAM_LASTCAMPAIGN_GAMES,
-    MAX_TOPTEAM_LASTCAMPAIGN_PLAYERAPPEARANCE,
-} from '@football/core/api/configs/config';
-import { isEmpty } from 'lodash';
-import moment from 'moment';
-import React, { useState } from 'react';
-import {
-    I18nManager,
-    Image,
-    ImageBackground,
-    SafeAreaView,
-    ScrollView,
-    StatusBar,
-    Text,
-    TouchableOpacity,
-    View,
-} from 'react-native';
-import { Avatar } from 'react-native-elements';
-import FastImage from 'react-native-fast-image';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import LinearGradient from 'react-native-linear-gradient';
-import Icon from 'react-native-vector-icons/AntDesign';
-import IconFeather from 'react-native-vector-icons/Feather';
+import React from 'react';
+import { Image, SafeAreaView, StatusBar, Text, View } from 'react-native';
+import { GestureHandlerRootView, ScrollView } from 'react-native-gesture-handler';
 import styles from './NationalTeamScreen.style';
 import { INationalTeamScreenProps } from './NationalTeamScreen.type';
 import { useViewModel } from './NationalTeamScreen.viewModel';
-import { BackGround } from '@football/app/components/background/BackGround';
-import { MainVideo } from '@football/app/screens/football-national-team/layout/main-video/MainVideo';
-import { VideoGallery } from '@football/app/screens/football-national-team/layout/video-gallery/VideoGallery';
-import { FutureEvents } from '@football/app/screens/football-national-team/layout/future-events/FutureEvents';
-import { Rankings } from '@football/app/screens/football-national-team/layout/rankings/Rankings';
-import { GamesList } from '@football/app/screens/football-national-team/layout/games-list/GamesList';
-import { GoalKickers } from '@football/app/screens/football-national-team/layout/goal-kickers/GoalKickers';
-import { Appearances } from '@football/app/screens/football-national-team/layout/appearances/Appearances';
-import { TeamPersonnel } from '@football/app/screens/football-national-team/layout/team-personnel/TeamPersonnel';
-import { ImageGallery } from '@football/app/screens/football-national-team/layout/image-gallery/ImageGallery';
 
 export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenProps) => {
     const { t, onGoBack, handleNavigation, topTeam } = useViewModel({
