@@ -372,7 +372,7 @@ const resources = {
                 },
             },
             video: {
-                title: 'סירטונים',
+                title: 'סרטונים',
                 priority: {
                     label: 'קבוצות מועדפות',
                 },
@@ -383,7 +383,7 @@ const resources = {
                     label: 'נבחרות מועדפות',
                 },
                 general_vod: {
-                    label: 'סירטונים נבחרים',
+                    label: 'סרטונים נבחרים',
                 },
             },
             goblet: {
@@ -656,7 +656,7 @@ const resources = {
                 top_team_second_tab_title: 'טבלת משחק',
                 edit_favorites: 'ערוך מועדפים',
                 magazine: 'מגזין ההתאחדות',
-                league_gallery: 'גלריית ליגות',
+                league_gallery: 'סרטונים',
                 all_video: 'לכל הסרטונים',
                 instagram: 'ההתאחדות באינסטגרם',
                 composition: 'הרכב',
@@ -664,7 +664,7 @@ const resources = {
             },
             list_game: {
                 results: 'לתוצאות המשחק בזמן אמת',
-                composition: 'הרכב',
+                composition: 'פרטי משחק',
             },
             drop_down: {
                 title: 'ליגת הבורסה לניירות ערך',
