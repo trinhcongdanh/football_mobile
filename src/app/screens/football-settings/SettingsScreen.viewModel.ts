@@ -12,9 +12,9 @@ import { launchImageLibrary } from 'react-native-image-picker';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
-import { PlayerModel } from '@football/core/models/PlayerModelResponse';
-import { TeamModel } from '@football/core/models/TeamModelResponse';
-import { TopTeamModel } from '@football/core/models/TopTeamModelResponse';
+import { PlayerModel, PlayersModelResponse } from '@football/core/models/PlayerModelResponse';
+import { TeamModel, TeamModelResponse } from '@football/core/models/TeamModelResponse';
+import { TopTeamModel, TopTeamModelResponse } from '@football/core/models/TopTeamModelResponse';
 import PlayerService from '@football/core/services/Player.service';
 import TeamService from '@football/core/services/Team.service';
 import TopTeamService from '@football/core/services/TopTeam.service';
@@ -43,13 +43,30 @@ enum Gender {
     OTHER = 'FAN_GENDER_NOT_AVAILABLE',
 }
 
+enum Notification {
+    FAN_NOTIFICATION_GENERAL = 'FAN_NOTIFICATION_GENERAL',
+    FAN_NOTIFICATION_FAVORITE_PLAYERS = 'FAN_NOTIFICATION_FAVORITE_PLAYERS',
+    FAN_NOTIFICATION_FAVORITE_ISRAEL_TEAMS = 'FAN_NOTIFICATION_FAVORITE_ISRAEL_TEAMS',
+    FAN_NOTIFICATION_FAVORITE_PLAYERS_LEAGUES = 'FAN_NOTIFICATION_FAVORITE_PLAYERS_LEAGUES',
+    FAN_NOTIFICATION_FAVORITE_ISRAEL_TEAMS_LEAGUES = 'FAN_NOTIFICATION_FAVORITE_ISRAEL_TEAMS_LEAGUES',
+    FAN_NOTIFICATION_FAVORITE_PLAYERS_NATIONAL_TEAMS = 'FAN_NOTIFICATION_FAVORITE_PLAYERS_NATIONAL_TEAMS',
+}
+
 interface NotificationSetting {
     id?: number;
     text: string;
     tutorial: string;
     beforeGame: string;
-    value: string;
+    value: Notification;
     isOn: boolean;
+}
+
+interface Option {
+    email: string;
+    favorite_israel_teams: TeamModel[];
+    favorite_players: PlayerModel[];
+    favorite_national_teams: TopTeamModel[];
+    approved_notifications: Notification[];
 }
 
 /**
@@ -87,10 +104,25 @@ const useViewState = () => {
     const [email, setEmail] = useState<string>('');
     const [birthDate, setBirthDate] = useState<string>('');
     const [gender, setGender] = useState<string>('');
-
+    const [editSetting, setEditSetting] = useState<boolean>(false);
     const [errors, setErrors] = useState<SettingProps>({
         userName: '',
         email: '',
+    });
+
+    const [defaultOptions, setDefaultOptions] = useState<Option>({
+        email: '',
+        favorite_israel_teams: [],
+        favorite_players: [],
+        favorite_national_teams: [],
+        approved_notifications: [],
+    });
+    const [newOptions, setNewOptions] = useState<Option>({
+        email: '',
+        favorite_israel_teams: [],
+        favorite_players: [],
+        favorite_national_teams: [],
+        approved_notifications: [],
     });
 
     // Props checking edit fields in the form
@@ -193,6 +225,12 @@ const useViewState = () => {
         selectedTopTeams,
         setSelectedTopTeams,
         t,
+        setEditSetting,
+        editSetting,
+        setDefaultOptions,
+        defaultOptions,
+        setNewOptions,
+        newOptions,
     };
 };
 
@@ -216,6 +254,9 @@ const useEventHandler = (state: any, route: any) => {
         selectedTeams,
         selectedPlayers,
         selectedTopTeams,
+        setEditSetting,
+        setNewOptions,
+        newOptions,
     } = state;
 
     const dispatch = useDispatch<any>();
@@ -239,21 +280,21 @@ const useEventHandler = (state: any, route: any) => {
     const handleSaveChange = () => {
         dispatch(statusSetProfile([]));
 
-        const favTeamIds = selectedTeams
-            .filter((team: TeamModel) => team)
-            .map((selectedTeam: TeamModel) => selectedTeam._id);
+        // const favTeamIds = selectedTeams
+        //     .filter((team: TeamModel) => team)
+        //     .map((selectedTeam: TeamModel) => selectedTeam._id);
 
-        const favPlayersIds = selectedPlayers
-            .filter((player: PlayerModel) => player)
-            .map((selectedPlayer: PlayerModel) => selectedPlayer._id);
+        // const favPlayersIds = selectedPlayers
+        //     .filter((player: PlayerModel) => player)
+        //     .map((selectedPlayer: PlayerModel) => selectedPlayer._id);
 
-        const favTopTeamIds = selectedTopTeams
-            .filter((topTeam: TopTeamModel) => topTeam)
-            .map((selectedTopTeam: TopTeamModel) => selectedTopTeam._id);
+        // const favTopTeamIds = selectedTopTeams
+        //     .filter((topTeam: TopTeamModel) => topTeam)
+        //     .map((selectedTopTeam: TopTeamModel) => selectedTopTeam._id);
 
-        const notificationIds = notifications
-            .filter((notification: NotificationSetting) => notification.isOn)
-            .map((notification: NotificationSetting) => notification.value);
+        // const notificationIds = notifications
+        //     .filter((notification: NotificationSetting) => notification.isOn)
+        //     .map((notification: NotificationSetting) => notification.value);
 
         dispatch(
             setProfileUser(
@@ -265,15 +306,23 @@ const useEventHandler = (state: any, route: any) => {
                         ? userLogin.otp.user.item_id
                         : createProfile.profile.item_id,
                     item: {
-                        email,
-                        favorite_israel_teams: isEmpty(favTeamIds) ? '' : favTeamIds,
-                        favorite_players: isEmpty(favPlayersIds) ? '' : favPlayersIds,
-                        favorite_national_teams: isEmpty(favTopTeamIds) ? '' : favTopTeamIds,
-                        approved_notifications: isEmpty(notificationIds) ? '' : notificationIds,
+                        email: newOptions.email,
+                        favorite_israel_teams: newOptions.favorite_israel_teams,
+                        favorite_players: newOptions.favorite_players,
+                        favorite_national_teams: newOptions.favorite_national_teams,
+                        approved_notifications: newOptions.approved_notifications,
                     },
                 })
             )
         );
+
+        state.setDefaultOptions((pre: Option) => ({
+            email: newOptions.email,
+            favorite_israel_teams: newOptions.favorite_israel_teams,
+            favorite_players: newOptions.favorite_players,
+            favorite_national_teams: newOptions.favorite_national_teams,
+            approved_notifications: newOptions.approved_notifications,
+        }));
     };
 
     const handleNotSaveChange = () => {
@@ -309,14 +358,17 @@ const useEventHandler = (state: any, route: any) => {
     //     state.setGender(value);
     // };
 
-    // /**
-    //  * Handle changing birthdate
-    //  * @param newDate
-    //  */
-    // const handleChangeBirthDate = (newDate: Date) => {
-    //     state.setEditBirthday(true);
-    //     state.setBirthDate(newDate);
-    // };
+    /**
+     * Handle changing birthdate
+     * @param newDate
+     */
+    const onChangeEmail = (text: string) => {
+        state.setEmail(text);
+        setNewOptions((pre: any) => ({
+            ...pre,
+            email: text,
+        }));
+    };
 
     /**
      * Handle changing notification
@@ -331,7 +383,18 @@ const useEventHandler = (state: any, route: any) => {
         if (originNotification) {
             originNotification.isOn = !originNotification.isOn;
         }
-        state.setNotifications(originNotifications);
+        state.setNotifications((pre: any) => originNotifications);
+
+        console.log('notifications', notifications);
+
+        const notificationIds = notifications
+            .filter((notification: NotificationSetting) => notification.isOn)
+            .map((notification: NotificationSetting) => notification.value);
+
+        setNewOptions((pre: Option) => ({
+            ...pre,
+            approved_notifications: notificationIds,
+        }));
     };
 
     /**
@@ -345,7 +408,8 @@ const useEventHandler = (state: any, route: any) => {
             newSelectedTeam[index] = team;
         });
 
-        state.setSelectedTeams(newSelectedTeam);
+        state.setSelectedTeams((pre: TeamModel[]) => newSelectedTeam);
+        console.log('newSelectedTeam', selectedTeams);
     };
 
     /**
@@ -436,6 +500,7 @@ const useEventHandler = (state: any, route: any) => {
         backFavTeam,
         backFavPlayer,
         backFavTopTeam,
+        onChangeEmail,
     };
 };
 
@@ -461,19 +526,15 @@ const useViewCallback = (viewState: any) => {
         if (!user?.favorite_israel_teams?.length) {
             return;
         }
-        const ids = user.favorite_israel_teams.map((id: string) => {
-            return { _id: { $oid: id } };
-        });
+        const favTeamsSelected = await Promise.all(
+            user.favorite_israel_teams.map(async (id: string) => {
+                const [err, res] = await TeamService.findByOId<TeamModelResponse>(id);
+                if (err) return;
+                return res.data.documents[0];
+            })
+        );
 
-        const [error, res] = await TeamService.findByFilter({
-            $or: ids,
-        });
-
-        if (error) {
-            return;
-        }
-
-        const teamResponse = (res?.data?.documents || []).splice(0, MAX_FAVORITES_TEAM);
+        const teamResponse = (favTeamsSelected || []).splice(0, MAX_FAVORITES_TEAM);
         const newSelectedTeam = [...selectedTeams];
 
         teamResponse.forEach((team: TeamModel, index: number) => {
@@ -490,19 +551,15 @@ const useViewCallback = (viewState: any) => {
         if (!user?.favorite_players?.length) {
             return;
         }
-        const ids = user.favorite_players.map((id: string) => {
-            return { _id: { $oid: id } };
-        });
+        const favPlayersSelected = await Promise.all(
+            user.favorite_players.map(async (id: string) => {
+                const [err, res] = await PlayerService.findByOId<PlayersModelResponse>(id);
+                if (err) return;
+                return res.data.documents[0];
+            })
+        );
 
-        const [error, res] = await PlayerService.findByFilter({
-            $or: ids,
-        });
-
-        if (error) {
-            return;
-        }
-
-        const playersResponse = (res?.data?.documents || []).splice(0, MAX_FAVORITES_PLAYER);
+        const playersResponse = (favPlayersSelected || []).splice(0, MAX_FAVORITES_PLAYER);
         const newSelectedPlayers = [...selectedPlayers];
 
         playersResponse.forEach((player: PlayerModel, index: number) => {
@@ -519,19 +576,15 @@ const useViewCallback = (viewState: any) => {
         if (!user?.favorite_national_teams?.length) {
             return;
         }
-        const ids = user.favorite_national_teams.map((id: string) => {
-            return { _id: { $oid: id } };
-        });
+        const favTopTeamsSelected = await Promise.all(
+            user.favorite_national_teams.map(async (id: string) => {
+                const [err, res] = await TopTeamService.findByOId<TopTeamModelResponse>(id);
+                if (err) return;
+                return res.data.documents[0];
+            })
+        );
 
-        const [error, res] = await TopTeamService.findByFilter({
-            $or: ids,
-        });
-
-        if (error) {
-            return;
-        }
-
-        const topTeamsResponse = (res?.data?.documents || []).splice(0, MAX_FAVORITES_TOPTEAM);
+        const topTeamsResponse = (favTopTeamsSelected || []).splice(0, MAX_FAVORITES_TOPTEAM);
         const newSelectedTopTeams = [...selectedTopTeams];
 
         topTeamsResponse.forEach((topTeam: TopTeamModel, index: number) => {
@@ -565,6 +618,9 @@ const useEffectHandler = (state: any, callback: any, eventHandler: any) => {
         setGender,
         setNotifications,
         t,
+        setDefaultOptions,
+        defaultOptions,
+        setNewOptions,
     } = state;
     useEffect(() => {
         if (getProfile.success !== true) {
@@ -603,6 +659,22 @@ const useEffectHandler = (state: any, callback: any, eventHandler: any) => {
 
         setNotifications(originNotifications);
 
+        setDefaultOptions((pre: Option) => ({
+            email: profile.email,
+            favorite_israel_teams: profile.favorite_israel_teams,
+            favorite_players: profile.favorite_players,
+            favorite_national_teams: profile.favorite_national_teams,
+            approved_notifications: profile.approved_notifications,
+        }));
+
+        setNewOptions((pre: Option) => ({
+            email: profile.email,
+            favorite_israel_teams: profile.favorite_israel_teams,
+            favorite_players: profile.favorite_players,
+            favorite_national_teams: profile.favorite_national_teams,
+            approved_notifications: profile.approved_notifications,
+        }));
+
         // set time out to run in different threads
         setTimeout(() => {
             getTeamsData(profile);
@@ -618,6 +690,27 @@ const useEffectHandler = (state: any, callback: any, eventHandler: any) => {
             getTopTeamsData(profile);
         }, 0);
     }, [getProfile.success]);
+
+    useEffect(() => {
+        const favTeamIds = state.selectedTeams
+            .filter((team: TeamModel) => team)
+            .map((selectedTeam: TeamModel) => selectedTeam._id);
+        const favPlayersIds = state.selectedPlayers
+            .filter((player: PlayerModel) => player)
+            .map((selectedPlayer: PlayerModel) => selectedPlayer._id);
+        console.log('Change', favPlayersIds);
+
+        const favTopTeamIds = state.selectedTopTeams
+            .filter((topTeam: TopTeamModel) => topTeam)
+            .map((selectedTopTeam: TopTeamModel) => selectedTopTeam._id);
+
+        setNewOptions((pre: Option) => ({
+            ...pre,
+            favorite_israel_teams: isEmpty(favTeamIds) ? '' : favTeamIds,
+            favorite_players: isEmpty(favPlayersIds) ? '' : favPlayersIds,
+            favorite_national_teams: isEmpty(favTopTeamIds) ? '' : favTopTeamIds,
+        }));
+    }, [state.selectedTeams, state.selectedPlayers, state.selectedTopTeams]);
 };
 
 /**
@@ -635,6 +728,8 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
     const eventHandler = useEventHandler(state, route);
     useEffectHandler(state, callback, eventHandler);
 
+    console.log('new option', state.newOptions);
+    console.log('defaultOptions', state.defaultOptions);
     const backAction = () => {
         const previousScreen = route?.params?.previousScreen;
         if (previousScreen && previousScreen === ScreenName.HomePage) {

@@ -35,6 +35,7 @@ import { ISettingsScreenProps } from './SettingsScreen.type';
 import { useViewModel } from './SettingsScreen.viewModel';
 import { BackGround } from '@football/app/components/background/BackGround';
 import { ChangeLanguage } from '@football/app/components/change-language/ChangeLanguage';
+import { difference, isEqual } from 'lodash';
 
 export function SettingsScreen(props: ISettingsScreenProps) {
     const {
@@ -66,6 +67,10 @@ export function SettingsScreen(props: ISettingsScreenProps) {
         backFavPlayer,
         backFavTopTeam,
         scrollBottom,
+        onChangeEmail,
+        editSetting,
+        defaultOptions,
+        newOptions,
     } = useViewModel(props);
     const scrollViewRef = useRef<any>();
 
@@ -142,11 +147,11 @@ export function SettingsScreen(props: ISettingsScreenProps) {
                                     styleInput={styles.input_container}
                                     error={errors.email}
                                     placeholder={t('settings.email')}
-                                    onChangeTextInput={setEmail}
+                                    onChangeTextInput={onChangeEmail}
                                     onFocus={() => {
                                         handleError('', 'email');
                                     }}
-                                    input={email}
+                                    input={newOptions.email}
                                 />
 
                                 <View style={{ marginTop: getSize.m(30) }}>
@@ -476,6 +481,7 @@ export function SettingsScreen(props: ISettingsScreenProps) {
                                 style={{ borderRadius: getSize.m(15) }}
                                 title={t('settings.save_changes')}
                                 onPress={handleSaveChange}
+                                disabled={isEqual(defaultOptions, newOptions)}
                             />
                             <View style={{ marginTop: getSize.m(10), marginBottom: getSize.m(20) }}>
                                 <ChangeLanguage
