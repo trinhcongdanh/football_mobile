@@ -25,10 +25,20 @@ export const DataPlayerScreen = ({ navigation, route }: IDataPlayerScreenProps) 
     const player_page = route?.params?.player_page;
 
     useEffect(() => {
-        if (player_page === 1) {
-            setOnSelect(1);
+        console.log('log player', player?.top_team, player?.team);
+        if (player?.top_team && player?.team) {
+            console.log('log 1');
+            setOnSelect(pre => 1);
+            console.log('onSelect', onSelect);
         }
-    }, []);
+        if (!player?.top_team || !player?.team) {
+            setOnSelect(pre => 0);
+            console.log('log 0');
+        }
+        // if (player_page === 1) {
+        //     setOnSelect(1);
+        // }
+    }, [player, onSelect]);
 
     const { getTranslationText } = useTranslationText();
 

@@ -192,6 +192,7 @@ export const ListOfGameTopTeam = ({ topTeam }: IListOfGameTopTeamProps) => {
                                     )
                                 )}
                                 style={{ marginVertical: getSize.m(12) }}
+                                gameDetail={t('list_game.detail')}
                             />
                         );
                     })}

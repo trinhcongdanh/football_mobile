@@ -151,11 +151,20 @@ export const FavoriteTeam = ({
                                     // onBlur={() => submitSearchFavTeam(searchText)}
                                 />
 
-                                <TouchableOpacity onPress={() => submitSearchFavTeam(searchText)}>
+                                <TouchableOpacity
+                                    onPress={() => submitSearchFavTeam(searchText)}
+                                    style={
+                                        searchText?.length ? { transform: [{ scale: 1.2 }] } : null
+                                    }
+                                >
                                     <Icon
                                         style={{ marginRight: getSize.m(14) }}
                                         name={appIcons.ic_search}
-                                        color={appColors.blue_gray_dark}
+                                        color={
+                                            searchText?.length
+                                                ? appColors.white
+                                                : appColors.blue_gray_dark
+                                        }
                                         size={getSize.m(16)}
                                     />
                                 </TouchableOpacity>

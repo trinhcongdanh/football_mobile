@@ -62,6 +62,7 @@ const styles = StyleSheet.create({
         lineHeight: getSize.m(15),
         fontFamily: AppFonts.semibold,
         height: getSize.m(30),
+        textAlign: 'center',
     },
     check: {
         width: getSize.m(18),

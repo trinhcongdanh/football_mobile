@@ -1,9 +1,11 @@
+import { CustomCarousel } from '@football/app/components/carousel/Carousel';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import { getSize } from '@football/app/utils/responsive/scale';
 import React from 'react';
 import { View, Animated, Text, useWindowDimensions, ScrollView } from 'react-native';
 import FastImage from 'react-native-fast-image';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import styles from './AboutLeague.style';
 import { IAboutLeagueProps } from './AboutLeague.type';
 import { useViewModel } from './AboutLeague.viewModel';
@@ -29,7 +31,7 @@ export const AboutLeague = ({ highlights }: IAboutLeagueProps) => {
                     },
                 ]}
             >
-                <ScrollView
+                {/* <ScrollView
                     horizontal
                     pagingEnabled
                     showsHorizontalScrollIndicator={false}
@@ -72,9 +74,41 @@ export const AboutLeague = ({ highlights }: IAboutLeagueProps) => {
                             </Animated.View>
                         ) : null;
                     })}
-                </ScrollView>
+                </ScrollView> */}
+                <CustomCarousel
+                    data={aboutGames?.filter(item => item) || []}
+                    height={getSize.m(300)}
+                    widthPerItem={windowWidth / 4}
+                    renderItem={({ item, index }) => {
+                        return (
+                            <Animated.View
+                                key={index}
+                                style={[
+                                    appStyles.align_justify,
+                                    styles.item_about,
+                                    {
+                                        width: windowWidth / 3,
+                                    },
+                                ]}
+                            >
+                                <View style={styles.icon_about}>
+                                    <FastImage
+                                        source={item.icon}
+                                        resizeMode={FastImage.resizeMode.contain}
+                                        style={{
+                                            width: getSize.m(12),
+                                            height: getSize.m(12),
+                                        }}
+                                    />
+                                </View>
+                                <Text style={styles.title_about}>{item.text}</Text>
+                                <Text style={styles.content_about}>{item.value}</Text>
+                            </Animated.View>
+                        );
+                    }}
+                />
             </View>
-            <View style={styles.dotContainer}>
+            {/* <View style={styles.dotContainer}>
                 {dots.map((_, index) => {
                     return (
                         <View key={index}>
@@ -96,7 +130,7 @@ export const AboutLeague = ({ highlights }: IAboutLeagueProps) => {
                         </View>
                     );
                 })}
-            </View>
+            </View> */}
             {/* <View style={styles.indicatorContainer}> */}
             {/* {dots.map((item, index) => {
                     const width = scrollX.interpolate({

@@ -28,10 +28,19 @@ import { useViewModel } from './LeaguesScreen.viewModel';
 import { BackGround } from '@football/app/components/background/BackGround';
 
 export const LeaguesScreen = ({ navigation, route }: ILeaguesScreenProps) => {
-    const { t, labels, onSearchLeague, searchLeagueType, handleLeaguesDetails } = useViewModel({
+    const {
+        t,
+        labels,
+        onSearchLeague,
+        searchLeagueType,
+        handleLeaguesDetails,
+        findLeagueType,
+    } = useViewModel({
         navigation,
         route,
     });
+
+    console.log('findLeagueType', findLeagueType);
     const colorCustom = useSelector((state: any) => state.colorCustom.colorCustom);
     const { getTranslationText } = useTranslationText();
     const renderItem = ({ item, index }: any) => {
@@ -93,7 +102,16 @@ export const LeaguesScreen = ({ navigation, route }: ILeaguesScreenProps) => {
                         </View>
                     </View>
 
-                    <View style={[appStyles.flex, appStyles.main_container]}>
+                    <View
+                        style={[
+                            appStyles.flex,
+                            appStyles.main_container,
+                            {
+                                paddingVertical: getSize.m(0),
+                                paddingTop: getSize.m(20),
+                            },
+                        ]}
+                    >
                         {searchLeagueType?.length ? (
                             <View
                                 style={[
@@ -117,9 +135,24 @@ export const LeaguesScreen = ({ navigation, route }: ILeaguesScreenProps) => {
                                     />
                                 </View>
                             </View>
+                        ) : !findLeagueType ? (
+                            <View
+                                style={[
+                                    {
+                                        backgroundColor: appColors.gray,
+                                        paddingHorizontal: getSize.m(20),
+                                    },
+                                ]}
+                            >
+                                <View>
+                                    <Text style={styles.text_suggestion}>
+                                        {t('leagues.not_search_result')}
+                                    </Text>
+                                </View>
+                            </View>
                         ) : null}
                         <TopTaps labels={labels} />
-                        <View style={{ height: TAB_BAR_HEIGHT }} />
+                        <View style={{ height: 0 }} />
                     </View>
                 </SafeAreaView>
             </BackGround>

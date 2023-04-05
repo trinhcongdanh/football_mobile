@@ -95,11 +95,20 @@ export const FavoritePlayer = ({
                                     onSubmitEditing={submitSearchFavPlayer}
                                     onFocus={handleFocusSearch}
                                 />
-                                <TouchableOpacity onPress={submitSearchFavPlayer}>
+                                <TouchableOpacity
+                                    onPress={submitSearchFavPlayer}
+                                    style={
+                                        searchText?.length ? { transform: [{ scale: 1.2 }] } : null
+                                    }
+                                >
                                     <Icon
                                         style={{ marginRight: getSize.m(14) }}
                                         name={appIcons.ic_search}
-                                        color={appColors.blue_gray_dark}
+                                        color={
+                                            searchText?.length
+                                                ? appColors.white
+                                                : appColors.blue_gray_dark
+                                        }
                                         size={getSize.m(16)}
                                     />
                                 </TouchableOpacity>
@@ -147,11 +156,22 @@ export const FavoritePlayer = ({
                                             onBlur={submitSearchFavPlayer}
                                             onFocus={handleFocusSearch}
                                         />
-                                        <TouchableOpacity onPress={submitSearchFavPlayer}>
+                                        <TouchableOpacity
+                                            onPress={submitSearchFavPlayer}
+                                            style={
+                                                searchText?.length
+                                                    ? { transform: [{ scale: 1.2 }] }
+                                                    : null
+                                            }
+                                        >
                                             <Icon
                                                 style={{ marginRight: getSize.m(14) }}
                                                 name={appIcons.ic_search}
-                                                color={appColors.blue_gray_dark}
+                                                color={
+                                                    searchText?.length
+                                                        ? appColors.white
+                                                        : appColors.blue_gray_dark
+                                                }
                                                 size={getSize.m(16)}
                                             />
                                         </TouchableOpacity>

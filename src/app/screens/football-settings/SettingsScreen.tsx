@@ -34,6 +34,8 @@ import { styles } from './SettingsScreen.styles';
 import { ISettingsScreenProps } from './SettingsScreen.type';
 import { useViewModel } from './SettingsScreen.viewModel';
 import { BackGround } from '@football/app/components/background/BackGround';
+import { ChangeLanguage } from '@football/app/components/change-language/ChangeLanguage';
+import { difference, isEqual } from 'lodash';
 
 export function SettingsScreen(props: ISettingsScreenProps) {
     const {
@@ -54,8 +56,8 @@ export function SettingsScreen(props: ISettingsScreenProps) {
         genders,
         gender,
         birthDate,
-        handleOnSelectGender,
-        handleChangeBirthDate,
+        // handleOnSelectGender,
+        // handleChangeBirthDate,
         notifications,
         handleChangeNotification,
         selectedTeams,
@@ -65,6 +67,10 @@ export function SettingsScreen(props: ISettingsScreenProps) {
         backFavPlayer,
         backFavTopTeam,
         scrollBottom,
+        onChangeEmail,
+        editSetting,
+        defaultOptions,
+        newOptions,
     } = useViewModel(props);
     const scrollViewRef = useRef<any>();
 
@@ -125,35 +131,27 @@ export function SettingsScreen(props: ISettingsScreenProps) {
                             </View>
 
                             <View style={styles.txt_container_avatar}>
+                                <Text style={styles.txt_avatar}>
+                                    {renderUserPoints(getProfile, t)}
+                                </Text>
                                 <FastImage
                                     source={AppImages.img_ball}
                                     resizeMode={FastImage.resizeMode.contain}
                                     style={styles.ic_football}
                                 />
-                                <Text style={styles.txt_avatar}>
-                                    {renderUserPoints(getProfile, t)}
-                                </Text>
                             </View>
 
                             <View style={styles.first_block_container}>
-                                <Input
-                                    error={errors.userName}
-                                    placeholder={t('settings.name')}
-                                    onChangeTextInput={setUserName}
-                                    onFocus={() => {
-                                        handleError('', 'userName');
-                                    }}
-                                    input={userName}
-                                />
+                                <Input editable={false} input={userName} />
                                 <Input
                                     styleInput={styles.input_container}
                                     error={errors.email}
                                     placeholder={t('settings.email')}
-                                    onChangeTextInput={setEmail}
+                                    onChangeTextInput={onChangeEmail}
                                     onFocus={() => {
                                         handleError('', 'email');
                                     }}
-                                    input={email}
+                                    input={newOptions.email}
                                 />
 
                                 <View style={{ marginTop: getSize.m(30) }}>
@@ -167,15 +165,9 @@ export function SettingsScreen(props: ISettingsScreenProps) {
                                     >
                                         {t('reg.gender.label')}
                                     </Text>
-                                    <View
-                                        style={[
-                                            appStyles.flex_row_align,
-                                            {
-                                                marginTop: getSize.m(10),
-                                            },
-                                        ]}
-                                    >
-                                        {genders.map((sexual: any, index: number) => {
+                                    <View style={{ marginTop: getSize.m(10) }}>
+                                        <Input editable={false} input={gender} />
+                                        {/* {genders.map((sexual: any, index: number) => {
                                             return (
                                                 <TouchableOpacity
                                                     key={index.toString()}
@@ -207,7 +199,7 @@ export function SettingsScreen(props: ISettingsScreenProps) {
                                                     </Text>
                                                 </TouchableOpacity>
                                             );
-                                        })}
+                                        })} */}
                                     </View>
                                     <View style={{ marginTop: getSize.m(30) }}>
                                         <Text
@@ -221,8 +213,9 @@ export function SettingsScreen(props: ISettingsScreenProps) {
                                         >
                                             {t('reg.birth_date')}
                                         </Text>
-                                        <View style={styles.date_picker}>
-                                            <DatePicker
+                                        <View style={{ marginTop: getSize.m(10) }}>
+                                            <Input editable={false} input={birthDate} />
+                                            {/* <DatePicker
                                                 fadeToColor="none"
                                                 textColor={appColors.text_dark_blue}
                                                 locale={I18nManager.isRTL ? 'he' : 'en'}
@@ -232,7 +225,7 @@ export function SettingsScreen(props: ISettingsScreenProps) {
                                                     handleChangeBirthDate(date);
                                                 }}
                                                 androidVariant="nativeAndroid"
-                                            />
+                                            /> */}
                                         </View>
                                     </View>
                                 </View>
@@ -488,7 +481,14 @@ export function SettingsScreen(props: ISettingsScreenProps) {
                                 style={{ borderRadius: getSize.m(15) }}
                                 title={t('settings.save_changes')}
                                 onPress={handleSaveChange}
+                                disabled={isEqual(defaultOptions, newOptions)}
                             />
+                            <View style={{ marginTop: getSize.m(10), marginBottom: getSize.m(20) }}>
+                                <ChangeLanguage
+                                    color={appColors.white}
+                                    borderBottomColor={appColors.white}
+                                />
+                            </View>
                             <TouchableOpacity
                                 onPress={handleNotSaveChange}
                                 style={styles.btn_delete_account}

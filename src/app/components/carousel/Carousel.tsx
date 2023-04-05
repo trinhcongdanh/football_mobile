@@ -3,6 +3,7 @@ import { appColors } from '@football/app/utils/constants/appColors';
 import { getSize } from '@football/app/utils/responsive/scale';
 import React, { useState } from 'react';
 import { Dimensions, I18nManager, View } from 'react-native';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import Carousel from 'react-native-reanimated-carousel';
 import styles from './Carousel.style';
 
@@ -31,6 +32,7 @@ export const CustomCarousel = ({
     const [active, setActive] = useState(defaultIndex);
     return (
         <View style={{ alignItems: 'center' }}>
+            {/* <GestureHandlerRootView> */}
             <Carousel
                 autoPlay={autoPlay}
                 defaultIndex={defaultIndex}
@@ -38,20 +40,22 @@ export const CustomCarousel = ({
                 loop={false}
                 data={data}
                 scrollAnimationDuration={1000}
+                windowSize={PAGE_WIDTH}
                 mode="parallax"
                 panGestureHandlerProps={{
                     activeOffsetX: [-10, 10],
                 }}
                 modeConfig={{
                     parallaxScrollingScale: 1,
-                    parallaxScrollingOffset: widthPerItem ? widthPerItem * 0.92 : 50,
+                    // parallaxScrollingOffset: widthPerItem ? widthPerItem * 0.92 : 50,
+                    parallaxScrollingOffset: 50,
                     parallaxAdjacentItemScale: 0.9,
                 }}
                 pagingEnabled
                 onSnapToItem={(index: number) => setActive(index)}
                 renderItem={renderItem}
             />
-
+            {/* </GestureHandlerRootView> */}
             <View style={styles.dotContainer}>
                 {data.map((_, index) => {
                     return (

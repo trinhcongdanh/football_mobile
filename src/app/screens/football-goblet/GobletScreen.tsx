@@ -65,7 +65,7 @@ export const GobletScreen = ({ navigation, route }: IGobletScreenProps) => {
                         </View>
                         <View style={[appStyles.flex_row_space_center, styles.search]}>
                             <TextInput
-                                placeholder={t('leagues.place_holder')}
+                                placeholder={t('goblet.search_placeholder')}
                                 style={styles.text_search}
                                 placeholderTextColor={appColors.blue_gray_light}
                                 onChangeText={(text: string) => {
@@ -108,8 +108,9 @@ export const GobletScreen = ({ navigation, route }: IGobletScreenProps) => {
                                                     <FastImage
                                                         source={{ uri: item.logo_url }}
                                                         style={{
-                                                            width: getSize.m(12),
-                                                            height: getSize.m(12),
+                                                            width: getSize.m(30),
+                                                            height: getSize.m(30),
+                                                            borderRadius: getSize.m(30),
                                                         }}
                                                         resizeMode={FastImage.resizeMode.contain}
                                                     />

@@ -33,7 +33,7 @@ import {
     StatusBar,
     Text,
     TouchableOpacity,
-    View
+    View,
 } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import LinearGradient from 'react-native-linear-gradient';
@@ -96,6 +96,7 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                     <View>
                         <ImageBackground
                             source={AppImages.img_background_header_home}
+                            imageStyle={{ width: '102%', marginLeft: getSize.m(-2) }}
                             style={[
                                 {
                                     height:
@@ -165,23 +166,24 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                                                         source={renderAvatar(profileUser)}
                                                     />
                                                 </TouchableOpacity>
+
+                                                <Text
+                                                    style={[
+                                                        appStyles.text_bold,
+                                                        {
+                                                            marginRight: getSize.m(3),
+                                                            marginLeft: getSize.m(10),
+                                                        },
+                                                    ]}
+                                                >
+                                                    {renderUserPoints(profileUser, t)}
+                                                </Text>
                                                 <FastImage
                                                     source={AppImages.img_ball}
                                                     style={styles.ic_football}
                                                     tintColor={colorCustom}
                                                     resizeMode={FastImage.resizeMode.contain}
                                                 />
-                                                <Text
-                                                    style={[
-                                                        appStyles.text_bold,
-                                                        {
-                                                            marginRight: getSize.m(6),
-                                                            marginLeft: getSize.m(3),
-                                                        },
-                                                    ]}
-                                                >
-                                                    {renderUserPoints(profileUser, t)}
-                                                </Text>
                                             </View>
                                         </View>
                                         <View>

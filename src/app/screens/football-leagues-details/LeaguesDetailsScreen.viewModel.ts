@@ -63,18 +63,16 @@ const useViewCallback = (route: any, viewState: any) => {
     const { leagueId }: any = route.params;
 
     const { setAllLeagueSeasons, setSelectedLeagueSeason, setLeague } = viewState;
-    const getLeagueSeasonsData = useCallback(async () => {
-        const [error, res] = await LeagueSeasonService.findByFilter({
-            league_id: leagueId,
-        });
+    const getLeagueSeasonsData = useCallback(async (id: string) => {
+        const [error, res] = await LeagueSeasonService.findByOId(id);
         if (error) {
             return;
         }
 
         const leagueSeasons = res.data.documents;
 
-        dispatch(setLeagueSeasons(leagueSeasons));
-        setAllLeagueSeasons(leagueSeasons);
+        // dispatch(setLeagueSeasons(leagueSeasons));
+        // setAllLeagueSeasons(leagueSeasons);
         if (leagueSeasons?.length) {
             setSelectedLeagueSeason(leagueSeasons[0]);
         }
@@ -106,12 +104,13 @@ export const useViewModel = ({ navigation, route }: ILeaguesDetailsScreenProps) 
     const { data: leagueSeasonData } = useLeagueSeasons(leagueId);
     const viewState = useViewState();
     const { setAllLeagueSeasons, setSelectedLeagueSeason } = viewState;
-    const { getLeagueById, dispatch } = useViewCallback(route, viewState);
+    const { getLeagueById, getLeagueSeasonsData, dispatch } = useViewCallback(route, viewState);
 
     const handleSelectedYear = (item: any) => {
-        viewState.setSelectedLeagueSeason(
-            viewState.allLeagueSeasons.find(season => season.name === item.content)
-        );
+        // viewState.setSelectedLeagueSeason(
+        //     viewState.allLeagueSeasons.find(season => season.name === item.content)
+        // );
+        getLeagueSeasonsData(item.id);
         viewState.setOpenModalYear(false);
     };
 
@@ -128,13 +127,21 @@ export const useViewModel = ({ navigation, route }: ILeaguesDetailsScreenProps) 
     }, []);
 
     useEffect(() => {
+        if (!viewState.league) {
+            return;
+        }
+
+        viewState.setAllLeagueSeasons(viewState.league.seasons);
+        getLeagueSeasonsData(viewState.league.seasons[0].league_season_id);
+    }, [viewState.league]);
+
+    useEffect(() => {
         viewState.setYears(
             (viewState.allLeagueSeasons?.length ? viewState.allLeagueSeasons : []).map(season => {
                 return {
-                    // eslint-disable-next-line no-underscore-dangle
-                    id: season._id.$oid,
-                    content: season.name,
-                    isSelected: viewState.selectedLeagueSeason?.name === season.name,
+                    id: season.league_season_id,
+                    content: season.league_season_name,
+                    isSelected: viewState.selectedLeagueSeason?.name === season.league_season_name,
                 };
             })
         );
@@ -168,23 +175,23 @@ export const useViewModel = ({ navigation, route }: ILeaguesDetailsScreenProps) 
         }
     }, [viewState.selectCycle, viewState.setSelectCycle, viewState.setSelectRound]);
 
-    useEffect(() => {
-        if (!leagueSeasonData) {
-            return;
-        }
-        const [error, res] = leagueSeasonData;
-        if (error) {
-            return;
-        }
+    // useEffect(() => {
+    //     if (!leagueSeasonData) {
+    //         return;
+    //     }
+    //     const [error, res] = leagueSeasonData;
+    //     if (error) {
+    //         return;
+    //     }
 
-        const leagueSeasons = res.data.documents;
+    //     const leagueSeasons = res.data.documents;
 
-        dispatch(setLeagueSeasons(leagueSeasons));
-        setAllLeagueSeasons(leagueSeasons);
-        if (leagueSeasons?.length) {
-            setSelectedLeagueSeason(leagueSeasons[0]);
-        }
-    }, [leagueSeasonData]);
+    //     dispatch(setLeagueSeasons(leagueSeasons));
+    //     setAllLeagueSeasons(leagueSeasons);
+    //     if (leagueSeasons?.length) {
+    //         setSelectedLeagueSeason(leagueSeasons[0]);
+    //     }
+    // }, [leagueSeasonData]);
 
     return {
         t,

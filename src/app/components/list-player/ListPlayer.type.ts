@@ -1,3 +1,5 @@
+import { StyleProp } from 'react-native';
+
 export type IListPlayerProps = {
     name: string | undefined;
     number?: number;
@@ -5,4 +7,5 @@ export type IListPlayerProps = {
     avt?: string;
     number_before?: number;
     handleDataPlayer?: () => void;
+    widthText?: StyleProp<any>;
 };

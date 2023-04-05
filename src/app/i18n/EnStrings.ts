@@ -309,6 +309,7 @@ const resources = {
             leagues: {
                 title: 'ליגות',
                 suggestion: 'הצעות',
+                not_search_result: 'לא נמצאו תוצאות חיפוש',
                 place_holder: 'חיפוש ליגה...',
                 graduates: {
                     title: 'בוגרים',
@@ -390,6 +391,7 @@ const resources = {
                 title: 'גביע',
                 state_cup: 'גביע מדינה',
                 toto_cup: 'גביע טוטו',
+                search_placeholder: 'חיפוש גביע',
             },
             state_cup: {
                 title: 'גביע המדינה',
@@ -664,7 +666,8 @@ const resources = {
             },
             list_game: {
                 results: 'לתוצאות המשחק בזמן אמת',
-                composition: 'פרטי משחק',
+                detail: 'פרטי המשחק',
+                composition: 'הרכב',
             },
             drop_down: {
                 title: 'ליגת הבורסה לניירות ערך',
@@ -989,6 +992,7 @@ const resources = {
             leagues: {
                 title: 'Leagues',
                 suggestion: 'Suggestions',
+                not_search_result: 'No search results found',
                 place_holder: 'Search league...',
                 graduates: {
                     title: 'Graduates',
@@ -1071,6 +1075,7 @@ const resources = {
                 title: 'Cup',
                 state_cup: 'National Cup',
                 toto_cup: 'Toto Cup',
+                search_placeholder: 'Search cup',
             },
             state_cup: {
                 title: 'State cup',
@@ -1349,7 +1354,8 @@ const resources = {
             },
             list_game: {
                 results: 'Game live data',
-                composition: 'Game details',
+                detail: 'Game details',
+                composition: 'Personnel',
             },
             drop_down: {
                 title: 'Stock Exchange League',
@@ -1370,8 +1376,6 @@ const resources = {
         },
     },
 };
-
-I18nManager.forceRTL(true);
 
 i18n.use(initReactI18next).init({
     compatibilityJSON: 'v3',
