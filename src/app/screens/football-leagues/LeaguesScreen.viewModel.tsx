@@ -9,7 +9,7 @@ import leaguesService from '@football/core/services/League.service';
 
 import LeagueTypeService, { useLeagueTypes } from '@football/core/services/LeagueType.service';
 import _ from 'lodash';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ILeaguesScreenProps } from './LeaguesScreen.type';
 
@@ -20,17 +20,20 @@ type INavigationProps = {
 const useViewState = () => {
     const [leagueType, setLeagueType] = useState<LeagueTypeModel[]>([]);
     const [searchLeagueType, setSearchLeagueType] = useState<LeagueModel[]>([]);
+    const [findLeagueType, setFindLeagueType] = useState(true);
 
     return {
         leagueType,
         setLeagueType,
         searchLeagueType,
         setSearchLeagueType,
+        findLeagueType,
+        setFindLeagueType,
     };
 };
 
 const useViewCallback = (route: any, viewState: any) => {
-    const { setLeagueType, setSearchLeagueType } = viewState;
+    const { setLeagueType, setSearchLeagueType, findLeagueType, setFindLeagueType } = viewState;
     let labels: any[] = [];
     const getLeagueTypeData = useCallback(async () => {
         const [error, res] = await LeagueTypeService.findAll();
@@ -59,7 +62,9 @@ const useViewCallback = (route: any, viewState: any) => {
         if (error) {
             return;
         }
-
+        if (!res.data.documents?.length) {
+            setFindLeagueType(false);
+        }
         setSearchLeagueType(res.data.documents);
     }, []);
 
@@ -76,6 +81,7 @@ const useEventHandler = (callback: any, state: any) => {
     const onChangeText = (text: string) => {
         if (!text?.length) {
             state.setSearchLeagueType([]);
+            state.setFindLeagueType(true);
             return;
         }
         callback.searchLeagueData(text);
