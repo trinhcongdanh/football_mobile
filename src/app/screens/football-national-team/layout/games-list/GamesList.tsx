@@ -143,6 +143,7 @@ export const GamesList = ({ topTeam }: IGamesListProps) => {
                                         )
                                     )}
                                     style={{ marginTop: getSize.m(12) }}
+                                    gameDetail={t('list_game.detail')}
                                 />
                             );
                         })}

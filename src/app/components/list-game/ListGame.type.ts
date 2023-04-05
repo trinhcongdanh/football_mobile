@@ -17,4 +17,6 @@ export type IListGameProps = {
     handleDetailMatch?: () => void;
     handleStadium?: () => void;
     style?: StyleProp<any>;
+    personnel?: string;
+    gameDetail?: string;
 };

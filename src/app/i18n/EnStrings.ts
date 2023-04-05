@@ -665,6 +665,7 @@ const resources = {
             },
             list_game: {
                 results: 'לתוצאות המשחק בזמן אמת',
+                detail: 'פרטי המשחק',
                 composition: 'הרכב',
             },
             drop_down: {
@@ -1351,7 +1352,8 @@ const resources = {
             },
             list_game: {
                 results: 'Game live data',
-                composition: 'Game details',
+                detail: 'Game details',
+                composition: 'Personnel',
             },
             drop_down: {
                 title: 'Stock Exchange League',

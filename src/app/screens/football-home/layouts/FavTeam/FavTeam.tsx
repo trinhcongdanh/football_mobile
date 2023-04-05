@@ -782,6 +782,7 @@ export const FavTeam = ({ team, color }: IFavTeamProps) => {
                                             ).add(2, 'hours')
                                         )}
                                         style={{ marginTop: getSize.m(12) }}
+                                        personnel={t('home_page.composition')}
                                     />
                                 );
                             })}
