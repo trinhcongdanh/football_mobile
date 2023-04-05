@@ -2,9 +2,13 @@ import { useTranslation } from 'react-i18next';
 import React from 'react';
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
 import { ScreenName } from '@football/app/utils/constants/enum';
+import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
+import { useDateTime } from '@football/app/utils/hooks/useDateTime';
 
 export const useViewModel = () => {
     const { navigate, goBack } = useAppNavigator();
+    const { getTranslationText } = useTranslationText();
+    const { getDate, getTime } = useDateTime();
     const { t } = useTranslation();
     const listState = [
         {
@@ -58,5 +62,8 @@ export const useViewModel = () => {
         t,
         listState,
         onNavigateGame,
+        getTranslationText,
+        getDate,
+        getTime,
     };
 };
