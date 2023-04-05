@@ -3,11 +3,12 @@ import React from 'react';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { getSize } from '@football/app/utils/responsive/scale';
-import { SvgUri } from 'react-native-svg';
+// import { SvgUri } from 'react-native-svg';
 import { useViewModel } from './DataCoachTeamsScreen.viewModel';
 import { IDataCoachTeamsScreenProps } from './DataCoachTeamsScreen.type';
 import LinearGradient from 'react-native-linear-gradient';
 import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
+import FastImage from 'react-native-fast-image';
 
 // type Props = {};
 
@@ -51,7 +52,7 @@ export const DataCoachTeamsScreen = ({ teams }: IDataCoachTeamsScreenProps) => {
                     </View>
                 </View>
                 <View style={{ marginTop: getSize.m(10) }}>
-                    {teams.map((item, index) => {
+                    {teams?.map((item, index) => {
                         return (
                             <LinearGradient
                                 key={item.team_id}
@@ -78,10 +79,13 @@ export const DataCoachTeamsScreen = ({ teams }: IDataCoachTeamsScreenProps) => {
                                             alignItems: 'center',
                                         }}
                                     >
-                                        <SvgUri
-                                            uri={item.logo_url}
-                                            width={getSize.m(22)}
-                                            height={getSize.m(22)}
+                                        <FastImage
+                                            source={{ uri: item.logo_url }}
+                                            style={{
+                                                width: getSize.m(22),
+                                                height: getSize.m(22),
+                                                borderRadius: getSize.m(22),
+                                            }}
                                         />
                                         <Text
                                             style={[
