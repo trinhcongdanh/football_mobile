@@ -52,6 +52,7 @@ export const ListOfGames = ({ games }: IListOfGamesProps) => {
                             )}
                             handleDetailMatch={() => onNavigateGamePersonnel(item.game_id)}
                             handleStadium={() => onNavigateStadium(item.stadium_id)}
+                            personnel={t('list_game.composition')}
                         />
                     );
                 })}

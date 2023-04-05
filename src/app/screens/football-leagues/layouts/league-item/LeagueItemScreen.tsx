@@ -21,7 +21,13 @@ export const LeagueItemScreen = ({ navigation, route, typeId }: ILeagueItemScree
     const renderItem = ({ item, index }: any) => {
         return (
             <TouchableOpacity
-                style={styles.option_menu}
+                style={[
+                    styles.option_menu,
+                    {
+                        marginBottom:
+                            index === optionLeagues.length - 1 ? getSize.m(120) : getSize.m(14),
+                    },
+                ]}
                 onPress={() => handleLeaguesDetails(index)}
             >
                 <View style={appStyles.flex_row_align_center}>

@@ -16,7 +16,7 @@ export const DataCoachGamesScreen = ({ games }: IDataCoachGamesScreenProps) => {
     const { t, onGoBack } = useViewModel({ games });
     return (
         <View style={{ marginHorizontal: getSize.m(20) }}>
-            {games.map((game, index) => {
+            {games?.map((game, index) => {
                 return (
                     <View key={index.toString()} style={styles.games}>
                         <View style={styles.tournaments}>

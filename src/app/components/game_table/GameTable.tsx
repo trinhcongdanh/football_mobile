@@ -11,6 +11,7 @@ import FastImage from 'react-native-fast-image';
 import { IGameTableProps } from '@football/app/components/game_table/GameTable.type';
 import { AppFonts } from '@football/app/assets/fonts';
 import { useTranslation } from 'react-i18next';
+import { useDateTime } from '@football/app/utils/hooks/useDateTime';
 
 export const GameTable = ({
     date,
@@ -26,22 +27,26 @@ export const GameTable = ({
     isLive,
 }: IGameTableProps) => {
     const { t } = useTranslation();
-
+    const emptyResult = result === ' : ' ? ' : ' : null;
+    const { getDate, getTime } = useDateTime();
     return (
         <View style={styles.item_game}>
             <View style={appStyles.flex_row_space_center}>
-                <Text style={styles.date}>{date}</Text>
+                <Text style={styles.date}>{getDate({ date: date })}</Text>
                 <TouchableOpacity onPress={handleStadium} style={appStyles.flex_row_align}>
                     <IconEvilIcons
                         name={appIcons.ic_location}
                         size={getSize.m(20)}
-                        color={result !== null ? appColors.text_dark_blue : appColors.soft_grey}
+                        color={
+                            result !== emptyResult ? appColors.text_dark_blue : appColors.soft_grey
+                        }
                     />
                     <Text
                         style={[
                             styles.location,
                             {
-                                fontFamily: result !== null ? AppFonts.medium : AppFonts.regular,
+                                fontFamily:
+                                    result !== emptyResult ? AppFonts.medium : AppFonts.regular,
                             },
                         ]}
                     >
@@ -75,18 +80,15 @@ export const GameTable = ({
                 <View style={appStyles.align_justify}>
                     <View style={styles.container_result}>
                         {isLive ? <Text style={[styles.result]}>- : -</Text> : null}
-                        {!isLive && result === null && schedule !== null ? (
-                            <Text style={styles.result}>V S</Text>
-                        ) : null}
-                        {!isLive && result !== null ? (
+                        {!isLive && result !== emptyResult ? (
                             <Text style={styles.result}>{result}</Text>
                         ) : null}
-                        {!isLive && result === null && schedule !== null ? (
-                            <Text style={styles.result}>{schedule}</Text>
+                        {!isLive && result === emptyResult && schedule !== null ? (
+                            <Text style={styles.result}>{getTime({ time: schedule })}</Text>
                         ) : null}
                     </View>
                     <TouchableOpacity onPress={handleDetailMatch} style={appStyles.flex_row_align}>
-                        {result !== null && (
+                        {result !== emptyResult && (
                             <Text
                                 style={[
                                     styles.details,
@@ -98,7 +100,7 @@ export const GameTable = ({
                                 {t('home_page.game_detail')}
                             </Text>
                         )}
-                        {result === null && schedule !== null && (
+                        {result === emptyResult && schedule !== null && (
                             <Text
                                 style={[
                                     styles.details,
@@ -113,7 +115,7 @@ export const GameTable = ({
                         <IconFeather
                             name={appIcons.ic_left_ios}
                             size={getSize.m(10)}
-                            color={result !== null ? '#061134' : appColors.soft_grey}
+                            color={result !== emptyResult ? '#061134' : appColors.soft_grey}
                         />
                     </TouchableOpacity>
                 </View>

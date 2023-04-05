@@ -12,7 +12,6 @@ const styles = StyleSheet.create({
         paddingVertical: getSize.m(20),
         paddingHorizontal: getSize.m(17),
         borderRadius: getSize.m(15),
-        marginBottom: getSize.m(14),
         backgroundColor: appColors.white,
     },
 

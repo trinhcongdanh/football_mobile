@@ -10,6 +10,7 @@ import FastImage from 'react-native-fast-image';
 import { useTranslation } from 'react-i18next';
 import { styles } from './ListGame_test.styles';
 import { IListGameProps } from './ListGame.type';
+import { useDateTime } from '@football/app/utils/hooks/useDateTime';
 
 export const ListGame_Test = ({
     logo_home,
@@ -28,9 +29,12 @@ export const ListGame_Test = ({
     isLive,
     handleStadium,
     style,
+    personnel,
+    gameDetail,
 }: IListGameProps) => {
     const { t } = useTranslation();
-
+    const emptyResult = result === ' : ' ? ' : ' : null;
+    const { getDate, getTime } = useDateTime();
     return (
         <View style={[styles.main_schedule, style]}>
             {tournament && (
@@ -39,17 +43,13 @@ export const ListGame_Test = ({
                     style={[
                         styles.tournament,
                         {
-                            backgroundColor: result !== null ? appColors.separator : '#F2FBFF',
-                            flexDirection: result === null && schedule === null ? 'row' : 'column',
-                            justifyContent:
-                                result === null && schedule === null ? 'space-between' : 'center',
-                            alignItems: result === null && schedule === null ? 'center' : 'center',
-                            paddingLeft:
-                                result === null && schedule === null
-                                    ? getSize.m(23.5)
-                                    : getSize.m(0),
-                            paddingRight:
-                                result === null && schedule === null ? getSize.m(10) : getSize.m(0),
+                            backgroundColor:
+                                result !== emptyResult ? appColors.separator : '#F2FBFF',
+                            flexDirection: isLive ? 'row' : 'column',
+                            justifyContent: isLive ? 'space-between' : 'center',
+                            alignItems: isLive ? 'center' : 'center',
+                            paddingLeft: isLive ? getSize.m(23.5) : getSize.m(0),
+                            paddingRight: isLive ? getSize.m(10) : getSize.m(0),
                         },
                     ]}
                 >
@@ -58,7 +58,7 @@ export const ListGame_Test = ({
                             styles.text_tournament,
                             {
                                 color:
-                                    result !== null
+                                    result !== emptyResult
                                         ? appColors.soft_grey
                                         : appColors.text_option_unselect,
                             },
@@ -95,15 +95,15 @@ export const ListGame_Test = ({
                                 styles.date,
                                 {
                                     color:
-                                        result !== null
+                                        result !== emptyResult
                                             ? appColors.soft_grey
                                             : appColors.text_dark_blue,
                                 },
                             ]}
                         >
-                            {date}
+                            {getDate({ date: date })}
                         </Text>
-                        {tournament && (
+                        {result === emptyResult && tournament ? (
                             <View style={appStyles.flex_row_align}>
                                 <View>
                                     <Text
@@ -111,7 +111,7 @@ export const ListGame_Test = ({
                                             styles.date,
                                             {
                                                 color:
-                                                    result !== null
+                                                    result !== emptyResult
                                                         ? appColors.soft_grey
                                                         : appColors.text_dark_blue,
                                                 marginHorizontal: getSize.m(4),
@@ -127,17 +127,17 @@ export const ListGame_Test = ({
                                             styles.date,
                                             {
                                                 color:
-                                                    result !== null
+                                                    result !== emptyResult
                                                         ? appColors.soft_grey
                                                         : appColors.text_dark_blue,
                                             },
                                         ]}
                                     >
-                                        {schedule}
+                                        {getTime({ time: schedule })}
                                     </Text>
                                 </View>
                             </View>
-                        )}
+                        ) : null}
                     </View>
 
                     <TouchableOpacity
@@ -147,14 +147,16 @@ export const ListGame_Test = ({
                         <IconLocation
                             name={appIcons.ic_location}
                             size={getSize.m(20)}
-                            color={result !== null ? appColors.soft_grey : appColors.blue_light}
+                            color={
+                                result !== emptyResult ? appColors.soft_grey : appColors.blue_light
+                            }
                         />
                         <Text
                             style={[
                                 styles.stadium,
                                 {
                                     color:
-                                        result !== null
+                                        result !== emptyResult
                                             ? appColors.soft_grey
                                             : appColors.text_dark_blue,
                                 },
@@ -217,7 +219,8 @@ export const ListGame_Test = ({
                             appStyles.align_justify,
                             styles.time,
                             {
-                                backgroundColor: result === null ? appColors.white : '#F8FDFF',
+                                backgroundColor:
+                                    result === emptyResult ? appColors.white : '#F8FDFF',
                                 marginHorizontal:
                                     nameHome || nameAway ? getSize.m(20) : getSize.m(40),
                             },
@@ -235,14 +238,16 @@ export const ListGame_Test = ({
                                 - : -
                             </Text>
                         )}
-                        {!isLive && result === null && schedule !== null && tournament && (
+                        {!isLive && result === emptyResult && schedule !== null && tournament && (
                             <Text style={styles.score}>V S</Text>
                         )}
-                        {!isLive && result === null && schedule !== null && !tournament && (
-                            <Text style={styles.score}>{schedule}</Text>
+                        {!isLive && result === emptyResult && schedule !== null && !tournament && (
+                            <Text style={styles.score}>{getTime({ time: schedule })}</Text>
                         )}
 
-                        {!isLive && result !== null && <Text style={styles.score}>{result}</Text>}
+                        {!isLive && result !== emptyResult && (
+                            <Text style={styles.score}>{result}</Text>
+                        )}
                     </View>
                     <View style={[appStyles.align_justify]}>
                         <View
@@ -285,8 +290,10 @@ export const ListGame_Test = ({
                 >
                     {isLive ? (
                         <Text style={[styles.details]}>{t('list_game.results')}</Text>
+                    ) : personnel ? (
+                        <Text style={[styles.details]}>{personnel}</Text>
                     ) : (
-                        <Text style={[styles.details]}>{t('list_game.composition')}</Text>
+                        gameDetail && <Text style={[styles.details]}>{gameDetail}</Text>
                     )}
                     <Icon name={icon} size={getSize.m(10)} color={appColors.button_dark_blue} />
                 </TouchableOpacity>
