@@ -93,7 +93,16 @@ export const LeaguesScreen = ({ navigation, route }: ILeaguesScreenProps) => {
                         </View>
                     </View>
 
-                    <View style={[appStyles.flex, appStyles.main_container]}>
+                    <View
+                        style={[
+                            appStyles.flex,
+                            appStyles.main_container,
+                            {
+                                paddingVertical: getSize.m(0),
+                                paddingTop: getSize.m(20),
+                            },
+                        ]}
+                    >
                         {searchLeagueType?.length ? (
                             <View
                                 style={[
@@ -119,7 +128,7 @@ export const LeaguesScreen = ({ navigation, route }: ILeaguesScreenProps) => {
                             </View>
                         ) : null}
                         <TopTaps labels={labels} />
-                        <View style={{ height: TAB_BAR_HEIGHT }} />
+                        <View style={{ height: 0 }} />
                     </View>
                 </SafeAreaView>
             </BackGround>

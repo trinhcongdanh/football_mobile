@@ -14,13 +14,11 @@ export const ButtonOption = ({
     defaultValue,
 }: IButtonOptionComponent) => {
     const options = [option_one, option_two];
-    // const [options, setOptions] = useState<any[]>([]);
-    // useEffect(() => {
-    //     setOptions(preOptions => [option_one, option_two]);
-    // }, []);
 
-    // console.log(options);
-    const [select, setSelect] = useState(defaultValue || 0);
+    const [select, setSelect] = useState(defaultValue);
+    useEffect(() => {
+        setSelect(pre => defaultValue);
+    }, [defaultValue]);
 
     const selectOption = (index: number): void => {
         setSelect(index);

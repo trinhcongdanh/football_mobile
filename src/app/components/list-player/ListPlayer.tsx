@@ -14,6 +14,7 @@ export const ListPlayer = ({
     position,
     number_before,
     handleDataPlayer,
+    widthText,
 }: IListPlayerProps) => {
     return (
         <TouchableOpacity
@@ -50,7 +51,11 @@ export const ListPlayer = ({
                         source={{ uri: avt }}
                     />
                 </View>
-                <Text style={[appStyles.text_dark, { marginLeft: getSize.m(10) }]}>{name}</Text>
+                <Text
+                    style={[appStyles.text_dark, { marginLeft: getSize.m(10), width: widthText }]}
+                >
+                    {name}
+                </Text>
             </View>
             {number && <Text style={appStyles.number}>{number}</Text>}
             {position && <Text style={styles.position}>{position}</Text>}
