@@ -38,9 +38,9 @@ class MongoDBService {
     findAll<T = any>(): Promise<Result<T>> {
         return this.httpClient.post('/find', { ...this.dbConfig }).then((response: any) => {
             const documents = response[1]?.data?.documents;
-            if (documents?.length) {
-                console.log(`keysOfProps ${this.collection}`, getDeepKeys(documents[0]));
-            }
+            // if (documents?.length) {
+            //     console.log(`keysOfProps ${this.collection}`, getDeepKeys(documents[0]));
+            // }
             return response;
         });
     }
@@ -50,9 +50,9 @@ class MongoDBService {
             .post('/find', { ...this.dbConfig, filter: { _id: { $oid: oid } } })
             .then((response: any) => {
                 const documents = response[1]?.data?.documents;
-                if (documents?.length) {
-                    console.log(`keysOfProps ${this.collection}`, getDeepKeys(documents[0]));
-                }
+                // if (documents?.length) {
+                //     console.log(`keysOfProps ${this.collection}`, getDeepKeys(documents[0]));
+                // }
                 return response;
             });
     }
@@ -60,9 +60,9 @@ class MongoDBService {
     findByFilter<T = any>(filter: any): Promise<Result<T>> {
         return this.httpClient.post('/find', { ...this.dbConfig, filter }).then((response: any) => {
             const documents = response[1]?.data?.documents;
-            if (documents?.length) {
-                console.log(`keysOfProps ${this.collection}`, getDeepKeys(documents[0]));
-            }
+            // if (documents?.length) {
+            //     console.log(`keysOfProps ${this.collection}`, getDeepKeys(documents[0]));
+            // }
             return response;
         });
     }
