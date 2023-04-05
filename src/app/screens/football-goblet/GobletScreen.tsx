@@ -108,8 +108,9 @@ export const GobletScreen = ({ navigation, route }: IGobletScreenProps) => {
                                                     <FastImage
                                                         source={{ uri: item.logo_url }}
                                                         style={{
-                                                            width: getSize.m(12),
-                                                            height: getSize.m(12),
+                                                            width: getSize.m(30),
+                                                            height: getSize.m(30),
+                                                            borderRadius: getSize.m(30),
                                                         }}
                                                         resizeMode={FastImage.resizeMode.contain}
                                                     />

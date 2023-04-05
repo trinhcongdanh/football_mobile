@@ -43,7 +43,7 @@ const Input = ({
                 editable={editable}
             />
             {input === '' && (
-                <View style={{ position: 'absolute', top: getSize.m(19), left: getSize.m(16) }}>
+                <View style={{ position: 'absolute', top: getSize.m(17), left: getSize.m(16) }}>
                     <Text style={{ color: 'red' }}>*</Text>
                 </View>
             )}

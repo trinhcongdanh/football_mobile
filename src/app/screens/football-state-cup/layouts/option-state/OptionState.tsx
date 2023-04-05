@@ -10,8 +10,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
 import moment from 'moment';
 export const OptionState = ({ label, data }: IOptionStateProps) => {
-    const { t, listState, onNavigateGame } = useViewModel();
-    const { getTranslationText } = useTranslationText();
+    const { t, listState, onNavigateGame, getTranslationText, getDate, getTime } = useViewModel();
 
     return (
         <View
@@ -64,7 +63,7 @@ export const OptionState = ({ label, data }: IOptionStateProps) => {
                                 >
                                     <View style={{ width: getSize.m(60) }}>
                                         <Text style={styles.text_content}>
-                                            {moment(item.date, 'YYYY-MM-DD').format('DD/MM/YY')}
+                                            {getDate({ date: item.date })}
                                         </Text>
                                     </View>
                                     <View style={{ width: getSize.m(110) }}>
@@ -90,7 +89,7 @@ export const OptionState = ({ label, data }: IOptionStateProps) => {
                                     </View>
                                     <View style={{ width: getSize.m(40) }}>
                                         <Text style={styles.text_content}>
-                                            {moment(item.time, 'HH:mm:ss').format('HH:mm')}
+                                            {getTime({ time: item.time })}
                                         </Text>
                                     </View>
                                     <View style={{ width: getSize.m(30) }}>
