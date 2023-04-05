@@ -70,6 +70,10 @@ export const LeaguesDetailsScreen = ({ navigation, route }: ILeaguesDetailsScree
                     </View>
                     {openModalYear && (
                         <DropDown
+                            title={getTranslationText({
+                                textHe: league?.name_he,
+                                textEn: league?.name_en,
+                            })}
                             data={years}
                             handleSelected={(item: any) => handleSelectedYear(item)}
                             handleCloseModal={handleCloseModal}

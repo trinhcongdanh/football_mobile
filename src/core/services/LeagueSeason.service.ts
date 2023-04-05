@@ -19,6 +19,15 @@ export const useLeagueSeasons = (leagueId: any) => {
     );
 };
 
+export const useLeagueSeasonsByName = (leagueId: string, name: string) => {
+    return useQuery(`${LeagueSeasonQueryKey.GetLeagueSeason}-${leagueId}-${name}`, () =>
+        leagueSeasonService.findByFilter<LeagueSeasonModelResponse>({
+            league_id: leagueId,
+            name,
+        })
+    );
+};
+
 export const useLeagueSeasonById = (leagueSeasonId: string) => {
     return useQuery(`${LeagueSeasonQueryKey.GetLeagueSeason}-byId-${leagueSeasonId}`, () =>
         leagueSeasonService.findByOId<LeagueSeasonModelResponse>(leagueSeasonId)

@@ -7,10 +7,11 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import IconIonicons from 'react-native-vector-icons/Ionicons';
+import { ScrollView } from 'react-native-gesture-handler';
 import { styles } from './DropDown.style';
 import { IDropDownProps } from './DropDown.type';
 
-export const DropDown = ({ data, handleSelected, handleCloseModal }: IDropDownProps) => {
+export const DropDown = ({ data, handleSelected, handleCloseModal, title }: IDropDownProps) => {
     const { t } = useTranslation();
     return (
         <View style={styles.background_opacity}>
@@ -26,41 +27,46 @@ export const DropDown = ({ data, handleSelected, handleCloseModal }: IDropDownPr
                             style={{ fontFamily: AppFonts.bold }}
                         />
                     </TouchableOpacity>
-                    <Text style={styles.title_drop_down}>{t('drop_down.title')}</Text>
+                    <Text style={styles.title_drop_down}>{title || t('drop_down.title')}</Text>
                     <View>
                         <Text style={styles.label_drop_down}>{t('drop_down.label')}</Text>
-                        {data.map((item: any) => {
-                            return (
-                                <TouchableOpacity
-                                    key={item.id}
-                                    style={[appStyles.flex_row_align_center, styles.item_select]}
-                                    onPress={() => handleSelected(item)}
-                                >
-                                    <View
+                        <ScrollView>
+                            {data.map((item: any) => {
+                                return (
+                                    <TouchableOpacity
+                                        key={item.id}
                                         style={[
-                                            styles.btn,
-                                            {
-                                                backgroundColor: item.isSelected
-                                                    ? appColors.blue_light
-                                                    : appColors.separator,
-                                            },
+                                            appStyles.flex_row_align_center,
+                                            styles.item_select,
                                         ]}
+                                        onPress={() => handleSelected(item)}
                                     >
                                         <View
                                             style={[
-                                                styles.btn_select,
+                                                styles.btn,
                                                 {
                                                     backgroundColor: item.isSelected
-                                                        ? appColors.white
+                                                        ? appColors.blue_light
                                                         : appColors.separator,
                                                 },
                                             ]}
-                                        />
-                                    </View>
-                                    <Text style={styles.content_select}>{item.content}</Text>
-                                </TouchableOpacity>
-                            );
-                        })}
+                                        >
+                                            <View
+                                                style={[
+                                                    styles.btn_select,
+                                                    {
+                                                        backgroundColor: item.isSelected
+                                                            ? appColors.white
+                                                            : appColors.separator,
+                                                    },
+                                                ]}
+                                            />
+                                        </View>
+                                        <Text style={styles.content_select}>{item.content}</Text>
+                                    </TouchableOpacity>
+                                );
+                            })}
+                        </ScrollView>
                     </View>
                 </View>
             </View>
