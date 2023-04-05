@@ -28,6 +28,7 @@ export const VideoGallery = ({ topTeam }: IVideoGalleryProps) => {
                     <CustomCarousel
                         data={topTeam ? topTeam.video_gallery : []}
                         height={getSize.m(300)}
+                        widthPerItem={getSize.m(200)}
                         activePageColor={appColors.white}
                         renderItem={({ item, index }) => {
                             return (
