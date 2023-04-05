@@ -28,10 +28,19 @@ import { useViewModel } from './LeaguesScreen.viewModel';
 import { BackGround } from '@football/app/components/background/BackGround';
 
 export const LeaguesScreen = ({ navigation, route }: ILeaguesScreenProps) => {
-    const { t, labels, onSearchLeague, searchLeagueType, handleLeaguesDetails } = useViewModel({
+    const {
+        t,
+        labels,
+        onSearchLeague,
+        searchLeagueType,
+        handleLeaguesDetails,
+        findLeagueType,
+    } = useViewModel({
         navigation,
         route,
     });
+
+    console.log('findLeagueType', findLeagueType);
     const colorCustom = useSelector((state: any) => state.colorCustom.colorCustom);
     const { getTranslationText } = useTranslationText();
     const renderItem = ({ item, index }: any) => {
@@ -124,6 +133,21 @@ export const LeaguesScreen = ({ navigation, route }: ILeaguesScreenProps) => {
                                         renderItem={renderItem}
                                         numColumns={1}
                                     />
+                                </View>
+                            </View>
+                        ) : !findLeagueType ? (
+                            <View
+                                style={[
+                                    {
+                                        backgroundColor: appColors.gray,
+                                        paddingHorizontal: getSize.m(20),
+                                    },
+                                ]}
+                            >
+                                <View>
+                                    <Text style={styles.text_suggestion}>
+                                        {t('leagues.not_search_result')}
+                                    </Text>
                                 </View>
                             </View>
                         ) : null}

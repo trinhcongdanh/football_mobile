@@ -309,6 +309,7 @@ const resources = {
             leagues: {
                 title: 'ליגות',
                 suggestion: 'הצעות',
+                not_search_result: 'לא נמצאו תוצאות חיפוש',
                 place_holder: 'חיפוש ליגה...',
                 graduates: {
                     title: 'בוגרים',
@@ -991,6 +992,7 @@ const resources = {
             leagues: {
                 title: 'Leagues',
                 suggestion: 'Suggestions',
+                not_search_result: 'No search results found',
                 place_holder: 'Search league...',
                 graduates: {
                     title: 'Graduates',
