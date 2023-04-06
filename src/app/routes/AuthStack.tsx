@@ -48,6 +48,7 @@ import {
     ContactUsScreen,
     TermsConditionScreen,
     GoalKickerListScreen,
+    NotificationScreen,
 } from '../screens';
 import { HistoryScreen } from '../screens/football-history/HistoryScreen';
 import { DataPlayerScreen } from '../screens/football-data-player/DataPlayerScreen';
@@ -127,6 +128,7 @@ export const AuthStack = () => {
             <Auth.Screen name={ScreenName.FullListGamePage} component={FullListGameScreen} />
             <Auth.Screen name={ScreenName.ContactUsPage} component={ContactUsScreen} />
             <Auth.Screen name={ScreenName.TermsConditionPage} component={TermsConditionScreen} />
+            <Auth.Screen name={ScreenName.NotificationPage} component={NotificationScreen} />
         </Auth.Navigator>
     );
 };

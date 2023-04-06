@@ -793,6 +793,10 @@ const resources = {
                 question: 'שאלון',
                 goblet: 'גביע',
             },
+            notification: {
+                title: 'התראות',
+                active: 'התראות פעילות',
+            },
         },
     },
     en: {
@@ -1478,6 +1482,10 @@ const resources = {
                 teams: 'Teams',
                 question: 'Question',
                 goblet: 'Cups',
+            },
+            notification: {
+                title: 'Notifications',
+                active: 'active notifications',
             },
         },
     },
