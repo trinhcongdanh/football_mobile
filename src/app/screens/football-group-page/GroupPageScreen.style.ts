@@ -44,6 +44,9 @@ const styles = StyleSheet.create({
         lineHeight: getSize.m(20),
         fontFamily: AppFonts.bold,
     },
+    title: {
+        textAlign: 'left',
+    },
     chevron_down: {
         fontFamily: AppFonts.bold,
     },

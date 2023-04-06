@@ -11,27 +11,18 @@ import { appStyles } from '@football/app/utils/constants/appStyles';
 import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
 import { getSize } from '@football/app/utils/responsive/scale';
 import React from 'react';
-import {
-    I18nManager,
-    ImageBackground,
-    SafeAreaView,
-    ScrollView,
-    StatusBar,
-    Text,
-    TouchableOpacity,
-    View,
-} from 'react-native';
+import { SafeAreaView, ScrollView, StatusBar, Text, TouchableOpacity, View } from 'react-native';
 import { Avatar } from 'react-native-elements';
 import FastImage from 'react-native-fast-image';
 import IconEntypo from 'react-native-vector-icons/Entypo';
 import Icon from 'react-native-vector-icons/Feather';
 import IconFontAwesome from 'react-native-vector-icons/FontAwesome';
 import IconIonicons from 'react-native-vector-icons/Ionicons';
+import { BackGround } from '@football/app/components/background/BackGround';
 import styles from './GroupPageScreen.style';
 import { IGroupPageScreenProps } from './GroupPageScreen.type';
 import { useViewModel } from './GroupPageScreen.viewModel';
 import { Statistics } from './layouts/statistics/Statistics';
-import { BackGround } from '@football/app/components/background/BackGround';
 
 export const GroupPageScreen = ({ navigation, route }: IGroupPageScreenProps) => {
     const {
@@ -372,7 +363,7 @@ export const GroupPageScreen = ({ navigation, route }: IGroupPageScreenProps) =>
                                             </View>
                                             <View style={styles.line} />
                                             <View>
-                                                <Text style={appStyles.number}>
+                                                <Text style={[appStyles.number, styles.title]}>
                                                     {t('group_page.info_group.list')}
                                                 </Text>
                                                 {teamSeason.about.stadiums.map(statium => {
@@ -389,9 +380,10 @@ export const GroupPageScreen = ({ navigation, route }: IGroupPageScreenProps) =>
                                                                 }
                                                             >
                                                                 <Text
-                                                                    style={
-                                                                        styles.info_group_item_label
-                                                                    }
+                                                                    style={[
+                                                                        styles.info_group_item_label,
+                                                                        styles.title,
+                                                                    ]}
                                                                 >
                                                                     {t(
                                                                         'group_page.info_group.stadium'
