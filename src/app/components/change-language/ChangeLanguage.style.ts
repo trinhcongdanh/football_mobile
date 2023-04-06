@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
         fontFamily: AppFonts.regular,
         fontSize: getSize.m(13),
         lineHeight: getSize.m(24),
-        borderBottomWidth: getSize.m(1),
+
         textAlign: 'center',
     },
 });
