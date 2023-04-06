@@ -162,6 +162,7 @@ const useEventHandler = (state: any) => {
     // Reset notifications
     const resetNotifications = () => {
         dispatch(clearNotifications());
+        navigate(ScreenName.NotificationPage);
     };
 
     return {

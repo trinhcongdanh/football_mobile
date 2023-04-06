@@ -135,6 +135,7 @@ export const AppImages = {
     img_dot_header_home: require('./dot_header_home.png'),
     img_background_arrow: require('./background_arrow.png'),
     img_background_black: require('./background_black.png'),
+    img_big_bell: require('./big_bell.png'),
 };
 
 export const AppJsons = {
