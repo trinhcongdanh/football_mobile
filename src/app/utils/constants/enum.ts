@@ -49,6 +49,7 @@ export enum ScreenName {
     ContactUsPage = 'ContactUsPage',
     TermsConditionPage = 'TermsConditionPage',
     SideBar = 'SideBar',
+    NotificationPage = 'NotificationPage',
 }
 
 export enum SplashAnimationKey {

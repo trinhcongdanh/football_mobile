@@ -44,3 +44,4 @@ export * from './football-contact-us';
 export * from './football-terms-conditon';
 export * from './football-goal-kicker-list';
 export * from './football-full-list-game';
+export * from './football-notification';
