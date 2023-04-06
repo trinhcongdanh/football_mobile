@@ -48,7 +48,7 @@ export const CustomCarousel = ({
                 modeConfig={{
                     parallaxScrollingScale: 1,
                     // parallaxScrollingOffset: widthPerItem ? widthPerItem * 0.92 : 50,
-                    parallaxScrollingOffset: 50,
+                    parallaxScrollingOffset: PAGE_WIDTH / 10,
                     parallaxAdjacentItemScale: 0.9,
                 }}
                 pagingEnabled

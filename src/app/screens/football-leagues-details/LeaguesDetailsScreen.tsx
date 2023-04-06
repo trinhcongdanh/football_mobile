@@ -79,109 +79,109 @@ export const LeaguesDetailsScreen = ({ navigation, route }: ILeaguesDetailsScree
                             handleCloseModal={handleCloseModal}
                         />
                     )}
-
-                    <ScrollView showsVerticalScrollIndicator={false}>
-                        <View style={appStyles.container}>
-                            <View style={[appStyles.align_justify, { marginTop: getSize.m(16) }]}>
-                                <View style={styles.avt_leagues_container}>
-                                    <FastImage
-                                        source={{
-                                            uri: league?.logo_url,
-                                        }}
-                                        style={{
-                                            ...styles.avt_leagues,
-                                        }}
-                                    />
-                                </View>
-                                <Text style={styles.name_leagues}>
-                                    {getTranslationText({
-                                        textHe: league?.name_he,
-                                        textEn: league?.name_en,
-                                    })}
-                                </Text>
-                            </View>
-                            <View>
+                    <GestureHandlerRootView style={{ flex: 1 }}>
+                        <ScrollView showsVerticalScrollIndicator={false}>
+                            <View style={appStyles.container}>
                                 <View
-                                    style={[
-                                        appStyles.flex_row_center,
-                                        { marginTop: getSize.m(16), flex: 0 },
-                                    ]}
+                                    style={[appStyles.align_justify, { marginTop: getSize.m(16) }]}
                                 >
-                                    <Text style={styles.season_year}>
-                                        {t('leagues_details.season_game')}
-                                    </Text>
-                                    <TouchableOpacity
-                                        onPress={() => {
-                                            setOpenModalYear(!openModalYear);
-                                        }}
-                                        style={styles.calender}
-                                    >
-                                        <Text style={styles.text_calender}>
-                                            {selectedLeagueSeason?.name}
-                                        </Text>
-                                        <Icon
-                                            name={appIcons.ic_chevron_down}
-                                            size={getSize.m(14)}
-                                            color={appColors.light_gray}
-                                            style={styles.chevron_down}
+                                    <View style={styles.avt_leagues_container}>
+                                        <FastImage
+                                            source={{
+                                                uri: league?.logo_url,
+                                            }}
+                                            style={{
+                                                ...styles.avt_leagues,
+                                            }}
                                         />
-                                    </TouchableOpacity>
-                                </View>
-                            </View>
-                            <View style={styles.line_dots} />
-                        </View>
-                        <View style={[appStyles.flex, appStyles.main_container]}>
-                            <View style={styles.drop_down_filter}>
-                                <View style={{ flex: 0.9 }}>
-                                    <DropdownField
-                                        options={selectedLeagueSeason?.cycles || []}
-                                        selectedValue={selectCycle}
-                                        onPressItem={cycle => {
-                                            setSelectCycle(cycle);
-                                        }}
-                                        itemTitleField={getTranslationText({
-                                            textHe: 'cycle_name_he',
-                                            textEn: 'cycle_name_en',
+                                    </View>
+                                    <Text style={styles.name_leagues}>
+                                        {getTranslationText({
+                                            textHe: league?.name_he,
+                                            textEn: league?.name_en,
                                         })}
-                                    />
+                                    </Text>
                                 </View>
-                                <View style={{ flex: 0.5 }}>
-                                    <DropdownField
-                                        options={selectCycle?.rounds || []}
-                                        selectedValue={selectRound}
-                                        onPressItem={round => {
-                                            setSelectRound(round);
-                                        }}
-                                        itemTitleField={getTranslationText({
-                                            textHe: 'round_name_he',
-                                            textEn: 'round_name_en',
-                                        })}
-                                    />
+                                <View>
+                                    <View
+                                        style={[
+                                            appStyles.flex_row_center,
+                                            { marginTop: getSize.m(16), flex: 0 },
+                                        ]}
+                                    >
+                                        <Text style={styles.season_year}>
+                                            {t('leagues_details.season_game')}
+                                        </Text>
+                                        <TouchableOpacity
+                                            onPress={() => {
+                                                setOpenModalYear(!openModalYear);
+                                            }}
+                                            style={styles.calender}
+                                        >
+                                            <Text style={styles.text_calender}>
+                                                {selectedLeagueSeason?.name}
+                                            </Text>
+                                            <Icon
+                                                name={appIcons.ic_chevron_down}
+                                                size={getSize.m(14)}
+                                                color={appColors.light_gray}
+                                                style={styles.chevron_down}
+                                            />
+                                        </TouchableOpacity>
+                                    </View>
                                 </View>
+                                <View style={styles.line_dots} />
                             </View>
-                            <LeaguesTable leaderBoards={selectRound?.leader_board || []} />
-                        </View>
-                        <View style={styles.package}>
-                            <ListOfGames games={selectRound?.games || []} />
-                        </View>
-                        <View style={styles.package}>
-                            <Statistics
-                                selectedRoundName={
-                                    getTranslationText({
-                                        textHe: selectRound?.round_name_he,
-                                        textEn: selectRound?.round_name_en,
-                                    }) || ''
-                                }
-                                statistics={selectRound?.statistics}
-                                statisticsId={selectedLeagueSeason?.league_season_stats_id}
-                            />
-                        </View>
-                        <View style={styles.package}>
-                            <GestureHandlerRootView>
+                            <View style={[appStyles.flex, appStyles.main_container]}>
+                                <View style={styles.drop_down_filter}>
+                                    <View style={{ flex: 0.9 }}>
+                                        <DropdownField
+                                            options={selectedLeagueSeason?.cycles || []}
+                                            selectedValue={selectCycle}
+                                            onPressItem={cycle => {
+                                                setSelectCycle(cycle);
+                                            }}
+                                            itemTitleField={getTranslationText({
+                                                textHe: 'cycle_name_he',
+                                                textEn: 'cycle_name_en',
+                                            })}
+                                        />
+                                    </View>
+                                    <View style={{ flex: 0.5 }}>
+                                        <DropdownField
+                                            options={selectCycle?.rounds || []}
+                                            selectedValue={selectRound}
+                                            onPressItem={round => {
+                                                setSelectRound(round);
+                                            }}
+                                            itemTitleField={getTranslationText({
+                                                textHe: 'round_name_he',
+                                                textEn: 'round_name_en',
+                                            })}
+                                        />
+                                    </View>
+                                </View>
+                                <LeaguesTable leaderBoards={selectRound?.leader_board || []} />
+                            </View>
+                            <View style={styles.package}>
+                                <ListOfGames games={selectRound?.games || []} />
+                            </View>
+                            <View style={styles.package}>
+                                <Statistics
+                                    selectedRoundName={
+                                        getTranslationText({
+                                            textHe: selectRound?.round_name_he,
+                                            textEn: selectRound?.round_name_en,
+                                        }) || ''
+                                    }
+                                    statistics={selectRound?.statistics}
+                                    statisticsId={selectedLeagueSeason?.league_season_stats_id}
+                                />
+                            </View>
+                            <View style={styles.package}>
                                 <AboutLeague highlights={highlights} />
-                            </GestureHandlerRootView>
-                        </View>
-                        {/* <View
+                            </View>
+                            {/* <View
                             style={{
                                 marginTop: getSize.m(10),
                                 paddingVertical: getSize.m(20),
@@ -190,10 +190,11 @@ export const LeaguesDetailsScreen = ({ navigation, route }: ILeaguesDetailsScree
                         >
                             <SelectedGallery galleries={galleries} />
                         </View> */}
-                        {/* <View style={styles.package}>
+                            {/* <View style={styles.package}>
                             <SelectedMagazine galleries={galleries} />
                         </View> */}
-                    </ScrollView>
+                        </ScrollView>
+                    </GestureHandlerRootView>
                 </SafeAreaView>
             </BackGround>
         </View>
