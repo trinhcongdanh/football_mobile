@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
         fontSize: getSize.m(14),
         lineHeight: getSize.m(18.2),
         fontFamily: AppFonts.regular,
-        textAlign: I18nManager.isRTL ? 'left' : 'right',
+        textAlign: 'left',
         color: appColors.blue_black,
     },
 });
