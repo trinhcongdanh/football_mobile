@@ -126,7 +126,9 @@ export const FavoritePlayer = ({
                                 <View style={styles.content_item}>
                                     {[
                                         ...favSelected?.map(a => ({ ...a, isSelected: true })),
-                                        ...favPlayers?.filter(t => !t.isSelected),
+                                        ...(favPlayers
+                                            ? favPlayers.filter(t => t && !t.isSelected).map(a => a)
+                                            : []),
                                     ]?.map((item: any, index: number) => {
                                         return (
                                             <TouchableOpacity
