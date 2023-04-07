@@ -186,7 +186,7 @@ export const FavoriteTeam = ({
                         <ScrollView>
                             <View style={styles.content_item}>
                                 {[
-                                    ...favSelected.map(a => ({ ...a, isSelected: true })),
+                                    ...favSelected?.map(a => ({ ...a, isSelected: true })),
                                     ...favTeams?.filter(t => !t.isSelected),
                                 ]?.map((item, index) => {
                                     return (

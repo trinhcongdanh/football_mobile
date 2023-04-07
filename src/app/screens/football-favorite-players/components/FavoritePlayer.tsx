@@ -125,7 +125,7 @@ export const FavoritePlayer = ({
                             <ScrollView>
                                 <View style={styles.content_item}>
                                     {[
-                                        ...favSelected.map(a => ({ ...a, isSelected: true })),
+                                        ...favSelected?.map(a => ({ ...a, isSelected: true })),
                                         ...favPlayers?.filter(t => !t.isSelected),
                                     ]?.map((item: any, index: number) => {
                                         return (
