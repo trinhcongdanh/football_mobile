@@ -20,6 +20,7 @@ axiosAuth.interceptors.response.use(
         return response;
     },
     error => {
+        console.log('Error', JSON.stringify(error));
         throw error;
     }
 );

@@ -234,7 +234,7 @@ const useEffectHandler = (state: any, eventHandler: any) => {
                         call: AuthData.SET_PROFILE,
                         item_id: authItem,
                         item: {
-                            notifications_registration_id: tokenFCM,
+                            notifications_registration_id: tokenFCM ? tokenFCM : '',
                         },
                     })
                 )
