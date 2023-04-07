@@ -295,7 +295,7 @@ const useEventHandler = (state: any) => {
             // use credentialState response to ensure the user is authenticated
             if (credentialState === appleAuth.State.AUTHORIZED) {
                 const decode = jwt_decode(`${appleAuthRequestResponse.identityToken}`);
-                code = appleAuthRequestResponse?.code;
+                code = appleAuthRequestResponse?.authorizationCode;
                 subject = decode?.sub;
             }
         }
