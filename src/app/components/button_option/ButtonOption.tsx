@@ -12,6 +12,7 @@ export const ButtonOption = ({
     option_two,
     onSelect,
     defaultValue,
+    data_player,
 }: IButtonOptionComponent) => {
     const options = [option_one, option_two];
 
@@ -25,7 +26,15 @@ export const ButtonOption = ({
         onSelect(index);
     };
     return (
-        <View style={[appStyles.flex_row_space, styles.option]}>
+        <View
+            style={[
+                appStyles.flex_row_space,
+                styles.option,
+                {
+                    backgroundColor: data_player ? appColors.white : appColors.separator,
+                },
+            ]}
+        >
             {options.map((option: any, index: number) => {
                 return (
                     option && (
@@ -33,10 +42,11 @@ export const ButtonOption = ({
                             style={[
                                 styles.button_option_dark,
                                 {
-                                    backgroundColor:
-                                        index === select
-                                            ? appColors.button_dark_blue
-                                            : appColors.separator,
+                                    backgroundColor: data_player
+                                        ? appColors.white
+                                        : index === select
+                                        ? appColors.button_dark_blue
+                                        : appColors.separator,
                                 },
                             ]}
                             key={index.toString()}
@@ -46,10 +56,11 @@ export const ButtonOption = ({
                                 style={[
                                     styles.text_option,
                                     {
-                                        color:
-                                            index === select
-                                                ? appColors.white
-                                                : appColors.text_option_unselect,
+                                        color: data_player
+                                            ? appColors.button_dark_blue
+                                            : index === select
+                                            ? appColors.white
+                                            : appColors.text_option_unselect,
                                         fontFamily:
                                             index === select ? AppFonts.bold : AppFonts.medium,
                                     },

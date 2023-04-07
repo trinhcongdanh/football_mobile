@@ -208,39 +208,41 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                                         ref={scrollViewRef}
                                         onContentSizeChange={scrollToTheEnd}
                                     >
-                                        {players?.map((item, index) => {
-                                            return (
-                                                <TouchableOpacity
-                                                    // eslint-disable-next-line no-underscore-dangle
-                                                    onPress={() => onClickPlayer(item._id)}
-                                                    // eslint-disable-next-line no-underscore-dangle
-                                                    key={item._id}
-                                                >
-                                                    <View
-                                                        style={[
-                                                            appStyles.flex_row_align,
-                                                            styles.header_item,
-                                                        ]}
+                                        {players
+                                            ?.filter(item => item)
+                                            .map((item, index) => {
+                                                return (
+                                                    <TouchableOpacity
+                                                        // eslint-disable-next-line no-underscore-dangle
+                                                        onPress={() => onClickPlayer(item._id)}
+                                                        // eslint-disable-next-line no-underscore-dangle
+                                                        key={item._id}
                                                     >
-                                                        <FastImage
-                                                            source={{ uri: item.image_url }}
-                                                            style={{
-                                                                width: getSize.m(30),
-                                                                height: getSize.m(30),
-                                                                borderRadius: getSize.m(30),
-                                                                marginRight: getSize.m(6),
-                                                            }}
-                                                        />
-                                                        <Text style={styles.header_item_text}>
-                                                            {getTranslationText({
-                                                                textHe: item.name_he,
-                                                                textEn: item.name_en,
-                                                            })}
-                                                        </Text>
-                                                    </View>
-                                                </TouchableOpacity>
-                                            );
-                                        })}
+                                                        <View
+                                                            style={[
+                                                                appStyles.flex_row_align,
+                                                                styles.header_item,
+                                                            ]}
+                                                        >
+                                                            <FastImage
+                                                                source={{ uri: item.image_url }}
+                                                                style={{
+                                                                    width: getSize.m(30),
+                                                                    height: getSize.m(30),
+                                                                    borderRadius: getSize.m(30),
+                                                                    marginRight: getSize.m(6),
+                                                                }}
+                                                            />
+                                                            <Text style={styles.header_item_text}>
+                                                                {getTranslationText({
+                                                                    textHe: item.name_he,
+                                                                    textEn: item.name_en,
+                                                                })}
+                                                            </Text>
+                                                        </View>
+                                                    </TouchableOpacity>
+                                                );
+                                            })}
 
                                         {teams
                                             ?.filter(item => item)
@@ -278,39 +280,41 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                                                 );
                                             })}
 
-                                        {topTeams?.map((item, index) => {
-                                            return (
-                                                <TouchableOpacity
-                                                    // eslint-disable-next-line no-underscore-dangle
-                                                    onPress={() => onClickTopTeam(item._id)}
-                                                    // eslint-disable-next-line no-underscore-dangle
-                                                    key={item._id}
-                                                >
-                                                    <View
-                                                        style={[
-                                                            appStyles.flex_row_align,
-                                                            styles.header_item,
-                                                        ]}
+                                        {topTeams
+                                            ?.filter(item => item)
+                                            .map((item, index) => {
+                                                return (
+                                                    <TouchableOpacity
+                                                        // eslint-disable-next-line no-underscore-dangle
+                                                        onPress={() => onClickTopTeam(item._id)}
+                                                        // eslint-disable-next-line no-underscore-dangle
+                                                        key={item._id}
                                                     >
-                                                        <FastImage
-                                                            source={{ uri: item.logo_url }}
-                                                            style={{
-                                                                width: getSize.m(30),
-                                                                height: getSize.m(30),
-                                                                borderRadius: getSize.m(30),
-                                                                marginRight: getSize.m(6),
-                                                            }}
-                                                        />
-                                                        <Text style={styles.header_item_text}>
-                                                            {getTranslationText({
-                                                                textHe: item.name_he,
-                                                                textEn: item.name_en,
-                                                            })}
-                                                        </Text>
-                                                    </View>
-                                                </TouchableOpacity>
-                                            );
-                                        })}
+                                                        <View
+                                                            style={[
+                                                                appStyles.flex_row_align,
+                                                                styles.header_item,
+                                                            ]}
+                                                        >
+                                                            <FastImage
+                                                                source={{ uri: item.logo_url }}
+                                                                style={{
+                                                                    width: getSize.m(30),
+                                                                    height: getSize.m(30),
+                                                                    borderRadius: getSize.m(30),
+                                                                    marginRight: getSize.m(6),
+                                                                }}
+                                                            />
+                                                            <Text style={styles.header_item_text}>
+                                                                {getTranslationText({
+                                                                    textHe: item.name_he,
+                                                                    textEn: item.name_en,
+                                                                })}
+                                                            </Text>
+                                                        </View>
+                                                    </TouchableOpacity>
+                                                );
+                                            })}
                                         {isGuest && (
                                             <TouchableOpacity onPress={onClickGuestRegistration}>
                                                 <View

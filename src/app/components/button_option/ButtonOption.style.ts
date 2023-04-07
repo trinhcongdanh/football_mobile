@@ -5,7 +5,6 @@ import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
     option: {
-        backgroundColor: appColors.separator,
         borderRadius: getSize.m(30),
         paddingHorizontal: getSize.m(4),
         paddingVertical: getSize.m(4),
