@@ -141,6 +141,7 @@ export const LeaguesScreen = ({ navigation, route }: ILeaguesScreenProps) => {
                                     {
                                         backgroundColor: appColors.gray,
                                         paddingHorizontal: getSize.m(20),
+                                        flexDirection: 'row',
                                     },
                                 ]}
                             >
