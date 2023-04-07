@@ -54,14 +54,19 @@ export const FavoriteTeam = ({
     };
 
     useEffect(() => {
-        const filterTeams = teams
-            .map(team => ({
-                ...team,
-                isSelected: favSelected.filter(t => t._id === team._id).length > 0,
-            }))
-            .sort((a, b) => {
-                return (b.isSelected ? 1 : 0) - (a.isSelected ? 1 : 0);
-            });
+        // const filterTeams = teams
+        //     .map(team => ({
+        //         ...team,
+        //         isSelected: favSelected.filter(t => t._id === team._id).length > 0,
+        //     }))
+        //     .sort((a, b) => {
+        //         return (b.isSelected ? 1 : 0) - (a.isSelected ? 1 : 0);
+        //     });
+
+        const filterTeams = teams.map(team => ({
+            ...team,
+            isSelected: favSelected.filter(t => t._id === team._id).length > 0,
+        }));
         setFavTeams(filterTeams);
         // console.log('favSelected', favSelected);
     }, [favSelected, teams]);
@@ -180,7 +185,10 @@ export const FavoriteTeam = ({
 
                         <ScrollView>
                             <View style={styles.content_item}>
-                                {favTeams?.map((item, index) => {
+                                {[
+                                    ...favSelected.map(a => ({ ...a, isSelected: true })),
+                                    ...favTeams?.filter(t => !t.isSelected),
+                                ]?.map((item, index) => {
                                     return (
                                         <TouchableOpacity
                                             key={item._id}
