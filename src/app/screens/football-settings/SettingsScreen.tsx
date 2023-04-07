@@ -155,33 +155,36 @@ export function SettingsScreen(props: ISettingsScreenProps) {
                                 />
 
                                 <View style={{ marginTop: getSize.m(30) }}>
-                                    <Text
-                                        style={[
-                                            appStyles.text_label,
-                                            {
-                                                fontFamily: AppFonts.medium,
-                                                textAlign: I18nManager.isRTL ? 'left' : 'right',
-                                            },
-                                        ]}
-                                    >
-                                        {t('reg.gender.label')}
-                                    </Text>
-                                    <View style={{ marginTop: getSize.m(10) }}>
-                                        <Input editable={false} input={gender} />
-                                    </View>
-                                    <View style={{ marginTop: getSize.m(30) }}>
+                                    <View style={{ flexDirection: 'row' }}>
                                         <Text
                                             style={[
                                                 appStyles.text_label,
                                                 {
                                                     fontFamily: AppFonts.medium,
-                                                    color: appColors.light_gray,
-                                                    textAlign: I18nManager.isRTL ? 'left' : 'right',
                                                 },
                                             ]}
                                         >
-                                            {t('reg.birth_date')}
+                                            {t('reg.gender.label')}
                                         </Text>
+                                    </View>
+                                    <View style={{ marginTop: getSize.m(10) }}>
+                                        <Input editable={false} input={gender} />
+                                    </View>
+                                    <View style={{ marginTop: getSize.m(30) }}>
+                                        <View style={{ flexDirection: 'row' }}>
+                                            <Text
+                                                style={[
+                                                    appStyles.text_label,
+                                                    {
+                                                        fontFamily: AppFonts.medium,
+                                                        color: appColors.light_gray,
+                                                    },
+                                                ]}
+                                            >
+                                                {t('reg.birth_date')}
+                                            </Text>
+                                        </View>
+
                                         <View style={{ marginTop: getSize.m(10) }}>
                                             <Input editable={false} input={birthDate} />
                                             {/* <DatePicker
