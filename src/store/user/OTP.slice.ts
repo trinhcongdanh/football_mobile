@@ -2,6 +2,7 @@ import { axiosAuth } from '@football/core/api/auth/axiosAuth';
 import { AUTH_URL } from '@football/core/api/auth/config';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { isEmpty } from 'lodash';
+import { Alert } from 'react-native';
 
 const initialState: any = {
     otp: {},
@@ -10,17 +11,21 @@ const initialState: any = {
 };
 
 export const otpUser = createAsyncThunk('user/otpUser', async (optData: any) => {
-    const { data }: any = await axiosAuth.post(
-        `${AUTH_URL}`,
-        optData,
+    try {
+        const { data }: any = await axiosAuth.post(
+            `${AUTH_URL}`,
+            optData,
 
-        {
-            headers: {},
+            {
+                headers: {},
+            }
+        );
+
+        if (!isEmpty(data)) {
+            return data;
         }
-    );
-
-    if (!isEmpty(data)) {
-        return data;
+    } catch (err: any) {
+        Alert.alert('Show error', err);
     }
 });
 
