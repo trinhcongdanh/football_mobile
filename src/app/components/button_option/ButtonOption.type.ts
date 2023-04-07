@@ -3,4 +3,5 @@ export type IButtonOptionComponent = {
     option_two: any;
     onSelect: any;
     defaultValue?: number;
+    data_player?: boolean;
 };

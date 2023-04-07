@@ -1,7 +1,7 @@
 import { AppFonts } from '@football/app/assets/fonts';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { getSize } from '@football/app/utils/responsive/scale';
-import { StyleSheet } from 'react-native';
+import { I18nManager, StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
     logo_team: {
@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
         color: appColors.button_dark_blue,
     },
     dotContainer: {
-        flexDirection: 'row-reverse',
+        flexDirection: I18nManager.isRTL ? 'row-reverse' : 'row',
         justifyContent: 'center',
         marginBottom: getSize.m(30),
     },

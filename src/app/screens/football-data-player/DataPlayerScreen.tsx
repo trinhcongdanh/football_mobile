@@ -89,6 +89,7 @@ export const DataPlayerScreen = ({ navigation, route }: IDataPlayerScreenProps) 
                                         }
                                         onSelect={setOnSelect}
                                         defaultValue={onSelect}
+                                        data_player={player.team && player.top_team ? false : true}
                                     />
 
                                     {onSelect === 0 ? (

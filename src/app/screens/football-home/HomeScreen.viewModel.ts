@@ -1,5 +1,5 @@
 /* eslint-disable no-underscore-dangle */
-import { TopTeamModel } from '@football/core/models/TopTeamModelResponse';
+import { TopTeamModel, TopTeamModelResponse } from '@football/core/models/TopTeamModelResponse';
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
 import { IHomeScreenProps } from '@football/app/screens/football-home/HomeScreen.type';
@@ -11,7 +11,7 @@ import { ACTION, AUTH_URL } from '@football/core/api/auth/config';
 import { GeneralVodModel } from '@football/core/models/GeneralVodResponse';
 import { HomeLayoutModel, HomePageModel } from '@football/core/models/HomePageModelResponse';
 import { LeagueModel } from '@football/core/models/LeagueModelResponse';
-import { PlayerModel } from '@football/core/models/PlayerModelResponse';
+import { PlayerModel, PlayersModelResponse } from '@football/core/models/PlayerModelResponse';
 import { TeamModel, TeamModelResponse } from '@football/core/models/TeamModelResponse';
 import GeneralVodService from '@football/core/services/GeneralVod.service';
 import HomeLayoutService from '@football/core/services/HomeLayout.service';
@@ -132,18 +132,27 @@ const useViewCallback = (route: any, viewState: any) => {
         if (!user?.favorite_players?.length) {
             return;
         }
-        const playerIds = user?.favorite_players?.map((id: string) => {
-            return { _id: { $oid: id } };
-        });
+        // const playerIds = user?.favorite_players?.map((id: string) => {
+        //     return { _id: { $oid: id } };
+        // });
 
-        const [error, res] = await PlayerService.findByFilter({
-            $or: playerIds,
-        });
-        if (error) {
-            return;
-        }
+        // const [error, res] = await PlayerService.findByFilter({
+        //     $or: playerIds,
+        // });
+        // if (error) {
+        //     return;
+        // }
+        const favPlayersSelected = await Promise.all(
+            user.favorite_players.map(async (id: string) => {
+                const [err, res] = await PlayerService.findByOId<PlayersModelResponse>(id);
+                if (err) return;
+                return res.data.documents[0];
+            })
+        );
 
-        setPlayers(res.data.documents);
+        console.log('favPlayersSelected', favPlayersSelected);
+
+        setPlayers(favPlayersSelected);
     }, []);
 
     const getTeamsData = useCallback(async (user: any) => {
@@ -182,17 +191,15 @@ const useViewCallback = (route: any, viewState: any) => {
         if (!user?.favorite_national_teams?.length) {
             return;
         }
-        const ids = user?.favorite_national_teams?.map((id: string) => {
-            return { _id: { $oid: id } };
-        });
-        const [error, res] = await TopTeamService.findByFilter({
-            $or: ids,
-        });
-        if (error) {
-            return;
-        }
+        const favTopTeamsSelected = await Promise.all(
+            user.favorite_national_teams.map(async (id: string) => {
+                const [err, res] = await TopTeamService.findByOId<TopTeamModelResponse>(id);
+                if (err) return;
+                return res.data.documents[0];
+            })
+        );
 
-        setTopTeams(res.data.documents);
+        setTopTeams(favTopTeamsSelected);
     }, []);
 
     const getDefaultLeagueData = useCallback(async (id: string) => {

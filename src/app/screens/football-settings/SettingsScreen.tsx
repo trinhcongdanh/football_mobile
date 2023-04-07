@@ -160,6 +160,7 @@ export function SettingsScreen(props: ISettingsScreenProps) {
                                             appStyles.text_label,
                                             {
                                                 fontFamily: AppFonts.medium,
+                                                textAlign: I18nManager.isRTL ? 'left' : 'right',
                                             },
                                         ]}
                                     >
@@ -167,39 +168,6 @@ export function SettingsScreen(props: ISettingsScreenProps) {
                                     </Text>
                                     <View style={{ marginTop: getSize.m(10) }}>
                                         <Input editable={false} input={gender} />
-                                        {/* {genders.map((sexual: any, index: number) => {
-                                            return (
-                                                <TouchableOpacity
-                                                    key={index.toString()}
-                                                    onPress={() => {
-                                                        handleOnSelectGender(sexual.value);
-                                                    }}
-                                                    style={[
-                                                        styles.select_gender,
-                                                        {
-                                                            backgroundColor:
-                                                                sexual.value === gender
-                                                                    ? appColors.text_dark_blue
-                                                                    : appColors.white,
-                                                        },
-                                                    ]}
-                                                >
-                                                    <Text
-                                                        style={[
-                                                            appStyles.text_label,
-                                                            {
-                                                                color:
-                                                                    sexual.value === gender
-                                                                        ? appColors.white
-                                                                        : appColors.text_dark_blue,
-                                                            },
-                                                        ]}
-                                                    >
-                                                        {sexual.text}
-                                                    </Text>
-                                                </TouchableOpacity>
-                                            );
-                                        })} */}
                                     </View>
                                     <View style={{ marginTop: getSize.m(30) }}>
                                         <Text
@@ -208,6 +176,7 @@ export function SettingsScreen(props: ISettingsScreenProps) {
                                                 {
                                                     fontFamily: AppFonts.medium,
                                                     color: appColors.light_gray,
+                                                    textAlign: I18nManager.isRTL ? 'left' : 'right',
                                                 },
                                             ]}
                                         >
