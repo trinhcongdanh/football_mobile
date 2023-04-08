@@ -307,8 +307,8 @@ const useEventHandler = (state: any) => {
                     action: ACTION,
                     token: TOKEN,
                     call: AuthData.LOGIN,
-                    apple_client_id: subject,
-                    apple_client_secret: code,
+                    apple_id_subject: subject,
+                    apple_id_code: code,
                 })
             )
         );

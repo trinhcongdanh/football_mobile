@@ -202,8 +202,8 @@ const useEventHandler = (state: any) => {
                     guest_id: login.login.user.item_id,
                     call: AuthData.REGISTER,
                     item: {
-                        apple_client_id: subject,
-                        apple_client_secret: code,
+                        apple_id_subject: subject,
+                        apple_id_code: code,
                     },
                 })
             )
