@@ -1327,12 +1327,14 @@ const resources = {
                     draw: 'Draw',
                     the_p: 'The p',
                     no: 'No',
+                    all_previous_seasons: 'All campaigns',
                 },
                 list_game: {
                     title: 'List of games',
                     home_away: 'Home / Away',
                     house: 'House',
                     outside: 'Outsidess',
+                    see_all_games: 'All campaigns',
                 },
             },
             goal_national_team: {

@@ -125,11 +125,11 @@ export const Rankings = ({ topTeam }: IRankingsProps) => {
                                         size={20}
                                     />
                                     <Text
-                                        numberOfLines={2}
+                                        numberOfLines={1}
                                         style={[
                                             appStyles.statistics_content,
                                             {
-                                                marginLeft: getSize.m(6),
+                                                marginLeft: getSize.m(3),
                                             },
                                         ]}
                                     >

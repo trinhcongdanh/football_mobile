@@ -17,11 +17,12 @@ import FastImage from 'react-native-fast-image';
 import LinearGradient from 'react-native-linear-gradient';
 import styles from './DataPlayerTeamScreen.style';
 import { useViewModel } from './DataPlayerTeamScreen.viewModel';
+import { useDateTime } from '@football/app/utils/hooks/useDateTime';
 
 export const DataPlayerTeamScreen = ({ player }: IDataPlayerTeamScreenProps) => {
     const { t, onGoBack, setSelectedSeason, selectedSeason } = useViewModel({ player });
     const { getTranslationText } = useTranslationText();
-
+    const { getDate, getTime } = useDateTime();
     return (
         <ScrollView showsVerticalScrollIndicator={false}>
             {player && (
@@ -260,11 +261,16 @@ export const DataPlayerTeamScreen = ({ player }: IDataPlayerTeamScreenProps) => 
                                                           ]
                                                         : [appColors.gray, appColors.gray]
                                                 }
-                                                style={[appStyles.flex_row_align, styles.result]}
+                                                style={[
+                                                    appStyles.flex_row_space_center,
+                                                    styles.result,
+                                                ]}
                                                 key={gameIndex}
                                             >
                                                 <View style={{ width: getSize.m(50) }}>
-                                                    <Text style={styles.date}>{game?.date}</Text>
+                                                    <Text style={styles.date}>
+                                                        {getDate({ date: game?.date })}
+                                                    </Text>
                                                 </View>
                                                 <View
                                                     style={[
@@ -276,24 +282,37 @@ export const DataPlayerTeamScreen = ({ player }: IDataPlayerTeamScreenProps) => 
                                                     ]}
                                                 >
                                                     <View style={[appStyles.flex_row_align_center]}>
-                                                        <Text style={styles.name_club}>
-                                                            {getTranslationText({
-                                                                textHe: game?.team1?.name_he,
-                                                                textEn: game?.team1?.name_en,
-                                                            })}
-                                                        </Text>
-                                                        <View style={styles.avt_club}>
-                                                            <FastImage
-                                                                source={{
-                                                                    uri: game?.team1?.logo_url,
-                                                                }}
-                                                                style={{
-                                                                    width: getSize.m(24),
-                                                                    height: getSize.m(24),
-                                                                    borderRadius: getSize.m(24),
-                                                                }}
-                                                            />
+                                                        <View
+                                                            style={{
+                                                                width: game?.team1?.logo_url
+                                                                    ? getSize.m(32)
+                                                                    : getSize.m(70),
+                                                            }}
+                                                        >
+                                                            <Text
+                                                                numberOfLines={2}
+                                                                style={styles.name_club}
+                                                            >
+                                                                {getTranslationText({
+                                                                    textHe: game?.team1?.name_he,
+                                                                    textEn: game?.team1?.name_en,
+                                                                })}
+                                                            </Text>
                                                         </View>
+                                                        {game?.team1?.logo_url ? (
+                                                            <View style={styles.avt_club}>
+                                                                <FastImage
+                                                                    source={{
+                                                                        uri: game?.team1?.logo_url,
+                                                                    }}
+                                                                    style={{
+                                                                        width: getSize.m(24),
+                                                                        height: getSize.m(24),
+                                                                        borderRadius: getSize.m(24),
+                                                                    }}
+                                                                />
+                                                            </View>
+                                                        ) : null}
                                                     </View>
                                                     <View
                                                         style={{
@@ -301,31 +320,41 @@ export const DataPlayerTeamScreen = ({ player }: IDataPlayerTeamScreenProps) => 
                                                         }}
                                                     >
                                                         <Text style={styles.score}>
-                                                            {game?.score}
+                                                            {game?.score ? game?.score : '- : -'}
                                                         </Text>
                                                     </View>
                                                     <View style={appStyles.flex_row_align_center}>
-                                                        <View style={styles.avt_club}>
-                                                            <FastImage
-                                                                source={{
-                                                                    uri: game?.team2?.logo_url,
-                                                                }}
-                                                                style={{
-                                                                    width: getSize.m(24),
-                                                                    height: getSize.m(24),
-                                                                    borderRadius: getSize.m(24),
-                                                                }}
-                                                            />
-                                                        </View>
-                                                        <Text
-                                                            style={styles.name_club}
-                                                            numberOfLines={2}
+                                                        {game?.team2?.logo_url ? (
+                                                            <View style={styles.avt_club}>
+                                                                <FastImage
+                                                                    source={{
+                                                                        uri: game?.team2?.logo_url,
+                                                                    }}
+                                                                    style={{
+                                                                        width: getSize.m(24),
+                                                                        height: getSize.m(24),
+                                                                        borderRadius: getSize.m(24),
+                                                                    }}
+                                                                />
+                                                            </View>
+                                                        ) : null}
+                                                        <View
+                                                            style={{
+                                                                width: game?.team2?.logo_url
+                                                                    ? getSize.m(32)
+                                                                    : getSize.m(70),
+                                                            }}
                                                         >
-                                                            {getTranslationText({
-                                                                textHe: game?.team2?.name_he,
-                                                                textEn: game?.team2?.name_en,
-                                                            })}
-                                                        </Text>
+                                                            <Text
+                                                                style={styles.name_club}
+                                                                numberOfLines={2}
+                                                            >
+                                                                {getTranslationText({
+                                                                    textHe: game?.team2?.name_he,
+                                                                    textEn: game?.team2?.name_en,
+                                                                })}
+                                                            </Text>
+                                                        </View>
                                                     </View>
                                                 </View>
                                                 <View style={appStyles.flex_row_align_center}>
@@ -389,28 +418,34 @@ export const DataPlayerTeamScreen = ({ player }: IDataPlayerTeamScreenProps) => 
                                                             {game?.red_cards ? game?.red_cards : ''}
                                                         </Text>
                                                     </View>
-                                                    <View style={[appStyles.flex_row_align, {}]}>
-                                                        <Text
-                                                            style={[
-                                                                styles.date,
-                                                                { width: getSize.m(30) },
-                                                            ]}
-                                                        >
-                                                            {`${game?.off_field}'`}
-                                                        </Text>
-                                                        {game?.on_field ? (
-                                                            <Icon
-                                                                name={appIcons.ic_arrow_down}
-                                                                color={appColors.red_dark}
-                                                                size={getSize.m(10)}
-                                                            />
-                                                        ) : (
-                                                            <Icon
-                                                                name={appIcons.ic_arrow_up}
-                                                                color={appColors.green}
-                                                                size={getSize.m(10)}
-                                                            />
-                                                        )}
+
+                                                    <View style={[appStyles.flex_row_align]}>
+                                                        <View style={{ width: getSize.m(20) }}>
+                                                            {game?.on_field ? (
+                                                                <Text style={styles.date}>
+                                                                    {`${game?.on_field}'`}
+                                                                </Text>
+                                                            ) : game?.off_field ? (
+                                                                <Text style={styles.date}>
+                                                                    {`${game?.off_field}'`}
+                                                                </Text>
+                                                            ) : null}
+                                                        </View>
+                                                        <View style={{ width: getSize.m(10) }}>
+                                                            {game?.off_field ? (
+                                                                <Icon
+                                                                    name={appIcons.ic_arrow_down}
+                                                                    color={appColors.red_dark}
+                                                                    size={getSize.m(10)}
+                                                                />
+                                                            ) : game?.on_field ? (
+                                                                <Icon
+                                                                    name={appIcons.ic_arrow_up}
+                                                                    color={appColors.green}
+                                                                    size={getSize.m(10)}
+                                                                />
+                                                            ) : null}
+                                                        </View>
                                                     </View>
                                                 </View>
                                             </LinearGradient>

@@ -13,6 +13,8 @@ import IconFeather from 'react-native-vector-icons/Feather';
 import { IListOfGamesProps } from './ListOfGames.type';
 import styles from './ListOfGames.style';
 import { useViewModel } from './ListOfGames.viewModel';
+import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
+import { ListGame_Test } from '@football/app/components/list-game/ListGame_test';
 
 export const ListOfGames = ({ games, groupName, topTeam }: IListOfGamesProps) => {
     const {
@@ -24,6 +26,8 @@ export const ListOfGames = ({ games, groupName, topTeam }: IListOfGamesProps) =>
         handleStadium,
         handleSeeAll,
     } = useViewModel(topTeam);
+    const { getTranslationText } = useTranslationText();
+
     return (
         <View>
             <View style={appStyles.flex_row_space_center}>
@@ -36,7 +40,7 @@ export const ListOfGames = ({ games, groupName, topTeam }: IListOfGamesProps) =>
                         {t('campaign.list_game.see_all_games')}
                     </Text>
                     <IconFeather
-                        name={appIcons.ic_arrow_left}
+                        name={appIcons.ic_left_ios}
                         size={getSize.m(10)}
                         color={appColors.button_dark_blue}
                     />
@@ -74,6 +78,7 @@ export const ListOfGames = ({ games, groupName, topTeam }: IListOfGamesProps) =>
                                                 index === select
                                                     ? appColors.white
                                                     : appColors.text_option_unselect,
+
                                             fontFamily:
                                                 index === select ? AppFonts.bold : AppFonts.medium,
                                         },
@@ -101,20 +106,29 @@ export const ListOfGames = ({ games, groupName, topTeam }: IListOfGamesProps) =>
                                 return true;
                         }
                     })
-                    .map(item => {
+                    ?.map(item => {
                         return (
-                            <ListGame
+                            <ListGame_Test
                                 key={item.game_id}
                                 logo_home={item.team1.logo_url}
                                 logo_away={item.team2.logo_url}
-                                nameHome={item.team1.name_he}
-                                nameAway={item.team2.name_he}
-                                location={item.stadium_he}
+                                nameHome={getTranslationText({
+                                    textHe: item.team1.name_he,
+                                    textEn: item.team1.name_en,
+                                })}
+                                nameAway={getTranslationText({
+                                    textHe: item.team2.name_he,
+                                    textEn: item.team2.name_en,
+                                })}
+                                location={getTranslationText({
+                                    textHe: item.stadium_he,
+                                    textEn: item.stadium_en,
+                                })}
                                 date={item.date}
                                 result={item.score}
                                 schedule={item.time}
                                 // completed={item.completed}
-                                icon={appIcons.ic_arrow_left}
+                                icon={appIcons.ic_left_ios}
                                 color={appColors.gray}
                                 details={item.game_id}
                                 handleDetailMatch={() => handleDetailMatch(item.game_id)}
@@ -126,6 +140,7 @@ export const ListOfGames = ({ games, groupName, topTeam }: IListOfGamesProps) =>
                                         'hours'
                                     )
                                 )}
+                                gameDetail={t('list_game.detail')}
                             />
                         );
                     })}
