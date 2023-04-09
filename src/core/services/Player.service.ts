@@ -8,12 +8,20 @@ class PlayerService extends MongoDBService {
     }
 
     findAllFavPlayer(sortBy?: any): Promise<Result<PlayersModelResponse>> {
-        return this.httpClient.post('/find', { ...this.dbConfig, limit: 100, sort: sortBy });
+        return this.httpClient.post('/find', {
+            ...this.dbConfig,
+            filter: { team: { $exists: true, $ne: null } },
+            limit: 100,
+            sort: sortBy,
+        });
     }
 
     async searchFavPlayer(searchText: string, sortBy?: any): Promise<Result<PlayersModelResponse>> {
-        const filter = { search_terms: { $regex: `.*${searchText}.*`, $options: 'i' } };
-        return await this.find({ filter, limit: 100, sort: sortBy });
+        const filter = {
+            search_terms: { $regex: `.*${searchText}.*`, $options: 'i' },
+            team: { $exists: true, $ne: null },
+        };
+        return this.find({ filter, limit: 100, sort: sortBy });
     }
 }
 
