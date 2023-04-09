@@ -52,7 +52,7 @@ export const FavTopTeam = ({ topTeam, color }: IFavTopTeamProps) => {
             <View style={appStyles.align_justify}>
                 <View style={styles.logo_team}>
                     <FastImage
-                        source={{ uri: topTeam.logo_url }}
+                        source={{ uri: topTeam?.logo_url }}
                         style={{
                             width: getSize.m(55),
                             height: getSize.m(55),
@@ -64,11 +64,11 @@ export const FavTopTeam = ({ topTeam, color }: IFavTopTeamProps) => {
                 <View style={[appStyles.flex_row_align, { marginTop: getSize.m(14) }]}>
                     <Text style={styles.text_details}>
                         {getTranslationText({
-                            textHe: topTeam.name_he,
-                            textEn: topTeam.name_en,
+                            textHe: topTeam?.name_he,
+                            textEn: topTeam?.name_en,
                         })}
                     </Text>
-                    <TouchableOpacity onPress={() => onClickTopTeam(topTeam._id)}>
+                    <TouchableOpacity onPress={() => onClickTopTeam(topTeam?._id)}>
                         <LinearGradient colors={[color, color]} style={styles.icon_arrow_left}>
                             <FastImage
                                 source={AppImages.img_angle_down}
@@ -185,7 +185,7 @@ export const FavTopTeam = ({ topTeam, color }: IFavTopTeamProps) => {
                                     ?.map((item, index) => {
                                         return (
                                             <LinearGradient
-                                                key={item.player_id}
+                                                key={item?.player_id}
                                                 start={{ x: 0, y: 0 }}
                                                 end={{ x: 1, y: 1 }}
                                                 colors={[
@@ -214,7 +214,7 @@ export const FavTopTeam = ({ topTeam, color }: IFavTopTeamProps) => {
                                                         }}
                                                     >
                                                         <Avatar
-                                                            source={{ uri: item.player_image_url }}
+                                                            source={{ uri: item?.player_image_url }}
                                                             rounded
                                                             size={getSize.m(20)}
                                                         />
@@ -228,16 +228,16 @@ export const FavTopTeam = ({ topTeam, color }: IFavTopTeamProps) => {
                                                             ]}
                                                         >
                                                             {getTranslationText({
-                                                                textHe: item.player_name_he,
-                                                                textEn: item.player_name_en,
+                                                                textHe: item?.player_name_he,
+                                                                textEn: item?.player_name_en,
                                                             })}
                                                         </Text>
                                                     </View>
                                                 </View>
                                                 <View style={{ width: getSize.m(50) }}>
-                                                    {item.games ? (
+                                                    {item?.games ? (
                                                         <Text style={styles.statistics_content}>
-                                                            {item.games}
+                                                            {item?.games}
                                                         </Text>
                                                     ) : (
                                                         <Text style={styles.statistics_content}>
@@ -246,9 +246,9 @@ export const FavTopTeam = ({ topTeam, color }: IFavTopTeamProps) => {
                                                     )}
                                                 </View>
                                                 <View style={{ width: getSize.m(50) }}>
-                                                    {item.goals ? (
+                                                    {item?.goals ? (
                                                         <Text style={styles.statistics_content}>
-                                                            {item.goals}
+                                                            {item?.goals}
                                                         </Text>
                                                     ) : (
                                                         <Text style={styles.statistics_content}>
@@ -326,7 +326,7 @@ export const FavTopTeam = ({ topTeam, color }: IFavTopTeamProps) => {
                                                     }}
                                                 >
                                                     <Avatar
-                                                        source={{ uri: item.player_image_url }}
+                                                        source={{ uri: item?.player_image_url }}
                                                         rounded
                                                         size={getSize.m(20)}
                                                     />
@@ -339,14 +339,14 @@ export const FavTopTeam = ({ topTeam, color }: IFavTopTeamProps) => {
                                                         ]}
                                                     >
                                                         {getTranslationText({
-                                                            textHe: item.player_name_he,
-                                                            textEn: item.player_name_en,
+                                                            textHe: item?.player_name_he,
+                                                            textEn: item?.player_name_en,
                                                         })}
                                                     </Text>
                                                 </View>
                                             </View>
                                             <View style={{ width: getSize.m(50) }}>
-                                                {item.yellow_cards ? (
+                                                {item?.yellow_cards ? (
                                                     <View>
                                                         <FastImage
                                                             source={AppImages.img_ticket_yellow}
@@ -356,7 +356,7 @@ export const FavTopTeam = ({ topTeam, color }: IFavTopTeamProps) => {
                                                             }
                                                         />
                                                         <Text style={styles.statistics_content}>
-                                                            {item.yellow_cards}
+                                                            {item?.yellow_cards}
                                                         </Text>
                                                     </View>
                                                 ) : (
@@ -368,7 +368,7 @@ export const FavTopTeam = ({ topTeam, color }: IFavTopTeamProps) => {
                                                 )}
                                             </View>
                                             <View style={{ width: getSize.m(50) }}>
-                                                {item.red_cards ? (
+                                                {item?.red_cards ? (
                                                     <View>
                                                         <FastImage
                                                             source={AppImages.img_ticket_red}
@@ -385,7 +385,7 @@ export const FavTopTeam = ({ topTeam, color }: IFavTopTeamProps) => {
                                                                 },
                                                             ]}
                                                         >
-                                                            {item.red_cards}
+                                                            {item?.red_cards}
                                                         </Text>
                                                     </View>
                                                 ) : (
@@ -447,7 +447,7 @@ export const FavTopTeam = ({ topTeam, color }: IFavTopTeamProps) => {
                     </View>
 
                     <View style={{ padding: getSize.m(5), zIndex: 0, position: 'relative' }}>
-                        {topTeam.homepage_info?.games?.slice(0, 3)?.map(item => {
+                        {topTeam?.homepage_info?.games?.slice(0, 3)?.map(item => {
                             return (
                                 // <ListGame_Test
                                 //     key={item.game_id}
@@ -483,7 +483,7 @@ export const FavTopTeam = ({ topTeam, color }: IFavTopTeamProps) => {
                                 //     style={{ marginTop: getSize.m(12) }}
                                 // />
                                 <GameTable
-                                    key={item.game_id}
+                                    key={item?.game_id}
                                     date={item?.date}
                                     avt_away={item?.team2?.logo_url}
                                     avt_home={item?.team1?.logo_url}
@@ -501,11 +501,11 @@ export const FavTopTeam = ({ topTeam, color }: IFavTopTeamProps) => {
                                         textHe: item?.stadium_he,
                                         textEn: item?.stadium_en,
                                     })}
-                                    handleDetailMatch={() => handleDetailMatch(item.game_id)}
-                                    handleStadium={() => handleStadium(item.stadium_id)}
+                                    handleDetailMatch={() => handleDetailMatch(item?.game_id)}
+                                    handleStadium={() => handleStadium(item?.stadium_id)}
                                     isLive={moment().isBetween(
-                                        moment(`${item.date} ${item.time}`, 'DD.M.YY HH:mm'),
-                                        moment(`${item.date} ${item.time}`, 'DD.M.YY HH:mm').add(
+                                        moment(`${item?.date} ${item?.time}`, 'DD.M.YY HH:mm'),
+                                        moment(`${item?.date} ${item?.time}`, 'DD.M.YY HH:mm').add(
                                             2,
                                             'hours'
                                         )

@@ -47,7 +47,7 @@ export const FavPlayer = ({ player, color }: IFavPlayerProps) => {
             <View style={appStyles.align_justify}>
                 <View style={styles.logo_team}>
                     <FastImage
-                        source={{ uri: player.image_url }}
+                        source={{ uri: player?.image_url }}
                         style={{
                             width: getSize.m(58),
                             height: getSize.m(58),
@@ -58,11 +58,11 @@ export const FavPlayer = ({ player, color }: IFavPlayerProps) => {
                 <View style={[appStyles.flex_row_align, { marginTop: getSize.m(14) }]}>
                     <Text style={styles.text_details}>
                         {getTranslationText({
-                            textHe: player.name_he,
-                            textEn: player.name_en,
+                            textHe: player?.name_he,
+                            textEn: player?.name_en,
                         })}
                     </Text>
-                    <TouchableOpacity onPress={() => onClickPlayer(player._id)}>
+                    <TouchableOpacity onPress={() => onClickPlayer(player?._id)}>
                         <LinearGradient colors={[color, color]} style={styles.icon_arrow_left}>
                             <FastImage
                                 source={AppImages.img_angle_down}
@@ -118,12 +118,12 @@ export const FavPlayer = ({ player, color }: IFavPlayerProps) => {
                                 resizeMode={FastImage.resizeMode.contain}
                             />
                             <Text style={styles.title_statistic}>
-                                {player.homepage_info?.season_name}
+                                {player?.homepage_info?.season_name}
                             </Text>
                         </View>
                         <TouchableOpacity
                             style={appStyles.flex_row_align}
-                            onPress={() => onClickPlayer(player._id)}
+                            onPress={() => onClickPlayer(player?._id)}
                         >
                             <Text style={styles.text_see_all}>{t('home_page.see_all')}</Text>
                             <IconEntypo
@@ -133,28 +133,28 @@ export const FavPlayer = ({ player, color }: IFavPlayerProps) => {
                             />
                         </TouchableOpacity>
                     </View>
-                    {player.homepage_info?.games?.slice(0, 2).map(game => {
+                    {player?.homepage_info?.games?.slice(0, 2).map(game => {
                         return (
                             <GameTable1
-                                key={game.game_id}
-                                date={game.date}
+                                key={game?.game_id}
+                                date={game?.date}
                                 name_away={getTranslationText({
-                                    textHe: game.team2.name_he,
-                                    textEn: game.team2.name_en,
+                                    textHe: game?.team2?.name_he,
+                                    textEn: game?.team2?.name_en,
                                 })}
                                 name_home={getTranslationText({
-                                    textHe: game.team1.name_he,
-                                    textEn: game.team1.name_en,
+                                    textHe: game?.team1?.name_he,
+                                    textEn: game?.team1?.name_en,
                                 })}
-                                result={game.score}
+                                result={game?.score}
                                 schedule=":"
-                                avt_away={game.team2.logo_url}
-                                avt_home={game.team1.logo_url}
-                                clock={`${game.on_field || 0}`}
-                                ticket_red={`${game.red_cards || 0}`}
-                                ticket_yellow={`${game.yellow_cards || 0}`}
-                                score={`${game.goals || 0}`}
-                                onHandleDetailMatch={() => handleDetailMatch(game.game_id)}
+                                avt_away={game?.team2?.logo_url}
+                                avt_home={game?.team1?.logo_url}
+                                clock={`${game?.on_field || 0}`}
+                                ticket_red={`${game?.red_cards || 0}`}
+                                ticket_yellow={`${game?.yellow_cards || 0}`}
+                                score={`${game?.goals || 0}`}
+                                onHandleDetailMatch={() => handleDetailMatch(game?.game_id)}
                             />
                         );
                     })}
@@ -190,7 +190,7 @@ export const FavPlayer = ({ player, color }: IFavPlayerProps) => {
                         </View>
                         <TouchableOpacity
                             style={appStyles.flex_row_align}
-                            onPress={() => onClickPlayer(player._id)}
+                            onPress={() => onClickPlayer(player?._id)}
                         >
                             <Text style={styles.text_see_all}>{t('home_page.see_all')}</Text>
                             <IconEntypo
@@ -216,26 +216,26 @@ export const FavPlayer = ({ player, color }: IFavPlayerProps) => {
                             >
                                 <View style={appStyles.align_justify}>
                                     <Text style={styles.content}>
-                                        {player.homepage_info?.goals.league_goals}
+                                        {player?.homepage_info?.goals.league_goals}
                                     </Text>
                                     <Text style={styles.title}>{t('home_page.league')}</Text>
                                 </View>
                                 <View style={appStyles.align_justify}>
                                     <Text style={styles.content}>
-                                        {player.homepage_info?.goals.national_cup_goals}
+                                        {player?.homepage_info?.goals.national_cup_goals}
                                     </Text>
                                     <Text style={styles.title}>{t('home_page.state_cup')}</Text>
                                 </View>
                                 <View style={appStyles.align_justify}>
                                     <Text style={styles.content}>
-                                        {player.homepage_info?.goals.toto_cup_goals}
+                                        {player?.homepage_info?.goals.toto_cup_goals}
                                     </Text>
                                     <Text style={styles.title}>{t('home_page.toto_cup')}</Text>
                                 </View>
 
                                 <View style={appStyles.align_justify}>
                                     <Text style={styles.content}>
-                                        {player.homepage_info?.goals.total_goals}
+                                        {player?.homepage_info?.goals.total_goals}
                                     </Text>
                                     <Text style={styles.title}>{t('home_page.total_goals')}</Text>
                                 </View>
@@ -312,7 +312,7 @@ export const FavPlayer = ({ player, color }: IFavPlayerProps) => {
                                             style={styles.ticket}
                                         />
                                         <Text style={styles.content_ticket}>
-                                            {player.homepage_info?.yellow_cards?.league_cards}
+                                            {player?.homepage_info?.yellow_cards?.league_cards}
                                         </Text>
                                     </View>
                                     <Text style={styles.title}>{t('home_page.league')}</Text>
@@ -325,7 +325,10 @@ export const FavPlayer = ({ player, color }: IFavPlayerProps) => {
                                             style={styles.ticket}
                                         />
                                         <Text style={styles.content_ticket}>
-                                            {player.homepage_info?.yellow_cards?.national_cup_cards}
+                                            {
+                                                player?.homepage_info?.yellow_cards
+                                                    ?.national_cup_cards
+                                            }
                                         </Text>
                                     </View>
                                     <Text style={styles.title}>{t('home_page.state_cup')}</Text>
@@ -338,14 +341,14 @@ export const FavPlayer = ({ player, color }: IFavPlayerProps) => {
                                             style={styles.ticket}
                                         />
                                         <Text style={styles.content_ticket}>
-                                            {player.homepage_info?.yellow_cards?.toto_cup_cards}
+                                            {player?.homepage_info?.yellow_cards?.toto_cup_cards}
                                         </Text>
                                     </View>
                                     <Text style={styles.title}>{t('home_page.toto_cup')}</Text>
                                 </View>
                                 <View style={appStyles.align_justify}>
                                     <Text style={styles.content}>
-                                        {player.homepage_info?.yellow_cards?.total_cards}
+                                        {player?.homepage_info?.yellow_cards?.total_cards}
                                     </Text>
                                     <Text style={styles.title}>{t('home_page.total')}</Text>
                                 </View>
@@ -380,7 +383,7 @@ export const FavPlayer = ({ player, color }: IFavPlayerProps) => {
                                                 },
                                             ]}
                                         >
-                                            {player.homepage_info?.red_cards?.league_cards}
+                                            {player?.homepage_info?.red_cards?.league_cards}
                                         </Text>
                                     </View>
                                     <Text style={styles.title}>{t('home_page.league')}</Text>
@@ -400,7 +403,7 @@ export const FavPlayer = ({ player, color }: IFavPlayerProps) => {
                                                 },
                                             ]}
                                         >
-                                            {player.homepage_info?.red_cards?.national_cup_cards}
+                                            {player?.homepage_info?.red_cards?.national_cup_cards}
                                         </Text>
                                     </View>
                                     <Text style={styles.title}>{t('home_page.state_cup')}</Text>
@@ -420,14 +423,14 @@ export const FavPlayer = ({ player, color }: IFavPlayerProps) => {
                                                 },
                                             ]}
                                         >
-                                            {player.homepage_info?.red_cards?.toto_cup_cards}
+                                            {player?.homepage_info?.red_cards?.toto_cup_cards}
                                         </Text>
                                     </View>
                                     <Text style={styles.title}>{t('home_page.toto_cup')}</Text>
                                 </View>
                                 <View style={appStyles.align_justify}>
                                     <Text style={styles.content}>
-                                        {player.homepage_info?.red_cards?.total_cards}
+                                        {player?.homepage_info?.red_cards?.total_cards}
                                     </Text>
                                     <Text style={styles.title}>{t('home_page.total')}</Text>
                                 </View>

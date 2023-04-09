@@ -397,7 +397,7 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                                 .map(team => {
                                     // eslint-disable-next-line no-underscore-dangle
                                     return (
-                                        <FavTeam color={colorCustom} team={team} key={team._id} />
+                                        <FavTeam color={colorCustom} team={team} key={team?._id} />
                                     );
                                 })}
                         {/* Item2 */}
@@ -411,7 +411,7 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                                     <FavPlayer
                                         color={colorCustom}
                                         player={player}
-                                        key={player._id}
+                                        key={player?._id}
                                     />
                                 );
                             })}
@@ -425,12 +425,12 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                                         <FavTopTeam
                                             color={colorCustom}
                                             topTeam={topTeam}
-                                            key={topTeam._id}
+                                            key={topTeam?._id}
                                         />
                                         {homeLayout?.layout.includes('my_top_team') && (
                                             <ListOfGameTopTeam
                                                 topTeam={topTeam}
-                                                key={topTeam._id}
+                                                key={topTeam?._id}
                                             />
                                         )}
                                     </>
@@ -452,7 +452,7 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                         {/* Item10 */}
                         {homeLayout?.layout.includes('leagues_table') && leagues?.length
                             ? leagues.map(league => {
-                                  return <LeaguesTable league={league} key={league._id} />;
+                                  return <LeaguesTable league={league} key={league?._id} />;
                               })
                             : null}
                         {/* Item11 */}
