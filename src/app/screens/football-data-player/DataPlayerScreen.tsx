@@ -38,7 +38,7 @@ export const DataPlayerScreen = ({ navigation, route }: IDataPlayerScreenProps) 
         // if (player_page === 1) {
         //     setOnSelect(1);
         // }
-    }, [player, onSelect]);
+    }, []);
 
     const { getTranslationText } = useTranslationText();
 
