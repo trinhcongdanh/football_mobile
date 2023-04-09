@@ -26,7 +26,7 @@ export const otpUser = createAsyncThunk('user/otpUser', async (optData: any) => 
         }
     } catch (err: any) {
         Alert.alert(`Calling api login failed`);
-        Alert.alert('Show error', err);
+        // Alert.alert('Show error', err);
     }
 });
 
