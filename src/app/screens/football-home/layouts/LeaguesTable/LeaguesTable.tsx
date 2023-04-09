@@ -168,7 +168,6 @@ export const LeaguesTable = ({ league }: ILeaguesTableProps) => {
                                 <View
                                     style={{
                                         width: getSize.m(120),
-                                        overflow: 'hidden',
                                     }}
                                 >
                                     <View
@@ -176,30 +175,27 @@ export const LeaguesTable = ({ league }: ILeaguesTableProps) => {
                                             flexDirection: 'row',
                                         }}
                                     >
-                                        <Text
-                                            style={[
-                                                appStyles.statistics_content,
-                                                {
-                                                    marginRight: getSize.m(10),
-                                                },
-                                            ]}
-                                        >
+                                        <Text style={[appStyles.statistics_content]}>
                                             {item.place}
                                         </Text>
-                                        <Avatar source={{ uri: item.logo_url }} rounded size={18} />
-                                        <Text
-                                            style={[
-                                                appStyles.statistics_content,
-                                                {
-                                                    marginLeft: getSize.m(10),
-                                                },
-                                            ]}
-                                        >
-                                            {getTranslationText({
-                                                textHe: item.name_he,
-                                                textEn: item.name_en,
-                                            })}
-                                        </Text>
+                                        <View style={{ marginHorizontal: getSize.m(8) }}>
+                                            <Avatar
+                                                source={{ uri: item.logo_url }}
+                                                rounded
+                                                size={18}
+                                            />
+                                        </View>
+                                        <View style={{ width: '70%' }}>
+                                            <Text
+                                                numberOfLines={1}
+                                                style={[appStyles.statistics_content]}
+                                            >
+                                                {getTranslationText({
+                                                    textHe: item.name_he,
+                                                    textEn: item.name_en,
+                                                })}
+                                            </Text>
+                                        </View>
                                     </View>
                                 </View>
                                 <View style={{ width: getSize.m(30) }}>

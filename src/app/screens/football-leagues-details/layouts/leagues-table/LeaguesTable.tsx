@@ -84,31 +84,24 @@ export const LeaguesTable = ({ leaderBoards }: ILeaguesTableProps) => {
                                             flexDirection: 'row',
                                         }}
                                     >
-                                        <Text
-                                            style={[
-                                                styles.text_content,
-                                                { marginRight: getSize.m(10) },
-                                            ]}
-                                        >
-                                            {item.place}
-                                        </Text>
-                                        <FastImage
-                                            source={{ uri: item.logo_url }}
-                                            style={{ width: getSize.m(18), height: getSize.m(18) }}
-                                        />
-                                        <Text
-                                            style={[
-                                                styles.text_content,
-                                                {
-                                                    marginLeft: getSize.m(10),
-                                                },
-                                            ]}
-                                        >
-                                            {getTranslationText({
-                                                textHe: item.name_he,
-                                                textEn: item.name_en,
-                                            })}
-                                        </Text>
+                                        <Text style={[styles.text_content]}>{item.place}</Text>
+                                        <View style={{ marginHorizontal: getSize.m(10) }}>
+                                            <FastImage
+                                                source={{ uri: item.logo_url }}
+                                                style={{
+                                                    width: getSize.m(18),
+                                                    height: getSize.m(18),
+                                                }}
+                                            />
+                                        </View>
+                                        <View style={{ width: '70%' }}>
+                                            <Text numberOfLines={1} style={[styles.text_content]}>
+                                                {getTranslationText({
+                                                    textHe: item.name_he,
+                                                    textEn: item.name_en,
+                                                })}
+                                            </Text>
+                                        </View>
                                     </View>
                                 </View>
                                 <View style={{ width: getSize.m(30) }}>

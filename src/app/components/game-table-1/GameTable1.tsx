@@ -49,12 +49,19 @@ export const GameTable1 = ({
                             style={{ width: getSize.m(24), height: getSize.m(24) }}
                         />
                         <View style={styles.resize_name_club}>
-                            <Text numberOfLines={3} style={styles.name_club}>
+                            <Text numberOfLines={2} style={styles.name_club}>
                                 {name_home}
                             </Text>
                         </View>
                     </View>
-                    <View style={appStyles.align_justify}>
+                    <View
+                        style={[
+                            appStyles.align_justify,
+                            {
+                                marginHorizontal: getSize.m(8),
+                            },
+                        ]}
+                    >
                         <View style={styles.container_result}>
                             {result !== null ? (
                                 <Text style={styles.result}>{result}</Text>
@@ -88,7 +95,7 @@ export const GameTable1 = ({
                             style={{ width: getSize.m(24), height: getSize.m(24) }}
                         />
                         <View style={styles.resize_name_club}>
-                            <Text numberOfLines={3} style={styles.name_club}>
+                            <Text numberOfLines={2} style={styles.name_club}>
                                 {name_away}
                             </Text>
                         </View>

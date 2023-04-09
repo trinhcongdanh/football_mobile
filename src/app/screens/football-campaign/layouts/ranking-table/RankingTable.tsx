@@ -12,22 +12,25 @@ import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/AntDesign';
 import IconFeather from 'react-native-vector-icons/Feather';
 import { IRankingTableProps } from './RankingTable.type';
+import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
 
 export const RankingTable = ({ data, groupName, topTeam }: IRankingTableProps) => {
     const { t, handleSeeAll } = useViewModel(topTeam);
+    const { getTranslationText } = useTranslationText();
+
     return (
         <View>
             <View style={appStyles.flex_row_space_center}>
                 <Text style={appStyles.statistics_title}>{t('campaign.ranking_table.title')}</Text>
                 <TouchableOpacity
-                    style={[appStyles.flex_row_center, { flex: 0, marginTop: getSize.m(12) }]}
+                    style={[appStyles.flex_row_center, { flex: 0 }]}
                     onPress={handleSeeAll}
                 >
                     <Text style={appStyles.statistics_title}>
                         {t('campaign.ranking_table.all_previous_seasons')}
                     </Text>
                     <IconFeather
-                        name={appIcons.ic_arrow_left}
+                        name={appIcons.ic_left_ios}
                         size={getSize.m(10)}
                         color={appColors.button_dark_blue}
                     />
@@ -50,7 +53,7 @@ export const RankingTable = ({ data, groupName, topTeam }: IRankingTableProps) =
                             },
                         ]}
                     >
-                        <View style={{ width: getSize.m(30) }}>
+                        <View style={{ width: getSize.m(34) }}>
                             <Text
                                 style={[
                                     appStyles.statistics_header,
@@ -102,7 +105,7 @@ export const RankingTable = ({ data, groupName, topTeam }: IRankingTableProps) =
                         </View>
                     </View>
                     <View>
-                        {data.map((item, index) => {
+                        {data?.map((item, index) => {
                             return (
                                 <LinearGradient
                                     key={item.place}
@@ -118,7 +121,7 @@ export const RankingTable = ({ data, groupName, topTeam }: IRankingTableProps) =
                                     ]}
                                 >
                                     <View
-                                        style={[appStyles.flex_row_align, { width: getSize.m(30) }]}
+                                        style={[appStyles.flex_row_align, { width: getSize.m(34) }]}
                                     >
                                         <Text style={appStyles.statistics_content}>
                                             {item.place}
@@ -156,14 +159,20 @@ export const RankingTable = ({ data, groupName, topTeam }: IRankingTableProps) =
                                                 rounded
                                                 size={getSize.m(20)}
                                             />
-                                            <Text
-                                                style={[
-                                                    appStyles.statistics_content,
-                                                    { marginLeft: getSize.m(6) },
-                                                ]}
-                                            >
-                                                {item.name_he}
-                                            </Text>
+                                            <View style={{ width: '70%' }}>
+                                                <Text
+                                                    numberOfLines={1}
+                                                    style={[
+                                                        appStyles.statistics_content,
+                                                        { marginLeft: getSize.m(3) },
+                                                    ]}
+                                                >
+                                                    {getTranslationText({
+                                                        textHe: item.name_he,
+                                                        textEn: item.name_en,
+                                                    })}
+                                                </Text>
+                                            </View>
                                         </View>
                                     </View>
                                     <View style={{ width: getSize.m(30) }}>

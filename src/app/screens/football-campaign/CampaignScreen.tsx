@@ -12,10 +12,11 @@ import { useViewModel } from './CampaignScreen.viewModel';
 import { ListOfGames } from './layouts/list-of-games/ListOfGames';
 import { RankingTable } from './layouts/ranking-table/RankingTable';
 import { BackGround } from '@football/app/components/background/BackGround';
+import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
 
 export const CampaignScreen = ({ navigation, route }: ICampaignScreenProps) => {
     const { t, onGoBack, campaign, topTeam } = useViewModel({ navigation, route });
-
+    const { getTranslationText } = useTranslationText();
     return (
         <View style={appStyles.flex}>
             {campaign && (
@@ -27,27 +28,39 @@ export const CampaignScreen = ({ navigation, route }: ICampaignScreenProps) => {
                                 iconName={appIcons.ic_right_ios}
                                 iconStyle={styles.ic_back}
                                 goBack={onGoBack}
-                                title={`${campaign.name_he} ${campaign.season}`}
+                                title={`${getTranslationText({
+                                    textHe: campaign?.name_he,
+                                    textEn: campaign?.name_en,
+                                })} ${campaign?.season}`}
                             />
                         </View>
                         <ScrollView>
                             {topTeam && (
                                 <HeaderLogo
-                                    text={topTeam.name_he}
-                                    logo={{ uri: topTeam.logo_url }}
+                                    text={getTranslationText({
+                                        textHe: topTeam?.name_he,
+                                        textEn: topTeam?.name_en,
+                                    })}
+                                    logo={{ uri: topTeam?.logo_url }}
                                 />
                             )}
                             <View style={[appStyles.package, { marginTop: getSize.m(0) }]}>
                                 <RankingTable
-                                    data={campaign.leader_board}
-                                    groupName={campaign.group_name_he}
+                                    data={campaign?.leader_board}
+                                    groupName={getTranslationText({
+                                        textHe: campaign?.group_name_he,
+                                        textEn: campaign?.group_name_en,
+                                    })}
                                     topTeam={topTeam}
                                 />
                             </View>
                             <View style={appStyles.package}>
                                 <ListOfGames
-                                    groupName={campaign.group_name_he}
-                                    games={campaign.games}
+                                    groupName={getTranslationText({
+                                        textHe: campaign?.group_name_he,
+                                        textEn: campaign?.group_name_en,
+                                    })}
+                                    games={campaign?.games}
                                     topTeam={topTeam}
                                 />
                             </View>

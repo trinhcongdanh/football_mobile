@@ -53,7 +53,7 @@ export const styles = StyleSheet.create({
     },
     resize_name_club: {
         width: getSize.m(80),
-        height: getSize.m(40),
+        height: getSize.m(46),
         justifyContent: 'flex-start',
         alignItems: 'center',
     },
