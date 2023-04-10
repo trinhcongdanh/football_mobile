@@ -85,12 +85,14 @@ export const useViewModel = ({ route }: IStateCupScreenProps) => {
         selectCycle,
         setSelectCycle,
         setSelectRound,
+        years,
+        setYears,
     } = viewState;
     const { onGoBack, getCupData } = useViewCallback(route, viewState);
 
     useMount(() => {
         if (route?.params?.cupId) {
-            console.log('route?.params?.cupId', route?.params?.cupId)
+            console.log('route?.params?.cupId', route?.params?.cupId);
             getCupData();
         }
     });
@@ -140,6 +142,11 @@ export const useViewModel = ({ route }: IStateCupScreenProps) => {
     }, [cupSeasonsData]);
 
     const handleSelectedYear = (item: any) => {
+        const selectedYears = years?.map(year => ({
+            ...year,
+            isSelected: year.content === item.content,
+        }));
+        setYears(selectedYears);
         viewState.setSelectedCupSeason(
             viewState.cupSeasons.find(season => season.name === item.content)
         );
