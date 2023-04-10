@@ -36,6 +36,7 @@ const useViewState = () => {
 
 export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) => {
     const { t } = useTranslation();
+    
     const { navigate, goBack } = useAppNavigator();
     const { params } = route;
     const dispatch = useDispatch<any>();
@@ -70,7 +71,6 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
     const [focusSearch, setFocusSearch] = useState(false);
 
     const getPlayersData = useCallback(async () => {
-
         if ((isEmpty(favPlayers) || isNil(favPlayers)) && focusSearch === false) {
             state.setIsLoading(true);
 
@@ -129,15 +129,12 @@ export const useViewModel = ({ navigation, route }: IFavoritePlayerScreenProps) 
         } else {
             dispatch(resetFavPlayer([]));
 
-            const [error, res] = await PlayerService.findAllFavPlayer();
+            const [error, res] = await PlayerService.findAllFavPlayer(sortByName);
             if (error) {
                 return;
             }
-            const sortByName = sortBy(res.data.documents, [
-                I18nManager.isRTL ? 'name_he' : 'name_en',
-            ]);
 
-            dispatch(setFavPlayers(sortByName));
+            dispatch(setFavPlayers(res.data.documents));
             state.setIsLoading(false);
         }
         state.setIsLoading(false);

@@ -8,12 +8,20 @@ class TeamService extends MongoDBService {
     }
 
     findAllFavTeam(sortBy?: any): Promise<Result<TeamModelResponse>> {
-        return this.httpClient.post('/find', { ...this.dbConfig, limit: 100, sort: sortBy });
+        return this.httpClient.post('/find', {
+            ...this.dbConfig,
+            filter: { name_en: { $ne: null } },
+            limit: 100,
+            sort: sortBy,
+        });
     }
 
     async searchFavTeam(searchText: string, sortBy?: any): Promise<Result<TeamModelResponse>> {
-        const filter = { search_terms: { $regex: `.*${searchText}.*`, $options: 'i' } };
-        return await this.find({ filter, limit: 100, sort: sortBy });
+        const filter = {
+            search_terms: { $regex: `.*${searchText}.*`, $options: 'i' },
+            name_en: { $ne: null },
+        };
+        return this.find({ filter, limit: 100, sort: sortBy });
     }
 }
 

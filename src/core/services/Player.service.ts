@@ -10,7 +10,7 @@ class PlayerService extends MongoDBService {
     findAllFavPlayer(sortBy?: any): Promise<Result<PlayersModelResponse>> {
         return this.httpClient.post('/find', {
             ...this.dbConfig,
-            filter: { team: { $exists: true, $ne: null } },
+            filter: { team: { $exists: true, $ne: null }, name_en: { $ne: ' ' } },
             limit: 100,
             sort: sortBy,
         });
@@ -20,6 +20,7 @@ class PlayerService extends MongoDBService {
         const filter = {
             search_terms: { $regex: `.*${searchText}.*`, $options: 'i' },
             team: { $exists: true, $ne: null },
+            name_en: { $ne: ' ' },
         };
         return this.find({ filter, limit: 100, sort: sortBy });
     }
