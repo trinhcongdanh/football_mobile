@@ -18,21 +18,17 @@ const useViewState = () => {
 
 const useViewCallback = (route: any, viewState: any) => {
     const { setleagueSeasonStats } = viewState;
-    const { leagueSeasonId, leagueId } = route.params;
+    const { leagueSeasonId, leagueId, statisticsId } = route.params;
     const getLeagueSeasonStatData = useCallback(async () => {
-        console.log('leagueSeasonId', leagueSeasonId);
-        console.log('leagueId', leagueId);
-        const [error, res] = await LeagueSeasonStatsService.findByFilter({
-            league_season_id: leagueSeasonId,
-            league_id: leagueId,
-        });
+        const [error, res] = statisticsId
+            ? await LeagueSeasonStatsService.findByOId(statisticsId)
+            : await LeagueSeasonStatsService.findByFilter({
+                  league_season_id: leagueSeasonId,
+                  league_id: leagueId,
+              });
         if (error) {
             return;
         }
-
-        console.log('res.data.documents', res.data.documents);
-        
-
         if (res.data.documents.length) {
             setleagueSeasonStats(res.data.documents[0]);
         }

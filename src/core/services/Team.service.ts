@@ -9,13 +9,15 @@ class TeamService extends MongoDBService {
     }
 
     findAllFavTeam(sortBy?: any): Promise<Result<TeamModelResponse>> {
-        const filter = {};
+        const filter = {
+            league_id: { $ne: null },
+        };
         if (!I18nManager.isRTL) {
             filter.name_en = { $ne: null };
         }
         return this.httpClient.post('/find', {
             ...this.dbConfig,
-            filter: { name_en: { $ne: null } },
+            filter,
             limit: 100,
             sort: sortBy,
         });
@@ -24,6 +26,7 @@ class TeamService extends MongoDBService {
     async searchFavTeam(searchText: string, sortBy?: any): Promise<Result<TeamModelResponse>> {
         const filter = {
             search_terms: { $regex: `.*${searchText}.*`, $options: 'i' },
+            league_id: { $ne: null },
         };
         if (!I18nManager.isRTL) {
             filter.name_en = { $ne: null };

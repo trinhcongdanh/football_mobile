@@ -11,8 +11,16 @@ export const useViewModel = ({ statistics, statisticsId }: IStatisticsProps) => 
     const externalGames = statistics?.external_games || [];
     const homeGames = statistics?.home_games || [];
 
-    const handleMoreStatistics = (leagueSeasonId: string, leagueId: string) => {
-        navigate(ScreenName.StatisticsLeaguesPage, { leagueSeasonId, leagueId });
+    const handleMoreStatistics = (
+        leagueSeasonId: string,
+        leagueId: string,
+        statisticsIdValue: string
+    ) => {
+        navigate(ScreenName.StatisticsLeaguesPage, {
+            leagueSeasonId,
+            leagueId,
+            statisticsId: statisticsIdValue,
+        });
     };
 
     return {

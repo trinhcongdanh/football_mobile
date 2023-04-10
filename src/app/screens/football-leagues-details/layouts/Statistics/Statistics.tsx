@@ -196,7 +196,7 @@ export const Statistics = ({
                     <Button
                         style={{ borderRadius: getSize.m(15) }}
                         title={t('leagues_details.statistics.more')}
-                        onPress={() => handleMoreStatistics(leagueSeasonId, leagueId)}
+                        onPress={() => handleMoreStatistics(leagueSeasonId, leagueId, statisticsId)}
                     />
                 </View>
             </View>
