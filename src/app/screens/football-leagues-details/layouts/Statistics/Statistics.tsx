@@ -5,7 +5,7 @@ import { appColors } from '@football/app/utils/constants/appColors';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import { getSize } from '@football/app/utils/responsive/scale';
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, I18nManager } from 'react-native';
 import { Avatar } from 'react-native-elements';
 import LinearGradient from 'react-native-linear-gradient';
 import { AppFonts } from '@football/app/assets/fonts';
@@ -109,34 +109,44 @@ export const Statistics = ({ selectedRoundName, statistics, statisticsId }: ISta
                                                 flexDirection: 'row',
                                             }}
                                         >
-                                            <Text
-                                                style={[
-                                                    appStyles.statistics_content,
-                                                    {
-                                                        marginRight: getSize.m(10),
-                                                    },
-                                                ]}
-                                            >
-                                                {index + 1}
-                                            </Text>
+                                            <View style={{ width: '12%' }}>
+                                                <Text
+                                                    style={[
+                                                        appStyles.statistics_content,
+                                                        {
+                                                            textAlign: I18nManager.isRTL
+                                                                ? 'right'
+                                                                : 'left',
+                                                        },
+                                                    ]}
+                                                >
+                                                    {index + 1}
+                                                </Text>
+                                            </View>
                                             <Avatar
                                                 source={{ uri: item.logo_url }}
                                                 rounded
                                                 size={18}
                                             />
-                                            <Text
-                                                style={[
-                                                    appStyles.statistics_content,
-                                                    {
-                                                        marginLeft: getSize.m(10),
-                                                    },
-                                                ]}
-                                            >
-                                                {getTranslationText({
-                                                    textHe: item.name_he,
-                                                    textEn: item.name_en,
-                                                })}
-                                            </Text>
+                                            <View style={{ width: '70%' }}>
+                                                <Text
+                                                    numberOfLines={1}
+                                                    style={[
+                                                        appStyles.statistics_content,
+                                                        {
+                                                            marginLeft: getSize.m(10),
+                                                            textAlign: I18nManager.isRTL
+                                                                ? 'right'
+                                                                : 'left',
+                                                        },
+                                                    ]}
+                                                >
+                                                    {getTranslationText({
+                                                        textHe: item.name_he,
+                                                        textEn: item.name_en,
+                                                    })}
+                                                </Text>
+                                            </View>
                                         </View>
                                     </View>
                                     <View style={{ width: getSize.m(30) }}>

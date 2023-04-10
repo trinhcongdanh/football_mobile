@@ -1,7 +1,7 @@
 import { AppFonts } from '@football/app/assets/fonts';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { getSize } from '@football/app/utils/responsive/scale';
-import { StyleSheet } from 'react-native';
+import { I18nManager, StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
     main_schedule: {
@@ -63,7 +63,7 @@ export const styles = StyleSheet.create({
         lineHeight: getSize.m(20),
         marginTop: getSize.m(5),
         fontFamily: AppFonts.bold,
-        textAlign: 'center',
+        textAlign: I18nManager.isRTL ? 'right' : 'left',
     },
     score: {
         color: appColors.text_dark_blue,

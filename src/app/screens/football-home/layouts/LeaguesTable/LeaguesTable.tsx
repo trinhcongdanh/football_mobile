@@ -9,7 +9,7 @@ import { appStyles } from '@football/app/utils/constants/appStyles';
 import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
 import { getSize } from '@football/app/utils/responsive/scale';
 import React from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { I18nManager, Text, TouchableOpacity, View } from 'react-native';
 import { Avatar } from 'react-native-elements';
 import LinearGradient from 'react-native-linear-gradient';
 import IconEntypo from 'react-native-vector-icons/Entypo';
@@ -156,8 +156,6 @@ export const LeaguesTable = ({ league }: ILeaguesTableProps) => {
                         ?.slice(0, 10)
                         .sort((a, b) => a.place - b.place)
                         .map((item, index) => {
-                            console.log('selectRound?.leader_board', selectRound?.leader_board);
-
                             return (
                                 <LinearGradient
                                     key={item.team_id}

@@ -1,7 +1,7 @@
 import { AppFonts } from '@football/app/assets/fonts';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { getSize } from '@football/app/utils/responsive/scale';
-import { StyleSheet } from 'react-native';
+import { I18nManager, StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
     item_game: {
@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
         lineHeight: getSize.m(17),
         color: appColors.blue_black,
         marginTop: getSize.m(5),
-        textAlign: 'center',
+        textAlign: I18nManager.isRTL ? 'right' : 'left',
     },
     container_result: {
         paddingVertical: getSize.m(6),
