@@ -3,7 +3,6 @@ import { useCallback, useEffect, useState } from 'react';
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
 import { serializeParams } from '@football/app/utils/functions/quick-functions';
-import moment from 'moment';
 
 import { AuthData, ScreenName } from '@football/app/utils/constants/enum';
 import { ACTION } from '@football/core/api/auth/config';
@@ -18,7 +17,7 @@ import { TopTeamModel, TopTeamModelResponse } from '@football/core/models/TopTea
 import PlayerService from '@football/core/services/Player.service';
 import TeamService from '@football/core/services/Team.service';
 import TopTeamService from '@football/core/services/TopTeam.service';
-import { isEmpty } from 'lodash';
+import { isEmpty, isEqual } from 'lodash';
 import { BackHandler } from 'react-native';
 import { addSelectedFavPlayer, resetFavPlayer } from 'src/store/FavPlayer.slice';
 import { addSelectedFavTeam, resetFavTeam } from 'src/store/FavTeam.slice';
@@ -263,7 +262,11 @@ const useEventHandler = (state: any, route: any) => {
 
     const onGoBack = () => {
         const previousScreen = route?.params?.previousScreen;
-        if (previousScreen && previousScreen === ScreenName.HomePage) {
+        if (
+            previousScreen &&
+            previousScreen === ScreenName.HomePage &&
+            !isEqual(state.defaultOptions, state.newOptions)
+        ) {
             console.log('Go Back 1');
             popToTop();
             navigate(ScreenName.SideBar);
@@ -732,7 +735,11 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
     console.log('defaultOptions', state.defaultOptions);
     const backAction = () => {
         const previousScreen = route?.params?.previousScreen;
-        if (previousScreen && previousScreen === ScreenName.HomePage) {
+        if (
+            previousScreen &&
+            previousScreen === ScreenName.HomePage &&
+            !isEqual(state.defaultOptions, state.newOptions)
+        ) {
             popToTop();
             navigate(ScreenName.SideBar);
         } else {

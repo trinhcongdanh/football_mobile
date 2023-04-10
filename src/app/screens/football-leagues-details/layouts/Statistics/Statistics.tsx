@@ -13,7 +13,13 @@ import { useViewModel } from './Statistics.viewModel';
 import { IStatisticsProps } from './Statistics.type';
 import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
 
-export const Statistics = ({ selectedRoundName, statistics, statisticsId }: IStatisticsProps) => {
+export const Statistics = ({
+    selectedRoundName,
+    statistics,
+    statisticsId,
+    leagueSeasonId,
+    leagueId,
+}: IStatisticsProps) => {
     const {
         t,
         setOnSelect,
@@ -25,6 +31,8 @@ export const Statistics = ({ selectedRoundName, statistics, statisticsId }: ISta
         selectedRoundName,
         statistics,
         statisticsId,
+        leagueSeasonId,
+        leagueId,
     });
     const { getTranslationText } = useTranslationText();
 
@@ -188,7 +196,7 @@ export const Statistics = ({ selectedRoundName, statistics, statisticsId }: ISta
                     <Button
                         style={{ borderRadius: getSize.m(15) }}
                         title={t('leagues_details.statistics.more')}
-                        onPress={handleMoreStatistics}
+                        onPress={() => handleMoreStatistics(leagueSeasonId, leagueId)}
                     />
                 </View>
             </View>
@@ -205,6 +213,7 @@ export const Statistics = ({ selectedRoundName, statistics, statisticsId }: ISta
                         option_one={t('leagues_details.statistics.ranking_home')}
                         option_two={t('leagues_details.statistics.ranking_away')}
                         onSelect={setOnSelect}
+                        defaultValue={0}
                     />
                 </View>
                 {onSelect === 0 ? renderStatistics(homeGames) : renderStatistics(externalGames)}

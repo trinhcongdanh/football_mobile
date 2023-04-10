@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import { appIcons } from '@football/app/assets/icons/appIcons';
 import { AppImages } from '@football/app/assets/images';
 import { DropDown } from '@football/app/components/drop-down/DropDown';
@@ -176,6 +177,8 @@ export const LeaguesDetailsScreen = ({ navigation, route }: ILeaguesDetailsScree
                                     }
                                     statistics={selectRound?.statistics}
                                     statisticsId={selectedLeagueSeason?.league_season_stats_id}
+                                    leagueSeasonId={selectedLeagueSeason?._id}
+                                    leagueId={league?._id}
                                 />
                             </View>
                             <View style={styles.package}>

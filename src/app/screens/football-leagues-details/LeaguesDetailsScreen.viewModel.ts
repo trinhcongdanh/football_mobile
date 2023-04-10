@@ -74,7 +74,9 @@ const useViewCallback = (route: any, viewState: any) => {
         // dispatch(setLeagueSeasons(leagueSeasons));
         // setAllLeagueSeasons(leagueSeasons);
         if (leagueSeasons?.length) {
+            
             setSelectedLeagueSeason(leagueSeasons[0]);
+            console.log('setSelectedLeagueSeason', leagueSeasons[0]);
         }
     }, []);
 
