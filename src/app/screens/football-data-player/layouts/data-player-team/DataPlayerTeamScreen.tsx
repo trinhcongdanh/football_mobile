@@ -342,7 +342,7 @@ export const DataPlayerTeamScreen = ({ player }: IDataPlayerTeamScreenProps) => 
                                                             style={{
                                                                 width: game?.team2?.logo_url
                                                                     ? getSize.m(32)
-                                                                    : getSize.m(70),
+                                                                    : getSize.m(60),
                                                             }}
                                                         >
                                                             <Text
