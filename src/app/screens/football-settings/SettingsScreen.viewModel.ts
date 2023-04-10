@@ -17,7 +17,7 @@ import { TopTeamModel, TopTeamModelResponse } from '@football/core/models/TopTea
 import PlayerService from '@football/core/services/Player.service';
 import TeamService from '@football/core/services/Team.service';
 import TopTeamService from '@football/core/services/TopTeam.service';
-import { isEmpty, isEqual } from 'lodash';
+import { isEmpty } from 'lodash';
 import { BackHandler } from 'react-native';
 import { addSelectedFavPlayer, resetFavPlayer } from 'src/store/FavPlayer.slice';
 import { addSelectedFavTeam, resetFavTeam } from 'src/store/FavTeam.slice';
@@ -262,11 +262,7 @@ const useEventHandler = (state: any, route: any) => {
 
     const onGoBack = () => {
         const previousScreen = route?.params?.previousScreen;
-        if (
-            previousScreen &&
-            previousScreen === ScreenName.HomePage &&
-            !isEqual(state.defaultOptions, state.newOptions)
-        ) {
+        if (previousScreen && previousScreen === ScreenName.HomePage) {
             console.log('Go Back 1');
             popToTop();
             navigate(ScreenName.SideBar);
@@ -735,11 +731,7 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
     console.log('defaultOptions', state.defaultOptions);
     const backAction = () => {
         const previousScreen = route?.params?.previousScreen;
-        if (
-            previousScreen &&
-            previousScreen === ScreenName.HomePage &&
-            !isEqual(state.defaultOptions, state.newOptions)
-        ) {
+        if (previousScreen && previousScreen === ScreenName.HomePage) {
             popToTop();
             navigate(ScreenName.SideBar);
         } else {
