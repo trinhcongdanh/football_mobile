@@ -267,7 +267,7 @@ export const DataPlayerTeamScreen = ({ player }: IDataPlayerTeamScreenProps) => 
                                                 ]}
                                                 key={gameIndex}
                                             >
-                                                <View style={{ width: getSize.m(50) }}>
+                                                <View style={{ width: getSize.m(54) }}>
                                                     <Text style={styles.date}>
                                                         {getDate({ date: game?.date })}
                                                     </Text>
