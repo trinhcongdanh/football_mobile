@@ -11,22 +11,18 @@ const initialState: any = {
 };
 
 export const otpUser = createAsyncThunk('user/otpUser', async (optData: any) => {
-    try {
-        const { data }: any = await axiosAuth.post(
-            `${AUTH_URL}`,
-            optData,
+    const { data }: any = await axiosAuth.post(
+        `${AUTH_URL}`,
+        optData,
 
-            {
-                headers: {},
-            }
-        );
-
-        if (!isEmpty(data)) {
-            return data;
+        {
+            headers: {},
         }
-    } catch (err: any) {
-        Alert.alert(`Calling api login failed`);
-        // Alert.alert('Show error', err);
+    );
+
+    if (!isEmpty(data)) {
+        console.log('data apple', data);
+        return data;
     }
 });
 

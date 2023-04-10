@@ -262,7 +262,7 @@ const useViewCallback = (route: any, viewState: any) => {
                 }
             );
 
-            console.log(data);
+            console.log('data', data);
 
             if (!isEmpty(data)) {
                 setProfileUser({
