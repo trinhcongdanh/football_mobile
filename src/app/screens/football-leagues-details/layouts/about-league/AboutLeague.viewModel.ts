@@ -91,8 +91,8 @@ export const useViewModel = ({ highlights }: IAboutLeagueProps) => {
               }
           })
         : [];
-    const dots = Array(4).fill('');
     const [activeIndexNumber, setActiveIndexNumber] = useState(Number);
+    const dots = Array(4).fill('');
 
     console.log(aboutGames);
 

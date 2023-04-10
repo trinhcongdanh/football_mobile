@@ -84,7 +84,7 @@ export const Rankings = ({ topTeam }: IRankingsProps) => {
                                     style={[
                                         appStyles.statistics_content,
                                         {
-                                            textAlign: I18nManager.isRTL ? 'right' : 'left',
+                                            textAlign: 'left',
                                         },
                                     ]}
                                 >
@@ -133,14 +133,14 @@ export const Rankings = ({ topTeam }: IRankingsProps) => {
                                         rounded
                                         size={20}
                                     />
-                                    <View style={{ width: '70%' }}>
+                                    <View style={{ width: '60%' }}>
                                         <Text
                                             numberOfLines={1}
                                             style={[
                                                 appStyles.statistics_content,
                                                 {
                                                     marginLeft: getSize.m(3),
-                                                    textAlign: I18nManager.isRTL ? 'right' : 'left',
+                                                    textAlign: 'left',
                                                 },
                                             ]}
                                         >

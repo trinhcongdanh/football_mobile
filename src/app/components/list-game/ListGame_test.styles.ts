@@ -63,7 +63,7 @@ export const styles = StyleSheet.create({
         lineHeight: getSize.m(20),
         marginTop: getSize.m(5),
         fontFamily: AppFonts.bold,
-        textAlign: I18nManager.isRTL ? 'right' : 'left',
+        textAlign: 'left',
     },
     score: {
         color: appColors.text_dark_blue,

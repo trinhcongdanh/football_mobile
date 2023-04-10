@@ -31,7 +31,7 @@ export const AboutLeague = ({ highlights }: IAboutLeagueProps) => {
                     },
                 ]}
             >
-                {/* <ScrollView
+                <ScrollView
                     horizontal
                     pagingEnabled
                     showsHorizontalScrollIndicator={false}
@@ -46,8 +46,14 @@ export const AboutLeague = ({ highlights }: IAboutLeagueProps) => {
                         }
                     }}
                     scrollEventThrottle={16}
+                    onMomentumScrollEnd={event =>
+                        console.log(
+                            'event.nativeEvent.contentOffset.x',
+                            event.nativeEvent.contentOffset.x
+                        )
+                    }
                 >
-                    {aboutGames.map((item: any, index) => {
+                    {aboutGames?.map((item: any, index) => {
                         return item ? (
                             <Animated.View
                                 key={index}
@@ -59,23 +65,35 @@ export const AboutLeague = ({ highlights }: IAboutLeagueProps) => {
                                     },
                                 ]}
                             >
-                                <View style={styles.icon_about}>
-                                    <FastImage
-                                        source={item.icon}
-                                        resizeMode={FastImage.resizeMode.contain}
-                                        style={{
-                                            width: getSize.m(12),
-                                            height: getSize.m(12),
-                                        }}
-                                    />
+                                <View
+                                    style={{
+                                        height: getSize.m(50),
+                                        justifyContent: 'center',
+                                        alignItems: 'center',
+                                    }}
+                                >
+                                    <View style={styles.icon_about}>
+                                        <FastImage
+                                            source={item?.icon}
+                                            resizeMode={FastImage.resizeMode.contain}
+                                            style={{
+                                                width: getSize.m(12),
+                                                height: getSize.m(12),
+                                            }}
+                                        />
+                                    </View>
+                                    <Text style={styles.title_about}>{item?.text}</Text>
                                 </View>
-                                <Text style={styles.title_about}>{item.text}</Text>
-                                <Text style={styles.content_about}>{item.value}</Text>
+                                <View style={{ height: getSize.m(50) }}>
+                                    <Text numberOfLines={2} style={styles.content_about}>
+                                        {item?.value}
+                                    </Text>
+                                </View>
                             </Animated.View>
                         ) : null;
                     })}
-                </ScrollView> */}
-                <CustomCarousel
+                </ScrollView>
+                {/* <CustomCarousel
                     data={aboutGames?.filter(item => item) || []}
                     height={getSize.m(300)}
                     widthPerItem={windowWidth / 4}
@@ -106,9 +124,9 @@ export const AboutLeague = ({ highlights }: IAboutLeagueProps) => {
                             </Animated.View>
                         );
                     }}
-                />
+                /> */}
             </View>
-            {/* <View style={styles.dotContainer}>
+            <View style={styles.dotContainer}>
                 {dots.map((_, index) => {
                     return (
                         <View key={index}>
@@ -130,7 +148,7 @@ export const AboutLeague = ({ highlights }: IAboutLeagueProps) => {
                         </View>
                     );
                 })}
-            </View> */}
+            </View>
             {/* <View style={styles.indicatorContainer}> */}
             {/* {dots.map((item, index) => {
                     const width = scrollX.interpolate({
