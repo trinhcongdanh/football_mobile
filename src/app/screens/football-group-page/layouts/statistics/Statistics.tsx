@@ -57,14 +57,11 @@ export const Statistics = ({ data }: IStatisticsProps) => {
                                         <LinearGradient
                                             start={{ x: 0, y: 0 }}
                                             end={{ x: 1, y: 1 }}
-                                            colors={[
+                                            colors={
                                                 index % 2 === 0
-                                                    ? appColors.linearLight
-                                                    : appColors.white,
-                                                index % 2 === 0
-                                                    ? appColors.linearDark
-                                                    : appColors.white,
-                                            ]}
+                                                    ? [appColors.linearLight, appColors.linearLight]
+                                                    : [appColors.gray, appColors.gray]
+                                            }
                                             style={[
                                                 appStyles.align_justify,
                                                 {
@@ -81,11 +78,13 @@ export const Statistics = ({ data }: IStatisticsProps) => {
                                                         size={getSize.m(17.33)}
                                                     />
                                                     <Text
+                                                        numberOfLines={1}
                                                         style={[
                                                             appStyles.statistics_content,
                                                             {
                                                                 marginLeft: getSize.m(10),
                                                                 fontSize: getSize.m(13),
+                                                                textAlign: 'left',
                                                             },
                                                         ]}
                                                     >
@@ -236,14 +235,11 @@ export const Statistics = ({ data }: IStatisticsProps) => {
                                 {data.map((item: Statistic, index) => {
                                     return (
                                         <LinearGradient
-                                            colors={[
+                                            colors={
                                                 index % 2 === 0
-                                                    ? appColors.linearLight
-                                                    : appColors.gray,
-                                                index % 2 === 0
-                                                    ? appColors.linearDark
-                                                    : appColors.gray,
-                                            ]}
+                                                    ? [appColors.linearLight, appColors.linearLight]
+                                                    : [appColors.gray, appColors.gray]
+                                            }
                                             style={[
                                                 appStyles.flex_row_align,
                                                 {

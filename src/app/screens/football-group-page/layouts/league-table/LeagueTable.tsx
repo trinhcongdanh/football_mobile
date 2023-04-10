@@ -110,7 +110,7 @@ export const LeagueTable = ({ leagueSeasonId }: ILeagueTableProps) => {
                                 </View>
                             </View>
                             <View style={{ marginTop: getSize.m(10) }}>
-                                {selectedRound?.leader_board.map((item, index) => {
+                                {selectedRound?.leader_board?.map((item, index) => {
                                     return (
                                         <TouchableOpacity
                                             onPress={() => {
@@ -121,14 +121,14 @@ export const LeagueTable = ({ leagueSeasonId }: ILeagueTableProps) => {
                                             <LinearGradient
                                                 start={{ x: 0, y: 0 }}
                                                 end={{ x: 1, y: 1 }}
-                                                colors={[
+                                                colors={
                                                     index % 2 === 0
-                                                        ? appColors.linearLight
-                                                        : appColors.white,
-                                                    index % 2 === 0
-                                                        ? appColors.linearDark
-                                                        : appColors.white,
-                                                ]}
+                                                        ? [
+                                                              appColors.linearLight,
+                                                              appColors.linearDark,
+                                                          ]
+                                                        : [appColors.white, appColors.white]
+                                                }
                                                 style={[
                                                     appStyles.flex_row_space_center,
                                                     appStyles.statistic_row,

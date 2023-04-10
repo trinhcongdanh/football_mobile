@@ -366,7 +366,7 @@ export const GroupPageScreen = ({ navigation, route }: IGroupPageScreenProps) =>
                                                 <Text style={[appStyles.number, styles.title]}>
                                                     {t('group_page.info_group.list')}
                                                 </Text>
-                                                {teamSeason.about.stadiums.map(statium => {
+                                                {teamSeason?.about?.stadiums?.map(statium => {
                                                     return (
                                                         <View
                                                             style={styles.info_group_item}
@@ -424,7 +424,7 @@ export const GroupPageScreen = ({ navigation, route }: IGroupPageScreenProps) =>
                                         marginTop: getSize.m(23),
                                     }}
                                 >
-                                    {groups.map(item => {
+                                    {groups?.map(item => {
                                         return (
                                             <TouchableOpacity
                                                 onPress={() => {
