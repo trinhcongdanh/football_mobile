@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
         lineHeight: getSize.m(17),
         color: appColors.blue_black,
         marginTop: getSize.m(5),
-        textAlign: I18nManager.isRTL ? 'right' : 'left',
+        textAlign: 'left',
     },
     container_result: {
         paddingVertical: getSize.m(6),

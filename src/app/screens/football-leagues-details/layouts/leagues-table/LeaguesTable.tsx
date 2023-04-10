@@ -89,9 +89,7 @@ export const LeaguesTable = ({ leaderBoards }: ILeaguesTableProps) => {
                                                 style={[
                                                     styles.text_content,
                                                     {
-                                                        textAlign: I18nManager.isRTL
-                                                            ? 'right'
-                                                            : 'left',
+                                                        textAlign: 'left',
                                                     },
                                                 ]}
                                             >
@@ -113,9 +111,7 @@ export const LeaguesTable = ({ leaderBoards }: ILeaguesTableProps) => {
                                                 style={[
                                                     styles.text_content,
                                                     {
-                                                        textAlign: I18nManager.isRTL
-                                                            ? 'right'
-                                                            : 'left',
+                                                        textAlign: 'left',
                                                     },
                                                 ]}
                                             >

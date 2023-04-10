@@ -181,14 +181,18 @@ export const LeaguesTable = ({ league }: ILeaguesTableProps) => {
                                                 flexDirection: 'row',
                                             }}
                                         >
-                                            <Text
-                                                style={[
-                                                    appStyles.statistics_content,
-                                                    { width: getSize.m(15) },
-                                                ]}
-                                            >
-                                                {item.place}
-                                            </Text>
+                                            <View style={{ width: '12%' }}>
+                                                <Text
+                                                    style={[
+                                                        appStyles.statistics_content,
+                                                        {
+                                                            textAlign: 'left',
+                                                        },
+                                                    ]}
+                                                >
+                                                    {item.place}
+                                                </Text>
+                                            </View>
                                             <View style={{ marginHorizontal: getSize.m(8) }}>
                                                 <Avatar
                                                     source={{ uri: item.logo_url }}
@@ -196,8 +200,9 @@ export const LeaguesTable = ({ league }: ILeaguesTableProps) => {
                                                     size={18}
                                                 />
                                             </View>
-                                            <View style={{ width: '70%' }}>
+                                            <View style={{ width: '60%' }}>
                                                 <Text
+                                                    numberOfLines={2}
                                                     style={[
                                                         appStyles.statistics_content,
                                                         { textAlign: 'left' },
