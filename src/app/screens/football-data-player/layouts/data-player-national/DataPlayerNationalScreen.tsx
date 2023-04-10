@@ -159,20 +159,22 @@ export const DataPlayerNationalScreen = ({ player }: IDataPlayerNationalScreenPr
                                         </Text>
                                         <Text style={[appStyles.number]}>{item?.games}</Text>
                                         <Text style={[appStyles.number]}>{item?.goals}</Text>
-                                        <TouchableOpacity
-                                            onPress={() =>
-                                                onNavigateGoalTopTeam(
-                                                    item?.player_top_team_goals_id
-                                                )
-                                            }
-                                            style={[styles.details]}
-                                        >
-                                            <Icon
-                                                name={appIcons.ic_left_ios}
-                                                size={getSize.m(18)}
-                                                color={appColors.text_option_unselect}
-                                            />
-                                        </TouchableOpacity>
+                                        {!item?.games && !item?.goals ? null : (
+                                            <TouchableOpacity
+                                                onPress={() =>
+                                                    onNavigateGoalTopTeam(
+                                                        item?.player_top_team_goals_id
+                                                    )
+                                                }
+                                                style={[styles.details]}
+                                            >
+                                                <Icon
+                                                    name={appIcons.ic_left_ios}
+                                                    size={getSize.m(18)}
+                                                    color={appColors.text_option_unselect}
+                                                />
+                                            </TouchableOpacity>
+                                        )}
                                     </View>
                                 );
                             })}
