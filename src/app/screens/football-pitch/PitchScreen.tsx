@@ -164,20 +164,26 @@ export const PitchScreen = ({ navigation, route }: IPitchScreenProps) => {
                                                                 rounded
                                                                 size={18}
                                                             />
-                                                            <Text
-                                                                style={[
-                                                                    appStyles.statistics_content,
-                                                                    {
-                                                                        marginLeft: getSize.m(10),
-                                                                        fontSize: getSize.m(13),
-                                                                    },
-                                                                ]}
-                                                            >
-                                                                {getTranslationText({
-                                                                    textHe: item?.name_he,
-                                                                    textEn: item?.name_en,
-                                                                })}
-                                                            </Text>
+                                                            <View style={{ width: '80%' }}>
+                                                                <Text
+                                                                    numberOfLines={2}
+                                                                    style={[
+                                                                        appStyles.statistics_content,
+                                                                        {
+                                                                            marginLeft: getSize.m(
+                                                                                10
+                                                                            ),
+                                                                            fontSize: getSize.m(13),
+                                                                            textAlign: 'left',
+                                                                        },
+                                                                    ]}
+                                                                >
+                                                                    {getTranslationText({
+                                                                        textHe: item?.name_he,
+                                                                        textEn: item?.name_en,
+                                                                    })}
+                                                                </Text>
+                                                            </View>
                                                         </View>
                                                     </View>
                                                     <View

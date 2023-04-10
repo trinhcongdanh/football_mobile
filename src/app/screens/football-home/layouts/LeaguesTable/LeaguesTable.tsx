@@ -42,13 +42,22 @@ export const LeaguesTable = ({ league }: ILeaguesTableProps) => {
                     },
                 ]}
             >
-                <Text style={styles.header}>
-                    {' '}
-                    {getTranslationText({
-                        textHe: league.name_he,
-                        textEn: league.name_en,
-                    })}
-                </Text>
+                <View style={{ width: '60%' }}>
+                    <Text
+                        numberOfLines={2}
+                        style={[
+                            styles.header,
+                            {
+                                textAlign: 'left',
+                            },
+                        ]}
+                    >
+                        {getTranslationText({
+                            textHe: league.name_he,
+                            textEn: league.name_en,
+                        })}
+                    </Text>
+                </View>
                 <TouchableOpacity onPress={() => onClickAllLeagues(league._id)}>
                     <View style={appStyles.flex_row_align}>
                         <Text style={styles.details}>{t('home_page.full_table')}</Text>
