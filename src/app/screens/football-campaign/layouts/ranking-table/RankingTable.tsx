@@ -6,7 +6,7 @@ import { appColors } from '@football/app/utils/constants/appColors';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import { getSize } from '@football/app/utils/responsive/scale';
 import React from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { I18nManager, Text, TouchableOpacity, View } from 'react-native';
 import { Avatar } from 'react-native-elements';
 import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/AntDesign';
@@ -123,9 +123,20 @@ export const RankingTable = ({ data, groupName, topTeam }: IRankingTableProps) =
                                     <View
                                         style={[appStyles.flex_row_align, { width: getSize.m(34) }]}
                                     >
-                                        <Text style={appStyles.statistics_content}>
-                                            {item.place}
-                                        </Text>
+                                        <View style={{ width: '12%' }}>
+                                            <Text
+                                                style={[
+                                                    appStyles.statistics_content,
+                                                    {
+                                                        textAlign: I18nManager.isRTL
+                                                            ? 'right'
+                                                            : 'left',
+                                                    },
+                                                ]}
+                                            >
+                                                {item.place}
+                                            </Text>
+                                        </View>
                                         <View
                                             style={{
                                                 marginLeft: getSize.m(2),
@@ -164,7 +175,12 @@ export const RankingTable = ({ data, groupName, topTeam }: IRankingTableProps) =
                                                     numberOfLines={1}
                                                     style={[
                                                         appStyles.statistics_content,
-                                                        { marginLeft: getSize.m(3) },
+                                                        {
+                                                            marginLeft: getSize.m(3),
+                                                            textAlign: I18nManager.isRTL
+                                                                ? 'right'
+                                                                : 'left',
+                                                        },
                                                     ]}
                                                 >
                                                     {getTranslationText({

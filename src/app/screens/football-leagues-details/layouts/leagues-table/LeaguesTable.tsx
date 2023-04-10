@@ -3,7 +3,7 @@ import { appStyles } from '@football/app/utils/constants/appStyles';
 import { getSize } from '@football/app/utils/responsive/scale';
 import React from 'react';
 import LinearGradient from 'react-native-linear-gradient';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, I18nManager } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import { ILeaguesTableProps } from '@football/app/screens/football-leagues-details/layouts/leagues-table/LeaguesTable.type';
 import styles from './LeaguesTable.style';
@@ -84,7 +84,20 @@ export const LeaguesTable = ({ leaderBoards }: ILeaguesTableProps) => {
                                             flexDirection: 'row',
                                         }}
                                     >
-                                        <Text style={[styles.text_content]}>{item.place}</Text>
+                                        <View style={{ width: '12%' }}>
+                                            <Text
+                                                style={[
+                                                    styles.text_content,
+                                                    {
+                                                        textAlign: I18nManager.isRTL
+                                                            ? 'right'
+                                                            : 'left',
+                                                    },
+                                                ]}
+                                            >
+                                                {item.place}
+                                            </Text>
+                                        </View>
                                         <View style={{ marginHorizontal: getSize.m(10) }}>
                                             <FastImage
                                                 source={{ uri: item.logo_url }}
@@ -94,8 +107,18 @@ export const LeaguesTable = ({ leaderBoards }: ILeaguesTableProps) => {
                                                 }}
                                             />
                                         </View>
-                                        <View style={{ width: '70%' }}>
-                                            <Text numberOfLines={1} style={[styles.text_content]}>
+                                        <View style={{ width: '60%' }}>
+                                            <Text
+                                                numberOfLines={1}
+                                                style={[
+                                                    styles.text_content,
+                                                    {
+                                                        textAlign: I18nManager.isRTL
+                                                            ? 'right'
+                                                            : 'left',
+                                                    },
+                                                ]}
+                                            >
                                                 {getTranslationText({
                                                     textHe: item.name_he,
                                                     textEn: item.name_en,

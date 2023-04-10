@@ -9,7 +9,7 @@ import { appStyles } from '@football/app/utils/constants/appStyles';
 import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
 import { getSize } from '@football/app/utils/responsive/scale';
 import React from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { I18nManager, Text, TouchableOpacity, View } from 'react-native';
 import { Avatar } from 'react-native-elements';
 import LinearGradient from 'react-native-linear-gradient';
 import IconEntypo from 'react-native-vector-icons/Entypo';
@@ -175,9 +175,20 @@ export const LeaguesTable = ({ league }: ILeaguesTableProps) => {
                                             flexDirection: 'row',
                                         }}
                                     >
-                                        <Text style={[appStyles.statistics_content]}>
-                                            {item.place}
-                                        </Text>
+                                        <View style={{ width: '12%' }}>
+                                            <Text
+                                                style={[
+                                                    appStyles.statistics_content,
+                                                    {
+                                                        textAlign: I18nManager.isRTL
+                                                            ? 'right'
+                                                            : 'left',
+                                                    },
+                                                ]}
+                                            >
+                                                {item.place}
+                                            </Text>
+                                        </View>
                                         <View style={{ marginHorizontal: getSize.m(8) }}>
                                             <Avatar
                                                 source={{ uri: item.logo_url }}
@@ -185,10 +196,17 @@ export const LeaguesTable = ({ league }: ILeaguesTableProps) => {
                                                 size={18}
                                             />
                                         </View>
-                                        <View style={{ width: '70%' }}>
+                                        <View style={{ width: '60%' }}>
                                             <Text
                                                 numberOfLines={1}
-                                                style={[appStyles.statistics_content]}
+                                                style={[
+                                                    appStyles.statistics_content,
+                                                    {
+                                                        textAlign: I18nManager.isRTL
+                                                            ? 'right'
+                                                            : 'left',
+                                                    },
+                                                ]}
                                             >
                                                 {getTranslationText({
                                                     textHe: item.name_he,
