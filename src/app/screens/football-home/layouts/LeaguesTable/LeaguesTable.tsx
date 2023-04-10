@@ -152,75 +152,100 @@ export const LeaguesTable = ({ league }: ILeaguesTableProps) => {
                         zIndex: 1,
                     }}
                 >
-                    {selectRound?.leader_board?.slice(0, 10).map((item, index) => {
-                        return (
-                            <LinearGradient
-                                key={item.team_id}
-                                start={{ x: 0, y: 0 }}
-                                end={{ x: 1, y: 1 }}
-                                colors={
-                                    index % 2 === 0
-                                        ? [appColors.linearLight, appColors.linearDark]
-                                        : [appColors.white, appColors.white]
-                                }
-                                style={[appStyles.flex_row_space_center, appStyles.statistic_row]}
-                            >
-                                <View
-                                    style={{
-                                        width: getSize.m(120),
-                                    }}
+                    {selectRound?.leader_board
+                        ?.slice(0, 10)
+                        .sort((a, b) => a.place - b.place)
+                        .map((item, index) => {
+                            console.log('selectRound?.leader_board', selectRound?.leader_board);
+
+                            return (
+                                <LinearGradient
+                                    key={item.team_id}
+                                    start={{ x: 0, y: 0 }}
+                                    end={{ x: 1, y: 1 }}
+                                    colors={
+                                        index % 2 === 0
+                                            ? [appColors.linearLight, appColors.linearDark]
+                                            : [appColors.white, appColors.white]
+                                    }
+                                    style={[
+                                        appStyles.flex_row_space_center,
+                                        appStyles.statistic_row,
+                                    ]}
                                 >
                                     <View
                                         style={{
-                                            flexDirection: 'row',
+                                            width: getSize.m(120),
                                         }}
                                     >
-                                        <Text style={[appStyles.statistics_content]}>
-                                            {item.place}
-                                        </Text>
-                                        <View style={{ marginHorizontal: getSize.m(8) }}>
-                                            <Avatar
-                                                source={{ uri: item.logo_url }}
-                                                rounded
-                                                size={18}
-                                            />
-                                        </View>
-                                        <View style={{ width: '70%' }}>
+                                        <View
+                                            style={{
+                                                flexDirection: 'row',
+                                            }}
+                                        >
                                             <Text
-                                                numberOfLines={1}
-                                                style={[appStyles.statistics_content]}
+                                                style={[
+                                                    appStyles.statistics_content,
+                                                    { width: getSize.m(15) },
+                                                ]}
                                             >
-                                                {getTranslationText({
-                                                    textHe: item.name_he,
-                                                    textEn: item.name_en,
-                                                })}
+                                                {item.place}
                                             </Text>
+                                            <View style={{ marginHorizontal: getSize.m(8) }}>
+                                                <Avatar
+                                                    source={{ uri: item.logo_url }}
+                                                    rounded
+                                                    size={18}
+                                                />
+                                            </View>
+                                            <View style={{ width: '70%' }}>
+                                                <Text
+                                                    style={[
+                                                        appStyles.statistics_content,
+                                                        { textAlign: 'left' },
+                                                    ]}
+                                                >
+                                                    {getTranslationText({
+                                                        textHe: item.name_he,
+                                                        textEn: item.name_en,
+                                                    })}
+                                                </Text>
+                                            </View>
                                         </View>
                                     </View>
-                                </View>
-                                <View style={{ width: getSize.m(30) }}>
-                                    <Text style={appStyles.statistics_content}>{item.games}</Text>
-                                </View>
-                                <View style={{ width: getSize.m(30) }}>
-                                    <Text style={appStyles.statistics_content}>{item.wins}</Text>
-                                </View>
-                                <View style={{ width: getSize.m(30) }}>
-                                    <Text style={appStyles.statistics_content}>{item.ties}</Text>
-                                </View>
-                                <View style={{ width: getSize.m(30) }}>
-                                    <Text style={appStyles.statistics_content}>
-                                        {item.difference}
-                                    </Text>
-                                </View>
-                                <View style={{ width: getSize.m(40) }}>
-                                    <Text style={appStyles.statistics_content}>{item.goals}</Text>
-                                </View>
-                                <View style={{ width: getSize.m(30) }}>
-                                    <Text style={appStyles.statistics_content}>{item.score}</Text>
-                                </View>
-                            </LinearGradient>
-                        );
-                    })}
+                                    <View style={{ width: getSize.m(30) }}>
+                                        <Text style={appStyles.statistics_content}>
+                                            {item.games}
+                                        </Text>
+                                    </View>
+                                    <View style={{ width: getSize.m(30) }}>
+                                        <Text style={appStyles.statistics_content}>
+                                            {item.wins}
+                                        </Text>
+                                    </View>
+                                    <View style={{ width: getSize.m(30) }}>
+                                        <Text style={appStyles.statistics_content}>
+                                            {item.ties}
+                                        </Text>
+                                    </View>
+                                    <View style={{ width: getSize.m(30) }}>
+                                        <Text style={appStyles.statistics_content}>
+                                            {item.difference}
+                                        </Text>
+                                    </View>
+                                    <View style={{ width: getSize.m(40) }}>
+                                        <Text style={appStyles.statistics_content}>
+                                            {item.goals}
+                                        </Text>
+                                    </View>
+                                    <View style={{ width: getSize.m(30) }}>
+                                        <Text style={appStyles.statistics_content}>
+                                            {item.score}
+                                        </Text>
+                                    </View>
+                                </LinearGradient>
+                            );
+                        })}
                 </View>
             </View>
         </View>
