@@ -13,6 +13,7 @@ import {
     FlatList,
     ImageBackground,
     SafeAreaView,
+    ScrollView,
     StatusBar,
     Text,
     TouchableOpacity,
@@ -101,7 +102,6 @@ export const LeaguesScreen = ({ navigation, route }: ILeaguesScreenProps) => {
                             />
                         </View>
                     </View>
-
                     <View
                         style={[
                             appStyles.flex,
@@ -122,7 +122,7 @@ export const LeaguesScreen = ({ navigation, route }: ILeaguesScreenProps) => {
                                     },
                                 ]}
                             >
-                                <View>
+                                <ScrollView>
                                     <Text style={styles.text_suggestion}>
                                         {t('leagues.suggestion')}
                                     </Text>
@@ -133,7 +133,7 @@ export const LeaguesScreen = ({ navigation, route }: ILeaguesScreenProps) => {
                                         renderItem={renderItem}
                                         numColumns={1}
                                     />
-                                </View>
+                                </ScrollView>
                             </View>
                         ) : !findLeagueType ? (
                             <View
