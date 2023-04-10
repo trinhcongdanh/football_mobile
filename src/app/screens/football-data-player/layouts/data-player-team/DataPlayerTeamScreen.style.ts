@@ -143,6 +143,7 @@ const styles = StyleSheet.create({
         lineHeight: getSize.m(14),
         fontFamily: AppFonts.semibold,
         color: appColors.text_dark_blue,
+        textAlign: 'left',
     },
 
     item: {
