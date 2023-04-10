@@ -122,9 +122,7 @@ export const Statistics = ({
                                                     style={[
                                                         appStyles.statistics_content,
                                                         {
-                                                            textAlign: I18nManager.isRTL
-                                                                ? 'right'
-                                                                : 'left',
+                                                            textAlign: 'left',
                                                         },
                                                     ]}
                                                 >
@@ -136,16 +134,14 @@ export const Statistics = ({
                                                 rounded
                                                 size={18}
                                             />
-                                            <View style={{ width: '70%' }}>
+                                            <View style={{ width: '60%' }}>
                                                 <Text
                                                     numberOfLines={1}
                                                     style={[
                                                         appStyles.statistics_content,
                                                         {
                                                             marginLeft: getSize.m(10),
-                                                            textAlign: I18nManager.isRTL
-                                                                ? 'right'
-                                                                : 'left',
+                                                            textAlign: 'left',
                                                         },
                                                     ]}
                                                 >

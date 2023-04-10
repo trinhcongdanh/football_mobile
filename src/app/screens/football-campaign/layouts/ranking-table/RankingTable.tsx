@@ -128,9 +128,7 @@ export const RankingTable = ({ data, groupName, topTeam }: IRankingTableProps) =
                                                 style={[
                                                     appStyles.statistics_content,
                                                     {
-                                                        textAlign: I18nManager.isRTL
-                                                            ? 'right'
-                                                            : 'left',
+                                                        textAlign: 'left',
                                                     },
                                                 ]}
                                             >
@@ -177,9 +175,7 @@ export const RankingTable = ({ data, groupName, topTeam }: IRankingTableProps) =
                                                         appStyles.statistics_content,
                                                         {
                                                             marginLeft: getSize.m(3),
-                                                            textAlign: I18nManager.isRTL
-                                                                ? 'right'
-                                                                : 'left',
+                                                            textAlign: 'left',
                                                         },
                                                     ]}
                                                 >

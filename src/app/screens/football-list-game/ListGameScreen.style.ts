@@ -40,9 +40,6 @@ const styles = StyleSheet.create({
         color: appColors.text_dark_blue,
         fontFamily: AppFonts.bold,
         lineHeight: getSize.m(18),
-        width: getSize.m(30),
-        marginLeft: getSize.m(20),
-        textAlign: 'center',
     },
 
     name_club: {
@@ -50,6 +47,7 @@ const styles = StyleSheet.create({
         lineHeight: getSize.m(14),
         fontFamily: AppFonts.bold,
         color: appColors.text_dark_blue,
+        textAlign: 'left',
     },
 
     calendar: {
@@ -65,7 +63,7 @@ const styles = StyleSheet.create({
         lineHeight: getSize.m(14.5),
         fontFamily: AppFonts.semibold,
         marginLeft: getSize.m(5),
-        width: getSize.m(50),
+        textAlign: 'left',
     },
 });
 

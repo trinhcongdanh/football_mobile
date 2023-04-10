@@ -12,7 +12,8 @@ const styles = StyleSheet.create({
         borderColor: appColors.separator,
         borderWidth: getSize.m(1),
         borderRadius: getSize.m(15),
-        paddingVertical: getSize.m(27),
+        paddingTop: getSize.m(27),
+        paddingBottom: getSize.m(10),
         marginHorizontal: getSize.m(14),
     },
     icon_about: {
