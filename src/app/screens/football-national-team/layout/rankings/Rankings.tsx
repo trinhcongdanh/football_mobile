@@ -4,7 +4,7 @@ import { appColors } from '@football/app/utils/constants/appColors';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import { getSize } from '@football/app/utils/responsive/scale';
 import React from 'react';
-import { Text, View } from 'react-native';
+import { I18nManager, Text, View } from 'react-native';
 import { Avatar } from 'react-native-elements';
 import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/AntDesign';
@@ -80,7 +80,16 @@ export const Rankings = ({ topTeam }: IRankingsProps) => {
                             style={[appStyles.flex_row_space_center, appStyles.statistic_row]}
                         >
                             <View style={[appStyles.flex_row_align, { width: getSize.m(30) }]}>
-                                <Text style={appStyles.statistics_content}>{index + 1}</Text>
+                                <Text
+                                    style={[
+                                        appStyles.statistics_content,
+                                        {
+                                            textAlign: I18nManager.isRTL ? 'right' : 'left',
+                                        },
+                                    ]}
+                                >
+                                    {index + 1}
+                                </Text>
                                 <View
                                     style={{
                                         marginLeft: getSize.m(2),
@@ -124,20 +133,23 @@ export const Rankings = ({ topTeam }: IRankingsProps) => {
                                         rounded
                                         size={20}
                                     />
-                                    <Text
-                                        numberOfLines={1}
-                                        style={[
-                                            appStyles.statistics_content,
-                                            {
-                                                marginLeft: getSize.m(3),
-                                            },
-                                        ]}
-                                    >
-                                        {getTranslationText({
-                                            textHe: item.name_he,
-                                            textEn: item.name_en,
-                                        })}
-                                    </Text>
+                                    <View style={{ width: '70%' }}>
+                                        <Text
+                                            numberOfLines={1}
+                                            style={[
+                                                appStyles.statistics_content,
+                                                {
+                                                    marginLeft: getSize.m(3),
+                                                    textAlign: I18nManager.isRTL ? 'right' : 'left',
+                                                },
+                                            ]}
+                                        >
+                                            {getTranslationText({
+                                                textHe: item.name_he,
+                                                textEn: item.name_en,
+                                            })}
+                                        </Text>
+                                    </View>
                                 </View>
                             </View>
                             <View style={{ width: getSize.m(28) }}>
