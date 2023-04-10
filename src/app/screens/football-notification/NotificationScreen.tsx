@@ -11,9 +11,25 @@ import { getSize } from '@football/app/utils/responsive/scale';
 import { appColors } from '@football/app/utils/constants/appColors';
 import FastImage from 'react-native-fast-image';
 import { AppImages } from '@football/app/assets/images';
+import { useDateTime } from '@football/app/utils/hooks/useDateTime';
+import moment from 'moment';
 
 export const NotificationScreen = ({ navigation, route }: INotificationScreenProps) => {
-    const { t, onGoBack, contents, getTranslationText } = useViewModel({ navigation, route });
+    const {
+        t,
+        onGoBack,
+        contents,
+        getTranslationText,
+        notifications,
+        handleNotification,
+    } = useViewModel({
+        navigation,
+        route,
+    });
+
+    const { getDate } = useDateTime();
+
+    console.log('notifications', notifications);
 
     return (
         <View style={appStyles.flex}>
@@ -49,42 +65,51 @@ export const NotificationScreen = ({ navigation, route }: INotificationScreenPro
                         </View>
                         <View style={styles.number_notification_active}>
                             <Text style={styles.number_notification_active_text}>
-                                {contents.length} {t('notification.active')}
+                                {notifications.length} {t('notification.active')}
                             </Text>
                         </View>
                     </View>
-                    <View
-                        style={[
-                            appStyles.package,
-                            { marginTop: getSize.m(0), minHeight: getSize.m(900) },
-                        ]}
-                    >
-                        <ScrollView>
-                            {contents.map(content => {
+                    <ScrollView>
+                        <View
+                            style={[
+                                appStyles.package,
+                                { marginTop: getSize.m(0), minHeight: getSize.m(900) },
+                            ]}
+                        >
+                            {notifications.map(notification => {
                                 return (
-                                    <TouchableOpacity style={styles.container_notification}>
+                                    <TouchableOpacity
+                                        style={styles.container_notification}
+                                        onPress={() => handleNotification(notification.payload)}
+                                    >
                                         <View>
-                                            <Text style={styles.text_notification}>
-                                                {getTranslationText({
-                                                    textHe: content?.content_he,
-                                                    textEn: content?.content_en,
-                                                })}
-                                            </Text>
+                                            <View>
+                                                <Text style={styles.text_notification}>
+                                                    {notification.title}
+                                                </Text>
+                                                <Text style={styles.text_notification}>
+                                                    {notification.message}
+                                                </Text>
+                                            </View>
                                             <View
                                                 style={[
                                                     appStyles.flex_row_align,
                                                     { marginTop: getSize.m(4) },
                                                 ]}
                                             >
-                                                <Text style={styles.date_time}>{content.time}</Text>
-                                                <Text style={styles.date_time}>{content.date}</Text>
+                                                <Text style={styles.date_time}>
+                                                    {moment(
+                                                        notification.tc_item_creation,
+                                                        'DD-MM-YYY'
+                                                    ).format('DD/MM')}
+                                                </Text>
                                             </View>
                                         </View>
                                     </TouchableOpacity>
                                 );
                             })}
-                        </ScrollView>
-                    </View>
+                        </View>
+                    </ScrollView>
                 </SafeAreaView>
             </BackGround>
         </View>

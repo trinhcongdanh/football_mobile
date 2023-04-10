@@ -37,6 +37,7 @@ const styles = StyleSheet.create({
         fontSize: getSize.m(14),
         lineHeight: getSize.m(18),
         color: appColors.text_dark_blue,
+        textAlign: 'left',
     },
     date_time: {
         fontFamily: AppFonts.bold,
