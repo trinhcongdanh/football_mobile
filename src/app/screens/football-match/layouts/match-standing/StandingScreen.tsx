@@ -122,12 +122,21 @@ export const StandingScreen = ({ navigation, route }: IStandingScreenProps) => {
                                         <View
                                             style={[
                                                 appStyles.flex_row_align,
-                                                { width: getSize.m(34) },
+                                                { width: getSize.m(40) },
                                             ]}
                                         >
-                                            <Text style={appStyles.statistics_content}>
-                                                {item.place}
-                                            </Text>
+                                            <View style={{ width: '38%' }}>
+                                                <Text
+                                                    style={[
+                                                        appStyles.statistics_content,
+                                                        {
+                                                            textAlign: 'left',
+                                                        },
+                                                    ]}
+                                                >
+                                                    {item.place}
+                                                </Text>
+                                            </View>
                                             <View
                                                 style={{
                                                     marginLeft: getSize.m(4),
@@ -163,17 +172,23 @@ export const StandingScreen = ({ navigation, route }: IStandingScreenProps) => {
                                                     rounded
                                                     size={20}
                                                 />
-                                                <Text
-                                                    style={[
-                                                        appStyles.statistics_content,
-                                                        { marginLeft: getSize.m(6) },
-                                                    ]}
-                                                >
-                                                    {getTranslationText({
-                                                        textHe: item.name_he,
-                                                        textEn: item.name_en,
-                                                    })}
-                                                </Text>
+                                                <View style={{ width: '70%' }}>
+                                                    <Text
+                                                        numberOfLines={2}
+                                                        style={[
+                                                            appStyles.statistics_content,
+                                                            {
+                                                                marginLeft: getSize.m(3),
+                                                                textAlign: 'left',
+                                                            },
+                                                        ]}
+                                                    >
+                                                        {getTranslationText({
+                                                            textHe: item.name_he,
+                                                            textEn: item.name_en,
+                                                        })}
+                                                    </Text>
+                                                </View>
                                             </View>
                                         </View>
                                         <View style={{ width: getSize.m(30) }}>
