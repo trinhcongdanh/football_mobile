@@ -420,6 +420,8 @@ const resources = {
                     year: 'שנה',
                     name: 'שם קבוצה',
                     date: 'תאריך',
+                    trophy: 'מחזיקות גביע',
+                    around: 'סיבובי הגביע',
                 },
             },
             group_page: {
