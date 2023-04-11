@@ -265,7 +265,7 @@ const useEventHandler = (state: any, route: any) => {
         if (previousScreen && previousScreen === ScreenName.HomePage) {
             console.log('Go Back 1');
             popToTop();
-            navigate(ScreenName.SideBar);
+            replace(ScreenName.SideBar);
         } else {
             console.log('Go Back 2');
             goBack();
@@ -733,7 +733,7 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
         const previousScreen = route?.params?.previousScreen;
         if (previousScreen && previousScreen === ScreenName.HomePage) {
             popToTop();
-            navigate(ScreenName.SideBar);
+            replace(ScreenName.SideBar);
         } else {
             goBack();
         }
