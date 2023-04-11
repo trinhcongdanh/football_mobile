@@ -29,7 +29,7 @@ export const Rankings = ({ topTeam }: IRankingsProps) => {
                         {t('national_team.ranking_table.place')}
                     </Text>
                 </View>
-                <View style={{ width: getSize.m(60) }}>
+                <View style={{ width: getSize.m(100) }}>
                     <Text style={[appStyles.statistics_header, { textAlign: 'left' }]}>
                         {t('national_team.ranking_table.team')}
                     </Text>
@@ -116,7 +116,7 @@ export const Rankings = ({ topTeam }: IRankingsProps) => {
                             <View
                                 style={[
                                     {
-                                        width: getSize.m(60),
+                                        width: getSize.m(100),
                                     },
                                 ]}
                             >
@@ -133,9 +133,9 @@ export const Rankings = ({ topTeam }: IRankingsProps) => {
                                         rounded
                                         size={20}
                                     />
-                                    <View style={{ width: '60%' }}>
+                                    <View style={{ width: '70%' }}>
                                         <Text
-                                            numberOfLines={1}
+                                            numberOfLines={2}
                                             style={[
                                                 appStyles.statistics_content,
                                                 {
