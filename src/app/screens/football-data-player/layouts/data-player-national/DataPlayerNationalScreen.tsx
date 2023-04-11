@@ -159,7 +159,16 @@ export const DataPlayerNationalScreen = ({ player }: IDataPlayerNationalScreenPr
                                         </Text>
                                         <Text style={[appStyles.number]}>{item?.games}</Text>
                                         <Text style={[appStyles.number]}>{item?.goals}</Text>
-                                        {!item?.games && !item?.goals ? null : (
+                                        {!item?.games && !item?.goals ? (
+                                            <TouchableOpacity
+                                                style={[
+                                                    styles.details,
+                                                    {
+                                                        backgroundColor: appColors.gray,
+                                                    },
+                                                ]}
+                                            />
+                                        ) : (
                                             <TouchableOpacity
                                                 onPress={() =>
                                                     onNavigateGoalTopTeam(

@@ -138,7 +138,10 @@ const styles = StyleSheet.create({
     },
 
     details: {
-        padding: getSize.m(10),
+        width: getSize.m(40),
+        height: getSize.m(40),
+        justifyContent: 'center',
+        alignItems: 'center',
         backgroundColor: appColors.separator,
         borderRadius: getSize.m(30),
     },

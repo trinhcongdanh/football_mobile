@@ -284,9 +284,7 @@ export const DataPlayerTeamScreen = ({ player }: IDataPlayerTeamScreenProps) => 
                                                     <View style={[appStyles.flex_row_align_center]}>
                                                         <View
                                                             style={{
-                                                                width: game?.team1?.logo_url
-                                                                    ? getSize.m(32)
-                                                                    : getSize.m(60),
+                                                                width: getSize.m(60),
                                                             }}
                                                         >
                                                             <Text
@@ -299,7 +297,7 @@ export const DataPlayerTeamScreen = ({ player }: IDataPlayerTeamScreenProps) => 
                                                                 })}
                                                             </Text>
                                                         </View>
-                                                        {game?.team1?.logo_url ? (
+                                                        {/* {game?.team1?.logo_url ? (
                                                             <View style={styles.avt_club}>
                                                                 <FastImage
                                                                     source={{
@@ -312,7 +310,7 @@ export const DataPlayerTeamScreen = ({ player }: IDataPlayerTeamScreenProps) => 
                                                                     }}
                                                                 />
                                                             </View>
-                                                        ) : null}
+                                                        ) : null} */}
                                                     </View>
                                                     <View
                                                         style={{
@@ -324,7 +322,7 @@ export const DataPlayerTeamScreen = ({ player }: IDataPlayerTeamScreenProps) => 
                                                         </Text>
                                                     </View>
                                                     <View style={appStyles.flex_row_align_center}>
-                                                        {game?.team2?.logo_url ? (
+                                                        {/* {game?.team2?.logo_url ? (
                                                             <View style={styles.avt_club}>
                                                                 <FastImage
                                                                     source={{
@@ -337,12 +335,10 @@ export const DataPlayerTeamScreen = ({ player }: IDataPlayerTeamScreenProps) => 
                                                                     }}
                                                                 />
                                                             </View>
-                                                        ) : null}
+                                                        ) : null} */}
                                                         <View
                                                             style={{
-                                                                width: game?.team2?.logo_url
-                                                                    ? getSize.m(32)
-                                                                    : getSize.m(60),
+                                                                width: getSize.m(60),
                                                             }}
                                                         >
                                                             <Text
