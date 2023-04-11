@@ -49,12 +49,12 @@ export const CupAround = ({ cyclesDetails, cup }: ICupAroundProps) => {
                 ]}
             >
                 <View style={{ width: getSize.m(90) }}>
-                    <Text style={[styles.header, { textAlign: 'left' }]}>
+                    <Text style={[styles.header, { textAlign: 'left', marginLeft: getSize.m(4) }]}>
                         {t('state_cup.statistics.date')}
                     </Text>
                 </View>
                 <View style={{ width: getSize.m(200) }}>
-                    <Text style={[styles.header, { textAlign: 'left' }]}>
+                    <Text style={[styles.header, { textAlign: 'left', marginLeft: getSize.m(-4) }]}>
                         {t('state_cup.statistics.team_name')}
                     </Text>
                 </View>
@@ -86,7 +86,10 @@ export const CupAround = ({ cyclesDetails, cup }: ICupAroundProps) => {
                                     width: getSize.m(200),
                                 }}
                             >
-                                <Text style={[styles.text_content, { textAlign: 'left' }]}>
+                                <Text
+                                    numberOfLines={2}
+                                    style={[styles.text_content, { textAlign: 'left' }]}
+                                >
                                     {getTranslationText({
                                         textHe: item.group_name_he,
                                         textEn: item.group_name_en,

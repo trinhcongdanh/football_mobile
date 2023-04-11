@@ -19,14 +19,14 @@ export const Appearances = ({ topTeam }: IAppearancesProps) => {
         <View style={appStyles.item_statistics}>
             <View style={[appStyles.flex_row_space_center]}>
                 <Text style={[appStyles.statistics_title, { fontSize: getSize.m(16) }]}>
-                    {t('national_team.conquerors.title')}
+                    {t('national_team.performances.title')}
                 </Text>
                 <TouchableOpacity
                     onPress={() => onNavigateAppearances(topTeam)}
                     style={appStyles.flex_row_space_center}
                 >
                     <Text style={appStyles.statistics_see_all}>
-                        {t('national_team.conquerors.full_list')}
+                        {t('national_team.performances.full_list')}
                     </Text>
                     <IconFeather
                         name={appIcons.ic_left_ios}
@@ -37,7 +37,7 @@ export const Appearances = ({ topTeam }: IAppearancesProps) => {
                 </TouchableOpacity>
             </View>
             <View style={{ marginTop: getSize.m(10) }}>
-                {topTeam?.last_campaign?.goal_kickers
+                {topTeam?.last_campaign?.players_appearances
                     .slice(0, MAX_TOPTEAM_LASTCAMPAIGN_PLAYERAPPEARANCE)
                     .map((item, index) => {
                         return (
@@ -90,7 +90,7 @@ export const Appearances = ({ topTeam }: IAppearancesProps) => {
                                             },
                                         ]}
                                     >
-                                        {item.num_of_goals}
+                                        {item.num_of_appearances}
                                     </Text>
                                 </View>
                             </TouchableOpacity>

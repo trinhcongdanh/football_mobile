@@ -1,11 +1,9 @@
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
-import { IGoalKickersProps } from '@football/app/screens/football-national-team/layout/goal-kickers/GoalKickers.type';
+import { IAppearancesProps } from '@football/app/screens/football-national-team/layout/appearances/Appearances.type';
 import { ScreenName, TopTeamPlayerType } from '@football/app/utils/constants/enum';
 import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
 import { TopTeamModel } from '@football/core/models/TopTeamModelResponse';
 import { useTranslation } from 'react-i18next';
-import { useDispatch } from 'react-redux';
-import { addVideo, setShowVideo } from 'src/store/video/Video.slice';
 
 /**
  * view settings variables
@@ -36,7 +34,7 @@ const useEventHandler = (state: any) => {
     const onNavigateAppearances = (topTeam?: TopTeamModel) => {
         navigate(ScreenName.ConquerorsPage, {
             topTeam: topTeam,
-            type: TopTeamPlayerType.GoalKickers,
+            type: TopTeamPlayerType.Appearances,
         });
     };
 
@@ -59,7 +57,7 @@ const useEventHandler = (state: any) => {
  * @param param0
  * @returns
  */
-export const useViewModel = ({ topTeam }: IGoalKickersProps) => {
+export const useViewModel = ({ topTeam }: IAppearancesProps) => {
     const state = useViewState();
     const eventHandler = useEventHandler(state);
     return {
