@@ -1,9 +1,9 @@
 import { getSize } from '@football/app/utils/responsive/scale';
-import { StyleSheet } from 'react-native';
+import { I18nManager, StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
     dotContainer: {
-        flexDirection: 'row-reverse',
+        flexDirection: I18nManager.isRTL ? 'row-reverse' : 'row',
         justifyContent: 'center',
         position: 'absolute',
         bottom: getSize.m(-14),

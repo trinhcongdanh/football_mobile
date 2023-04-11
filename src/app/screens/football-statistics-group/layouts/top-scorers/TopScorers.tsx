@@ -18,7 +18,11 @@ export const TopScorers = ({ listGames, handleTeamGoalKickersList }: ITopScorers
     return (
         <View style={appStyles.item_statistics}>
             <View style={[appStyles.flex_row_space_center]}>
-                <Text style={appStyles.statistics_title}>{t('statistics.group.top_scorers')}</Text>
+                <View style={{ width: '80%' }}>
+                    <Text numberOfLines={2} style={appStyles.statistics_title}>
+                        {t('statistics.group.top_scorers')}
+                    </Text>
+                </View>
                 <TouchableOpacity
                     style={appStyles.flex_row_space_center}
                     onPress={handleTeamGoalKickersList}
@@ -50,7 +54,7 @@ export const TopScorers = ({ listGames, handleTeamGoalKickersList }: ITopScorers
                 </View>
                 <View
                     style={{
-                        width: getSize.m(44),
+                        width: getSize.m(46),
                     }}
                 >
                     <Text style={[appStyles.statistics_header, { fontSize: getSize.m(12) }]}>
@@ -96,7 +100,7 @@ export const TopScorers = ({ listGames, handleTeamGoalKickersList }: ITopScorers
                             </View>
                             <View
                                 style={{
-                                    width: getSize.m(44),
+                                    width: getSize.m(46),
                                 }}
                             >
                                 <Text
