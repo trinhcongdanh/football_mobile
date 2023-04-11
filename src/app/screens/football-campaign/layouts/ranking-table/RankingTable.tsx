@@ -54,22 +54,12 @@ export const RankingTable = ({ data, groupName, topTeam }: IRankingTableProps) =
                         ]}
                     >
                         <View style={{ width: getSize.m(34) }}>
-                            <Text
-                                style={[
-                                    appStyles.statistics_header,
-                                    { textAlign: 'left', marginLeft: getSize.m(4) },
-                                ]}
-                            >
+                            <Text style={[appStyles.statistics_header, { textAlign: 'left' }]}>
                                 {t('match.standing.place')}
                             </Text>
                         </View>
                         <View style={{ width: getSize.m(80) }}>
-                            <Text
-                                style={[
-                                    appStyles.statistics_header,
-                                    { textAlign: 'left', marginLeft: getSize.m(4) },
-                                ]}
-                            >
+                            <Text style={[appStyles.statistics_header, { textAlign: 'left' }]}>
                                 {t('match.standing.team')}
                             </Text>
                         </View>
@@ -123,7 +113,7 @@ export const RankingTable = ({ data, groupName, topTeam }: IRankingTableProps) =
                                     <View
                                         style={[appStyles.flex_row_align, { width: getSize.m(34) }]}
                                     >
-                                        <View style={{ width: '12%' }}>
+                                        <View style={{ width: '30%' }}>
                                             <Text
                                                 style={[
                                                     appStyles.statistics_content,
@@ -170,7 +160,7 @@ export const RankingTable = ({ data, groupName, topTeam }: IRankingTableProps) =
                                             />
                                             <View style={{ width: '70%' }}>
                                                 <Text
-                                                    numberOfLines={1}
+                                                    numberOfLines={2}
                                                     style={[
                                                         appStyles.statistics_content,
                                                         {
