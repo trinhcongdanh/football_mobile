@@ -705,9 +705,9 @@ const useEffectHandler = (state: any, callback: any, eventHandler: any) => {
 
         setNewOptions((pre: Option) => ({
             ...pre,
-            favorite_israel_teams: isEmpty(favTeamIds) ? '' : favTeamIds,
-            favorite_players: isEmpty(favPlayersIds) ? '' : favPlayersIds,
-            favorite_national_teams: isEmpty(favTopTeamIds) ? '' : favTopTeamIds,
+            favorite_israel_teams: isEmpty(favTeamIds) ? [] : favTeamIds,
+            favorite_players: isEmpty(favPlayersIds) ? [] : favPlayersIds,
+            favorite_national_teams: isEmpty(favTopTeamIds) ? [] : favTopTeamIds,
         }));
     }, [state.selectedTeams, state.selectedPlayers, state.selectedTopTeams]);
 };
