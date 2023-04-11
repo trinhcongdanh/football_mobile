@@ -823,8 +823,8 @@ const resources = {
             },
             welcome: {
                 splash: 'Splash page',
-                title: 'The Israel Football Association',
-                info: 'Join us and get all the info abput your team or players!',
+                title: 'Israeli Football Association',
+                info: 'Join us and get all the info about your team or players!',
                 start: 'Start',
                 account: 'Already have an account?',
                 create: 'Connect',
@@ -976,7 +976,7 @@ const resources = {
                     no: 'pts',
                 },
                 list_game: {
-                    title: 'Games list',
+                    title: 'Games List',
                     home_away: 'Home / Away',
                     house: 'Home',
                     outside: 'Away',
@@ -991,7 +991,7 @@ const resources = {
                 },
             },
             team_squad: {
-                title: 'Personal',
+                title: 'Personnel',
                 option: {
                     players: 'Players',
                     officials: 'Staff',
@@ -1123,7 +1123,7 @@ const resources = {
                 },
             },
             leagues_details: {
-                season_game: 'Game season',
+                season_game: 'Games season',
                 top_playoff: 'Top playoff',
                 league_table: {
                     title: 'League table',
@@ -1182,8 +1182,8 @@ const resources = {
             },
             goblet: {
                 title: 'Cup',
-                state_cup: 'National Cup',
-                toto_cup: 'Toto Cup',
+                state_cup: 'National cup',
+                toto_cup: 'Toto cup',
                 search_placeholder: 'Search cup',
             },
             state_cup: {
@@ -1295,7 +1295,7 @@ const resources = {
                     category: 'Category',
                     average_game: 'Avg. Game',
                     average_cycle: 'Avg. Round',
-                    average_goal: 'Average goals',
+                    average_goal: 'Avg. goals',
                     average_rebounds: 'Avg. goals received per game',
                     team_competition: 'The fair team competition',
                     total: 'Total',
@@ -1357,11 +1357,11 @@ const resources = {
             },
             conquerors: {
                 title: 'List of conquerors',
-                name: "A player's name",
+                name: 'Player name',
                 number: 'Number of goals',
                 goal_kicker_title: 'Goal Kickers',
                 appearances_kicker_title: 'Appearances',
-                number_of_goals: 'Number of goals',
+                number_of_goals: 'Num of goals',
                 appearances: 'Appearances',
             },
             magazine: {

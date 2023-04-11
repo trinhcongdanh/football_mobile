@@ -1,7 +1,7 @@
 import { AppFonts } from '@football/app/assets/fonts';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { getSize } from '@football/app/utils/responsive/scale';
-import { StyleSheet } from 'react-native';
+import { I18nManager, StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
     ic_football: {
@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
         marginHorizontal: getSize.m(5),
     },
     dotContainer: {
-        flexDirection: 'row-reverse',
+        flexDirection: I18nManager.isRTL ? 'row-reverse' : 'row',
         justifyContent: 'center',
         marginTop: getSize.m(16),
     },

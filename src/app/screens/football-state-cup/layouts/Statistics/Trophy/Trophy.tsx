@@ -47,12 +47,12 @@ export const Trophy = ({ cupHolders, cup }: ITrophyProps) => {
                 ]}
             >
                 <View style={{ width: getSize.m(90) }}>
-                    <Text style={[styles.header, { textAlign: 'left' }]}>
+                    <Text style={[styles.header, { textAlign: 'left', marginLeft: getSize.m(4) }]}>
                         {t('state_cup.statistics.season')}
                     </Text>
                 </View>
                 <View style={{ width: getSize.m(200) }}>
-                    <Text style={[styles.header, { textAlign: 'left' }]}>
+                    <Text style={[styles.header, { textAlign: 'left', marginLeft: getSize.m(-4) }]}>
                         {t('state_cup.statistics.group')}
                     </Text>
                 </View>
@@ -86,29 +86,29 @@ export const Trophy = ({ cupHolders, cup }: ITrophyProps) => {
                                     overflow: 'hidden',
                                 }}
                             >
-                                <View
-                                    style={{
-                                        flexDirection: 'row',
-                                    }}
-                                >
+                                <View style={appStyles.flex_row_align}>
                                     <Avatar
                                         source={{ uri: item.team_image_url }}
                                         rounded
                                         size={18}
                                     />
-                                    <Text
-                                        style={[
-                                            styles.text_content,
-                                            {
-                                                marginLeft: getSize.m(10),
-                                            },
-                                        ]}
-                                    >
-                                        {getTranslationText({
-                                            textHe: item.team_name_he,
-                                            textEn: item.team_name_en,
-                                        })}
-                                    </Text>
+                                    <View style={{ width: '90%' }}>
+                                        <Text
+                                            numberOfLines={2}
+                                            style={[
+                                                styles.text_content,
+                                                {
+                                                    marginLeft: getSize.m(10),
+                                                    textAlign: 'left',
+                                                },
+                                            ]}
+                                        >
+                                            {getTranslationText({
+                                                textHe: item.team_name_he,
+                                                textEn: item.team_name_en,
+                                            })}
+                                        </Text>
+                                    </View>
                                 </View>
                             </View>
                         </LinearGradient>
