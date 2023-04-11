@@ -19,14 +19,15 @@ const styles = StyleSheet.create({
     },
     cup: {
         width: getSize.m(133),
-        height: getSize.m(202),
+        height: getSize.m(186),
         position: 'absolute',
-        bottom: getSize.m(16),
+        bottom: getSize.m(28),
         zIndex: 1,
+        left: getSize.m(123),
     },
     button: {
         position: 'absolute',
-        right: Platform.OS === 'android' ? getSize.m(30) : getSize.m(50),
+        right: Platform.OS === 'android' ? getSize.m(30) : getSize.m(60),
         bottom: getSize.m(60),
         zIndex: 0,
     },
@@ -37,7 +38,7 @@ const styles = StyleSheet.create({
     },
     text_button: {
         fontFamily: AppFonts.bold,
-        fontSize: getSize.m(15),
+        fontSize: getSize.m(12),
         lineHeight: getSize.m(19.5),
         color: appColors.white,
     },
