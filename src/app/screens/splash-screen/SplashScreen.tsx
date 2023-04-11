@@ -176,23 +176,23 @@ export const SplashScreen = ({ navigation, route }: ISplashScreenProps) => {
             }
 
             if (!isEmpty(login.login) && !isNil(login.login)) {
-                navigate(ScreenName.SideBar);
-                navigation.reset({
-                    index: 0,
-                    routes: [{ name: ScreenName.SideBar as never }],
-                });
+                replace(ScreenName.SideBar);
+                // navigation.reset({
+                //     index: 0,
+                //     routes: [{ name: ScreenName.SideBar as never }],
+                // });
             } else if (!isEmpty(userLogin.otp) && !isNil(userLogin.otp)) {
-                navigate(ScreenName.SideBar);
-                navigation.reset({
-                    index: 0,
-                    routes: [{ name: ScreenName.SideBar as never }],
-                });
+                replace(ScreenName.SideBar);
+                // navigation.reset({
+                //     index: 0,
+                //     routes: [{ name: ScreenName.SideBar as never }],
+                // });
             } else {
-                navigate(ScreenName.OpeningPage);
-                navigation.reset({
-                    index: 0,
-                    routes: [{ name: ScreenName.OpeningPage as never }],
-                });
+                replace(ScreenName.OpeningPage);
+                // navigation.reset({
+                //     index: 0,
+                //     routes: [{ name: ScreenName.OpeningPage as never }],
+                // });
             }
         }
     }, [authLoaded]);
