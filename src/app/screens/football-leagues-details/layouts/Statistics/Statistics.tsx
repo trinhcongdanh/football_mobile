@@ -136,7 +136,7 @@ export const Statistics = ({
                                             />
                                             <View style={{ width: '60%' }}>
                                                 <Text
-                                                    numberOfLines={1}
+                                                    numberOfLines={2}
                                                     style={[
                                                         appStyles.statistics_content,
                                                         {

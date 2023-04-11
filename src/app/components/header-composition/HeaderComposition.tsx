@@ -50,7 +50,9 @@ export const HeaderComposition = ({
                         <Avatar rounded size={60} source={{ uri: avt_home }} />
                     </View>
                     <View style={styles.resize_name_club}>
-                        <Text style={styles.name_club}>{name_home}</Text>
+                        <Text numberOfLines={2} style={styles.name_club}>
+                            {name_home}
+                        </Text>
                     </View>
                 </View>
                 <View style={[appStyles.align_justify]}>
@@ -62,7 +64,9 @@ export const HeaderComposition = ({
                         <Avatar rounded size={getSize.m(60)} source={{ uri: avt_away }} />
                     </View>
                     <View style={styles.resize_name_club}>
-                        <Text style={styles.name_club}>{name_away}</Text>
+                        <Text numberOfLines={2} style={styles.name_club}>
+                            {name_away}
+                        </Text>
                     </View>
                 </View>
             </View>

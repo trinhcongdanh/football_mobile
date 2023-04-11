@@ -105,9 +105,9 @@ export const LeaguesTable = ({ leaderBoards }: ILeaguesTableProps) => {
                                                 }}
                                             />
                                         </View>
-                                        <View style={{ width: '60%' }}>
+                                        <View style={{ width: '50%' }}>
                                             <Text
-                                                numberOfLines={1}
+                                                numberOfLines={2}
                                                 style={[
                                                     styles.text_content,
                                                     {
