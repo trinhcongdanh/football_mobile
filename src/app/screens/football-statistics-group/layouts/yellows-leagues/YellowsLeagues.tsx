@@ -21,9 +21,11 @@ export const YellowsLeagues = ({ listGames, handleTeamGoalKickersList }: IYellow
     return (
         <View style={appStyles.item_statistics}>
             <View style={[appStyles.flex_row_space_center]}>
-                <Text style={appStyles.statistics_title}>
-                    {t('statistics.group.yellow_league')}
-                </Text>
+                <View style={{ width: '80%' }}>
+                    <Text numberOfLines={2} style={appStyles.statistics_title}>
+                        {t('statistics.group.yellow_league')}
+                    </Text>
+                </View>
                 <TouchableOpacity
                     style={appStyles.flex_row_space_center}
                     onPress={handleTeamGoalKickersList}

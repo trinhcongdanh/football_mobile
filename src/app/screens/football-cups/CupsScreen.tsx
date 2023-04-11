@@ -60,14 +60,13 @@ export const CupsScreen = ({ route }: ICupsScreenProps) => {
                                         },
                                     ]}
                                 >
-                                    <View style={{ width: getSize.m(84) }}>
+                                    <View style={{ width: getSize.m(84), left: getSize.m(16) }}>
                                         <Text
                                             style={[
                                                 appStyles.statistics_header,
                                                 {
                                                     textAlign: 'left',
                                                     fontSize: getSize.m(12),
-                                                    left: getSize.m(10),
                                                 },
                                             ]}
                                         >
@@ -76,7 +75,7 @@ export const CupsScreen = ({ route }: ICupsScreenProps) => {
                                                 : t('state_cup.cup.date')}
                                         </Text>
                                     </View>
-                                    <View style={{ width: getSize.m(180) }}>
+                                    <View style={{ width: getSize.m(180), left: getSize.m(-4) }}>
                                         <Text
                                             style={[
                                                 appStyles.statistics_header,
@@ -132,11 +131,7 @@ export const CupsScreen = ({ route }: ICupsScreenProps) => {
                                                         overflow: 'hidden',
                                                     }}
                                                 >
-                                                    <View
-                                                        style={{
-                                                            flexDirection: 'row',
-                                                        }}
-                                                    >
+                                                    <View style={appStyles.flex_row_align}>
                                                         {isCupHolders && (
                                                             <Avatar
                                                                 source={{
@@ -146,25 +141,28 @@ export const CupsScreen = ({ route }: ICupsScreenProps) => {
                                                                 size={18}
                                                             />
                                                         )}
-
-                                                        <Text
-                                                            style={[
-                                                                appStyles.statistics_content,
-                                                                {
-                                                                    marginLeft: getSize.m(10),
-                                                                    fontSize: getSize.m(14),
-                                                                },
-                                                            ]}
-                                                        >
-                                                            {getTranslationText({
-                                                                textEn: isCupHolders
-                                                                    ? item.team_name_en
-                                                                    : item.group_name_en,
-                                                                textHe: isCupHolders
-                                                                    ? item.team_name_he
-                                                                    : item.group_name_he,
-                                                            })}
-                                                        </Text>
+                                                        <View style={{ width: '80%' }}>
+                                                            <Text
+                                                                numberOfLines={2}
+                                                                style={[
+                                                                    appStyles.statistics_content,
+                                                                    {
+                                                                        marginLeft: getSize.m(10),
+                                                                        fontSize: getSize.m(14),
+                                                                        textAlign: 'left',
+                                                                    },
+                                                                ]}
+                                                            >
+                                                                {getTranslationText({
+                                                                    textEn: isCupHolders
+                                                                        ? item.team_name_en
+                                                                        : item.group_name_en,
+                                                                    textHe: isCupHolders
+                                                                        ? item.team_name_he
+                                                                        : item.group_name_he,
+                                                                })}
+                                                            </Text>
+                                                        </View>
                                                     </View>
                                                 </View>
                                             </LinearGradient>

@@ -20,9 +20,11 @@ export const ScoresOfGoalsStateCup = ({
     return (
         <View style={appStyles.item_statistics}>
             <View style={[appStyles.flex_row_space_center]}>
-                <Text style={appStyles.statistics_title}>
-                    {t('statistics.group.scorer_of_goal_state_cup')}
-                </Text>
+                <View style={{ width: '80%' }}>
+                    <Text numberOfLines={2} style={appStyles.statistics_title}>
+                        {t('statistics.group.scorer_of_goal_state_cup')}
+                    </Text>
+                </View>
                 <TouchableOpacity
                     style={appStyles.flex_row_space_center}
                     onPress={handleTeamGoalKickersList}
@@ -54,7 +56,7 @@ export const ScoresOfGoalsStateCup = ({
                 </View>
                 <View
                     style={{
-                        width: getSize.m(44),
+                        width: getSize.m(46),
                     }}
                 >
                     <Text style={[appStyles.statistics_header, { fontSize: getSize.m(12) }]}>
@@ -100,7 +102,7 @@ export const ScoresOfGoalsStateCup = ({
                             </View>
                             <View
                                 style={{
-                                    width: getSize.m(44),
+                                    width: getSize.m(46),
                                 }}
                             >
                                 <Text
