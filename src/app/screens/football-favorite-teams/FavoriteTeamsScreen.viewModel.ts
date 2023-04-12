@@ -112,7 +112,7 @@ const useViewCallback = (route: any, viewState: any) => {
         if (params?.previous_screen === ScreenName.SettingsPage) {
             goBack();
         } else {
-            clearFavoriteData(dispatch);
+            // clearFavoriteData(dispatch);
             navigate(ScreenName.FavSummaryPage);
         }
     };
