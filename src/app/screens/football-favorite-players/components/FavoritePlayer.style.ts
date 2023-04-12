@@ -19,6 +19,9 @@ const styles = StyleSheet.create({
         paddingHorizontal: getSize.m(25),
         textAlign: I18nManager.isRTL ? 'right' : 'left',
     },
+    loading: {
+        top: getSize.m(50),
+    },
 
     name_club: {
         fontSize: getSize.m(14),

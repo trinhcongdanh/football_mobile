@@ -41,7 +41,7 @@ export const FavoritePlayer = ({
     favSelected,
     chosen,
     button,
-    searchText,
+    searchTextRef,
     searchFavPlayer,
     submitSearchFavPlayer,
     handleFocusSearch,
@@ -49,6 +49,11 @@ export const FavoritePlayer = ({
 }: IFavoritePlayerProps) => {
     const { getTranslationText } = useTranslationText();
     const [favPlayers, setFavPlayers] = useState<PlayerModel[]>();
+    const [searchText, setSearchText] = useState('');
+    const handleTextChange = (newValue: string) => {
+        setSearchText(newValue);
+        searchFavPlayer(newValue);
+    };
 
     LogBox.ignoreLogs(['source.uri should not be an empty string']);
     LogBox.ignoreLogs(['SerializableStateInvariantMiddleware']);
@@ -62,7 +67,7 @@ export const FavoritePlayer = ({
         //     .sort((a, b) => {
         //         return (b.number ? 1 : 0) - (a.number ? 1 : 0);
         //     });
-        const filterPlayers = newFav.map(player => ({
+        const filterPlayers = newFav?.map(player => ({
             ...player,
             isSelected: favSelected.filter(t => t._id === player._id).length > 0,
         }));
@@ -72,121 +77,127 @@ export const FavoritePlayer = ({
         <View style={[appStyles.flex]}>
             <ImageBackground source={AppImages.img_bg_register} style={appStyles.flex}>
                 <StatusBar translucent backgroundColor="transparent" />
-                <>
-                    <SafeAreaView style={appStyles.safe_area}>
-                        <View style={[appStyles.flex, { marginTop: StatusBar.currentHeight }]}>
-                            <View style={{ paddingHorizontal: getSize.m(16) }}>
-                                <HeaderFav goSkip={onGoSkip} goBack={onGoBack} onIndex={onIndex} />
 
-                                <View style={{ marginTop: getSize.m(15) }}>
-                                    <Text
-                                        style={[
-                                            appStyles.text_title,
-                                            {
-                                                marginTop: getSize.m(0),
-                                            },
-                                        ]}
-                                    >
-                                        {title}
-                                    </Text>
-                                </View>
+                <SafeAreaView style={appStyles.safe_area}>
+                    <View style={[appStyles.flex, { marginTop: StatusBar.currentHeight }]}>
+                        <View style={{ paddingHorizontal: getSize.m(16) }}>
+                            <HeaderFav goSkip={onGoSkip} goBack={onGoBack} onIndex={onIndex} />
 
-                                <View style={[appStyles.flex_row_space_center, styles.search]}>
-                                    <TextInput
-                                        value={searchText}
-                                        placeholder={placeholder}
-                                        style={styles.text_search}
-                                        placeholderTextColor={appColors.blue_gray_dark}
-                                        onChangeText={searchFavPlayer}
-                                        onBlur={submitSearchFavPlayer}
-                                        onFocus={handleFocusSearch}
-                                    />
-                                    <TouchableOpacity
-                                        onPress={submitSearchFavPlayer}
-                                        style={
-                                            searchText?.length
-                                                ? { transform: [{ scale: 1.2 }] }
-                                                : null
-                                        }
-                                    >
-                                        <Icon
-                                            style={{ marginRight: getSize.m(14) }}
-                                            name={appIcons.ic_search}
-                                            color={
-                                                searchText?.length
-                                                    ? appColors.white
-                                                    : appColors.blue_gray_dark
-                                            }
-                                            size={getSize.m(16)}
-                                        />
-                                    </TouchableOpacity>
-                                </View>
+                            <View style={{ marginTop: getSize.m(15) }}>
+                                <Text
+                                    style={[
+                                        appStyles.text_title,
+                                        {
+                                            marginTop: getSize.m(0),
+                                        },
+                                    ]}
+                                >
+                                    {title}
+                                </Text>
                             </View>
-                            <ScrollView>
-                                <View style={styles.content_item}>
-                                    {[
-                                        ...favSelected?.map(a => ({ ...a, isSelected: true })),
-                                        ...(favPlayers
-                                            ? favPlayers.filter(t => t && !t.isSelected).map(a => a)
-                                            : []),
-                                    ]?.map((item: any, index: number) => {
-                                        return (
-                                            <TouchableOpacity
-                                                key={index.toString()}
+
+                            <View style={[appStyles.flex_row_space_center, styles.search]}>
+                                <TextInput
+                                    value={searchText}
+                                    placeholder={placeholder}
+                                    style={styles.text_search}
+                                    placeholderTextColor={appColors.blue_gray_dark}
+                                    onChangeText={handleTextChange}
+                                    // onBlur={submitSearchFavPlayer}
+                                    // onFocus={handleFocusSearch}
+                                />
+                                <TouchableOpacity
+                                    onPress={() => submitSearchFavPlayer(searchText)}
+                                    style={
+                                        searchText?.length ? { transform: [{ scale: 1.2 }] } : null
+                                    }
+                                >
+                                    <Icon
+                                        style={{ marginRight: getSize.m(14) }}
+                                        name={appIcons.ic_search}
+                                        color={
+                                            searchText?.length
+                                                ? appColors.white
+                                                : appColors.blue_gray_dark
+                                        }
+                                        size={getSize.m(16)}
+                                    />
+                                </TouchableOpacity>
+                            </View>
+                            {isLoading && (
+                                <ActivityIndicator
+                                    style={[appStyles.flex_center, styles.loading]}
+                                    size="large"
+                                    color={appColors.blue_dark}
+                                />
+                            )}
+                        </View>
+                        <ScrollView>
+                            <View style={styles.content_item}>
+                                {[
+                                    ...favSelected?.map(a => ({ ...a, isSelected: true })),
+                                    ...(favPlayers
+                                        ? favPlayers?.filter(t => t && !t.isSelected).map(a => a)
+                                        : []),
+                                ]?.map((item: any, index: number) => {
+                                    return (
+                                        <TouchableOpacity
+                                            key={index.toString()}
+                                            style={[
+                                                styles.item,
+                                                {
+                                                    backgroundColor:
+                                                        item.isSelected === true
+                                                            ? 'rgba(20, 36, 86, 1)'
+                                                            : 'transparent',
+                                                    borderWidth:
+                                                        item.isSelected === true
+                                                            ? getSize.m(1)
+                                                            : getSize.m(0),
+                                                },
+                                            ]}
+                                            onPress={() => {
+                                                handleSelected(item);
+                                            }}
+                                        >
+                                            <Image
+                                                source={{
+                                                    uri: item.image_url,
+                                                }}
                                                 style={[
-                                                    styles.item,
+                                                    styles.image_item,
                                                     {
-                                                        backgroundColor:
-                                                            item.isSelected === true
-                                                                ? 'rgba(20, 36, 86, 1)'
-                                                                : 'transparent',
-                                                        borderWidth:
-                                                            item.isSelected === true
-                                                                ? getSize.m(1)
+                                                        borderRadius:
+                                                            onIndex === 1
+                                                                ? getSize.m(28)
                                                                 : getSize.m(0),
                                                     },
                                                 ]}
-                                                onPress={() => {
-                                                    handleSelected(item);
-                                                }}
-                                            >
-                                                <Image
-                                                    source={{
-                                                        uri: item.image_url,
-                                                    }}
-                                                    style={[
-                                                        styles.image_item,
-                                                        {
-                                                            borderRadius:
-                                                                onIndex === 1
-                                                                    ? getSize.m(28)
-                                                                    : getSize.m(0),
-                                                        },
-                                                    ]}
-                                                />
-                                                <Text numberOfLines={2} style={styles.name_item}>
-                                                    {getTranslationText({
-                                                        textHe: item.name_he,
-                                                        textEn: item.name_en,
-                                                    })}
-                                                </Text>
-                                                {item.isSelected === true && (
-                                                    <View style={styles.check}>
-                                                        <Icon
-                                                            name={appIcons.ic_check}
-                                                            size={getSize.m(10)}
-                                                            color={appColors.white}
-                                                            style={styles.ic_check}
-                                                        />
-                                                    </View>
-                                                )}
-                                            </TouchableOpacity>
-                                        );
-                                    })}
-                                </View>
-                            </ScrollView>
-                        </View>
-                    </SafeAreaView>
+                                            />
+                                            <Text numberOfLines={2} style={styles.name_item}>
+                                                {getTranslationText({
+                                                    textHe: item.name_he,
+                                                    textEn: item.name_en,
+                                                })}
+                                            </Text>
+                                            {item.isSelected === true && (
+                                                <View style={styles.check}>
+                                                    <Icon
+                                                        name={appIcons.ic_check}
+                                                        size={getSize.m(10)}
+                                                        color={appColors.white}
+                                                        style={styles.ic_check}
+                                                    />
+                                                </View>
+                                            )}
+                                        </TouchableOpacity>
+                                    );
+                                })}
+                            </View>
+                        </ScrollView>
+                    </View>
+                </SafeAreaView>
+                {!isEmpty(favPlayers) && (
                     <View style={styles.select_item}>
                         <View style={styles.result_select}>
                             <View style={styles.image_select}>
@@ -272,7 +283,7 @@ export const FavoritePlayer = ({
                             />
                         </View>
                     </View>
-                </>
+                )}
             </ImageBackground>
         </View>
     );

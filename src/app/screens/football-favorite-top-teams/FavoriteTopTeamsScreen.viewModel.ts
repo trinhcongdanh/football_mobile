@@ -25,6 +25,7 @@ import { setSettingFavTopTeam } from 'src/store/SettingSelected.slice';
 import { clearFavoriteData } from '@football/app/utils/functions/clearFavoriteData';
 import TopTeamService from '@football/core/services/TopTeam.service';
 import sortBy from 'lodash/sortBy';
+import { resetFavPlayer } from 'src/store/FavPlayer.slice';
 
 export const useViewModel = ({ navigation, route }: IFavoriteTopTeamsScreenProps) => {
     const { t } = useTranslation();
@@ -93,6 +94,7 @@ export const useViewModel = ({ navigation, route }: IFavoriteTopTeamsScreenProps
 
     const onGoBack = () => {
         dispatch(resetTopTeams([]));
+        dispatch(resetFavPlayer([]));
         goBack();
         return true;
     };
@@ -109,6 +111,7 @@ export const useViewModel = ({ navigation, route }: IFavoriteTopTeamsScreenProps
             goBack();
         } else {
             navigate(ScreenName.FavSummaryPage);
+            dispatch(resetTopTeams([]));
         }
     };
 

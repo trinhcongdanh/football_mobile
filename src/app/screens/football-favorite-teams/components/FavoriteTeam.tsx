@@ -78,56 +78,6 @@ export const FavoriteTeam = ({
         <View style={[appStyles.flex]}>
             <ImageBackground source={AppImages.img_bg_register} style={appStyles.flex}>
                 <StatusBar translucent backgroundColor="transparent" />
-                {/* {isEmpty(favTeams) ? (
-                    <SafeAreaView style={appStyles.safe_area}>
-                        <View style={[appStyles.flex, appStyles.container]}>
-                            <HeaderFav goSkip={onGoSkip} goBack={onGoBack} onIndex={onIndex} />
-                            <View style={{ marginTop: getSize.m(15) }}>
-                                <Text
-                                    style={[
-                                        appStyles.text_title,
-                                        {
-                                            marginTop: getSize.m(0),
-                                        },
-                                    ]}
-                                >
-                                    {title}
-                                </Text>
-                            </View>
-
-                            <View style={[appStyles.flex_row_space_center, styles.search]}>
-                                <TextInput
-                                    ref={searchTextRef}
-                                    placeholder={placeholder}
-                                    style={styles.text_search}
-                                    placeholderTextColor={appColors.blue_gray_dark}
-                                    onChangeText={handleTextChange}
-                                    onBlur={() => submitSearchFavTeam(searchText)}
-                                />
-
-                                <TouchableOpacity onPress={() => submitSearchFavTeam(searchText)}>
-                                    <Icon
-                                        style={{ marginRight: getSize.m(14) }}
-                                        name={appIcons.ic_search}
-                                        color={appColors.blue_gray_dark}
-                                        size={getSize.m(16)}
-                                    />
-                                </TouchableOpacity>
-                            </View>
-                            {isLoading && (
-                                <ActivityIndicator
-                                    style={appStyles.flex_center}
-                                    size="large"
-                                    color={appColors.blue_dark}
-                                />
-                            )}
-                        </View>
-                    </SafeAreaView>
-                ) : (
-                    <>
-                        
-                    </>
-                )} */}
 
                 <SafeAreaView style={appStyles.safe_area}>
                     <View style={[appStyles.flex, { marginTop: StatusBar.currentHeight }]}>
