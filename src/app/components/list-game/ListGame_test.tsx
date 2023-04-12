@@ -86,7 +86,7 @@ export const ListGame_Test = ({
                 <View
                     style={[
                         appStyles.flex_row_space,
-                        { marginLeft: getSize.m(24), marginRight: getSize.m(10) },
+                        { marginLeft: getSize.m(24), marginRight: getSize.m(10), width: '100%' },
                     ]}
                 >
                     <View style={appStyles.flex_row_align}>
@@ -142,7 +142,12 @@ export const ListGame_Test = ({
 
                     <TouchableOpacity
                         onPress={handleStadium}
-                        style={[appStyles.flex_row_space_center]}
+                        style={[
+                            appStyles.flex_row_align,
+                            {
+                                width: '50%',
+                            },
+                        ]}
                     >
                         <IconLocation
                             name={appIcons.ic_location}
@@ -151,19 +156,23 @@ export const ListGame_Test = ({
                                 result !== emptyResult ? appColors.soft_grey : appColors.blue_light
                             }
                         />
-                        <Text
-                            style={[
-                                styles.stadium,
-                                {
-                                    color:
-                                        result !== emptyResult
-                                            ? appColors.soft_grey
-                                            : appColors.text_dark_blue,
-                                },
-                            ]}
-                        >
-                            {location}
-                        </Text>
+                        <View style={{ width: '60%' }}>
+                            <Text
+                                numberOfLines={2}
+                                style={[
+                                    styles.stadium,
+                                    {
+                                        color:
+                                            result !== emptyResult
+                                                ? appColors.soft_grey
+                                                : appColors.text_dark_blue,
+                                        textAlign: 'left',
+                                    },
+                                ]}
+                            >
+                                {location}
+                            </Text>
+                        </View>
                     </TouchableOpacity>
                 </View>
             )}
