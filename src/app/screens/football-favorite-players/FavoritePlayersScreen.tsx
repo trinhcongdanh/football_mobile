@@ -21,9 +21,11 @@ export const FavoritePlayersScreen = ({ navigation, route }: IFavoritePlayerScre
         searchText,
         profile,
         selectedFavPlayers,
-        formattedFavPlayers,
+        players,
         submitSearchFavPlayer,
         isLoading,
+        onSearchFavPlayer,
+        searchTextRef,
     } = useViewModel({
         navigation,
         route,
@@ -48,20 +50,19 @@ export const FavoritePlayersScreen = ({ navigation, route }: IFavoritePlayerScre
                     <ActivityIndicator size="large" />
                 </View>
             )}
+
             <FavoritePlayer
-                searchText={searchText}
+                searchTextRef={searchTextRef}
                 onGoSkip={onGoSkip}
                 onGoBack={onGoBack}
                 // handleFocusSearch={() => setFocusSearch(true)}
                 handleContinue={handleContinue}
-                submitSearchFavPlayer={submitSearchFavPlayer}
-                searchFavPlayer={(text: string) => {
-                    setSearchText(text);
-                }}
+                submitSearchFavPlayer={(text: string) => submitSearchFavPlayer(text)}
+                searchFavPlayer={onSearchFavPlayer}
                 handleSelected={(item: PlayerModel) => {
                     handleSelected(item);
                 }}
-                newFav={formattedFavPlayers}
+                newFav={players}
                 isLoading={isLoading}
                 favSelected={selectedFavPlayers}
                 title={t('favorite_player.title')}

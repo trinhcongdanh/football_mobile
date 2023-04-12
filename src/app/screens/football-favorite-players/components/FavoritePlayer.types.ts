@@ -5,7 +5,7 @@ export type IFavoritePlayerProps = {
     onGoBack: () => void;
     handleSelected: (item: PlayerModel) => void;
     handleContinue: () => void;
-    newFav: PlayerModel[];
+    newFav: PlayerModel[] | undefined;
 
     favSelected: PlayerModel[];
     title: string;
@@ -14,9 +14,9 @@ export type IFavoritePlayerProps = {
     button: string;
     onIndex: number;
     number: number;
-    searchText: any;
+    searchTextRef: any;
     searchFavPlayer: (text: string) => void;
-    submitSearchFavPlayer: () => void;
+    submitSearchFavPlayer: (text: string) => void;
     handleFocusSearch?: () => void;
     isLoading: boolean;
 };
