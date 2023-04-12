@@ -237,16 +237,24 @@ export const PitchScreen = ({ navigation, route }: IPitchScreenProps) => {
                                         zoomEnabled={true}
                                         style={styles.map}
                                         initialRegion={{
-                                            latitude: parseFloat(stadium?.location_lat),
-                                            longitude: parseFloat(stadium?.location_lon),
+                                            latitude: stadium?.location_lat
+                                                ? parseFloat(stadium?.location_lat)
+                                                : 0,
+                                            longitude: stadium?.location_lon
+                                                ? parseFloat(stadium?.location_lon)
+                                                : 0,
                                             latitudeDelta: 0.0922,
                                             longitudeDelta: 0.0421,
                                         }}
                                     >
                                         <Marker
                                             coordinate={{
-                                                latitude: parseFloat(stadium?.location_lat),
-                                                longitude: parseFloat(stadium?.location_lon),
+                                                latitude: stadium?.location_lat
+                                                    ? parseFloat(stadium?.location_lat)
+                                                    : 0,
+                                                longitude: stadium?.location_lon
+                                                    ? parseFloat(stadium?.location_lon)
+                                                    : 0,
                                             }}
                                         />
                                     </MapView>
