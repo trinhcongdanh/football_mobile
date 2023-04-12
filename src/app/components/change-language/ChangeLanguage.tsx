@@ -12,17 +12,18 @@ import { getSize } from '@football/app/utils/responsive/scale';
 export const ChangeLanguage = ({ color, borderBottomColor }: IChangeLanguageComponent) => {
     const { t } = useTranslation();
 
+    const value = '1';
     const handleChangeLanguage = () => {
-        AsyncStorage.setItem(Restart.language, '1');
+        AsyncStorage.setItem(Restart.language, value);
         i18n.changeLanguage(i18n.language === 'en' ? 'heb' : 'en');
         if (i18n.language === 'heb') {
             I18nManager.forceRTL(true);
             ChangeLanguageService.removeLanguage(Restart.key_restart_for_ltr);
-            ChangeLanguageService.changedLanguage(Restart.key_restart_for_rtl, '1');
+            ChangeLanguageService.changedLanguage(Restart.key_restart_for_rtl, value);
         } else {
             I18nManager.forceRTL(false);
             ChangeLanguageService.removeLanguage(Restart.key_restart_for_rtl);
-            ChangeLanguageService.changedLanguage(Restart.key_restart_for_ltr, '1');
+            ChangeLanguageService.changedLanguage(Restart.key_restart_for_ltr, value);
         }
     };
 

@@ -8,7 +8,9 @@ class ChangeLanguage {
             if (isRestarted === null) {
                 await AsyncStorage.setItem(key, data).then(() => {
                     console.log('call restart before: ');
-                    RNRestart.Restart();
+                    setTimeout(() => {
+                        RNRestart.Restart();
+                    }, 150);
                     console.log('call restart after: ');
                 });
             } else {
