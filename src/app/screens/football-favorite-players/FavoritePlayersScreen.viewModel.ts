@@ -17,6 +17,7 @@ import {
     setFavPlayers,
     resetFavPlayer,
     pushFavPlayer,
+    resetSelectedFavPlayer,
 } from 'src/store/FavPlayer.slice';
 
 import { RootState } from 'src/store/store';
@@ -137,6 +138,7 @@ const useEventHandler = (state: any, route: any) => {
         if (params?.previous_screen === ScreenName.SettingsPage) {
             goBack();
         } else {
+            dispatch(resetSelectedFavPlayer([]));
             navigate(ScreenName.FavSummaryPage);
         }
     };
