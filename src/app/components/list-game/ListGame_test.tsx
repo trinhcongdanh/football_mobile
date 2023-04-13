@@ -156,7 +156,7 @@ export const ListGame_Test = ({
                                 result !== emptyResult ? appColors.soft_grey : appColors.blue_light
                             }
                         />
-                        <View style={{ width: '60%' }}>
+                        <View style={{ width: '62%' }}>
                             <Text
                                 numberOfLines={2}
                                 style={[
