@@ -21,34 +21,61 @@ import { addGuestId } from 'src/store/user/GuestId.slice';
 import { loginUser } from 'src/store/user/Login.slice';
 import { setProfileUser } from 'src/store/user/setProfile.slice';
 import { IFavoriteSummaryScreenProps } from './FavoriteSummaryScreen.type';
-import { serializeParams } from '@football/app/utils/functions/quick-functions';
-import {
-    MAX_FAVORITES_PLAYER,
-    MAX_FAVORITES_TEAM,
-    MAX_FAVORITES_TOPTEAM,
-} from '@football/core/api/configs/config';
 
-/**
- * view settings variables
- * @returns
- */
-const useViewState = () => {
+export const useViewModel = ({ navigation, route }: IFavoriteSummaryScreenProps) => {
     const { t } = useTranslation();
     const dispatch = useDispatch<any>();
     const { navigate, goBack } = useAppNavigator();
     const [onCheck, setonCheck] = useState(false);
 
-    const [selectedTeams, setSelectedTeams] = useState<TeamModel[]>(
-        Array(MAX_FAVORITES_TEAM).fill(null)
-    );
+    // team
+    const [firstTeams, setFirstTeams] = useState<TeamModel>();
+    const [secondTeams, setSecondTeams] = useState<TeamModel>();
+    const [thirdTeams, setThirdTeams] = useState<TeamModel>();
+    const teams = [firstTeams, secondTeams, thirdTeams];
+    useEffect(() => {
+        if (selectedFavTeams.length === 3) {
+            setFirstTeams(selectedFavTeams[0]);
+            setSecondTeams(selectedFavTeams[1]);
+            setThirdTeams(selectedFavTeams[2]);
+        } else if (selectedFavTeams.length === 2) {
+            setFirstTeams(selectedFavTeams[0]);
+            setSecondTeams(selectedFavTeams[1]);
+        } else if (selectedFavTeams.length === 1) {
+            setFirstTeams(selectedFavTeams[0]);
+        }
+    }, []);
 
-    const [selectedPlayers, setSelectedPlayers] = useState<PlayerModel[]>(
-        Array(MAX_FAVORITES_PLAYER).fill(null)
-    );
+    // player
+    const [firstPlayers, setFirstPlayers] = useState<PlayerModel>();
+    const [secondPlayers, setSecondPlayers] = useState<PlayerModel>();
+    const [thirdPlayers, setThirdPlayers] = useState<PlayerModel>();
+    const players = [firstPlayers, secondPlayers, thirdPlayers];
+    useEffect(() => {
+        if (selectedFavPlayers.length === 3) {
+            setFirstPlayers(selectedFavPlayers[0]);
+            setSecondPlayers(selectedFavPlayers[1]);
+            setThirdPlayers(selectedFavPlayers[2]);
+        } else if (selectedFavPlayers.length === 2) {
+            setFirstPlayers(selectedFavPlayers[0]);
+            setSecondPlayers(selectedFavPlayers[1]);
+        } else if (selectedFavPlayers.length === 1) {
+            setFirstPlayers(selectedFavPlayers[0]);
+        }
+    }, []);
 
-    const [selectedTopTeams, setSelectedTopTeams] = useState<TopTeamModel[]>(
-        Array(MAX_FAVORITES_TOPTEAM).fill(null)
-    );
+    // top team
+    const [firstTopTeams, setFirstTopTeams] = useState<TopTeamModel>();
+    const [secondTopTeams, setSecondTopTeams] = useState<TopTeamModel>();
+    const topTeams = [firstTopTeams, secondTopTeams];
+    useEffect(() => {
+        if (selectedFavTopTeams.length === 2) {
+            setFirstTopTeams(selectedFavTopTeams[0]);
+            setSecondTopTeams(selectedFavTopTeams[1]);
+        } else if (selectedFavTopTeams.length === 1) {
+            setFirstTopTeams(selectedFavTopTeams[0]);
+        }
+    }, []);
 
     const selectedFavTeams = useSelector((state: RootState) => state.favTeams.selectedTeams);
     const selectedFavPlayers = useSelector((state: RootState) => state.favPlayers.selectedPlayers);
@@ -62,58 +89,18 @@ const useViewState = () => {
 
     const uuid = require('uuid');
     const id = uuid.v4();
-    const [screenName, setScreenName] = useState<any>(null);
-    const [setProfile, setSetProfile] = useState(false);
-    const isFocused = useIsFocused();
+    useEffect(() => {
+        if (guestId.length === 0) {
+            dispatch(addGuestId(id));
+        }
+    }, [guestId]);
 
-    return {
-        t,
-        dispatch,
-        navigate,
-        goBack,
-        onCheck,
-        setonCheck,
-        selectedFavTeams,
-        selectedFavPlayers,
-        selectedFavTopTeams,
-        login,
-        profile,
-        guestId,
-        profileUser,
-        id,
-        screenName,
-        setScreenName,
-        setProfile,
-        setSetProfile,
-        isFocused,
-        selectedTeams,
-        setSelectedTeams,
-        selectedPlayers,
-        setSelectedPlayers,
-        selectedTopTeams,
-        setSelectedTopTeams,
-    };
-};
+    function serializeParams(obj: any) {
+        const a = qs.stringify(obj, { encode: false, arrayFormat: 'brackets' });
+        console.log(a);
+        return a;
+    }
 
-/**
- * States use event handler
- * @param state
- * @returns
- */
-
-const useEventHandler = (state: any, route: any) => {
-    const {
-        t,
-        dispatch,
-        navigate,
-        goBack,
-        onCheck,
-        setonCheck,
-        profile,
-        guestId,
-        setScreenName,
-        setSetProfile,
-    } = state;
     const editFav = route?.params?.editFav;
 
     const onGoBack = () => {
@@ -125,13 +112,61 @@ const useEventHandler = (state: any, route: any) => {
         return true;
     };
 
-    const backFavTeam = () => {
+    useEffect(() => {
+        BackHandler.addEventListener('hardwareBackPress', onGoBack);
+        return () => {
+            BackHandler.removeEventListener('hardwareBackPress', onGoBack);
+        };
+    }, []);
+
+    const addFavTeam = (index: number) => {
         dispatch(resetFavTeam([]));
         navigate(ScreenName.FavTeamPage, {
             previous_screen: ScreenName.FavSummaryPage,
         });
     };
 
+    const changeFavTeam = (index: string) => {
+        dispatch(resetFavTeam([]));
+        navigate(ScreenName.FavTeamPage, {
+            previous_screen: ScreenName.FavSummaryPage,
+        });
+    };
+
+    const addFavPlayer = (index: number) => {
+        dispatch(resetFavPlayer([]));
+        navigate(ScreenName.FavPlayerPage, {
+            previous_screen: ScreenName.FavSummaryPage,
+        });
+    };
+
+    const changeFavPlayer = (index: number) => {
+        dispatch(resetFavPlayer([]));
+        navigate(ScreenName.FavPlayerPage, {
+            previous_screen: ScreenName.FavSummaryPage,
+        });
+    };
+
+    const addFavTopTeam = (index: number) => {
+        dispatch(resetTopTeams([]));
+        navigate(ScreenName.FavTopTeamPage, {
+            previous_screen: ScreenName.FavSummaryPage,
+        });
+    };
+
+    const changeFavTopTeam = (index: string) => {
+        dispatch(resetTopTeams([]));
+        navigate(ScreenName.FavTopTeamPage, {
+            previous_screen: ScreenName.FavSummaryPage,
+        });
+    };
+
+    const backFavTeam = () => {
+        dispatch(resetFavTeam([]));
+        navigate(ScreenName.FavTeamPage, {
+            previous_screen: ScreenName.FavSummaryPage,
+        });
+    };
     const backFavPlayer = () => {
         dispatch(resetFavPlayer([]));
         navigate(ScreenName.FavPlayerPage, {
@@ -145,9 +180,13 @@ const useEventHandler = (state: any, route: any) => {
         });
     };
 
+    const [screenName, setScreenName] = useState<any>(null);
+
     const toggleOnCheck = () => {
         setonCheck(!onCheck);
     };
+
+    const [setProfile, setSetProfile] = useState(false);
 
     const navigationHomePage = () => {
         setSetProfile(false);
@@ -233,84 +272,7 @@ const useEventHandler = (state: any, route: any) => {
             navigate(ScreenName.RegisterPage);
         }
     };
-
-    return {
-        onGoBack,
-        backFavTeam,
-        backFavPlayer,
-        backFavTopTeam,
-        toggleOnCheck,
-        askBeforeGo,
-        navigationHomePage,
-        navigationSaveHomePage,
-        navigationMethodRegister,
-    };
-};
-
-/**
- * Handle effect to listening variables change here.
- * @param state
- * @param eventHandler
- */
-
-const useEffectHandler = (state: any, eventHandler: any, navigation: any) => {
-    const {
-        dispatch,
-        navigate,
-        selectedFavTeams,
-        selectedFavPlayers,
-        selectedFavTopTeams,
-        login,
-        profile,
-        guestId,
-        id,
-        screenName,
-        setProfile,
-        isFocused,
-        setSelectedTeams,
-        setSelectedPlayers,
-        setSelectedTopTeams,
-    } = state;
-
-    const { onGoBack } = eventHandler;
-
-    useEffect(() => {
-        const newSelectedTeams = Array(MAX_FAVORITES_TEAM).fill(null);
-        selectedFavTeams.forEach((favTeam: TeamModel, index: number) => {
-            newSelectedTeams[index] = favTeam;
-        });
-        setSelectedTeams(newSelectedTeams);
-    }, []);
-
-    useEffect(() => {
-        const newSelectedPlayers = Array(MAX_FAVORITES_PLAYER).fill(null);
-        selectedFavPlayers.forEach((favPlayer: PlayerModel, index: number) => {
-            newSelectedPlayers[index] = favPlayer;
-        });
-        setSelectedPlayers(newSelectedPlayers);
-    }, []);
-
-    useEffect(() => {
-        const newSelectedTopTeams = Array(MAX_FAVORITES_TOPTEAM).fill(null);
-        selectedFavTopTeams.forEach((favTopTeam: TopTeamModel, index: number) => {
-            newSelectedTopTeams[index] = favTopTeam;
-        });
-        setSelectedTopTeams(newSelectedTopTeams);
-    }, []);
-
-    useEffect(() => {
-        if (guestId.length === 0) {
-            dispatch(addGuestId(id));
-        }
-    }, [guestId]);
-
-    useEffect(() => {
-        BackHandler.addEventListener('hardwareBackPress', onGoBack);
-        return () => {
-            BackHandler.removeEventListener('hardwareBackPress', onGoBack);
-        };
-    }, []);
-
+    const isFocused = useIsFocused();
     useEffect(() => {
         if (!isFocused) return;
         if (!isEmpty(login.login)) {
@@ -342,15 +304,15 @@ const useEffectHandler = (state: any, eventHandler: any, navigation: any) => {
         if (!isFocused) return;
         if (login.success) {
             let fav_team: any = [];
-            selectedFavTeams.map((item: any) => {
+            selectedFavTeams.map(item => {
                 fav_team.push(item._id);
             });
             let player_team: any = [];
-            selectedFavPlayers.map((item: any) => {
+            selectedFavPlayers.map(item => {
                 player_team.push(item._id);
             });
             let fav_top_team: any = [];
-            selectedFavTopTeams.map((item: any) => {
+            selectedFavTopTeams.map(item => {
                 fav_top_team.push(item._id);
             });
             dispatch(
@@ -377,20 +339,31 @@ const useEffectHandler = (state: any, eventHandler: any, navigation: any) => {
             }
         }
     }, [login.success, isFocused]);
-};
-
-/**
- * Main model
- * @param param0
- * @returns
- */
-export const useViewModel = ({ navigation, route }: IFavoriteSummaryScreenProps) => {
-    const state = useViewState();
-    const eventHandler = useEventHandler(state, route);
-    useEffectHandler(state, eventHandler, navigation);
-
     return {
-        ...eventHandler,
-        ...state,
+        t,
+        onGoBack,
+        toggleOnCheck,
+        onCheck,
+        addFavTeam,
+        changeFavTeam,
+        addFavPlayer,
+        changeFavPlayer,
+        addFavTopTeam,
+        changeFavTopTeam,
+        backFavTeam,
+        backFavPlayer,
+        backFavTopTeam,
+        navigationHomePage,
+        teams,
+        players,
+        topTeams,
+        navigationMethodRegister,
+        profile,
+        navigationSaveHomePage,
+        login,
+        setProfile,
+        profileUser,
+        navigate,
+        askBeforeGo,
     };
 };

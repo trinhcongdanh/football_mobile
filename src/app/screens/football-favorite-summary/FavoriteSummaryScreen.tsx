@@ -31,27 +31,17 @@ export const FavoriteSummaryScreen = ({ navigation, route }: IFavoriteSummaryScr
         onGoBack,
         toggleOnCheck,
         onCheck,
-        addFavTeam,
-        changeFavTeam,
-        addFavPlayer,
-        changeFavPlayer,
-        addFavTopTeam,
-        changeFavTopTeam,
         backFavTeam,
         backFavPlayer,
         backFavTopTeam,
-        teams,
-        players,
-        topTeams,
         navigationMethodRegister,
-        navigationHomePage,
         navigationSaveHomePage,
         profile,
-        login,
-        setProfile,
-        profileUser,
         navigate,
         askBeforeGo,
+        selectedTeams,
+        selectedPlayers,
+        selectedTopTeams,
     } = useViewModel({
         navigation,
         route,
@@ -97,7 +87,7 @@ export const FavoriteSummaryScreen = ({ navigation, route }: IFavoriteSummaryScr
                                     iconName={appIcons.ic_left_ios}
                                 />
                                 <View style={styles.item_render}>
-                                    {teams.map((item, index) => {
+                                    {selectedTeams?.map((item, index) => {
                                         return (
                                             <View
                                                 key={index.toString()}
@@ -107,7 +97,7 @@ export const FavoriteSummaryScreen = ({ navigation, route }: IFavoriteSummaryScr
                                                     <>
                                                         <TouchableOpacity
                                                             style={styles.btn_add}
-                                                            onPress={() => addFavTeam(index)}
+                                                            onPress={backFavTeam}
                                                         >
                                                             <Icon
                                                                 name={appIcons.ic_plus}
@@ -123,7 +113,7 @@ export const FavoriteSummaryScreen = ({ navigation, route }: IFavoriteSummaryScr
                                                     <>
                                                         <TouchableOpacity
                                                             style={styles.btn_img}
-                                                            onPress={() => changeFavTeam(item._id)}
+                                                            onPress={backFavTeam}
                                                         >
                                                             <Image
                                                                 resizeMode="cover"
@@ -156,7 +146,7 @@ export const FavoriteSummaryScreen = ({ navigation, route }: IFavoriteSummaryScr
                                     iconName={appIcons.ic_left_ios}
                                 />
                                 <View style={styles.item_render}>
-                                    {players.map((item, index) => {
+                                    {selectedPlayers?.map((item, index) => {
                                         return (
                                             <View
                                                 key={index.toString()}
@@ -166,7 +156,7 @@ export const FavoriteSummaryScreen = ({ navigation, route }: IFavoriteSummaryScr
                                                     <>
                                                         <TouchableOpacity
                                                             style={styles.btn_add}
-                                                            onPress={() => addFavPlayer(index)}
+                                                            onPress={backFavPlayer}
                                                         >
                                                             <Icon
                                                                 name={appIcons.ic_plus}
@@ -182,7 +172,7 @@ export const FavoriteSummaryScreen = ({ navigation, route }: IFavoriteSummaryScr
                                                     <>
                                                         <TouchableOpacity
                                                             style={styles.btn_img}
-                                                            onPress={() => changeFavPlayer(index)}
+                                                            onPress={backFavPlayer}
                                                         >
                                                             <Image
                                                                 resizeMode="cover"
@@ -215,7 +205,7 @@ export const FavoriteSummaryScreen = ({ navigation, route }: IFavoriteSummaryScr
                                     iconName={appIcons.ic_left_ios}
                                 />
                                 <View style={styles.item_render}>
-                                    {topTeams.map((item, index) => {
+                                    {selectedTopTeams?.map((item, index) => {
                                         return (
                                             <View
                                                 key={index.toString()}
@@ -225,7 +215,7 @@ export const FavoriteSummaryScreen = ({ navigation, route }: IFavoriteSummaryScr
                                                     <>
                                                         <TouchableOpacity
                                                             style={styles.btn_add}
-                                                            onPress={() => addFavTopTeam(index)}
+                                                            onPress={backFavTopTeam}
                                                         >
                                                             <Icon
                                                                 name={appIcons.ic_plus}
@@ -241,9 +231,7 @@ export const FavoriteSummaryScreen = ({ navigation, route }: IFavoriteSummaryScr
                                                     <>
                                                         <TouchableOpacity
                                                             style={styles.btn_img}
-                                                            onPress={() =>
-                                                                changeFavTopTeam(item._id)
-                                                            }
+                                                            onPress={backFavTopTeam}
                                                         >
                                                             <Image
                                                                 resizeMode="cover"
