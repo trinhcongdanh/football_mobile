@@ -11,7 +11,12 @@ import { RootState } from 'src/store/store';
 import TeamService from '@football/core/services/Team.service';
 import _ from 'lodash';
 import { ScreenName } from '@football/app/utils/constants/enum';
-import { pushFavTeam, resetFavTeam, selectedFavTeamsAsMapSelector } from 'src/store/FavTeam.slice';
+import {
+    pushFavTeam,
+    resetFavTeam,
+    resetSelectedFavTeam,
+    selectedFavTeamsAsMapSelector,
+} from 'src/store/FavTeam.slice';
 import { MAX_FAVORITES_TEAM } from '@football/core/api/configs/config';
 import { useIsFocused, useNavigation } from '@react-navigation/native';
 import { resetFavPlayer, resetSelectedFavPlayer } from 'src/store/FavPlayer.slice';
@@ -113,6 +118,7 @@ const useViewCallback = (route: any, viewState: any) => {
             goBack();
         } else {
             // clearFavoriteData(dispatch);
+            dispatch(resetSelectedFavTeam([]));
             navigate(ScreenName.FavSummaryPage);
         }
     };

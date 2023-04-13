@@ -18,6 +18,7 @@ import {
     pushFavTopTeam,
     selectedFavTopTeamsAsMapSelector,
     resetTopTeams,
+    resetSelectedFavTopTeams,
 } from 'src/store/FavTopTeam.slice';
 import { IFavoriteTopTeamsScreenProps } from './FavoriteTopTeamsScreen.type';
 import { RootState } from 'src/store/store';
@@ -110,8 +111,9 @@ export const useViewModel = ({ navigation, route }: IFavoriteTopTeamsScreenProps
         if (previous_screen === ScreenName.SettingsPage) {
             goBack();
         } else {
-            navigate(ScreenName.FavSummaryPage);
+            dispatch(resetSelectedFavTopTeams([]));
             dispatch(resetTopTeams([]));
+            navigate(ScreenName.FavSummaryPage);
         }
     };
 
