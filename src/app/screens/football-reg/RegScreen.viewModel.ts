@@ -60,7 +60,10 @@ export const useViewModel = ({ navigation, route }: IRegScreenProps) => {
     const userNameRef = useRef<any>(null);
     const [userName, setUserName] = useState('');
     const handleOnChange = (e: string) => {
-        setUserName(e);
+        const regex = /[\u0080-\uFFFF]/g;
+        const specialCharRegex = /[!@#$%^&*(),.?":{}|<>]/g;
+        const newText = e.replace(regex, '').replace(specialCharRegex, '');
+        setUserName(newText);
     };
 
     const [date, setDate] = useState<any>(new Date());
