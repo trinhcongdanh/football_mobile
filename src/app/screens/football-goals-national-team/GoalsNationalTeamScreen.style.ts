@@ -44,14 +44,15 @@ const styles = StyleSheet.create({
         fontSize: getSize.m(13),
         color: appColors.text_dark_blue,
         lineHeight: getSize.m(20),
-        marginTop: getSize.m(5),
         fontFamily: AppFonts.bold,
+        textAlign: 'left',
     },
     score: {
         color: appColors.text_dark_blue,
         fontSize: getSize.m(14),
         lineHeight: getSize.m(20),
         fontFamily: AppFonts.bold,
+        textAlign: 'left',
     },
     time: {
         borderColor: appColors.border,

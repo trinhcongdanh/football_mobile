@@ -143,11 +143,7 @@ export const StatisticDetailsScreen = ({ navigation, route }: IStatisticDetailsS
                                                     overflow: 'hidden',
                                                 }}
                                             >
-                                                <View
-                                                    style={{
-                                                        flexDirection: 'row',
-                                                    }}
-                                                >
+                                                <View style={appStyles.flex_row_align}>
                                                     <Avatar
                                                         source={{
                                                             uri: item.player_image_url,
@@ -155,20 +151,24 @@ export const StatisticDetailsScreen = ({ navigation, route }: IStatisticDetailsS
                                                         rounded
                                                         size={18}
                                                     />
-                                                    <Text
-                                                        style={[
-                                                            appStyles.statistics_content,
-                                                            {
-                                                                marginLeft: getSize.m(10),
-                                                                fontSize: getSize.m(14),
-                                                            },
-                                                        ]}
-                                                    >
-                                                        {getTranslationText({
-                                                            textHe: item.player_name_he,
-                                                            textEn: item.player_name_en,
-                                                        })}
-                                                    </Text>
+                                                    <View style={{ width: '70%' }}>
+                                                        <Text
+                                                            numberOfLines={2}
+                                                            style={[
+                                                                appStyles.statistics_content,
+                                                                {
+                                                                    marginLeft: getSize.m(10),
+                                                                    fontSize: getSize.m(14),
+                                                                    textAlign: 'left',
+                                                                },
+                                                            ]}
+                                                        >
+                                                            {getTranslationText({
+                                                                textHe: item.player_name_he,
+                                                                textEn: item.player_name_en,
+                                                            })}
+                                                        </Text>
+                                                    </View>
                                                 </View>
                                             </View>
                                             <View
@@ -177,11 +177,7 @@ export const StatisticDetailsScreen = ({ navigation, route }: IStatisticDetailsS
                                                     overflow: 'hidden',
                                                 }}
                                             >
-                                                <View
-                                                    style={{
-                                                        flexDirection: 'row',
-                                                    }}
-                                                >
+                                                <View style={appStyles.flex_row_align}>
                                                     <Avatar
                                                         source={{
                                                             uri: item.team_image_url,
@@ -189,20 +185,24 @@ export const StatisticDetailsScreen = ({ navigation, route }: IStatisticDetailsS
                                                         rounded
                                                         size={18}
                                                     />
-                                                    <Text
-                                                        style={[
-                                                            appStyles.statistics_content,
-                                                            {
-                                                                marginLeft: getSize.m(10),
-                                                                fontSize: getSize.m(14),
-                                                            },
-                                                        ]}
-                                                    >
-                                                        {getTranslationText({
-                                                            textHe: item.team_name_he,
-                                                            textEn: item.team_name_en,
-                                                        })}
-                                                    </Text>
+                                                    <View style={{ width: '70%' }}>
+                                                        <Text
+                                                            numberOfLines={2}
+                                                            style={[
+                                                                appStyles.statistics_content,
+                                                                {
+                                                                    marginLeft: getSize.m(10),
+                                                                    fontSize: getSize.m(14),
+                                                                    textAlign: 'left',
+                                                                },
+                                                            ]}
+                                                        >
+                                                            {getTranslationText({
+                                                                textHe: item.team_name_he,
+                                                                textEn: item.team_name_en,
+                                                            })}
+                                                        </Text>
+                                                    </View>
                                                 </View>
                                             </View>
                                             <View
@@ -338,27 +338,30 @@ export const StatisticDetailsScreen = ({ navigation, route }: IStatisticDetailsS
                                                     overflow: 'hidden',
                                                 }}
                                             >
-                                                <View
-                                                    style={{
-                                                        flexDirection: 'row',
-                                                    }}
-                                                >
+                                                <View style={appStyles.flex_row_align}>
                                                     <Avatar
                                                         source={{ uri: item.team_image_url }}
                                                         rounded
                                                         size={18}
                                                     />
-                                                    <Text
-                                                        style={[
-                                                            appStyles.statistics_content,
-                                                            {
-                                                                marginLeft: getSize.m(10),
-                                                                fontSize: getSize.m(14),
-                                                            },
-                                                        ]}
-                                                    >
-                                                        {item.team_name_he}
-                                                    </Text>
+                                                    <View style={{ width: '70%' }}>
+                                                        <Text
+                                                            numberOfLines={2}
+                                                            style={[
+                                                                appStyles.statistics_content,
+                                                                {
+                                                                    marginLeft: getSize.m(10),
+                                                                    fontSize: getSize.m(14),
+                                                                    textAlign: 'left',
+                                                                },
+                                                            ]}
+                                                        >
+                                                            {getTranslationText({
+                                                                textHe: item.team_name_he,
+                                                                textEn: item.team_name_en,
+                                                            })}
+                                                        </Text>
+                                                    </View>
                                                 </View>
                                             </View>
                                             <View
@@ -492,27 +495,30 @@ export const StatisticDetailsScreen = ({ navigation, route }: IStatisticDetailsS
                                                     overflow: 'hidden',
                                                 }}
                                             >
-                                                <View
-                                                    style={{
-                                                        flexDirection: 'row',
-                                                    }}
-                                                >
+                                                <View style={appStyles.flex_row_align}>
                                                     <Avatar
                                                         source={{ uri: item.team_image_url }}
                                                         rounded
                                                         size={18}
                                                     />
-                                                    <Text
-                                                        style={[
-                                                            appStyles.statistics_content,
-                                                            {
-                                                                marginLeft: getSize.m(10),
-                                                                fontSize: getSize.m(14),
-                                                            },
-                                                        ]}
-                                                    >
-                                                        {item.team_name_he}
-                                                    </Text>
+                                                    <View style={{ width: '70%' }}>
+                                                        <Text
+                                                            numberOfLines={2}
+                                                            style={[
+                                                                appStyles.statistics_content,
+                                                                {
+                                                                    marginLeft: getSize.m(10),
+                                                                    fontSize: getSize.m(14),
+                                                                    textAlign: 'left',
+                                                                },
+                                                            ]}
+                                                        >
+                                                            {getTranslationText({
+                                                                textHe: item.team_name_he,
+                                                                textEn: item.team_name_en,
+                                                            })}
+                                                        </Text>
+                                                    </View>
                                                 </View>
                                             </View>
                                         </LinearGradient>
