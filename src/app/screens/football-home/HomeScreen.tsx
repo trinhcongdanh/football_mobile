@@ -123,20 +123,6 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                                 }}
                             />
 
-                            <FastImage
-                                source={AppImages.img_decoration_background_3}
-                                tintColor={colorCustom}
-                                resizeMode="contain"
-                                style={{
-                                    height: '60%',
-                                    width: '100%',
-                                    position: 'absolute',
-                                    transform: [{ scaleX: I18nManager.isRTL ? 1 : -1 }],
-                                    left: getSize.m(110),
-                                    top: getSize.m(-10),
-                                }}
-                            />
-
                             <StatusBar translucent backgroundColor="transparent" />
                             <SafeAreaView
                                 style={[
