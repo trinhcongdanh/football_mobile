@@ -7,13 +7,16 @@ import PlayerTopTeamService from '@football/core/services/PlayerTopTeamService';
 import { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { IGoalsNationalTeamScreenProps } from './GoalsNationalTeamScreen.type';
+import { useDateTime } from '@football/app/utils/hooks/useDateTime';
 
 const useViewState = () => {
     const [player, setPlayer] = useState<PlayerTopTeamModel>();
-
+    const { getDate, getTime } = useDateTime();
     return {
         player,
         setPlayer,
+        getDate,
+        getTime,
     };
 };
 
@@ -27,6 +30,7 @@ const useViewCallback = (route: any, viewState: any) => {
         }
 
         if (res?.data?.documents[0]) {
+            console.log('res.data.documents[0]', res.data.documents[0]);
             setPlayer(res.data.documents[0]);
         }
     }, []);

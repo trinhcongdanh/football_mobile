@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 export const useViewModel = ({ videos }: IItem12Props) => {
-    const { navigate, goBack } = useAppNavigator();
+    const { navigate, goBack, replace } = useAppNavigator();
     const { t } = useTranslation();
     const pages = Array(videos.length).fill('');
     const [activeIndexNumber, setActiveIndexNumber] = useState(Number);
@@ -13,7 +13,7 @@ export const useViewModel = ({ videos }: IItem12Props) => {
     const dots = Array(videos.length).fill('');
 
     const onClickAllVideo = () => {
-        navigate(ScreenName.SideBar, { isBackVideo: true });
+        replace(ScreenName.SideBar, { isBackVideo: true });
     };
     return {
         t,
