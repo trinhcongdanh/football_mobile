@@ -136,6 +136,11 @@ export const AppImages = {
     img_background_arrow: require('./background_arrow.png'),
     img_background_black: require('./background_black.png'),
     img_big_bell: require('./big_bell.png'),
+    img_background_player: require('./background_player.png'),
+    img_background_arrow_screen: require('./img_background_arrow_screen.png'),
+    img_background_light: require('./background_light.png'),
+    img_arrow: require('./arrow.png'),
+    img_arrow_header_home: require('./arrow_header_home.png'),
 };
 
 export const AppJsons = {
