@@ -190,6 +190,7 @@ const useViewCallback = (state: any) => {
             if (error) {
                 return;
             }
+
             setPlayers(res.data.documents);
         } catch (error: any) {
             Alert.alert(error);
