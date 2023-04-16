@@ -31,9 +31,16 @@ export const TermsConditionScreen = ({ navigation, route }: ITermsConditionScree
                         <ScrollView>
                             <View style={styles.terms_container}>
                                 <View>
-                                    <Text style={styles.terms_container_content}>
-                                        {t('terms.text')}
-                                    </Text>
+                                    <View>
+                                        <Text style={styles.terms_container_content}>
+                                            {t('terms.header')}
+                                        </Text>
+                                    </View>
+                                    <View style={{ marginTop: getSize.m(20) }}>
+                                        <Text style={styles.terms_container_content}>
+                                            {t('terms.text')}
+                                        </Text>
+                                    </View>
                                 </View>
                             </View>
                         </ScrollView>
