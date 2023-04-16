@@ -441,7 +441,7 @@ export const GroupPageScreen = ({ navigation, route }: IGroupPageScreenProps) =>
                                                 <View style={appStyles.flex_row_align_center}>
                                                     <View style={styles.container_img}>
                                                         <Avatar
-                                                            source={AppImages.img_israel}
+                                                            source={{ uri: team?.logo_url }}
                                                             size={getSize.m(26)}
                                                             rounded
                                                         />
