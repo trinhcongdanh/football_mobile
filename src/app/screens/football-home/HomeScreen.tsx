@@ -109,6 +109,18 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                             ]}
                         >
                             <FastImage
+                                source={AppImages.img_arrow_header_home}
+                                resizeMode={FastImage.resizeMode.contain}
+                                style={{
+                                    height: getSize.m(80),
+                                    width: getSize.m(281),
+                                    position: 'absolute',
+                                    top: getSize.m(0),
+                                    left: getSize.m(130),
+                                    transform: [{ scaleX: I18nManager.isRTL ? 1 : -1 }],
+                                }}
+                            />
+                            <FastImage
                                 source={AppImages.img_dot_header_home}
                                 tintColor={colorCustom}
                                 resizeMode={FastImage.resizeMode.contain}
@@ -133,7 +145,14 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                                 ]}
                             >
                                 <View style={[appStyles.container]}>
-                                    <View style={appStyles.flex_row_space_center}>
+                                    <View
+                                        style={[
+                                            appStyles.flex_row_space_center,
+                                            {
+                                                marginTop: getSize.m(10),
+                                            },
+                                        ]}
+                                    >
                                         <TouchableOpacity onPress={onShowSideMenu}>
                                             <LinearGradient
                                                 colors={[
@@ -197,7 +216,7 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                                         </View>
                                     </View>
                                 </View>
-                                <View style={{ marginTop: getSize.m(30) }}>
+                                <View style={{ marginTop: getSize.m(20) }}>
                                     <ScrollView
                                         style={{
                                             flexDirection: I18nManager.isRTL
