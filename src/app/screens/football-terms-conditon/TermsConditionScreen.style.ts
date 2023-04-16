@@ -8,7 +8,6 @@ const styles = StyleSheet.create({
     terms_container: {
         backgroundColor: appColors.white,
         minHeight: getSize.m(900),
-        marginTop: getSize.m(34),
         paddingHorizontal: getSize.m(20),
         paddingVertical: getSize.m(20),
     },

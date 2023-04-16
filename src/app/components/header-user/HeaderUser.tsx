@@ -65,33 +65,35 @@ export const HeaderUser = ({
                 </LinearGradient>
             </TouchableOpacity>
             {title ? <Text style={styles.txt_title}>{title}</Text> : <View />}
-
-            <View style={[appStyles.flex_row_space_center, styles.avt]}>
-                <TouchableOpacity onPress={onPressAvatar}>
+            {avt ? null : <View style={styles.width_size} />}
+            {avt ? (
+                <View style={[appStyles.flex_row_space_center, styles.avt]}>
+                    <TouchableOpacity onPress={onPressAvatar}>
+                        <FastImage
+                            style={{
+                                width: getSize.m(40),
+                                height: getSize.m(40),
+                                borderRadius: getSize.m(40),
+                            }}
+                            source={renderAvatar(profileUser)}
+                        />
+                    </TouchableOpacity>
                     <FastImage
-                        style={{
-                            width: getSize.m(40),
-                            height: getSize.m(40),
-                            borderRadius: getSize.m(40),
-                        }}
-                        source={renderAvatar(profileUser)}
+                        tintColor={colorCustom}
+                        source={AppImages.img_ball}
+                        style={styles.ic_football}
+                        resizeMode={FastImage.resizeMode.contain}
                     />
-                </TouchableOpacity>
-                <FastImage
-                    tintColor={colorCustom}
-                    source={AppImages.img_ball}
-                    style={styles.ic_football}
-                    resizeMode={FastImage.resizeMode.contain}
-                />
-                <Text
-                    style={[
-                        appStyles.text_bold,
-                        { marginRight: getSize.m(6), marginLeft: getSize.m(3) },
-                    ]}
-                >
-                    {renderUserPoints(profileUser, t)}
-                </Text>
-            </View>
+                    <Text
+                        style={[
+                            appStyles.text_bold,
+                            { marginRight: getSize.m(6), marginLeft: getSize.m(3) },
+                        ]}
+                    >
+                        {renderUserPoints(profileUser, t)}
+                    </Text>
+                </View>
+            ) : null}
         </View>
     );
 };

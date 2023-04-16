@@ -44,8 +44,6 @@ export const TeamSquadScreen = ({ navigation, route }: ITeamGroupScreenProps) =>
                 <SafeAreaView style={appStyles.safe_area}>
                     <View style={appStyles.container}>
                         <HeaderUser
-                            avt={AppImages.img_avt}
-                            point="1,325"
                             icon={AppImages.img_angle_arrow}
                             color_pre={appColors.black}
                             color_after={appColors.black}
