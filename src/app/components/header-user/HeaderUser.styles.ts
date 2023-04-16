@@ -29,4 +29,5 @@ export const styles = StyleSheet.create({
         fontFamily: AppFonts.bold,
         textAlign: 'center',
     },
+    width_size: { width: getSize.m(40) },
 });
