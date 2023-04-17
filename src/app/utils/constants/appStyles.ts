@@ -63,7 +63,9 @@ export const appStyles = StyleSheet.create({
     },
     container: {
         paddingHorizontal: getSize.m(16),
-        marginTop: StatusBar.currentHeight,
+        marginTop: StatusBar?.currentHeight
+            ? StatusBar?.currentHeight + getSize.m(10)
+            : getSize.m(10),
     },
     text_title: {
         fontFamily: AppFonts.bold,
