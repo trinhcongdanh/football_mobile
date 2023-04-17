@@ -133,39 +133,41 @@ export const LeagueTable = ({ leagueSeasonId }: ILeagueTableProps) => {
                                                 overflow: 'hidden',
                                             }}
                                         >
-                                            <View
-                                                style={{
-                                                    flexDirection: 'row',
-                                                }}
-                                            >
+                                            <View style={appStyles.flex_row_align}>
                                                 <Text
                                                     style={[
                                                         appStyles.statistics_content,
                                                         {
                                                             marginRight: getSize.m(10),
+                                                            textAlign: 'left',
                                                         },
                                                     ]}
                                                 >
                                                     {item?.place}
                                                 </Text>
+
                                                 <Avatar
                                                     source={{ uri: item?.logo_url }}
                                                     rounded
                                                     size={18}
                                                 />
-                                                <Text
-                                                    style={[
-                                                        appStyles.statistics_content,
-                                                        {
-                                                            marginLeft: getSize.m(10),
-                                                        },
-                                                    ]}
-                                                >
-                                                    {getTranslationText({
-                                                        textHe: item?.name_he,
-                                                        textEn: item?.name_en,
-                                                    })}
-                                                </Text>
+                                                <View style={{ width: '60%' }}>
+                                                    <Text
+                                                        numberOfLines={2}
+                                                        style={[
+                                                            appStyles.statistics_content,
+                                                            {
+                                                                marginLeft: getSize.m(10),
+                                                                textAlign: 'left',
+                                                            },
+                                                        ]}
+                                                    >
+                                                        {getTranslationText({
+                                                            textHe: item?.name_he,
+                                                            textEn: item?.name_en,
+                                                        })}
+                                                    </Text>
+                                                </View>
                                             </View>
                                         </View>
                                         <View style={{ width: getSize.m(30) }}>
@@ -204,6 +206,7 @@ export const LeagueTable = ({ leagueSeasonId }: ILeagueTableProps) => {
                         })}
                     </View>
                 </View>
+
                 {/* <TouchableOpacity style={styles.more_result}>
                     <Text style={styles.text_more_result}>{t('group_page.league_table.more')}</Text>
                     <Icon
@@ -212,6 +215,17 @@ export const LeagueTable = ({ leagueSeasonId }: ILeagueTableProps) => {
                         style={styles.ic_more_result}
                     />
                 </TouchableOpacity> */}
+            </View>
+            <View
+                style={[
+                    appStyles.package,
+                    {
+                        paddingHorizontal: getSize.m(0),
+                        paddingLeft: getSize.m(16),
+                    },
+                ]}
+            >
+                <ListOfGames listGames={selectedRound?.games} />
             </View>
         </>
     );

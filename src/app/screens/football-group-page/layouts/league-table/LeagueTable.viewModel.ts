@@ -25,7 +25,7 @@ export const useViewModel = ({ leagueSeasonId }: ILeagueTableProps) => {
     const { navigate, goBack } = useAppNavigator();
     const { t } = useTranslation();
     // Cycle
-    const { data: leagueSeasonData } = useLeagueSeasonById(leagueSeasonId);
+    const { data: leagueSeasonData } = useLeagueSeasonById(leagueSeasonId!);
     const state = useViewState();
 
     useEffect(() => {
@@ -44,6 +44,7 @@ export const useViewModel = ({ leagueSeasonId }: ILeagueTableProps) => {
         }
 
         if (res.data.documents?.length) {
+            console.log('res.data.documents', res.data.documents);
             const leagueSeasons = res.data.documents;
             state.setLeagueSeason(leagueSeasons[0]);
             if (leagueSeasons[0]?.cycles?.length) {
