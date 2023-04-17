@@ -99,10 +99,7 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                             imageStyle={{ width: '102%', marginLeft: getSize.m(-2) }}
                             style={[
                                 {
-                                    height:
-                                        Platform.OS === 'android' ? getSize.m(172) : getSize.m(132),
-                                    borderBottomLeftRadius:
-                                        Platform.OS === 'android' ? 0 : getSize.m(30),
+                                    height: getSize.m(172),
                                     zIndex: 1000,
                                     overflow: 'hidden',
                                 },
@@ -116,9 +113,9 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                                         Platform.OS === 'android' ? getSize.m(80) : getSize.m(70),
                                     width: getSize.m(281),
                                     position: 'absolute',
-                                    top: Platform.OS === 'android' ? getSize.m(0) : getSize.m(-10),
+                                    top: getSize.m(0),
                                     left:
-                                        Platform.OS === 'android' ? getSize.m(130) : getSize.m(140),
+                                        Platform.OS === 'android' ? getSize.m(130) : getSize.m(160),
                                     transform: [{ scaleX: I18nManager.isRTL ? 1 : -1 }],
                                 }}
                             />

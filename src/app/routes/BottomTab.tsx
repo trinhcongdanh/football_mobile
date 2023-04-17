@@ -10,7 +10,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { RouteProp } from '@react-navigation/native';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { I18nManager, LogBox, SafeAreaView } from 'react-native';
+import { I18nManager, LogBox, Platform, SafeAreaView, View } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useSelector } from 'react-redux';
@@ -25,6 +25,7 @@ import {
 } from '../screens';
 import { ScreenName } from '../utils/constants/enum';
 import { BottomFabBar } from './bottom-tab';
+import { appStyles } from '@football/app/utils/constants/appStyles';
 
 const Bottom = createBottomTabNavigator();
 const renderIcon = (routeName: string) => {
@@ -81,98 +82,200 @@ export const BottomTabStack = ({ route }: ISideBarProps) => {
     const isBackVideo = route?.params?.isBackVideo;
 
     return (
-        <SafeAreaView style={{ flex: 1, marginBottom: -insets.bottom }}>
-            <Bottom.Navigator
-                initialRouteName={isBackVideo ? ScreenName.VideoPage : ScreenName.HomePage}
-                screenOptions={{
-                    tabBarActiveTintColor: appColors.white,
-                    tabBarInactiveTintColor: appColors.text_grey,
-                    tabBarActiveBackgroundColor: appColors.text_dark_blue,
-                    headerShown: false,
-                }}
-                tabBar={(props: any) => (
-                    <BottomFabBar
-                        mode="default"
-                        // isRtl={true}
-                        isEng={I18nManager.isRTL ? false : true}
-                        focusedButtonStyle={{
-                            shadowColor: '#000',
-                            shadowOffset: {
-                                width: 0,
-                                height: -1,
-                            },
-                            shadowOpacity: 0.41,
-                            shadowRadius: 5,
-                            elevation: 5,
+        <View style={appStyles.flex}>
+            {Platform.OS === 'android' ? (
+                <SafeAreaView style={{ flex: 1, marginBottom: -insets.bottom }}>
+                    <Bottom.Navigator
+                        initialRouteName={isBackVideo ? ScreenName.VideoPage : ScreenName.HomePage}
+                        screenOptions={{
+                            tabBarActiveTintColor: appColors.white,
+                            tabBarInactiveTintColor: appColors.text_grey,
+                            tabBarActiveBackgroundColor: appColors.text_dark_blue,
+                            headerShown: false,
                         }}
-                        bottomBarContainerStyle={{
-                            position: 'absolute',
-                            bottom: 0,
-                            left: 0,
-                            right: 0,
-                        }}
-                        {...props}
-                    />
-                )}
-            >
-                <Bottom.Screen
-                    options={{
-                        tabBarIcon: renderIcon(ScreenName.HomePage),
-                        tabBarLabel: t('bottom_tab.home'),
-                    }}
-                    name={ScreenName.HomePage}
-                    component={HomeScreen}
-                />
-                <Bottom.Screen
-                    options={{
-                        tabBarIcon: renderIcon(ScreenName.LeaguesPage),
-                        tabBarLabel: t('bottom_tab.leagues'),
-                    }}
-                    name={ScreenName.LeaguesPage}
-                    component={LeaguesScreen}
-                />
-                <Bottom.Screen
-                    options={{
-                        tabBarIcon: renderIcon(ScreenName.TeamPage),
-                        tabBarLabel: t('bottom_tab.teams'),
-                    }}
-                    name={ScreenName.TeamPage}
-                    component={TeamScreen}
-                />
-                <Bottom.Screen
-                    options={{
-                        tabBarIcon: renderIcon(ScreenName.PlayGroundPage),
-                        tabBarLabel: t('bottom_tab.question'),
-                    }}
-                    name={ScreenName.PlayGroundPage}
-                    component={PlayGroundScreen}
-                    listeners={({ navigation, route }) => ({
-                        tabPress: e => {
-                            if (isGuessUser(profileUser)) {
-                                e.preventDefault();
-                                navigation.navigate(ScreenName.RegisterPage, { isLogin: true });
-                            }
-                        },
-                    })}
-                />
-                <Bottom.Screen
-                    options={{
-                        tabBarIcon: renderIcon(ScreenName.GobletPage),
-                        tabBarLabel: t('bottom_tab.goblet'),
-                    }}
-                    name={ScreenName.GobletPage}
-                    component={GobletScreen}
-                />
+                        tabBar={(props: any) => (
+                            <BottomFabBar
+                                mode="default"
+                                // isRtl={true}
+                                isEng={I18nManager.isRTL ? false : true}
+                                focusedButtonStyle={{
+                                    shadowColor: '#000',
+                                    shadowOffset: {
+                                        width: 0,
+                                        height: -1,
+                                    },
+                                    shadowOpacity: 0.41,
+                                    shadowRadius: 5,
+                                    elevation: 5,
+                                }}
+                                bottomBarContainerStyle={{
+                                    position: 'absolute',
+                                    bottom: Platform.OS === 'android' ? 0 : getSize.m(20),
+                                    left: 0,
+                                    right: 0,
+                                }}
+                                {...props}
+                            />
+                        )}
+                    >
+                        <Bottom.Screen
+                            options={{
+                                tabBarIcon: renderIcon(ScreenName.HomePage),
+                                tabBarLabel: t('bottom_tab.home'),
+                            }}
+                            name={ScreenName.HomePage}
+                            component={HomeScreen}
+                        />
+                        <Bottom.Screen
+                            options={{
+                                tabBarIcon: renderIcon(ScreenName.LeaguesPage),
+                                tabBarLabel: t('bottom_tab.leagues'),
+                            }}
+                            name={ScreenName.LeaguesPage}
+                            component={LeaguesScreen}
+                        />
+                        <Bottom.Screen
+                            options={{
+                                tabBarIcon: renderIcon(ScreenName.TeamPage),
+                                tabBarLabel: t('bottom_tab.teams'),
+                            }}
+                            name={ScreenName.TeamPage}
+                            component={TeamScreen}
+                        />
+                        <Bottom.Screen
+                            options={{
+                                tabBarIcon: renderIcon(ScreenName.PlayGroundPage),
+                                tabBarLabel: t('bottom_tab.question'),
+                            }}
+                            name={ScreenName.PlayGroundPage}
+                            component={PlayGroundScreen}
+                            listeners={({ navigation, route }) => ({
+                                tabPress: e => {
+                                    if (isGuessUser(profileUser)) {
+                                        e.preventDefault();
+                                        navigation.navigate(ScreenName.RegisterPage, {
+                                            isLogin: true,
+                                        });
+                                    }
+                                },
+                            })}
+                        />
+                        <Bottom.Screen
+                            options={{
+                                tabBarIcon: renderIcon(ScreenName.GobletPage),
+                                tabBarLabel: t('bottom_tab.goblet'),
+                            }}
+                            name={ScreenName.GobletPage}
+                            component={GobletScreen}
+                        />
 
-                <Bottom.Screen
-                    options={{
-                        tabBarIcon: renderIcon(ScreenName.VideoPage),
-                        tabBarLabel: 'VOD',
-                    }}
-                    name={ScreenName.VideoPage}
-                    component={VideoScreen}
-                />
-            </Bottom.Navigator>
-        </SafeAreaView>
+                        <Bottom.Screen
+                            options={{
+                                tabBarIcon: renderIcon(ScreenName.VideoPage),
+                                tabBarLabel: 'VOD',
+                            }}
+                            name={ScreenName.VideoPage}
+                            component={VideoScreen}
+                        />
+                    </Bottom.Navigator>
+                </SafeAreaView>
+            ) : (
+                <View style={{ flex: 1, marginBottom: -insets.bottom }}>
+                    <Bottom.Navigator
+                        initialRouteName={isBackVideo ? ScreenName.VideoPage : ScreenName.HomePage}
+                        screenOptions={{
+                            tabBarActiveTintColor: appColors.white,
+                            tabBarInactiveTintColor: appColors.text_grey,
+                            tabBarActiveBackgroundColor: appColors.text_dark_blue,
+                            headerShown: false,
+                        }}
+                        tabBar={(props: any) => (
+                            <BottomFabBar
+                                mode="default"
+                                // isRtl={true}
+                                isEng={I18nManager.isRTL ? false : true}
+                                focusedButtonStyle={{
+                                    shadowColor: '#000',
+                                    shadowOffset: {
+                                        width: 0,
+                                        height: -1,
+                                    },
+                                    shadowOpacity: 0.41,
+                                    shadowRadius: 5,
+                                    elevation: 5,
+                                }}
+                                bottomBarContainerStyle={{
+                                    position: 'absolute',
+                                    bottom: 0,
+                                    left: 0,
+                                    right: 0,
+                                }}
+                                {...props}
+                            />
+                        )}
+                    >
+                        <Bottom.Screen
+                            options={{
+                                tabBarIcon: renderIcon(ScreenName.HomePage),
+                                tabBarLabel: t('bottom_tab.home'),
+                            }}
+                            name={ScreenName.HomePage}
+                            component={HomeScreen}
+                        />
+                        <Bottom.Screen
+                            options={{
+                                tabBarIcon: renderIcon(ScreenName.LeaguesPage),
+                                tabBarLabel: t('bottom_tab.leagues'),
+                            }}
+                            name={ScreenName.LeaguesPage}
+                            component={LeaguesScreen}
+                        />
+                        <Bottom.Screen
+                            options={{
+                                tabBarIcon: renderIcon(ScreenName.TeamPage),
+                                tabBarLabel: t('bottom_tab.teams'),
+                            }}
+                            name={ScreenName.TeamPage}
+                            component={TeamScreen}
+                        />
+                        <Bottom.Screen
+                            options={{
+                                tabBarIcon: renderIcon(ScreenName.PlayGroundPage),
+                                tabBarLabel: t('bottom_tab.question'),
+                            }}
+                            name={ScreenName.PlayGroundPage}
+                            component={PlayGroundScreen}
+                            listeners={({ navigation, route }) => ({
+                                tabPress: e => {
+                                    if (isGuessUser(profileUser)) {
+                                        e.preventDefault();
+                                        navigation.navigate(ScreenName.RegisterPage, {
+                                            isLogin: true,
+                                        });
+                                    }
+                                },
+                            })}
+                        />
+                        <Bottom.Screen
+                            options={{
+                                tabBarIcon: renderIcon(ScreenName.GobletPage),
+                                tabBarLabel: t('bottom_tab.goblet'),
+                            }}
+                            name={ScreenName.GobletPage}
+                            component={GobletScreen}
+                        />
+
+                        <Bottom.Screen
+                            options={{
+                                tabBarIcon: renderIcon(ScreenName.VideoPage),
+                                tabBarLabel: 'VOD',
+                            }}
+                            name={ScreenName.VideoPage}
+                            component={VideoScreen}
+                        />
+                    </Bottom.Navigator>
+                </View>
+            )}
+        </View>
     );
 };
