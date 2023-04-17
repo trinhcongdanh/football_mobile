@@ -21,45 +21,42 @@ export const TeamStaffScreen = ({ navigation, route }: ITeamStaffScreenProps) =>
     return (
         <View style={appStyles.flex}>
             <BackGround>
-                <StatusBar translucent backgroundColor="transparent" />
-                <SafeAreaView style={appStyles.safe_area}>
-                    <View style={appStyles.container}>
-                        <CardGoBack
-                            iconName={appIcons.ic_right_ios}
-                            iconStyle={styles.ic_back}
-                            goBack={onGoBack}
-                            title={t('team_staff.title')}
-                        />
+                <View style={appStyles.container}>
+                    <CardGoBack
+                        iconName={appIcons.ic_right_ios}
+                        iconStyle={styles.ic_back}
+                        goBack={onGoBack}
+                        title={t('team_staff.title')}
+                    />
+                </View>
+                <View style={[appStyles.flex, appStyles.main_container]}>
+                    <ButtonOption
+                        option_one={t('team_staff.option.cast')}
+                        option_two={t('team_staff.option.official')}
+                        onSelect={setOnSelect}
+                    />
+                    <View style={{ paddingHorizontal: getSize.m(26) }}>
+                        {onSelect === 0 ? (
+                            <ScrollView showsVerticalScrollIndicator={false}></ScrollView>
+                        ) : (
+                            <ScrollView showsVerticalScrollIndicator={false}>
+                                <View style={{ marginTop: getSize.m(30) }}>
+                                    {teamStaffs.map(item => {
+                                        return (
+                                            <ListPlayer
+                                                key={item.id}
+                                                avt={item.avt}
+                                                name={item.name}
+                                                position={item.position}
+                                                handleDataPlayer={onNavigateDataCoach}
+                                            />
+                                        );
+                                    })}
+                                </View>
+                            </ScrollView>
+                        )}
                     </View>
-                    <View style={[appStyles.flex, appStyles.main_container]}>
-                        <ButtonOption
-                            option_one={t('team_staff.option.cast')}
-                            option_two={t('team_staff.option.official')}
-                            onSelect={setOnSelect}
-                        />
-                        <View style={{ paddingHorizontal: getSize.m(26) }}>
-                            {onSelect === 0 ? (
-                                <ScrollView showsVerticalScrollIndicator={false}></ScrollView>
-                            ) : (
-                                <ScrollView showsVerticalScrollIndicator={false}>
-                                    <View style={{ marginTop: getSize.m(30) }}>
-                                        {teamStaffs.map(item => {
-                                            return (
-                                                <ListPlayer
-                                                    key={item.id}
-                                                    avt={item.avt}
-                                                    name={item.name}
-                                                    position={item.position}
-                                                    handleDataPlayer={onNavigateDataCoach}
-                                                />
-                                            );
-                                        })}
-                                    </View>
-                                </ScrollView>
-                            )}
-                        </View>
-                    </View>
-                </SafeAreaView>
+                </View>
             </BackGround>
         </View>
     );

@@ -54,8 +54,7 @@ export const GroupPageScreen = ({ navigation, route }: IGroupPageScreenProps) =>
         <View style={appStyles.flex}>
             {team && (
                 <BackGround>
-                    <StatusBar translucent backgroundColor="transparent" />
-                    <SafeAreaView style={appStyles.safe_area}>
+                    <View>
                         <View style={appStyles.container}>
                             <HeaderUser
                                 avt={AppImages.img_avt}
@@ -493,7 +492,7 @@ export const GroupPageScreen = ({ navigation, route }: IGroupPageScreenProps) =>
                             </View>
                             <View style={{ height: TAB_BAR_HEIGHT + BOTTOM_SVG_HEIGHT }} />
                         </ScrollView>
-                    </SafeAreaView>
+                    </View>
                 </BackGround>
             )}
         </View>

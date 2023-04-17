@@ -35,110 +35,107 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
     return (
         <View style={appStyles.flex}>
             <BackGround>
-                <StatusBar translucent backgroundColor="transparent" />
-                <SafeAreaView style={appStyles.safe_area}>
-                    <View style={appStyles.container}>
-                        <HeaderUser
-                            avt={AppImages.img_avt}
-                            point="1,325"
-                            icon={AppImages.img_angle_arrow}
-                            color_pre={appColors.black}
-                            color_after={appColors.black}
-                            handlePressFunction={onGoBack}
-                        />
-                    </View>
-                    <GestureHandlerRootView style={{ flex: 1 }}>
-                        <ScrollView>
-                            <View style={appStyles.container}>
-                                <View style={appStyles.align_justify}>
-                                    <View style={styles.container_image}>
-                                        <Image
-                                            source={{ uri: topTeam?.logo_url }}
-                                            style={styles.image_logo}
-                                        />
-                                    </View>
-                                    <Text style={styles.text_title}>
-                                        {getTranslationText({
-                                            textHe: topTeam?.name_he,
-                                            textEn: topTeam?.name_en,
-                                        })}
-                                    </Text>
+                <View style={appStyles.container}>
+                    <HeaderUser
+                        avt={AppImages.img_avt}
+                        point="1,325"
+                        icon={AppImages.img_angle_arrow}
+                        color_pre={appColors.black}
+                        color_after={appColors.black}
+                        handlePressFunction={onGoBack}
+                    />
+                </View>
+                <GestureHandlerRootView style={{ flex: 1 }}>
+                    <ScrollView>
+                        <View style={appStyles.container}>
+                            <View style={appStyles.align_justify}>
+                                <View style={styles.container_image}>
+                                    <Image
+                                        source={{ uri: topTeam?.logo_url }}
+                                        style={styles.image_logo}
+                                    />
                                 </View>
-                                {/* Main Video */}
-                                <MainVideo topTeam={topTeam} />
+                                <Text style={styles.text_title}>
+                                    {getTranslationText({
+                                        textHe: topTeam?.name_he,
+                                        textEn: topTeam?.name_en,
+                                    })}
+                                </Text>
+                            </View>
+                            {/* Main Video */}
+                            <MainVideo topTeam={topTeam} />
 
-                                {/* Video Fallery */}
-                                {/* <VideoGallery topTeam={topTeam} /> */}
-                                <VideoGallery topTeam={topTeam} />
-                                {/* <GestureHandlerRootView>
+                            {/* Video Fallery */}
+                            {/* <VideoGallery topTeam={topTeam} /> */}
+                            <VideoGallery topTeam={topTeam} />
+                            {/* <GestureHandlerRootView>
                             </GestureHandlerRootView> */}
 
-                                {/* Future Events */}
-                                <FutureEvents topTeam={topTeam} />
-                            </View>
-                            <View>
-                                <HeaderLogo
-                                    text={getTranslationText({
-                                        textHe: topTeam?.last_campaign?.name_he,
-                                        textEn: topTeam?.last_campaign?.name_en,
-                                    })}
-                                    avt={AppImages.img_israel}
-                                    details={t('national_team.previous_campaigns')}
-                                    icon={appIcons.ic_left_ios}
-                                    handleNavigation={() => handleNavigation()}
-                                />
-                                <View
-                                    style={[
-                                        appStyles.package,
-                                        {
-                                            marginTop: getSize.m(-1),
-                                            backgroundColor: appColors.white,
-                                        },
-                                    ]}
-                                >
+                            {/* Future Events */}
+                            <FutureEvents topTeam={topTeam} />
+                        </View>
+                        <View>
+                            <HeaderLogo
+                                text={getTranslationText({
+                                    textHe: topTeam?.last_campaign?.name_he,
+                                    textEn: topTeam?.last_campaign?.name_en,
+                                })}
+                                avt={AppImages.img_israel}
+                                details={t('national_team.previous_campaigns')}
+                                icon={appIcons.ic_left_ios}
+                                handleNavigation={() => handleNavigation()}
+                            />
+                            <View
+                                style={[
+                                    appStyles.package,
+                                    {
+                                        marginTop: getSize.m(-1),
+                                        backgroundColor: appColors.white,
+                                    },
+                                ]}
+                            >
+                                <View>
                                     <View>
-                                        <View>
-                                            <Text style={appStyles.statistics_title}>
-                                                {t('national_team.ranking_table.title')}
-                                            </Text>
-                                        </View>
-                                        <View style={{ marginTop: getSize.m(26) }}>
-                                            <Position
-                                                position={getTranslationText({
-                                                    textHe: topTeam?.last_campaign?.group_name_he,
-                                                    textEn: topTeam?.last_campaign?.group_name_en,
-                                                })}
-                                                color={appColors.text_dark_blue}
-                                                fontFamily={AppFonts.bold}
-                                                fontSize={getSize.m(11)}
-                                                backgroundColor={appColors.white}
-                                            />
-                                            {/* Rankings */}
-                                            <Rankings topTeam={topTeam} />
-                                        </View>
+                                        <Text style={appStyles.statistics_title}>
+                                            {t('national_team.ranking_table.title')}
+                                        </Text>
+                                    </View>
+                                    <View style={{ marginTop: getSize.m(26) }}>
+                                        <Position
+                                            position={getTranslationText({
+                                                textHe: topTeam?.last_campaign?.group_name_he,
+                                                textEn: topTeam?.last_campaign?.group_name_en,
+                                            })}
+                                            color={appColors.text_dark_blue}
+                                            fontFamily={AppFonts.bold}
+                                            fontSize={getSize.m(11)}
+                                            backgroundColor={appColors.white}
+                                        />
+                                        {/* Rankings */}
+                                        <Rankings topTeam={topTeam} />
                                     </View>
                                 </View>
-                                <View style={appStyles.package}>
-                                    {/* Game List */}
-                                    <GamesList topTeam={topTeam} />
-                                </View>
-                                <View style={appStyles.package}>
-                                    {/* Goal Kickers */}
-                                    <GoalKickers topTeam={topTeam} />
-                                </View>
-                                <View style={appStyles.package}>
-                                    {/* Appearances */}
-                                    <Appearances topTeam={topTeam} />
-                                </View>
                             </View>
-                            {/* Team Personnel */}
-                            <TeamPersonnel topTeam={topTeam} />
+                            <View style={appStyles.package}>
+                                {/* Game List */}
+                                <GamesList topTeam={topTeam} />
+                            </View>
+                            <View style={appStyles.package}>
+                                {/* Goal Kickers */}
+                                <GoalKickers topTeam={topTeam} />
+                            </View>
+                            <View style={appStyles.package}>
+                                {/* Appearances */}
+                                <Appearances topTeam={topTeam} />
+                            </View>
+                        </View>
+                        {/* Team Personnel */}
+                        <TeamPersonnel topTeam={topTeam} />
 
-                            {/* Image gallery */}
-                            <ImageGallery topTeam={topTeam} />
-                        </ScrollView>
-                    </GestureHandlerRootView>
-                </SafeAreaView>
+                        {/* Image gallery */}
+                        <ImageGallery topTeam={topTeam} />
+                    </ScrollView>
+                </GestureHandlerRootView>
             </BackGround>
         </View>
     );

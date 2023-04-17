@@ -34,83 +34,80 @@ export const NotificationScreen = ({ navigation, route }: INotificationScreenPro
     return (
         <View style={appStyles.flex}>
             <BackGround>
-                <StatusBar translucent backgroundColor="transparent" />
-                <SafeAreaView style={appStyles.safe_area}>
-                    <View style={appStyles.container}>
-                        <CardGoBack
-                            iconName={appIcons.ic_right_ios}
-                            iconStyle={styles.ic_back}
-                            goBack={onGoBack}
-                            title={t('notification.title')}
-                        />
-                    </View>
+                <View style={appStyles.container}>
+                    <CardGoBack
+                        iconName={appIcons.ic_right_ios}
+                        iconStyle={styles.ic_back}
+                        goBack={onGoBack}
+                        title={t('notification.title')}
+                    />
+                </View>
 
+                <View
+                    style={[
+                        appStyles.main_container,
+                        {
+                            marginTop: getSize.m(38),
+                            backgroundColor: appColors.white,
+                        },
+                    ]}
+                >
+                    <View style={[appStyles.align_justify, { marginTop: getSize.m(-50) }]}>
+                        <View style={styles.icon_notification}>
+                            <FastImage
+                                source={AppImages.img_big_bell}
+                                style={{ width: getSize.m(40), height: getSize.m(44) }}
+                                resizeMode={FastImage.resizeMode.contain}
+                            />
+                        </View>
+                    </View>
+                    <View style={styles.number_notification_active}>
+                        <Text style={styles.number_notification_active_text}>
+                            {notifications.length} {t('notification.active')}
+                        </Text>
+                    </View>
+                </View>
+                <ScrollView>
                     <View
                         style={[
-                            appStyles.main_container,
-                            {
-                                marginTop: getSize.m(38),
-                                backgroundColor: appColors.white,
-                            },
+                            appStyles.package,
+                            { marginTop: getSize.m(0), minHeight: getSize.m(900) },
                         ]}
                     >
-                        <View style={[appStyles.align_justify, { marginTop: getSize.m(-50) }]}>
-                            <View style={styles.icon_notification}>
-                                <FastImage
-                                    source={AppImages.img_big_bell}
-                                    style={{ width: getSize.m(40), height: getSize.m(44) }}
-                                    resizeMode={FastImage.resizeMode.contain}
-                                />
-                            </View>
-                        </View>
-                        <View style={styles.number_notification_active}>
-                            <Text style={styles.number_notification_active_text}>
-                                {notifications.length} {t('notification.active')}
-                            </Text>
-                        </View>
-                    </View>
-                    <ScrollView>
-                        <View
-                            style={[
-                                appStyles.package,
-                                { marginTop: getSize.m(0), minHeight: getSize.m(900) },
-                            ]}
-                        >
-                            {notifications.map(notification => {
-                                return (
-                                    <TouchableOpacity
-                                        style={styles.container_notification}
-                                        onPress={() => handleNotification(notification.payload)}
-                                    >
+                        {notifications.map(notification => {
+                            return (
+                                <TouchableOpacity
+                                    style={styles.container_notification}
+                                    onPress={() => handleNotification(notification.payload)}
+                                >
+                                    <View>
                                         <View>
-                                            <View>
-                                                <Text style={styles.text_notification}>
-                                                    {notification.title}
-                                                </Text>
-                                                <Text style={styles.text_notification}>
-                                                    {notification.message}
-                                                </Text>
-                                            </View>
-                                            <View
-                                                style={[
-                                                    appStyles.flex_row_align,
-                                                    { marginTop: getSize.m(4) },
-                                                ]}
-                                            >
-                                                <Text style={styles.date_time}>
-                                                    {moment(
-                                                        notification.tc_item_creation,
-                                                        'DD-MM-YYY'
-                                                    ).format('DD/MM')}
-                                                </Text>
-                                            </View>
+                                            <Text style={styles.text_notification}>
+                                                {notification.title}
+                                            </Text>
+                                            <Text style={styles.text_notification}>
+                                                {notification.message}
+                                            </Text>
                                         </View>
-                                    </TouchableOpacity>
-                                );
-                            })}
-                        </View>
-                    </ScrollView>
-                </SafeAreaView>
+                                        <View
+                                            style={[
+                                                appStyles.flex_row_align,
+                                                { marginTop: getSize.m(4) },
+                                            ]}
+                                        >
+                                            <Text style={styles.date_time}>
+                                                {moment(
+                                                    notification.tc_item_creation,
+                                                    'DD-MM-YYY'
+                                                ).format('DD/MM')}
+                                            </Text>
+                                        </View>
+                                    </View>
+                                </TouchableOpacity>
+                            );
+                        })}
+                    </View>
+                </ScrollView>
             </BackGround>
         </View>
     );

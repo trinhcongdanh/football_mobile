@@ -20,34 +20,31 @@ export const GameCompositionScreen = ({ navigation, route }: IGameCompositionScr
     return (
         <View style={appStyles.flex}>
             <BackGround>
-                <StatusBar translucent backgroundColor="transparent" />
-                <SafeAreaView style={appStyles.safe_area}>
-                    <View style={appStyles.container}>
-                        <HeaderUser
-                            avt={AppImages.img_avt}
-                            point="1,325"
-                            icon={AppImages.img_angle_right}
-                            color_pre={appColors.text_dark_blue}
-                            color_after={appColors.text_dark_blue}
-                            handlePressFunction={onGoBack}
-                        />
-                        <HeaderComposition
-                            title='ליגת האומות של אופ"א'
-                            season="2022/23"
-                            avt_away="https://upload.wikimedia.org/wikipedia/he/thumb/5/50/HaifaCarmel.svg/800px-HaifaCarmel.svg.png"
-                            avt_home="https://upload.wikimedia.org/wikipedia/he/thumb/5/50/HaifaCarmel.svg/800px-HaifaCarmel.svg.png"
-                            name_home="הפועל ירושלים"
-                            name_away="הפועל באר שבע"
-                            score="2 : 1"
-                            stadium="בלומפילד"
-                            status="הסתיים"
-                            handleStadium={handleStadium}
-                        />
-                    </View>
-                    <View style={[appStyles.flex, appStyles.main_container]}>
-                        <TopTaps labels={labels} />
-                    </View>
-                </SafeAreaView>
+                <View style={appStyles.container}>
+                    <HeaderUser
+                        avt={AppImages.img_avt}
+                        point="1,325"
+                        icon={AppImages.img_angle_right}
+                        color_pre={appColors.text_dark_blue}
+                        color_after={appColors.text_dark_blue}
+                        handlePressFunction={onGoBack}
+                    />
+                    <HeaderComposition
+                        title='ליגת האומות של אופ"א'
+                        season="2022/23"
+                        avt_away="https://upload.wikimedia.org/wikipedia/he/thumb/5/50/HaifaCarmel.svg/800px-HaifaCarmel.svg.png"
+                        avt_home="https://upload.wikimedia.org/wikipedia/he/thumb/5/50/HaifaCarmel.svg/800px-HaifaCarmel.svg.png"
+                        name_home="הפועל ירושלים"
+                        name_away="הפועל באר שבע"
+                        score="2 : 1"
+                        stadium="בלומפילד"
+                        status="הסתיים"
+                        handleStadium={handleStadium}
+                    />
+                </View>
+                <View style={[appStyles.flex, appStyles.main_container]}>
+                    <TopTaps labels={labels} />
+                </View>
             </BackGround>
         </View>
     );

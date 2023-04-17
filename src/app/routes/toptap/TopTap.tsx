@@ -7,8 +7,8 @@ import { appColors } from '../../utils/constants/appColors';
 import { getSize } from '../../utils/responsive/scale';
 
 interface Props {
-    labels: any;
-    defaultTab: string;
+    labels?: any;
+    defaultTab?: string;
     // eslint-disable-next-line react/require-default-props
     data?: any;
 }

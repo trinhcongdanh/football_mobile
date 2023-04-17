@@ -15,37 +15,34 @@ export const TermsConditionScreen = ({ navigation, route }: ITermsConditionScree
     return (
         <View style={appStyles.flex}>
             <BackGround>
-                <StatusBar translucent backgroundColor="transparent" />
-                <SafeAreaView style={appStyles.safe_area}>
-                    <View style={[appStyles.container]}>
-                        <View style={{ marginTop: getSize.m(16) }}>
-                            <CardGoBack
-                                iconName={appIcons.ic_right_ios}
-                                iconStyle={styles.ic_back}
-                                goBack={onGoBack}
-                                title={t('terms.title')}
-                            />
-                        </View>
+                <View style={[appStyles.container]}>
+                    <View style={{ marginTop: getSize.m(16) }}>
+                        <CardGoBack
+                            iconName={appIcons.ic_right_ios}
+                            iconStyle={styles.ic_back}
+                            goBack={onGoBack}
+                            title={t('terms.title')}
+                        />
                     </View>
-                    <View style={{ marginTop: getSize.m(34) }}>
-                        <ScrollView>
-                            <View style={styles.terms_container}>
+                </View>
+                <View style={{ marginTop: getSize.m(34) }}>
+                    <ScrollView>
+                        <View style={styles.terms_container}>
+                            <View>
                                 <View>
-                                    <View>
-                                        <Text style={styles.terms_container_content}>
-                                            {t('terms.header')}
-                                        </Text>
-                                    </View>
-                                    <View style={{ marginTop: getSize.m(20) }}>
-                                        <Text style={styles.terms_container_content}>
-                                            {t('terms.text')}
-                                        </Text>
-                                    </View>
+                                    <Text style={styles.terms_container_content}>
+                                        {t('terms.header')}
+                                    </Text>
+                                </View>
+                                <View style={{ marginTop: getSize.m(20) }}>
+                                    <Text style={styles.terms_container_content}>
+                                        {t('terms.text')}
+                                    </Text>
                                 </View>
                             </View>
-                        </ScrollView>
-                    </View>
-                </SafeAreaView>
+                        </View>
+                    </ScrollView>
+                </View>
             </BackGround>
         </View>
     );

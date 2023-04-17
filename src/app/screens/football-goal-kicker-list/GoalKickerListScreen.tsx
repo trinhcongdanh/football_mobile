@@ -37,9 +37,8 @@ export const GoalKickerListScreen = ({ navigation, route }: IGoalKickerListScree
     return (
         <View style={appStyles.flex}>
             <BackGround>
-                <StatusBar translucent backgroundColor="transparent" />
                 {teamSeasonStats && (
-                    <SafeAreaView style={appStyles.safe_area}>
+                    <View>
                         <View style={appStyles.container}>
                             <CardGoBack
                                 iconName={appIcons.ic_right_ios}
@@ -93,7 +92,7 @@ export const GoalKickerListScreen = ({ navigation, route }: IGoalKickerListScree
                                 </View>
                             </LinearGradient>
                         </ScrollView>
-                    </SafeAreaView>
+                    </View>
                 )}
             </BackGround>
         </View>

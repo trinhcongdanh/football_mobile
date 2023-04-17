@@ -53,332 +53,329 @@ export const VideoScreen = ({ navigation, route }: IVideoScreenProps) => {
     return (
         <View style={appStyles.flex}>
             <BackGround>
-                <StatusBar translucent backgroundColor="transparent" />
-                <SafeAreaView style={appStyles.safe_area}>
-                    <ScrollView>
-                        <View style={appStyles.container}>
-                            <HeaderUser
-                                avt={AppImages.img_avt}
-                                point="1,325"
-                                icon={AppImages.img_bars_sort}
-                                color_pre={colorCustom}
-                                color_after={colorCustom}
-                                handlePressFunction={onShowSideMenu}
-                            />
+                <ScrollView>
+                    <View style={appStyles.container}>
+                        <HeaderUser
+                            avt={AppImages.img_avt}
+                            point="1,325"
+                            icon={AppImages.img_bars_sort}
+                            color_pre={colorCustom}
+                            color_after={colorCustom}
+                            handlePressFunction={onShowSideMenu}
+                        />
 
-                            <View>
-                                <Text style={[appStyles.text_title]}>{t('video.title')}</Text>
-                            </View>
-                            <View style={{ marginTop: getSize.m(30) }}>
-                                <Text
-                                    style={[
-                                        appStyles.text_topic,
-                                        { marginLeft: getSize.m(6), color: appColors.white },
-                                    ]}
-                                >
-                                    {t('video.priority.label')}
-                                </Text>
-                                <View
-                                    style={{
-                                        marginHorizontal: getSize.m(-16),
-                                        marginTop: getSize.m(18),
-                                    }}
-                                >
-                                    <View style={{ paddingLeft: getSize.m(14) }}>
-                                        <ScrollView
-                                            horizontal
-                                            showsHorizontalScrollIndicator={false}
-                                            directionalLockEnabled
-                                        >
-                                            {favoriteTeamsVideo?.map((item, index) => {
-                                                return (
-                                                    <View
-                                                        key={index}
-                                                        style={{
-                                                            flexDirection: 'row',
-                                                            justifyContent: 'center',
-                                                            marginHorizontal: getSize.m(8),
-                                                        }}
+                        <View>
+                            <Text style={[appStyles.text_title]}>{t('video.title')}</Text>
+                        </View>
+                        <View style={{ marginTop: getSize.m(30) }}>
+                            <Text
+                                style={[
+                                    appStyles.text_topic,
+                                    { marginLeft: getSize.m(6), color: appColors.white },
+                                ]}
+                            >
+                                {t('video.priority.label')}
+                            </Text>
+                            <View
+                                style={{
+                                    marginHorizontal: getSize.m(-16),
+                                    marginTop: getSize.m(18),
+                                }}
+                            >
+                                <View style={{ paddingLeft: getSize.m(14) }}>
+                                    <ScrollView
+                                        horizontal
+                                        showsHorizontalScrollIndicator={false}
+                                        directionalLockEnabled
+                                    >
+                                        {favoriteTeamsVideo?.map((item, index) => {
+                                            return (
+                                                <View
+                                                    key={index}
+                                                    style={{
+                                                        flexDirection: 'row',
+                                                        justifyContent: 'center',
+                                                        marginHorizontal: getSize.m(8),
+                                                    }}
+                                                >
+                                                    <TouchableOpacity
+                                                        activeOpacity={1}
+                                                        onPress={() => handlePlayVideo(item)}
                                                     >
-                                                        <TouchableOpacity
-                                                            activeOpacity={1}
-                                                            onPress={() => handlePlayVideo(item)}
-                                                        >
-                                                            <LinearGradient
-                                                                colors={[
-                                                                    'transparent',
-                                                                    'rgba(0, 0, 0, 0.92)',
-                                                                ]}
-                                                                start={{ x: 0, y: 0.3 }}
-                                                                end={{ x: 0, y: 1 }}
-                                                                style={styles.gradient_img}
+                                                        <LinearGradient
+                                                            colors={[
+                                                                'transparent',
+                                                                'rgba(0, 0, 0, 0.92)',
+                                                            ]}
+                                                            start={{ x: 0, y: 0.3 }}
+                                                            end={{ x: 0, y: 1 }}
+                                                            style={styles.gradient_img}
+                                                        />
+                                                        <Image
+                                                            source={{ uri: item.image_url }}
+                                                            style={[styles.image]}
+                                                        />
+                                                        <View style={styles.date}>
+                                                            <Text style={styles.text_date}>
+                                                                {item.length}
+                                                            </Text>
+                                                        </View>
+                                                        <View style={styles.play_video}>
+                                                            <Icon
+                                                                name={appIcons.ic_caretright}
+                                                                size={getSize.m(16)}
+                                                                color={appColors.white}
                                                             />
-                                                            <Image
-                                                                source={{ uri: item.image_url }}
-                                                                style={[styles.image]}
-                                                            />
-                                                            <View style={styles.date}>
-                                                                <Text style={styles.text_date}>
-                                                                    {item.length}
-                                                                </Text>
-                                                            </View>
-                                                            <View style={styles.play_video}>
-                                                                <Icon
-                                                                    name={appIcons.ic_caretright}
-                                                                    size={getSize.m(16)}
-                                                                    color={appColors.white}
-                                                                />
-                                                            </View>
-                                                            <View style={styles.content}>
-                                                                <Text style={styles.text_content}>
-                                                                    {getTranslationText({
-                                                                        textHe: item.caption_he,
-                                                                        textEn: item.caption_en,
-                                                                    })}
-                                                                </Text>
-                                                            </View>
-                                                        </TouchableOpacity>
-                                                    </View>
-                                                );
-                                            })}
-                                        </ScrollView>
-                                    </View>
-                                </View>
-                            </View>
-
-                            <View style={{ marginTop: getSize.m(30) }}>
-                                <Text
-                                    style={[
-                                        appStyles.text_topic,
-                                        { marginLeft: getSize.m(6), color: appColors.white },
-                                    ]}
-                                >
-                                    {t('video.fav_player.label')}
-                                </Text>
-                                <View
-                                    style={{
-                                        marginHorizontal: getSize.m(-16),
-                                        marginTop: getSize.m(18),
-                                    }}
-                                >
-                                    <View style={{ paddingLeft: getSize.m(14) }}>
-                                        <ScrollView
-                                            horizontal
-                                            showsHorizontalScrollIndicator={false}
-                                            directionalLockEnabled
-                                        >
-                                            {favoriteTopTeamsVideo?.map((item, index) => {
-                                                return (
-                                                    <View
-                                                        key={index}
-                                                        style={{
-                                                            flexDirection: 'row',
-                                                            justifyContent: 'center',
-                                                            marginHorizontal: getSize.m(8),
-                                                        }}
-                                                    >
-                                                        <TouchableOpacity
-                                                            activeOpacity={1}
-                                                            onPress={() => handlePlayVideo(item)}
-                                                        >
-                                                            <LinearGradient
-                                                                colors={[
-                                                                    'transparent',
-                                                                    'rgba(0, 0, 0, 0.92)',
-                                                                ]}
-                                                                start={{ x: 0, y: 0.3 }}
-                                                                end={{ x: 0, y: 1 }}
-                                                                style={styles.gradient_img}
-                                                            />
-                                                            <Image
-                                                                source={{ uri: item.image_url }}
-                                                                style={[styles.image]}
-                                                            />
-                                                            <View style={styles.date}>
-                                                                <Text style={styles.text_date}>
-                                                                    {item.length}
-                                                                </Text>
-                                                            </View>
-                                                            <View style={styles.play_video}>
-                                                                <Icon
-                                                                    name={appIcons.ic_caretright}
-                                                                    size={getSize.m(16)}
-                                                                    color={appColors.white}
-                                                                />
-                                                            </View>
-                                                            <View style={styles.content}>
-                                                                <Text style={styles.text_content}>
-                                                                    {getTranslationText({
-                                                                        textHe: item.caption_he,
-                                                                        textEn: item.caption_en,
-                                                                    })}
-                                                                </Text>
-                                                            </View>
-                                                        </TouchableOpacity>
-                                                    </View>
-                                                );
-                                            })}
-                                        </ScrollView>
-                                    </View>
-                                </View>
-                            </View>
-                            <View style={{ marginTop: getSize.m(30) }}>
-                                <Text
-                                    style={[
-                                        appStyles.text_topic,
-                                        { marginLeft: getSize.m(6), color: appColors.white },
-                                    ]}
-                                >
-                                    {t('video.fav_nation_team.label')}
-                                </Text>
-                                <View
-                                    style={{
-                                        marginHorizontal: getSize.m(-16),
-                                        marginTop: getSize.m(18),
-                                    }}
-                                >
-                                    <View style={{ paddingLeft: getSize.m(14) }}>
-                                        <ScrollView
-                                            horizontal
-                                            showsHorizontalScrollIndicator={false}
-                                            directionalLockEnabled
-                                        >
-                                            {favoritePlayersVideo?.map((item, index) => {
-                                                return (
-                                                    <View
-                                                        key={index}
-                                                        style={{
-                                                            flexDirection: 'row',
-                                                            justifyContent: 'center',
-                                                            marginHorizontal: getSize.m(8),
-                                                        }}
-                                                    >
-                                                        <TouchableOpacity
-                                                            activeOpacity={1}
-                                                            onPress={() => handlePlayVideo(item)}
-                                                        >
-                                                            <LinearGradient
-                                                                colors={[
-                                                                    'transparent',
-                                                                    'rgba(0, 0, 0, 0.92)',
-                                                                ]}
-                                                                start={{ x: 0, y: 0.3 }}
-                                                                end={{ x: 0, y: 1 }}
-                                                                style={styles.gradient_img}
-                                                            />
-                                                            <Image
-                                                                source={{ uri: item.image_url }}
-                                                                style={[styles.image]}
-                                                            />
-                                                            <View style={styles.date}>
-                                                                <Text style={styles.text_date}>
-                                                                    {item.length}
-                                                                </Text>
-                                                            </View>
-                                                            <View style={styles.play_video}>
-                                                                <Icon
-                                                                    name={appIcons.ic_caretright}
-                                                                    size={getSize.m(16)}
-                                                                    color={appColors.white}
-                                                                />
-                                                            </View>
-                                                            <View style={styles.content}>
-                                                                <Text style={styles.text_content}>
-                                                                    {getTranslationText({
-                                                                        textHe: item.caption_he,
-                                                                        textEn: item.caption_en,
-                                                                    })}
-                                                                </Text>
-                                                            </View>
-                                                        </TouchableOpacity>
-                                                    </View>
-                                                );
-                                            })}
-                                        </ScrollView>
-                                    </View>
-                                </View>
-                            </View>
-
-                            <View style={{ marginTop: getSize.m(30) }}>
-                                <Text
-                                    style={[
-                                        appStyles.text_topic,
-                                        { marginLeft: getSize.m(6), color: appColors.white },
-                                    ]}
-                                >
-                                    {t('video.general_vod.label')}
-                                </Text>
-                                <View
-                                    style={{
-                                        marginHorizontal: getSize.m(-16),
-                                        marginTop: getSize.m(18),
-                                    }}
-                                >
-                                    <View style={{ paddingLeft: getSize.m(14) }}>
-                                        <ScrollView
-                                            horizontal
-                                            showsHorizontalScrollIndicator={false}
-                                            directionalLockEnabled
-                                        >
-                                            {generalVod?.map((item, index) => {
-                                                return (
-                                                    <View
-                                                        key={index}
-                                                        style={{
-                                                            flexDirection: 'row',
-                                                            justifyContent: 'center',
-                                                            marginHorizontal: getSize.m(8),
-                                                        }}
-                                                    >
-                                                        <TouchableOpacity
-                                                            activeOpacity={1}
-                                                            onPress={() => handlePlayVideo(item)}
-                                                        >
-                                                            <LinearGradient
-                                                                colors={[
-                                                                    'transparent',
-                                                                    'rgba(0, 0, 0, 0.92)',
-                                                                ]}
-                                                                start={{ x: 0, y: 0.3 }}
-                                                                end={{ x: 0, y: 1 }}
-                                                                style={styles.gradient_img}
-                                                            />
-                                                            <Image
-                                                                source={{ uri: item.image_url }}
-                                                                style={[styles.image]}
-                                                            />
-                                                            <View style={styles.date}>
-                                                                <Text style={styles.text_date}>
-                                                                    {item.length}
-                                                                </Text>
-                                                            </View>
-                                                            <View style={styles.play_video}>
-                                                                <Icon
-                                                                    name={appIcons.ic_caretright}
-                                                                    size={getSize.m(16)}
-                                                                    color={appColors.white}
-                                                                />
-                                                            </View>
-                                                            <View style={styles.content}>
-                                                                <Text style={styles.text_content}>
-                                                                    {getTranslationText({
-                                                                        textHe: item.caption_he,
-                                                                        textEn: item.caption_en,
-                                                                    })}
-                                                                </Text>
-                                                            </View>
-                                                        </TouchableOpacity>
-                                                    </View>
-                                                );
-                                            })}
-                                        </ScrollView>
-                                    </View>
+                                                        </View>
+                                                        <View style={styles.content}>
+                                                            <Text style={styles.text_content}>
+                                                                {getTranslationText({
+                                                                    textHe: item.caption_he,
+                                                                    textEn: item.caption_en,
+                                                                })}
+                                                            </Text>
+                                                        </View>
+                                                    </TouchableOpacity>
+                                                </View>
+                                            );
+                                        })}
+                                    </ScrollView>
                                 </View>
                             </View>
                         </View>
-                        <View style={{ height: TAB_BAR_HEIGHT + BOTTOM_SVG_HEIGHT }} />
-                    </ScrollView>
-                </SafeAreaView>
+
+                        <View style={{ marginTop: getSize.m(30) }}>
+                            <Text
+                                style={[
+                                    appStyles.text_topic,
+                                    { marginLeft: getSize.m(6), color: appColors.white },
+                                ]}
+                            >
+                                {t('video.fav_player.label')}
+                            </Text>
+                            <View
+                                style={{
+                                    marginHorizontal: getSize.m(-16),
+                                    marginTop: getSize.m(18),
+                                }}
+                            >
+                                <View style={{ paddingLeft: getSize.m(14) }}>
+                                    <ScrollView
+                                        horizontal
+                                        showsHorizontalScrollIndicator={false}
+                                        directionalLockEnabled
+                                    >
+                                        {favoriteTopTeamsVideo?.map((item, index) => {
+                                            return (
+                                                <View
+                                                    key={index}
+                                                    style={{
+                                                        flexDirection: 'row',
+                                                        justifyContent: 'center',
+                                                        marginHorizontal: getSize.m(8),
+                                                    }}
+                                                >
+                                                    <TouchableOpacity
+                                                        activeOpacity={1}
+                                                        onPress={() => handlePlayVideo(item)}
+                                                    >
+                                                        <LinearGradient
+                                                            colors={[
+                                                                'transparent',
+                                                                'rgba(0, 0, 0, 0.92)',
+                                                            ]}
+                                                            start={{ x: 0, y: 0.3 }}
+                                                            end={{ x: 0, y: 1 }}
+                                                            style={styles.gradient_img}
+                                                        />
+                                                        <Image
+                                                            source={{ uri: item.image_url }}
+                                                            style={[styles.image]}
+                                                        />
+                                                        <View style={styles.date}>
+                                                            <Text style={styles.text_date}>
+                                                                {item.length}
+                                                            </Text>
+                                                        </View>
+                                                        <View style={styles.play_video}>
+                                                            <Icon
+                                                                name={appIcons.ic_caretright}
+                                                                size={getSize.m(16)}
+                                                                color={appColors.white}
+                                                            />
+                                                        </View>
+                                                        <View style={styles.content}>
+                                                            <Text style={styles.text_content}>
+                                                                {getTranslationText({
+                                                                    textHe: item.caption_he,
+                                                                    textEn: item.caption_en,
+                                                                })}
+                                                            </Text>
+                                                        </View>
+                                                    </TouchableOpacity>
+                                                </View>
+                                            );
+                                        })}
+                                    </ScrollView>
+                                </View>
+                            </View>
+                        </View>
+                        <View style={{ marginTop: getSize.m(30) }}>
+                            <Text
+                                style={[
+                                    appStyles.text_topic,
+                                    { marginLeft: getSize.m(6), color: appColors.white },
+                                ]}
+                            >
+                                {t('video.fav_nation_team.label')}
+                            </Text>
+                            <View
+                                style={{
+                                    marginHorizontal: getSize.m(-16),
+                                    marginTop: getSize.m(18),
+                                }}
+                            >
+                                <View style={{ paddingLeft: getSize.m(14) }}>
+                                    <ScrollView
+                                        horizontal
+                                        showsHorizontalScrollIndicator={false}
+                                        directionalLockEnabled
+                                    >
+                                        {favoritePlayersVideo?.map((item, index) => {
+                                            return (
+                                                <View
+                                                    key={index}
+                                                    style={{
+                                                        flexDirection: 'row',
+                                                        justifyContent: 'center',
+                                                        marginHorizontal: getSize.m(8),
+                                                    }}
+                                                >
+                                                    <TouchableOpacity
+                                                        activeOpacity={1}
+                                                        onPress={() => handlePlayVideo(item)}
+                                                    >
+                                                        <LinearGradient
+                                                            colors={[
+                                                                'transparent',
+                                                                'rgba(0, 0, 0, 0.92)',
+                                                            ]}
+                                                            start={{ x: 0, y: 0.3 }}
+                                                            end={{ x: 0, y: 1 }}
+                                                            style={styles.gradient_img}
+                                                        />
+                                                        <Image
+                                                            source={{ uri: item.image_url }}
+                                                            style={[styles.image]}
+                                                        />
+                                                        <View style={styles.date}>
+                                                            <Text style={styles.text_date}>
+                                                                {item.length}
+                                                            </Text>
+                                                        </View>
+                                                        <View style={styles.play_video}>
+                                                            <Icon
+                                                                name={appIcons.ic_caretright}
+                                                                size={getSize.m(16)}
+                                                                color={appColors.white}
+                                                            />
+                                                        </View>
+                                                        <View style={styles.content}>
+                                                            <Text style={styles.text_content}>
+                                                                {getTranslationText({
+                                                                    textHe: item.caption_he,
+                                                                    textEn: item.caption_en,
+                                                                })}
+                                                            </Text>
+                                                        </View>
+                                                    </TouchableOpacity>
+                                                </View>
+                                            );
+                                        })}
+                                    </ScrollView>
+                                </View>
+                            </View>
+                        </View>
+
+                        <View style={{ marginTop: getSize.m(30) }}>
+                            <Text
+                                style={[
+                                    appStyles.text_topic,
+                                    { marginLeft: getSize.m(6), color: appColors.white },
+                                ]}
+                            >
+                                {t('video.general_vod.label')}
+                            </Text>
+                            <View
+                                style={{
+                                    marginHorizontal: getSize.m(-16),
+                                    marginTop: getSize.m(18),
+                                }}
+                            >
+                                <View style={{ paddingLeft: getSize.m(14) }}>
+                                    <ScrollView
+                                        horizontal
+                                        showsHorizontalScrollIndicator={false}
+                                        directionalLockEnabled
+                                    >
+                                        {generalVod?.map((item, index) => {
+                                            return (
+                                                <View
+                                                    key={index}
+                                                    style={{
+                                                        flexDirection: 'row',
+                                                        justifyContent: 'center',
+                                                        marginHorizontal: getSize.m(8),
+                                                    }}
+                                                >
+                                                    <TouchableOpacity
+                                                        activeOpacity={1}
+                                                        onPress={() => handlePlayVideo(item)}
+                                                    >
+                                                        <LinearGradient
+                                                            colors={[
+                                                                'transparent',
+                                                                'rgba(0, 0, 0, 0.92)',
+                                                            ]}
+                                                            start={{ x: 0, y: 0.3 }}
+                                                            end={{ x: 0, y: 1 }}
+                                                            style={styles.gradient_img}
+                                                        />
+                                                        <Image
+                                                            source={{ uri: item.image_url }}
+                                                            style={[styles.image]}
+                                                        />
+                                                        <View style={styles.date}>
+                                                            <Text style={styles.text_date}>
+                                                                {item.length}
+                                                            </Text>
+                                                        </View>
+                                                        <View style={styles.play_video}>
+                                                            <Icon
+                                                                name={appIcons.ic_caretright}
+                                                                size={getSize.m(16)}
+                                                                color={appColors.white}
+                                                            />
+                                                        </View>
+                                                        <View style={styles.content}>
+                                                            <Text style={styles.text_content}>
+                                                                {getTranslationText({
+                                                                    textHe: item.caption_he,
+                                                                    textEn: item.caption_en,
+                                                                })}
+                                                            </Text>
+                                                        </View>
+                                                    </TouchableOpacity>
+                                                </View>
+                                            );
+                                        })}
+                                    </ScrollView>
+                                </View>
+                            </View>
+                        </View>
+                    </View>
+                    <View style={{ height: TAB_BAR_HEIGHT + BOTTOM_SVG_HEIGHT }} />
+                </ScrollView>
             </BackGround>
         </View>
     );

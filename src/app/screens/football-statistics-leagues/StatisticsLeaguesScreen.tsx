@@ -30,76 +30,71 @@ export const StatisticsLeaguesScreen = ({ navigation, route }: IStatisticsLeague
         <View style={appStyles.flex}>
             {leagueSeasonStats && (
                 <BackGround>
-                    <StatusBar translucent backgroundColor="transparent" />
-                    <SafeAreaView style={appStyles.safe_area}>
-                        <View style={appStyles.container}>
-                            <CardGoBack
-                                iconName={appIcons.ic_right_ios}
-                                iconStyle={styles.ic_back}
-                                goBack={onGoBack}
-                                title={t('statistics.group.title')}
+                    <View style={appStyles.container}>
+                        <CardGoBack
+                            iconName={appIcons.ic_right_ios}
+                            iconStyle={styles.ic_back}
+                            goBack={onGoBack}
+                            title={t('statistics.group.title')}
+                        />
+                    </View>
+                    <ScrollView>
+                        <HeaderLogo
+                            text={getTranslationText({
+                                textHe: leagueSeasonStats.league_name_he,
+                                textEn: leagueSeasonStats.league_name_en,
+                            })}
+                            avt={{ uri: leagueSeasonStats.league_logo_url }}
+                        />
+                        <View style={[appStyles.package, { marginTop: getSize.m(0) }]}>
+                            <ScoresGoals
+                                goalKickers={leagueSeasonStats.goal_kickers || []}
+                                leagueSeasonStats={leagueSeasonStats}
                             />
                         </View>
-                        <ScrollView>
-                            <HeaderLogo
-                                text={getTranslationText({
-                                    textHe: leagueSeasonStats.league_name_he,
-                                    textEn: leagueSeasonStats.league_name_en,
-                                })}
-                                avt={{ uri: leagueSeasonStats.league_logo_url }}
+                        <View style={appStyles.package}>
+                            <AccumulationYellows
+                                yellowCards={leagueSeasonStats.yellow_cards || []}
+                                leagueSeasonStats={leagueSeasonStats}
                             />
-                            <View style={[appStyles.package, { marginTop: getSize.m(0) }]}>
-                                <ScoresGoals
-                                    goalKickers={leagueSeasonStats.goal_kickers || []}
-                                    leagueSeasonStats={leagueSeasonStats}
-                                />
-                            </View>
-                            <View style={appStyles.package}>
-                                <AccumulationYellows
-                                    yellowCards={leagueSeasonStats.yellow_cards || []}
-                                    leagueSeasonStats={leagueSeasonStats}
-                                />
-                            </View>
-                            <View style={appStyles.package}>
-                                <AccumulationReds
-                                    redCards={leagueSeasonStats.red_cards || []}
-                                    leagueSeasonStats={leagueSeasonStats}
-                                />
-                            </View>
-                            <View style={appStyles.package}>
-                                <AverageYellows
-                                    avgCards={leagueSeasonStats.avg_game_yellow_cards || []}
-                                    leagueSeasonStats={leagueSeasonStats}
-                                />
-                            </View>
-                            <View style={appStyles.package}>
-                                <AverageScores
-                                    avgGoalKicker={leagueSeasonStats.avg_game_goals_kicked || []}
-                                    leagueSeasonStats={leagueSeasonStats}
-                                />
-                            </View>
-                            <View style={appStyles.package}>
-                                <AverageRebounds
-                                    avgRebounds={leagueSeasonStats.avg_game_goals_received || []}
-                                    leagueSeasonStats={leagueSeasonStats}
-                                />
-                            </View>
-                            <View style={appStyles.package}>
-                                <LeaguesAverage data={leagueSeasonStats} />
-                            </View>
-                            {/* <View style={appStyles.package}>
+                        </View>
+                        <View style={appStyles.package}>
+                            <AccumulationReds
+                                redCards={leagueSeasonStats.red_cards || []}
+                                leagueSeasonStats={leagueSeasonStats}
+                            />
+                        </View>
+                        <View style={appStyles.package}>
+                            <AverageYellows
+                                avgCards={leagueSeasonStats.avg_game_yellow_cards || []}
+                                leagueSeasonStats={leagueSeasonStats}
+                            />
+                        </View>
+                        <View style={appStyles.package}>
+                            <AverageScores
+                                avgGoalKicker={leagueSeasonStats.avg_game_goals_kicked || []}
+                                leagueSeasonStats={leagueSeasonStats}
+                            />
+                        </View>
+                        <View style={appStyles.package}>
+                            <AverageRebounds
+                                avgRebounds={leagueSeasonStats.avg_game_goals_received || []}
+                                leagueSeasonStats={leagueSeasonStats}
+                            />
+                        </View>
+                        <View style={appStyles.package}>
+                            <LeaguesAverage data={leagueSeasonStats} />
+                        </View>
+                        {/* <View style={appStyles.package}>
                             <TeamCompetition />
                         </View> */}
-                            <View style={appStyles.package}>
-                                <HistoryChampionShips
-                                    championshipHistory={
-                                        leagueSeasonStats.championship_history || []
-                                    }
-                                    leagueSeasonStats={leagueSeasonStats}
-                                />
-                            </View>
-                        </ScrollView>
-                    </SafeAreaView>
+                        <View style={appStyles.package}>
+                            <HistoryChampionShips
+                                championshipHistory={leagueSeasonStats.championship_history || []}
+                                leagueSeasonStats={leagueSeasonStats}
+                            />
+                        </View>
+                    </ScrollView>
                 </BackGround>
             )}
         </View>

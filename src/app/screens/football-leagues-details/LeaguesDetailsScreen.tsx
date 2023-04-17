@@ -57,8 +57,7 @@ export const LeaguesDetailsScreen = ({ navigation, route }: ILeaguesDetailsScree
     return (
         <View style={appStyles.flex}>
             <BackGround>
-                <StatusBar translucent backgroundColor="transparent" />
-                <SafeAreaView style={appStyles.safe_area}>
+                <View>
                     <View style={appStyles.container}>
                         <HeaderUser
                             avt={AppImages.img_avt}
@@ -198,7 +197,7 @@ export const LeaguesDetailsScreen = ({ navigation, route }: ILeaguesDetailsScree
                         </View> */}
                         </ScrollView>
                     </GestureHandlerRootView>
-                </SafeAreaView>
+                </View>
             </BackGround>
         </View>
     );

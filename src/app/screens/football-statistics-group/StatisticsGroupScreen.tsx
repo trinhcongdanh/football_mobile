@@ -28,8 +28,7 @@ export const StatisticsGroupScreen = ({ navigation, route }: IStatisticsGroupScr
     return (
         <View style={appStyles.flex}>
             <BackGround>
-                <StatusBar translucent backgroundColor="transparent" />
-                <SafeAreaView style={appStyles.safe_area}>
+                <>
                     <View style={appStyles.container}>
                         <CardGoBack
                             iconName={appIcons.ic_right_ios}
@@ -126,7 +125,7 @@ export const StatisticsGroupScreen = ({ navigation, route }: IStatisticsGroupScr
                             </View>
                         </ScrollView>
                     )}
-                </SafeAreaView>
+                </>
             </BackGround>
         </View>
     );

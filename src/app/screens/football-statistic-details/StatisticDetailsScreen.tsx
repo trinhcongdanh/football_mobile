@@ -536,34 +536,31 @@ export const StatisticDetailsScreen = ({ navigation, route }: IStatisticDetailsS
         <View style={appStyles.flex}>
             {leagueSeasonStats && (
                 <BackGround>
-                    <StatusBar translucent backgroundColor="transparent" />
-                    <SafeAreaView style={appStyles.safe_area}>
-                        <View style={appStyles.container}>
-                            <CardGoBack
-                                iconName={appIcons.ic_right_ios}
-                                iconStyle={styles.ic_back}
-                                goBack={onGoBack}
-                                title={title}
-                            />
-                        </View>
-                        <ScrollView>
-                            <HeaderLogo
-                                text={getTranslationText({
-                                    textHe: leagueSeasonStats.league_name_he,
-                                    textEn: leagueSeasonStats.league_name_en,
-                                })}
-                                avt={{ uri: leagueSeasonStats.league_logo_url }}
-                            />
-                            {renderLists(
-                                // eslint-disable-next-line no-nested-ternary
-                                data?.length
-                                    ? ListType.NormalGame
-                                    : avgData?.length
-                                    ? ListType.AvgGame
-                                    : ListType.HistoryGame
-                            )}
-                        </ScrollView>
-                    </SafeAreaView>
+                    <View style={appStyles.container}>
+                        <CardGoBack
+                            iconName={appIcons.ic_right_ios}
+                            iconStyle={styles.ic_back}
+                            goBack={onGoBack}
+                            title={title}
+                        />
+                    </View>
+                    <ScrollView>
+                        <HeaderLogo
+                            text={getTranslationText({
+                                textHe: leagueSeasonStats.league_name_he,
+                                textEn: leagueSeasonStats.league_name_en,
+                            })}
+                            avt={{ uri: leagueSeasonStats.league_logo_url }}
+                        />
+                        {renderLists(
+                            // eslint-disable-next-line no-nested-ternary
+                            data?.length
+                                ? ListType.NormalGame
+                                : avgData?.length
+                                ? ListType.AvgGame
+                                : ListType.HistoryGame
+                        )}
+                    </ScrollView>
                 </BackGround>
             )}
         </View>
