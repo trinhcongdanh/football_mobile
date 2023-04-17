@@ -465,9 +465,8 @@ export const GroupPageScreen = ({ navigation, route }: IGroupPageScreenProps) =>
                             <View>
                                 {
                                     // eslint-disable-next-line @typescript-eslint/prefer-optional-chain
-                                    teamSeason && teamSeason.league_season_id ? (
-                                        <LeagueTable leagueSeasonId={teamSeason.league_season_id} />
-                                    ) : null
+
+                                    <LeagueTable leagueSeasonId={teamSeason?.league_season_id} />
                                 }
                             </View>
                             <View

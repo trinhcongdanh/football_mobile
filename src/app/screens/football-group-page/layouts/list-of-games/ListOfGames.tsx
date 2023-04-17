@@ -55,6 +55,7 @@ export const ListOfGames = ({ listGames }: IListOfGamesProps) => {
                             )}
                             handleDetailMatch={() => handleDetailMatch(item?.game_id)}
                             handleStadium={() => handleStadium(item?.stadium_id)}
+                            gameDetail={t('list_game.detail')}
                         />
                     );
                 })}
