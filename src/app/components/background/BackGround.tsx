@@ -11,7 +11,7 @@ export const BackGround = ({ children }: IBackGroundComponent) => {
                 source={AppImages.img_background_arrow_screen}
                 style={[appStyles.flex]}
             >
-                <StatusBar translucent backgroundColor="transparent" />
+                <StatusBar barStyle="light-content" translucent backgroundColor="transparent" />
                 <SafeAreaView style={appStyles.safe_area}>{children}</SafeAreaView>
             </ImageBackground>
         </ImageBackground>
