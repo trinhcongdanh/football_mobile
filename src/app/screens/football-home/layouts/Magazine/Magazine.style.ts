@@ -13,6 +13,7 @@ const styles = StyleSheet.create({
         fontSize: getSize.m(16),
         color: appColors.blue_black,
         lineHeight: getSize.m(20.8),
+        textAlign: 'left',
     },
     image: {
         height: getSize.m(280),

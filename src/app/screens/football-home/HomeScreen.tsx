@@ -112,11 +112,13 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                                 source={AppImages.img_arrow_header_home}
                                 resizeMode={FastImage.resizeMode.contain}
                                 style={{
-                                    height: getSize.m(80),
+                                    height:
+                                        Platform.OS === 'android' ? getSize.m(80) : getSize.m(70),
                                     width: getSize.m(281),
                                     position: 'absolute',
-                                    top: getSize.m(0),
-                                    left: getSize.m(130),
+                                    top: Platform.OS === 'android' ? getSize.m(0) : getSize.m(-10),
+                                    left:
+                                        Platform.OS === 'android' ? getSize.m(130) : getSize.m(140),
                                     transform: [{ scaleX: I18nManager.isRTL ? 1 : -1 }],
                                 }}
                             />
