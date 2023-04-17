@@ -31,7 +31,7 @@ import { resetFavPlayer } from 'src/store/FavPlayer.slice';
 export const useViewModel = ({ navigation, route }: IFavoriteTopTeamsScreenProps) => {
     const { t } = useTranslation();
     const dispatch = useDispatch<any>();
-    const { navigate, goBack } = useAppNavigator();
+    const { navigate, goBack, popToTop } = useAppNavigator();
     const getProfile = useSelector((state: RootState) => state.getProfile);
 
     const selectedFavTopTeamsMap = useSelector(selectedFavTopTeamsAsMapSelector);
@@ -94,8 +94,6 @@ export const useViewModel = ({ navigation, route }: IFavoriteTopTeamsScreenProps
     }, [favSelectedTopTeam]);
 
     const onGoBack = () => {
-        dispatch(resetTopTeams([]));
-        dispatch(resetFavPlayer([]));
         goBack();
         return true;
     };
@@ -110,51 +108,16 @@ export const useViewModel = ({ navigation, route }: IFavoriteTopTeamsScreenProps
     const onGoSkip = () => {
         if (previous_screen === ScreenName.SettingsPage) {
             goBack();
+        } else if (previous_screen === ScreenName.FavSummaryPage) {
+            goBack();
         } else {
             dispatch(resetSelectedFavTopTeams([]));
-            dispatch(resetTopTeams([]));
             navigate(ScreenName.FavSummaryPage);
         }
     };
 
     const isFocused = useIsFocused();
     const previous_screen = route?.params?.previous_screen;
-
-    // useEffect(() => {
-    //     if (previous_screen === ScreenName.HomePage) {
-    //         return;
-    //     }
-    //     if (previous_screen !== ScreenName.SettingsPage) {
-    //         if (!isFocused) return;
-    //         if (!isEmpty(login.login)) {
-    //             navigate(ScreenName.SideBar);
-    //             navigation.reset({
-    //                 index: 0,
-    //                 routes: [{ name: ScreenName.SideBar as never }],
-    //             });
-    //         } else {
-    //             if (profile.success === true) {
-    //                 dispatch(
-    //                     loginUser(
-    //                         serializeParams({
-    //                             action: ACTION,
-    //                             token: TOKEN,
-    //                             call: AuthData.LOGIN,
-    //                             guest_id: profile.profile.tc_user,
-    //                             guest_guid: guestId[0],
-    //                         })
-    //                     )
-    //                 );
-
-    //                 navigate(ScreenName.SideBar);
-    //                 navigation.reset({
-    //                     index: 0,
-    //                     routes: [{ name: ScreenName.SideBar as never }],
-    //                 });
-    //             }
-    //         }
-    //     }
-    // }, [profile.success, isFocused]);
 
     const handleContinue = () => {
         if (previous_screen === ScreenName.SettingsPage) {
@@ -183,10 +146,12 @@ export const useViewModel = ({ navigation, route }: IFavoriteTopTeamsScreenProps
                     previous_screen: ScreenName.HomePage,
                 });
             }
-        } else {
+        } else if (previous_screen === ScreenName.FavSummaryPage) {
             navigate(ScreenName.FavSummaryPage, {
                 editFav: true,
             });
+        } else {
+            navigate(ScreenName.FavSummaryPage);
         }
     };
     useMount(() => {
