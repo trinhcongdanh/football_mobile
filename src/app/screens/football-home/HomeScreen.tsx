@@ -145,14 +145,7 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                                 ]}
                             >
                                 <View style={[appStyles.container]}>
-                                    <View
-                                        style={[
-                                            appStyles.flex_row_space_center,
-                                            {
-                                                marginTop: getSize.m(10),
-                                            },
-                                        ]}
-                                    >
+                                    <View style={[appStyles.flex_row_space_center]}>
                                         <TouchableOpacity onPress={onShowSideMenu}>
                                             <LinearGradient
                                                 colors={[
