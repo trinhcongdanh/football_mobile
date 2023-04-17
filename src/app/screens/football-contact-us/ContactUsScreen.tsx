@@ -48,101 +48,96 @@ export const ContactUsScreen = ({ navigation, route }: IContactUsScreenProps) =>
     return (
         <View style={appStyles.flex}>
             <BackGround>
-                <StatusBar translucent backgroundColor="transparent" />
-                <SafeAreaView style={appStyles.safe_area}>
-                    <View style={appStyles.container}>
-                        <CardGoBack
-                            iconName={appIcons.ic_right_ios}
-                            iconStyle={styles.ic_back}
-                            goBack={onGoBack}
-                            title={t('contact_us.contact_us')}
-                        />
-                    </View>
-                    <ScrollView>
-                        <View style={styles.contact_us_conatiner}>
-                            <View style={styles.title}>
-                                <Text style={styles.title_text}>{t('contact_us.header')}</Text>
-                            </View>
-                            <View style={{ marginTop: getSize.m(16) }}>
-                                <Input
-                                    input={name}
-                                    inputRef={nameRef}
-                                    backgroundColor={appColors.white}
-                                    backgroundColorCompleted={appColors.separator}
-                                    textColor={appColors.light_gray}
-                                    error={errors.name}
-                                    placeholder={t('contact_us.name')}
-                                    onChangeTextInput={text => setName(text)}
-                                    onFocus={() => {
-                                        handleError('', 'name');
-                                    }}
-                                />
-                            </View>
-                            <View style={{ marginTop: getSize.m(16) }}>
-                                <Input
-                                    input={email}
-                                    inputRef={applicationRef}
-                                    error={errors.email}
-                                    backgroundColor={appColors.white}
-                                    backgroundColorCompleted={appColors.separator}
-                                    textColor={appColors.light_gray}
-                                    placeholder={t('contact_us.email')}
-                                    keyboardType="email-address"
-                                    onChangeTextInput={text => setEmail(text)}
-                                    onFocus={() => {
-                                        handleError('', 'email');
-                                    }}
-                                />
-                            </View>
-                            <View style={{ marginTop: getSize.m(16) }}>
-                                <Input
-                                    input={title}
-                                    inputRef={titleRef}
-                                    error={errors.title}
-                                    backgroundColor={appColors.white}
-                                    backgroundColorCompleted={appColors.separator}
-                                    textColor={appColors.light_gray}
-                                    placeholder={t('contact_us.title')}
-                                    onChangeTextInput={text => setTitle(text)}
-                                    onFocus={() => {
-                                        handleError('', 'title');
-                                    }}
-                                />
-                            </View>
-                            <View style={{ marginTop: getSize.m(16) }}>
-                                <TextInput
-                                    editable
-                                    multiline
-                                    numberOfLines={4}
-                                    style={[
-                                        styles.text_input_content,
-                                        {
-                                            backgroundColor:
-                                                content === ''
-                                                    ? appColors.white
-                                                    : appColors.separator,
-                                        },
-                                    ]}
-                                    placeholderTextColor={appColors.light_gray}
-                                    placeholder={t('contact_us.content')}
-                                    onChangeText={text => setContent(text)}
-                                    value={content}
-                                    ref={contentRef}
-                                    onFocus={() => {
-                                        handleError('', 'content');
-                                    }}
-                                />
-                            </View>
-                            <View>
-                                <Button
-                                    style={{ borderRadius: getSize.m(15) }}
-                                    title={t('contact_us.button')}
-                                    onPress={submitContact}
-                                />
-                            </View>
+                <View style={appStyles.container}>
+                    <CardGoBack
+                        iconName={appIcons.ic_right_ios}
+                        iconStyle={styles.ic_back}
+                        goBack={onGoBack}
+                        title={t('contact_us.contact_us')}
+                    />
+                </View>
+                <ScrollView>
+                    <View style={styles.contact_us_conatiner}>
+                        <View style={styles.title}>
+                            <Text style={styles.title_text}>{t('contact_us.header')}</Text>
                         </View>
-                    </ScrollView>
-                </SafeAreaView>
+                        <View style={{ marginTop: getSize.m(16) }}>
+                            <Input
+                                input={name}
+                                inputRef={nameRef}
+                                backgroundColor={appColors.white}
+                                backgroundColorCompleted={appColors.separator}
+                                textColor={appColors.light_gray}
+                                error={errors.name}
+                                placeholder={t('contact_us.name')}
+                                onChangeTextInput={text => setName(text)}
+                                onFocus={() => {
+                                    handleError('', 'name');
+                                }}
+                            />
+                        </View>
+                        <View style={{ marginTop: getSize.m(16) }}>
+                            <Input
+                                input={email}
+                                inputRef={applicationRef}
+                                error={errors.email}
+                                backgroundColor={appColors.white}
+                                backgroundColorCompleted={appColors.separator}
+                                textColor={appColors.light_gray}
+                                placeholder={t('contact_us.email')}
+                                keyboardType="email-address"
+                                onChangeTextInput={text => setEmail(text)}
+                                onFocus={() => {
+                                    handleError('', 'email');
+                                }}
+                            />
+                        </View>
+                        <View style={{ marginTop: getSize.m(16) }}>
+                            <Input
+                                input={title}
+                                inputRef={titleRef}
+                                error={errors.title}
+                                backgroundColor={appColors.white}
+                                backgroundColorCompleted={appColors.separator}
+                                textColor={appColors.light_gray}
+                                placeholder={t('contact_us.title')}
+                                onChangeTextInput={text => setTitle(text)}
+                                onFocus={() => {
+                                    handleError('', 'title');
+                                }}
+                            />
+                        </View>
+                        <View style={{ marginTop: getSize.m(16) }}>
+                            <TextInput
+                                editable
+                                multiline
+                                numberOfLines={4}
+                                style={[
+                                    styles.text_input_content,
+                                    {
+                                        backgroundColor:
+                                            content === '' ? appColors.white : appColors.separator,
+                                    },
+                                ]}
+                                placeholderTextColor={appColors.light_gray}
+                                placeholder={t('contact_us.content')}
+                                onChangeText={text => setContent(text)}
+                                value={content}
+                                ref={contentRef}
+                                onFocus={() => {
+                                    handleError('', 'content');
+                                }}
+                            />
+                        </View>
+                        <View>
+                            <Button
+                                style={{ borderRadius: getSize.m(15) }}
+                                title={t('contact_us.button')}
+                                onPress={submitContact}
+                            />
+                        </View>
+                    </View>
+                </ScrollView>
             </BackGround>
         </View>
     );

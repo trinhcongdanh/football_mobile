@@ -40,126 +40,41 @@ export const TeamSquadScreen = ({ navigation, route }: ITeamGroupScreenProps) =>
     return (
         <View style={appStyles.flex}>
             <BackGround>
-                <StatusBar translucent backgroundColor="transparent" />
-                <SafeAreaView style={appStyles.safe_area}>
-                    <View style={appStyles.container}>
-                        <HeaderUser
-                            icon={AppImages.img_angle_arrow}
-                            color_pre={appColors.black}
-                            color_after={appColors.black}
-                            title={
-                                fromTopTeam
-                                    ? t('team_squad.top_team_personnel')
-                                    : t('team_squad.team_personnel')
-                            }
-                            handlePressFunction={onGoBack}
-                        />
-                    </View>
-                    <View style={[appStyles.flex, appStyles.main_container]}>
-                        <ButtonOption
-                            option_one={t('team_squad.option.players')}
-                            option_two={t('team_squad.option.officials')}
-                            onSelect={setOnSelect}
-                            defaultValue={onSelect}
-                        />
-                        <ScrollView>
-                            <View
-                                style={{
-                                    paddingHorizontal: getSize.m(26),
-                                    marginBottom: getSize.m(30),
-                                }}
-                            >
-                                {onSelect === TeamSquadScreenType.Personnel && fromTopTeam && (
-                                    <ScrollView showsVerticalScrollIndicator={false}>
-                                        <View style={{ marginTop: getSize.m(30) }}>
-                                            <Position
-                                                width={getSize.m(130)}
-                                                position={t('team_squad.gk')}
-                                            />
-                                            {topTeamPersonnel?.players?.goalkeepers.map(item => {
-                                                return (
-                                                    <ListPlayer
-                                                        key={item.player_id}
-                                                        name={getTranslationText({
-                                                            textHe: item.name_he,
-                                                            textEn: item.name_en,
-                                                        })}
-                                                        avt={item.image_url}
-                                                        handleDataPlayer={() =>
-                                                            onNavigateDataPlayer(item.player_id)
-                                                        }
-                                                    />
-                                                );
-                                            })}
-                                        </View>
-                                        <View style={{ marginTop: getSize.m(30) }}>
-                                            <Position
-                                                width={getSize.m(130)}
-                                                position={t('team_squad.df')}
-                                            />
-                                            {topTeamPersonnel?.players?.defence.map(item => {
-                                                return (
-                                                    <ListPlayer
-                                                        key={item.player_id}
-                                                        name={getTranslationText({
-                                                            textHe: item.name_he,
-                                                            textEn: item.name_en,
-                                                        })}
-                                                        avt={item.image_url}
-                                                        handleDataPlayer={() =>
-                                                            onNavigateDataPlayer(item.player_id)
-                                                        }
-                                                    />
-                                                );
-                                            })}
-                                        </View>
-                                        <View style={{ marginTop: getSize.m(30) }}>
-                                            <Position
-                                                width={getSize.m(130)}
-                                                position={t('team_squad.mf')}
-                                            />
-                                            {topTeamPersonnel?.players?.midfield.map(item => {
-                                                return (
-                                                    <ListPlayer
-                                                        key={item.player_id}
-                                                        name={getTranslationText({
-                                                            textHe: item.name_he,
-                                                            textEn: item.name_en,
-                                                        })}
-                                                        avt={item.image_url}
-                                                        handleDataPlayer={() =>
-                                                            onNavigateDataPlayer(item.player_id)
-                                                        }
-                                                    />
-                                                );
-                                            })}
-                                        </View>
-                                        <View style={{ marginTop: getSize.m(30) }}>
-                                            <Position
-                                                width={getSize.m(130)}
-                                                position={t('team_squad.st')}
-                                            />
-                                            {topTeamPersonnel?.players?.attack.map(item => {
-                                                return (
-                                                    <ListPlayer
-                                                        key={item.player_id}
-                                                        name={getTranslationText({
-                                                            textHe: item.name_he,
-                                                            textEn: item.name_en,
-                                                        })}
-                                                        avt={item.image_url}
-                                                        handleDataPlayer={() =>
-                                                            onNavigateDataPlayer(item.player_id)
-                                                        }
-                                                    />
-                                                );
-                                            })}
-                                        </View>
-                                    </ScrollView>
-                                )}
-                                {onSelect === TeamSquadScreenType.Personnel && !fromTopTeam && (
+                <View style={appStyles.container}>
+                    <HeaderUser
+                        icon={AppImages.img_angle_arrow}
+                        color_pre={appColors.black}
+                        color_after={appColors.black}
+                        title={
+                            fromTopTeam
+                                ? t('team_squad.top_team_personnel')
+                                : t('team_squad.team_personnel')
+                        }
+                        handlePressFunction={onGoBack}
+                    />
+                </View>
+                <View style={[appStyles.flex, appStyles.main_container]}>
+                    <ButtonOption
+                        option_one={t('team_squad.option.players')}
+                        option_two={t('team_squad.option.officials')}
+                        onSelect={setOnSelect}
+                        defaultValue={onSelect}
+                    />
+                    <ScrollView>
+                        <View
+                            style={{
+                                paddingHorizontal: getSize.m(26),
+                                marginBottom: getSize.m(30),
+                            }}
+                        >
+                            {onSelect === TeamSquadScreenType.Personnel && fromTopTeam && (
+                                <ScrollView showsVerticalScrollIndicator={false}>
                                     <View style={{ marginTop: getSize.m(30) }}>
-                                        {teamPersonnel?.players.map(item => {
+                                        <Position
+                                            width={getSize.m(130)}
+                                            position={t('team_squad.gk')}
+                                        />
+                                        {topTeamPersonnel?.players?.goalkeepers.map(item => {
                                             return (
                                                 <ListPlayer
                                                     key={item.player_id}
@@ -175,59 +90,141 @@ export const TeamSquadScreen = ({ navigation, route }: ITeamGroupScreenProps) =>
                                             );
                                         })}
                                     </View>
-                                )}
-                                {onSelect === TeamSquadScreenType.Staff && fromTopTeam && (
                                     <View style={{ marginTop: getSize.m(30) }}>
-                                        {topTeamPersonnel?.staff.map(item => {
+                                        <Position
+                                            width={getSize.m(130)}
+                                            position={t('team_squad.df')}
+                                        />
+                                        {topTeamPersonnel?.players?.defence.map(item => {
                                             return (
                                                 <ListPlayer
-                                                    key={item.coach_id}
-                                                    avt={item.image_url}
+                                                    key={item.player_id}
                                                     name={getTranslationText({
                                                         textHe: item.name_he,
                                                         textEn: item.name_en,
                                                     })}
-                                                    position={getTranslationText({
-                                                        textHe: item.title_he,
-                                                        textEn: item.title_en,
-                                                    })}
+                                                    avt={item.image_url}
                                                     handleDataPlayer={() =>
-                                                        onNavigateDataCoach(item.coach_id)
+                                                        onNavigateDataPlayer(item.player_id)
                                                     }
-                                                    widthText={getSize.m(80)}
                                                 />
                                             );
                                         })}
                                     </View>
-                                )}
-                                {onSelect === TeamSquadScreenType.Staff && !fromTopTeam && (
                                     <View style={{ marginTop: getSize.m(30) }}>
-                                        {teamPersonnel?.staff.map(item => {
+                                        <Position
+                                            width={getSize.m(130)}
+                                            position={t('team_squad.mf')}
+                                        />
+                                        {topTeamPersonnel?.players?.midfield.map(item => {
                                             return (
                                                 <ListPlayer
-                                                    key={item.coach_id}
-                                                    avt={item.image_url}
+                                                    key={item.player_id}
                                                     name={getTranslationText({
                                                         textHe: item.name_he,
                                                         textEn: item.name_en,
                                                     })}
-                                                    position={getTranslationText({
-                                                        textHe: item.title_he,
-                                                        textEn: item.title_en,
-                                                    })}
+                                                    avt={item.image_url}
                                                     handleDataPlayer={() =>
-                                                        onNavigateDataCoach(item.coach_id)
+                                                        onNavigateDataPlayer(item.player_id)
                                                     }
-                                                    widthText={getSize.m(80)}
                                                 />
                                             );
                                         })}
                                     </View>
-                                )}
-                            </View>
-                        </ScrollView>
-                    </View>
-                </SafeAreaView>
+                                    <View style={{ marginTop: getSize.m(30) }}>
+                                        <Position
+                                            width={getSize.m(130)}
+                                            position={t('team_squad.st')}
+                                        />
+                                        {topTeamPersonnel?.players?.attack.map(item => {
+                                            return (
+                                                <ListPlayer
+                                                    key={item.player_id}
+                                                    name={getTranslationText({
+                                                        textHe: item.name_he,
+                                                        textEn: item.name_en,
+                                                    })}
+                                                    avt={item.image_url}
+                                                    handleDataPlayer={() =>
+                                                        onNavigateDataPlayer(item.player_id)
+                                                    }
+                                                />
+                                            );
+                                        })}
+                                    </View>
+                                </ScrollView>
+                            )}
+                            {onSelect === TeamSquadScreenType.Personnel && !fromTopTeam && (
+                                <View style={{ marginTop: getSize.m(30) }}>
+                                    {teamPersonnel?.players.map(item => {
+                                        return (
+                                            <ListPlayer
+                                                key={item.player_id}
+                                                name={getTranslationText({
+                                                    textHe: item.name_he,
+                                                    textEn: item.name_en,
+                                                })}
+                                                avt={item.image_url}
+                                                handleDataPlayer={() =>
+                                                    onNavigateDataPlayer(item.player_id)
+                                                }
+                                            />
+                                        );
+                                    })}
+                                </View>
+                            )}
+                            {onSelect === TeamSquadScreenType.Staff && fromTopTeam && (
+                                <View style={{ marginTop: getSize.m(30) }}>
+                                    {topTeamPersonnel?.staff.map(item => {
+                                        return (
+                                            <ListPlayer
+                                                key={item.coach_id}
+                                                avt={item.image_url}
+                                                name={getTranslationText({
+                                                    textHe: item.name_he,
+                                                    textEn: item.name_en,
+                                                })}
+                                                position={getTranslationText({
+                                                    textHe: item.title_he,
+                                                    textEn: item.title_en,
+                                                })}
+                                                handleDataPlayer={() =>
+                                                    onNavigateDataCoach(item.coach_id)
+                                                }
+                                                widthText={getSize.m(80)}
+                                            />
+                                        );
+                                    })}
+                                </View>
+                            )}
+                            {onSelect === TeamSquadScreenType.Staff && !fromTopTeam && (
+                                <View style={{ marginTop: getSize.m(30) }}>
+                                    {teamPersonnel?.staff.map(item => {
+                                        return (
+                                            <ListPlayer
+                                                key={item.coach_id}
+                                                avt={item.image_url}
+                                                name={getTranslationText({
+                                                    textHe: item.name_he,
+                                                    textEn: item.name_en,
+                                                })}
+                                                position={getTranslationText({
+                                                    textHe: item.title_he,
+                                                    textEn: item.title_en,
+                                                })}
+                                                handleDataPlayer={() =>
+                                                    onNavigateDataCoach(item.coach_id)
+                                                }
+                                                widthText={getSize.m(80)}
+                                            />
+                                        );
+                                    })}
+                                </View>
+                            )}
+                        </View>
+                    </ScrollView>
+                </View>
             </BackGround>
         </View>
     );

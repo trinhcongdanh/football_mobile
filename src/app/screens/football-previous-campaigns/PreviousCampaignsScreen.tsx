@@ -31,81 +31,73 @@ export const PreviousCampaignsScreen = ({ navigation, route }: IPreviousCampaign
     return (
         <View style={appStyles.flex}>
             <BackGround>
-                <StatusBar translucent backgroundColor="transparent" />
-                <SafeAreaView style={appStyles.safe_area}>
-                    <View style={appStyles.container}>
-                        <CardGoBack
-                            iconName={appIcons.ic_right_ios}
-                            iconStyle={styles.ic_back}
-                            goBack={onGoBack}
-                            title={getTranslationText({
-                                textHe: topTeam?.name_he,
-                                textEn: topTeam?.name_en,
-                            })}
-                        />
-                    </View>
-                    <ScrollView>
-                        <HeaderLogo
-                            text={getTranslationText({
-                                textHe: topTeam?.name_he,
-                                textEn: topTeam?.name_en,
-                            })}
-                            logo={{ uri: topTeam.logo_url }}
-                        />
-                        <View
-                            style={[
-                                appStyles.package,
-                                { marginTop: getSize.m(0), minHeight: getSize.m(900) },
-                            ]}
+                <View style={appStyles.container}>
+                    <CardGoBack
+                        iconName={appIcons.ic_right_ios}
+                        iconStyle={styles.ic_back}
+                        goBack={onGoBack}
+                        title={getTranslationText({
+                            textHe: topTeam?.name_he,
+                            textEn: topTeam?.name_en,
+                        })}
+                    />
+                </View>
+                <ScrollView>
+                    <HeaderLogo
+                        text={getTranslationText({
+                            textHe: topTeam?.name_he,
+                            textEn: topTeam?.name_en,
+                        })}
+                        logo={{ uri: topTeam.logo_url }}
+                    />
+                    <View
+                        style={[
+                            appStyles.package,
+                            { marginTop: getSize.m(0), minHeight: getSize.m(900) },
+                        ]}
+                    >
+                        <LinearGradient
+                            start={{ x: 0, y: 0 }}
+                            end={{ x: 1, y: 1 }}
+                            colors={[appColors.linearLight, appColors.linearDark]}
+                            style={[appStyles.flex_row_space_center, styles.header]}
                         >
-                            <LinearGradient
-                                start={{ x: 0, y: 0 }}
-                                end={{ x: 1, y: 1 }}
-                                colors={[appColors.linearLight, appColors.linearDark]}
-                                style={[appStyles.flex_row_space_center, styles.header]}
+                            <Text style={styles.text_header}>
+                                {t('previous_campaigns.campaign_game')}
+                            </Text>
+                            <Text
+                                style={[
+                                    styles.text_header,
+                                    {
+                                        marginRight: getSize.m(30),
+                                    },
+                                ]}
                             >
-                                <Text style={styles.text_header}>
-                                    {t('previous_campaigns.campaign_game')}
-                                </Text>
-                                <Text
-                                    style={[
-                                        styles.text_header,
-                                        {
-                                            marginRight: getSize.m(30),
-                                        },
-                                    ]}
-                                >
-                                    {t('previous_campaigns.year')}
-                                </Text>
-                            </LinearGradient>
-                            <View>
-                                {campaigns?.map((campaign, index) => {
-                                    return (
-                                        <TouchableOpacity
-                                            style={[
-                                                appStyles.flex_row_space_center,
-                                                styles.content,
-                                            ]}
-                                            onPress={() => handleCampaignPage(index)}
-                                            // eslint-disable-next-line no-underscore-dangle
-                                            key={campaign._id}
-                                        >
-                                            <Text style={styles.name_campaign}>
-                                                {getTranslationText({
-                                                    textHe: campaign.name_he,
-                                                    textEn: campaign.name_en,
-                                                })}
-                                            </Text>
-                                            <Text style={styles.year_campaign}>
-                                                {campaign.season}
-                                            </Text>
-                                        </TouchableOpacity>
-                                    );
-                                })}
-                            </View>
+                                {t('previous_campaigns.year')}
+                            </Text>
+                        </LinearGradient>
+                        <View>
+                            {campaigns?.map((campaign, index) => {
+                                return (
+                                    <TouchableOpacity
+                                        style={[appStyles.flex_row_space_center, styles.content]}
+                                        onPress={() => handleCampaignPage(index)}
+                                        // eslint-disable-next-line no-underscore-dangle
+                                        key={campaign._id}
+                                    >
+                                        <Text style={styles.name_campaign}>
+                                            {getTranslationText({
+                                                textHe: campaign.name_he,
+                                                textEn: campaign.name_en,
+                                            })}
+                                        </Text>
+                                        <Text style={styles.year_campaign}>{campaign.season}</Text>
+                                    </TouchableOpacity>
+                                );
+                            })}
                         </View>
-                    </ScrollView>
-                </SafeAreaView>
+                    </View>
+                </ScrollView>
             </BackGround>
         </View>
     );

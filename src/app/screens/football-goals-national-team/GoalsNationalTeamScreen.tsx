@@ -27,104 +27,100 @@ export const GoalsNationalTeamScreen = ({ navigation, route }: IGoalsNationalTea
     return (
         <View style={appStyles.flex}>
             <BackGround>
-                <StatusBar translucent backgroundColor="transparent" />
-                <SafeAreaView style={appStyles.safe_area}>
-                    <View style={appStyles.container}>
-                        <CardGoBack
-                            iconName={appIcons.ic_right_ios}
-                            iconStyle={styles.ic_back}
-                            goBack={onGoBack}
-                            title={getTranslationText({
-                                textHe: player?.league_title_he,
-                                textEn: player?.league_title_en,
-                            })}
-                        />
-                    </View>
-                    <ScrollView>
-                        <HeaderLogo
-                            text={getTranslationText({
-                                textHe: player?.player_name_he,
-                                textEn: player?.player_name_en,
-                            })}
-                            avt={{ uri: player?.player_image_url }}
-                        />
-                        <View
-                            style={[
-                                appStyles.package,
-                                {
-                                    marginTop: getSize.m(0),
-                                    paddingVertical: getSize.m(0),
-                                    minHeight: getSize.m(900),
-                                },
-                            ]}
-                        >
-                            {player?.games_by_context.map((item, index) => {
-                                return (
-                                    // eslint-disable-next-line react/no-array-index-key
-                                    <View style={{ marginTop: getSize.m(20) }} key={index}>
-                                        <Position
-                                            position={getTranslationText({
-                                                textHe: item?.context_he,
-                                                textEn: item?.context_en,
-                                            })}
-                                            color={appColors.text_dark_blue}
-                                            width={getSize.m(60)}
-                                            fontFamily={AppFonts.bold}
-                                            fontSize={getSize.m(12)}
-                                        />
-                                        <View style={{ marginTop: getSize.m(-10) }}>
-                                            {item?.games?.map((game, gameIndex) => {
-                                                return (
-                                                    <LinearGradient
-                                                        start={{ x: 0, y: 0 }}
-                                                        end={{ x: 1, y: 1 }}
-                                                        colors={[
-                                                            gameIndex % 2 === 0
-                                                                ? appColors.linearLight
-                                                                : appColors.gray,
-                                                            gameIndex % 2 === 0
-                                                                ? appColors.linearDark
-                                                                : appColors.gray,
-                                                        ]}
-                                                        // eslint-disable-next-line react/no-array-index-key
-                                                        key={gameIndex}
+                <View style={appStyles.container}>
+                    <CardGoBack
+                        iconName={appIcons.ic_right_ios}
+                        iconStyle={styles.ic_back}
+                        goBack={onGoBack}
+                        title={getTranslationText({
+                            textHe: player?.league_title_he,
+                            textEn: player?.league_title_en,
+                        })}
+                    />
+                </View>
+                <ScrollView>
+                    <HeaderLogo
+                        text={getTranslationText({
+                            textHe: player?.player_name_he,
+                            textEn: player?.player_name_en,
+                        })}
+                        avt={{ uri: player?.player_image_url }}
+                    />
+                    <View
+                        style={[
+                            appStyles.package,
+                            {
+                                marginTop: getSize.m(0),
+                                paddingVertical: getSize.m(0),
+                                minHeight: getSize.m(900),
+                            },
+                        ]}
+                    >
+                        {player?.games_by_context.map((item, index) => {
+                            return (
+                                // eslint-disable-next-line react/no-array-index-key
+                                <View style={{ marginTop: getSize.m(20) }} key={index}>
+                                    <Position
+                                        position={getTranslationText({
+                                            textHe: item?.context_he,
+                                            textEn: item?.context_en,
+                                        })}
+                                        color={appColors.text_dark_blue}
+                                        width={getSize.m(60)}
+                                        fontFamily={AppFonts.bold}
+                                        fontSize={getSize.m(12)}
+                                    />
+                                    <View style={{ marginTop: getSize.m(-10) }}>
+                                        {item?.games?.map((game, gameIndex) => {
+                                            return (
+                                                <LinearGradient
+                                                    start={{ x: 0, y: 0 }}
+                                                    end={{ x: 1, y: 1 }}
+                                                    colors={[
+                                                        gameIndex % 2 === 0
+                                                            ? appColors.linearLight
+                                                            : appColors.gray,
+                                                        gameIndex % 2 === 0
+                                                            ? appColors.linearDark
+                                                            : appColors.gray,
+                                                    ]}
+                                                    // eslint-disable-next-line react/no-array-index-key
+                                                    key={gameIndex}
+                                                    style={[
+                                                        appStyles.flex_row_space_center,
+                                                        {
+                                                            borderRadius: getSize.m(5),
+                                                            paddingVertical: getSize.m(14),
+                                                            paddingHorizontal: getSize.m(16),
+                                                            width: '100%',
+                                                        },
+                                                    ]}
+                                                >
+                                                    <View style={{ width: '20%' }}>
+                                                        <Text style={styles.calendar}>
+                                                            {getDate({ date: game?.date })}
+                                                        </Text>
+                                                    </View>
+                                                    <View
                                                         style={[
                                                             appStyles.flex_row_space_center,
                                                             {
-                                                                borderRadius: getSize.m(5),
-                                                                paddingVertical: getSize.m(14),
-                                                                paddingHorizontal: getSize.m(16),
-                                                                width: '100%',
+                                                                width: '70%',
+                                                                marginHorizontal: getSize.m(4),
                                                             },
                                                         ]}
                                                     >
-                                                        <View style={{ width: '20%' }}>
-                                                            <Text style={styles.calendar}>
-                                                                {getDate({ date: game?.date })}
+                                                        <View style={{ width: '35%' }}>
+                                                            <Text
+                                                                numberOfLines={2}
+                                                                style={[styles.name_club]}
+                                                            >
+                                                                {getTranslationText({
+                                                                    textHe: game?.team1?.name_he,
+                                                                    textEn: game?.team1?.name_en,
+                                                                })}
                                                             </Text>
-                                                        </View>
-                                                        <View
-                                                            style={[
-                                                                appStyles.flex_row_space_center,
-                                                                {
-                                                                    width: '70%',
-                                                                    marginHorizontal: getSize.m(4),
-                                                                },
-                                                            ]}
-                                                        >
-                                                            <View style={{ width: '35%' }}>
-                                                                <Text
-                                                                    numberOfLines={2}
-                                                                    style={[styles.name_club]}
-                                                                >
-                                                                    {getTranslationText({
-                                                                        textHe:
-                                                                            game?.team1?.name_he,
-                                                                        textEn:
-                                                                            game?.team1?.name_en,
-                                                                    })}
-                                                                </Text>
-                                                                {/* <View style={styles.avt_club}>
+                                                            {/* <View style={styles.avt_club}>
                                                                     <FastImage
                                                                         source={{
                                                                             uri:
@@ -140,20 +136,20 @@ export const GoalsNationalTeamScreen = ({ navigation, route }: IGoalsNationalTea
                                                                         }}
                                                                     />
                                                                 </View> */}
-                                                            </View>
-                                                            <View
-                                                                style={{
-                                                                    width: '30%',
-                                                                }}
-                                                            >
-                                                                <Text style={styles.score}>
-                                                                    {game?.score
-                                                                        ? game?.score
-                                                                        : '- : -'}
-                                                                </Text>
-                                                            </View>
-                                                            <View style={{ width: '35%' }}>
-                                                                {/* <View style={styles.avt_club}>
+                                                        </View>
+                                                        <View
+                                                            style={{
+                                                                width: '30%',
+                                                            }}
+                                                        >
+                                                            <Text style={styles.score}>
+                                                                {game?.score
+                                                                    ? game?.score
+                                                                    : '- : -'}
+                                                            </Text>
+                                                        </View>
+                                                        <View style={{ width: '35%' }}>
+                                                            {/* <View style={styles.avt_club}>
                                                                     <FastImage
                                                                         source={{
                                                                             uri:
@@ -169,48 +165,45 @@ export const GoalsNationalTeamScreen = ({ navigation, route }: IGoalsNationalTea
                                                                         }}
                                                                     />
                                                                 </View> */}
-                                                                <Text
-                                                                    numberOfLines={2}
-                                                                    style={[styles.name_club]}
-                                                                >
-                                                                    {getTranslationText({
-                                                                        textHe:
-                                                                            game?.team2?.name_he,
-                                                                        textEn:
-                                                                            game?.team2?.name_en,
-                                                                    })}
-                                                                </Text>
-                                                            </View>
-                                                        </View>
-                                                        <View
-                                                            style={[
-                                                                appStyles.flex_row_align,
-                                                                {
-                                                                    width: '10%',
-                                                                },
-                                                            ]}
-                                                        >
-                                                            <Text style={styles.location}>
-                                                                {game?.goals}
+                                                            <Text
+                                                                numberOfLines={2}
+                                                                style={[styles.name_club]}
+                                                            >
+                                                                {getTranslationText({
+                                                                    textHe: game?.team2?.name_he,
+                                                                    textEn: game?.team2?.name_en,
+                                                                })}
                                                             </Text>
-                                                            <FastImage
-                                                                source={AppImages.img_ball}
-                                                                style={{
-                                                                    width: getSize.m(12),
-                                                                    height: getSize.m(12),
-                                                                }}
-                                                            />
                                                         </View>
-                                                    </LinearGradient>
-                                                );
-                                            })}
-                                        </View>
+                                                    </View>
+                                                    <View
+                                                        style={[
+                                                            appStyles.flex_row_align,
+                                                            {
+                                                                width: '10%',
+                                                            },
+                                                        ]}
+                                                    >
+                                                        <Text style={styles.location}>
+                                                            {game?.goals}
+                                                        </Text>
+                                                        <FastImage
+                                                            source={AppImages.img_ball}
+                                                            style={{
+                                                                width: getSize.m(12),
+                                                                height: getSize.m(12),
+                                                            }}
+                                                        />
+                                                    </View>
+                                                </LinearGradient>
+                                            );
+                                        })}
                                     </View>
-                                );
-                            })}
-                        </View>
-                    </ScrollView>
-                </SafeAreaView>
+                                </View>
+                            );
+                        })}
+                    </View>
+                </ScrollView>
             </BackGround>
         </View>
     );

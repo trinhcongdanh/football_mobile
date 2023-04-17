@@ -45,63 +45,57 @@ export const TeamScreen = ({ navigation, route }: ITeamScreenProps) => {
     return (
         <View style={appStyles.flex}>
             <BackGround>
-                <StatusBar translucent backgroundColor="transparent" />
-                <SafeAreaView style={appStyles.safe_area}>
-                    <View style={appStyles.container}>
-                        <HeaderUser
-                            avt={AppImages.img_avt}
-                            point="1,325"
-                            icon={AppImages.img_bars_sort}
-                            color_pre={colorCustom}
-                            color_after={colorCustom}
-                            handlePressFunction={onShowSideMenu}
-                        />
-                        <View>
-                            <Text style={[appStyles.text_title]}>{t('team.title')}</Text>
-                        </View>
+                <View style={appStyles.container}>
+                    <HeaderUser
+                        avt={AppImages.img_avt}
+                        point="1,325"
+                        icon={AppImages.img_bars_sort}
+                        color_pre={colorCustom}
+                        color_after={colorCustom}
+                        handlePressFunction={onShowSideMenu}
+                    />
+                    <View>
+                        <Text style={[appStyles.text_title]}>{t('team.title')}</Text>
                     </View>
-                    <View style={[appStyles.flex, appStyles.main_container]}>
-                        <View
-                            style={{
-                                paddingHorizontal: getSize.m(26),
-                            }}
-                        >
-                            <ScrollView>
-                                <View style={styles.state_content}>
-                                    {topTeams?.map(item => {
-                                        return (
-                                            <TouchableOpacity
-                                                activeOpacity={0.5}
-                                                key={item?._id}
-                                                style={styles.option_grid}
-                                                // eslint-disable-next-line no-underscore-dangle
-                                                onPress={() => handleTeam(item?._id)}
-                                            >
-                                                <View style={styles.container_logo}>
-                                                    <FastImage
-                                                        resizeMode="contain"
-                                                        source={{ uri: item?.logo_url }}
-                                                        style={styles.logo}
-                                                    />
-                                                </View>
-                                                <Text
-                                                    numberOfLines={2}
-                                                    style={styles.text_option_grid}
-                                                >
-                                                    {getTranslationText({
-                                                        textHe: item?.name_he,
-                                                        textEn: item?.name_en,
-                                                    })}
-                                                </Text>
-                                            </TouchableOpacity>
-                                        );
-                                    })}
-                                </View>
-                            </ScrollView>
-                        </View>
-                        <View style={{ height: TAB_BAR_HEIGHT + BOTTOM_SVG_HEIGHT }} />
+                </View>
+                <View style={[appStyles.flex, appStyles.main_container]}>
+                    <View
+                        style={{
+                            paddingHorizontal: getSize.m(26),
+                        }}
+                    >
+                        <ScrollView>
+                            <View style={styles.state_content}>
+                                {topTeams?.map(item => {
+                                    return (
+                                        <TouchableOpacity
+                                            activeOpacity={0.5}
+                                            key={item?._id}
+                                            style={styles.option_grid}
+                                            // eslint-disable-next-line no-underscore-dangle
+                                            onPress={() => handleTeam(item?._id)}
+                                        >
+                                            <View style={styles.container_logo}>
+                                                <FastImage
+                                                    resizeMode="contain"
+                                                    source={{ uri: item?.logo_url }}
+                                                    style={styles.logo}
+                                                />
+                                            </View>
+                                            <Text numberOfLines={2} style={styles.text_option_grid}>
+                                                {getTranslationText({
+                                                    textHe: item?.name_he,
+                                                    textEn: item?.name_en,
+                                                })}
+                                            </Text>
+                                        </TouchableOpacity>
+                                    );
+                                })}
+                            </View>
+                        </ScrollView>
                     </View>
-                </SafeAreaView>
+                    <View style={{ height: TAB_BAR_HEIGHT + BOTTOM_SVG_HEIGHT }} />
+                </View>
             </BackGround>
         </View>
     );

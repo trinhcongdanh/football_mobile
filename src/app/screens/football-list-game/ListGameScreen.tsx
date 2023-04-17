@@ -42,178 +42,171 @@ export const ListGameScreen = ({ navigation, route }: IListGameScreenProps) => {
     return (
         <View style={appStyles.flex}>
             <BackGround>
-                <StatusBar translucent backgroundColor="transparent" />
-                <SafeAreaView style={appStyles.safe_area}>
-                    <View style={appStyles.container}>
-                        <CardGoBack
-                            iconName={appIcons.ic_right_ios}
-                            iconStyle={styles.ic_back}
-                            goBack={onGoBack}
-                            title={t('national_team.list_game.title')}
-                        />
-                    </View>
-                    <ScrollView>
-                        <HeaderLogo
-                            text={getTranslationText({
-                                textHe: topTeam.last_campaign.name_he,
-                                textEn: topTeam.last_campaign.name_en,
-                            })}
-                            avt={{ uri: topTeam.logo_url }}
-                        />
-                        <View
-                            style={[
-                                appStyles.package,
-                                {
-                                    marginTop: getSize.m(0),
-                                    minHeight: getSize.m(900),
-                                    paddingHorizontal: getSize.m(0),
-                                    paddingLeft: getSize.m(5),
-                                    paddingRight: getSize.m(10),
-                                },
-                            ]}
-                        >
-                            <View>
-                                {topTeam?.last_campaign.games.map((item: Game, index: number) => {
-                                    return (
-                                        <TouchableOpacity
-                                            onPress={() => onNavigateGame(item.game_id)}
-                                            key={item.game_id}
-                                            style={{ width: '100%' }}
+                <View style={appStyles.container}>
+                    <CardGoBack
+                        iconName={appIcons.ic_right_ios}
+                        iconStyle={styles.ic_back}
+                        goBack={onGoBack}
+                        title={t('national_team.list_game.title')}
+                    />
+                </View>
+                <ScrollView>
+                    <HeaderLogo
+                        text={getTranslationText({
+                            textHe: topTeam.last_campaign.name_he,
+                            textEn: topTeam.last_campaign.name_en,
+                        })}
+                        avt={{ uri: topTeam.logo_url }}
+                    />
+                    <View
+                        style={[
+                            appStyles.package,
+                            {
+                                marginTop: getSize.m(0),
+                                minHeight: getSize.m(900),
+                                paddingHorizontal: getSize.m(0),
+                                paddingLeft: getSize.m(5),
+                                paddingRight: getSize.m(10),
+                            },
+                        ]}
+                    >
+                        <View>
+                            {topTeam?.last_campaign.games.map((item: Game, index: number) => {
+                                return (
+                                    <TouchableOpacity
+                                        onPress={() => onNavigateGame(item.game_id)}
+                                        key={item.game_id}
+                                        style={{ width: '100%' }}
+                                    >
+                                        <LinearGradient
+                                            start={{ x: 0, y: 0 }}
+                                            end={{ x: 1, y: 1 }}
+                                            colors={[
+                                                index % 2 === 1
+                                                    ? appColors.linearLight
+                                                    : appColors.gray,
+                                                index % 2 === 1
+                                                    ? appColors.linearDark
+                                                    : appColors.gray,
+                                            ]}
+                                            style={[
+                                                appStyles.flex_row_space_center,
+                                                {
+                                                    paddingVertical: getSize.m(11),
+                                                    paddingHorizontal: getSize.m(8),
+                                                    borderRadius: getSize.m(5),
+                                                },
+                                            ]}
                                         >
-                                            <LinearGradient
-                                                start={{ x: 0, y: 0 }}
-                                                end={{ x: 1, y: 1 }}
-                                                colors={[
-                                                    index % 2 === 1
-                                                        ? appColors.linearLight
-                                                        : appColors.gray,
-                                                    index % 2 === 1
-                                                        ? appColors.linearDark
-                                                        : appColors.gray,
+                                            <View
+                                                style={[
+                                                    appStyles.flex_row_align,
+                                                    {
+                                                        width: '20%',
+                                                    },
                                                 ]}
+                                            >
+                                                <FastImage
+                                                    source={AppImages.img_calendar}
+                                                    resizeMode={FastImage.resizeMode.contain}
+                                                    style={{
+                                                        width: getSize.m(10),
+                                                        height: getSize.m(13),
+                                                    }}
+                                                />
+                                                <Text style={styles.calendar}>
+                                                    {getDate({
+                                                        date: item?.date,
+                                                    })}
+                                                </Text>
+                                            </View>
+                                            <View
                                                 style={[
                                                     appStyles.flex_row_space_center,
                                                     {
-                                                        paddingVertical: getSize.m(11),
-                                                        paddingHorizontal: getSize.m(8),
-                                                        borderRadius: getSize.m(5),
+                                                        width: '60%',
+                                                        marginHorizontal: getSize.m(4),
                                                     },
                                                 ]}
                                             >
                                                 <View
-                                                    style={[
-                                                        appStyles.flex_row_align,
-                                                        {
-                                                            width: '20%',
-                                                        },
-                                                    ]}
+                                                    style={{
+                                                        width: '40%',
+                                                    }}
                                                 >
-                                                    <FastImage
-                                                        source={AppImages.img_calendar}
-                                                        resizeMode={FastImage.resizeMode.contain}
-                                                        style={{
-                                                            width: getSize.m(10),
-                                                            height: getSize.m(13),
-                                                        }}
-                                                    />
-                                                    <Text style={styles.calendar}>
-                                                        {getDate({
-                                                            date: item?.date,
+                                                    <Text
+                                                        numberOfLines={2}
+                                                        style={[styles.name_club]}
+                                                    >
+                                                        {getTranslationText({
+                                                            textHe: item.team1.name_he,
+                                                            textEn: item.team1.name_en,
                                                         })}
                                                     </Text>
                                                 </View>
                                                 <View
-                                                    style={[
-                                                        appStyles.flex_row_space_center,
-                                                        {
-                                                            width: '60%',
-                                                            marginHorizontal: getSize.m(4),
-                                                        },
-                                                    ]}
+                                                    style={{
+                                                        width: '20%',
+                                                        justifyContent: 'center',
+                                                        alignItems: 'center',
+                                                    }}
                                                 >
-                                                    <View
-                                                        style={{
-                                                            width: '40%',
-                                                        }}
-                                                    >
-                                                        <Text
-                                                            numberOfLines={2}
-                                                            style={[styles.name_club]}
-                                                        >
-                                                            {getTranslationText({
-                                                                textHe: item.team1.name_he,
-                                                                textEn: item.team1.name_en,
-                                                            })}
-                                                        </Text>
-                                                    </View>
-                                                    <View
-                                                        style={{
-                                                            width: '20%',
-                                                            justifyContent: 'center',
-                                                            alignItems: 'center',
-                                                        }}
-                                                    >
-                                                        <Text style={styles.score}>
-                                                            {item.score}
-                                                        </Text>
-                                                    </View>
-                                                    <View
-                                                        style={{
-                                                            width: '40%',
-                                                        }}
-                                                    >
-                                                        <Text
-                                                            numberOfLines={2}
-                                                            style={[styles.name_club]}
-                                                        >
-                                                            {getTranslationText({
-                                                                textHe: item.team2.name_he,
-                                                                textEn: item.team2.name_en,
-                                                            })}
-                                                        </Text>
-                                                    </View>
+                                                    <Text style={styles.score}>{item.score}</Text>
                                                 </View>
-                                                <TouchableOpacity
-                                                    onPress={() =>
-                                                        onNavigateStadium(item?.stadium_id)
-                                                    }
-                                                    key={item.game_id}
-                                                    style={{ width: '20%' }}
+                                                <View
+                                                    style={{
+                                                        width: '40%',
+                                                    }}
                                                 >
-                                                    {item?.stadium_id ? (
-                                                        <View style={appStyles.flex_row_align}>
-                                                            <FastImage
-                                                                source={AppImages.img_location_dot}
-                                                                resizeMode={
-                                                                    FastImage.resizeMode.contain
-                                                                }
-                                                                style={{
-                                                                    width: getSize.m(9),
-                                                                    height: getSize.m(11),
-                                                                }}
-                                                            />
-                                                            <View style={{ width: '80%' }}>
-                                                                <Text
-                                                                    numberOfLines={2}
-                                                                    style={styles.location}
-                                                                >
-                                                                    {getTranslationText({
-                                                                        textHe: item.stadium_he,
-                                                                        textEn: item.stadium_en,
-                                                                    })}
-                                                                </Text>
-                                                            </View>
+                                                    <Text
+                                                        numberOfLines={2}
+                                                        style={[styles.name_club]}
+                                                    >
+                                                        {getTranslationText({
+                                                            textHe: item.team2.name_he,
+                                                            textEn: item.team2.name_en,
+                                                        })}
+                                                    </Text>
+                                                </View>
+                                            </View>
+                                            <TouchableOpacity
+                                                onPress={() => onNavigateStadium(item?.stadium_id)}
+                                                key={item.game_id}
+                                                style={{ width: '20%' }}
+                                            >
+                                                {item?.stadium_id ? (
+                                                    <View style={appStyles.flex_row_align}>
+                                                        <FastImage
+                                                            source={AppImages.img_location_dot}
+                                                            resizeMode={
+                                                                FastImage.resizeMode.contain
+                                                            }
+                                                            style={{
+                                                                width: getSize.m(9),
+                                                                height: getSize.m(11),
+                                                            }}
+                                                        />
+                                                        <View style={{ width: '80%' }}>
+                                                            <Text
+                                                                numberOfLines={2}
+                                                                style={styles.location}
+                                                            >
+                                                                {getTranslationText({
+                                                                    textHe: item.stadium_he,
+                                                                    textEn: item.stadium_en,
+                                                                })}
+                                                            </Text>
                                                         </View>
-                                                    ) : null}
-                                                </TouchableOpacity>
-                                            </LinearGradient>
-                                        </TouchableOpacity>
-                                    );
-                                })}
-                            </View>
+                                                    </View>
+                                                ) : null}
+                                            </TouchableOpacity>
+                                        </LinearGradient>
+                                    </TouchableOpacity>
+                                );
+                            })}
                         </View>
-                    </ScrollView>
-                </SafeAreaView>
+                    </View>
+                </ScrollView>
             </BackGround>
         </View>
     );

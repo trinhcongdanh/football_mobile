@@ -72,90 +72,87 @@ export const LeaguesScreen = ({ navigation, route }: ILeaguesScreenProps) => {
     return (
         <View style={appStyles.flex}>
             <BackGround>
-                <StatusBar translucent backgroundColor="transparent" />
-                <SafeAreaView style={appStyles.safe_area}>
-                    <View style={appStyles.container}>
-                        <HeaderUser
-                            avt={AppImages.img_avt}
-                            point="1,325"
-                            icon={AppImages.img_bars_sort}
-                            color_pre={colorCustom}
-                            color_after={colorCustom}
+                <View style={appStyles.container}>
+                    <HeaderUser
+                        avt={AppImages.img_avt}
+                        point="1,325"
+                        icon={AppImages.img_bars_sort}
+                        color_pre={colorCustom}
+                        color_after={colorCustom}
+                    />
+                    <View>
+                        <Text style={[appStyles.text_title]}>{t('leagues.title')}</Text>
+                    </View>
+                    <View style={[appStyles.flex_row_space_center, styles.search]}>
+                        <TextInput
+                            placeholder={t('leagues.place_holder')}
+                            style={styles.text_search}
+                            placeholderTextColor={appColors.blue_gray_light}
+                            onChangeText={onSearchLeague}
+                            // onBlur={submitSearchLeague}
+                            // onSubmitEditing={submitSearchLeague}
                         />
-                        <View>
-                            <Text style={[appStyles.text_title]}>{t('leagues.title')}</Text>
-                        </View>
-                        <View style={[appStyles.flex_row_space_center, styles.search]}>
-                            <TextInput
-                                placeholder={t('leagues.place_holder')}
-                                style={styles.text_search}
-                                placeholderTextColor={appColors.blue_gray_light}
-                                onChangeText={onSearchLeague}
-                                // onBlur={submitSearchLeague}
-                                // onSubmitEditing={submitSearchLeague}
-                            />
-                            <Icon
-                                style={{ marginRight: getSize.m(14) }}
-                                name={appIcons.ic_search}
-                                color={appColors.blue_gray_light}
-                                size={getSize.m(16)}
-                            />
-                        </View>
+                        <Icon
+                            style={{ marginRight: getSize.m(14) }}
+                            name={appIcons.ic_search}
+                            color={appColors.blue_gray_light}
+                            size={getSize.m(16)}
+                        />
                     </View>
-                    <View
-                        style={[
-                            appStyles.flex,
-                            appStyles.main_container,
-                            {
-                                paddingVertical: getSize.m(0),
-                                paddingTop: getSize.m(20),
-                            },
-                        ]}
-                    >
-                        {searchLeagueType?.length ? (
-                            <View
-                                style={[
-                                    appStyles.flex,
-                                    {
-                                        backgroundColor: appColors.gray,
-                                        paddingHorizontal: getSize.m(20),
-                                    },
-                                ]}
-                            >
-                                <ScrollView>
-                                    <Text style={styles.text_suggestion}>
-                                        {t('leagues.suggestion')}
-                                    </Text>
-                                    <FlatList
-                                        showsVerticalScrollIndicator={false}
-                                        data={searchLeagueType.slice(0, MAX_SEARCH_LEAGUES)}
-                                        keyExtractor={(item: any) => item.id}
-                                        renderItem={renderItem}
-                                        numColumns={1}
-                                    />
-                                </ScrollView>
+                </View>
+                <View
+                    style={[
+                        appStyles.flex,
+                        appStyles.main_container,
+                        {
+                            paddingVertical: getSize.m(0),
+                            paddingTop: getSize.m(20),
+                        },
+                    ]}
+                >
+                    {searchLeagueType?.length ? (
+                        <View
+                            style={[
+                                appStyles.flex,
+                                {
+                                    backgroundColor: appColors.gray,
+                                    paddingHorizontal: getSize.m(20),
+                                },
+                            ]}
+                        >
+                            <ScrollView>
+                                <Text style={styles.text_suggestion}>
+                                    {t('leagues.suggestion')}
+                                </Text>
+                                <FlatList
+                                    showsVerticalScrollIndicator={false}
+                                    data={searchLeagueType.slice(0, MAX_SEARCH_LEAGUES)}
+                                    keyExtractor={(item: any) => item.id}
+                                    renderItem={renderItem}
+                                    numColumns={1}
+                                />
+                            </ScrollView>
+                        </View>
+                    ) : !findLeagueType ? (
+                        <View
+                            style={[
+                                {
+                                    backgroundColor: appColors.gray,
+                                    paddingHorizontal: getSize.m(20),
+                                    flexDirection: 'row',
+                                },
+                            ]}
+                        >
+                            <View>
+                                <Text style={styles.text_suggestion}>
+                                    {t('leagues.not_search_result')}
+                                </Text>
                             </View>
-                        ) : !findLeagueType ? (
-                            <View
-                                style={[
-                                    {
-                                        backgroundColor: appColors.gray,
-                                        paddingHorizontal: getSize.m(20),
-                                        flexDirection: 'row',
-                                    },
-                                ]}
-                            >
-                                <View>
-                                    <Text style={styles.text_suggestion}>
-                                        {t('leagues.not_search_result')}
-                                    </Text>
-                                </View>
-                            </View>
-                        ) : null}
-                        <TopTaps labels={labels} />
-                        <View style={{ height: 0 }} />
-                    </View>
-                </SafeAreaView>
+                        </View>
+                    ) : null}
+                    <TopTaps labels={labels} />
+                    <View style={{ height: 0 }} />
+                </View>
             </BackGround>
         </View>
     );
