@@ -150,7 +150,7 @@ export const FavPlayer = ({ player, color }: IFavPlayerProps) => {
                                 schedule=":"
                                 avt_away={game?.team2?.logo_url}
                                 avt_home={game?.team1?.logo_url}
-                                clock={`${game?.on_field || 0}`}
+                                clock={`${game?.minutes_played || 0}`}
                                 ticket_red={`${game?.red_cards || 0}`}
                                 ticket_yellow={`${game?.yellow_cards || 0}`}
                                 score={`${game?.goals || 0}`}

@@ -18,11 +18,14 @@ import LinearGradient from 'react-native-linear-gradient';
 import styles from './DataPlayerTeamScreen.style';
 import { useViewModel } from './DataPlayerTeamScreen.viewModel';
 import { useDateTime } from '@football/app/utils/hooks/useDateTime';
+import { useResult } from '@football/app/utils/hooks/useResult';
 
 export const DataPlayerTeamScreen = ({ player }: IDataPlayerTeamScreenProps) => {
     const { t, onGoBack, setSelectedSeason, selectedSeason } = useViewModel({ player });
     const { getTranslationText } = useTranslationText();
     const { getDate, getTime } = useDateTime();
+    const { getResult } = useResult();
+
     return (
         <ScrollView showsVerticalScrollIndicator={false}>
             {player && (
@@ -318,7 +321,11 @@ export const DataPlayerTeamScreen = ({ player }: IDataPlayerTeamScreenProps) => 
                                                         }}
                                                     >
                                                         <Text style={styles.score}>
-                                                            {game?.score ? game?.score : '- : -'}
+                                                            {game?.score
+                                                                ? getResult({
+                                                                      result: game?.score,
+                                                                  })
+                                                                : '- : -'}
                                                         </Text>
                                                     </View>
                                                     <View style={appStyles.flex_row_align_center}>
