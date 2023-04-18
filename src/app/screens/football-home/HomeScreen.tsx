@@ -99,7 +99,8 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                             imageStyle={{ width: '102%', marginLeft: getSize.m(-2) }}
                             style={[
                                 {
-                                    height: getSize.m(172),
+                                    height:
+                                        Platform.OS === 'android' ? getSize.m(172) : getSize.m(180),
                                     zIndex: 1000,
                                     overflow: 'hidden',
                                 },
@@ -134,7 +135,11 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                                 }}
                             />
 
-                            <StatusBar translucent backgroundColor="transparent" />
+                            <StatusBar
+                                barStyle="light-content"
+                                translucent
+                                backgroundColor="transparent"
+                            />
                             <SafeAreaView
                                 style={[
                                     appStyles.safe_area,
@@ -223,7 +228,7 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                                         ref={scrollViewRef}
                                         onContentSizeChange={scrollToTheEnd}
                                     >
-                                        {players
+                                        {/* {players
                                             ?.filter(item => item)
                                             .map((item, index) => {
                                                 return (
@@ -257,7 +262,7 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                                                         </View>
                                                     </TouchableOpacity>
                                                 );
-                                            })}
+                                            })} */}
 
                                         {teams
                                             ?.filter(item => item)
@@ -295,7 +300,7 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                                                 );
                                             })}
 
-                                        {topTeams
+                                        {/* {topTeams
                                             ?.filter(item => item)
                                             .map((item, index) => {
                                                 return (
@@ -355,7 +360,7 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                                                     </Text>
                                                 </View>
                                             </TouchableOpacity>
-                                        )}
+                                        )} */}
                                     </ScrollView>
                                 </View>
                             </SafeAreaView>
