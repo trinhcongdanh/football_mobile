@@ -62,7 +62,7 @@ const App = (props: any) => {
                 i18n.changeLanguage(locale === 'he' || locale === 'iw' ? 'heb' : 'en');
                 if (i18n.language === 'heb') {
                     I18nManager.forceRTL(true);
-                    // ChangeLanguageService.changedLanguage(Restart.key_restart_for_rtl, '1');
+                    ChangeLanguageService.changedLanguage(Restart.key_restart_for_rtl, '1');
                 } else {
                     I18nManager.forceRTL(false);
                     // ChangeLanguageService.changedLanguage(Restart.key_restart_for_ltr, '1');
