@@ -42,10 +42,18 @@ export const GameTable1 = ({
                             marginTop: getSize.m(14),
                             paddingHorizontal: getSize.m(25),
                             marginBottom: getSize.m(11),
+                            width: '100%',
                         },
                     ]}
                 >
-                    <View style={appStyles.align_justify}>
+                    <View
+                        style={[
+                            appStyles.align_justify,
+                            {
+                                width: '30%',
+                            },
+                        ]}
+                    >
                         <FastImage
                             source={{ uri: avt_home }}
                             style={{ width: getSize.m(24), height: getSize.m(24) }}
@@ -60,7 +68,8 @@ export const GameTable1 = ({
                         style={[
                             appStyles.align_justify,
                             {
-                                marginHorizontal: getSize.m(8),
+                                marginHorizontal: getSize.m(10),
+                                width: '30%',
                             },
                         ]}
                     >
@@ -95,7 +104,14 @@ export const GameTable1 = ({
                             </View>
                         </TouchableOpacity>
                     </View>
-                    <View style={appStyles.align_justify}>
+                    <View
+                        style={[
+                            appStyles.align_justify,
+                            {
+                                width: '30%',
+                            },
+                        ]}
+                    >
                         <FastImage
                             source={{ uri: avt_away }}
                             style={{ width: getSize.m(24), height: getSize.m(24) }}

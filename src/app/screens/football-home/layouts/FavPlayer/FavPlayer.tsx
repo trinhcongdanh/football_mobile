@@ -42,6 +42,7 @@ export const FavPlayer = ({ player, color }: IFavPlayerProps) => {
             <FastImage
                 source={AppImages.img_decoration_background_2}
                 tintColor={color}
+                resizeMode={FastImage.resizeMode.contain}
                 style={{ height: '100%', width: '100%', position: 'absolute' }}
             />
             <View style={appStyles.align_justify}>
