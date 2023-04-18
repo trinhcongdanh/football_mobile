@@ -1,0 +1,50 @@
+{
+  "project_info": {
+    "project_number": "944318847741",
+    "project_id": "crashlyticsfootballapp",
+    "storage_bucket": "crashlyticsfootballapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:944318847741:android:ba29ce477472454efb3c94",
+        "android_client_info": {
+          "package_name": "com.footballassociation"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "944318847741-cqckktvhbr2p7gg33aa6c0c2hpiv3803.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.footballassociation",
+            "certificate_hash": "44ebbe9f926049086aaff9df7e517545df3fd0f6"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAjOfDUt6FF4fWuN-03wzELs3ISwhLM4-E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "944318847741-94kj3g75lbks4a16fntgcf73bfup4ocq.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "944318847741-um9r5j309g4nd652j9i7vluivuv88fhr.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.reactjs.native.example.FootballAssociation"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

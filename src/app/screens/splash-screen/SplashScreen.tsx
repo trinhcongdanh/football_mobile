@@ -1,0 +1,208 @@
+import { AppImages } from '@football/app/assets/images';
+import { AppJsons } from '@football/app/assets/images/AppImages';
+import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
+import { ISplashScreenProps } from '@football/app/screens/splash-screen/SplashScreen.type';
+import { appStyles } from '@football/app/utils/constants/appStyles';
+import { AuthData, Restart, ScreenName } from '@football/app/utils/constants/enum';
+import { serializeParams } from '@football/app/utils/functions/quick-functions';
+import { ACTION } from '@football/core/api/auth/config';
+import { Lottie } from '@football/core/models/SplashModelResponse';
+import { useSplashAnimations } from '@football/core/services/SplashScreen.service';
+import { isEmpty, isNil } from 'lodash';
+import LottieView from 'lottie-react-native';
+import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import {
+    I18nManager,
+    ImageBackground,
+    NativeModules,
+    Platform,
+    StatusBar,
+    View,
+} from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
+import { getProfileUser } from 'src/store/user/getProfile.slice';
+import { addGuestId } from 'src/store/user/GuestId.slice';
+import { RootState } from 'src/store/store';
+import { useMount } from '@football/app/utils/hooks/useMount';
+import { NotificationData } from '@football/core/models/NotificationModel';
+import * as RNLocalize from 'react-native-localize';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import RNRestart from 'react-native-restart';
+
+const useViewModel = () => {};
+
+export const SplashScreen = ({ navigation, route }: ISplashScreenProps) => {
+    const { t, i18n } = useTranslation();
+    const { navigate, replace } = useAppNavigator();
+    const uuid = require('uuid');
+    const id = uuid.v4();
+    const dispatch = useDispatch<any>();
+
+    const guestId = useSelector((state: any) => state.guestId.guestId);
+
+    // const getSplashData = useCallback(async () => {
+    //     try {
+    //         const { data } = await axiosClient.post(`${BASE_URL}/find`, {
+    //             dataSource: DATA_SOURCE,
+    //             database: DB,
+    //             collection: 'splash_animation',
+    //         });
+    //         if (!isEmpty(data.documents)) {
+    //             setSplashData(data.documents[0].lottie);
+    //         }
+    //     } catch (error: any) {
+    //         Alert.alert(error);
+    //     }
+    // }, []);
+
+    // const getSplashData = useCallback(async () => {
+    //     const [error, res] = await splashAnimationService.findAll();
+    //     if (error) {
+    //         return;
+    //     }
+
+    //     if (!isEmpty(res.documents)) {
+    //         setSplashData(res.documents[0].lottie);
+    //     }
+    // }, []);
+    // useEffect(() => {
+    //     if (!splashAnimationData) {
+    //         return;
+    //     }
+    //     const [error, res] = splashAnimationData;
+    //     if (!error && res?.data?.documents?.length) {
+    //         setSplashData(res.data.documents[0].lottie);
+    //     }
+    // }, [splashAnimationData]);
+
+    // useMount(() => {
+    //     getSplashData();
+    // });
+    const [authLoaded, setAuthLoaded] = useState(false);
+    useEffect(() => {
+        if (guestId.length === 0) {
+            console.log('Danh');
+            const action = addGuestId(id);
+            dispatch(action);
+        }
+    }, []);
+
+    // useEffect(() => {
+    //     if (!isLoading) {
+    //         setTimeout(() => {
+    //             setAuthLoaded(true);
+    //         }, 4000);
+    //     }
+    // }, [splashData, isLoading]);
+
+    setTimeout(() => {
+        setAuthLoaded(true);
+    }, 4000);
+
+    const login = useSelector((state: any) => state.login);
+
+    const userLogin = useSelector((state: RootState) => state.otpUser);
+    useMount(() => {
+        if (userLogin?.otp?.user?.item_id && userLogin.opt?.token) {
+            dispatch(
+                getProfileUser(
+                    serializeParams({
+                        action: ACTION,
+                        token: userLogin.opt?.token,
+                        call: AuthData.GET_PROFILE,
+                        item: userLogin.otp.user.item_id,
+                    })
+                )
+            );
+        }
+    });
+
+    useEffect(() => {
+        if (authLoaded) {
+            const notificationData = global?.notificationData?.data as NotificationData;
+            if (notificationData) {
+                switch (notificationData.target_type) {
+                    case 'top_team':
+                        replace(ScreenName.NationalTeamPage, {
+                            topTeamId: notificationData.target_id,
+                        });
+
+                        break;
+                    case 'campaign':
+                        replace(ScreenName.CampaignPage, {
+                            campaignId: notificationData.target_id,
+                        });
+                        break;
+
+                    case 'stadium':
+                        replace(ScreenName.PitchPage, { stadiumId: notificationData.target_id });
+                        break;
+
+                    case 'game':
+                        replace(ScreenName.MatchPage, {
+                            gameId: notificationData.target_id,
+                            selectedTab: notificationData.target_section,
+                        });
+                        break;
+
+                    case 'coach':
+                        replace(ScreenName.DataCoachPage, { coachId: notificationData.target_id });
+                        break;
+
+                    case 'player':
+                        replace(ScreenName.DataPlayerPage, {
+                            playerId: notificationData.target_id,
+                            selectedTab: notificationData.target_section,
+                        });
+                        break;
+
+                    case 'questionnaire':
+                        replace(ScreenName.PlayGroundPage);
+                        break;
+                    case 'cup':
+                        replace(ScreenName.StateCupPage, {
+                            cupId: notificationData.target_id,
+                        });
+                        break;
+
+                    default:
+                        replace(ScreenName.SideBar);
+                        break;
+                }
+
+                global.notificationData = null;
+                return;
+            }
+
+            if (!isEmpty(login.login) && !isNil(login.login)) {
+                replace(ScreenName.SideBar);
+                // navigation.reset({
+                //     index: 0,
+                //     routes: [{ name: ScreenName.SideBar as never }],
+                // });
+            } else if (!isEmpty(userLogin.otp) && !isNil(userLogin.otp)) {
+                replace(ScreenName.SideBar);
+                // navigation.reset({
+                //     index: 0,
+                //     routes: [{ name: ScreenName.SideBar as never }],
+                // });
+            } else {
+                replace(ScreenName.OpeningPage);
+                // navigation.reset({
+                //     index: 0,
+                //     routes: [{ name: ScreenName.OpeningPage as never }],
+                // });
+            }
+        }
+    }, [authLoaded]);
+
+    return (
+        <View style={appStyles.flex}>
+            <ImageBackground source={AppImages.img_background} style={appStyles.flex_center}>
+                <StatusBar translucent backgroundColor="transparent" />
+                <LottieView source={AppJsons.splash} autoPlay loop />
+            </ImageBackground>
+        </View>
+    );
+};

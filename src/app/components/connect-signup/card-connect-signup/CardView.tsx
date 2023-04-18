@@ -1,0 +1,119 @@
+import { View, Text, TouchableOpacity, Image, ScrollView, FlatList } from 'react-native';
+import React from 'react';
+import { appStyles } from '@football/app/utils/constants/appStyles';
+import { getSize } from '@football/app/utils/responsive/scale';
+import { AppImages } from '@football/app/assets/images';
+import FastImage from 'react-native-fast-image';
+import { useTranslation } from 'react-i18next';
+import Input from '../../input/Input';
+import { Button } from '../../button';
+import { styles } from './CardView.style';
+import { ICardViewProps } from './CardView.types';
+
+export const CardView = ({
+    errors,
+    input,
+    inputRef,
+    onChangeTextInput,
+    handleError,
+    connect,
+    connectFacebook,
+    connectGoogle,
+    connectApple,
+    option,
+    buttonTitle,
+    facebook,
+    google,
+    apple,
+}: ICardViewProps) => {
+    const { t } = useTranslation();
+    return (
+        <View style={styles.mr_top}>
+            <View style={styles.connect_container}>
+                {option === '1' && (
+                    <Text style={styles.txt_register}>{t('register.registerByPhone')}</Text>
+                )}
+
+                <Input
+                    input={input}
+                    inputRef={inputRef}
+                    error={errors}
+                    placeholder={t('register.phoneNumber')}
+                    onChangeTextInput={onChangeTextInput}
+                    onFocus={handleError}
+                    keyboardType="phone-pad"
+                />
+
+                <Button
+                    style={{ borderRadius: getSize.m(15) }}
+                    disabled={input !== '' ? false : true}
+                    onPress={connect}
+                    title={buttonTitle}
+                />
+
+                <View style={{ paddingHorizontal: getSize.m(17) }}>
+                    <View
+                        style={[
+                            appStyles.flex_row_space_center,
+                            { marginTop: getSize.m(29), marginBottom: getSize.m(35) },
+                        ]}
+                    >
+                        <View style={styles.line} />
+                        <Text style={styles.text_or}>{t('connect.or')}</Text>
+                        <View style={styles.line} />
+                    </View>
+
+                    <TouchableOpacity
+                        onPress={connectFacebook}
+                        style={[appStyles.flex_row_center, styles.button_link]}
+                    >
+                        {/* <Image
+                            resizeMode="contain"
+                            source={AppImages.img_fb}
+                            style={styles.image_link}
+                        /> */}
+                        <FastImage
+                            source={AppImages.img_fb}
+                            resizeMode={FastImage.resizeMode.contain}
+                            style={styles.image_link}
+                        />
+
+                        <Text style={styles.text_link}>{facebook}</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        onPress={connectGoogle}
+                        style={[appStyles.flex_row_center, styles.button_link]}
+                    >
+                        {/* <Image
+                            resizeMode="contain"
+                            source={AppImages.img_google}
+                            style={styles.image_link}
+                        /> */}
+                        <FastImage
+                            source={AppImages.img_google}
+                            resizeMode={FastImage.resizeMode.contain}
+                            style={styles.image_link}
+                        />
+                        <Text style={styles.text_link}> {google}</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        onPress={connectApple}
+                        style={[appStyles.flex_row_center, styles.button_link]}
+                    >
+                        {/* <Image
+                            resizeMode="contain"
+                            source={AppImages.img_apple}
+                            style={styles.image_link}
+                        /> */}
+                        <FastImage
+                            source={AppImages.img_apple}
+                            resizeMode={FastImage.resizeMode.contain}
+                            style={styles.image_link}
+                        />
+                        <Text style={styles.text_link}> {apple} </Text>
+                    </TouchableOpacity>
+                </View>
+            </View>
+        </View>
+    );
+};
