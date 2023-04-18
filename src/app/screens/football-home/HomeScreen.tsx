@@ -22,7 +22,7 @@ import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
 import { getSize } from '@football/app/utils/responsive/scale';
 import { renderAvatar, renderUserPoints } from '@football/core/models/AvatarType.enum';
 import { isEmpty } from 'lodash';
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import {
     I18nManager,
     ImageBackground,
@@ -75,8 +75,8 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
     const { getTranslationText } = useTranslationText();
 
     const scrollToTheEnd = () => {
-        if (I18nManager.isRTL && Platform.OS === 'android') {
-            scrollViewRef.current?.scrollToEnd();
+        if (I18nManager.isRTL) {
+            scrollViewRef.current?.scrollToEnd({ animated: false });
         }
     };
 
@@ -208,7 +208,11 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                                         </View>
                                     </View>
                                 </View>
-                                <View style={{ marginTop: getSize.m(20) }}>
+                                <View
+                                    style={{
+                                        marginTop: getSize.m(20),
+                                    }}
+                                >
                                     <ScrollView
                                         style={{
                                             flexDirection: I18nManager.isRTL

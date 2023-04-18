@@ -22,10 +22,8 @@ const styles = StyleSheet.create({
     },
 
     resize_name_club: {
-        width: getSize.m(100),
+        width: '100%',
         height: getSize.m(60),
-        justifyContent: 'flex-start',
-        alignItems: 'center',
     },
 
     name_club: {
