@@ -24,6 +24,7 @@ import { renderAvatar, renderUserPoints } from '@football/core/models/AvatarType
 import { isEmpty } from 'lodash';
 import React, { useRef, useState } from 'react';
 import {
+    Dimensions,
     I18nManager,
     ImageBackground,
     LogBox,
@@ -219,16 +220,14 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                                     }}
                                 >
                                     <ScrollView
-                                        style={{
-                                            flexDirection: I18nManager.isRTL
-                                                ? 'row-reverse'
-                                                : 'row',
+                                        contentContainerStyle={{
+                                            width: Dimensions.get('window').width,
                                         }}
                                         horizontal
                                         ref={scrollViewRef}
                                         onContentSizeChange={scrollToTheEnd}
                                     >
-                                        {/* {players
+                                        {players
                                             ?.filter(item => item)
                                             .map((item, index) => {
                                                 return (
@@ -262,7 +261,7 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                                                         </View>
                                                     </TouchableOpacity>
                                                 );
-                                            })} */}
+                                            })}
 
                                         {teams
                                             ?.filter(item => item)
@@ -300,7 +299,7 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                                                 );
                                             })}
 
-                                        {/* {topTeams
+                                        {topTeams
                                             ?.filter(item => item)
                                             .map((item, index) => {
                                                 return (
@@ -360,7 +359,7 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                                                     </Text>
                                                 </View>
                                             </TouchableOpacity>
-                                        )} */}
+                                        )}
                                     </ScrollView>
                                 </View>
                             </SafeAreaView>
