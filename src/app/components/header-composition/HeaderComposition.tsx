@@ -8,6 +8,7 @@ import { appIcons } from '@football/app/assets/icons/appIcons';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { styles } from './HeaderComposition.style';
 import { IHeaderCompositionProps } from './HeaderComposition.type';
+import { useResult } from '@football/app/utils/hooks/useResult';
 
 export const HeaderComposition = ({
     title,
@@ -21,6 +22,7 @@ export const HeaderComposition = ({
     season,
     handleStadium,
 }: IHeaderCompositionProps) => {
+    const { getResult } = useResult();
     return (
         <View>
             <View>
@@ -56,7 +58,11 @@ export const HeaderComposition = ({
                     </View>
                 </View>
                 <View style={[appStyles.align_justify]}>
-                    <Text style={styles.score}>{score}</Text>
+                    <Text style={styles.score}>
+                        {getResult({
+                            result: score,
+                        })}
+                    </Text>
                     <Text style={styles.status}>{status}</Text>
                 </View>
                 <View style={[appStyles.align_justify]}>

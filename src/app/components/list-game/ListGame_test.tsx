@@ -11,6 +11,7 @@ import { useTranslation } from 'react-i18next';
 import { styles } from './ListGame_test.styles';
 import { IListGameProps } from './ListGame.type';
 import { useDateTime } from '@football/app/utils/hooks/useDateTime';
+import { useResult } from '@football/app/utils/hooks/useResult';
 
 export const ListGame_Test = ({
     logo_home,
@@ -35,6 +36,8 @@ export const ListGame_Test = ({
     const { t } = useTranslation();
     const emptyResult = result === ' : ' ? ' : ' : null;
     const { getDate, getTime } = useDateTime();
+    const { getResult } = useResult();
+
     return (
         <View style={[styles.main_schedule, style]}>
             {tournament && (
@@ -255,7 +258,11 @@ export const ListGame_Test = ({
                         )}
 
                         {!isLive && result !== emptyResult && (
-                            <Text style={styles.score}>{result}</Text>
+                            <Text style={styles.score}>
+                                {getResult({
+                                    result: result,
+                                })}
+                            </Text>
                         )}
                     </View>
                     <View style={[appStyles.align_justify]}>

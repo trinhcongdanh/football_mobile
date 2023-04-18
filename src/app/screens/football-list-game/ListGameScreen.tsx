@@ -27,6 +27,7 @@ import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
 import moment from 'moment';
 import { BackGround } from '@football/app/components/background/BackGround';
 import { useDateTime } from '@football/app/utils/hooks/useDateTime';
+import { useResult } from '@football/app/utils/hooks/useResult';
 
 export const ListGameScreen = ({ navigation, route }: IListGameScreenProps) => {
     const topTeam = route?.params?.topTeam as TopTeamModel;
@@ -36,7 +37,7 @@ export const ListGameScreen = ({ navigation, route }: IListGameScreenProps) => {
     });
     const { getTranslationText } = useTranslationText();
     const { getDate } = useDateTime();
-
+    const { getResult } = useResult();
     console.log('I18nManager.isRTL', I18nManager.isRTL);
 
     return (
@@ -151,7 +152,11 @@ export const ListGameScreen = ({ navigation, route }: IListGameScreenProps) => {
                                                         alignItems: 'center',
                                                     }}
                                                 >
-                                                    <Text style={styles.score}>{item.score}</Text>
+                                                    <Text style={styles.score}>
+                                                        {getResult({
+                                                            result: item.score,
+                                                        })}
+                                                    </Text>
                                                 </View>
                                                 <View
                                                     style={{
