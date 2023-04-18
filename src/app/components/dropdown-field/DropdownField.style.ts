@@ -28,7 +28,7 @@ export const styles = StyleSheet.create({
         fontFamily: AppFonts.bold,
     },
     itemsContainer: {
-        position: 'absolute',
+        // position: 'absolute',
         right: 0,
         // top: getSize.m(38),
         top: 0,
@@ -38,7 +38,7 @@ export const styles = StyleSheet.create({
         borderBottomRightRadius: getSize.m(20),
         elevation: 1,
         width: '100%',
-        // height: getSize.m(110),
+        height: getSize.m(300),
         overflow: 'visible',
         paddingHorizontal: getSize.m(10),
         paddingTop: getSize.m(10),
