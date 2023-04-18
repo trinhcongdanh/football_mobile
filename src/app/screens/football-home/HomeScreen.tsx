@@ -19,7 +19,7 @@ import { appColors } from '@football/app/utils/constants/appColors';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import { ScreenName } from '@football/app/utils/constants/enum';
 import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
-import { getSize } from '@football/app/utils/responsive/scale';
+import { getSize, width } from '@football/app/utils/responsive/scale';
 import { renderAvatar, renderUserPoints } from '@football/core/models/AvatarType.enum';
 import { isEmpty } from 'lodash';
 import React, { useRef, useState } from 'react';
@@ -71,12 +71,12 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
     const notScroll = () => {};
     LogBox.ignoreLogs(['Warning: Encountered two children with the same key']);
     LogBox.ignoreLogs(['Warning: Each child in a list should have a unique "key" prop']);
-
+    // const width = Dimensions.get('window').width;
     const isGuest = !userLogin?.success;
     const { getTranslationText } = useTranslationText();
 
     const scrollToTheEnd = () => {
-        if (I18nManager.isRTL) {
+        if (I18nManager.isRTL && Platform.OS === 'android') {
             scrollViewRef.current?.scrollToEnd({ animated: false });
         }
     };
@@ -221,7 +221,9 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                                 >
                                     <ScrollView
                                         contentContainerStyle={{
-                                            width: Dimensions.get('window').width,
+                                            minWidth: width,
+                                            // flexDirection: 'row-reverse',
+                                            // flex: 1,
                                         }}
                                         horizontal
                                         ref={scrollViewRef}
