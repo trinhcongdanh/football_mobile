@@ -101,6 +101,7 @@ const styles = StyleSheet.create({
         fontSize: getSize.m(13),
         color: appColors.blue_black,
         lineHeight: getSize.m(17),
+        textAlign: 'left',
     },
 
     content: {
