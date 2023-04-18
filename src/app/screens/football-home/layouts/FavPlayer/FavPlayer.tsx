@@ -36,16 +36,16 @@ export const FavPlayer = ({ player, color }: IFavPlayerProps) => {
 
     return (
         <ImageBackground
-            source={AppImages.img_home_background_favorite_2}
-            style={[appStyles.flex, { height: '100%', marginTop: getSize.m(46) }]}
+            source={AppImages.img_decoration_background_2}
+            style={[appStyles.flex, { width: '100%', height: '60%', marginTop: getSize.m(46) }]}
+            imageStyle={{ tintColor: color, opacity: 0.1 }}
         >
-            <FastImage
+            {/* <FastImage
                 source={AppImages.img_decoration_background_2}
                 tintColor={color}
-                resizeMode={FastImage.resizeMode.contain}
                 style={{ height: '100%', width: '100%', position: 'absolute' }}
-            />
-            <View style={appStyles.align_justify}>
+            /> */}
+            <View style={[appStyles.align_justify]}>
                 <View style={styles.logo_team}>
                     <FastImage
                         source={{ uri: player?.image_url }}
@@ -64,7 +64,7 @@ export const FavPlayer = ({ player, color }: IFavPlayerProps) => {
                         })}
                     </Text>
                     <TouchableOpacity onPress={() => onClickPlayer(player?._id)}>
-                        <LinearGradient colors={[color, color]} style={styles.icon_arrow_left}>
+                        <LinearGradient colors={appColors.menu_gradient} style={styles.icon_arrow_left}>
                             <FastImage
                                 source={AppImages.img_angle_down}
                                 style={{
@@ -97,7 +97,7 @@ export const FavPlayer = ({ player, color }: IFavPlayerProps) => {
                         {
                             marginLeft: getSize.m(25),
                             marginRight: getSize.m(8),
-                        },
+                        }
                     ]}
                 >
                     <View
@@ -106,7 +106,7 @@ export const FavPlayer = ({ player, color }: IFavPlayerProps) => {
                             {
                                 paddingLeft: getSize.m(16),
                                 paddingRight: getSize.m(10),
-                            },
+                            }
                         ]}
                     >
                         <View style={appStyles.flex_row_align}>
@@ -151,7 +151,7 @@ export const FavPlayer = ({ player, color }: IFavPlayerProps) => {
                                 schedule=":"
                                 avt_away={game?.team2?.logo_url}
                                 avt_home={game?.team1?.logo_url}
-                                clock={`${game?.minutes_played || 0}`}
+                                clock={`${game?.on_field || 0}`}
                                 ticket_red={`${game?.red_cards || 0}`}
                                 ticket_yellow={`${game?.yellow_cards || 0}`}
                                 score={`${game?.goals || 0}`}
@@ -166,7 +166,7 @@ export const FavPlayer = ({ player, color }: IFavPlayerProps) => {
                         {
                             marginLeft: getSize.m(8),
                             marginRight: getSize.m(25),
-                        },
+                        }
                     ]}
                 >
                     <View
@@ -178,7 +178,7 @@ export const FavPlayer = ({ player, color }: IFavPlayerProps) => {
                             },
                         ]}
                     >
-                        <View style={appStyles.flex_row_align}>
+                        <View style={[appStyles.flex_row_align]}>
                             <FastImage
                                 source={AppImages.img_chess_queen}
                                 style={{
@@ -201,7 +201,7 @@ export const FavPlayer = ({ player, color }: IFavPlayerProps) => {
                             />
                         </TouchableOpacity>
                     </View>
-                    <View>
+                    <View >
                         <View style={{ marginTop: getSize.m(20) }}>
                             <View style={{ marginLeft: getSize.m(16) }}>
                                 <Text style={styles.label}> {t('home_page.gates')}</Text>

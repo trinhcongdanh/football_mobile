@@ -10,7 +10,6 @@ const styles = StyleSheet.create({
         minHeight: getSize.m(900),
         paddingHorizontal: getSize.m(20),
         paddingVertical: getSize.m(20),
-        paddingBottom: getSize.m(200),
     },
     terms_container_content: {
         fontSize: getSize.m(14),

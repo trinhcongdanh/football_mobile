@@ -10,20 +10,27 @@ const styles = StyleSheet.create({
         backgroundColor: appColors.white,
         marginHorizontal: getSize.m(10),
         borderRadius: getSize.m(10),
-        marginTop: getSize.m(14),
+        marginTop: getSize.m(12),
         overflow: 'hidden',
     },
     date: {
         fontFamily: AppFonts.bold,
-        fontSize: getSize.m(12),
-        lineHeight: getSize.m(15.6),
+        fontSize: getSize.m(13),
         color: appColors.text_dark_blue,
         marginLeft: getSize.m(28),
     },
-
+    line_dots: {
+        marginBottom: getSize.m(10),
+        borderBottomWidth: 1,
+        borderStyle: 'dashed',
+        borderColor: appColors.soft_grey,
+        width: '100%'
+    },
     resize_name_club: {
-        width: '100%',
+        width: getSize.m(100),
         height: getSize.m(60),
+        justifyContent: 'flex-start',
+        alignItems: 'center',
     },
 
     name_club: {
@@ -64,12 +71,6 @@ const styles = StyleSheet.create({
         height: getSize.m(30),
         width: getSize.m(30),
         borderRadius: getSize.m(30),
-    },
-    line_dots: {
-        marginBottom: getSize.m(11),
-        borderBottomWidth: 1,
-        borderStyle: 'dashed',
-        borderColor: appColors.soft_grey,
     },
     img_ticket: {
         width: getSize.m(10),

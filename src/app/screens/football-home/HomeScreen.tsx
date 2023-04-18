@@ -19,12 +19,11 @@ import { appColors } from '@football/app/utils/constants/appColors';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import { ScreenName } from '@football/app/utils/constants/enum';
 import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
-import { getSize, width } from '@football/app/utils/responsive/scale';
+import { getSize } from '@football/app/utils/responsive/scale';
 import { renderAvatar, renderUserPoints } from '@football/core/models/AvatarType.enum';
 import { isEmpty } from 'lodash';
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import {
-    Dimensions,
     I18nManager,
     ImageBackground,
     LogBox,
@@ -68,16 +67,16 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
     });
 
     const scrollViewRef = useRef<any>();
-    const notScroll = () => {};
+    const notScroll = () => { };
     LogBox.ignoreLogs(['Warning: Encountered two children with the same key']);
     LogBox.ignoreLogs(['Warning: Each child in a list should have a unique "key" prop']);
-    // const width = Dimensions.get('window').width;
+
     const isGuest = !userLogin?.success;
     const { getTranslationText } = useTranslationText();
 
     const scrollToTheEnd = () => {
         if (I18nManager.isRTL && Platform.OS === 'android') {
-            scrollViewRef.current?.scrollToEnd({ animated: false });
+            scrollViewRef.current?.scrollToEnd();
         }
     };
 
@@ -95,18 +94,7 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
             {homePage && (
                 <>
                     <View>
-                        <ImageBackground
-                            source={AppImages.img_background_header_home}
-                            imageStyle={{ width: '102%', marginLeft: getSize.m(-2) }}
-                            style={[
-                                {
-                                    height:
-                                        Platform.OS === 'android' ? getSize.m(172) : getSize.m(180),
-                                    zIndex: 1000,
-                                    overflow: 'hidden',
-                                },
-                            ]}
-                        >
+                        <View style={styles.header_background}>
                             <FastImage
                                 source={AppImages.img_arrow_header_home}
                                 resizeMode={FastImage.resizeMode.contain}
@@ -127,7 +115,6 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                                 resizeMode={FastImage.resizeMode.contain}
                                 style={{
                                     height: getSize.m(64),
-                                    // width: '100%',
                                     width: getSize.m(94),
                                     position: 'absolute',
                                     bottom: getSize.m(-50),
@@ -136,11 +123,7 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                                 }}
                             />
 
-                            <StatusBar
-                                barStyle="light-content"
-                                translucent
-                                backgroundColor="transparent"
-                            />
+                            <StatusBar translucent backgroundColor="transparent" />
                             <SafeAreaView
                                 style={[
                                     appStyles.safe_area,
@@ -153,12 +136,13 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                                     <View style={[appStyles.flex_row_space_center]}>
                                         <TouchableOpacity onPress={onShowSideMenu}>
                                             <LinearGradient
-                                                colors={[
-                                                    Platform.OS === 'android'
-                                                        ? colorCustom
-                                                        : colorCustom,
-                                                    colorCustom,
-                                                ]}
+                                                // colors={[
+                                                //     Platform.OS === 'android'
+                                                //         ? colorCustom
+                                                //         : colorCustom,
+                                                //     colorCustom,
+                                                // ]}
+                                                colors={appColors.menu_gradient}
                                                 style={styles.home_side_bar}
                                             >
                                                 <FastImage
@@ -183,24 +167,23 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                                                         source={renderAvatar(profileUser)}
                                                     />
                                                 </TouchableOpacity>
-
-                                                <Text
-                                                    style={[
-                                                        appStyles.text_bold,
-                                                        {
-                                                            marginRight: getSize.m(3),
-                                                            marginLeft: getSize.m(10),
-                                                        },
-                                                    ]}
-                                                >
-                                                    {renderUserPoints(profileUser, t)}
-                                                </Text>
                                                 <FastImage
                                                     source={AppImages.img_ball}
                                                     style={styles.ic_football}
                                                     tintColor={colorCustom}
                                                     resizeMode={FastImage.resizeMode.contain}
                                                 />
+                                                <Text
+                                                    style={[
+                                                        appStyles.text_bold,
+                                                        {
+                                                            // marginRight: getSize.m(3),
+                                                            // marginLeft: getSize.m(10),
+                                                        },
+                                                    ]}
+                                                >
+                                                    {renderUserPoints(profileUser, t)}
+                                                </Text>
                                             </View>
                                         </View>
                                         <View>
@@ -214,16 +197,13 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                                         </View>
                                     </View>
                                 </View>
-                                <View
-                                    style={{
-                                        marginTop: getSize.m(20),
-                                    }}
-                                >
+                                <View style={{ marginTop: getSize.m(20) }}>
                                     <ScrollView
-                                        contentContainerStyle={{
-                                            minWidth: width,
-                                            // flexDirection: 'row-reverse',
-                                            // flex: 1,
+                                        style={{
+                                            flexDirection: I18nManager.isRTL
+                                                ? 'row-reverse'
+                                                : 'row',
+                                            marginRight: 10,
                                         }}
                                         horizontal
                                         ref={scrollViewRef}
@@ -365,49 +345,48 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                                     </ScrollView>
                                 </View>
                             </SafeAreaView>
-                        </ImageBackground>
+                        </View>
                     </View>
                     <ScrollView
-                        style={{ marginTop: getSize.m(-40), paddingTop: getSize.m(40), zIndex: -1 }}
+                        style={{ marginTop: getSize.m(-40), paddingTop: getSize.m(40), zIndex: -1, marginBottom: getSize.m(50), }}
                     >
                         {/* Video Intro */}
                         {homeLayout?.layout.includes('video') && (
                             <TouchableOpacity onPress={() => handlePlayVideo(homePage?.video)}>
-                                <View style={styles.home_video}>
-                                    <LinearGradient
-                                        colors={['transparent', 'rgba(0, 0, 0, 0.92)']}
-                                        start={{ x: 0, y: 0.3 }}
-                                        end={{ x: 0, y: 1 }}
-                                        style={styles.gradient_img}
-                                    />
-                                    <FastImage
+                                <View style={[styles.home_video]}>
+                                    <ImageBackground
                                         source={{ uri: homePage?.video.image_url }}
+                                        imageStyle={{ borderRadius: getSize.m(20), opacity: 0.9, }}
                                         style={{
                                             width: getSize.m(347),
                                             height: getSize.m(233),
-                                            borderRadius: getSize.m(20),
                                         }}
-                                    />
-                                    <View style={styles.date}>
-                                        <Text style={styles.text_date}>
-                                            {homePage?.video.length}
-                                        </Text>
-                                    </View>
-                                    <View style={styles.play_video_main}>
-                                        <IconAntDesign
-                                            name={appIcons.ic_caretright}
-                                            size={getSize.m(16)}
-                                            color={appColors.white}
-                                        />
-                                    </View>
-                                    <View style={styles.content}>
-                                        <Text style={styles.text_content}>
-                                            {getTranslationText({
-                                                textHe: homePage?.video.caption_he,
-                                                textEn: homePage?.video.caption_en,
-                                            })}
-                                        </Text>
-                                    </View>
+                                    >
+                                        <View style={{ flex: 1, backgroundColor: 'rgba(0,0,0,0.4)', borderRadius: getSize.m(20), flexDirection: 'column', justifyContent: 'space-between' }} >
+                                            <View style={styles.date}>
+                                                <Text style={styles.text_date}>
+                                                    {homePage?.video.length}
+                                                </Text>
+                                            </View>
+                                            <View style={styles.play_video_main}>
+                                                <FastImage
+                                                    source={AppImages.img_play_icon}
+                                                    style={{
+                                                        width: getSize.m(35),
+                                                        height: getSize.m(35),
+                                                    }}
+                                                />
+                                            </View>
+                                            <View style={styles.content}>
+                                                <Text style={styles.text_content}>
+                                                    {getTranslationText({
+                                                        textHe: homePage?.video.caption_he,
+                                                        textEn: homePage?.video.caption_en,
+                                                    })}
+                                                </Text>
+                                            </View>
+                                        </View>
+                                    </ImageBackground>
                                 </View>
                             </TouchableOpacity>
                         )}
@@ -473,8 +452,8 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                         {/* Item10 */}
                         {homeLayout?.layout.includes('leagues_table') && leagues?.length
                             ? leagues.map(league => {
-                                  return <LeaguesTable league={league} key={league?._id} />;
-                              })
+                                return <LeaguesTable league={league} key={league?._id} />;
+                            })
                             : null}
                         {/* Item11 */}
                         {/* <Item11 /> */}

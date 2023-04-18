@@ -38,7 +38,7 @@ export const styles = StyleSheet.create({
         borderBottomRightRadius: getSize.m(20),
         elevation: 1,
         width: '100%',
-        // height: getSize.m(300),
+        // height: getSize.m(110),
         overflow: 'visible',
         paddingHorizontal: getSize.m(10),
         paddingTop: getSize.m(10),

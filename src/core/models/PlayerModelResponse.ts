@@ -145,7 +145,6 @@ export interface Game3 {
     yellow_cards: number;
     red_cards: number;
     on_field: number;
-    minutes_played: number;
 }
 
 export interface Goals {

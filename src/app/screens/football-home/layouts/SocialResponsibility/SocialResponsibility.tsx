@@ -17,11 +17,11 @@ export const SocialResponsibility = ({ homePage }: ISocialResponsibilityProps) =
                 <FastImage
                     source={{ uri: homePage.ads.image_url }}
                     style={{
-                        width: getSize.m(347),
-                        height: getSize.m(247),
+                        width: getSize.m(350),
+                        height: getSize.m(175),
                         borderRadius: getSize.m(20),
                     }}
-                    // resizeMode={FastImage.resizeMode.contain}
+                // resizeMode={FastImage.resizeMode.contain}
                 />
                 {/* <FastImage
                     resizeMode={FastImage.resizeMode.contain}

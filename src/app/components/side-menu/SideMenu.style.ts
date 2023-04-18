@@ -5,7 +5,7 @@ import { I18nManager, Platform, StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
     side_menu_container: {
-        position: 'absolute',
+        // position: 'absolute',
         backgroundColor: appColors.white,
         bottom: 0,
         top: 0,

@@ -27,6 +27,7 @@ export const appColors = {
     yellow_light: '#FFFCEA',
     red_light: '#FDE9ED',
     red: '#EF1B1B',
+    menu_gradient: ['#FF2B5E', '#CC0A2D'],
     red_dark: '#CC0A2D',
     black: '#000823',
     black_dark: '#000',

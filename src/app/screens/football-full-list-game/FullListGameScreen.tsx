@@ -10,7 +10,6 @@ import { appColors } from '@football/app/utils/constants/appColors';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import { useDateTime } from '@football/app/utils/hooks/useDateTime';
 import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
-import { useResult } from '@football/app/utils/hooks/useResult';
 import { getSize } from '@football/app/utils/responsive/scale';
 import { Game, TeamModel } from '@football/core/models/TeamModelResponse';
 import { TopTeamModel } from '@football/core/models/TopTeamModelResponse';
@@ -36,7 +35,6 @@ export const FullListGameScreen = ({ navigation, route }: IFullListGameScreenPro
     });
     const { getTranslationText } = useTranslationText();
     const { getDate } = useDateTime();
-    const { getResult } = useResult();
     return (
         <View style={appStyles.flex}>
             <BackGround>
@@ -149,11 +147,7 @@ export const FullListGameScreen = ({ navigation, route }: IFullListGameScreenPro
                                                         alignItems: 'center',
                                                     }}
                                                 >
-                                                    <Text style={styles.score}>
-                                                        {getResult({
-                                                            result: item.score,
-                                                        })}
-                                                    </Text>
+                                                    <Text style={styles.score}>{item.score}</Text>
                                                 </View>
                                                 <View
                                                     style={{

@@ -659,7 +659,7 @@ const resources = {
                 all_game: 'לכל המשחקים',
                 read_more: 'קרא עוד',
                 full_table: 'לטבלה המלאה',
-                top_team_second_tab_title: 'רשימת משחקים',
+                top_team_second_tab_title: 'טבלת משחק',
                 edit_favorites: 'ערוך מועדפים',
                 magazine: 'מגזין ההתאחדות',
                 league_gallery: 'סרטונים',

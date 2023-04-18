@@ -34,7 +34,6 @@ const styles = StyleSheet.create({
         fontSize: getSize.m(15),
         color: appColors.white,
         lineHeight: getSize.m(22),
-        textAlign: 'left',
     },
 
     title: {
@@ -43,7 +42,6 @@ const styles = StyleSheet.create({
         lineHeight: getSize.m(17),
         color: appColors.white,
         marginTop: getSize.m(2),
-        textAlign: 'left',
     },
     rating: {
         fontFamily: AppFonts.regular,

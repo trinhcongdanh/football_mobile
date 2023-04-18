@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, Image } from 'react-native';
 import React from 'react';
 import IconLocation from 'react-native-vector-icons/EvilIcons';
 import Icon from 'react-native-vector-icons/Feather';
@@ -11,7 +11,7 @@ import { useTranslation } from 'react-i18next';
 import { styles } from './ListGame_test.styles';
 import { IListGameProps } from './ListGame.type';
 import { useDateTime } from '@football/app/utils/hooks/useDateTime';
-import { useResult } from '@football/app/utils/hooks/useResult';
+import { AppImages } from '@football/app/assets/images';
 
 export const ListGame_Test = ({
     logo_home,
@@ -36,8 +36,6 @@ export const ListGame_Test = ({
     const { t } = useTranslation();
     const emptyResult = result === ' : ' ? ' : ' : null;
     const { getDate, getTime } = useDateTime();
-    const { getResult } = useResult();
-
     return (
         <View style={[styles.main_schedule, style]}>
             {tournament && (
@@ -89,7 +87,7 @@ export const ListGame_Test = ({
                 <View
                     style={[
                         appStyles.flex_row_space,
-                        { marginLeft: getSize.m(24), marginRight: getSize.m(10), width: '100%' },
+                        { marginHorizontal: getSize.m(15), },
                     ]}
                 >
                     <View style={appStyles.flex_row_align}>
@@ -161,7 +159,7 @@ export const ListGame_Test = ({
                         />
                         <View style={{ width: '62%' }}>
                             <Text
-                                numberOfLines={2}
+                                numberOfLines={1}
                                 style={[
                                     styles.stadium,
                                     {
@@ -185,7 +183,8 @@ export const ListGame_Test = ({
                 <View style={[styles.circle_right, { backgroundColor: color }]} />
             </View>
             <View style={{ paddingHorizontal: getSize.m(14) }}>
-                <View style={styles.line_dots} />
+                {/* <View style={styles.line_dots} /> */}
+                <Image source={AppImages.img_dotted_border} style={styles.line_dots} />
             </View>
             <View style={[appStyles.align_justify]}>
                 <View
@@ -210,9 +209,9 @@ export const ListGame_Test = ({
                         >
                             <FastImage
                                 style={{
-                                    width: getSize.m(28),
-                                    height: getSize.m(28),
-                                    borderRadius: getSize.m(28),
+                                    width: getSize.m(25),
+                                    height: getSize.m(25),
+                                    borderRadius: getSize.m(25),
                                 }}
                                 source={{ uri: logo_home }}
                             />
@@ -226,43 +225,59 @@ export const ListGame_Test = ({
                             </View>
                         ) : null}
                     </View>
-                    <View
-                        style={[
-                            appStyles.align_justify,
-                            styles.time,
-                            {
-                                backgroundColor:
-                                    result === emptyResult ? appColors.white : '#F8FDFF',
-                                marginHorizontal:
-                                    nameHome || nameAway ? getSize.m(20) : getSize.m(40),
-                            },
-                        ]}
-                    >
-                        {isLive && (
-                            <Text
-                                style={[
-                                    styles.score,
-                                    {
-                                        color: appColors.light_gray,
-                                    },
-                                ]}
-                            >
-                                - : -
-                            </Text>
-                        )}
-                        {!isLive && result === emptyResult && schedule !== null && tournament && (
-                            <Text style={styles.score}>V S</Text>
-                        )}
-                        {!isLive && result === emptyResult && schedule !== null && !tournament && (
-                            <Text style={styles.score}>{getTime({ time: schedule })}</Text>
-                        )}
+                    <View >
+                        <View
+                            style={[
+                                appStyles.align_justify,
+                                styles.time,
+                                {
+                                    backgroundColor:
+                                        result === emptyResult ? appColors.white : '#F8FDFF',
+                                    marginHorizontal:
+                                        nameHome || nameAway ? getSize.m(20) : getSize.m(40),
+                                },
+                            ]}
+                        >
+                            {isLive && (
+                                <Text
+                                    style={[
+                                        styles.score,
+                                        {
+                                            color: appColors.light_gray,
+                                        },
+                                    ]}
+                                >
+                                    - : -
+                                </Text>
+                            )}
+                            {!isLive && result === emptyResult && schedule !== null && tournament && (
+                                <Text style={styles.score}>V S</Text>
+                            )}
+                            {!isLive && result === emptyResult && schedule !== null && !tournament && (
+                                <Text style={styles.score}>{getTime({ time: schedule })}</Text>
+                            )}
 
-                        {!isLive && result !== emptyResult && (
-                            <Text style={styles.score}>
-                                {getResult({
-                                    result: result,
-                                })}
-                            </Text>
+                            {!isLive && result !== emptyResult && (
+                                <Text style={styles.score}>{result}</Text>
+                            )}
+                        </View>
+                        {details && (
+                            <TouchableOpacity
+                                style={[
+                                    appStyles.flex_row_center,
+                                    { flex: 0, marginTop: nameHome || nameAway ? getSize.m(0) : getSize.m(14), paddingTop: 5, },
+                                ]}
+                                onPress={handleDetailMatch}
+                            >
+                                {isLive ? (
+                                    <Text style={[styles.details]}>{t('list_game.results')}</Text>
+                                ) : personnel ? (
+                                    <Text style={[styles.details]}>{personnel}</Text>
+                                ) : (
+                                    gameDetail && <Text style={[styles.details]}>{gameDetail}</Text>
+                                )}
+                                <Icon name={icon} size={getSize.m(14)} color={appColors.button_dark_blue} />
+                            </TouchableOpacity>
                         )}
                     </View>
                     <View style={[appStyles.align_justify]}>
@@ -279,9 +294,9 @@ export const ListGame_Test = ({
                         >
                             <FastImage
                                 style={{
-                                    width: getSize.m(28),
-                                    height: getSize.m(28),
-                                    borderRadius: getSize.m(28),
+                                    width: getSize.m(25),
+                                    height: getSize.m(25),
+                                    borderRadius: getSize.m(25),
                                 }}
                                 source={{ uri: logo_away }}
                             />
@@ -296,7 +311,7 @@ export const ListGame_Test = ({
                     </View>
                 </View>
             </View>
-            {details && (
+            {/* {details && (
                 <TouchableOpacity
                     style={[
                         appStyles.flex_row_center,
@@ -313,7 +328,7 @@ export const ListGame_Test = ({
                     )}
                     <Icon name={icon} size={getSize.m(10)} color={appColors.button_dark_blue} />
                 </TouchableOpacity>
-            )}
+            )} */}
         </View>
     );
 };

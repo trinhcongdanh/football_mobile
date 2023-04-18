@@ -4,11 +4,11 @@ import styles from '@football/app/components/game-table-1/GameTable1.style';
 import { IGameTable1Props } from '@football/app/components/game-table-1/GameTable1.type';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { appStyles } from '@football/app/utils/constants/appStyles';
-import { useResult } from '@football/app/utils/hooks/useResult';
 import { getSize } from '@football/app/utils/responsive/scale';
+import moment from 'moment';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { Image, Text, TouchableOpacity, View } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import IconFeather from 'react-native-vector-icons/Feather';
 
@@ -27,33 +27,22 @@ export const GameTable1 = ({
     onHandleDetailMatch,
 }: IGameTable1Props) => {
     const { t } = useTranslation();
-    const { getResult } = useResult();
 
     return (
         <View style={styles.game_table}>
-            <View style={appStyles.flex_row_align}>
-                <Text style={styles.date}>{date}</Text>
+            <View style={[appStyles.flex_row_align]}>
+                <Text style={styles.date}>{moment(date).format('DD.MM.YY')}</Text>
             </View>
             <View style={[appStyles.align_justify]}>
                 <View
                     style={[
                         appStyles.flex_row_space_center,
                         {
-                            marginTop: getSize.m(14),
                             paddingHorizontal: getSize.m(25),
-                            marginBottom: getSize.m(11),
-                            width: '100%',
                         },
                     ]}
                 >
-                    <View
-                        style={[
-                            appStyles.align_justify,
-                            {
-                                width: '30%',
-                            },
-                        ]}
-                    >
+                    <View style={[appStyles.align_justify]}>
                         <FastImage
                             source={{ uri: avt_home }}
                             style={{ width: getSize.m(24), height: getSize.m(24) }}
@@ -68,18 +57,13 @@ export const GameTable1 = ({
                         style={[
                             appStyles.align_justify,
                             {
-                                marginHorizontal: getSize.m(10),
-                                width: '30%',
+                                marginHorizontal: getSize.m(8),
                             },
                         ]}
                     >
                         <View style={styles.container_result}>
                             {result !== null ? (
-                                <Text style={styles.result}>
-                                    {getResult({
-                                        result: result,
-                                    })}
-                                </Text>
+                                <Text style={styles.result}>{result}</Text>
                             ) : (
                                 <Text style={styles.result}>:</Text>
                             )}
@@ -104,14 +88,7 @@ export const GameTable1 = ({
                             </View>
                         </TouchableOpacity>
                     </View>
-                    <View
-                        style={[
-                            appStyles.align_justify,
-                            {
-                                width: '30%',
-                            },
-                        ]}
-                    >
+                    <View style={appStyles.align_justify}>
                         <FastImage
                             source={{ uri: avt_away }}
                             style={{ width: getSize.m(24), height: getSize.m(24) }}
@@ -125,7 +102,7 @@ export const GameTable1 = ({
                 </View>
             </View>
 
-            <View style={appStyles.flex_row_space}>
+            <View style={[appStyles.flex_row_space]}>
                 <View
                     style={[
                         styles.circle,
@@ -148,14 +125,14 @@ export const GameTable1 = ({
                 />
             </View>
             <View style={{ paddingHorizontal: getSize.m(20) }}>
-                <View style={styles.line_dots} />
+                <Image source={AppImages.img_dotted_border} style={styles.line_dots} />
             </View>
             <View
                 style={[
                     appStyles.flex_row_space_center,
                     {
                         paddingHorizontal: getSize.m(12),
-                    },
+                    }
                 ]}
             >
                 <View style={appStyles.align_justify}>

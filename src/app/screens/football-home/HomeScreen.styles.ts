@@ -4,6 +4,15 @@ import { getSize } from '@football/app/utils/responsive/scale';
 import { StyleSheet, I18nManager } from 'react-native';
 
 const styles = StyleSheet.create({
+    header_background: {
+        height: getSize.m(172),
+        zIndex: 1000,
+        overflow: 'hidden',
+        width: '102%',
+        marginLeft: getSize.m(-2),
+        backgroundColor: appColors.text_dark,
+        borderBottomLeftRadius: 40,
+    },
     home_side_bar: {
         width: getSize.m(40),
         height: getSize.m(40),
@@ -15,6 +24,7 @@ const styles = StyleSheet.create({
     ic_football: {
         width: getSize.m(16),
         height: getSize.m(16),
+        margin: 5,
     },
 
     header_item: {
@@ -34,7 +44,6 @@ const styles = StyleSheet.create({
 
     home_video: {
         marginTop: getSize.m(20),
-        marginHorizontal: getSize.m(14),
         justifyContent: 'center',
         alignItems: 'center',
     },
@@ -42,37 +51,38 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(0, 0, 0, 0.6)',
         paddingHorizontal: getSize.m(12),
         paddingVertical: getSize.m(2),
-        position: 'absolute',
         borderRadius: getSize.m(40),
         top: getSize.m(16),
         right: getSize.m(16),
-        zIndex: 100,
+        alignSelf: 'flex-end'
     },
     text_date: {
+        width: '30%',
+        textAlign: 'center',
         fontSize: getSize.m(12),
         fontFamily: AppFonts.semibold,
         color: appColors.white,
         lineHeight: getSize.m(20),
     },
     play_video_main: {
-        paddingHorizontal: getSize.m(16),
-        paddingVertical: getSize.m(14),
+        width: 50,
+        height: 50,
+        justifyContent: 'center',
+        alignItems: 'center',
+        alignSelf: 'center',
+        paddingHorizontal: getSize.m(10),
+        paddingVertical: getSize.m(10),
         borderRadius: getSize.m(50),
-        backgroundColor: 'rgba(255, 255, 255, 0.3)',
-        position: 'absolute',
-        top: getSize.m(90),
-        left: getSize.m(140),
-        borderColor: 'rgba(255, 255, 255, 0.6)',
+        backgroundColor: 'rgba(95,95,89,0.95)',
+        borderColor: '#757372',
         borderWidth: getSize.m(2),
     },
 
     content: {
-        position: 'absolute',
         bottom: getSize.m(16),
-        right: getSize.m(40),
-        left: getSize.m(40),
         overflow: 'hidden',
-        zIndex: 100,
+        alignSelf: 'center',
+        width: '80%'
     },
     text_content: {
         textAlign: 'center',

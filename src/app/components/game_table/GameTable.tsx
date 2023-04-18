@@ -12,7 +12,6 @@ import { IGameTableProps } from '@football/app/components/game_table/GameTable.t
 import { AppFonts } from '@football/app/assets/fonts';
 import { useTranslation } from 'react-i18next';
 import { useDateTime } from '@football/app/utils/hooks/useDateTime';
-import { useResult } from '@football/app/utils/hooks/useResult';
 
 export const GameTable = ({
     date,
@@ -30,8 +29,6 @@ export const GameTable = ({
     const { t } = useTranslation();
     const emptyResult = result === ' : ' ? ' : ' : null;
     const { getDate, getTime } = useDateTime();
-    const { getResult } = useResult();
-
     return (
         <View style={styles.item_game}>
             <View style={appStyles.flex_row_space_center}>
@@ -84,11 +81,7 @@ export const GameTable = ({
                     <View style={styles.container_result}>
                         {isLive ? <Text style={[styles.result]}>- : -</Text> : null}
                         {!isLive && result !== emptyResult ? (
-                            <Text style={styles.result}>
-                                {getResult({
-                                    result: result,
-                                })}
-                            </Text>
+                            <Text style={styles.result}>{result}</Text>
                         ) : null}
                         {!isLive && result === emptyResult && schedule !== null ? (
                             <Text style={styles.result}>{getTime({ time: schedule })}</Text>

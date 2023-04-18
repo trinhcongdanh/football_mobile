@@ -10,6 +10,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: getSize.m(14),
         justifyContent: 'center',
         alignItems: 'center',
+        marginTop: getSize.m(20)
     },
     logo_player: {
         width: getSize.m(212),

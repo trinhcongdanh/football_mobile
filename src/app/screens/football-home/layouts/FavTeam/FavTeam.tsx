@@ -47,7 +47,12 @@ export const FavTeam = ({ team, color }: IFavTeamProps) => {
             style={[appStyles.flex, { height: '100%', marginTop: getSize.m(46) }]}
         >
             <FastImage
-                source={AppImages.img_decoration_background}
+                source={AppImages.img_decoration_top}
+                tintColor={'#182A63'}
+                style={{ height: '100%', width: '100%', position: 'absolute' }}
+            />
+            <FastImage
+                source={AppImages.img_decoration_bottom}
                 tintColor={color}
                 style={{ height: '100%', width: '100%', position: 'absolute' }}
             />
@@ -55,10 +60,11 @@ export const FavTeam = ({ team, color }: IFavTeamProps) => {
                 <View style={styles.logo_team}>
                     <FastImage
                         source={{ uri: team?.logo_url }}
+                        resizeMode="contain"
                         style={{
                             width: getSize.m(58),
                             height: getSize.m(58),
-                            borderRadius: getSize.m(62),
+                            borderRadius: getSize.m(29),
                         }}
                     />
                 </View>
@@ -70,7 +76,7 @@ export const FavTeam = ({ team, color }: IFavTeamProps) => {
                         })}
                     </Text>
                     <TouchableOpacity onPress={() => onNavigateTeamDetails(team?._id)}>
-                        <LinearGradient colors={[color, color]} style={styles.icon_arrow_left}>
+                        <LinearGradient colors={appColors.menu_gradient} style={styles.icon_arrow_left}>
                             <FastImage
                                 source={AppImages.img_angle_down}
                                 style={{
@@ -708,7 +714,7 @@ export const FavTeam = ({ team, color }: IFavTeamProps) => {
                         {
                             marginLeft: getSize.m(8),
                             marginRight: getSize.m(25),
-                        },
+                        }
                     ]}
                 >
                     <View
@@ -743,7 +749,7 @@ export const FavTeam = ({ team, color }: IFavTeamProps) => {
                             />
                         </TouchableOpacity>
                     </View>
-                    <View style={{ padding: getSize.m(10) }}>
+                    <View style={{ paddingHorizontal: getSize.m(10) }}>
                         {team?.homepage_info?.games
                             ?.slice(0, MAX_GAME_IN_FAVORITES_TEAM)
                             .map((item, index) => {
@@ -805,7 +811,7 @@ export const FavTeam = ({ team, color }: IFavTeamProps) => {
                                         backgroundColor:
                                             index === activeIndexNumber
                                                 ? appColors.white
-                                                : appColors.light_gray,
+                                                : appColors.light_gray
                                     },
                                 ]}
                             />

@@ -114,10 +114,14 @@ const useEventHandler = (state: any, route: any) => {
         setScreenName,
         setSetProfile,
     } = state;
-    let editFav = route?.params?.editFav;
+    const editFav = route?.params?.editFav;
 
     const onGoBack = () => {
-        goBack();
+        if (editFav) {
+            navigate(ScreenName.FavTopTeamPage);
+        } else {
+            goBack();
+        }
         return true;
     };
 

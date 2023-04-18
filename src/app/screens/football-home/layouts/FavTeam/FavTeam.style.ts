@@ -1,18 +1,25 @@
 import { AppFonts } from '@football/app/assets/fonts';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { getSize } from '@football/app/utils/responsive/scale';
-import { I18nManager, Platform, StyleSheet } from 'react-native';
+import { I18nManager, StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
     logo_team: {
         width: getSize.m(63),
         height: getSize.m(63),
-        borderRadius: getSize.m(63),
+        borderRadius: getSize.m(32),
         backgroundColor: appColors.white,
         justifyContent: 'center',
         alignItems: 'center',
         marginTop: getSize.m(-30),
         elevation: 10,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.23,
+        shadowRadius: 2.62,
     },
 
     icon_arrow_left: {
@@ -37,8 +44,8 @@ const styles = StyleSheet.create({
         marginTop: getSize.m(14),
         minHeight: getSize.m(389),
         borderRadius: getSize.m(15),
-        paddingTop: getSize.m(16),
-        paddingBottom: getSize.m(23.5),
+        paddingTop: getSize.m(10),
+        paddingBottom: getSize.m(15),
         marginBottom: getSize.m(15),
     },
 
@@ -91,8 +98,7 @@ const styles = StyleSheet.create({
     },
 
     dotContainer: {
-        flexDirection:
-            Platform.OS === 'android' ? (I18nManager.isRTL ? 'row-reverse' : 'row') : 'row',
+        flexDirection: I18nManager.isRTL ? 'row-reverse' : 'row',
         justifyContent: 'center',
         marginBottom: getSize.m(30),
     },

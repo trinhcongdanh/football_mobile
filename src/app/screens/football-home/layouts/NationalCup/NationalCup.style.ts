@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
     content_button: {
         position: 'absolute',
         top: getSize.m(5),
-        left: getSize.m(28),
+        left: Platform.OS === 'ios' ? getSize.m(38) : getSize.m(20),
     },
     text_button: {
         fontFamily: AppFonts.bold,

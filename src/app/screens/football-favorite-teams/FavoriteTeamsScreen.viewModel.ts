@@ -94,7 +94,7 @@ const useViewCallback = (route: any, viewState: any) => {
         sortByName.name_en = 1;
     }
     const dispatch = useDispatch<any>();
-    const { navigate, goBack, pop, popToTop } = useAppNavigator();
+    const { navigate, goBack, pop } = useAppNavigator();
 
     const onGoBack = () => {
         dispatch(resetFavTeam([]));
@@ -115,8 +115,6 @@ const useViewCallback = (route: any, viewState: any) => {
 
     const onGoSkip = () => {
         if (params?.previous_screen === ScreenName.SettingsPage) {
-            goBack();
-        } else if (params?.previous_screen === ScreenName.FavSummaryPage) {
             goBack();
         } else {
             // clearFavoriteData(dispatch);

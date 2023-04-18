@@ -6,7 +6,7 @@ import { appColors } from '@football/app/utils/constants/appColors';
 import { getSize } from '@football/app/utils/responsive/scale';
 import IconEntypo from 'react-native-vector-icons/Entypo';
 import React from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { Platform, Text, TouchableOpacity, View } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import { INationalCupProps } from '@football/app/screens/football-home/layouts/NationalCup/NationalCup.type';
@@ -39,7 +39,7 @@ export const NationalCup = ({ homePage }: INationalCupProps) => {
             >
                 <FastImage
                     source={AppImages.img_button}
-                    style={{ width: getSize.m(130), height: getSize.m(33) }}
+                    style={{ width: getSize.m(125), height: getSize.m(33), left: Platform.OS === 'ios' ? 12 : 0, }}
                     resizeMode={FastImage.resizeMode.contain}
                 />
                 <View style={[appStyles.flex_row_align, styles.content_button]}>

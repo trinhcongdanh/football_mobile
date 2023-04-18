@@ -31,7 +31,7 @@ import { MAX_FAVORITES_PLAYER } from '@football/core/api/configs/config';
 
 const useViewState = () => {
     const { t } = useTranslation();
-    const { navigate, goBack, popToTop } = useAppNavigator();
+    const { navigate, goBack } = useAppNavigator();
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const dispatch = useDispatch<any>();
     const [searchText, setSearchText] = useState('');
@@ -78,7 +78,6 @@ const useViewState = () => {
         setSelectedFavPlayers,
         players,
         setPlayers,
-        popToTop,
     };
 };
 
@@ -95,7 +94,6 @@ const useEventHandler = (state: any, route: any) => {
         navigate,
         goBack,
         setSelectedFavPlayers,
-        popToTop,
     } = state;
 
     const { params } = route;
@@ -138,8 +136,6 @@ const useEventHandler = (state: any, route: any) => {
      */
     const onGoSkip = () => {
         if (params?.previous_screen === ScreenName.SettingsPage) {
-            goBack();
-        } else if (params?.previous_screen === ScreenName.FavSummaryPage) {
             goBack();
         } else {
             dispatch(resetSelectedFavPlayer([]));
