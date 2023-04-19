@@ -19,7 +19,7 @@ import { appColors } from '@football/app/utils/constants/appColors';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import { ScreenName } from '@football/app/utils/constants/enum';
 import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
-import { getSize } from '@football/app/utils/responsive/scale';
+import { getSize, width } from '@football/app/utils/responsive/scale';
 import { renderAvatar, renderUserPoints } from '@football/core/models/AvatarType.enum';
 import { isEmpty } from 'lodash';
 import React, { useRef } from 'react';
@@ -200,10 +200,13 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                                 <View style={{ marginTop: getSize.m(20) }}>
                                     <ScrollView
                                         style={{
-                                            flexDirection: I18nManager.isRTL
-                                                ? 'row-reverse'
-                                                : 'row',
-                                            marginRight: 10,
+                                            // flexDirection: I18nManager.isRTL
+                                            //     ? 'row-reverse'
+                                            //     : 'row',
+                                            marginHorizontal: getSize.m(10),
+                                        }}
+                                        contentContainerStyle={{
+                                            minWidth: width,
                                         }}
                                         horizontal
                                         ref={scrollViewRef}
