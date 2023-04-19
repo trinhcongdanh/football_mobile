@@ -12,6 +12,7 @@ import { styles } from './ListGame_test.styles';
 import { IListGameProps } from './ListGame.type';
 import { useDateTime } from '@football/app/utils/hooks/useDateTime';
 import { AppImages } from '@football/app/assets/images';
+import { useResult } from '@football/app/utils/hooks/useResult';
 
 export const ListGame_Test = ({
     logo_home,
@@ -36,6 +37,7 @@ export const ListGame_Test = ({
     const { t } = useTranslation();
     const emptyResult = result === ' : ' ? ' : ' : null;
     const { getDate, getTime } = useDateTime();
+    const { getResult } = useResult();
     return (
         <View style={[styles.main_schedule, style]}>
             {tournament && (
@@ -84,12 +86,7 @@ export const ListGame_Test = ({
                     </Text>
                 </View>
             ) : (
-                <View
-                    style={[
-                        appStyles.flex_row_space,
-                        { marginHorizontal: getSize.m(15), },
-                    ]}
-                >
+                <View style={[appStyles.flex_row_space, { marginHorizontal: getSize.m(15) }]}>
                     <View style={appStyles.flex_row_align}>
                         <Text
                             style={[
@@ -225,7 +222,7 @@ export const ListGame_Test = ({
                             </View>
                         ) : null}
                     </View>
-                    <View >
+                    <View>
                         <View
                             style={[
                                 appStyles.align_justify,
@@ -250,22 +247,35 @@ export const ListGame_Test = ({
                                     - : -
                                 </Text>
                             )}
-                            {!isLive && result === emptyResult && schedule !== null && tournament && (
-                                <Text style={styles.score}>V S</Text>
-                            )}
-                            {!isLive && result === emptyResult && schedule !== null && !tournament && (
-                                <Text style={styles.score}>{getTime({ time: schedule })}</Text>
-                            )}
+                            {!isLive &&
+                                result === emptyResult &&
+                                schedule !== null &&
+                                tournament && <Text style={styles.score}>V S</Text>}
+                            {!isLive &&
+                                result === emptyResult &&
+                                schedule !== null &&
+                                !tournament && (
+                                    <Text style={styles.score}>{getTime({ time: schedule })}</Text>
+                                )}
 
                             {!isLive && result !== emptyResult && (
-                                <Text style={styles.score}>{result}</Text>
+                                <Text style={styles.score}>
+                                    {getResult({
+                                        result: result,
+                                    })}
+                                </Text>
                             )}
                         </View>
                         {details && (
                             <TouchableOpacity
                                 style={[
                                     appStyles.flex_row_center,
-                                    { flex: 0, marginTop: nameHome || nameAway ? getSize.m(0) : getSize.m(14), paddingTop: 5, },
+                                    {
+                                        flex: 0,
+                                        marginTop:
+                                            nameHome || nameAway ? getSize.m(0) : getSize.m(14),
+                                        paddingTop: 5,
+                                    },
                                 ]}
                                 onPress={handleDetailMatch}
                             >
@@ -276,7 +286,11 @@ export const ListGame_Test = ({
                                 ) : (
                                     gameDetail && <Text style={[styles.details]}>{gameDetail}</Text>
                                 )}
-                                <Icon name={icon} size={getSize.m(14)} color={appColors.button_dark_blue} />
+                                <Icon
+                                    name={icon}
+                                    size={getSize.m(14)}
+                                    color={appColors.button_dark_blue}
+                                />
                             </TouchableOpacity>
                         )}
                     </View>

@@ -55,6 +55,7 @@ const App = (props: any) => {
     const locale = langCode.substring(0, 2).toLocaleLowerCase();
 
     useEffect(() => {
+        console.log('locale', locale);
         console.log('Language 58', i18n.language);
         AsyncStorage.getItem(Restart.language).then(isClickChanged => {
             console.log('isClickChanged', isClickChanged);

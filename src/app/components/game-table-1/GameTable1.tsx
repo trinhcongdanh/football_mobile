@@ -4,6 +4,7 @@ import styles from '@football/app/components/game-table-1/GameTable1.style';
 import { IGameTable1Props } from '@football/app/components/game-table-1/GameTable1.type';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { appStyles } from '@football/app/utils/constants/appStyles';
+import { useResult } from '@football/app/utils/hooks/useResult';
 import { getSize } from '@football/app/utils/responsive/scale';
 import moment from 'moment';
 import React from 'react';
@@ -27,7 +28,7 @@ export const GameTable1 = ({
     onHandleDetailMatch,
 }: IGameTable1Props) => {
     const { t } = useTranslation();
-
+    const { getResult } = useResult();
     return (
         <View style={styles.game_table}>
             <View style={[appStyles.flex_row_align]}>
@@ -63,7 +64,11 @@ export const GameTable1 = ({
                     >
                         <View style={styles.container_result}>
                             {result !== null ? (
-                                <Text style={styles.result}>{result}</Text>
+                                <Text style={styles.result}>
+                                    {getResult({
+                                        result: result,
+                                    })}
+                                </Text>
                             ) : (
                                 <Text style={styles.result}>:</Text>
                             )}
@@ -132,7 +137,7 @@ export const GameTable1 = ({
                     appStyles.flex_row_space_center,
                     {
                         paddingHorizontal: getSize.m(12),
-                    }
+                    },
                 ]}
             >
                 <View style={appStyles.align_justify}>
