@@ -46,9 +46,11 @@ const DropdownField = ({
                         },
                     ]}
                 >
-                    <Text numberOfLines={1} style={[styles.title]}>
-                        {selectedValue ? selectedValue[itemTitleField] : ''}
-                    </Text>
+                    <View style={{ width: '80%' }}>
+                        <Text numberOfLines={1} style={[styles.title]}>
+                            {selectedValue ? selectedValue[itemTitleField] : ''}
+                        </Text>
+                    </View>
                     <Icon
                         name={openModal ? appIcons.ic_chevron_up : appIcons.ic_chevron_down}
                         size={getSize.m(14)}

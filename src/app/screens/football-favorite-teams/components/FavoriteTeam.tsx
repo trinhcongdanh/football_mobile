@@ -227,16 +227,18 @@ export const FavoriteTeam = ({
                             </View>
                             <View>
                                 <View style={styles.result_number_container}>
-                                    <Text
-                                        style={{
-                                            fontFamily: AppFonts.regular,
-                                            fontSize: getSize.m(14),
-                                            color: appColors.white,
-                                            lineHeight: getSize.m(24),
-                                        }}
-                                    >
-                                        {chosen}
-                                    </Text>
+                                    <View style={{ marginRight: getSize.m(4) }}>
+                                        <Text
+                                            style={{
+                                                fontFamily: AppFonts.regular,
+                                                fontSize: getSize.m(14),
+                                                color: appColors.white,
+                                                lineHeight: getSize.m(24),
+                                            }}
+                                        >
+                                            {chosen}
+                                        </Text>
+                                    </View>
                                     <View style={styles.result_number}>
                                         <Text
                                             style={{
