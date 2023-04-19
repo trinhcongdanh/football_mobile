@@ -191,6 +191,8 @@ const useViewCallback = (state: any) => {
                 return;
             }
 
+            console.log('res.data.documents', res.data.documents);
+
             setPlayers(res.data.documents);
         } catch (error: any) {
             Alert.alert(error);

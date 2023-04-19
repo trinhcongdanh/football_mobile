@@ -49,7 +49,7 @@ const App = (props: any) => {
     langCode =
         Platform.OS === 'ios'
             ? NativeModules.SettingsManager.settings.AppleLocale ||
-            NativeModules.SettingsManager.settings.AppleLanguages[0] // iOS 13
+              NativeModules.SettingsManager.settings.AppleLanguages[0] // iOS 13
             : NativeModules.I18nManager.localeIdentifier;
 
     const locale = langCode.substring(0, 2).toLocaleLowerCase();
@@ -62,10 +62,14 @@ const App = (props: any) => {
                 i18n.changeLanguage(locale === 'he' || locale === 'iw' ? 'heb' : 'en');
                 if (i18n.language === 'heb') {
                     I18nManager.forceRTL(true);
-                    // ChangeLanguageService.changedLanguage(Restart.key_restart_for_rtl, '1');
+                    console.log('Language 58 hebrew');
+
+                    ChangeLanguageService.changedLanguage(Restart.key_restart_for_rtl, '1');
                 } else {
                     I18nManager.forceRTL(false);
-                    // ChangeLanguageService.changedLanguage(Restart.key_restart_for_ltr, '1');
+                    console.log('Language 58 english');
+
+                    ChangeLanguageService.changedLanguage(Restart.key_restart_for_ltr, '1');
                 }
             }
         });

@@ -18,10 +18,14 @@ export const ChangeLanguage = ({ color, borderBottomColor }: IChangeLanguageComp
         i18n.changeLanguage(i18n.language === 'en' ? 'heb' : 'en');
         if (i18n.language === 'heb') {
             I18nManager.forceRTL(true);
+            console.log('force RTL');
             ChangeLanguageService.removeLanguage(Restart.key_restart_for_ltr);
+            ChangeLanguageService.removeLanguage(Restart.key_restart_for_rtl);
             ChangeLanguageService.changedLanguage(Restart.key_restart_for_rtl, value);
         } else {
             I18nManager.forceRTL(false);
+            console.log('force LTR');
+            ChangeLanguageService.removeLanguage(Restart.key_restart_for_ltr);
             ChangeLanguageService.removeLanguage(Restart.key_restart_for_rtl);
             ChangeLanguageService.changedLanguage(Restart.key_restart_for_ltr, value);
         }
