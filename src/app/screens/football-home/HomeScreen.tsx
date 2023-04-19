@@ -35,7 +35,6 @@ import {
     TouchableOpacity,
     View,
 } from 'react-native';
-import DeviceInfo from 'react-native-device-info';
 import FastImage from 'react-native-fast-image';
 import LinearGradient from 'react-native-linear-gradient';
 import IconAntDesign from 'react-native-vector-icons/AntDesign';
@@ -88,8 +87,6 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
             navigate(ScreenName.SettingsPage, { previousScreen: ScreenName.HomePage });
         }
     };
-
-    let hasNotch = DeviceInfo.hasNotch();
 
     return (
         <View style={[appStyles.flex, { backgroundColor: appColors.gray2 }]}>
