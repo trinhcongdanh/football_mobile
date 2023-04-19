@@ -2,6 +2,9 @@ import { AppFonts } from '@football/app/assets/fonts';
 import { StyleSheet, I18nManager, Platform, StatusBar } from 'react-native';
 import { getSize } from '../responsive/scale';
 import { appColors } from './appColors';
+import DeviceInfo from 'react-native-device-info';
+
+let hasNotch = DeviceInfo.hasNotch();
 
 export const appStyles = StyleSheet.create({
     flex: {
@@ -65,7 +68,9 @@ export const appStyles = StyleSheet.create({
         paddingHorizontal: getSize.m(16),
         marginTop: StatusBar?.currentHeight
             ? StatusBar?.currentHeight + getSize.m(10)
-            : getSize.m(0),
+            : hasNotch
+            ? getSize.m(0)
+            : getSize.m(10),
     },
     text_title: {
         fontFamily: AppFonts.bold,
