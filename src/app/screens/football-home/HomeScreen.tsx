@@ -38,6 +38,7 @@ import {
 import FastImage from 'react-native-fast-image';
 import LinearGradient from 'react-native-linear-gradient';
 import IconAntDesign from 'react-native-vector-icons/AntDesign';
+import DeviceInfo from 'react-native-device-info';
 
 export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
     const {
@@ -87,6 +88,7 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
             navigate(ScreenName.SettingsPage, { previousScreen: ScreenName.HomePage });
         }
     };
+    let hasNotch = DeviceInfo.hasNotch();
 
     return (
         <View style={[appStyles.flex, { backgroundColor: appColors.gray2 }]}>
@@ -201,7 +203,16 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                                         </View>
                                     </View>
                                 </View>
-                                <View style={{ marginTop: getSize.m(20) }}>
+                                <View
+                                    style={{
+                                        marginTop:
+                                            Platform.OS === 'android'
+                                                ? getSize.m(20)
+                                                : hasNotch
+                                                ? getSize.m(20)
+                                                : getSize.m(30),
+                                    }}
+                                >
                                     <ScrollView
                                         style={{
                                             // flexDirection: I18nManager.isRTL
