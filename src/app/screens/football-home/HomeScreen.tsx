@@ -35,6 +35,7 @@ import {
     TouchableOpacity,
     View,
 } from 'react-native';
+import DeviceInfo from 'react-native-device-info';
 import FastImage from 'react-native-fast-image';
 import LinearGradient from 'react-native-linear-gradient';
 import IconAntDesign from 'react-native-vector-icons/AntDesign';
@@ -88,6 +89,8 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
         }
     };
 
+    let hasNotch = DeviceInfo.hasNotch();
+
     return (
         <View style={[appStyles.flex, { backgroundColor: appColors.gray2 }]}>
             {/* Header */}
@@ -123,7 +126,11 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                                 }}
                             />
 
-                            <StatusBar translucent backgroundColor="transparent" />
+                            <StatusBar
+                                barStyle="light-content"
+                                translucent
+                                backgroundColor="transparent"
+                            />
                             <SafeAreaView
                                 style={[
                                     appStyles.safe_area,
