@@ -16,6 +16,7 @@ import { useViewModel } from './GoalsNationalTeamScreen.viewModel';
 import { IGoalsNationalTeamScreenProps } from './GoalsNationalTeamScreen.type';
 import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
 import { BackGround } from '@football/app/components/background/BackGround';
+import { useResult } from '@football/app/utils/hooks/useResult';
 
 export const GoalsNationalTeamScreen = ({ navigation, route }: IGoalsNationalTeamScreenProps) => {
     const { t, onGoBack, player, getDate } = useViewModel({
@@ -23,7 +24,7 @@ export const GoalsNationalTeamScreen = ({ navigation, route }: IGoalsNationalTea
         route,
     });
     const { getTranslationText } = useTranslationText();
-
+    const { getResult } = useResult();
     return (
         <View style={appStyles.flex}>
             <BackGround>
@@ -144,7 +145,9 @@ export const GoalsNationalTeamScreen = ({ navigation, route }: IGoalsNationalTea
                                                         >
                                                             <Text style={styles.score}>
                                                                 {game?.score
-                                                                    ? game?.score
+                                                                    ? getResult({
+                                                                          result: game?.score,
+                                                                      })
                                                                     : '- : -'}
                                                             </Text>
                                                         </View>
