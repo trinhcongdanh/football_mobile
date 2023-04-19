@@ -67,7 +67,7 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
     });
 
     const scrollViewRef = useRef<any>();
-    const notScroll = () => { };
+    const notScroll = () => {};
     LogBox.ignoreLogs(['Warning: Encountered two children with the same key']);
     LogBox.ignoreLogs(['Warning: Each child in a list should have a unique "key" prop']);
 
@@ -348,7 +348,12 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                         </View>
                     </View>
                     <ScrollView
-                        style={{ marginTop: getSize.m(-40), paddingTop: getSize.m(40), zIndex: -1, marginBottom: getSize.m(50), }}
+                        style={{
+                            marginTop: getSize.m(-40),
+                            paddingTop: getSize.m(40),
+                            zIndex: -1,
+                            marginBottom: getSize.m(50),
+                        }}
                     >
                         {/* Video Intro */}
                         {homeLayout?.layout.includes('video') && (
@@ -356,13 +361,21 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                                 <View style={[styles.home_video]}>
                                     <ImageBackground
                                         source={{ uri: homePage?.video.image_url }}
-                                        imageStyle={{ borderRadius: getSize.m(20), opacity: 0.9, }}
+                                        imageStyle={{ borderRadius: getSize.m(20), opacity: 0.9 }}
                                         style={{
                                             width: getSize.m(347),
                                             height: getSize.m(233),
                                         }}
                                     >
-                                        <View style={{ flex: 1, backgroundColor: 'rgba(0,0,0,0.4)', borderRadius: getSize.m(20), flexDirection: 'column', justifyContent: 'space-between' }} >
+                                        <View
+                                            style={{
+                                                flex: 1,
+                                                backgroundColor: 'rgba(0,0,0,0.4)',
+                                                borderRadius: getSize.m(20),
+                                                flexDirection: 'column',
+                                                justifyContent: 'space-between',
+                                            }}
+                                        >
                                             <View style={styles.date}>
                                                 <Text style={styles.text_date}>
                                                     {homePage?.video.length}
@@ -427,12 +440,12 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                                             topTeam={topTeam}
                                             key={topTeam?._id}
                                         />
-                                        {homeLayout?.layout.includes('my_top_team') && (
+                                        {/* {homeLayout?.layout.includes('my_top_team') && (
                                             <ListOfGameTopTeam
                                                 topTeam={topTeam}
                                                 key={topTeam?._id}
                                             />
-                                        )}
+                                        )} */}
                                     </>
                                 );
                             })}
@@ -452,8 +465,8 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                         {/* Item10 */}
                         {homeLayout?.layout.includes('leagues_table') && leagues?.length
                             ? leagues.map(league => {
-                                return <LeaguesTable league={league} key={league?._id} />;
-                            })
+                                  return <LeaguesTable league={league} key={league?._id} />;
+                              })
                             : null}
                         {/* Item11 */}
                         {/* <Item11 /> */}

@@ -204,6 +204,7 @@ export const appStyles = StyleSheet.create({
         fontSize: getSize.m(14),
         lineHeight: getSize.m(18),
         fontFamily: AppFonts.bold,
+        textAlign: 'left',
     },
     statistics_see_all: {
         color: appColors.button_dark_blue,

@@ -46,6 +46,7 @@ export const styles = StyleSheet.create({
         color: appColors.text_dark_blue,
         lineHeight: getSize.m(17),
         marginTop: getSize.m(20),
+        textAlign: 'left',
     },
 
     item_select: {
