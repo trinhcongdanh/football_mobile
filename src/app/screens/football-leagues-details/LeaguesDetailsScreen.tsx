@@ -57,7 +57,7 @@ export const LeaguesDetailsScreen = ({ navigation, route }: ILeaguesDetailsScree
     return (
         <View style={appStyles.flex}>
             <BackGround>
-                <View>
+                <>
                     <View style={appStyles.container}>
                         <HeaderUser
                             avt={AppImages.img_avt}
@@ -197,7 +197,7 @@ export const LeaguesDetailsScreen = ({ navigation, route }: ILeaguesDetailsScree
                         </View> */}
                         </ScrollView>
                     </GestureHandlerRootView>
-                </View>
+                </>
             </BackGround>
         </View>
     );

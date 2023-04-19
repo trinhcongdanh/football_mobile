@@ -1,7 +1,7 @@
 import { AppFonts } from '@football/app/assets/fonts';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { getSize } from '@football/app/utils/responsive/scale';
-import { I18nManager, StyleSheet } from 'react-native';
+import { I18nManager, Platform, StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
     logo_team: {
@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginTop: getSize.m(-30),
         elevation: 10,
-        shadowColor: "#000",
+        shadowColor: '#000',
         shadowOffset: {
             width: 0,
             height: 2,
@@ -98,7 +98,8 @@ const styles = StyleSheet.create({
     },
 
     dotContainer: {
-        flexDirection: I18nManager.isRTL ? 'row-reverse' : 'row',
+        flexDirection:
+            Platform.OS === 'android' ? (I18nManager.isRTL ? 'row-reverse' : 'row') : 'row',
         justifyContent: 'center',
         marginBottom: getSize.m(30),
     },

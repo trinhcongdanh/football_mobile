@@ -9,7 +9,10 @@ class PlayerService extends MongoDBService {
     }
 
     findAllFavPlayer(sortBy?: any): Promise<Result<PlayersModelResponse>> {
-        const filter = { team: { $exists: true, $ne: null } };
+        const filter = {
+            team: { $exists: true, $ne: null },
+            show_in_search: { $exists: true, $ne: false },
+        };
         if (!I18nManager.isRTL) {
             filter.name_en = { $ne: ' ' };
         }
@@ -25,6 +28,7 @@ class PlayerService extends MongoDBService {
         const filter = {
             search_terms: { $regex: `.*${searchText}.*`, $options: 'i' },
             team: { $exists: true, $ne: null },
+            show_in_search: { $exists: true, $ne: false },
         };
         if (!I18nManager.isRTL) {
             filter.name_en = { $ne: ' ' };
