@@ -31,12 +31,12 @@ const styles = StyleSheet.create({
     container_image: {
         flexDirection: 'row',
         flexWrap: 'wrap',
-        justifyContent: 'center',
+        justifyContent: 'space-between',
         marginTop: getSize.m(14),
     },
     item_image: {
         marginBottom: getSize.m(16),
-        marginHorizontal: getSize.m(4),
+        // marginHorizontal: getSize.m(4),
     },
 });
 

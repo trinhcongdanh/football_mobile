@@ -12,13 +12,15 @@ export const Instagram = () => {
         {}
     );
     return (
-        <View style={styles.container}>
-            <View
-                style={[
-                    appStyles.flex_row_space_center,
-                    { marginTop: getSize.m(30), marginHorizontal: getSize.m(16) },
-                ]}
-            >
+        <View
+            style={[
+                styles.container,
+                {
+                    marginHorizontal: getSize.m(16),
+                },
+            ]}
+        >
+            <View style={[appStyles.flex_row_space_center, { marginTop: getSize.m(30) }]}>
                 <Text style={styles.header}>{t('home_page.instagram')}</Text>
                 <TouchableOpacity style={styles.button} onPress={openInstagram}>
                     <View style={appStyles.flex_row_align}>

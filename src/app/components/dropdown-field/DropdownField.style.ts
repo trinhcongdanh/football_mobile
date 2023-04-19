@@ -23,6 +23,7 @@ export const styles = StyleSheet.create({
         color: appColors.text_dark_blue,
         lineHeight: getSize.m(20),
         fontFamily: AppFonts.bold,
+        textAlign: 'left',
     },
     chevronDown: {
         fontFamily: AppFonts.bold,
@@ -30,8 +31,7 @@ export const styles = StyleSheet.create({
     itemsContainer: {
         position: 'absolute',
         right: 0,
-        // top: getSize.m(38),
-        top: 0,
+        top: getSize.m(38),
         zIndex: 1000,
         backgroundColor: appColors.white,
         borderBottomLeftRadius: getSize.m(20),

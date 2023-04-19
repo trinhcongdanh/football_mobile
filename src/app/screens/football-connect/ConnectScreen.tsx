@@ -7,6 +7,7 @@ import {
     SafeAreaView,
     ScrollView,
     ActivityIndicator,
+    Platform,
 } from 'react-native';
 import React from 'react';
 
@@ -114,17 +115,22 @@ export const ConnectScreen = ({ navigation, route }: IConnectScreenProps) => {
                                     { marginTop: getSize.m(23), marginBottom: getSize.m(30) },
                                 ]}
                             >
-                                <Text
+                                <View
                                     style={{
-                                        color: appColors.text_grey,
-                                        fontFamily: AppFonts.regular,
-                                        lineHeight: getSize.m(24),
-                                        fontSize: getSize.m(14),
+                                        marginRight: Platform.OS === 'ios' ? getSize.m(4) : 0,
                                     }}
                                 >
-                                    {' '}
-                                    {t('connect.nosignUp')}
-                                </Text>
+                                    <Text
+                                        style={{
+                                            color: appColors.text_grey,
+                                            fontFamily: AppFonts.regular,
+                                            lineHeight: getSize.m(24),
+                                            fontSize: getSize.m(14),
+                                        }}
+                                    >
+                                        {t('connect.nosignUp')}
+                                    </Text>
+                                </View>
 
                                 <TouchableOpacity onPress={onNavigateSignUp}>
                                     <Text
