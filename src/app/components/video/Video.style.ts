@@ -81,6 +81,7 @@ export const styles = StyleSheet.create({
         color: appColors.white,
         fontSize: getSize.m(16),
         lineHeight: getSize.m(20),
+        textAlign: 'left',
     },
     desc: {
         fontFamily: AppFonts.regular,
@@ -88,5 +89,6 @@ export const styles = StyleSheet.create({
         fontSize: getSize.m(14),
         lineHeight: getSize.m(18),
         marginTop: getSize.m(10),
+        textAlign: 'left',
     },
 });
