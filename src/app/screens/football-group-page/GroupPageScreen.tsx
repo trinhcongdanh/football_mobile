@@ -23,6 +23,7 @@ import styles from './GroupPageScreen.style';
 import { IGroupPageScreenProps } from './GroupPageScreen.type';
 import { useViewModel } from './GroupPageScreen.viewModel';
 import { Statistics } from './layouts/statistics/Statistics';
+import { ListOfGames } from '@football/app/screens/football-group-page/layouts/list-of-games/ListOfGames';
 
 export const GroupPageScreen = ({ navigation, route }: IGroupPageScreenProps) => {
     const {
@@ -467,6 +468,9 @@ export const GroupPageScreen = ({ navigation, route }: IGroupPageScreenProps) =>
 
                                     <LeagueTable leagueSeasonId={teamSeason?.league_season_id} />
                                 }
+                            </View>
+                            <View style={[appStyles.package]}>
+                                <ListOfGames listGames={teamSeason?.games} />
                             </View>
                             <View
                                 style={[

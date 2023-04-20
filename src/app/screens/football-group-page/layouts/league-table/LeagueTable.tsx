@@ -26,11 +26,11 @@ export const LeagueTable = ({ leagueSeasonId }: ILeagueTableProps) => {
     const { getTranslationText } = useTranslationText();
     return (
         <>
-            <View style={[appStyles.package, { backgroundColor: appColors.white }]}>
+            <View style={[appStyles.package, { backgroundColor: appColors.white, zIndex: 10 }]}>
                 <Text style={[appStyles.text_topic, { marginLeft: getSize.m(6) }]}>
                     {t('group_page.league_table.title')}
                 </Text>
-                <View style={[appStyles.flex, { zIndex: 1 }]}>
+                <View style={[appStyles.flex, { zIndex: 10 }]}>
                     <View style={styles.drop_down_filter}>
                         <View style={{ flex: 0.9 }}>
                             <DropdownField
@@ -215,17 +215,6 @@ export const LeagueTable = ({ leagueSeasonId }: ILeagueTableProps) => {
                         style={styles.ic_more_result}
                     />
                 </TouchableOpacity> */}
-            </View>
-            <View
-                style={[
-                    appStyles.package,
-                    {
-                        paddingHorizontal: getSize.m(0),
-                        paddingLeft: getSize.m(16),
-                    },
-                ]}
-            >
-                <ListOfGames listGames={selectedRound?.games} />
             </View>
         </>
     );
