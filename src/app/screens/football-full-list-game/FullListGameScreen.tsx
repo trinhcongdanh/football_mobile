@@ -150,9 +150,11 @@ export const FullListGameScreen = ({ navigation, route }: IFullListGameScreenPro
                                                     }}
                                                 >
                                                     <Text style={styles.score}>
-                                                        {getResult({
-                                                            result: item.score,
-                                                        })}
+                                                        {item?.score
+                                                            ? getResult({
+                                                                  result: item.score,
+                                                              })
+                                                            : '- : -'}
                                                     </Text>
                                                 </View>
                                                 <View

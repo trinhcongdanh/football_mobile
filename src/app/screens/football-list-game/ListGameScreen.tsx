@@ -153,9 +153,11 @@ export const ListGameScreen = ({ navigation, route }: IListGameScreenProps) => {
                                                     }}
                                                 >
                                                     <Text style={styles.score}>
-                                                        {getResult({
-                                                            result: item.score,
-                                                        })}
+                                                        {item?.score
+                                                            ? getResult({
+                                                                  result: item.score,
+                                                              })
+                                                            : '- : -'}
                                                     </Text>
                                                 </View>
                                                 <View
