@@ -182,7 +182,8 @@ const useViewCallback = (route: any, viewState: any) => {
         // if (error) {
         //     return;
         // }
-        // console.log(favTeamsSelected);
+        // console.log('favTeamsSelected', favTeamsSelected);
+
         setTeams(favTeamsSelected);
     }, []);
 
