@@ -16,7 +16,7 @@ export const useResult = () => {
         if (locale === Locale.en) {
             return result;
         }
-        return result.split('').reverse().join('');
+        return `\u202D${result.split('').reverse().join('')}`;
     };
 
     return { getResult };

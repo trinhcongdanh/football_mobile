@@ -142,13 +142,13 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                                     <View style={[appStyles.flex_row_space_center]}>
                                         <TouchableOpacity onPress={onShowSideMenu}>
                                             <LinearGradient
-                                                // colors={[
-                                                //     Platform.OS === 'android'
-                                                //         ? colorCustom
-                                                //         : colorCustom,
-                                                //     colorCustom,
-                                                // ]}
-                                                colors={appColors.menu_gradient}
+                                                colors={[
+                                                    Platform.OS === 'android'
+                                                        ? colorCustom
+                                                        : colorCustom,
+                                                    colorCustom,
+                                                ]}
+                                                // colors={appColors.menu_gradient}
                                                 style={styles.home_side_bar}
                                             >
                                                 <FastImage

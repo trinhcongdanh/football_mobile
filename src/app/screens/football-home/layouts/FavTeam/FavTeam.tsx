@@ -16,6 +16,7 @@ import React from 'react';
 import {
     I18nManager,
     ImageBackground,
+    Platform,
     ScrollView,
     Text,
     TouchableOpacity,
@@ -76,7 +77,7 @@ export const FavTeam = ({ team, color }: IFavTeamProps) => {
                         })}
                     </Text>
                     <TouchableOpacity onPress={() => onNavigateTeamDetails(team?._id)}>
-                        <LinearGradient colors={appColors.menu_gradient} style={styles.icon_arrow_left}>
+                        <LinearGradient colors={[color, color]} style={styles.icon_arrow_left}>
                             <FastImage
                                 source={AppImages.img_angle_down}
                                 style={{
@@ -714,7 +715,7 @@ export const FavTeam = ({ team, color }: IFavTeamProps) => {
                         {
                             marginLeft: getSize.m(8),
                             marginRight: getSize.m(25),
-                        }
+                        },
                     ]}
                 >
                     <View
@@ -811,7 +812,7 @@ export const FavTeam = ({ team, color }: IFavTeamProps) => {
                                         backgroundColor:
                                             index === activeIndexNumber
                                                 ? appColors.white
-                                                : appColors.light_gray
+                                                : appColors.light_gray,
                                     },
                                 ]}
                             />
