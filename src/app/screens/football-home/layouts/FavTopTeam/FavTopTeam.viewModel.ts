@@ -1,5 +1,6 @@
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
 import { ScreenName } from '@football/app/utils/constants/enum';
+import { TopTeamModel } from '@football/core/models/TopTeamModelResponse';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -21,6 +22,10 @@ export const useViewModel = () => {
         navigate(ScreenName.MatchPage, { gameId });
     };
 
+    const onNavigateGameList = (topTeam: TopTeamModel) => {
+        navigate(ScreenName.ListGamePage, { topTeam });
+    };
+
     return {
         t,
         pages,
@@ -29,5 +34,6 @@ export const useViewModel = () => {
         onClickTopTeam,
         handleStadium,
         handleDetailMatch,
+        onNavigateGameList,
     };
 };

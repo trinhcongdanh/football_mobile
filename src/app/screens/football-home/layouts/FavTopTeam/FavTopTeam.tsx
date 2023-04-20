@@ -36,6 +36,7 @@ export const FavTopTeam = ({ topTeam, color }: IFavTopTeamProps) => {
         handleStadium,
         onClickTopTeam,
         handleDetailMatch,
+        onNavigateGameList,
     } = useViewModel();
     const { getTranslationText } = useTranslationText();
 
@@ -436,7 +437,10 @@ export const FavTopTeam = ({ topTeam, color }: IFavTopTeamProps) => {
                                 {t('home_page.top_team_second_tab_title')}
                             </Text>
                         </View>
-                        <TouchableOpacity style={appStyles.flex_row_align}>
+                        <TouchableOpacity
+                            style={appStyles.flex_row_align}
+                            onPress={() => onNavigateGameList(topTeam)}
+                        >
                             <Text style={styles.text_see_all}>{t('home_page.see_all')}</Text>
                             <IconEntypo
                                 name={appIcons.ic_left_ios}
