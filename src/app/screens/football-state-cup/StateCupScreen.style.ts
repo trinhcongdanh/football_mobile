@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
         elevation: getSize.m(1),
         flexDirection: 'row',
         justifyContent: 'space-between',
-        zIndex: 10,
+        zIndex: 11,
     },
     cycle: {
         flexDirection: 'row',
