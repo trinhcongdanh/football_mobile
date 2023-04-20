@@ -179,6 +179,7 @@ const useEventHandler = (state: any, route: any) => {
             subTitle: t('fav_summary.popUp.text'),
             option1: t('fav_summary.popUp.option1'),
             option2: t('fav_summary.popUp.option2'),
+            // exit: false,
             onOption1: () => {
                 global.props.closeAlert();
             },
