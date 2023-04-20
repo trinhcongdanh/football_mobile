@@ -64,10 +64,7 @@ export const FavPlayer = ({ player, color }: IFavPlayerProps) => {
                         })}
                     </Text>
                     <TouchableOpacity onPress={() => onClickPlayer(player?._id)}>
-                        <LinearGradient
-                            colors={appColors.menu_gradient}
-                            style={styles.icon_arrow_left}
-                        >
+                        <LinearGradient colors={[color, color]} style={styles.icon_arrow_left}>
                             <FastImage
                                 source={AppImages.img_angle_down}
                                 style={{
