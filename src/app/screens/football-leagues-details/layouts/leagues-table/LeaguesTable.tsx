@@ -57,7 +57,7 @@ export const LeaguesTable = ({ leaderBoards }: ILeaguesTableProps) => {
                         <Text style={styles.header}>{t('leagues_details.league_table.no')}</Text>
                     </View>
                 </View>
-                {listTeams.map(item => {
+                {listTeams.map((item, index) => {
                     return (
                         <TouchableOpacity
                             style={{ marginTop: getSize.m(10) }}
@@ -93,7 +93,7 @@ export const LeaguesTable = ({ leaderBoards }: ILeaguesTableProps) => {
                                                     },
                                                 ]}
                                             >
-                                                {item.place}
+                                                {index + 1}
                                             </Text>
                                         </View>
                                         <View style={{ marginHorizontal: getSize.m(10) }}>

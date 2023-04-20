@@ -74,7 +74,6 @@ const useViewCallback = (route: any, viewState: any) => {
         // dispatch(setLeagueSeasons(leagueSeasons));
         // setAllLeagueSeasons(leagueSeasons);
         if (leagueSeasons?.length) {
-            
             setSelectedLeagueSeason(leagueSeasons[0]);
             console.log('setSelectedLeagueSeason', leagueSeasons[0]);
         }
@@ -105,7 +104,26 @@ export const useViewModel = ({ navigation, route }: ILeaguesDetailsScreenProps) 
     const { leagueId }: any = route.params;
     const { data: leagueSeasonData } = useLeagueSeasons(leagueId);
     const viewState = useViewState();
-    const { setAllLeagueSeasons, setSelectedLeagueSeason } = viewState;
+    const {
+        years,
+        setYears,
+        allLeagueSeasons,
+        setAllLeagueSeasons,
+        openModalYear,
+        setOpenModalYear,
+        selectedLeagueSeason,
+        setSelectedLeagueSeason,
+        selectCycle,
+        setSelectCycle,
+        selectRound,
+        setSelectRound,
+        galleries,
+        setGalleries,
+        highlights,
+        setHightlights,
+        league,
+        setLeague,
+    } = viewState;
     const { getLeagueById, getLeagueSeasonsData, dispatch } = useViewCallback(route, viewState);
 
     const handleSelectedYear = (item: any) => {
@@ -113,11 +131,11 @@ export const useViewModel = ({ navigation, route }: ILeaguesDetailsScreenProps) 
         //     viewState.allLeagueSeasons.find(season => season.name === item.content)
         // );
         getLeagueSeasonsData(item.id);
-        viewState.setOpenModalYear(false);
+        setOpenModalYear(false);
     };
 
     const handleCloseModal = () => {
-        viewState.setOpenModalYear(false);
+        setOpenModalYear(false);
     };
 
     useEffect(() => {
@@ -129,53 +147,65 @@ export const useViewModel = ({ navigation, route }: ILeaguesDetailsScreenProps) 
     }, []);
 
     useEffect(() => {
-        if (!viewState.league) {
+        if (!league) {
             return;
         }
 
-        viewState.setAllLeagueSeasons(viewState.league.seasons);
-        getLeagueSeasonsData(viewState.league.seasons[0].league_season_id);
-    }, [viewState.league]);
+        setAllLeagueSeasons(league.seasons);
+        getLeagueSeasonsData(league.seasons[0].league_season_id);
+    }, [league]);
 
     useEffect(() => {
-        viewState.setYears(
-            (viewState.allLeagueSeasons?.length ? viewState.allLeagueSeasons : []).map(season => {
+        setYears(
+            (allLeagueSeasons?.length ? allLeagueSeasons : []).map(season => {
                 return {
                     id: season.league_season_id,
                     content: season.league_season_name,
-                    isSelected: viewState.selectedLeagueSeason?.name === season.league_season_name,
+                    isSelected: selectedLeagueSeason?.name === season.league_season_name,
                 };
             })
         );
-        const cycles: Cycle[] = viewState.selectedLeagueSeason?.cycles || [];
-        // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-        cycles[0] ? viewState.setSelectCycle(cycles[0]) : null;
+        // const cycles: Cycle[] = viewState.selectedLeagueSeason?.cycles || [];
+        // // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+        // cycles[0] ? viewState.setSelectCycle(cycles[0]) : null;
 
-        const currentGalleries = viewState.selectedLeagueSeason?.gallery || [];
+        const currentGalleries = selectedLeagueSeason?.gallery || [];
         if (currentGalleries.length) {
-            viewState.setGalleries(currentGalleries);
+            setGalleries(currentGalleries);
         }
 
-        if (viewState.selectedLeagueSeason?.highlights) {
-            viewState.setHightlights(viewState.selectedLeagueSeason.highlights);
+        if (selectedLeagueSeason?.highlights) {
+            setHightlights(selectedLeagueSeason.highlights);
         }
+
+        console.log('year', years);
     }, [
-        viewState.selectedLeagueSeason,
-        viewState.allLeagueSeasons,
-        viewState.setAllLeagueSeasons,
-        viewState.setYears,
-        viewState.setSelectCycle,
-        viewState.setGalleries,
-        viewState.setHightlights,
+        selectedLeagueSeason,
+        allLeagueSeasons,
+        setAllLeagueSeasons,
+        setYears,
+        setSelectCycle,
+        setGalleries,
+        setHightlights,
     ]);
 
     useEffect(() => {
-        const rounds = viewState.selectCycle?.rounds || [];
+        const cycles = selectedLeagueSeason?.cycles || [];
+
+        // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+        cycles[0] ? setSelectCycle(cycles[0]) : [];
+        console.log(' cycles[0]', cycles[0]);
+        console.log('cycles', cycles);
+    }, [selectedLeagueSeason]);
+
+    useEffect(() => {
+        const rounds = selectCycle?.rounds || [];
         const firstRound = rounds[0] ? rounds[0] : null;
         if (firstRound) {
-            viewState.setSelectRound(firstRound);
+            setSelectRound(firstRound);
         }
-    }, [viewState.selectCycle, viewState.setSelectCycle, viewState.setSelectRound]);
+        console.log('rounds', rounds);
+    }, [selectCycle]);
 
     // useEffect(() => {
     //     if (!leagueSeasonData) {
