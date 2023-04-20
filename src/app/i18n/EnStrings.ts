@@ -696,6 +696,10 @@ const resources = {
                 title: 'התראות',
                 active: 'התראות פעילות',
             },
+            internet: {
+                title: 'אין חיבור אינטרנט',
+                button: 'צא מהאפליקציה',
+            },
         },
     },
     en: {
@@ -1388,6 +1392,10 @@ const resources = {
             notification: {
                 title: 'Notifications',
                 active: 'active notifications',
+            },
+            internet: {
+                title: 'No internet connection',
+                button: 'Exit the app',
             },
         },
     },

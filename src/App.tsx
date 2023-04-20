@@ -7,7 +7,7 @@ import messaging from '@react-native-firebase/messaging';
 import { NavigationContainer } from '@react-navigation/native';
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { I18nManager, LogBox, Platform, Text, TextInput, View } from 'react-native';
+import { BackHandler, I18nManager, LogBox, Platform, Text, TextInput, View } from 'react-native';
 import { ThemeProvider } from 'react-native-elements';
 import { TextInput as TextInputGH } from 'react-native-gesture-handler';
 import 'react-native-get-random-values';
@@ -26,6 +26,7 @@ import { Restart } from '@football/app/utils/constants/enum';
 import * as RNLocalize from 'react-native-localize';
 import i18n from './app/i18n/EnStrings';
 import ChangeLanguageService from '@football/core/services/ChangeLanguage.service';
+import { useNetInfo } from '@react-native-community/netinfo';
 
 TextInput.defaultProps = Text.defaultProps || {};
 TextInput.defaultProps.allowFontScaling = false;
@@ -134,6 +135,25 @@ const App = (props: any) => {
         NotificationListener();
         Orientation.lockToPortrait();
     }, []);
+
+    const { t } = useTranslation();
+    const netInfo = useNetInfo();
+    useEffect(() => {
+        console.log('netInfo.isConnected', netInfo.isConnected);
+        if (netInfo.isConnected === false) {
+            global.props.showAlert({
+                title: t('internet.title'),
+                option1: t('internet.button'),
+                exitApp: true,
+                onOption1: () => {
+                    global.props.closeAlert();
+                    BackHandler.exitApp();
+                },
+            });
+        } else {
+            global.props.closeAlert();
+        }
+    }, [netInfo.isConnected]);
 
     return (
         <QueryClientProvider client={queryClient}>

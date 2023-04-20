@@ -3,14 +3,17 @@ import React, { Component } from 'react';
 
 const AppContext = React.createContext({});
 export const AppConsumer = AppContext.Consumer;
+const noop = () => {};
 
-const alertInitialState = {
+const alertInitialState: IAlertData = {
     title: '',
     subTitle: '',
     option1: '',
     option2: '',
-    onOption1: () => {},
-    onOption2: () => {},
+    exitApp: false,
+    onOption1: noop,
+    onOption2: noop,
+    onDismiss: noop,
 };
 
 export interface IAlertData {
@@ -18,11 +21,16 @@ export interface IAlertData {
     subTitle: string;
     option1: string;
     option2: string;
-    onOption1: void;
-    onOption2: void;
+    exitApp: boolean;
+    onOption1: () => void;
+    onOption2: () => void;
+    onDismiss: () => void;
 }
-
-export class AppProvider extends Component {
+export interface AppProvideState {
+    alertData: IAlertData;
+    alertVisible: boolean;
+}
+export class AppProvider extends Component<any, AppProvideState> {
     constructor(props: any) {
         super(props);
         this.state = {
@@ -44,7 +52,7 @@ export class AppProvider extends Component {
 
     render() {
         const { alertData, alertVisible } = this.state;
-        const { title, subTitle, onOption1, onOption2, option1, option2 } = alertData;
+        const { title, subTitle, onOption1, onOption2, option1, option2, exitApp } = alertData;
         const funcs = {
             showAlert: this.showAlert,
             closeAlert: this.closeAlert,
@@ -63,6 +71,7 @@ export class AppProvider extends Component {
                     option1={option1}
                     option2={option2}
                     onDismiss={this.closeAlert}
+                    exitApp={exitApp}
                 />
             </AppContext.Provider>
         );

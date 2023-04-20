@@ -7,7 +7,7 @@ import { appStyles } from '@football/app/utils/constants/appStyles';
 import { getSize } from '@football/app/utils/responsive/scale';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Modal, Text, TouchableOpacity, View } from 'react-native';
+import { BackHandler, Modal, Text, TouchableOpacity, View } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import IconIonicons from 'react-native-vector-icons/Ionicons';
 import { styles } from './Modal.styles';
@@ -21,6 +21,7 @@ const Alert = ({
     visible,
     option1,
     option2,
+    exitApp,
 }: IModalProps) => {
     const { t } = useTranslation();
 
@@ -60,14 +61,31 @@ const Alert = ({
                         <View
                             style={[appStyles.flex_row_space_center, { paddingTop: getSize.m(15) }]}
                         >
-                            <TouchableOpacity onPress={dismiss}>
-                                <IconIonicons
-                                    name={appIcons.ic_close}
-                                    color={appColors.black}
-                                    size={getSize.m(20)}
-                                    style={styles.close}
-                                />
-                            </TouchableOpacity>
+                            {exitApp ? (
+                                <TouchableOpacity
+                                    onPress={() => {
+                                        global.props.closeAlert();
+                                        BackHandler.exitApp();
+                                    }}
+                                >
+                                    <IconIonicons
+                                        name={appIcons.ic_close}
+                                        color={appColors.black}
+                                        size={getSize.m(20)}
+                                        style={styles.close}
+                                    />
+                                </TouchableOpacity>
+                            ) : (
+                                <TouchableOpacity onPress={dismiss}>
+                                    <IconIonicons
+                                        name={appIcons.ic_close}
+                                        color={appColors.black}
+                                        size={getSize.m(20)}
+                                        style={styles.close}
+                                    />
+                                </TouchableOpacity>
+                            )}
+
                             {/* <View></View> */}
                         </View>
 
@@ -93,9 +111,11 @@ const Alert = ({
                             >
                                 <Text style={styles.title}>{title}</Text>
                             </View>
-                            <View style={[appStyles.flex_row_align_center]}>
-                                <Text style={styles.subTitle}>{subTitle}</Text>
-                            </View>
+                            {subTitle && (
+                                <View style={[appStyles.flex_row_align_center]}>
+                                    <Text style={styles.subTitle}>{subTitle}</Text>
+                                </View>
+                            )}
                         </View>
                         <View style={[{ width: '100%', marginTop: getSize.m(30) }]}>
                             {option1 && (
