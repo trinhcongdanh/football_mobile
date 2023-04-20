@@ -6,6 +6,8 @@ import { StyleSheet } from 'react-native';
 export const styles = StyleSheet.create({
     container: {
         marginHorizontal: getSize.m(7),
+        flex: 1,
+        // position: 'absolute',
     },
     fieldContainer: {
         paddingHorizontal: getSize.m(10),
@@ -29,19 +31,21 @@ export const styles = StyleSheet.create({
         fontFamily: AppFonts.bold,
     },
     itemsContainer: {
-        // position: 'absolute',
-        right: 0,
+        position: 'absolute',
         top: 0,
-        zIndex: 1000,
+        left: 0,
+        right: 0,
+        bottom: 0,
         backgroundColor: appColors.white,
         borderBottomLeftRadius: getSize.m(20),
         borderBottomRightRadius: getSize.m(20),
         elevation: 1,
         width: '100%',
-        height: getSize.m(200),
+        height: getSize.m(300),
         overflow: 'scroll',
         paddingHorizontal: getSize.m(10),
         paddingTop: getSize.m(10),
+        zIndex: 100,
     },
     itemContainer: {
         borderColor: appColors.border,

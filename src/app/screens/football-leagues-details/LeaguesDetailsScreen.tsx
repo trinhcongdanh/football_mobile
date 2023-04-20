@@ -132,7 +132,15 @@ export const LeaguesDetailsScreen = ({ navigation, route }: ILeaguesDetailsScree
                                 </View>
                                 <View style={styles.line_dots} />
                             </View>
-                            <View style={[appStyles.flex, appStyles.main_container]}>
+                            <View
+                                style={[
+                                    appStyles.flex,
+                                    appStyles.main_container,
+                                    {
+                                        zIndex: 10,
+                                    },
+                                ]}
+                            >
                                 <View style={styles.drop_down_filter}>
                                     <View style={{ flex: 0.9 }}>
                                         <DropdownField

@@ -34,7 +34,7 @@ const DropdownField = ({
                 <TouchableOpacity
                     activeOpacity={1}
                     onPress={() => {
-                        setOpenModal(true);
+                        setOpenModal(!openModal);
                         if (onPress) {
                             onPress();
                         }
