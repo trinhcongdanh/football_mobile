@@ -6,6 +6,7 @@ import { Avatar } from 'react-native-elements';
 import { styles } from './ListPlayer.styles';
 import { IListPlayerProps } from './ListPlayer.type';
 import FastImage from 'react-native-fast-image';
+import { appColors } from '@football/app/utils/constants/appColors';
 
 export const ListPlayer = ({
     name,
@@ -34,12 +35,13 @@ export const ListPlayer = ({
                 )}
                 <View
                     style={{
-                        width: getSize.m(30),
-                        height: getSize.m(30),
-                        borderRadius: getSize.m(30),
+                        width: getSize.m(26),
+                        height: getSize.m(26),
+                        borderRadius: getSize.m(26),
                         justifyContent: 'center',
                         alignItems: 'center',
-                        elevation: 1,
+                        backgroundColor: appColors.separator,
+                        // elevation: 1,
                     }}
                 >
                     <FastImage

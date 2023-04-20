@@ -27,6 +27,8 @@ import { useViewModel } from './ConquerorsScreen.viewModel';
 import { IConquerorsScreenProps } from './ConquerorsScreen.type';
 import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
 import { BackGround } from '@football/app/components/background/BackGround';
+import FastImage from 'react-native-fast-image';
+import { appColors } from '@football/app/utils/constants/appColors';
 
 export const ConquerorsScreen = ({ navigation, route }: IConquerorsScreenProps) => {
     const topTeam = route?.params?.topTeam as TopTeamModel;
@@ -99,11 +101,26 @@ export const ConquerorsScreen = ({ navigation, route }: IConquerorsScreenProps) 
                                         key={item.player_id}
                                     >
                                         <View style={appStyles.flex_row_align}>
-                                            <Avatar
-                                                source={{ uri: item.image_url }}
-                                                size={getSize.m(26)}
-                                                rounded
-                                            />
+                                            <View
+                                                style={{
+                                                    width: getSize.m(26),
+                                                    height: getSize.m(26),
+                                                    borderRadius: getSize.m(26),
+                                                    backgroundColor: appColors.separator,
+                                                    justifyContent: 'center',
+                                                    alignItems: 'center',
+                                                    // elevation: 1,
+                                                }}
+                                            >
+                                                <FastImage
+                                                    source={{ uri: item.image_url }}
+                                                    style={{
+                                                        width: getSize.m(26),
+                                                        height: getSize.m(26),
+                                                        borderRadius: getSize.m(26),
+                                                    }}
+                                                />
+                                            </View>
                                             <Text style={styles.name_player}>
                                                 {getTranslationText({
                                                     textHe: item.name_he,
