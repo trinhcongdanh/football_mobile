@@ -21,9 +21,9 @@ const useViewState = ({ route }: IStateCupScreenProps) => {
     const [openModalYear, setOpenModalYear] = useState(false);
 
     const [selectedCupSeason, setSelectedCupSeason] = useState<CupSeasonModel>();
-    const [selectCycle, setSelectCycle] = useState<Cycle>();
+    const [selectCycle, setSelectCycle] = useState<Cycle | null>();
     const [cycles, setCycles] = useState<any[]>([]);
-    const [selectRound, setSelectRound] = useState<Round>();
+    const [selectRound, setSelectRound] = useState<Round | null>();
     const [years, setYears] = useState<any[]>();
 
     return {
@@ -149,15 +149,20 @@ export const useViewModel = ({ route }: IStateCupScreenProps) => {
         const cycles = selectedCupSeason?.cycles || [];
 
         // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-        cycles[0] ? setSelectCycle(cycles[0]) : null;
+        if (cycles[0]) {
+            setSelectCycle(() => cycles[0]);
+        } else {
+            setSelectCycle(null);
+        }
     }, [selectedCupSeason]);
 
     useEffect(() => {
         const rounds = selectCycle?.rounds || [];
 
-        const firstRound = rounds[0] ? rounds[0] : null;
-        if (firstRound) {
-            setSelectRound(firstRound);
+        if (rounds[0]) {
+            setSelectRound(() => rounds[0]);
+        } else {
+            setSelectRound(null);
         }
     }, [selectCycle]);
 
