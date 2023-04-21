@@ -47,9 +47,10 @@ export const ListOfGames = ({ games }: IListOfGamesProps) => {
                             icon={appIcons.ic_left_ios}
                             details={item.game_id}
                             isLive={moment().isBetween(
-                                moment(`${item.date} ${item.time}`, 'DD.M.YY HH:mm'),
-                                moment(`${item.date} ${item.time}`, 'DD.M.YY HH:mm').add(2, 'hours')
+                                moment(`${item.date} ${item.time}`),
+                                moment(`${item.date} ${item.time}`).add(2, 'hours')
                             )}
+                            isFuture={moment().diff(moment(`${item?.date} ${item?.time}`)) < 0}
                             handleDetailMatch={() => onNavigateGamePersonnel(item.game_id)}
                             handleStadium={() => onNavigateStadium(item.stadium_id)}
                             personnel={t('list_game.composition')}

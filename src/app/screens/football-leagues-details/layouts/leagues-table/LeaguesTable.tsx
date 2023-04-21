@@ -79,11 +79,7 @@ export const LeaguesTable = ({ leaderBoards }: ILeaguesTableProps) => {
                                         overflow: 'hidden',
                                     }}
                                 >
-                                    <View
-                                        style={{
-                                            flexDirection: 'row',
-                                        }}
-                                    >
+                                    <View style={appStyles.flex_row_align}>
                                         <View style={{ width: '12%' }}>
                                             <Text
                                                 style={[
@@ -102,7 +98,9 @@ export const LeaguesTable = ({ leaderBoards }: ILeaguesTableProps) => {
                                                 style={{
                                                     width: getSize.m(18),
                                                     height: getSize.m(18),
+                                                    borderRadius: getSize.m(18),
                                                 }}
+                                                resizeMode={FastImage.resizeMode.contain}
                                             />
                                         </View>
                                         <View style={{ width: '50%' }}>
