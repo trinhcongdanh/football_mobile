@@ -1,14 +1,20 @@
 import { TeamModel } from '@football/core/models/TeamModelResponse';
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
 import { ScreenName } from '@football/app/utils/constants/enum';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { IFavTeamProps } from '@football/app/screens/football-home/layouts/FavTeam/FavTeam.type';
+import moment from 'moment';
+import { Game } from '@football/core/models/TeamModelResponse';
+import { useGame } from '@football/app/utils/hooks/useGame';
 
-export const useViewModel = () => {
+export const useViewModel = ({ team, color }: IFavTeamProps) => {
     const { navigate, goBack } = useAppNavigator();
     const { t } = useTranslation();
     const pages = Array(2).fill('');
     const [activeIndexNumber, setActiveIndexNumber] = useState(Number);
+    const [newGames, setNewGames] = useState<Game[]>([]);
+    const { getGame } = useGame();
 
     const handleStadium = (stadiumId: string) => {
         navigate(ScreenName.PitchPage, { stadiumId });
@@ -32,6 +38,11 @@ export const useViewModel = () => {
         navigate(ScreenName.StatisticsGroupPage, { teamSeasonId });
     };
 
+    useEffect(() => {
+        const newTeamGame = getGame({ listGames: team?.homepage_info?.games });
+        setNewGames(newTeamGame);
+    }, [team]);
+
     return {
         t,
         pages,
@@ -42,5 +53,6 @@ export const useViewModel = () => {
         onNavigateTeamDetails,
         onNavigateStatistics,
         onNavigateGameList,
+        newGames,
     };
 };
