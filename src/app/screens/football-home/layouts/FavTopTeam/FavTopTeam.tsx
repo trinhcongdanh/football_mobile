@@ -37,7 +37,8 @@ export const FavTopTeam = ({ topTeam, color }: IFavTopTeamProps) => {
         onClickTopTeam,
         handleDetailMatch,
         onNavigateGameList,
-    } = useViewModel();
+        newTopGames,
+    } = useViewModel({ topTeam, color });
     const { getTranslationText } = useTranslationText();
 
     return (
@@ -451,7 +452,7 @@ export const FavTopTeam = ({ topTeam, color }: IFavTopTeamProps) => {
                     </View>
 
                     <View style={{ padding: getSize.m(5), zIndex: 0, position: 'relative' }}>
-                        {topTeam?.homepage_info?.games?.slice(0, 3)?.map(item => {
+                        {newTopGames?.slice(0, 3)?.map(item => {
                             return (
                                 // <ListGame_Test
                                 //     key={item.game_id}
