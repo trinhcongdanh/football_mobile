@@ -9,4 +9,5 @@ export type IHeaderCompositionProps = {
     score: string;
     season?: string;
     handleStadium?: () => void;
+    isFinish?: boolean;
 };

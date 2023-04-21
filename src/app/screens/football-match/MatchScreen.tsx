@@ -10,6 +10,7 @@ import { ImageBackground, SafeAreaView, StatusBar, View } from 'react-native';
 import { IMatchScreenProps } from './MatchScreen.type';
 import { useViewModel } from './MatchScreen.viewModel';
 import { BackGround } from '@football/app/components/background/BackGround';
+import moment from 'moment';
 
 // type Props = {};
 
@@ -61,6 +62,15 @@ export const MatchScreen = ({ navigation, route }: IMatchScreenProps) => {
                                 textHe: game.stadium_he,
                                 textEn: game.stadium_en,
                             })}
+                            isFinish={
+                                Math.round(
+                                    moment
+                                        .duration(
+                                            moment().diff(moment(`${game?.date} ${game?.time}`))
+                                        )
+                                        .asMinutes()
+                                ) > 105
+                            }
                             status={t('match.status')}
                             handleStadium={() => handleStadium(game.stadium_id)}
                         />

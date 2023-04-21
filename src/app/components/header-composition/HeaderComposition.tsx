@@ -21,6 +21,7 @@ export const HeaderComposition = ({
     score,
     season,
     handleStadium,
+    isFinish,
 }: IHeaderCompositionProps) => {
     const { getResult } = useResult();
     return (
@@ -63,7 +64,7 @@ export const HeaderComposition = ({
                             result: score,
                         })}
                     </Text>
-                    <Text style={styles.status}>{status}</Text>
+                    {isFinish ? <Text style={styles.status}>{status}</Text> : null}
                 </View>
                 <View style={[appStyles.align_justify]}>
                     <View style={styles.avt_club}>
@@ -78,7 +79,7 @@ export const HeaderComposition = ({
             </View>
             <TouchableOpacity
                 onPress={handleStadium}
-                style={[appStyles.flex_row_center, { marginTop: getSize.m(24), flex: 0 }]}
+                style={[appStyles.flex_row_center, { flex: 0 }]}
             >
                 <IconLocation
                     name={appIcons.ic_location}
