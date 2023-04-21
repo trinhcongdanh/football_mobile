@@ -28,8 +28,8 @@ const useViewState = () => {
 
     // Few properties changes when selectedLeagueSeason change
     const [selectedLeagueSeason, setSelectedLeagueSeason] = useState<LeagueSeasonModel>();
-    const [selectCycle, setSelectCycle] = useState<Cycle>();
-    const [selectRound, setSelectRound] = useState<Round>();
+    const [selectCycle, setSelectCycle] = useState<Cycle | null>();
+    const [selectRound, setSelectRound] = useState<Round | null>();
     const [galleries, setGalleries] = useState<Gallery[]>();
     const [highlights, setHightlights] = useState<Highlights>();
 
@@ -193,19 +193,24 @@ export const useViewModel = ({ navigation, route }: ILeaguesDetailsScreenProps) 
         const cycles = selectedLeagueSeason?.cycles || [];
 
         // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-        cycles[0] ? setSelectCycle(cycles[0]) : [];
-        console.log(' cycles[0]', cycles[0]);
-        console.log('cycles', cycles);
+        if (cycles[0]) {
+            setSelectCycle(() => cycles[0]);
+        } else {
+            setSelectCycle(null);
+        }
     }, [selectedLeagueSeason]);
+
+    console.log('cycles', selectCycle);
 
     useEffect(() => {
         const rounds = selectCycle?.rounds || [];
-        const firstRound = rounds[0] ? rounds[0] : null;
-        if (firstRound) {
-            setSelectRound(firstRound);
+        if (rounds[0]) {
+            setSelectRound(() => rounds[0]);
+        } else {
+            setSelectRound(null);
         }
-        console.log('rounds', rounds);
     }, [selectCycle]);
+    console.log('rounds', selectRound);
 
     // useEffect(() => {
     //     if (!leagueSeasonData) {
