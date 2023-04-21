@@ -31,7 +31,7 @@ export const styles = StyleSheet.create({
     line_dots: {
         marginTop: getSize.m(10),
         marginBottom: getSize.m(14),
-        width: '100%'
+        width: '100%',
     },
     date: {
         fontSize: getSize.m(12),
@@ -92,9 +92,9 @@ export const styles = StyleSheet.create({
         right: getSize.m(-10),
     },
     details: {
-        fontSize: getSize.m(14),
+        fontSize: getSize.m(12),
         lineHeight: getSize.m(16),
-        // fontFamily: AppFonts.bold,
+        fontFamily: AppFonts.bold,
         marginRight: getSize.m(4),
         color: appColors.button_dark_blue,
     },

@@ -63,9 +63,10 @@ export const ScheduleScreen = ({ navigation, route }: IScheduleScreenProps) => {
                             handleDetailMatch={() => handleDetailMatch(item.game_id)}
                             handleStadium={() => handleStadium(item.stadium_id)}
                             isLive={moment().isBetween(
-                                moment(`${item.date} ${item.time}`, 'DD.M.YY HH:mm'),
-                                moment(`${item.date} ${item.time}`, 'DD.M.YY HH:mm').add(2, 'hours')
+                                moment(`${item.date} ${item.time}`),
+                                moment(`${item.date} ${item.time}`).add(2, 'hours')
                             )}
+                            isFuture={moment().diff(moment(`${item?.date} ${item?.time}`)) < 0}
                             color={appColors.gray}
                         />
                     );

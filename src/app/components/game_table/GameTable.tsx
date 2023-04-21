@@ -26,6 +26,7 @@ export const GameTable = ({
     handleStadium,
     handleDetailMatch,
     isLive,
+    isFuture,
 }: IGameTableProps) => {
     const { t } = useTranslation();
     const emptyResult = result === ' : ' ? ' : ' : null;
@@ -39,21 +40,21 @@ export const GameTable = ({
                     <IconEvilIcons
                         name={appIcons.ic_location}
                         size={getSize.m(20)}
-                        color={
-                            result !== emptyResult ? appColors.text_dark_blue : appColors.soft_grey
-                        }
+                        color={!isFuture ? appColors.text_dark_blue : appColors.soft_grey}
                     />
-                    <Text
-                        style={[
-                            styles.location,
-                            {
-                                fontFamily:
-                                    result !== emptyResult ? AppFonts.medium : AppFonts.regular,
-                            },
-                        ]}
-                    >
-                        {location}
-                    </Text>
+                    <View style={{ width: getSize.m(50) }}>
+                        <Text
+                            numberOfLines={1}
+                            style={[
+                                styles.location,
+                                {
+                                    fontFamily: !isFuture ? AppFonts.medium : AppFonts.regular,
+                                },
+                            ]}
+                        >
+                            {location}
+                        </Text>
+                    </View>
                 </TouchableOpacity>
             </View>
             <View
@@ -94,7 +95,7 @@ export const GameTable = ({
                         ) : null}
                     </View>
                     <TouchableOpacity onPress={handleDetailMatch} style={appStyles.flex_row_align}>
-                        {result !== emptyResult && (
+                        {!isFuture && (
                             <Text
                                 style={[
                                     styles.details,
@@ -106,7 +107,7 @@ export const GameTable = ({
                                 {t('home_page.game_detail')}
                             </Text>
                         )}
-                        {result === emptyResult && schedule !== null && (
+                        {isFuture && schedule !== null && (
                             <Text
                                 style={[
                                     styles.details,
@@ -121,7 +122,7 @@ export const GameTable = ({
                         <IconFeather
                             name={appIcons.ic_left_ios}
                             size={getSize.m(10)}
-                            color={result !== emptyResult ? '#061134' : appColors.soft_grey}
+                            color={!isFuture ? '#061134' : appColors.soft_grey}
                         />
                     </TouchableOpacity>
                 </View>

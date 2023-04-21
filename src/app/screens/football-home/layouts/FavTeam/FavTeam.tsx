@@ -780,13 +780,22 @@ export const FavTeam = ({ team, color }: IFavTeamProps) => {
                                     color={appColors.gray2}
                                     handleDetailMatch={() => handleDetailMatch(item?.game_id)}
                                     handleStadium={() => handleStadium(item?.stadium_id)}
+                                    isFuture={
+                                        moment().diff(moment(`${item?.date} ${item?.time}`)) < 0
+                                    }
                                     isLive={moment().isBetween(
-                                        moment(`${item?.date} ${item?.time}`, 'DD.M.YY HH:mm'),
-                                        moment(`${item?.date} ${item?.time}`, 'DD.M.YY HH:mm').add(
-                                            2,
-                                            'hours'
-                                        )
+                                        moment(`${item?.date} ${item?.time}`),
+                                        moment(`${item?.date} ${item?.time}`).add(2, 'hours')
                                     )}
+                                    isHomePage={true}
+                                    timeLive={Math.round(
+                                        moment
+                                            .duration(
+                                                moment().diff(moment(`${item?.date} ${item?.time}`))
+                                            )
+                                            .asMinutes()
+                                    )}
+                                    // moment.duration(moment2.diff(moment1));
                                     style={{ marginTop: getSize.m(12) }}
                                     personnel={t('home_page.composition')}
                                 />

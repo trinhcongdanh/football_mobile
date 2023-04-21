@@ -13,6 +13,7 @@ import { IListGameProps } from './ListGame.type';
 import { useDateTime } from '@football/app/utils/hooks/useDateTime';
 import { AppImages } from '@football/app/assets/images';
 import { useResult } from '@football/app/utils/hooks/useResult';
+import { AppFonts } from '@football/app/assets/fonts';
 
 export const ListGame_Test = ({
     logo_home,
@@ -33,6 +34,9 @@ export const ListGame_Test = ({
     style,
     personnel,
     gameDetail,
+    isFuture,
+    isHomePage,
+    timeLive,
 }: IListGameProps) => {
     const { t } = useTranslation();
     const emptyResult = result === ' : ' ? ' : ' : null;
@@ -46,8 +50,7 @@ export const ListGame_Test = ({
                     style={[
                         styles.tournament,
                         {
-                            backgroundColor:
-                                result !== emptyResult ? appColors.separator : '#F2FBFF',
+                            backgroundColor: !isFuture ? appColors.separator : '#F2FBFF',
                             flexDirection: isLive ? 'row' : 'column',
                             justifyContent: isLive ? 'space-between' : 'center',
                             alignItems: isLive ? 'center' : 'center',
@@ -60,10 +63,9 @@ export const ListGame_Test = ({
                         style={[
                             styles.text_tournament,
                             {
-                                color:
-                                    result !== emptyResult
-                                        ? appColors.soft_grey
-                                        : appColors.text_option_unselect,
+                                color: !isFuture
+                                    ? appColors.soft_grey
+                                    : appColors.text_option_unselect,
                             },
                         ]}
                     >
@@ -73,7 +75,7 @@ export const ListGame_Test = ({
                 </TouchableOpacity>
             )}
             {!tournament && isLive ? (
-                <View>
+                <View style={appStyles.flex_row_center}>
                     <Text
                         style={[
                             styles.text_live,
@@ -84,6 +86,16 @@ export const ListGame_Test = ({
                     >
                         L I V E
                     </Text>
+                    <Text
+                        style={{
+                            color: '#0697fd',
+                            fontFamily: AppFonts.bold,
+                            fontSize: getSize.m(13),
+                            marginLeft: getSize.m(6),
+                        }}
+                    >
+                        {timeLive}'
+                    </Text>
                 </View>
             ) : (
                 <View style={[appStyles.flex_row_space, { marginHorizontal: getSize.m(15) }]}>
@@ -92,26 +104,24 @@ export const ListGame_Test = ({
                             style={[
                                 styles.date,
                                 {
-                                    color:
-                                        result !== emptyResult
-                                            ? appColors.soft_grey
-                                            : appColors.text_dark_blue,
+                                    color: !isFuture
+                                        ? appColors.soft_grey
+                                        : appColors.text_dark_blue,
                                 },
                             ]}
                         >
                             {getDate({ date: date })}
                         </Text>
-                        {result === emptyResult && tournament ? (
+                        {isFuture && tournament ? (
                             <View style={appStyles.flex_row_align}>
                                 <View>
                                     <Text
                                         style={[
                                             styles.date,
                                             {
-                                                color:
-                                                    result !== emptyResult
-                                                        ? appColors.soft_grey
-                                                        : appColors.text_dark_blue,
+                                                color: !isFuture
+                                                    ? appColors.soft_grey
+                                                    : appColors.text_dark_blue,
                                                 marginHorizontal: getSize.m(4),
                                             },
                                         ]}
@@ -124,10 +134,9 @@ export const ListGame_Test = ({
                                         style={[
                                             styles.date,
                                             {
-                                                color:
-                                                    result !== emptyResult
-                                                        ? appColors.soft_grey
-                                                        : appColors.text_dark_blue,
+                                                color: !isFuture
+                                                    ? appColors.soft_grey
+                                                    : appColors.text_dark_blue,
                                             },
                                         ]}
                                     >
@@ -150,9 +159,7 @@ export const ListGame_Test = ({
                         <IconLocation
                             name={appIcons.ic_location}
                             size={getSize.m(20)}
-                            color={
-                                result !== emptyResult ? appColors.soft_grey : appColors.blue_light
-                            }
+                            color={!isFuture ? appColors.soft_grey : appColors.blue_light}
                         />
                         <View style={{ width: '62%' }}>
                             <Text
@@ -160,10 +167,9 @@ export const ListGame_Test = ({
                                 style={[
                                     styles.stadium,
                                     {
-                                        color:
-                                            result !== emptyResult
-                                                ? appColors.soft_grey
-                                                : appColors.text_dark_blue,
+                                        color: !isFuture
+                                            ? appColors.soft_grey
+                                            : appColors.text_dark_blue,
                                         textAlign: 'left',
                                     },
                                 ]}
@@ -186,7 +192,7 @@ export const ListGame_Test = ({
             <View style={[appStyles.align_justify]}>
                 <View
                     style={[
-                        appStyles.flex_row_space_center,
+                        appStyles.flex_row_space,
                         {
                             marginHorizontal: getSize.m(36),
                         },
@@ -222,7 +228,14 @@ export const ListGame_Test = ({
                             </View>
                         ) : null}
                     </View>
-                    <View>
+                    <View
+                        style={[
+                            appStyles.align_justify,
+                            {
+                                marginTop: getSize.m(-18),
+                            },
+                        ]}
+                    >
                         <View
                             style={[
                                 appStyles.align_justify,
@@ -244,7 +257,11 @@ export const ListGame_Test = ({
                                         },
                                     ]}
                                 >
-                                    - : -
+                                    {result === emptyResult
+                                        ? '- : -'
+                                        : getResult({
+                                              result: result,
+                                          })}
                                 </Text>
                             )}
                             {!isLive &&
@@ -266,33 +283,6 @@ export const ListGame_Test = ({
                                 </Text>
                             )}
                         </View>
-                        {details && (
-                            <TouchableOpacity
-                                style={[
-                                    appStyles.flex_row_center,
-                                    {
-                                        flex: 0,
-                                        marginTop:
-                                            nameHome || nameAway ? getSize.m(0) : getSize.m(14),
-                                        paddingTop: 5,
-                                    },
-                                ]}
-                                onPress={handleDetailMatch}
-                            >
-                                {isLive ? (
-                                    <Text style={[styles.details]}>{t('list_game.results')}</Text>
-                                ) : personnel ? (
-                                    <Text style={[styles.details]}>{personnel}</Text>
-                                ) : (
-                                    gameDetail && <Text style={[styles.details]}>{gameDetail}</Text>
-                                )}
-                                <Icon
-                                    name={icon}
-                                    size={getSize.m(14)}
-                                    color={appColors.button_dark_blue}
-                                />
-                            </TouchableOpacity>
-                        )}
                     </View>
                     <View style={[appStyles.align_justify]}>
                         <View
@@ -325,24 +315,61 @@ export const ListGame_Test = ({
                     </View>
                 </View>
             </View>
-            {/* {details && (
+            {details && (
                 <TouchableOpacity
                     style={[
                         appStyles.flex_row_center,
-                        { flex: 0, marginTop: nameHome || nameAway ? getSize.m(0) : getSize.m(14) },
+                        {
+                            flex: 0,
+                            marginBottom: getSize.m(20),
+                            marginTop: getSize.m(-10),
+                            paddingTop: 5,
+                        },
                     ]}
                     onPress={handleDetailMatch}
                 >
                     {isLive ? (
-                        <Text style={[styles.details]}>{t('list_game.results')}</Text>
+                        <View style={appStyles.flex_row_align}>
+                            <View style={appStyles.flex_row_align}>
+                                <Text style={[styles.details]}>{t('list_game.detail')}</Text>
+                                <Icon
+                                    name={icon}
+                                    size={getSize.m(14)}
+                                    color={appColors.button_dark_blue}
+                                />
+                            </View>
+                            <View style={appStyles.flex_row_align}>
+                                <Text style={[styles.details]}>{t('list_game.results')}</Text>
+                                <Icon
+                                    name={icon}
+                                    size={getSize.m(14)}
+                                    color={appColors.button_dark_blue}
+                                />
+                            </View>
+                        </View>
                     ) : personnel ? (
-                        <Text style={[styles.details]}>{personnel}</Text>
+                        <View style={appStyles.flex_row_align}>
+                            <Text style={[styles.details]}>{personnel}</Text>
+                            <Icon
+                                name={icon}
+                                size={getSize.m(14)}
+                                color={appColors.button_dark_blue}
+                            />
+                        </View>
                     ) : (
-                        gameDetail && <Text style={[styles.details]}>{gameDetail}</Text>
+                        gameDetail && (
+                            <View style={appStyles.flex_row_align}>
+                                <Text style={[styles.details]}>{gameDetail}</Text>
+                                <Icon
+                                    name={icon}
+                                    size={getSize.m(14)}
+                                    color={appColors.button_dark_blue}
+                                />
+                            </View>
+                        )
                     )}
-                    <Icon name={icon} size={getSize.m(10)} color={appColors.button_dark_blue} />
                 </TouchableOpacity>
-            )} */}
+            )}
         </View>
     );
 };

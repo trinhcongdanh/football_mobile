@@ -669,7 +669,7 @@ const resources = {
                 game_detail: 'פרטי משחק',
             },
             list_game: {
-                results: 'לתוצאות המשחק בזמן אמת',
+                results: 'המשחק בזמן אמת',
                 detail: 'פרטי המשחק',
                 composition: 'הרכב',
             },

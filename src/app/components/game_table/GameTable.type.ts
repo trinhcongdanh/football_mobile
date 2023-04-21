@@ -8,6 +8,7 @@ export type IGameTableProps = {
     result: any;
     schedule: string;
     isLive?: boolean;
+    isFuture?: boolean;
     handleDetailMatch?: () => void;
     handleStadium?: () => void;
 };

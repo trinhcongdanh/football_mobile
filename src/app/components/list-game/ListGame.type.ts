@@ -14,6 +14,9 @@ export type IListGameProps = {
     tournament?: string;
     color?: any;
     isLive?: boolean;
+    isFuture?: boolean;
+    isHomePage?: boolean;
+    timeLive?: any;
     handleDetailMatch?: () => void;
     handleStadium?: () => void;
     style?: StyleProp<any>;
