@@ -2,6 +2,9 @@ import { AppFonts } from '@football/app/assets/fonts';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { getSize } from '@football/app/utils/responsive/scale';
 import { I18nManager, Platform, StyleSheet } from 'react-native';
+import DeviceInfo from 'react-native-device-info';
+
+let hasNotch = DeviceInfo.hasNotch();
 
 export const styles = StyleSheet.create({
     side_menu_container: {
@@ -15,7 +18,8 @@ export const styles = StyleSheet.create({
     },
     side_menu: {
         paddingVertical: getSize.m(24),
-        paddingTop: Platform.OS === 'android' ? getSize.m(24) : getSize.m(40),
+        paddingTop:
+            Platform.OS === 'android' ? getSize.m(24) : hasNotch ? getSize.m(40) : getSize.m(24),
     },
     side_menu_close: {
         flexDirection: I18nManager.isRTL ? 'row' : 'row-reverse',

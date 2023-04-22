@@ -29,6 +29,7 @@ const styles = StyleSheet.create({
         fontSize: getSize.m(20),
         lineHeight: getSize.m(26),
         color: appColors.blue_black,
+        textAlign: 'center',
     },
     stats_content: {
         shadowColor: '#000',

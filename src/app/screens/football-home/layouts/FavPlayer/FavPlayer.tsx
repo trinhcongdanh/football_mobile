@@ -57,12 +57,13 @@ export const FavPlayer = ({ player, color }: IFavPlayerProps) => {
                     />
                 </View>
                 <View style={[appStyles.flex_row_align, { marginTop: getSize.m(14) }]}>
-                    <Text style={styles.text_details}>
+                    <Text numberOfLines={1} style={styles.text_details}>
                         {getTranslationText({
                             textHe: player?.name_he,
                             textEn: player?.name_en,
                         })}
                     </Text>
+
                     <TouchableOpacity onPress={() => onClickPlayer(player?._id)}>
                         <LinearGradient colors={[color, color]} style={styles.icon_arrow_left}>
                             <FastImage

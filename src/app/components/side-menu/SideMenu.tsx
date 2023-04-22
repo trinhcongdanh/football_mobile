@@ -6,12 +6,13 @@ import { appStyles } from '@football/app/utils/constants/appStyles';
 import { ScreenName } from '@football/app/utils/constants/enum';
 import { getSize } from '@football/app/utils/responsive/scale';
 import React from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { Platform, Text, TouchableOpacity, View } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import IconAntDesign from 'react-native-vector-icons/AntDesign';
 import { styles } from './SideMenu.style';
 import { useViewModel } from './SideMenu.viewModel';
 import { ChangeLanguage } from '@football/app/components/change-language/ChangeLanguage';
+import DeviceInfo from 'react-native-device-info';
 
 export const SideMenu = ({ navigation }: ISideMenuProps) => {
     const {
@@ -29,6 +30,8 @@ export const SideMenu = ({ navigation }: ISideMenuProps) => {
     } = useViewModel({
         navigation,
     });
+
+    let hasNotch = DeviceInfo.hasNotch();
 
     return (
         <View style={styles.side_menu_container}>
@@ -153,7 +156,12 @@ export const SideMenu = ({ navigation }: ISideMenuProps) => {
                 </View>
                 <View
                     style={{
-                        marginTop: getSize.m(300),
+                        marginTop:
+                            Platform.OS === 'android'
+                                ? getSize.m(300)
+                                : hasNotch
+                                ? getSize.m(300)
+                                : getSize.m(260),
                         alignItems: 'center',
                     }}
                 >
