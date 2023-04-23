@@ -20,7 +20,10 @@ export const WelcomeScreen = ({ navigation, route }: IWelcomeScreenProps) => {
 
     return (
         <View style={appStyles.flex}>
-            <ImageBackground source={AppImages.img_background} style={appStyles.flex_center}>
+            <ImageBackground
+                source={AppImages.img_background_welcome}
+                style={appStyles.flex_center}
+            >
                 <StatusBar translucent backgroundColor="transparent" />
                 <View style={{ width: '90%', justifyContent: 'center', alignItems: 'center' }}>
                     <Image resizeMode="contain" source={AppImages.img_logo} style={styles.image} />

@@ -68,7 +68,7 @@ export const HeaderUser = ({
             {avt ? null : <View style={styles.width_size} />}
             {avt ? (
                 <View style={[appStyles.flex_row_space_center, styles.avt]}>
-                    <TouchableOpacity onPress={onPressAvatar}>
+                    <TouchableOpacity style={styles.container_avt} onPress={onPressAvatar}>
                         <FastImage
                             style={{
                                 width: getSize.m(40),

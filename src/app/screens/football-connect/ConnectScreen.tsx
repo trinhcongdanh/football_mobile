@@ -66,7 +66,7 @@ export const ConnectScreen = ({ navigation, route }: IConnectScreenProps) => {
                     <ActivityIndicator size="large" />
                 </View>
             ) : null}
-            <ImageBackground source={AppImages.img_bg_register} style={appStyles.flex}>
+            <ImageBackground source={AppImages.img_background_login} style={appStyles.flex}>
                 <StatusBar translucent backgroundColor="transparent" />
                 <SafeAreaView style={appStyles.safe_area}>
                     <View style={appStyles.container}>
