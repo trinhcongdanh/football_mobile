@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     },
 
     line: {
-        backgroundColor: appColors.soft_grey,
+        backgroundColor: appColors.separator,
         width: getSize.m(1),
         minHeight: 0,
         height: '100%',

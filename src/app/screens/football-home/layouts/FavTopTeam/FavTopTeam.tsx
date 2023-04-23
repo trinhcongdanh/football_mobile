@@ -215,30 +215,29 @@ export const FavTopTeam = ({ topTeam, color }: IFavTopTeamProps) => {
                                                         },
                                                     ]}
                                                 >
-                                                    <View
-                                                        style={{
-                                                            flexDirection: 'row',
-                                                        }}
-                                                    >
+                                                    <View style={appStyles.flex_row_align}>
                                                         <Avatar
                                                             source={{ uri: item?.player_image_url }}
                                                             rounded
                                                             size={getSize.m(20)}
                                                         />
-                                                        <Text
-                                                            style={[
-                                                                styles.statistics_content,
-                                                                {
-                                                                    marginLeft: getSize.m(6),
-                                                                    textAlignVertical: 'center',
-                                                                },
-                                                            ]}
-                                                        >
-                                                            {getTranslationText({
-                                                                textHe: item?.player_name_he,
-                                                                textEn: item?.player_name_en,
-                                                            })}
-                                                        </Text>
+                                                        <View style={{ width: '80%' }}>
+                                                            <Text
+                                                                numberOfLines={1}
+                                                                style={[
+                                                                    styles.statistics_content,
+                                                                    {
+                                                                        marginLeft: getSize.m(6),
+                                                                        textAlign: 'left',
+                                                                    },
+                                                                ]}
+                                                            >
+                                                                {getTranslationText({
+                                                                    textHe: item?.player_name_he,
+                                                                    textEn: item?.player_name_en,
+                                                                })}
+                                                            </Text>
+                                                        </View>
                                                     </View>
                                                 </View>
                                                 <View style={{ width: getSize.m(50) }}>
@@ -327,29 +326,28 @@ export const FavTopTeam = ({ topTeam, color }: IFavTopTeamProps) => {
                                                     },
                                                 ]}
                                             >
-                                                <View
-                                                    style={{
-                                                        flexDirection: 'row',
-                                                    }}
-                                                >
+                                                <View style={appStyles.flex_row_align}>
                                                     <Avatar
                                                         source={{ uri: item?.player_image_url }}
                                                         rounded
                                                         size={getSize.m(20)}
                                                     />
-                                                    <Text
-                                                        style={[
-                                                            styles.statistics_content,
-                                                            {
-                                                                marginLeft: getSize.m(6),
-                                                            },
-                                                        ]}
-                                                    >
-                                                        {getTranslationText({
-                                                            textHe: item?.player_name_he,
-                                                            textEn: item?.player_name_en,
-                                                        })}
-                                                    </Text>
+                                                    <View style={{ width: '80%' }}>
+                                                        <Text
+                                                            style={[
+                                                                styles.statistics_content,
+                                                                {
+                                                                    marginLeft: getSize.m(6),
+                                                                    textAlign: 'left',
+                                                                },
+                                                            ]}
+                                                        >
+                                                            {getTranslationText({
+                                                                textHe: item?.player_name_he,
+                                                                textEn: item?.player_name_en,
+                                                            })}
+                                                        </Text>
+                                                    </View>
                                                 </View>
                                             </View>
                                             <View style={{ width: getSize.m(50) }}>

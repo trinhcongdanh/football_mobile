@@ -67,7 +67,7 @@ export const useViewModel = ({ navigation, route }: IRegScreenProps) => {
         //     i18n.language === 'en'
         //         ? e.replace(regex, '').replace(specialCharRegex, '')
         //         : e.replace(regex, '');
-        const regex = /^[a-zA-Z\u0590-\u05FF\s]*$/;
+        const regex = /^[a-zA-Z0-9\u0590-\u05FF\s]+$/;
         if (regex.test(e)) {
             setUserName(e);
         }
