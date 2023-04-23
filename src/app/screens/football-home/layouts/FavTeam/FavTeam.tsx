@@ -70,23 +70,17 @@ export const FavTeam = ({ team, color }: IFavTeamProps) => {
                         }}
                     />
                 </View>
-                <View style={[appStyles.flex_row_align, { marginTop: getSize.m(14) }]}>
-                    <View
-                        style={{
-                            width: '70%',
-                            alignItems: 'flex-end',
-                        }}
-                    >
-                        <Text numberOfLines={1} style={styles.text_details}>
-                            {getTranslationText({
-                                textHe: team?.name_he,
-                                textEn: team?.name_en,
-                            })}
-                        </Text>
-                    </View>
-                    <View style={{ width: '30%' }}>
-                        <TouchableOpacity onPress={() => onNavigateTeamDetails(team?._id)}>
-                            <LinearGradient colors={[color, color]} style={styles.icon_arrow_left}>
+                <View style={[appStyles.flex_row_center, { marginTop: getSize.m(14) }]}>
+                    <Text style={styles.text_details}>
+                        {getTranslationText({
+                            textHe: team?.name_he,
+                            textEn: team?.name_en,
+                        })}
+                    </Text>
+
+                    <TouchableOpacity onPress={() => onNavigateTeamDetails(team?._id)}>
+                        <LinearGradient colors={[color, color]} style={styles.icon_arrow_left}>
+                            <View style={{ marginLeft: getSize.m(1) }}>
                                 <FastImage
                                     source={AppImages.img_angle_down}
                                     style={{
@@ -98,9 +92,9 @@ export const FavTeam = ({ team, color }: IFavTeamProps) => {
                                     }}
                                     resizeMode={FastImage.resizeMode.contain}
                                 />
-                            </LinearGradient>
-                        </TouchableOpacity>
-                    </View>
+                            </View>
+                        </LinearGradient>
+                    </TouchableOpacity>
                 </View>
             </View>
             <ScrollView

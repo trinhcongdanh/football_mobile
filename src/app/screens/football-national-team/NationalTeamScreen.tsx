@@ -40,8 +40,8 @@ export const NationalTeamScreen = ({ navigation, route }: INationalTeamScreenPro
                         avt={AppImages.img_avt}
                         point="1,325"
                         icon={AppImages.img_angle_arrow}
-                        color_pre={appColors.black}
-                        color_after={appColors.black}
+                        color_pre={appColors.blue_black}
+                        color_after={appColors.blue_black}
                         handlePressFunction={onGoBack}
                     />
                 </View>

@@ -70,17 +70,22 @@ export const FavTopTeam = ({ topTeam, color }: IFavTopTeamProps) => {
                             textEn: topTeam?.name_en,
                         })}
                     </Text>
+
                     <TouchableOpacity onPress={() => onClickTopTeam(topTeam?._id)}>
                         <LinearGradient colors={[color, color]} style={styles.icon_arrow_left}>
-                            <FastImage
-                                source={AppImages.img_angle_down}
-                                style={{
-                                    width: getSize.m(9),
-                                    height: getSize.m(12),
-                                    transform: [{ rotate: I18nManager.isRTL ? '0deg' : '180deg' }],
-                                }}
-                                resizeMode={FastImage.resizeMode.contain}
-                            />
+                            <View style={{ marginLeft: getSize.m(1) }}>
+                                <FastImage
+                                    source={AppImages.img_angle_down}
+                                    style={{
+                                        width: getSize.m(9),
+                                        height: getSize.m(12),
+                                        transform: [
+                                            { rotate: I18nManager.isRTL ? '0deg' : '180deg' },
+                                        ],
+                                    }}
+                                    resizeMode={FastImage.resizeMode.contain}
+                                />
+                            </View>
                         </LinearGradient>
                     </TouchableOpacity>
                 </View>

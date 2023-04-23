@@ -43,8 +43,8 @@ export const TeamSquadScreen = ({ navigation, route }: ITeamGroupScreenProps) =>
                 <View style={appStyles.container}>
                     <HeaderUser
                         icon={AppImages.img_angle_arrow}
-                        color_pre={appColors.black}
-                        color_after={appColors.black}
+                        color_pre={appColors.blue_black}
+                        color_after={appColors.blue_black}
                         title={
                             fromTopTeam
                                 ? t('team_squad.top_team_personnel')

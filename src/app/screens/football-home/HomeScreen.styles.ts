@@ -21,6 +21,14 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     avt: {},
+    container_avt: {
+        backgroundColor: '#182D60',
+        height: getSize.m(44),
+        width: getSize.m(44),
+        borderRadius: getSize.m(44),
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
     ic_football: {
         width: getSize.m(16),
         height: getSize.m(16),
@@ -54,7 +62,7 @@ const styles = StyleSheet.create({
         borderRadius: getSize.m(40),
         top: getSize.m(16),
         right: getSize.m(16),
-        alignSelf: 'flex-end'
+        alignSelf: 'flex-end',
     },
     text_date: {
         width: '30%',
@@ -82,7 +90,7 @@ const styles = StyleSheet.create({
         bottom: getSize.m(16),
         overflow: 'hidden',
         alignSelf: 'center',
-        width: '80%'
+        width: '80%',
     },
     text_content: {
         textAlign: 'center',

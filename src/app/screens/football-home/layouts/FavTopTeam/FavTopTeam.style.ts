@@ -16,8 +16,8 @@ const styles = StyleSheet.create({
     },
 
     icon_arrow_left: {
-        width: getSize.m(24),
-        height: getSize.m(24),
+        width: getSize.m(20),
+        height: getSize.m(20),
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: getSize.m(24),
@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
 
     text_details: {
         fontFamily: AppFonts.bold,
-        fontSize: getSize.m(20),
+        fontSize: getSize.m(16),
         lineHeight: getSize.m(26),
         color: appColors.white,
     },

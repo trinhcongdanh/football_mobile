@@ -181,7 +181,7 @@ export const DataCoachScreen = ({ navigation, route }: IDataCoachScreenProps) =>
                                                 />
                                             </View>
                                             <View style={{ marginTop: getSize.m(4) }}>
-                                                <Text>{t('coach.draw')}</Text>
+                                                <Text style={styles.label}>{t('coach.draw')}</Text>
                                             </View>
                                             <View style={{ marginTop: getSize.m(14) }}>
                                                 <Text style={styles.total}>
@@ -201,7 +201,7 @@ export const DataCoachScreen = ({ navigation, route }: IDataCoachScreenProps) =>
                                                 />
                                             </View>
                                             <View style={{ marginTop: getSize.m(4) }}>
-                                                <Text>{t('coach.loss')}</Text>
+                                                <Text style={styles.label}>{t('coach.loss')}</Text>
                                             </View>
                                             <View style={{ marginTop: getSize.m(14) }}>
                                                 <Text style={styles.total}>
@@ -221,7 +221,9 @@ export const DataCoachScreen = ({ navigation, route }: IDataCoachScreenProps) =>
                                                 />
                                             </View>
                                             <View style={{ marginTop: getSize.m(4) }}>
-                                                <Text>{t('coach.victory')}</Text>
+                                                <Text style={styles.label}>
+                                                    {t('coach.victory')}
+                                                </Text>
                                             </View>
                                             <View style={{ marginTop: getSize.m(14) }}>
                                                 <Text style={styles.total}>
@@ -241,7 +243,7 @@ export const DataCoachScreen = ({ navigation, route }: IDataCoachScreenProps) =>
                                                 />
                                             </View>
                                             <View style={{ marginTop: getSize.m(4) }}>
-                                                <Text>{t('coach.game')}</Text>
+                                                <Text style={styles.label}>{t('coach.game')}</Text>
                                             </View>
                                             <View style={{ marginTop: getSize.m(14) }}>
                                                 <Text style={styles.total}>

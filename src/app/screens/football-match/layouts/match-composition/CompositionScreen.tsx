@@ -33,7 +33,12 @@ export const CompositionScreen = ({ navigation, route }: ICompositionScreenProps
         return (
             <>
                 <View style={{ marginTop: getSize.m(30) }}>
-                    <Position position={t('match.composition.main_lineup')} />
+                    <Position
+                        position={t('match.composition.main_lineup')}
+                        color={appColors.light_gray}
+                        fontSize={getSize.m(11)}
+                        fontFamily={AppFonts.medium}
+                    />
                     {team?.lineup?.opening?.map(item => {
                         return (
                             <ListPlayer
@@ -50,7 +55,12 @@ export const CompositionScreen = ({ navigation, route }: ICompositionScreenProps
                     })}
                 </View>
                 <View style={{ marginTop: getSize.m(30) }}>
-                    <Position position={t('match.composition.replace')} />
+                    <Position
+                        position={t('match.composition.replace')}
+                        color={appColors.light_gray}
+                        fontSize={getSize.m(11)}
+                        fontFamily={AppFonts.medium}
+                    />
                     {team?.lineup?.substitutes?.map(item => {
                         return (
                             <ListPlayer
@@ -67,7 +77,12 @@ export const CompositionScreen = ({ navigation, route }: ICompositionScreenProps
                     })}
                 </View>
                 <View style={{ marginTop: getSize.m(30) }}>
-                    <Position position={t('match.composition.not_partner')} />
+                    <Position
+                        position={t('match.composition.not_partner')}
+                        color={appColors.light_gray}
+                        fontSize={getSize.m(11)}
+                        fontFamily={AppFonts.medium}
+                    />
                     {team?.lineup?.not_participated?.map(item => {
                         return (
                             <ListPlayer
@@ -84,7 +99,12 @@ export const CompositionScreen = ({ navigation, route }: ICompositionScreenProps
                     })}
                 </View>
                 <View style={{ marginTop: getSize.m(30) }}>
-                    <Position position={t('match.composition.coach')} />
+                    <Position
+                        position={t('match.composition.coach')}
+                        color={appColors.light_gray}
+                        fontSize={getSize.m(11)}
+                        fontFamily={AppFonts.medium}
+                    />
                     {team?.lineup?.coaches?.map(item => {
                         return (
                             <ListPlayer
@@ -100,7 +120,12 @@ export const CompositionScreen = ({ navigation, route }: ICompositionScreenProps
                     })}
                 </View>
                 <View style={{ marginTop: getSize.m(30) }}>
-                    <Position position={t('match.composition.referees')} />
+                    <Position
+                        position={t('match.composition.referees')}
+                        color={appColors.light_gray}
+                        fontSize={getSize.m(11)}
+                        fontFamily={AppFonts.medium}
+                    />
                     {team?.lineup?.referees?.map(item => {
                         return (
                             <ListPlayer

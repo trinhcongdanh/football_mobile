@@ -35,13 +35,13 @@ export const ListPlayer = ({
                 )}
                 <View
                     style={{
-                        width: getSize.m(26),
-                        height: getSize.m(26),
-                        borderRadius: getSize.m(26),
+                        width: getSize.m(28),
+                        height: getSize.m(28),
+                        borderRadius: getSize.m(28),
                         justifyContent: 'center',
                         alignItems: 'center',
                         backgroundColor: appColors.separator,
-                        // elevation: 1,
+                        elevation: 1,
                     }}
                 >
                     <FastImage
