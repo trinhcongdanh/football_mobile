@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: getSize.m(24),
-        marginLeft: getSize.m(10),
+        marginLeft: getSize.m(4),
     },
 
     text_details: {
