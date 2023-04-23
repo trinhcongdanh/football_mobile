@@ -10,5 +10,13 @@ export const styles = StyleSheet.create({
         fontSize: getSize.m(20),
         fontFamily: AppFonts.bold,
         textAlign: 'center',
+        lineHeight: getSize.m(26),
+    },
+    container_back: {
+        width: getSize.m(40),
+        height: getSize.m(40),
+        borderRadius: getSize.m(34),
+        justifyContent: 'center',
+        alignItems: 'center',
     },
 });
