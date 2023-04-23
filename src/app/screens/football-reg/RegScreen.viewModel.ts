@@ -15,6 +15,7 @@ import { AvatarType } from '@football/core/models/AvatarType.enum';
 import { isEmpty } from 'lodash';
 import { clearFavoriteData } from '@football/app/utils/functions/clearFavoriteData';
 import moment from 'moment';
+import i18n from '@football/app/i18n/EnStrings';
 
 enum GenderSocial {
     male = 'male',
@@ -61,7 +62,8 @@ export const useViewModel = ({ navigation, route }: IRegScreenProps) => {
     const [userName, setUserName] = useState('');
     const handleOnChange = (e: string) => {
         const regex = /[\u0080-\uFFFF]/g;
-        const specialCharRegex = /[!@#$%^&*(),.?":{}|<>]/g;
+        const specialCharRegex =
+            i18n.language === 'en' ? /[!@#$%^&*(),.?":{}|<>]/g : /^[ \u0590-\u05FF]*$/;
         const newText = e.replace(regex, '').replace(specialCharRegex, '');
         setUserName(newText);
     };
