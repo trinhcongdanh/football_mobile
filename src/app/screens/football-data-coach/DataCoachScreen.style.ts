@@ -72,6 +72,12 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
+    label: {
+        fontSize: getSize.m(13),
+        lineHeight: getSize.m(17),
+        color: appColors.light_gray,
+        fontFamily: AppFonts.medium,
+    },
     total: {
         fontSize: getSize.m(15),
         lineHeight: getSize.m(22),

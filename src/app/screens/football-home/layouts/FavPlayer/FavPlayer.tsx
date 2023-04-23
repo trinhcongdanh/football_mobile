@@ -56,8 +56,8 @@ export const FavPlayer = ({ player, color }: IFavPlayerProps) => {
                         }}
                     />
                 </View>
-                <View style={[appStyles.flex_row_align, { marginTop: getSize.m(14) }]}>
-                    <Text numberOfLines={1} style={styles.text_details}>
+                <View style={[appStyles.flex_row_center, { marginTop: getSize.m(14) }]}>
+                    <Text style={styles.text_details}>
                         {getTranslationText({
                             textHe: player?.name_he,
                             textEn: player?.name_en,
@@ -66,15 +66,19 @@ export const FavPlayer = ({ player, color }: IFavPlayerProps) => {
 
                     <TouchableOpacity onPress={() => onClickPlayer(player?._id)}>
                         <LinearGradient colors={[color, color]} style={styles.icon_arrow_left}>
-                            <FastImage
-                                source={AppImages.img_angle_down}
-                                style={{
-                                    width: getSize.m(9),
-                                    height: getSize.m(12),
-                                    transform: [{ rotate: I18nManager.isRTL ? '0deg' : '180deg' }],
-                                }}
-                                resizeMode={FastImage.resizeMode.contain}
-                            />
+                            <View style={{ marginLeft: getSize.m(1) }}>
+                                <FastImage
+                                    source={AppImages.img_angle_down}
+                                    style={{
+                                        width: getSize.m(9),
+                                        height: getSize.m(12),
+                                        transform: [
+                                            { rotate: I18nManager.isRTL ? '0deg' : '180deg' },
+                                        ],
+                                    }}
+                                    resizeMode={FastImage.resizeMode.contain}
+                                />
+                            </View>
                         </LinearGradient>
                     </TouchableOpacity>
                 </View>

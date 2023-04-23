@@ -163,7 +163,10 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                                         </TouchableOpacity>
                                         <View>
                                             <View style={[appStyles.flex_row_align, styles.avt]}>
-                                                <TouchableOpacity onPress={onPressAvatar}>
+                                                <TouchableOpacity
+                                                    style={styles.container_avt}
+                                                    onPress={onPressAvatar}
+                                                >
                                                     <FastImage
                                                         style={{
                                                             width: getSize.m(40),
