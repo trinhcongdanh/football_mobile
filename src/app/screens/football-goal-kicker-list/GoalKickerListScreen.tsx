@@ -52,18 +52,24 @@ export const GoalKickerListScreen = ({ navigation, route }: IGoalKickerListScree
                                 text={teamSeasonStats.team_name_he}
                                 avt={{ uri: teamSeasonStats.team_logo_url }}
                             />
-                            <LinearGradient
-                                colors={[
-                                    'rgba(255, 255, 255, 0.05)',
-                                    'rgba(16, 32, 100, 0.05)',
-                                    'rgba(59, 168, 225, 0.05)',
+
+                            <View
+                                style={[
+                                    appStyles.package,
+                                    { marginTop: getSize.m(0), minHeight: getSize.m(900) },
                                 ]}
-                                style={[appStyles.package, { marginTop: getSize.m(0) }]}
                             >
-                                <View style={[appStyles.flex_row_space_center, styles.header]}>
+                                <LinearGradient
+                                    colors={[
+                                        'rgba(255, 255, 255, 0.05)',
+                                        'rgba(16, 32, 100, 0.05)',
+                                        'rgba(59, 168, 225, 0.05)',
+                                    ]}
+                                    style={[appStyles.flex_row_space_center, styles.header]}
+                                >
                                     <Text style={styles.text_header}>{titleLeft}</Text>
                                     <Text style={styles.text_header}>{titleRight}</Text>
-                                </View>
+                                </LinearGradient>
                                 <View>
                                     {data.map((item: any) => {
                                         return (
@@ -90,7 +96,7 @@ export const GoalKickerListScreen = ({ navigation, route }: IGoalKickerListScree
                                         );
                                     })}
                                 </View>
-                            </LinearGradient>
+                            </View>
                         </ScrollView>
                     </View>
                 )}

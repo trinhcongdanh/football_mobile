@@ -87,19 +87,23 @@ export const DataCoachTeamsScreen = ({ teams }: IDataCoachTeamsScreenProps) => {
                                                 borderRadius: getSize.m(22),
                                             }}
                                         />
-                                        <Text
-                                            style={[
-                                                appStyles.statistics_content,
-                                                {
-                                                    marginLeft: getSize.m(3),
-                                                },
-                                            ]}
-                                        >
-                                            {getTranslationText({
-                                                textHe: item.name_he,
-                                                textEn: item.name_en,
-                                            })}
-                                        </Text>
+                                        <View style={{ width: '70%' }}>
+                                            <Text
+                                                numberOfLines={2}
+                                                style={[
+                                                    appStyles.statistics_content,
+                                                    {
+                                                        marginLeft: getSize.m(3),
+                                                        textAlign: 'left',
+                                                    },
+                                                ]}
+                                            >
+                                                {getTranslationText({
+                                                    textHe: item.name_he,
+                                                    textEn: item.name_en,
+                                                })}
+                                            </Text>
+                                        </View>
                                     </View>
                                 </View>
 
