@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
         backgroundColor: appColors.blue_matte,
     },
     text_option_grid: {
-        fontSize: getSize.s(14),
+        fontSize: getSize.m(12),
         marginTop: getSize.m(10),
         color: appColors.text_dark_blue,
         textAlign: 'center',
