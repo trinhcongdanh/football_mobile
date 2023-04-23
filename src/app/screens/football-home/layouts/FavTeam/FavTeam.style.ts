@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
 
     text_details: {
         fontFamily: AppFonts.bold,
-        fontSize: getSize.m(16),
+        fontSize: getSize.m(18),
         lineHeight: getSize.m(26),
         color: appColors.white,
     },

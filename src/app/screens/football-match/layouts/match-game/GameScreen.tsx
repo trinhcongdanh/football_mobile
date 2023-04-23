@@ -59,7 +59,7 @@ export const GameScreen = ({ navigation, route }: IGameScreenProps) => {
                         {game?.gameplay?.map((item: Gameplay, index: number) => {
                             return (
                                 // eslint-disable-next-line react/no-array-index-key
-                                <View key={index} style={{ marginTop: getSize.m(item.minute) }}>
+                                <View key={index} style={{ marginTop: getSize.m(30) }}>
                                     {item.action === GamePlayAction.YellowCard && (
                                         <TicketYellow
                                             name={getTranslationText({
