@@ -80,7 +80,7 @@ export const styles = StyleSheet.create({
         width: getSize.m(16),
         borderTopRightRadius: getSize.m(30),
         borderBottomRightRadius: getSize.m(30),
-        left: getSize.m(-10),
+        left: getSize.m(-12),
     },
     circle_left: {
         backgroundColor: appColors.gray,
@@ -89,7 +89,7 @@ export const styles = StyleSheet.create({
         width: getSize.m(16),
         borderTopLeftRadius: getSize.m(30),
         borderBottomLeftRadius: getSize.m(30),
-        right: getSize.m(-10),
+        right: getSize.m(-12),
     },
     details: {
         fontSize: getSize.m(12),

@@ -66,7 +66,9 @@ export const AppImages = {
     img_user: require('./user.png'),
     img_user_bold: require('./user_bold.png'),
     img_building: require('./building.png'),
-    img_bars_sort: I18nManager.isRTL ? require('./bars_sort.png') : require('./bars_sort_reverse.png'),
+    img_bars_sort: I18nManager.isRTL
+        ? require('./bars_sort.png')
+        : require('./bars_sort_reverse.png'),
     img_angle_arrow: I18nManager.isRTL ? require('./angle_right.png') : require('./angle_left.png'),
     img_light_volleyball: require('./light_volleyball.png'),
     img_calendar: require('./calendar.png'),
@@ -147,6 +149,8 @@ export const AppImages = {
     img_dotted_border: require('./dotted_border.png'),
     img_play_video_button: require('./play_video_button.png'),
     img_play_icon: require('./play_icon.png'),
+    img_background_welcome: require('./background_welcome.png'),
+    img_background_login: require('./background_login.png'),
 };
 
 export const AppJsons = {

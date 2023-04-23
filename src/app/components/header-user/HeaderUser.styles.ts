@@ -30,4 +30,13 @@ export const styles = StyleSheet.create({
         textAlign: 'center',
     },
     width_size: { width: getSize.m(40) },
+
+    container_avt: {
+        backgroundColor: '#182D60',
+        height: getSize.m(44),
+        width: getSize.m(44),
+        borderRadius: getSize.m(44),
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
 });
