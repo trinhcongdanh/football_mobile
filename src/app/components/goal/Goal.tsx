@@ -12,7 +12,9 @@ export const Goal = ({ name, avt, minute, team }: IGoalProps) => {
     return (
         <View>
             <View style={appStyles.flex_row_align_center}>
-                <Text style={styles.time}>{`${minute}'`}</Text>
+                <View style={{ marginLeft: getSize.m(7) }}>
+                    <Text style={styles.time}>{`${minute}'`}</Text>
+                </View>
 
                 <View style={styles.ticket}>
                     <FastImage
@@ -29,7 +31,9 @@ export const Goal = ({ name, avt, minute, team }: IGoalProps) => {
                 />
                 <Text style={styles.name_player}>{name}</Text>
             </View>
-            <Text style={styles.team}>{team}</Text>
+            <View style={{ marginLeft: getSize.m(7) }}>
+                <Text style={styles.team}>{team}</Text>
+            </View>
         </View>
     );
 };

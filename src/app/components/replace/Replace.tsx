@@ -14,7 +14,9 @@ export const Replace = ({ name_up, name_down, avt_up, avt_down, minute, team }: 
     return (
         <View>
             <View style={appStyles.flex_row_align_center}>
-                <Text style={styles.time}>{`${minute}'`}</Text>
+                <View style={{ marginLeft: getSize.m(7) }}>
+                    <Text style={styles.time}>{`${minute}'`}</Text>
+                </View>
 
                 <View style={styles.ticket}>
                     <FastImage
@@ -48,7 +50,9 @@ export const Replace = ({ name_up, name_down, avt_up, avt_down, minute, team }: 
                     <Text style={styles.name_player}>{name_down}</Text>
                 </View>
             </View>
-            <Text style={styles.team}>{team}</Text>
+            <View style={{ marginLeft: getSize.m(7) }}>
+                <Text style={styles.team}>{team}</Text>
+            </View>
         </View>
     );
 };
