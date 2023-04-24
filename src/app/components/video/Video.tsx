@@ -65,7 +65,7 @@ export const Video = () => {
                         }}
                     >
                         {showVideo && (
-                            <View>
+                            <View style={{ marginTop: getSize.m(10) }}>
                                 <YoutubePlayer
                                     ref={videoRef}
                                     height={getSize.m(210)}

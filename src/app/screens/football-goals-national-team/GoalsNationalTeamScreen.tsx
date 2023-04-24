@@ -33,10 +33,7 @@ export const GoalsNationalTeamScreen = ({ navigation, route }: IGoalsNationalTea
                         iconName={appIcons.ic_right_ios}
                         iconStyle={styles.ic_back}
                         goBack={onGoBack}
-                        title={getTranslationText({
-                            textHe: player?.league_title_he,
-                            textEn: player?.league_title_en,
-                        })}
+                        title={t('goal_national_team.title')}
                     />
                 </View>
                 <ScrollView>

@@ -9,4 +9,5 @@ export type IDropdownFieldProps = {
     selectedValue: any;
     isOpen?: boolean;
     width?: StyleProp<any>;
+    style?: StyleProp<any>;
 };
