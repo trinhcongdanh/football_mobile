@@ -71,7 +71,7 @@ export const FavTeam = ({ team, color }: IFavTeamProps) => {
                     />
                 </View>
                 <View style={[appStyles.flex_row_center, { marginTop: getSize.m(14) }]}>
-                    <Text style={styles.text_details}>
+                    <Text numberOfLines={2} style={styles.text_details}>
                         {getTranslationText({
                             textHe: team?.name_he,
                             textEn: team?.name_en,

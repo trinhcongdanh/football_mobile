@@ -107,7 +107,9 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                                     position: 'absolute',
                                     top: getSize.m(0),
                                     left:
-                                        Platform.OS === 'android' ? getSize.m(130) : getSize.m(160),
+                                        Platform.OS === 'android'
+                                            ? width / 3 + getSize.m(10)
+                                            : width / 3 + getSize.m(40),
                                     transform: [{ scaleX: I18nManager.isRTL ? 1 : -1 }],
                                 }}
                             />

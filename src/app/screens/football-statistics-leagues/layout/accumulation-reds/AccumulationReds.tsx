@@ -183,7 +183,7 @@ export const AccumulationReds = ({ redCards, leagueSeasonStats }: IAccumulationR
                                         appStyles.statistics_content,
                                         {
                                             color: appColors.white,
-                                            fontSize: getSize.m(14),
+                                            fontSize: getSize.m(10),
                                         },
                                     ]}
                                 >
