@@ -64,6 +64,8 @@ export const DataPlayerTeamScreen = ({ player }: IDataPlayerTeamScreenProps) => 
                                     setSelectedSeason(season);
                                 }}
                                 itemTitleField="name"
+                                width={getSize.m(144)}
+                                style={{ justifyContent: 'center', alignItems: 'center' }}
                             />
                         </View>
                     </View>

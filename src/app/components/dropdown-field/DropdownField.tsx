@@ -17,6 +17,7 @@ const DropdownField = ({
     selectedValue,
     closeDropdown,
     width,
+    style,
 }: IDropdownFieldProps) => {
     const [openModal, setOpenModal] = useState(false);
 
@@ -29,8 +30,16 @@ const DropdownField = ({
                 }
             }}
             disabled={false}
+            style={style}
         >
-            <View style={styles.container}>
+            <View
+                style={[
+                    styles.container,
+                    {
+                        width: width,
+                    },
+                ]}
+            >
                 <TouchableOpacity
                     activeOpacity={1}
                     onPress={() => {

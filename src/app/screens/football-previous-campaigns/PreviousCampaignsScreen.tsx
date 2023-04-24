@@ -48,7 +48,7 @@ export const PreviousCampaignsScreen = ({ navigation, route }: IPreviousCampaign
                             textHe: topTeam?.name_he,
                             textEn: topTeam?.name_en,
                         })}
-                        logo={{ uri: topTeam.logo_url }}
+                        logo={{ uri: topTeam?.logo_url }}
                     />
                     <View
                         style={[
@@ -83,15 +83,15 @@ export const PreviousCampaignsScreen = ({ navigation, route }: IPreviousCampaign
                                         style={[appStyles.flex_row_space_center, styles.content]}
                                         onPress={() => handleCampaignPage(index)}
                                         // eslint-disable-next-line no-underscore-dangle
-                                        key={campaign._id}
+                                        key={campaign?._id}
                                     >
                                         <Text style={styles.name_campaign}>
                                             {getTranslationText({
-                                                textHe: campaign.name_he,
-                                                textEn: campaign.name_en,
+                                                textHe: campaign?.name_he,
+                                                textEn: campaign?.name_en,
                                             })}
                                         </Text>
-                                        <Text style={styles.year_campaign}>{campaign.season}</Text>
+                                        <Text style={styles.year_campaign}>{campaign?.season}</Text>
                                     </TouchableOpacity>
                                 );
                             })}

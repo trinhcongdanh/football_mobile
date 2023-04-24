@@ -114,7 +114,7 @@ export const RedCard = ({ listGames, handleTeamGoalKickersList }: IRedCardProps)
                                 <Text
                                     style={[
                                         appStyles.statistics_content,
-                                        { fontSize: getSize.m(14), color: appColors.white },
+                                        { fontSize: getSize.m(10), color: appColors.white },
                                     ]}
                                 >
                                     {item.num_of_cards}

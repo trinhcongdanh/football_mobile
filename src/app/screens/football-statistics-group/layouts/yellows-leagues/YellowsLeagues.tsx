@@ -113,7 +113,7 @@ export const YellowsLeagues = ({ listGames, handleTeamGoalKickersList }: IYellow
                                 <Text
                                     style={[
                                         appStyles.statistics_content,
-                                        { fontSize: getSize.m(14) },
+                                        { fontSize: getSize.m(10) },
                                     ]}
                                 >
                                     {item.num_of_cards}
