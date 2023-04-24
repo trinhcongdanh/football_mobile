@@ -170,57 +170,63 @@ const useEventHandler = (state: any) => {
 
     // Facebook Login
     const connectFacebook = useCallback(async () => {
-        await LoginManager.logInWithPermissions(['public_profile', 'email']).then(
-            async (result: any) => {
-                console.log('login is progressing.');
-                if (result.isCancelled) {
-                    console.log('login is cancelled.');
-                } else {
-                    await Profile.getCurrentProfile().then(currentProfile => {
-                        if (currentProfile) {
-                            console.log(currentProfile);
-                        }
-                    });
-                    if (Platform.OS === 'ios') {
-                        await AuthenticationToken.getAuthenticationTokenIOS().then((data: any) => {
-                            console.log(data?.authenticationToken);
-                            getInfoFromToken(data?.authenticationToken.toString());
-                            if (data) {
-                                dispatch(
-                                    otpUser(
-                                        serializeParams({
-                                            action: ACTION,
-                                            token: TOKEN,
-                                            call: AuthData.LOGIN,
-                                            facebook_app_id: env.FACEBOOK_APPID,
-                                            facebook_app_secret: env.FACEBOOK_SECRET_KEY,
-                                        })
-                                    )
-                                );
-                            }
-                        });
+        try {
+            await LoginManager.logInWithPermissions(['public_profile', 'email']).then(
+                async (result: any) => {
+                    console.log('login is progressing.');
+                    if (result.isCancelled) {
+                        console.log('login is cancelled.');
                     } else {
-                        await AccessToken.getCurrentAccessToken().then((data: any) => {
-                            console.log(data);
-                            getInfoFromToken(data?.accessToken.toString());
-                            if (data) {
-                                dispatch(
-                                    otpUser(
-                                        serializeParams({
-                                            action: ACTION,
-                                            token: TOKEN,
-                                            call: AuthData.LOGIN,
-                                            facebook_app_id: env.FACEBOOK_APPID,
-                                            facebook_app_secret: env.FACEBOOK_SECRET_KEY,
-                                        })
-                                    )
-                                );
+                        await Profile.getCurrentProfile().then(currentProfile => {
+                            if (currentProfile) {
+                                console.log(currentProfile);
                             }
                         });
+                        if (Platform.OS === 'ios') {
+                            await AuthenticationToken.getAuthenticationTokenIOS().then(
+                                (data: any) => {
+                                    console.log(data?.authenticationToken);
+                                    getInfoFromToken(data?.authenticationToken.toString());
+                                    if (data) {
+                                        dispatch(
+                                            otpUser(
+                                                serializeParams({
+                                                    action: ACTION,
+                                                    token: TOKEN,
+                                                    call: AuthData.LOGIN,
+                                                    facebook_app_id: env.FACEBOOK_APPID,
+                                                    facebook_app_secret: env.FACEBOOK_SECRET_KEY,
+                                                })
+                                            )
+                                        );
+                                    }
+                                }
+                            );
+                        } else {
+                            await AccessToken.getCurrentAccessToken().then((data: any) => {
+                                console.log(data);
+                                getInfoFromToken(data?.accessToken.toString());
+                                if (data) {
+                                    dispatch(
+                                        otpUser(
+                                            serializeParams({
+                                                action: ACTION,
+                                                token: TOKEN,
+                                                call: AuthData.LOGIN,
+                                                facebook_app_id: env.FACEBOOK_APPID,
+                                                facebook_app_secret: env.FACEBOOK_SECRET_KEY,
+                                            })
+                                        )
+                                    );
+                                }
+                            });
+                        }
                     }
                 }
-            }
-        );
+            );
+        } catch (error: any) {
+            Alert.alert(JSON.stringify(error.message));
+        }
     }, [getInfoFromToken]);
 
     const connectGoogle = useCallback(async () => {
@@ -262,43 +268,48 @@ const useEventHandler = (state: any) => {
     const connectApple = async () => {
         let subject = '';
         let code = '';
-        if (Platform.OS === 'android') {
-            // Configure the request
-            appleAuthAndroid.configure({
-                clientId: CLIENT_ID,
-                redirectUri: REDIRECT_URI,
-                responseType: appleAuthAndroid.ResponseType.ALL,
-                scope: appleAuthAndroid.Scope.NAME,
-                nonce: uuid(),
-                state: uuid(),
-            });
+        try {
+            if (Platform.OS === 'android') {
+                // Configure the request
+                appleAuthAndroid.configure({
+                    clientId: CLIENT_ID,
+                    redirectUri: REDIRECT_URI,
+                    responseType: appleAuthAndroid.ResponseType.ALL,
+                    scope: appleAuthAndroid.Scope.NAME,
+                    nonce: uuid(),
+                    state: uuid(),
+                });
 
-            // Open the browser window for user sign in
-            const response = await appleAuthAndroid.signIn();
+                // Open the browser window for user sign in
+                const response = await appleAuthAndroid.signIn();
 
-            console.log('response', response);
-            const decode = jwt_decode(`${response.id_token}`);
-            code = response.code;
-            subject = decode?.sub;
-        } else {
-            const appleAuthRequestResponse = await appleAuth.performRequest({
-                requestedOperation: appleAuth.Operation.LOGIN,
-                // Note: it appears putting FULL_NAME first is important, see issue #293
-                requestedScopes: [appleAuth.Scope.FULL_NAME, appleAuth.Scope.EMAIL],
-            });
-
-            const credentialState = await appleAuth.getCredentialStateForUser(
-                appleAuthRequestResponse.user
-            );
-
-            console.log('credentialState', credentialState);
-            // use credentialState response to ensure the user is authenticated
-            if (credentialState === appleAuth.State.AUTHORIZED) {
-                const decode = jwt_decode(`${appleAuthRequestResponse.identityToken}`);
-                code = appleAuthRequestResponse?.authorizationCode;
+                console.log('response', response);
+                const decode = jwt_decode(`${response.id_token}`);
+                code = response.code;
                 subject = decode?.sub;
+            } else {
+                const appleAuthRequestResponse = await appleAuth.performRequest({
+                    requestedOperation: appleAuth.Operation.LOGIN,
+                    // Note: it appears putting FULL_NAME first is important, see issue #293
+                    requestedScopes: [appleAuth.Scope.FULL_NAME, appleAuth.Scope.EMAIL],
+                });
+
+                const credentialState = await appleAuth.getCredentialStateForUser(
+                    appleAuthRequestResponse.user
+                );
+
+                console.log('credentialState', credentialState);
+                // use credentialState response to ensure the user is authenticated
+                if (credentialState === appleAuth.State.AUTHORIZED) {
+                    const decode = jwt_decode(`${appleAuthRequestResponse.identityToken}`);
+                    code = appleAuthRequestResponse?.authorizationCode;
+                    subject = decode?.sub;
+                }
             }
+        } catch (error: any) {
+            Alert.alert(JSON.stringify(error.message));
         }
+
         console.log('subject', subject);
         console.log('code', code);
         dispatch(
@@ -360,11 +371,15 @@ const useEffectHandler = (state: any, eventHandler: any) => {
 
     // Google Account
     useEffect(() => {
-        GoogleSignin.configure({
-            webClientId: env.webClientId,
-            iosClientId: env.iosClientId,
-            offlineAccess: true,
-        });
+        try {
+            GoogleSignin.configure({
+                webClientId: env.webClientId,
+                iosClientId: env.iosClientId,
+                offlineAccess: true,
+            });
+        } catch (error: any) {
+            Alert.alert(JSON.stringify(error.message));
+        }
     }, []);
 };
 
