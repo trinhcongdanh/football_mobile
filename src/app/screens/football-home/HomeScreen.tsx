@@ -108,7 +108,7 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                                     top: getSize.m(0),
                                     left:
                                         Platform.OS === 'android'
-                                            ? width / 3 + getSize.m(10)
+                                            ? width / (3 * 0.8)
                                             : width / 3 + getSize.m(40),
                                     transform: [{ scaleX: I18nManager.isRTL ? 1 : -1 }],
                                 }}
@@ -158,6 +158,9 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                                                     style={{
                                                         width: getSize.m(12),
                                                         height: getSize.m(14),
+                                                        transform: [
+                                                            { scaleX: I18nManager.isRTL ? 1 : -1 },
+                                                        ],
                                                     }}
                                                     resizeMode={FastImage.resizeMode.contain}
                                                 />

@@ -134,23 +134,30 @@ export const LeagueTable = ({ leagueSeasonId }: ILeagueTableProps) => {
                                             }}
                                         >
                                             <View style={appStyles.flex_row_align}>
-                                                <Text
-                                                    style={[
-                                                        appStyles.statistics_content,
-                                                        {
-                                                            marginRight: getSize.m(10),
-                                                            textAlign: 'left',
-                                                        },
-                                                    ]}
+                                                <View style={{ width: '20%' }}>
+                                                    <Text
+                                                        style={[
+                                                            appStyles.statistics_content,
+                                                            {
+                                                                marginRight: getSize.m(10),
+                                                                textAlign: 'left',
+                                                            },
+                                                        ]}
+                                                    >
+                                                        {item?.place}
+                                                    </Text>
+                                                </View>
+                                                <View
+                                                    style={{
+                                                        width: '10%',
+                                                    }}
                                                 >
-                                                    {item?.place}
-                                                </Text>
-
-                                                <Avatar
-                                                    source={{ uri: item?.logo_url }}
-                                                    rounded
-                                                    size={18}
-                                                />
+                                                    <Avatar
+                                                        source={{ uri: item?.logo_url }}
+                                                        rounded
+                                                        size={18}
+                                                    />
+                                                </View>
                                                 <View style={{ width: '60%' }}>
                                                     <Text
                                                         numberOfLines={2}
