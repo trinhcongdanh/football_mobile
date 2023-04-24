@@ -152,7 +152,7 @@ export const ListGame_Test = ({
                         style={[
                             appStyles.flex_row_align,
                             {
-                                width: '50%',
+                                width: '36%',
                             },
                         ]}
                     >
@@ -161,7 +161,7 @@ export const ListGame_Test = ({
                             size={getSize.m(20)}
                             color={!isFuture ? appColors.soft_grey : appColors.blue_light}
                         />
-                        <View style={{ width: '62%' }}>
+                        <View style={{ width: '90%' }}>
                             <Text
                                 numberOfLines={1}
                                 style={[
