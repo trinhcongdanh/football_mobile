@@ -12,4 +12,5 @@ export type IInfoPersonComponent = {
     title_3: string;
     rating?: any;
     style?: StyleProp<any>;
+    textAlign?: StyleProp<any>;
 };

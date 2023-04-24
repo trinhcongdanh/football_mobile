@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
         fontSize: getSize.m(15),
         color: appColors.white,
         lineHeight: getSize.m(22),
-        textAlign: 'left',
+        textAlign: 'center',
     },
 
     title: {

@@ -50,6 +50,7 @@ export const ListPlayer = ({
                             height: getSize.m(26),
                             borderRadius: getSize.m(26),
                         }}
+                        resizeMode={FastImage.resizeMode.contain}
                         source={{ uri: avt }}
                     />
                 </View>

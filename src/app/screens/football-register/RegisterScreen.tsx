@@ -101,7 +101,7 @@ export const RegisterScreen = ({ navigation, route }: IRegisterScreenProps) => {
                             <View
                                 style={[
                                     appStyles.flex_row_center,
-                                    { marginTop: getSize.m(67), marginBottom: getSize.m(35) },
+                                    { marginTop: getSize.m(67), marginBottom: getSize.m(60) },
                                 ]}
                             >
                                 <Text style={styles.txt_have_user}>
