@@ -52,6 +52,9 @@ export const ListPlayer = ({
                         }}
                         resizeMode={FastImage.resizeMode.contain}
                         source={{ uri: avt }}
+                        onLoadEnd={() => {
+                            console.log('Load finished image');
+                        }}
                     />
                 </View>
                 <Text
