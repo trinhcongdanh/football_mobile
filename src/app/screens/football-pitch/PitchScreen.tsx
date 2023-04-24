@@ -52,6 +52,7 @@ export const PitchScreen = ({ navigation, route }: IPitchScreenProps) => {
                                     textHe: stadium?.address_he,
                                     textEn: stadium?.address_en,
                                 })}
+                                textAlign="left"
                                 data_2={getTranslationText({
                                     textHe: stadium?.contact_he,
                                     textEn: stadium?.contact_en,

@@ -19,6 +19,7 @@ export const InfoPerson = ({
     title_3,
     rating,
     style,
+    textAlign,
 }: IInfoPersonComponent) => {
     const { t } = useTranslation();
     return (
@@ -53,11 +54,36 @@ export const InfoPerson = ({
                     },
                 ]}
             >
-                <View style={[appStyles.align_justify, style]}>
-                    <Text style={styles.data}>{data_1}</Text>
+                <View
+                    style={[
+                        appStyles.align_justify,
+                        style,
+                        {
+                            width: '32%',
+                        },
+                    ]}
+                >
+                    <Text
+                        numberOfLines={2}
+                        style={[
+                            styles.data,
+                            {
+                                textAlign: textAlign,
+                            },
+                        ]}
+                    >
+                        {data_1}
+                    </Text>
                     <Text style={styles.title}>{title_1}</Text>
                 </View>
-                <View style={appStyles.align_justify}>
+                <View
+                    style={[
+                        appStyles.align_justify,
+                        {
+                            width: '33%',
+                        },
+                    ]}
+                >
                     <View style={appStyles.flex_row_space_center}>
                         {img_logo && (
                             <Avatar
@@ -68,12 +94,23 @@ export const InfoPerson = ({
                             />
                         )}
 
-                        <Text style={styles.data}>{data_2}</Text>
+                        <Text numberOfLines={2} style={styles.data}>
+                            {data_2}
+                        </Text>
                     </View>
                     <Text style={styles.title}>{title_2}</Text>
                 </View>
-                <View style={appStyles.align_justify}>
-                    <Text style={styles.data}>{data_3}</Text>
+                <View
+                    style={[
+                        appStyles.align_justify,
+                        {
+                            width: '34%',
+                        },
+                    ]}
+                >
+                    <Text numberOfLines={2} style={styles.data}>
+                        {data_3}
+                    </Text>
                     <Text style={styles.title}>{title_3}</Text>
                 </View>
             </View>
