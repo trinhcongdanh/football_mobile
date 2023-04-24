@@ -55,7 +55,12 @@ export const DataPlayerTeamScreen = ({ player }: IDataPlayerTeamScreenProps) => 
                             </Text>
                         </View>
                         <View
-                            style={{ flex: 1, marginBottom: getSize.m(20), width: getSize.m(130) }}
+                            style={{
+                                flex: 1,
+                                marginBottom: getSize.m(20),
+                                width: getSize.m(130),
+                                marginTop: getSize.m(12),
+                            }}
                         >
                             <DropdownField
                                 options={player?.team?.seasons || []}
