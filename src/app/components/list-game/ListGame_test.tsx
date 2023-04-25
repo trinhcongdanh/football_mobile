@@ -240,7 +240,7 @@ export const ListGame_Test = ({
                         {isHomePage ? (
                             <View>
                                 {isLive ? (
-                                    <ProgressBar percentage={45}>
+                                    <ProgressBar percentage={timeLive}>
                                         <View
                                             style={{
                                                 position: 'absolute',
