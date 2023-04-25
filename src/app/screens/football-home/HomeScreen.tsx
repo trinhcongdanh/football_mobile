@@ -158,9 +158,6 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                                                     style={{
                                                         width: getSize.m(12),
                                                         height: getSize.m(14),
-                                                        transform: [
-                                                            { scaleX: I18nManager.isRTL ? 1 : -1 },
-                                                        ],
                                                     }}
                                                     resizeMode={FastImage.resizeMode.contain}
                                                 />
