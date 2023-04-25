@@ -142,7 +142,11 @@ export const GamesList = ({ topTeam }: IGamesListProps) => {
                                     isFuture={
                                         moment().diff(moment(`${item?.date} ${item?.time}`)) < 0
                                     }
-                                    style={{ marginTop: getSize.m(12) }}
+                                    style={{
+                                        marginTop: getSize.m(12),
+                                        height: getSize.m(157),
+                                        width: getSize.m(335),
+                                    }}
                                     gameDetail={t('list_game.detail')}
                                 />
                             );

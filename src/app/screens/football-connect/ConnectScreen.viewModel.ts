@@ -185,7 +185,8 @@ const useEventHandler = (state: any) => {
                         if (Platform.OS === 'ios') {
                             await AuthenticationToken.getAuthenticationTokenIOS().then(
                                 (data: any) => {
-                                    console.log(data?.authenticationToken);
+                                    console.log('authenticationToken', data?.authenticationToken);
+
                                     getInfoFromToken(data?.authenticationToken.toString());
                                     if (data) {
                                         dispatch(
@@ -194,8 +195,8 @@ const useEventHandler = (state: any) => {
                                                     action: ACTION,
                                                     token: TOKEN,
                                                     call: AuthData.LOGIN,
-                                                    facebook_app_id: env.FACEBOOK_APPID,
-                                                    facebook_app_secret: env.FACEBOOK_SECRET_KEY,
+                                                    facebook_user_id: data.userID,
+                                                    facebook_access_token: data.accessToken,
                                                 })
                                             )
                                         );
@@ -213,8 +214,8 @@ const useEventHandler = (state: any) => {
                                                 action: ACTION,
                                                 token: TOKEN,
                                                 call: AuthData.LOGIN,
-                                                facebook_app_id: env.FACEBOOK_APPID,
-                                                facebook_app_secret: env.FACEBOOK_SECRET_KEY,
+                                                facebook_user_id: data.userID,
+                                                facebook_access_token: data.accessToken,
                                             })
                                         )
                                     );

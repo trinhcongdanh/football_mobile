@@ -68,6 +68,11 @@ export const ScheduleScreen = ({ navigation, route }: IScheduleScreenProps) => {
                             )}
                             isFuture={moment().diff(moment(`${item?.date} ${item?.time}`)) < 0}
                             color={appColors.gray}
+                            style={{
+                                height: getSize.m(164),
+                                width: getSize.m(324),
+                            }}
+                            marginTopMatch={getSize.m(14)}
                         />
                     );
                 })}

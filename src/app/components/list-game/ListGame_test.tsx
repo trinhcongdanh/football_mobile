@@ -38,6 +38,7 @@ export const ListGame_Test = ({
     isFuture,
     isHomePage,
     timeLive,
+    marginTopMatch,
 }: IListGameProps) => {
     const { t } = useTranslation();
     const emptyResult = result === ' : ' ? ' : ' : null;
@@ -99,7 +100,16 @@ export const ListGame_Test = ({
                     </Text>
                 </View>
             ) : (
-                <View style={[appStyles.flex_row_space, { marginHorizontal: getSize.m(15) }]}>
+                <View
+                    style={[
+                        appStyles.flex_row_space,
+                        {
+                            marginHorizontal: getSize.m(24),
+                            marginTop: getSize.m(4),
+                            marginTop: marginTopMatch,
+                        },
+                    ]}
+                >
                     <View style={appStyles.flex_row_align}>
                         <Text
                             style={[
@@ -190,7 +200,7 @@ export const ListGame_Test = ({
                 {/* <View style={styles.line_dots} /> */}
                 <Image source={AppImages.img_dotted_border} style={styles.line_dots} />
             </View>
-            <View style={[appStyles.align_justify]}>
+            <View style={[appStyles.align_justify, { marginTop: getSize.m(4) }]}>
                 <View
                     style={[
                         appStyles.flex_row_space,
@@ -402,7 +412,7 @@ export const ListGame_Test = ({
                         {
                             flex: 0,
                             marginBottom: getSize.m(20),
-                            marginTop: getSize.m(-10),
+                            marginTop: getSize.m(-16),
                             paddingTop: 5,
                         },
                     ]}
