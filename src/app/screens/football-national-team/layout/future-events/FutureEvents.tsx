@@ -60,7 +60,11 @@ export const FutureEvents = ({ topTeam }: IFutureEventsProps) => {
                                     isFuture={
                                         moment().diff(moment(`${item?.date} ${item?.time}`)) < 0
                                     }
-                                    style={{ marginTop: getSize.m(12) }}
+                                    style={{
+                                        height: getSize.m(196),
+                                        width: getSize.m(335),
+                                        marginTop: getSize.m(12),
+                                    }}
                                 />
                             );
                         })}

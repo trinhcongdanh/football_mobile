@@ -260,7 +260,7 @@ const useEventHandler = (state: any) => {
                         if (Platform.OS === 'ios') {
                             await AuthenticationToken.getAuthenticationTokenIOS().then(
                                 (data: any) => {
-                                    console.log(data?.authenticationToken);
+                                    console.log('authenticationToken', data?.authenticationToken);
                                     getInfoFromToken(data?.authenticationToken.toString());
                                     if (data) {
                                         dispatch(
@@ -272,9 +272,8 @@ const useEventHandler = (state: any) => {
                                                     guest_id: login.login.user.item_id,
                                                     call: AuthData.REGISTER,
                                                     item: {
-                                                        facebook_app_id: env.FACEBOOK_APPID,
-                                                        facebook_app_secret:
-                                                            env.FACEBOOK_SECRET_KEY,
+                                                        facebook_user_id: data.userID,
+                                                        facebook_access_token: data.accessToken,
                                                     },
                                                 })
                                             )
@@ -296,8 +295,8 @@ const useEventHandler = (state: any) => {
                                                 guest_id: login.login.user.item_id,
                                                 call: AuthData.REGISTER,
                                                 item: {
-                                                    facebook_app_id: env.FACEBOOK_APPID,
-                                                    facebook_app_secret: env.FACEBOOK_SECRET_KEY,
+                                                    facebook_user_id: data.userID,
+                                                    facebook_access_token: data.accessToken,
                                                 },
                                             })
                                         )

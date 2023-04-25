@@ -53,7 +53,8 @@ export const ListOfGames = ({ games }: IListOfGamesProps) => {
                             isFuture={moment().diff(moment(`${item?.date} ${item?.time}`)) < 0}
                             handleDetailMatch={() => onNavigateGamePersonnel(item.game_id)}
                             handleStadium={() => onNavigateStadium(item.stadium_id)}
-                            personnel={t('list_game.composition')}
+                            gameDetail={t('list_game.detail')}
+                            style={{ height: getSize.m(157), width: getSize.m(335) }}
                         />
                     );
                 })}
