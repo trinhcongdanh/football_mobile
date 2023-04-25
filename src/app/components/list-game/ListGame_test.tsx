@@ -14,6 +14,7 @@ import { useDateTime } from '@football/app/utils/hooks/useDateTime';
 import { AppImages } from '@football/app/assets/images';
 import { useResult } from '@football/app/utils/hooks/useResult';
 import { AppFonts } from '@football/app/assets/fonts';
+import { ProgressBar } from '@football/app/components/progress-bar/ProgressBar';
 
 export const ListGame_Test = ({
     logo_home,
@@ -94,7 +95,7 @@ export const ListGame_Test = ({
                             marginLeft: getSize.m(6),
                         }}
                     >
-                        {timeLive}'
+                        '{timeLive}
                     </Text>
                 </View>
             ) : (
@@ -236,53 +237,132 @@ export const ListGame_Test = ({
                             },
                         ]}
                     >
-                        <View
-                            style={[
-                                appStyles.align_justify,
-                                styles.time,
-                                {
-                                    backgroundColor:
-                                        result === emptyResult ? appColors.white : '#F8FDFF',
-                                    marginHorizontal:
-                                        nameHome || nameAway ? getSize.m(20) : getSize.m(40),
-                                },
-                            ]}
-                        >
-                            {isLive && (
-                                <Text
-                                    style={[
-                                        styles.score,
-                                        {
-                                            color: appColors.light_gray,
-                                        },
-                                    ]}
-                                >
-                                    {result === emptyResult
-                                        ? '- : -'
-                                        : getResult({
-                                              result: result,
-                                          })}
-                                </Text>
-                            )}
-                            {!isLive &&
-                                result === emptyResult &&
-                                schedule !== null &&
-                                tournament && <Text style={styles.score}>V S</Text>}
-                            {!isLive &&
-                                result === emptyResult &&
-                                schedule !== null &&
-                                !tournament && (
-                                    <Text style={styles.score}>{getTime({ time: schedule })}</Text>
-                                )}
+                        {isHomePage ? (
+                            <View>
+                                {isLive ? (
+                                    <ProgressBar percentage={45}>
+                                        <View
+                                            style={{
+                                                position: 'absolute',
+                                                top: getSize.m(10),
+                                                left: getSize.m(21),
+                                            }}
+                                        >
+                                            <View
+                                                style={{
+                                                    width: getSize.m(30),
+                                                    justifyContent: 'center',
+                                                    alignItems: 'center',
+                                                }}
+                                            >
+                                                <Text
+                                                    style={[
+                                                        styles.score,
+                                                        {
+                                                            color: '#404040',
+                                                        },
+                                                    ]}
+                                                >
+                                                    {result === emptyResult
+                                                        ? '- : -'
+                                                        : getResult({
+                                                              result: result,
+                                                          })}
+                                                </Text>
+                                            </View>
+                                        </View>
+                                    </ProgressBar>
+                                ) : (
+                                    <View
+                                        style={[
+                                            appStyles.align_justify,
+                                            styles.time,
+                                            {
+                                                backgroundColor:
+                                                    result === emptyResult
+                                                        ? appColors.white
+                                                        : '#F8FDFF',
+                                                marginHorizontal:
+                                                    nameHome || nameAway
+                                                        ? getSize.m(20)
+                                                        : getSize.m(40),
+                                            },
+                                        ]}
+                                    >
+                                        {!isLive &&
+                                            result === emptyResult &&
+                                            schedule !== null &&
+                                            tournament && <Text style={styles.score}>V S</Text>}
+                                        {!isLive &&
+                                            result === emptyResult &&
+                                            schedule !== null &&
+                                            !tournament && (
+                                                <Text style={styles.score}>
+                                                    {getTime({ time: schedule })}
+                                                </Text>
+                                            )}
 
-                            {!isLive && result !== emptyResult && (
-                                <Text style={styles.score}>
-                                    {getResult({
-                                        result: result,
-                                    })}
-                                </Text>
-                            )}
-                        </View>
+                                        {!isLive && result !== emptyResult && (
+                                            <Text style={styles.score}>
+                                                {getResult({
+                                                    result: result,
+                                                })}
+                                            </Text>
+                                        )}
+                                    </View>
+                                )}
+                            </View>
+                        ) : (
+                            <View
+                                style={[
+                                    appStyles.align_justify,
+                                    styles.time,
+                                    {
+                                        backgroundColor:
+                                            result === emptyResult ? appColors.white : '#F8FDFF',
+                                        marginHorizontal:
+                                            nameHome || nameAway ? getSize.m(20) : getSize.m(40),
+                                    },
+                                ]}
+                            >
+                                {isLive && (
+                                    <Text
+                                        style={[
+                                            styles.score,
+                                            {
+                                                color: appColors.light_gray,
+                                            },
+                                        ]}
+                                    >
+                                        {result === emptyResult
+                                            ? '- : -'
+                                            : getResult({
+                                                  result: result,
+                                              })}
+                                    </Text>
+                                )}
+                                {!isLive &&
+                                    result === emptyResult &&
+                                    schedule !== null &&
+                                    tournament && <Text style={styles.score}>V S</Text>}
+                                {!isLive &&
+                                    result === emptyResult &&
+                                    schedule !== null &&
+                                    !tournament && (
+                                        <Text style={styles.score}>
+                                            {getTime({ time: schedule })}
+                                        </Text>
+                                    )}
+
+                                {!isLive && result !== emptyResult && (
+                                    <Text style={styles.score}>
+                                        {getResult({
+                                            result: result,
+                                        })}
+                                    </Text>
+                                )}
+                            </View>
+                        )}
                     </View>
                     <View style={[appStyles.align_justify]}>
                         <View
@@ -328,7 +408,7 @@ export const ListGame_Test = ({
                     ]}
                     onPress={handleDetailMatch}
                 >
-                    {isLive ? (
+                    {isLive && !isHomePage ? (
                         <View style={appStyles.flex_row_align}>
                             <View style={appStyles.flex_row_align}>
                                 <Text style={[styles.details]}>{t('list_game.detail')}</Text>
@@ -346,6 +426,15 @@ export const ListGame_Test = ({
                                     color={appColors.button_dark_blue}
                                 />
                             </View>
+                        </View>
+                    ) : !isLive && isHomePage && !isFuture ? (
+                        <View style={appStyles.flex_row_align}>
+                            <Text style={[styles.details]}>{t('list_game.detail_home')}</Text>
+                            <Icon
+                                name={icon}
+                                size={getSize.m(14)}
+                                color={appColors.button_dark_blue}
+                            />
                         </View>
                     ) : personnel ? (
                         <View style={appStyles.flex_row_align}>

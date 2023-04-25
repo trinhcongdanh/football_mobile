@@ -672,6 +672,7 @@ const resources = {
                 results: 'המשחק בזמן אמת',
                 detail: 'פרטי המשחק',
                 composition: 'הרכב',
+                detail_home: 'פרטים',
             },
             drop_down: {
                 title: 'ליגת הבורסה לניירות ערך',
@@ -1372,6 +1373,7 @@ const resources = {
                 results: 'Game live data',
                 detail: 'Game details',
                 composition: 'Personnel',
+                detail_home: 'Details',
             },
             drop_down: {
                 title: 'Stock Exchange League',
