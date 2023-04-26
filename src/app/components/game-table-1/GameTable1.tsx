@@ -31,7 +31,15 @@ export const GameTable1 = ({
     const { getResult } = useResult();
     return (
         <View style={styles.game_table}>
-            <View style={[appStyles.flex_row_align]}>
+            <View
+                style={[
+                    appStyles.flex_row_align,
+                    {
+                        marginLeft: getSize.m(28),
+                        marginTop: getSize.m(4),
+                    },
+                ]}
+            >
                 <Text style={styles.date}>{moment(date).format('DD.MM.YY')}</Text>
             </View>
             <View style={[appStyles.align_justify]}>
@@ -129,7 +137,12 @@ export const GameTable1 = ({
                     ]}
                 />
             </View>
-            <View style={{ paddingHorizontal: getSize.m(20) }}>
+            <View
+                style={{
+                    paddingHorizontal: getSize.m(20),
+                    marginBottom: getSize.m(10),
+                }}
+            >
                 <Image source={AppImages.img_dotted_border} style={styles.line_dots} />
             </View>
             <View
