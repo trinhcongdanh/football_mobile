@@ -5,6 +5,8 @@ import { I18nManager, StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
     game_table: {
+        width: getSize.m(283),
+        height: getSize.m(158),
         paddingTop: getSize.m(6),
         paddingBottom: getSize.m(14),
         backgroundColor: appColors.white,
@@ -17,26 +19,26 @@ const styles = StyleSheet.create({
         fontFamily: AppFonts.bold,
         fontSize: getSize.m(13),
         color: appColors.text_dark_blue,
-        marginLeft: getSize.m(28),
     },
     line_dots: {
-        marginBottom: getSize.m(10),
-        borderBottomWidth: 1,
-        borderStyle: 'dashed',
-        borderColor: appColors.soft_grey,
-        width: '100%'
+        // marginBottom: getSize.m(10),
+        // borderBottomWidth: 1,
+        // borderStyle: 'dashed',
+        // borderColor: appColors.soft_grey,
+        width: '100%',
+        resizeMode: 'contain',
     },
     resize_name_club: {
-        width: getSize.m(100),
-        height: getSize.m(60),
+        width: getSize.m(80),
+        height: getSize.m(48),
         justifyContent: 'flex-start',
         alignItems: 'center',
     },
 
     name_club: {
         fontFamily: AppFonts.bold,
-        fontSize: getSize.m(13),
-        lineHeight: getSize.m(17),
+        fontSize: getSize.m(12),
+        lineHeight: getSize.m(14),
         color: appColors.blue_black,
         marginTop: getSize.m(5),
         textAlign: 'left',
