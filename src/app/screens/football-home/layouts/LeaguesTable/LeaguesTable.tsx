@@ -185,11 +185,7 @@ export const LeaguesTable = ({ league }: ILeaguesTableProps) => {
                                             width: getSize.m(120),
                                         }}
                                     >
-                                        <View
-                                            style={{
-                                                flexDirection: 'row',
-                                            }}
-                                        >
+                                        <View style={appStyles.flex_row_align}>
                                             <View style={{ width: '12%' }}>
                                                 <Text
                                                     style={[
@@ -199,7 +195,7 @@ export const LeaguesTable = ({ league }: ILeaguesTableProps) => {
                                                         },
                                                     ]}
                                                 >
-                                                    {item.place}
+                                                    {index + 1}
                                                 </Text>
                                             </View>
                                             <View style={{ marginHorizontal: getSize.m(8) }}>

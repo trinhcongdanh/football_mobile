@@ -16,7 +16,7 @@ export const Instagram = () => {
             style={[
                 styles.container,
                 {
-                    marginHorizontal: getSize.m(16),
+                    paddingHorizontal: getSize.m(16),
                 },
             ]}
         >

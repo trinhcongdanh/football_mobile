@@ -112,11 +112,7 @@ export const Statistics = ({
                                             overflow: 'hidden',
                                         }}
                                     >
-                                        <View
-                                            style={{
-                                                flexDirection: 'row',
-                                            }}
-                                        >
+                                        <View style={appStyles.flex_row_align}>
                                             <View style={{ width: '12%' }}>
                                                 <Text
                                                     style={[

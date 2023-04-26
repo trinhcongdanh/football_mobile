@@ -50,7 +50,7 @@ export const styles = StyleSheet.create({
     itemContainer: {
         borderColor: appColors.border,
         borderBottomWidth: 1,
-        marginHorizontal: getSize.m(12),
+        marginHorizontal: getSize.m(11),
         paddingVertical: getSize.m(15),
     },
     itemTitle: {

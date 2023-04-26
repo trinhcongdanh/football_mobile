@@ -37,8 +37,8 @@ import {
 } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import LinearGradient from 'react-native-linear-gradient';
-import IconAntDesign from 'react-native-vector-icons/AntDesign';
 import DeviceInfo from 'react-native-device-info';
+import { useDateTime } from '@football/app/utils/hooks/useDateTime';
 
 export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
     const {
@@ -68,7 +68,6 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
     });
 
     const scrollViewRef = useRef<any>();
-    const notScroll = () => {};
     LogBox.ignoreLogs(['Warning: Encountered two children with the same key']);
     LogBox.ignoreLogs(['Warning: Each child in a list should have a unique "key" prop']);
 
@@ -89,6 +88,7 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
         }
     };
     let hasNotch = DeviceInfo.hasNotch();
+    const { getTime } = useDateTime();
 
     return (
         <View style={[appStyles.flex, { backgroundColor: appColors.gray2 }]}>
@@ -401,7 +401,7 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                                         >
                                             <View style={styles.date}>
                                                 <Text style={styles.text_date}>
-                                                    {homePage?.video.length}
+                                                    {getTime({ time: homePage?.video.length })}
                                                 </Text>
                                             </View>
                                             <View style={styles.play_video_main}>

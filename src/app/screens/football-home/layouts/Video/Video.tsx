@@ -5,6 +5,7 @@ import { IVideoProps } from '@football/app/screens/football-home/layouts/Video/V
 import { useViewModel } from '@football/app/screens/football-home/layouts/Video/Video.viewModel';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { appStyles } from '@football/app/utils/constants/appStyles';
+import { useDateTime } from '@football/app/utils/hooks/useDateTime';
 import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
 import { getSize } from '@football/app/utils/responsive/scale';
 import React from 'react';
@@ -20,6 +21,7 @@ export const Video = ({ videos, handlePlayVideo }: IVideoProps) => {
         handlePlayVideo,
     });
     const { getTranslationText } = useTranslationText();
+    const { getTime } = useDateTime();
 
     return (
         <View style={styles.container}>
@@ -71,9 +73,11 @@ export const Video = ({ videos, handlePlayVideo }: IVideoProps) => {
                                     end={{ x: 0, y: 1 }}
                                     style={styles.gradient_img}
                                 />
-                                <Image source={{ uri: item.image_url }} style={styles.image} />
+                                <Image source={{ uri: item?.image_url }} style={styles.image} />
                                 <View style={styles.date}>
-                                    <Text style={styles.text_date}>{item.length}</Text>
+                                    <Text style={styles.text_date}>
+                                        {getTime({ time: item?.length })}
+                                    </Text>
                                 </View>
                                 <View style={styles.play_video}>
                                     <IconAntDesign
@@ -85,8 +89,8 @@ export const Video = ({ videos, handlePlayVideo }: IVideoProps) => {
                                 <View style={styles.content}>
                                     <Text style={styles.text_content}>
                                         {getTranslationText({
-                                            textHe: item.caption_he,
-                                            textEn: item.caption_en,
+                                            textHe: item?.caption_he,
+                                            textEn: item?.caption_en,
                                         })}
                                         <IconFeather
                                             name={appIcons.ic_left_ios}
