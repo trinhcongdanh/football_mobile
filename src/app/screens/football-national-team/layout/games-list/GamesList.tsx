@@ -91,7 +91,13 @@ export const GamesList = ({ topTeam }: IGamesListProps) => {
                         );
                     })}
                 </View>
-                <View style={{ marginTop: getSize.m(8) }}>
+                <View
+                    style={{
+                        marginTop: getSize.m(8),
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                    }}
+                >
                     {topTeam?.last_campaign.games
                         .slice(0, MAX_TOPTEAM_LASTCAMPAIGN_GAMES)
                         .filter(game => {
