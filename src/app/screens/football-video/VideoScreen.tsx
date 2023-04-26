@@ -28,6 +28,7 @@ import styles from './VideoScreen.styles';
 import { IVideoScreenProps } from './VideoScreen.type';
 import { useViewModel } from './VideoScreen.viewModel';
 import { BackGround } from '@football/app/components/background/BackGround';
+import { useDateTime } from '@football/app/utils/hooks/useDateTime';
 
 export const VideoScreen = ({ navigation, route }: IVideoScreenProps) => {
     const {
@@ -44,6 +45,8 @@ export const VideoScreen = ({ navigation, route }: IVideoScreenProps) => {
         navigation,
         route,
     });
+
+    const { getTime } = useDateTime();
 
     const [indexDot, setIndexDot] = useState(0);
     const { getTranslationText } = useTranslationText();
@@ -117,7 +120,7 @@ export const VideoScreen = ({ navigation, route }: IVideoScreenProps) => {
                                                         />
                                                         <View style={styles.date}>
                                                             <Text style={styles.text_date}>
-                                                                {item.length}
+                                                                {getTime({ time: item.length })}
                                                             </Text>
                                                         </View>
                                                         <View style={styles.play_video}>
@@ -194,7 +197,7 @@ export const VideoScreen = ({ navigation, route }: IVideoScreenProps) => {
                                                         />
                                                         <View style={styles.date}>
                                                             <Text style={styles.text_date}>
-                                                                {item.length}
+                                                                {getTime({ time: item.length })}
                                                             </Text>
                                                         </View>
                                                         <View style={styles.play_video}>
@@ -270,7 +273,7 @@ export const VideoScreen = ({ navigation, route }: IVideoScreenProps) => {
                                                         />
                                                         <View style={styles.date}>
                                                             <Text style={styles.text_date}>
-                                                                {item.length}
+                                                                {getTime({ time: item.length })}
                                                             </Text>
                                                         </View>
                                                         <View style={styles.play_video}>
@@ -347,7 +350,7 @@ export const VideoScreen = ({ navigation, route }: IVideoScreenProps) => {
                                                         />
                                                         <View style={styles.date}>
                                                             <Text style={styles.text_date}>
-                                                                {item.length}
+                                                                {getTime({ time: item.length })}
                                                             </Text>
                                                         </View>
                                                         <View style={styles.play_video}>
