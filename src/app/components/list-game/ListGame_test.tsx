@@ -15,6 +15,7 @@ import { AppImages } from '@football/app/assets/images';
 import { useResult } from '@football/app/utils/hooks/useResult';
 import { AppFonts } from '@football/app/assets/fonts';
 import { ProgressBar } from '@football/app/components/progress-bar/ProgressBar';
+import i18n from '@football/app/i18n/EnStrings';
 
 export const ListGame_Test = ({
     logo_home,
@@ -105,8 +106,7 @@ export const ListGame_Test = ({
                         appStyles.flex_row_space,
                         {
                             marginHorizontal: getSize.m(24),
-                            marginTop: getSize.m(4),
-                            marginTop: marginTopMatch,
+                            marginTop: marginTopMatch ? marginTopMatch : getSize.m(4),
                         },
                     ]}
                 >
@@ -255,7 +255,10 @@ export const ListGame_Test = ({
                                             style={{
                                                 position: 'absolute',
                                                 top: getSize.m(10),
-                                                left: getSize.m(21),
+                                                left:
+                                                    i18n.language === 'heb'
+                                                        ? getSize.m(21)
+                                                        : getSize.m(26),
                                             }}
                                         >
                                             <View
