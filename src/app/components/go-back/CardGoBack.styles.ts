@@ -4,7 +4,7 @@ import { AppFonts } from '@football/app/assets/fonts';
 import { getSize } from '@football/app/utils/responsive/scale';
 
 export const styles = StyleSheet.create({
-    width_size: { width: getSize.m(16) },
+    width_size: { width: getSize.m(40) },
     txt_title: {
         color: appColors.white,
         fontSize: getSize.m(20),

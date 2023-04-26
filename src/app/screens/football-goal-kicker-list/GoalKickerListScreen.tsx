@@ -21,6 +21,7 @@ import styles from './GoalKickerList.style';
 import { IGoalKickerListScreenProps } from './GoalKickerListScreen.type';
 import { useViewModel } from './GoalKickerListScreen.viewModel';
 import { BackGround } from '@football/app/components/background/BackGround';
+import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
 
 export const GoalKickerListScreen = ({ navigation, route }: IGoalKickerListScreenProps) => {
     const teamSeasonStats = route?.params?.teamSeasonStats as TeamSeasonStatsModel;
@@ -34,6 +35,8 @@ export const GoalKickerListScreen = ({ navigation, route }: IGoalKickerListScree
         navigation,
         route,
     });
+    const { getTranslationText } = useTranslationText();
+
     return (
         <View style={appStyles.flex}>
             <BackGround>
@@ -49,14 +52,21 @@ export const GoalKickerListScreen = ({ navigation, route }: IGoalKickerListScree
                         </View>
                         <ScrollView>
                             <HeaderLogo
-                                text={teamSeasonStats.team_name_he}
+                                text={getTranslationText({
+                                    textHe: teamSeasonStats?.team_name_he,
+                                    textEn: teamSeasonStats?.team_name_en,
+                                })}
                                 avt={{ uri: teamSeasonStats.team_logo_url }}
                             />
 
                             <View
                                 style={[
                                     appStyles.package,
-                                    { marginTop: getSize.m(0), minHeight: getSize.m(900) },
+                                    {
+                                        marginTop: getSize.m(0),
+                                        minHeight: getSize.m(900),
+                                        paddingBottom: getSize.m(200),
+                                    },
                                 ]}
                             >
                                 <LinearGradient
@@ -88,7 +98,10 @@ export const GoalKickerListScreen = ({ navigation, route }: IGoalKickerListScree
                                                         rounded
                                                     />
                                                     <Text style={styles.name_player}>
-                                                        {item.name_he}
+                                                        {getTranslationText({
+                                                            textHe: item?.name_he,
+                                                            textEn: item?.name_en,
+                                                        })}
                                                     </Text>
                                                 </View>
                                                 <Text style={styles.number}>{item[props]}</Text>
