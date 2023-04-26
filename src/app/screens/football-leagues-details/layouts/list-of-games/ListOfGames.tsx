@@ -21,7 +21,7 @@ export const ListOfGames = ({ games }: IListOfGamesProps) => {
             <Text style={[appStyles.text_topic, { marginLeft: getSize.m(6) }]}>
                 {t('leagues_details.list_games.title')}
             </Text>
-            <View>
+            <View style={{ justifyContent: 'center', alignItems: 'center' }}>
                 {listGames.map(item => {
                     return (
                         <ListGame_Test

@@ -21,13 +21,17 @@ export const ListOfGames = ({ listGames }: IListOfGamesProps) => {
             <Text style={[appStyles.text_topic, { marginLeft: getSize.m(6) }]}>
                 {t('group_page.list_games.title')}
             </Text>
-            <View>
+            <View style={{ justifyContent: 'center', alignItems: 'center' }}>
                 {listGames?.slice(0, MAX_GAME_IN_FAVORITES_TEAM).map(item => {
                     return (
                         <ListGame_Test
                             key={item?.game_id}
                             logo_home={item?.team1?.logo_url}
                             logo_away={item?.team2?.logo_url}
+                            // tournament={getTranslationText({
+                            //     textHe: 'פלייאוף לאליפות אירופה',
+                            //     textEn: 'Playoff for the European Championship',
+                            // })}
                             nameHome={getTranslationText({
                                 textHe: item?.team1?.name_he,
                                 textEn: item?.team1?.name_en,
@@ -54,6 +58,10 @@ export const ListOfGames = ({ listGames }: IListOfGamesProps) => {
                             handleDetailMatch={() => handleDetailMatch(item?.game_id)}
                             handleStadium={() => handleStadium(item?.stadium_id)}
                             gameDetail={t('list_game.detail')}
+                            style={{
+                                height: getSize.m(157),
+                                width: getSize.m(335),
+                            }}
                         />
                     );
                 })}

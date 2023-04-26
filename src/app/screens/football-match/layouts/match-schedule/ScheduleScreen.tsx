@@ -34,6 +34,8 @@ export const ScheduleScreen = ({ navigation, route }: IScheduleScreenProps) => {
                 {
                     backgroundColor: appColors.gray,
                     paddingTop: getSize.m(40),
+                    justifyContent: 'center',
+                    alignItems: 'center',
                 },
             ]}
         >

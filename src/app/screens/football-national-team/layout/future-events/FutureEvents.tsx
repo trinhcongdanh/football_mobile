@@ -22,7 +22,13 @@ export const FutureEvents = ({ topTeam }: IFutureEventsProps) => {
                     }}
                 >
                     <Text style={styles.text_title}>{t('national_team.team_event')}</Text>
-                    <View style={{ marginTop: getSize.m(8) }}>
+                    <View
+                        style={{
+                            marginTop: getSize.m(8),
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                        }}
+                    >
                         {topTeam?.future_events?.slice(0, 3).map((item, index) => {
                             return (
                                 <ListGame_Test
