@@ -21,7 +21,9 @@ export const CardGoBack = ({ goBack, iconName, iconStyle, title }: ICardGoBackPr
                     <Icon name={iconName} size={getSize.m(20)} color={appColors.white} />
                 </TouchableOpacity>
             </LinearGradient>
-            {title ? <Text style={styles.txt_title}>{title}</Text> : <View />}
+            <View style={{ width: '70%' }}>
+                {title ? <Text style={styles.txt_title}>{title}</Text> : <View />}
+            </View>
             <View style={styles.width_size} />
         </View>
     );
