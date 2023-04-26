@@ -4,10 +4,11 @@ import { IDropdownFieldProps } from '@football/app/components/dropdown-field/Dro
 import { appColors } from '@football/app/utils/constants/appColors';
 import { getSize } from '@football/app/utils/responsive/scale';
 import React, { useState } from 'react';
-import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
 import OutsidePressHandler from 'react-native-outside-press';
 import Icon from 'react-native-vector-icons/Feather';
 import { styles } from './DropdownField.style';
+import { ScrollView } from 'react-native-gesture-handler';
 
 const DropdownField = ({
     onPress,
