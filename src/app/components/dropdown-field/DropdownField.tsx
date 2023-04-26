@@ -7,8 +7,8 @@ import React, { useState } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import OutsidePressHandler from 'react-native-outside-press';
 import Icon from 'react-native-vector-icons/Feather';
-import { styles } from './DropdownField.style';
 import { ScrollView } from 'react-native-gesture-handler';
+import { styles } from './DropdownField.style';
 
 const DropdownField = ({
     onPress,
@@ -37,7 +37,7 @@ const DropdownField = ({
                 style={[
                     styles.container,
                     {
-                        width: width,
+                        width,
                     },
                 ]}
             >
