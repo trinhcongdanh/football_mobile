@@ -22,12 +22,13 @@ import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
 import { getSize, width } from '@football/app/utils/responsive/scale';
 import { renderAvatar, renderUserPoints } from '@football/core/models/AvatarType.enum';
 import { isEmpty } from 'lodash';
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import {
     I18nManager,
     ImageBackground,
     LogBox,
     Platform,
+    RefreshControl,
     SafeAreaView,
     ScrollView,
     StatusBar,
@@ -89,6 +90,15 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
     };
     let hasNotch = DeviceInfo.hasNotch();
     const { getTime } = useDateTime();
+
+    const [refreshing, setRefreshing] = useState(false);
+
+    const onRefresh = React.useCallback(() => {
+        setRefreshing(true);
+        setTimeout(() => {
+            setRefreshing(false);
+        }, 2000);
+    }, []);
 
     return (
         <View style={[appStyles.flex, { backgroundColor: appColors.gray2 }]}>
@@ -377,6 +387,9 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                             zIndex: -1,
                             marginBottom: getSize.m(50),
                         }}
+                        refreshControl={
+                            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+                        }
                     >
                         {/* Video Intro */}
                         {homeLayout?.layout.includes('video') && (
