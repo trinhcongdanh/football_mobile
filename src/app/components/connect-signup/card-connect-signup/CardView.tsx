@@ -81,6 +81,7 @@ export const CardView = ({
                         <Text style={styles.text_link}>{facebook}</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
+                        disabled
                         onPress={connectGoogle}
                         style={[appStyles.flex_row_center, styles.button_link]}
                     >
