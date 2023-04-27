@@ -28,7 +28,6 @@ import jwt_decode from 'jwt-decode';
 import { RootState } from 'src/store/store';
 import { otpUser } from 'src/store/user/OTP.slice';
 import { IConnectScreenProps } from './ConnectScreen.type';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 interface LoginProps {
     phoneNumber: string;
@@ -232,23 +231,30 @@ const useEventHandler = (state: any) => {
 
     const connectGoogle = useCallback(async () => {
         try {
-            await GoogleSignin.hasPlayServices();
-            await GoogleSignin.signIn().then((result: any) => {
-                console.log(result);
-                if (result) {
-                    dispatch(
-                        otpUser(
-                            serializeParams({
-                                action: ACTION,
-                                token: TOKEN,
-                                call: AuthData.LOGIN,
-                                google_client_id: env.GOOGLE_CLIENT_ID,
-                                google_client_secret: env.GOOGLE_CLIENT_SECRET,
-                            })
-                        )
-                    );
-                }
-            });
+            if ((await GoogleSignin.hasPlayServices()) === false) {
+                return;
+            }
+            await GoogleSignin.signIn()
+                .then((result: any) => {
+                    console.log(result);
+                    if (result) {
+                        dispatch(
+                            otpUser(
+                                serializeParams({
+                                    action: ACTION,
+                                    token: TOKEN,
+                                    call: AuthData.LOGIN,
+                                    google_client_id: env?.GOOGLE_CLIENT_ID,
+                                    google_client_secret: env?.GOOGLE_CLIENT_SECRET,
+                                })
+                            )
+                        );
+                    }
+                })
+                .catch(e => {
+                    console.log('we', e);
+                    Alert.alert('Google login is not config correctly');
+                });
         } catch (error: any) {
             if (error.code === statusCodes.SIGN_IN_CANCELLED) {
                 // user cancelled the login flow
@@ -261,6 +267,7 @@ const useEventHandler = (state: any) => {
                 // play services not available or outdated
             } else {
                 console.log(error);
+                Alert.alert('Google login is not config correctly');
             }
         }
     }, []);
@@ -374,9 +381,9 @@ const useEffectHandler = (state: any, eventHandler: any) => {
     useEffect(() => {
         try {
             GoogleSignin.configure({
-                webClientId: env.webClientId,
-                iosClientId: env.iosClientId,
-                offlineAccess: true,
+                webClientId: env?.webClientId || '',
+                iosClientId: env?.iosClientId || '',
+                offlineAccess: !!env?.webClientId,
             });
         } catch (error: any) {
             Alert.alert(JSON.stringify(error.message));
