@@ -19,9 +19,9 @@ export const LeagueTable = ({ leagueSeasonId }: ILeagueTableProps) => {
         selectCycle,
         selectedRound,
         setSelectedRound,
-        navigate,
         setSelectCycle,
         leagueSeason,
+        onNavigateTeamDetails,
     } = useViewModel({ leagueSeasonId });
     const { getTranslationText } = useTranslationText();
     return (
@@ -109,9 +109,7 @@ export const LeagueTable = ({ leagueSeasonId }: ILeagueTableProps) => {
                         {selectedRound?.leader_board?.map((item, index) => {
                             return (
                                 <TouchableOpacity
-                                    onPress={() => {
-                                        navigate(ScreenName.GroupPagePage);
-                                    }}
+                                    onPress={() => onNavigateTeamDetails(item?.team_id)}
                                     key={item?.team_id}
                                 >
                                     <LinearGradient
