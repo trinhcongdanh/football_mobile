@@ -354,8 +354,8 @@ const resources = {
                 },
                 about: {
                     title: 'אודות הליגה',
-                    cycles: 'מחזורים',
-                    rounds: 'סבבים',
+                    cycles: 'סבבים',
+                    rounds: 'מחזורים',
                     seasons: 'עונה',
                     rising: 'עולות',
                     groups: 'קבוצות',
