@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
 import { ILeagueTableProps } from '@football/app/screens/football-group-page/layouts/league-table/LeagueTable.type';
+import { ScreenName } from '@football/app/utils/constants/enum';
 import { LeagueSeasonModel } from '@football/core/models/LeagueSeasonModelResponse';
 import { Cycle, Round } from '@football/core/models/TeamSeasonResponse';
 import { useLeagueSeasonById } from '@football/core/services/LeagueSeason.service';
@@ -8,6 +9,8 @@ import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 const useViewState = () => {
+    const { navigate, goBack } = useAppNavigator();
+
     const [selectCycle, setSelectCycle] = useState<Cycle>();
     const [selectedRound, setSelectedRound] = useState<Round>();
     const [leagueSeason, setLeagueSeason] = useState<LeagueSeasonModel>();
@@ -18,14 +21,32 @@ const useViewState = () => {
         setSelectedRound,
         leagueSeason,
         setLeagueSeason,
+        navigate,
+        goBack,
+    };
+};
+
+/**
+ * State use event handler
+ * @param state
+ * @returns
+ */
+
+const useEventHandler = (state: any) => {
+    const { navigate } = state;
+    const onNavigateTeamDetails = (teamId: string) => {
+        navigate(ScreenName.GroupPagePage, { teamId });
+    };
+    return {
+        onNavigateTeamDetails,
     };
 };
 
 export const useViewModel = ({ leagueSeasonId }: ILeagueTableProps) => {
-    const { navigate, goBack } = useAppNavigator();
     const { t } = useTranslation();
     // Cycle
     const { data: leagueSeasonData } = useLeagueSeasonById(leagueSeasonId!);
+
     const state = useViewState();
 
     useEffect(() => {
@@ -56,10 +77,12 @@ export const useViewModel = ({ leagueSeasonId }: ILeagueTableProps) => {
         }
     }, [leagueSeasonData]);
 
+    const eventHandler = useEventHandler(state);
+
     return {
         t,
         ...state,
-        navigate,
         leagueSeasonData,
+        ...eventHandler,
     };
 };

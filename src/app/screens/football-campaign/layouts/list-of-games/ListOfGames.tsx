@@ -90,58 +90,63 @@ export const ListOfGames = ({ games, groupName, topTeam }: IListOfGamesProps) =>
                         );
                     })}
                 </View>
-                {games
-                    .slice(0, MAX_TOPTEAM_LASTCAMPAIGN_GAMES)
-                    .filter(game => {
-                        switch (select) {
-                            case 0:
-                                return true;
-                            case 1:
-                                return game.is_home_game;
+                <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+                    {games
+                        .slice(0, MAX_TOPTEAM_LASTCAMPAIGN_GAMES)
+                        .filter(game => {
+                            switch (select) {
+                                case 0:
+                                    return true;
+                                case 1:
+                                    return game.is_home_game;
 
-                            case 2:
-                                return !game.is_home_game;
+                                case 2:
+                                    return !game.is_home_game;
 
-                            default:
-                                return true;
-                        }
-                    })
-                    ?.map(item => {
-                        return (
-                            <ListGame_Test
-                                key={item.game_id}
-                                logo_home={item.team1.logo_url}
-                                logo_away={item.team2.logo_url}
-                                nameHome={getTranslationText({
-                                    textHe: item.team1.name_he,
-                                    textEn: item.team1.name_en,
-                                })}
-                                nameAway={getTranslationText({
-                                    textHe: item.team2.name_he,
-                                    textEn: item.team2.name_en,
-                                })}
-                                location={getTranslationText({
-                                    textHe: item.stadium_he,
-                                    textEn: item.stadium_en,
-                                })}
-                                date={item.date}
-                                result={item.score}
-                                schedule={item.time}
-                                // completed={item.completed}
-                                icon={appIcons.ic_left_ios}
-                                color={appColors.gray}
-                                details={item.game_id}
-                                handleDetailMatch={() => handleDetailMatch(item.game_id)}
-                                handleStadium={() => handleStadium(item.stadium_id)}
-                                isLive={moment().isBetween(
-                                    moment(`${item.date} ${item.time}`),
-                                    moment(`${item.date} ${item.time}`).add(2, 'hours')
-                                )}
-                                isFuture={moment().diff(moment(`${item?.date} ${item?.time}`)) < 0}
-                                gameDetail={t('list_game.detail')}
-                            />
-                        );
-                    })}
+                                default:
+                                    return true;
+                            }
+                        })
+                        ?.map(item => {
+                            return (
+                                <ListGame_Test
+                                    key={item.game_id}
+                                    logo_home={item.team1.logo_url}
+                                    logo_away={item.team2.logo_url}
+                                    nameHome={getTranslationText({
+                                        textHe: item.team1.name_he,
+                                        textEn: item.team1.name_en,
+                                    })}
+                                    nameAway={getTranslationText({
+                                        textHe: item.team2.name_he,
+                                        textEn: item.team2.name_en,
+                                    })}
+                                    location={getTranslationText({
+                                        textHe: item.stadium_he,
+                                        textEn: item.stadium_en,
+                                    })}
+                                    date={item.date}
+                                    result={item.score}
+                                    schedule={item.time}
+                                    // completed={item.completed}
+                                    icon={appIcons.ic_left_ios}
+                                    color={appColors.gray}
+                                    details={item.game_id}
+                                    handleDetailMatch={() => handleDetailMatch(item.game_id)}
+                                    handleStadium={() => handleStadium(item.stadium_id)}
+                                    isLive={moment().isBetween(
+                                        moment(`${item.date} ${item.time}`),
+                                        moment(`${item.date} ${item.time}`).add(2, 'hours')
+                                    )}
+                                    isFuture={
+                                        moment().diff(moment(`${item?.date} ${item?.time}`)) < 0
+                                    }
+                                    gameDetail={t('list_game.detail')}
+                                    style={{ width: getSize.m(335), height: getSize.m(157) }}
+                                />
+                            );
+                        })}
+                </View>
             </View>
         </View>
     );

@@ -64,10 +64,6 @@ const styles = StyleSheet.create({
     },
 
     option_menu: {
-        shadowColor: appColors.shadow,
-        shadowOpacity: 0.26,
-        shadowOffset: { width: 0, height: 2 },
-        shadowRadius: getSize.m(10),
         elevation: getSize.m(2),
         flexDirection: 'row',
         alignItems: 'center',

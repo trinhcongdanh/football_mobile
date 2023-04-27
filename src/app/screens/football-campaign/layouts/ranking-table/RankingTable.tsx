@@ -122,7 +122,7 @@ export const RankingTable = ({ data, groupName, topTeam }: IRankingTableProps) =
                                                     },
                                                 ]}
                                             >
-                                                {item.place}
+                                                {index + 1}
                                             </Text>
                                         </View>
                                         <View
