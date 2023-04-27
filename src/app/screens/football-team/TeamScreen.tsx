@@ -69,7 +69,7 @@ export const TeamScreen = ({ navigation, route }: ITeamScreenProps) => {
                                 {topTeams?.map(item => {
                                     return (
                                         <TouchableOpacity
-                                            activeOpacity={0.5}
+                                            activeOpacity={0.8}
                                             key={item?._id}
                                             style={styles.option_grid}
                                             // eslint-disable-next-line no-underscore-dangle

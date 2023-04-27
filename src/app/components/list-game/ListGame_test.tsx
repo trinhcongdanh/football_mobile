@@ -89,16 +89,33 @@ export const ListGame_Test = ({
                     >
                         L I V E
                     </Text>
-                    <Text
-                        style={{
-                            color: '#0697fd',
-                            fontFamily: AppFonts.bold,
-                            fontSize: getSize.m(13),
-                            marginLeft: getSize.m(6),
-                        }}
+                    <View
+                        style={[
+                            appStyles.flex_row_align,
+                            {
+                                marginLeft: getSize.m(6),
+                            },
+                        ]}
                     >
-                        '{timeLive}
-                    </Text>
+                        <Text
+                            style={{
+                                color: '#0697fd',
+                                fontFamily: AppFonts.bold,
+                                fontSize: getSize.m(13),
+                            }}
+                        >
+                            {timeLive}
+                        </Text>
+                        <Text
+                            style={{
+                                color: '#0697fd',
+                                fontFamily: AppFonts.bold,
+                                fontSize: getSize.m(13),
+                            }}
+                        >
+                            '
+                        </Text>
+                    </View>
                 </View>
             ) : (
                 <View
