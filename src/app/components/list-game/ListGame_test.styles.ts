@@ -32,6 +32,7 @@ export const styles = StyleSheet.create({
         marginTop: getSize.m(14),
         marginBottom: getSize.m(14),
         width: '100%',
+        resizeMode: 'contain',
     },
     date: {
         fontSize: getSize.m(12),

@@ -122,7 +122,7 @@ export const StandingScreen = ({ navigation, route }: IStandingScreenProps) => {
                                         <View
                                             style={[
                                                 appStyles.flex_row_align,
-                                                { width: getSize.m(40) },
+                                                { width: getSize.m(34) },
                                             ]}
                                         >
                                             <View style={{ width: '38%' }}>
@@ -134,12 +134,11 @@ export const StandingScreen = ({ navigation, route }: IStandingScreenProps) => {
                                                         },
                                                     ]}
                                                 >
-                                                    {item.place}
+                                                    {index + 1}
                                                 </Text>
                                             </View>
                                             <View
                                                 style={{
-                                                    marginLeft: getSize.m(4),
                                                     marginTop: getSize.m(1),
                                                 }}
                                             >
@@ -162,11 +161,7 @@ export const StandingScreen = ({ navigation, route }: IStandingScreenProps) => {
                                         <View
                                             style={[{ width: getSize.m(80), overflow: 'hidden' }]}
                                         >
-                                            <View
-                                                style={{
-                                                    flexDirection: 'row',
-                                                }}
-                                            >
+                                            <View style={appStyles.flex_row_align}>
                                                 <Avatar
                                                     source={{ uri: item.logo_url }}
                                                     rounded
