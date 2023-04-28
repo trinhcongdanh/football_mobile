@@ -67,20 +67,71 @@ export const OptionState = ({ label, data }: IOptionStateProps) => {
                                         </Text>
                                     </View>
                                     <View style={{ width: getSize.m(110) }}>
-                                        <Text style={styles.text_content}>
-                                            {getTranslationText({
-                                                textHe: item.team1.name_he,
-                                                textEn: item.team1.name_en,
-                                            })}
-                                            -
-                                            {getTranslationText({
-                                                textHe: item.team2.name_he,
-                                                textEn: item.team2.name_en,
-                                            })}
-                                        </Text>
+                                        <View style={{ width: '90%' }}>
+                                            <Text
+                                                numberOfLines={1}
+                                                style={[
+                                                    styles.text_content,
+                                                    {
+                                                        textAlign: 'left',
+                                                    },
+                                                ]}
+                                            >
+                                                {getTranslationText({
+                                                    textHe: item.team1.name_he,
+                                                    textEn: item.team1.name_en,
+                                                })}
+                                            </Text>
+                                        </View>
+                                        <View
+                                            style={[
+                                                appStyles.flex_row_align,
+                                                {
+                                                    width: '100%',
+                                                },
+                                            ]}
+                                        >
+                                            <View>
+                                                <Text
+                                                    style={[
+                                                        styles.text_content,
+                                                        {
+                                                            textAlign: 'left',
+                                                            marginRight: getSize.m(2),
+                                                        },
+                                                    ]}
+                                                >
+                                                    -
+                                                </Text>
+                                            </View>
+                                            <View style={{ width: '90%' }}>
+                                                <Text
+                                                    numberOfLines={1}
+                                                    style={[
+                                                        styles.text_content,
+                                                        {
+                                                            textAlign: 'left',
+                                                        },
+                                                    ]}
+                                                >
+                                                    {getTranslationText({
+                                                        textHe: item.team2.name_he,
+                                                        textEn: item.team2.name_en,
+                                                    })}
+                                                </Text>
+                                            </View>
+                                        </View>
                                     </View>
                                     <View style={{ width: getSize.m(80) }}>
-                                        <Text style={styles.text_content}>
+                                        <Text
+                                            numberOfLines={2}
+                                            style={[
+                                                styles.text_content,
+                                                {
+                                                    textAlign: 'left',
+                                                },
+                                            ]}
+                                        >
                                             {getTranslationText({
                                                 textHe: item.stadium_he,
                                                 textEn: item.stadium_en,

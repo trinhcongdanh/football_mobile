@@ -7,8 +7,8 @@ const styles = StyleSheet.create({
         width: getSize.m(14),
         height: getSize.m(20),
         position: 'absolute',
-        left: getSize.m(13),
-        top: getSize.m(-3),
+        left: getSize.m(13.5),
+        top: getSize.m(-2),
     },
     avg_ticket: {
         marginLeft: getSize.m(9),
