@@ -228,7 +228,11 @@ export const StatisticDetailsScreen = ({ navigation, route }: IStatisticDetailsS
                                                     style={[
                                                         appStyles.statistics_content,
                                                         {
-                                                            fontSize: getSize.m(14),
+                                                            fontSize:
+                                                                ticket === 'yellow' ||
+                                                                ticket === 'red'
+                                                                    ? getSize.m(10)
+                                                                    : getSize.m(14),
                                                             color:
                                                                 ticket === 'red'
                                                                     ? appColors.white
@@ -365,13 +369,13 @@ export const StatisticDetailsScreen = ({ navigation, route }: IStatisticDetailsS
                                                 </View>
                                             </View>
                                             <View
-                                                style={[
-                                                    appStyles.flex_row_center,
-                                                    {
-                                                        width: getSize.m(90),
-                                                        flex: 0,
-                                                    },
-                                                ]}
+                                                style={{
+                                                    width: getSize.m(60),
+                                                    flexDirection: 'row',
+                                                    justifyContent: 'flex-end',
+                                                    alignItems: 'center',
+                                                    marginRight: getSize.m(10),
+                                                }}
                                             >
                                                 <Text
                                                     style={[
