@@ -252,12 +252,19 @@ const useEventHandler = (state: any) => {
                     if (result.isCancelled) {
                         console.log('login is cancelled.');
                     } else {
+                        let userId = '';
                         await Profile.getCurrentProfile().then(currentProfile => {
                             if (currentProfile) {
-                                console.log(currentProfile);
+                                console.log("currentProfile", currentProfile);
+                                userId = currentProfile.userID;
                             }
                         });
                         if (Platform.OS === 'ios') {
+                            let accessToken = '';
+                            await AccessToken.getCurrentAccessToken().then(data => {
+                                accessToken = data.accessToken.toString();
+                                console.log("accessToken", accessToken);
+                            });                        
                             await AuthenticationToken.getAuthenticationTokenIOS().then(
                                 (data: any) => {
                                     console.log('authenticationToken', data?.authenticationToken);
@@ -272,8 +279,8 @@ const useEventHandler = (state: any) => {
                                                     guest_id: login.login.user.item_id,
                                                     call: AuthData.REGISTER,
                                                     item: {
-                                                        facebook_user_id: data.userID,
-                                                        facebook_access_token: data.accessToken,
+                                                        facebook_user_id: userId,
+                                                        facebook_access_token: accessToken,
                                                     },
                                                 })
                                             )
