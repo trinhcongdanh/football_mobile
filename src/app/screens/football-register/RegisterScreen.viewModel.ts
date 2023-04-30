@@ -323,28 +323,35 @@ const useEventHandler = (state: any) => {
 
     const connectGoogle = useCallback(async () => {
         try {
-            await GoogleSignin.hasPlayServices();
-            await GoogleSignin.signIn().then((result: any) => {
-                console.log(result);
-                if (result) {
-                    dispatch(setInfoSocial(result.user));
-                    dispatch(
-                        otpUser(
-                            serializeParams({
-                                action: ACTION,
-                                token: login.login.token,
-                                guest_guid: guestId[0],
-                                guest_id: login.login.user.item_id,
-                                call: AuthData.REGISTER,
-                                item: {
-                                    google_client_id: env.GOOGLE_CLIENT_ID,
-                                    google_client_secret: env.GOOGLE_CLIENT_SECRET,
-                                },
-                            })
-                        )
-                    );
-                }
-            });
+            if ((await GoogleSignin.hasPlayServices()) === false) {
+                return;
+            }
+            await GoogleSignin.signIn()
+                .then((result: any) => {
+                    console.log(result);
+                    if (result) {
+                        dispatch(setInfoSocial(result.user));
+                        dispatch(
+                            otpUser(
+                                serializeParams({
+                                    action: ACTION,
+                                    token: login.login.token,
+                                    guest_guid: guestId[0],
+                                    guest_id: login.login.user.item_id,
+                                    call: AuthData.REGISTER,
+                                    item: {
+                                        google_client_id: env.GOOGLE_CLIENT_ID,
+                                        google_client_secret: env.GOOGLE_CLIENT_SECRET,
+                                    },
+                                })
+                            )
+                        );
+                    }
+                })
+                .catch(e => {
+                    console.log('we', e);
+                    Alert.alert('Google login is not config correctly');
+                });
         } catch (error: any) {
             if (error.code === statusCodes.SIGN_IN_CANCELLED) {
                 // user cancelled the login flow
@@ -357,6 +364,7 @@ const useEventHandler = (state: any) => {
                 // play services not available or outdated
             } else {
                 console.log(error);
+                Alert.alert('Google login is not config correctly');
             }
         }
     }, []);
