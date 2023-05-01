@@ -168,7 +168,7 @@ const resources = {
                 },
             },
             national_team: {
-                team_event: 'אירועי נבחרת',
+                team_event: 'משחקי הנבחרת',
                 previous_campaigns: 'קמפיינים קודמים',
                 ranking_table: {
                     title: 'טבלת דירוג',
