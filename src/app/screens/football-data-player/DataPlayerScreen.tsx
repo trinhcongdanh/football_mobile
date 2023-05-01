@@ -45,6 +45,21 @@ export const DataPlayerScreen = ({ navigation, route }: IDataPlayerScreenProps) 
     return (
         <View style={appStyles.flex}>
             <BackGround>
+                {player == null && 
+                    <>
+                        <View style={appStyles.container}>
+                        <HeaderUser
+                                avt={AppImages.img_avt}
+                                point="1,325"
+                                icon={AppImages.img_angle_arrow}
+                                color_pre={appColors.blue_black}
+                                color_after={appColors.blue_black}
+                                handlePressFunction={onGoBack}
+                            />
+                    </View>
+                    </>
+                }
+                
                 {player && (
                     <>
                         <View style={appStyles.container}>
