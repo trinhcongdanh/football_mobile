@@ -149,6 +149,7 @@ export const AppImages = {
     img_play_icon: require('./play_icon.png'),
     img_background_welcome: require('./background_welcome.png'),
     img_background_login: require('./background_login.png'),
+    img_background_cup: require('./background_cup.png'),
 };
 
 export const AppJsons = {
