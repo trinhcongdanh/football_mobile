@@ -46,7 +46,7 @@ export const OptionState = ({ label, data }: IOptionStateProps) => {
                     </View>
                 </View>
                 <View style={{ marginTop: getSize.m(10) }}>
-                    {data.map(item => {
+                    {data.map((item, index) => {
                         return (
                             <TouchableOpacity
                                 onPress={() => onNavigateGame(item.game_id)}
@@ -56,8 +56,8 @@ export const OptionState = ({ label, data }: IOptionStateProps) => {
                                     start={{ x: 0, y: 0 }}
                                     end={{ x: 1, y: 1 }}
                                     colors={[
-                                        item.id % 2 === 1 ? appColors.linearLight : appColors.gray,
-                                        item.id % 2 === 1 ? appColors.linearDark : appColors.gray,
+                                        index % 2 === 1 ? appColors.linearLight : appColors.gray,
+                                        index % 2 === 1 ? appColors.linearDark : appColors.gray,
                                     ]}
                                     style={[appStyles.flex_row_space_center, styles.itemTeam]}
                                 >
