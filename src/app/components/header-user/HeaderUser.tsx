@@ -60,6 +60,7 @@ export const HeaderUser = ({
                             width: getSize.m(12),
                             height: getSize.m(12),
                             // transform: [{ rotate: I18nManager.isRTL ? '0deg' : '180deg' }],
+                            transform: [{ scaleX: I18nManager.isRTL ? 1 : -1 }],
                         }}
                     />
                 </LinearGradient>
