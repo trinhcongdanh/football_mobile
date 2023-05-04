@@ -19,7 +19,7 @@ export const useDateTime = () => {
         if (locale === Locale.en) {
             return moment(date, 'YYYY-MM-DD').format('MM.DD.YY');
         }
-        return moment(date, 'YYYY-MM-DD').format('DD.MM.YY');
+        return moment(date, 'YYYY-MM-DD').format('DD/MM/YY');
     };
 
     const getTime = ({ time }: IDateTimeProps) => {
