@@ -62,7 +62,8 @@ const resources = {
             },
             register: {
                 title: 'הרשמה לאפליקציית\n ההתאחדות לכדורגל בישראל',
-                sub_title: 'הצטרפו אלינו וקבלו את כל המידע הכי חם על\n הנבחרת, הקבוצה או השחקן שלכם!',
+                sub_title:
+                    'הצטרפו אלינו וקבלו את כל המידע הכי חם על\n הנבחרת, הקבוצה או השחקן שלכם!',
                 registerByPhone: 'הרשמה באמצעות טלפון',
                 phoneNumber: 'מס׳ טלפון',
                 submit: 'שלח קוד אימות',
@@ -144,7 +145,8 @@ const resources = {
             },
             reg: {
                 title: 'וולקם! מלאו את הפרטים',
-                sub_title: 'הצטרפו אלינו וקבלו את כל המידע הכי חם על\n הנבחרת, הקבוצה או השחקן שלכם!',
+                sub_title:
+                    'הצטרפו אלינו וקבלו את כל המידע הכי חם על\n הנבחרת, הקבוצה או השחקן שלכם!',
                 place_holder_name: 'שם / כינוי',
                 error: {
                     error_empty: 'נא להזין שם',
@@ -391,7 +393,7 @@ const resources = {
                 title: 'גביע',
                 state_cup: 'גביע המדינה',
                 toto_cup: 'גביע הטוטו',
-                search_placeholder: 'חיפוש גביע',
+                search_placeholder: 'חיפוש גביע...',
             },
             state_cup: {
                 title: 'גביע המדינה',
@@ -1088,7 +1090,7 @@ const resources = {
                 title: 'Cup',
                 state_cup: 'National cup',
                 toto_cup: 'Toto cup',
-                search_placeholder: 'Search cup',
+                search_placeholder: 'Search cup...',
             },
             state_cup: {
                 title: 'State cup',

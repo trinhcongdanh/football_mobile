@@ -49,85 +49,99 @@ export const GobletScreen = ({ navigation, route }: IGobletScreenProps) => {
 
     return (
         <View style={[appStyles.flex]}>
-            <BackGround>
-                <View style={appStyles.container}>
-                    <HeaderUser
-                        avt={AppImages.img_avt}
-                        point="1,325"
-                        icon={AppImages.img_bars_sort}
-                        color_pre={colorCustom}
-                        color_after={colorCustom}
-                    />
-                    <View>
-                        <Text style={[appStyles.text_title]}>{t('goblet.title')}</Text>
-                    </View>
-                    <View style={[appStyles.flex_row_space_center, styles.search]}>
-                        <TextInput
-                            placeholder={t('goblet.search_placeholder')}
-                            style={styles.text_search}
-                            placeholderTextColor={appColors.blue_gray_light}
-                            onChangeText={(text: string) => {
-                                setSearchText(text);
-                                onSearchCup(text, tab);
-                            }}
-                            ref={searchTextRef}
-                            value={searchText}
-                            // onKeyPress={(e: any) => {
-                            //     handleKeyPress(e);
-                            // }}
+            <ImageBackground
+                source={AppImages.img_background_cup}
+                style={[
+                    appStyles.flex,
+                    {
+                        height: '120%',
+                    },
+                ]}
+            >
+                <StatusBar barStyle="light-content" translucent backgroundColor="transparent" />
+                <SafeAreaView style={appStyles.safe_area}>
+                    <View style={appStyles.container}>
+                        <HeaderUser
+                            avt={AppImages.img_avt}
+                            point="1,325"
+                            icon={AppImages.img_bars_sort}
+                            color_pre={colorCustom}
+                            color_after={colorCustom}
                         />
-                        <Icon
-                            style={{ marginRight: getSize.m(14) }}
-                            name={appIcons.ic_search}
-                            color={appColors.blue_gray_light}
-                            size={getSize.m(16)}
-                        />
-                    </View>
-                </View>
-                <View style={[appStyles.flex, appStyles.main_container]}>
-                    <ButtonOption
-                        option_one={t('goblet.state_cup')}
-                        option_two={t('goblet.toto_cup')}
-                        onSelect={changeTab}
-                        defaultValue={0}
-                    />
-
-                    <ScrollView>
-                        <View style={{ paddingHorizontal: getSize.m(16) }}>
-                            <View style={styles.state_content}>
-                                {cups.map(item => {
-                                    return (
-                                        <TouchableOpacity
-                                            style={styles.option_grid}
-                                            key={item._id}
-                                            onPress={() => goToStateCupPage(item)}
-                                        >
-                                            <View style={styles.image_cup}>
-                                                <FastImage
-                                                    source={{ uri: item.logo_url }}
-                                                    style={{
-                                                        width: getSize.m(30),
-                                                        height: getSize.m(30),
-                                                        borderRadius: getSize.m(30),
-                                                    }}
-                                                    resizeMode={FastImage.resizeMode.contain}
-                                                />
-                                            </View>
-                                            <Text numberOfLines={2} style={styles.text_option_grid}>
-                                                {getTranslationText({
-                                                    textHe: item.name_he,
-                                                    textEn: item.name_en,
-                                                })}
-                                            </Text>
-                                        </TouchableOpacity>
-                                    );
-                                })}
-                            </View>
+                        <View>
+                            <Text style={[appStyles.text_title]}>{t('goblet.title')}</Text>
                         </View>
-                        <View style={{ height: TAB_BAR_HEIGHT + BOTTOM_SVG_HEIGHT }} />
-                    </ScrollView>
-                </View>
-            </BackGround>
+                        <View style={[appStyles.flex_row_space_center, styles.search]}>
+                            <TextInput
+                                placeholder={t('goblet.search_placeholder')}
+                                style={styles.text_search}
+                                placeholderTextColor={appColors.blue_gray_light}
+                                onChangeText={(text: string) => {
+                                    setSearchText(text);
+                                    onSearchCup(text, tab);
+                                }}
+                                ref={searchTextRef}
+                                value={searchText}
+                                // onKeyPress={(e: any) => {
+                                //     handleKeyPress(e);
+                                // }}
+                            />
+                            <Icon
+                                style={{ marginRight: getSize.m(14) }}
+                                name={appIcons.ic_search}
+                                color={appColors.blue_gray_light}
+                                size={getSize.m(16)}
+                            />
+                        </View>
+                    </View>
+                    <View style={[appStyles.flex, appStyles.main_container]}>
+                        <ButtonOption
+                            option_one={t('goblet.state_cup')}
+                            option_two={t('goblet.toto_cup')}
+                            onSelect={changeTab}
+                            defaultValue={0}
+                        />
+
+                        <ScrollView>
+                            <View style={{ paddingHorizontal: getSize.m(16) }}>
+                                <View style={styles.state_content}>
+                                    {cups.map(item => {
+                                        return (
+                                            <TouchableOpacity
+                                                style={styles.option_grid}
+                                                key={item._id}
+                                                onPress={() => goToStateCupPage(item)}
+                                            >
+                                                <View style={styles.image_cup}>
+                                                    <FastImage
+                                                        source={{ uri: item.logo_url }}
+                                                        style={{
+                                                            width: getSize.m(30),
+                                                            height: getSize.m(30),
+                                                            borderRadius: getSize.m(30),
+                                                        }}
+                                                        resizeMode={FastImage.resizeMode.contain}
+                                                    />
+                                                </View>
+                                                <Text
+                                                    numberOfLines={2}
+                                                    style={styles.text_option_grid}
+                                                >
+                                                    {getTranslationText({
+                                                        textHe: item.name_he,
+                                                        textEn: item.name_en,
+                                                    })}
+                                                </Text>
+                                            </TouchableOpacity>
+                                        );
+                                    })}
+                                </View>
+                            </View>
+                            <View style={{ height: TAB_BAR_HEIGHT + BOTTOM_SVG_HEIGHT }} />
+                        </ScrollView>
+                    </View>
+                </SafeAreaView>
+            </ImageBackground>
         </View>
     );
 };
