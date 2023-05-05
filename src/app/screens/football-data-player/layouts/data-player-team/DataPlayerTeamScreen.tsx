@@ -293,7 +293,7 @@ export const DataPlayerTeamScreen = ({ player }: IDataPlayerTeamScreenProps) => 
                                                     <View style={[appStyles.flex_row_align_center]}>
                                                         <View
                                                             style={{
-                                                                width: getSize.m(60),
+                                                                width: getSize.m(58),
                                                             }}
                                                         >
                                                             <Text
@@ -351,7 +351,7 @@ export const DataPlayerTeamScreen = ({ player }: IDataPlayerTeamScreenProps) => 
                                                         ) : null} */}
                                                         <View
                                                             style={{
-                                                                width: getSize.m(60),
+                                                                width: getSize.m(58),
                                                             }}
                                                         >
                                                             <Text
@@ -367,7 +367,7 @@ export const DataPlayerTeamScreen = ({ player }: IDataPlayerTeamScreenProps) => 
                                                     </View>
                                                 </View>
                                                 <View style={appStyles.flex_row_align_center}>
-                                                    <View style={{ width: getSize.m(60) }}>
+                                                    <View style={{ width: getSize.m(58) }}>
                                                         <Text
                                                             style={{
                                                                 color: appColors.text_dark_blue,
@@ -429,7 +429,7 @@ export const DataPlayerTeamScreen = ({ player }: IDataPlayerTeamScreenProps) => 
                                                     </View>
 
                                                     <View style={[appStyles.flex_row_align]}>
-                                                        <View style={{ width: getSize.m(30) }}>
+                                                        <View style={{ width: getSize.m(26) }}>
                                                             {game?.on_field ? (
                                                                 <Text style={styles.date}>
                                                                     {`${game?.on_field}'`}
@@ -440,7 +440,7 @@ export const DataPlayerTeamScreen = ({ player }: IDataPlayerTeamScreenProps) => 
                                                                 </Text>
                                                             ) : null}
                                                         </View>
-                                                        <View style={{ width: getSize.m(10) }}>
+                                                        <View style={{ width: getSize.m(9) }}>
                                                             {game?.off_field ? (
                                                                 <Icon
                                                                     name={appIcons.ic_arrow_down}
