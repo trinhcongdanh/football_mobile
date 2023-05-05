@@ -128,6 +128,7 @@ export enum AuthData {
     GET_PROFILE = 'get_profile',
     REGISTER_SMS = 'register_sms',
     LOGOUT = 'logout',
+    DELETE_FAN = 'forget',
 }
 
 export enum Gender {

@@ -703,6 +703,12 @@ const resources = {
                 title: 'אין חיבור אינטרנט',
                 button: 'צא מהאפליקציה',
             },
+            delete_account: {
+                title: 'מחיקת החשבון שלך',
+                text: 'בטוחים שברצונכם למחוק את החשבון? לא ניתן לבטל פעולה זו!',
+                yes: 'כן',
+                no: 'לא',
+            },
         },
     },
     en: {
@@ -1400,6 +1406,12 @@ const resources = {
             internet: {
                 title: 'No internet connection',
                 button: 'Exit the app',
+            },
+            delete_account: {
+                title: 'Delete Your Account',
+                text: 'Are you sure you want to delete your account? This action cannot be undone!',
+                yes: 'Yes',
+                no: 'No',
             },
         },
     },
