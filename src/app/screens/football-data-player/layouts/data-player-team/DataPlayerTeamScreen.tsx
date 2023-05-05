@@ -429,7 +429,7 @@ export const DataPlayerTeamScreen = ({ player }: IDataPlayerTeamScreenProps) => 
                                                     </View>
 
                                                     <View style={[appStyles.flex_row_align]}>
-                                                        <View style={{ width: getSize.m(26) }}>
+                                                        <View style={{ width: getSize.m(30) }}>
                                                             {game?.on_field ? (
                                                                 <Text style={styles.date}>
                                                                     {`${game?.on_field}'`}
