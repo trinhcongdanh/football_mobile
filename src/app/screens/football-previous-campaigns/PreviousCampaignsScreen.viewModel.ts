@@ -21,11 +21,11 @@ const useViewCallback = (viewState: any) => {
     const { setCampaigns } = viewState;
 
     const getCampaignsData = useCallback(async () => {
-        const [error, res] = await CampaignService.findAll();
+        const [error, res] = await CampaignService.findAllCampaign();
         if (error) {
             return;
         }
-
+        console.log('res.data.documents', res.data.documents);
         setCampaigns(res.data.documents);
     }, []);
 
