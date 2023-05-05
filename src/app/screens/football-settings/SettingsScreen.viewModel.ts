@@ -30,6 +30,7 @@ import {
     MAX_FAVORITES_TOPTEAM,
 } from '../../../core/api/configs/config';
 import { ISettingsScreenProps } from './SettingsScreen.type';
+import { deleteAccount } from 'src/store/user/deleteAccount.slice';
 
 interface SettingProps {
     userName: string;
@@ -81,6 +82,7 @@ const useViewState = () => {
     const numberPhone = useSelector((state: RootState) => state.numberPhoneUser);
     const userLogin = useSelector((state: RootState) => state.otpUser);
     const login = useSelector((state: RootState) => state.login);
+    const deleteAccount = useSelector((state: RootState) => state.deleteAccount);
 
     const genders = [
         {
@@ -230,6 +232,7 @@ const useViewState = () => {
         defaultOptions,
         setNewOptions,
         newOptions,
+        deleteAccount,
     };
 };
 
@@ -256,6 +259,7 @@ const useEventHandler = (state: any, route: any) => {
         setEditSetting,
         setNewOptions,
         newOptions,
+        t,
     } = state;
 
     const dispatch = useDispatch<any>();
@@ -325,7 +329,32 @@ const useEventHandler = (state: any, route: any) => {
     };
 
     const handleNotSaveChange = () => {
-        goBack();
+        global.props.showAlert({
+            title: t('delete_account.title'),
+            subTitle: t('delete_account.text'),
+            option1: t('delete_account.yes'),
+            option2: t('delete_account.no'),
+            // exit: false,
+            onOption1: () => {
+                global.props.closeAlert();
+                handleDeleteAccount();
+            },
+            onOption2: () => {
+                global.props.closeAlert();
+            },
+        });
+    };
+
+    const handleDeleteAccount = () => {
+        dispatch(
+            deleteAccount(
+                serializeParams({
+                    action: ACTION,
+                    token: numberPhone.successLogin ? userLogin.otp.token : login.login.token,
+                    call: AuthData.DELETE_FAN,
+                })
+            )
+        );
     };
 
     /**
@@ -620,7 +649,9 @@ const useEffectHandler = (state: any, callback: any, eventHandler: any) => {
         setDefaultOptions,
         defaultOptions,
         setNewOptions,
+        deleteAccount,
     } = state;
+    const { navigate } = useAppNavigator();
     useEffect(() => {
         if (getProfile.success !== true) {
             return;
@@ -710,6 +741,14 @@ const useEffectHandler = (state: any, callback: any, eventHandler: any) => {
             favorite_national_teams: isEmpty(favTopTeamIds) ? [] : favTopTeamIds,
         }));
     }, [state.selectedTeams, state.selectedPlayers, state.selectedTopTeams]);
+
+    useEffect(() => {
+        if (deleteAccount.success) {
+            navigate(ScreenName.SplashPage);
+        } else {
+            console.log('Failed to delete');
+        }
+    }, [deleteAccount.success]);
 };
 
 /**
