@@ -89,6 +89,8 @@ export const LeaguesScreen = ({ navigation, route }: ILeaguesScreenProps) => {
                             style={styles.text_search}
                             placeholderTextColor={appColors.blue_gray_light}
                             onChangeText={onSearchLeague}
+                            keyboardType={'ascii-capable'}
+                            textContentType="none"
                             // onBlur={submitSearchLeague}
                             // onSubmitEditing={submitSearchLeague}
                         />

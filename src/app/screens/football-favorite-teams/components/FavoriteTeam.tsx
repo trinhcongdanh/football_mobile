@@ -103,6 +103,8 @@ export const FavoriteTeam = ({
                                     style={styles.text_search}
                                     placeholderTextColor={appColors.blue_gray_dark}
                                     onChangeText={handleTextChange}
+                                    keyboardType={'ascii-capable'}
+                                    textContentType="none"
                                     // onBlur={() => submitSearchFavTeam(searchText)}
                                 />
 
