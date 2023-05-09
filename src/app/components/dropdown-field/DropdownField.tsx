@@ -9,6 +9,7 @@ import OutsidePressHandler from 'react-native-outside-press';
 import Icon from 'react-native-vector-icons/Feather';
 import { ScrollView } from 'react-native-gesture-handler';
 import { styles } from './DropdownField.style';
+import { isEmpty } from 'lodash';
 
 const DropdownField = ({
     onPress,
@@ -68,9 +69,16 @@ const DropdownField = ({
                         style={styles.chevronDown}
                     />
                 </TouchableOpacity>
-                {openModal && (
+                {openModal && !isEmpty(options) && (
                     <View style={{ position: 'relative' }}>
-                        <View style={[styles.itemsContainer]}>
+                        <View
+                            style={[
+                                styles.itemsContainer,
+                                {
+                                    height: options.length > 6 ? getSize.m(300) : 'auto',
+                                },
+                            ]}
+                        >
                             <ScrollView nestedScrollEnabled>
                                 {options?.map((opt: any, index: number) => {
                                     return (

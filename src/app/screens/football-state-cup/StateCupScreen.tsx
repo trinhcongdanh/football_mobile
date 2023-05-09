@@ -25,6 +25,7 @@ import styles from './StateCupScreen.style';
 import { IStateCupScreenProps } from './StateCupScreen.type';
 import { useViewModel } from './StateCupScreen.viewModel';
 import { BackGround } from '@football/app/components/background/BackGround';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 export const StateCupScreen = ({ route }: IStateCupScreenProps) => {
     const {
@@ -75,114 +76,119 @@ export const StateCupScreen = ({ route }: IStateCupScreenProps) => {
                                 handleCloseModal={handleCloseModal}
                             />
                         )}
-                        <ScrollView>
-                            <View style={appStyles.container}>
-                                <View
-                                    style={[appStyles.align_justify, { marginTop: getSize.m(16) }]}
-                                >
-                                    <View style={styles.avt_leagues_container}>
-                                        <FastImage
-                                            source={{ uri: cup.logo_url }}
-                                            style={styles.avt_leagues}
-                                            resizeMode={FastImage.resizeMode.contain}
-                                        />
-                                    </View>
-                                    <Text style={styles.name_leagues}>
-                                        {getTranslationText({
-                                            textHe: cup.name_he,
-                                            textEn: cup.name_en,
-                                        })}
-                                    </Text>
-                                </View>
-                                <View>
+                        <GestureHandlerRootView style={{ flex: 1 }}>
+                            <ScrollView showsVerticalScrollIndicator={false}>
+                                <View style={appStyles.container}>
                                     <View
                                         style={[
-                                            appStyles.flex_row_center,
-                                            { marginTop: getSize.m(16), flex: 0 },
+                                            appStyles.align_justify,
+                                            { marginTop: getSize.m(16) },
                                         ]}
                                     >
-                                        <Text style={styles.season_year}>
-                                            {t('state_cup.season_game')}
-                                        </Text>
-                                        <TouchableOpacity
-                                            onPress={() => {
-                                                setOpenModalYear(!openModalYear);
-                                                setIsScroll(!isScroll);
-                                            }}
-                                            style={styles.calender}
-                                            activeOpacity={0.9}
-                                        >
-                                            <Text style={styles.text_calender}>
-                                                {selectedCupSeason?.name}
-                                            </Text>
-                                            <Icon
-                                                name={appIcons.ic_chevron_down}
-                                                size={getSize.m(14)}
-                                                color={appColors.light_gray}
-                                                style={styles.chevron_down}
+                                        <View style={styles.avt_leagues_container}>
+                                            <FastImage
+                                                source={{ uri: cup.logo_url }}
+                                                style={styles.avt_leagues}
+                                                resizeMode={FastImage.resizeMode.contain}
                                             />
-                                        </TouchableOpacity>
-                                    </View>
-                                </View>
-                                <View style={styles.line_dots} />
-                            </View>
-                            <View
-                                style={[
-                                    appStyles.flex,
-                                    appStyles.main_container,
-                                    {
-                                        zIndex: 10,
-                                    },
-                                ]}
-                            >
-                                <View style={styles.drop_down_filter}>
-                                    <View style={{ flex: 0.9 }}>
-                                        <DropdownField
-                                            options={selectedCupSeason?.cycles || []}
-                                            selectedValue={selectCycle}
-                                            onPressItem={cycle => {
-                                                setSelectCycle(cycle);
-                                            }}
-                                            itemTitleField={getTranslationText({
-                                                textHe: 'cycle_name_he',
-                                                textEn: 'cycle_name_en',
+                                        </View>
+                                        <Text style={styles.name_leagues}>
+                                            {getTranslationText({
+                                                textHe: cup.name_he,
+                                                textEn: cup.name_en,
                                             })}
-                                        />
+                                        </Text>
                                     </View>
-                                    <View style={{ flex: 0.6 }}>
-                                        <DropdownField
-                                            options={selectCycle?.rounds || []}
-                                            selectedValue={selectRound}
-                                            onPressItem={round => {
-                                                setSelectRound(round);
-                                            }}
-                                            itemTitleField={getTranslationText({
-                                                textHe: 'round_name_he',
-                                                textEn: 'round_name_en',
-                                            })}
-                                        />
+                                    <View>
+                                        <View
+                                            style={[
+                                                appStyles.flex_row_center,
+                                                { marginTop: getSize.m(16), flex: 0 },
+                                            ]}
+                                        >
+                                            <Text style={styles.season_year}>
+                                                {t('state_cup.season_game')}
+                                            </Text>
+                                            <TouchableOpacity
+                                                onPress={() => {
+                                                    setOpenModalYear(!openModalYear);
+                                                    setIsScroll(!isScroll);
+                                                }}
+                                                style={styles.calender}
+                                                activeOpacity={0.9}
+                                            >
+                                                <Text style={styles.text_calender}>
+                                                    {selectedCupSeason?.name}
+                                                </Text>
+                                                <Icon
+                                                    name={appIcons.ic_chevron_down}
+                                                    size={getSize.m(14)}
+                                                    color={appColors.light_gray}
+                                                    style={styles.chevron_down}
+                                                />
+                                            </TouchableOpacity>
+                                        </View>
                                     </View>
+                                    <View style={styles.line_dots} />
                                 </View>
-                                <OptionState
-                                    data={selectRound?.games || []}
-                                    label={
-                                        getTranslationText({
-                                            textHe: selectCycle?.cycle_name_he,
-                                            textEn: selectCycle?.cycle_name_en,
-                                        }) || ''
-                                    }
-                                />
-                            </View>
-                            <View style={styles.package}>
-                                <Trophy cupHolders={cup.cup_holders} cup={cup} />
-                            </View>
-                            <View style={styles.package}>
-                                <CupAround
-                                    cyclesDetails={selectedCupSeason?.cycles_details || []}
-                                    cup={cup}
-                                />
-                            </View>
-                        </ScrollView>
+                                <View
+                                    style={[
+                                        appStyles.flex,
+                                        appStyles.main_container,
+                                        {
+                                            zIndex: 10,
+                                        },
+                                    ]}
+                                >
+                                    <View style={styles.drop_down_filter}>
+                                        <View style={{ flex: 0.9 }}>
+                                            <DropdownField
+                                                options={selectedCupSeason?.cycles || []}
+                                                selectedValue={selectCycle}
+                                                onPressItem={cycle => {
+                                                    setSelectCycle(cycle);
+                                                }}
+                                                itemTitleField={getTranslationText({
+                                                    textHe: 'cycle_name_he',
+                                                    textEn: 'cycle_name_en',
+                                                })}
+                                            />
+                                        </View>
+                                        <View style={{ flex: 0.6 }}>
+                                            <DropdownField
+                                                options={selectCycle?.rounds || []}
+                                                selectedValue={selectRound}
+                                                onPressItem={round => {
+                                                    setSelectRound(round);
+                                                }}
+                                                itemTitleField={getTranslationText({
+                                                    textHe: 'round_name_he',
+                                                    textEn: 'round_name_en',
+                                                })}
+                                            />
+                                        </View>
+                                    </View>
+                                    <OptionState
+                                        data={selectRound?.games || []}
+                                        label={
+                                            getTranslationText({
+                                                textHe: selectCycle?.cycle_name_he,
+                                                textEn: selectCycle?.cycle_name_en,
+                                            }) || ''
+                                        }
+                                    />
+                                </View>
+                                <View style={styles.package}>
+                                    <Trophy cupHolders={cup.cup_holders} cup={cup} />
+                                </View>
+                                <View style={styles.package}>
+                                    <CupAround
+                                        cyclesDetails={selectedCupSeason?.cycles_details || []}
+                                        cup={cup}
+                                    />
+                                </View>
+                            </ScrollView>
+                        </GestureHandlerRootView>
                     </>
                 )}
             </BackGround>
