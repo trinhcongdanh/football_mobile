@@ -113,6 +113,8 @@ const useViewState = () => {
         email: '',
     });
 
+    const [changeSetting, setChangeSetting] = useState<boolean>(false);
+
     const [defaultOptions, setDefaultOptions] = useState<Option>({
         email: '',
         favorite_israel_teams: [],
@@ -237,6 +239,8 @@ const useViewState = () => {
         deleteAccount,
         isImage,
         setIsImage,
+        changeSetting,
+        setChangeSetting,
     };
 };
 
@@ -268,6 +272,8 @@ const useEventHandler = (state: any, route: any) => {
         image,
         setIsImage,
         setImage,
+        changeSetting,
+        setChangeSetting,
     } = state;
 
     const dispatch = useDispatch<any>();
@@ -275,9 +281,13 @@ const useEventHandler = (state: any, route: any) => {
     const onGoBack = () => {
         const previousScreen = route?.params?.previousScreen;
         if (previousScreen && previousScreen === ScreenName.HomePage) {
-            console.log('Go Back 1');
-            popToTop();
-            replace(ScreenName.SideBar);
+            if (changeSetting) {
+                console.log('Go Back 1');
+                popToTop();
+                replace(ScreenName.SideBar);
+            } else {
+                goBack();
+            }
         } else {
             console.log('Go Back 2');
             goBack();
@@ -307,6 +317,7 @@ const useEventHandler = (state: any, route: any) => {
      */
     const handleSaveChange = () => {
         setIsImage(false);
+        setChangeSetting(true);
         dispatch(statusSetProfile([]));
 
         if (!isEmpty(image)) {
