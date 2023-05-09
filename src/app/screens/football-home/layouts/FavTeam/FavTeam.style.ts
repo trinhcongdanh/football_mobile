@@ -36,6 +36,7 @@ const styles = StyleSheet.create({
         fontSize: getSize.m(18),
         lineHeight: getSize.m(26),
         color: appColors.white,
+        textAlign: 'left',
     },
 
     stats_content: {
