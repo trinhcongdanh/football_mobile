@@ -129,6 +129,8 @@ export enum AuthData {
     REGISTER_SMS = 'register_sms',
     LOGOUT = 'logout',
     DELETE_FAN = 'forget',
+    UPLOAD_PROFILE_IMAGE = 'upload_profile_image',
+    AVATAR_IMAGE = 'avatar_image',
 }
 
 export enum Gender {

@@ -31,6 +31,7 @@ import {
 } from '../../../core/api/configs/config';
 import { ISettingsScreenProps } from './SettingsScreen.type';
 import { deleteAccount } from 'src/store/user/deleteAccount.slice';
+import { avatarUser } from 'src/store/user/avatarUser.slice';
 
 interface SettingProps {
     userName: string;
@@ -100,7 +101,8 @@ const useViewState = () => {
     ];
 
     // Props fields in the form
-    const [image, setImage] = useState<string>();
+    const [image, setImage] = useState<any>(null);
+    const [isImage, setIsImage] = useState<boolean>(false);
     const [userName, setUserName] = useState<string>('');
     const [email, setEmail] = useState<string>('');
     const [birthDate, setBirthDate] = useState<string>('');
@@ -233,6 +235,8 @@ const useViewState = () => {
         setNewOptions,
         newOptions,
         deleteAccount,
+        isImage,
+        setIsImage,
     };
 };
 
@@ -260,6 +264,10 @@ const useEventHandler = (state: any, route: any) => {
         setNewOptions,
         newOptions,
         t,
+        isImage,
+        image,
+        setIsImage,
+        setImage,
     } = state;
 
     const dispatch = useDispatch<any>();
@@ -278,26 +286,42 @@ const useEventHandler = (state: any, route: any) => {
     };
 
     /**
+     * Handle event click on the profile picture
+     */
+    const onImagePicker = async () => {
+        const result = await launchImageLibrary({ mediaType: 'photo', includeBase64: true });
+        // eslint-disable-next-line array-callback-return
+        result.assets?.map(item => {
+            const form = new FormData();
+            form.append('file', item.base64);
+            const convertImage = 'data:image/png;base64,' + item.base64;
+            setImage(convertImage);
+            setIsImage(true);
+            console.log('form', form);
+            console.log('item.uri', item);
+        });
+    };
+
+    /**
      *  Handle save button click
      */
     const handleSaveChange = () => {
+        setIsImage(false);
         dispatch(statusSetProfile([]));
 
-        // const favTeamIds = selectedTeams
-        //     .filter((team: TeamModel) => team)
-        //     .map((selectedTeam: TeamModel) => selectedTeam._id);
-
-        // const favPlayersIds = selectedPlayers
-        //     .filter((player: PlayerModel) => player)
-        //     .map((selectedPlayer: PlayerModel) => selectedPlayer._id);
-
-        // const favTopTeamIds = selectedTopTeams
-        //     .filter((topTeam: TopTeamModel) => topTeam)
-        //     .map((selectedTopTeam: TopTeamModel) => selectedTopTeam._id);
-
-        // const notificationIds = notifications
-        //     .filter((notification: NotificationSetting) => notification.isOn)
-        //     .map((notification: NotificationSetting) => notification.value);
+        if (!isEmpty(image)) {
+            dispatch(
+                avatarUser(
+                    serializeParams({
+                        action: ACTION,
+                        token: numberPhone.successLogin ? userLogin.otp.token : login.login.token,
+                        call: AuthData.UPLOAD_PROFILE_IMAGE,
+                        field: AuthData.AVATAR_IMAGE,
+                        file: image,
+                    })
+                )
+            );
+        }
 
         dispatch(
             setProfileUser(
@@ -355,17 +379,6 @@ const useEventHandler = (state: any, route: any) => {
                 })
             )
         );
-    };
-
-    /**
-     * Handle event click on the profile picture
-     */
-    const onImagePicker = async () => {
-        const result = await launchImageLibrary({ mediaType: 'photo' });
-        // eslint-disable-next-line array-callback-return
-        result.assets?.map(item => {
-            state.setImage(item.uri);
-        });
     };
 
     /**
