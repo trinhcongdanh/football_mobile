@@ -388,7 +388,7 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                             marginTop: getSize.m(-40),
                             paddingTop: getSize.m(40),
                             zIndex: -1,
-                            marginBottom: getSize.m(50),
+                            marginBottom: getSize.m(40),
                         }}
                         refreshControl={
                             <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
