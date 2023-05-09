@@ -56,6 +56,7 @@ const styles = StyleSheet.create({
         lineHeight: getSize.m(16),
         color: appColors.white,
         fontFamily: AppFonts.bold,
+        textAlign: 'left',
     },
     ic_arrow_left: {
         lineHeight: getSize.m(16),
