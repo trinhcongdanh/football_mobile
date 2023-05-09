@@ -35,7 +35,7 @@ import { ISettingsScreenProps } from './SettingsScreen.type';
 import { useViewModel } from './SettingsScreen.viewModel';
 import { BackGround } from '@football/app/components/background/BackGround';
 import { ChangeLanguage } from '@football/app/components/change-language/ChangeLanguage';
-import { difference, isEqual } from 'lodash';
+import { difference, isEmpty, isEqual } from 'lodash';
 
 export function SettingsScreen(props: ISettingsScreenProps) {
     const {
@@ -71,6 +71,8 @@ export function SettingsScreen(props: ISettingsScreenProps) {
         editSetting,
         defaultOptions,
         newOptions,
+        image,
+        isImage,
     } = useViewModel(props);
     const scrollViewRef = useRef<any>();
 
@@ -441,7 +443,7 @@ export function SettingsScreen(props: ISettingsScreenProps) {
                             style={{ borderRadius: getSize.m(15) }}
                             title={t('settings.save_changes')}
                             onPress={handleSaveChange}
-                            disabled={isEqual(defaultOptions, newOptions)}
+                            disabled={isEqual(defaultOptions, newOptions) && !isImage}
                         />
                         <View style={{ marginTop: getSize.m(10), marginBottom: getSize.m(20) }}>
                             <ChangeLanguage

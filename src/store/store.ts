@@ -30,6 +30,7 @@ import registerFacebookReducer from './user/RegisterFacebook.slice';
 import numberPhoneUserReducer from './user/RegisterNumberPhone.slice';
 import videoReducer from './video/Video.slice';
 import deleteAccountReducer from './user/deleteAccount.slice';
+import avatarUserReducer from './user/avatarUser.slice';
 
 const reducer = combineReducers({
     guestId: guestIdReducer,
@@ -49,6 +50,7 @@ const reducer = combineReducers({
     colorCustom: colorCustomReducer,
     notifications: notificationReducer,
     deleteAccount: deleteAccountReducer,
+    avatarUser: avatarUserReducer,
 });
 const persistConfig = {
     key: 'root',
