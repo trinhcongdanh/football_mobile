@@ -222,26 +222,26 @@ export const FavPlayer = ({ player, color }: IFavPlayerProps) => {
                             >
                                 <View style={appStyles.align_justify}>
                                     <Text style={styles.content}>
-                                        {player?.homepage_info?.goals.league_goals}
+                                        {player?.homepage_info?.goals.goals_league}
                                     </Text>
                                     <Text style={styles.title}>{t('home_page.league')}</Text>
                                 </View>
                                 <View style={appStyles.align_justify}>
                                     <Text style={styles.content}>
-                                        {player?.homepage_info?.goals.national_cup_goals}
+                                        {player?.homepage_info?.goals.goals_national_cup}
                                     </Text>
                                     <Text style={styles.title}>{t('home_page.state_cup')}</Text>
                                 </View>
                                 <View style={appStyles.align_justify}>
                                     <Text style={styles.content}>
-                                        {player?.homepage_info?.goals.toto_cup_goals}
+                                        {player?.homepage_info?.goals.goals_toto_cup}
                                     </Text>
                                     <Text style={styles.title}>{t('home_page.toto_cup')}</Text>
                                 </View>
 
                                 <View style={appStyles.align_justify}>
                                     <Text style={styles.content}>
-                                        {player?.homepage_info?.goals.total_goals}
+                                        {player?.homepage_info?.goals.goals_total}
                                     </Text>
                                     <Text style={styles.title}>{t('home_page.total_goals')}</Text>
                                 </View>

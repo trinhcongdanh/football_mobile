@@ -149,10 +149,10 @@ export interface Game3 {
 }
 
 export interface Goals {
-    league_goals: number;
-    national_cup_goals: number;
-    toto_cup_goals: number;
-    total_goals: number;
+    goals_league: number;
+    goals_national_cup: number;
+    goals_toto_cup: number;
+    goals_total: number;
 }
 
 export interface YellowCards {
