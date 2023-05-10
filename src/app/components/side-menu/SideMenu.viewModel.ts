@@ -244,17 +244,17 @@ const useEffectHandler = (state: any, eventHandler: any) => {
 
     useEffect(() => {
         if (getProfile.success) {
-            if (getProfile.getProfile.item.name === '') {
+            if (getProfile?.getProfile?.item?.name === '') {
                 setUserName(t('side_menu.guest'));
             } else {
-                setUserName(getProfile.getProfile.item.name);
+                setUserName(getProfile?.getProfile?.item?.name);
             }
 
-            if (getProfile.getProfile.item.gender === Gender.OTHER) {
+            if (getProfile.getProfile.item?.gender === Gender.OTHER) {
                 setAvt(AppImages.img_avt_other);
-            } else if (getProfile.getProfile.item.gender === Gender.MALE) {
+            } else if (getProfile.getProfile.item?.gender === Gender.MALE) {
                 setAvt(AppImages.img_avt_man);
-            } else if (getProfile.getProfile.item.gender === Gender.FEMALE) {
+            } else if (getProfile.getProfile.item?.gender === Gender.FEMALE) {
                 setAvt(AppImages.img_avt_woman);
             }
         }

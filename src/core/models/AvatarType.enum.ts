@@ -36,5 +36,5 @@ export const renderUserPoints = (profileUser: any, t: any) => {
         return t('side_menu.guest');
     }
 
-    return profileUser.getProfile.item.points_balance || '0';
+    return profileUser.getProfile.item?.points_balance || '0';
 };

@@ -151,6 +151,7 @@ const resources = {
                 error: {
                     error_empty: 'נא להזין שם',
                     error_valid: 'שימוש בתווים לא תקינים',
+                    error_char: 'נא להזין 2 תווים או יותר',
                 },
                 gender: {
                     label: 'מגדר',
@@ -854,6 +855,7 @@ const resources = {
                 error: {
                     error_empty: 'Please enter name',
                     error_valid: 'Use of invalid characters',
+                    error_char: 'Please enter 2 or more characters',
                 },
                 gender: {
                     label: 'Gender',
