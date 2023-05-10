@@ -22,8 +22,8 @@ export const useViewModel = ({ topTeam, color }: IFavTopTeamProps) => {
         navigate(ScreenName.PitchPage, { stadiumId });
     };
 
-    const handleDetailMatch = (gameId: any) => {
-        navigate(ScreenName.MatchPage, { gameId });
+    const handleDetailMatch = (gameId: any, topTeam: boolean) => {
+        navigate(ScreenName.MatchPage, { gameId, topTeam });
     };
 
     const onNavigateGameList = (topTeam: TopTeamModel) => {

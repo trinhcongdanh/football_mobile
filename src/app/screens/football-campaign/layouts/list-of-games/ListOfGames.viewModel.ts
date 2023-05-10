@@ -18,8 +18,8 @@ export const useViewModel = (topTeam: TopTeamModel) => {
         setSelect(index);
     };
 
-    const handleDetailMatch = (gameId: any) => {
-        navigate(ScreenName.MatchPage, { gameId });
+    const handleDetailMatch = (gameId: any, topTeam: boolean) => {
+        navigate(ScreenName.MatchPage, { gameId, topTeam });
     };
 
     const handleStadium = (stadiumId: string) => {
