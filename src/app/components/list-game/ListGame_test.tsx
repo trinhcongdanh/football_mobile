@@ -319,20 +319,16 @@ export const ListGame_Test = ({
                                             },
                                         ]}
                                     >
-                                        {!isLive &&
-                                            result === emptyResult &&
-                                            schedule !== null &&
-                                            tournament && <Text style={styles.score}>V S</Text>}
-                                        {!isLive &&
-                                            result === emptyResult &&
-                                            schedule !== null &&
-                                            !tournament && (
-                                                <Text style={styles.score}>
-                                                    {getTime({ time: schedule })}
-                                                </Text>
-                                            )}
+                                        {!isLive && isFuture && tournament && (
+                                            <Text style={styles.score}>V S</Text>
+                                        )}
+                                        {!isLive && isFuture && !tournament && (
+                                            <Text style={styles.score}>
+                                                {getTime({ time: schedule })}
+                                            </Text>
+                                        )}
 
-                                        {!isLive && result !== emptyResult && (
+                                        {!isLive && !isFuture && (
                                             <Text style={styles.score}>
                                                 {getResult({
                                                     result: result,
@@ -371,20 +367,14 @@ export const ListGame_Test = ({
                                               })}
                                     </Text>
                                 )}
-                                {!isLive &&
-                                    result === emptyResult &&
-                                    schedule !== null &&
-                                    tournament && <Text style={styles.score}>V S</Text>}
-                                {!isLive &&
-                                    result === emptyResult &&
-                                    schedule !== null &&
-                                    !tournament && (
-                                        <Text style={styles.score}>
-                                            {getTime({ time: schedule })}
-                                        </Text>
-                                    )}
+                                {!isLive && isFuture && tournament && (
+                                    <Text style={styles.score}>V S</Text>
+                                )}
+                                {!isLive && isFuture && !tournament && (
+                                    <Text style={styles.score}>{getTime({ time: schedule })}</Text>
+                                )}
 
-                                {!isLive && result !== emptyResult && (
+                                {!isLive && !isFuture && (
                                     <Text style={styles.score}>
                                         {getResult({
                                             result: result,

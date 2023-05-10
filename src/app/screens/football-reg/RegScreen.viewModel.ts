@@ -139,24 +139,28 @@ export const useViewModel = ({ navigation, route }: IRegScreenProps) => {
         selectedFavTopTeams.map(item => {
             fav_top_team.push(item._id);
         });
-        dispatch(
-            setProfileUser(
-                serializeParams({
-                    action: ACTION,
-                    token: login.login.token,
-                    call: AuthData.SET_PROFILE,
-                    item_id: profile.profile.item_id,
-                    item: {
-                        name: userName,
-                        gender: gender,
-                        birthdate: moment(date).format('YYYY-MM-DD'),
-                        favorite_israel_teams: isEmpty(fav_team) ? '' : fav_team,
-                        favorite_players: isEmpty(fav_player) ? '' : fav_player,
-                        favorite_national_teams: isEmpty(fav_top_team) ? '' : fav_top_team,
-                    },
-                })
-            )
-        );
+        if (userName.length >= 2) {
+            dispatch(
+                setProfileUser(
+                    serializeParams({
+                        action: ACTION,
+                        token: login.login.token,
+                        call: AuthData.SET_PROFILE,
+                        item_id: profile.profile.item_id,
+                        item: {
+                            name: userName,
+                            gender: gender,
+                            birthdate: moment(date).format('YYYY-MM-DD'),
+                            favorite_israel_teams: isEmpty(fav_team) ? '' : fav_team,
+                            favorite_players: isEmpty(fav_player) ? '' : fav_player,
+                            favorite_national_teams: isEmpty(fav_top_team) ? '' : fav_top_team,
+                        },
+                    })
+                )
+            );
+        } else {
+            handleError(t('reg.error.error_char'), 'userName');
+        }
     };
     const isFocused = useIsFocused();
     useEffect(() => {
