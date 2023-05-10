@@ -58,7 +58,10 @@ export const ListPlayer = ({
                     />
                 </View>
                 <Text
-                    style={[appStyles.text_dark, { marginLeft: getSize.m(10), width: widthText }]}
+                    style={[
+                        appStyles.text_dark,
+                        { marginLeft: getSize.m(10), width: widthText, textAlign: 'left' },
+                    ]}
                 >
                     {name}
                 </Text>
