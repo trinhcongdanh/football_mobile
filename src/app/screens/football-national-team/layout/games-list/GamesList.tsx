@@ -139,7 +139,7 @@ export const GamesList = ({ topTeam }: IGamesListProps) => {
                                     icon={appIcons.ic_left_ios}
                                     color={appColors.gray}
                                     details={item.game_id}
-                                    handleDetailMatch={() => handleDetailMatch(item.game_id)}
+                                    handleDetailMatch={() => handleDetailMatch(item.game_id, true)}
                                     handleStadium={() => handleStadium(item.stadium_id)}
                                     isLive={moment().isBetween(
                                         moment(`${item.date} ${item.time}`),

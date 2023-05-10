@@ -5,7 +5,7 @@ import { appColors } from '@football/app/utils/constants/appColors';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import { ScreenName } from '@football/app/utils/constants/enum';
 import { getSize } from '@football/app/utils/responsive/scale';
-import React from 'react';
+import React, { useState } from 'react';
 import { Platform, Text, TouchableOpacity, View } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import IconAntDesign from 'react-native-vector-icons/AntDesign';

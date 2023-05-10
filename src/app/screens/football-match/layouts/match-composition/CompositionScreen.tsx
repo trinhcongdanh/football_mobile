@@ -16,6 +16,7 @@ import { useViewModel } from './CompositionScreen.viewModel';
 
 export const CompositionScreen = ({ navigation, route }: ICompositionScreenProps) => {
     const game = route?.params?.data;
+    const topTeam = route?.params?.topTeam;
     const { t, handleDataPlayer, options, selectOption, select, handleDataCoach } = useViewModel({
         navigation,
         route,
@@ -26,7 +27,7 @@ export const CompositionScreen = ({ navigation, route }: ICompositionScreenProps
     // if (lineUp.success == false) {
     //     return <></>;
     // }
-
+    console.log('topTeam', topTeam);
     const { getTranslationText } = useTranslationText();
 
     const renderList = (team: Team) => {
@@ -135,6 +136,11 @@ export const CompositionScreen = ({ navigation, route }: ICompositionScreenProps
                                     textEn: item.name_en,
                                 })}
                                 avt={item.image_url}
+                                position={getTranslationText({
+                                    textHe: item.role_he,
+                                    textEn: item.role_en,
+                                })}
+                                fontFamily={AppFonts.semibold}
                                 // handleDataPlayer={() => handleDataPlayer(item.player_id)}
                             />
                         );
@@ -155,42 +161,47 @@ export const CompositionScreen = ({ navigation, route }: ICompositionScreenProps
             ]}
         >
             <ScrollView showsVerticalScrollIndicator={false}>
-                <View style={[appStyles.flex_row_space, styles.option]}>
-                    {options?.map((option: string, index: number) => {
-                        return (
-                            <TouchableOpacity
-                                style={[
-                                    styles.button_option_dark,
-                                    {
-                                        backgroundColor:
-                                            index === select
-                                                ? appColors.button_dark_blue
-                                                : appColors.separator,
-                                    },
-                                ]}
-                                key={index.toString()}
-                                onPress={() => selectOption(index)}
-                            >
-                                <Text
+                {!topTeam ? (
+                    <View style={[appStyles.flex_row_space, styles.option]}>
+                        {options?.map((option: string, index: number) => {
+                            return (
+                                <TouchableOpacity
                                     style={[
-                                        styles.text_option,
+                                        styles.button_option_dark,
                                         {
-                                            color:
+                                            backgroundColor:
                                                 index === select
-                                                    ? appColors.white
-                                                    : appColors.text_option_unselect,
-
-                                            fontFamily:
-                                                index === select ? AppFonts.bold : AppFonts.medium,
+                                                    ? appColors.button_dark_blue
+                                                    : appColors.separator,
                                         },
                                     ]}
+                                    key={index.toString()}
+                                    onPress={() => selectOption(index)}
                                 >
-                                    {option}
-                                </Text>
-                            </TouchableOpacity>
-                        );
-                    })}
-                </View>
+                                    <Text
+                                        style={[
+                                            styles.text_option,
+                                            {
+                                                color:
+                                                    index === select
+                                                        ? appColors.white
+                                                        : appColors.text_option_unselect,
+
+                                                fontFamily:
+                                                    index === select
+                                                        ? AppFonts.bold
+                                                        : AppFonts.medium,
+                                            },
+                                        ]}
+                                    >
+                                        {option}
+                                    </Text>
+                                </TouchableOpacity>
+                            );
+                        })}
+                    </View>
+                ) : null}
+
                 {game && renderList(select === 0 ? game.team1 : game.team2)}
             </ScrollView>
         </View>

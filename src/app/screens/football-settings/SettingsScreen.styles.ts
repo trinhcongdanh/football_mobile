@@ -94,11 +94,14 @@ export const styles = StyleSheet.create({
     },
     btn_add: {
         flex: 0.2,
-        padding: getSize.m(14),
         borderRadius: getSize.m(30),
         borderWidth: getSize.m(1),
         borderColor: appColors.blue_light,
         borderStyle: 'dashed',
+        width: getSize.m(38),
+        height: getSize.m(38),
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     txt_tutorial: {
         fontFamily: AppFonts.bold,
@@ -191,6 +194,7 @@ export const styles = StyleSheet.create({
         fontSize: getSize.m(12),
         lineHeight: getSize.m(15),
         color: appColors.text_dark_blue,
+        height: getSize.m(30),
     },
     txt_add_group: {
         textAlign: 'center',
@@ -199,9 +203,10 @@ export const styles = StyleSheet.create({
         fontSize: getSize.m(12),
         lineHeight: getSize.m(15),
         color: appColors.text_dark_blue,
+        height: getSize.m(30),
     },
     btn_img: {
-        flex: 0.2,
+        // flex: 0.2,
         width: getSize.m(38),
         height: getSize.m(38),
         alignItems: 'center',

@@ -42,8 +42,8 @@ const useEventHandler = (state: any) => {
      * Handle detail game
      * @param gameId
      */
-    const handleDetailMatch = (gameId: any) => {
-        navigate(ScreenName.MatchPage, { gameId });
+    const handleDetailMatch = (gameId: any, topTeam: boolean) => {
+        navigate(ScreenName.MatchPage, { gameId, topTeam });
     };
 
     /**

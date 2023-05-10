@@ -23,6 +23,10 @@ export const useViewModel = ({ statistics, statisticsId }: IStatisticsProps) => 
         });
     };
 
+    const onNavigateTeamDetails = (teamId: string) => {
+        navigate(ScreenName.GroupPagePage, { teamId });
+    };
+
     return {
         t,
         setOnSelect,
@@ -30,5 +34,6 @@ export const useViewModel = ({ statistics, statisticsId }: IStatisticsProps) => 
         onSelect,
         externalGames,
         homeGames,
+        onNavigateTeamDetails,
     };
 };

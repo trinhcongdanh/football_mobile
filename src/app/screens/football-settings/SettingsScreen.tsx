@@ -225,17 +225,21 @@ export function SettingsScreen(props: ISettingsScreenProps) {
                                         return (
                                             <View key={index} style={styles.item_container}>
                                                 {item ? (
-                                                    <>
-                                                        <TouchableOpacity
-                                                            style={styles.btn_img}
-                                                            onPress={backFavTeam}
-                                                        >
-                                                            <Image
-                                                                resizeMode="cover"
-                                                                source={{ uri: item.logo_url }}
-                                                                style={styles.img_team}
-                                                            />
-                                                        </TouchableOpacity>
+                                                    <TouchableOpacity
+                                                        style={{
+                                                            justifyContent: 'center',
+                                                            alignItems: 'center',
+                                                            flex: 0.2,
+                                                            height: getSize.m(84),
+                                                        }}
+                                                        onPress={backFavTeam}
+                                                    >
+                                                        <Image
+                                                            resizeMode="cover"
+                                                            source={{ uri: item.logo_url }}
+                                                            style={styles.img_team}
+                                                        />
+
                                                         <Text
                                                             numberOfLines={2}
                                                             style={styles.txt_add_group}
@@ -245,7 +249,7 @@ export function SettingsScreen(props: ISettingsScreenProps) {
                                                                 textEn: item.name_en,
                                                             })}
                                                         </Text>
-                                                    </>
+                                                    </TouchableOpacity>
                                                 ) : (
                                                     <>
                                                         <TouchableOpacity
@@ -287,17 +291,21 @@ export function SettingsScreen(props: ISettingsScreenProps) {
                                                 style={styles.item_container}
                                             >
                                                 {item ? (
-                                                    <>
-                                                        <TouchableOpacity
-                                                            style={styles.btn_img}
-                                                            onPress={backFavPlayer}
-                                                        >
-                                                            <Image
-                                                                resizeMode="cover"
-                                                                source={{ uri: item.image_url }}
-                                                                style={styles.img_player}
-                                                            />
-                                                        </TouchableOpacity>
+                                                    <TouchableOpacity
+                                                        style={{
+                                                            justifyContent: 'center',
+                                                            alignItems: 'center',
+                                                            flex: 0.2,
+                                                            height: getSize.m(84),
+                                                        }}
+                                                        onPress={backFavPlayer}
+                                                    >
+                                                        <Image
+                                                            resizeMode="cover"
+                                                            source={{ uri: item.image_url }}
+                                                            style={styles.img_player}
+                                                        />
+
                                                         <Text
                                                             numberOfLines={2}
                                                             style={styles.txt_add_group}
@@ -307,7 +315,7 @@ export function SettingsScreen(props: ISettingsScreenProps) {
                                                                 textEn: item.name_en,
                                                             })}
                                                         </Text>
-                                                    </>
+                                                    </TouchableOpacity>
                                                 ) : (
                                                     <>
                                                         <TouchableOpacity
@@ -349,17 +357,21 @@ export function SettingsScreen(props: ISettingsScreenProps) {
                                                 style={styles.item_container}
                                             >
                                                 {item ? (
-                                                    <>
-                                                        <TouchableOpacity
-                                                            style={styles.btn_img}
-                                                            onPress={backFavTopTeam}
-                                                        >
-                                                            <Image
-                                                                resizeMode="cover"
-                                                                source={{ uri: item.logo_url }}
-                                                                style={styles.img_top_team}
-                                                            />
-                                                        </TouchableOpacity>
+                                                    <TouchableOpacity
+                                                        style={{
+                                                            justifyContent: 'center',
+                                                            alignItems: 'center',
+                                                            flex: 0.2,
+                                                            height: getSize.m(84),
+                                                        }}
+                                                        onPress={backFavTopTeam}
+                                                    >
+                                                        <Image
+                                                            resizeMode="cover"
+                                                            source={{ uri: item.logo_url }}
+                                                            style={styles.img_top_team}
+                                                        />
+
                                                         <Text
                                                             numberOfLines={2}
                                                             style={styles.txt_add_group}
@@ -369,7 +381,7 @@ export function SettingsScreen(props: ISettingsScreenProps) {
                                                                 textEn: item.name_en,
                                                             })}
                                                         </Text>
-                                                    </>
+                                                    </TouchableOpacity>
                                                 ) : (
                                                     <>
                                                         <TouchableOpacity

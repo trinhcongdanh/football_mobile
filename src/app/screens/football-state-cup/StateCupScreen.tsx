@@ -74,6 +74,10 @@ export const StateCupScreen = ({ route }: IStateCupScreenProps) => {
                                 data={years}
                                 handleSelected={(item: any) => handleSelectedYear(item)}
                                 handleCloseModal={handleCloseModal}
+                                title={getTranslationText({
+                                    textHe: cup?.name_he,
+                                    textEn: cup?.name_en,
+                                })}
                             />
                         )}
                         <GestureHandlerRootView style={{ flex: 1 }}>

@@ -8,4 +8,5 @@ export type IListPlayerProps = {
     number_before?: number;
     handleDataPlayer?: () => void;
     widthText?: StyleProp<any>;
+    fontFamily?: StyleProp<any>;
 };

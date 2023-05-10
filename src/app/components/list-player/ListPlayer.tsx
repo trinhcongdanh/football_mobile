@@ -16,6 +16,7 @@ export const ListPlayer = ({
     number_before,
     handleDataPlayer,
     widthText,
+    fontFamily,
 }: IListPlayerProps) => {
     return (
         <TouchableOpacity
@@ -67,7 +68,18 @@ export const ListPlayer = ({
                 </Text>
             </View>
             {number && <Text style={appStyles.number}>{number}</Text>}
-            {position && <Text style={styles.position}>{position}</Text>}
+            {position && (
+                <Text
+                    style={[
+                        styles.position,
+                        {
+                            fontFamily: fontFamily,
+                        },
+                    ]}
+                >
+                    {position}
+                </Text>
+            )}
         </TouchableOpacity>
     );
 };
