@@ -71,7 +71,7 @@ export const ConquerorsScreen = ({ navigation, route }: IConquerorsScreenProps) 
                     <View
                         style={[
                             appStyles.package,
-                            { marginTop: getSize.m(0), minHeight: getSize.m(900) },
+                            { marginTop: getSize.m(-2), minHeight: getSize.m(900) },
                         ]}
                     >
                         <LinearGradient

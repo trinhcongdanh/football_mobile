@@ -112,7 +112,7 @@ export const ConnectScreen = ({ navigation, route }: IConnectScreenProps) => {
                             <View
                                 style={[
                                     appStyles.flex_row_center,
-                                    { marginTop: getSize.m(23), marginBottom: getSize.m(30) },
+                                    { marginTop: getSize.m(23), marginBottom: getSize.m(100) },
                                 ]}
                             >
                                 <View
