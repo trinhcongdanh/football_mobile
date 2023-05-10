@@ -7,9 +7,9 @@ class CampaignService extends MongoDBService {
         super('campaign');
     }
 
-    findAllCampaign(sortBy?: any): Promise<Result<CampaignsResponse>> {
+    findAllCampaign(id?: any): Promise<Result<CampaignsResponse>> {
         const filter = {
-            top_team_id: { $ne: null },
+            top_team_id: '63a192148b29e970240143f0',
         };
         return this.httpClient.post('/find', {
             ...this.dbConfig,
