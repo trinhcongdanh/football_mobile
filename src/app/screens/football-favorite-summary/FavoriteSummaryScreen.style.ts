@@ -41,6 +41,7 @@ const styles = StyleSheet.create({
         fontSize: getSize.m(12),
         lineHeight: getSize.m(15),
         color: appColors.text_dark_blue,
+        height: getSize.m(30),
     },
     txt_add_group: {
         textAlign: 'center',
@@ -49,6 +50,7 @@ const styles = StyleSheet.create({
         fontSize: getSize.m(12),
         lineHeight: getSize.m(15),
         color: appColors.text_dark_blue,
+        height: getSize.m(30),
     },
     btn_img: {
         flex: 0.2,

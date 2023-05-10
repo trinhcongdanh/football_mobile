@@ -5,7 +5,7 @@ import { appColors } from '@football/app/utils/constants/appColors';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import { getSize } from '@football/app/utils/responsive/scale';
 import React from 'react';
-import { View, Text, I18nManager } from 'react-native';
+import { View, Text, I18nManager, TouchableOpacity } from 'react-native';
 import { Avatar } from 'react-native-elements';
 import LinearGradient from 'react-native-linear-gradient';
 import { AppFonts } from '@football/app/assets/fonts';
@@ -27,6 +27,7 @@ export const Statistics = ({
         onSelect,
         externalGames,
         homeGames,
+        onNavigateTeamDetails,
     } = useViewModel({
         selectedRoundName,
         statistics,
@@ -93,93 +94,99 @@ export const Statistics = ({
                     <View style={{ marginTop: getSize.m(10) }}>
                         {data.map((item, index) => {
                             return (
-                                <LinearGradient
+                                <TouchableOpacity
+                                    onPress={() => onNavigateTeamDetails(item.team_id)}
                                     key={item.team_id}
-                                    start={{ x: 0, y: 0 }}
-                                    end={{ x: 1, y: 1 }}
-                                    colors={[
-                                        index % 2 === 1 ? appColors.linearLight : appColors.gray,
-                                        index % 2 === 1 ? appColors.linearDark : appColors.gray,
-                                    ]}
-                                    style={[
-                                        appStyles.flex_row_space_center,
-                                        appStyles.statistic_row,
-                                    ]}
                                 >
-                                    <View
-                                        style={{
-                                            width: getSize.m(120),
-                                            overflow: 'hidden',
-                                        }}
+                                    <LinearGradient
+                                        start={{ x: 0, y: 0 }}
+                                        end={{ x: 1, y: 1 }}
+                                        colors={[
+                                            index % 2 === 1
+                                                ? appColors.linearLight
+                                                : appColors.gray,
+                                            index % 2 === 1 ? appColors.linearDark : appColors.gray,
+                                        ]}
+                                        style={[
+                                            appStyles.flex_row_space_center,
+                                            appStyles.statistic_row,
+                                        ]}
                                     >
-                                        <View style={appStyles.flex_row_align}>
-                                            <View style={{ width: '12%' }}>
-                                                <Text
-                                                    style={[
-                                                        appStyles.statistics_content,
-                                                        {
-                                                            textAlign: 'left',
-                                                        },
-                                                    ]}
-                                                >
-                                                    {index + 1}
-                                                </Text>
-                                            </View>
-                                            <Avatar
-                                                source={{ uri: item.logo_url }}
-                                                rounded
-                                                size={18}
-                                            />
-                                            <View style={{ width: '60%' }}>
-                                                <Text
-                                                    numberOfLines={2}
-                                                    style={[
-                                                        appStyles.statistics_content,
-                                                        {
-                                                            marginLeft: getSize.m(10),
-                                                            textAlign: 'left',
-                                                        },
-                                                    ]}
-                                                >
-                                                    {getTranslationText({
-                                                        textHe: item.name_he,
-                                                        textEn: item.name_en,
-                                                    })}
-                                                </Text>
+                                        <View
+                                            style={{
+                                                width: getSize.m(120),
+                                                overflow: 'hidden',
+                                            }}
+                                        >
+                                            <View style={appStyles.flex_row_align}>
+                                                <View style={{ width: '12%' }}>
+                                                    <Text
+                                                        style={[
+                                                            appStyles.statistics_content,
+                                                            {
+                                                                textAlign: 'left',
+                                                            },
+                                                        ]}
+                                                    >
+                                                        {index + 1}
+                                                    </Text>
+                                                </View>
+                                                <Avatar
+                                                    source={{ uri: item.logo_url }}
+                                                    rounded
+                                                    size={18}
+                                                />
+                                                <View style={{ width: '60%' }}>
+                                                    <Text
+                                                        numberOfLines={2}
+                                                        style={[
+                                                            appStyles.statistics_content,
+                                                            {
+                                                                marginLeft: getSize.m(10),
+                                                                textAlign: 'left',
+                                                            },
+                                                        ]}
+                                                    >
+                                                        {getTranslationText({
+                                                            textHe: item.name_he,
+                                                            textEn: item.name_en,
+                                                        })}
+                                                    </Text>
+                                                </View>
                                             </View>
                                         </View>
-                                    </View>
-                                    <View style={{ width: getSize.m(30) }}>
-                                        <Text style={appStyles.statistics_content}>
-                                            {item.games}
-                                        </Text>
-                                    </View>
-                                    <View style={{ width: getSize.m(30) }}>
-                                        <Text style={appStyles.statistics_content}>
-                                            {item.wins}
-                                        </Text>
-                                    </View>
-                                    <View style={{ width: getSize.m(30) }}>
-                                        <Text style={appStyles.statistics_content}>
-                                            {item.ties}
-                                        </Text>
-                                    </View>
-                                    <View style={{ width: getSize.m(30) }}>
-                                        <Text style={appStyles.statistics_content}>
-                                            {item.difference}
-                                        </Text>
-                                    </View>
-                                    <View style={{ width: getSize.m(40) }}>
-                                        <Text style={appStyles.statistics_content}>
-                                            {item.goals}
-                                        </Text>
-                                    </View>
-                                    <View style={{ width: getSize.m(30) }}>
-                                        <Text style={appStyles.statistics_content}>
-                                            {item.score}
-                                        </Text>
-                                    </View>
-                                </LinearGradient>
+                                        <View style={{ width: getSize.m(30) }}>
+                                            <Text style={appStyles.statistics_content}>
+                                                {item.games}
+                                            </Text>
+                                        </View>
+                                        <View style={{ width: getSize.m(30) }}>
+                                            <Text style={appStyles.statistics_content}>
+                                                {item.wins}
+                                            </Text>
+                                        </View>
+                                        <View style={{ width: getSize.m(30) }}>
+                                            <Text style={appStyles.statistics_content}>
+                                                {item.ties}
+                                            </Text>
+                                        </View>
+                                        <View style={{ width: getSize.m(30) }}>
+                                            <Text style={appStyles.statistics_content}>
+                                                {item.difference}
+                                            </Text>
+                                        </View>
+                                        <View style={{ width: getSize.m(40) }}>
+                                            <Text style={appStyles.statistics_content}>
+                                                {item.goals}
+                                            </Text>
+                                        </View>
+                                        <View style={{ width: getSize.m(30) }}>
+                                            <Text style={appStyles.statistics_content}>
+                                                {item.score}
+                                            </Text>
+                                        </View>
+                                    </LinearGradient>
+                                </TouchableOpacity>
                             );
                         })}
                     </View>

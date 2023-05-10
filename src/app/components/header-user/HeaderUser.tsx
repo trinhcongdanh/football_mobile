@@ -8,7 +8,7 @@ import { renderAvatar, renderUserPoints } from '@football/core/models/AvatarType
 import { isEmpty } from 'lodash';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { I18nManager, Image, Text, TouchableOpacity, View } from 'react-native';
+import { I18nManager, Image, Keyboard, Text, TouchableOpacity, View } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import LinearGradient from 'react-native-linear-gradient';
 import { useSelector } from 'react-redux';
@@ -33,7 +33,9 @@ export const HeaderUser = ({
     const onPressMenu = () => {
         if (handlePressFunction) {
             handlePressFunction();
+            Keyboard.dismiss();
         } else {
+            Keyboard.dismiss();
             openDrawer();
         }
     };

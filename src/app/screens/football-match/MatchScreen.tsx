@@ -27,6 +27,9 @@ export const MatchScreen = ({ navigation, route }: IMatchScreenProps) => {
     //     return <></>;
     // }
     const { getTranslationText } = useTranslationText();
+    const topTeam = route?.params?.topTeam;
+    console.log('topTeam1', topTeam);
+    console.log('game', game);
 
     return (
         <View style={appStyles.flex}>
@@ -78,7 +81,12 @@ export const MatchScreen = ({ navigation, route }: IMatchScreenProps) => {
                 </View>
                 <View style={[appStyles.flex, appStyles.main_container]}>
                     {game && labels ? (
-                        <TopTaps labels={labels} data={game} defaultTab={defaultTab} />
+                        <TopTaps
+                            labels={labels}
+                            data={game}
+                            defaultTab={defaultTab}
+                            topTeam={topTeam}
+                        />
                     ) : null}
                 </View>
             </BackGround>

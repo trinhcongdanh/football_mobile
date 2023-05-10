@@ -11,6 +11,7 @@ interface Props {
     defaultTab?: string;
     // eslint-disable-next-line react/require-default-props
     data?: any;
+    topTeam?: boolean;
 }
 const Tab = createMaterialTopTabNavigator();
 
@@ -27,7 +28,7 @@ const TabLabel = ({ focused, title }: any) => (
         {title}
     </Text>
 );
-export const TopTaps = ({ labels, data, defaultTab }: Props) => {
+export const TopTaps = ({ labels, data, defaultTab, topTeam }: Props) => {
     if (labels.length === 0) {
         return <View />;
     }
@@ -63,7 +64,7 @@ export const TopTaps = ({ labels, data, defaultTab }: Props) => {
                         key={item.id}
                         name={item.name}
                         component={item.component}
-                        initialParams={{ typeId: item.id, data }}
+                        initialParams={{ typeId: item.id, data, topTeam }}
                         options={{
                             tabBarLabel: ({ focused }) => (
                                 <TabLabel focused={focused} title={item.title} />
