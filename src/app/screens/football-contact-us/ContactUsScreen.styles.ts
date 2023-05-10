@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
         borderColor: '#E9F1F4',
         borderWidth: 1,
         borderRadius: getSize.m(15),
-        textAlign: I18nManager.isRTL ? 'right' : 'left',
+        // textAlign: I18nManager.isRTL ? 'right' : 'left',
         backgroundColor: appColors.separator,
     },
     title_text: {
@@ -39,6 +39,7 @@ const styles = StyleSheet.create({
         lineHeight: getSize.m(17),
         color: appColors.light_gray,
         fontFamily: AppFonts.medium,
+        textAlign: 'left',
     },
 });
 

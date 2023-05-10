@@ -36,5 +36,6 @@ export const styles = StyleSheet.create({
         fontSize: getSize.m(12),
         color: '#2f4cfa',
         fontFamily: AppFonts.bold,
+        textAlign: 'left',
     },
 });
