@@ -82,8 +82,8 @@ export const GobletScreen = ({ navigation, route }: IGobletScreenProps) => {
                                 }}
                                 ref={searchTextRef}
                                 value={searchText}
-                                keyboardType={'ascii-capable'}
-                                textContentType="none"
+                                // keyboardType={'ascii-capable'}
+                                // textContentType="none"
                                 // onKeyPress={(e: any) => {
                                 //     handleKeyPress(e);
                                 // }}

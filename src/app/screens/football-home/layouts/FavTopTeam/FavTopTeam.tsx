@@ -509,7 +509,7 @@ export const FavTopTeam = ({ topTeam, color }: IFavTopTeamProps) => {
                                         textHe: item?.stadium_he,
                                         textEn: item?.stadium_en,
                                     })}
-                                    handleDetailMatch={() => handleDetailMatch(item?.game_id)}
+                                    handleDetailMatch={() => handleDetailMatch(item?.game_id, true)}
                                     handleStadium={() => handleStadium(item?.stadium_id)}
                                     isLive={moment().isBetween(
                                         moment(`${item?.date} ${item?.time}`),
