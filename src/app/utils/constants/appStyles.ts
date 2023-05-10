@@ -120,6 +120,7 @@ export const appStyles = StyleSheet.create({
         lineHeight: getSize.m(17),
         color: appColors.text_dark_blue,
         fontFamily: AppFonts.bold,
+        textAlign: 'left',
     },
     text_error: {
         color: 'red',
