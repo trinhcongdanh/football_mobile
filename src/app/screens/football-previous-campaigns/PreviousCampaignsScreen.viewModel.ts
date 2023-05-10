@@ -7,21 +7,25 @@ import CampaignService from '@football/core/services/Campaign.service';
 import { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { IPreviousCampaignsScreenProps } from './PreviousCampaignsScreen.type';
+import { RouteProp } from '@react-navigation/native';
+import { TopTeamModel } from '@football/core/models/TopTeamModelResponse';
 
-const useViewState = () => {
+const useViewState = ({ navigation, route }: IPreviousCampaignsScreenProps) => {
     const [campaigns, setCampaigns] = useState<Campaign[]>();
+    const topTeam = route?.params?.topTeam as TopTeamModel;
 
     return {
         campaigns,
         setCampaigns,
+        topTeam,
     };
 };
 
 const useViewCallback = (viewState: any) => {
-    const { setCampaigns } = viewState;
+    const { setCampaigns, topTeam } = viewState;
 
     const getCampaignsData = useCallback(async () => {
-        const [error, res] = await CampaignService.findAllCampaign();
+        const [error, res] = await CampaignService.findAllCampaign(topTeam._id);
         if (error) {
             return;
         }
@@ -38,7 +42,7 @@ export const useViewModel = ({ navigation, route }: IPreviousCampaignsScreenProp
     const { navigate, goBack } = useAppNavigator();
     const { t } = useTranslation();
 
-    const state = useViewState();
+    const state = useViewState({ navigation, route });
 
     const { getCampaignsData } = useViewCallback(state);
 

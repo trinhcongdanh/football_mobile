@@ -24,8 +24,11 @@ import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
 import { BackGround } from '@football/app/components/background/BackGround';
 
 export const PreviousCampaignsScreen = ({ navigation, route }: IPreviousCampaignsScreenProps) => {
-    const { t, onGoBack, campaigns, handleCampaignPage } = useViewModel({ navigation, route });
-    const topTeam = route?.params?.topTeam as TopTeamModel;
+    const { t, onGoBack, campaigns, handleCampaignPage, topTeam } = useViewModel({
+        navigation,
+        route,
+    });
+
     const { getTranslationText } = useTranslationText();
 
     return (
