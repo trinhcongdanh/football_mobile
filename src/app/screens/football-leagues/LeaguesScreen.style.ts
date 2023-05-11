@@ -50,6 +50,7 @@ const styles = StyleSheet.create({
         lineHeight: getSize.m(22),
         color: appColors.text_dark_blue,
         paddingBottom: getSize.m(20),
+        textAlign: 'left',
     },
 });
 
