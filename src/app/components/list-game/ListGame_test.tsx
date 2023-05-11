@@ -213,10 +213,16 @@ export const ListGame_Test = ({
             <View style={[appStyles.flex_row_space, { position: 'relative' }]}>
                 {/* <View style={[styles.circle_left, { backgroundColor: color }]} /> */}
                 <View style={styles.circle_left}>
-                    <HalfCircle color={color} yOffset="90deg" />
+                    <HalfCircle
+                        color={color}
+                        yOffset={i18n.language === 'heb' ? '90deg' : '270deg'}
+                    />
                 </View>
                 <View style={styles.circle_right}>
-                    <HalfCircle color={color} yOffset="270deg" />
+                    <HalfCircle
+                        color={color}
+                        yOffset={i18n.language === 'heb' ? '270deg' : '90deg'}
+                    />
                 </View>
                 {/* <View style={[styles.circle_right, { backgroundColor: color }]} /> */}
             </View>
