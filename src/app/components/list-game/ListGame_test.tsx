@@ -16,6 +16,7 @@ import { useResult } from '@football/app/utils/hooks/useResult';
 import { AppFonts } from '@football/app/assets/fonts';
 import { ProgressBar } from '@football/app/components/progress-bar/ProgressBar';
 import i18n from '@football/app/i18n/EnStrings';
+import { HalfCircle } from '@football/app/components/half-circle/HalfCircle';
 
 export const ListGame_Test = ({
     logo_home,
@@ -210,8 +211,14 @@ export const ListGame_Test = ({
             )}
 
             <View style={[appStyles.flex_row_space, { position: 'relative' }]}>
-                <View style={[styles.circle_left, { backgroundColor: color }]} />
-                <View style={[styles.circle_right, { backgroundColor: color }]} />
+                {/* <View style={[styles.circle_left, { backgroundColor: color }]} /> */}
+                <View style={styles.circle_left}>
+                    <HalfCircle color={color} yOffset="90deg" />
+                </View>
+                <View style={styles.circle_right}>
+                    <HalfCircle color={color} yOffset="270deg" />
+                </View>
+                {/* <View style={[styles.circle_right, { backgroundColor: color }]} /> */}
             </View>
             <View style={{ paddingHorizontal: getSize.m(14) }}>
                 {/* <View style={styles.line_dots} /> */}
