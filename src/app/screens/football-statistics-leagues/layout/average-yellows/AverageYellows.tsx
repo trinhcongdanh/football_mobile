@@ -153,13 +153,13 @@ export const AverageYellows = ({ avgCards, leagueSeasonStats }: IAverageYellowsP
                                 </View>
                             </View>
                             <View
-                                style={[
-                                    appStyles.flex_row_center,
-                                    {
-                                        width: getSize.m(60),
-                                        flex: 0,
-                                    },
-                                ]}
+                                style={{
+                                    width: getSize.m(60),
+                                    flexDirection: 'row',
+                                    justifyContent: 'flex-end',
+                                    alignItems: 'center',
+                                    marginRight: getSize.m(10),
+                                }}
                             >
                                 <Text
                                     style={[
