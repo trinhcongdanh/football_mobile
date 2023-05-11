@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Alert, BackHandler, Keyboard } from 'react-native';
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
@@ -49,38 +49,38 @@ export const useViewModel = ({ navigation, route }: IVerifyScreenProps) => {
         };
     }, []);
 
-    const inputs = Array(4).fill('');
+    // const inputs = Array(4).fill('');
 
-    const [OTP, setOTP] = useState<any>({ 0: '', 1: '', 2: '', 3: '' });
+    // const [OTP, setOTP] = useState<any>({ 0: '', 1: '', 2: '', 3: '' });
 
-    const input = useRef<any>();
+    // const input = useRef<any>();
 
-    let newInputIndex = 0;
+    // let newInputIndex = 0;
 
-    const [nextInputIndex, setNextInputIndex] = useState(0);
+    // const [nextInputIndex, setNextInputIndex] = useState(0);
 
-    const handleChangeText = (text: string, index: number): void => {
-        const newOTP = { ...OTP };
-        newOTP[index] = text;
-        setOTP(newOTP);
+    // const handleChangeText = (text: string, index: number): void => {
+    //     const newOTP = { ...OTP };
+    //     newOTP[index] = text;
+    //     setOTP(newOTP);
 
-        const lastInputIndex = inputs.length - 1;
+    //     const lastInputIndex = inputs.length - 1;
 
-        if (!text) {
-            newInputIndex = index === 0 ? 0 : index - 1;
-        } else {
-            newInputIndex = index === lastInputIndex ? lastInputIndex : index + 1;
-            if (index === lastInputIndex) {
-                Keyboard.dismiss();
-            }
-        }
+    //     if (!text) {
+    //         newInputIndex = index === 0 ? 0 : index - 1;
+    //     } else {
+    //         newInputIndex = index === lastInputIndex ? lastInputIndex : index + 1;
+    //         if (index === lastInputIndex) {
+    //             Keyboard.dismiss();
+    //         }
+    //     }
 
-        setNextInputIndex(newInputIndex);
-    };
+    //     setNextInputIndex(newInputIndex);
+    // };
 
-    useEffect(() => {
-        input.current?.focus();
-    }, [nextInputIndex]);
+    // useEffect(() => {
+    //     input.current?.focus();
+    // }, [nextInputIndex]);
 
     const [confirm, setConfirm] = useState<any>(null);
 
@@ -98,6 +98,16 @@ export const useViewModel = ({ navigation, route }: IVerifyScreenProps) => {
     const otp = useSelector((state: any) => state.otpUser);
     const routes = useRoute();
     const { number }: any = route.params;
+
+    const [codeOtp, setCodeOtp] = useState('');
+
+    const onChangeCode = useCallback((value: string) => {
+        setCodeOtp(value);
+    }, []);
+
+    // const onFullFill = async (value: string) => {
+    //     console.log('Full', value);
+    // };
 
     const reSendVerify = (): void => {
         // setTimeSend(true);
@@ -136,13 +146,13 @@ export const useViewModel = ({ navigation, route }: IVerifyScreenProps) => {
         }
     };
 
-    const onVerifyCode = async () => {
+    const onFullFill = async (value: string) => {
         handleError('', 'verifyError');
-        let codeOtp = '';
-        Object.values(OTP).forEach(code => {
-            codeOtp += code;
-        });
-        if (codeOtp.length === 4) {
+        // let codeOtp = '';
+        // Object.values(OTP).forEach(code => {
+        //     codeOtp += code;
+        // });
+        if (value.length === 4) {
             if (routes.params!.previous_screen === ScreenName.RegisterPage) {
                 console.log('danh');
                 dispatch(
@@ -155,7 +165,7 @@ export const useViewModel = ({ navigation, route }: IVerifyScreenProps) => {
                             guest_id: login.login.user.item_id,
                             item: {
                                 sms_phone: encodeURIComponent(number),
-                                sms_code: codeOtp,
+                                sms_code: value,
                             },
                         })
                     )
@@ -169,7 +179,7 @@ export const useViewModel = ({ navigation, route }: IVerifyScreenProps) => {
                             token: TOKEN,
                             call: AuthData.LOGIN,
                             sms_phone: encodeURIComponent(number),
-                            sms_code: codeOtp,
+                            sms_code: value,
                         })
                     )
                 );
@@ -201,15 +211,11 @@ export const useViewModel = ({ navigation, route }: IVerifyScreenProps) => {
     useEffect(() => {
         if (otp.success === false && otp.loading === false && otp.isVerifyOtp === true) {
             handleError(t('verify.error'), 'verifyError');
-            setOTP({ 0: '', 1: '', 2: '', 3: '' });
-            setNextInputIndex(0);
         }
     }, [otp.loading, otp.isVerifyOtp]);
     useEffect(() => {
         if (numberPhone.successLogin === false && numberPhone.loadingLogin === false) {
             handleError(t('verify.error'), 'verifyError');
-            setOTP({ 0: '', 1: '', 2: '', 3: '' });
-            setNextInputIndex(0);
         }
     }, [numberPhone.loadingLogin, otp.isVerifyOtp]);
 
@@ -217,18 +223,21 @@ export const useViewModel = ({ navigation, route }: IVerifyScreenProps) => {
         handleError('', 'verifyError');
     }, []);
     return {
-        inputs,
+        // inputs,
         errors,
-        OTP,
-        nextInputIndex,
-        input,
+        // OTP,
+        // nextInputIndex,
+        // input,
         handleError,
         onGoBack,
         reSendVerify,
-        onVerifyCode,
-        handleChangeText,
+        // onVerifyCode,
+        // handleChangeText,
         number,
         otp,
         numberPhone,
+        codeOtp,
+        onChangeCode,
+        onFullFill,
     };
 };
