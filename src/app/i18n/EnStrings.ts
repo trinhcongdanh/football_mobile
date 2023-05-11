@@ -688,6 +688,7 @@ const resources = {
                 gates: 'שערים',
                 tickets: 'כרטיסים',
                 playing_time: 'זמן משחק',
+                thin: 'דק',
             },
             bottom_tab: {
                 home: 'בית',
@@ -1393,6 +1394,7 @@ const resources = {
                 gates: 'Goals',
                 tickets: 'Cards',
                 playing_time: 'Playing time',
+                thin: 'Thin',
             },
             bottom_tab: {
                 home: 'Home',

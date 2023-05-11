@@ -10,10 +10,12 @@ import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/Feather';
 import styles from './CupAround.style';
 import { useViewModel } from './CupAround.viewModel';
+import { useDateTime } from '@football/app/utils/hooks/useDateTime';
 
 export const CupAround = ({ cyclesDetails, cup }: ICupAroundProps) => {
     const { t, details, handleStatisticDetailsScreen } = useViewModel({ cyclesDetails, cup });
     const { getTranslationText } = useTranslationText();
+    const { getDate } = useDateTime();
 
     return (
         <View style={styles.item_statistics}>
@@ -78,7 +80,7 @@ export const CupAround = ({ cyclesDetails, cup }: ICupAroundProps) => {
                                 }}
                             >
                                 <Text style={[styles.text_content, { textAlign: 'left' }]}>
-                                    {item.date}
+                                    {getDate({ date: item.date })}
                                 </Text>
                             </View>
                             <View

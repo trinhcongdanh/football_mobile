@@ -211,7 +211,9 @@ export const GameTable1 = ({
                     </View>
                 </View>
                 <View style={appStyles.align_justify}>
-                    <Text style={styles.content}>{clock}</Text>
+                    <Text style={styles.content}>
+                        {clock} {t('table_game.thin')}
+                    </Text>
                     <View style={[appStyles.flex_row_align, { marginTop: getSize.m(6) }]}>
                         <FastImage
                             source={AppImages.img_clock_solid}
