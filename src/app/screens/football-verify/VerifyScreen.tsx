@@ -133,6 +133,7 @@ export const VerifyScreen = ({ navigation, route }: IVerifyScreenProps) => {
                                             onEndEditing={onVerifyCode}
                                             ref={nextInputIndex === index ? input : null}
                                             onChangeText={text => handleChangeText(text, index)}
+                                            autoComplete="off"
                                         />
                                     );
                                 })}
