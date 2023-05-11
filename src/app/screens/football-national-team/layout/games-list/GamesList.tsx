@@ -32,7 +32,7 @@ export const GamesList = ({ topTeam }: IGamesListProps) => {
             <View style={appStyles.flex_row_space_center}>
                 <Text style={appStyles.statistics_title}>{t('national_team.list_game.title')}</Text>
                 <TouchableOpacity
-                    style={[appStyles.flex_row_center, { flex: 0, marginTop: getSize.m(12) }]}
+                    style={[appStyles.flex_row_center, { flex: 0 }]}
                     onPress={() => navigateToDetailsGame(topTeam)}
                 >
                     <Text style={styles.details}>{t('national_team.ranking_table.details')}</Text>
