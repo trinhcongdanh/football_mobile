@@ -8,7 +8,7 @@ import {
     TextInput,
     ActivityIndicator,
 } from 'react-native';
-import React from 'react';
+import React, { useCallback, useImperativeHandle, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import { AppImages } from '@football/app/assets/images';
@@ -20,6 +20,7 @@ import { IVerifyScreenProps } from './VerifyScreen.type';
 import styles from './VerifyScreen.styles';
 import { useViewModel } from './VerifyScreen.viewModel';
 import { appColors } from '../../utils/constants/appColors';
+import InputCode from '@football/app/components/InputOtp/InputOtp';
 
 // type Props = {};
 
@@ -27,17 +28,20 @@ export const VerifyScreen = ({ navigation, route }: IVerifyScreenProps) => {
     const { t } = useTranslation();
     const {
         errors,
-        OTP,
-        nextInputIndex,
-        input,
-        inputs,
+        // OTP,
+        // nextInputIndex,
+        // input,
+        // inputs,
         onGoBack,
         reSendVerify,
-        handleChangeText,
-        onVerifyCode,
+        // handleChangeText,
+        // onVerifyCode,
         number,
         otp,
         numberPhone,
+        codeOtp,
+        onChangeCode,
+        onFullFill,
     } = useViewModel({
         navigation,
         route,
@@ -113,7 +117,7 @@ export const VerifyScreen = ({ navigation, route }: IVerifyScreenProps) => {
                             </View>
 
                             {/* OTP Verify */}
-                            <View style={styles.otp_Container}>
+                            {/* <View style={styles.otp_Container}>
                                 {inputs.map((inp: string, index: number) => {
                                     return (
                                         <TextInput
@@ -137,6 +141,20 @@ export const VerifyScreen = ({ navigation, route }: IVerifyScreenProps) => {
                                         />
                                     );
                                 })}
+                            </View> */}
+                            <View
+                                style={{
+                                    marginTop: getSize.m(37),
+                                    paddingHorizontal: getSize.m(20),
+                                }}
+                            >
+                                <InputCode
+                                    code={codeOtp}
+                                    length={4}
+                                    onChangeCode={onChangeCode}
+                                    onFullFill={onFullFill}
+                                    autoFocus
+                                />
                             </View>
 
                             {/* End */}
