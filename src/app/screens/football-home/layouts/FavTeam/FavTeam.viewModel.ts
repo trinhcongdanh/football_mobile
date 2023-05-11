@@ -28,12 +28,12 @@ export const useViewModel = ({ team, color }: IFavTeamProps) => {
         navigate(ScreenName.GroupPagePage, { teamId });
     };
 
-    const onNavigateGameList = (team: TeamModel) => {
-        navigate(ScreenName.FullListGamePage, { team });
+    const onNavigateGameList = (teamData: TeamModel) => {
+        navigate(ScreenName.FullListGamePage, { team: teamData });
     };
 
-    const onNavigateStatistics = (team: TeamModel) => {
-        const teamSeasonId = team?.seasons?.length ? team?.seasons[0].team_season_id : null;
+    const onNavigateStatistics = (teamData: TeamModel) => {
+        const teamSeasonId = teamData?.seasons?.length ? teamData?.seasons[0].team_season_id : null;
         // eslint-disable-next-line no-underscore-dangle
         navigate(ScreenName.StatisticsGroupPage, { teamSeasonId });
     };
