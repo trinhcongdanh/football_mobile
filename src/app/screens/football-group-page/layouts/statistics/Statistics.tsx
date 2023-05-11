@@ -6,7 +6,7 @@ import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
 import { getSize } from '@football/app/utils/responsive/scale';
 import { Statistic } from '@football/core/models/TeamSeasonResponse';
 import React from 'react';
-import { I18nManager, ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { I18nManager, Platform, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { Avatar } from 'react-native-elements';
 import LinearGradient from 'react-native-linear-gradient';
 import IconAntDesign from 'react-native-vector-icons/AntDesign';
@@ -114,7 +114,11 @@ export const Statistics = ({ data }: IStatisticsProps) => {
                         <IconAntDesign
                             name={appIcons.ic_caretright}
                             size={getSize.m(10)}
-                            color={activeIndexNumber === 2 ? '#D9D9D9' : appColors.blue_light}
+                            color={
+                                activeIndexNumber === (Platform.OS === 'ios' ? 0 : 2)
+                                    ? '#D9D9D9'
+                                    : appColors.blue_light
+                            }
                         />
                     </TouchableOpacity>
                     <ScrollView
@@ -402,7 +406,11 @@ export const Statistics = ({ data }: IStatisticsProps) => {
                         <IconAntDesign
                             name={appIcons.ic_caretleft}
                             size={getSize.m(10)}
-                            color={activeIndexNumber === 0 ? '#D9D9D9' : appColors.blue_light}
+                            color={
+                                activeIndexNumber === (Platform.OS === 'ios' ? 2 : 0)
+                                    ? '#D9D9D9'
+                                    : appColors.blue_light
+                            }
                         />
                     </TouchableOpacity>
                     <View style={styles.dotContainer}>
