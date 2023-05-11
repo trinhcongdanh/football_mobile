@@ -1,17 +1,16 @@
 import DropdownField from '@football/app/components/dropdown-field/DropdownField';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { appStyles } from '@football/app/utils/constants/appStyles';
-import { ScreenName } from '@football/app/utils/constants/enum';
 import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
 import { getSize } from '@football/app/utils/responsive/scale';
 import React from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
-import { Avatar } from 'react-native-elements';
-import LinearGradient from 'react-native-linear-gradient';
-import { ListOfGames } from '../list-of-games/ListOfGames';
+import { Text, View } from 'react-native';
 import styles from './LeagueTable.style';
 import { ILeagueTableProps } from './LeagueTable.type';
 import { useViewModel } from './LeagueTable.viewModel';
+import { TouchableOpacity } from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
+import { Avatar } from 'react-native-elements';
 
 export const LeagueTable = ({ leagueSeasonId }: ILeagueTableProps) => {
     const {

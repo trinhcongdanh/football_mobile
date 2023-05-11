@@ -7,9 +7,9 @@ import React, { useState } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import OutsidePressHandler from 'react-native-outside-press';
 import Icon from 'react-native-vector-icons/Feather';
-import { ScrollView } from 'react-native-gesture-handler';
-import { styles } from './DropdownField.style';
+import { GestureHandlerRootView, ScrollView } from 'react-native-gesture-handler';
 import { isEmpty } from 'lodash';
+import { styles } from './DropdownField.style';
 
 const DropdownField = ({
     onPress,
@@ -71,34 +71,32 @@ const DropdownField = ({
                 </TouchableOpacity>
                 {openModal && !isEmpty(options) && (
                     <View style={{ position: 'relative' }}>
-                        <View
-                            style={[
-                                styles.itemsContainer,
-                                {
-                                    height: options.length > 6 ? getSize.m(300) : 'auto',
-                                },
-                            ]}
-                        >
-                            <ScrollView nestedScrollEnabled>
-                                {options?.map((opt: any, index: number) => {
-                                    return (
-                                        <TouchableOpacity
-                                            onPress={() => {
-                                                setOpenModal(!openModal);
-                                                if (onPressItem) {
-                                                    onPressItem(opt);
-                                                }
-                                            }}
-                                            key={index}
-                                            style={styles.itemContainer}
-                                        >
-                                            <Text style={styles.itemTitle}>
-                                                {opt[itemTitleField]}
-                                            </Text>
-                                        </TouchableOpacity>
-                                    );
-                                })}
-                            </ScrollView>
+                        <View style={[styles.itemsContainer]}>
+                            <GestureHandlerRootView>
+                                <ScrollView
+                                    nestedScrollEnabled
+                                    style={{ height: options.length > 6 ? getSize.m(300) : 'auto' }}
+                                >
+                                    {options?.map((opt: any, index: number) => {
+                                        return (
+                                            <TouchableOpacity
+                                                onPress={() => {
+                                                    setOpenModal(!openModal);
+                                                    if (onPressItem) {
+                                                        onPressItem(opt);
+                                                    }
+                                                }}
+                                                key={index}
+                                                style={styles.itemContainer}
+                                            >
+                                                <Text style={styles.itemTitle}>
+                                                    {opt[itemTitleField]}
+                                                </Text>
+                                            </TouchableOpacity>
+                                        );
+                                    })}
+                                </ScrollView>
+                            </GestureHandlerRootView>
                         </View>
                     </View>
                 )}
