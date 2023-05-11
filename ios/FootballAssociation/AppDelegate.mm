@@ -54,9 +54,9 @@ static NSString *const kRNConcurrentRoot = @"concurrentRoot";
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
 
-  // disable smart quotes
-  [[UITextField appearance] setSmartQuotesType:UITextSmartQuotesTypeNo];
-  [[UITextView appearance] setSmartQuotesType:UITextSmartQuotesTypeNo];
+  // // disable smart quotes
+  // [[UITextField appearance] setSmartQuotesType:UITextSmartQuotesTypeNo];
+  // [[UITextView appearance] setSmartQuotesType:UITextSmartQuotesTypeNo];
   // [GMSServices provideAPIKey:@"_YOUR_API_KEY_"];
   [GMSServices provideAPIKey:@"AIzaSyD-bcsWEPz5OmiW9hTdcY4doQiIQYQ5v0g"];
 
