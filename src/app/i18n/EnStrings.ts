@@ -414,7 +414,7 @@ const resources = {
                     group: 'שם הקבוצה',
                     see_all: 'ראה הכל',
                     cup_around: 'סיבובי הגביע',
-                    date: 'תאריך',
+                    date: 'תאריך פתיחה',
                     round: 'סבב',
                     trophy_around: 'סיבובי הגביע',
                     team_name: 'שם הקבוצה',
