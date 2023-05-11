@@ -11,7 +11,7 @@ import { appStyles } from '@football/app/utils/constants/appStyles';
 import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
 import { getSize } from '@football/app/utils/responsive/scale';
 import React from 'react';
-import { SafeAreaView, ScrollView, StatusBar, Text, TouchableOpacity, View } from 'react-native';
+import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { Avatar } from 'react-native-elements';
 import FastImage from 'react-native-fast-image';
 import IconEntypo from 'react-native-vector-icons/Entypo';
@@ -19,11 +19,11 @@ import Icon from 'react-native-vector-icons/Feather';
 import IconFontAwesome from 'react-native-vector-icons/FontAwesome';
 import IconIonicons from 'react-native-vector-icons/Ionicons';
 import { BackGround } from '@football/app/components/background/BackGround';
+import { ListOfGames } from '@football/app/screens/football-group-page/layouts/list-of-games/ListOfGames';
 import styles from './GroupPageScreen.style';
 import { IGroupPageScreenProps } from './GroupPageScreen.type';
 import { useViewModel } from './GroupPageScreen.viewModel';
 import { Statistics } from './layouts/statistics/Statistics';
-import { ListOfGames } from '@football/app/screens/football-group-page/layouts/list-of-games/ListOfGames';
 
 export const GroupPageScreen = ({ navigation, route }: IGroupPageScreenProps) => {
     const {
@@ -462,7 +462,7 @@ export const GroupPageScreen = ({ navigation, route }: IGroupPageScreenProps) =>
                                     })}
                                 </View>
                             </View>
-                            <View>
+                            <View style={{ zIndex: 10 }}>
                                 {
                                     // eslint-disable-next-line @typescript-eslint/prefer-optional-chain
 
