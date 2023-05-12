@@ -51,8 +51,15 @@ export const FavoritePlayer = ({
     const [favPlayers, setFavPlayers] = useState<PlayerModel[]>();
     const [searchText, setSearchText] = useState('');
     const handleTextChange = (newValue: string) => {
-        setSearchText(newValue);
-        searchFavPlayer(newValue);
+        let newText: string = newValue;
+        if (newText.includes('“') || newText.includes('”')) {
+            newText = newValue.replace('“', '"').replace('”', '"');
+        }
+        if (newText.includes('‘') || newText.includes('’')) {
+            newText = newValue.replace('‘', "'").replace('’', "'");
+        }
+        setSearchText(newText);
+        searchFavPlayer(newText);
     };
 
     LogBox.ignoreLogs(['source.uri should not be an empty string']);

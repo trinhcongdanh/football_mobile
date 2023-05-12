@@ -49,8 +49,15 @@ export const FavoriteTeam = ({
     const [favTeams, setFavTeams] = useState<TeamModel[]>();
     const [searchText, setSearchText] = useState('');
     const handleTextChange = (newValue: string) => {
-        setSearchText(newValue);
-        searchFavTeam(newValue);
+        let newText: string = newValue;
+        if (newText.includes('“') || newText.includes('”')) {
+            newText = newValue.replace('“', '"').replace('”', '"');
+        }
+        if (newText.includes('‘') || newText.includes('’')) {
+            newText = newValue.replace('‘', "'").replace('’', "'");
+        }
+        setSearchText(newText);
+        searchFavTeam(newText);
     };
 
     useEffect(() => {
@@ -103,6 +110,7 @@ export const FavoriteTeam = ({
                                     style={styles.text_search}
                                     placeholderTextColor={appColors.blue_gray_dark}
                                     onChangeText={handleTextChange}
+
                                     // keyboardType={'ascii-capable'}
                                     // textContentType="none"
                                     // onBlur={() => submitSearchFavTeam(searchText)}
