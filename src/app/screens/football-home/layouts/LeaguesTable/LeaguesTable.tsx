@@ -117,7 +117,7 @@ export const LeaguesTable = ({ league }: ILeaguesTableProps) => {
                         },
                     ]}
                 >
-                    <View style={{ width: getSize.m(120), left: getSize.m(30) }}>
+                    <View style={{ width: getSize.m(120), left: getSize.m(42) }}>
                         <Text style={[appStyles.statistics_header, { textAlign: 'left' }]}>
                             {t('leagues_details.league_table.group')}
                         </Text>
@@ -198,19 +198,22 @@ export const LeaguesTable = ({ league }: ILeaguesTableProps) => {
                                                     {index + 1}
                                                 </Text>
                                             </View>
-                                            <View style={{ marginHorizontal: getSize.m(8) }}>
-                                                <Avatar
-                                                    source={{ uri: item.logo_url }}
-                                                    rounded
-                                                    size={18}
-                                                />
-                                            </View>
+
+                                            <Avatar
+                                                source={{ uri: item.logo_url }}
+                                                rounded
+                                                size={18}
+                                            />
+
                                             <View style={{ width: '60%' }}>
                                                 <Text
                                                     numberOfLines={2}
                                                     style={[
                                                         appStyles.statistics_content,
-                                                        { textAlign: 'left' },
+                                                        {
+                                                            textAlign: 'left',
+                                                            marginLeft: getSize.m(10),
+                                                        },
                                                     ]}
                                                 >
                                                     {getTranslationText({
