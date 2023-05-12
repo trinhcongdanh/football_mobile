@@ -530,7 +530,12 @@ export const GroupPageScreen = ({ navigation, route }: IGroupPageScreenProps) =>
                                 >
                                     {teamSeason && <Statistics data={teamSeason.statistics} />}
                                 </View>
-                                <View style={{ marginHorizontal: getSize.m(28) }}>
+                                <View
+                                    style={{
+                                        marginHorizontal: getSize.m(28),
+                                        marginBottom: getSize.m(200),
+                                    }}
+                                >
                                     {teamSeason && (
                                         <Button
                                             style={{ borderRadius: getSize.m(15) }}
@@ -543,7 +548,7 @@ export const GroupPageScreen = ({ navigation, route }: IGroupPageScreenProps) =>
                                         />
                                     )}
                                 </View>
-                                <View style={{ height: TAB_BAR_HEIGHT + BOTTOM_SVG_HEIGHT }} />
+                                {/* <View style={{ height: TAB_BAR_HEIGHT + BOTTOM_SVG_HEIGHT }} /> */}
                             </ScrollView>
                         </GestureHandlerRootView>
                     </View>
