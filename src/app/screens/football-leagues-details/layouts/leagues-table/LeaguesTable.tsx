@@ -33,7 +33,7 @@ export const LeaguesTable = ({ leaderBoards }: ILeaguesTableProps) => {
                         },
                     ]}
                 >
-                    <View style={{ width: getSize.m(120) }}>
+                    <View style={{ width: getSize.m(120), left: getSize.m(16) }}>
                         <Text style={[styles.header, { textAlign: 'left' }]}>
                             {t('leagues_details.league_table.group')}
                         </Text>
@@ -92,23 +92,24 @@ export const LeaguesTable = ({ leaderBoards }: ILeaguesTableProps) => {
                                                 {index + 1}
                                             </Text>
                                         </View>
-                                        <View style={{ marginHorizontal: getSize.m(10) }}>
-                                            <FastImage
-                                                source={{ uri: item.logo_url }}
-                                                style={{
-                                                    width: getSize.m(18),
-                                                    height: getSize.m(18),
-                                                    borderRadius: getSize.m(18),
-                                                }}
-                                                resizeMode={FastImage.resizeMode.contain}
-                                            />
-                                        </View>
-                                        <View style={{ width: '50%' }}>
+
+                                        <FastImage
+                                            source={{ uri: item.logo_url }}
+                                            style={{
+                                                width: getSize.m(18),
+                                                height: getSize.m(18),
+                                                borderRadius: getSize.m(18),
+                                            }}
+                                            resizeMode={FastImage.resizeMode.contain}
+                                        />
+
+                                        <View style={{ width: '60%' }}>
                                             <Text
                                                 numberOfLines={2}
                                                 style={[
                                                     styles.text_content,
                                                     {
+                                                        marginLeft: getSize.m(10),
                                                         textAlign: 'left',
                                                     },
                                                 ]}
