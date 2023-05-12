@@ -68,7 +68,7 @@ export const LeagueTable = ({ leagueSeasonId }: ILeagueTableProps) => {
                             },
                         ]}
                     >
-                        <View style={{ width: getSize.m(120), left: getSize.m(18) }}>
+                        <View style={{ width: getSize.m(120), left: getSize.m(16) }}>
                             <Text style={[appStyles.statistics_header, { textAlign: 'left' }]}>
                                 {t('leagues_details.league_table.group')}
                             </Text>
@@ -131,12 +131,11 @@ export const LeagueTable = ({ leagueSeasonId }: ILeagueTableProps) => {
                                             }}
                                         >
                                             <View style={appStyles.flex_row_align}>
-                                                <View style={{ width: '20%' }}>
+                                                <View style={{ width: '12%' }}>
                                                     <Text
                                                         style={[
                                                             appStyles.statistics_content,
                                                             {
-                                                                marginRight: getSize.m(10),
                                                                 textAlign: 'left',
                                                             },
                                                         ]}
@@ -144,17 +143,13 @@ export const LeagueTable = ({ leagueSeasonId }: ILeagueTableProps) => {
                                                         {item?.place}
                                                     </Text>
                                                 </View>
-                                                <View
-                                                    style={{
-                                                        width: '10%',
-                                                    }}
-                                                >
-                                                    <Avatar
-                                                        source={{ uri: item?.logo_url }}
-                                                        rounded
-                                                        size={18}
-                                                    />
-                                                </View>
+
+                                                <Avatar
+                                                    source={{ uri: item?.logo_url }}
+                                                    rounded
+                                                    size={18}
+                                                />
+
                                                 <View style={{ width: '60%' }}>
                                                     <Text
                                                         numberOfLines={2}

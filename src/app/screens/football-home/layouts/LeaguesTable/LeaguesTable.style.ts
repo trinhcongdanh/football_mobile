@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
         color: appColors.blue_black,
     },
     drop_down_filter: {
-        marginHorizontal: getSize.m(20),
+        marginHorizontal: getSize.m(14),
         flexDirection: 'row',
         justifyContent: 'space-between',
         marginTop: getSize.m(20),
