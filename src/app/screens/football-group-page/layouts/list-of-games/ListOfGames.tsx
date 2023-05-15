@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import { getSize } from '@football/app/utils/responsive/scale';
 import { appColors } from '@football/app/utils/constants/appColors';
@@ -11,18 +11,39 @@ import { IListOfGamesProps } from './ListOfGames.type';
 import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
 import { ListGame_Test } from '@football/app/components/list-game/ListGame_test';
 import { MAX_GAME_IN_FAVORITES_TEAM } from '@football/core/api/configs/config';
+import IconEntypo from 'react-native-vector-icons/Entypo';
+import styles from './ListOfGames.style';
 
-export const ListOfGames = ({ listGames }: IListOfGamesProps) => {
-    const { t, handleDetailMatch, handleStadium } = useViewModel();
+export const ListOfGames = ({ teamDetail }: IListOfGamesProps) => {
+    const { t, handleDetailMatch, handleStadium, onNavigateGameList, newGames } = useViewModel({
+        teamDetail,
+    });
     const { getTranslationText } = useTranslationText();
 
     return (
         <View>
-            <Text style={[appStyles.text_topic, { marginLeft: getSize.m(6) }]}>
-                {t('group_page.list_games.title')}
-            </Text>
+            <View style={appStyles.flex_row_space_center}>
+                <View>
+                    <Text style={[appStyles.text_topic, { marginLeft: getSize.m(6) }]}>
+                        {t('group_page.list_games.title')}
+                    </Text>
+                </View>
+                <View>
+                    <TouchableOpacity
+                        style={appStyles.flex_row_align}
+                        onPress={() => onNavigateGameList(teamDetail)}
+                    >
+                        <Text style={styles.text_see_all}>{t('home_page.see_all')}</Text>
+                        <IconEntypo
+                            name={appIcons.ic_left_ios}
+                            size={getSize.m(13)}
+                            color={appColors.button_dark_blue}
+                        />
+                    </TouchableOpacity>
+                </View>
+            </View>
             <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-                {listGames?.slice(0, MAX_GAME_IN_FAVORITES_TEAM).map(item => {
+                {newGames?.slice(0, MAX_GAME_IN_FAVORITES_TEAM).map(item => {
                     return (
                         <ListGame_Test
                             key={item?.game_id}

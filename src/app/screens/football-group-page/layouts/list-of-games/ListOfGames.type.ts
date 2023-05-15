@@ -1,5 +1,5 @@
-import { Game } from '@football/core/models/TeamSeasonResponse';
+import { TeamModel } from '@football/core/models/TeamModelResponse';
 
 export type IListOfGamesProps = {
-    listGames: Game[] | undefined;
+    teamDetail: TeamModel;
 };

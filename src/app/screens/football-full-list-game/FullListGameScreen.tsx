@@ -51,10 +51,10 @@ export const FullListGameScreen = ({ navigation, route }: IFullListGameScreenPro
                 <ScrollView>
                     <HeaderLogo
                         text={getTranslationText({
-                            textHe: team.name_he,
-                            textEn: team.name_en,
+                            textHe: team?.name_he,
+                            textEn: team?.name_en,
                         })}
-                        avt={{ uri: team.logo_url }}
+                        avt={{ uri: team?.logo_url }}
                     />
                     <View
                         style={[

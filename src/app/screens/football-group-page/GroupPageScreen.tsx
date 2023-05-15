@@ -46,6 +46,7 @@ export const GroupPageScreen = ({ navigation, route }: IGroupPageScreenProps) =>
         handleMoreStatistics,
         onNavigateStadium,
         navigate,
+        teamDetail,
     } = useViewModel({
         navigation,
         route,
@@ -517,7 +518,7 @@ export const GroupPageScreen = ({ navigation, route }: IGroupPageScreenProps) =>
                                     }
                                 </View>
                                 <View style={[appStyles.package]}>
-                                    <ListOfGames listGames={teamSeason?.games} />
+                                    <ListOfGames teamDetail={teamDetail} />
                                 </View>
                                 <View
                                     style={[
