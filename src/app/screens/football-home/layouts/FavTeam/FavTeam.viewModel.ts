@@ -24,8 +24,8 @@ export const useViewModel = ({ team, color }: IFavTeamProps) => {
         navigate(ScreenName.MatchPage, { gameId });
     };
 
-    const onNavigateTeamDetails = (teamId: string) => {
-        navigate(ScreenName.GroupPagePage, { teamId });
+    const onNavigateTeamDetails = (team: TeamModel) => {
+        navigate(ScreenName.GroupPagePage, { team });
     };
 
     const onNavigateGameList = (teamData: TeamModel) => {

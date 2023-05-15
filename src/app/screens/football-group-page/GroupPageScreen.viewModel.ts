@@ -3,21 +3,24 @@ import { useEffect, useCallback, useState } from 'react';
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
 import { ScreenName } from '@football/app/utils/constants/enum';
 import { useMount } from '@football/app/utils/hooks/useMount';
-import { Season, TeamModel } from '@football/core/models/TeamModelResponse';
+import { Game, Season, TeamModel } from '@football/core/models/TeamModelResponse';
 import TeamService from '@football/core/services/Team.service';
 import { useTranslation } from 'react-i18next';
 import TeamSeasonService from '@football/core/services/TeamSeason.service';
 import { TeamSeasonModel } from '@football/core/models/TeamSeasonResponse';
 import { TeamSquadScreenType } from '@football/app/screens/football-team-squad';
 import { IGroupPageScreenProps } from './GroupPageScreen.type';
+import { useGame } from '@football/app/utils/hooks/useGame';
 
-const useViewState = () => {
+const useViewState = (route: any) => {
     const [selectYear, setSelectYear] = useState();
     const [team, setTeam] = useState<TeamModel>();
     const [selectedSeason, setSelectedSeason] = useState<Season>();
     const [openModalYear, setOpenModalYear] = useState(false);
     const [years, setYears] = useState<any[]>();
     const [teamSeason, setTeamSeason] = useState<TeamSeasonModel>();
+
+    const teamDetail = route?.params?.team;
 
     return {
         selectYear,
@@ -32,14 +35,15 @@ const useViewState = () => {
         setYears,
         teamSeason,
         setTeamSeason,
+        teamDetail,
     };
 };
 
 const useViewCallback = (route: any, viewState: any) => {
-    const { setTeam, team, setSelectedSeason, setYears, setTeamSeason } = viewState;
+    const { setTeam, team, setSelectedSeason, setYears, setTeamSeason, teamDetail } = viewState;
 
     const getTeamData = useCallback(async () => {
-        const [error, res] = await TeamService.findByOId(route?.params?.teamId);
+        const [error, res] = await TeamService.findByOId(teamDetail?._id);
         if (error) {
             return;
         }
@@ -73,7 +77,7 @@ export const useViewModel = ({ navigation, route }: IGroupPageScreenProps) => {
         goBack();
     };
 
-    const state = useViewState();
+    const state = useViewState(route);
     const { getTeamData, getTeamSeasonData } = useViewCallback(route, state);
 
     const handleSelectedYear = (item: any) => {

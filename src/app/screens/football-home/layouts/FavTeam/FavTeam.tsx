@@ -83,7 +83,7 @@ export const FavTeam = ({ team, color }: IFavTeamProps) => {
                         })}
                     </Text>
 
-                    <TouchableOpacity onPress={() => onNavigateTeamDetails(team?._id)}>
+                    <TouchableOpacity onPress={() => onNavigateTeamDetails(team)}>
                         <LinearGradient colors={[color, color]} style={styles.icon_arrow_left}>
                             <View style={{ marginLeft: getSize.m(1) }}>
                                 <FastImage
