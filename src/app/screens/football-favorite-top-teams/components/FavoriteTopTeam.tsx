@@ -188,7 +188,7 @@ export const FavoriteTopTeam = ({
                                                 <Image
                                                     source={{ uri: item.logo_url }}
                                                     style={[
-                                                        styles.image_item,
+                                                        styles.image_item_selected,
                                                         {
                                                             borderRadius:
                                                                 onIndex === 1
