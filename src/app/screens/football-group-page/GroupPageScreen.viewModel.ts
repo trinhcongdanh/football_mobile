@@ -3,7 +3,12 @@ import { useEffect, useCallback, useState } from 'react';
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
 import { ScreenName } from '@football/app/utils/constants/enum';
 import { useMount } from '@football/app/utils/hooks/useMount';
-import { Game, Season, TeamModel } from '@football/core/models/TeamModelResponse';
+import {
+    Game,
+    Season,
+    TeamModel,
+    TeamModelResponse,
+} from '@football/core/models/TeamModelResponse';
 import TeamService from '@football/core/services/Team.service';
 import { useTranslation } from 'react-i18next';
 import TeamSeasonService from '@football/core/services/TeamSeason.service';
@@ -20,8 +25,6 @@ const useViewState = (route: any) => {
     const [years, setYears] = useState<any[]>();
     const [teamSeason, setTeamSeason] = useState<TeamSeasonModel>();
 
-    const teamDetail = route?.params?.team;
-
     return {
         selectYear,
         setSelectYear,
@@ -35,15 +38,14 @@ const useViewState = (route: any) => {
         setYears,
         teamSeason,
         setTeamSeason,
-        teamDetail,
     };
 };
 
 const useViewCallback = (route: any, viewState: any) => {
-    const { setTeam, team, setSelectedSeason, setYears, setTeamSeason, teamDetail } = viewState;
+    const { setTeam, team, setSelectedSeason, setYears, setTeamSeason } = viewState;
 
     const getTeamData = useCallback(async () => {
-        const [error, res] = await TeamService.findByOId(teamDetail?._id);
+        const [error, res] = await TeamService.findByOId(route?.params?.teamId);
         if (error) {
             return;
         }
@@ -63,9 +65,18 @@ const useViewCallback = (route: any, viewState: any) => {
         }
     }, []);
 
+    // const getTeamHomePage = useCallback(async () => {
+    //     setTeamDetail([]);
+
+    //     const [err, res] = await TeamService.findByOId<TeamModelResponse>(teamId);
+    //     if (err) return;
+    //     setTeamDetail(res.data.documents[0]);
+    // }, []);
+
     return {
         getTeamData,
         getTeamSeasonData,
+        // getTeamHomePage,
     };
 };
 
@@ -123,6 +134,7 @@ export const useViewModel = ({ navigation, route }: IGroupPageScreenProps) => {
 
     useMount(() => {
         getTeamData();
+        // getTeamHomePage();
     });
 
     useEffect(() => {

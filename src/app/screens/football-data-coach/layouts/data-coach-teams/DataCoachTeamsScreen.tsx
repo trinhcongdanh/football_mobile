@@ -44,11 +44,15 @@ export const DataCoachTeamsScreen = ({ teams }: IDataCoachTeamsScreenProps) => {
                             {t('coach.club')}
                         </Text>
                     </View>
-                    <View style={{ width: getSize.m(60) }}>
-                        <Text style={appStyles.statistics_header}>{t('coach.age_group')}</Text>
+                    <View style={{ width: getSize.m(60), right: getSize.m(3) }}>
+                        <Text style={[appStyles.statistics_header, { textAlign: 'left' }]}>
+                            {t('coach.age_group')}
+                        </Text>
                     </View>
-                    <View style={{ width: getSize.m(60) }}>
-                        <Text style={appStyles.statistics_header}>{t('coach.position')}</Text>
+                    <View style={{ width: getSize.m(60), right: getSize.m(3) }}>
+                        <Text style={[appStyles.statistics_header, { textAlign: 'left' }]}>
+                            {t('coach.position')}
+                        </Text>
                     </View>
                 </View>
                 <View style={{ marginTop: getSize.m(10) }}>
@@ -112,7 +116,14 @@ export const DataCoachTeamsScreen = ({ teams }: IDataCoachTeamsScreenProps) => {
                                         width: getSize.m(60),
                                     }}
                                 >
-                                    <Text style={appStyles.statistics_content}>
+                                    <Text
+                                        style={[
+                                            appStyles.statistics_content,
+                                            {
+                                                textAlign: 'left',
+                                            },
+                                        ]}
+                                    >
                                         {getTranslationText({
                                             textHe: item.age_group_he,
                                             textEn: item.age_group_en,
@@ -124,7 +135,14 @@ export const DataCoachTeamsScreen = ({ teams }: IDataCoachTeamsScreenProps) => {
                                         width: getSize.m(60),
                                     }}
                                 >
-                                    <Text style={appStyles.statistics_content}>
+                                    <Text
+                                        style={[
+                                            appStyles.statistics_content,
+                                            {
+                                                textAlign: 'left',
+                                            },
+                                        ]}
+                                    >
                                         {getTranslationText({
                                             textHe: item.position_he,
                                             textEn: item.position_en,

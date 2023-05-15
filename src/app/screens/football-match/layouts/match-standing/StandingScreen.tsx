@@ -101,7 +101,7 @@ export const StandingScreen = ({ navigation, route }: IStandingScreenProps) => {
                                 </Text>
                             </View>
                         </View>
-                        <View>
+                        <View style={{ marginTop: getSize.m(8) }}>
                             {game?.leader_board?.map((item: LeaderBoard, index: number) => {
                                 return (
                                     <LinearGradient

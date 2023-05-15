@@ -17,7 +17,7 @@ export const styles = StyleSheet.create({
         lineHeight: getSize.m(15),
         color: appColors.text_option_unselect,
         marginLeft: getSize.m(30),
-        width: getSize.m(160),
+        width: getSize.m(120),
         textAlign: 'right',
     },
 });

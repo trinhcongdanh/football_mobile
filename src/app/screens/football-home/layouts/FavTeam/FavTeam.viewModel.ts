@@ -24,12 +24,12 @@ export const useViewModel = ({ team, color }: IFavTeamProps) => {
         navigate(ScreenName.MatchPage, { gameId });
     };
 
-    const onNavigateTeamDetails = (team: TeamModel) => {
-        navigate(ScreenName.GroupPagePage, { team });
+    const onNavigateTeamDetails = (teamId: string) => {
+        navigate(ScreenName.GroupPagePage, { teamId });
     };
 
-    const onNavigateGameList = (teamData: TeamModel) => {
-        navigate(ScreenName.FullListGamePage, { team: teamData });
+    const onNavigateGameList = (team: TeamModel) => {
+        navigate(ScreenName.FullListGamePage, { team });
     };
 
     const onNavigateStatistics = (teamData: TeamModel) => {
