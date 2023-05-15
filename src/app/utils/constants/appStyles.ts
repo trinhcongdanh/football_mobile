@@ -177,6 +177,7 @@ export const appStyles = StyleSheet.create({
         color: appColors.text_dark_blue,
         fontSize: getSize.m(16),
         lineHeight: getSize.m(24),
+        textAlign: 'left',
     },
 
     top_tap: {
