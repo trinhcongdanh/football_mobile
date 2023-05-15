@@ -95,35 +95,36 @@ export const FavoriteSummaryScreen = ({ navigation, route }: IFavoriteSummaryScr
                                             >
                                                 {_.isEmpty(item) ? (
                                                     <>
-                                                        <TouchableOpacity
-                                                            style={styles.btn_add}
-                                                            onPress={backFavTeam}
-                                                        >
-                                                            <Icon
-                                                                name={appIcons.ic_plus}
-                                                                size={getSize.m(14)}
-                                                                color={appColors.blue_light}
-                                                            />
-                                                        </TouchableOpacity>
-                                                        <Text style={styles.txt_no_group}>
-                                                            {t('fav_summary.add_group')}
-                                                        </Text>
+                                                        <View style={styles.container_fav}>
+                                                            <View style={styles.container_image}>
+                                                                <TouchableOpacity
+                                                                    style={styles.btn_add}
+                                                                    onPress={backFavTeam}
+                                                                >
+                                                                    <Icon
+                                                                        name={appIcons.ic_plus}
+                                                                        size={getSize.m(14)}
+                                                                        color={appColors.blue_light}
+                                                                    />
+                                                                </TouchableOpacity>
+                                                            </View>
+                                                            <Text style={styles.txt_no_group}>
+                                                                {t('fav_summary.add_group')}
+                                                            </Text>
+                                                        </View>
                                                     </>
                                                 ) : (
                                                     <TouchableOpacity
-                                                        style={{
-                                                            justifyContent: 'center',
-                                                            alignItems: 'center',
-                                                            flex: 0.2,
-                                                            height: getSize.m(84),
-                                                        }}
+                                                        style={styles.container_fav}
                                                         onPress={backFavTeam}
                                                     >
-                                                        <Image
-                                                            resizeMode="cover"
-                                                            source={{ uri: item.logo_url }}
-                                                            style={styles.img_team}
-                                                        />
+                                                        <View style={styles.container_image}>
+                                                            <Image
+                                                                resizeMode="cover"
+                                                                source={{ uri: item.logo_url }}
+                                                                style={styles.img_team}
+                                                            />
+                                                        </View>
 
                                                         <Text
                                                             numberOfLines={2}
@@ -158,35 +159,36 @@ export const FavoriteSummaryScreen = ({ navigation, route }: IFavoriteSummaryScr
                                             >
                                                 {_.isEmpty(item) ? (
                                                     <>
-                                                        <TouchableOpacity
-                                                            style={styles.btn_add}
-                                                            onPress={backFavPlayer}
-                                                        >
-                                                            <Icon
-                                                                name={appIcons.ic_plus}
-                                                                size={getSize.m(14)}
-                                                                color={appColors.blue_light}
-                                                            />
-                                                        </TouchableOpacity>
-                                                        <Text style={styles.txt_no_group}>
-                                                            {t('fav_summary.add_actress')}
-                                                        </Text>
+                                                        <View style={styles.container_fav}>
+                                                            <View style={styles.container_image}>
+                                                                <TouchableOpacity
+                                                                    style={styles.btn_add}
+                                                                    onPress={backFavPlayer}
+                                                                >
+                                                                    <Icon
+                                                                        name={appIcons.ic_plus}
+                                                                        size={getSize.m(14)}
+                                                                        color={appColors.blue_light}
+                                                                    />
+                                                                </TouchableOpacity>
+                                                            </View>
+                                                            <Text style={styles.txt_no_group}>
+                                                                {t('fav_summary.add_actress')}
+                                                            </Text>
+                                                        </View>
                                                     </>
                                                 ) : (
                                                     <TouchableOpacity
-                                                        style={{
-                                                            justifyContent: 'center',
-                                                            alignItems: 'center',
-                                                            flex: 0.2,
-                                                            height: getSize.m(84),
-                                                        }}
+                                                        style={styles.container_fav}
                                                         onPress={backFavPlayer}
                                                     >
-                                                        <Image
-                                                            resizeMode="cover"
-                                                            source={{ uri: item.image_url }}
-                                                            style={styles.img_player}
-                                                        />
+                                                        <View style={styles.container_image}>
+                                                            <Image
+                                                                resizeMode="cover"
+                                                                source={{ uri: item.image_url }}
+                                                                style={styles.img_player}
+                                                            />
+                                                        </View>
 
                                                         <Text
                                                             numberOfLines={2}
@@ -221,35 +223,36 @@ export const FavoriteSummaryScreen = ({ navigation, route }: IFavoriteSummaryScr
                                             >
                                                 {_.isEmpty(item) ? (
                                                     <>
-                                                        <TouchableOpacity
-                                                            style={styles.btn_add}
-                                                            onPress={backFavTopTeam}
-                                                        >
-                                                            <Icon
-                                                                name={appIcons.ic_plus}
-                                                                size={getSize.m(14)}
-                                                                color={appColors.blue_light}
-                                                            />
-                                                        </TouchableOpacity>
-                                                        <Text style={styles.txt_no_group}>
-                                                            {t('fav_summary.add_squad')}
-                                                        </Text>
+                                                        <View style={styles.container_fav}>
+                                                            <View style={styles.container_image}>
+                                                                <TouchableOpacity
+                                                                    style={styles.btn_add}
+                                                                    onPress={backFavTopTeam}
+                                                                >
+                                                                    <Icon
+                                                                        name={appIcons.ic_plus}
+                                                                        size={getSize.m(14)}
+                                                                        color={appColors.blue_light}
+                                                                    />
+                                                                </TouchableOpacity>
+                                                            </View>
+                                                            <Text style={styles.txt_no_group}>
+                                                                {t('fav_summary.add_squad')}
+                                                            </Text>
+                                                        </View>
                                                     </>
                                                 ) : (
                                                     <TouchableOpacity
-                                                        style={{
-                                                            justifyContent: 'center',
-                                                            alignItems: 'center',
-                                                            flex: 0.2,
-                                                            height: getSize.m(84),
-                                                        }}
+                                                        style={styles.container_fav}
                                                         onPress={backFavTopTeam}
                                                     >
-                                                        <Image
-                                                            resizeMode="cover"
-                                                            source={{ uri: item.logo_url }}
-                                                            style={styles.img_top_team}
-                                                        />
+                                                        <View style={styles.container_image}>
+                                                            <Image
+                                                                resizeMode="cover"
+                                                                source={{ uri: item.logo_url }}
+                                                                style={styles.img_top_team}
+                                                            />
+                                                        </View>
 
                                                         <Text
                                                             numberOfLines={2}

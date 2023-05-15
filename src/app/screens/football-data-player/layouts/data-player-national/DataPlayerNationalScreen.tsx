@@ -128,12 +128,45 @@ export const DataPlayerNationalScreen = ({ player }: IDataPlayerNationalScreenPr
                             colors={[appColors.linearLight, appColors.linearDark]}
                             style={[appStyles.flex_row_space_center, styles.header]}
                         >
-                            <Text style={[styles.text_header, { width: '40%' }]}>
-                                {t('data_player.team')}
-                            </Text>
-                            <Text style={[styles.text_header]}>{t('data_player.games')}</Text>
-                            <Text style={styles.text_header}>{t('data_player.gates')}</Text>
-                            <Text style={styles.text_header}>{t('data_player.details')}</Text>
+                            <View style={{ width: '40%' }}>
+                                <Text style={[styles.text_header]}>{t('data_player.team')}</Text>
+                            </View>
+                            <View style={{ width: '20%' }}>
+                                <Text
+                                    style={[
+                                        styles.text_header,
+                                        {
+                                            textAlign: 'right',
+                                        },
+                                    ]}
+                                >
+                                    {t('data_player.games')}
+                                </Text>
+                            </View>
+                            <View style={{ width: '20%' }}>
+                                <Text
+                                    style={[
+                                        styles.text_header,
+                                        {
+                                            textAlign: 'right',
+                                        },
+                                    ]}
+                                >
+                                    {t('data_player.gates')}
+                                </Text>
+                            </View>
+                            <View style={{ width: '20%' }}>
+                                <Text
+                                    style={[
+                                        styles.text_header,
+                                        {
+                                            textAlign: 'right',
+                                        },
+                                    ]}
+                                >
+                                    {t('data_player.details')}
+                                </Text>
+                            </View>
                         </LinearGradient>
                         <View style={{ marginHorizontal: getSize.m(22) }}>
                             {player?.top_team?.goals?.map((item, index) => {
@@ -141,7 +174,7 @@ export const DataPlayerNationalScreen = ({ player }: IDataPlayerNationalScreenPr
                                     <View
                                         key={item?.player_top_team_goals_id}
                                         style={[
-                                            appStyles.flex_row_space_center,
+                                            appStyles.flex_row_align,
                                             styles.goal_team,
                                             {
                                                 borderBottomWidth:
@@ -151,39 +184,65 @@ export const DataPlayerNationalScreen = ({ player }: IDataPlayerNationalScreenPr
                                             },
                                         ]}
                                     >
-                                        <Text style={[appStyles.text_label, { width: '40%' }]}>
-                                            {getTranslationText({
-                                                textHe: item?.context_he,
-                                                textEn: item?.context_en,
-                                            })}
-                                        </Text>
-                                        <Text style={[appStyles.number]}>{item?.games}</Text>
-                                        <Text style={[appStyles.number]}>{item?.goals}</Text>
-                                        {!item?.games && !item?.goals ? (
-                                            <TouchableOpacity
+                                        <View style={{ width: '40%' }}>
+                                            <Text style={[appStyles.text_label]}>
+                                                {getTranslationText({
+                                                    textHe: item?.context_he,
+                                                    textEn: item?.context_en,
+                                                })}
+                                            </Text>
+                                        </View>
+                                        <View style={{ width: '20%', left: getSize.m(12) }}>
+                                            <Text
                                                 style={[
-                                                    styles.details,
+                                                    appStyles.number,
                                                     {
-                                                        backgroundColor: appColors.gray,
+                                                        textAlign: 'center',
                                                     },
                                                 ]}
-                                            />
-                                        ) : (
-                                            <TouchableOpacity
-                                                onPress={() =>
-                                                    onNavigateGoalTopTeam(
-                                                        item?.player_top_team_goals_id
-                                                    )
-                                                }
-                                                style={[styles.details]}
                                             >
-                                                <Icon
-                                                    name={appIcons.ic_left_ios}
-                                                    size={getSize.m(18)}
-                                                    color={appColors.text_option_unselect}
+                                                {item?.games}
+                                            </Text>
+                                        </View>
+                                        <View style={{ width: '20%', left: getSize.m(12) }}>
+                                            <Text
+                                                style={[
+                                                    appStyles.number,
+                                                    {
+                                                        textAlign: 'center',
+                                                    },
+                                                ]}
+                                            >
+                                                {item?.goals}
+                                            </Text>
+                                        </View>
+                                        <View style={{ width: '20%', alignItems: 'flex-end' }}>
+                                            {!item?.goals ? (
+                                                <TouchableOpacity
+                                                    style={[
+                                                        styles.details,
+                                                        {
+                                                            backgroundColor: appColors.gray,
+                                                        },
+                                                    ]}
                                                 />
-                                            </TouchableOpacity>
-                                        )}
+                                            ) : (
+                                                <TouchableOpacity
+                                                    onPress={() =>
+                                                        onNavigateGoalTopTeam(
+                                                            item?.player_top_team_goals_id
+                                                        )
+                                                    }
+                                                    style={[styles.details]}
+                                                >
+                                                    <Icon
+                                                        name={appIcons.ic_left_ios}
+                                                        size={getSize.m(18)}
+                                                        color={appColors.text_option_unselect}
+                                                    />
+                                                </TouchableOpacity>
+                                            )}
+                                        </View>
                                     </View>
                                 );
                             })}

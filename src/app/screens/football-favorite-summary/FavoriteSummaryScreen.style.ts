@@ -24,7 +24,6 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     btn_add: {
-        flex: 0.2,
         width: getSize.m(38),
         height: getSize.m(38),
         borderRadius: getSize.m(30),
@@ -53,25 +52,34 @@ const styles = StyleSheet.create({
         height: getSize.m(30),
     },
     btn_img: {
-        flex: 0.2,
         width: getSize.m(38),
         height: getSize.m(38),
         alignItems: 'center',
         justifyContent: 'center',
     },
+
+    container_fav: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: getSize.m(84),
+    },
+    container_image: {
+        height: getSize.m(55),
+        justifyContent: 'flex-end',
+    },
     img_team: {
-        width: getSize.m(38),
-        height: getSize.m(38),
+        width: getSize.m(55),
+        height: getSize.m(55),
     },
 
     img_player: {
-        width: getSize.m(38),
-        height: getSize.m(38),
-        borderRadius: getSize.m(38),
+        width: getSize.m(54),
+        height: getSize.m(54),
+        borderRadius: getSize.m(54),
     },
     img_top_team: {
-        width: getSize.m(32),
-        height: getSize.m(38),
+        width: getSize.m(49),
+        height: getSize.m(55),
     },
     block_add_actress: {
         backgroundColor: appColors.white,
