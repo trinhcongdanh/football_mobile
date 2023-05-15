@@ -22,3 +22,30 @@ export const useTranslationText = () => {
     };
     return { getTranslationText };
 };
+
+export const useTranslationTextWithParenthesis = () => {
+    const { i18n } = useTranslation();
+    const locale = i18n.language;
+
+    const getTranslationTextWithParenthesis = ({ textHe, textEn }: ITranslationTextProps) => {
+        if (locale === Locale.en) {
+
+            textEn = textEn.trim();
+            if (textEn == "")
+            {
+                return "";
+            }
+
+            return "(" + textEn + ")";
+        }
+
+        textHe = textHe.trim();
+        if (textHe == "")
+        {
+            return "";
+        }
+
+        return "(" + textHe + ")";
+    };
+    return { getTranslationTextWithParenthesis };
+};

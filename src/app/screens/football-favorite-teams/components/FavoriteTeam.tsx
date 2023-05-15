@@ -7,6 +7,7 @@ import { HeaderFav } from '@football/app/components/header-fav/HeaderFav';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
+import { useTranslationTextWithParenthesis } from '@football/app/utils/hooks/useLanguage';
 import { getSize } from '@football/app/utils/responsive/scale';
 import { TeamModel } from '@football/core/models/TeamModelResponse';
 import { isEmpty } from 'lodash';
@@ -80,6 +81,8 @@ export const FavoriteTeam = ({
     }, [favSelected, teams]);
 
     const { getTranslationText } = useTranslationText();
+
+    const { getTranslationTextWithParenthesis } = useTranslationTextWithParenthesis();
 
     const { getTextTeam } = useTextTeam();
 
@@ -193,7 +196,7 @@ export const FavoriteTeam = ({
                                                         textEn: item.name_en,
                                                     }),
                                                 })}{' '}
-                                                {getTranslationText({
+                                                {getTranslationTextWithParenthesis({
                                                     textHe: item.league_short_name_he,
                                                     textEn: item.league_short_name_en,
                                                 })}
