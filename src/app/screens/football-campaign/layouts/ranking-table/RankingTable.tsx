@@ -94,7 +94,7 @@ export const RankingTable = ({ data, groupName, topTeam }: IRankingTableProps) =
                             </Text>
                         </View>
                     </View>
-                    <View>
+                    <View style={{ marginTop: getSize.m(8) }}>
                         {data?.map((item, index) => {
                             return (
                                 <LinearGradient

@@ -51,6 +51,7 @@ export const styles = StyleSheet.create({
         lineHeight: getSize.m(26),
         fontFamily: AppFonts.bold,
         color: appColors.button_dark_blue,
+        textAlign: 'left',
     },
 
     side_menu_logout_text: {

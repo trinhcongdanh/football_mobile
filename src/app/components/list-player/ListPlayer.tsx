@@ -28,7 +28,11 @@ export const ListPlayer = ({
                     <Text
                         style={[
                             appStyles.number,
-                            { marginRight: getSize.m(10), width: getSize.m(20) },
+                            {
+                                marginRight: getSize.m(10),
+                                width: getSize.m(20),
+                                textAlign: 'right',
+                            },
                         ]}
                     >
                         {number_before}
@@ -67,7 +71,11 @@ export const ListPlayer = ({
                     {name}
                 </Text>
             </View>
-            {number && <Text style={appStyles.number}>{number}</Text>}
+            {number && (
+                <View style={{ width: '12%' }}>
+                    <Text style={[appStyles.number]}>{number}</Text>
+                </View>
+            )}
             {position && (
                 <Text
                     style={[
