@@ -27,6 +27,7 @@ import { TextInput } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/Feather';
 import styles from './FavoriteTeam.style';
 import { IFavoriteTeamProps } from './FavoriteTeam.types';
+import { useTextTeam } from '@football/app/utils/hooks/useText';
 
 export const FavoriteTeam = ({
     onGoSkip,
@@ -79,6 +80,8 @@ export const FavoriteTeam = ({
     }, [favSelected, teams]);
 
     const { getTranslationText } = useTranslationText();
+
+    const { getTextTeam } = useTextTeam();
 
     LogBox.ignoreAllLogs(true);
     return (
@@ -184,9 +187,15 @@ export const FavoriteTeam = ({
                                                 ]}
                                             />
                                             <Text numberOfLines={2} style={styles.name_item}>
+                                                {getTextTeam({
+                                                    textTeam: getTranslationText({
+                                                        textHe: item.name_he,
+                                                        textEn: item.name_en,
+                                                    }),
+                                                })}{' '}
                                                 {getTranslationText({
-                                                    textHe: item.name_he,
-                                                    textEn: item.name_en,
+                                                    textHe: item.league_short_name_he,
+                                                    textEn: item.league_short_name_en,
                                                 })}
                                             </Text>
                                             {item.isSelected === true && (

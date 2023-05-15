@@ -12,6 +12,7 @@ import { AppFonts } from '@football/app/assets/fonts';
 import { useViewModel } from './Statistics.viewModel';
 import { IStatisticsProps } from './Statistics.type';
 import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
+import { useTextTeam } from '@football/app/utils/hooks/useText';
 
 export const Statistics = ({
     selectedRoundName,
@@ -36,6 +37,7 @@ export const Statistics = ({
         leagueId,
     });
     const { getTranslationText } = useTranslationText();
+    const { getTextTeam } = useTextTeam();
 
     const renderStatistics = (data: any[]) => {
         return (
@@ -138,7 +140,7 @@ export const Statistics = ({
                                                 />
                                                 <View style={{ width: '60%' }}>
                                                     <Text
-                                                        numberOfLines={2}
+                                                        // numberOfLines={2}
                                                         style={[
                                                             appStyles.statistics_content,
                                                             {
@@ -147,9 +149,11 @@ export const Statistics = ({
                                                             },
                                                         ]}
                                                     >
-                                                        {getTranslationText({
-                                                            textHe: item.name_he,
-                                                            textEn: item.name_en,
+                                                        {getTextTeam({
+                                                            textTeam: getTranslationText({
+                                                                textHe: item.name_he,
+                                                                textEn: item.name_en,
+                                                            }),
                                                         })}
                                                     </Text>
                                                 </View>

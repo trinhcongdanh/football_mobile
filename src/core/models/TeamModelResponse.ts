@@ -87,6 +87,8 @@ export interface TeamModel {
     league_id: string;
     isSelected?: boolean;
     number?: number;
+    league_short_name_he?: string;
+    league_short_name_en?: string;
 }
 
 export type TeamModelResponse = AxiosResponse<{
