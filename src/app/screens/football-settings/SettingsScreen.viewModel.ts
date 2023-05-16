@@ -32,6 +32,7 @@ import {
 import { ISettingsScreenProps } from './SettingsScreen.type';
 import { deleteAccount } from 'src/store/user/deleteAccount.slice';
 import { avatarUser } from 'src/store/user/avatarUser.slice';
+import { clearAllData } from '@football/app/utils/functions/clearAllData';
 
 interface SettingProps {
     userName: string;
@@ -76,6 +77,7 @@ interface Option {
  */
 const useViewState = () => {
     const { t } = useTranslation();
+    const dispatch = useDispatch<any>();
 
     const setProfile = useSelector((state: RootState) => state.setProfile);
     const getProfile = useSelector((state: RootState) => state.getProfile);
@@ -241,6 +243,7 @@ const useViewState = () => {
         setIsImage,
         changeSetting,
         setChangeSetting,
+        dispatch,
     };
 };
 
@@ -274,9 +277,8 @@ const useEventHandler = (state: any, route: any) => {
         setImage,
         changeSetting,
         setChangeSetting,
+        dispatch,
     } = state;
-
-    const dispatch = useDispatch<any>();
 
     const onGoBack = () => {
         const previousScreen = route?.params?.previousScreen;
@@ -674,6 +676,7 @@ const useEffectHandler = (state: any, callback: any, eventHandler: any) => {
         defaultOptions,
         setNewOptions,
         deleteAccount,
+        dispatch,
     } = state;
     const { navigate } = useAppNavigator();
     useEffect(() => {
@@ -768,6 +771,7 @@ const useEffectHandler = (state: any, callback: any, eventHandler: any) => {
 
     useEffect(() => {
         if (deleteAccount.success) {
+            clearAllData(dispatch);
             navigate(ScreenName.SplashPage);
         } else {
             console.log('Failed to delete');
