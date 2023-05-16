@@ -8,7 +8,7 @@ import { getSize } from '@football/app/utils/responsive/scale';
 import { MAX_TOPTEAM_LASTCAMPAIGN_GAMES } from '@football/core/api/configs/config';
 import moment from 'moment';
 import React from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { I18nManager, Text, TouchableOpacity, View } from 'react-native';
 import IconFeather from 'react-native-vector-icons/Feather';
 import { IListOfGamesProps } from './ListOfGames.type';
 import styles from './ListOfGames.style';
@@ -36,7 +36,14 @@ export const ListOfGames = ({ games, groupName, topTeam }: IListOfGamesProps) =>
                     style={[appStyles.flex_row_center, { flex: 0, marginTop: getSize.m(12) }]}
                     onPress={handleSeeAll}
                 >
-                    <Text style={appStyles.statistics_title}>
+                    <Text
+                        style={[
+                            appStyles.statistics_title,
+                            {
+                                fontSize: getSize.m(12),
+                            },
+                        ]}
+                    >
                         {t('campaign.list_game.see_all_games')}
                     </Text>
                     <IconFeather
@@ -65,6 +72,7 @@ export const ListOfGames = ({ games, groupName, topTeam }: IListOfGamesProps) =>
                                             index === select
                                                 ? appColors.button_dark_blue
                                                 : appColors.separator,
+                                        width: I18nManager.isRTL ? getSize.m(100) : getSize.m(120),
                                     },
                                 ]}
                                 key={index.toString()}

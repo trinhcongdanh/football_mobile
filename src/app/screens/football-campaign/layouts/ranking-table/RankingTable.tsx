@@ -26,7 +26,14 @@ export const RankingTable = ({ data, groupName, topTeam }: IRankingTableProps) =
                     style={[appStyles.flex_row_center, { flex: 0 }]}
                     onPress={handleSeeAll}
                 >
-                    <Text style={appStyles.statistics_title}>
+                    <Text
+                        style={[
+                            appStyles.statistics_title,
+                            {
+                                fontSize: getSize.m(12),
+                            },
+                        ]}
+                    >
                         {t('campaign.ranking_table.all_previous_seasons')}
                     </Text>
                     <IconFeather
