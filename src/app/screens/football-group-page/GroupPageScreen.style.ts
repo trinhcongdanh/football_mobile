@@ -111,6 +111,7 @@ const styles = StyleSheet.create({
         color: appColors.blue_black,
         lineHeight: getSize.m(18),
         fontFamily: AppFonts.bold,
+        textAlign: 'left',
     },
 
     ic_label: {
