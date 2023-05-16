@@ -65,7 +65,7 @@ export const GamesList = ({ topTeam }: IGamesListProps) => {
                                             index === select
                                                 ? appColors.button_dark_blue
                                                 : appColors.separator,
-                                        width: I18nManager.isRTL ? 'auto' : getSize.m(120),
+                                        width: I18nManager.isRTL ? getSize.m(100) : getSize.m(120),
                                     },
                                 ]}
                                 key={index.toString()}

@@ -123,15 +123,7 @@ export const OptionState = ({ label, data }: IOptionStateProps) => {
                                         </View>
                                     </View>
                                     <View style={{ width: getSize.m(80) }}>
-                                        <Text
-                                            numberOfLines={2}
-                                            style={[
-                                                styles.text_content,
-                                                {
-                                                    textAlign: 'left',
-                                                },
-                                            ]}
-                                        >
+                                        <Text numberOfLines={2} style={[styles.text_content]}>
                                             {getTranslationText({
                                                 textHe: item.stadium_he,
                                                 textEn: item.stadium_en,
