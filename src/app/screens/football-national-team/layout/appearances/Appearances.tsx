@@ -79,7 +79,7 @@ export const Appearances = ({ topTeam }: IAppearancesProps) => {
                                         })}
                                     </Text>
                                 </View>
-                                <View>
+                                <View style={{ marginRight: getSize.m(10) }}>
                                     <Text
                                         style={[
                                             appStyles.statistics_content,
