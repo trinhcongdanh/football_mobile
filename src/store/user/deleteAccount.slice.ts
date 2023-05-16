@@ -28,7 +28,7 @@ export const deleteAccount = createAsyncThunk(
 );
 
 export const deleteAccountSlice = createSlice({
-    name: 'setProfile',
+    name: 'deleteAccount',
     initialState,
     reducers: {},
     extraReducers: builder => {
