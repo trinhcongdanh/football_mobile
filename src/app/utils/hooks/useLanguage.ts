@@ -29,23 +29,20 @@ export const useTranslationTextWithParenthesis = () => {
 
     const getTranslationTextWithParenthesis = ({ textHe, textEn }: ITranslationTextProps) => {
         if (locale === Locale.en) {
-
-            textEn = textEn.trim();
-            if (textEn == "")
-            {
-                return "";
+            textEn = textEn?.trim();
+            if (textEn == '') {
+                return '';
             }
 
-            return "(" + textEn + ")";
+            return '(' + textEn + ')';
         }
 
-        textHe = textHe.trim();
-        if (textHe == "")
-        {
-            return "";
+        textHe = textHe?.trim();
+        if (textHe == '') {
+            return '';
         }
 
-        return "(" + textHe + ")";
+        return '(' + textHe + ')';
     };
     return { getTranslationTextWithParenthesis };
 };

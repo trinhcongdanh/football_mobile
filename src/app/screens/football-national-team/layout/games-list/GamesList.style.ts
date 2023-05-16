@@ -16,6 +16,7 @@ const styles = StyleSheet.create({
         borderRadius: getSize.m(30),
         paddingVertical: getSize.m(4),
         marginHorizontal: getSize.m(10),
+        paddingHorizontal: getSize.m(4),
     },
     button_option_dark: {
         paddingHorizontal: getSize.m(20),

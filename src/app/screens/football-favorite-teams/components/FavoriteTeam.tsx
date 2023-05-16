@@ -52,11 +52,11 @@ export const FavoriteTeam = ({
     const [searchText, setSearchText] = useState('');
     const handleTextChange = (newValue: string) => {
         let newText: string = newValue;
-        if (newText.includes('“') || newText.includes('”')) {
-            newText = newValue.replace('“', '"').replace('”', '"');
+        if (newText.includes('“') || newText.includes('”') || newText.includes('״')) {
+            newText = newValue.replace('“', '"').replace('”', '"').replace('״','"');
         }
-        if (newText.includes('‘') || newText.includes('’')) {
-            newText = newValue.replace('‘', "'").replace('’', "'");
+        if (newText.includes('‘') || newText.includes('’') || newText.includes('׳')) {
+            newText = newValue.replace('‘', "'").replace('’', "'").replace('׳',"'");
         }
         setSearchText(newText);
         searchFavTeam(newText);
