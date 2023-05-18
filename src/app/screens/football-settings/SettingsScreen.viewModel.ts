@@ -7,7 +7,7 @@ import { serializeParams } from '@football/app/utils/functions/quick-functions';
 import { AuthData, ScreenName } from '@football/app/utils/constants/enum';
 import { ACTION } from '@football/core/api/auth/config';
 import { useTranslation } from 'react-i18next';
-import { launchImageLibrary } from 'react-native-image-picker';
+import { Asset, launchImageLibrary } from 'react-native-image-picker';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
@@ -18,7 +18,7 @@ import PlayerService from '@football/core/services/Player.service';
 import TeamService from '@football/core/services/Team.service';
 import TopTeamService from '@football/core/services/TopTeam.service';
 import { isEmpty } from 'lodash';
-import { BackHandler } from 'react-native';
+import { BackHandler, Platform } from 'react-native';
 import { addSelectedFavPlayer, resetFavPlayer } from 'src/store/FavPlayer.slice';
 import { addSelectedFavTeam, resetFavTeam } from 'src/store/FavTeam.slice';
 import { addSelectedFavTopTeams, resetTopTeams } from 'src/store/FavTopTeam.slice';
@@ -33,6 +33,10 @@ import { ISettingsScreenProps } from './SettingsScreen.type';
 import { deleteAccount } from 'src/store/user/deleteAccount.slice';
 import { avatarUser } from 'src/store/user/avatarUser.slice';
 import { clearAllData } from '@football/app/utils/functions/clearAllData';
+import * as RNFS from 'react-native-fs';
+import RNFetchBlob from 'rn-fetch-blob';
+import FormData from 'form-data';
+import DocumentPicker from 'react-native-document-picker';
 
 interface SettingProps {
     userName: string;
@@ -86,6 +90,7 @@ const useViewState = () => {
     const userLogin = useSelector((state: RootState) => state.otpUser);
     const login = useSelector((state: RootState) => state.login);
     const deleteAccount = useSelector((state: RootState) => state.deleteAccount);
+    const avatarUser = useSelector((state: RootState) => state.avatarUser.avatarUser.item);
 
     const genders = [
         {
@@ -244,6 +249,7 @@ const useViewState = () => {
         changeSetting,
         setChangeSetting,
         dispatch,
+        avatarUser,
     };
 };
 
@@ -301,39 +307,60 @@ const useEventHandler = (state: any, route: any) => {
      * Handle event click on the profile picture
      */
     const onImagePicker = async () => {
-        const result = await launchImageLibrary({ mediaType: 'photo', includeBase64: true });
-        // eslint-disable-next-line array-callback-return
-        result.assets?.map(item => {
-            const form = new FormData();
-            form.append('file', item.base64);
-            const convertImage = 'data:image/png;base64,' + item.base64;
-            setImage(convertImage);
+        // const result = await launchImageLibrary({ mediaType: 'photo', includeBase64: true });
+        // console.log('result', result);
+        // // eslint-disable-next-line array-callback-return
+        // result.assets?.map(item => {
+        //     // const form = new FormData();
+        //     // form.append('file', item.base64);
+        //     // const convertImage = item;
+        //     // const RNFS = require('react-native-fs');
+        //     // RNFS.readFile(item.uri?.replace('file://', ''), 'base64').then((data: any) => {
+        //     //     console.log(data);
+        //     // });
+        //     setImage(item);
+        //     setIsImage(true);
+        //     // console.log('form', form);
+        //     console.log('item.uri', item);
+        // });
+
+        try {
+            const res = await DocumentPicker.pick({
+                type: [DocumentPicker?.types?.images],
+            });
+            setImage(res[0]);
             setIsImage(true);
-            console.log('form', form);
-            console.log('item.uri', item);
-        });
+            console.log('image picker', res);
+        } catch (err) {
+            if (DocumentPicker.isCancel(err)) {
+                // User cancelled the picker, exit any dialogs or menus and move on
+            } else {
+                throw err;
+            }
+        }
     };
 
     /**
      *  Handle save button click
      */
-    const handleSaveChange = () => {
+    const handleSaveChange = async () => {
         setIsImage(false);
         setChangeSetting(true);
         dispatch(statusSetProfile([]));
 
         if (!isEmpty(image)) {
-            dispatch(
-                avatarUser(
-                    serializeParams({
-                        action: ACTION,
-                        token: numberPhone.successLogin ? userLogin.otp.token : login.login.token,
-                        call: AuthData.UPLOAD_PROFILE_IMAGE,
-                        field: AuthData.AVATAR_IMAGE,
-                        file: image,
-                    })
-                )
+            const formDataImage = new FormData();
+            formDataImage.append('action', ACTION);
+            formDataImage.append(
+                'token',
+                numberPhone.successLogin ? userLogin.otp.token : login.login.token
             );
+
+            formDataImage.append('call', AuthData.UPLOAD_PROFILE_IMAGE);
+            formDataImage.append('field', AuthData.AVATAR_IMAGE);
+            formDataImage.append('file', image);
+
+            dispatch(avatarUser(formDataImage));
         }
 
         dispatch(
