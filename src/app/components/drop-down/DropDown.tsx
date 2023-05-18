@@ -27,7 +27,10 @@ export const DropDown = ({ data, handleSelected, handleCloseModal, title }: IDro
                             style={{ fontFamily: AppFonts.bold }}
                         />
                     </TouchableOpacity>
-                    <Text style={styles.title_drop_down}>{title || t('drop_down.title')}</Text>
+                    <View style={styles.line_dashed}>
+                        <Text style={styles.title_drop_down}>{title || t('drop_down.title')}</Text>
+                    </View>
+
                     <View>
                         <Text style={styles.label_drop_down}>{t('drop_down.label')}</Text>
                         <View style={{ height: getSize.m(500) }}>

@@ -41,6 +41,7 @@ export const ListGame_Test = ({
     isHomePage,
     timeLive,
     marginTopMatch,
+    fontFamily,
 }: IListGameProps) => {
     const { t } = useTranslation();
     const emptyResult = result === ' : ' ? ' : ' : null;
@@ -428,6 +429,7 @@ export const ListGame_Test = ({
                     </View>
                 </View>
             </View>
+
             {details && (
                 <TouchableOpacity
                     style={[
@@ -435,8 +437,9 @@ export const ListGame_Test = ({
                         {
                             flex: 0,
                             marginBottom: getSize.m(20),
-                            marginTop: getSize.m(-16),
+                            marginTop: nameHome || nameAway ? getSize.m(-16) : getSize.m(14),
                             paddingTop: 5,
+                            marginLeft: getSize.m(12),
                         },
                     ]}
                     onPress={handleDetailMatch}
@@ -444,7 +447,16 @@ export const ListGame_Test = ({
                     {isLive && !isHomePage ? (
                         <View style={appStyles.flex_row_align}>
                             <View style={appStyles.flex_row_align}>
-                                <Text style={[styles.details]}>{t('list_game.detail')}</Text>
+                                <Text
+                                    style={[
+                                        styles.details,
+                                        {
+                                            fontFamily: fontFamily ? fontFamily : AppFonts.bold,
+                                        },
+                                    ]}
+                                >
+                                    {t('list_game.detail')}
+                                </Text>
                                 <Icon
                                     name={icon}
                                     size={getSize.m(14)}
@@ -452,7 +464,16 @@ export const ListGame_Test = ({
                                 />
                             </View>
                             <View style={appStyles.flex_row_align}>
-                                <Text style={[styles.details]}>{t('list_game.results')}</Text>
+                                <Text
+                                    style={[
+                                        styles.details,
+                                        {
+                                            fontFamily: fontFamily ? fontFamily : AppFonts.bold,
+                                        },
+                                    ]}
+                                >
+                                    {t('list_game.results')}
+                                </Text>
                                 <Icon
                                     name={icon}
                                     size={getSize.m(14)}
@@ -462,7 +483,16 @@ export const ListGame_Test = ({
                         </View>
                     ) : !isLive && isHomePage && !isFuture ? (
                         <View style={appStyles.flex_row_align}>
-                            <Text style={[styles.details]}>{t('list_game.detail_home')}</Text>
+                            <Text
+                                style={[
+                                    styles.details,
+                                    {
+                                        fontFamily: fontFamily ? fontFamily : AppFonts.bold,
+                                    },
+                                ]}
+                            >
+                                {t('list_game.detail_home')}
+                            </Text>
                             <Icon
                                 name={icon}
                                 size={getSize.m(14)}
@@ -471,7 +501,16 @@ export const ListGame_Test = ({
                         </View>
                     ) : personnel ? (
                         <View style={appStyles.flex_row_align}>
-                            <Text style={[styles.details]}>{personnel}</Text>
+                            <Text
+                                style={[
+                                    styles.details,
+                                    {
+                                        fontFamily: fontFamily ? fontFamily : AppFonts.bold,
+                                    },
+                                ]}
+                            >
+                                {personnel}
+                            </Text>
                             <Icon
                                 name={icon}
                                 size={getSize.m(14)}
@@ -481,7 +520,16 @@ export const ListGame_Test = ({
                     ) : (
                         gameDetail && (
                             <View style={appStyles.flex_row_align}>
-                                <Text style={[styles.details]}>{gameDetail}</Text>
+                                <Text
+                                    style={[
+                                        styles.details,
+                                        {
+                                            fontFamily: fontFamily ? fontFamily : AppFonts.bold,
+                                        },
+                                    ]}
+                                >
+                                    {gameDetail}
+                                </Text>
                                 <Icon
                                     name={icon}
                                     size={getSize.m(14)}
