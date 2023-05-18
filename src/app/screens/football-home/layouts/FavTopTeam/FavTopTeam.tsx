@@ -242,22 +242,50 @@ export const FavTopTeam = ({ topTeam, color }: IFavTopTeamProps) => {
                                                 </View>
                                                 <View style={{ width: getSize.m(50) }}>
                                                     {item?.games ? (
-                                                        <Text style={styles.statistics_content}>
+                                                        <Text
+                                                            style={[
+                                                                styles.statistics_content,
+                                                                {
+                                                                    marginLeft: getSize.m(6),
+                                                                },
+                                                            ]}
+                                                        >
                                                             {item?.games}
                                                         </Text>
                                                     ) : (
-                                                        <Text style={styles.statistics_content}>
+                                                        <Text
+                                                            style={[
+                                                                styles.statistics_content,
+                                                                {
+                                                                    marginLeft: getSize.m(6),
+                                                                },
+                                                            ]}
+                                                        >
                                                             -
                                                         </Text>
                                                     )}
                                                 </View>
                                                 <View style={{ width: getSize.m(50) }}>
                                                     {item?.goals ? (
-                                                        <Text style={styles.statistics_content}>
+                                                        <Text
+                                                            style={[
+                                                                styles.statistics_content,
+                                                                {
+                                                                    marginLeft: getSize.m(20),
+                                                                },
+                                                            ]}
+                                                        >
                                                             {item?.goals}
                                                         </Text>
                                                     ) : (
-                                                        <Text style={styles.statistics_content}>
+                                                        <Text
+                                                            style={[
+                                                                styles.statistics_content,
+                                                                {
+                                                                    marginLeft: getSize.m(20),
+                                                                },
+                                                            ]}
+                                                        >
                                                             -
                                                         </Text>
                                                     )}

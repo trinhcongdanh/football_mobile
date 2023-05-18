@@ -124,6 +124,7 @@ export const styles = StyleSheet.create({
         fontSize: getSize.m(12),
         lineHeight: getSize.m(15),
         width: getSize.m(240),
+        textAlign: 'left',
     },
     btn_bottom_container: {
         justifyContent: 'center',

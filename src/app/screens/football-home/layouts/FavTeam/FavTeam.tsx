@@ -809,6 +809,7 @@ export const FavTeam = ({ team, color }: IFavTeamProps) => {
                                     // moment.duration(moment2.diff(moment1));
                                     style={{ marginTop: getSize.m(12) }}
                                     personnel={t('home_page.composition')}
+                                    fontFamily={AppFonts.regular}
                                 />
                             );
                         })}

@@ -23,4 +23,5 @@ export type IListGameProps = {
     personnel?: string;
     gameDetail?: string;
     marginTopMatch?: StyleProp<any>;
+    fontFamily?: StyleProp<any>;
 };

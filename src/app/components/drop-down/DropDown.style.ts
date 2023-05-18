@@ -35,6 +35,8 @@ export const styles = StyleSheet.create({
         fontFamily: AppFonts.bold,
         lineHeight: getSize.m(23),
         textAlign: 'center',
+    },
+    line_dashed: {
         paddingBottom: getSize.m(20),
         borderBottomWidth: getSize.m(1),
         borderColor: appColors.soft_grey,
