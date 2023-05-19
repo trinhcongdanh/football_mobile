@@ -396,7 +396,7 @@ export const StatisticDetailsScreen = ({ navigation, route }: IStatisticDetailsS
                                                 ) : null}
                                                 {ticket === 'ball' ? (
                                                     <FastImage
-                                                        source={AppImages.img_volleyball}
+                                                        source={AppImages.img_ball_light_gray}
                                                         style={styles.avg_ticket}
                                                         resizeMode={FastImage.resizeMode.contain}
                                                     />

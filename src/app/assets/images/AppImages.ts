@@ -150,6 +150,7 @@ export const AppImages = {
     img_background_welcome: require('./background_welcome.png'),
     img_background_login: require('./background_login.png'),
     img_background_cup: require('./background_cup.png'),
+    img_ball_gray: require('./ball_gray.png'),
 };
 
 export const AppJsons = {

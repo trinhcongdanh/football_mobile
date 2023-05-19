@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
         width: getSize.m(14),
         height: getSize.m(20),
         position: 'absolute',
-        left: getSize.m(15),
+        left: getSize.m(16.5),
         top: getSize.m(-2),
     },
 });
