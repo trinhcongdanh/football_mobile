@@ -274,7 +274,7 @@ export const ListGame_Test = ({
                         style={[
                             appStyles.align_justify,
                             {
-                                marginTop: getSize.m(-18),
+                                marginTop: nameHome || nameAway ? getSize.m(-18) : getSize.m(4),
                             },
                         ]}
                     >

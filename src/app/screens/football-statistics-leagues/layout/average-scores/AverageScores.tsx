@@ -179,7 +179,7 @@ export const AverageScores = ({ avgGoalKicker, leagueSeasonStats }: IAverageScor
                                     {item.num_of_goals}
                                 </Text>
                                 <FastImage
-                                    source={AppImages.img_volleyball}
+                                    source={AppImages.img_ball_light_gray}
                                     style={styles.ticket}
                                     resizeMode={FastImage.resizeMode.contain}
                                 />
