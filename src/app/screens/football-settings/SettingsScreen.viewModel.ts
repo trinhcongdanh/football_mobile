@@ -33,10 +33,9 @@ import { ISettingsScreenProps } from './SettingsScreen.type';
 import { deleteAccount } from 'src/store/user/deleteAccount.slice';
 import { avatarUser } from 'src/store/user/avatarUser.slice';
 import { clearAllData } from '@football/app/utils/functions/clearAllData';
-import * as RNFS from 'react-native-fs';
-import RNFetchBlob from 'rn-fetch-blob';
 import FormData from 'form-data';
 import DocumentPicker from 'react-native-document-picker';
+import RNFS from 'react-native-fs';
 
 interface SettingProps {
     userName: string;
@@ -109,6 +108,7 @@ const useViewState = () => {
 
     // Props fields in the form
     const [image, setImage] = useState<any>(null);
+    const [imageUpload, setImageUpload] = useState<string>('');
     const [isImage, setIsImage] = useState<boolean>(false);
     const [userName, setUserName] = useState<string>('');
     const [email, setEmail] = useState<string>('');
@@ -250,6 +250,8 @@ const useViewState = () => {
         setChangeSetting,
         dispatch,
         avatarUser,
+        imageUpload,
+        setImageUpload,
     };
 };
 
@@ -284,6 +286,7 @@ const useEventHandler = (state: any, route: any) => {
         changeSetting,
         setChangeSetting,
         dispatch,
+        setImageUpload,
     } = state;
 
     const onGoBack = () => {
@@ -330,6 +333,8 @@ const useEventHandler = (state: any, route: any) => {
             });
             setImage(res[0]);
             setIsImage(true);
+            const base64Data = await RNFS.readFile(res[0].uri, 'base64');
+            setImageUpload(`data:image/jpeg;base64,${base64Data}`);
             console.log('image picker', res);
         } catch (err) {
             if (DocumentPicker.isCancel(err)) {

@@ -74,6 +74,7 @@ export function SettingsScreen(props: ISettingsScreenProps) {
         image,
         isImage,
         avatarUser,
+        imageUpload,
     } = useViewModel(props);
     const scrollViewRef = useRef<any>();
 
@@ -110,7 +111,11 @@ export function SettingsScreen(props: ISettingsScreenProps) {
                                     <Avatar
                                         size={getSize.m(73)}
                                         rounded
-                                        source={{ uri: avatarUser.avatar_image.src }}
+                                        source={
+                                            imageUpload
+                                                ? { uri: imageUpload }
+                                                : renderAvatar(getProfile)
+                                        }
                                         containerStyle={{
                                             backgroundColor: appColors.separator,
                                         }}

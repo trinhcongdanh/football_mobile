@@ -16,8 +16,8 @@ export const renderAvatar = (profileUser: any) => {
         return AppImages.img_avt_other;
     }
 
-    if (profileUser?.getProfile?.item?.avatar_image) {
-        return { uri: profileUser.getProfile.item.avatar_image };
+    if (profileUser?.getProfile?.item?.avatar_image?.src) {
+        return { uri: profileUser.getProfile.item.avatar_image.src };
     }
     switch (profileUser?.getProfile?.item?.gender) {
         case AvatarType.FAN_GENDER_MALE:
