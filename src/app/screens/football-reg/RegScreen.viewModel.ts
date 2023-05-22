@@ -245,6 +245,7 @@ const useEventHandler = (state: any) => {
  * Handle effect to listening variables change here.
  * @param state
  * @param eventHandler
+ * @param navigation
  */
 const useEffectHandler = (state: any, eventHandler: any, navigation: any) => {
     const {

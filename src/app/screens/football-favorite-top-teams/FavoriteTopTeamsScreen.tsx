@@ -14,10 +14,11 @@ export const FavoriteTopTeamsScreen = ({ navigation, route }: IFavoriteTopTeamsS
         onGoSkip,
         handleContinue,
         handleSelected,
-        formattedFavTopTeams,
         selectedFavTopTeams,
         profile,
         getProfile,
+        topTeams,
+        favSelectedTopTeam,
     } = useViewModel({
         navigation,
         route,
@@ -49,8 +50,8 @@ export const FavoriteTopTeamsScreen = ({ navigation, route }: IFavoriteTopTeamsS
                 handleSelected={(item: TopTeamModel) => {
                     handleSelected(item);
                 }}
-                newFav={formattedFavTopTeams}
-                favSelected={selectedFavTopTeams}
+                topTeams={topTeams}
+                favSelected={favSelectedTopTeam}
                 title={t('favorite_top_team.title')}
                 placeholder={t('favorite_top_team.place_holder')}
                 chosen={t('favorite_top_team.chosen')}

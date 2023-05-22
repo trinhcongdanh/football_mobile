@@ -36,7 +36,7 @@ export const FavoriteTopTeam = ({
     number,
     title,
     placeholder,
-    newFav,
+    topTeams,
     favSelected,
     chosen,
     button,
@@ -45,17 +45,14 @@ export const FavoriteTopTeam = ({
 
     const [favTopTeams, setFavTopTeams] = useState<TopTeamModel[]>();
     useEffect(() => {
-        const filterTopTeams = newFav
-            .map(topTeam => ({
-                ...topTeam,
-                isSelected: favSelected.filter(t => t._id === topTeam._id).length > 0,
-            }))
-            .sort((a, b) => {
-                return (b.isSelected ? 1 : 0) - (a.isSelected ? 1 : 0);
-            });
+        const filterTopTeams = topTeams?.map(topTeam => ({
+            ...topTeam,
+            isSelected: favSelected.filter(t => t._id === topTeam._id).length > 0,
+        }));
+
         setFavTopTeams(filterTopTeams);
         // console.log('favSelected', favSelected);
-    }, [favSelected, newFav]);
+    }, [favSelected, topTeams]);
 
     LogBox.ignoreAllLogs(true);
 
@@ -63,7 +60,7 @@ export const FavoriteTopTeam = ({
         <View style={[appStyles.flex]}>
             <ImageBackground source={AppImages.img_bg_register} style={appStyles.flex}>
                 <StatusBar translucent backgroundColor="transparent" />
-                {isEmpty(newFav) ? (
+                {isEmpty(topTeams) ? (
                     <SafeAreaView style={appStyles.safe_area}>
                         <View style={[appStyles.flex, appStyles.container]}>
                             <HeaderFav goSkip={onGoSkip} goBack={onGoBack} onIndex={onIndex} />
@@ -116,7 +113,14 @@ export const FavoriteTopTeam = ({
 
                                 <ScrollView>
                                     <View style={styles.content_item}>
-                                        {favTopTeams?.map((item: TopTeamModel, index: number) => {
+                                        {[
+                                            ...favSelected?.map(a => ({ ...a, isSelected: true })),
+                                            ...(favTopTeams
+                                                ? favTopTeams
+                                                      .filter(t => t && !t.isSelected)
+                                                      .map(a => a)
+                                                : []),
+                                        ]?.map((item: TopTeamModel, index: number) => {
                                             return (
                                                 <TouchableOpacity
                                                     key={item._id}

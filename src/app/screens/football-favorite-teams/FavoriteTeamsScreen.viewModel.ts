@@ -94,7 +94,7 @@ const useViewCallback = (route: any, viewState: any) => {
         sortByName.name_en = 1;
     }
     const dispatch = useDispatch<any>();
-    const { navigate, goBack, pop } = useAppNavigator();
+    const { navigate, goBack } = useAppNavigator();
 
     const onGoBack = () => {
         dispatch(resetFavTeam([]));
