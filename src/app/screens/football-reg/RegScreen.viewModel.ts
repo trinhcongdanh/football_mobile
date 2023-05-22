@@ -10,12 +10,14 @@ import { ACTION } from '@football/core/api/auth/config';
 import { RootState } from 'src/store/store';
 import qs from 'qs';
 import { useIsFocused } from '@react-navigation/native';
-import { AppImages } from '@football/app/assets/images';
 import { AvatarType } from '@football/core/models/AvatarType.enum';
 import { isEmpty } from 'lodash';
 import { clearFavoriteData } from '@football/app/utils/functions/clearFavoriteData';
 import moment from 'moment';
-import i18n from '@football/app/i18n/EnStrings';
+import { serializeParams } from '@football/app/utils/functions/quick-functions';
+import { TeamModel } from '@football/core/models/TeamModelResponse';
+import { PlayerModel } from '@football/core/models/PlayerModelResponse';
+import { TopTeamModel } from '@football/core/models/TopTeamModelResponse';
 
 enum GenderSocial {
     male = 'male',
@@ -29,7 +31,16 @@ enum Gender {
     OTHER = 'FAN_GENDER_NOT_AVAILABLE',
 }
 
-export const useViewModel = ({ navigation, route }: IRegScreenProps) => {
+interface RegisterDetailProps {
+    userName: string;
+}
+
+/**
+ * view settings variables
+ * @returns
+ */
+
+const useViewState = () => {
     const { navigate, goBack } = useAppNavigator();
     const { t } = useTranslation();
     const dispatch = useDispatch<any>();
@@ -38,48 +49,127 @@ export const useViewModel = ({ navigation, route }: IRegScreenProps) => {
     const guestId = useSelector((state: any) => state.guestId.guestId);
     const profileUser = useSelector((state: RootState) => state.setProfile);
     const infoSocial = useSelector((state: any) => state.otpUser.infoSocial);
+    const selectedFavTeams = useSelector((state: RootState) => state.favTeams.selectedTeams);
+    const selectedFavPlayers = useSelector((state: RootState) => state.favPlayers.selectedPlayers);
+    const selectedFavTopTeams = useSelector(
+        (state: RootState) => state.favTopTeams.selectedTopTeams
+    );
     const [finishRegister, setFinishRegister] = useState(false);
-
     const [errors, setErrors] = useState({
         userName: '',
     });
-
     const [onCheck, setonCheck] = useState(false);
+    const userNameRef = useRef<any>(null);
+    const [userName, setUserName] = useState('');
+    const [date, setDate] = useState<any>(new Date());
+    const [gender, setGender] = useState<any>(AvatarType.FAN_GENDER_MALE);
+    const isFocused = useIsFocused();
 
+    return {
+        navigate,
+        goBack,
+        t,
+        dispatch,
+        login,
+        profile,
+        guestId,
+        profileUser,
+        infoSocial,
+        selectedFavTeams,
+        selectedFavPlayers,
+        selectedFavTopTeams,
+        finishRegister,
+        setFinishRegister,
+        errors,
+        setErrors,
+        onCheck,
+        setonCheck,
+        userNameRef,
+        userName,
+        setUserName,
+        date,
+        setDate,
+        gender,
+        setGender,
+        isFocused,
+    };
+};
+
+/**
+ * State use event handler
+ * @param state
+ * @returns
+ */
+const useEventHandler = (state: any) => {
+    const {
+        navigate,
+        goBack,
+        t,
+        dispatch,
+        login,
+        profile,
+        selectedFavTeams,
+        selectedFavPlayers,
+        selectedFavTopTeams,
+        setFinishRegister,
+        setErrors,
+        onCheck,
+        setonCheck,
+        userName,
+        setUserName,
+        date,
+        setDate,
+        gender,
+        setGender,
+    } = state;
+
+    /**
+     * Go back previous screen
+     */
     const onGoBack = (): void => {
         goBack();
     };
 
+    /**
+     * Toggle button allows account registration
+     */
     const toggleOnCheck = () => {
         setonCheck(!onCheck);
     };
 
-    const handleError = (errorMessage: string, input: string) => {
-        setErrors(prevState => ({ ...prevState, [input]: errorMessage }));
-    };
-
-    const userNameRef = useRef<any>(null);
-    const [userName, setUserName] = useState('');
+    /**
+     * Type username
+     * @param e
+     */
     const handleOnChange = (e: string) => {
-        // const regex = /[^\u0000-\u05FF]/gi;
-        // const specialCharRegex = /[!@#$%^&*(),.?":{}|<>]/g;
-        // const newText =
-        //     i18n.language === 'en'
-        //         ? e.replace(regex, '').replace(specialCharRegex, '')
-        //         : e.replace(regex, '');
         const regex = /^[a-zA-Z0-9\u0590-\u05fe\s]*$/;
         if (regex.test(e)) {
             setUserName(e);
         }
     };
 
-    const [date, setDate] = useState<any>(new Date());
+    /**
+     * Handle error response when phone number is wrong
+     * @param errorMessage
+     * @param input
+     */
+    const handleError = (errorMessage: string, input: string) => {
+        setErrors((prevState: RegisterDetailProps) => ({ ...prevState, [input]: errorMessage }));
+    };
 
+    /**
+     * Change date
+     * @param e
+     */
     const handleOnDate = (e: Date) => {
         console.log(e);
         setDate(e);
     };
-    const [gender, setGender] = useState<any>(AvatarType.FAN_GENDER_MALE);
+
+    /**
+     * Change gender
+     * @param e
+     */
     const handleOnGender = (e: number) => {
         if (e === 0) {
             setGender(AvatarType.FAN_GENDER_MALE);
@@ -90,53 +180,22 @@ export const useViewModel = ({ navigation, route }: IRegScreenProps) => {
         }
     };
 
-    function serializeParams(obj: any) {
-        const a = qs.stringify(obj, { encode: false, arrayFormat: 'brackets' });
-        console.log(a);
-        return a;
-    }
-    useEffect(() => {
-        if (!isEmpty(infoSocial)) {
-            setUserName(infoSocial?.name || '');
-            setDate(
-                infoSocial?.birthday
-                    ? moment(infoSocial?.birthday, 'DD/MM/YYYY').toDate()
-                    : new Date()
-            );
-
-            console.log(date);
-
-            switch (infoSocial?.gender) {
-                case GenderSocial.male:
-                    setGender(Gender.MALE);
-                case GenderSocial.female:
-                    setGender(Gender.FEMALE);
-                case GenderSocial.other:
-                    setGender(Gender.OTHER);
-                default:
-                    setGender(Gender.MALE);
-            }
-        }
-    }, [infoSocial]);
-    const selectedFavTeams = useSelector((state: RootState) => state.favTeams.selectedTeams);
-    const selectedFavPlayers = useSelector((state: RootState) => state.favPlayers.selectedPlayers);
-    const selectedFavTopTeams = useSelector(
-        (state: RootState) => state.favTopTeams.selectedTopTeams
-    );
-
+    /**
+     * create account
+     */
     const createInfo = () => {
         Keyboard.dismiss();
         setFinishRegister(true);
         let fav_team: string[] = [];
-        selectedFavTeams.map(item => {
+        selectedFavTeams.map((item: TeamModel) => {
             fav_team.push(item._id);
         });
         let fav_player: string[] = [];
-        selectedFavPlayers.map(item => {
+        selectedFavPlayers.map((item: PlayerModel) => {
             fav_player.push(item._id);
         });
         let fav_top_team: string[] = [];
-        selectedFavTopTeams.map(item => {
+        selectedFavTopTeams.map((item: TopTeamModel) => {
             fav_top_team.push(item._id);
         });
         if (userName.length >= 2) {
@@ -162,7 +221,67 @@ export const useViewModel = ({ navigation, route }: IRegScreenProps) => {
             handleError(t('reg.error.error_char'), 'userName');
         }
     };
-    const isFocused = useIsFocused();
+
+    /**
+     * navigate to the term condition screen
+     */
+    const handleProvision = () => {
+        navigate(ScreenName.TermsConditionPage);
+    };
+
+    return {
+        onGoBack,
+        toggleOnCheck,
+        handleOnChange,
+        handleError,
+        handleOnDate,
+        handleOnGender,
+        createInfo,
+        handleProvision,
+    };
+};
+
+/**
+ * Handle effect to listening variables change here.
+ * @param state
+ * @param eventHandler
+ */
+const useEffectHandler = (state: any, eventHandler: any, navigation: any) => {
+    const {
+        navigate,
+        dispatch,
+        profileUser,
+        infoSocial,
+        finishRegister,
+        setUserName,
+        date,
+        setDate,
+        setGender,
+        isFocused,
+    } = state;
+    useEffect(() => {
+        if (!isEmpty(infoSocial)) {
+            setUserName(infoSocial?.name || '');
+            setDate(
+                infoSocial?.birthday
+                    ? moment(infoSocial?.birthday, 'DD/MM/YYYY').toDate()
+                    : new Date()
+            );
+
+            console.log(date);
+
+            switch (infoSocial?.gender) {
+                case GenderSocial.male:
+                    setGender(Gender.MALE);
+                case GenderSocial.female:
+                    setGender(Gender.FEMALE);
+                case GenderSocial.other:
+                    setGender(Gender.OTHER);
+                default:
+                    setGender(Gender.MALE);
+            }
+        }
+    }, [infoSocial]);
     useEffect(() => {
         if (!isFocused) return;
         if (profileUser.success && finishRegister) {
@@ -174,25 +293,15 @@ export const useViewModel = ({ navigation, route }: IRegScreenProps) => {
             clearFavoriteData(dispatch);
         }
     }, [profileUser.success, finishRegister, isFocused]);
+};
 
-    const handleProvision = () => {
-        navigate(ScreenName.TermsConditionPage);
-    };
+export const useViewModel = ({ navigation, route }: IRegScreenProps) => {
+    const state = useViewState();
+    const eventHandler = useEventHandler(state);
+    useEffectHandler(state, eventHandler, navigation);
 
     return {
-        errors,
-        onCheck,
-        onGoBack,
-        handleOnChange,
-        handleError,
-        createInfo,
-        handleOnDate,
-        toggleOnCheck,
-        userName,
-        userNameRef,
-        handleOnGender,
-        date,
-        profileUser,
-        handleProvision,
+        ...eventHandler,
+        ...state,
     };
 };

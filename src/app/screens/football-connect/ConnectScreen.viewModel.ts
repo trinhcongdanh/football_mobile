@@ -84,24 +84,7 @@ const useViewState = () => {
  */
 
 const useEventHandler = (state: any) => {
-    const {
-        t,
-        numberPhone,
-        guestId,
-        profile,
-        login,
-        socialLogin,
-        imgUrl,
-        setImgUrl,
-        setPhoneNumber,
-        errors,
-        setErrors,
-        phoneNumber,
-        navigate,
-        goBack,
-        replace,
-        dispatch,
-    } = state;
+    const { setImgUrl, setPhoneNumber, phoneNumber, navigate, goBack, dispatch } = state;
     // Go back previous screen
     const onGoBack = (): void => {
         goBack();
@@ -179,7 +162,7 @@ const useEventHandler = (state: any) => {
                         let userId = '';
                         await Profile.getCurrentProfile().then(currentProfile => {
                             if (currentProfile) {
-                                console.log("currentProfile", currentProfile);
+                                console.log('currentProfile', currentProfile);
                                 userId = currentProfile.userID;
                             }
                         });
@@ -187,15 +170,15 @@ const useEventHandler = (state: any) => {
                             let accessToken = '';
                             await AccessToken.getCurrentAccessToken().then(data => {
                                 accessToken = data.accessToken.toString();
-                                console.log("accessToken", accessToken);
-                            });                        
+                                console.log('accessToken', accessToken);
+                            });
                             await AuthenticationToken.getAuthenticationTokenIOS().then(
                                 (data: any) => {
                                     console.log('authenticationToken', data?.authenticationToken);
 
                                     getInfoFromToken(data?.authenticationToken.toString());
                                     if (data) {
-                                        console.log("data", data);
+                                        console.log('data', data);
                                         dispatch(
                                             otpUser(
                                                 serializeParams({
@@ -360,30 +343,30 @@ const useEventHandler = (state: any) => {
  */
 const useEffectHandler = (state: any, eventHandler: any) => {
     const { handleError } = eventHandler;
-    const { profile, login } = state;
+    const { isFocused, socialLogin, replace, numberPhone, navigate, phoneNumber, t } = state;
 
     useEffect(() => {
-        if (!state.isFocused) return;
-        if (state.socialLogin.success) {
-            state.replace(ScreenName.SideBar);
+        if (!isFocused) return;
+        if (socialLogin.success) {
+            replace(ScreenName.SideBar);
         }
-    }, [state.socialLogin.success, state.isFocused]);
+    }, [socialLogin.success, isFocused]);
 
     useEffect(() => {
-        if (!state.isFocused) return;
-        if (state.numberPhone.successLogin === true) {
-            state.navigate(ScreenName.VerifyPage, {
-                number: state.phoneNumber,
+        if (!isFocused) return;
+        if (numberPhone.successLogin === true) {
+            navigate(ScreenName.VerifyPage, {
+                number: phoneNumber,
                 previous_screen: ScreenName.ConnectPage,
             });
         }
-    }, [state.numberPhone.successLogin, state.isFocused]);
+    }, [numberPhone.successLogin, isFocused]);
 
     useEffect(() => {
-        if (state.numberPhone.successLogin === false && state.numberPhone.loadingLogin === false) {
-            handleError(state.t('register.invalid'), 'numberPhone');
+        if (numberPhone.successLogin === false && numberPhone.loadingLogin === false) {
+            handleError(t('register.invalid'), 'numberPhone');
         }
-    }, [state.numberPhone.successLogin, state.numberPhone.loadingLogin]);
+    }, [numberPhone.successLogin, numberPhone.loadingLogin]);
 
     // Google Account
     useEffect(() => {
