@@ -22,12 +22,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { env } from 'src/config';
 import { otpUser, setInfoSocial } from 'src/store/user/OTP.slice';
 import { registerNumberPhoneUser } from 'src/store/user/RegisterNumberPhone.slice';
-import { setProfileUser, statusSetProfile } from 'src/store/user/setProfile.slice';
+import { statusSetProfile } from 'src/store/user/setProfile.slice';
 import { v4 as uuid } from 'uuid';
 import jwt_decode from 'jwt-decode';
 import { appleAuth, appleAuthAndroid } from '@invertase/react-native-apple-authentication';
 import { IRegisterScreenProps } from './RegisterScreen.type';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 interface RegisterProps {
     phoneNumber: string;
@@ -83,22 +82,15 @@ const useViewState = (route: any) => {
 
 const useEventHandler = (state: any) => {
     const {
-        t,
-        errors,
-        setErrors,
-        phoneNumberRef,
         guestId,
-        profile,
         login,
-        numberPhone,
-        otp,
-        isFocused,
         goBack,
         navigate,
         setPhoneNumber,
         phoneNumber,
         isLogin,
         dispatch,
+        setErrors,
     } = state;
 
     /**
@@ -112,7 +104,7 @@ const useEventHandler = (state: any) => {
 
     // Handle error response when phone number is wrong
     const handleError = (errorMessage: string, input: string) => {
-        state.setErrors((prevState: RegisterProps) => ({ ...prevState, [input]: errorMessage }));
+        setErrors((prevState: RegisterProps) => ({ ...prevState, [input]: errorMessage }));
     };
     // Go back previous screen
 
@@ -255,7 +247,7 @@ const useEventHandler = (state: any) => {
                         let userId = '';
                         await Profile.getCurrentProfile().then(currentProfile => {
                             if (currentProfile) {
-                                console.log("currentProfile", currentProfile);
+                                console.log('currentProfile', currentProfile);
                                 userId = currentProfile.userID;
                             }
                         });
@@ -263,8 +255,8 @@ const useEventHandler = (state: any) => {
                             let accessToken = '';
                             await AccessToken.getCurrentAccessToken().then(data => {
                                 accessToken = data.accessToken.toString();
-                                console.log("accessToken", accessToken);
-                            });                        
+                                console.log('accessToken', accessToken);
+                            });
                             await AuthenticationToken.getAuthenticationTokenIOS().then(
                                 (data: any) => {
                                     console.log('authenticationToken', data?.authenticationToken);
@@ -389,30 +381,27 @@ const useEventHandler = (state: any) => {
 const useEffectHandler = (state: any, eventHandler: any) => {
     const { handleError, onGoBack } = eventHandler;
 
-    const { profile, login } = state;
+    const { isFocused, numberPhone, phoneNumber, navigate, t, otp, dispatch } = state;
 
     useEffect(() => {
-        if (!state.isFocused) return;
-        if (state.numberPhone.successRegister === true) {
-            state.navigate(ScreenName.VerifyPage, {
-                number: state.phoneNumber,
+        if (!isFocused) return;
+        if (numberPhone.successRegister === true) {
+            navigate(ScreenName.VerifyPage, {
+                number: phoneNumber,
                 previous_screen: ScreenName.RegisterPage,
             });
         }
-        if (
-            state.numberPhone.successRegister === false &&
-            state.numberPhone.loadingRegister === false
-        ) {
-            handleError(state.t('register.invalid'), 'numberPhone');
+        if (numberPhone.successRegister === false && numberPhone.loadingRegister === false) {
+            handleError(t('register.invalid'), 'numberPhone');
         }
-    }, [state.numberPhone.successRegister, state.isFocused, state.numberPhone.loadingRegister]);
+    }, [numberPhone.successRegister, isFocused, numberPhone.loadingRegister]);
 
     useEffect(() => {
-        if (state.otp.success) {
-            state.navigate(ScreenName.RegPage);
+        if (otp.success) {
+            navigate(ScreenName.RegPage);
         }
-        state.dispatch(statusSetProfile(null));
-    }, [state.otp.success]);
+        dispatch(statusSetProfile(null));
+    }, [otp.success]);
 
     useEffect(() => {
         try {
