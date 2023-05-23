@@ -12,9 +12,9 @@ export const useViewModel = ({ statistics, statisticsId }: IStatisticsProps) => 
     const homeGames = statistics?.home_games || [];
 
     const handleMoreStatistics = (
-        leagueSeasonId: string,
-        leagueId: string,
-        statisticsIdValue: string
+        leagueSeasonId?: string,
+        leagueId?: string,
+        statisticsIdValue?: string
     ) => {
         navigate(ScreenName.StatisticsLeaguesPage, {
             leagueSeasonId,

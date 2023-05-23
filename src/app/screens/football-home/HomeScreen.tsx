@@ -10,7 +10,6 @@ import { FavTeam } from '@football/app/screens/football-home/layouts/FavTeam/Fav
 import { FavTopTeam } from '@football/app/screens/football-home/layouts/FavTopTeam/FavTopTeam';
 import { Instagram } from '@football/app/screens/football-home/layouts/Instagram/Instagram';
 import { LeaguesTable } from '@football/app/screens/football-home/layouts/LeaguesTable/LeaguesTable';
-import { ListOfGameTopTeam } from '@football/app/screens/football-home/layouts/ListOfGameTopTeam/ListOfGameTopTeam';
 import { Magazine } from '@football/app/screens/football-home/layouts/Magazine/Magazine';
 import { NationalCup } from '@football/app/screens/football-home/layouts/NationalCup/NationalCup';
 import { SocialResponsibility } from '@football/app/screens/football-home/layouts/SocialResponsibility/SocialResponsibility';
@@ -452,9 +451,7 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                                         <FavTeam color={colorCustom} team={team} key={team?._id} />
                                     );
                                 })}
-                        {/* Item2 */}
-                        {/* <Item2 /> */}
-                        {/* Item3 */}
+
                         {homeLayout?.layout.includes('my_players') &&
                             players &&
                             players?.map(player => {
@@ -467,9 +464,7 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                                     />
                                 );
                             })}
-                        {/* Item4 */}
-                        {/* <Item4 /> */}
-                        {/* Item5 */}
+
                         {homeLayout?.layout.includes('my_top_team') &&
                             topTeams?.map(topTeam => {
                                 return (
@@ -479,46 +474,31 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                                             topTeam={topTeam}
                                             key={topTeam?._id}
                                         />
-                                        {/* {homeLayout?.layout.includes('my_top_team') && (
-                                            <ListOfGameTopTeam
-                                                topTeam={topTeam}
-                                                key={topTeam?._id}
-                                            />
-                                        )} */}
                                     </>
                                 );
                             })}
-                        {/* <Item5 topTeam={} /> */}
-                        {/* Item6 */}
-                        {/* Item7 */}
+
                         {homeLayout?.layout.includes('ads') && (
                             <SocialResponsibility homePage={homePage} />
                         )}
-                        {/* Item8 */}
-                        {/* <Item8 /> */}
-                        {/* Item9 */}
+
                         {homeLayout?.layout.includes('magazine') ? (
                             <Magazine homePage={homePage} />
                         ) : null}
 
-                        {/* Item10 */}
                         {homeLayout?.layout.includes('leagues_table') && leagues?.length
                             ? leagues.map(league => {
                                   return <LeaguesTable league={league} key={league?._id} />;
                               })
                             : null}
-                        {/* Item11 */}
-                        {/* <Item11 /> */}
+
                         {homeLayout?.layout.includes('national_cup') && (
                             <NationalCup homePage={homePage} />
                         )}
 
-                        {/* Item12 */}
                         {homeLayout?.layout.includes('clips') && generalVod && (
                             <Video videos={generalVod} handlePlayVideo={handlePlayVideo} />
                         )}
-
-                        {/* Item13 */}
 
                         {homeLayout?.layout.includes('instagram') && <Instagram />}
 

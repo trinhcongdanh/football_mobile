@@ -50,7 +50,7 @@ const useViewState = () => {
  * @returns
  */
 const useEventHandler = (state: any, callback: any) => {
-    const { setTab, navigate, setCups, tab, setSearchText } = state;
+    const { setTab, navigate } = state;
     const { searchCupsData } = callback;
     const changeTab = (index: number) => {
         const type = index === 0 ? CupTab.NationCup : CupTab.TotoCup;

@@ -1,11 +1,9 @@
 import { Alert, Linking } from 'react-native';
-import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
-import { IItem9Props } from '@football/app/screens/football-home/layouts/Magazine/Magazine.type';
+import { IMagazineProps } from '@football/app/screens/football-home/layouts/Magazine/Magazine.type';
 import { useState, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 
-export const useViewModel = ({ homePage }: IItem9Props) => {
-    const { navigate, goBack } = useAppNavigator();
+export const useViewModel = ({ homePage }: IMagazineProps) => {
     const { t } = useTranslation();
     const pages = Array(2).fill('');
     const [activeIndexNumber, setActiveIndexNumber] = useState(Number);

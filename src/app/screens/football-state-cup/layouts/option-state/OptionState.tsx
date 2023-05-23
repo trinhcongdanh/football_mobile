@@ -7,8 +7,7 @@ import styles from './OptionState.style';
 import { useViewModel } from './OptionState.viewModel';
 import { IOptionStateProps } from './OptionState.type';
 import LinearGradient from 'react-native-linear-gradient';
-import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
-import moment from 'moment';
+
 export const OptionState = ({ label, data }: IOptionStateProps) => {
     const { t, listState, onNavigateGame, getTranslationText, getDate, getTime } = useViewModel();
 

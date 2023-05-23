@@ -7,23 +7,13 @@ import { HeaderUser } from '@football/app/components/header-user/HeaderUser';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import { getSize } from '@football/app/utils/responsive/scale';
-import { Round } from '@football/core/models/LeagueSeasonModelResponse';
 import React from 'react';
-import {
-    ImageBackground,
-    SafeAreaView,
-    ScrollView,
-    StatusBar,
-    Text,
-    TouchableOpacity,
-    View,
-} from 'react-native';
+import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import Icon from 'react-native-vector-icons/Feather';
 import { AboutLeague } from './layouts/about-league/AboutLeague';
 import { LeaguesTable } from './layouts/leagues-table/LeaguesTable';
 import { ListOfGames } from './layouts/list-of-games/ListOfGames';
-import SelectedGallery from './layouts/selected-gallery/SelectedGallery';
 import { Statistics } from './layouts/Statistics/Statistics';
 import styles from './LeaguesDetailsScreen.style';
 import { ILeaguesDetailsScreenProps } from './LeaguesDetailsScreen.type';
@@ -45,7 +35,6 @@ export const LeaguesDetailsScreen = ({ navigation, route }: ILeaguesDetailsScree
         selectRound,
         selectCycle,
         league,
-        galleries,
         highlights,
         selectedLeagueSeason,
         getTranslationText,

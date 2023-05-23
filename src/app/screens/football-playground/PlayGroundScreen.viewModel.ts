@@ -3,13 +3,13 @@ import { IPlayGroundScreenProps } from '@football/app/screens/football-playgroun
 import { useTranslation } from 'react-i18next';
 
 export const useViewModel = ({ navigation, route }: IPlayGroundScreenProps) => {
-    const { navigate, goBack } = useAppNavigator();
+    const { navigate, goBack, openDrawer } = useAppNavigator();
     const { t } = useTranslation();
     const onGoBack = (): void => {
         goBack();
     };
     const onShowSideMenu = () => {
-        navigation.openDrawer();
+        openDrawer();
     };
 
     return {

@@ -322,7 +322,7 @@ const eventHandler = (navigate: any) => {
 };
 
 export const useViewModel = ({ navigation, route }: IHomeScreenProps) => {
-    const { navigate, goBack } = useAppNavigator();
+    const { navigate, goBack, openDrawer } = useAppNavigator();
     const { t } = useTranslation();
     const dispatch = useDispatch();
 
@@ -386,7 +386,7 @@ export const useViewModel = ({ navigation, route }: IHomeScreenProps) => {
     }, [state.teams[0]?.team_color]);
 
     const onShowSideMenu = () => {
-        navigation?.openDrawer();
+        openDrawer();
     };
 
     const handlePlayVideo = (item: any) => {

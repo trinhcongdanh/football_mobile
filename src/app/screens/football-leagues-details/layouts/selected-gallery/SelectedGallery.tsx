@@ -1,6 +1,5 @@
 /* eslint-disable react/no-array-index-key */
 import { appIcons } from '@football/app/assets/icons/appIcons';
-import { AppImages } from '@football/app/assets/images';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import { getSize } from '@football/app/utils/responsive/scale';
@@ -8,7 +7,6 @@ import React from 'react';
 import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import IconAntDesign from 'react-native-vector-icons/AntDesign';
 import IconFeather from 'react-native-vector-icons/Feather';
-import VideoPlayer from 'react-native-video-player';
 import styles from './SelectedGallery.style';
 import { ISelectedGalleryProps } from './SelectedGallery.type';
 import { useViewModel } from './SelectedGallery.viewModel';
@@ -17,17 +15,17 @@ const SelectedGallery = ({ pagination, galleries }: ISelectedGalleryProps) => {
     const {
         t,
         data,
-        width,
+        // width,
         activeIndexNumber,
         setActiveIndexNumber,
         dots,
         handlePlayVideo,
-        setDisplay,
-        sourceVideo,
-        display,
-        autoPlay,
-        setAutoPlay,
-        handleEndVideo,
+        // setDisplay,
+        // sourceVideo,
+        // display,
+        // autoPlay,
+        // setAutoPlay,
+        // handleEndVideo,
     } = useViewModel({ galleries });
     // const { width } = useWindowDimensions();
     // const [newData] = useState([{ key: 'spacer-left' }, ...data, { key: 'spacer-right' }]);

@@ -1,36 +1,22 @@
-import { appIcons } from '@football/app/assets/icons/appIcons';
 import { AppImages } from '@football/app/assets/images';
 import { HeaderUser } from '@football/app/components/header-user/HeaderUser';
 import { BOTTOM_SVG_HEIGHT } from '@football/app/routes/bottom-tab/components/bottom.tab';
 import { TAB_BAR_HEIGHT } from '@football/app/routes/bottom-tab/styles/bottom.tab.styles';
-import { appColors } from '@football/app/utils/constants/appColors';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
 import { getSize } from '@football/app/utils/responsive/scale';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import {
-    FlatList,
-    ImageBackground,
-    SafeAreaView,
-    ScrollView,
-    StatusBar,
-    Text,
-    TouchableOpacity,
-    View,
-} from 'react-native';
+import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import FastImage from 'react-native-fast-image';
-import Icon from 'react-native-vector-icons/Feather';
 import { useSelector } from 'react-redux';
 import styles from './TeamScreen.style';
 import { ITeamScreenProps } from './TeamScreen.type';
 import { useViewModel } from './TeamScreen.viewModel';
 import { BackGround } from '@football/app/components/background/BackGround';
 
-// type Props = {};
-
 export const TeamScreen = ({ navigation, route }: ITeamScreenProps) => {
-    const { topTeams, toggleChangeBar, toggleBar, handleTeam, onShowSideMenu } = useViewModel({
+    const { topTeams, handleTeam, onShowSideMenu } = useViewModel({
         navigation,
         route,
     });

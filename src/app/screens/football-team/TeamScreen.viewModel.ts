@@ -7,14 +7,12 @@ import { TopTeamModel, TopTeamModelResponse } from '@football/core/models/TopTea
 import { useAsyncStorage } from '@react-native-async-storage/async-storage';
 import { isEmpty, isNil } from 'lodash';
 import { useCallback, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import { Alert } from 'react-native';
 import { ITeamScreenProps } from './TeamScreen.type';
 
 export const useViewModel = ({ navigation, route }: ITeamScreenProps) => {
-    const { navigate, goBack } = useAppNavigator();
-    const { t } = useTranslation();
-    const { getItem, setItem } = useAsyncStorage(OfflineData.team_page);
+    const { navigate, openDrawer } = useAppNavigator();
+    const { getItem } = useAsyncStorage(OfflineData.team_page);
     const [teamPageData, setTeamPageData] = useState();
 
     const [toggleBar, setToggleBar] = useState(false);
@@ -31,8 +29,6 @@ export const useViewModel = ({ navigation, route }: ITeamScreenProps) => {
                     collection: 'team',
                 });
                 if (!isEmpty(data.documents)) {
-                    // console.log(data.documents);
-
                     setTeamPageData(data.documents);
                 }
             }
@@ -44,18 +40,6 @@ export const useViewModel = ({ navigation, route }: ITeamScreenProps) => {
     const toggleChangeBar = () => {
         setToggleBar(!toggleBar);
     };
-
-    // const optionTeams = [
-    //     { id: 1, name: 'הנבחרת הצעירה' },
-    //     { id: 2, name: 'נבחרת הנשים' },
-    //     { id: 3, name: 'נבחרת נערים א' },
-    //     { id: 4, name: 'הנבחרת הלאומית' },
-    //     { id: 5, name: 'נבחרת נוער ב' },
-    //     { id: 6, name: 'נבחרת הנערות עד גיל 19' },
-    //     { id: 7, name: 'נבחרת הנערות עד גיל 17' },
-    //     { id: 8, name: 'נבחרת הנערות עד גיל 17' },
-    //     { id: 9, name: 'נבחרת הנערות עד גיל 17' },
-    // ];
 
     const [topTeams, setTopTeams] = useState<TopTeamModel[]>();
     const getTopTeamsData = async () => {
@@ -77,7 +61,7 @@ export const useViewModel = ({ navigation, route }: ITeamScreenProps) => {
     };
 
     const onShowSideMenu = () => {
-        navigation.openDrawer();
+        openDrawer();
     };
 
     useMount(() => {

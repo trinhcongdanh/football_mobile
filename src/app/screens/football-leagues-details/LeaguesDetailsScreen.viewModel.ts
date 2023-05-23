@@ -10,9 +10,7 @@ import {
     Round,
 } from '@football/core/models/LeagueSeasonModelResponse';
 import LeagueService from '@football/core/services/League.service';
-import LeagueSeasonService, {
-    useLeagueSeasons,
-} from '@football/core/services/LeagueSeason.service';
+import LeagueSeasonService from '@football/core/services/LeagueSeason.service';
 import { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
@@ -63,7 +61,7 @@ const useViewCallback = (route: any, viewState: any) => {
     const dispatch = useDispatch();
     const { leagueId }: any = route.params;
 
-    const { setAllLeagueSeasons, setSelectedLeagueSeason, setLeague } = viewState;
+    const { setSelectedLeagueSeason, setLeague } = viewState;
     const getLeagueSeasonsData = useCallback(async (id: string) => {
         const [error, res] = await LeagueSeasonService.findByOId(id);
         if (error) {
@@ -71,9 +69,6 @@ const useViewCallback = (route: any, viewState: any) => {
         }
 
         const leagueSeasons = res.data.documents;
-
-        // dispatch(setLeagueSeasons(leagueSeasons));
-        // setAllLeagueSeasons(leagueSeasons);
         if (leagueSeasons?.length) {
             setSelectedLeagueSeason(leagueSeasons[0]);
             console.log('setSelectedLeagueSeason', leagueSeasons[0]);
@@ -102,35 +97,28 @@ export const useViewModel = ({ navigation, route }: ILeaguesDetailsScreenProps) 
     const { onGoBack } = useAppNavigation();
     const { t } = useTranslation();
     const { getTranslationText } = useTranslationText();
-    const { leagueId }: any = route.params;
-    const { data: leagueSeasonData } = useLeagueSeasons(leagueId);
     const viewState = useViewState();
     const {
         years,
         setYears,
         allLeagueSeasons,
         setAllLeagueSeasons,
-        openModalYear,
         setOpenModalYear,
         selectedLeagueSeason,
-        setSelectedLeagueSeason,
+
         selectCycle,
         setSelectCycle,
         selectRound,
         setSelectRound,
-        galleries,
+
         setGalleries,
-        highlights,
+
         setHightlights,
         league,
-        setLeague,
     } = viewState;
     const { getLeagueById, getLeagueSeasonsData, dispatch } = useViewCallback(route, viewState);
 
     const handleSelectedYear = (item: any) => {
-        // viewState.setSelectedLeagueSeason(
-        //     viewState.allLeagueSeasons.find(season => season.name === item.content)
-        // );
         getLeagueSeasonsData(item.id);
         setOpenModalYear(false);
     };
@@ -166,10 +154,6 @@ export const useViewModel = ({ navigation, route }: ILeaguesDetailsScreenProps) 
                 };
             })
         );
-        // const cycles: Cycle[] = viewState.selectedLeagueSeason?.cycles || [];
-        // // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-        // cycles[0] ? viewState.setSelectCycle(cycles[0]) : null;
-
         const currentGalleries = selectedLeagueSeason?.gallery || [];
         if (currentGalleries.length) {
             setGalleries(currentGalleries);
@@ -198,9 +182,9 @@ export const useViewModel = ({ navigation, route }: ILeaguesDetailsScreenProps) 
             let tempSelectedCycle = cycles[0];
             const checkDate = moment().add(3, 'days');
             let foundCycle = false;
-            for (let i = cycles.length-1; i >= 0 && !foundCycle; i--) {
+            for (let i = cycles.length - 1; i >= 0 && !foundCycle; i--) {
                 let cyclesStartDate = moment('2023-01-01', 'YYYY-MM-DD');
-                if (cycles[i].start_date != null && cycles[i].start_date != ""){
+                if (cycles[i].start_date != null && cycles[i].start_date != '') {
                     cyclesStartDate = moment(cycles[i].start_date, 'YYYY-MM-DD');
                 }
                 if (cyclesStartDate.isBefore(checkDate)) {
@@ -210,7 +194,6 @@ export const useViewModel = ({ navigation, route }: ILeaguesDetailsScreenProps) 
             }
 
             setSelectCycle(() => tempSelectedCycle);
-            // setSelectCycle(() => cycles[0]);
         } else {
             setSelectCycle(null);
         }
@@ -221,13 +204,12 @@ export const useViewModel = ({ navigation, route }: ILeaguesDetailsScreenProps) 
     useEffect(() => {
         const rounds = selectCycle?.rounds || [];
         if (rounds[0]) {
-            // setSelectRound(() => rounds[0]);
             let tempSelectedRound = rounds[0];
             const checkDate = moment().add(3, 'days');
             let foundRound = false;
-            for (let i = rounds.length-1; i >= 0 && !foundRound; i--) {
+            for (let i = rounds.length - 1; i >= 0 && !foundRound; i--) {
                 let roundStartDate = moment('2023-01-01', 'YYYY-MM-DD');
-                if (rounds[i].start_date != null && rounds[i].start_date != ""){
+                if (rounds[i].start_date != null && rounds[i].start_date != '') {
                     roundStartDate = moment(rounds[i].start_date, 'YYYY-MM-DD');
                 }
                 if (roundStartDate.isBefore(checkDate)) {
@@ -242,24 +224,6 @@ export const useViewModel = ({ navigation, route }: ILeaguesDetailsScreenProps) 
         }
     }, [selectCycle]);
     console.log('rounds', selectRound);
-
-    // useEffect(() => {
-    //     if (!leagueSeasonData) {
-    //         return;
-    //     }
-    //     const [error, res] = leagueSeasonData;
-    //     if (error) {
-    //         return;
-    //     }
-
-    //     const leagueSeasons = res.data.documents;
-
-    //     dispatch(setLeagueSeasons(leagueSeasons));
-    //     setAllLeagueSeasons(leagueSeasons);
-    //     if (leagueSeasons?.length) {
-    //         setSelectedLeagueSeason(leagueSeasons[0]);
-    //     }
-    // }, [leagueSeasonData]);
 
     return {
         t,
