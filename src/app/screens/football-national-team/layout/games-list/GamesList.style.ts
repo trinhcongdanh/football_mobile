@@ -17,11 +17,14 @@ const styles = StyleSheet.create({
         paddingVertical: getSize.m(4),
         marginHorizontal: getSize.m(10),
         paddingHorizontal: getSize.m(4),
+        height: I18nManager.isRTL ? 'auto' : getSize.m(70),
     },
     button_option_dark: {
         paddingHorizontal: getSize.m(20),
         paddingVertical: getSize.m(10),
         borderRadius: getSize.m(30),
+        height: I18nManager.isRTL ? 'auto' : '100%',
+        justifyContent: 'center',
         flex: I18nManager.isRTL ? 0 : 1,
     },
     text_option: {

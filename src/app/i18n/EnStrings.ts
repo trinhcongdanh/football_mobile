@@ -1248,7 +1248,7 @@ const resources = {
                     title: 'List of games',
                     home_away: 'Home / Away',
                     house: 'House',
-                    outside: 'Outsidess',
+                    outside: 'Away',
                     see_all_games: 'All campaigns',
                 },
             },
