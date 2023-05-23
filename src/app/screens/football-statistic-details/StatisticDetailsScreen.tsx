@@ -88,7 +88,7 @@ export const StatisticDetailsScreen = ({ navigation, route }: IStatisticDetailsS
                                     </Text>
                                 </View>
 
-                                <View style={{ width: getSize.m(40) }}>
+                                <View style={{ width: getSize.m(44), right: getSize.m(4) }}>
                                     <Text
                                         style={[
                                             appStyles.statistics_header,
@@ -207,7 +207,7 @@ export const StatisticDetailsScreen = ({ navigation, route }: IStatisticDetailsS
                                             </View>
                                             <View
                                                 style={{
-                                                    width: getSize.m(40),
+                                                    width: getSize.m(44),
                                                 }}
                                             >
                                                 {ticket === 'yellow' ? (

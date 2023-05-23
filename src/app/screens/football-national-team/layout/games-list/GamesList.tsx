@@ -54,7 +54,7 @@ export const GamesList = ({ topTeam }: IGamesListProps) => {
                     fontSize={getSize.m(11)}
                     width={getSize.m(130)}
                 />
-                <View style={[appStyles.flex_row_space, styles.option]}>
+                <View style={[appStyles.flex_row_space_center, styles.option]}>
                     {options.map((option: string, index: number) => {
                         return (
                             <TouchableOpacity

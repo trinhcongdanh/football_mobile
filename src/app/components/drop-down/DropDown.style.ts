@@ -41,6 +41,7 @@ export const styles = StyleSheet.create({
         borderBottomWidth: getSize.m(1),
         borderColor: appColors.soft_grey,
         borderStyle: 'dashed',
+        width: '100%',
     },
     label_drop_down: {
         fontFamily: AppFonts.bold,
