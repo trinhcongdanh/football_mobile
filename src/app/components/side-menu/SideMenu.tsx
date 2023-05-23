@@ -13,6 +13,7 @@ import { styles } from './SideMenu.style';
 import { useViewModel } from './SideMenu.viewModel';
 import { ChangeLanguage } from '@football/app/components/change-language/ChangeLanguage';
 import DeviceInfo from 'react-native-device-info';
+import { renderAvatar } from '@football/core/models/AvatarType.enum';
 
 export const SideMenu = ({ navigation }: ISideMenuProps) => {
     const {
@@ -27,6 +28,7 @@ export const SideMenu = ({ navigation }: ISideMenuProps) => {
         resetNotifications,
         isGuestWithFavourite,
         notifications,
+        getProfile,
     } = useViewModel({
         navigation,
     });
@@ -52,7 +54,7 @@ export const SideMenu = ({ navigation }: ISideMenuProps) => {
                     <View style={[appStyles.flex_row_align_center, styles.side_menu_info]}>
                         <View style={styles.side_menu_avt_container}>
                             <FastImage
-                                source={avt}
+                                source={renderAvatar(getProfile)}
                                 style={styles.side_menu_avt}
                                 resizeMode={FastImage.resizeMode.contain}
                             />
