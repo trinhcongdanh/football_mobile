@@ -9,7 +9,7 @@ import leaguesService from '@football/core/services/League.service';
 
 import LeagueTypeService, { useLeagueTypes } from '@football/core/services/LeagueType.service';
 import _ from 'lodash';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ILeaguesScreenProps } from './LeaguesScreen.type';
 
@@ -129,8 +129,8 @@ export const useViewModel = ({ navigation, route }: ILeaguesScreenProps) => {
                     textHe: e.name_he,
                     textEn: e.name_en,
                 })
-                    .split(' ')
-                    .join(''),
+                    ?.split(' ')
+                    ?.join(''),
                 renderComponent: (props: INavigationProps) => (
                     <LeagueItemScreen {...props} typeId={e._id} />
                 ),

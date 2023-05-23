@@ -1,11 +1,11 @@
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
-import { IItem12Props } from '@football/app/screens/football-home/layouts/Video/Video.type';
+import { IVideoProps } from '@football/app/screens/football-home/layouts/Video/Video.type';
 import { ScreenName } from '@football/app/utils/constants/enum';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-export const useViewModel = ({ videos }: IItem12Props) => {
-    const { navigate, goBack, replace } = useAppNavigator();
+export const useViewModel = ({ videos }: IVideoProps) => {
+    const { replace } = useAppNavigator();
     const { t } = useTranslation();
     const pages = Array(videos.length).fill('');
     const [activeIndexNumber, setActiveIndexNumber] = useState(Number);

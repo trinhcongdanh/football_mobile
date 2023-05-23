@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'src/store/store';
 import { addVideo, setShowVideo } from 'src/store/video/Video.slice';
 import { IVideoScreenProps } from './VideoScreen.type';
+import { GeneralVodModel } from '@football/core/models/GeneralVodResponse';
 
 export const useViewModel = ({ navigation, route }: IVideoScreenProps) => {
     const { navigate, goBack, openDrawer } = useAppNavigator();

@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
-import { Alert } from 'react-native';
 
 interface IAxiosInstance {
     get<T = any>(url: string, config?: AxiosRequestConfig): Promise<Result<T>>;

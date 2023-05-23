@@ -35,7 +35,6 @@ export enum ScreenName {
     GroupPagePage = 'GroupPagePage',
     TeamStaffPage = 'TeamStaffPage',
     StatisticsGroupPage = 'StatisticsGroupPage',
-    GameCompositionPage = 'GameCompositionPage',
     MagazinePage = 'MagazinePage',
     PlayGroundPage = 'PlayGroundPage',
     DiscussionPage = 'DiscussionPage',

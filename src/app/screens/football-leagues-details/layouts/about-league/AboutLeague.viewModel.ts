@@ -3,6 +3,7 @@ import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { IAboutLeagueProps } from './AboutLeague.type';
+import { Highlights } from '@football/core/models/LeagueSeasonModelResponse';
 
 export const useViewModel = ({ highlights }: IAboutLeagueProps) => {
     const { t } = useTranslation();
@@ -10,6 +11,10 @@ export const useViewModel = ({ highlights }: IAboutLeagueProps) => {
 
     const aboutGames = highlights
         ? Object.keys(highlights).map((key, index) => {
+              const ageGroupKey = getTranslationText({
+                  textHe: 'age_group_he',
+                  textEn: 'age_group_en',
+              }) as keyof Highlights;
               switch (key) {
                   case 'season_name':
                       return {
@@ -35,10 +40,7 @@ export const useViewModel = ({ highlights }: IAboutLeagueProps) => {
                           value: highlights[key],
                       };
 
-                  case getTranslationText({
-                      textHe: 'age_group_he',
-                      textEn: 'age_group_en',
-                  }):
+                  case ageGroupKey:
                       return {
                           id: index,
                           icon: AppImages.img_user,

@@ -16,7 +16,7 @@ import IconEntypo from 'react-native-vector-icons/Entypo';
 import IconFeather from 'react-native-vector-icons/Feather';
 
 export const Video = ({ videos, handlePlayVideo }: IVideoProps) => {
-    const { t, activeIndexNumber, setActiveIndexNumber, dots, onClickAllVideo } = useViewModel({
+    const { t, onClickAllVideo } = useViewModel({
         videos,
         handlePlayVideo,
     });

@@ -1,11 +1,10 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Alert, BackHandler, Keyboard } from 'react-native';
+import { BackHandler } from 'react-native';
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
-import { AuthData, OfflineData, ScreenName } from '@football/app/utils/constants/enum';
+import { AuthData, ScreenName } from '@football/app/utils/constants/enum';
 import { IVerifyScreenProps } from './VerifyScreen.type';
 import { useDispatch, useSelector } from 'react-redux';
-import qs from 'qs';
 import {
     clearPhoneNumber,
     loginNumberPhoneUser,
@@ -14,9 +13,8 @@ import {
 import { ACTION, TOKEN } from '@football/core/api/auth/config';
 import { isVerifyOtp, otpUser } from 'src/store/user/OTP.slice';
 import { useIsFocused, useRoute } from '@react-navigation/native';
-import { isVerify, loginUser } from 'src/store/user/Login.slice';
-import { RootState } from 'src/store/store';
 import { statusSetProfile } from 'src/store/user/setProfile.slice';
+import { serializeParams } from '@football/app/utils/functions/quick-functions';
 
 export const useViewModel = ({ navigation, route }: IVerifyScreenProps) => {
     const { t } = useTranslation();
@@ -36,12 +34,6 @@ export const useViewModel = ({ navigation, route }: IVerifyScreenProps) => {
         return true;
     };
 
-    // const handleBackButtonClick = () => {
-    //     dispatch(clearPhoneNumber([]));
-    //     goBack();
-    //     return true;
-    // };
-
     useEffect(() => {
         BackHandler.addEventListener('hardwareBackPress', onGoBack);
         return () => {
@@ -49,54 +41,11 @@ export const useViewModel = ({ navigation, route }: IVerifyScreenProps) => {
         };
     }, []);
 
-    // const inputs = Array(4).fill('');
-
-    // const [OTP, setOTP] = useState<any>({ 0: '', 1: '', 2: '', 3: '' });
-
-    // const input = useRef<any>();
-
-    // let newInputIndex = 0;
-
-    // const [nextInputIndex, setNextInputIndex] = useState(0);
-
-    // const handleChangeText = (text: string, index: number): void => {
-    //     const newOTP = { ...OTP };
-    //     newOTP[index] = text;
-    //     setOTP(newOTP);
-
-    //     const lastInputIndex = inputs.length - 1;
-
-    //     if (!text) {
-    //         newInputIndex = index === 0 ? 0 : index - 1;
-    //     } else {
-    //         newInputIndex = index === lastInputIndex ? lastInputIndex : index + 1;
-    //         if (index === lastInputIndex) {
-    //             Keyboard.dismiss();
-    //         }
-    //     }
-
-    //     setNextInputIndex(newInputIndex);
-    // };
-
-    // useEffect(() => {
-    //     input.current?.focus();
-    // }, [nextInputIndex]);
-
-    const [confirm, setConfirm] = useState<any>(null);
-
     const dispatch = useDispatch<any>();
-    function serializeParams(obj: any) {
-        const a = qs.stringify(obj, { encode: false, arrayFormat: 'brackets' });
-        console.log(a);
-        return a;
-    }
     const guestId = useSelector((state: any) => state.guestId.guestId);
-    const profile = useSelector((state: any) => state.createProfile.profile);
     const login = useSelector((state: any) => state.login);
     const numberPhone = useSelector((state: any) => state.numberPhoneUser);
-    const profileUser = useSelector((state: RootState) => state.setProfile);
     const otp = useSelector((state: any) => state.otpUser);
-    const routes = useRoute();
     const { number }: any = route.params;
 
     const [codeOtp, setCodeOtp] = useState('');
@@ -105,14 +54,8 @@ export const useViewModel = ({ navigation, route }: IVerifyScreenProps) => {
         setCodeOtp(value);
     }, []);
 
-    // const onFullFill = async (value: string) => {
-    //     console.log('Full', value);
-    // };
-
     const reSendVerify = (): void => {
-        // setTimeSend(true);
-        // console.log(routes.params!.previous_screen);
-        if (routes.params!.previous_screen === ScreenName.RegisterPage) {
+        if (route.params!.previous_screen === ScreenName.RegisterPage) {
             dispatch(
                 registerNumberPhoneUser(
                     serializeParams({
@@ -123,14 +66,13 @@ export const useViewModel = ({ navigation, route }: IVerifyScreenProps) => {
                         guest_id: login.login.user.item_id,
                         item: {
                             sms_phone: encodeURIComponent(number),
-                            // sms_phone: ''.
                         },
                     })
                 )
             );
             dispatch(isVerifyOtp(false));
             handleError('', 'verifyError');
-        } else if (routes.params!.previous_screen === ScreenName.ConnectPage) {
+        } else if (route.params!.previous_screen === ScreenName.ConnectPage) {
             dispatch(
                 loginNumberPhoneUser(
                     serializeParams({
@@ -148,12 +90,8 @@ export const useViewModel = ({ navigation, route }: IVerifyScreenProps) => {
 
     const onFullFill = async (value: string) => {
         handleError('', 'verifyError');
-        // let codeOtp = '';
-        // Object.values(OTP).forEach(code => {
-        //     codeOtp += code;
-        // });
         if (value.length === 4) {
-            if (routes.params!.previous_screen === ScreenName.RegisterPage) {
+            if (route.params!.previous_screen === ScreenName.RegisterPage) {
                 console.log('danh');
                 dispatch(
                     otpUser(
@@ -171,7 +109,7 @@ export const useViewModel = ({ navigation, route }: IVerifyScreenProps) => {
                     )
                 );
                 dispatch(isVerifyOtp(true));
-            } else if (routes.params!.previous_screen === ScreenName.ConnectPage) {
+            } else if (route.params!.previous_screen === ScreenName.ConnectPage) {
                 dispatch(
                     otpUser(
                         serializeParams({

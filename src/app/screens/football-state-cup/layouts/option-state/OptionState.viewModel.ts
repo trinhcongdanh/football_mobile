@@ -53,7 +53,7 @@ export const useViewModel = () => {
         },
     ];
 
-    const onNavigateGame = gameId => {
+    const onNavigateGame = (gameId: string) => {
         navigate(ScreenName.MatchPage, {
             gameId,
         });

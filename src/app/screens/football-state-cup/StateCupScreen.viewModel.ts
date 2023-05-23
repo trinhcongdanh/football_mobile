@@ -119,8 +119,8 @@ export const useViewModel = ({ route }: IStateCupScreenProps) => {
     };
 
     useMount(() => {
-        if (route?.params?.cupId) {
-            console.log('route?.params?.cupId', route?.params?.cupId);
+        if (route?.params?.cup) {
+            console.log('route?.params?.cupId', route?.params?.cup);
             getCupData();
         }
     });
@@ -155,9 +155,9 @@ export const useViewModel = ({ route }: IStateCupScreenProps) => {
             let tempSelectedCycle = cycles[0];
             const checkDate = moment().add(3, 'days');
             let foundCycle = false;
-            for (let i = cycles.length-1; i >= 0 && !foundCycle; i--) {
+            for (let i = cycles.length - 1; i >= 0 && !foundCycle; i--) {
                 let cyclesStartDate = moment('2023-01-01', 'YYYY-MM-DD');
-                if (cycles[i].start_date != null && cycles[i].start_date != ""){
+                if (cycles[i].start_date != null && cycles[i].start_date != '') {
                     cyclesStartDate = moment(cycles[i].start_date, 'YYYY-MM-DD');
                 }
                 if (cyclesStartDate.isBefore(checkDate)) {
@@ -180,9 +180,9 @@ export const useViewModel = ({ route }: IStateCupScreenProps) => {
             let tempSelectedRound = rounds[0];
             const checkDate = moment().add(3, 'days');
             let foundRound = false;
-            for (let i = rounds.length-1; i >= 0 && !foundRound; i--) {
+            for (let i = rounds.length - 1; i >= 0 && !foundRound; i--) {
                 let roundStartDate = moment('2023-01-01', 'YYYY-MM-DD');
-                if (rounds[i].start_date != null && rounds[i].start_date != ""){
+                if (rounds[i].start_date != null && rounds[i].start_date != '') {
                     roundStartDate = moment(rounds[i].start_date, 'YYYY-MM-DD');
                 }
                 if (roundStartDate.isBefore(checkDate)) {

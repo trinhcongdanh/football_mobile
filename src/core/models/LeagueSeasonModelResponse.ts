@@ -1,7 +1,7 @@
 import { AxiosResponse } from 'axios';
 
 export interface LeagueSeasonModel {
-    _id: Id;
+    _id: string;
     name: string;
     league_id: string;
     league_season_stats_id: string;
@@ -35,6 +35,7 @@ export interface Cycle {
     cycle_name_he: string;
     cycle_name_en: string;
     rounds: Round[];
+    start_date: string;
 }
 
 export interface Round {
@@ -43,6 +44,7 @@ export interface Round {
     leader_board: Leaderboard[];
     games: Game[];
     statistics: Statistics;
+    start_date: string;
 }
 
 export interface Statistics {
@@ -97,9 +99,9 @@ export interface Leaderboard {
     score: number;
 }
 
-export interface Id {
-    $oid: string;
-}
+// export interface Id {
+//     $oid: string;
+// }
 
 export type LeagueSeasonModelResponse = AxiosResponse<{
     documents: LeagueSeasonModel[];

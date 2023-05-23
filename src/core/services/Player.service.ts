@@ -12,6 +12,7 @@ class PlayerService extends MongoDBService {
         const filter = {
             team: { $exists: true, $ne: null },
             show_in_search: { $exists: true, $ne: false },
+            name_en: {},
         };
         if (!I18nManager.isRTL) {
             filter.name_en = { $ne: ' ' };
@@ -29,6 +30,7 @@ class PlayerService extends MongoDBService {
             search_terms: { $regex: `.*${searchText}.*`, $options: 'i' },
             team: { $exists: true, $ne: null },
             show_in_search: { $exists: true, $ne: false },
+            name_en: {},
         };
         if (!I18nManager.isRTL) {
             filter.name_en = { $ne: ' ' };

@@ -69,7 +69,7 @@ class MongoDBService {
 
     search<T = any>(searchText: string, searchProp?: string): Promise<Result<T>> {
         const searchProperty = searchProp || 'search_terms';
-        const searchQuery = {};
+        const searchQuery: { [key: string]: any } = {};
         searchQuery[`${searchProperty}`] = { $regex: `.*${searchText}.*`, $options: 'i' };
         return this.httpClient.post('/find', {
             ...this.dbConfig,
