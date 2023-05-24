@@ -35,7 +35,7 @@ import {
 const useViewState = () => {
     const { t } = useTranslation();
     const dispatch = useDispatch<any>();
-    const { navigate, goBack } = useAppNavigator();
+    const { navigate, goBack, pop } = useAppNavigator();
     const [onCheck, setonCheck] = useState(false);
 
     const [selectedTeams, setSelectedTeams] = useState<TeamModel[]>(
@@ -92,6 +92,7 @@ const useViewState = () => {
         setSelectedPlayers,
         selectedTopTeams,
         setSelectedTopTeams,
+        pop,
     };
 };
 
@@ -113,33 +114,34 @@ const useEventHandler = (state: any, route: any) => {
         guestId,
         setScreenName,
         setSetProfile,
+        pop,
     } = state;
     const editFav = route?.params?.editFav;
 
     const onGoBack = () => {
-        if (editFav) {
-            navigate(ScreenName.FavTopTeamPage);
-        } else {
-            goBack();
-        }
+        // if (editFav) {
+        //     navigate(ScreenName.FavTopTeamPage);
+        // } else {
+        goBack();
+        // }
         return true;
     };
 
     const backFavTeam = () => {
-        dispatch(resetFavTeam([]));
+        pop();
         navigate(ScreenName.FavTeamPage, {
             previous_screen: ScreenName.FavSummaryPage,
         });
     };
 
     const backFavPlayer = () => {
-        dispatch(resetFavPlayer([]));
+        pop();
         navigate(ScreenName.FavPlayerPage, {
             previous_screen: ScreenName.FavSummaryPage,
         });
     };
     const backFavTopTeam = () => {
-        dispatch(resetTopTeams([]));
+        pop();
         navigate(ScreenName.FavTopTeamPage, {
             previous_screen: ScreenName.FavSummaryPage,
         });

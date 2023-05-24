@@ -94,10 +94,9 @@ const useViewCallback = (route: any, viewState: any) => {
         sortByName.name_en = 1;
     }
     const dispatch = useDispatch<any>();
-    const { navigate, goBack } = useAppNavigator();
+    const { navigate, goBack, pop } = useAppNavigator();
 
     const onGoBack = () => {
-        dispatch(resetFavTeam([]));
         goBack();
         return true;
     };
@@ -110,45 +109,15 @@ const useViewCallback = (route: any, viewState: any) => {
     }, []);
 
     const { params } = route;
-    const isFocused = useIsFocused();
-    const navigation = useNavigation();
 
     const onGoSkip = () => {
         if (params?.previous_screen === ScreenName.SettingsPage) {
             goBack();
+        } else if (params?.previous_screen === ScreenName.FavSummaryPage) {
+            goBack();
         } else {
-            // clearFavoriteData(dispatch);
             dispatch(resetSelectedFavTeam([]));
             navigate(ScreenName.FavSummaryPage);
-        }
-    };
-
-    const handleContinue = () => {
-        if (params?.previous_screen === ScreenName.FavSummaryPage) {
-            navigate(ScreenName.FavSummaryPage, {
-                editFav: true,
-            });
-        } else if (params?.previous_screen === ScreenName.SettingsPage) {
-            // navigate(ScreenName.SettingsPage, {
-            //     previous_screen: ScreenName.FavTeamPage,
-            //     position: params.position,
-            //     scrollBottom: false,
-            //     selectedPlayers: true,
-            //     selectedTeams: true,
-            //     selectedTopTeams: true,
-            // });
-            route.params.handleAfterSelectTeam(selectedFavTeams);
-            goBack();
-            // dispatch(setSettingFavTeam(selectedFavTeams));
-            // pop(ScreenName.FavTeamPage);
-        } else if (params?.previous_screen === ScreenName.HomePage) {
-            navigate(ScreenName.FavPlayerPage, {
-                previous_screen: ScreenName.HomePage,
-            });
-        } else {
-            navigate(ScreenName.FavPlayerPage);
-            dispatch(resetSelectedFavPlayer([]));
-            dispatch(resetFavPlayer([]));
         }
     };
 
@@ -163,12 +132,40 @@ const useViewCallback = (route: any, viewState: any) => {
             newSelectedFavTeams = newSelectedFavTeams.filter(
                 (selectedFavTeam: TeamModel) => selectedFavTeam._id !== team._id
             );
-            dispatch(pushFavTeam(team));
         } else if (newSelectedFavTeams.length < MAX_FAVORITES_TEAM) {
             newSelectedFavTeams.push(team);
-            dispatch(pushFavTeam(team));
         }
         setSelectedFavTeams(newSelectedFavTeams);
+    };
+
+    const handleContinue = () => {
+        if (params?.previous_screen === ScreenName.FavSummaryPage) {
+            pop();
+            navigate(ScreenName.FavSummaryPage, {
+                editFav: true,
+            });
+            dispatch(resetSelectedFavTeam([]));
+            selectedFavTeams.map((team: TeamModel) => {
+                dispatch(pushFavTeam(team));
+            });
+        } else if (params?.previous_screen === ScreenName.SettingsPage) {
+            dispatch(resetSelectedFavTeam([]));
+            selectedFavTeams.map((team: TeamModel) => {
+                dispatch(pushFavTeam(team));
+            });
+            route.params.handleAfterSelectTeam(selectedFavTeams);
+            goBack();
+        } else if (params?.previous_screen === ScreenName.HomePage) {
+            navigate(ScreenName.FavPlayerPage, {
+                previous_screen: ScreenName.HomePage,
+            });
+        } else {
+            navigate(ScreenName.FavPlayerPage);
+            selectedFavTeams.map((team: TeamModel) => {
+                dispatch(pushFavTeam(team));
+            });
+            dispatch(resetSelectedFavPlayer([]));
+        }
     };
 
     const searchTeams = useCallback(async (searchText: string) => {

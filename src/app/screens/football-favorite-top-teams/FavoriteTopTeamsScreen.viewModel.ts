@@ -31,14 +31,12 @@ const useViewState = (route: any) => {
     const { navigate, goBack, replace, pop } = useAppNavigator();
     const getProfile = useSelector((state: RootState) => state.getProfile);
     const selectedFavTopTeamsMap = useSelector(selectedFavTopTeamsAsMapSelector);
-    const selectedFavTopTeams = useSelector(
-        (state: RootState) => state.favTopTeams.selectedTopTeams
-    );
+    const selectedTopTeams = useSelector((state: RootState) => state.favTopTeams.selectedTopTeams);
     const array = selectedFavTopTeamsMap.size
         ? Array.from(selectedFavTopTeamsMap, ([name, value]) => ({ ...value }))
-        : selectedFavTopTeams;
+        : selectedTopTeams;
 
-    const [favSelectedTopTeam, setFavSelectedTopTeam] = useState<TopTeamModel[]>(array);
+    const [selectedFavTopTeams, setSelectedFavTopTeams] = useState<TopTeamModel[]>(array);
     const [topTeams, setTopTeams] = useState<TopTeamModel[]>();
 
     const login = useSelector((state: RootState) => state.login);
@@ -54,9 +52,9 @@ const useViewState = (route: any) => {
         goBack,
         getProfile,
         selectedFavTopTeamsMap,
+        selectedTopTeams,
         selectedFavTopTeams,
-        favSelectedTopTeam,
-        setFavSelectedTopTeam,
+        setSelectedFavTopTeams,
         login,
         profile,
         guestId,
@@ -113,7 +111,7 @@ const useEventHandler = (state: any, callback: any, navigation: any, route: any)
         selectedFavTopTeams,
         profile,
         previous_screen,
-        setFavSelectedTopTeam,
+        setSelectedFavTopTeams,
         replace,
         pop,
     } = state;
@@ -127,18 +125,14 @@ const useEventHandler = (state: any, callback: any, navigation: any, route: any)
             newSelectedFavTopTeams = selectedFavTopTeams.filter(
                 (selectedFavTeam: TopTeamModel) => selectedFavTeam._id !== topTeam._id
             );
-            dispatch(pushFavTopTeam(topTeam));
         } else if (newSelectedFavTopTeams.length < MAX_FAVORITES_TOPTEAM) {
             newSelectedFavTopTeams.push(topTeam);
-            dispatch(pushFavTopTeam(topTeam));
         }
 
-        setFavSelectedTopTeam(newSelectedFavTopTeams);
+        setSelectedFavTopTeams(newSelectedFavTopTeams);
     };
 
     const onGoBack = () => {
-        dispatch(resetTopTeams([]));
-        dispatch(resetFavPlayer([]));
         goBack();
         return true;
     };
@@ -146,15 +140,20 @@ const useEventHandler = (state: any, callback: any, navigation: any, route: any)
     const onGoSkip = () => {
         if (previous_screen === ScreenName.SettingsPage) {
             goBack();
+        } else if (previous_screen === ScreenName.FavSummaryPage) {
+            goBack();
         } else {
             dispatch(resetSelectedFavTopTeams([]));
-            dispatch(resetTopTeams([]));
             navigate(ScreenName.FavSummaryPage);
         }
     };
 
     const handleContinue = () => {
         if (previous_screen === ScreenName.SettingsPage) {
+            dispatch(resetSelectedFavTopTeams([]));
+            selectedFavTopTeams.map((topTeam: TopTeamModel) => {
+                dispatch(pushFavTopTeam(topTeam));
+            });
             route.params?.handleAfterSelectTopTeams(selectedFavTopTeams);
             goBack();
         } else if (previous_screen === ScreenName.HomePage) {
@@ -170,11 +169,19 @@ const useEventHandler = (state: any, callback: any, navigation: any, route: any)
                 });
             }
         } else if (previous_screen === ScreenName.FavSummaryPage) {
+            pop();
             navigate(ScreenName.FavSummaryPage, {
                 editFav: true,
             });
+            dispatch(resetSelectedFavTopTeams([]));
+            selectedFavTopTeams.map((topTeam: TopTeamModel) => {
+                dispatch(pushFavTopTeam(topTeam));
+            });
         } else {
             navigate(ScreenName.FavSummaryPage);
+            selectedFavTopTeams.map((topTeam: TopTeamModel) => {
+                dispatch(pushFavTopTeam(topTeam));
+            });
         }
     };
 
@@ -192,15 +199,7 @@ const useEventHandler = (state: any, callback: any, navigation: any, route: any)
  * @param callback
  */
 const useEffectHandler = (state: any, callback: any) => {
-    const { dispatch, selectedFavTopTeams, favSelectedTopTeam } = state;
     const { onGoBack } = callback;
-    useEffect(() => {
-        if (isEmpty(selectedFavTopTeams)) {
-            favSelectedTopTeam.map((item: TopTeamModel) => {
-                dispatch(pushFavTopTeam(item));
-            });
-        }
-    }, [favSelectedTopTeam]);
     useEffect(() => {
         BackHandler.addEventListener('hardwareBackPress', onGoBack);
         return () => {

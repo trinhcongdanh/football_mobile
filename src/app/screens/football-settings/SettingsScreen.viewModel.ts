@@ -530,7 +530,6 @@ const useEventHandler = (state: any, route: any) => {
      * Navigate to FavoriteTeam screen
      */
     const backFavTeam = () => {
-        dispatch(resetFavTeam([]));
         dispatch(
             addSelectedFavTeam(selectedTeams.filter((selectedTeam: TopTeamModel) => selectedTeam))
         );
@@ -546,7 +545,6 @@ const useEventHandler = (state: any, route: any) => {
      *  Navigate to FavoritePlayer screen
      */
     const backFavPlayer = () => {
-        dispatch(resetFavPlayer([]));
         dispatch(addSelectedFavPlayer(selectedPlayers.filter((player: PlayerModel) => player)));
         navigate(ScreenName.FavPlayerPage, {
             previous_screen: ScreenName.SettingsPage,
@@ -560,7 +558,6 @@ const useEventHandler = (state: any, route: any) => {
      * Navigate to FavoriteTopTeam screen
      */
     const backFavTopTeam = () => {
-        dispatch(resetTopTeams([]));
         dispatch(
             addSelectedFavTopTeams(
                 selectedTopTeams.filter((selectedTeam: TeamModel) => selectedTeam)
