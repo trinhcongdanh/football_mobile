@@ -136,6 +136,7 @@ const useEventHandler = (state: any, callback: any, navigation: any, route: any)
         if (previous_screen === ScreenName.SettingsPage) {
             goBack();
         } else if (previous_screen === ScreenName.FavSummaryPage) {
+            pop();
             navigate(ScreenName.FavSummaryPage);
         } else {
             goBack();
@@ -147,6 +148,7 @@ const useEventHandler = (state: any, callback: any, navigation: any, route: any)
         if (previous_screen === ScreenName.SettingsPage) {
             goBack();
         } else if (previous_screen === ScreenName.FavSummaryPage) {
+            pop();
             navigate(ScreenName.FavSummaryPage);
         } else {
             dispatch(resetSelectedFavTopTeams([]));
