@@ -40,14 +40,18 @@ export const Replace = ({ name_up, name_down, avt_up, avt_down, minute, team }: 
                     />
                 </View>
                 <View style={[appStyles.flex_row_align_center, { marginLeft: getSize.m(28) }]}>
-                    <Text style={styles.name_player}>{name_up}</Text>
+                    <View style={{ width: getSize.m(50) }}>
+                        <Text style={styles.name_player}>{name_up}</Text>
+                    </View>
                     <Icon
                         name={I18nManager.isRTL ? 'caretleft' : 'caretright'}
                         size={12}
                         color={appColors.blue_light}
                         style={styles.ic_arrow}
                     />
-                    <Text style={styles.name_player}>{name_down}</Text>
+                    <View style={{ width: getSize.m(50) }}>
+                        <Text style={styles.name_player}>{name_down}</Text>
+                    </View>
                 </View>
             </View>
             <View style={{ marginLeft: getSize.m(7) }}>

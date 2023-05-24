@@ -6,7 +6,7 @@ import { I18nManager, StyleSheet } from 'react-native';
 export const styles = StyleSheet.create({
     ic_circle: {
         backgroundColor: appColors.blue_light,
-        padding: getSize.m(7),
+        padding: getSize.m(10),
         borderRadius: getSize.m(25),
     },
     card_view_container: {

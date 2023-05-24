@@ -29,7 +29,11 @@ export const Goal = ({ name, avt, minute, team }: IGoalProps) => {
                     rounded
                     containerStyle={styles.avt}
                 />
-                <Text style={styles.name_player}>{name}</Text>
+                <View style={{ width: getSize.m(200) }}>
+                    <Text numberOfLines={2} style={styles.name_player}>
+                        {name}
+                    </Text>
+                </View>
             </View>
             <View style={{ marginLeft: getSize.m(7) }}>
                 <Text style={styles.team}>{team}</Text>
