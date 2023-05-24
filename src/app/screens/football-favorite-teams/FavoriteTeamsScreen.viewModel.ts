@@ -100,6 +100,7 @@ const useViewCallback = (route: any, viewState: any) => {
         if (params?.previous_screen === ScreenName.SettingsPage) {
             goBack();
         } else if (params?.previous_screen === ScreenName.FavSummaryPage) {
+            pop();
             navigate(ScreenName.FavSummaryPage);
         } else {
             goBack();
@@ -120,6 +121,7 @@ const useViewCallback = (route: any, viewState: any) => {
         if (params?.previous_screen === ScreenName.SettingsPage) {
             goBack();
         } else if (params?.previous_screen === ScreenName.FavSummaryPage) {
+            pop();
             navigate(ScreenName.FavSummaryPage);
         } else {
             dispatch(resetSelectedFavTeam([]));

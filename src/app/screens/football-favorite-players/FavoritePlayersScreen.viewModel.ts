@@ -26,7 +26,7 @@ import { loginUser } from 'src/store/user/Login.slice';
 import { IFavoritePlayerScreenProps } from './FavoritePlayersScreen.type';
 import sortBy from 'lodash/sortBy';
 import _ from 'lodash';
-import { resetTopTeams } from 'src/store/FavTopTeam.slice';
+import { resetSelectedFavTopTeams, resetTopTeams } from 'src/store/FavTopTeam.slice';
 import { MAX_FAVORITES_PLAYER } from '@football/core/api/configs/config';
 
 const useViewState = () => {
@@ -127,6 +127,7 @@ const useEventHandler = (state: any, route: any) => {
         if (params?.previous_screen === ScreenName.SettingsPage) {
             goBack();
         } else if (params?.previous_screen === ScreenName.FavSummaryPage) {
+            pop();
             navigate(ScreenName.FavSummaryPage);
         } else {
             goBack();
@@ -141,6 +142,7 @@ const useEventHandler = (state: any, route: any) => {
         if (params?.previous_screen === ScreenName.SettingsPage) {
             goBack();
         } else if (params?.previous_screen === ScreenName.FavSummaryPage) {
+            pop();
             navigate(ScreenName.FavSummaryPage);
         } else {
             dispatch(resetSelectedFavPlayer([]));
@@ -179,6 +181,7 @@ const useEventHandler = (state: any, route: any) => {
             selectedFavPlayers.map((player: PlayerModel) => {
                 dispatch(pushFavPlayer(player));
             });
+            dispatch(resetSelectedFavTopTeams([]));
         }
     };
 
