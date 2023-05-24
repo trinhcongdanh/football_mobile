@@ -97,7 +97,13 @@ const useViewCallback = (route: any, viewState: any) => {
     const { navigate, goBack, pop } = useAppNavigator();
 
     const onGoBack = () => {
-        goBack();
+        if (params?.previous_screen === ScreenName.SettingsPage) {
+            goBack();
+        } else if (params?.previous_screen === ScreenName.FavSummaryPage) {
+            navigate(ScreenName.FavSummaryPage);
+        } else {
+            goBack();
+        }
         return true;
     };
 
@@ -114,7 +120,7 @@ const useViewCallback = (route: any, viewState: any) => {
         if (params?.previous_screen === ScreenName.SettingsPage) {
             goBack();
         } else if (params?.previous_screen === ScreenName.FavSummaryPage) {
-            goBack();
+            navigate(ScreenName.FavSummaryPage);
         } else {
             dispatch(resetSelectedFavTeam([]));
             navigate(ScreenName.FavSummaryPage);
@@ -161,6 +167,7 @@ const useViewCallback = (route: any, viewState: any) => {
             });
         } else {
             navigate(ScreenName.FavPlayerPage);
+            dispatch(resetSelectedFavTeam([]));
             selectedFavTeams.map((team: TeamModel) => {
                 dispatch(pushFavTeam(team));
             });
