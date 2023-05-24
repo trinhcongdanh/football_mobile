@@ -39,6 +39,7 @@ export const Statistics = ({ data }: IStatisticsProps) => {
                                 flexDirection: 'row',
                                 alignItems: 'flex-end',
                                 paddingHorizontal: getSize.m(10),
+                                marginTop: getSize.m(6.5),
                             }}
                         >
                             <View style={{ width: getSize.m(120) }}>
@@ -47,7 +48,7 @@ export const Statistics = ({ data }: IStatisticsProps) => {
                                 </Text>
                             </View>
                         </View>
-                        <View style={{ marginTop: getSize.m(14) }}>
+                        <View style={{ marginTop: getSize.m(7.5) }}>
                             {data?.map((item: Statistic, index) => {
                                 return (
                                     <TouchableOpacity
@@ -105,7 +106,7 @@ export const Statistics = ({ data }: IStatisticsProps) => {
                     <TouchableOpacity
                         style={{
                             position: 'absolute',
-                            top: getSize.m(10),
+                            top: getSize.m(24),
                             left: getSize.m(130),
                             transform: [{ rotate: I18nManager.isRTL ? '0deg' : '180deg' }],
                         }}
@@ -235,7 +236,7 @@ export const Statistics = ({ data }: IStatisticsProps) => {
                                     </Text>
                                 </View>
                             </View>
-                            <View style={{ marginTop: getSize.m(8) }}>
+                            <View style={{ marginTop: getSize.m(7.5) }}>
                                 {data.map((item: Statistic, index) => {
                                     return (
                                         <LinearGradient
@@ -397,7 +398,7 @@ export const Statistics = ({ data }: IStatisticsProps) => {
                     <TouchableOpacity
                         style={{
                             position: 'absolute',
-                            top: getSize.m(10),
+                            top: getSize.m(24),
                             right: getSize.m(2),
                             transform: [{ rotate: I18nManager.isRTL ? '0deg' : '180deg' }],
                         }}

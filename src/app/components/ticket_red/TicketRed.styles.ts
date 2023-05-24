@@ -30,6 +30,7 @@ export const styles = StyleSheet.create({
         fontSize: getSize.m(13),
         fontFamily: AppFonts.semibold,
         color: appColors.text_dark_blue,
+        textAlign: 'left',
     },
     team: {
         marginLeft: getSize.m(32),

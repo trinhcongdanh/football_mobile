@@ -38,7 +38,6 @@ export const styles = StyleSheet.create({
         fontSize: getSize.m(13),
         fontFamily: AppFonts.semibold,
         color: appColors.text_dark_blue,
-        width: getSize.m(50),
         textAlign: 'left',
     },
     team: {
