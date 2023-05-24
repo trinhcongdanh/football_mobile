@@ -124,7 +124,13 @@ const useEventHandler = (state: any, route: any) => {
      * Back to previous screen
      */
     const onGoBack = () => {
-        goBack();
+        if (params?.previous_screen === ScreenName.SettingsPage) {
+            goBack();
+        } else if (params?.previous_screen === ScreenName.FavSummaryPage) {
+            navigate(ScreenName.FavSummaryPage);
+        } else {
+            goBack();
+        }
         return true;
     };
 
@@ -135,7 +141,7 @@ const useEventHandler = (state: any, route: any) => {
         if (params?.previous_screen === ScreenName.SettingsPage) {
             goBack();
         } else if (params?.previous_screen === ScreenName.FavSummaryPage) {
-            goBack();
+            navigate(ScreenName.FavSummaryPage);
         } else {
             dispatch(resetSelectedFavPlayer([]));
             navigate(ScreenName.FavSummaryPage);
@@ -169,6 +175,7 @@ const useEventHandler = (state: any, route: any) => {
             }
         } else {
             navigate(ScreenName.FavTopTeamPage);
+            dispatch(resetSelectedFavPlayer([]));
             selectedFavPlayers.map((player: PlayerModel) => {
                 dispatch(pushFavPlayer(player));
             });
