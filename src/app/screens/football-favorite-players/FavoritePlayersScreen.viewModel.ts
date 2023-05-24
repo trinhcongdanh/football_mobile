@@ -31,12 +31,11 @@ import { MAX_FAVORITES_PLAYER } from '@football/core/api/configs/config';
 
 const useViewState = () => {
     const { t } = useTranslation();
-    const { navigate, goBack } = useAppNavigator();
+    const { navigate, goBack, pop } = useAppNavigator();
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const dispatch = useDispatch<any>();
     const [searchText, setSearchText] = useState('');
     const getProfile = useSelector((state: RootState) => state.getProfile);
-    const [favSelectedPlayer, setFavSelectedPlayer] = useState<PlayerModel[]>([]);
     const profile = useSelector((state: RootState) => state.createProfile);
     // eslint-disable-next-line no-new-object
     const sortByName: any = new Object();
@@ -63,8 +62,6 @@ const useViewState = () => {
         searchText,
         setSearchText,
         getProfile,
-        favSelectedPlayer,
-        setFavSelectedPlayer,
         profile,
         sortByName,
         selectedFavPlayersMap,
@@ -78,6 +75,7 @@ const useViewState = () => {
         setSelectedFavPlayers,
         players,
         setPlayers,
+        pop,
     };
 };
 
@@ -94,6 +92,7 @@ const useEventHandler = (state: any, route: any) => {
         navigate,
         goBack,
         setSelectedFavPlayers,
+        pop,
     } = state;
 
     const { params } = route;
@@ -115,10 +114,8 @@ const useEventHandler = (state: any, route: any) => {
             newSelectedFavPlayers = newSelectedFavPlayers.filter(
                 (selectedFavPlayers: PlayerModel) => selectedFavPlayers._id !== player._id
             );
-            dispatch(pushFavPlayer(player));
         } else if (newSelectedFavPlayers.length < MAX_FAVORITES_PLAYER) {
             newSelectedFavPlayers.push(player);
-            dispatch(pushFavPlayer(player));
         }
         setSelectedFavPlayers(newSelectedFavPlayers);
     };
@@ -137,6 +134,8 @@ const useEventHandler = (state: any, route: any) => {
     const onGoSkip = () => {
         if (params?.previous_screen === ScreenName.SettingsPage) {
             goBack();
+        } else if (params?.previous_screen === ScreenName.FavSummaryPage) {
+            goBack();
         } else {
             dispatch(resetSelectedFavPlayer([]));
             navigate(ScreenName.FavSummaryPage);
@@ -146,10 +145,19 @@ const useEventHandler = (state: any, route: any) => {
     const handleContinue = () => {
         if (!isEmpty(params)) {
             if (params.previous_screen === ScreenName.FavSummaryPage) {
+                pop();
                 navigate(ScreenName.FavSummaryPage, {
                     editFav: true,
                 });
+                dispatch(resetSelectedFavPlayer([]));
+                selectedFavPlayers.map((player: PlayerModel) => {
+                    dispatch(pushFavPlayer(player));
+                });
             } else if (params.previous_screen === ScreenName.SettingsPage) {
+                dispatch(resetSelectedFavPlayer([]));
+                selectedFavPlayers.map((player: PlayerModel) => {
+                    dispatch(pushFavPlayer(player));
+                });
                 route?.params?.handleAfterSelectPlayers(selectedFavPlayers);
                 goBack();
             } else if (params.previous_screen === ScreenName.HomePage) {
@@ -158,11 +166,12 @@ const useEventHandler = (state: any, route: any) => {
                 });
             } else {
                 navigate(ScreenName.FavTopTeamPage);
-                dispatch(resetTopTeams([]));
             }
         } else {
             navigate(ScreenName.FavTopTeamPage);
-            dispatch(resetTopTeams([]));
+            selectedFavPlayers.map((player: PlayerModel) => {
+                dispatch(pushFavPlayer(player));
+            });
         }
     };
 
@@ -180,7 +189,7 @@ const useEventHandler = (state: any, route: any) => {
  * @returns
  */
 const useViewCallback = (state: any) => {
-    const { dispatch, sortByName, setPlayers } = state;
+    const { sortByName, setPlayers } = state;
 
     const getPlayersData = useCallback(async () => {
         state.setIsLoading(true);
@@ -238,25 +247,11 @@ const useViewCallback = (state: any) => {
  * @param eventHandler
  */
 const useEffectHandler = (state: any, callback: any, eventHandler: any) => {
-    const {
-        dispatch,
-        searchText,
-        favSelectedPlayer,
-        selectedFavPlayers,
-        focusSearch,
-        setFocusSearch,
-    } = state;
+    const { searchText, focusSearch, setFocusSearch } = state;
 
     const { onGoBack } = eventHandler;
 
     const { submitSearchFavPlayer } = callback;
-    useEffect(() => {
-        if (isEmpty(selectedFavPlayers)) {
-            favSelectedPlayer.map((item: PlayerModel) => {
-                dispatch(pushFavPlayer(item));
-            });
-        }
-    }, [favSelectedPlayer]);
 
     useEffect(() => {
         if (searchText.length) {
