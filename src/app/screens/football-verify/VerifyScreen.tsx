@@ -5,10 +5,10 @@ import {
     StatusBar,
     SafeAreaView,
     TouchableOpacity,
-    TextInput,
     ActivityIndicator,
+    ScrollView,
 } from 'react-native';
-import React, { useCallback, useImperativeHandle, useRef, useState } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import { AppImages } from '@football/app/assets/images';
@@ -19,7 +19,6 @@ import { appIcons } from '@football/app/assets/icons/appIcons';
 import { IVerifyScreenProps } from './VerifyScreen.type';
 import styles from './VerifyScreen.styles';
 import { useViewModel } from './VerifyScreen.viewModel';
-import { appColors } from '../../utils/constants/appColors';
 import InputCode from '@football/app/components/InputOtp/InputOtp';
 
 // type Props = {};
@@ -42,6 +41,7 @@ export const VerifyScreen = ({ navigation, route }: IVerifyScreenProps) => {
         codeOtp,
         onChangeCode,
         onFullFill,
+        showKeyboard,
     } = useViewModel({
         navigation,
         route,
@@ -109,79 +109,60 @@ export const VerifyScreen = ({ navigation, route }: IVerifyScreenProps) => {
                             iconStyle={styles.ic_back}
                             goBack={onGoBack}
                         />
-                        <CardHeaderView title={t('verify.title')} />
-                        <View style={styles.connect_container}>
-                            <View style={{ paddingHorizontal: getSize.m(56) }}>
-                                <Text style={[appStyles.text_header]}>{t('verify.header')}</Text>
-                                <Text style={[appStyles.text_sub_header]}>{number}</Text>
-                            </View>
-
-                            {/* OTP Verify */}
-                            {/* <View style={styles.otp_Container}>
-                                {inputs.map((inp: string, index: number) => {
-                                    return (
-                                        <TextInput
-                                            key={index}
-                                            value={OTP[index]}
-                                            style={[
-                                                styles.otp_Text,
-                                                {
-                                                    borderColor:
-                                                        index === nextInputIndex
-                                                            ? appColors.blue_light
-                                                            : appColors.medium_gray,
-                                                },
-                                            ]}
-                                            keyboardType="number-pad"
-                                            maxLength={1}
-                                            onEndEditing={onVerifyCode}
-                                            ref={nextInputIndex === index ? input : null}
-                                            onChangeText={text => handleChangeText(text, index)}
-                                            autoComplete="off"
+                        <ScrollView>
+                            <View style={{ minHeight: showKeyboard ? getSize.m(800) : 0 }}>
+                                <CardHeaderView title={t('verify.title')} />
+                                <View style={styles.connect_container}>
+                                    <View style={{ paddingHorizontal: getSize.m(56) }}>
+                                        <Text style={[appStyles.text_header]}>
+                                            {t('verify.header')}
+                                        </Text>
+                                        <Text style={[appStyles.text_sub_header]}>{number}</Text>
+                                    </View>
+                                    <View
+                                        style={{
+                                            marginTop: getSize.m(37),
+                                            paddingHorizontal: getSize.m(20),
+                                        }}
+                                    >
+                                        <InputCode
+                                            code={codeOtp}
+                                            length={4}
+                                            onChangeCode={onChangeCode}
+                                            onFullFill={onFullFill}
+                                            autoFocus
                                         />
-                                    );
-                                })}
-                            </View> */}
-                            <View
-                                style={{
-                                    marginTop: getSize.m(37),
-                                    paddingHorizontal: getSize.m(20),
-                                }}
-                            >
-                                <InputCode
-                                    code={codeOtp}
-                                    length={4}
-                                    onChangeCode={onChangeCode}
-                                    onFullFill={onFullFill}
-                                    autoFocus
-                                />
-                            </View>
+                                    </View>
 
-                            {/* End */}
-                            <View style={{ marginTop: getSize.m(15) }}>
-                                <Text
-                                    style={[
-                                        styles.timeSend,
-                                        // eslint-disable-next-line react-native/no-inline-styles
-                                    ]}
-                                >
-                                    {t('verify.time_send')}
-                                </Text>
-                            </View>
-                            {errors.verifyError !== '' && (
-                                <View style={{ marginTop: getSize.m(15) }}>
-                                    <Text style={styles.error}>{t('verify.error')}</Text>
+                                    {/* End */}
+                                    <View style={{ marginTop: getSize.m(15) }}>
+                                        <Text
+                                            style={[
+                                                styles.timeSend,
+                                                // eslint-disable-next-line react-native/no-inline-styles
+                                            ]}
+                                        >
+                                            {t('verify.time_send')}
+                                        </Text>
+                                    </View>
+                                    {errors.verifyError !== '' && (
+                                        <View style={{ marginTop: getSize.m(15) }}>
+                                            <Text style={styles.error}>{t('verify.error')}</Text>
+                                        </View>
+                                    )}
+                                    <View style={[styles.footer_opt, { marginTop: getSize.m(38) }]}>
+                                        <Text style={styles.text_not_reach}>
+                                            {t('verify.text_not_reach')}
+                                        </Text>
+                                        <TouchableOpacity onPress={reSendVerify}>
+                                            <Text style={styles.text_link}>
+                                                {t('verify.text_link')}
+                                            </Text>
+                                        </TouchableOpacity>
+                                    </View>
                                 </View>
-                            )}
-                            <View style={[styles.footer_opt, { marginTop: getSize.m(38) }]}>
-                                <Text style={styles.text_not_reach}>
-                                    {t('verify.text_not_reach')}
-                                </Text>
-                                <TouchableOpacity onPress={reSendVerify}>
-                                    <Text style={styles.text_link}>{t('verify.text_link')}</Text>
-                                </TouchableOpacity>
                             </View>
-                        </View>
+                        </ScrollView>
                     </View>
                 </SafeAreaView>
             </ImageBackground>
