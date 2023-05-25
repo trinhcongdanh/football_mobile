@@ -26,6 +26,10 @@ export const useViewModel = (topTeam: TopTeamModel) => {
         navigate(ScreenName.PitchPage, { stadiumId });
     };
 
+    const onNavigateGameLive = () => {
+        navigate(ScreenName.GameLivePage);
+    };
+
     const handleSeeAll = () => {
         navigate(ScreenName.ListGamePage, { topTeam });
     };
@@ -39,5 +43,6 @@ export const useViewModel = (topTeam: TopTeamModel) => {
         handleDetailMatch,
         handleStadium,
         handleSeeAll,
+        onNavigateGameLive,
     };
 };

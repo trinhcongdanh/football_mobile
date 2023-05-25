@@ -1,9 +1,8 @@
 import { appIcons } from '@football/app/assets/icons/appIcons';
-import { AppImages } from '@football/app/assets/images';
 import { CardGoBack } from '@football/app/components/go-back/CardGoBack';
 import { appStyles } from '@football/app/utils/constants/appStyles';
 import React from 'react';
-import { ImageBackground, SafeAreaView, ScrollView, StatusBar, Text, View } from 'react-native';
+import { ScrollView, Text, View } from 'react-native';
 import { useViewModel } from '@football/app/screens/football-terms-conditon/TermsConditionScreen.viewModel';
 import styles from '@football/app/screens/football-terms-conditon/TermsConditionScreen.style';
 import { ITermsConditionScreenProps } from '@football/app/screens/football-terms-conditon/TermsConditionScreen.type';

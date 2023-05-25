@@ -16,10 +16,15 @@ export const useViewModel = ({ games }: IListOfGamesProps) => {
         navigate(ScreenName.PitchPage, { stadiumId });
     };
 
+    const onNavigateGameLive = () => {
+        navigate(ScreenName.GameLivePage);
+    };
+
     return {
         t,
         listGames,
         onNavigateGamePersonnel,
         onNavigateStadium,
+        onNavigateGameLive,
     };
 };
