@@ -55,6 +55,13 @@ const useEventHandler = (state: any) => {
     };
 
     /**
+     * Navigate game live screen
+     */
+    const onNavigateGameLive = () => {
+        navigate(ScreenName.GameLivePage);
+    };
+
+    /**
      * Navigate to all game
      * @param topTeam
      */
@@ -75,6 +82,7 @@ const useEventHandler = (state: any) => {
         handleStadium,
         navigateToDetailsGame,
         selectOption,
+        onNavigateGameLive,
     };
 };
 

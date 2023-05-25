@@ -24,6 +24,7 @@ export const GamesList = ({ topTeam }: IGamesListProps) => {
         options,
         selectOption,
         select,
+        onNavigateGameLive,
     } = useViewModel({
         topTeam,
     });
@@ -141,6 +142,7 @@ export const GamesList = ({ topTeam }: IGamesListProps) => {
                                     details={item.game_id}
                                     handleDetailMatch={() => handleDetailMatch(item.game_id, true)}
                                     handleStadium={() => handleStadium(item.stadium_id)}
+                                    handleGameLive={() => onNavigateGameLive()}
                                     isLive={moment().isBetween(
                                         moment(`${item.date} ${item.time}`),
                                         moment(`${item.date} ${item.time}`).add(2, 'hours')

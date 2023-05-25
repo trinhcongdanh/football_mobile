@@ -13,7 +13,13 @@ import { ListGame_Test } from '@football/app/components/list-game/ListGame_test'
 // import { IListOfGamesProps } from './ListOfGames.type';
 
 export const ListOfGames = ({ games }: IListOfGamesProps) => {
-    const { t, listGames, onNavigateGamePersonnel, onNavigateStadium } = useViewModel({ games });
+    const {
+        t,
+        listGames,
+        onNavigateGamePersonnel,
+        onNavigateStadium,
+        onNavigateGameLive,
+    } = useViewModel({ games });
     const { getTranslationText } = useTranslationText();
 
     return (
@@ -53,6 +59,7 @@ export const ListOfGames = ({ games }: IListOfGamesProps) => {
                             isFuture={moment().diff(moment(`${item?.date} ${item?.time}`)) < 0}
                             handleDetailMatch={() => onNavigateGamePersonnel(item.game_id)}
                             handleStadium={() => onNavigateStadium(item.stadium_id)}
+                            handleGameLive={() => onNavigateGameLive()}
                             gameDetail={t('list_game.detail')}
                             style={{ height: getSize.m(157), width: getSize.m(335) }}
                         />

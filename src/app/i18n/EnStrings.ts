@@ -672,7 +672,7 @@ const resources = {
                 game_detail: 'פרטי משחק',
             },
             list_game: {
-                results: 'המשחק בזמן אמת',
+                results: 'לתוצאות המשחק בזמן אמת',
                 detail: 'פרטי המשחק',
                 composition: 'הרכב',
                 detail_home: 'פרטים',
@@ -710,6 +710,9 @@ const resources = {
                 text: 'בטוחים שברצונכם למחוק את החשבון? לא ניתן לבטל פעולה זו!',
                 yes: 'כן',
                 no: 'לא',
+            },
+            game_live: {
+                title: 'תוצאות זמן אמת',
             },
         },
     },
@@ -1416,6 +1419,9 @@ const resources = {
                 text: 'Are you sure you want to delete your account? This action cannot be undone!',
                 yes: 'Yes',
                 no: 'No',
+            },
+            game_live: {
+                title: 'Game live data',
             },
         },
     },

@@ -21,6 +21,10 @@ export const useViewModel = ({ teamDetail }: IListOfGamesProps) => {
         navigate(ScreenName.PitchPage, { stadiumId });
     };
 
+    const onNavigateGameLive = () => {
+        navigate(ScreenName.GameLivePage);
+    };
+
     const onNavigateGameList = (team: TeamModel) => {
         navigate(ScreenName.FullListGamePage, { team });
     };
@@ -35,5 +39,6 @@ export const useViewModel = ({ teamDetail }: IListOfGamesProps) => {
         handleStadium,
         onNavigateGameList,
         newGames,
+        onNavigateGameLive,
     };
 };

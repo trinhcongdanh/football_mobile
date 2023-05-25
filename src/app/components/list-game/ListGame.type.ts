@@ -19,6 +19,7 @@ export type IListGameProps = {
     timeLive?: any;
     handleDetailMatch?: () => void;
     handleStadium?: () => void;
+    handleGameLive?: () => void;
     style?: StyleProp<any>;
     personnel?: string;
     gameDetail?: string;

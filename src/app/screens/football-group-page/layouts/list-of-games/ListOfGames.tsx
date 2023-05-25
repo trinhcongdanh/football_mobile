@@ -15,7 +15,14 @@ import IconEntypo from 'react-native-vector-icons/Entypo';
 import styles from './ListOfGames.style';
 
 export const ListOfGames = ({ teamDetail }: IListOfGamesProps) => {
-    const { t, handleDetailMatch, handleStadium, onNavigateGameList, newGames } = useViewModel({
+    const {
+        t,
+        handleDetailMatch,
+        handleStadium,
+        onNavigateGameList,
+        newGames,
+        onNavigateGameLive,
+    } = useViewModel({
         teamDetail,
     });
     const { getTranslationText } = useTranslationText();
@@ -78,6 +85,7 @@ export const ListOfGames = ({ teamDetail }: IListOfGamesProps) => {
                             isFuture={moment().diff(moment(`${item?.date} ${item?.time}`)) < 0}
                             handleDetailMatch={() => handleDetailMatch(item?.game_id)}
                             handleStadium={() => handleStadium(item?.stadium_id)}
+                            handleGameLive={() => onNavigateGameLive()}
                             gameDetail={t('list_game.detail')}
                             style={{
                                 height: getSize.m(157),

@@ -42,6 +42,7 @@ export const ListGame_Test = ({
     timeLive,
     marginTopMatch,
     fontFamily,
+    handleGameLive,
 }: IListGameProps) => {
     const { t } = useTranslation();
     const emptyResult = result === ' : ' ? ' : ' : null;
@@ -80,7 +81,7 @@ export const ListGame_Test = ({
                 </TouchableOpacity>
             )}
             {!tournament && isLive ? (
-                <View style={appStyles.flex_row_center}>
+                <View style={[appStyles.flex_row_center, { flex: 0 }]}>
                     <Text
                         style={[
                             styles.text_live,
@@ -91,33 +92,35 @@ export const ListGame_Test = ({
                     >
                         L I V E
                     </Text>
-                    <View
-                        style={[
-                            appStyles.flex_row_align,
-                            {
-                                marginLeft: getSize.m(6),
-                            },
-                        ]}
-                    >
-                        <Text
-                            style={{
-                                color: '#0697fd',
-                                fontFamily: AppFonts.bold,
-                                fontSize: getSize.m(13),
-                            }}
+                    {isHomePage ? (
+                        <View
+                            style={[
+                                appStyles.flex_row_align,
+                                {
+                                    marginLeft: getSize.m(6),
+                                },
+                            ]}
                         >
-                            {timeLive}
-                        </Text>
-                        <Text
-                            style={{
-                                color: '#0697fd',
-                                fontFamily: AppFonts.bold,
-                                fontSize: getSize.m(13),
-                            }}
-                        >
-                            '
-                        </Text>
-                    </View>
+                            <Text
+                                style={{
+                                    color: '#0697fd',
+                                    fontFamily: AppFonts.bold,
+                                    fontSize: getSize.m(13),
+                                }}
+                            >
+                                {timeLive}
+                            </Text>
+                            <Text
+                                style={{
+                                    color: '#0697fd',
+                                    fontFamily: AppFonts.bold,
+                                    fontSize: getSize.m(13),
+                                }}
+                            >
+                                '
+                            </Text>
+                        </View>
+                    ) : null}
                 </View>
             ) : (
                 <View
@@ -442,27 +445,10 @@ export const ListGame_Test = ({
                             marginLeft: getSize.m(12),
                         },
                     ]}
-                    onPress={handleDetailMatch}
+                    onPress={isLive ? handleGameLive : handleDetailMatch}
                 >
                     {isLive && !isHomePage ? (
                         <View style={appStyles.flex_row_align}>
-                            <View style={appStyles.flex_row_align}>
-                                <Text
-                                    style={[
-                                        styles.details,
-                                        {
-                                            fontFamily: fontFamily ? fontFamily : AppFonts.bold,
-                                        },
-                                    ]}
-                                >
-                                    {t('list_game.detail')}
-                                </Text>
-                                <Icon
-                                    name={icon}
-                                    size={getSize.m(14)}
-                                    color={appColors.button_dark_blue}
-                                />
-                            </View>
                             <View style={appStyles.flex_row_align}>
                                 <Text
                                     style={[

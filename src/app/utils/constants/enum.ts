@@ -49,6 +49,7 @@ export enum ScreenName {
     TermsConditionPage = 'TermsConditionPage',
     SideBar = 'SideBar',
     NotificationPage = 'NotificationPage',
+    GameLivePage = 'GameLivePage',
 }
 
 export enum SplashAnimationKey {
