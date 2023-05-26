@@ -1,20 +1,10 @@
 import React from 'react';
-import {
-    View,
-    ImageBackground,
-    StatusBar,
-    SafeAreaView,
-    ScrollView,
-    Text,
-    TouchableOpacity,
-} from 'react-native';
+import { View, ScrollView, Text, TouchableOpacity } from 'react-native';
 import { appStyles } from '@football/app/utils/constants/appStyles';
-import { AppImages } from '@football/app/assets/images';
 import { appIcons } from '@football/app/assets/icons/appIcons';
 import { getSize } from '@football/app/utils/responsive/scale';
 import { CardGoBack } from '@football/app/components/go-back/CardGoBack';
 import { HeaderLogo } from '@football/app/components/header-logo/HeaderLogo';
-import { Avatar } from 'react-native-elements';
 import LinearGradient from 'react-native-linear-gradient';
 import {
     GoalKicker,

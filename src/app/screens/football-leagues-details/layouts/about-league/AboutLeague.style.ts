@@ -38,6 +38,7 @@ const styles = StyleSheet.create({
         color: appColors.blue_black,
         lineHeight: getSize.m(22),
         fontFamily: AppFonts.bold,
+        textAlign: 'left',
     },
 
     indicatorContainer: {

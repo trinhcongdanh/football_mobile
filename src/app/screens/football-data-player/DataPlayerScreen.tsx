@@ -45,71 +45,77 @@ export const DataPlayerScreen = ({ navigation, route }: IDataPlayerScreenProps) 
     return (
         <View style={appStyles.flex}>
             <BackGround>
-                {player == null && 
-                    <>
-                        <View style={appStyles.container}>
-                        <HeaderUser
-                                avt={AppImages.img_avt}
-                                point="1,325"
-                                icon={AppImages.img_angle_arrow}
-                                color_pre={appColors.blue_black}
-                                color_after={appColors.blue_black}
-                                handlePressFunction={onGoBack}
-                            />
-                    </View>
-                    </>
-                }
-                
-                {player && (
-                    <>
-                        <View style={appStyles.container}>
-                            <HeaderUser
-                                avt={AppImages.img_avt}
-                                point="1,325"
-                                icon={AppImages.img_angle_arrow}
-                                color_pre={appColors.blue_black}
-                                color_after={appColors.blue_black}
-                                handlePressFunction={onGoBack}
-                            />
-                            <InfoPerson
-                                name={getTranslationText({
-                                    textHe: player.name_he,
-                                    textEn: player.name_en,
-                                })}
-                                data_1={player.date_of_birth}
-                                data_2={getTranslationText({
-                                    textHe: player.citizenship_he,
-                                    textEn: player.citizenship_en,
-                                })}
-                                data_3={player.num_of_games}
-                                avt={player.image_url}
-                                img_logo={player.citizenship_image_url}
-                                title_1={t('data_player.birthday')}
-                                title_2={t('data_player.national.title')}
-                                title_3={t('data_player.number')}
-                            />
-                        </View>
-                        {!player.team && !player.top_team ? null : (
-                            <View style={[appStyles.flex, appStyles.main_container]}>
-                                <ButtonOption
-                                    option_one={player.team ? t('data_player.option.club') : null}
-                                    option_two={
-                                        player.top_team ? t('data_player.option.national') : null
-                                    }
-                                    onSelect={setOnSelect}
-                                    defaultValue={onSelect}
-                                    data_player={player.team && player.top_team ? false : true}
+                <>
+                    {player == null && (
+                        <>
+                            <View style={appStyles.container}>
+                                <HeaderUser
+                                    avt={AppImages.img_avt}
+                                    point="1,325"
+                                    icon={AppImages.img_angle_arrow}
+                                    color_pre={appColors.blue_black}
+                                    color_after={appColors.blue_black}
+                                    handlePressFunction={onGoBack}
                                 />
-
-                                {onSelect === 0 ? (
-                                    <DataPlayerTeamScreen player={player} />
-                                ) : (
-                                    <DataPlayerNationalScreen player={player} />
-                                )}
                             </View>
-                        )}
-                    </>
-                )}
+                        </>
+                    )}
+
+                    {player && (
+                        <>
+                            <View style={appStyles.container}>
+                                <HeaderUser
+                                    avt={AppImages.img_avt}
+                                    point="1,325"
+                                    icon={AppImages.img_angle_arrow}
+                                    color_pre={appColors.blue_black}
+                                    color_after={appColors.blue_black}
+                                    handlePressFunction={onGoBack}
+                                />
+                                <InfoPerson
+                                    name={getTranslationText({
+                                        textHe: player.name_he,
+                                        textEn: player.name_en,
+                                    })}
+                                    data_1={player.date_of_birth}
+                                    data_2={getTranslationText({
+                                        textHe: player.citizenship_he,
+                                        textEn: player.citizenship_en,
+                                    })}
+                                    data_3={player.num_of_games}
+                                    avt={player.image_url}
+                                    img_logo={player.citizenship_image_url}
+                                    title_1={t('data_player.birthday')}
+                                    title_2={t('data_player.national.title')}
+                                    title_3={t('data_player.number')}
+                                />
+                            </View>
+                            {!player.team && !player.top_team ? null : (
+                                <View style={[appStyles.flex, appStyles.main_container]}>
+                                    <ButtonOption
+                                        option_one={
+                                            player.team ? t('data_player.option.club') : null
+                                        }
+                                        option_two={
+                                            player.top_team
+                                                ? t('data_player.option.national')
+                                                : null
+                                        }
+                                        onSelect={setOnSelect}
+                                        defaultValue={onSelect}
+                                        data_player={player.team && player.top_team ? false : true}
+                                    />
+
+                                    {onSelect === 0 ? (
+                                        <DataPlayerTeamScreen player={player} />
+                                    ) : (
+                                        <DataPlayerNationalScreen player={player} />
+                                    )}
+                                </View>
+                            )}
+                        </>
+                    )}
+                </>
             </BackGround>
         </View>
     );

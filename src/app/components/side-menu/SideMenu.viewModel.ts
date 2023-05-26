@@ -23,7 +23,7 @@ import { ISideMenuProps } from '@football/app/components/side-menu/SideMenu.type
  * @returns
  */
 const useViewState = () => {
-    const { navigate, goBack, popToTop } = useAppNavigator();
+    const { navigate, goBack, popToTop, closeDrawer } = useAppNavigator();
     const navigation = useNavigation();
     const { t } = useTranslation();
     const dispatch = useDispatch<any>();
@@ -83,6 +83,7 @@ const useViewState = () => {
         setUserName,
         avt,
         setAvt,
+        closeDrawer,
     };
 };
 

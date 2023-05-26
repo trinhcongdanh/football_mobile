@@ -51,7 +51,7 @@ export const useViewModel = ({ navigation, route }: IDataPlayerScreenProps) => {
 
     useMount(() => {
         getPlayerData();
-        const { selectedTab } = route.params;
+        const { selectedTab }: any = route?.params;
         if (selectedTab && selectedTab === 'top_team') {
             state.setOnSelect(1);
         }

@@ -31,6 +31,7 @@ const styles = StyleSheet.create({
         lineHeight: getSize.m(18),
         fontSize: getSize.m(14),
         fontFamily: AppFonts.bold,
+        textAlign: 'left',
     },
 
     year_campaign: {

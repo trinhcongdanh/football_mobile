@@ -98,6 +98,7 @@ export interface GoalKicker {
     name_en: string;
     image_url: string;
     num_of_goals: number;
+    num_of_appearances: number;
 }
 
 export interface PlayersAppearance {
@@ -105,6 +106,7 @@ export interface PlayersAppearance {
     name_he: string;
     name_en: string;
     image_url: string;
+    num_of_goals: number;
     num_of_appearances: number;
 }
 

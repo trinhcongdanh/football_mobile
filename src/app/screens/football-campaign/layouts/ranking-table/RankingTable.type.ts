@@ -4,5 +4,5 @@ import { TopTeamModel } from '@football/core/models/TopTeamModelResponse';
 export type IRankingTableProps = {
     data: Leaderboard[];
     groupName?: string;
-    topTeam?: TopTeamModel;
+    topTeam: TopTeamModel;
 };

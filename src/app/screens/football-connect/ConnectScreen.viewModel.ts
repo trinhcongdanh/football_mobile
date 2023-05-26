@@ -24,7 +24,7 @@ import { loginNumberPhoneUser } from 'src/store/user/RegisterNumberPhone.slice';
 import { v4 as uuid } from 'uuid';
 
 import { serializeParams } from '@football/app/utils/functions/quick-functions';
-import jwt_decode from 'jwt-decode';
+import jwt_decode, { JwtPayload } from 'jwt-decode';
 import { RootState } from 'src/store/store';
 import { otpUser } from 'src/store/user/OTP.slice';
 import { IConnectScreenProps } from './ConnectScreen.type';
@@ -137,7 +137,7 @@ const useEventHandler = (state: any) => {
         // getProfile
         const profileRequest = new GraphRequest(
             '/me',
-            { token, parameters: PROFILE_REQUEST_PARAMS },
+            { accessToken: token, parameters: PROFILE_REQUEST_PARAMS },
             (error, result: any) => {
                 if (error) {
                     console.log('Login Info has an error:', error);
@@ -159,17 +159,17 @@ const useEventHandler = (state: any) => {
                     if (result.isCancelled) {
                         console.log('login is cancelled.');
                     } else {
-                        let userId = '';
+                        let userId: string = '';
                         await Profile.getCurrentProfile().then(currentProfile => {
                             if (currentProfile) {
                                 console.log('currentProfile', currentProfile);
-                                userId = currentProfile.userID;
+                                userId = currentProfile?.userID ?? '';
                             }
                         });
                         if (Platform.OS === 'ios') {
                             let accessToken = '';
-                            await AccessToken.getCurrentAccessToken().then(data => {
-                                accessToken = data.accessToken.toString();
+                            await AccessToken.getCurrentAccessToken().then((data: any) => {
+                                accessToken = data?.accessToken?.toString();
                                 console.log('accessToken', accessToken);
                             });
                             await AuthenticationToken.getAuthenticationTokenIOS().then(
@@ -265,8 +265,8 @@ const useEventHandler = (state: any) => {
 
     // Apple Developer
     const connectApple = async () => {
-        let subject = '';
-        let code = '';
+        let subject: string = '';
+        let code: string = '';
         try {
             if (Platform.OS === 'android') {
                 // Configure the request
@@ -283,9 +283,9 @@ const useEventHandler = (state: any) => {
                 const response = await appleAuthAndroid.signIn();
 
                 console.log('response', response);
-                const decode = jwt_decode(`${response.id_token}`);
+                const decode: JwtPayload | null = jwt_decode(`${response.id_token}`);
                 code = response.code;
-                subject = decode?.sub;
+                subject = decode?.sub ?? '';
             } else {
                 const appleAuthRequestResponse = await appleAuth.performRequest({
                     requestedOperation: appleAuth.Operation.LOGIN,
@@ -300,9 +300,11 @@ const useEventHandler = (state: any) => {
                 console.log('credentialState', credentialState);
                 // use credentialState response to ensure the user is authenticated
                 if (credentialState === appleAuth.State.AUTHORIZED) {
-                    const decode = jwt_decode(`${appleAuthRequestResponse.identityToken}`);
-                    code = appleAuthRequestResponse?.authorizationCode;
-                    subject = decode?.sub;
+                    const decode: JwtPayload | null = jwt_decode(
+                        `${appleAuthRequestResponse.identityToken}`
+                    );
+                    code = appleAuthRequestResponse?.authorizationCode ?? '';
+                    subject = decode?.sub ?? '';
                 }
             }
         } catch (error: any) {

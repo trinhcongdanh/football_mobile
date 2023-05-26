@@ -25,7 +25,7 @@ export const ListOfGames = ({ games, groupName, topTeam }: IListOfGamesProps) =>
         handleDetailMatch,
         handleStadium,
         handleSeeAll,
-        onNavigateGameLive
+        onNavigateGameLive,
     } = useViewModel(topTeam);
     const { getTranslationText } = useTranslationText();
 

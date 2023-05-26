@@ -7,12 +7,12 @@ import { appStyles } from '@football/app/utils/constants/appStyles';
 import { getSize } from '@football/app/utils/responsive/scale';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { BackHandler, Modal, Text, TouchableOpacity, View } from 'react-native';
+import { Alert, BackHandler, Modal, Text, TouchableOpacity, View } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import IconIonicons from 'react-native-vector-icons/Ionicons';
 import { styles } from './Modal.styles';
 
-const Alert = ({
+const AlertModal = ({
     title,
     subTitle,
     onOption1,
@@ -138,4 +138,4 @@ const Alert = ({
     );
 };
 
-export default Alert;
+export default AlertModal;

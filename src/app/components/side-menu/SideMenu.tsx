@@ -18,7 +18,6 @@ import { renderAvatar } from '@football/core/models/AvatarType.enum';
 export const SideMenu = ({ navigation }: ISideMenuProps) => {
     const {
         t,
-        onGoBack,
         navigate,
         onNavigateStartScreen,
         userName,
@@ -29,6 +28,7 @@ export const SideMenu = ({ navigation }: ISideMenuProps) => {
         isGuestWithFavourite,
         notifications,
         getProfile,
+        closeDrawer,
     } = useViewModel({
         navigation,
     });
@@ -40,7 +40,7 @@ export const SideMenu = ({ navigation }: ISideMenuProps) => {
             <View style={styles.side_menu}>
                 <TouchableOpacity
                     onPress={() => {
-                        navigation.closeDrawer();
+                        closeDrawer();
                     }}
                     style={styles.side_menu_close}
                 >
