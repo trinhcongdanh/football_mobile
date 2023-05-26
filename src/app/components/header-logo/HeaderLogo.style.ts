@@ -19,6 +19,7 @@ export const styles = StyleSheet.create({
         lineHeight: getSize.m(16),
         fontFamily: AppFonts.bold,
         color: appColors.check_box,
+        textAlign: 'left',
     },
     details: {
         fontSize: getSize.m(12),

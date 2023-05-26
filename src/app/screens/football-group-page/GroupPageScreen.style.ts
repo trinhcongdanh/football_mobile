@@ -14,6 +14,7 @@ const styles = StyleSheet.create({
         fontSize: getSize.m(18),
         lineHeight: getSize.m(24),
         marginTop: getSize.m(16),
+        textAlign: 'left',
     },
     sub_name_leagues: {
         fontFamily: AppFonts.medium,
@@ -21,6 +22,7 @@ const styles = StyleSheet.create({
         fontSize: getSize.m(14),
         lineHeight: getSize.m(21),
         marginTop: getSize.m(2),
+        textAlign: 'left',
     },
     season_year: {
         fontSize: getSize.m(14),
