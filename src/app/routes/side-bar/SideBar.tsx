@@ -5,7 +5,7 @@ import { ScreenName } from '@football/app/utils/constants/enum';
 import { BottomTabStack } from '@football/app/routes/BottomTab';
 import { Platform, SafeAreaView, View } from 'react-native';
 import { appStyles } from '@football/app/utils/constants/appStyles';
-import { RouteProp, useRoute } from '@react-navigation/native';
+import { RouteProp } from '@react-navigation/native';
 
 const Drawer = createDrawerNavigator();
 

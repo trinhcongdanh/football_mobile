@@ -4,7 +4,7 @@ import { NavigationProp, RouteProp } from '@react-navigation/native';
 
 export type ICupsScreenProps = {
     navigation?: NavigationProp<any>;
-    route: RouteProp<
+    route?: RouteProp<
         {
             params: {
                 cupHolders: CupHolder[];

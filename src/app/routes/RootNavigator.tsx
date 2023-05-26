@@ -17,7 +17,11 @@ export const RootNavigator = () => {
     const dispatch = useDispatch();
 
     messaging().onNotificationOpenedApp(remoteMessage => {
-        const notificationData = remoteMessage.data as NotificationData;
+        const notificationData: NotificationData = {
+            target_id: remoteMessage.data!.target_id || '',
+            target_section: remoteMessage.data!.target_section || '',
+            target_type: remoteMessage.data!.target_type || '',
+        };
         console.log('onNotificationOpenedApp', remoteMessage);
 
         dispatch(addNotification(remoteMessage));

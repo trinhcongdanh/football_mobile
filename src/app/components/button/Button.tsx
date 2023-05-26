@@ -4,7 +4,7 @@ import styles from './Button.styles';
 
 type Props = {
     title: string;
-    onPress: () => void;
+    onPress?: () => void;
     // eslint-disable-next-line react/require-default-props
     disabled?: boolean;
     style?: StyleProp<any>;
