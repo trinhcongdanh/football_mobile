@@ -110,6 +110,7 @@ export const YellowsLeagues = ({ listGames, handleTeamGoalKickersList }: IYellow
                                 <FastImage
                                     source={AppImages.img_ticket_yellow}
                                     style={styles.ticket}
+                                    resizeMode={FastImage.resizeMode.contain}
                                 />
                                 <Text
                                     style={[

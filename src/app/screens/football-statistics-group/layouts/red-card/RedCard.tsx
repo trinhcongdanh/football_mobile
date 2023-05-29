@@ -111,6 +111,7 @@ export const RedCard = ({ listGames, handleTeamGoalKickersList }: IRedCardProps)
                                 <FastImage
                                     source={AppImages.img_ticket_red}
                                     style={styles.ticket}
+                                    resizeMode={FastImage.resizeMode.contain}
                                 />
                                 <Text
                                     style={[
