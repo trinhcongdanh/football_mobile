@@ -19,6 +19,11 @@ const styles = StyleSheet.create({
         textAlign: 'left',
         color: appColors.blue_black,
     },
+    text_link: {
+        color: 'blue',
+        borderBottomWidth: getSize.m(1),
+        borderBottomColor: 'blue',
+    },
 });
 
 export default styles;
