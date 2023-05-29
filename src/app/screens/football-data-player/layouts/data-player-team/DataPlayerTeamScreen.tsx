@@ -244,12 +244,14 @@ export const DataPlayerTeamScreen = ({ player }: IDataPlayerTeamScreenProps) => 
                                     ]}
                                 >
                                     <Text style={styles.frame}>{t('data_player.frame')}:</Text>
-                                    <Text style={appStyles.text_label}>
-                                        {getTranslationText({
-                                            textHe: item?.context_he,
-                                            textEn: item?.context_en,
-                                        })}
-                                    </Text>
+                                    <View style={{ width: '80%' }}>
+                                        <Text numberOfLines={2} style={appStyles.text_label}>
+                                            {getTranslationText({
+                                                textHe: item?.context_he,
+                                                textEn: item?.context_en,
+                                            })}
+                                        </Text>
+                                    </View>
                                 </View>
                                 <View
                                     style={[

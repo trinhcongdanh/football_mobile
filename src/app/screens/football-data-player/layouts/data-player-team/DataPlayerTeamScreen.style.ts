@@ -51,6 +51,7 @@ const styles = StyleSheet.create({
         fontSize: getSize.m(14),
         color: appColors.text_dark_blue,
         lineHeight: getSize.m(22),
+        textAlign: 'left',
     },
 
     text_label: {
