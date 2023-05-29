@@ -80,7 +80,6 @@ export const GamesList = ({ topTeam }: IGamesListProps) => {
                                                 index === select
                                                     ? appColors.white
                                                     : appColors.text_option_unselect,
-
                                             fontFamily:
                                                 index === select ? AppFonts.bold : AppFonts.medium,
                                         },
