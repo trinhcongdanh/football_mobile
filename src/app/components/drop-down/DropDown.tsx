@@ -5,11 +5,13 @@ import { appStyles } from '@football/app/utils/constants/appStyles';
 import { getSize, height } from '@football/app/utils/responsive/scale';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import IconIonicons from 'react-native-vector-icons/Ionicons';
 import { GestureHandlerRootView, ScrollView } from 'react-native-gesture-handler';
 import { styles } from './DropDown.style';
 import { IDropDownProps } from './DropDown.type';
+import FastImage from 'react-native-fast-image';
+import { AppImages } from '@football/app/assets/images';
 
 export const DropDown = ({ data, handleSelected, handleCloseModal, title }: IDropDownProps) => {
     const { t } = useTranslation();
@@ -28,7 +30,8 @@ export const DropDown = ({ data, handleSelected, handleCloseModal, title }: IDro
                         />
                     </TouchableOpacity>
                     <Text style={styles.title_drop_down}>{title || t('drop_down.title')}</Text>
-                    <View style={styles.line_dashed} />
+                    {/* <View style={styles.line_dashed} /> */}
+                    <Image source={AppImages.img_line_dots_dropdown} style={styles.line_dots} />
                     <View>
                         <Text style={styles.label_drop_down}>{t('drop_down.label')}</Text>
                         <View style={{ height: getSize.m(500) }}>

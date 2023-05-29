@@ -36,19 +36,16 @@ export const styles = StyleSheet.create({
         lineHeight: getSize.m(23),
         textAlign: 'center',
     },
-    line_dashed: {
-        paddingBottom: getSize.m(20),
-        borderBottomWidth: getSize.m(1),
-        borderColor: appColors.soft_grey,
-        borderStyle: 'dashed',
+    line_dots: {
         width: '100%',
+        marginVertical: getSize.m(20),
+        resizeMode: 'contain',
     },
     label_drop_down: {
         fontFamily: AppFonts.bold,
         fontSize: getSize.m(13),
         color: appColors.text_dark_blue,
         lineHeight: getSize.m(17),
-        marginTop: getSize.m(20),
         textAlign: 'left',
     },
 
