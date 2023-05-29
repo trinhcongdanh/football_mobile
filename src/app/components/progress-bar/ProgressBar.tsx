@@ -1,6 +1,7 @@
 import { IProgressBarProps } from '@football/app/components/progress-bar/ProgressBar.type';
 import { getSize } from '@football/app/utils/responsive/scale';
 import React from 'react';
+import { Platform } from 'react-native';
 import { Text, View } from 'react-native';
 import Svg, { Circle, G, Rect } from 'react-native-svg';
 
@@ -37,17 +38,32 @@ export const ProgressBar = ({
                         strokeWidth={strokeWidth}
                         fill="transparent"
                     />
-                    <Rect
-                        rx="20%"
-                        ry="20%"
-                        width={width}
-                        height={height}
-                        stroke="rgba(3,151,255,1)"
-                        strokeWidth={strokeWidth + 1}
-                        fill="transparent"
-                        strokeDasharray={rectCircumference}
-                        strokeDashoffset={strokeDashoffset}
-                    />
+                    {Platform.OS === 'android' ? (
+                        <Rect
+                            rx="20%"
+                            ry="20%"
+                            width={width}
+                            height={height}
+                            stroke="rgba(3,151,255,1)"
+                            strokeWidth={strokeWidth + 1}
+                            fill="transparent"
+                            strokeDasharray={rectCircumference}
+                            strokeDashoffset={strokeDashoffset}
+                        />
+                    ) : (
+                        <Rect
+                            rx="20%"
+                            ry="20%"
+                            width={width}
+                            height={height}
+                            stroke="rgba(3,151,255,1)"
+                            strokeWidth={strokeWidth + 1}
+                            fill="transparent"
+                            strokeDasharray={rectCircumference}
+                            strokeDashoffset={strokeDashoffset}
+                            transform="rotate(180 25.5 15.5)"
+                        />
+                    )}
                 </G>
             </Svg>
             {children}

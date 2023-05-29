@@ -24,6 +24,10 @@ export const useViewModel = ({ team, color }: IFavTeamProps) => {
         navigate(ScreenName.MatchPage, { gameId });
     };
 
+    const onNavigateGameLive = () => {
+        navigate(ScreenName.GameLivePage);
+    };
+
     const onNavigateTeamDetails = (teamId: string) => {
         navigate(ScreenName.GroupPagePage, { teamId });
     };
@@ -54,5 +58,6 @@ export const useViewModel = ({ team, color }: IFavTeamProps) => {
         onNavigateStatistics,
         onNavigateGameList,
         newGames,
+        onNavigateGameLive,
     };
 };

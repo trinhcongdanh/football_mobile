@@ -40,6 +40,7 @@ export const FavTeam = ({ team, color }: IFavTeamProps) => {
         onNavigateStatistics,
         onNavigateGameList,
         newGames,
+        onNavigateGameLive,
     } = useViewModel({ team, color });
     const { getTranslationText } = useTranslationText();
 
@@ -791,6 +792,7 @@ export const FavTeam = ({ team, color }: IFavTeamProps) => {
                                     color={appColors.gray2}
                                     handleDetailMatch={() => handleDetailMatch(item?.game_id)}
                                     handleStadium={() => handleStadium(item?.stadium_id)}
+                                    handleGameLive={() => onNavigateGameLive()}
                                     isFuture={
                                         moment().diff(moment(`${item?.date} ${item?.time}`)) < 0
                                     }

@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, Image } from 'react-native';
+import { View, Text, TouchableOpacity, Image, Platform } from 'react-native';
 import React from 'react';
 import IconLocation from 'react-native-vector-icons/EvilIcons';
 import Icon from 'react-native-vector-icons/Feather';
@@ -290,9 +290,13 @@ export const ListGame_Test = ({
                                                 position: 'absolute',
                                                 top: getSize.m(10),
                                                 left:
-                                                    i18n.language === 'heb'
-                                                        ? getSize.m(21)
-                                                        : getSize.m(26),
+                                                    Platform.OS === 'android'
+                                                        ? i18n.language === 'heb'
+                                                            ? getSize.m(21)
+                                                            : getSize.m(26)
+                                                        : i18n.language === 'heb'
+                                                        ? getSize.m(18)
+                                                        : getSize.m(25),
                                             }}
                                         >
                                             <View
@@ -447,7 +451,7 @@ export const ListGame_Test = ({
                     ]}
                     onPress={isLive ? handleGameLive : handleDetailMatch}
                 >
-                    {isLive && !isHomePage ? (
+                    {isLive ? (
                         <View style={appStyles.flex_row_align}>
                             <View style={appStyles.flex_row_align}>
                                 <Text
