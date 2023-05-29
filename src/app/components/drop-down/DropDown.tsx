@@ -34,7 +34,7 @@ export const DropDown = ({ data, handleSelected, handleCloseModal, title }: IDro
                     <Image source={AppImages.img_line_dots_dropdown} style={styles.line_dots} />
                     <View>
                         <Text style={styles.label_drop_down}>{t('drop_down.label')}</Text>
-                        <View style={{ height: getSize.m(500) }}>
+                        <View style={{ height: getSize.m(490) }}>
                             <ScrollView>
                                 {data.map((item: any) => {
                                     return (
