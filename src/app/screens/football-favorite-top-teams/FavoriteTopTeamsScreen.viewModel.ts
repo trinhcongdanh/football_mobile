@@ -4,21 +4,17 @@ import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
 import { useTranslation } from 'react-i18next';
 import { TopTeamModel } from '@football/core/models/TopTeamModelResponse';
 import { Alert, BackHandler } from 'react-native';
-import { isEmpty, isNil } from 'lodash';
 import { useDispatch, useSelector } from 'react-redux';
 import { useMount } from '@football/app/utils/hooks/useMount';
 import { useIsFocused } from '@react-navigation/native';
 import {
-    setFavTopTeams,
     pushFavTopTeam,
     selectedFavTopTeamsAsMapSelector,
-    resetTopTeams,
     resetSelectedFavTopTeams,
 } from 'src/store/FavTopTeam.slice';
 import { IFavoriteTopTeamsScreenProps } from './FavoriteTopTeamsScreen.type';
 import { RootState } from 'src/store/store';
 import TopTeamService from '@football/core/services/TopTeam.service';
-import { resetFavPlayer } from 'src/store/FavPlayer.slice';
 import { MAX_FAVORITES_TOPTEAM } from '@football/core/api/configs/config';
 
 /**
@@ -38,6 +34,7 @@ const useViewState = (route: any) => {
 
     const [selectedFavTopTeams, setSelectedFavTopTeams] = useState<TopTeamModel[]>(array);
     const [topTeams, setTopTeams] = useState<TopTeamModel[]>();
+    const [isLoading, setIsLoading] = useState<boolean>(false);
 
     const login = useSelector((state: RootState) => state.login);
     const profile = useSelector((state: RootState) => state.createProfile);
@@ -64,6 +61,8 @@ const useViewState = (route: any) => {
         setTopTeams,
         replace,
         pop,
+        isLoading,
+        setIsLoading,
     };
 };
 
@@ -74,9 +73,10 @@ const useViewState = (route: any) => {
  * @returns
  */
 const useViewCallback = (route: any, state: any, navigation: any) => {
-    const { setTopTeams } = state;
+    const { setTopTeams, setIsLoading } = state;
 
     const getTopTeamsData = useCallback(async () => {
+        setIsLoading(true);
         try {
             const [error, res] = await TopTeamService.findAllFavTopTeam();
             if (error) {
@@ -87,6 +87,8 @@ const useViewCallback = (route: any, state: any, navigation: any) => {
             setTopTeams(res.data.documents);
         } catch (error: any) {
             Alert.alert(error);
+        } finally {
+            setIsLoading(false);
         }
     }, []);
 
@@ -206,9 +208,10 @@ const useEventHandler = (state: any, callback: any, navigation: any, route: any)
  * Handle effect to listening variables change here.
  * @param state
  * @param callback
+ * @param eventHandler
  */
-const useEffectHandler = (state: any, callback: any) => {
-    const { onGoBack } = callback;
+const useEffectHandler = (state: any, callback: any, eventHandler: any) => {
+    const { onGoBack } = eventHandler;
     useEffect(() => {
         BackHandler.addEventListener('hardwareBackPress', onGoBack);
         return () => {
@@ -221,7 +224,7 @@ export const useViewModel = ({ navigation, route }: IFavoriteTopTeamsScreenProps
     const state = useViewState(route);
     const callback = useViewCallback(route, state, navigation);
     const eventHandler = useEventHandler(state, callback, navigation, route);
-    useEffectHandler(state, callback);
+    useEffectHandler(state, callback, eventHandler);
 
     useMount(() => {
         callback.getTopTeamsData();

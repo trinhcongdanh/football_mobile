@@ -112,6 +112,11 @@ const styles = StyleSheet.create({
     button_continue: {
         borderRadius: getSize.m(15),
     },
+    loading: {
+        top: getSize.m(200),
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
 });
 
 export default styles;

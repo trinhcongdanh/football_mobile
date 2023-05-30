@@ -53,10 +53,10 @@ export const FavoriteTeam = ({
     const handleTextChange = (newValue: string) => {
         let newText: string = newValue;
         if (newText.includes('“') || newText.includes('”') || newText.includes('״')) {
-            newText = newValue.replace('“', '"').replace('”', '"').replace('״','"');
+            newText = newValue.replace('“', '"').replace('”', '"').replace('״', '"');
         }
         if (newText.includes('‘') || newText.includes('’') || newText.includes('׳')) {
-            newText = newValue.replace('‘', "'").replace('’', "'").replace('׳',"'");
+            newText = newValue.replace('‘', "'").replace('’', "'").replace('׳', "'");
         }
         setSearchText(newText);
         searchFavTeam(newText);
@@ -72,7 +72,7 @@ export const FavoriteTeam = ({
         //         return (b.isSelected ? 1 : 0) - (a.isSelected ? 1 : 0);
         //     });
 
-        const filterTeams = teams.map(team => ({
+        const filterTeams = teams?.map(team => ({
             ...team,
             isSelected: favSelected.filter(t => t._id === team._id).length > 0,
         }));
@@ -140,13 +140,15 @@ export const FavoriteTeam = ({
                                     />
                                 </TouchableOpacity>
                             </View>
-                            {isLoading && (
-                                <ActivityIndicator
-                                    style={[appStyles.flex_center, styles.loading]}
-                                    size="large"
-                                    color={appColors.blue_dark}
-                                />
-                            )}
+                            {isLoading ? (
+                                <View style={styles.loading}>
+                                    <ActivityIndicator
+                                        style={[appStyles.flex_center]}
+                                        size="large"
+                                        color={appColors.blue_dark}
+                                    />
+                                </View>
+                            ) : null}
                         </View>
 
                         <ScrollView>
@@ -218,7 +220,7 @@ export const FavoriteTeam = ({
                         </ScrollView>
                     </View>
                 </SafeAreaView>
-                {!isEmpty(favTeams) && (
+                {!isEmpty(favTeams) ? (
                     <View style={styles.select_item}>
                         <View style={styles.result_select}>
                             <View style={styles.image_select}>
@@ -306,7 +308,7 @@ export const FavoriteTeam = ({
                             />
                         </View>
                     </View>
-                )}
+                ) : null}
             </ImageBackground>
         </View>
     );

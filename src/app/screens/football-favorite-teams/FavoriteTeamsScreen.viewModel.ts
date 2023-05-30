@@ -13,28 +13,12 @@ import _ from 'lodash';
 import { ScreenName } from '@football/app/utils/constants/enum';
 import {
     pushFavTeam,
-    resetFavTeam,
     resetSelectedFavTeam,
     selectedFavTeamsAsMapSelector,
 } from 'src/store/FavTeam.slice';
 import { MAX_FAVORITES_TEAM } from '@football/core/api/configs/config';
-import { useIsFocused, useNavigation } from '@react-navigation/native';
-import { resetFavPlayer, resetSelectedFavPlayer } from 'src/store/FavPlayer.slice';
-import { clearFavoriteData } from '@football/app/utils/functions/clearFavoriteData';
-import sortBy from 'lodash/sortBy';
+import { resetSelectedFavPlayer } from 'src/store/FavPlayer.slice';
 import { IFavoriteTeamsScreenProps } from './FavoriteTeamsScreen.type';
-
-function serializeParams(obj: any) {
-    const str = [];
-    // eslint-disable-next-line no-restricted-syntax
-    for (const p in obj) {
-        // eslint-disable-next-line no-prototype-builtins
-        if (obj.hasOwnProperty(p)) {
-            str.push(`${p}=${encodeURIComponent(obj[p])}`);
-        }
-    }
-    return str.join('&');
-}
 
 const useViewState = () => {
     const getProfile = useSelector((state: RootState) => state.getProfile);
