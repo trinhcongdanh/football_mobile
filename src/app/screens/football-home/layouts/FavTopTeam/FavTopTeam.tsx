@@ -38,6 +38,7 @@ export const FavTopTeam = ({ topTeam, color }: IFavTopTeamProps) => {
         handleDetailMatch,
         onNavigateGameList,
         newTopGames,
+        onNavigateGameLive,
     } = useViewModel({ topTeam, color });
     const { getTranslationText } = useTranslationText();
 
@@ -482,70 +483,90 @@ export const FavTopTeam = ({ topTeam, color }: IFavTopTeamProps) => {
                         </TouchableOpacity>
                     </View>
 
-                    <View style={{ padding: getSize.m(5), zIndex: 0, position: 'relative' }}>
+                    <View
+                        style={{
+                            paddingHorizontal: getSize.m(10),
+                            zIndex: 0,
+                            position: 'relative',
+                        }}
+                    >
                         {newTopGames?.slice(0, 3)?.map(item => {
                             return (
-                                // <ListGame_Test
-                                //     key={item.game_id}
-                                //     logo_home={item.team1.logo_url}
-                                //     logo_away={item.team2.logo_url}
-                                // nameHome={getTranslationText({
-                                //     textHe: item.team1.name_he,
-                                //     textEn: item.team1.name_en,
-                                // })}
-                                //     nameAway={getTranslationText({
-                                //         textHe: item.team2.name_he,
-                                //         textEn: item.team2.name_en,
+                                // <GameTable
+                                //     key={item?.game_id}
+                                //     date={item?.date}
+                                //     avt_away={item?.team2?.logo_url}
+                                //     avt_home={item?.team1?.logo_url}
+                                //     name_away={getTranslationText({
+                                //         textHe: item?.team2?.name_he,
+                                //         textEn: item?.team2?.name_en,
                                 //     })}
-                                // location={getTranslationText({
-                                //     textHe: item.stadium_he,
-                                //     textEn: item.stadium_en,
-                                // })}
-                                //     date={item.date}
-                                //     result={item.score}
-                                //     schedule={item.time}
-                                //     // completed={item.completed}
-                                //     details={item.game_id}
-                                //     color={appColors.gray2}
-                                //     handleDetailMatch={() => handleDetailMatch(item.game_id)}
-                                //     handleStadium={() => handleStadium(item.stadium_id)}
-                                // isLive={moment().isBetween(
-                                //     moment(`${item.date} ${item.time}`, 'DD.M.YY HH:mm'),
-                                //     moment(`${item.date} ${item.time}`, 'DD.M.YY HH:mm').add(
-                                //         2,
-                                //         'hours'
-                                //     )
-                                // )}
-                                //     style={{ marginTop: getSize.m(12) }}
+                                //     name_home={getTranslationText({
+                                //         textHe: item?.team1?.name_he,
+                                //         textEn: item?.team1?.name_en,
+                                //     })}
+                                //     result={item?.score}
+                                //     schedule={item?.time}
+                                //     location={getTranslationText({
+                                //         textHe: item?.stadium_he,
+                                //         textEn: item?.stadium_en,
+                                //     })}
+                                //     handleDetailMatch={() => handleDetailMatch(item?.game_id, true)}
+                                //     handleStadium={() => handleStadium(item?.stadium_id)}
+                                //     isLive={moment().isBetween(
+                                //         moment(`${item?.date} ${item?.time}`),
+                                //         moment(`${item?.date} ${item?.time}`).add(2, 'hours')
+                                //     )}
+                                // isFuture={
+                                //     moment().diff(moment(`${item?.date} ${item?.time}`)) < 0
+                                // }
                                 // />
-                                <GameTable
+                                <ListGame_Test
+                                    // eslint-disable-next-line react/no-array-index-key
                                     key={item?.game_id}
-                                    date={item?.date}
-                                    avt_away={item?.team2?.logo_url}
-                                    avt_home={item?.team1?.logo_url}
-                                    name_away={getTranslationText({
-                                        textHe: item?.team2?.name_he,
-                                        textEn: item?.team2?.name_en,
-                                    })}
-                                    name_home={getTranslationText({
+                                    logo_home={item?.team1?.logo_url}
+                                    logo_away={item?.team2?.logo_url}
+                                    nameHome={getTranslationText({
                                         textHe: item?.team1?.name_he,
                                         textEn: item?.team1?.name_en,
                                     })}
-                                    result={item?.score}
-                                    schedule={item?.time}
+                                    nameAway={getTranslationText({
+                                        textHe: item?.team2?.name_he,
+                                        textEn: item?.team2?.name_en,
+                                    })}
                                     location={getTranslationText({
                                         textHe: item?.stadium_he,
                                         textEn: item?.stadium_en,
                                     })}
+                                    date={item?.date}
+                                    result={item?.score}
+                                    schedule={item?.time}
+                                    icon={appIcons.ic_left_ios}
+                                    // completed={item.completed}
+                                    details={item?.game_id}
+                                    color={appColors.gray2}
                                     handleDetailMatch={() => handleDetailMatch(item?.game_id, true)}
                                     handleStadium={() => handleStadium(item?.stadium_id)}
+                                    handleGameLive={() => onNavigateGameLive()}
+                                    isFuture={
+                                        moment().diff(moment(`${item?.date} ${item?.time}`)) < 0
+                                    }
                                     isLive={moment().isBetween(
                                         moment(`${item?.date} ${item?.time}`),
                                         moment(`${item?.date} ${item?.time}`).add(2, 'hours')
                                     )}
-                                    isFuture={
-                                        moment().diff(moment(`${item?.date} ${item?.time}`)) < 0
-                                    }
+                                    isHomePage={true}
+                                    timeLive={Math.round(
+                                        moment
+                                            .duration(
+                                                moment().diff(moment(`${item?.date} ${item?.time}`))
+                                            )
+                                            .asMinutes()
+                                    )}
+                                    // moment.duration(moment2.diff(moment1));
+                                    style={{ marginTop: getSize.m(12) }}
+                                    personnel={t('home_page.composition')}
+                                    fontFamily={AppFonts.regular}
                                 />
                             );
                         })}

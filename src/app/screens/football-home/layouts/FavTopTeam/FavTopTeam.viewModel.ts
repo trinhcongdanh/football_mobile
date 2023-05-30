@@ -26,6 +26,10 @@ export const useViewModel = ({ topTeam, color }: IFavTopTeamProps) => {
         navigate(ScreenName.MatchPage, { gameId, topTeam });
     };
 
+    const onNavigateGameLive = () => {
+        navigate(ScreenName.GameLivePage);
+    };
+
     const onNavigateGameList = (topTeam: TopTeamModel) => {
         navigate(ScreenName.ListGamePage, { topTeam });
     };
@@ -45,5 +49,6 @@ export const useViewModel = ({ topTeam, color }: IFavTopTeamProps) => {
         handleDetailMatch,
         onNavigateGameList,
         newTopGames,
+        onNavigateGameLive,
     };
 };
