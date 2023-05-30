@@ -5,7 +5,7 @@ export type IFavoriteTeamProps = {
     onGoBack: () => void;
     handleSelected: (item: TeamModel) => void;
     handleContinue: () => void;
-    teams: TeamModel[];
+    teams: TeamModel[] | undefined;
     favSelected: TeamModel[];
     title: string;
     placeholder: string;

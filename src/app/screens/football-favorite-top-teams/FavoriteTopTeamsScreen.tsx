@@ -18,6 +18,7 @@ export const FavoriteTopTeamsScreen = ({ navigation, route }: IFavoriteTopTeamsS
         profile,
         getProfile,
         topTeams,
+        isLoading,
     } = useViewModel({
         navigation,
         route,
@@ -50,6 +51,7 @@ export const FavoriteTopTeamsScreen = ({ navigation, route }: IFavoriteTopTeamsS
                     handleSelected(item);
                 }}
                 topTeams={topTeams}
+                isLoading={isLoading}
                 favSelected={selectedFavTopTeams}
                 title={t('favorite_top_team.title')}
                 placeholder={t('favorite_top_team.place_holder')}

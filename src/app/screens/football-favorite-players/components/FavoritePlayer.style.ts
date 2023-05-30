@@ -20,7 +20,9 @@ const styles = StyleSheet.create({
         textAlign: I18nManager.isRTL ? 'right' : 'left',
     },
     loading: {
-        top: getSize.m(50),
+        top: getSize.m(200),
+        justifyContent: 'center',
+        alignItems: 'center',
     },
 
     name_club: {

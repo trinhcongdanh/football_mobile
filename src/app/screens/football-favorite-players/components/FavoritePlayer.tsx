@@ -133,13 +133,16 @@ export const FavoritePlayer = ({
                                     />
                                 </TouchableOpacity>
                             </View>
-                            {isLoading && (
-                                <ActivityIndicator
-                                    style={[appStyles.flex_center, styles.loading]}
-                                    size="large"
-                                    color={appColors.blue_dark}
-                                />
-                            )}
+                            {isLoading ? (
+                                <View style={styles.loading}>
+
+                                    <ActivityIndicator
+                                        style={[appStyles.flex_center, ]}
+                                        size="large"
+                                        color={appColors.blue_dark}
+                                    />
+                                </View>
+                            ) : null}
                         </View>
                         <ScrollView>
                             <View style={styles.content_item}>
@@ -206,7 +209,7 @@ export const FavoritePlayer = ({
                         </ScrollView>
                     </View>
                 </SafeAreaView>
-                {!isEmpty(favPlayers) && (
+                {!isEmpty(favPlayers) ? (
                     <View style={styles.select_item}>
                         <View style={styles.result_select}>
                             <View style={styles.image_select}>
@@ -294,7 +297,7 @@ export const FavoritePlayer = ({
                             />
                         </View>
                     </View>
-                )}
+                ) : null}
             </ImageBackground>
         </View>
     );
