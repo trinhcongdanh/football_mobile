@@ -58,6 +58,7 @@ export const RedCard = ({ listGames, handleTeamGoalKickersList }: IRedCardProps)
                 <View
                     style={{
                         width: getSize.m(46),
+                        right: getSize.m(2),
                     }}
                 >
                     <Text style={[appStyles.statistics_header, { fontSize: getSize.m(12) }]}>

@@ -688,8 +688,9 @@ const useViewCallback = (viewState: any) => {
  * Handle effect to listening variables change here.
  * @param state
  * @param callback
+ * @param navigation
  */
-const useEffectHandler = (state: any, callback: any, eventHandler: any) => {
+const useEffectHandler = (state: any, callback: any, eventHandler: any, navigation: any) => {
     const { getTeamsData, getPlayersData, getTopTeamsData } = callback;
 
     // Listening for user profile change
@@ -801,7 +802,11 @@ const useEffectHandler = (state: any, callback: any, eventHandler: any) => {
     useEffect(() => {
         if (deleteAccount.success) {
             clearAllData(dispatch);
-            navigate(ScreenName.SplashPage);
+            // navigate(ScreenName.SplashPage);
+            navigation.reset({
+                index: 0,
+                routes: [{ name: ScreenName.SplashPage as never }],
+            });
         } else {
             console.log('Failed to delete');
         }
@@ -821,7 +826,7 @@ export const useViewModel = ({ navigation, route }: ISettingsScreenProps) => {
     const state = useViewState();
     const callback = useViewCallback(state);
     const eventHandler = useEventHandler(state, route);
-    useEffectHandler(state, callback, eventHandler);
+    useEffectHandler(state, callback, eventHandler, navigation);
 
     console.log('new option', state.newOptions);
     console.log('defaultOptions', state.defaultOptions);

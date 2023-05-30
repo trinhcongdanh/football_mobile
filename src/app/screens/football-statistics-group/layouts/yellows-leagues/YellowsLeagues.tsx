@@ -58,6 +58,7 @@ export const YellowsLeagues = ({ listGames, handleTeamGoalKickersList }: IYellow
                 <View
                     style={{
                         width: getSize.m(46),
+                        right: getSize.m(4),
                     }}
                 >
                     <Text style={[appStyles.statistics_header, { fontSize: getSize.m(12) }]}>
