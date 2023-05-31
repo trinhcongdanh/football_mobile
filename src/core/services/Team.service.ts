@@ -11,7 +11,6 @@ class TeamService extends MongoDBService {
     findAllFavTeam(sortBy?: any): Promise<Result<TeamModelResponse>> {
         const filter = {
             league_id: { $ne: null },
-            name_en: {},
         };
         if (!I18nManager.isRTL) {
             filter.name_en = { $ne: null };
@@ -28,7 +27,6 @@ class TeamService extends MongoDBService {
         const filter = {
             search_terms: { $regex: `.*${searchText}.*`, $options: 'i' },
             league_id: { $ne: null },
-            name_en: {},
         };
         if (!I18nManager.isRTL) {
             filter.name_en = { $ne: null };
