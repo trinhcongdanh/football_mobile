@@ -30,7 +30,13 @@ export const deleteAccount = createAsyncThunk(
 export const deleteAccountSlice = createSlice({
     name: 'deleteAccount',
     initialState,
-    reducers: {},
+    reducers: {
+        clearDelete: (state, action) => {
+            state.deleteAccount = {};
+            state.loading = null;
+            state.success = null;
+        },
+    },
     extraReducers: builder => {
         builder
             .addCase(deleteAccount.pending, (state, action) => {
@@ -50,5 +56,5 @@ export const deleteAccountSlice = createSlice({
 });
 
 const { actions, reducer } = deleteAccountSlice;
-export const {} = actions;
+export const { clearDelete } = actions;
 export default deleteAccountSlice.reducer;

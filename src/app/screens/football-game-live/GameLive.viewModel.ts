@@ -19,7 +19,8 @@ export const useViewModel = ({ navigation, route }: IGameLiveProps) => {
         };
     }, []);
 
-    const url: string = 'https://www.realmadrid.com/en/football';
+    const url: string =
+        'http://m.telesport.co.il/gamesiframemobile.aspx?b=1&ID=hitahadut_171982979_newsss';
 
     const onNavigateToLink = useCallback(async () => {
         // Checking if the link is supported for links with custom URL scheme.
