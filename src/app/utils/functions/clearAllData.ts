@@ -2,6 +2,7 @@ import { resetFavPlayer, resetSelectedFavPlayer } from 'src/store/FavPlayer.slic
 import { resetFavTeam, resetSelectedFavTeam } from 'src/store/FavTeam.slice';
 import { resetSelectedFavTopTeams, resetTopTeams } from 'src/store/FavTopTeam.slice';
 import { clearCreateProfile } from 'src/store/user/CreateProfile.slice';
+import { clearDelete } from 'src/store/user/deleteAccount.slice';
 import { clearGetProfile } from 'src/store/user/getProfile.slice';
 import { removeGuestId } from 'src/store/user/GuestId.slice';
 import { clearLogin } from 'src/store/user/Login.slice';
@@ -31,4 +32,6 @@ export const clearAllData = (dispatch: any) => {
     dispatch(clearGetProfile([]));
     // Clear Login
     dispatch(clearLogin({}));
+    // CLear delete account
+    dispatch(clearDelete({}));
 };
