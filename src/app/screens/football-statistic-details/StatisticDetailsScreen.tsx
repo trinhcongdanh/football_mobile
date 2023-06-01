@@ -287,7 +287,7 @@ export const StatisticDetailsScreen = ({ navigation, route }: IStatisticDetailsS
                                             { textAlign: 'left', fontSize: getSize.m(12) },
                                         ]}
                                     >
-                                        {name}
+                                        {team}
                                     </Text>
                                 </View>
                                 <View style={{ width: getSize.m(90) }}>
