@@ -6,7 +6,7 @@ import { StyleSheet, I18nManager } from 'react-native';
 const styles = StyleSheet.create({
     header_background: {
         height: getSize.m(172),
-        zIndex: 1000,
+        zIndex: 1000000,
         overflow: 'hidden',
         width: '102%',
         marginLeft: getSize.m(-2),
