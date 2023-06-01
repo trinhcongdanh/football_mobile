@@ -150,6 +150,8 @@ export const DataPlayerTeamScreen = ({ player }: IDataPlayerTeamScreenProps) => 
                             <Text style={styles.text_label}>{t('data_player.ticket.label')}</Text>
                         </View>
                         <LinearGradient
+                            start={{ x: 0, y: 0 }}
+                            end={{ x: 1, y: 1 }}
                             colors={[appColors.linearLight, appColors.linearDark]}
                             style={[appStyles.flex_row_space_center, styles.header]}
                         >
@@ -264,6 +266,8 @@ export const DataPlayerTeamScreen = ({ player }: IDataPlayerTeamScreenProps) => 
                                     {item?.games?.map((game, gameIndex) => {
                                         return (
                                             <LinearGradient
+                                                start={{ x: 0, y: 0 }}
+                                                end={{ x: 1, y: 1 }}
                                                 colors={
                                                     gameIndex % 2 === 0
                                                         ? [

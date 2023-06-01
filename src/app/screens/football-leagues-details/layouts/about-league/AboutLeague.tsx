@@ -84,7 +84,12 @@ export const AboutLeague = ({ highlights }: IAboutLeagueProps) => {
                                     </View>
                                     <Text style={styles.title_about}>{item?.text}</Text>
                                 </View>
-                                <View style={{ height: getSize.m(50) }}>
+                                <View
+                                    style={{
+                                        height: getSize.m(50),
+                                        marginHorizontal: getSize.m(6),
+                                    }}
+                                >
                                     <Text numberOfLines={2} style={styles.content_about}>
                                         {item?.value}
                                     </Text>
