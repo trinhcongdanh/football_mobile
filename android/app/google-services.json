@@ -1,50 +1,54 @@
 {
-  "project_info": {
-    "project_number": "944318847741",
-    "project_id": "crashlyticsfootballapp",
-    "storage_bucket": "crashlyticsfootballapp.appspot.com"
-  },
-  "client": [
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:944318847741:android:ba29ce477472454efb3c94",
-        "android_client_info": {
-          "package_name": "com.footballassociation"
-        }
-      },
-      "oauth_client": [
+    "project_info": {
+        "project_number": "1090944091439",
+        "project_id": "football-association-a5922",
+        "storage_bucket": "football-association-a5922.appspot.com"
+    },
+    "client": [
         {
-          "client_id": "944318847741-2pvoktd8b54kj29perfhb5oq40ru8lb8.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.footballassociation",
-            "certificate_hash": "be6bbe4d3d14ba1042c210adcbd638878b065ec3"
-          }
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyAjOfDUt6FF4fWuN-03wzELs3ISwhLM4-E"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "944318847741-1ga2mqnn3m2606672uolsekdn4pc5io0.apps.googleusercontent.com",
-              "client_type": 3
+            "client_info": {
+                "mobilesdk_app_id": "1:1090944091439:android:fe8ae698a1aa3fe934cdda",
+                "android_client_info": {
+                    "package_name": "com.footballassociation"
+                }
             },
-            {
-              "client_id": "944318847741-kesnu4nnmulumjummldttm9itfac5sgt.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "il.org.football.mobile.ios"
-              }
+            "oauth_client": [
+                {
+                    "client_id": "1090944091439-mk55fcuj0bb49scsdomiljfh8563e4v6.apps.googleusercontent.com",
+                    "client_type": 1,
+                    "android_info": {
+                        "package_name": "com.footballassociation",
+                        "certificate_hash": "77c92baa4990efceed8eb073c71594ff9edc9da2"
+                    }
+                },
+                {
+                    "client_id": "1090944091439-b31q9sth6dg8embs917880n2e2qfnj72.apps.googleusercontent.com",
+                    "client_type": 3
+                }
+            ],
+            "api_key": [
+                {
+                    "current_key": "AIzaSyCud4C02Qg-En4KLczK4gorLbW2UDZgCgQ"
+                }
+            ],
+            "services": {
+                "appinvite_service": {
+                    "other_platform_oauth_client": [
+                        {
+                            "client_id": "1090944091439-b31q9sth6dg8embs917880n2e2qfnj72.apps.googleusercontent.com",
+                            "client_type": 3
+                        },
+                        {
+                            "client_id": "1090944091439-e7a80kic7at0ld1cq5s687ck7ri1qmq3.apps.googleusercontent.com",
+                            "client_type": 2,
+                            "ios_info": {
+                                "bundle_id": "il.org.football.mobile.ios"
+                            }
+                        }
+                    ]
+                }
             }
-          ]
         }
-      }
-    }
-  ],
-  "configuration_version": "1"
+    ],
+    "configuration_version": "1"
 }
