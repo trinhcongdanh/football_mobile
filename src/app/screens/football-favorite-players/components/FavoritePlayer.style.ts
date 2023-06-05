@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
         flexWrap: 'wrap',
         flexDirection: 'row',
         paddingHorizontal: getSize.m(16),
-        marginTop: getSize.m(7),
+        marginTop: getSize.m(20),
     },
 
     item: {
