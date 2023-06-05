@@ -1,4 +1,5 @@
 import { AppFonts } from '@football/app/assets/fonts';
+import i18n from '@football/app/i18n/EnStrings';
 import { appColors } from '@football/app/utils/constants/appColors';
 import { getSize } from '@football/app/utils/responsive/scale';
 import { I18nManager, StyleSheet } from 'react-native';
@@ -59,7 +60,7 @@ export const styles = StyleSheet.create({
         lineHeight: getSize.m(14),
         marginTop: getSize.m(5),
         fontFamily: AppFonts.bold,
-        textAlign: 'left',
+        textAlign: i18n.language === 'heb' ? 'left' : 'center',
     },
     score: {
         color: appColors.text_dark_blue,
