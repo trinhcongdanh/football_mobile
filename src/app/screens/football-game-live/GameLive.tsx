@@ -8,9 +8,10 @@ import { getSize } from '@football/app/utils/responsive/scale';
 import React from 'react';
 import { I18nManager, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { IGameLiveProps } from '@football/app/screens/football-game-live/GameLive.type';
+import { WebView } from 'react-native-webview';
 
 export const GameLive = ({ navigation, route }: IGameLiveProps) => {
-    const { t, onGoBack, onNavigateToLink, url } = useViewModel({ navigation, route });
+    const { t, onGoBack, url } = useViewModel({ navigation, route });
     return (
         <View style={appStyles.flex}>
             <BackGround>
@@ -27,12 +28,13 @@ export const GameLive = ({ navigation, route }: IGameLiveProps) => {
                 <View style={{ marginTop: getSize.m(34) }}>
                     <ScrollView>
                         <View style={styles.terms_container}>
-                            <TouchableOpacity
+                            {/* <TouchableOpacity
                                 onPress={onNavigateToLink}
                                 style={{ flexDirection: I18nManager.isRTL ? 'row-reverse' : 'row' }}
                             >
                                 <Text style={styles.text_link}>{url}</Text>
-                            </TouchableOpacity>
+                            </TouchableOpacity> */}
+                            <WebView source={{ uri: url }} />
                         </View>
                     </ScrollView>
                 </View>
