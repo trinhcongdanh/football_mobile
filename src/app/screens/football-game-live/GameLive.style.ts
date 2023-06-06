@@ -8,8 +8,8 @@ const styles = StyleSheet.create({
     terms_container: {
         backgroundColor: appColors.white,
         minHeight: getSize.m(900),
-        paddingHorizontal: getSize.m(20),
-        paddingVertical: getSize.m(20),
+        // paddingHorizontal: getSize.m(20),
+        // paddingVertical: getSize.m(20),
         paddingBottom: getSize.m(200),
     },
     terms_container_content: {

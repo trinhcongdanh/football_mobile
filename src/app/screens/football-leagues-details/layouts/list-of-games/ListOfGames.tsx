@@ -13,13 +13,8 @@ import { ListGame_Test } from '@football/app/components/list-game/ListGame_test'
 // import { IListOfGamesProps } from './ListOfGames.type';
 
 export const ListOfGames = ({ games }: IListOfGamesProps) => {
-    const {
-        t,
-        listGames,
-        onNavigateGamePersonnel,
-        onNavigateStadium,
-        onNavigateGameLive,
-    } = useViewModel({ games });
+    const { t, listGames, onNavigateGamePersonnel, onNavigateStadium, onNavigateGameLive } =
+        useViewModel({ games });
     const { getTranslationText } = useTranslationText();
 
     return (

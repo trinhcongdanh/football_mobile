@@ -19,26 +19,25 @@ export const useViewModel = ({ navigation, route }: IGameLiveProps) => {
         };
     }, []);
 
-    const url: string =
-        'http://m.telesport.co.il/gamesiframemobile.aspx?b=1&ID=hitahadut_171982979_newsss';
+    const url: string = 'https://www.telesport.co.il/';
 
-    const onNavigateToLink = useCallback(async () => {
-        // Checking if the link is supported for links with custom URL scheme.
-        const supported = await Linking.canOpenURL(url);
+    // const onNavigateToLink = useCallback(async () => {
+    //     // Checking if the link is supported for links with custom URL scheme.
+    //     const supported = await Linking.canOpenURL(url);
 
-        if (supported) {
-            // Opening the link with some app, if the URL scheme is "http" the web link should be opened
-            // by some browser in the mobile
-            await Linking.openURL(url);
-        } else {
-            Alert.alert(`Don't know how to open this URL: ${url}`);
-        }
-    }, [url]);
+    //     if (supported) {
+    //         // Opening the link with some app, if the URL scheme is "http" the web link should be opened
+    //         // by some browser in the mobile
+    //         await Linking.openURL(url);
+    //     } else {
+    //         Alert.alert(`Don't know how to open this URL: ${url}`);
+    //     }
+    // }, [url]);
 
     return {
         t,
         onGoBack,
-        onNavigateToLink,
+        // onNavigateToLink,
         url,
     };
 };
