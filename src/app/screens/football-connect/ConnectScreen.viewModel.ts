@@ -352,6 +352,9 @@ const useEffectHandler = (state: any, eventHandler: any) => {
         if (socialLogin.success) {
             replace(ScreenName.SideBar);
         }
+        if (socialLogin.success === false) {
+            Alert.alert('Call api wrong');
+        }
     }, [socialLogin.success, isFocused]);
 
     useEffect(() => {
