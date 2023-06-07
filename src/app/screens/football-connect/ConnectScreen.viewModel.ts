@@ -235,8 +235,8 @@ const useEventHandler = (state: any) => {
                                     action: ACTION,
                                     token: TOKEN,
                                     call: AuthData.LOGIN,
-                                    google_client_id: env?.GOOGLE_CLIENT_ID,
-                                    google_client_secret: env?.GOOGLE_CLIENT_SECRET,
+                                    google_user_id: result?.user?.id,
+                                    google_id_token: result?.idToken,
                                 })
                             )
                         );
