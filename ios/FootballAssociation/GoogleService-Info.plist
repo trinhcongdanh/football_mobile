@@ -3,23 +3,23 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>944318847741-kesnu4nnmulumjummldttm9itfac5sgt.apps.googleusercontent.com</string>
+	<string>1090944091439-e7a80kic7at0ld1cq5s687ck7ri1qmq3.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.944318847741-kesnu4nnmulumjummldttm9itfac5sgt</string>
+	<string>com.googleusercontent.apps.1090944091439-e7a80kic7at0ld1cq5s687ck7ri1qmq3</string>
 	<key>ANDROID_CLIENT_ID</key>
-	<string>944318847741-2pvoktd8b54kj29perfhb5oq40ru8lb8.apps.googleusercontent.com</string>
+	<string>1090944091439-mk55fcuj0bb49scsdomiljfh8563e4v6.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
-	<string>AIzaSyBoFZBnFJnyvMdFVbq1GBjvIlJi5-UAdq0</string>
+	<string>AIzaSyA9x2rwgpCvYBTYmRIH1PidVTxYrPvsds0</string>
 	<key>GCM_SENDER_ID</key>
-	<string>944318847741</string>
+	<string>1090944091439</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>il.org.football.mobile.ios</string>
 	<key>PROJECT_ID</key>
-	<string>crashlyticsfootballapp</string>
+	<string>football-association-a5922</string>
 	<key>STORAGE_BUCKET</key>
-	<string>crashlyticsfootballapp.appspot.com</string>
+	<string>football-association-a5922.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -31,6 +31,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:944318847741:ios:c9b52910f3ae2deefb3c94</string>
+	<string>1:1090944091439:ios:64aa45f50775792334cdda</string>
 </dict>
 </plist>

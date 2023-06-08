@@ -6,8 +6,8 @@ export const env = {
     //All are fake
     FACEBOOK_APPID: '584766430131655',
     FACEBOOK_SECRET_KEY: '2ece0d5f686681c989e8d69daf5b0d88',
-    GOOGLE_CLIENT_ID: '944318847741-1ga2mqnn3m2606672uolsekdn4pc5io0.apps.googleusercontent.com',
-    GOOGLE_CLIENT_SECRET: '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',
-    webClientId: '944318847741-1ga2mqnn3m2606672uolsekdn4pc5io0.apps.googleusercontent.com',
-    iosClientId: '944318847741-kesnu4nnmulumjummldttm9itfac5sgt.apps.googleusercontent.com',
+    GOOGLE_CLIENT_ID: '1090944091439-b31q9sth6dg8embs917880n2e2qfnj72.apps.googleusercontent.com',
+    GOOGLE_CLIENT_SECRET: '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',
+    webClientId: '1090944091439-b31q9sth6dg8embs917880n2e2qfnj72.apps.googleusercontent.com',
+    iosClientId: '1090944091439-e7a80kic7at0ld1cq5s687ck7ri1qmq3.apps.googleusercontent.com',
 };

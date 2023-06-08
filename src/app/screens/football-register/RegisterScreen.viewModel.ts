@@ -334,8 +334,8 @@ const useEventHandler = (state: any) => {
                                     guest_id: login.login.user.item_id,
                                     call: AuthData.REGISTER,
                                     item: {
-                                        google_client_id: env.GOOGLE_CLIENT_ID,
-                                        google_client_secret: env.GOOGLE_CLIENT_SECRET,
+                                        google_user_id: result?.user?.id,
+                                        google_id_token: result?.idToken,
                                     },
                                 })
                             )

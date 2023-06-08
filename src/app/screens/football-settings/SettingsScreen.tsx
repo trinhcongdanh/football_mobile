@@ -143,7 +143,11 @@ export function SettingsScreen(props: ISettingsScreenProps) {
                         </View>
 
                         <View style={styles.first_block_container}>
-                            <Input editable={false} input={userName} />
+                            <Input
+                                editable={false}
+                                input={userName}
+                                textColor={appColors.text_dark_blue}
+                            />
                             <Input
                                 styleInput={styles.input_container}
                                 error={errors.email}
@@ -169,7 +173,11 @@ export function SettingsScreen(props: ISettingsScreenProps) {
                                     </Text>
                                 </View>
                                 <View style={{ marginTop: getSize.m(10) }}>
-                                    <Input editable={false} input={gender} />
+                                    <Input
+                                        editable={false}
+                                        input={gender}
+                                        textColor={appColors.text_dark_blue}
+                                    />
                                 </View>
                                 <View style={{ marginTop: getSize.m(30) }}>
                                     <View style={{ flexDirection: 'row' }}>
@@ -187,7 +195,11 @@ export function SettingsScreen(props: ISettingsScreenProps) {
                                     </View>
 
                                     <View style={{ marginTop: getSize.m(10) }}>
-                                        <Input editable={false} input={birthDate} />
+                                        <Input
+                                            editable={false}
+                                            input={birthDate}
+                                            textColor={appColors.text_dark_blue}
+                                        />
                                         {/* <DatePicker
                                                 fadeToColor="none"
                                                 textColor={appColors.text_dark_blue}
