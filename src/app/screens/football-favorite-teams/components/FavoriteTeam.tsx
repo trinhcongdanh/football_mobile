@@ -29,6 +29,7 @@ import Icon from 'react-native-vector-icons/Feather';
 import styles from './FavoriteTeam.style';
 import { IFavoriteTeamProps } from './FavoriteTeam.types';
 import { useTextTeam } from '@football/app/utils/hooks/useText';
+import FastImage from 'react-native-fast-image';
 
 export const FavoriteTeam = ({
     onGoSkip,
@@ -158,7 +159,7 @@ export const FavoriteTeam = ({
                                     ...(favTeams
                                         ? favTeams.filter(t => t && !t.isSelected).map(a => a)
                                         : []),
-                                ]?.map((item, index) => {
+                                ]?.map((item: TeamModel, index: number) => {
                                     return (
                                         <TouchableOpacity
                                             key={item._id}
@@ -179,7 +180,7 @@ export const FavoriteTeam = ({
                                                 handleSelected(item);
                                             }}
                                         >
-                                            <Image
+                                            <FastImage
                                                 source={{ uri: item.logo_url }}
                                                 style={[
                                                     styles.image_item,
@@ -190,6 +191,7 @@ export const FavoriteTeam = ({
                                                                 : getSize.m(0),
                                                     },
                                                 ]}
+                                                resizeMode={FastImage.resizeMode.contain}
                                             />
                                             <Text numberOfLines={2} style={styles.name_item}>
                                                 {getTextTeam({
@@ -230,7 +232,7 @@ export const FavoriteTeam = ({
                                             key={index.toString()}
                                             style={{ marginLeft: getSize.m(6) }}
                                         >
-                                            <Image
+                                            <FastImage
                                                 source={{ uri: item.logo_url }}
                                                 style={[
                                                     styles.image_item_selected,
@@ -241,6 +243,7 @@ export const FavoriteTeam = ({
                                                                 : getSize.m(0),
                                                     },
                                                 ]}
+                                                resizeMode={FastImage.resizeMode.contain}
                                             />
                                             <View style={styles.index}>
                                                 <Text style={styles.text_index}>{index + 1}</Text>

@@ -27,6 +27,7 @@ import {
 import Icon from 'react-native-vector-icons/Feather';
 import styles from './FavoritePlayer.style';
 import { IFavoritePlayerProps } from './FavoritePlayer.types';
+import FastImage from 'react-native-fast-image';
 
 export const FavoritePlayer = ({
     onGoSkip,
@@ -135,9 +136,8 @@ export const FavoritePlayer = ({
                             </View>
                             {isLoading ? (
                                 <View style={styles.loading}>
-
                                     <ActivityIndicator
-                                        style={[appStyles.flex_center, ]}
+                                        style={[appStyles.flex_center]}
                                         size="large"
                                         color={appColors.blue_dark}
                                     />
@@ -151,10 +151,10 @@ export const FavoritePlayer = ({
                                     ...(favPlayers
                                         ? favPlayers?.filter(t => t && !t.isSelected).map(a => a)
                                         : []),
-                                ]?.map((item: any, index: number) => {
+                                ]?.map((item: PlayerModel, index: number) => {
                                     return (
                                         <TouchableOpacity
-                                            key={index.toString()}
+                                            key={item._id}
                                             style={[
                                                 styles.item,
                                                 {
@@ -172,7 +172,7 @@ export const FavoritePlayer = ({
                                                 handleSelected(item);
                                             }}
                                         >
-                                            <Image
+                                            <FastImage
                                                 source={{
                                                     uri: item.image_url,
                                                 }}
@@ -185,6 +185,7 @@ export const FavoritePlayer = ({
                                                                 : getSize.m(0),
                                                     },
                                                 ]}
+                                                resizeMode={FastImage.resizeMode.contain}
                                             />
                                             <Text numberOfLines={2} style={styles.name_item}>
                                                 {getTranslationText({
@@ -219,7 +220,7 @@ export const FavoritePlayer = ({
                                             key={index.toString()}
                                             style={{ marginLeft: getSize.m(6) }}
                                         >
-                                            <Image
+                                            <FastImage
                                                 source={{ uri: item.image_url }}
                                                 style={[
                                                     styles.image_item_selected,
@@ -230,6 +231,7 @@ export const FavoritePlayer = ({
                                                                 : getSize.m(0),
                                                     },
                                                 ]}
+                                                resizeMode={FastImage.resizeMode.contain}
                                             />
                                             <View style={styles.index}>
                                                 <Text style={styles.text_index}>{index + 1}</Text>
