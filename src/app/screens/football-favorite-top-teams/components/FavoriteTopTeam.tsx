@@ -26,6 +26,7 @@ import { AppFonts } from '@football/app/assets/fonts';
 import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
 import styles from './FavoriteTopTeam.style';
 import { IFavoriteTeamProps } from './FavoriteTopTeam.types';
+import FastImage from 'react-native-fast-image';
 
 export const FavoriteTopTeam = ({
     onGoSkip,
@@ -121,7 +122,7 @@ export const FavoriteTopTeam = ({
                                                 handleSelected(item);
                                             }}
                                         >
-                                            <Image
+                                            <FastImage
                                                 source={{ uri: item.logo_url }}
                                                 style={[
                                                     styles.image_item,
@@ -132,6 +133,7 @@ export const FavoriteTopTeam = ({
                                                                 : getSize.m(0),
                                                     },
                                                 ]}
+                                                resizeMode={FastImage.resizeMode.contain}
                                             />
 
                                             <Text numberOfLines={2} style={styles.name_item}>
@@ -167,7 +169,7 @@ export const FavoriteTopTeam = ({
                                             key={index.toString()}
                                             style={{ marginLeft: getSize.m(6) }}
                                         >
-                                            <Image
+                                            <FastImage
                                                 source={{ uri: item.logo_url }}
                                                 style={[
                                                     styles.image_item_selected,
@@ -178,6 +180,7 @@ export const FavoriteTopTeam = ({
                                                                 : getSize.m(0),
                                                     },
                                                 ]}
+                                                resizeMode={FastImage.resizeMode.contain}
                                             />
                                             <View style={styles.index}>
                                                 <Text style={styles.text_index}>{index + 1}</Text>
