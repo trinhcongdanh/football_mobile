@@ -7,7 +7,8 @@ import { serializeParams } from '@football/app/utils/functions/quick-functions';
 import { AuthData, ScreenName } from '@football/app/utils/constants/enum';
 import { ACTION } from '@football/core/api/auth/config';
 import { useTranslation } from 'react-i18next';
-import { Asset, launchImageLibrary } from 'react-native-image-picker';
+import { Asset, launchCamera, launchImageLibrary } from 'react-native-image-picker';
+import ImageCropPicker from 'react-native-image-crop-picker';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { useTranslationText } from '@football/app/utils/hooks/useLanguage';
@@ -18,7 +19,7 @@ import PlayerService from '@football/core/services/Player.service';
 import TeamService from '@football/core/services/Team.service';
 import TopTeamService from '@football/core/services/TopTeam.service';
 import { isEmpty } from 'lodash';
-import { BackHandler, Platform } from 'react-native';
+import { BackHandler, PermissionsAndroid, Platform } from 'react-native';
 import { addSelectedFavPlayer, resetFavPlayer } from 'src/store/FavPlayer.slice';
 import { addSelectedFavTeam, resetFavTeam } from 'src/store/FavTeam.slice';
 import { addSelectedFavTopTeams, resetTopTeams } from 'src/store/FavTopTeam.slice';
@@ -309,40 +310,89 @@ const useEventHandler = (state: any, route: any) => {
     /**
      * Handle event click on the profile picture
      */
-    const onImagePicker = async () => {
-        // const result = await launchImageLibrary({ mediaType: 'photo', includeBase64: true });
-        // console.log('result', result);
-        // // eslint-disable-next-line array-callback-return
-        // result.assets?.map(item => {
-        //     // const form = new FormData();
-        //     // form.append('file', item.base64);
-        //     // const convertImage = item;
-        //     // const RNFS = require('react-native-fs');
-        //     // RNFS.readFile(item.uri?.replace('file://', ''), 'base64').then((data: any) => {
-        //     //     console.log(data);
-        //     // });
-        //     setImage(item);
-        //     setIsImage(true);
-        //     // console.log('form', form);
-        //     console.log('item.uri', item);
-        // });
 
+    const onImagePicker = async () => {
+        global.props.showAlert({
+            title: t('photo.title'),
+            subTitle: t('photo.desc'),
+            option1: t('photo.fromGallery'),
+            option2: t('photo.fromCamera'),
+            // exit: false,
+            onOption1: () => {
+                global.props.closeAlert();
+                takePhotoGallery();
+            },
+            onOption2: () => {
+                global.props.closeAlert();
+                requestCameraPermission();
+            },
+        });
+    };
+
+    const takePhotoGallery = async () => {
         try {
-            const res = await DocumentPicker.pick({
-                type: [DocumentPicker?.types?.images],
+            const result = await launchImageLibrary({ mediaType: 'photo', includeBase64: true });
+            console.log('result', result);
+            result.assets?.map(item => {
+                cropImage(item.uri);
             });
-            setImage(res[0]);
-            setIsImage(true);
-            const base64Data = await RNFS.readFile(res[0].uri, 'base64');
-            setImageUpload(`data:image/jpeg;base64,${base64Data}`);
-            console.log('image picker', res);
         } catch (err) {
-            if (DocumentPicker.isCancel(err)) {
-                // User cancelled the picker, exit any dialogs or menus and move on
-            } else {
-                throw err;
-            }
+            console.log('Error take photo', err);
         }
+    };
+
+    const requestCameraPermission = async () => {
+        try {
+            const granted = await PermissionsAndroid.request(
+                PermissionsAndroid.PERMISSIONS.CAMERA,
+                {
+                    title: 'App Camera Permission',
+                    message: 'App needs access to your camera ',
+                    buttonNeutral: 'Ask Me Later',
+                    buttonNegative: 'Cancel',
+                    buttonPositive: 'OK',
+                }
+            );
+            if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+                takePhotoCamera();
+            } else {
+                console.log('Camera permission denied');
+            }
+        } catch (err) {
+            console.warn(err);
+        }
+    };
+
+    const takePhotoCamera = async () => {
+        try {
+            const result = await launchCamera({ mediaType: 'photo', includeBase64: true });
+            console.log('result', result);
+            result.assets?.map(item => {
+                cropImage(item.uri);
+            });
+        } catch (err) {
+            console.log('Error take photo', err);
+        }
+    };
+
+    const cropImage = (uri: any) => {
+        ImageCropPicker.openCropper({
+            path: uri,
+            width: 600,
+            height: 600,
+            cropping: true,
+            mediaType: 'photo',
+            includeBase64: true,
+        })
+            .then(image => {
+                console.log('Image', image);
+                setImage(`data:image/jpeg;base64,${image.data}`);
+                setIsImage(true);
+                setImageUpload(`data:image/jpeg;base64,${image.data}`);
+            })
+            .catch(error => {
+                console.log('Crop Error: ', error);
+            });
     };
 
     /**
