@@ -714,6 +714,12 @@ const resources = {
             game_live: {
                 title: 'תוצאות זמן אמת',
             },
+            photo: {
+                title: 'לצלם תמונות',
+                desc: 'האם אתה רוצה לבחור בין גלריה או מצלמה?',
+                fromGallery: 'גלריה',
+                fromCamera: 'מַצלֵמָה',
+            },
         },
     },
     en: {
@@ -1283,8 +1289,7 @@ const resources = {
                 appearances: 'Appearances',
             },
             magazine: {
-                title:
-                    'Strengthening the relationship between the refereeing teams and the clubs for the sake of eradicating violence',
+                title: 'Strengthening the relationship between the refereeing teams and the clubs for the sake of eradicating violence',
             },
             play_ground: {
                 title: 'The playground',
@@ -1422,6 +1427,12 @@ const resources = {
             },
             game_live: {
                 title: 'Game live data',
+            },
+            photo: {
+                title: 'Take pictures',
+                desc: ' Do you want to choose from gallery or camera?',
+                fromGallery: 'Gallery',
+                fromCamera: 'Camera',
             },
         },
     },
