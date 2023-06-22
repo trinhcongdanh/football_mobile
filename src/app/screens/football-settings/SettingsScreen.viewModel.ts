@@ -7,7 +7,6 @@ import { serializeParams } from '@football/app/utils/functions/quick-functions';
 import { AuthData, ScreenName } from '@football/app/utils/constants/enum';
 import { ACTION } from '@football/core/api/auth/config';
 import { useTranslation } from 'react-i18next';
-import { Asset, launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import ImageCropPicker from 'react-native-image-crop-picker';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -19,10 +18,10 @@ import PlayerService from '@football/core/services/Player.service';
 import TeamService from '@football/core/services/Team.service';
 import TopTeamService from '@football/core/services/TopTeam.service';
 import { isEmpty } from 'lodash';
-import { BackHandler, PermissionsAndroid, Platform } from 'react-native';
-import { addSelectedFavPlayer, resetFavPlayer } from 'src/store/FavPlayer.slice';
-import { addSelectedFavTeam, resetFavTeam } from 'src/store/FavTeam.slice';
-import { addSelectedFavTopTeams, resetTopTeams } from 'src/store/FavTopTeam.slice';
+import { BackHandler } from 'react-native';
+import { addSelectedFavPlayer } from 'src/store/FavPlayer.slice';
+import { addSelectedFavTeam } from 'src/store/FavTeam.slice';
+import { addSelectedFavTopTeams } from 'src/store/FavTopTeam.slice';
 import { RootState } from 'src/store/store';
 import { setProfileUser, statusSetProfile } from 'src/store/user/setProfile.slice';
 import {
@@ -35,8 +34,6 @@ import { deleteAccount } from 'src/store/user/deleteAccount.slice';
 import { avatarUser } from 'src/store/user/avatarUser.slice';
 import { clearAllData } from '@football/app/utils/functions/clearAllData';
 import FormData from 'form-data';
-import DocumentPicker from 'react-native-document-picker';
-import RNFS from 'react-native-fs';
 
 interface SettingProps {
     userName: string;
@@ -320,69 +317,91 @@ const useEventHandler = (state: any, route: any) => {
             // exit: false,
             onOption1: () => {
                 global.props.closeAlert();
-                takePhotoGallery();
+                cropImageGallery();
             },
             onOption2: () => {
                 global.props.closeAlert();
-                requestCameraPermission();
+                cropImageCamera();
             },
         });
     };
 
-    const takePhotoGallery = async () => {
-        try {
-            const result = await launchImageLibrary({ mediaType: 'photo', includeBase64: true });
-            console.log('result', result);
-            result.assets?.map(item => {
-                cropImage(item.uri);
-            });
-        } catch (err) {
-            console.log('Error take photo', err);
-        }
-    };
+    // const takePhotoGallery = async () => {
+    //     try {
+    //         const result = await launchImageLibrary({ mediaType: 'photo', includeBase64: true });
+    //         console.log('result', result);
+    //         result.assets?.map(item => {
+    //             // cropImage(item.uri);
+    //         });
+    //     } catch (err) {
+    //         console.log('Error take photo', err);
+    //     }
+    // };
 
-    const requestCameraPermission = async () => {
-        try {
-            const granted = await PermissionsAndroid.request(
-                PermissionsAndroid.PERMISSIONS.CAMERA,
-                {
-                    title: 'App Camera Permission',
-                    message: 'App needs access to your camera ',
-                    buttonNeutral: 'Ask Me Later',
-                    buttonNegative: 'Cancel',
-                    buttonPositive: 'OK',
-                }
-            );
-            if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-                takePhotoCamera();
-            } else {
-                console.log('Camera permission denied');
-            }
-        } catch (err) {
-            console.warn(err);
-        }
-    };
+    // const requestCameraPermission = async () => {
+    //     try {
+    //         const granted = await PermissionsAndroid.request(
+    //             PermissionsAndroid.PERMISSIONS.CAMERA,
+    //             {
+    //                 title: 'App Camera Permission',
+    //                 message: 'App needs access to your camera ',
+    //                 buttonNeutral: 'Ask Me Later',
+    //                 buttonNegative: 'Cancel',
+    //                 buttonPositive: 'OK',
+    //             }
+    //         );
+    //         if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+    //             cropImageCamera();
+    //         } else {
+    //             console.log('Camera permission denied');
+    //         }
+    //     } catch (err) {
+    //         console.warn(err);
+    //     }
+    // };
 
-    const takePhotoCamera = async () => {
-        try {
-            const result = await launchCamera({ mediaType: 'photo', includeBase64: true });
-            console.log('result', result);
-            result.assets?.map(item => {
-                cropImage(item.uri);
-            });
-        } catch (err) {
-            console.log('Error take photo', err);
-        }
-    };
+    // const takePhotoCamera = async () => {
+    //     try {
+    //         const result = await launchCamera({ mediaType: 'photo', includeBase64: true });
+    //         console.log('result', result);
+    //         result.assets?.map(item => {
+    //             // cropImage(item.uri);
+    //         });
+    //     } catch (err) {
+    //         console.log('Error take photo', err);
+    //     }
+    // };
 
-    const cropImage = (uri: any) => {
-        ImageCropPicker.openCropper({
-            path: uri,
+    const cropImageCamera = async () => {
+        await ImageCropPicker.openCamera({
+            // path: uri,
             width: 600,
             height: 600,
             cropping: true,
             mediaType: 'photo',
             includeBase64: true,
+            includeExif: true,
+        })
+            .then(image => {
+                console.log('Image', image);
+                setImage(`data:image/jpeg;base64,${image.data}`);
+                setIsImage(true);
+                setImageUpload(`data:image/jpeg;base64,${image.data}`);
+            })
+            .catch(error => {
+                console.log('Crop Error: ', error);
+            });
+    };
+
+    const cropImageGallery = async () => {
+        await ImageCropPicker.openPicker({
+            // path: uri,
+            width: 600,
+            height: 600,
+            cropping: true,
+            mediaType: 'photo',
+            includeBase64: true,
+            includeExif: true,
         })
             .then(image => {
                 console.log('Image', image);
