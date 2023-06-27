@@ -498,7 +498,9 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                             <Video videos={generalVod} handlePlayVideo={handlePlayVideo} />
                         )}
 
-                        {homeLayout?.layout.includes('instagram') && <Instagram />}
+                        {homeLayout?.layout.includes('instagram') && (
+                            <Instagram homePage={homePage} />
+                        )}
 
                         <View style={{ height: getSize.m(120), width: '100%' }} />
                     </ScrollView>

@@ -178,21 +178,14 @@ const useViewState = () => {
         {
             id: 4,
             text: t('settings.notify_4'),
-            value: 'FAN_NOTIFICATION_FAVORITE_PLAYERS_LEAGUES',
+            value: 'FAN_NOTIFICATION_FAVORITE_NATIONAL_TEAMS',
             isOn: false,
         },
 
         {
             id: 5,
             text: t('settings.notify_5'),
-            value: 'FAN_NOTIFICATION_FAVORITE_ISRAEL_TEAMS_LEAGUES',
-            isOn: false,
-        },
-
-        {
-            id: 6,
-            text: t('settings.notify_6'),
-            value: 'FAN_NOTIFICATION_FAVORITE_PLAYERS_NATIONAL_TEAMS',
+            value: 'FAN_NOTIFICATION_FAN_GAMES',
             isOn: false,
         },
     ] as NotificationSetting[];
