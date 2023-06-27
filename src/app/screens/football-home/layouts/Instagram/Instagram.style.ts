@@ -28,12 +28,7 @@ const styles = StyleSheet.create({
         color: appColors.white,
         marginRight: getSize.m(6),
     },
-    container_image: {
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        justifyContent: 'space-between',
-        marginTop: getSize.m(14),
-    },
+    container_image: {},
     item_image: {
         marginBottom: getSize.m(16),
         // marginHorizontal: getSize.m(4),

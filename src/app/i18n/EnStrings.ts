@@ -139,9 +139,8 @@ const resources = {
                 notify_1: 'התראות על הודעות/מבצעים/פרסים',
                 notify_2: 'התראות על השחקן המועדף שלי',
                 notify_3: 'התראות על הקבוצה המועדפת שלי',
-                notify_4: 'התראות על הליגה של השחקן המועדף שלי',
-                notify_5: 'התראות על הליגה של הקבוצה המועדפת שלי',
-                notify_6: 'התראות על הנבחרת של השחקן/שחקנים המועדפים שלי',
+                notify_4: 'הודעות על אזרח מועדף',
+                notify_5: 'הודעות על משחק מעריצים',
             },
             reg: {
                 title: 'וולקם! מלאו את הפרטים',
@@ -854,9 +853,8 @@ const resources = {
                 notify_1: 'Notifications about messages/sales/prizes',
                 notify_2: 'Notifications about a favorite player',
                 notify_3: 'Notifications about a favorite team',
-                notify_4: "Notifications about a favorite player's league",
-                notify_5: "Notifications about a favorite team's league",
-                notify_6: "Notifications about a favorite players's top team",
+                notify_4: 'Notifications about a favorite national',
+                notify_5: 'Notifications about a fan game',
             },
             reg: {
                 title: 'Welcome! Please fill the details',

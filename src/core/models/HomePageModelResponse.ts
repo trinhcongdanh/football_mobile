@@ -5,6 +5,11 @@ export interface HomePageModel {
     default_league_id: string;
     national_cup: Nationalcup;
     magazine: Magazine[];
+    instagram: InstagramProp[];
+}
+
+export interface InstagramProp {
+    embed_code: string;
 }
 
 interface Magazine {

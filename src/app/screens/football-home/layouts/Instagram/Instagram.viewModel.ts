@@ -1,10 +1,11 @@
 import { useTranslation } from 'react-i18next';
 import { useAppNavigator } from '@football/app/routes/AppNavigator.handler';
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { AppImages } from '@football/app/assets/images';
 import { IInstagramProps } from '@football/app/screens/football-home/layouts/Instagram/Instagram.type';
 import { Linking, Alert } from 'react-native';
-export const useViewModel = ({}: IInstagramProps) => {
+import { NativeWebViewWindows } from 'react-native-webview/lib/WebViewTypes';
+export const useViewModel = ({ homePage }: IInstagramProps) => {
     const { navigate, goBack } = useAppNavigator();
     const { t } = useTranslation();
     const pages = Array(2).fill('');
@@ -29,6 +30,10 @@ export const useViewModel = ({}: IInstagramProps) => {
             Alert.alert(`Can't open the link`);
         }
     }, []);
+
+    // useEffect(()=>{
+    //     window.instgrm.Embeds.process();
+    // },[])
 
     return {
         t,

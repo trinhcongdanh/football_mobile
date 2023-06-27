@@ -1,16 +1,22 @@
 import { AppImages } from '@football/app/assets/images';
 import styles from '@football/app/screens/football-home/layouts/Instagram/Instagram.style';
+import { IInstagramProps } from '@football/app/screens/football-home/layouts/Instagram/Instagram.type';
 import { useViewModel } from '@football/app/screens/football-home/layouts/Instagram/Instagram.viewModel';
 import { appStyles } from '@football/app/utils/constants/appStyles';
-import { getSize } from '@football/app/utils/responsive/scale';
+import { getSize, width } from '@football/app/utils/responsive/scale';
+import { InstagramProp } from '@football/core/models/HomePageModelResponse';
 import React from 'react';
-import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
 import FastImage from 'react-native-fast-image';
+import RenderHtml from 'react-native-render-html';
+import WebView from 'react-native-webview';
 
-export const Instagram = () => {
+export const Instagram = ({ homePage }: IInstagramProps) => {
     const { t, pages, activeIndexNumber, setActiveIndexNumber, data, openInstagram } = useViewModel(
-        {}
+        { homePage }
     );
+
+    console.log('homepage', homePage.instagram);
     return (
         <View
             style={[
@@ -33,18 +39,10 @@ export const Instagram = () => {
                 </TouchableOpacity>
             </View>
             <View style={styles.container_image}>
-                {data.map((item, index) => {
+                {homePage.instagram.map((item: InstagramProp, index) => {
                     return (
-                        <View style={styles.item_image} key={index}>
-                            <FastImage
-                                source={item.img}
-                                style={{
-                                    width: getSize.m(165),
-                                    height: getSize.m(165),
-                                    borderRadius: getSize.m(15),
-                                }}
-                                resizeMode={FastImage.resizeMode.contain}
-                            />
+                        <View key={index}>
+                            <RenderHtml contentWidth={width} source={{ html: item.embed_code }} />
                         </View>
                     );
                 })}
