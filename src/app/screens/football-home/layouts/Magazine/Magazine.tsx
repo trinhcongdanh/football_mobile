@@ -24,7 +24,7 @@ export const Magazine = ({ homePage }: IMagazineProps) => {
             </View>
 
             <CustomCarousel
-                data={homePage.magazine}
+                data={homePage?.magazine}
                 height={getSize.m(300)}
                 renderItem={({ item, index }) => {
                     return (

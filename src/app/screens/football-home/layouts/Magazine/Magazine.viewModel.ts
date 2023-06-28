@@ -7,7 +7,7 @@ export const useViewModel = ({ homePage }: IMagazineProps) => {
     const { t } = useTranslation();
     const pages = Array(2).fill('');
     const [activeIndexNumber, setActiveIndexNumber] = useState(Number);
-    const dots = Array(homePage.magazine.length).fill('');
+    const dots = Array(homePage?.magazine.length).fill('');
 
     const onClickImage = useCallback(async (url: string) => {
         try {

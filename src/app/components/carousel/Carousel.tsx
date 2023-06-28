@@ -38,7 +38,7 @@ export const CustomCarousel = ({
                 defaultIndex={defaultIndex}
                 {...baseOptions}
                 loop={false}
-                data={data}
+                data={data || []}
                 scrollAnimationDuration={1000}
                 windowSize={PAGE_WIDTH}
                 mode="parallax"
@@ -57,7 +57,7 @@ export const CustomCarousel = ({
             />
             {/* </GestureHandlerRootView> */}
             <View style={styles.dotContainer}>
-                {data.map((_, index) => {
+                {data?.map((_, index) => {
                     return (
                         // eslint-disable-next-line react/no-array-index-key
                         <View key={index}>

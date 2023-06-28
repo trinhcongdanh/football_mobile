@@ -34,12 +34,16 @@ export const NationalCup = ({ homePage }: INationalCupProps) => {
                 style={styles.cup}
             />
             <TouchableOpacity
-                onPress={() => onClickCup(homePage.national_cup?.cup_id)}
+                onPress={() => onClickCup(homePage?.national_cup?.cup_id)}
                 style={styles.button}
             >
                 <FastImage
                     source={AppImages.img_button}
-                    style={{ width: getSize.m(125), height: getSize.m(33), left: Platform.OS === 'ios' ? 12 : 0, }}
+                    style={{
+                        width: getSize.m(125),
+                        height: getSize.m(33),
+                        left: Platform.OS === 'ios' ? 12 : 0,
+                    }}
                     resizeMode={FastImage.resizeMode.contain}
                 />
                 <View style={[appStyles.flex_row_align, styles.content_button]}>

@@ -13,15 +13,15 @@ export const SocialResponsibility = ({ homePage }: ISocialResponsibilityProps) =
     const { t, pages, activeIndexNumber, setActiveIndexNumber, onClickImage } = useViewModel();
     return (
         <View style={styles.container}>
-            <TouchableOpacity onPress={() => onClickImage(homePage.ads.link)}>
+            <TouchableOpacity onPress={() => onClickImage(homePage?.ads.link)}>
                 <FastImage
-                    source={{ uri: homePage.ads.image_url }}
+                    source={{ uri: homePage?.ads.image_url }}
                     style={{
                         width: getSize.m(350),
                         height: getSize.m(175),
                         borderRadius: getSize.m(20),
                     }}
-                // resizeMode={FastImage.resizeMode.contain}
+                    // resizeMode={FastImage.resizeMode.contain}
                 />
                 {/* <FastImage
                     resizeMode={FastImage.resizeMode.contain}

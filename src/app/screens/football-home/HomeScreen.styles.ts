@@ -108,6 +108,17 @@ const styles = StyleSheet.create({
         height: '100%',
         borderRadius: getSize.m(18),
     },
+    header: {
+        fontFamily: AppFonts.bold,
+        fontSize: getSize.m(20),
+        color: appColors.blue_black,
+        lineHeight: getSize.m(20.8),
+        textAlign: 'left',
+    },
+    container_header: {
+        paddingHorizontal: getSize.m(10),
+        paddingVertical: getSize.m(4),
+    },
 });
 
 export default styles;
