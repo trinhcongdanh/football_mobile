@@ -10,7 +10,7 @@ export const useViewModel = ({ homePage }: INationalCupProps) => {
     const pages = Array(2).fill('');
     const [activeIndexNumber, setActiveIndexNumber] = useState(Number);
 
-    const onClickCup = (cupId: string) => {
+    const onClickCup = (cupId?: string) => {
         navigate(ScreenName.StateCupPage, { cupId });
     };
 

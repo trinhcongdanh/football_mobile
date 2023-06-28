@@ -16,7 +16,7 @@ export const Instagram = ({ homePage }: IInstagramProps) => {
         { homePage }
     );
 
-    console.log('homepage', homePage.instagram);
+    console.log('homepage', homePage?.instagram);
     return (
         <View
             style={[
@@ -39,7 +39,7 @@ export const Instagram = ({ homePage }: IInstagramProps) => {
                 </TouchableOpacity>
             </View>
             <View style={styles.container_image}>
-                {homePage.instagram.map((item: InstagramProp, index) => {
+                {homePage?.instagram.map((item: InstagramProp, index) => {
                     return (
                         <View key={index}>
                             <RenderHtml contentWidth={width} source={{ html: item.embed_code }} />

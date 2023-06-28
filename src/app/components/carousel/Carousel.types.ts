@@ -1,5 +1,5 @@
 export type ICarouselProps = {
-    data: any[];
+    data?: any[];
     itemPerPage?: number;
     height: number;
     widthPerItem?: number;

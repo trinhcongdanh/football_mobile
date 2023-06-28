@@ -113,6 +113,7 @@ const useViewCallback = (route: any, viewState: any) => {
         }
 
         if (res.data.documents?.length) {
+            console.log('getHomeLayoutData', res.data.documents[0]);
             setHomeLayout(res.data.documents[0]);
         }
     }, []);
@@ -123,7 +124,9 @@ const useViewCallback = (route: any, viewState: any) => {
             return;
         }
         if (res.data.documents?.length) {
-            setHomePage(res.data.documents[0]);
+            setTimeout(() => {
+                setHomePage(res.data.documents[0]);
+            }, 2000);
         }
     }, []);
 
@@ -331,17 +334,11 @@ export const useViewModel = ({ navigation, route }: IHomeScreenProps) => {
     };
 
     const state = useViewState();
-    const {
-        getHomeLayoutData,
-        getHomePageData,
-        getDefaultLeagueData,
-        getGeneralVodData,
-        getUser,
-    } = useViewCallback(route, state);
+    const { getHomeLayoutData, getHomePageData, getDefaultLeagueData, getGeneralVodData, getUser } =
+        useViewCallback(route, state);
 
-    const { onClickPlayer, onClickTeam, onClickTopTeam, onClickGuestRegistration } = eventHandler(
-        navigate
-    );
+    const { onClickPlayer, onClickTeam, onClickTopTeam, onClickGuestRegistration } =
+        eventHandler(navigate);
 
     useMount(() => {
         if (state.userLogin.success && !state.profileUser) {
