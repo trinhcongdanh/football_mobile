@@ -7,10 +7,10 @@ import { useTranslation } from 'react-i18next';
 export const useViewModel = ({ videos }: IVideoProps) => {
     const { replace } = useAppNavigator();
     const { t } = useTranslation();
-    const pages = Array(videos.length).fill('');
+    const pages = Array(videos?.length).fill('');
     const [activeIndexNumber, setActiveIndexNumber] = useState(Number);
 
-    const dots = Array(videos.length).fill('');
+    const dots = Array(videos?.length).fill('');
 
     const onClickAllVideo = () => {
         replace(ScreenName.SideBar, { isBackVideo: true });

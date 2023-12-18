@@ -385,7 +385,7 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                 refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
             >
                 {/* Video Intro */}
-                {!isEmpty(homePage?.video) ? (
+               
                     <TouchableOpacity onPress={() => handlePlayVideo(homePage?.video)}>
                         <View style={[styles.home_video]}>
                             <ImageBackground
@@ -431,37 +431,25 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                             </ImageBackground>
                         </View>
                     </TouchableOpacity>
-                ) : (
-                    <View style={styles.container_header}>
-                        <Text style={styles.header}>Video</Text>
-                    </View>
-                )}
+              
                 {/* Player Stats */}
-                {!isEmpty(teams) ? (
+                {
                     teams
                         ?.filter(team => team)
                         .map(team => {
                             // eslint-disable-next-line no-underscore-dangle
                             return <FavTeam color={colorCustom} team={team} key={team?._id} />;
                         })
-                ) : (
-                    <View style={styles.container_header}>
-                        <Text style={styles.header}>My teams</Text>
-                    </View>
-                )}
+                }
 
-                {!isEmpty(players) ? (
+                {
                     players?.map(player => {
                         // eslint-disable-next-line no-underscore-dangle
                         return <FavPlayer color={colorCustom} player={player} key={player?._id} />;
                     })
-                ) : (
-                    <View style={styles.container_header}>
-                        <Text style={styles.header}>My players</Text>
-                    </View>
-                )}
+               }
 
-                {!isEmpty(topTeams) ? (
+                {
                     topTeams?.map(topTeam => {
                         return (
                             <>
@@ -473,62 +461,25 @@ export const HomeScreen = ({ navigation, route }: IHomeScreenProps) => {
                             </>
                         );
                     })
-                ) : (
-                    <View style={styles.container_header}>
-                        <Text style={styles.header}>My top team</Text>
-                    </View>
-                )}
+                }
 
-                {!isEmpty(homePage) ? (
-                    <SocialResponsibility homePage={homePage} />
-                ) : (
-                    <View style={styles.container_header}>
-                        <Text style={styles.header}>Ads</Text>
-                    </View>
-                )}
+                
+                <SocialResponsibility homePage={homePage} />
 
-                {!isEmpty(homePage) ? (
-                    <Magazine homePage={homePage} />
-                ) : (
-                    <View style={styles.container_header}>
-                        <Text style={styles.header}>Magazine</Text>
-                    </View>
-                )}
-
-                {!isEmpty(leagues) ? (
+                <Magazine homePage={homePage} />
+               
+                {
                     leagues?.map(league => {
                         return <LeaguesTable league={league} key={league?._id} />;
                     })
-                ) : (
-                    <View style={styles.container_header}>
-                        <Text style={styles.header}>Leagues table</Text>
-                    </View>
-                )}
+                }
 
-                {!isEmpty(homePage) ? (
-                    <NationalCup homePage={homePage} />
-                ) : (
-                    <View style={styles.container_header}>
-                        <Text style={styles.header}>National cup</Text>
-                    </View>
-                )}
-
-                {!isEmpty(generalVod) ? (
-                    <Video videos={generalVod} handlePlayVideo={handlePlayVideo} />
-                ) : (
-                    <View style={styles.container_header}>
-                        <Text style={styles.header}>Clips</Text>
-                    </View>
-                )}
-
-                {!isEmpty(homePage) ? (
-                    <Instagram homePage={homePage} />
-                ) : (
-                    <View style={styles.container_header}>
-                        <Text style={styles.header}>Instagram</Text>
-                    </View>
-                )}
-
+                <NationalCup homePage={homePage} />
+                
+                <Video videos={generalVod} handlePlayVideo={handlePlayVideo} />
+               
+                <Instagram homePage={homePage} />
+                
                 <View style={{ height: getSize.m(120), width: '100%' }} />
             </ScrollView>
         </View>
